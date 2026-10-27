@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.WeilTensorProduct
 import Sheaf.Paper.WfConstructibleTensorKoszulUnit
 import Sheaf.Paper.WfTensorPullbackCompletionUnitSquare
+import all Sheaf.Paper.WeilTensorProduct
 
 /-!
 # Frobenius compatibility of ordinary and completed tensor
@@ -280,7 +281,28 @@ def WfTensorCompletion.FullProperty (D : FiniteFieldDatum.{u})
 /-- Existence part of the normalized rational comparison; uniqueness is omitted.
 Source: blueprint proof step 13. The construction supplies the ordinary and completed
 localized bifunctors, the completion-unit comparison, the two Frobenius comparisons,
-and the induced Weil-pair isomorphisms. (blueprint: lem-wf-tensor-completion-frobenius-existence) -/
+and the induced Weil-pair isomorphisms.
+(blueprint: lem-wf-tensor-completion-frobenius-existence).
+Proof: restrict ordinary derived tensor and its intrinsic completion to integral
+constructibles using wfConstructibleTensorKoszulUnit. Both bifunctors are linear in
+each variable: derived tensor is bilinear and the completion reflector is linear by
+its unit and the injective Hom comparison. Extend the two Hom maps by scalar extension
+in both variables, sending (s tensor f, t tensor g) to st tensor T(f,g). The integral
+identity and composition equations, together with commutativity of localized scalars,
+prove the bifunctor laws on pure tensors; additivity proves them on every morphism.
+Localize the invertible completion-unit components to obtain chi. Localize the ordinary
+and completed pullback comparisons as well. Their integral naturality equations extend
+to arbitrary localized arrows by the same pure-tensor calculation; these components
+therefore define the three required natural isomorphisms. Their definitions give the
+two localization equalities and the three component normalizations.
+The integral pullback/unit square is wfTensorPullbackCompletionUnitSquare. Tensoring
+that equality with one proves the rational square on every object, since objects are
+unchanged. Naturality of rational chi, applied to the product of the two rational Weil
+structure arrows, then gives the displayed Weil equation; no integral lift of either
+structure isomorphism is needed. The equation makes chi a morphism of the two
+IsoAlgebras. Compose it with its inverse and cancel chi to obtain the inverse's
+commuting equation. Their underlying inverse identities lift through the faithful
+IsoAlgebra forgetful functor, yielding the required Weil-pair isomorphism. -/
 theorem wfTensorCompletionFrobenius_exists (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
     (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom]
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
@@ -291,6 +313,64 @@ theorem wfTensorCompletionFrobenius_exists (D : FiniteFieldDatum.{u}) (c : D.Coe
 
 
 
+/-- Integral precomposition determines a rational bifunctor in both variables. -/
+private theorem tensor_precomp_injective
+    {A : Type*} [CommRing A] {C : Type*} [Category C] [Preadditive C] [Linear A C]
+    (p : A) {B : Type*} [Category B]
+    (F G : ScalarLocalization A C p × ScalarLocalization A C p ⥤ B)
+    (h : ((ScalarLocalization.localization A C p).prod
+      (ScalarLocalization.localization A C p)) ⋙ F =
+        ((ScalarLocalization.localization A C p).prod
+          (ScalarLocalization.localization A C p)) ⋙ G) : F = G := by
+  apply Functor.curry_obj_injective
+  apply scalarLocalization_precomp_injective p
+  apply Functor.flip_injective
+  apply scalarLocalization_precomp_injective p
+  apply Functor.flip_injective
+  apply Functor.uncurry_obj_injective
+  simpa only [Functor.uncurry_obj_curry_obj_flip_flip] using h
+
+/-- Normalization fixes the bifunctors and all three isomorphisms componentwise. -/
+private theorem normalized_unique (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom]
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (E : Padic.FiniteCoefficientFields c.l c.Qbar)
+    (R S : RationalComparison D c X₀ E)
+    (hR : R.Normalized D c X₀ E) (hS : S.Normalized D c X₀ E) : R = S := by
+  have ho : R.ordinary = S.ordinary :=
+    tensor_precomp_injective _ _ _ (hR.1.trans hS.1.symm)
+  have hc : R.completed = S.completed :=
+    tensor_precomp_injective _ _ _ (hR.2.1.trans hS.2.1.symm)
+  cases R with
+  | mk ro rc ri rm rn =>
+    cases S with
+    | mk so sc si sm sn =>
+      dsimp only at ho hc
+      subst so
+      subst sc
+      have hi : ri = si := by
+        apply Iso.ext
+        apply NatTrans.ext
+        funext MN
+        exact eq_of_heq ((hR.2.2 MN.1.obj MN.2.obj).1.trans
+          (hS.2.2 MN.1.obj MN.2.obj).1.symm)
+      have hm : rm = sm := by
+        apply Iso.ext
+        apply NatTrans.ext
+        funext MN
+        exact eq_of_heq ((hR.2.2 MN.1.obj MN.2.obj).2.1.trans
+          (hS.2.2 MN.1.obj MN.2.obj).2.1.symm)
+      have hn : rn = sn := by
+        apply Iso.ext
+        apply NatTrans.ext
+        funext MN
+        exact eq_of_heq ((hR.2.2 MN.1.obj MN.2.obj).2.2.trans
+          (hS.2.2 MN.1.obj MN.2.obj).2.2.symm)
+      subst si
+      subst sm
+      subst sn
+      rfl
+
 /-- Uniqueness part, supplied for two normalized comparison packages.
 Source: localization precomposition and prescribed integral components. -/
 theorem wfTensorCompletionFrobenius_unique (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
@@ -300,7 +380,7 @@ theorem wfTensorCompletionFrobenius_unique (D : FiniteFieldDatum.{u}) (c : D.Coe
     (R S : WfTensorCompletion.RationalComparison D c X₀ E)
     (hR : WfTensorCompletion.FullProperty D c X₀ E R)
     (hS : WfTensorCompletion.FullProperty D c X₀ E S) : R = S := by
-  sorry
+  exact normalized_unique D c X₀ E R S hR.1 hS.1
 
 
 
@@ -374,7 +454,12 @@ theorem wfTensorCompletionCommonField (D : FiniteFieldDatum.{u}) (c : D.Coeffici
             (R.completedPair D c X₀ G ((weilScalarExtension D c X₀ h).obj K)
               ((weilScalarExtension D c X₀ k).obj L)),
         ebar = ((weilScalarSystem D c X₀).ι G).mapIso e := by
-  sorry
+  obtain ⟨S, hS⟩ := wfTensorCompletionFrobenius_exists D c X₀ G
+  have heq := normalized_unique D c X₀ G R S _hR hS.1
+  subst S
+  obtain ⟨e, he⟩ := (hS.2 ((weilScalarExtension D c X₀ h).obj K)
+    ((weilScalarExtension D c X₀ k).obj L)).2
+  exact ⟨e, he, ((weilScalarSystem D c X₀).ι G).mapIso e, rfl⟩
 
 
 end WeilConjectures

@@ -10,9 +10,9 @@
   "def-sf-projection-weil-tensor-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
-  "place": "Decomposition of target proof into existence and uniqueness."
+  "place": "Expanded construction from the existing integral tensor, canonical unit square, and raw scalar localization; G7, 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -61,8 +61,23 @@
  "statement": "For finite-field datum D, coefficient datum c, separated finite-type X₀, and finite E, there exists R : WfTensorCompletion.RationalComparison D c X₀ E satisfying the target theorem’s normalization, Frobenius equation, and ordinary/completed Weil-pair isomorphism conjuncts.",
  "proof": [
   {
-   "text": "The detailed construction/uniqueness argument remains an intermediate obligation for a later worker; the item combines this statement with the other split statement.",
-   "uses": [],
+   "text": "Use constructible tensor/Koszul unit to restrict ordinary and completed tensor to integral constructibles, with invertible natural completion unit. Derived tensor is bilinear, and completion is linear by the reflector unit and its injective Hom map. Extend both bifunctors on localized Hom modules by (s tensor f,t tensor g) maps to st tensor T(f,g). Functoriality on pure tensors follows from integral functoriality and commutativity of scalars; additivity proves the general case. Localize the completion unit and the two canonical Frobenius comparisons componentwise. Integral naturality, extended on pure tensors and then sums, gives three natural isomorphisms, with exactly the prescribed normalization.",
+   "uses": [
+    "lem-wf-constructible-tensor-koszul-unit",
+    "def-wf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Item proof step 13, existence/uniqueness assembly"
+   }
+  },
+  {
+   "text": "Localize the integral pullback/completion-unit square. Every rational object is an unchanged integral object, so it holds at every pair. Apply naturality of the rational completion comparison to the two rational Weil structure arrows to obtain the Weil equation. This argument does not require integral lifts of these arrows. The equation lifts chi to an IsoAlgebra morphism; cancellation with chi and its inverse supplies the inverse morphism. Faithfulness of the forgetful functor proves the inverse laws, providing the required Weil-pair isomorphism with underlying arrow chi.",
+   "uses": [
+    "lem-wf-tensor-pullback-completion-unit-square",
+    "def-wf-weil-category"
+   ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
@@ -70,7 +85,12 @@
    }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-wf-constructible-tensor-koszul-unit",
+  "def-wf-tensor-product",
+  "lem-wf-tensor-pullback-completion-unit-square",
+  "def-wf-weil-category"
+ ],
  "lean": {
   "module": "Sheaf.Paper.WfTensorCompletionFrobenius",
   "declaration": "WeilConjectures.wfTensorCompletionFrobenius_exists",
@@ -92,23 +112,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "G7",
   "result": "pass",
-  "landing": "20261026T024132-L-640855",
+  "landing": "20261027T180619-L-3882638",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.wfTensorCompletionCommonField",
-   "WeilConjectures.wfTensorCompletionFrobenius_exists",
-   "WeilConjectures.wfTensorCompletionFrobenius_unique"
-  ],
-  "sorry_after": [
-   "WeilConjectures.wfTensorCompletionCommonField",
-   "WeilConjectures.wfTensorCompletionFrobenius_exists",
-   "WeilConjectures.wfTensorCompletionFrobenius_unique"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
