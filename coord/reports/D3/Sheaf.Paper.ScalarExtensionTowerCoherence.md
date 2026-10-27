@@ -1,74 +1,82 @@
 ## What changed
 
-Proved both halves of `WeilConjectures.ScalarExtensionTower.unit` from the
-existing uniquely normalized scalar associator and action unitor. The proof tests
-module morphisms with the actual pullback adjunction unit, cancels the inverse
-scalar unitor, applies both section formulas, and lifts the resulting ordinary
-natural-isomorphism equality termwise. Private proved helpers expose the pullback
-adjunction extensionality, scalar unitor section and inverse-section formulas,
-and pullback-section naturality. The tensor half is proved as
-`WeilConjectures.scalarExtensionTensorUnit`, which only assumes a comparison's
-homogeneous pure-tensor normalization at coefficient one. Its proof establishes
-naturality of the sheafified tensor pairing and extensionality on homogeneous
-total summands, then calculates the two unitor actions on their generators.
-`unit` combines these with the existing `Comparisons.sigma_formula` and has no
-remaining internal hole. No definition, existing signature, or public import changes.
+`Sheaf.Paper.ScalarExtensionTowerCoherence` now assembles `quotientModels` from
+`coefficientExtensionReductionModel`, strict association existence, and the existing
+`square`. Both reduction-model choices use the given global unit on Y. A new proved
+private helper `modelSection_hom_ext` conjugates ordinary finite evaluation by
+`directEvaluation` and applies sheafified tensor-generator extensionality. Transposing
+through the ordinary scalar adjunction and applying this helper proves uniqueness of
+the association from its formula with outer coefficient one.
 
-On the latest resumption, `lcompile.py --all` compiled both delivered modules
-against the current server snapshot without diagnostics (0.8 seconds reported for
-each module). The previous uncached compile of the item took 42.8 seconds, within
-the single-file limit. The import-direction check passed.
-Both proved declarations still inherit `sorryAx` from the existing normalization
-and model theorems used by their proofs; this delivery closes the local proof hole,
-not the unfinished dependencies.
+The new proof imports are `Sheaf.Paper.ScalarExtensionQuotientAssociation` and
+`import all Sheaf.Paper.CoefficientExtensionOrdinaryStrictTensor`; the latter exposes
+only the proved private tensor-generator lemma used by the proof. No existing
+statement, definition, attribute, or public import changes.
 
 ## Proved and sorry left
 
-One original hole closed, no holes added; net hole reduction one.
-The original module had eight holes.
-Closed: `WeilConjectures.ScalarExtensionTower.unit`.
-New and proved: `WeilConjectures.scalarExtensionTensorUnit`
-(node `lem-pur-scalar-tensor-unit`). There are no holes in the new module.
+One original hole is closed by decomposition: `WeilConjectures.ScalarExtensionTower.quotientModels`
+(node `lem-pur-scalar-extension-tower-coherence`). Its assembly and uniqueness proof
+are complete Lean. This is a decomposition, not a net proof of an original hole.
 
-The following seven original holes remain unchanged, all attached to
-`lem-pur-scalar-extension-tower-coherence`:
+Two original sorries remain unchanged in the item:
 
-- `WeilConjectures.ScalarExtensionTower.comparisons_existsUnique`
-- `WeilConjectures.ScalarExtensionTower.square`
-- `WeilConjectures.ScalarExtensionTower.composition`
-- `WeilConjectures.ScalarExtensionTower.derivedSigma_existsUnique`
 - `WeilConjectures.ScalarExtensionTower.realizationModels`
 - `WeilConjectures.ScalarExtensionTower.scalarExtensionTowerCoherence`
-- `WeilConjectures.ScalarExtensionTower.quotientModels`
+
+Both belong to `lem-pur-scalar-extension-tower-coherence`.
+
+One new sorry is added:
+`WeilConjectures.ScalarExtensionTower.quotientAssociation_exists`, in the new module
+`Sheaf.Paper.ScalarExtensionQuotientAssociation`, node
+`stage3-pur-scalar-quotient-association`. It constructs the association on fixed
+strict representatives. It does not choose the reduction models, prove uniqueness,
+or assert the geometric square or completed comparison equations. The combination
+of these separate tasks is proved in the original theorem.
+
+Actual holes: originally three; two in the delivered item and one in the new module.
+Holes closed: one; holes added: one; net zero. No sorry occurs in a definition.
+
+Both modules compile through `lcompile.py --all`; each is below the 60-second file
+limit. Zero complexes, n=0, identity coefficient extension, and ramified coefficient
+extensions use the same balanced association construction: neither the new statement
+nor the uniqueness proof assumes flatness of finite quotient inclusions.
 
 ## No longer needed
 
-None. The original proof dependencies are retained for the seven unresolved
-obligations. No modules or nodes are made unnecessary by this partial proof.
+No imports, declarations, nodes, or modules are withdrawn. The quotient-model proof
+uses the existing reduction construction directly and does not need
+`lem-pur-normalized-scalar-comparison-realization`, K-flat change of rings, or derived
+limit descent. Those dependencies stay in the parent node because its other two
+original realization/coherence obligations remain unfinished. The strict-association
+construction itself is ordinary: it needs no completed or derived-limit comparison.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-No mathematical disagreement. The whole-system scalar maps already have enough
-normalization to prove their identity pullback equation directly by adjunction;
-there is no need to reconstruct the geometric ringed-pullback presentation for
-this part. Remote compilation intermittently returned no server response; retries
-subsequently produced normal compiler diagnostics. The retained tensor proof hit its
-heartbeat budget at a broad rewriting step. Replacing it with explicit congruence
-on the two unitor section equations and direct use of the final unitor equation
-avoids unfolding the tensor colimit choices; the revised helper compiled in 27 seconds. The smaller tensor lemma was
-tested conceptually on zero complexes, empty sites, and modules concentrated in
-degree zero: its generator proof and universal properties apply in each case.
+The original plan bundled strict quotient association with the stronger normalized
+realization theorem. The already proved reduction-model construction and square
+allow these tasks to be separated. In particular, uniqueness can be proved directly
+by scalar adjunction and finite sheaf tensor generators, without waiting for the
+completed realization equations.
+
+The node `lem-pur-normalized-scalar-comparison-realization` names
+`Sheaf.Paper.NormalizedScalarComparisonRealization`, whose source is absent from the
+shared snapshot. This delivery does not assume that absent module exists and does
+not remove its node: the remaining realization obligations retain that route.
+
+The current blueprint places `def-weil-derived-pullback-tensor-hom` under
+`sk-prop-sf-open-closed-triangle`, rather than the older `sk-def-sf-operations` path.
+The new node cites the current `literature/blueprint/latest` location.
 
 ## New nodes
 
-`lem-pur-scalar-tensor-unit`, module `Sheaf.Paper.ScalarExtensionTensorUnit`,
-is the tensor action-unitor step alone, for arbitrary pure-tensor-normalized sigma.
-It has neither a scheme pullback nor the strict scalar square, composition laws,
-quotient representative existence, or completed realization assertions. It is not
-a renamed version of `unit`: the pullback half is proved in the delivered module,
-and the tensor half is instantiated using the existing comparison normalization.
-The new lemma is fully proved; no obligation is handed on. There are no change
-records because no existing statement or definition changes.
+`stage3-pur-scalar-quotient-association` records the existence of the strict association
+for fixed reduction data, with its finite adjunction construction and transition
+gluing proof. It is strictly a constituent of `quotientModels`: model existence,
+uniqueness, and the geometric square are outside its conclusion and are supplied by
+the completed Lean assembly. The original node's proof and proof dependencies now
+record that assembly. No change record is required because all existing signatures
+and public definitions are unchanged.
 
 ## Second reading by D3
 
