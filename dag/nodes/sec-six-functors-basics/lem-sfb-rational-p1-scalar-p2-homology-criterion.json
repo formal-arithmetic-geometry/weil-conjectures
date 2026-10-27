@@ -14,14 +14,14 @@
  },
  "proof": [
   {
-   "text": "Evaluate the normalized completed diagonal-tower splitting on strict constant systems and use projective-line cohomological concentration after the positive shift.",
+   "text": "The fully proved normalized completed-Chern splitting supplies a first completed-line arrow v for which biprod.desc v b is invertible. Its construction uses the given tower Result and the completed normalization of b.",
    "uses": [
-    "lem-sfb-diagonal-trace-twisted-splitting-components"
+    "lem-sfb-diagonal-completed-chern-splitting"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the two components through the specified realization, direct-image, and scalar-extension squares; the normalized Chern equation identifies the degree-zero map with c2 and the unit component identifies the degree-minus-two map with u2.",
+   "text": "Apply the given exact completed realization and the integral, rational and, when needed, algebraic-closure scalar functors. The endpoint isomorphisms, direct-image mates and final native-pushforward comparison preserve biproduct splittings. By definition the second arrow is scalarP2Chern. This constructs a first arrow v with biprod.desc v c2 invertible, without identifying v with the specified unit.",
    "uses": [
     "def-sfb-rational-p1-scalar-chern-maps",
     "def-sfb-diagonal-coefficient-reference"
@@ -29,20 +29,34 @@
    "elementary": false
   },
   {
-   "text": "The endpoint and right-derived comparisons are isomorphisms, so the transported component maps are isomorphisms and the target has no other homology.",
+   "text": "The degree-zero single unit is concentrated in degree zero and the shifted line in degree minus two. Additivity of homology and the splitting imply concentration of K in those two degrees, invertibility of H0(c2), and invertibility of Hminus2(v).",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "The diagonal is a section of the second projection. The composite pullback is isomorphic to the identity, so its adjunction unit is invertible and the second-projection unit is split mono. Its composite with the shifted-line comparison is therefore split mono, also after taking homology. Identify both Hminus2 source and target with the scalar line using Hminus2(v). The retraction is epic; on the common root cover both objects have rank-one bases, so the existing local rank-one epi criterion makes the retraction invertible. Local conservativity gives a global isomorphism, hence the specified Hminus2(u2) is invertible.",
+   "uses": [
+    "def-sfb-projective-diagonal-pullback",
+    "lem-route-sp-twists-common-cover",
+    "lem-diagonal-local-rank-one-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-diagonal-trace-twisted-splitting-components",
+  "lem-sfb-diagonal-completed-chern-splitting",
   "def-sfb-rational-p1-scalar-chern-maps",
-  "def-sfb-diagonal-coefficient-reference"
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-projective-diagonal-pullback",
+  "lem-route-sp-twists-common-cover",
+  "lem-diagonal-local-rank-one-iso"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "E5",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Second identity, scalar trace base change before tensoring with q*K"
+  "place": "The normalized tower splitting transported to scalar coefficients; the specified unit is recovered in its nonzero homology degree by the diagonal section and the local rank-one epi criterion."
  },
  "mathlib_searches": [
   {
@@ -119,9 +133,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "E5",
   "result": "pass",
-  "landing": "20261027T210009-L-1643432",
+  "landing": "20261027T233917-L-4135178",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
