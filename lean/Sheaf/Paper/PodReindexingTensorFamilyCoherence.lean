@@ -6,6 +6,8 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.Paper.PodCompletionReindexCoherence
+import Sheaf.Paper.PodReindexingTensorFamilyIdentityComposition
+import Sheaf.Paper.PodReindexingTensorFamilyTensorConstraints
 
 /-! # Coherence of fixed normalized completion and tensor families
 
@@ -83,6 +85,15 @@ theorem podReindexingTensorFamilyCoherence
       A.Relabelling l E ∧ A.Identity l E ∧ A.Composition l E ∧
         ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]
           [∀ v : V, Invertible (l : V.residueField v)]
-          [∀ w : W, Invertible (l : W.residueField w)], A.TensorConstraints l E f := by sorry
+          [∀ w : W, Invertible (l : W.residueField w)], A.TensorConstraints l E f := by
+  obtain ⟨identity, composition, hR, hI, hC⟩ :=
+    podReindexingTensorFamilyIdentityComposition l E completion tensor hcompletion htensor
+  refine ⟨identity, composition, ?_⟩
+  let A : PodReindexFamily l E := ⟨completion, tensor, identity, composition⟩
+  dsimp [A]
+  refine ⟨hR, hI, hC, ?_⟩
+  intro V W f _ _ _
+  exact podReindexingTensorFamilyTensorConstraints l E completion tensor hcompletion htensor
+    identity composition (V := V) (W := W) f
 
 end WeilConjectures
