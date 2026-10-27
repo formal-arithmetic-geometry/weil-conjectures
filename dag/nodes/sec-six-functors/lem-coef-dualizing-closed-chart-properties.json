@@ -1,0 +1,93 @@
+{
+ "id": "lem-coef-dualizing-closed-chart-properties",
+ "kind": "statement",
+ "title": "Coefficient clauses for a chosen closed affine chart",
+ "statement": "For a chosen closed immersion of an affine scheme into an affine space over a field, with the separated finite-type and quasi-compact hypotheses on the ambient and source maps, the two positive finite coefficient levels satisfy the exact closed pushforward, bounded-below dualizing, compact-support composition, and counit-normalization clauses packaged by CoefClosedChartAt.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraphs 2--3, after the affine closed chart has been chosen"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-amb-etale-compact-comparisons",
+  "lem-exc-closed-ambient",
+  "lem-weil-boundary-etale-adjunction-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary-etale boundary adjunction, exact closed-support pushforward, bounded-below compact-support comparison, and uniqueness of the composite right adjoint at each of the two coefficient levels. The resulting clauses are exactly CoefClosedChartAt for m and n.",
+   "uses": [
+    "lem-weil-boundary-etale-adjunction-restriction",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-amb-etale-compact-comparisons",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraphs 2--3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-boundary-etale-adjunction-restriction",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-amb-etale-compact-comparisons",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Split coefficient-theoretic clauses from the affine chart existence theorem"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefDualizingClosedChart",
+  "date": "2026-10-28",
+  "group": "C5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-dualizing-closed-chart",
+   "place": "Coefficient clauses after choosing the closed affine chart",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefDualizingClosedChart",
+  "file": "lean/Sheaf/Paper/CoefDualizingClosedChart.lean",
+  "declaration": "AlgebraicGeometry.Etale.coefClosedChartAt_of_closed_chart",
+  "statement": "theorem coefClosedChartAt_of_closed_chart (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) {Y P : Scheme.{u}} (i : Y ⟶ P) [IsClosedImmersion i] (k : Type u) [Field k] (p : P ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (h : i ≫ p = aY) : CoefClosedChartAt l E m hm i k p aY h ∧ CoefClosedChartAt l E n (hm.trans hmn) i k p aY h",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T233830-L-4121429",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T233830-L-4121429",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.Compactification.NagataCompactification
 public import Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedChart
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -197,6 +198,27 @@ def CoefClosedChartAt
     CoefClosedChartNormalization
       (ULift.{u + 1} (Padic.coefficientExtensionRing l E j)) i p aY h H.omegaY_boundedBelow
 
+/-- The coefficient-theoretic part of the closed-chart construction.
+
+This is the remaining bounded-below compact-support and dualizing comparison argument
+after a closed affine-space chart has been chosen. It is split from the geometric
+existence theorem so that the two coefficient levels can be proved independently.
+Source: main-20261015, sec-smooth-purity/sk-lem-sp-tower/
+lem-coef-finite-dualizing.proof.md, paragraphs 2--3
+(blueprint: lem-coef-dualizing-closed-chart-properties). -/
+theorem coefClosedChartAt_of_closed_chart
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n)
+    {Y P : Scheme.{u}} (i : Y ⟶ P) [IsClosedImmersion i]
+    (k : Type u) [Field k] (p : P ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p]
+    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (h : i ≫ p = aY) :
+    CoefClosedChartAt l E m hm i k p aY h ∧
+      CoefClosedChartAt l E n (hm.trans hmn) i k p aY h := by
+  sorry
+
+set_option linter.unusedVariables false in
 /-- Every affine separated finite-type scheme has a closed affine-space chart with
 exact ordinary pushforward and the counit-normalized dualizing composition at both
 positive coefficient levels. Both representing objects are independently bounded below.
@@ -249,6 +271,20 @@ theorem exists_coefDualizingClosedChart
           (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘ Spec (.of D.k)) aY h ∧
         CoefClosedChartAt l E n (hm.trans hmn) i D.k
           (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘ Spec (.of D.k)) aY h := by
-  sorry
+  obtain ⟨r, i, hi_over, hclosed⟩ :=
+    exists_isClosedImmersion_affineSpace_of_isAffine aY
+  let P := AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k))
+  let p : P ⟶ Spec (.of D.k) := P ↘ Spec (.of D.k)
+  have : IsClosedImmersion i := hclosed
+  refine ⟨r, i, hclosed, ?_⟩
+  intro hi
+  let : IsClosedImmersion i := hi
+  have hfinite : IsFinite i := inferInstance
+  have hproper : IsProper i := inferInstance
+  have hlft : LocallyOfFiniteType i := inferInstance
+  have hqc : QuasiCompact i := inferInstance
+  refine ⟨hi_over, hfinite, hproper, hlft, hqc, ?_⟩
+  intro h
+  exact coefClosedChartAt_of_closed_chart l E m n hm hmn i D.k p aY h
 
 end AlgebraicGeometry.Etale
