@@ -6,8 +6,7 @@ Authors: SHEAF group E8
 module
 
 public import Sheaf.Paper.NativeWeilTensorRingedBridgeData
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+import Sheaf.Paper.NativeWeilTensorRingedKFlatLocalizationEquivalence
 
 /-! # Localization for normalized native ringed tensors
 
@@ -44,6 +43,16 @@ theorem native_weil_tensor_ringed_kflat_localization :
     ((ObjectProperty.ι (NativeTensorKFlat k₀ l X T)) ⋙ DerivedCategory.Q).IsLocalization
       ((HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l X) (.up ℤ)).inverseImage
         (ObjectProperty.ι (NativeTensorKFlat k₀ l X T))) := by
-  sorry
+  let P := ObjectProperty.ι (NativeTensorKFlat k₀ l X T)
+  let W := (HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l X) (.up ℤ)).inverseImage P
+  let L := P ⋙ DerivedCategory.Q
+  have hInv : W.IsInvertedBy L := by
+    intro A B f hf
+    change IsIso (DerivedCategory.Q.map f.hom)
+    change (HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l X) (.up ℤ)) f.hom at hf
+    exact Localization.inverts DerivedCategory.Q
+      (HomologicalComplex.quasiIso (ProEtaleWeilSheaf k₀ l X) (.up ℤ)) f.hom hf
+  refine { inverts := hInv, isEquivalence := ?_ }
+  exact native_weil_tensor_ringed_kflat_localization_equivalence T hInv
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
