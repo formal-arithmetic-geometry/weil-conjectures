@@ -16,13 +16,15 @@ namespace AlgebraicGeometry.ProjectiveSpace
 /-- The diagonal equations left after the off-diagonal normalization.
 
 Source: Stacks Project, divisors.tex, Tag 0BXJ, lemma-Pic-projective-space-UFD.
-(blueprint: new-sfb-projective-standard-unit-cocycle-diagonal)
+(blueprint: lem-sfb-projective-standard-unit-cocycle-diagonal)
 
-Proof: apply the cocycle equation with repeated indices to obtain the diagonal
-unit relation and use the inverse of that unit to cancel. Apply the same
-repeated-index calculation to the standard transition cocycle. Substituting
-the off-diagonal equations on a pair and its reverse, and then cancelling the
-chart unit, gives the required equation on the diagonal overlap.
+Proof: evaluate the given cocycle equation at i = j = l on the diagonal
+overlap. All restriction maps are identities, so t_ii * t_ii = t_ii; cancellation
+of the unit gives t_ii = 1. Apply the standard transition cocycle equation at
+i = j = l and restrict back from the triple overlap to the diagonal overlap.
+Functoriality makes each composite restriction the identity, so the same
+cancellation gives u_ii = 1. The two restrictions of a_i agree, since the
+inclusions from U_i ∩ U_i to U_i agree. Substitution proves the result.
 -/
 theorem standardUnitCocycle_diagonal_normalization (k : Type u) [Field k]
     (r : ℕ) (hr : 3 ≤ r)
@@ -55,6 +57,36 @@ theorem standardUnitCocycle_diagonal_normalization (k : Type u) [Field k]
         (transitionUnit _ (Spec (.of k)) d i i).val *
           (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map
             (homOfLE inf_le_right).op (a i).val := by
-  sorry
+  have _hr := hr
+  have _hoff := hoff
+  intro i
+  have ht_diag := ht i i i
+    (standardOpen _ (Spec (.of k)) i ⊓ standardOpen _ (Spec (.of k)) i)
+    inf_le_left inf_le_left inf_le_left
+  have ht_idem : (t i i).val * (t i i).val = (t i i).val := by
+    simpa using ht_diag
+  have ht_one : (t i i).val = 1 := (t i i).isUnit.mul_eq_left.mp ht_idem
+  have hu_diag := transitionUnit_mul_transitionUnit
+    (n := ULift.{u} (Fin r)) (S := Spec (.of k)) d i i i
+  let U := standardOpen (ULift.{u} (Fin r)) (Spec (.of k)) i
+  let ρ := (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map
+    (homOfLE (inf_le_left : (U ⊓ U) ⊓ U ≤ U ⊓ U)).op
+  have hu_val : ρ (transitionUnit _ (Spec (.of k)) d i i).val *
+      ρ (transitionUnit _ (Spec (.of k)) d i i).val =
+        ρ (transitionUnit _ (Spec (.of k)) d i i).val :=
+    congrArg Units.val hu_diag
+  have hu_restrict := congrArg (fun x ↦
+    (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map
+      (homOfLE (le_inf le_rfl inf_le_left : U ⊓ U ≤ (U ⊓ U) ⊓ U)).op x) hu_val
+  have hu_idem : (transitionUnit _ (Spec (.of k)) d i i).val *
+      (transitionUnit _ (Spec (.of k)) d i i).val =
+        (transitionUnit _ (Spec (.of k)) d i i).val := by
+    dsimp only [ρ] at hu_restrict
+    simp only [map_mul, ← CommRingCat.comp_apply, ← Functor.map_comp, ← op_comp,
+      homOfLE_comp, homOfLE_refl, op_id] at hu_restrict
+    simpa using hu_restrict
+  have hu_one : (transitionUnit _ (Spec (.of k)) d i i).val = 1 :=
+    (transitionUnit _ (Spec (.of k)) d i i).isUnit.mul_eq_left.mp hu_idem
+  simp only [ht_one, hu_one, mul_one, one_mul]
 
 end AlgebraicGeometry.ProjectiveSpace

@@ -42,26 +42,30 @@
  "statement": "Under the hypotheses of the off-diagonal unit cocycle normalization, if d and a_i satisfy the normalization equation for every i != j, then the same equation holds for every diagonal pair i=i.",
  "proof": [
   {
-   "text": "Use the cocycle equation with repeated indices to obtain the diagonal unit relation. Apply the same repeated-index argument to the standard transition cocycle, substitute the equations for a pair and its reverse, and cancel the chart unit. This gives the normalization equation on each diagonal overlap.",
+   "text": "Fix i and apply the given cocycle equation with all three indices equal to i and W = U_i ∩ U_i. The restrictions to W are identities. Thus t_ii squared equals t_ii; since t_ii is a unit, cancellation gives t_ii = 1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply transitionUnit_mul_transitionUnit with all three indices equal to i. Restrict this equation from (U_i ∩ U_i) ∩ U_i back to U_i ∩ U_i, which is contained in that triple intersection. Each composite restriction is the identity by functoriality. This gives u_ii squared equals u_ii, and unit cancellation gives u_ii = 1.",
    "uses": [
-    "lem-sfb-projective-standard-unit-cocycle-off-diagonal",
     "lem-pc-twist-cocycle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Substitute the two diagonal identities. The restrictions of a_i along inf_le_left and inf_le_right are identical: these are morphisms between the same opens, in a preorder category. This proves the desired equality. No distinct-index equation or dimension bound is needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-projective-standard-unit-cocycle-off-diagonal",
   "lem-pc-twist-cocycle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 0BXJ, repeated-index cocycle equations and diagonal completion."
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD: elementary repeated-index cocycle calculation, formalized by C8 using the existing standard transition cocycle theorem."
  },
  "lean": {
   "existing": false,
@@ -110,10 +114,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M6",
+  "group": "C8",
   "result": "pass",
-  "landing": "20261027T151720-L-1196926",
-  "kind": "interface",
+  "landing": "20261027T180518-L-3869151",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
