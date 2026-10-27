@@ -1,0 +1,115 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Component of the five displayed tensor normalization equations."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-coefficient-tensor-normalization",
+   "place": "Componentwise split of the displayed tensor normalization equation.",
+   "via": [
+    "lem-sf-coefficient-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientTensorNormalization",
+  "date": "2026-10-28",
+  "group": "M8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived tensor comparison identity and associativity",
+   "results": "No exact coefficient-specific match; only generic monoidal functor laws.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coefficient tensorator preserves associator and adjunction mates",
+   "results": "No exact coefficient-specific match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientTensor_normalization|tensor.*associator",
+   "results": "Only the parent statement and generic tensor coherence declarations were found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Componentwise split of the displayed tensor normalization equation."
+ },
+ "id": "lem-sf-coefficient-tensor-normalization-quotient",
+ "kind": "statement",
+ "title": "Quotient tensor associativity normalization",
+ "statement": "the third equation of the parent statement This is a strict component of the canonical coefficient tensor normalization theorem.",
+ "proof": [
+  {
+   "text": "Prove the quotient tensorator on three factors on K-flat representatives using the fixed normalized comparison; the universal localization comparison descends the equation to all stated objects.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pc-kflat-resolution",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientTensorNormalizationQuotient",
+  "file": "lean/Sheaf/Paper/CoefficientTensorNormalizationQuotient.lean",
+  "declaration": "WeilConjectures.coefficientTensor_normalization_quotient",
+  "statement": "theorem coefficientTensor_normalization_quotient (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) : ∀ (n m : ℕ) (h : m ≤ n), let SA := finiteIntrinsicClosed l E X n let SB := finiteIntrinsicClosed l E X m let F := coefficientFiniteQuotientDerived l E X h let μ := (coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.tensor h ∀ K M N : normalizedDVRDerived l E X n, μ.hom.app (SA.tensor.obj (K, M), N) ≫ SB.tensor.map (Prod.mkHom (μ.hom.app (K, M)) (𝟙 (F.obj N))) ≫ (SB.monoidal.associator (F.obj K) (F.obj M) (F.obj N)).hom = F.map (SA.monoidal.associator K M N).hom ≫ μ.hom.app (K, SA.tensor.obj (M, N)) ≫ SB.tensor.map (Prod.mkHom (𝟙 (F.obj K)) (μ.hom.app (M, N)))",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T210141-L-1663611",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T210141-L-1663611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

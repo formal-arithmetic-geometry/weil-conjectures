@@ -7,6 +7,11 @@ module
 
 public import Sheaf.Paper.FiniteCoefficientHomChange
 public import Sheaf.Paper.IntegralOperationsScalarComparisons
+import Sheaf.Paper.CoefficientTensorNormalizationUnit
+import Sheaf.Paper.CoefficientTensorNormalizationTower
+import Sheaf.Paper.CoefficientTensorNormalizationQuotient
+import Sheaf.Paper.CoefficientTensorNormalizationFinite
+import Sheaf.Paper.CoefficientTensorNormalizationScalar
 
 /-! # Normalization of the canonical coefficient tensor comparisons
 
@@ -20,6 +25,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
@@ -119,6 +125,11 @@ theorem coefficientTensor_normalization
         (SB.monoidal.associator (F.obj K) (F.obj M) (F.obj N)).hom =
       F.map (SA.monoidal.associator K M N).hom ≫
         μ.hom.app (K, SA.tensor.obj (M, N)) ≫
-        SB.tensor.map (Prod.mkHom (𝟙 (F.obj K)) (μ.hom.app (M, N))) := by sorry
+        SB.tensor.map (Prod.mkHom (𝟙 (F.obj K)) (μ.hom.app (M, N))) := by
+  refine ⟨coefficientTensor_normalization_unit l E X D hl,
+    coefficientTensor_normalization_tower l E X D hl,
+    coefficientTensor_normalization_quotient l E X D hl,
+    coefficientTensor_normalization_finite l E X D hl,
+    coefficientTensor_normalization_scalar l E X D hl⟩
 
 end WeilConjectures
