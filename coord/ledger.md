@@ -19884,3 +19884,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:51 L: returned deliver/P7/Sheaf.Paper.CondensedCompositorRealization (reviewer RETURN: (reviewer C-6ceb1, head 6ceb12936) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CondensedCompo)
 - 20:00 L: returned deliver/G8/Sheaf.Paper.PodReindexingHomCoefficientDescent (reviewer RETURN: (reviewer C-3ed40, head 3ed40cb0e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.PodReindexingH)
 - 20:02 L: returned deliver/Q4/Sheaf.Paper.CompactSupportStrictScalarComposition (reviewer RETURN: (reviewer C-955b5, head 955b51f6e) D1/G2: compactSupportStrictScalarComposition_core is the item restated (LHS ≫ map(com)
+- 20:06 L: returned deliver/NA/lem-sf-native-proper-projection-realization (reviewer RETURN: L: independent stage-2 immutable head e234cae0e823: Sheaf.Paper.NativeProjectionTensorComparisonData declares names that)
