@@ -19916,3 +19916,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/B7/Sheaf.Paper.EtaleQuotientTensorProjection (stage 3; reviewer PASS; first push; landing 20261027T205811-L-1617398 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:58 L: merged deliver/B7/Sheaf.Paper.FiniteIntrinsicTensorRealization (stage 3; reviewer PASS; first push; landing 20261027T205812-L-1617622 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:58 L: merged deliver/B7/Sheaf.Paper.FiniteRingRefinementCoordinates (stage 3; reviewer PASS; after a return; landing 20261027T205813-L-1617744 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 20:58 L: merged deliver/B8/Sheaf.Paper.EtaleBrownOpenSingletonEvaluation (stage 3; reviewer PASS; first push; landing 20261027T205815-L-1617955 (interface); batch 20261027T205736; modules 2; new nodes 1; change records: coord/changes/import-repair.md)

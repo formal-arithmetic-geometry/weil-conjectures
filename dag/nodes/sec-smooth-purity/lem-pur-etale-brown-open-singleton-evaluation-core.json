@@ -1,0 +1,79 @@
+{
+ "id": "lem-pur-etale-brown-open-singleton-evaluation-core",
+ "kind": "statement",
+ "title": "Explicit mate-pasting remainder for open singleton evaluation",
+ "statement": "With the hypotheses of lem-pur-etale-brown-open-singleton-evaluation, the defining conjugate expansion of the open insertion satisfies the displayed evaluated scalar square.",
+ "stmt_deps": [
+  "lem-pur-etale-brown-open-singleton-evaluation"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.14 and Lemma 5.16"
+ },
+ "proof": [
+  {
+   "text": "Expand the conjugate mate and use the open evaluation and scalar mate squares; the remaining equality is the scalar/open mate pasting identity.",
+   "uses": [
+    "lem-pur-etale-brown-open-singleton-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-brown-open-singleton-evaluation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.14 and Lemma 5.16"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownOpenSingletonEvaluation",
+  "date": "2026-10-28",
+  "group": "B8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-brown-open-singleton-evaluation",
+   "place": "strict mate-pasting remainder",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownOpenSingletonEvaluationCore",
+  "file": "lean/Sheaf/Paper/EtaleBrownOpenSingletonEvaluationCore.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownOpenSingletonEvaluationCore",
+  "statement": "theorem etaleBrownOpenSingletonEvaluationCore\n    (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)\n    (q : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅\n      S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived)\n    (hq : (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)\n      (.mk _ _ _ _ q.hom)).natTrans = (S.openDerived.derivedTensor h).inv)\n    (P : DerivedCategory (strictEtaleLevel X O t n)) :\n    (S.PZ.evaluation m).map\n        ((S.derivedOpen.map ((S.PX.derivedExtension n).map\n          ((S.levelDerivedOpenAdjunction n).unit.app P ≫\n            (S.openDerived.level n).inverse.map\n              ((S.PZ.derivedAdj n).unit.app ((S.levelDerivedOpen n).obj P)))) ≫\n          S.derivedOpen.map ((S.PX.derivedExtension n).map\n            ((S.openDerived.inverseEvaluation n).inv.app\n              ((S.PZ.derivedExtension n).obj ((S.levelDerivedOpen n).obj P)))) ≫\n          S.derivedOpen.map ((S.PX.derivedAdj n).counit.app\n            (S.openDerived.system.inverse.obj\n              ((S.PZ.derivedExtension n).obj ((S.levelDerivedOpen n).obj P)))) ≫\n          S.derivedOpenAdjunction.counit.app\n            ((S.PZ.derivedExtension n).obj ((S.levelDerivedOpen n).obj P)))) ≫\n      (S.PZ.derivedBelow h).hom.app ((S.levelDerivedOpen n).obj P) =\n    (S.openDerivedEvaluation m).hom.app ((S.PX.derivedExtension n).obj P) ≫\n      (S.levelDerivedOpen m).map ((S.PX.derivedBelow h).hom.app P) ≫ q.hom.app P",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T205815-L-1617955",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T205815-L-1617955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

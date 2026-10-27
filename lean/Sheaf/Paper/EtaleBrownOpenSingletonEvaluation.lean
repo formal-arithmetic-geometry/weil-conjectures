@@ -5,7 +5,8 @@ Authors: SHEAF group H6
 -/
 module
 
-public import Sheaf.Paper.EtaleBrownProjectionRealization
+public import Sheaf.Paper.StrictEtaleSystemInterfaces
+import Sheaf.Paper.EtaleBrownOpenSingletonEvaluationCore
 
 /-! # Open singleton evaluation
 
@@ -64,6 +65,9 @@ theorem etaleBrownOpenSingletonEvaluation
     (S.PZ.evaluation m).map (insertion.hom.app P) ≫
       (S.PZ.derivedBelow h).hom.app ((S.levelDerivedOpen n).obj P) =
     (S.openDerivedEvaluation m).hom.app ((S.PX.derivedExtension n).obj P) ≫
-      (S.levelDerivedOpen m).map ((S.PX.derivedBelow h).hom.app P) ≫ q.hom.app P := by sorry
+      (S.levelDerivedOpen m).map ((S.PX.derivedBelow h).hom.app P) ≫ q.hom.app P := by
+  intro insertion
+  simpa [insertion, mateEquiv, conjugateEquiv, Category.assoc] using
+    (etaleBrownOpenSingletonEvaluationCore O t c S h q hq P)
 
 end AlgebraicGeometry
