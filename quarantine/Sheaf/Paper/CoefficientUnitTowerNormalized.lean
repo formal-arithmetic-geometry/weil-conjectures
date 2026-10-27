@@ -27,7 +27,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 namespace AlgebraicGeometry.ProEtale.SpFiniteOrientation
 
-attribute [local irreducible] spCoefficientCommRings spCoefficientRings
+attribute [local irreducible] spCoefficientRings
 -- Use the canonical ring instance throughout the section calculations.
 attribute [local instance 20000] CommRing.toRing
 
