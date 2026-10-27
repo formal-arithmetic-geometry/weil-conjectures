@@ -1,0 +1,91 @@
+{
+ "id": "lem-coef-rational-verdier-integral-comp-normalization-bridge",
+ "kind": "statement",
+ "title": "Identification of the integral scalar associator representatives",
+ "statement": "theorem integral_comp_normalization_bridge\n    (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F]\n    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]\n    (H : Type u) [Field H] [Algebra (Padic l) H] [FiniteDimensional (Padic l) H]\n    (i : F →ₐ[Padic l] G) (j : G →ₐ[Padic l] H)\n    (K : sfIntegralConstructibleCategory l F X) :\n    (sfIntegralScalarComp l F G i X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) H j).hom.app K =\n      ObjectProperty.homMk\n        (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))\n        (Y := (integralScalar l X F H (j.comp i)).obj K)\n        (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom",
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-finite-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "the normalization clause of paragraph 3, associator equation"
+ },
+ "proof": [
+  {
+   "text": "Expand both normalized associators through their completion comparisons and identify the common completed tensor composition component by naturality.",
+   "uses": [
+    "lem-coef-integral-finite-extension",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-finite-extension",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "the normalization clause of paragraph 3, component identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sfIntegralScalarComp IntegralFiniteExtension.comp",
+   "results": "Found the two normalized component constructions; no existing identification theorem.",
+   "date": "2026-10-28",
+   "verdict": "new bridge statement required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierCompositionNormalization",
+  "date": "2026-10-28",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-verdier-composition-normalization",
+   "place": "component identification used in the normalization clause",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierIntegralCompNormalization",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierIntegralCompNormalization.lean",
+  "declaration": "WeilConjectures.RationalVerdier.integral_comp_normalization_bridge",
+  "statement": "theorem integral_comp_normalization_bridge\n    (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F]\n    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]\n    (H : Type u) [Field H] [Algebra (Padic l) H] [FiniteDimensional (Padic l) H]\n    (i : F →ₐ[Padic l] G) (j : G →ₐ[Padic l] H)\n    (K : sfIntegralConstructibleCategory l F X) :\n    (sfIntegralScalarComp l F G i X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) H j).hom.app K =\n      ObjectProperty.homMk\n        (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))\n        (Y := (integralScalar l X F H (j.comp i)).obj K)\n        (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T233809-L-4116298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T233809-L-4116298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

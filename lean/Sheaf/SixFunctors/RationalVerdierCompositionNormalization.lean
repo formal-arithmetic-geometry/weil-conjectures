@@ -6,6 +6,7 @@ module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
 import Sheaf.Paper.SfScalarExtensionComposition
+import Sheaf.SixFunctors.RationalVerdierIntegralCompNormalization
 
 /-! # Integral normalization of the rational Verdier associator
 
@@ -53,6 +54,22 @@ theorem rational_scalar_comp_normalization
               (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))
               (Y := (integralScalar l X F H (j.comp i)).obj K)
               (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom)) := by
-  sorry
+  let hzero : l ≠ 0 := Nat.Prime.ne_zero (Fact.out : l.Prime)
+  obtain ⟨a, ha⟩ := sfRationalScalarComp_existsUnique l F G i X 0 hzero H j
+  refine ⟨a, ?_⟩
+  intro K
+  have hcomp := ha.1 ((sfRationalConstructibleLocalization l F X).obj K)
+  have hbridge := integral_comp_normalization_bridge (l := l) (X := X) F G H i j K
+  have hbridge' :
+      (sfIntegralScalarComp l F G i X 0 hzero H j).hom.app
+          ((sfRationalConstructibleLocalization l F X).obj K).obj =
+        ObjectProperty.homMk
+          (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))
+          (Y := (integralScalar l X F H (j.comp i)).obj K)
+          (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom := by
+    simpa only [sfRationalConstructibleLocalization, ScalarLocalization.localization]
+      using hbridge
+  rw [hbridge'] at hcomp
+  exact hcomp
 
 end WeilConjectures.RationalVerdier
