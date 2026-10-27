@@ -26,6 +26,7 @@ comparisons. Arithmetic reassociation is the localization of the actual index eq
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -414,6 +415,23 @@ theorem compactSupportStrictScalarComposition (c : Compactification f)
         (subsequence l L Y (h * e)).map
           ((support l L c SL).map ((compositionCompleted l E F i L j X).hom.app M)) := by
   sorry
+
+/-- Strict mate composition on the common compact-support image tower.
+Source: auxiliary proof Steps 3--5 (blueprint: lem-pur-compact-support-strict-scalar-composition).
+(blueprint: lem-pur-compact-support-strict-scalar-comparison-stage3-h2).
+Proof: paste the proper restriction cocycles, apply mateEquiv horizontal and
+vertical pasting, and use the balancing associator for the open factor. Naturality
+of the pasted comparison gives the displayed equation before support realization. -/
+theorem compactSupportStrictScalarComparison (c : Compactification f)
+    (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) X) :
+    (compositionTower l E F i L j Y).hom.app ((image l E c).obj K) ≫
+        (comparison l E L (j.comp i) c).app K =
+      (T l F L j Y).map ((comparison l E F i c).app K) ≫
+        (comparison l F L j c).app ((T l E F i X).obj K) ≫
+        (image l L c).map ((compositionTower l E F i L j X).hom.app K) := by
+  sorry
+
+
 
 /-- The same composition after the specified tensor/product and cofinal Roos maps.
 Source: Stacks 0941; auxiliary proof Steps 7--8

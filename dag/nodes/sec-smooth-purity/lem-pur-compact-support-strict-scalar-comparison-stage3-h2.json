@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-compact-support-strict-scalar-comparison-stage3-h2",
+ "kind": "statement",
+ "title": "Strict mate composition on compact-support image towers",
+ "statement": "For finite coefficient fields E ⊂ F ⊂ L and a compactification c, the normalized strict scalar mate comparisons on the compact-support image towers compose with the canonical tensor associator.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0E8I; auxiliary comparison Step 11, strict mate pasting before support realization."
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-strict-scalar-tower-associator"
+ ],
+ "proof": [
+  {
+   "text": "Use the proper restriction cocycle and inverse restriction cocycle, then apply mate pasting. The open factors are the degree-zero tensor balancing maps, whose two successive products agree with the composite balancing associator. Naturality in the derived image object gives the displayed equality.",
+   "uses": [
+    "lem-pur-strict-proper-restriction-composition",
+    "lem-pur-strict-scalar-tower-associator",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-compact-support-strict-scalar-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0E8I; auxiliary comparison Step 11."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-strict-proper-restriction-composition",
+  "lem-pur-strict-scalar-tower-associator",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-compact-support-strict-scalar-mate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0E8I; auxiliary comparison Step 11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp mateEquiv_hcomp scalar composition",
+   "results": "Generic mate pasting lemmas found; no existing strict compact-support composition theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_vcomp\"",
+   "results": "Generic categorical mate pasting only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict scalar mate compact support composition",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-28",
+  "group": "H2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-strict-scalar-composition",
+   "place": "Auxiliary comparison Step 11, strict mate composition before support realization.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-composition"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "file": "lean/Sheaf/Paper/CompactSupportStrictScalarComposition.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComparison",
+  "statement": "theorem compactSupportStrictScalarComparison (c : Compactification f) (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) X) : (compositionTower l E F i L j Y).hom.app ((image l E c).obj K) ≫ (comparison l E L (j.comp i) c).app K = (T l F L j Y).map ((comparison l E F i c).app K) ≫ (comparison l F L j c).app ((T l E F i X).obj K) ≫ (image l L c).map ((compositionTower l E F i L j X).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T180631-L-3884617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T180631-L-3884617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
