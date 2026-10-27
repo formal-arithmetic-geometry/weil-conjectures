@@ -105,6 +105,18 @@
     "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
     "place": "Constituent coefficient-compatibility assembly paragraph; agent expansion, scalar-adjunction argument, Step 6."
    }
+  },
+  {
+   "text": "The completed integral equality is the previously isolated integral clause, while the simultaneous finite-level equality and the normalized total-limit clause are supplied by the two strictly smaller statements finiteScalarIsomorphismExchange and strictLimitEquation_of_integralScalarIsomorphismExchange. Combining these three clauses gives the displayed conjunction.",
+   "uses": [
+    "lem-pur-integral-scalar-isomorphism-exchange-finite-level",
+    "lem-pur-integral-scalar-isomorphism-exchange-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Constituent coefficient-transport assembly: decomposition into finite-system and normalized-limit clauses."
+   }
   }
  ],
  "proof_deps": [
@@ -117,7 +129,9 @@
   "lem-coef-derived-system-evaluation-calculus",
   "lem-pur-compact-support-integral-coefficient-comparison",
   "lem-pur-normalized-scalar-comparison-realization",
-  "lem-weil-finite-free-completed-scalar-comparison"
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-scalar-isomorphism-exchange-finite-level",
+  "lem-pur-integral-scalar-isomorphism-exchange-strict-limit"
  ],
  "proof_origin": {
   "by": "agent",
@@ -297,7 +311,9 @@
    "WeilConjectures.IntegralScalarExchange.Systems.pullScalar",
    "WeilConjectures.IntegralScalarExchange.Systems.left",
    "WeilConjectures.IntegralScalarExchange.Systems.right",
-   "WeilConjectures.IntegralScalarExchange.Systems.strictScalarIsomorphismExchange"
+   "WeilConjectures.IntegralScalarExchange.Systems.strictScalarIsomorphismExchange",
+   "WeilConjectures.IntegralScalarExchange.finiteScalarIsomorphismExchange",
+   "WeilConjectures.IntegralScalarExchange.strictLimitEquation_of_integralScalarIsomorphismExchange"
   ],
   "file": "lean/Sheaf/Paper/IntegralScalarIsomorphismExchange.lean",
   "statement": "theorem integralScalarIsomorphismExchange (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (c' : Compactification f') (x : X' ⟶ X) (g : Y' ⟶ Y) (b : c'.Z ⟶ c.Z) [IsIso x] [IsIso g] [IsIso b] (sp : ChosenCartesianSquare b c'.g c.g g) (sj : OpenImmersionSquare x c'.i c.i b) (M : DerivedCategory (scalarReductionSource l E X)) (_hM : finiteTorConstructibleIntegral l E X M) (h : ℕ) (hr : Ramification l E F i h) (hp : 1 ≤ h) : left l E F i c c' x g b sp sj M = right l E F i c c' x g b sp sj M ∧ (∀ n : ℕ, FiniteLeft l E F i h hr hp c c' x g b sp sj M n = FiniteRight l E F i h hr hp c c' x g b sp sj M n) ∧ StrictLimitEquation l E F i h hr hp c c' x g b sp sj M",
@@ -316,29 +332,13 @@
   "note": "Re-delivery after H2 RETURN at 75b30eb5bce5. Lean module byte-identical; item stmt_deps now cite new existing:true def node def-coef-finite-free-system-data (25 declarations of Sheaf.Paper.FiniteFreeSystemRestriction: A/B/transitions/levelMap/systemInclusion/U/Spaces/OrdinarySquare mates/Geometry+pushIso/openIso/compactIso/Compatibility/compact), replacing the theorem node; G,hG remain quantified, Assertions unused. New node meets H12 fields (chapter sec-six-functors, split, 10 existing def stmt_deps covering ScalarData/squareP/beta owners, 3 search kinds, blueprint.from ancestor+via, lean_audit none) and its TeX matches the module. Re-read mathematics: left/right order, proper mate then inverted open transpose (named sorry isIso), no k-linearity, l≠p, ideal-equality ramification h≥1, finite levels n+1/h(n+1), whole-system NatTrans, pinned Roos limit, naturality, refinement clauses; edge cases not excluded. Advisory: primed k-structures in refinement/Systems; universes u vs u+1; levelMap_transition (existing sorried helper) also listed in def node; lean.statement lacks trailing 'where' (note only). No file changed, no compile."
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P8",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261026T023742-L-599375",
+  "landing": "20261027T234341-L-110114",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.IntegralScalarExchange.Systems.strictScalarIsomorphismExchange",
-   "WeilConjectures.IntegralScalarExchange.integralScalarIsomorphismExchange",
-   "WeilConjectures.IntegralScalarExchange.integralScalarIsomorphismExchange_integral",
-   "WeilConjectures.IntegralScalarExchange.openInverse_isIso",
-   "WeilConjectures.IntegralScalarExchange.rectangle_refinement",
-   "WeilConjectures.IntegralScalarExchange.scalarPull_finiteTor"
-  ],
-  "sorry_after": [
-   "WeilConjectures.IntegralScalarExchange.Systems.strictScalarIsomorphismExchange",
-   "WeilConjectures.IntegralScalarExchange.integralScalarIsomorphismExchange",
-   "WeilConjectures.IntegralScalarExchange.integralScalarIsomorphismExchange_integral",
-   "WeilConjectures.IntegralScalarExchange.openInverse_isIso",
-   "WeilConjectures.IntegralScalarExchange.rectangle_refinement",
-   "WeilConjectures.IntegralScalarExchange.scalarPull_finiteTor"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

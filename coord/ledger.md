@@ -20430,3 +20430,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/V3/Sheaf.Paper.IntegralPullbackReductionAugmentationGood (stage 3; reviewer PASS; first push; landing 20261027T234338-L-107750 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:43 L: merged deliver/V3/Sheaf.SixFunctors.IntegralDualizingMappingLimitHom (stage 3; reviewer PASS; first push; landing 20261027T234339-L-108429 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:43 L: merged deliver/V4/Sheaf.Paper.AdicCommonPullbackIdentityUnit (stage 3; reviewer PASS; first push; landing 20261027T234340-L-109208 (interface); batch 20261027T233735; modules 1; new nodes 0)
+- 23:43 L: merged deliver/V4/Sheaf.Paper.IntegralScalarIsomorphismExchange (stage 3; reviewer PASS; first push; landing 20261027T234341-L-110114 (proof); batch 20261027T233735; modules 1; new nodes 2)

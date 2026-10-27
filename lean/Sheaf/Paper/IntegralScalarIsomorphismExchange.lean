@@ -78,7 +78,6 @@ theorem openInverse_isIso (R : Coefficients.{u}) (hc : Coherent R)
     (j : U ⟶ T) (g : T' ⟶ T) [IsOpenImmersion j] [IsOpenImmersion j']
     (w : x ≫ j = j' ≫ g) (_sq : IsPullback x j' j g) :
     IsIso (openInverse R hc x j' j g w) := by
-  -- The generic ringed open base-change argument remains this single planned hole.
   sorry
 
 /-- The specified compact-support exchange: proper mate, then open comparison.
@@ -435,6 +434,55 @@ def StrictLimitEquation (h : ℕ) (hr : Ramification l E F i h) (hp : 1 ≤ h)
 attribute [local irreducible] left right scalarLeft scalarRight FiniteLeft FiniteRight
   sourceProjection targetProjection StrictLimitEquation exchange
 
+/-- The simultaneous finite-level part of the integral scalar-exchange rectangle.
+Source: constituent coefficient-transport assembly, proof Steps 1--4
+(blueprint: lem-pur-integral-scalar-isomorphism-exchange).
+This is the strict-system equality before the normalized total-limit argument. -/
+theorem finiteScalarIsomorphismExchange
+    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
+    {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    [IsSeparated (Y ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) (c' : Compactification f')
+    (x : X' ⟶ X) (g : Y' ⟶ Y) (b : c'.Z ⟶ c.Z)
+    [IsIso x] [IsIso g] [IsIso b]
+    (sp : ChosenCartesianSquare b c'.g c.g g)
+    (sj : OpenImmersionSquare x c'.i c.i b)
+    (M : DerivedCategory (scalarReductionSource l E X))
+    (_hM : finiteTorConstructibleIntegral l E X M)
+    (h : ℕ) (hr : Ramification l E F i h) (hp : 1 ≤ h) :
+    ∀ n : ℕ, FiniteLeft l E F i h hr hp c c' x g b sp sj M n =
+      FiniteRight l E F i h hr hp c c' x g b sp sj M n := by
+  sorry
+
+/-- The normalized total-limit part of the integral scalar-exchange rectangle.
+Source: constituent coefficient-transport assembly, proof Steps 5--6
+(blueprint: lem-pur-integral-scalar-isomorphism-exchange).
+This is the Roos normalization clause after the strict finite-system equation. -/
+theorem strictLimitEquation_of_integralScalarIsomorphismExchange
+    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
+    {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    [IsSeparated (Y ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) (c' : Compactification f')
+    (x : X' ⟶ X) (g : Y' ⟶ Y) (b : c'.Z ⟶ c.Z)
+    [IsIso x] [IsIso g] [IsIso b]
+    (sp : ChosenCartesianSquare b c'.g c.g g)
+    (sj : OpenImmersionSquare x c'.i c.i b)
+    (M : DerivedCategory (scalarReductionSource l E X))
+    (_hM : finiteTorConstructibleIntegral l E X M)
+    (h : ℕ) (hr : Ramification l E F i h) (hp : 1 ≤ h) :
+    StrictLimitEquation l E F i h hr hp c c' x g b sp sj M := by
+  sorry
+
 /-- The integral equation together with its simultaneous finite-system and
 normalized total-limit clauses, with the actual ramification exponent.
 Source: constituent coefficient-transport assembly, proof Steps 1--6
@@ -470,7 +518,10 @@ theorem integralScalarIsomorphismExchange
       (∀ n : ℕ, FiniteLeft l E F i h hr hp c c' x g b sp sj M n =
         FiniteRight l E F i h hr hp c c' x g b sp sj M n) ∧
       StrictLimitEquation l E F i h hr hp c c' x g b sp sj M := by
-  sorry
+  refine ⟨integralScalarIsomorphismExchange_integral l E F i D _hl c c' x g b sp sj M _hM, ?_, ?_⟩
+  · exact finiteScalarIsomorphismExchange l E F i D _hl c c' x g b sp sj M _hM h hr hp
+  · exact strictLimitEquation_of_integralScalarIsomorphismExchange l E F i D _hl c c' x g b sp sj M
+      _hM h hr hp
 
 attribute [local irreducible] completedAdicDerivedChange completedAdicChangeData
   reductionDerivedChange pbcDerivedScalarAdjunction completedCoefficientMap
