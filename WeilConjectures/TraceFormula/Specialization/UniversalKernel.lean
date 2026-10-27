@@ -37,10 +37,11 @@ abstract adjunctions and monoidal closed categories:
 * `CategoryTheory.map_comp_ev_eq_of_kunneth`: the restriction of `ρ` to the diagonal is the
   pairing `θ ∘ S(ev) ∘ μ` defining `δ_K`, given that `Δ_s^* Π` is the lax tensor map `μ_X` (the
   composition law and monoidality of the pullback exchanges, with `p_i ∘ Δ = 1`);
-* `CategoryTheory.map_comp_eq_comp_of_pairing` and `CategoryTheory.pairing_specialization_eq`: the
-  first identity reduces to the adjoint pairings, and these agree given the definition of `δ_K`,
-  the monoidality of `α_{p_2}`, the compatibility of the exceptional Künneth map with the
-  exchanges and the symmetry of the lax tensor maps.
+* `CategoryTheory.map_curry_kunnethPairing_comp_eq`: the first identity, given the definition of
+  `δ_K`, the monoidality of `α_{p_2}`, the compatibility of the exceptional Künneth map with the
+  exchanges and the symmetry of the lax tensor maps. It reduces to the adjoint pairings
+  (`CategoryTheory.map_comp_eq_comp_of_pairing`), which agree by
+  `CategoryTheory.pairing_specialization_eq`.
 
 It also defines `ρ` for the specialization to the normal cone
 (`ProEtale.CondensedRing.universalKernelSpecialization`) and proves the ambient form of
@@ -255,6 +256,52 @@ theorem pairing_specialization_eq {CX CX' CP CP' : Type*} [Category CX] [Categor
     ← whiskerLeft_comp_assoc,
     whiskerRight_whiskerLeft_braiding_comp_assoc]
   simp
+
+/-- **Nearby cycles of the universal kernel**, first identity, abstractly (blueprint
+`det-tf-sp-universal-kernel`, `𝔥 S(λ_K) = λ_{K'} ρ`): let `λ_K` and `λ_{K'}` be the curried
+Künneth–Verdier pairings (the symmetry, `μ` of `p₂^*`, `p₂^*(ev)` and the exceptional Künneth map
+`κ`), `ρ = Π⁻¹ ≫ (1 ⊠ δ_K)` for `Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ`, and `𝔥` the map adjoint to
+`(α_{p₂} ⊗ 1) ≫ μ ≫ S(ev) ≫ β_{p₁}`. Then `𝔥 ∘ S(λ_K) = λ_{K'} ∘ ρ`, given the definition of `δ_K`,
+the monoidality of `α_{p₂}`, the compatibility `hκ` of `κ` with the exchanges and the symmetry of
+the lax tensor maps of `S_P`. -/
+theorem map_curry_kunnethPairing_comp_eq {CX CX' CP CP' : Type*} [Category CX] [Category CX']
+    [Category CP] [Category CP'] [MonoidalCategory CX] [MonoidalCategory CX']
+    [MonoidalClosed CX'] [MonoidalCategory CP] [MonoidalCategory CP'] [BraidedCategory CP]
+    [BraidedCategory CP'] [MonoidalClosed CP] [MonoidalClosed CP'] {SX : CX ⥤ CX'}
+    [SX.LaxMonoidal] {SP : CP ⥤ CP'} [SP.LaxMonoidal]
+    {L₁ L₂ R₁ : CX ⥤ CP} {L₁' L₂' R₁' : CX' ⥤ CP'}
+    (α₁ : SX ⋙ L₁' ⟶ L₁ ⋙ SP) (α₂ : SX ⋙ L₂' ⟶ L₂ ⋙ SP) (β₁ : R₁ ⋙ SP ⟶ SX ⋙ R₁')
+    {K DK ω : CX} {ω' : CX'} (ev : K ⊗ DK ⟶ ω) (θ : SX.obj ω ⟶ ω')
+    (μ₂ : L₂.obj K ⊗ L₂.obj DK ⟶ L₂.obj (K ⊗ DK))
+    (μ₂' : ∀ X Y : CX', L₂'.obj X ⊗ L₂'.obj Y ⟶ L₂'.obj (X ⊗ Y))
+    (hμ₂' : ∀ {Y Y' : CX'} (g : Y ⟶ Y'), L₂'.obj (SX.obj K) ◁ L₂'.map g ≫
+      μ₂' (SX.obj K) Y' = μ₂' (SX.obj K) Y ≫ L₂'.map (SX.obj K ◁ g))
+    (κ : L₁.obj K ⊗ L₂.obj ω ⟶ R₁.obj K)
+    (κ' : L₁'.obj (SX.obj K) ⊗ L₂'.obj ω' ⟶ R₁'.obj (SX.obj K))
+    (δ : SX.obj DK ⟶ (ihom (SX.obj K)).obj ω')
+    (hδ : SX.obj K ◁ δ ≫ (ihom.ev (SX.obj K)).app ω' =
+      Functor.LaxMonoidal.μ SX K DK ≫ SX.map ev ≫ θ)
+    (hα₂ : (α₂.app K ⊗ₘ α₂.app DK) ≫ Functor.LaxMonoidal.μ SP _ _ ≫ SP.map μ₂ =
+      μ₂' _ _ ≫ L₂'.map (Functor.LaxMonoidal.μ SX K DK) ≫ α₂.app (K ⊗ DK))
+    (hκ : (α₁.app K ⊗ₘ α₂.app ω) ≫ Functor.LaxMonoidal.μ SP _ _ ≫ SP.map κ ≫ β₁.app K =
+      L₁'.obj (SX.obj K) ◁ L₂'.map θ ≫ κ')
+    (hbr : ∀ X Y : CP, Functor.LaxMonoidal.μ SP X Y ≫ SP.map (β_ X Y).hom =
+      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ SP Y X)
+    (Km : L₁'.obj (SX.obj K) ⊗ L₂'.obj (SX.obj DK) ⟶ SP.obj (L₁.obj K ⊗ L₂.obj DK))
+    (hKm : Km = (α₁.app K ⊗ₘ α₂.app DK) ≫ Functor.LaxMonoidal.μ SP _ _) [IsIso Km]
+    (h : SP.obj ((ihom (L₂.obj K)).obj (R₁.obj K)) ⟶
+      (ihom (L₂'.obj (SX.obj K))).obj (R₁'.obj (SX.obj K)))
+    (hh : MonoidalClosed.uncurry h = α₂.app K ▷ _ ≫ Functor.LaxMonoidal.μ SP _ _ ≫
+      SP.map ((ihom.ev (L₂.obj K)).app (R₁.obj K)) ≫ β₁.app K) :
+    SP.map (MonoidalClosed.curry ((α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+        (_ ◁ μ₂) ≫ (_ ◁ L₂.map ev) ≫ κ)) ≫ h =
+      (inv Km ≫ L₁'.obj (SX.obj K) ◁ L₂'.map δ) ≫
+        MonoidalClosed.curry ((α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+          (_ ◁ μ₂' _ _) ≫ (_ ◁ L₂'.map ((ihom.ev (SX.obj K)).app ω')) ≫ κ') := by
+  refine map_comp_eq_comp_of_pairing (SP := SP) (A := L₂.obj K) (B := R₁.obj K)
+    (P := L₁.obj K ⊗ L₂.obj DK) (α₂.app K) (β₁.app K) _ _ h hh _ ?_
+  rw [MonoidalClosed.uncurry_curry, MonoidalClosed.uncurry_curry]
+  exact pairing_specialization_eq α₁ α₂ β₁ ev θ μ₂ μ₂' hμ₂' κ κ' δ hδ hα₂ hκ hbr Km hKm
 
 variable [MonoidalCategory CX] [MonoidalCategory CX'] [MonoidalClosed CX']
 
