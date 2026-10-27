@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-layer-local-complex-core",
+ "kind": "statement",
+ "title": "Chartwise finite complex model for the coefficient layer",
+ "statement": "Fix the hypotheses of lem-weil-pbc-finite-quotient-layer-local-complexes, a residue-model chart Z, and its bounded finite-projective complex P together with the residue comparison. Then there exists a cochain complex Q of modules over A/I^(n+2), supported in [a,b] with finite terms, whose constant realization has on Z the homology of the explicit coefficient-layer object.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-coefficient-local-homology-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0942, 094H and 094I, balancing with the annihilated ideal layer and the local algebraic model calculation."
+ },
+ "proof": [
+  {
+   "text": "Let Q=I^(n+1)/I^(n+2), regarded as a finite A/I-module. Derived balancing identifies the layer with the residue reduction tensored with Q and restricted to A/I^(n+2). Tensor the supplied bounded finite-projective residue complex with Q. Projectivity computes the derived tensor termwise; finiteness of the quotient and annihilation by I give finite successor-ring terms, and the interval bounds are inherited. Exact constant realization and exact restriction transport the termwise homology comparison to the explicit layer object.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-coefficient-layer-data",
+    "def-weil-pbc-finite-perfect-quotient-model-data",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0942, 094H and 094I, local algebraic model calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite-projective complex tensor finite annihilated quotient module local homology model",
+   "results": "No exact project-specific match; only generic derived tensor and homology preservation lemmas.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact functor preserves homology of tensor complex",
+   "results": "Generic PreservesHomology declarations; no explicit coefficient-layer comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteQuotientLayerObject tensor homology",
+   "results": "No existing declaration beyond the layer data and triangle modules.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientLayerLocalComplexes",
+  "date": "2026-10-27",
+  "group": "W2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-quotient-layer-local-complexes",
+   "place": "Chartwise local calculation in the proof of the layer local-complex theorem.",
+   "via": [
+    "lem-weil-pbc-finite-quotient-layer-local-complexes"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientLayerLocalComplexCore",
+  "file": "lean/Sheaf/Paper/FiniteQuotientLayerLocalComplexCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_layer_local_complex_core",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotient_layer_local_complex_core"
+  ],
+  "statement": "theorem finiteQuotient_layer_local_complex_core\n    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n))\n    (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d))\n    (a b : ℤ) (n : ℕ) (Z : X.Etale)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (0 + 1))) ℤ)\n    (hPa : P.IsStrictlyGE a) (hPb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Projective (A ⧸ d.ideal ^ (0 + 1)) (P.X i) ∧\n      Module.Finite (A ⧸ d.ideal ^ (0 + 1)) (P.X i))\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicQuotientReduction X d 0).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicDerivedChange X (φ 0)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :\n    ∃ Q : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1 + 1))) ℤ,\n      Q.IsStrictlyGE a ∧ Q.IsStrictlyLE b ∧\n        (∀ i : ℤ, Module.Finite (A ⧸ d.ideal ^ (n + 1 + 1)) (Q.X i)) ∧\n        ∀ q : ℤ, Nonempty\n          ((SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n              ((DerivedCategory.homologyFunctor _ q).obj\n                (finiteQuotientLayerObject X d M n)) ≅\n            (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n              ((finiteCoefficientConstantFunctor X (A ⧸ d.ideal ^ (n + 1 + 1))\n                (φ (n + 1))).obj (Q.homology q)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261027T180930-L-3914221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261027T180930-L-3914221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

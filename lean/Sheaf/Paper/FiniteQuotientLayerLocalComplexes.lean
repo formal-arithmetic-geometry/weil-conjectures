@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.FiniteQuotientCoefficientLayerData
 public import Sheaf.Paper.FiniteCoefficientLocalHomologyModels
+import Sheaf.Paper.FiniteQuotientLayerLocalComplexCore
 
 /-! # Local algebraic complexes for a coefficient-filtration outer term
 Source: Stacks Project, Tags 0942, 094H and 094I.
@@ -21,6 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
+set_option linter.unusedVariables false in
 /-- The residue complex computes the coefficient layer after ordinary tensor.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
@@ -53,6 +55,20 @@ theorem finiteQuotient_layer_local_complexes
     (a b : ℤ) (hab : a ≤ b) (n : ℕ)
     (hresidue : FinitePerfectModelsOn X d φ M 0 V a b) :
     FiniteCoefficientLocalHomologyModels X (A ⧸ d.ideal ^ (n + 1 + 1))
-      (φ (n + 1)) (finiteQuotientLayerObject X d M n) V a b := by sorry
+      (φ (n + 1)) (finiteQuotientLayerObject X d M n) V a b := by
+  classical
+  obtain ⟨T, hT, hlocal⟩ := hresidue
+  intro W g
+  refine ⟨T.pullback g, X.smallEtaleTopology.pullback_stable g hT, ?_⟩
+  intro Z f hf
+  obtain ⟨P, hPa, hPb, hP, ⟨e⟩⟩ := hlocal Z (f ≫ g) hf
+  obtain ⟨Q, hQa, hQb, hQfin, hQiso⟩ :=
+    finiteQuotient_layer_local_complex_core X d φ hφ hcompat M a b n Z P
+      hPa hPb hP ⟨e⟩
+  refine ⟨Q, ?_, hQfin, hQiso⟩
+  intro q hq
+  rcases hq with hq | hq
+  · exact (Q.isStrictlyGE_iff a).1 hQa q hq
+  · exact (Q.isStrictlyLE_iff b).1 hQb q hq
 
 end AlgebraicGeometry.Scheme
