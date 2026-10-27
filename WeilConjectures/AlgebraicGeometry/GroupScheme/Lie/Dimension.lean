@@ -201,7 +201,7 @@ scheme `K` of a connected group scheme `G` of finite type with the same Lie alge
 differential of the inclusion is bijective) is all of `G`. By Cartier's theorem
 `dim K = dim Lie(K) = dim Lie(G) = dim G`, and `K` and `G` are reduced, so
 `AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq` applies.
-(blueprint: `lem-wf-same-lie-closed-subgroup`) -/
+(blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
 theorem isIso_left_of_differential_bijective [CharZero k] {K G : Over (Spec (.of k))} [GrpObj K]
     [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [ConnectedSpace G.left]
     (f : K ⟶ G) [IsMonHom f] [IsClosedImmersion f.left]
