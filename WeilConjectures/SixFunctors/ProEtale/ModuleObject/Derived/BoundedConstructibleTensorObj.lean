@@ -18,10 +18,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 Let `Λ` be a commutative condensed ring such that, on every scheme with noetherian underlying
 space, the pro-étale locally finitely presented module objects over `Λ` are locally free and the
 bounded constructible complexes form a triangulated subcategory. This holds for the field
-coefficients `E̲` (`E` a finite extension of `ℚ_ℓ`) and `ℚ̲̄_ℓ` (Bhatt–Scholze, Lemma 6.8.? and
-Section 6.8; `exists_finiteFree_cover_of_condensedField_lfp`,
-`condensedQbar_lfp_locally_free`). Then the bounded constructible complexes on a scheme `T`
-with noetherian underlying space are stable under the derived tensor product
+coefficients `E̲` (`E` a finite extension of `ℚ_ℓ`) and `ℚ̲̄_ℓ`, whose locally finitely presented
+module objects are the lisse sheaves of Bhatt–Scholze, Definition 6.8.6
+(`ProEtale.CondensedRing.tensorHypotheses_padicAlgClRingObj`,
+`ProEtale.CondensedRing.tensorHypotheses_continuousMapRingObj`). Then the bounded constructible
+complexes on a scheme `T` with noetherian underlying space are stable under the derived tensor
+product
 (`ProEtale.CondensedRing.boundedConstructible_tensorObj`, blueprint
 `lem-sfb-dc-tensor-preserves` for the field coefficients).
 

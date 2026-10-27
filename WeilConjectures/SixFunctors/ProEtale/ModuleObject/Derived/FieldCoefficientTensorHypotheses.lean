@@ -36,14 +36,14 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The coefficient ring `ℚ̲̄_ℓ` satisfies `ProEtale.CondensedRing.TensorHypotheses`. -/
 theorem tensorHypotheses_padicAlgClRingObj :
     TensorHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) where
-  isLocallyFree Z _ M hM := isLocallyFree_of_isLocallyFinitelyPresented_of_noetherianSpace ℓ Z hM
+  isLocallyFree Z _ _ hM := isLocallyFree_of_isLocallyFinitelyPresented_of_noetherianSpace ℓ Z hM
   isTriangulated _ _ := inferInstance
 
 /-- The coefficient ring `E̲` of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` satisfies
 `ProEtale.CondensedRing.TensorHypotheses`. -/
 theorem tensorHypotheses_continuousMapRingObj (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     TensorHypotheses (Profinite.continuousMapRingObj.{u} E) where
-  isLocallyFree Z _ M hM :=
+  isLocallyFree Z _ _ hM :=
     ContinuousMapRingObj.isLocallyFree_of_isLocallyFinitelyPresented ℓ E Z hM
   isTriangulated _ _ := inferInstance
 

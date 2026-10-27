@@ -37,6 +37,76 @@ open Scheme
 
 variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
 
+/-- If `k^* g^* M` is pro-étale locally finitely presented, then so is `(k ≫ g)^* M`. -/
+lemma isLocallyFinitelyPresented_upperStar_comp {P W X : Scheme.{u}} (k : P ⟶ W) (g : W ⟶ X)
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (hM : IsLocallyFinitelyPresented (condensedRingObj Λ P) ((k)^*⟦Λ⟧.obj ((g)^*⟦Λ⟧.obj M))) :
+    IsLocallyFinitelyPresented (condensedRingObj Λ P) ((k ≫ g)^*⟦Λ⟧.obj M) :=
+  hM.of_iso ((upperStarComp Λ k g).app M).symm
+
+/-- A constructible sheaf `G` on a nonempty scheme `D` becomes pro-étale locally finitely
+presented on a surjective closed immersion `c : E ⟶ W` into a nonempty open `j : W ⟶ D`: take
+for `W` a nonempty open contained in a stratum of a stratification adapted to `G`. -/
+lemma exists_isLocallyFinitelyPresented_upperStar_of_isConstructible {D : Scheme.{u}}
+    [Nonempty D]
+    {G : Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1}) (condensedRingObj Λ D)}
+    (hG : IsConstructibleModuleObject (condensedRingObj Λ D) G) :
+    ∃ (W E : Scheme.{u}) (j : W ⟶ D) (c : E ⟶ W), IsOpenImmersion j ∧ Nonempty W ∧
+      IsClosedImmersion c ∧ Surjective c ∧
+      IsLocallyFinitelyPresented (condensedRingObj Λ E) ((c ≫ j)^*⟦Λ⟧.obj G) := by
+  obtain ⟨S, hS⟩ := hG
+  obtain ⟨a, V, ⟨v, hv⟩, hVS⟩ := exists_nonempty_opens_subset_stratum S
+  have : Surjective (pullback.fst V.ι (S.immersion a)) :=
+    surjective_pullback_fst_of_range_subset _ _ (by
+      rw [Scheme.Opens.range_ι, S.range_immersion]
+      exact hVS)
+  exact ⟨V, _, V.ι, pullback.fst V.ι (S.immersion a), inferInstance, ⟨⟨v, hv⟩⟩,
+    IsClosedImmersion.of_isImmersion_of_surjective _, this,
+    isLocallyFinitelyPresented_upperStar_comp_of_comm Λ pullback.condition
+      ((isLocallyFinitelyPresented_mapMod_iff Λ _ _).1 (hS a))⟩
+
+/-- Finitely many constructible sheaves `G i` (`i ∈ s`) on a nonempty scheme `D` with noetherian
+underlying space all become pro-étale locally finitely presented on a common surjective closed
+immersion `c : E ⟶ W` into a nonempty open `j : W ⟶ D`. -/
+lemma exists_isLocallyFinitelyPresented_upperStar_of_finset {ι : Type*} (s : Finset ι) :
+    ∀ (D : Scheme.{u}) [TopologicalSpace.NoetherianSpace D] [Nonempty D]
+      (G : ι → Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1}) (condensedRingObj Λ D)),
+      (∀ i ∈ s, IsConstructibleModuleObject (condensedRingObj Λ D) (G i)) →
+      ∃ (W E : Scheme.{u}) (j : W ⟶ D) (c : E ⟶ W), IsOpenImmersion j ∧ Nonempty W ∧
+        IsClosedImmersion c ∧ Surjective c ∧ ∀ i ∈ s,
+          IsLocallyFinitelyPresented (condensedRingObj Λ E) ((c ≫ j)^*⟦Λ⟧.obj (G i)) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+    intro D _ _ G _
+    exact ⟨D, D, 𝟙 D, 𝟙 D, inferInstance, inferInstance, inferInstance, inferInstance,
+      fun _ h ↦ absurd h (Finset.notMem_empty _)⟩
+  | insert i s _ ih =>
+    intro D _ _ G hG
+    obtain ⟨W₁, E₁, j₁, c₁, _, _, _, _, h₁⟩ :=
+      ih D G fun k hk ↦ hG k (Finset.mem_insert_of_mem hk)
+    have : TopologicalSpace.NoetherianSpace W₁ := j₁.isOpenEmbedding.isInducing.noetherianSpace
+    obtain ⟨W₂, E₂, j₂, c₂, _, _, _, _, h₂⟩ :=
+      exists_isLocallyFinitelyPresented_upperStar_of_isConstructible
+        (IsConstructibleModuleObject.upperStar Λ j₁ (hG i (Finset.mem_insert_self i s)))
+    have : Surjective (pullback.fst j₂ c₁) := MorphismProperty.pullback_fst _ _ inferInstance
+    have : Surjective (pullback.fst (pullback.fst j₂ c₁) c₂) :=
+      MorphismProperty.pullback_fst _ _ inferInstance
+    let c := pullback.fst (pullback.fst j₂ c₁) c₂ ≫ pullback.fst j₂ c₁
+    have hc₁ : c ≫ j₂ ≫ j₁ =
+        (pullback.fst (pullback.fst j₂ c₁) c₂ ≫ pullback.snd j₂ c₁) ≫ c₁ ≫ j₁ := by
+      simp only [c, Category.assoc, pullback.condition_assoc]
+    have hc₂ : c = pullback.snd (pullback.fst j₂ c₁) c₂ ≫ c₂ := by
+      simp only [c, pullback.condition]
+    refine ⟨W₂, _, j₂ ≫ j₁, c, inferInstance, inferInstance, inferInstance, inferInstance,
+      fun k hk ↦ ?_⟩
+    rcases Finset.mem_insert.1 hk with rfl | hk
+    · rw [← Category.assoc]
+      refine isLocallyFinitelyPresented_upperStar_comp _ _ ?_
+      rw [hc₂, Category.assoc]
+      exact isLocallyFinitelyPresented_upperStar_comp_of_comm Λ rfl h₂
+    · exact isLocallyFinitelyPresented_upperStar_comp_of_comm Λ hc₁ (h₁ k hk)
+
 /-- **A bounded constructible complex is lisse on a dense open, up to nilpotents**: on a nonempty
 scheme `D` with noetherian underlying space, a bounded constructible complex `K` has a nonempty
 open `V` and a surjective closed immersion `c : E ⟶ V` such that all cohomology sheaves of the
@@ -49,7 +119,20 @@ theorem exists_isLocallyFinitelyPresented_homology_upperStar {D : Scheme.{u}}
     ∃ (V : D.Opens) (E : Scheme.{u}) (c : E ⟶ V), (V : Set D).Nonempty ∧
       IsClosedImmersion c ∧ Surjective c ∧ ∀ n : ℤ,
         IsLocallyFinitelyPresented (condensedRingObj Λ E)
-          ((DerivedCategory.homologyFunctor _ n).obj ((L(((c ≫ V.ι))^*⟦Λ⟧)).obj K)) :=
-  sorry
+          ((DerivedCategory.homologyFunctor _ n).obj ((L(((c ≫ V.ι))^*⟦Λ⟧)).obj K)) := by
+  obtain ⟨⟨a, b, hab⟩, hc⟩ := (mem_boundedConstructible_iff _ K).1 hK
+  obtain ⟨W, E, j, c, _, ⟨w⟩, _, _, h⟩ := exists_isLocallyFinitelyPresented_upperStar_of_finset
+    (Finset.Icc a b) D (fun n ↦ (DerivedCategory.homologyFunctor _ n).obj K) fun n _ ↦ hc n
+  have hcj : (c ≫ j.isoOpensRange.hom) ≫ j.opensRange.ι = c ≫ j := by
+    rw [Category.assoc, Scheme.Hom.isoOpensRange_hom_ι]
+  refine ⟨j.opensRange, E, c ≫ j.isoOpensRange.hom, ⟨j w, w, rfl⟩, inferInstance,
+    inferInstance, fun n ↦ ?_⟩
+  rw [hcj]
+  refine IsLocallyFinitelyPresented.of_iso ((leftDerivedUpperStarHomologyIso Λ (c ≫ j) n).app K) ?_
+  by_cases hn : n ∈ Finset.Icc a b
+  · exact h n hn
+  · refine isLocallyFinitelyPresented_of_isZero _ ((c ≫ j)^*⟦Λ⟧.map_isZero (hab n ?_))
+    rw [Finset.mem_Icc] at hn
+    lia
 
 end AlgebraicGeometry.ProEtale.CondensedRing
