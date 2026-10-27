@@ -7,11 +7,10 @@ public import Mathlib.CategoryTheory.Idempotents.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.CategoryTheory.Triangulated.Generators
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import all Sheaf.SixFunctors.BrownHypothesesSmall
 import Sheaf.SixFunctorsBasics.BrownHypothesesStructural
-import Sheaf.Paper.IntegralConstructibleCompactness
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.IntegralConstructibleCompactness
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
 import WeilConjectures.CategoryTheory.CompactObjectsThick
 import WeilConjectures.CategoryTheory.DerivedCategory.Products
