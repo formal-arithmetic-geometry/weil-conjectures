@@ -14,7 +14,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B and 0F7I; strict decomposition of the refinement restriction construction."
+  "place": "Tags 0F7B and 0F7I, construction of the natural comparison; T4 formalizes the component naturality directly from Mathlib NatTrans.naturality, Functor.map_comp and associativity, specializing the equation of the existing refinementRestriction definition."
  },
  "mathlib_searches": [
   {
@@ -61,29 +61,15 @@
  "statement": "∃ θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶\n        (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i,\n      ∀ M, θ.app M = refinementRestriction R r hi M",
  "proof": [
   {
-   "text": "Construct the natural transformation from the sectionwise proper counit after pullback composition. Naturality follows from the pullback compositor and counit naturality; the clopen restriction calculation is deferred to the separate invertibility and shift statements.",
+   "text": "Construct the proved private categorical helper counitRestriction: for functors L : A → B, P : B → A, F : B → C, G : A → C and natural transformations ε : P ⋙ L → 𝟭 B and α : G → L ⋙ F, the maps α.app (P.obj M) followed by F.map (ε.app M) form a natural transformation P ⋙ G → F. The proof uses α.naturality, ε.naturality, Functor.map_comp and associativity. The proved private helper exists_counitRestriction_of_eq whisks this transformation by K : S → B and identifies any specified equal component family. For the geometric specialization, open the compactification and refinement records and substitute the open-triangle equality; this avoids expensive conversion through refinementPull. Apply the generic existence helper to refinementRestriction.eq_def. Its α is refinementPull.hom, its ε is the specified derived adjunction counit, and K is the derived open extension. No invertibility or shift assertion is used.",
    "uses": [
-    "lem-sfb-proetale-open-restriction-counit",
-    "lem-sf-proetale-open-pullback-preserves-kinjective",
-    "lem-sfb-proetale-identified-open-closed",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-pur-exact-adjunction-unit-shift-descent",
-    "lem-sp-canonical-right-derived-adjunction-shift",
-    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+    "def-sf-integral-refinement-normalization-data"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-proetale-open-restriction-counit",
-  "lem-sf-proetale-open-pullback-preserves-kinjective",
-  "lem-sfb-proetale-identified-open-closed",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-pur-exact-adjunction-unit-shift-descent",
-  "lem-sp-canonical-right-derived-adjunction-shift",
-  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+  "def-sf-integral-refinement-normalization-data"
  ],
  "lean": {
   "existing": false,
@@ -109,9 +95,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S8",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261027T180812-L-3903387",
+  "landing": "20261027T234323-L-98956",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
