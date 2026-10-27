@@ -7765,6 +7765,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
 public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft
+public import WeilConjectures.CategoryTheory.Adjunction.MatePasting
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateTwoColimit
 public import WeilConjectures.CategoryTheory.Adjunction.MateVCompIsIso
@@ -12588,6 +12589,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
 public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
+public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchange
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.CohomologyVanishing
