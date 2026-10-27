@@ -26,6 +26,10 @@ of blueprint `det-tf-sp-kernel-pullback`
 (`IsContractingAt.map_exceptionalHomIso_inv_comp_supportHomSpecialization`), from the first identity
 of blueprint `det-tf-sp-universal-kernel` and the compatibility of `β_c` with the projection formula
 (blueprint `det-nearby-exceptional-tensor` (2)), taken as hypotheses.
+It also identifies the unit of the lax monoidal structure of nearby cycles with the
+specialization unit (`NearbyCyclesModel.nearbyCyclesLaxMonoidal_ε`,
+`IsContractingAt.laxMonoidal_ε_specialization`), the form in which `σ_C` enters the section of the
+specialized coefficient (`curry_comp_eq_of_section`).
 
 The special support is written `prod.lift γ₁ γ₂` rather than `(specialCorrespondence k').support`:
 both have the same value, but the second has source `(specialCorrespondence k').C`, and mixing the
@@ -47,6 +51,28 @@ open Scheme
 
 namespace NearbyCyclesModel
 
+section
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  {X X' : Scheme.{u}} (M : NearbyCyclesModel X X')
+
+set_option maxHeartbeats 1000000 in
+-- the unit comparisons of the derived pullbacks are identified by unfolding
+/-- The unit of the lax monoidal structure of nearby cycles is the specialization unit. -/
+lemma nearbyCyclesLaxMonoidal_ε :
+    @Functor.LaxMonoidal.ε _ _ _ _ _ _ (M.nearbyCycles Λ) (M.nearbyCyclesLaxMonoidal Λ) =
+      M.unit Λ := by
+  have hε (Y Z : Scheme.{u}) (f : Y ⟶ Z) :
+      Functor.LaxMonoidal.ε (f)^*⟦Λ⟧.leftDerivedFunctor =
+        (leftDerivedUpperStarUnitIso Λ f).inv := rfl
+  unfold nearbyCyclesLaxMonoidal
+  erw [Functor.LaxMonoidal.comp_ε, Functor.LaxMonoidal.comp_ε,
+    Adjunction.rightAdjointLaxMonoidal_ε, Adjunction.homEquiv_unit]
+  simp only [hε, unit, Functor.comp_map, Functor.map_comp, Category.assoc]
+  congr 4
+
+end
+
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k] [Field k'] [Fact (ringChar k ≠ ℓ)]
   [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
@@ -61,6 +87,16 @@ noncomputable def boundedConstructibleNearbyCyclesLaxMonoidal
   @ObjectProperty.laxMonoidalLift _ _ _ _ _ _ (boundedConstructible _) _
     (boundedConstructible _) _ (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
     (M.nearbyCyclesLaxMonoidal (Profinite.padicAlgClRingObj ℓ)) _
+
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
+/-- The unit of the lax monoidal structure of nearby cycles on bounded constructible complexes is
+the specialization unit. -/
+lemma boundedConstructibleNearbyCyclesLaxMonoidal_ε
+    (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ)) :
+    @Functor.LaxMonoidal.ε _ _ _ _ _ _ (boundedConstructibleNearbyCycles hP)
+      (boundedConstructibleNearbyCyclesLaxMonoidal hP) = boundedConstructibleUnit ℓ hP :=
+  ObjectProperty.hom_ext _ (nearbyCyclesLaxMonoidal_ε _ M)
 
 end NearbyCyclesModel
 
@@ -300,6 +336,12 @@ theorem map_exceptionalHomIso_inv_comp_supportHomSpecialization
   unfold homSpecialization at h₁
   unfold supportHomSpecialization specialExceptionalHomInv Correspondence.exceptionalHomIso
   fo_apply map_externalDuality_comp_eq using _, _, _, _, _, hX, _, _, _, h₁
+
+/-- The unit `ε` of the lax monoidal structure of the specialization of `C` is the specialization
+unit `σ_C`. -/
+lemma laxMonoidal_ε_specialization :
+    Functor.LaxMonoidal.ε 𝐒 = supportSpecializationUnit (ℓ := ℓ) (y := y) k' :=
+  NearbyCyclesModel.boundedConstructibleNearbyCyclesLaxMonoidal_ε _
 
 end Correspondence.IsContractingAt
 
