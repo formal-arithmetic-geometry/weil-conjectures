@@ -1,0 +1,113 @@
+{
+ "id": "lem-trf-ordinary-quotient-scalar-section-casts",
+ "kind": "statement",
+ "title": "Restriction of coefficient systems preserves the specified section casts",
+ "statement": "For every map g:N to Nprime of coefficient sequence modules on a scheme W, level n, pro-etale object U and section x of N at (n,U), restricting g to level n and applying it to the specified restricted section of x equals the specified restricted section of g(x). This is naturality of the section cast, with notation as in [def-trf-integral-comparison-realization-models] and [def-coef-ringed-sequence-site].",
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-coef-ringed-sequence-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03D7, ordinary scalar-extension adjunction; 03EK, tensor products. Fully proved ordinary substep of the strict scalar quotient comparison."
+ },
+ "proof": [
+  {
+   "text": "The restriction functor is characterized by HEq of its underlying map on each section with the original map g on the sequence-site section. The specified restricted section is the cast along the recorded carrier equality. Transport the map across its domain and codomain carrier equalities using equality elimination. The HEq characterization then gives precisely the asserted equality. The module also proves the analogous evaluation and eqToHom identities directly by equality elimination.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary balanced tensor and adjunction-unit naturality; fully proved private implementation helper, not a new sorry obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary extension scalar associativity sheaf quotient tower",
+   "results": "Generic module scalar-extension API; no strict quotient tower comparison retaining the generator normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project evaluation and association declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Generic uniqueness of left adjoints; no project-specific normalized strict tower comparison.",
+   "date": "2026-10-28",
+   "verdict": "Prescribing the scalar model avoids a separate uniqueness comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|ofOpSequence",
+   "results": "Generic adjunction uniqueness and opposite-sequence assembly APIs. Repository search also found the proved restricted-tower assembly helpers.",
+   "date": "2026-10-28",
+   "verdict": "Reuse assembly helpers and prove the section transport directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary scalar extension of sheaves of modules is compatible with finite evaluation and tensor associativity on a quotient tower",
+   "results": "Eight hits: generic TensorProduct and PiTensorProduct scalar-tower instances, Submodule.Quotient.isScalarTower, valuation and algebra-extension scalar towers, and PresheafOfModules.Sheafify.SMulCandidate.h. No strict coefficient quotient-tower comparison or its presentation-unit formula.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; retain the proved project scalar-evaluation, balanced-association and section-cast APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryQuotientScalarTowerComparison",
+  "date": "2026-10-28",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-ordinary-quotient-scalar-tower-comparison",
+   "place": "Elementary restriction and evaluation section casts."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryQuotientScalarSectionCasts",
+  "file": "lean/Sheaf/Paper/OrdinaryQuotientScalarSectionCasts.lean",
+  "declaration": "WeilConjectures.OrdinaryScalarTowerProof.restriction_map_section",
+  "statement": "theorem restriction_map_section {X : Scheme.{t}}\n    {N N' : coefficientSequenceModules l E X} (g : N ⟶ N')\n    (n : ℕ) (U : X.ProEtᵒᵖ) (x : N.val.obj (op (n, U.unop))) :\n    ((((coefficientSequenceRestriction l E X).map g).app (op n)).val.app U)\n      (integralComparisonRestrictedSection l E X N n U x) =\n    integralComparisonRestrictedSection l E X N' n U\n      (g.val.app (op (n, U.unop)) x)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T234003-L-4155331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T234003-L-4155331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

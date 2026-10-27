@@ -1,0 +1,124 @@
+{
+ "id": "def-trf-ordinary-quotient-scalar-tower-levels",
+ "kind": "definition",
+ "title": "Finite balanced scalar comparison on all complexes",
+ "statement": "For a prime ell, finite coefficient extensions E and L with embedding iota, a scheme W, ordinary quotient model M [def-trf-completion-unit-models], scalar systems A with finite scalar evaluations rho [stage3-pur-scalar-cochain-evaluation], and finite balanced associations [stage3-pur-finite-extension-association], define direct to be degreewise sequence scalar extension after M.quotient. Define directEvaluation at n by composing rho after M.tensor, finite scalar extension of M.evaluation, and association, then applying this natural module isomorphism degreewise to every complex. Naturality supplies chain-map and complex-map compatibility; the existing successor theorem applies to every complex.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "stage3-pur-scalar-cochain-evaluation",
+  "stage3-pur-finite-extension-association"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03D7, ordinary scalar-extension adjunction; 03EK, tensor products. Fully proved ordinary substep of the strict scalar quotient comparison."
+ },
+ "proof": [
+  {
+   "text": "Compose the three given module isomorphisms. Their naturality gives the differential and complex-map equations needed for NatIso.ofComponents and HomologicalComplex.Hom.isoOfComponents. The degree component equation is definitional. The directTransition theorem is the existing successor compatibility specialized to these composites.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "stage3-pur-extension-association-successor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Retain the actual coefficient-evaluation scalar-action calculation: rewrite its ring eqToHom on sections to identity. Convert the evaluated scalar-unit HEq to equality in the native finite carrier, then use this action identity to transport its scalar multiples. These are fully proved helpers, separated so each native-carrier identification is checked once.",
+   "uses": [
+    "stage3-pur-extension-scalar-unit-transition",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-completion-unit-models",
+  "stage3-pur-extension-association-successor",
+  "stage3-pur-extension-scalar-unit-transition",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary balanced tensor and adjunction-unit naturality; fully proved private implementation helper, not a new sorry obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary extension scalar associativity sheaf quotient tower",
+   "results": "Generic module scalar-extension API; no strict quotient tower comparison retaining the generator normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project evaluation and association declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Generic uniqueness of left adjoints; no project-specific normalized strict tower comparison.",
+   "date": "2026-10-28",
+   "verdict": "Prescribing the scalar model avoids a separate uniqueness comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|ofOpSequence",
+   "results": "Generic adjunction uniqueness and opposite-sequence assembly APIs. Repository search also found the proved restricted-tower assembly helpers.",
+   "date": "2026-10-28",
+   "verdict": "Reuse assembly helpers and prove the section transport directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary scalar extension of sheaves of modules is compatible with finite evaluation and tensor associativity on a quotient tower",
+   "results": "Eight hits: generic TensorProduct and PiTensorProduct scalar-tower instances, Submodule.Quotient.isScalarTower, valuation and algebra-extension scalar towers, and PresheafOfModules.Sheafify.SMulCandidate.h. No strict coefficient quotient-tower comparison or its presentation-unit formula.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; retain the proved project scalar-evaluation, balanced-association and section-cast APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryQuotientScalarTowerComparison",
+  "date": "2026-10-28",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-ordinary-quotient-scalar-tower-comparison",
+   "place": "Finite balanced scalar comparison on all complexes"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryQuotientScalarTowerLevels",
+  "file": "lean/Sheaf/Paper/OrdinaryQuotientScalarTowerLevels.lean",
+  "declaration": "WeilConjectures.OrdinaryScalarTowerProof.directEvaluation",
+  "statement": "def directEvaluation\n    (A : CoefficientExtensionSystems l E L ι W)\n    (M : CompletionUnit.OrdinaryModel l E W)\n    (ρ : ∀ n : ℕ, A.scalar.model.E ⋙ coefficientSequenceEvaluation l L W n ≅\n      coefficientSequenceEvaluation l E W n ⋙ (A.levels n).model.E)\n    (association : ∀ n : ℕ,\n      scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅\n        integralScalarReduction l E L ι W n)\n    (n : ℕ) :\n    direct l E L ι W A M ⋙\n      (coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ) ≅\n        integralScalarFiniteComplex l E L ι W n",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T234003-L-4155331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T234003-L-4155331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

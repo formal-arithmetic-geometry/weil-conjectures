@@ -6,6 +6,10 @@ module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.CompletionUnitModels
+import all Sheaf.Paper.OrdinaryQuotientScalarModels
+import all Sheaf.Paper.OrdinaryQuotientScalarNormalization
+import Sheaf.Paper.CoefficientScalarCochainEvaluation
+import Sheaf.Paper.CoefficientExtensionFiniteAssociation
 
 /-! # Ordinary quotient scalar tower comparison
 
@@ -33,10 +37,10 @@ Source: Stacks 03EK, 03D7 and 0941, balanced association for quotient tensors.
 
 Proof: evaluate at each quotient. The ordinary extension/restriction adjunction
 identifies evaluation of sequence scalar extension with scalar extension of the
-evaluated module. If chosen cochain models differ, their obj_eq and map_eq
-formulas identify the ordinary extension functors; equality of the actual ring
-maps identifies their tensor sections. The ordinary unit formulas ensure these
-identifications preserve unit tensors. Compose with M.evaluation and the
+evaluated module. Construct the scalar systems package with the prescribed
+actual sequence cochain model, transporting along the componentwise equality
+of the sequence ring maps. The ordinary unit formula then identifies actual
+tensor sections with scalar multiples of that unit. Compose with M.evaluation and the
 balanced associator
 b tensor (a tensor x) to (b times iota(a)) tensor x. Its inverse inserts 1.
 Both maps commute with quotient reduction because reduction preserves products,
@@ -74,6 +78,18 @@ theorem ordinaryQuotientScalarTowerComparison
                   (((κ n).inv.f i).val.app U
                     (unrestrictedIntegralTensorSection l E W n (P.X i) U 1 x))))) =
             integralScalarTensorSection l E L ι W n (P.X i) U s x := by
-  sorry
+  dsimp only
+  obtain ⟨A, hA, hTensor⟩ := OrdinaryScalarTowerProof.fixedSystems_exists l E L ι W
+  obtain ⟨ρ, hρ, _⟩ := coefficientScalarCochainEvaluation l E L ι W A
+  obtain ⟨d⟩ := coefficientExtensionFiniteAssociation_exists l E L ι W A
+  obtain ⟨θ, hθ⟩ := OrdinaryScalarTowerProof.normalizedComparison l E L ι W A M ρ hρ
+    d.association d.association_section (integralComparisonSequenceScalarModel l E L ι W).E hA
+  refine ⟨θ, ?_⟩
+  intro P C a κ hκ n i U s x
+  exact hθ P C a κ hκ n i U s x _
+    (hTensor (C.X i) (op (n, U.unop)) s
+      (integralComparisonSequenceSection l E W (C.X i) n U
+        (((κ n).inv.f i).val.app U
+          (unrestrictedIntegralTensorSection l E W n (P.X i) U 1 x))))
 
 end WeilConjectures

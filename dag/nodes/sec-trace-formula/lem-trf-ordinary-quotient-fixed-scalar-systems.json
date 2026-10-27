@@ -1,0 +1,125 @@
+{
+ "id": "lem-trf-ordinary-quotient-fixed-scalar-systems",
+ "kind": "statement",
+ "title": "Scalar systems with the prescribed ordinary cochain model",
+ "statement": "For a prime ell, finite coefficient extensions E and L with embedding iota, and a scheme W, there exist coefficient scalar systems A whose ordinary sequence extension functor is exactly the functor of the prescribed integral comparison sequence scalar model. For every module N, sequence-site object U, scalar s and section x, the actual sequence tensor section is HEq to s times the ordinary scalar-adjunction unit applied to x. The notation is that of [def-trf-integral-comparison-sequence-systems], [stage3-pur-scalar-cochain-evaluation].",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "stage3-pur-scalar-cochain-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03D7, ordinary scalar-extension adjunction; 03EK, tensor products. Fully proved ordinary substep of the strict scalar quotient comparison."
+ },
+ "proof": [
+  {
+   "text": "Package the prescribed cochain model with its normalized ordinary scalar adjunction using scalarPackageExists. The generic sequence scalar ring map equals the actual comparison ring map componentwise; transport the model along that equality. The normalized unit formula identifies actual tensor sections with scalar multiples of the unit.",
+   "uses": [
+    "lem-sf-system-scalar-package-exists",
+    "def-trf-integral-comparison-sequence-systems",
+    "stage3-pur-finite-extension-association"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the finite scalar packages from the proved scalar-data existence theorem. Apply the evaluation-transpose construction to these packages and the prescribed sequence package, obtaining coefficient scalar systems without changing its sequence model.",
+   "uses": [
+    "lem-coef-semilinear-scalar-data",
+    "lem-coef-semilinear-scalar-evaluation-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-scalar-package-exists",
+  "def-trf-integral-comparison-sequence-systems",
+  "stage3-pur-finite-extension-association",
+  "lem-coef-semilinear-scalar-data",
+  "lem-coef-semilinear-scalar-evaluation-transpose"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary balanced tensor and adjunction-unit naturality; fully proved private implementation helper, not a new sorry obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary extension scalar associativity sheaf quotient tower",
+   "results": "Generic module scalar-extension API; no strict quotient tower comparison retaining the generator normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project evaluation and association declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Generic uniqueness of left adjoints; no project-specific normalized strict tower comparison.",
+   "date": "2026-10-28",
+   "verdict": "Prescribing the scalar model avoids a separate uniqueness comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|ofOpSequence",
+   "results": "Generic adjunction uniqueness and opposite-sequence assembly APIs. Repository search also found the proved restricted-tower assembly helpers.",
+   "date": "2026-10-28",
+   "verdict": "Reuse assembly helpers and prove the section transport directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary scalar extension of sheaves of modules is compatible with finite evaluation and tensor associativity on a quotient tower",
+   "results": "Eight hits: generic TensorProduct and PiTensorProduct scalar-tower instances, Submodule.Quotient.isScalarTower, valuation and algebra-extension scalar towers, and PresheafOfModules.Sheafify.SMulCandidate.h. No strict coefficient quotient-tower comparison or its presentation-unit formula.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; retain the proved project scalar-evaluation, balanced-association and section-cast APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryQuotientScalarTowerComparison",
+  "date": "2026-10-28",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-ordinary-quotient-scalar-tower-comparison",
+   "place": "Scalar systems with the prescribed ordinary cochain model"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryQuotientScalarModels",
+  "file": "lean/Sheaf/Paper/OrdinaryQuotientScalarModels.lean",
+  "declaration": "WeilConjectures.OrdinaryScalarTowerProof.fixedSystems_exists",
+  "statement": "theorem fixedSystems_exists :\n    ∃ A : CoefficientExtensionSystems l E L ι W,\n      A.scalar.model.E = (integralComparisonSequenceScalarModel l E L ι W).E ∧\n      ∀ (N : coefficientSequenceModules l E W) (U : (ℕ × W.ProEt)ᵒᵖ)\n        (s : (coefficientSequenceCommRingSheaf l L W).obj.obj U) (x : N.val.obj U),\n        HEq (integralComparisonSequenceTensorSection l E L ι W N U s x)\n          (s • (show (A.scalar.model.E.obj N).val.obj U from\n            (A.scalar.ordinaryAdjunction.unit.app N).val.app U x))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T234003-L-4155331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T234003-L-4155331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
