@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-normalized-integral-scalar-pullback-comparison",
+ "kind": "statement",
+ "title": "Uniquely normalized integral scalar pullback comparison by good localization",
+ "statement": "For a finite coefficient extension E→L and a scheme morphism f:X→Y, there is a unique natural isomorphism from integralDerivedPullback over E followed by ordinary derived scalar extension on X to ordinary derived scalar extension on Y followed by integralDerivedPullback over L. Its component on every good complex satisfies exactly scalarPullbackOrdinaryNormalization: conjugation by the two good pullback comparisons and the exact scalar factorization identifies it with the prescribed scalarPullbackChain. This is the unchanged normalized-existence clause of lem-pur-integral-operations-scalar-extension, extracted as a completely proved lemma to meet the per-file compile limit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved uniquely normalized pullback chain natural isomorphism on good representatives. The good inclusion followed by Q localizes at quasi-isomorphisms, so restriction is fully faithful. Apply functorSquareRepresentativeDescent with the good scalar lift, the two derived pullback representative comparisons, and exact scalar mapDerivedCategoryFactors. The resulting normalization is exactly scalarPullbackOrdinaryNormalization by its definition and the prescribed hom components of the good chain comparison. The descent lemma proves existence, invertibility, and uniqueness. All statements and normalization data of the original clause are preserved; no new hole or construction from arbitrary existence is introduced.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-good-comparison",
+    "lem-pur-functor-square-representative-descent",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-pullback-good-comparison",
+  "lem-pur-functor-square-representative-descent",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "F3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension comparisons commute with coefficient towers on complexes of sheaves",
+   "results": "Only IsScalarTower and module scalar compatibility results; no normalized sheaf-complex comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of natural scalar extension tensor comparisons on representatives descends through a localization",
+   "results": "Module localization and tensor base-change facts only.",
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison descent."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain.*tower|scalarTensorChain.*tower|scalarBaseChangeHom_tower|functorSquareTower",
+   "results": "The msearch grep index returned zero hits. Separate local rg searches found the existing representative-square descent and formal Hom tower lemma, but no integral chain tower equation.",
+   "date": "2026-10-27",
+   "verdict": "The new equations isolate the missing chain calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "group": "F3",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral coefficient operations: define operations by compatible finite reductions and derived inverse limits; coherence of coefficient changes is the scalar-comparison tower step of lem-pur-integral-operations-scalar-extension.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralScalarPullbackComparison",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralScalarPullbackComparison.lean",
+  "declaration": "WeilConjectures.normalizedIntegralScalarPullbackComparison",
+  "statement": "theorem normalizedIntegralScalarPullbackComparison {X Y : AlgebraicGeometry.Scheme.{u}}\n    (f : X ⟶ Y) :\n    ∃! α : integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E L ι X ≅\n      integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L f,\n      scalarPullbackOrdinaryNormalization l E L ι f α",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

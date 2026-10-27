@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-integral-scalar-ordinary-tensor-tower-representatives",
+ "kind": "statement",
+ "title": "Localized ordinary scalar tensor chain squares respect towers",
+ "statement": "For finite coefficient fields E,L,F over Q_l and coefficient maps iota:E→L and j:L→F, take ordinary total-tensor scalar chain comparison isomorphisms mu,nu,xi for the three coefficient maps, and arbitrary cochain complexes P,Q on W. Suppose S_j(mu(P,Q));nu(S_iota P,S_iota Q);Tot_F(kappa_P,kappa_Q)=kappa_(Tot_E(P,Q));xi(P,Q). Then the localized scalar square respects the same tower: transport the first exact scalar factor and Q(mu) through the second derived scalar functor, then apply the second factor, Q(nu) and Q of the tensor map of the input associators. This equals the output derived scalar associator followed by the direct exact scalar factor and Q(xi). The ordinary total tensor and scalar maps are [def-coef-ringed-tensor-hom-model], [def-weil-integral-scalar-extension], with associators [lem-weil-scalar-extension-composition]. The three chain comparison isomorphisms and their chain tower equation are parameters, not new chosen data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of the second exact scalar localization factor to interchange it with the first chain comparison. Combine the three Q-images by functoriality and apply the given chain tower equation. Split the resulting Q-image into the output chain associator and the direct comparison. The exact-derived scalar composition factors formula identifies the other three factors with the derived scalar associator followed by the direct exact scalar factor. Only this formal scalar-factor calculation is performed here; the caller supplies its chain comparisons and tower equation.",
+   "uses": [
+    "lem-pur-exact-restriction-composition",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-exact-restriction-composition",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "F3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension comparisons commute with coefficient towers on complexes of sheaves",
+   "results": "Only IsScalarTower and module scalar compatibility results; no normalized sheaf-complex comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of natural scalar extension tensor comparisons on representatives descends through a localization",
+   "results": "Module localization and tensor base-change facts only.",
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison descent."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain.*tower|scalarTensorChain.*tower|scalarBaseChangeHom_tower|functorSquareTower",
+   "results": "The msearch grep index returned zero hits. Separate local rg searches found the existing representative-square descent and formal Hom tower lemma, but no integral chain tower equation.",
+   "date": "2026-10-27",
+   "verdict": "The new equations isolate the missing chain calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "group": "F3",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral coefficient operations: define operations by compatible finite reductions and derived inverse limits; coherence of coefficient changes is the scalar-comparison tower step of lem-pur-integral-operations-scalar-extension.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarOrdinaryTensorTowerRepresentatives",
+  "file": "lean/Sheaf/Paper/IntegralScalarOrdinaryTensorTowerRepresentatives.lean",
+  "declaration": "WeilConjectures.integralScalarOrdinaryTensorTowerOnRepresentatives",
+  "statement": "theorem integralScalarOrdinaryTensorTowerOnRepresentatives\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})\n    (μ : coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l E W) ⋙\n          (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ≅\n      ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)).prod\n        ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)) ⋙\n          coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n            (completedIntegralCommRingSheafUnrestricted l L W))\n    (ν : coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l L W) ⋙\n          (integralOrdinaryScalar l L F j W).mapHomologicalComplex (ComplexShape.up ℤ) ≅\n      ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (ComplexShape.up ℤ)).prod\n        ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (ComplexShape.up ℤ)) ⋙\n          coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n            (completedIntegralCommRingSheafUnrestricted l F W))\n    (ξ : coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l E W) ⋙\n          (integralOrdinaryScalar l E F (j.comp ι) W).mapHomologicalComplex (ComplexShape.up ℤ) ≅\n      ((integralOrdinaryScalar l E F (j.comp ι) W).mapHomologicalComplex (ComplexShape.up ℤ)).prod\n        ((integralOrdinaryScalar l E F (j.comp ι) W).mapHomologicalComplex (ComplexShape.up ℤ)) ⋙\n          coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n            (completedIntegralCommRingSheafUnrestricted l F W))\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ)\n    (hμ : ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (.up ℤ)).map\n        (μ.hom.app (P, Q)) ≫\n      ν.hom.app\n        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P,\n          ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      (coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l F W)).map (CategoryTheory.Prod.mkHom\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n          (.up ℤ)).hom.app P)\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n          (.up ℤ)).hom.app Q)) =\n    (NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n      (.up ℤ)).hom.app\n        ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) ≫\n      ξ.hom.app\n        (P, Q)) :\n    (integralOrdinaryDerivedScalar l L F j W).map\n      ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app\n          ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) ≫\n        DerivedCategory.Q.map (μ.hom.app\n          (P, Q))) ≫\n      (integralOrdinaryScalar l L F j W).mapDerivedCategoryFactors.hom.app\n        ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l L W)).obj\n            (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P,\n          ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q)) ≫\n      DerivedCategory.Q.map (ν.hom.app\n        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P,\n          ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q)) ≫\n      DerivedCategory.Q.map ((coefficientTotalTensor.{u, u + 1, u}\n        (AlgebraicGeometry.Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l F W)).map\n        (CategoryTheory.Prod.mkHom\n          ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n            (.up ℤ)).hom.app P)\n          ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n            (.up ℤ)).hom.app Q))) =\n    (integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app\n        (DerivedCategory.Q.obj ((coefficientTotalTensor.{u, u + 1, u}\n          (AlgebraicGeometry.Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))) ≫\n      (integralOrdinaryScalar l E F (j.comp ι) W).mapDerivedCategoryFactors.hom.app\n        ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) ≫\n      DerivedCategory.Q.map (ξ.hom.app\n        (P, Q))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

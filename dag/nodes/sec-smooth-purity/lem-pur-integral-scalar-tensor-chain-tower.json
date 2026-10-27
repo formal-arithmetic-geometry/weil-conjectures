@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-chain-tower",
+ "kind": "statement",
+ "title": "Completed-tensor Roos chain maps respect scalar towers",
+ "statement": "For finite coefficient fields E,L,F over Q_l with maps iota:E→L and j:L→F, every scheme W and arbitrary cochain complexes P,Q of completed E-coefficient modules, the explicit completed tensor chain comparison [lem-pur-integral-scalar-finite-comparison-models] satisfies S_j(delta_iota(P,Q));delta_j(S_iota P,S_iota Q);T_F(kappa_P,kappa_Q) = kappa_(T_E(P,Q));delta_(j iota)(P,Q), where kappa is the termwise scalar associator of [lem-weil-scalar-extension-composition].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "The finite-level formulas send a bidegree tensor generator, through either route, to the tensor with the same product of the two new coefficients in its first factor and a unit in its second factor. Balance, sheafification and coproduct injections in total degree extend this equality to the finite total complexes. The two signed differential summands are respected. Consecutive reduction compatibility gives equality of strict tower maps. Project both Roos comparison routes to every coordinate of each of the two products. Finite freeness commutes with the products; each coordinate is the finite-level equality already proved. Joint injectivity gives the chain equality.",
+   "uses": [
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "F3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension comparisons commute with coefficient towers on complexes of sheaves",
+   "results": "Only IsScalarTower and module scalar compatibility results; no normalized sheaf-complex comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of natural scalar extension tensor comparisons on representatives descends through a localization",
+   "results": "Module localization and tensor base-change facts only.",
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison descent."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain.*tower|scalarTensorChain.*tower|scalarBaseChangeHom_tower|functorSquareTower",
+   "results": "The msearch grep index returned zero hits. Separate local rg searches found the existing representative-square descent and formal Hom tower lemma, but no integral chain tower equation.",
+   "date": "2026-10-27",
+   "verdict": "The new equations isolate the missing chain calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "group": "F3",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral coefficient operations: define operations by compatible finite reductions and derived inverse limits; coherence of coefficient changes is the scalar-comparison tower step of lem-pur-integral-operations-scalar-extension.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorChainTower",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorChainTower.lean",
+  "declaration": "WeilConjectures.integralScalarTensorChainTower",
+  "statement": "theorem integralScalarTensorChainTower (W : AlgebraicGeometry.Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) :\n    ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (.up ℤ)).map\n        (scalarTensorChain l E L ι W P Q) ≫\n      scalarTensorChain l L F j W\n        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P)\n        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      (integralOperationsTensorComplexFunctor l F W).map (CategoryTheory.Prod.mkHom\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n          (.up ℤ)).hom.app P)\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n          (.up ℤ)).hom.app Q)) =\n    (NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n      (.up ℤ)).hom.app ((integralOperationsTensorComplexFunctor l E W).obj (P, Q)) ≫\n        scalarTensorChain l E F (j.comp ι) W P Q",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

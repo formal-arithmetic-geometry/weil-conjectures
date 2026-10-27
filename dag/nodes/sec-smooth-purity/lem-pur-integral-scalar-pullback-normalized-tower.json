@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-normalized-tower",
+ "kind": "statement",
+ "title": "Normalized pullback scalar comparison squares descend coherently along towers",
+ "statement": "For finite coefficient fields E,L,F over Q_l and coefficient maps iota:E→L and j:L→F, let alpha,beta,gamma be natural scalar/pullback comparison isomorphisms for iota,j,and j iota. Suppose their components satisfy the prescribed good-complex normalization using the fixed chain comparisons from [lem-pur-integral-scalar-finite-comparison-models] and the representative operation comparisons of [lem-pur-integral-operations-well-defined]. Then G(alpha_K);beta_(A K);T_F(kappa_K)=kappa_(T_E K);gamma_K for all derived objects K (pairs M,N for tensor), with kappa the specified scalar associator [lem-weil-scalar-extension-composition]. No comparison is chosen in this statement: all three normalized isomorphisms are parameters.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Rewrite each given normalization as a square for the fixed representative component family. The exact scalar associator factorization gives the input representative coherence, and the proved localized chain square gives the output representative coherence. Restriction along the good-complex localization is faithful; for tensor use its product with itself. Apply the proved categorical tower descent lemma to the three normalized squares. This produces exactly the claimed derived component equation, with no new comparison choices.",
+   "uses": [
+    "lem-pur-functor-square-tower-descent",
+    "lem-pur-integral-scalar-pullback-tower-representatives",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-functor-square-tower-descent",
+  "lem-pur-integral-scalar-pullback-tower-representatives",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "F3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension comparisons commute with coefficient towers on complexes of sheaves",
+   "results": "Only IsScalarTower and module scalar compatibility results; no normalized sheaf-complex comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of natural scalar extension tensor comparisons on representatives descends through a localization",
+   "results": "Module localization and tensor base-change facts only.",
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison descent."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain.*tower|scalarTensorChain.*tower|scalarBaseChangeHom_tower|functorSquareTower",
+   "results": "The msearch grep index returned zero hits. Separate local rg searches found the existing representative-square descent and formal Hom tower lemma, but no integral chain tower equation.",
+   "date": "2026-10-27",
+   "verdict": "The new equations isolate the missing chain calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "group": "F3",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral coefficient operations: define operations by compatible finite reductions and derived inverse limits; coherence of coefficient changes is the scalar-comparison tower step of lem-pur-integral-operations-scalar-extension.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarPullbackNormalizedTower",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackNormalizedTower.lean",
+  "declaration": "WeilConjectures.integralScalarPullbackNormalizedTower",
+  "statement": "theorem integralScalarPullbackNormalizedTower\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (j : L →ₐ[ℚ_[l]] F) {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)\n    (α : integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E L ι X ≅\n      integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L f)\n    (β : integralDerivedPullback l L f ⋙ integralOrdinaryDerivedScalar l L F j X ≅\n      integralOrdinaryDerivedScalar l L F j Y ⋙ integralDerivedPullback l F f)\n    (γ : integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E F (j.comp ι) X ≅\n      integralOrdinaryDerivedScalar l E F (j.comp ι) Y ⋙ integralDerivedPullback l F f)\n    (hα : scalarPullbackOrdinaryNormalization l E L ι f α)\n    (hβ : scalarPullbackOrdinaryNormalization l L F j f β)\n    (hγ : scalarPullbackOrdinaryNormalization l E F (j.comp ι) f γ) :\n    ∀ K : DerivedCategory (integralTowerModules l E Y),\n      (integralOrdinaryDerivedScalar l L F j X).map\n          ((α).hom.app K) ≫\n        (β).hom.app\n          ((integralOrdinaryDerivedScalar l E L ι Y).obj K) ≫\n        (integralDerivedPullback l F f).map\n          ((integralOrdinaryDerivedScalarComp l E L ι Y F j).hom.app K) =\n      (integralOrdinaryDerivedScalarComp l E L ι X F j).hom.app\n          ((integralDerivedPullback l E f).obj K) ≫\n        (γ).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

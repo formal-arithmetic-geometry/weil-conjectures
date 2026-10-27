@@ -19588,3 +19588,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:16 L: merged deliver/E4/Sheaf.Algebra.Homology.OrdinaryLineScalarEvaluation (stage 3; reviewer PASS; first push; landing 20261027T151656-L-1190422 (interface); batch 20261027T151642; modules 1; new nodes 0)
 - 15:16 L: merged deliver/E5/Sheaf.Paper.NormalizedChernFiniteBoundary (stage 3; reviewer PASS; first push; landing 20261027T151659-L-1191175 (interface); batch 20261027T151642; modules 21; new nodes 20)
 - 15:17 L: merged deliver/F1/Sheaf.Paper.RamifiedCoefficientModuleBaseChange (stage 3; reviewer PASS; first push; landing 20261027T151700-L-1191584 (interface); batch 20261027T151642; modules 1; new nodes 0)
+- 15:17 L: merged deliver/F3/Sheaf.Paper.IntegralOperationsScalarComparisons (stage 3; reviewer PASS; first push; landing 20261027T151702-L-1192152 (interface); batch 20261027T151642; modules 12; new nodes 11)

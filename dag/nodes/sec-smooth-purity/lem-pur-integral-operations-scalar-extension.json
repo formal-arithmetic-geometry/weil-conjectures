@@ -127,18 +127,27 @@
    }
   },
   {
-   "text": "All chosen maps are natural. The ordinary pullback tower routes agree on local tensors by $((p\\otimes s)\\otimes s')\\mapsto p\\otimes ss'$; normalized derived pullback composition preserves this equality. Tensor tower/unit coherence is [lem-sfb-scalar-hom-tensor-coherence], and Hom tower/unit coherence is [lem-pur-scalar-hom-comparison-tower]. The actual completion exchanges satisfy the tower and identity equations of [lem-pur-finite-free-completion-exchange-coherence]. Their quotient-unit equation identifies $\\chi$ with $\\epsilon\\,T\\eta$ on complete inputs, so conjugating the ordinary equations by $\\chi$ gives the integral tower and identity clauses.",
+   "text": "Apply the explicit pullback and completed-tensor chain tower equations to all good representatives. The exact ordinary scalar factorization maps respect the chosen scalar associator. Naturality of the factorization maps therefore gives the output representative tower squares. The proved functorSquareTowerDescent lemma transports the three normalized squares through faithful restriction along the good-complex localization; product localization handles tensor pairs. For internal Hom, apply the same descent to the ordinary pure-tensor chain comparison and the closed tensor models, obtaining closed tensor tower coherence. The already proved scalarBaseChangeHom_tower calculation then uncarries both Hom routes to evaluation and proves the third equality, including inverse transport in the first variable. The existing idempotent/unit argument specializes this tower theorem to identity coefficients. No derived comparison, definition or statement is changed. The two proved representative modules isolate the exact scalar and chain-square calculations for the per-file compile-time limit; the assigned module retains all its existing definitions and statements. The two proved normalized-descent modules take the comparison isomorphisms and their normalization equations as parameters, so the assigned module supplies its already-defined comparisons and choose_spec normalizations without repeating the large localization application. The ordinary tensor representative scalar-factor calculation is also extracted into a proved module; the assigned module only identifies its normalized ordinary chain choice with that calculation.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-pur-functor-square-tower-descent",
+    "lem-pur-integral-scalar-pullback-chain-tower",
+    "lem-pur-integral-scalar-tensor-chain-tower",
+    "lem-pur-integral-scalar-ordinary-tensor-chain-tower",
     "lem-pur-scalar-hom-comparison-tower",
-    "lem-pur-finite-free-completion-exchange-coherence",
-    "lem-pur-finite-free-completion-exchange"
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-exact-restriction-composition",
+    "lem-pur-integral-scalar-pullback-chain-quasi-iso",
+    "lem-pur-integral-scalar-pullback-tower-representatives",
+    "lem-pur-integral-scalar-tensor-tower-representatives",
+    "lem-pur-integral-scalar-pullback-normalized-tower",
+    "lem-pur-integral-scalar-tensor-normalized-tower",
+    "lem-pur-integral-scalar-ordinary-tensor-tower-representatives"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final paragraph: 'define the operation by the compatible finite reductions, the derived inverse limit for O_E ... and the common-stage coefficient construction for Qbar_l'."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coefficient composition and compatibility of tensor and evaluation comparisons."
    }
   },
   {
@@ -196,12 +205,9 @@
    "elementary": false
   },
   {
-   "text": "For scalarPullbackOrdinary_existsUnique, first prove naturality of scalarRoosMap on arbitrary strict towers from its two prescribed product coordinates and the direct shifted-cone coordinate calculation in ScalarRoosComparison. Compose this with scalarPullbackTower naturality to obtain the strict chain natural transformation. Apply [lem-pur-integral-scalar-pullback-roos-quasi-iso] to a good representative, discharging its level generator and Roos coordinate hypotheses by the existing chosen normalization equations. Thus the image of the prescribed chain map under Q is invertible. Conjugate this natural isomorphism on good representatives by integralDerivedPullbackComparison and mapDerivedCategoryFactors. Precomposition with the good localization is fully faithful, so preimageIso supplies the comparison on the ambient derived category. Its map_preimage equation and cancellation of the representative isomorphisms prove exactly scalarPullbackOrdinaryNormalization. Faithfulness and the same cancellation prove uniqueness. All naturality, localization, normalization and uniqueness steps are complete Lean proofs; only the chain-level cofinal-filtration quasi-isomorphism is split off. Other holes retain the preceding plans. Apply the fully proved general functorSquareRepresentativeDescent theorem for the final normalized-square descent. The proved chain-property specialization is now extracted into IntegralScalarPullbackChainProperties; the remaining cofinal-filtration hole and its statement are unchanged.",
+   "text": "Apply the extracted, completely proved normalizedIntegralScalarPullbackComparison theorem with exactly the original scalarPullbackOrdinaryNormalization predicate. Its module contains the original full localization proof, using the prescribed good chain comparison, both pullback representative isomorphisms, and exact scalar factorization. It is separated solely to meet the per-file compile limit; the existing statement, chosen derived comparison, and normalization are unchanged.",
    "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "def-weil-integral-scalar-extension",
-    "lem-pur-integral-scalar-pullback-chain-quasi-iso",
-    "lem-pur-functor-square-representative-descent"
+    "lem-pur-normalized-integral-scalar-pullback-comparison"
    ],
    "elementary": false,
    "source": {
@@ -222,7 +228,7 @@
    }
   },
   {
-   "text": "The extracted normalizedIntegralScalarTensorComparison theorem carries the complete scalar tensor descent described here: For scalarTensorOrdinary_existsUnique, assemble scalarRoosTransformation with the specified scalarTensorTower to prove scalarTensorChain naturality on arbitrary complex pairs. On good pairs apply [lem-pur-integral-scalar-tensor-chain-quasi-iso] to obtain a natural isomorphism after Q. Product localization of the good-complex categories makes precomposition fully faithful. Use functorSquareRepresentativeDescent with integralCompletedTensorComparison, exact ordinary scalar mapDerivedCategoryFactors, and the product of the scalar good-representative maps. Its component equation is exactly scalarTensorOrdinaryNormalization. Its faithfulness and cancellation proof gives uniqueness. Naturality, the descent, its specified square and uniqueness are fully proved in Lean; only the strictly lower chain quasi-isomorphism is deferred. scalarOperationsOrdinary_tower is unchanged. The item now applies that proved theorem directly. Its displayed good-pair equation is definitionally scalarTensorOrdinaryNormalization. The extraction isolates the new descent from the expensive earlier pullback and Hom proofs; no mathematical argument or hole is added by this helper module.",
+   "text": "The extracted normalizedIntegralScalarTensorComparison theorem carries the complete scalar tensor descent described here: For scalarTensorOrdinary_existsUnique, assemble scalarRoosTransformation with the specified scalarTensorTower to prove scalarTensorChain naturality on arbitrary complex pairs. On good pairs apply [lem-pur-integral-scalar-tensor-chain-quasi-iso] to obtain a natural isomorphism after Q. Product localization of the good-complex categories makes precomposition fully faithful. Use functorSquareRepresentativeDescent with integralCompletedTensorComparison, exact ordinary scalar mapDerivedCategoryFactors, and the product of the scalar good-representative maps. Its component equation is exactly scalarTensorOrdinaryNormalization. Its faithfulness and cancellation proof gives uniqueness. Naturality, the descent, its specified square and uniqueness are fully proved in Lean; only the strictly lower chain quasi-isomorphism is deferred. The item applies that proved tensor-comparison existence theorem directly; tower coherence is handled by the descent step above. Its displayed good-pair equation is definitionally scalarTensorOrdinaryNormalization. The extraction isolates the new descent from the expensive earlier pullback and Hom proofs; no mathematical argument or hole is added by this helper module.",
    "uses": [
     "lem-pur-normalized-integral-scalar-tensor-descent"
    ],
@@ -253,25 +259,34 @@
   "lem-coef-derived-system-evaluation-calculus",
   "lem-weil-pbc-tensor-comparison-descent-representatives",
   "def-weil-integral-scalar-extension",
-  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-pur-functor-square-tower-descent",
+  "lem-pur-integral-scalar-pullback-chain-tower",
+  "lem-pur-integral-scalar-tensor-chain-tower",
+  "lem-pur-integral-scalar-ordinary-tensor-chain-tower",
   "lem-pur-scalar-hom-comparison-tower",
-  "lem-pur-finite-free-completion-exchange-coherence",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-exact-restriction-composition",
+  "lem-pur-integral-scalar-pullback-chain-quasi-iso",
+  "lem-pur-integral-scalar-pullback-tower-representatives",
+  "lem-pur-integral-scalar-tensor-tower-representatives",
+  "lem-pur-integral-scalar-pullback-normalized-tower",
+  "lem-pur-integral-scalar-tensor-normalized-tower",
+  "lem-pur-integral-scalar-ordinary-tensor-tower-representatives",
   "lem-weil-normalized-ordinary-scalar-tensor-chain",
   "lem-pur-derived-change-of-rings",
   "lem-weil-completed-integral-finite-free",
   "lem-weil-normalized-scalar-completion",
   "lem-pur-integral-scalar-pullback-level-reduction",
   "lem-pur-integral-scalar-tensor-level-reduction",
-  "lem-pur-integral-scalar-pullback-chain-quasi-iso",
-  "lem-pur-functor-square-representative-descent",
+  "lem-pur-normalized-integral-scalar-pullback-comparison",
   "lem-pur-integral-scalar-finite-comparison-models",
   "lem-pur-normalized-integral-scalar-tensor-descent"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "N3",
+  "by": "F3",
   "date": "2026-10-27",
-  "note": "Retain all preceding proved arguments and the unresolved scalarOperationsOrdinary_tower plan. Add normalized ordinary completed-tensor descent from the specified chain map, with only its quasi-isomorphism on good pairs split off. After local opacity/unfolding improvements, extract the proved descent to NormalizedIntegralScalarTensorComparison for the per-file compile limit; existing statements, definitions and public imports stay verbatim."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
  },
  "mathlib_searches": [
   {
@@ -534,9 +549,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261027T112413-L-1580371",
+  "landing": "20261027T151702-L-1192152",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

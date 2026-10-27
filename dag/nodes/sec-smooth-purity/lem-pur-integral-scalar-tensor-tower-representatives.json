@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-tower-representatives",
+ "kind": "statement",
+ "title": "Localized scalar tensor representative squares respect towers",
+ "statement": "For finite coefficient fields E,L,F over Q_l, coefficient maps iota:E→L and j:L→F, and good integral cochain representatives, the Q-localized tensor chain square intertwines the coefficient tower associator. Explicitly, scalar transport of the first exact scalar factor and chain comparison, followed by the second factor, second chain comparison and the operation applied to the input scalar associator, equals the output derived scalar associator followed by the direct exact scalar factor and chain comparison. The underlying chain comparison is [lem-pur-integral-scalar-tensor-chain-tower], and the scalar associators are [lem-weil-scalar-extension-composition].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-tensor-chain-tower",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the second exact scalar factor moves the first chain comparison past that factor. Combine the remaining Q-images by functoriality and use the chain tower equation. The exact-derived scalar composition factors formula identifies the two successive factors with the output derived scalar associator followed by the direct factor. This proves the explicit component equation; the private component families record its normalized square version for faithful descent.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-chain-tower",
+    "lem-pur-integral-scalar-pullback-tower-representatives",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-tensor-chain-tower",
+  "lem-pur-integral-scalar-pullback-tower-representatives",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "F3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension comparisons commute with coefficient towers on complexes of sheaves",
+   "results": "Only IsScalarTower and module scalar compatibility results; no normalized sheaf-complex comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of natural scalar extension tensor comparisons on representatives descends through a localization",
+   "results": "Module localization and tensor base-change facts only.",
+   "date": "2026-10-27",
+   "verdict": "No specialized comparison descent."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain.*tower|scalarTensorChain.*tower|scalarBaseChangeHom_tower|functorSquareTower",
+   "results": "The msearch grep index returned zero hits. Separate local rg searches found the existing representative-square descent and formal Hom tower lemma, but no integral chain tower equation.",
+   "date": "2026-10-27",
+   "verdict": "The new equations isolate the missing chain calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "group": "F3",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral coefficient operations: define operations by compatible finite reductions and derived inverse limits; coherence of coefficient changes is the scalar-comparison tower step of lem-pur-integral-operations-scalar-extension.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorTowerRepresentatives",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorTowerRepresentatives.lean",
+  "declaration": "WeilConjectures.integralScalarTensorTowerOnRepresentatives",
+  "statement": "theorem integralScalarTensorTowerOnRepresentatives\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})\n    (P : (integralOperationsGoodComplex l E W).FullSubcategory ×\n      (integralOperationsGoodComplex l E W).FullSubcategory) :\n    (integralOrdinaryDerivedScalar l L F j W).map\n      ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app\n          ((integralOperationsTensorComplexFunctor l E W).obj (P.1.obj, P.2.obj)) ≫\n        DerivedCategory.Q.map (scalarTensorChain l E L ι W P.1.obj P.2.obj)) ≫\n      (integralOrdinaryScalar l L F j W).mapDerivedCategoryFactors.hom.app\n        ((integralOperationsTensorComplexFunctor l L W).obj\n          (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.1.obj,\n            ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.2.obj)) ≫\n      DerivedCategory.Q.map (scalarTensorChain l L F j W\n        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.1.obj)\n        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.2.obj)) ≫\n      DerivedCategory.Q.map ((integralOperationsTensorComplexFunctor l F W).map\n        (CategoryTheory.Prod.mkHom\n          ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n            (.up ℤ)).hom.app P.1.obj)\n          ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n            (.up ℤ)).hom.app P.2.obj))) =\n    (integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app\n        (DerivedCategory.Q.obj\n          ((integralOperationsTensorComplexFunctor l E W).obj (P.1.obj, P.2.obj))) ≫\n      (integralOrdinaryScalar l E F (j.comp ι) W).mapDerivedCategoryFactors.hom.app\n        ((integralOperationsTensorComplexFunctor l E W).obj (P.1.obj, P.2.obj)) ≫\n      DerivedCategory.Q.map (scalarTensorChain l E F (j.comp ι) W P.1.obj P.2.obj)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T151702-L-1192152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
