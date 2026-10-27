@@ -2,11 +2,11 @@
  "id": "lem-sp-reduction-site-coefficient-pasting",
  "kind": "statement",
  "title": "The intrinsic coefficient/site square with bounded-below endpoints",
- "statement": "Let A and B be finite commutative rings, phi:A→B a unital homomorphism, X and Y Noetherian schemes, j:X→Z an open immersion and p:Z→Y proper [def-weil-pbc-scheme-conventions]. Use the recorded ordinary etale derived categories and intrinsic proetale realization [def-weil-pbc-derived-categories, det-sp-reduction-exceptional]. Let M be a bounded-below ordinary etale A-complex on X, N a bounded-below ordinary etale B-complex on X, and a:M tensor_A^L B→N any morphism. Write U_R for reductionSite, F_R for the fixed etale compact-support functor, F_R^i for reductionCompactSupport, T for coefficient extension, delta for reductionSiteScalarIso, s_R for reductionSiteCompactSupportIso, q for the actual etale compactSupportMap and b for reductionDirectImageComparison [def-sp-reduction-direct-image-comparison, lem-pur-etale-compact-scalar-coherence]. Then T_Y(s_A(M));delta_Y(F_A M);U_B(q_M;F_B(a)) equals b_(U_A M);F_B^i(delta_X(M);U_B(a));s_B(N), in left-to-right composition order. No lower bound on T_X M is assumed.",
+ "statement": "Let A and B be finite commutative rings, phi:A→B a unital homomorphism, X and Y Noetherian schemes, j:X→Z an open immersion and p:Z→Y proper [def-weil-pbc-scheme-conventions]. Use the recorded ordinary etale derived categories and intrinsic proetale realization [def-weil-pbc-derived-categories, def-sp-reduction-exceptional-realization-objects]. Let M be a bounded-below ordinary etale A-complex on X, N a bounded-below ordinary etale B-complex on X, and a:M tensor_A^L B→N any morphism. Write U_R for reductionSite, F_R for the fixed etale compact-support functor, F_R^i for reductionCompactSupport, T for coefficient extension, delta for reductionSiteScalarIso, s_R for reductionSiteCompactSupportIso, q for the actual etale compactSupportMap and b for reductionDirectImageComparison [def-sp-reduction-direct-image-comparison, lem-pur-etale-compact-scalar-coherence]. Then T_Y(s_A(M));delta_Y(F_A M);U_B(q_M;F_B(a)) equals b_(U_A M);F_B^i(delta_X(M);U_B(a));s_B(N), in left-to-right composition order. No lower bound on T_X M is assumed.",
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-derived-categories",
-  "det-sp-reduction-exceptional",
+  "def-sp-reduction-exceptional-realization-objects",
   "def-sp-reduction-direct-image-comparison",
   "lem-pur-etale-compact-scalar-coherence"
  ],
@@ -18,7 +18,7 @@
   {
    "text": "Unfold the realization scalar and compact-support comparisons. The scalar comparison is the inverse mate of the exact section-normalized restriction square; the proper direct-image comparison is fixed on K-injective representatives. Uniqueness of adjoints identifies these with the scalar and support presentations used for the recorded coefficient comparison. The exact open comparison cancels the same realization equivalences termwise.",
    "uses": [
-    "det-sp-reduction-exceptional",
+    "def-sp-reduction-exceptional-realization-objects",
     "def-sp-et-proet-coefficient-transport",
     "lem-sf-compact-support-restriction-of-scalars",
     "def-weil-proetale-inverse-image"
@@ -37,7 +37,7 @@
  "proof_deps": [
   "def-sp-et-proet-coefficient-transport",
   "def-weil-proetale-inverse-image",
-  "det-sp-reduction-exceptional",
+  "def-sp-reduction-exceptional-realization-objects",
   "lem-sf-compact-support-restriction-of-scalars",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-mate-pasting"
@@ -115,13 +115,70 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y6",
-  "result": "pass",
-  "landing": "20261025T043429-L-1758897",
+  "reviewer": "C-0f29a",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261027T205939-L-1636634",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof + new descent/ordinary-chart/cube modules and 5 node files against packet, clone ReductionExceptionalObjects/EtaleCompactScalarCoherence definitions and DAG owners; RSCP import swap against the clone and 3b importers (EAPCM OK, imports RSCP privately; ReductionExceptional OK)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "F2 stage 3",
+  "old_statement": "Let A and B be finite commutative rings, phi:A→B a unital homomorphism, X and Y Noetherian schemes, j:X→Z an open immersion and p:Z→Y proper [def-weil-pbc-scheme-conventions]. Use the recorded ordinary etale derived categories and intrinsic proetale realization [def-weil-pbc-derived-categories, det-sp-reduction-exceptional]. Let M be a bounded-below ordinary etale A-complex on X, N a bounded-below ordinary etale B-complex on X, and a:M tensor_A^L B→N any morphism. Write U_R for reductionSite, F_R for the fixed etale compact-support functor, F_R^i for reductionCompactSupport, T for coefficient extension, delta for reductionSiteScalarIso, s_R for reductionSiteCompactSupportIso, q for the actual etale compactSupportMap and b for reductionDirectImageComparison [def-sp-reduction-direct-image-comparison, lem-pur-etale-compact-scalar-coherence]. Then T_Y(s_A(M));delta_Y(F_A M);U_B(q_M;F_B(a)) equals b_(U_A M);F_B^i(delta_X(M);U_B(a));s_B(N), in left-to-right composition order. No lower bound on T_X M is assumed.",
+  "what": "Dependency correction after the verbatim extraction of ReductionExceptionalObjects: the intrinsic comparison family is defined by def-sp-reduction-exceptional-realization-objects, whereas det-sp-reduction-exceptional now records the exceptional-isomorphism theorem that depends on the chart lemma. Retarget the old definition citation in the statement, statement dependencies and first proof step to the extracted objects node, matching the corrected Lean import. No mathematical hypothesis, conclusion, construction or Lean signature changes.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+   "place": "Charts; coefficient/site square, expanded using the section-normalized realization and the proper/open factorization. Stacks more-etale.tex, remark-Rf-lower-shriek-change-of-rings (Tag 0GL6); Tag 099R."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-etale-affine-projection-coefficient-mate",
+    "holds": true,
+    "note": "The coefficient/site square and every Lean binder and comparison are unchanged; only the citation of the constructed objects is redirected to their extracted definition node."
+   },
+   {
+    "id": "lem-sp-reduction-counit-descent",
+    "holds": true,
+    "note": "The coefficient/site square and every Lean binder and comparison are unchanged; only the citation of the constructed objects is redirected to their extracted definition node."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-scheme-conventions",
+   "def-weil-pbc-derived-categories",
+   "det-sp-reduction-exceptional",
+   "def-sp-reduction-direct-image-comparison",
+   "lem-pur-etale-compact-scalar-coherence"
+  ],
+  "old_proof": [
+   {
+    "text": "Unfold the realization scalar and compact-support comparisons. The scalar comparison is the inverse mate of the exact section-normalized restriction square; the proper direct-image comparison is fixed on K-injective representatives. Uniqueness of adjoints identifies these with the scalar and support presentations used for the recorded coefficient comparison. The exact open comparison cancels the same realization equivalences termwise.",
+    "uses": [
+     "det-sp-reduction-exceptional",
+     "def-sp-et-proet-coefficient-transport",
+     "lem-sf-compact-support-restriction-of-scalars",
+     "def-weil-proetale-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Transpose the proper direct-image square using the bounded-below comparison-counit equations at the two endpoints. The scalar/pullback cube agrees on pure tensors, since the inverse scalar maps are mates of the sectionwise restriction square. Apply mate pasting and the triangle identities. This proves the proper mixed-endpoint square without inverting a comparison at the intermediate scalar extension. The exact open-extension comparison agrees termwise. Compose the proper and open squares, and use naturality to move the given map a through the B-support comparison. This yields the displayed equation, with the support comparisons evaluated only at M and N.",
+    "uses": [
+     "lem-weil-pbc-mate-pasting",
+     "lem-weil-pbc-comparison-direct-image-canonical-mate"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-sp-et-proet-coefficient-transport",
+   "def-weil-proetale-inverse-image",
+   "det-sp-reduction-exceptional",
+   "lem-sf-compact-support-restriction-of-scalars",
+   "lem-weil-pbc-comparison-direct-image-canonical-mate",
+   "lem-weil-pbc-mate-pasting"
+  ]
  }
 }

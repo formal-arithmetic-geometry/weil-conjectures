@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-reduction-counit-descent",
+ "kind": "statement",
+ "title": "Descent of an intrinsic scalar counit equation to ordinary etale coordinates",
+ "statement": "Let $A\\to B$ be a unital map of finite commutative rings. Let $X$ and $Y$ be noetherian schemes. Fix an open/proper compactification $X\\xrightarrow j Z\\xrightarrow pY$, its intrinsic constructible finite-Tor adjunctions $F_R\\dashv G_R$, and their specified ordinary-etale realizations $R_A,R_B$ as in [def-sp-reduction-exceptional-realization-objects]. Let $K\\in D_{ctf}(Y,A)$, $K_B\\in D_{ctf}(Y,B)$ and $v:T_YK\\to K_B$. Let $a:T^{et}_Y R_A.origin(K)\\to R_B.origin(K_B)$ have site image specified by the input scalar comparison, the two origin isomorphisms and $v$. Let $m:T_XG_AK\\to G_BK_B$ satisfy $F_B(m);\\epsilon_B(K_B)=b(G_AK)^{-1};T_Y(\\epsilon_A(K));v$, where $b$ is the actual reductionDirectImageComparison, assumed invertible on $G_AK$. Let $q:T^{et}_XR_A.right(R_A.origin(K))\\to R_B.right(R_B.origin(K_B))$ have site image $s_X^{-1};T_X(R_A.rightIso_K^{-1});m;R_B.rightIso_{K_B}$. Then $\\beta(R_A.right(R_A.origin(K)));F^{et}_B(q);\\epsilon^{et}_B(R_B.origin(K_B))=T^{et}_Y(\\epsilon^{et}_A(R_A.origin(K)));a$, where $\\beta$ is the specified compactScalarMap of the same compactification. This is a pointwise counit equation and makes no chart or smoothness assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality and Charts; retained Steps 5--12"
+ },
+ "stmt_deps": [
+  "def-sp-reduction-exceptional-realization-objects",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sf-etale-compact-scalar-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing mixed-endpoint reductionSiteCoefficientPasting square to M = RA.right(RA.origin(K)), N = RB.right(RB.origin(KB)) and q. Its bounded-below endpoints are the right_plus fields.",
+   "uses": [
+    "lem-sp-reduction-site-coefficient-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality at q and the two realization counit equations. Conjugation by the right-output isomorphisms replaces the ordinary compact-support composites by F_B(m) followed by the intrinsic B-counit.",
+   "uses": [
+    "def-sp-reduction-exceptional-realization-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the given intrinsic counit equation, cancel the invertible coefficient comparison, and use the site equation for a. Faithfulness of comparison on the bounded-below target reflects the ordinary equality.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-reduction-site-coefficient-pasting",
+  "def-sp-reduction-exceptional-realization-objects",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Named subargument of the retained Locality/Charts proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction counit transposes commute with extension of coefficients and fully faithful comparison functors",
+   "results": "CategoryTheory.Adjunction.counit, counit_naturality, ModuleCat.ExtendRestrictScalarsAdj.counit_app, and generic adjunction declarations.",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction API does not identify these specified geometric comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit in Mathlib.CategoryTheory.Adjunction.Unique.",
+   "date": "2026-10-28",
+   "verdict": "Supplies abstract uniqueness normalization, not the coefficient/site or ordered-chart equation."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionSite_scalar_pullback|reductionExceptional_counit_descent|reductionExceptional_ordinary_chart",
+   "results": "No matching declaration in the searched source and Mathlib libraries. Direct rg additionally read ReductionExceptionalObjects, EtaleProEtaleCoefficientCompatibility, ChartCounitScalarTransport, RawChartScalarCounitPasting and EtaleProEtaleScalarPullbackCube.",
+   "date": "2026-10-28",
+   "verdict": "Existing ingredients have different endpoints; the new statements isolate their necessary coherence and local transpose steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.ReductionExceptionalChart",
+  "date": "2026-10-28",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality and Charts; Descent of an intrinsic scalar counit equation to ordinary etale coordinates",
+   "via": [
+    "lem-sp-reduction-exceptional-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ReductionExceptionalCounitDescent",
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionExceptionalCounitDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionExceptional_counit_descent",
+  "statement": "theorem reductionExceptional_counit_descent\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Z Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p]\n    (hFA : ∀ M : spFiniteConstructibleTorCategory X A,\n      spFiniteConstructibleTor Y A ((reductionCompactSupport A j p).obj M.obj))\n    (hFB : ∀ M : spFiniteConstructibleTorCategory X B,\n      spFiniteConstructibleTor Y B ((reductionCompactSupport B j p).obj M.obj))\n    (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A)\n    (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B)\n    (adjA : reductionCtfCompactSupport A j p hFA ⊣ GA)\n    (adjB : reductionCtfCompactSupport B j p hFB ⊣ GB)\n    (RA : ReductionExceptionalRealization A j p hFA GA adjA)\n    (RB : ReductionExceptionalRealization B j p hFB GB adjB)\n    (K : spFiniteConstructibleTorCategory Y A)\n    (KB : spFiniteConstructibleTorCategory Y B)\n    (v : (scalarExtensionFunctor φ Y).obj K.obj ⟶ KB.obj)\n    (a : (Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y).obj\n      (RA.origin.obj K) ⟶ RB.origin.obj KB)\n    (ha : (reductionSite B Y).map a ≫ RB.originIso.hom.app KB =\n      (reductionSiteScalarIso φ Y).inv.app (RA.origin.obj K) ≫\n        (scalarExtensionFunctor φ Y).map (RA.originIso.hom.app K) ≫ v)\n    (m : (scalarExtensionFunctor φ X).obj (GA.obj K).obj ⟶ (GB.obj KB).obj)\n    (hb : IsIso ((reductionDirectImageComparison φ j p).app (GA.obj K).obj))\n    (hm : (reductionCompactSupport B j p).map m ≫ (adjB.counit.app KB).hom =\n      @inv _ _ _ _ ((reductionDirectImageComparison φ j p).app (GA.obj K).obj) hb ≫\n        (scalarExtensionFunctor φ Y).map (adjA.counit.app K).hom ≫ v)\n    (q : (Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).obj\n      (RA.right.obj (RA.origin.obj K)) ⟶ RB.right.obj (RB.origin.obj KB))\n    (hq : (reductionSite B X).map q =\n      (reductionSiteScalarIso φ X).inv.app (RA.right.obj (RA.origin.obj K)) ≫\n        (scalarExtensionFunctor φ X).map (RA.rightIso.inv.app K) ≫\n        m ≫ RB.rightIso.hom.app KB) :\n    (Etale.compactScalarMap (RingHom.ulift.{u + 1, u + 1, u, u} φ)\n        (⟨Z, p, j, rfl, inferInstance, inferInstance⟩ : Compactification (j ≫ p))).app\n        (RA.right.obj (RA.origin.obj K)) ≫\n      (Etale.rightDerivedLowerShriekOfCompactification\n        (ModuleCat.{u + 1} (ULift.{u + 1, u} B))\n        (⟨Z, p, j, rfl, inferInstance, inferInstance⟩ : Compactification (j ≫ p))).map q ≫\n      RB.adjunction.counit.app (RB.origin.obj KB) =\n    (Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y).map\n      (RA.adjunction.counit.app (RA.origin.obj K)) ≫ a",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f29a",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261027T205939-L-1636634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f29a",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261027T205939-L-1636634",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new descent/ordinary-chart/cube modules and 5 node files against packet, clone ReductionExceptionalObjects/EtaleCompactScalarCoherence definitions and DAG owners; RSCP import swap against the clone and 3b importers (EAPCM OK, imports RSCP privately; ReductionExceptional OK)"
+ }
+}

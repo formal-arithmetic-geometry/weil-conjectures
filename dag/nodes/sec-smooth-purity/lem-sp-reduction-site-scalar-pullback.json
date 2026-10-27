@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-reduction-site-scalar-pullback",
+ "kind": "statement",
+ "title": "Intrinsic scalar/site/inverse-image cube",
+ "statement": "Let $A\\to B$ be a unital map $\\varphi$ of finite commutative rings, let $i:U\\to X$ be any morphism of schemes, and let $L\\in D(X_{et},\\operatorname{ULift} A)$. Use the actual comparison/realization functors $S^R_T=\\mathtt{reductionSite}\\ R\\ T$, scalar functors $T^{et},T^{int}$, and inverse-image functors $P^{et},P^{int}$ of [def-sp-reduction-exceptional-realization-objects]. Write $s_T:S^A_T T^{int}_T\\simeq T^{et}_T S^B_T$ for reductionSiteScalarIso, $r_R:S^R_X P^{int}_R\\simeq P^{et}_R S^R_U$ for reductionSitePullbackIso, and $d^{int},d^{et}:T_XP_B\\simeq P_AT_U$ for the specified scalar/pullback isomorphisms. Then, with Lean composition order, $ (d^{int}_L)^{-1};P^{int}_B(s_{X,L});r_{B,T^{et}_XL}=T^{int}_U(r_{A,L});s_{U,P^{et}_AL};S^B_U((d^{et}_L)^{-1})$. No boundedness or open-immersion hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality and Charts; retained Steps 5--12"
+ },
+ "stmt_deps": [
+  "def-sp-reduction-exceptional-realization-objects",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "proof": [
+  {
+   "text": "Use the etale/pro-etale scalar/pullback cube in the fixed ModuleCat presentation. Both paths are inverse mates of the sectionwise scalar restriction square.",
+   "uses": [
+    "lem-sfb-etale-proetale-scalar-pullback-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport through the intrinsic module equivalences, using the section-normalized realization scalar map and openSquarePullbackModel. Their exact restriction squares commute on every section; mate pasting and exact derived descent preserve that equality.",
+   "uses": [
+    "def-sp-reduction-exceptional-realization-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert the exact-to-derived ordinary inverse-image comparisons. Associativity gives the displayed equation, including identity maps, empty schemes and zero rings.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "def-sp-reduction-exceptional-realization-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Named subargument of the retained Locality/Charts proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction counit transposes commute with extension of coefficients and fully faithful comparison functors",
+   "results": "CategoryTheory.Adjunction.counit, counit_naturality, ModuleCat.ExtendRestrictScalarsAdj.counit_app, and generic adjunction declarations.",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction API does not identify these specified geometric comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit in Mathlib.CategoryTheory.Adjunction.Unique.",
+   "date": "2026-10-28",
+   "verdict": "Supplies abstract uniqueness normalization, not the coefficient/site or ordered-chart equation."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionSite_scalar_pullback|reductionExceptional_counit_descent|reductionExceptional_ordinary_chart",
+   "results": "No matching declaration in the searched source and Mathlib libraries. Direct rg additionally read ReductionExceptionalObjects, EtaleProEtaleCoefficientCompatibility, ChartCounitScalarTransport, RawChartScalarCounitPasting and EtaleProEtaleScalarPullbackCube.",
+   "date": "2026-10-28",
+   "verdict": "Existing ingredients have different endpoints; the new statements isolate their necessary coherence and local transpose steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.ReductionExceptionalChart",
+  "date": "2026-10-28",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality and Charts; Intrinsic scalar/site/inverse-image cube",
+   "via": [
+    "lem-sp-reduction-exceptional-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ReductionSiteScalarPullback",
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionSiteScalarPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionSite_scalar_pullback",
+  "statement": "theorem reductionSite_scalar_pullback\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {U X : Scheme.{u}} (i : U ⟶ X)\n    (L : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) X) :\n    (directImageScalarPullbackIso φ i).inv.app ((reductionSite A X).obj L) ≫\n        (proEtaleConstantRingDerivedPullback B i).map\n          ((reductionSiteScalarIso φ X).hom.app L) ≫\n        (reductionSitePullbackIso B i).hom.app\n          ((Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).obj L) =\n      (scalarExtensionFunctor φ U).map ((reductionSitePullbackIso A i).hom.app L) ≫\n        (reductionSiteScalarIso φ U).hom.app\n          ((Etale.ordinaryFinitePullback (ULift.{u + 1, u} A) i).obj L) ≫\n        (reductionSite B U).map\n          ((Etale.scalarPullbackIso (RingHom.ulift.{u + 1, u + 1, u, u} φ) i).inv.app L)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f29a",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261027T205939-L-1636634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f29a",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261027T205939-L-1636634",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new descent/ordinary-chart/cube modules and 5 node files against packet, clone ReductionExceptionalObjects/EtaleCompactScalarCoherence definitions and DAG owners; RSCP import swap against the clone and 3b importers (EAPCM OK, imports RSCP privately; ReductionExceptional OK)"
+ }
+}

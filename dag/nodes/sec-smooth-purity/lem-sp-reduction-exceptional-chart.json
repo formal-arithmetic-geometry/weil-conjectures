@@ -13,56 +13,53 @@
  ],
  "proof": [
   {
-   "text": "Lift the input scalar comparison through bounded-below comparison full faithfulness. Scalar extension preserves the finite-Tor constructible domain, so the lifted transformation is an isomorphism; its site image is forced by the origin isomorphisms and reductionSiteScalarIso.",
+   "text": "Use the bounded-below site Hom bijection followed by the intrinsic derived equivalence. This makes reductionSite fully faithful on D-plus. Scalar extension preserves the finite-Tor constructible origins. Fully faithful cancellation of the specified site scalar/origin isomorphism constructs o, and map_preimage proves its site normalization.",
    "uses": [
     "lem-sp-etale-ctf-chart-domain",
-    "det-pe-finite-tor-comparison-noetherian"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a common annihilator use the ordinary finite-ring chart adjunction: exact sum/evaluation followed by the specified ordered affine trace. Domain preservation supplies all bounded-below endpoints. The generator formula uniquely identifies its line comparison with reductionEtaleTateIso, including zero rings.",
-   "uses": [
-    "lem-sp-chart-finite-ring-adjunction",
-    "lem-sp-etale-ctf-chart-domain",
-    "lem-asd-finite-etale-twist-line"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The chart scalar counit transport equation identifies the inverse adjunct of the canonical ordered Tate reassociation with scalar extension of the A-chart counit after the inverse specified compact-support coefficient comparison. The source-open locality equation identifies this transpose with the restriction of c. Apply the actual realization counit equations at A and B and the site/coefficient compatibility square.",
-   "uses": [
-    "lem-sp-chart-counit-scalar-transport",
-    "lem-sp-open-exceptional-scalar-locality",
-    "lem-sp-open-proetale-counit-scalar",
-    "det-sf-mate-open-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Injectivity of the B-chart adjunction Hom equivalence gives the displayed chart equation. Right-adjoint uniqueness fixes the comparison to precisely reductionIntrinsicChartIso. The identity tower handles dimension zero and the same generator argument includes zero coefficient rings.",
-   "uses": [
+    "det-sp-et-proet-adjunction-transfer",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
     "def-sp-reduction-exceptional-realization-objects"
    ],
-   "elementary": true
+   "elementary": false
+  },
+  {
+   "text": "For each common annihilator ell^n, its image is invertible on Y because ell is nonzero in k. Lift the given intrinsic component to a single ordinary morphism q by the site Hom bijection into the bounded-below B right output.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the intrinsic counit identity for this q, then apply the ordinary single-input chart transpose calculation to RA.origin(K), RB.origin(K_B) and o_K.",
+   "uses": [
+    "lem-sp-reduction-counit-descent",
+    "lem-sp-reduction-ordinary-chart"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic proved transfer_chart lemma pastes the ordinary chart equation through site/pullback naturality and the scalar/site/pullback cube. Cancelling the right-output isomorphisms gives exactly the specified reductionIntrinsicChartIso equation.",
+   "uses": [
+    "lem-sp-reduction-site-scalar-pullback",
+    "def-sp-reduction-exceptional-realization-objects"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sp-etale-ctf-chart-domain",
-  "det-pe-finite-tor-comparison-noetherian",
-  "lem-sp-chart-finite-ring-adjunction",
-  "lem-asd-finite-etale-twist-line",
-  "lem-sp-chart-counit-scalar-transport",
-  "lem-sp-open-exceptional-scalar-locality",
-  "lem-sp-open-proetale-counit-scalar",
-  "det-sf-mate-open-restriction",
-  "def-sp-reduction-exceptional-realization-objects"
+  "det-sp-et-proet-adjunction-transfer",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "def-sp-reduction-exceptional-realization-objects",
+  "lem-sp-reduction-counit-descent",
+  "lem-sp-reduction-ordinary-chart",
+  "lem-sp-reduction-site-scalar-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K5",
+  "group": "F2",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Charts and Locality paragraphs, retained Steps 5--12; Lean implements the retained source argument in the named comparison coordinates."
+  "place": "Locality and Charts; explicit origin-isomorphism construction, pointwise ordinary lifting, counit descent, ordinary chart calculation, and proved categorical pasting"
  },
  "mathlib_searches": [
   {
@@ -175,13 +172,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-bc7ac",
-  "group": "K5",
+  "reviewer": "C-0f29a",
+  "group": "F2",
   "result": "fix",
-  "landing": "20261025T211641-L-4013015",
+  "landing": "20261027T205939-L-1636634",
   "kind": "interface",
-  "note": "independent cc review: Lean files vs previous head 22b4d (byte-identical); Objects module vs current published ReductionExceptional prefix (verbatim); 2 sorry statements vs nodes/source Steps 3-4, 5-12; 25 direct importers compiled against sandbox build with fixed item (all exit 0)"
+  "note": "independent cc review: item proof + new descent/ordinary-chart/cube modules and 5 node files against packet, clone ReductionExceptionalObjects/EtaleCompactScalarCoherence definitions and DAG owners; RSCP import swap against the clone and 3b importers (EAPCM OK, imports RSCP privately; ReductionExceptional OK)"
  }
 }

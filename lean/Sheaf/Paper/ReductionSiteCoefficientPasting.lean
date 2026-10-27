@@ -5,7 +5,7 @@ Authors: SHEAF group Y6
 -/
 module
 
-public import Sheaf.SecSmoothPurity.ReductionExceptional
+public import Sheaf.SecSmoothPurity.ReductionExceptionalObjects
 
 /-! # The coefficient square in intrinsic realization coordinates
 

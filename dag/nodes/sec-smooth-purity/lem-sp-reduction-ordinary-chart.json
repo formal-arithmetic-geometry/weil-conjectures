@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-reduction-ordinary-chart",
+ "kind": "statement",
+ "title": "Ordinary etale chart formula forced by a scalar counit equation",
+ "statement": "Let $A\\to B$ be a unital map $\\varphi$ of finite commutative rings, and let $N>0$ annihilate both. Let $X,Y,U$ be Noetherian schemes, $i:U\\hookrightarrow X$ open, and $e:U\\to\\mathbf A^d_Y$ separated, quasi-compact, finite-type etale, with $if=ep_d$ for $f:X\\to Y$. Fix a compactification $c$ of $f$, the two sum-extension normalizations, normalized finite Tate transports and projective-line adjunction data of [def-sp-reduction-exceptional-realization-objects], and assume $N$ invertible on $Y$. Let $F_R^{et}\\dashv G_R^{et}$ be arbitrary ordinary compact-support adjunctions for $c$. Let $L\\in D^b_{ctf}(Y,A)$, $L_B\\in D(Y,B)$ and $a:T_YL\\to L_B$. If $q:T_XG_A^{et}L\\to G_B^{et}L_B$ satisfies $\\beta(G_A^{et}L);F_B^{et}(q);\\epsilon_B(L_B)=T_Y(\\epsilon_A(L));a$ for the actual compactScalarMap, then $d_i^{-1};i_B^*(q);r_B(L_B)=T_U(r_A(L));t_{e,d}(L);(p_d^*(-)(d)[2d]\\,e_B^*)(a)$. Here $r_R$ is exactly reductionEtaleChartRightIso and $t_{e,d}$ exactly reductionEtaleChartScalarIso. This states one ordinary-site component; there are no intrinsic realizations or chosen input-origin isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality and Charts; retained Steps 5--12"
+ },
+ "stmt_deps": [
+  "def-sp-reduction-exceptional-realization-objects",
+  "def-sf-etale-compact-scalar-map",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "proof": [
+  {
+   "text": "Compose ordinary open sum/evaluation with the given compact-support adjunctions. The scalar/open counit equation identifies the restriction of q with the transpose of the scalar-extended composite counit followed by a.",
+   "uses": [
+    "lem-pur-etale-open-scalar-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the left functors through reductionEtaleChartLeftIso. The normalized finite-ring chart adjunction is the sum/evaluation adjunction followed by ordered affine integration.",
+   "uses": [
+    "lem-sp-chart-finite-ring-adjunction",
+    "def-sp-reduction-exceptional-realization-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use scalar compatibility of the actual sum-then-affine counit, the generator-normalized finite Tate-line comparison, and naturality at a. The resulting inverse transpose is that of the displayed canonical chart map.",
+   "uses": [
+    "lem-sp-chart-counit-scalar-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Injectivity of the B-chart Hom equivalence gives the equality. Right-adjoint uniqueness identifies r_R with precisely the specified reductionEtaleChartRightIso. The identity affine adjunction handles d=0, and the generator identities include zero rings.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-open-scalar-exchange",
+  "lem-sp-chart-finite-ring-adjunction",
+  "def-sp-reduction-exceptional-realization-objects",
+  "lem-sp-chart-counit-scalar-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Named subargument of the retained Locality/Charts proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction counit transposes commute with extension of coefficients and fully faithful comparison functors",
+   "results": "CategoryTheory.Adjunction.counit, counit_naturality, ModuleCat.ExtendRestrictScalarsAdj.counit_app, and generic adjunction declarations.",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction API does not identify these specified geometric comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit in Mathlib.CategoryTheory.Adjunction.Unique.",
+   "date": "2026-10-28",
+   "verdict": "Supplies abstract uniqueness normalization, not the coefficient/site or ordered-chart equation."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionSite_scalar_pullback|reductionExceptional_counit_descent|reductionExceptional_ordinary_chart",
+   "results": "No matching declaration in the searched source and Mathlib libraries. Direct rg additionally read ReductionExceptionalObjects, EtaleProEtaleCoefficientCompatibility, ChartCounitScalarTransport, RawChartScalarCounitPasting and EtaleProEtaleScalarPullbackCube.",
+   "date": "2026-10-28",
+   "verdict": "Existing ingredients have different endpoints; the new statements isolate their necessary coherence and local transpose steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.ReductionExceptionalChart",
+  "date": "2026-10-28",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality and Charts; Ordinary etale chart formula forced by a scalar counit equation",
+   "via": [
+    "lem-sp-reduction-exceptional-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ReductionExceptionalOrdinaryChart",
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionExceptionalOrdinaryChart.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionExceptional_ordinary_chart",
+  "statement": "theorem reductionExceptional_ordinary_chart\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)\n    {X Y U : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian U]\n    (f : X ⟶ Y) (i : U ⟶ X) [IsOpenImmersion i]\n    (d : ℕ) (e : U ⟶ affineTraceTower Y d)\n    [AlgebraicGeometry.Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]\n    (he : i ≫ f = e ≫ affineTraceProjection Y d) (cf : Compactification f)\n    (MA : Etale.EtaleCompactSupportNormalization A)\n    (MB : Etale.EtaleCompactSupportNormalization B)\n    (tA : Etale.OrdinaryFiniteTwistTransport A N hA)\n    (DA : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum A N hA tA T hT)\n    (tB : Etale.OrdinaryFiniteTwistTransport B N hB)\n    (DB : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum B N hB tB T hT)\n    (hY : IsUnit (N : Γ(Y, ⊤)))\n    (GA : Etale.DerivedCategoryModule A Y ⥤ Etale.DerivedCategoryModule A X)\n    (GB : Etale.DerivedCategoryModule B Y ⥤ Etale.DerivedCategoryModule B X)\n    (adjA : Etale.rightDerivedLowerShriekOfCompactification\n      (ModuleCat.{u + 1} A) cf ⊣ GA)\n    (adjB : Etale.rightDerivedLowerShriekOfCompactification\n      (ModuleCat.{u + 1} B) cf ⊣ GB)\n    (L : Etale.DerivedCategoryModule A Y)\n    (hL : Etale.DerivedCategory.boundedConstructibleFiniteTor A Y L)\n    (LB : Etale.DerivedCategoryModule B Y)\n    (a : (Etale.scalarExtension φ Y).obj L ⟶ LB)\n    (q : (Etale.scalarExtension φ X).obj (GA.obj L) ⟶ GB.obj LB)\n    (hq : (Etale.compactScalarMap φ cf).app (GA.obj L) ≫\n        (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) cf).map q ≫\n        adjB.counit.app LB = (Etale.scalarExtension φ Y).map (adjA.counit.app L) ≫ a) :\n    (Etale.scalarPullbackIso φ i).inv.app (GA.obj L) ≫\n        (Etale.ordinaryFinitePullback B i).map q ≫\n        (reductionEtaleChartRightIso B MB f i d e he cf GB adjB N hB tB DB hY).hom.app LB =\n      (Etale.scalarExtension φ U).map\n        ((reductionEtaleChartRightIso A MA f i d e he cf GA adjA N hA tA DA hY).hom.app L) ≫\n      (reductionEtaleChartScalarIso φ N hA hB hY d e L).hom ≫\n      (Etale.affineTraceRight B N hB Y d ⋙ Etale.ordinaryFinitePullback B e).map a",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f29a",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261027T205939-L-1636634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0f29a",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261027T205939-L-1636634",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new descent/ordinary-chart/cube modules and 5 node files against packet, clone ReductionExceptionalObjects/EtaleCompactScalarCoherence definitions and DAG owners; RSCP import swap against the clone and 3b importers (EAPCM OK, imports RSCP privately; ReductionExceptional OK)"
+ }
+}
