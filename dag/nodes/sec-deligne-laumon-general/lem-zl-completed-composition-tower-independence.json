@@ -1,0 +1,139 @@
+{
+ "id": "lem-zl-completed-composition-tower-independence",
+ "kind": "statement",
+ "title": "Equality of completed tower maps under normalized refinements",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, a field k with ell invertible, composable separated finite-type k-morphisms f:X→Y and g:Y→Z of finite-type schemes, three compactifications cf,cg,cfg of f,g,fg, and an integral constructible input K on X. Suppose two compatible towers (d,e) and (d_prime,e_prime) refine cf,cg,cfg. On each tower supply proofs that its open unit and Lambda are invertible and supply the three refinement isomorphisms satisfying SfCompletedRefinementSpec [def-zl-field-shriek-composition-normalization]. Then the actual ambient completed arrows (image cg).map(rho_f inverse) followed by rho_g inverse, sfCompletedCompositionOnTower and rho_fg are equal for the two towers. The theorem asserts equality conditional on the supplied local data; it asserts neither existence of those data nor invertibility of the transported arrows.",
+ "stmt_deps": [
+  "def-zl-field-shriek-composition-normalization",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-compactifications-refinements",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J, lemma-shriek-proper-and-open and lemma-shriek-composition; completed-coefficient passage: Bhatt--Scholze Definition 6.7.6, Lemma 6.7.7 and Lemma 6.1.13."
+ },
+ "proof": [
+  {
+   "text": "Choose a common refining compatible tower and equalize parallel refinement arrows. This permits comparison with each original tower while retaining every refinement map, including noncartesian intermediate faces.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-compactifiable-cofiltered"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply proper/open horizontal pasting to squares F,A,E and vertical pasting to B,F,C,D in Stacks 0F7J. Naturality at the A-comparison and proper/open compositor associativity give equality after inserting the canonical refinement maps. These equations hold before finite evaluation.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sp-compactification-refinement-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize those strict-system equalities on the completed constructible domain. Open adjunction transposition and its injectivity identify each normalized refinement with the supplied one. Cancel inverse factors to obtain equality of each displayed transport with that of the common tower, and hence with one another. This also covers identical towers with distinct witnesses.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-zl-field-shriek-composition-normalization",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-sp-compactification-refinement-coherence",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-zl-field-shriek-composition-normalization",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Proper/open comparison and the six-square independence argument of lemma-shriek-composition; completed-coefficient extension as in Bhatt--Scholze 6.7.6--6.7.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The composition isomorphism for compactly supported direct images is independent of choices of compactification by common refinement and proper open mate pasting",
+   "results": "8 hits: TopCat.Presheaf.Pushforward.comp, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict_assoc, AlgebraicGeometry.Scheme.Hom.isoImage_hom_ι, CompactlySupportedContinuousMap.comp, CategoryTheory.ChosenPullbacksAlong.pullbackComp",
+   "date": "2026-10-27",
+   "verdict": "No match for this completed-coefficient derived proper/open statement; the categorical hits supply only formal operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans_assoc",
+   "results": "1 hits: CategoryTheory.Iso.trans_assoc",
+   "date": "2026-10-27",
+   "verdict": "No match for this completed-coefficient derived proper/open statement; the categorical hits supply only formal operations."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompactification|[Rr]efinement.*coherence",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No match for this completed-coefficient derived proper/open statement; the categorical hits supply only formal operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldShriekCompositionIntegralComponent",
+  "date": "2026-10-28",
+  "group": "S5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "Common-refinement and equalizer independence of the normalized completed components. This supplies the compact-support composition used in the Leray spectral sequence of det-l-dl-general-composition.",
+   "via": [
+    "lem-zl-field-shriek-integral-component",
+    "lem-zl-field-shriek-composition-qcqs",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "merged_into": null,
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCompositionTowerIndependence",
+  "file": "lean/Sheaf/Paper/CompletedCompositionTowerIndependence.lean",
+  "declaration": "WeilConjectures.sfCompletedCompositionTransport_independent",
+  "declarations": [
+   "WeilConjectures.sfCompletedCompositionTransport",
+   "WeilConjectures.sfCompletedCompositionTransport_independent"
+  ],
+  "statement": "theorem sfCompletedCompositionTransport_independent\n    (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))\n    (K : sfIntegralConstructibleCategory l E X)\n    (d : Compactification g) (e : Compactification (f ≫ d.i))\n    (rf : e.restrict.Refinement cf) (rg : d.Refinement cg)\n    (rfg : (d.comp e).Refinement cfg)\n    (hη : IsIso ((openDerivedAdjunction (completed l E) (pullback.fst e.g d.i)).unit.app\n      ((openExtension (completed l E) e.restrict.i).mapDerivedCategory.obj K.obj)))\n    (hLambda : IsIso (sfCompositionLambda l E (pullback.fst e.g d.i)\n      e.restrict.g e.g d.i e.isPullback_restrict.w.symm\n        ((openExtension (completed l E) e.restrict.i).mapDerivedCategory.obj K.obj) hη))\n    (ρf : (image (completed l E) e.restrict).obj K.obj ≅\n      (image (completed l E) cf).obj K.obj)\n    (ρg : (image (completed l E) d).obj\n        ((image (completed l E) e.restrict).obj K.obj) ≅\n      (image (completed l E) cg).obj ((image (completed l E) e.restrict).obj K.obj))\n    (ρfg : (image (completed l E) (d.comp e)).obj K.obj ≅\n      (image (completed l E) cfg).obj K.obj)\n    (hf : SfCompletedRefinementSpec l E rf K.obj ρf)\n    (hg : SfCompletedRefinementSpec l E rg\n      ((image (completed l E) e.restrict).obj K.obj) ρg)\n    (hfg : SfCompletedRefinementSpec l E rfg K.obj ρfg)\n    (d' : Compactification g) (e' : Compactification (f ≫ d'.i))\n    (rf' : e'.restrict.Refinement cf) (rg' : d'.Refinement cg)\n    (rfg' : (d'.comp e').Refinement cfg)\n    (hη' : IsIso ((openDerivedAdjunction (completed l E) (pullback.fst e'.g d'.i)).unit.app\n      ((openExtension (completed l E) e'.restrict.i).mapDerivedCategory.obj K.obj)))\n    (hLambda' : IsIso (sfCompositionLambda l E (pullback.fst e'.g d'.i)\n      e'.restrict.g e'.g d'.i e'.isPullback_restrict.w.symm\n        ((openExtension (completed l E) e'.restrict.i).mapDerivedCategory.obj K.obj) hη'))\n    (ρf' : (image (completed l E) e'.restrict).obj K.obj ≅\n      (image (completed l E) cf).obj K.obj)\n    (ρg' : (image (completed l E) d').obj\n        ((image (completed l E) e'.restrict).obj K.obj) ≅\n      (image (completed l E) cg).obj ((image (completed l E) e'.restrict).obj K.obj))\n    (ρfg' : (image (completed l E) (d'.comp e')).obj K.obj ≅\n      (image (completed l E) cfg).obj K.obj)\n    (hf' : SfCompletedRefinementSpec l E rf' K.obj ρf')\n    (hg' : SfCompletedRefinementSpec l E rg'\n      ((image (completed l E) e'.restrict).obj K.obj) ρg')\n    (hfg' : SfCompletedRefinementSpec l E rfg' K.obj ρfg')\n    : sfCompletedCompositionTransport l E cf cg cfg K.obj d e hη hLambda ρf ρg ρfg =\n      sfCompletedCompositionTransport l E cf cg cfg K.obj d' e' hη' hLambda' ρf' ρg' ρfg'",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T180808-L-3902903",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T180808-L-3902903",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

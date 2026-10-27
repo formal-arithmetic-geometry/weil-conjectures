@@ -6,6 +6,13 @@ module
 
 public import Sheaf.Paper.FieldShriekCompositionNormalization
 public import Sheaf.Paper.FiniteFieldFiber
+import Sheaf.Paper.QcqsCompletedRefinement
+import Sheaf.Paper.CompletedCompositionTowerIsIso
+import Sheaf.Paper.CompletedCompositionTowerIndependence
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
+import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
+import WeilConjectures.Compactification.OverRefinement
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Normalized components of the integral field shriek compositor
 
@@ -70,6 +77,64 @@ def SfIntegralCompositionComponentSpec
         (sfQcqsCompactSupportRealization l E D.k (coefficientPrimeUnit l D hl) cfg).hom.app K
 
 
+omit [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+  [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] in
+include D in
+private theorem exists_refining_tower :
+    ∃ (d : Compactification g) (e : Compactification (f ≫ d.i)),
+      Nonempty (e.restrict.Refinement cf) ∧ Nonempty (d.Refinement cg) ∧
+        Nonempty ((d.comp e).Refinement cfg) := by
+  have : QuasiCompact cg.i := cg.quasiCompact_openImmersion inferInstance
+  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace
+    (Z ↘ Spec (.of D.k))
+  have : IsLocallyNoetherian Z :=
+    LocallyOfFiniteType.isLocallyNoetherian (Z ↘ Spec (.of D.k))
+  have : QuasiSeparatedSpace Z := inferInstance
+  have : CompactSpace cg.Z := QuasiCompact.compactSpace_of_compactSpace cg.g
+  have : QuasiSeparatedSpace cg.Z := quasiSeparatedSpace_of_quasiSeparated cg.g
+  obtain ⟨t, ht⟩ := exists_isDense_compactification (cf.g ≫ cg.i)
+  have : IsSchemeTheoreticallyDominant t.i := ht
+  have : QuasiCompact t.i := t.quasiCompact_openImmersion inferInstance
+  let e₀ : Compactification (f ≫ cg.i) :=
+    (t.precomp cf.i).copy
+      ((congrArg (fun h : X ⟶ Y ↦ h ≫ cg.i) cf.comm).trans (Category.assoc _ _ _))
+  let T : Compactification.Triangle f g :=
+    { cf := cf, cg := cg, cfg := cg.comp e₀, q := t.i, p := t.g,
+      i_q := rfl, p_g := rfl,
+      isPullback := t.isPullback_of_isProper_of_isSchemeTheoreticallyDominant }
+  obtain ⟨e₁, v, hv, hvi, hvg, _⟩ :=
+    (exists_compactifiable_compatible_tower f g cg cfg).1
+  let e := Compactification.inf e₀ e₁
+  let r₀ := Compactification.infFst e₀ e₁
+  let r₁ := Compactification.infSnd e₀ e₁
+  let rf : e.restrict.Refinement cf :=
+    T.homOfRestrictRf cg (Compactification.Refinement.id cg) e r₀.hom r₀.i_hom
+      (by change e.g ≫ 𝟙 cg.Z = r₀.hom ≫ e₀.g
+          exact (Category.comp_id _).trans r₀.hom_g.symm)
+  let rfg : (cg.comp e).Refinement cfg :=
+    { hom := r₁.hom ≫ v,
+      i_hom := by
+        change e.i ≫ (r₁.hom ≫ v) = cfg.i
+        rw [← Category.assoc, r₁.i_hom]
+        exact hvi,
+      hom_g := by
+        change (r₁.hom ≫ v) ≫ cfg.g = e.g ≫ cg.g
+        rw [Category.assoc, hvg, ← Category.assoc, r₁.hom_g] }
+  exact ⟨cg, e, ⟨rf⟩, ⟨Compactification.Refinement.id cg⟩, ⟨rfg⟩⟩
+
+include D hl in
+private theorem completed_image_constructible
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (c : Compactification f) (K : sfIntegralConstructibleCategory l E X) :
+    sfIntegralConstructible l E Y ((image (completed l E) c).obj K.obj) := by
+  have := sfIntegralConstructible_isClosedUnderIsomorphisms l E Y
+  exact ObjectProperty.prop_of_iso _
+    ((sfQcqsCompactSupportRealization l E D.k (coefficientPrimeUnit l D hl) c).app K).symm
+    ((sfCompactSupportFiniteIntegralFunctor l D.k
+      (coefficientPrimeUnit l D hl) c E).obj K).property
+
 /-- There is a uniquely normalized isomorphism at each integral constructible input.
 Source: Stacks 0F7J, compatible compactifications and independence of choices;
 Bhatt--Scholze Definition 6.7.6 and Lemmas 6.7.7, 6.1.13
@@ -95,6 +160,82 @@ theorem sfFieldShriekCompositionIntegral_component
         ((sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cf E).obj K)
       ≅ (sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cfg E).obj K,
       SfIntegralCompositionComponentSpec D l hl cf cg cfg E K a.hom := by
-  sorry
+  obtain ⟨d, e, ⟨rf⟩, ⟨rg⟩, ⟨rfg⟩⟩ := exists_refining_tower D cf cg cfg
+  obtain ⟨hη, hLambda, hcomp⟩ := sfCompletedCompositionOnTower_isIso l E D.k
+    (coefficientPrimeUnit l D hl) d e K
+  obtain ⟨ρf, hf⟩ := sfQcqsCompletedRefinement_exists l E D.k
+    (coefficientPrimeUnit l D hl) rf K
+  let L : sfIntegralConstructibleCategory l E Y :=
+    ⟨(image (completed l E) e.restrict).obj K.obj,
+      completed_image_constructible D l hl E e.restrict K⟩
+  obtain ⟨ρg, hg⟩ := sfQcqsCompletedRefinement_exists l E D.k
+    (coefficientPrimeUnit l D hl) rg L
+  obtain ⟨ρfg, hfg⟩ := sfQcqsCompletedRefinement_exists l E D.k
+    (coefficientPrimeUnit l D hl) rfg K
+  let t := sfCompletedCompositionTransport l E cf cg cfg K.obj d e hη hLambda ρf ρg ρfg
+  have : IsIso t := by
+    have := hcomp
+    dsimp only [t, sfCompletedCompositionTransport]
+    infer_instance
+  let sourceIso :=
+    (image (completed l E) cg).mapIso
+      ((sfQcqsCompactSupportRealization l E D.k
+        (coefficientPrimeUnit l D hl) cf).app K) ≪≫
+      (sfQcqsCompactSupportRealization l E D.k (coefficientPrimeUnit l D hl) cg).app
+        ((sfCompactSupportFiniteIntegralFunctor l D.k
+          (coefficientPrimeUnit l D hl) cf E).obj K)
+  let targetIso :=
+    (sfQcqsCompactSupportRealization l E D.k (coefficientPrimeUnit l D hl) cfg).app K
+  let a := (sfIntegralConstructible l E Z).isoMk
+    (sourceIso.symm ≪≫ asIso t ≪≫ targetIso)
+  have normalization
+      (b : (sfCompactSupportFiniteIntegralFunctor l D.k
+          (coefficientPrimeUnit l D hl) cg E).obj
+          ((sfCompactSupportFiniteIntegralFunctor l D.k
+            (coefficientPrimeUnit l D hl) cf E).obj K) ⟶
+        (sfCompactSupportFiniteIntegralFunctor l D.k
+          (coefficientPrimeUnit l D hl) cfg E).obj K) :
+      SfIntegralCompositionComponentSpec D l hl cf cg cfg E K b ↔
+        b.hom = sourceIso.inv ≫ t ≫ targetIso.hom := by
+    constructor
+    · intro hb
+      obtain ⟨hη', hLambda', ρf', ρg', ρfg', hf', hg', hfg', hb⟩ := hb d e rf rg rfg
+      have h := sfCompletedCompositionTransport_independent l E D.k
+        (coefficientPrimeUnit l D hl) cf cg cfg K
+        d e rf rg rfg hη' hLambda' ρf' ρg' ρfg' hf' hg' hfg'
+        d e rf rg rfg hη hLambda ρf ρg ρfg hf hg hfg
+      calc
+        b.hom = sourceIso.inv ≫ sfCompletedCompositionTransport l E cf cg cfg K.obj
+            d e hη' hLambda' ρf' ρg' ρfg' ≫ targetIso.hom := by
+          simpa only [sourceIso, targetIso, Iso.trans_inv, Functor.mapIso_inv,
+            Iso.app_inv, Iso.app_hom, sfCompletedCompositionTransport, Category.assoc] using hb
+        _ = sourceIso.inv ≫ t ≫ targetIso.hom :=
+          congrArg (fun z ↦ sourceIso.inv ≫ z ≫ targetIso.hom) h
+    · intro hb d' e' rf' rg' rfg'
+      obtain ⟨hη', hLambda', _⟩ := sfCompletedCompositionOnTower_isIso l E D.k
+        (coefficientPrimeUnit l D hl) d' e' K
+      obtain ⟨ρf', hf'⟩ := sfQcqsCompletedRefinement_exists l E D.k
+        (coefficientPrimeUnit l D hl) rf' K
+      let L' : sfIntegralConstructibleCategory l E Y :=
+        ⟨(image (completed l E) e'.restrict).obj K.obj,
+          completed_image_constructible D l hl E e'.restrict K⟩
+      obtain ⟨ρg', hg'⟩ := sfQcqsCompletedRefinement_exists l E D.k
+        (coefficientPrimeUnit l D hl) rg' L'
+      obtain ⟨ρfg', hfg'⟩ := sfQcqsCompletedRefinement_exists l E D.k
+        (coefficientPrimeUnit l D hl) rfg' K
+      refine ⟨hη', hLambda', ρf', ρg', ρfg', hf', hg', hfg', ?_⟩
+      have h := sfCompletedCompositionTransport_independent l E D.k
+        (coefficientPrimeUnit l D hl) cf cg cfg K
+        d e rf rg rfg hη hLambda ρf ρg ρfg hf hg hfg
+        d' e' rf' rg' rfg' hη' hLambda' ρf' ρg' ρfg' hf' hg' hfg'
+      rw [hb, show t = _ from h]
+      simp only [sourceIso, targetIso, Iso.trans_inv, Functor.mapIso_inv,
+        Iso.app_inv, Iso.app_hom, sfCompletedCompositionTransport, Category.assoc]
+  refine ⟨a, (normalization a.hom).mpr ?_, ?_⟩
+  · rfl
+  · intro b hb
+    apply Iso.ext
+    apply (sfIntegralConstructible l E Z).ι.map_injective
+    exact (normalization b.hom).mp hb
 
 end WeilConjectures
