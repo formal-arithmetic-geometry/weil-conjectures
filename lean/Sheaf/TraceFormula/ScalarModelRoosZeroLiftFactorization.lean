@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorizationExistence
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftUniqueness
 
 /-! # Factorization of the normalized scalar Roos lift -/
 
@@ -77,6 +79,57 @@ theorem scalarModelRoosZeroLift_factorization
     (hh : scalarModelRoosZeroLiftZero l E L F ι j X SL P D h)
     (hcoord : scalarModelRoosZeroLiftCoordinates l E L F ι j X SL P D f h) :
     scalarModelRoosZeroLiftFactorization l E L F ι j X SL ρL ρF b P D f h := by
-  sorry
+  obtain ⟨g, hg, hcoordg, hfactor⟩ :=
+    scalarModelRoosZeroLift_factorization_exists l E L F ι j X SL ρL ρF b P D f
+  have hcoord : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)
+      (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)
+      (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U)
+      (x : (P.obj.X i).val.obj U),
+      ((h.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary
+        (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
+          (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
+            (.up ℤ)).obj D)).asFunctor)).f i ≫
+        (Pi.π (fun m : ℕ ↦
+          (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
+            (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
+              (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i).val.app U)
+        (completedScalarTensorSection l L F j X
+          (((completedOrdinaryScalarComplex l E L ι X).obj P.obj).X i) U s
+          (completedScalarTensorSection l E L ι X (P.obj.X i) U t x)) =
+      ((g.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary
+        (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
+          (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
+            (.up ℤ)).obj D)).asFunctor)).f i ≫
+        (Pi.π (fun m : ℕ ↦
+          (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
+            (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
+              (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i).val.app U)
+        (completedScalarTensorSection l L F j X
+          (((completedOrdinaryScalarComplex l E L ι X).obj P.obj).X i) U s
+          (completedScalarTensorSection l E L ι X (P.obj.X i) U t x)) := by
+    intro n i U s t x
+    let z : (((coefficientSequenceRestriction l L X).obj (D.X i)).obj (op n)).val.obj U :=
+      ((f.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary
+        (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj
+          D).asFunctor)).f i ≫
+        (Pi.π (fun m : ℕ ↦
+          (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj
+            D).asFunctor.obj (op m)) n).f i).val.app U)
+        (completedScalarTensorSection l E L ι X (P.obj.X i) U t x)
+    let y : (D.X i).val.obj (op (n, U.unop)) :=
+      cast (integralComparisonRestrictedSectionType l L X (D.X i) n U) z
+    have hy : integralComparisonRestrictedSection l L X (D.X i) n U y = z := by
+      dsimp [y, z]
+      simp only [integralComparisonRestrictedSection, cast_cast, cast_eq]
+    have hy' : z = integralComparisonRestrictedSection l L X (D.X i) n U y := hy.symm
+    have hh' := hcoord n i U s t x y hy'
+    have hg' := hcoordg n i U s t x y hy'
+    exact hh'.trans hg'.symm
+  have hq := scalarModelRoosZeroLift_uniqueness l E L F ι j X P D h g hh hg hcoord
+  calc
+    _ = completedScalarCounit l L F j X
+        ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ≫ DerivedCategory.Q.map g :=
+      hfactor
+    _ = _ := by rw [hq]
 
 end WeilConjectures
