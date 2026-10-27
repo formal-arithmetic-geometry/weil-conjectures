@@ -1,0 +1,136 @@
+{
+ "id": "lem-sf-immersion-finite-reduction-interval",
+ "kind": "statement",
+ "title": "Finite reductions of immersion pullback preserve constructibility and bounds",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbb Q_\\ell$ and an immersion $f:Y\\to X$ of arbitrary schemes. Let $K$ be a derived module over the completed integral coefficient ring on $X$, $n\\ge0$, and $r,s\\in\\mathbb Z$. If the detailed $(n+1)$st finite reduction of the normalized coefficient transport of $K$ is intrinsically finite-torsion constructible and has cohomological support contained in $[r,s]$, then the same holds for the $(n+1)$st finite reduction of normalized transport of the actual ordinary derived pullback of $K$. No completeness, uniformity in n, Noetherian condition, or nonempty-interval assumption is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization proof, returned integral Step 6: ordinary immersion inverse image, strict quotient towers and finite constructibility."
+ },
+ "stmt_deps": [
+  "lem-sf-immersion-completed-pullback-coefficients",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof": [
+  {
+   "text": "Normalized quotient and completed coefficient identifications intertwine every projection. Their scalar adjunctions identify detailed finite reduction with canonical adic finite reduction. Compose this identification with finiteComparison to express the target as exact finite coefficient inverse image of the source, transported along coefficient equivalences.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-coefficients",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact coefficient restriction preserves and reflects zero objects and constructible cohomology. Finite coefficient inverse image commutes with cohomology and pulls back a finite locally closed stratification and its finite constant models. Thus each target cohomology sheaf is constructible.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-pullback-preserves-bounded-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Outside the same interval source cohomology is zero, and exact inverse image preserves zero. Target support is contained in the same finite integer interval, proving both its finite-support condition and its specified bound, also for an empty interval or scheme.",
+   "uses": [
+    "lem-weil-pbc-pullback-preserves-bounded-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-immersion-completed-pullback-coefficients",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-pullback-preserves-bounded-constructible"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization proof, returned integral Step 6: ordinary immersion inverse image, strict quotient towers and finite constructibility.",
+  "by": "worker",
+  "note": "C4: source argument specialized and categorical assembly made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact inverse image preserves constructible finite coefficient complexes and cohomological bounds",
+   "results": "Scheme.Hom.isConstructible_preimage and topological constructibility lemmas.",
+   "date": "2026-10-27",
+   "verdict": "No normalized derived coefficient comparison; reuse project constituent declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact countable product preserving functor commutes with derived inverse limit of towers",
+   "results": "CountableAB4Star.of_countableAB5Star; SequentialProduct.functorMap_commSq.",
+   "date": "2026-10-27",
+   "verdict": "No full match for the specified coefficient presentations and normalized mate."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.?complet|completedPullback",
+   "results": "msearch grep: OK, zero hits. Separate local rg of Mathlib and the project found the existing normalized coefficient, finite pullback and Roos APIs recorded in proof_deps.",
+   "date": "2026-10-27",
+   "verdict": "Reuse proved constructions; isolate only the mate equality and one finite-reduction consequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfImmersionCompletedPullbackComparison",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Localization proof, returned integral Step 6: ordinary immersion inverse image, strict quotient towers and finite constructibility.",
+   "via": [
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfImmersionFiniteReductionInterval",
+  "file": "lean/Sheaf/Paper/SfImmersionFiniteReductionInterval.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finite_reduction_preservesConstructibleInterval",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finite_reduction_preservesConstructibleInterval"
+  ],
+  "statement": "theorem finite_reduction_preservesConstructibleInterval [IsImmersion f] (K : PbcCompletedDerived X (pbcIntegralDatum l E)) (n : ℕ) (r s : ℤ) (hK : intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X ((scalarReductionDerivedExtension.{u, u} l E X n).obj ((transport l E X).obj K)) ∧ proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X n).obj ((transport l E X).obj K)) ⊆ Set.Icc r s) : intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) Y ((scalarReductionDerivedExtension.{u, u} l E Y n).obj ((transport l E Y).obj ((pbcActualDerivedPull f (pbcIntegralDatum l E)).obj K))) ∧ proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E Y n).obj ((transport l E Y).obj ((pbcActualDerivedPull f (pbcIntegralDatum l E)).obj K))) ⊆ Set.Icc r s",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-37045",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180511-L-3867707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-37045",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180511-L-3867707",
+  "kind": "interface",
+  "note": "independent cc review: published item vs delivered CoreA + item (CoreA = verbatim lines 1-448; strict/Roos block verbatim; only the main theorem's proof is new); new hole vs Stratification/IsConstructible preimage (true); 10 direct importers compiled against the sandbox build, all OK"
+ }
+}

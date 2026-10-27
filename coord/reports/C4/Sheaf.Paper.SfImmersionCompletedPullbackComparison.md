@@ -1,88 +1,112 @@
 ## What changed
 
-Proved ImmersionCompletedPullback.completedProjection_compatibility, preserving its
-statement and both specified maps. The proof first works over an arbitrary adic
-coefficient datum, then specializes to the original integral datum. Evaluation of
-the derived constant/limit counit gives the projection of the pulled augmentation.
-The K-flat computing counits identify its finite evaluation with the scalar unit;
-naturality extends that identity to all derived objects. The transition equation
-combines the actual Rlim projection law with the existing evaluation-interchange
-and quotient-transition laws. Proved helpers contain these calculations.
+Repair of reviewer C-ddea0's return of ddea060962c.
 
-Extracted the generic finite calculations into the new module
-SfImmersionFiniteNormalization to reduce kernel checking time in the item. It
-provides the proved public theorem sfCompletedReductionAugmentation_level_unit;
-all other extracted calculations remain proved private helpers. The item imports
-this module for its proof, with private access to the existing generic helpers.
-The helper module imports the existing proved counit/evaluation normalizations.
-Extracted the already-proved abstract Roos normalization into
-SfImmersionRoosNormalization, including its proved public resolution uniqueness
-lemma sfRoosComparison_ext, to reduce checking time further. Updated the item's
-proof plan and dependencies and added both helper nodes. The final extraction also
-moves the original private actual/intrinsic completion transports, product-coordinate
-normalizations, and exact-derived-counit normalization into those helper modules.
-Their statements and proofs are preserved. The new projection proof explicitly
-identifies its coefficient type and uses the default transparency settings.
-No existing public signature, definition body, public import, or shared module changed.
+2b/A3: merged strictIso_exists through roosRlim verbatim from CoreB back into
+SfImmersionCompletedPullbackComparison, including every private helper. Restored
+the original strictIso_exists docstring, the five [-instance] lines, all three
+original local irreducible declarations, and Elab.async false. Removed the
+unpublished CoreB module. The item publicly imports CoreA and also uses
+import all CoreA for its original private ordinary_transport_eq helper.
+The strict/Roos block now has its actual proof imports in the item.
+
+D1: removed the unpublished lem-sf-immersion-completed-pullback-models node.
+Restored all 21 CoreB public names to the item node's lean.declarations, alongside
+its two theorem names. Every use of that duplicate node was replaced by the
+eight actual dependencies specified by the reviewer. proof_deps is exactly
+the union of proof-step uses, and stmt_deps is unchanged from current main.
+The existing definition owner is not changed or duplicated by a new node.
+
+Retained CoreA and its coefficient node, the finite-interval module and node,
+and every new proof from the returned head. All 44 original public signatures
+and all existing definition bodies agree with current main. The only original
+public proof body changed is immersion_completed_pullback_comparison. No
+source-library file changes. The remaining CoreA extraction allows the finite
+obligation to be imported without an import cycle through its consumer.
+
+Change record: coord/changes/C4-immersion-completed-pullback-extraction.md.
+
+Final lcompile --all passed for all three delivery modules and all ten live
+direct importers, individually in import order. The merged item took 33.9 seconds;
+the longest live importer took 30.6 seconds. All temporary consumer copies were
+removed, and no consumer adaptation is delivered. Five other initial source
+paths were quarantined by the running global build during the check; their
+temporary copies and timing experiments are excluded from this packet. Their
+quarantine archives and nodes are untouched.
 
 ## Proved and sorry left
 
-Original holes: 3. Closed: 1. Added: 0. Remaining: 2.
+The original hole in
+AlgebraicGeometry.Scheme.ImmersionCompletedPullback.immersion_completed_pullback_comparison
+is closed by a decomposition. Its Lean proof includes exactness, product
+preservation, transfer from represented complexes to arbitrary derived towers,
+coefficient completeness transport, invertibility of the actual strict unit,
+and assembly of integral constructibility with the original uniform bounds.
+These proofs are retained unchanged from the returned head.
 
-Closed:
+The item's one original hole remains:
 
-- AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedProjection_compatibility.
+- AlgebraicGeometry.Scheme.ImmersionCompletedPullback.rlimComparison_roos,
+  node lem-sf-immersion-completed-pullback-comparison, unchanged from current main.
 
-Unchanged original holes, both attached to
-lem-sf-immersion-completed-pullback-comparison:
+The packet adds one smaller named theorem hole:
 
-- AlgebraicGeometry.Scheme.ImmersionCompletedPullback.rlimComparison_roos.
-- AlgebraicGeometry.Scheme.ImmersionCompletedPullback.immersion_completed_pullback_comparison.
+- AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finite_reduction_preservesConstructibleInterval,
+  node lem-sf-immersion-finite-reduction-interval, in SfImmersionFiniteReductionInterval.
+  It concerns one finite reduction without completeness or uniform-in-level
+  assumptions; it concludes neither completeness nor integral constructibility.
 
-All added helpers and both new public theorems are proved. No new sorry statement
-or axiom is introduced.
-The scalar-unit calculation compiled independently in 16.9 seconds. The initial
-helper-plus-item compile typechecked the proofs but took 63 seconds
-for the item. A later 64-second run prompted profiling: kernel checks of existing
-normalization proofs account for a substantial part of the time. These private
-proofs were extracted further. All three final modules were accepted by lcompile.py. The item compiled in
-41.3 seconds. Both helper modules compile with zero holes; no profiling or
-unsafe reducibility overrides remain. The projection theorem uses explicit
-associativity and permissive rewrites only where the coefficient aliases require them.
+There are two holes across the three delivery modules: one retained original
+and one split off. Closing one original hole and adding one lower hole is a
+decomposition with net zero holes, not an unconditional proof. CoreA is proved,
+and every restored strict/Roos construction is proved. The new finite theorem's
+source and full proof in words remain in its docstring. Empty intervals, zero
+complexes, empty schemes and identity immersions remain covered.
 
 ## No longer needed
 
-No mathematical dependency or existing module is withdrawn. Removed the helper's
-unused CompletedPullbackReductionCoherence import; the item retains it for its
-actual projection-transition calculation. The item's direct
-LevelwiseAdicTruncations import moves to the finite helper module that uses it.
-The direct RightDerivedFunctor.ShortExactPullback import moves to the Roos helper
-that uses its UnitQ normalization. The two remaining original
-holes retain their existing plans and dependencies. The projection proof uses
-existing generic adjunction, evaluation, and scalar-unit normalizations directly;
-it introduces no new unproved statement. No dependency is removed from the
-import closure: the ordinary imports of ExactTowerAugmentedCounitEvaluation and
-StratumCompletionUnitRestriction were replaced by their proof-only import-all
-forms, and the duplicate ordinary stratum import was removed.
+The returned packet's unnecessary SfImmersionCompletedPullbackCoreB module and
+lem-sf-immersion-completed-pullback-models node are removed as requested. They
+were unpublished additions, absent on current main; no deletion manifest for
+an existing library path is needed. Their mathematics and declaration records
+are restored to the item, rather than removed from the library's argument.
+
+Direct proof imports of MapDerivedCategoryMate, WeilCompletedTensorReflector
+and RoosComparisonHorizontalCoherence remain unnecessary: the existing
+normalization APIs supply the generic facts used here. No adopted-source
+declaration is removed. The originally proposed integral-detailed-finite-reduction
+lemma is unused because its Noetherian hypothesis does not cover arbitrary
+schemes in the assigned statement; the single finite-level split records the
+needed coefficient comparison and inverse-image step. No unit route is bypassed.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The earlier proof-origin text recorded three remaining holes. This delivery
-updates it to reflect the projection-compatibility proof and two remaining holes.
-The current source exists despite its historical rework/quarantine row; it was
-preserved, with every declaration and its Lean attachment intact. No archive is
-withdrawn and no dependency is deleted on the basis of that row.
+The return correctly identified the unnecessary CoreB split and duplicate
+ownership node. The original monolith and the reviewer's recombination both
+compiled within 60 seconds, so this extraction was unjustified. Both return
+points are repaired directly, retaining the new proofs and the useful CoreA
+extraction. No statement, binder, universe or definition is weakened.
+
+The earlier retained draft had regressed roosRlim_exists and replaced
+termwiseLimitIso_eq by a tautology. Their original proved bodies remain restored;
+the repair moves those bodies verbatim into their original item. The obsolete
+unqualified generated attachments and redundant equation-only split remain
+excluded from the packet.
 
 ## New nodes
 
-- lem-sf-completed-reduction-augmentation-level-unit, in
-  Sheaf.Paper.SfImmersionFiniteNormalization: a proved scalar-unit normalization,
-  strictly the evaluated-augmentation step of projection compatibility. Zero holes.
+lem-sf-immersion-completed-pullback-coefficients is retained unchanged, recording
+the 21 coefficient/finite normalization declarations in CoreA and their proved
+unit, transition and projection compatibilities. CoreA remains the separate
+coefficient interface required by the finite-level obligation.
 
-- lem-sf-roos-comparison-resolution-uniqueness, in
-  Sheaf.Paper.SfImmersionRoosNormalization: proved uniqueness from equality on
-  K-injective resolutions. Its private helpers retain the existing normalized
-  comparison construction. Zero holes.
+lem-sf-immersion-finite-reduction-interval is retained unchanged. Its proof plan
+identifies the finite coefficient presentations, applies exact finite inverse
+image to the constructible strata and constant models, and preserves vanishing
+outside the supplied interval. The final theorem applies it to the source's
+uniform interval and then to the separately specified interval.
+
+Change record: coord/changes/C4-immersion-completed-pullback-extraction.md.
 
 ## Second reading by C4
 

@@ -22,105 +22,82 @@
  ],
  "proof": [
   {
-   "text": "Identify quotient coefficients by the unique ring equivalence induced by ULift.ringEquiv and passage to principal-ideal quotients. IntegralCoefficientPresentation.comparison gives the uniquely projection-normalized completed ring comparison. Identify actual module pullback with exact inverse image. Uniqueness of the universal left-derived pair gives derivedIso with its specified counit equation. These declarations are proved in the delivered module. The module object equality is obtained by evaluation of the existing full functor equality. The generic uniqueness and counit calculations are proved private helpers in SfImmersionRoosNormalization.",
+   "text": "The unchanged strictIso construction uses the actual completed transport and completion reflector; its finite projection equations use the normalized augmentation-unit theorem. Immersion inverse image preserves products, and the strict Roos comparison and exact-adjoint tower models, with normalized resolution uniqueness, give the original roosRlim_exists proof. These constructions remain in this module. rlimComparison_roos retains its original named hole, including the normalized mate equation. Its first clause gives invertibility on represented complexes. For the final theorem regard rlimComparison as the natural transformation supplied by mateEquiv. Naturality along a derived representative isomorphism transfers invertibility to every derived tower.",
    "uses": [
-    "lem-weil-pbc-integral-coefficient-presentation-comparison",
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Evaluation of tower pullback is definitional. Identify the actual completed object with intrinsic completion by transporting the full reduction tower and augmentation. Use the completion reflector to show that its unit uniquely determines strictIso. The actual and datum ordinary transports agree by their universal counit normalizations. Prove finite_compatibility over an arbitrary adic coefficient datum, using the same explicit unit, transition and comparison formulas, and specialize to pbcIntegralDatum. The calculation is as follows. The unit square is the scalar-extension inverse-mate unit identity, followed by cancellation of the inverse of chi. For each quotient transition, stratumReduction_evaluation identifies the finite comparison with the evaluation of stratumReductionIso. Use the existing proved ExactTowerAugmentedCounit.interchange_transition, exposed as a public API without changing its statement or proof. This is the normalized evaluation-interchange transition identity, established in its owning module by localization extensionality and the factor formulas. Obtain the all-pair evaluation comparison from the public pbc_reduction_adic_tower_laws: the semilinear transition is the adjunct of its normalization, so the adjunction inverse identities recover pbcReductionTransition; cancel the inverse evaluation isomorphisms. Thus the evaluation interchanges commute with transitions; naturality of the strict tower transition and the levelwise all-pair comparison give the square after precomposition with an isomorphism. Finally localized evaluation transitions preserve composition: use comp_liftNatTrans, whiskering, and the homological-complex functor on natural transformations. The all-pair evaluation comparison conjugates each restricted reduction transition to this strict tower transition. Cancel the finite evaluation isomorphism to obtain the quotient cocycle. These proofs include equal indices and all composites. Prove completedProjection_compatibility over an arbitrary adic coefficient datum. The canonical derived-limit projection is evaluation of the constant/limit counit. The adjunction triangle identity and naturality of constant evaluation identify its composition with the pulled augmentation. ExactTowerAugmentedCounit.constant_coherence then gives pullback of the evaluated augmentation. On a K-flat representative, the normalized reduction evaluation and augmentation counits identify this evaluated augmentation with the scalar-extension unit; cancel the computing scalar counit and use stratumModuleUnit_component. K-flat resolutions and naturality extend the equation to every derived object. For transitions combine projection_transition, the evaluation-interchange transition square and generic_evaluation_transition. Specialize these equations to pbcIntegralDatum. No new unproved statement is introduced. Prove actualCompletedProjection_compatibility by composing the strictIso unit equation with these two declarations and the naturality of scalar-extension units and quotient transitions under derivedIso. The transition naturality follows directly by adjunction and the naturality of the restriction compositor. The fully proved generic calculations are in SfImmersionFiniteNormalization; this extraction keeps each file within the compile-time limit, without changing any public item interface. The generic actual/intrinsic completion transport and its integral specialization are likewise retained as proved private helpers in SfImmersionFiniteNormalization.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-stratum-completion-unit-restriction",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
     "lem-cbc-completed-extension-zero-comparison",
-    "def-wf-tensor-product",
-    "def-weil-pbc-reduction-augmentation",
-    "def-weil-pbc-four-corners",
-    "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
-    "prop-weil-pbc-levelwise-truncations",
-    "lem-sf-exact-tower-augmented-counit-evaluation",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-weil-pbc-completed-pullback-reduction-coherence",
-    "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
-    "lem-sf-completed-reduction-augmentation-level-unit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Prove ordinaryToCompleted_eq by the general adjunction mate augmentation identity and the triangle identity. Construct roosIso from the existing additive Roos comparison and its two coordinate equations, using countable-product preservation for an immersion. The strict Roos functor, its normalized inclusion, and the universal property of the termwise limit give roosMap, roosInclusion and termwiseLimitIso with uniqueness. These declarations are proved. Prove roosRlim_exists from ExactProductsRoos.comparisonIso applied to the actual rightDerivedFunctorUnitQ of inverse limit. The proved signIso and ordinaryIso of ExactAdjointTowerModels transport its normalization to the specified positive-difference Roos complex and termwiseLimitIso. Coordinate uniqueness identifies roosMap and roosInclusion with the strict functor maps. Naturality follows from the comparison natural isomorphism. For uniqueness, the normalized inclusion is invertible on K-injectives; cancel it there, then use a functorial K-injective resolution and naturality to identify the comparison on every complex. rlimComparison_roos retains its original hole comparing the constant/limit mate to this normalized conjugate. The productComparison definition keeps its original Pi.lift formula; a proved generic projection-formula certificate identifies it with roosProductComparison, including its evaluation equality transports. modulePull has the same data and an explicit result type using the completed-coefficient aliases of the tower statements. In roosIso_exists, rewrite productComparison by that certificate and apply the generic uniqueness theorem. Use the same completed-coefficient alias for the abstract category in roosRlim_exists. The already-proved generic Roos normalization is extracted into SfImmersionRoosNormalization for kernel checking time. Its proved sfRoosComparison_ext isolates the K-injective-resolution uniqueness argument, and its private helpers preserve the original normalized existence and uniqueness proof.",
-   "uses": [
-    "lem-pur-roos-comparison-horizontal-coherence",
-    "def-weil-strict-roos-model",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-sf-completed-reduction-augmentation-level-unit",
+    "lem-sf-roos-comparison-resolution-uniqueness",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-strict-roos-derivation",
+    "def-weil-strict-roos-model",
     "lem-sf-strict-roos-derived-limit-comparison",
-    "lem-pur-exact-derived-mate",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-pbc-exact-products-roos-comparison",
-    "lem-weil-pbc-exact-adjoint-tower-models",
-    "lem-sf-roos-comparison-resolution-uniqueness"
+    "lem-weil-pbc-exact-adjoint-tower-models"
    ],
    "elementary": false
   },
   {
-   "text": "The final immersion_completed_pullback_comparison remains its original named hole. Its retained argument applies intrinsic-to-tower completeness to the completion unit, uses the immersion Rlim comparison and ordinaryToCompleted_eq to make ordinary-to-completed pullback invertible, and transports the strict unit and completeness through the normalized identifications. At each finite quotient, exact inverse image preserves constructibility and the supplied interval; coefficient equivalences preserve and reflect those bounds. Assemble completeness and those finite properties into the stated integral predicate, with precisely the original interval.",
+   "text": "Uniqueness on quotient representatives and finite projections identifies completedRingIso with purCoefficientIso. The completeness-transport theorem identifies both detailed completeness predicates with intrinsic completeness in the original presentation.",
    "uses": [
-    "lem-weil-pbc-intrinsic-to-tower-complete",
+    "lem-sf-immersion-completed-pullback-coefficients",
     "lem-weil-pbc-integral-coefficient-completeness-transport",
-    "lem-weil-pbc-stratum-completion-unit-restriction",
-    "def-weil-derived-complete",
+    "def-sfb-integral-completed-coefficient-transport",
+    "def-weil-pbc-adic-lisse-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Intrinsic completeness makes the source quotient-tower completion unit invertible. ordinaryToCompleted_eq factors ordinary-to-completed pullback as inverse image of that unit followed by the invertible derived-limit mate. strictIso gives invertibility of the actual strict unit. The unit-compatible actual/intrinsic completed-pullback comparison and closure under isomorphism imply completeness of ordinary pullback. Transport it back to the detailed coefficient category.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-sf-completed-reduction-augmentation-level-unit",
+    "lem-sf-roos-comparison-resolution-uniqueness",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "def-weil-strict-roos-model",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-pbc-exact-adjoint-tower-models",
+    "lem-weil-pbc-intrinsic-to-tower-complete",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-integral-coefficient-completeness-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the source uniform interval a,b. Apply the finite-reduction theorem at each n with that interval, and combine it with completeness to obtain integral constructibility. Apply the finite theorem again with the separately supplied r,s to retain that exact bound. Finite-limit and finite-colimit preservation are existing ordinary pullback instances; products follow from immersion limit preservation.",
+   "uses": [
+    "lem-sf-immersion-finite-reduction-interval",
     "def-weil-derived-complete-integral-detailed",
-    "lem-weil-pbc-integral-detailed-finite-reduction",
-    "lem-sf-proetale-constructible-origin",
-    "lem-weil-pbc-pullback-preserves-bounded-constructible"
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-exact-pullback-interface"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-integral-coefficient-presentation-comparison",
-  "def-weil-pbc-completed-pullback",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-pbc-stratum-completion-unit-restriction",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
   "lem-cbc-completed-extension-zero-comparison",
-  "def-wf-tensor-product",
-  "def-weil-pbc-reduction-augmentation",
-  "def-weil-pbc-four-corners",
-  "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
-  "prop-weil-pbc-levelwise-truncations",
-  "lem-sf-exact-tower-augmented-counit-evaluation",
-  "lem-pur-roos-comparison-horizontal-coherence",
-  "def-weil-strict-roos-model",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-strict-roos-derivation",
-  "lem-sf-strict-roos-derived-limit-comparison",
-  "lem-pur-exact-derived-mate",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-pbc-intrinsic-to-tower-complete",
-  "lem-weil-pbc-integral-coefficient-completeness-transport",
-  "def-weil-derived-complete",
-  "def-weil-derived-complete-integral-detailed",
-  "lem-weil-pbc-integral-detailed-finite-reduction",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-pbc-pullback-preserves-bounded-constructible",
-  "lem-weil-pbc-exact-products-roos-comparison",
-  "lem-weil-pbc-exact-adjoint-tower-models",
-  "prop-weil-pbc-direct-image-limits",
-  "lem-weil-pbc-completed-pullback-reduction-coherence",
-  "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
   "lem-sf-completed-reduction-augmentation-level-unit",
-  "lem-sf-roos-comparison-resolution-uniqueness"
+  "lem-sf-roos-comparison-resolution-uniqueness",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "def-weil-strict-roos-model",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-pbc-exact-adjoint-tower-models",
+  "lem-sf-immersion-completed-pullback-coefficients",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lem-weil-pbc-intrinsic-to-tower-complete",
+  "def-weil-pbc-completed-pullback",
+  "lem-sf-immersion-finite-reduction-interval",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-exact-pullback-interface"
  ],
  "proof_origin": {
-  "by": "C4",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-  "place": "Localization Step 6, finite projection compatibility: evaluation of the derived adjunction counit, K-flat scalar-unit normalization and naturality of strict tower transitions. The existing rlimComparison_roos and immersion_completed_pullback_comparison holes remain."
+  "place": "Localization proof, returned integral Step 6: ordinary immersion inverse image, strict quotient towers and finite constructibility.",
+  "by": "C4",
+  "note": "Repair of returned ddea060962c: restore strictIso_exists through roosRlim verbatim to the item and retain their actual generic dependencies. The final theorem still has complete proofs of exactness, representative transfer, completeness, strict-unit invertibility and uniform-interval assembly from the unchanged Roos obligation and the one finite-level split."
  },
  "mathlib_searches": [
   {
@@ -329,27 +306,6 @@
   "module": "Sheaf.Paper.SfImmersionCompletedPullbackComparison",
   "declaration": "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.immersion_completed_pullback_comparison",
   "declarations": [
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv_exists",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finiteRingIso",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso_exists",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.transport",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleObj_eq",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleObj_eq_naturality",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleIso",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso_exists",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finiteComparison",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.restrictedReduction",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.reductionUnit",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.reductionTransition",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.restrictedComparison",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finite_compatibility",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleTowerEvaluation_eq",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.towerEvaluationIso",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedProjection",
-   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedProjection_compatibility",
    "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.strictIso_exists",
    "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.strictIso",
    "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.actualCompletedProjection",
@@ -380,7 +336,7 @@
   "by": "Q53",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The item is stated jointly by the main theorem, finiteComparison, finite_compatibility, completedProjection_compatibility, actualCompletedProjection_compatibility, strictIso_exists, ordinaryToCompleted_eq and rlimComparison_roos. Other declarations supply their canonical coefficient and strict-Roos normalization, with choices only from unique characterizations. The base statement, dependencies and split_report are retained verbatim."
+  "note": "The original strict completion and Roos constructions remain in the item, with their declaration records restored. Coefficient and finite normalization constructions are reexported from SfImmersionCompletedPullbackCoreA. The original Roos comparison hole is retained, and the final theorem is proved from it and one finite-reduction preservation statement."
  },
  "lean_audit": {
   "master": {
@@ -397,11 +353,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-37045",
   "group": "C4",
-  "result": "pass",
-  "landing": "20261027T112325-L-1570997",
+  "result": "fix",
+  "landing": "20261027T180511-L-3867707",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: published item vs delivered CoreA + item (CoreA = verbatim lines 1-448; strict/Roos block verbatim; only the main theorem's proof is new); new hole vs Stratification/IsConstructible preimage (true); 10 direct importers compiled against the sandbox build, all OK"
  }
 }

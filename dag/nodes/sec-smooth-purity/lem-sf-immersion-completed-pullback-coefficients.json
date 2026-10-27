@@ -1,0 +1,181 @@
+{
+ "id": "lem-sf-immersion-completed-pullback-coefficients",
+ "kind": "statement",
+ "title": "Canonical coefficient identifications and finite projections of immersion pullback",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbb Q_\\ell$, its integral adic datum $d$, schemes $X,Y$ and $f:Y\\to X$. Quotient representatives determine unique finite coefficient identifications; compatibility with every finite projection determines the completed coefficient identification. Ordinary resolving pullback is canonically isomorphic to exact termwise inverse image, with its original universal counit. The finite tensor comparisons respect scalar-extension units, every quotient transition and quotient composition. Under derived tower evaluation, every finite projection of completed pullback carries the specified completion unit to pullback of the finite scalar unit; the projections respect all quotient transitions. The attached declarations are the original coefficient, ordinary, finite comparison and projection constructions of the parent node.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization proof, returned integral Step 6: ordinary immersion inverse image, strict quotient towers and finite constructibility."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-complete",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Quotient induction supplies the unique quotientEquiv on the specified representatives. IntegralCoefficientPresentation.comparison supplies completedRingIso with its unique finite projection equations. Identify actual and normalized module pullback; uniqueness of the universal left-derived pair gives derivedIso with the counit equation.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-sf-roos-comparison-resolution-uniqueness",
+    "lem-cbc-completed-extension-zero-comparison",
+    "def-weil-pbc-exact-pullback-interface",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing generic finite-comparison normalization to the integral adic datum. Its scalar unit equation, transition equation and quotient cocycle give finite_compatibility. The specified strict tower evaluation identifies each level with the restricted scalar reduction.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sf-completed-reduction-augmentation-level-unit",
+    "lem-weil-pbc-stratum-completion-unit-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For completedProjection_compatibility, evaluate the constant/limit counit on the pulled reduction augmentation. The adjunction triangle identity identifies the finite projection. Apply the normalized K-flat augmentation-unit equation and descend by naturality. For transitions use the derived-limit projection transition equation, ExactTowerAugmentedCounit.interchange_transition and the generic evaluation transition equation, then cancel the finite evaluation isomorphisms.",
+   "uses": [
+    "lem-sf-exact-tower-augmented-counit-evaluation",
+    "lem-sf-completed-reduction-augmentation-level-unit",
+    "lem-weil-pbc-completed-pullback-reduction-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-sf-roos-comparison-resolution-uniqueness",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sf-completed-reduction-augmentation-level-unit",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "lem-sf-exact-tower-augmented-counit-evaluation",
+  "lem-weil-pbc-completed-pullback-reduction-coherence",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-weil-pbc-exact-pullback-interface",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization proof, returned integral Step 6: ordinary immersion inverse image, strict quotient towers and finite constructibility.",
+  "by": "worker",
+  "note": "C4: source argument specialized and categorical assembly made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact inverse image preserves constructible finite coefficient complexes and cohomological bounds",
+   "results": "Scheme.Hom.isConstructible_preimage and topological constructibility lemmas.",
+   "date": "2026-10-27",
+   "verdict": "No normalized derived coefficient comparison; reuse project constituent declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact countable product preserving functor commutes with derived inverse limit of towers",
+   "results": "CountableAB4Star.of_countableAB5Star; SequentialProduct.functorMap_commSq.",
+   "date": "2026-10-27",
+   "verdict": "No full match for the specified coefficient presentations and normalized mate."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.?complet|completedPullback",
+   "results": "msearch grep: OK, zero hits. Separate local rg of Mathlib and the project found the existing normalized coefficient, finite pullback and Roos APIs recorded in proof_deps.",
+   "date": "2026-10-27",
+   "verdict": "Reuse proved constructions; isolate only the mate equality and one finite-reduction consequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfImmersionCompletedPullbackComparison",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Localization proof, returned integral Step 6: ordinary immersion inverse image, strict quotient towers and finite constructibility.",
+   "via": [
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfImmersionCompletedPullbackCoreA",
+  "file": "lean/Sheaf/Paper/SfImmersionCompletedPullbackCoreA.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedProjection_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv_exists",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finiteRingIso",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso_exists",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.transport",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleObj_eq",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleObj_eq_naturality",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleIso",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso_exists",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finiteComparison",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.restrictedReduction",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.reductionUnit",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.reductionTransition",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.restrictedComparison",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.finite_compatibility",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.moduleTowerEvaluation_eq",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.towerEvaluationIso",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedProjection",
+   "AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedProjection_compatibility"
+  ],
+  "statement": "theorem completedProjection_compatibility : (∀ (K : PbcCompletedDerived X (pbcIntegralDatum l E)) (n : ℕ), (pbcIntegralDatum l E).ordinaryToCompleted f K ≫ completedProjection l E f K n = ((pbcIntegralDatum l E).pull f).map ((reductionUnit l E X n).app K)) ∧ (∀ (K : PbcCompletedDerived X (pbcIntegralDatum l E)) (b a : ℕ) (h : a ≤ b), completedProjection l E f K b ≫ ((pbcIntegralDatum l E).pull f).map (reductionTransition l E X b a h K) = completedProjection l E f K a)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-37045",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180511-L-3867707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-37045",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180511-L-3867707",
+  "kind": "interface",
+  "note": "independent cc review: published item vs delivered CoreA + item (CoreA = verbatim lines 1-448; strict/Roos block verbatim; only the main theorem's proof is new); new hole vs Stratification/IsConstructible preimage (true); 10 direct importers compiled against the sandbox build, all OK"
+ }
+}
