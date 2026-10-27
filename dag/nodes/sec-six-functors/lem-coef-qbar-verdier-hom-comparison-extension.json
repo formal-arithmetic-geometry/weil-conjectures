@@ -1,0 +1,140 @@
+{
+ "id": "lem-coef-qbar-verdier-hom-comparison-extension",
+ "kind": "lemma",
+ "title": "The explicit dual-to-Hom components commute with extension of the field of definition",
+ "statement": "theorem component_extension (B : Duality D l hl Ω X)\n    (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    (L : Index l Ω) (h : K.stage ≤ L) :\n    B.duality.dual.map ((stageSystem l Ω X).isoToStage K h).hom.op ≫\n        (component l Ω X D hl B K).hom =\n      (component l Ω X D hl B ((inclusion L).obj (K.toStage h))).hom ≫\n        (homDual l Ω X B.omega (fun M ↦ allPairs l Ω X D hl B.finite M B.omega)).map\n          ((stageSystem l Ω X).isoToStage K h).hom.op",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient-transport paragraph; retained thm-coef-qbar-verdier proof step 5, finite Hom identification and compatibility with scalar extension, expanded in lem-coef-qbar-verdier-internal-hom-comparison."
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-coef-qbar-verdier-hom-comparison-components"
+ ],
+ "proof": [
+  {
+   "text": "Use the duality and omega scalar equations from DualityProperties to replace transport of the two recorded inclusion comparisons by the finite beta and omega maps. betaNormalized and ExtensionProperties identify the former with the normalized rational comparison.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "lem-coef-integral-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite HomIdentification evaluation and integral_evaluation equations, with rationalHom_identifications and the specified Hom scalar evaluation square, identify both transported finite comparisons as the transpose of the same scalar-extended evaluation. Injectivity of the finite tensor-Hom adjunction gives equality. The specified identity and tower equations cancel the self-transition unitors in stageHomInclusion. Apply inclusion L and the canonical inclusion-transition isomorphisms to obtain naturality along isoToStage.",
+   "uses": [
+    "lem-sf-rational-hom-identifications",
+    "lem-zl-specified-hom-scalar-evaluation",
+    "def-coef-qbar-verdier-hom-comparison-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-qbar-verdier-hom-comparison-components",
+  "def-sf-common-stage-verdier-data",
+  "lem-coef-integral-finite-extension",
+  "lem-sf-rational-hom-identifications",
+  "lem-zl-specified-hom-scalar-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient-transport paragraph; retained thm-coef-qbar-verdier proof step 5, finite Hom identification and compatibility with scalar extension, expanded in lem-coef-qbar-verdier-internal-hom-comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NatIso.ofComponents|natIso.*(desc|stage)|iso.*lift",
+   "results": "{\"n_hits\": 25, \"top\": [\"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"Mathlib/CategoryTheory/UnivLE.lean\", \"Mathlib/CategoryTheory/UnivLE.lean\", \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"Mathlib/CategoryTheory/DifferentialObject.lean\"], \"note\": \"\", \"digest\": \"47f7a1bd5eb3ecbd\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.NatIso.ofComponents\", \"CategoryTheory.NatIso.ofComponents.app\", \"CategoryTheory.NatIso.ofComponents_hom_app\", \"CategoryTheory.NatIso.ofComponents_inv_app\", \"CategoryTheory.opOpEquivalence_counitIso\", \"CategoryTheory.opOpEquivalence_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_counitIso\"], \"note\": \"\", \"digest\": \"d0d45c50c87b1b36\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between functors on a filtered colimit category is determined by coherent natural isomorphisms on the finite stages",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"CategoryTheory.Limits.HasColimit.isoOfNatIso_ι_hom\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\", \"CategoryTheory.Limits.HasColimit.isoOfNatIso_ι_inv\", \"CategoryTheory.Limits.IndObjectPresentation.extend\"], \"note\": \"\", \"digest\": \"9b2aa9f154efeec8\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality to internal Hom comparison commutes with extension of the finite coefficient field of a representative",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Abelian.Ext.homEquiv\", \"CategoryTheory.Abelian.Ext.homLinearEquiv_symm_apply\", \"CategoryTheory.Abelian.Ext.homAddEquiv\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"FDRep.dualTensorIsoLinHom\", \"CategoryTheory.Abelian.Ext.smul_hom\", \"LightCondensed.ihomPoints\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\"], \"note\": \"\", \"digest\": \"3a1dba6ac4dc24d7\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomComparison",
+  "date": "2026-10-28",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Retained proof step 5: the finite Hom comparisons and their scalar square before descent to arbitrary common-stage morphisms.",
+   "via": [
+    "lem-coef-qbar-verdier-internal-hom-comparison",
+    "lem-coef-qbar-verdier-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierHomComparisonExtension",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierHomComparisonExtension.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.HomComparison.component_extension",
+  "statement": "theorem component_extension (B : Duality D l hl Ω X)\n    (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    (L : Index l Ω) (h : K.stage ≤ L) :\n    B.duality.dual.map ((stageSystem l Ω X).isoToStage K h).hom.op ≫\n        (component l Ω X D hl B K).hom =\n      (component l Ω X D hl B ((inclusion L).obj (K.toStage h))).hom ≫\n        (homDual l Ω X B.omega (fun M ↦ allPairs l Ω X D hl B.finite M B.omega)).map\n          ((stageSystem l Ω X).isoToStage K h).hom.op",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomComparison",
+  "worker": "stage3",
+  "summary": "Isolates only the scalar square for the already constructed, finite-stage-natural comparison. No arbitrary morphism and no existential isomorphism remains in this statement.",
+  "blueprint": "Retained thm-coef-qbar-verdier step 5, scalar-compatibility part.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-specified-hom-scalar-evaluation",
+    "why": "Uses only the generic normalized rational internal-Hom scalar evaluation and identity/tower equations, not any geometric purity argument of that unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261027T180520-L-3869565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261027T180520-L-3869565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

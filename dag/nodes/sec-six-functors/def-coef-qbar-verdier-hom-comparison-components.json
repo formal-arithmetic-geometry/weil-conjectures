@@ -1,0 +1,139 @@
+{
+ "id": "def-coef-qbar-verdier-hom-comparison-components",
+ "kind": "definition",
+ "title": "Explicit finite-stage dual-to-Hom comparisons and their components",
+ "statement": "For a finite-field datum D, prime l distinct from its characteristic, an independently sized algebraic closure Ω of Padic l, and a separated finite-type scheme X over Spec D.k, use the Duality record of def-sf-common-stage-verdier-data and the actual internal Hom of def-weil-derived-pullback-tensor-hom. Construct HomComparison.localComparison E as the natural isomorphism from inclusion(E).op followed by B.duality.dual to inclusion(E).op followed by homDual(B.omega). Invert B.comparison E, include the finite HomIdentification.duality, compare finite and common-stage internal Hom using the actual scalar self unitor, and map B.omegaComparison E in the second Hom variable. Define HomComparison.component B K by evaluation at the literal stage K.stage and object K.obj. These are concrete isomorphisms and are natural for every arrow included from a single finite stage; no scalar-extension naturality is included in this definition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient-transport paragraph; retained thm-coef-qbar-verdier proof step 5, finite Hom identification and compatibility with scalar extension, expanded in lem-coef-qbar-verdier-internal-hom-comparison."
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "The common-stage internal-Hom representative formula gives homToStage_naturality after factoring its output representative through isoToStage and cancelling the target comparison. Apply this at E itself: the compositum E with E lies in E. Remove both repeated-stage transitions with the actual scalar unitor, obtaining the natural isomorphism stageHomInclusion.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite HomIdentification supplies closure on all pairs and a natural finite dual-to-Hom comparison. Compose its included isomorphism with stageHomInclusion, the inverse B.comparison, and internal-Hom postcomposition with B.omegaComparison. Functoriality proves naturality of the last factor. Evaluate this natural isomorphism at K.stage and K.obj. Naturality at an included finite-stage arrow is the naturality of that same isomorphism.",
+   "uses": [
+    "def-sf-common-stage-verdier-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-common-stage-verdier-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient-transport paragraph; retained thm-coef-qbar-verdier proof step 5, finite Hom identification and compatibility with scalar extension, expanded in lem-coef-qbar-verdier-internal-hom-comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NatIso.ofComponents|natIso.*(desc|stage)|iso.*lift",
+   "results": "{\"n_hits\": 25, \"top\": [\"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"Mathlib/CategoryTheory/UnivLE.lean\", \"Mathlib/CategoryTheory/UnivLE.lean\", \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"Mathlib/CategoryTheory/DifferentialObject.lean\"], \"note\": \"\", \"digest\": \"47f7a1bd5eb3ecbd\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.NatIso.ofComponents\", \"CategoryTheory.NatIso.ofComponents.app\", \"CategoryTheory.NatIso.ofComponents_hom_app\", \"CategoryTheory.NatIso.ofComponents_inv_app\", \"CategoryTheory.opOpEquivalence_counitIso\", \"CategoryTheory.opOpEquivalence_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_counitIso\"], \"note\": \"\", \"digest\": \"d0d45c50c87b1b36\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between functors on a filtered colimit category is determined by coherent natural isomorphisms on the finite stages",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"CategoryTheory.Limits.HasColimit.isoOfNatIso_ι_hom\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq\", \"CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'\", \"CategoryTheory.Limits.HasColimit.isoOfNatIso_ι_inv\", \"CategoryTheory.Limits.IndObjectPresentation.extend\"], \"note\": \"\", \"digest\": \"9b2aa9f154efeec8\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered common-stage category internal Hom restricts at each finite coefficient field to the finite-stage internal Hom via its scalar unitor",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.MonoidalClosed.internalHom\", \"CategoryTheory.internalHom\", \"CategoryTheory.ihom\", \"FGModuleCat.ihom_obj\", \"CategoryTheory.Closed\", \"CategoryTheory.MonoidalClosed.internalHom_obj\", \"CategoryTheory.ObjectProperty.ihom_map_hom\", \"CategoryTheory.MonoidalClosed.unitNatIso\"], \"note\": \"\", \"digest\": \"b766a82c73cf1758\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for this project-specific common-stage comparison. Reuse the existing natural-isomorphism and functoriality APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomComparison",
+  "date": "2026-10-28",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Retained proof step 5: the finite Hom comparisons and their scalar square before descent to arbitrary common-stage morphisms.",
+   "via": [
+    "lem-coef-qbar-verdier-internal-hom-comparison",
+    "lem-coef-qbar-verdier-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierHomComparisonComponents",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierHomComparisonComponents.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.HomComparison.component",
+  "statement": "def component (B : Duality D l hl Ω X)\n    (K : generalAlgebraicallyClosedConstructibleCategory l Ω X) :\n    B.duality.dual.obj (op K) ≅\n      (homDual l Ω X B.omega (fun K ↦ allPairs l Ω X D hl B.finite K B.omega)).obj\n        (op K)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.HomComparison.homToStage",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.homToStage_naturality",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.allPairs",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.stagePairs",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.stageHom",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.selfCompositum_le",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.stageSelf",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.stageToSelf",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.stageUnit",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.stageSelfIso",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.stageHomInclusion",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.localComparison",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.component",
+   "WeilConjectures.CoefQbarVerdier.HomComparison.component_naturality_stage"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261027T180520-L-3869565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261027T180520-L-3869565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
