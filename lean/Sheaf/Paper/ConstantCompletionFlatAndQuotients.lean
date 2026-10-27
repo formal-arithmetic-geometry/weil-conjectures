@@ -55,6 +55,9 @@ import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import Sheaf.Paper.ConstantCompletionBasic
+import Sheaf.Paper.ConstantCompletionFlatAndQuotientsFlatness
+import Sheaf.Paper.ConstantCompletionFlatAndQuotientsProjection
+import Sheaf.Paper.ConstantCompletionFlatAndQuotientsQuotient
 
 /-!
 # Constant coefficient completion: FlatAndQuotients
@@ -107,6 +110,7 @@ theorem flat_and_quotients (J : GrothendieckTopology C) (A : Type u) [CommRing A
       RingHom.ker ((quotient J A I n).hom.app (op U)).hom =
         Ideal.span (Set.range (fun a : ↥(I ^ (n + 1)) ↦
           (constantSection (J := J) (a : A)).val (op U)))) := by
-  sorry
+  exact ⟨flat_and_quotients_flatness J A I, flat_and_quotients_projection J A I,
+    flat_and_quotients_quotient J A I⟩
 
 end CategoryTheory.ConstantCompletion
