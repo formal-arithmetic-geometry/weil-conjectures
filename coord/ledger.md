@@ -20031,3 +20031,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:01 L: merged deliver/K4/Sheaf.Paper.EtaleOrderedOpenProjectionScalar (stage 3; reviewer PASS; first push; landing 20261027T210124-L-1659963 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:01 L: merged deliver/K4/Sheaf.Paper.LisseFiniteQuotientEtaleOriginCore (stage 3; reviewer PASS; first push; landing 20261027T210125-L-1660232 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 21:01 L: merged deliver/K5/Sheaf.SixFunctors.ProperOpenLambdaOrdinarySquare (stage 3; reviewer PASS; first push; landing 20261027T210126-L-1660723 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 21:01 L: merged deliver/K6/Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistCompositionLaw (stage 3; reviewer PASS; first push; landing 20261027T210128-L-1660937 (interface); batch 20261027T205736; modules 1; new nodes 0)
