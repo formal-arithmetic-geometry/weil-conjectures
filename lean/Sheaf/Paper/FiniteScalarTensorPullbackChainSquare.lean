@@ -5,12 +5,8 @@ Authors: SHEAF group B3
 -/
 module
 
-public import Sheaf.Paper.FiniteScalarOrdinaryPullbackComparison
-public import Sheaf.Paper.FiniteScalarComplexTensorPullback
-public import Sheaf.Paper.FiniteScalarRepresentativeTotalRealization
-public import Sheaf.Paper.RepresentativeTensorOrdinaryPullbackLaw
+public import Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent
 import Sheaf.Algebra.Homology.FlatTermKFlatFunctor
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-! # The scalar tensor square before localization
 
@@ -115,6 +111,10 @@ theorem finiteScalarTensorPullback_chain_square
         (ModuleCat.{u + 1} (ULift.{u + 1} R)) p)
       (finiteScalarRepresentativeTotalRealization R Y)
       (finiteScalarRepresentativeTotalRealization R X)
-      (finiteScalarIntrinsicComplexTensorPullback R p) := by sorry
+      (finiteScalarIntrinsicComplexTensorPullback R p) := by
+  intro P Q
+  apply HomologicalComplex.hom_ext _ _
+  intro n
+  exact finiteScalarTensorPullback_chain_square_component R p P Q n
 
 end WeilConjectures

@@ -1,0 +1,102 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-pullback-chain-square-component",
+ "kind": "statement",
+ "title": "Degreewise scalar tensor pullback chain square",
+ "statement": "For finite R, p:X→Y, complexes P,Q and degree n, the two chain maps of the scalar tensor pullback square have equal nth components.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 00YV, 07A4 and 07A6; signed totalization component"
+ },
+ "stmt_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sf-finite-scalar-complex-tensor-pullback",
+  "def-sf-finite-scalar-representative-total-realization",
+  "def-sf-representative-tensor-ordinary-pullback-law"
+ ],
+ "proof": [
+  {
+   "text": "Expand both signed-total maps on the coproduct injection in degree n. The two resulting summand maps are the same ordinary scalar tensor pullback square, with the same Koszul sign.",
+   "uses": [
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "lem-sf-finite-scalar-tensor-complex",
+    "def-sf-finite-scalar-complex-tensor-pullback",
+    "def-sf-finite-scalar-representative-total-realization",
+    "def-sf-representative-tensor-ordinary-pullback-law"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sf-finite-scalar-complex-tensor-pullback",
+  "def-sf-finite-scalar-representative-total-realization",
+  "def-sf-representative-tensor-ordinary-pullback-law"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "signed totalization component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HomologicalComplex.hom_ext",
+   "results": "Degreewise extensionality is the standard final step.",
+   "date": "2026-10-28",
+   "verdict": "Use the component equation to prove the chain-map equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquare",
+  "date": "2026-10-28",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-chain-square",
+   "place": "signed totalization component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquareComponent",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackChainSquareComponent.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullback_chain_square_component",
+  "statement": "theorem finiteScalarTensorPullback_chain_square_component\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) (n : ℤ) :\n    (((((sfIntrinsicModuleEquivalence X R).functor.mapHomologicalComplex (.up ℤ)).map\n        ((finiteScalarFixedComplexTensorPullbackForCoefficients\n          (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).app (P, Q))) ≫\n      (finiteScalarRepresentativeTotalRealization R X).app\n        (((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex\n          (.up ℤ)).obj P,\n         ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex\n          (.up ℤ)).obj Q) ≫\n      (uncurry.obj ((proEtaleOrdinaryTensor X (proEtaleConstantRing X R)).map₂HomologicalComplex\n        (.up ℤ) (.up ℤ) (.up ℤ))).map\n        (Prod.mkHom ((finiteScalarComplexPullbackComparison R p).inv.app P)\n          ((finiteScalarComplexPullbackComparison R p).inv.app Q))).f n) =\n    (((finiteScalarComplexPullbackComparison R p).inv.app\n        ((finiteScalarRepresentativeTotalTensor\n          (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R)))).obj (P, Q)) ≫\n      ((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n          (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n        (.up ℤ)).map ((finiteScalarRepresentativeTotalRealization R Y).app (P, Q)) ≫\n      (finiteScalarIntrinsicComplexTensorPullback R p).app\n        (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P,\n         ((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q)).f n)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T234328-L-101782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T234328-L-101782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
