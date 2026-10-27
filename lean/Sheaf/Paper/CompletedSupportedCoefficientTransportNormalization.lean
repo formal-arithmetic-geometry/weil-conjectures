@@ -21,6 +21,8 @@ transport argument.  It is independent of the derived acyclicity argument.
 set_option autoImplicit false
 set_option genSizeOf false
 set_option genInjectivity false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -62,6 +64,21 @@ theorem completedSupportedCoefficient_transport_normalization
         (s.ordinary.app (diagonalCompletedSource l Y)) ≪≫
         ((CondensedRing.lowerStar
           (Profinite.continuousMapRingObj.{u} ℤ_[l]) f).mapIso i)) a.over_eq := by
+  dsimp [SupportNormalization]
   sorry
+
+private theorem normalized_inverse_cancel
+    {C D : Type*} [Category C] [Category D]
+    (H : C ⥤ D) {A B T : C} {S : D}
+    (u : A ≅ B) (v : S ≅ H.obj B)
+    (o : S ⟶ H.obj A) (w : A ⟶ T)
+    (h : o ≫ H.map u.hom = v.hom) :
+    v.inv ≫ o ≫ H.map w = H.map (u.inv ≫ w) := by
+  have ho : v.inv ≫ o = H.map u.inv := by
+    apply (cancel_mono (H.map u.hom)).mp
+    rw [Category.assoc, h, v.inv_hom_id, ← H.map_comp,
+      u.inv_hom_id, H.map_id]
+  rw [H.map_comp, ← Category.assoc, ho]
+
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
