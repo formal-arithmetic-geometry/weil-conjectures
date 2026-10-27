@@ -20319,3 +20319,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:40 L: merged deliver/K6/Sheaf.Paper.IntegralSitePullbackIntegerEndpoint (stage 3; reviewer PASS; first push; landing 20261027T234042-L-4174822 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:40 L: merged deliver/K7/Sheaf.Paper.IntegralSitePullbackUnitsEndpoint (stage 3; reviewer PASS; first push; landing 20261027T234043-L-4175719 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:40 L: merged deliver/K8/Sheaf.Paper.CompactSupportRealizationCoordinates (stage 3; reviewer PASS; first push; landing 20261027T234045-L-4176497 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:40 L: merged deliver/K8/Sheaf.Paper.NativeWeilTensorRingedKFlatFlat (stage 3; reviewer PASS; first push; landing 20261027T234046-L-4177423 (interface); batch 20261027T233735; modules 2; new nodes 0; change records: coord/changes/native-weil-ringed-kflat-adjunction.md)
