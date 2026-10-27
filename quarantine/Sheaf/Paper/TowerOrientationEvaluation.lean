@@ -113,6 +113,12 @@ private theorem word_pull {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
       (SpTowerP1.pullWord l E n b g gc K) (SpTowerP1.pullWord l E n b g gc L)
       ((SpTowerShriek.pull l E b g).map v)
       ((Etale.ordinaryFinitePullback (SpTowerP1.levelRing l E n) f).map v') := by
+  letI : Finite (SpTowerShriek.R l E n) := b.finite n
+  letI : (SpTowerP1.realization l E n X).Additive := SpTowerP1.realizationAdditive l E n X
+  letI : PreservesFiniteLimits (SpTowerP1.realization l E n X) :=
+    SpTowerP1.realizationLimits l E n X
+  letI : PreservesFiniteColimits (SpTowerP1.realization l E n X) :=
+    SpTowerP1.realizationColimits l E n X
   haveI := h.1
   haveI := h.2.1
   refine ⟨by dsimp only [SpTowerP1.pullWord]; infer_instance,
