@@ -18,8 +18,8 @@ public import WeilConjectures.Tactic.ExactModProofs
 
 # Gabber's Künneth formula for nearby cycles: global sections
 
-Let `M`, `N` be models of finite type over the strictly henselian trait `S = Spec k'⟦t⟧`
-(`k'` separably closed) along proper structure morphisms `q_M`, `q_N`, and let `P` be their
+Let `M`, `N` be models of finite type over the henselian trait `S = Spec k'⟦t⟧`
+over an arbitrary field `k'` along proper structure morphisms `q_M`, `q_N`, and let `P` be their
 product over the trait. This file proves the global-sections step (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4)) of Illusie's proof of Gabber's Künneth
 formula: the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the
@@ -203,8 +203,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] {X : Scheme.{u}}
 
 /-- **The proper exchange for the structure morphism** (blueprint
 `det-sp-nearby-cycles-exchanges` (2), for the proper morphism `f = q : 𝒳 ⟶ S` to the trait; SGA 7
-XIII (2.1.7.1)): for a model `M` of finite type over the strictly henselian trait along a proper
-`q` and a bounded constructible complex `C₀` on the total space, the pushforward exchange
+XIII (2.1.7.1)): for a model `M` of finite type over the henselian trait `Spec k'⟦t⟧` along a
+proper `q` and a bounded constructible complex `C₀` on the total space, the pushforward exchange
 `χ : Ψ_S Rg_* (Lj^* C₀) ⟶ R(q_s)_* Ψ_M (Lj^* C₀)` of the structure morphism
 `(q, g) : M ⟶ S` (`NearbyCyclesModel.IsTraitModelOver.toTraitGeneric`) is an isomorphism. Here
 `Lj^* C₀` is the pullback to the geometric generic fibre of the complex `C₀|_{𝒳_η}` on the
@@ -427,8 +427,8 @@ set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): let `P` be the product over the strictly henselian trait of models
-`M`, `N` of finite type along proper structure morphisms `q_M`, `q_N`, whose projections are
+locale*, proof of Thm. 4.7): let `P` be the product over the henselian trait `Spec k'⟦t⟧` of
+models `M`, `N` of finite type along proper structure morphisms `q_M`, `q_N`, whose projections are
 compatible with the structure morphisms `g` of the geometric generic fibres to `Spec Ω`. For
 bounded constructible `A`, `B` (whose nearby cycles are bounded constructible, Deligne's
 finiteness theorem), the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles

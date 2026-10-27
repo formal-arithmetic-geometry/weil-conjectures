@@ -47,7 +47,14 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
 
 /-- The invertibility of the projection morphism `G A ⊗ B ⟶ G (A ⊗ F B)` only depends on `A` up
-to isomorphism (`projectionMorphism_natural_left`). -/
+to isomorphism, by the naturality square (`projectionMorphism_natural_left`)
+```
+G A ⊗ B ──projection morphism──▶ G (A ⊗ F B)
+   │ G φ ▷ B                        │ G (φ ▷ F B)
+   ▼                                ▼
+G A' ⊗ B ─projection morphism──▶ G (A' ⊗ F B)
+```
+whose vertical arrows are isomorphisms. -/
 lemma isIso_projectionMorphism_iff_of_iso {A A' : C} (φ : A ≅ A') (B : D) :
     IsIso (adj.projectionMorphism A B) ↔ IsIso (adj.projectionMorphism A' B) := by
   have h := adj.projectionMorphism_natural_left φ.hom B
@@ -62,7 +69,14 @@ lemma isIso_projectionMorphism_iff_of_iso {A A' : C} (φ : A ≅ A') (B : D) :
 variable [BraidedCategory C] [BraidedCategory D]
 
 /-- For `F` compatible with the braidings, the projection morphism at `(A, B)` is an isomorphism
-if the left projection morphism at `(B, A)` is (`leftProjectionMorphism_eq`). -/
+if the left projection morphism at `(B, A)` is, by the square (`leftProjectionMorphism_eq`)
+```
+B ⊗ G A ──left projection morphism──▶ G (F B ⊗ A)
+   │ β                                   ▲ G β⁻¹
+   ▼                                     │
+G A ⊗ B ───projection morphism──────▶ G (A ⊗ F B)
+```
+whose vertical arrows are isomorphisms. -/
 lemma isIso_projectionMorphism_of_isIso_leftProjectionMorphism
     (h : ∀ X Y : D, δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom = F.map (β_ X Y).hom ≫ δ F Y X)
     (A : C) (B : D) [IsIso (adj.leftProjectionMorphism B A)] :

@@ -5,12 +5,15 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.KunnethTranspose
+public import WeilConjectures.CategoryTheory.ObjectProperty.FullSubcategoryEqToHom
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.TraceFormula.ProperKunneth
 public import WeilConjectures.TraceFormula.GenericBaseChangePullback
 public import WeilConjectures.TraceFormula.OrdinaryKunnethProjection
 public import WeilConjectures.TraceFormula.FieldDualizable
+public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
@@ -57,9 +60,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-
-
-
 set_option linter.flexible false in
 /-- The counits of the restricted adjunction `Lf^* ⊣ Rf_*` on `Dᵇc` are those of the ambient
 adjunction. -/
@@ -79,82 +79,10 @@ lemma counit_app_hom_boundedConstructibleUpperStarLowerStarAdjunction {Y : Over 
     ObjectProperty.liftCompιIso]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
-end AlgebraicGeometry.ProEtale.CondensedRing
-
-namespace CategoryTheory.Adjunction
-
-variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
-  {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
-
-/-- A tensor product of morphisms `bᵢ : Uᵢ ⟶ G Mᵢ` followed by a lax tensor map `μ` of `G` whose
-transpose is the tensor product of the counits is the transpose of the oplax structure of `F`
-followed by the tensor product of the transposes `cᵢ` of the `bᵢ`. -/
-lemma tensorHom_comp_eq_homEquiv_δ (μ : ∀ M N, G.obj M ⊗ G.obj N ⟶ G.obj (M ⊗ N))
-    (hμ : ∀ M N, F.map (μ M N) ≫ adj.counit.app (M ⊗ N) =
-      Functor.OplaxMonoidal.δ F _ _ ≫ (adj.counit.app M ⊗ₘ adj.counit.app N))
-    {U₁ U₂ : D} {M N : C} (b₁ : U₁ ⟶ G.obj M) (b₂ : U₂ ⟶ G.obj N) (c₁ : F.obj U₁ ⟶ M)
-    (c₂ : F.obj U₂ ⟶ N) (hb₁ : F.map b₁ ≫ adj.counit.app M = c₁)
-    (hb₂ : F.map b₂ ≫ adj.counit.app N = c₂) :
-    (b₁ ⊗ₘ b₂) ≫ μ M N = adj.homEquiv _ _ (Functor.OplaxMonoidal.δ F U₁ U₂ ≫ (c₁ ⊗ₘ c₂)) := by
-  apply (adj.homEquiv _ _).symm.injective
-  rw [Equiv.symm_apply_apply, homEquiv_counit, Functor.map_comp, Category.assoc, hμ,
-    ← Functor.OplaxMonoidal.δ_natural_assoc, tensorHom_comp_tensorHom, hb₁, hb₂]
-
-section Restrict
-
-variable {P : ObjectProperty C} [P.IsMonoidal] {Q : ObjectProperty D} [Q.IsMonoidal]
-  {F' : D ⥤ C} [F'.Monoidal] {G' : C ⥤ D} (adj' : F' ⊣ G')
-  (hF : ∀ X : Q.FullSubcategory, P (F'.obj X.obj)) (hG : ∀ X : P.FullSubcategory, Q (G'.obj X.obj))
-
-/-- The Künneth transpose of the restriction of an adjunction `F ⊣ G` to full monoidal
-subcategories is the Künneth transpose of `F ⊣ G`. -/
-lemma ι_map_homEquiv_δ_tensorHom_restrictFullyFaithful {U₁ U₂ : Q.FullSubcategory}
-    {A₁ A₂ : P.FullSubcategory} (c₁ : (P.lift (Q.ι ⋙ F') hF).obj U₁ ⟶ A₁)
-    (c₂ : (P.lift (Q.ι ⋙ F') hF).obj U₂ ⟶ A₂) :
-    Q.ι.map ((adj'.restrictFullyFaithful Q.fullyFaithfulι P.fullyFaithfulι
-      (P.liftCompιIso (Q.ι ⋙ F') hF).symm (Q.liftCompιIso (P.ι ⋙ G') hG).symm).homEquiv _ _
-        (Functor.OplaxMonoidal.δ (P.lift (Q.ι ⋙ F') hF) U₁ U₂ ≫ (c₁ ⊗ₘ c₂))) =
-      adj'.homEquiv _ _
-        (Functor.OplaxMonoidal.δ F' U₁.obj U₂.obj ≫ (P.ι.map c₁ ⊗ₘ P.ι.map c₂)) := by
-  rw [restrictFullyFaithful_homEquiv_apply, Functor.FullyFaithful.map_preimage, homEquiv_unit]
-  simp only [ObjectProperty.liftCompιIso, Iso.symm_hom, Iso.refl_inv, Functor.map_comp]
-  erw [Functor.map_id, Category.id_comp, Category.comp_id]
-  rfl
-
-end Restrict
-
-end CategoryTheory.Adjunction
-
-namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-open Scheme
-
-attribute [-instance] monoidalCategory_boundedConstructible
-  ObjectProperty.instMonoidalCategoryStructFullSubcategory
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
-  {P P' X Y : Over (Spec (.of k))}
+variable {P P' Y : Over (Spec (.of k))}
   [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
   [LocallyOfFiniteType P'.hom] [QuasiCompact P'.hom] [IsSeparated P'.hom]
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-/-- The underlying morphism of an `eqToHom` in a full subcategory. -/
-lemma _root_.CategoryTheory.ObjectProperty.FullSubcategory.eqToHom_hom' {C : Type*} [Category C]
-    {Q : ObjectProperty C} {K K' : Q.FullSubcategory} (h : K = K') :
-    (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
-  subst h
-  rfl
-
-/-- The inverse composition isomorphisms of the pullbacks on `Dᵇc` are the ambient ones. -/
-lemma boundedConstructibleUpperStarComp_inv_app_hom' {Z : Over (Spec (.of k))}
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (f : P ⟶ X) (g : X ⟶ Z)
-    (K : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f g).inv.app K).hom =
-      (leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left).inv.app K.obj := by
-  simp [boundedConstructibleUpperStarComp, boundedConstructibleUpperStarCompatibility,
-    ObjectProperty.liftCompιIso]
 
 /-- The transported counit of a commutative square is, on the ambient derived categories, the
 transpose of the base change morphism of the square. -/
@@ -177,7 +105,7 @@ lemma map_baseChangeMap_app_comp_counit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' �
             B.obj) := by
     rw [pullbackSquareComparison_hom_app]
     simp only [prodUpperStarCounit, ObjectProperty.FullSubcategory.comp_hom,
-      boundedConstructibleUpperStarComp_hom_app_hom, boundedConstructibleUpperStarComp_inv_app_hom',
+      boundedConstructibleUpperStarComp_hom_app_hom, boundedConstructibleUpperStarComp_inv_app_hom,
       boundedConstructibleUpperStar_map_hom, ObjectProperty.FullSubcategory.eqToHom_hom',
       counit_app_hom_boundedConstructibleUpperStarLowerStarAdjunction, Category.assoc]
     rfl
@@ -300,12 +228,6 @@ lemma lowerStarKunnethMap'_eq_homEquiv (Λ : Sheaf (coherentTopology Profinite.{
   Adjunction.tensorHom_comp_eq_homEquiv_δ (derivedUpperStarLowerStarAdjunction Λ k)
     (lowerStarTensorMap' Λ k) (lowerStarTensorMap'_comp_counit Λ k) _ _ _ _ rfl rfl
 
-variable {K : Type u} [Field K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ ℓ)]
-  {X Y P : Over (Spec (.of K))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-
 end Ambient
 
 section BridgeKunneth
@@ -373,6 +295,5 @@ theorem isIso_lowerStarKunnethMap'_of_isPullback_point {X Y : Over (Spec (.of k)
   all_goals rfl
 
 end BridgeKunneth
-
 
 end AlgebraicGeometry.ProEtale.CondensedRing

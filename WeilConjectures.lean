@@ -7585,6 +7585,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.FullyFaithfulCounitLocal
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTrans
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTransRestriction
+public import WeilConjectures.CategoryTheory.Adjunction.KunnethTranspose
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommGrpBranch
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
@@ -8344,6 +8345,7 @@ public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 public import WeilConjectures.CategoryTheory.NaturalTruncationCouple
 public import WeilConjectures.CategoryTheory.NormalizedGradedFiniteKernel
 public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
+public import WeilConjectures.CategoryTheory.ObjectProperty.FullSubcategoryEqToHom
 public import WeilConjectures.CategoryTheory.ObjectProperty.LiftCommShift
 public import WeilConjectures.CategoryTheory.ObjectProperty.LiftSquareIso
 public import WeilConjectures.CategoryTheory.OpcyclesTorKernelIso
