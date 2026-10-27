@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.AlgebraicGeometry.EtaleCoordinateTraceData
+import Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoute
+import Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethRightRoute
 /-! The pre-pullback equality of the two coordinate Kunneth routes. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -15,8 +17,8 @@ variable (A : Type (u + 1)) [CommRing A]
 
 /-- The two direct-image coordinate Kunneth routes agree before applying pullback.
 Source: the mate calculation in the proof of the coordinate Kunneth factorization.
-Proof: expand both routes by the ordered projection, exchange, comparison, and
-direct comparison mate equations, then use naturality of the tensor comparison.
+Proof: identify each route, after the same composition isomorphism, with the
+canonical Kunneth map, and cancel that composition isomorphism.
 (blueprint: lem-sfb-etale-coordinate-kunneth-route-equality). -/
 theorem coordinateKunnethFactorization_route_eq [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)
@@ -31,5 +33,9 @@ theorem coordinateKunnethFactorization_route_eq [Finite A] {X Y : Scheme.{u}}
               (exchange1 A f ((pull A f).obj L)).hom ≫
             (orderedProjectionIso A (pullback.fst f f) M
               ((pull A (pullback.snd f f)).obj ((pull A f).obj L))).hom) := by
-  sorry
+  apply (cancel_mono
+    ((rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A)
+      (pullback.fst f f) f (pullback.fst f f ≫ f) rfl).hom.app _)).1
+  exact (coordinateKunneth_leftRoute_comp_kunneth A f L M).trans
+    (coordinateKunneth_rightRoute_comp_kunneth A f L M).symm
 end AlgebraicGeometry.Etale.CoordinateTrace

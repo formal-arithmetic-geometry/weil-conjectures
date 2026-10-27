@@ -1,0 +1,36 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+public import Sheaf.AlgebraicGeometry.EtaleCoordinateTraceData
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+/-! The left coordinate route is the canonical Kunneth map after composition. -/
+@[expose] public noncomputable section
+set_option autoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Functor
+namespace AlgebraicGeometry.Etale.CoordinateTrace
+variable (A : Type (u + 1)) [CommRing A]
+
+/-- The ordered-projection/comparison route identifies with the canonical Kunneth map
+after composing `R p₁_*` and `R f_*`.  This is the first mate calculation in the
+coordinate interchange argument.
+Source: the coordinate interchange calculation in
+`literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/`.
+(blueprint: lem-sfb-etale-coordinate-kunneth-left-route-comp-kunneth).
+-/
+theorem coordinateKunneth_leftRoute_comp_kunneth
+    [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
+    (L : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :
+    ((orderedProjectionIso A f ((push A f).obj M) ((pull A f).obj L)).hom ≫
+        (push A f).map (comparison A f L M).inv ≫
+          (directComparison A f).hom.app _ ) ≫
+        (rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A)
+          (pullback.fst f f) f (pullback.fst f f ≫ f) rfl).hom.app _ =
+      kunnethMap (ModuleCat.{u + 1} A) (pullback.fst f f) (pullback.snd f f)
+        f f (pullback.fst f f ≫ f) rfl (pullback.condition (f := f) (g := f)).symm
+        M ((pull A f).obj L) := by
+  sorry
+end AlgebraicGeometry.Etale.CoordinateTrace

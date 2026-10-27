@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-etale-coordinate-kunneth-left-route-comp-kunneth",
+ "kind": "statement",
+ "title": "Left coordinate route equals canonical Kunneth map after composition",
+ "statement": "theorem coordinateKunneth_leftRoute_comp_kunneth [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) : ((orderedProjectionIso A f ((push A f).obj M) ((pull A f).obj L)).hom ≫ (push A f).map (comparison A f L M).inv ≫ (directComparison A f).hom.app _) ≫ (rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A) (pullback.fst f f) f (pullback.fst f f ≫ f) rfl).hom.app _ = kunnethMap (ModuleCat.{u + 1} A) (pullback.fst f f) (pullback.snd f f) f f (pullback.fst f f ≫ f) rfl (pullback.condition (f := f) (g := f)).symm M ((pull A f).obj L)",
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, coordinate interchange calculation."
+ },
+ "proof": [
+  {
+   "text": "Expand the ordered projection, the comparison mate, and the direct-image compositor. The mate equations and the canonical tensor/base-change comparison identify the resulting composite with the adjunction definition of kunnethMap.",
+   "uses": [
+    "def-kun-kunneth-map",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-kunneth-map",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The corresponding route-to-Kunneth mate calculation."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-etale-coordinate-kunneth-route-equality",
+   "place": "The two route calculations after canonical composition.",
+   "via": [
+    "lem-sfb-etale-coordinate-kunneth-route-equality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoute",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateKunnethLeftRoute.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.coordinateKunneth_leftRoute_comp_kunneth",
+  "statement": "theorem coordinateKunneth_leftRoute_comp_kunneth [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) : ((orderedProjectionIso A f ((push A f).obj M) ((pull A f).obj L)).hom ≫ (push A f).map (comparison A f L M).inv ≫ (directComparison A f).hom.app _ ) ≫ (rightDerivedLowerStarCompIsoOfComp (ModuleCat.{u + 1} A) (pullback.fst f f) f (pullback.fst f f ≫ f) rfl).hom.app _ = kunnethMap (ModuleCat.{u + 1} A) (pullback.fst f f) (pullback.snd f f) f f (pullback.fst f f ≫ f) rfl (pullback.condition (f := f) (g := f)).symm M ((pull A f).obj L)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coordinateKunneth.*Route.*comp.*kunneth",
+   "results": "No existing specialized route-to-Kunneth declaration found.",
+   "date": "2026-10-28",
+   "verdict": "no duplicate"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T233955-L-4148228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T233955-L-4148228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
