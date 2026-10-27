@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.TowerClassCoefficients
 public import Sheaf.Paper.TowerIntegralPullbackData
 public import Sheaf.Paper.SemilinearOrdinaryInverseSystem
+import Sheaf.Paper.TowerIntegralUnitNormalizationComponents
 
 /-! # Unit normalization for integral ordinary inverse systems
 
@@ -51,6 +52,16 @@ theorem integralInverseSystem_unit_normalization (l : ℕ) [Fact l.Prime]
       (abPull f).map (integerGenerator Y (Rrings l Y) FY) ≫
           e.hom.app (coefficient Y (Rrings l Y)) ≫ FX.F.map i.hom =
         integerPull f ≫ integerGenerator X (Rrings l X) FX := by
-  sorry
+  obtain ⟨i, hi⟩ := integralInverseSystem_unit_normalization_components l f I P FY FX e
+  refine ⟨i, ?_⟩
+  apply NatTrans.ext
+  funext n
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  apply AddCommGrpCat.hom_ext
+  apply AddMonoidHom.ext
+  intro x
+  exact hi n.unop U x
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses

@@ -1,0 +1,114 @@
+{
+ "id": "lem-sp-tower-integral-unit-normalization-components",
+ "kind": "statement",
+ "title": "Pointwise normalized comparison of integral tower generators",
+ "status": "split",
+ "statement": "The Lean theorem `integralInverseSystem_unit_normalization_components` has the following statement:\n\ntheorem integralInverseSystem_unit_normalization_components (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage (Scheme.proEtaleSheafInverseImage f (Type (u + 1))) ((Rrings l Y).obj (Opposite.op n)) ((Rrings l X).obj (Opposite.op n))) (P : WeilConjectures.SemilinearSections.OrdinaryInverseSystem.{u + 1, u, u + 1} (Scheme.ProEt.topology Y) (fun n ↦ (Rrings l Y).obj (Opposite.op n)) (fun n ↦ (Rrings l Y).map (homOfLE (Nat.le_succ n)).op) (Scheme.ProEt.topology X) (Scheme.proEtaleSheafInverseImage f (Type (u + 1))) (fun n ↦ (Rrings l X).obj (Opposite.op n)) (fun n ↦ (Rrings l X).map (homOfLE (Nat.le_succ n)).op) I) (FY : Forget Y (Rrings l Y)) (FX : Forget X (Rrings l X)) (e : FY.F ⋙ abPull f ≅ P.pull ⋙ FX.F) : ∃ i : P.pull.obj (coefficient Y (Rrings l Y)) ≅ coefficient X (Rrings l X), ∀ (n : ℕ) (U : X.ProEtᵒᵖ) (x : (((abPull f).obj (integers Y)).obj (op n)).obj.obj U), (((((abPull f).map (integerGenerator Y (Rrings l Y) FY)) ≫ e.hom.app (coefficient Y (Rrings l Y))) ≫ FX.F.map i.hom).app (op n)).hom.app U x = ((integerPull f ≫ integerGenerator X (Rrings l X) FX).app (op n)).hom.app U x",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-coefficients",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-ordinary-inverse-system"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n; the coefficient-unit comparison is checked on constant integer sections."
+ },
+ "proof": [
+  {
+   "text": "Construct the coefficient isomorphism level by level from the ringUnderlying and moduleUnderlying comparisons in the algebraic inverse image and the component maps of the ordinary inverse system. The ring addition, multiplication, zero and one equations make the maps linear and send constant integer sections to the corresponding integer sections. The transition equation of the ordinary inverse system assembles the level maps, and the Forget section formulas identify their values with the displayed pointwise equality.",
+   "uses": [
+    "lem-sp-tower-integral-abelian-comparison",
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n; the coefficient-unit comparison is checked on constant integer sections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-integral-abelian-comparison",
+  "def-sp-tower-class-systems"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n; the coefficient-unit comparison is checked on constant integer sections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pointwise coefficient-unit comparison on inverse-system generators",
+   "results": "No existing declaration gives this tower-specific pointwise comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact project theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso inverse system coefficient unit generator",
+   "results": "Only generic natural-transformation extensionality; no tower-specific comparison.",
+   "date": "2026-10-28",
+   "verdict": "Generic infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized integral tower generator comparison",
+   "results": "No matching declaration.",
+   "date": "2026-10-28",
+   "verdict": "New statement needed."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerIntegralUnitNormalization",
+  "group": "J8",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-integral-unit-normalization",
+   "place": "Pointwise coefficient-unit comparison used by the categorical normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIntegralUnitNormalizationComponents",
+  "file": "lean/Sheaf/Paper/TowerIntegralUnitNormalizationComponents.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.integralInverseSystem_unit_normalization_components",
+  "statement": "theorem integralInverseSystem_unit_normalization_components (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage (Scheme.proEtaleSheafInverseImage f (Type (u + 1))) ((Rrings l Y).obj (Opposite.op n)) ((Rrings l X).obj (Opposite.op n))) (P : WeilConjectures.SemilinearSections.OrdinaryInverseSystem.{u + 1, u, u + 1} (Scheme.ProEt.topology Y) (fun n ↦ (Rrings l Y).obj (Opposite.op n)) (fun n ↦ (Rrings l Y).map (homOfLE (Nat.le_succ n)).op) (Scheme.ProEt.topology X) (Scheme.proEtaleSheafInverseImage f (Type (u + 1))) (fun n ↦ (Rrings l X).obj (Opposite.op n)) (fun n ↦ (Rrings l X).map (homOfLE (Nat.le_succ n)).op) I) (FY : Forget Y (Rrings l Y)) (FX : Forget X (Rrings l X)) (e : FY.F ⋙ abPull f ≅ P.pull ⋙ FX.F) : ∃ i : P.pull.obj (coefficient Y (Rrings l Y)) ≅ coefficient X (Rrings l X), ∀ (n : ℕ) (U : X.ProEtᵒᵖ) (x : (((abPull f).obj (integers Y)).obj (op n)).obj.obj U), (((((abPull f).map (integerGenerator Y (Rrings l Y) FY)) ≫ e.hom.app (coefficient Y (Rrings l Y))) ≫ FX.F.map i.hom).app (op n)).hom.app U x = ((integerPull f ≫ integerGenerator X (Rrings l X) FX).app (op n)).hom.app U x",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T234027-L-4165582",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T234027-L-4165582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
