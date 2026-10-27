@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-compact-object-adjunction",
+ "kind": "statement",
+ "title": "Compact objects transport along adjunctions whose right adjoint preserves coproducts",
+ "statement": "Let C and D be preadditive categories whose Hom types lie in one fixed universe v. Let F:C→D and G:D→C be adjoint functors F⊣G, with F additive and G preserving coproducts indexed by every type in Type v. Suppose s is an object of C with the following finite-support property: for every type I in Type v, family X:I→C, coproduct cocone c of X and map f:s→c.pt, there are a finite subset J of I and maps g_i:s→X_i with f=∑_{i∈J} g_i followed by the ith injection. Then F(s) has the same finite-support property in D. Neither category is required to admit every coproduct. When fixed-universe coproducts exist this is exactly compactness [def-pc-compact-object], by the canonical comparison between finite-support and direct-sum-Hom bijectivity.",
+ "stmt_deps": [
+  "def-pc-compact-object"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Triangulated/CompactBoundedHom.lean",
+  "place": "CategoryTheory.BrownRepresentability.IsCompactObj.of_adjunction, lines 56--67; compactness is the finite-support form of Stacks derived.tex, definition-compact-object"
+ },
+ "proof": [
+  {
+   "text": "For a coproduct cocone of objects X_j in D, preservation by G makes the mapped cocone a coproduct of G(X_j). Transpose a map F(s)→coproduct X_j across the adjunction. Compactness of s factors this transpose as a finite sum through the G(X_j). Transpose each summand back. Additivity of the adjunction Hom equivalence and its naturality identify the original map with the resulting finite sum through X_j. This is the existing complete source proof; no new theorem is postulated.",
+   "uses": [
+    "def-pc-compact-object"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object"
+ ],
+ "proof_origin": {
+  "by": "existing source proof",
+  "document": "lean/WeilConjectures/CategoryTheory/Triangulated/CompactBoundedHom.lean",
+  "place": "CategoryTheory.BrownRepresentability.IsCompactObj.of_adjunction, lines 56--67"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint preserves compact objects when its right adjoint preserves coproducts",
+   "results": "8 hits: CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj, CategoryTheory.Adjunction.leftAdjoint_preservesColimits, CategoryTheory.finitaryExtensive_of_reflective, CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint, CategoryTheory.Adjunction.isCardinalAccessibleCategory, CategoryTheory.RepresentablyCoflat.of_isLeftAdjoint, CategoryTheory.Adjunction.isCardinalLocallyPresentable, CategoryTheory.Adjunction.hasExactColimitsOfShape. ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; reuse the existing proved adopted-source theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\", \"Adjunction\"",
+   "results": "1 hits: CategoryTheory.Adjunction.preservesColimitsOfShape_iff. ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; reuse the existing proved adopted-source theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObj.of_adjunction|[Cc]ompact.*[Aa]djunction",
+   "results": "6 hits: Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Topology/Category/Compactum.lean. ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; reuse the existing proved adopted-source theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left adjoint preserves compact objects if right adjoint preserves direct sums",
+   "results": "8 hits: CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint, CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint, CategoryTheory.Adjunction.map_projective, CategoryTheory.Adjunction.leftAdjoint_preservesColimits, CategoryTheory.Functor.preservesProjectiveObjects_of_adjunction_of_preservesEpimorphisms, CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint, CategoryTheory.Functor.preservesEpimorphsisms_of_adjunction, CategoryTheory.Functor.instPreservesLimitsOfShapeOfIsRightAdjoint. ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; reuse the existing proved adopted-source theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2: compact representatives; coefficient-isomorphism transport in the formal criterion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Triangulated.CompactBoundedHom",
+  "declaration": "CategoryTheory.BrownRepresentability.IsCompactObj.of_adjunction",
+  "statement": "lemma IsCompactObj.of_adjunction\n    {C : Type u} [Category.{v} C] [Preadditive C]\n    {D : Type u'} [Category.{v} D] [Preadditive D]\n    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Additive]\n    [∀ J : Type v, PreservesColimitsOfShape (Discrete J) G]\n    {s : C} (hs : IsCompactObj s) : IsCompactObj (F.obj s)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d8058",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261027T151650-L-1188987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d8058",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261027T151650-L-1188987",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + BrownHypothesesCoefficientIso + BrownHypothesesFiniteField against sheaf-dag clone, the prior return's keep-list, node lean records vs Lean signatures, and the single direct importer LocalizingExceptionalAdjoint compiled against the delivered files (OK 17 s); axioms checked"
+ }
+}

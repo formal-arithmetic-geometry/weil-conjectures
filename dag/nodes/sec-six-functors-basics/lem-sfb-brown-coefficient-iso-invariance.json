@@ -28,11 +28,12 @@
    "elementary": false
   },
   {
-   "text": "Extract objectwise compactness from the second Brown bundle. The already proved compactness_of_brown_coefficientIso helper expresses it as ambient canonical direct-sum Hom-map bijectivity, transports this bijectivity through the derived scalar equivalence using compactness_coefficientIso, and reflects it through the full localizing inclusion. Use the objectwise Brown criterion to assemble the first bundle. This proves one implication for arbitrary coefficients; apply the same implication to the inverse ring isomorphism for the converse.",
+   "text": "An exact coproduct-preserving functor takes the generating localizing intersection into the localizing intersection of the image generators: pull back each replete localizing test property along the functor and use minimality. Apply this to both directions of the derived scalar equivalence. The unit and repleteness identify the first localizing property as the inverse image of the second. Hence congrFullSubcategory gives an equivalence dL of the localizing full subcategories. Extract compactness at the second coefficient, convert it to the finite-support formulation, and apply the existing compact-object adjunction theorem to dL.symm.toAdjunction. Both equivalence functors preserve coproducts. Transport back by the unit isomorphism and apply the objectwise Brown criterion. Repeat for the inverse coefficient isomorphism.",
    "uses": [
     "lem-sfb-brown-hypotheses-criterion",
     "lem-sfb-condensed-coefficient-iso-constructible",
-    "h1-brown-hypotheses-structural"
+    "h1-brown-hypotheses-structural",
+    "lem-sfb-compact-object-adjunction"
    ],
    "elementary": false
   }
@@ -40,13 +41,14 @@
  "proof_deps": [
   "lem-sfb-condensed-coefficient-iso-constructible",
   "lem-sfb-brown-hypotheses-criterion",
-  "h1-brown-hypotheses-structural"
+  "h1-brown-hypotheses-structural",
+  "lem-sfb-compact-object-adjunction"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "C2 stage 3",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
   "place": "paragraphs 1--2: thickness, essential smallness and compactness; coefficient identifications in sk-lem-brown-hypotheses-generation.proof.md",
-  "note": "A2: complete Lean proof using constructible finite-Tor preservation for e and its inverse, the derived equivalence unit, full-subcategory equivalence and canonical compactness comparisons."
+  "note": "Replace ambient direct-sum Hom comparisons and private BrownHypothesesGeneration helpers by the induced equivalence of localizing full subcategories and the existing source IsCompactObj.of_adjunction theorem. No field-specific compactness input or additional hypothesis is used. The invariant theorem and its private helpers now live in BrownHypothesesCoefficientIso, preserving the public declaration type while removing optional coefficient-transport dependencies from the general Brown module."
  },
  "mathlib_searches": [
   {
@@ -99,8 +101,8 @@
  "unit": "sk-lem-brown-hypotheses",
  "lean": {
   "existing": false,
-  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
-  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "module": "Sheaf.SixFunctorsBasics.BrownHypothesesCoefficientIso",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypothesesCoefficientIso.lean",
   "declaration": "CategoryTheory.brownHypothesesFor_coefficientIso_iff",
   "statement": "theorem brownHypothesesFor_coefficientIso_iff\n    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']\n    (e : Mon.mk Λ ≅ Mon.mk Λ') (X : Scheme.{u}) :\n    BrownHypothesesFor Λ X ↔ BrownHypothesesFor Λ' X",
   "branch": "sheaf-dag",
@@ -120,17 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K4",
+  "reviewer": "C-d8058",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261027T112403-L-1578020",
+  "landing": "20261027T151650-L-1188987",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.brownHypotheses"
-  ],
-  "sorry_after": [
-   "CategoryTheory.brownHypotheses"
-  ]
+  "note": "independent cc review: delivered item + BrownHypothesesCoefficientIso + BrownHypothesesFiniteField against sheaf-dag clone, the prior return's keep-list, node lean records vs Lean signatures, and the single direct importer LocalizingExceptionalAdjoint compiled against the delivered files (OK 17 s); axioms checked"
  }
 }

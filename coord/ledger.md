@@ -19579,3 +19579,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:16 L: merged deliver/B2/Sheaf.Paper.FiniteRealizationScalarMate (stage 3; reviewer PASS; first push; landing 20261027T151646-L-1188164 (proof); batch 20261027T151642; modules 1; new nodes 0)
 - 15:16 L: merged deliver/B7/Sheaf.Paper.CompactSupportRealizationCoordinates (stage 3; reviewer PASS; first push; landing 20261027T151647-L-1188439 (proof); batch 20261027T151642; modules 1; new nodes 0)
 - 15:16 L: merged deliver/B9/Sheaf.Paper.SystemDirectImageEffectivity (stage 3; reviewer PASS; first push; landing 20261027T151648-L-1188654 (interface); batch 20261027T151642; modules 2; new nodes 1)
+- 15:16 L: merged deliver/C2/Sheaf.SixFunctorsBasics.BrownHypotheses (stage 3; reviewer PASS; after a return; landing 20261027T151650-L-1188987 (interface); batch 20261027T151642; modules 3; new nodes 1; change records: coord/changes/C2-brown-specialization-import-pruning.md)
