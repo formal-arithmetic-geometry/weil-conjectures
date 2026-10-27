@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.CoefScalarReductionExchange
+import Sheaf.SixFunctors.CoefIntegralScalarQuotientTransitionTranspose
 
 /-! # Scalar tensor quotient transition compatibility
 
@@ -61,6 +62,8 @@ theorem quotient_reduction_transition
           ((scalarReductionDerivedExtension l E X n).obj K) =
       normalizedDVRReductionTransition l L X D hl h
           ((integralScalarExtensionOfUniverses l E L ι X).obj K) ≫
-        (normalizedDVRRes l L X h).map (quotient l E L ι X n K hK).hom := by sorry
+        (normalizedDVRRes l L X h).map (quotient l E L ι X n K hK).hom := by
+  apply Equiv.injective ((normalizedDVRIntegralAdjunction l L X m).homEquiv _ _)
+  exact quotient_reduction_transition_transpose l E L ι X D hl K hK h
 
 end WeilConjectures.IntegralFiniteExtension
