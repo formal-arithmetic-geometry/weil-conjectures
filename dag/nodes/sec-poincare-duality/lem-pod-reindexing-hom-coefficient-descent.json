@@ -190,11 +190,12 @@
    }
   },
   {
-   "text": "For common-stage inputs with fields $E_1,E_2$, put $K=E_1E_2$. Construct the comparison at $K$ using the rational map just obtained. At a larger field $L$, conjugate $c_L$ by the scalar comparisons of its source and target operations, exactly as prescribed for operation arrows. Step 12 says this conjugate equals scalar extension of $c_K$. The identity and tower equations make the same assertion for any further $L'$. A finite collection of objects and arrow representatives has finitely many fields, whose compositum is a common field by the coefficient-category definition. If two representatives are equal at a further field, their operation images are equal there, and the conjugated comparisons are equal there by the scalar square. Hence their colimit classes are equal. This proves independence of fields and representatives without requiring transition functors to be faithful.",
+   "text": "For common-stage inputs with fields $E_1,E_2$, put $K=E_1E_2$. Construct the comparison at $K$ using the rational map just obtained. At a larger field $L$, conjugate $c_L$ by the scalar comparisons of its source and target operations, exactly as prescribed for operation arrows. Step 12 says this conjugate equals scalar extension of $c_K$. The identity and tower equations make the same assertion for any further $L'$. A finite collection of objects and arrow representatives has finitely many fields, whose compositum is a common field by the coefficient-category definition. If two representatives are equal at a further field, their operation images are equal there, and the conjugated comparisons are equal there by the scalar square. Hence their colimit classes are equal. This proves independence of fields and representatives without requiring transition functors to be faithful. For common_pair_permitted specifically, work with the integral objects underlying the rational pair at the input compositum. The stage-system transition formula identifies these with the specified integral scalar extensions. The object formula for rational pullback and integralPullbackScalarComparison identify the pulled-back objects at that same compositum with the integral pullbacks of the original stage objects. Apply integral_pair_permitted there, and transport constructibility through internal Hom, using the first-variable isomorphism oppositely and the inverse second-variable isomorphism. The proved object-normalization interface [lem-pod-common-stage-operation-object-normalizations] records the three literal object formulas without unfolding the chosen functors in the equality-only copyObj transports.",
    "uses": [
     "def-weil-algebraically-closed-coefficients",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-pur-integral-operations-scalar-extension"
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-pod-common-stage-operation-object-normalizations"
    ],
    "elementary": true,
    "source": {
@@ -203,7 +204,7 @@
    }
   },
   {
-   "text": "Represent each naturality, evaluation, transposition, inverse, signed-shift or scheme-composition diagram at one common finite field (enlarging it for the finitely many arrows in that diagram). There it is one of the rational equations of Steps 11–12. Apply the Hom-colimit structure maps to that equality. Intermediate scalar comparisons cancel with their inverses, and the tower equation identifies successive changes with the direct one, so the resulting equality is precisely the equation between the normalized common-stage operations, including the specified evaluation and transpose. This proves all asserted common-stage laws. The same argument applies only on the specified constructible-Hom pairs; no closure of arbitrary constructible pairs under Hom is asserted. The common_tensorComparison interface is obtained directly from canonicalCommonStagePullbackTensor in [lem-pur-derived-pullback-tensor-iso], transporting only its source and target object equalities. Substitution of these equalities reduces existence and uniqueness to the original isomorphism and Iso.ext. The common_signedShift_images equation is the image of rational_signed_shifts under the stage inclusion, by congrArg. The common_transposition equation can then be proved without another representative calculation: copied pullback and tensor functors equal their original functors by Functor.ext_of_iso. Transport the natural tensor isomorphism of lem-pur-derived-pullback-tensor-iso across these equalities. Its prescribed component HEq identifies the resulting naturality equation with commonTensorComparison. Use common_transpose_existsUnique to characterize the desired transpose by evaluation; expand tensor functoriality, precompose with the invertible tensor comparison, apply its naturality and common_evaluation, and cancel the tensor comparison. The defining evaluation equation of the original transpose closes the remaining equality.",
+   "text": "Represent each naturality, evaluation, transposition, inverse, signed-shift or scheme-composition diagram at one common finite field (enlarging it for the finitely many arrows in that diagram). There it is one of the rational equations of Steps 11–12. Apply the Hom-colimit structure maps to that equality. Intermediate scalar comparisons cancel with their inverses, and the tower equation identifies successive changes with the direct one, so the resulting equality is precisely the equation between the normalized common-stage operations, including the specified evaluation and transpose. This proves all asserted common-stage laws. The same argument applies only on the specified constructible-Hom pairs; no closure of arbitrary constructible pairs under Hom is asserted. The common_tensorComparison interface is obtained directly from canonicalCommonStagePullbackTensor in [lem-pur-derived-pullback-tensor-iso], transporting only its source and target object equalities. Substitution of these equalities reduces existence and uniqueness to the original isomorphism and Iso.ext. The common_signedShift_images equation is the image of rational_signed_shifts under the stage inclusion, by Functor.congr_map followed by rational_signed_shifts, whose displayed parameters are inferred from the goal and whose normalization hypotheses are already in context. The common_transposition equation can then be proved without another representative calculation: copied pullback and tensor functors equal their original functors by Functor.ext_of_iso. Transport the natural tensor isomorphism of lem-pur-derived-pullback-tensor-iso across these equalities. Its prescribed component HEq identifies the resulting naturality equation with commonTensorComparison. Use common_transpose_existsUnique to characterize the desired transpose by evaluation; expand tensor functoriality, precompose with the invertible tensor comparison, apply its naturality and common_evaluation, and cancel the tensor comparison. The defining evaluation equation of the original transpose closes the remaining equality.",
    "uses": [
     "def-weil-algebraically-closed-coefficients",
     "def-weil-derived-pullback-tensor-hom",
@@ -244,12 +245,13 @@
   "lem-weil-integral-constructible-triangulated",
   "def-weil-algebraically-closed-coefficients",
   "lem-pur-derived-pullback-tensor-iso",
-  "lem-sf-derived-complete-legacy-comparison"
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pod-common-stage-operation-object-normalizations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Step 5, expanded with Stacks Tag 08J9 (sites-cohomology, lemma-internal-hom), Tag 0GMX (sites-modules, remark-pullback-internal-hom), and the raw rational/common-stage definitions. C2, 2026-10-25: nine Lean obligations closed from existing interfaces, shift stability, fullness, naturality and equality-only transport. The other 23 named obligations retain their existing proof plans. G3, 2026-10-25: integral_comparison_existsUnique is now proved by completion-unit conjugation, ambient naturality, and cancellation; 22 original obligations remain. J4, 2026-10-25: common_transposition is proved from the existing evaluation and transpose specifications and the natural tensor comparison. No new obligations or nodes; the other 21 obligations retain their plans."
+  "place": "Step 5, expanded with Stacks Tag 08J9 (sites-cohomology, lemma-internal-hom), Tag 0GMX (sites-modules, remark-pullback-internal-hom), and the raw rational/common-stage definitions. C2, 2026-10-25: nine Lean obligations closed from existing interfaces, shift stability, fullness, naturality and equality-only transport. The other 23 named obligations retain their existing proof plans. G3, 2026-10-25: integral_comparison_existsUnique is now proved by completion-unit conjugation, ambient naturality, and cancellation; 22 original obligations remain. J4, 2026-10-25: common_transposition is proved from the existing evaluation and transpose specifications and the natural tensor comparison. No new obligations or nodes; the other 21 obligations retain their plans. G8, 2026-10-27: common_pair_permitted is proved by transporting the integral permitted-pair result at the common coefficient compositum. The new object-normalization interface is fully proved and keeps the chosen common-stage functors abstract during compilation. No new unfinished obligations; the other 20 obligations retain their plans. G8 repair, 2026-10-28: signed-shift image transport uses Functor.congr_map; F8’s independent derived-automorphism split and its node are preserved."
  },
  "mathlib_searches": [
   {
@@ -525,13 +527,13 @@
   "note": "Lean byte-identical to 2b38 (maths accepted there); H2 stmt_deps repaired via existing:true def nodes def-pod-finite-free-basis-coordinates / def-pod-rational-common-pullback-composition (read against decls, OK). FIX: ambient_scalar_chain still used theorem-owned uncited specifiedHomResolutionUnit via a theorem-module import → inlined its body (toKInjectiveResolution into def-owned coefficientHomResolution), import swapped; compiled clean 48.1 s. Coordinates node: full lean.statement (was cut at `(R`), pure-section cite → def-fix-ringed-scalar-extension-section (actual owner of ringedFiniteFreeScalarSection). Advisory: integral compositor owner (lem-pod-integral-pullback-composition) uncited in compositor node."
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J4",
+  "reviewer": "C-81a20",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261025T180818-L-4037008",
+  "landing": "20261027T233952-L-4145821",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 81a202fe delivery vs 3ed4 reviewed delivery (DAG/ContinuationB/Semilinear/new module identical; item +local irreducible caches; FWSSD alias restore re-placed) and vs clone live; importer-side inferInstance test of the 4 finite + Frobenius CommShift instances against delivered FWSSD and published build"
  }
 }

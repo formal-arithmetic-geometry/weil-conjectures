@@ -1,0 +1,129 @@
+{
+ "id": "lem-pod-common-stage-operation-object-normalizations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 5: literal common-stage operation objects used by the coefficient descent of reindexed evaluation.",
+   "via": [
+    "lem-pod-reindexing-hom-coefficient-descent",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Object normalizations of the recorded common-stage operations",
+ "statement": "Let ℓ be prime and Ω an algebraic closure of Q_ℓ [def-weil-l-adic-coefficient-extension]. Use the common-stage constructible pair categories over schemes [def-weil-algebraically-closed-coefficients, def-weil-pbc-proetale-site] and the recorded common-stage derived operations [def-weil-derived-pullback-tensor-hom]. For every morphism g : X → Y with ℓ invertible on X and Y [def-weil-scheme-morphism-properties], and every common-stage object P on Y, the object of the chosen pullback functor at P equals commonStagePullbackObject(g,P). For every scheme W with ℓ invertible and every pair M,N of common-stage objects, the chosen tensor functor at (M,N) has object commonStageTensorObject(W,M,N). For every scheme W and every permitted common-stage Hom pair P, the chosen internal-Hom functor has object commonStageHomObject(W,P). These are literal equalities of pair objects, retaining their coefficient field and representative, not merely isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5, canonical common-stage operations; the object clauses of commonStageDerivedPullback_existsUnique, commonStageDerivedTensor_existsUnique and commonStageDerivedInternalHom_existsUnique in lean/Sheaf/Paper/DerivedPullbackTensorHom.lean."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Each of the three recorded functors is defined by choosing the unique functor with its stated object and representative-arrow normalization. Project the object clause of the specification of that choice. Apply the pullback clause to g and P, the tensor clause to W,M,N, and the Hom clause to the permitted pair P. Conjoin the three universally quantified formulas. The argument does not choose a new object or a new arrow.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Step 5, recorded operation normalizations; definitional projection of the three existing unique-existence specifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "G8, 2026-10-27: proved projection API for the recorded object clauses. It keeps the chosen functors abstract in the item and avoids repeated elaboration of the raw uniqueness specifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical common-stage derived pullback tensor product and internal Hom retain the object clauses of their unique normalized existence specifications.",
+   "results": "Types.tensorProductAdjunction, ChosenPullbacksAlong.Over.tensorObj_left and Over.tensorObj_hom concern other categories. No result states these project-specific common-stage object formulas.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical common-stage derived pullback tensor and internal Hom have their prescribed object functions",
+   "results": "Over.tensorObj_left and ChosenPullbacksAlong.Over.tensorObj_left concern different over categories. The concrete coefficient operations are project definitions.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "commonStageDerivedPullback commonStageDerivedTensor commonStageDerivedInternalHom",
+   "results": "No hits; these concrete operations are not Mathlib declarations.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStageDerived(Pullback|Tensor|InternalHom).*obj|choose_spec in Mathlib",
+   "results": "Mathlib/Logic/ExistsUnique.lean uses choose_spec. The three object clauses themselves already occur in the project operation specifications; no Mathlib declaration states their conjunction.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingHomCoefficientDescent",
+  "date": "2026-10-27",
+  "group": "G8"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodCommonStageObjectNormalizations",
+  "file": "lean/Sheaf/Paper/PodCommonStageObjectNormalizations.lean",
+  "declaration": "WeilConjectures.podCommonStageObjectNormalizations",
+  "statement": "theorem podCommonStageObjectNormalizations :\n    (∀ {X Y : Scheme.{u}} (g : X ⟶ Y)\n      [∀ x : X, Invertible (l : X.residueField x)]\n      [∀ y : Y, Invertible (l : Y.residueField y)]\n      (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y),\n      (commonStageDerivedPullback l Ω g).obj P = commonStagePullbackObject l Ω g P) ∧\n    (∀ (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n      (M N : generalAlgebraicallyClosedConstructibleCategory l Ω W),\n      (commonStageDerivedTensor l Ω W).obj (M, N) = commonStageTensorObject l Ω W M N) ∧\n    (∀ (W : Scheme.{u}) (P : (commonStageHomPairs l Ω W).FullSubcategory),\n      (commonStageDerivedInternalHom l Ω W).obj P = commonStageHomObject l Ω W P)",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-81a20",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T233952-L-4145821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-81a20",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T233952-L-4145821",
+  "kind": "interface",
+  "note": "independent cc review: 81a202fe delivery vs 3ed4 reviewed delivery (DAG/ContinuationB/Semilinear/new module identical; item +local irreducible caches; FWSSD alias restore re-placed) and vs clone live; importer-side inferInstance test of the 4 finite + Frobenius CommShift instances against delivered FWSSD and published build"
+ }
+}

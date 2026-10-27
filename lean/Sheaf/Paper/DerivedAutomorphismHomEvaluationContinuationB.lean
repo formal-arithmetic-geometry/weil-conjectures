@@ -67,6 +67,7 @@ Rational maps are localized; algebraically closed maps use every common stage.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -137,6 +138,9 @@ def podCompletedToTower (K : DerivedCategory (integralTowerModules l E Y)) :
     (pullbackTensorIntegralPullbackModel l E g).inv.app K
 
 attribute [local irreducible] pullbackTensorCalculus
+  podCompletedDerivedInverseImage integralDerivedPullback podLimitReindexing
+  pullbackTensorIntegralPullbackModel completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence
 
 /-- The identification with tower-defined pullback is natural, and is invertible
 on exactly the complete constructible inputs used here.

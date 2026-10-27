@@ -12,6 +12,7 @@ public import Sheaf.Paper.DerivedPullbackTensorIso
 public import Sheaf.Paper.PodCompletionReindexCoefficientTransition
 public import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 public import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChangeCoordinates
+public import Sheaf.Paper.PodCommonStageObjectNormalizations
 import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
@@ -40,15 +41,17 @@ set_option linter.privateModule false
 set_option autoImplicit false
 set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option Elab.async false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TensorProduct
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures.PodCoefficientDescent
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
-  HasDerivedCategory.standard
+  HasDerivedCategory.standard completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence
 
 private theorem existsUnique_iso_of_eq {C : Type*} [Category* C]
     {A B A' B' : C} (hA : A = A') (hB : B = B') (e : A' ≅ B') :
@@ -78,6 +81,11 @@ private theorem inverse_square {C : Type*} [Category* C] {A B D E : C}
   rw [← h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
 
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] Preadditive.fullSubcategory
+  StageSystem.PairCategory.categoryStruct
+
+attribute [local irreducible] Linear.homModule
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -535,6 +543,8 @@ private theorem completionUnit_isIso
   infer_instance
 
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The uniquely normalized integral comparison in the constructible category.
 Source: blueprint Step 5; Stacks 099B, 08J9
 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
@@ -972,6 +982,11 @@ end Reindex
 attribute [local irreducible] rationalComparison integralComparison rationalTranspose
   rationalEvaluation rationalPullbackShift integralSignedShift
 
+attribute [local irreducible] commonStageDerivedPullback commonStageDerivedTensor
+  commonStageDerivedInternalHom
+
+attribute [local irreducible] ObjectProperty.FullSubcategory.category
+
 section CommonStage
 open GeneralAlgebraicallyClosedCoefficients
 open AlgebraicallyClosedCoefficients (Index Coefficient)
@@ -985,20 +1000,20 @@ Only equality transport is used, preserving the prescribed representative maps.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
 def commonPullback := (commonStageDerivedPullback l Ω g).copyObj
   (commonStagePullbackObject l Ω g)
-  (fun P ↦ eqToIso ((commonStageDerivedPullback_existsUnique l Ω g).exists.choose_spec.1 P))
+  (fun P ↦ eqToIso ((podCommonStageObjectNormalizations l Ω).1 g P))
 
 /-- The recorded common-stage Hom in its literally specified compositum coordinates.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
 def commonHom (W : Scheme.{u}) := (commonStageDerivedInternalHom l Ω W).copyObj
   (commonStageHomObject l Ω W)
-  (fun P ↦ eqToIso ((commonStageDerivedInternalHom_existsUnique l Ω W).exists.choose_spec.1 P))
+  (fun P ↦ eqToIso ((podCommonStageObjectNormalizations l Ω).2.2 W P))
 
 /-- The recorded tensor in its literal compositum coordinates, by equality transport.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
 def commonTensor (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :=
   (commonStageDerivedTensor l Ω W).copyObj
     (fun P ↦ commonStageTensorObject l Ω W P.1 P.2)
-    (fun P ↦ eqToIso ((commonStageDerivedTensor_existsUnique l Ω W).exists.choose_spec.1 P.1 P.2))
+    (fun P ↦ eqToIso ((podCommonStageObjectNormalizations l Ω).2.1 W P.1 P.2))
 
 attribute [local irreducible]
   commonStagePullbackComparison commonStageHomComparison commonStageTensorComparison
@@ -1007,13 +1022,13 @@ attribute [local irreducible]
 
 private theorem commonPullback_eq : commonPullback l Ω g = commonStageDerivedPullback l Ω g :=
   copyObj_eq _ _
-    ((commonStageDerivedPullback_existsUnique l Ω g).exists.choose_spec.1)
+    ((podCommonStageObjectNormalizations l Ω).1 g)
 
 private theorem commonTensor_eq (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)] :
     commonTensor l Ω W = commonStageDerivedTensor l Ω W :=
   copyObj_eq _ _ (fun P ↦
-    (commonStageDerivedTensor_existsUnique l Ω W).exists.choose_spec.1 P.1 P.2)
+    (podCommonStageObjectNormalizations l Ω).2.1 W P.1 P.2)
 
 /-- Evaluation at every common field, with the fixed Hom and tensor comparisons.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
@@ -1049,18 +1064,76 @@ def commonEvaluation (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField
   (common_evaluation_existsUnique l Ω W P).exists.choose
 
 
+section CommonPairProof
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+private theorem stageIntegralObject (W : Scheme.{u})
+    (P : generalAlgebraicallyClosedConstructibleCategory l Ω W)
+    (L : Index l Ω) (h : P.stage ≤ L) :
+    (P.toStage h).obj =
+      (sfConstructibleIntegralScalarExtension 0 l
+        (Nat.Prime.ne_zero (Fact.out : l.Prime))
+        (Coefficient.{u} l Ω P.stage) (Coefficient.{u} l Ω L)
+        (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L h) W).obj
+          P.obj.obj := by
+  change (((stageSystem l Ω W).T h).obj P.obj).obj = _
+  have ht : (stageSystem l Ω W).T h = transition l Ω W P.stage L h := by
+    simpa only [stageSystem] using
+      (stageSystem_existsUnique l Ω W).exists.choose_spec.1 P.stage L h
+  have hi := sfRationalScalarExtension_obj l (Coefficient.{u} l Ω P.stage) W 0
+    (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
+    (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L h) P.obj
+  exact (congrArg (fun F : Stage l Ω W P.stage ⥤ Stage l Ω W L ↦
+    (F.obj P.obj).obj) ht).trans (congrArg ScalarLocalization.obj hi)
+
+private def stagePullbackIntegralIso
+    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
+    (L : Index l Ω) (h : P.stage ≤ L) :
+    ((commonStagePullbackObject l Ω g P).toStage h).obj ≅
+      (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).obj (P.toStage h).obj :=
+  eqToIso (stageIntegralObject l Ω X (commonStagePullbackObject l Ω g P) L h) ≪≫
+    (sfConstructibleIntegralScalarExtension 0 l
+      (Nat.Prime.ne_zero (Fact.out : l.Prime))
+      (Coefficient.{u} l Ω P.stage) (Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L h) X).mapIso
+        (eqToIso (congrArg ScalarLocalization.obj
+          ((rationalDerivedPullback_existsUnique l
+            (Coefficient.{u} l Ω P.stage) g).exists.choose_spec.2.1 P.obj))) ≪≫
+    integralPullbackScalarComparison l (Coefficient.{u} l Ω P.stage)
+      (Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω P.stage L h) g P.obj.obj ≪≫
+    (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).mapIso
+      (eqToIso (stageIntegralObject l Ω Y P L h).symm)
+
 /-- The specified common-stage pullback preserves the permitted Hom domain.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
 Proof (node Steps 13--14): represent the two objects at their compositum and apply
-rational_pair_permitted. Scalar compatibility identifies all subsequent extensions,
-including identity extensions. The prescribed scalar associators identify this
-pair with the pair used in commonStageHomPairs after pullback. -/
+integral_pair_permitted to the underlying integral pair. The rational scalar object
+formula and the pullback/scalar comparison identify both pulled-back stage objects
+with integral pullbacks. Apply internal Hom with its contravariant first argument,
+then transport constructibility through this isomorphism. -/
 theorem common_pair_permitted
     (P : (commonStageHomPairs l Ω Y).FullSubcategory) :
     commonStageHomPairs l Ω X
       (op ((commonPullback l Ω g).obj P.obj.1.unop),
         (commonPullback l Ω g).obj P.obj.2) := by
-  sorry
+  let M := P.obj.1.unop
+  let N := P.obj.2
+  let L := Padic.finiteCoefficientCompositum l Ω M.stage N.stage
+  have hL := (Padic.finiteCoefficientFields_properties l Ω).1 M.stage N.stage
+  let A := Coefficient.{u} l Ω L
+  have hP := integral_pair_permitted l A g
+    (integralPairOfRationalHomPair l A Y (commonStageHomRationalPair l Ω Y P))
+  let eM := stagePullbackIntegralIso l Ω g M L hL.1
+  let eN := stagePullbackIntegralIso l Ω g N L hL.2
+  let e := (integralDerivedInternalHom l A X).mapIso
+    (((sfIntegralConstructible l A X).ι.mapIso eM).op.prod
+      (((sfIntegralConstructible l A X).ι.mapIso eN).symm))
+  exact (sfIntegralConstructible l A X).prop_of_iso e hP
+
+end CommonPairProof
+
 
 /-- The actual common-stage permitted-pair functor, with all quotient-class arrows.
 Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
@@ -1142,10 +1215,10 @@ theorem common_tensorComparison_existsUnique
   have hT (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
       (A B : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
       (commonStageDerivedTensor l Ω W).obj (A, B) = commonStageTensorObject l Ω W A B :=
-    (commonStageDerivedTensor_existsUnique l Ω W).exists.choose_spec.1 A B
+    (podCommonStageObjectNormalizations l Ω).2.1 W A B
   have hF (A : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :
       (commonStageDerivedPullback l Ω g).obj A = commonStagePullbackObject l Ω g A :=
-    (commonStageDerivedPullback_existsUnique l Ω g).exists.choose_spec.1 A
+    (podCommonStageObjectNormalizations l Ω).1 g A
   apply existsUnique_iso_of_eq ?_ ?_ (canonicalCommonStagePullbackTensor l Ω g M N)
   · change commonStagePullbackObject l Ω g (commonStageTensorObject l Ω Y M N) = _
     rw [hT Y M N, hF]
@@ -1159,8 +1232,7 @@ def commonTensorComparison
     (M N : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :=
   (common_tensorComparison_existsUnique l Ω g M N).exists.choose
 
-attribute [local irreducible] commonStageDerivedPullback commonStageDerivedTensor
-  commonStageDerivedInternalHom commonPullback commonTensor commonHom
+attribute [local irreducible] commonPullback commonTensor commonHom
   commonComparison commonEvaluation
 
 
@@ -1248,6 +1320,8 @@ def commonTranspose (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField 
     (K : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
   (common_transpose_existsUnique l Ω W P K).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Transposition is preserved for every common-stage arrow.
 Source: blueprint Step 5; Stacks 08J9
 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
@@ -1328,8 +1402,11 @@ theorem common_composition {Z : Scheme.{u}} (h : Z ⟶ X) [IsIso h]
         (commonComparison l Ω h).hom.app ((commonPair l Ω g).obj P) := by
   sorry
 
-attribute [local irreducible] shiftedPullbackInput
+attribute [local irreducible] shiftedPullbackInput rationalDerivedPullback
+  rationalDerivedInternalHom
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Both signed Hom shift squares hold as classes at every finite field of definition.
 The normalized common-stage shifts are the stagewise shifts from the operation package.
 Source: blueprint Step 5; Stacks 08JA
@@ -1372,11 +1449,12 @@ theorem common_signedShift_images (L : Index l Ω)
         (self := rationalPullbackShift l (Coefficient.{u} l Ω L) g) (b - a)).hom.app
           ((rationalDerivedInternalHom l (Coefficient.{u} l Ω L) Y).obj P) ≫
       ((rationalComparison l (Coefficient.{u} l Ω L) g).hom.app P)⟦b - a⟧') := by
-  exact congrArg
-    (fun f ↦ (inclusion L : Stage l Ω X L ⥤
-      generalAlgebraicallyClosedConstructibleCategory l Ω X).map f)
-    (rational_signed_shifts l (Coefficient.{u} l Ω L) g
-      P Q a b hM hN S hFM hFN eY eX _heY _heX)
+  apply (inclusion L : Stage l Ω X L ⥤
+    generalAlgebraicallyClosedConstructibleCategory l Ω X).congr_map
+  set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types true in
+      apply rational_signed_shifts
+  all_goals assumption
 
 
 end CommonStage

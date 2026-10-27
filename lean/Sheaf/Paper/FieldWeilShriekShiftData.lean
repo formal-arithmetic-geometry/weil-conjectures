@@ -35,6 +35,7 @@ are fixed by signed Roos reindexing, localization, and adjunction mates.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -96,6 +97,14 @@ section PullbackShift
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+section InitialShiftElaboration
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence HasDerivedCategory.standard
+  Scheme.residueField
 
 private theorem fieldChainShift_unique
     (c c' : (integralOperationsPullbackComplexFunctor l E f).CommShift ℤ)
@@ -161,6 +170,8 @@ theorem fieldIntegralPullShift_existsUnique :
 instance fieldIntegralPullShift : (integralDerivedPullback l E f).CommShift ℤ :=
   (fieldIntegralPullShift_existsUnique l E f).exists.choose
 
+end InitialShiftElaboration
+
 variable [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
@@ -201,6 +212,10 @@ private theorem fieldConstructibleShift_normalization
       CategoryTheory.Functor.map_id, Category.comp_id]
     erw [Category.id_comp]
     rfl)
+
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence HasDerivedCategory.standard
+  Scheme.residueField
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -426,6 +441,9 @@ private instance fieldFiberMap_quasiCompact
     (D.geometricFiber X).left (D.geometricFiber Y).left (zlFiberMap D f)
     (fieldFiber_compact D X) inferInstance
 
+set_option allowUnsafeReducibility true in
+attribute [local reducible] FiniteFieldDatum.geometricFiber zlFiberMap
+
 section FiniteGeometry
 variable (k : Type u) [Field k] (hk : IsUnit (l : k))
   {X Y : Scheme.{u}}
@@ -586,8 +604,8 @@ private theorem fieldOpenRationalAdjunction :
   exact ⟨aQ⟩
 end OpenGeometry
 
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 /-- The rational inverse image along the geometric fibre map. Source: blueprint
 lem-fix-weil-operations.proof, first paragraph
@@ -615,6 +633,8 @@ private theorem fieldMap_heq {C B : Type*} [Category C] [Category B] (F : C ⥤ 
 
 -- Tensor naturality needs only additivity and the prescribed action, not a chosen
 -- integral linearity structure. This also keeps the normalization of the given functors.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem fieldLocalizeIso
     (R : Type*) [CommRing R] (p : R)
     {C B : Type*} [Category C] [Category B] [Preadditive C] [Preadditive B]
@@ -726,6 +746,10 @@ def fieldRationalPullComp {X Y Z : Scheme.{u}}
   (fieldRationalPullComp_existsUnique l E f g).exists.choose
 
 section Finite
+
+attribute [local irreducible] constructibleIntegralPullback integralDerivedPullback
+  rationalDerivedPullback commonStageDerivedPullback
+
 variable {X₀ Y₀ : Over (Spec (.of D.k₀))}
   [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
@@ -872,6 +896,8 @@ def fieldWeilOpenExchangeInverseMap (j₀ : X₀ ⟶ Y₀) [IsOpenImmersion j₀
     (TwoSquare.mk _ _ _ _ (fieldWeilPullSquare D l hl E j₀).hom)).natTrans
 
 -- The finite Frobenius equivalence is already part of the recorded semilinear transport.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 private theorem fieldFrobenius_isEquivalence
     (T₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom] :
@@ -987,6 +1013,9 @@ instance fieldWeilShriekShift (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.
   inferInstanceAs ((fieldWeilOpen D l hl E (zlCompactificationOpen D f₀ c) ⋙
     fieldWeilProper D l hl E (zlCompactificationProper D f₀ c)).CommShift ℤ)
 
+set_option allowUnsafeReducibility true in
+attribute [local semireducible] FiniteFieldDatum.geometricFiber zlFiberMap
+
 private theorem fieldSupport_copy {X Y : Scheme.{u}}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
@@ -1002,6 +1031,8 @@ private theorem fieldSupport_copy {X Y : Scheme.{u}}
   rw [he]
   exact ⟨Iso.refl _⟩
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The adjunction-defined finite operation agrees with the recorded normalized
 compact-support action on every object and morphism. Source: SGA 4 XVII, sections
 5--6; Bhatt--Scholze 6.7.6--6.7.7
@@ -1047,6 +1078,9 @@ theorem fieldWeilShriek_recorded (f₀ : X₀ ⟶ Y₀)
     CategoryTheory.Functor.isoWhiskerLeft _ ep ≪≫ ec ≪≫ et⟩
 
 end Finite
+
+set_option allowUnsafeReducibility true in
+attribute [local semireducible] FiniteFieldDatum.geometricFiber zlFiberMap
 
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 

@@ -34,6 +34,7 @@ its precise permitted-pair domain. Exactness refers to underlying derived functo
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option genInjectivity false
 set_option genSizeOfSpec false
@@ -227,6 +228,31 @@ theorem pod_supplied_field_operation_lifts
     pod_covariant_field_operation_lift _ β, pod_covariant_field_operation_lift _ γ⟩
 
 
+section CompositionElaboration
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+attribute [local irreducible] commonStagePullbackComparison rationalDerivedPullback
+  commonStageDerivedPullback Scheme.residueField
+
+attribute [local irreducible] rationalDerivedInternalHom commonStageDerivedInternalHom
+
+-- Retain the category wrappers used by the common-stage operation interface.
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] Preadditive.fullSubcategory
+  StageSystem.PairCategory.categoryStruct
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
+
+attribute [local irreducible] sfIntegralConstructible Linear.homModule
+  ObjectProperty.FullSubcategory.category
+  HasDerivedCategory.standard completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence
+
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
+
 /-- The rational Frobenius square component through the canonical compositors.
 Source: blueprint prop-weil-operations, sentence 1, proof step 4
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
@@ -285,17 +311,32 @@ private theorem pod_rational_composition_naturality
       (M : sfRationalConstructibleCategory l E W) :
       (rationalDerivedPullback l E g).obj M =
         ⟨(constructibleIntegralPullback l E g).obj M.obj⟩ :=
-    (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.1 M
+    by
+      unfold rationalDerivedPullback
+      exact (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.1 M
   have hom {V W : Scheme.{u}} (g : V ⟶ W)
       [∀ v : V, Invertible (l : V.residueField v)]
-      [∀ w : W, Invertible (l : W.residueField w)] (M N) (b : M ⟶ N) (c) :=
-    (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.2 M N b c
+      [∀ w : W, Invertible (l : W.residueField w)]
+      (M N : sfIntegralConstructibleCategory l E W) (b : M ⟶ N)
+      (c : Localization.Away (Padic.coefficientExtensionUniformizer l E)) :
+      HEq ((rationalDerivedPullback l E g).map (X := ⟨M⟩) (Y := ⟨N⟩)
+        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] b))
+        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E]
+          (constructibleIntegralPullback l E g).map b) := by
+    unfold rationalDerivedPullback
+    exact (rationalDerivedPullback_existsUnique l E g).exists.choose_spec.2.2 M N b c
   have : (rationalDerivedPullback l E (h ≫ f)).Additive :=
-    (rationalDerivedPullback_existsUnique l E (h ≫ f)).exists.choose_spec.1
+    by
+      unfold rationalDerivedPullback
+      exact (rationalDerivedPullback_existsUnique l E (h ≫ f)).exists.choose_spec.1
   have : (rationalDerivedPullback l E f).Additive :=
-    (rationalDerivedPullback_existsUnique l E f).exists.choose_spec.1
+    by
+      unfold rationalDerivedPullback
+      exact (rationalDerivedPullback_existsUnique l E f).exists.choose_spec.1
   have : (rationalDerivedPullback l E h).Additive :=
-    (rationalDerivedPullback_existsUnique l E h).exists.choose_spec.1
+    by
+      unfold rationalDerivedPullback
+      exact (rationalDerivedPullback_existsUnique l E h).exists.choose_spec.1
   have compobj (M) : (rationalDerivedPullback l E h).obj
       ((rationalDerivedPullback l E f).obj M) =
       ⟨(constructibleIntegralPullback l E h).obj
@@ -331,6 +372,9 @@ private theorem pod_rational_composition_naturality
     rw [Functor.map_add, Functor.map_add, Functor.map_add,
       Preadditive.add_comp, Preadditive.comp_add, ha, hb]
 
+attribute [local irreducible] Preadditive.homGroup
+  ScalarLocalization.category ScalarLocalization.linear
+
 private theorem pod_composition_representative_naturality
     {C D B : Type*} [Category* C] [Category* D] [Category* B]
     (G : C ⥤ D) (F : D ⥤ B) (H : C ⥤ B)
@@ -349,9 +393,6 @@ private theorem pod_composition_representative_naturality
     Iso.map_inv_hom_id_assoc]
   simpa only [Category.assoc] using
     congrArg (fun t ↦ aK.hom ≫ t ≫ F.map bN.inv ≫ dN.inv) nat
-
-attribute [local irreducible] commonStagePullbackComparison rationalDerivedPullback
-  commonStageDerivedPullback Scheme.residueField
 
 private theorem pod_ofHom_square
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω]
@@ -556,6 +597,8 @@ theorem pod_actual_pullback_field_lifts
       (cc _ _ _ f (D.geometricFrobenius X₀).hom)
       (cc _ _ _ (D.geometricFrobenius Y₀).hom f) K)
 
+
+end CompositionElaboration
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (T₀ : Over (Spec (.of D.k₀)))
