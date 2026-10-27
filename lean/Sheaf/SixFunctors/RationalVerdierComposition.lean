@@ -6,6 +6,9 @@ Authors: SHEAF group B6
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
+import Sheaf.SixFunctors.RationalVerdierCompositionEquation
+import Sheaf.SixFunctors.RationalVerdierCompositionNormalization
+import Sheaf.Paper.SfScalarExtensionComposition
 
 /-! # Composition of normalized rational Verdier coefficient comparisons
 
@@ -78,6 +81,10 @@ theorem extension_composition
           eGH.comparison.hom.app (op ((scalar l X F G i).obj K)) =
         a.hom.app (A.dual.obj (op K)) ≫
           eFH.comparison.hom.app (op K) ≫
-            C.dual.map (a.hom.app K).op := by sorry
+            C.dual.map (a.hom.app K).op := by
+  obtain ⟨a, hnorm⟩ := rational_scalar_comp_normalization l X F G H i j
+  refine ⟨a, hnorm, ?_⟩
+  exact extension_composition_equation D l hl X F G H i j wF wG wH A B C a hnorm
+    eFG eGH eFH hFG hGH hFH
 
 end WeilConjectures.RationalVerdier

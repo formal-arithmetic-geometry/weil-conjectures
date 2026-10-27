@@ -19840,3 +19840,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:09 L: merged deliver/V9/Sheaf.Paper.SystemOpenRestrictionCoherence (stage 3; reviewer PASS; first push; landing 20261027T180928-L-3914049 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:09 L: merged deliver/W2/Sheaf.Paper.FiniteQuotientLayerLocalComplexes (stage 3; reviewer PASS; first push; landing 20261027T180930-L-3914221 (interface); batch 20261027T180444; modules 2; new nodes 1)
 - 18:09 L: merged deliver/W3/Sheaf.Paper.FiniteQuotientPreviousLocalComplexes (stage 3; reviewer PASS; first push; landing 20261027T180931-L-3914397 (interface); batch 20261027T180444; modules 2; new nodes 1)
+- 18:09 L: merged deliver/W3/Sheaf.SixFunctors.RationalVerdierComposition (stage 3; reviewer PASS; first push; landing 20261027T180933-L-3914671 (interface); batch 20261027T180444; modules 3; new nodes 2)

@@ -1,0 +1,109 @@
+{
+ "id": "lem-coef-rational-verdier-composition-equation",
+ "kind": "statement",
+ "title": "Rational Verdier associator equation for a normalized associator",
+ "statement": "theorem extension_composition_equation\n    (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F]\n    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]\n    (H : Type u) [Field H] [Algebra (Padic l) H] [FiniteDimensional (Padic l) H]\n    (i : F →ₐ[Padic l] G) (j : G →ₐ[Padic l] H)\n    (wF : IntegralFiniteExtension.DualizingDatum l X D hl F)\n    (wG : IntegralFiniteExtension.DualizingDatum l X D hl G)\n    (wH : IntegralFiniteExtension.DualizingDatum l X D hl H)\n    (A : Datum D l hl X F wF) (B : Datum D l hl X G wG) (C : Datum D l hl X H wH)\n    (a : scalar l X F G i ⋙ scalar l X G H j ≅ scalar l X F H (j.comp i))\n    (hnorm : ∀ K : sfIntegralConstructibleCategory l F X,\n      HEq (a.hom.app ((sfRationalConstructibleLocalization l F X).obj K))\n        ((sfRationalConstructibleLocalization l H X).map\n          (ObjectProperty.homMk\n            (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))\n            (Y := (integralScalar l X F H (j.comp i)).obj K)\n            (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom)))\n    (eFG : Extension D l hl X F G i wF wG A B)\n    (eGH : Extension D l hl X G H j wG wH B C)\n    (eFH : Extension D l hl X F H (j.comp i) wF wH A C)\n    (hFG : ExtensionProperties D l hl X F G i wF wG A B eFG)\n    (hGH : ExtensionProperties D l hl X G H j wG wH B C eGH)\n    (hFH : ExtensionProperties D l hl X F H (j.comp i) wF wH A C eFH) :\n    ∀ K : sfRationalConstructibleCategory l F X,\n      (scalar l X G H j).map (eFG.comparison.hom.app (op K)) ≫\n          eGH.comparison.hom.app (op ((scalar l X F G i).obj K)) =\n        a.hom.app (A.dual.obj (op K)) ≫\n          eFH.comparison.hom.app (op K) ≫\n            C.dual.map (a.hom.app K).op",
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-sf-rational-verdier-data",
+  "lem-coef-integral-finite-extension",
+  "lem-coef-rational-verdier-composition-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "the composition clause of paragraph 3, associator equation"
+ },
+ "proof": [
+  {
+   "text": "Localize the integral beta composition equation for the three normalized presentations; the ExtensionProperties clauses identify the localized beta factors and the normalized associator hypothesis identifies the tensor associator component.",
+   "uses": [
+    "lem-coef-integral-finite-extension",
+    "def-weil-rationalization-karoubi",
+    "lem-coef-rational-verdier-composition-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-finite-extension",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-rational-verdier-composition-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "the composition clause of paragraph 3, associator equation; split from the recorded rational associator argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scalar extension associator normalized rational Verdier comparison composition",
+   "results": "No direct project theorem found; the canonical rational scalar associator is supplied by SfScalarExtensionComposition.",
+   "date": "2026-10-28",
+   "verdict": "use project associator and split the normalization/equation steps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso scalar extension composition",
+   "results": "Generic natural-isomorphism infrastructure only; no Verdier comparison equation.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfRationalScalarComp|IntegralFiniteExtension.comp|ExtensionProperties",
+   "results": "Found sfRationalScalarComp and integral finite-extension comparison declarations in the project modules.",
+   "date": "2026-10-28",
+   "verdict": "use project declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierComposition",
+  "date": "2026-10-28",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-verdier-composition",
+   "place": "the composition clause of paragraph 3, associator equation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierCompositionEquation",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierCompositionEquation.lean",
+  "declaration": "WeilConjectures.RationalVerdier.extension_composition_equation",
+  "statement": "theorem extension_composition_equation\n    (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F]\n    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]\n    (H : Type u) [Field H] [Algebra (Padic l) H] [FiniteDimensional (Padic l) H]\n    (i : F →ₐ[Padic l] G) (j : G →ₐ[Padic l] H)\n    (wF : IntegralFiniteExtension.DualizingDatum l X D hl F)\n    (wG : IntegralFiniteExtension.DualizingDatum l X D hl G)\n    (wH : IntegralFiniteExtension.DualizingDatum l X D hl H)\n    (A : Datum D l hl X F wF) (B : Datum D l hl X G wG) (C : Datum D l hl X H wH)\n    (a : scalar l X F G i ⋙ scalar l X G H j ≅ scalar l X F H (j.comp i))\n    (hnorm : ∀ K : sfIntegralConstructibleCategory l F X,\n      HEq (a.hom.app ((sfRationalConstructibleLocalization l F X).obj K))\n        ((sfRationalConstructibleLocalization l H X).map\n          (ObjectProperty.homMk\n            (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))\n            (Y := (integralScalar l X F H (j.comp i)).obj K)\n            (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom)))\n    (eFG : Extension D l hl X F G i wF wG A B)\n    (eGH : Extension D l hl X G H j wG wH B C)\n    (eFH : Extension D l hl X F H (j.comp i) wF wH A C)\n    (hFG : ExtensionProperties D l hl X F G i wF wG A B eFG)\n    (hGH : ExtensionProperties D l hl X G H j wG wH B C eGH)\n    (hFH : ExtensionProperties D l hl X F H (j.comp i) wF wH A C eFH) :\n    ∀ K : sfRationalConstructibleCategory l F X,\n      (scalar l X G H j).map (eFG.comparison.hom.app (op K)) ≫\n          eGH.comparison.hom.app (op ((scalar l X F G i).obj K)) =\n        a.hom.app (A.dual.obj (op K)) ≫\n          eFH.comparison.hom.app (op K) ≫\n            C.dual.map (a.hom.app K).op",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T180933-L-3914671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T180933-L-3914671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
