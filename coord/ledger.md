@@ -20116,3 +20116,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:03 L: merged deliver/Y2/Sheaf.Paper.QuotientSectionTensorTransportNormalizedPure (stage 3; reviewer PASS; first push; landing 20261027T210315-L-1687220 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 21:03 L: merged deliver/Y3/Sheaf.Paper.QuotientSectionTensorTransportNormalizedTotal (stage 3; reviewer PASS; first push; landing 20261027T210317-L-1687664 (interface); batch 20261027T205736; modules 7; new nodes 5; change records: coord/changes/Y3-quotient-section-total-conjugation.md)
 - 21:03 L: merged deliver/NC/lem-route-inverse-image-ring-functor (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T205736; landing 20261027T210318-NC-1688053 (proof)
+- 21:03 L: merged deliver/NB/lem-route-inverse-image-module-lift (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T205736; landing 20261027T210319-NB-1688410 (proof)
