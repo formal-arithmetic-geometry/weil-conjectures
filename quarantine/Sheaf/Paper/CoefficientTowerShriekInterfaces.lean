@@ -182,6 +182,8 @@ def levelComparison (b : SpTowerShriek.Base l E) (q : Coordinates l E b)
   letI := (q.abelian T).equivalenceAdditive
   letI := (q.abelian T).evaluationLimits n
   letI := (q.abelian T).evaluationColimits n
+  letI : (spCoefficientEvaluation l E T (q.abelian T).equivalence n).Additive :=
+    Functor.additive_of_preserves_binary_products _
   exact (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.mapDerivedCategoryNatIso (q.ordinaryEvaluation T n)
 

@@ -316,6 +316,7 @@ structure Evaluation (s : Presentation l E) where
       ((s.base.realization T).functor.obj C)).val.obj U),
     HEq (((ordinary T n).hom.app C).val.app U x) x
 
+set_option linter.style.haveILetI false in
 /-- Derived evaluation is the localization of that sectionwise identity.
 Source: blueprint, evaluation comparison (blueprint: det-sp-integral-direct-image-tower). -/
 def Evaluation.derived (s : Presentation l E) (e : Evaluation l E s)
@@ -327,11 +328,25 @@ def Evaluation.derived (s : Presentation l E) (e : Evaluation l E s)
   letI := (s.towers T).equivalenceAdditive
   letI := (s.towers T).evaluationLimits n
   letI := (s.towers T).evaluationColimits n
-  letI := Functor.additive_of_preserves_binary_products
-    (spCoefficientEvaluation l E T (s.towers T).equivalence n)
+  let hAdd : (spCoefficientEvaluation l E T (s.towers T).equivalence n).Additive := by
+    letI := (s.towers T).equivalenceAdditive
+    letI := (s.towers T).evaluationLimits n
+    exact Functor.additive_of_preserves_binary_products _
+  letI : ((s.base.realization T).functor ⋙ SpTowerShriek.ev l E T n).Additive := by
+    infer_instance
+  letI : PreservesFiniteLimits ((s.base.realization T).functor ⋙ SpTowerShriek.ev l E T n) := by
+    infer_instance
+  letI : PreservesFiniteColimits ((s.base.realization T).functor ⋙ SpTowerShriek.ev l E T n) := by
+    infer_instance
+  let e' : (s.base.realization T).functor ⋙ SpTowerShriek.ev l E T n ≅
+      spCoefficientEvaluation l E T (s.towers T).equivalence n := e.ordinary T n
   (Functor.mapDerivedCategoryCompIso (s.base.realization T).functor
       (SpTowerShriek.ev l E T n)).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (e.ordinary T n)
+    @Functor.mapDerivedCategoryNatIso _ _ _ _ _ _ _ _
+      ((s.base.realization T).functor ⋙ SpTowerShriek.ev l E T n)
+      (spCoefficientEvaluation l E T (s.towers T).equivalence n)
+      _ hAdd _ _
+      ((s.towers T).evaluationLimits n) ((s.towers T).evaluationColimits n) e'
 
 /-- Ordinary scalar evaluation of strict reduction, with the existing tensor generator.
 Source: blueprint, quotient tensor (blueprint: det-sp-integral-direct-image-tower). -/

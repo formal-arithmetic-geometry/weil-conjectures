@@ -104,6 +104,7 @@ private theorem coefficient_one
 
 attribute [local irreducible] sectionAdjoint pure positive
 
+set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- The normalization fields retain their original direct-image section carriers.
 private theorem ordinary_unit_square
@@ -158,6 +159,8 @@ private theorem ordinary_unit_square
     (tX.equivalence.functor.map q.iso.hom ≫ tX.unitIso.hom) n U z
   exact hleft.trans (hX.symm.trans hright.symm)
 
+set_option maxHeartbeats 800000 in
+-- The derived single-functor comparison rewrites need the larger heartbeat budget.
 /-- The positive pullback comparison respects the coefficient-to-line unit.
 
 Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), twisting the
@@ -207,12 +210,13 @@ theorem positivePullback_unit_square
   apply (cancel_epi ((Functor.mapDerivedCategoryCompIso
     tY.equivalence.functor g.pull).hom.app (unit Y (Arings l E Y)))).mp
   simp only [Iso.hom_inv_id_app_assoc]
-  erw [reassoc_of% (Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor
-      tY.equivalence.functor g.pull (coefficient Y (Arings l E Y))),
-    reassoc_of% (Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor
-      g.pull tX.equivalence.functor (coefficient Y (Arings l E Y))),
-    reassoc_of% (Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor
-      v.iso (coefficient Y (Arings l E Y)))]
+  dsimp only [SpTowerShriek.pull, Twisting.T]
+  have hcomp₁ := Functor.mapDerivedCategoryCompIso_hom_app_singleFunctor
+    tY.equivalence.functor g.pull (coefficient Y (Arings l E Y))
+  have hcomb := Functor.mapDerivedCategoryNatIso_comp_hom_app_singleFunctor
+    g.pull tX.equivalence.functor (tY.equivalence.functor ⋙ g.pull) v.iso
+      (coefficient Y (Arings l E Y))
+  erw [reassoc_of% hcomp₁, reassoc_of% hcomb]
   have h' := congrArg (fun a ↦
     ((tY.equivalence.functor ⋙ g.pull).mapDerivedCategorySingleFunctor 0).hom.app
       (coefficient Y (Arings l E Y)) ≫
