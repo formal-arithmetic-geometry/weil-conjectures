@@ -13,9 +13,18 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationReco
 
 Let `T₁ : C₁ ⥤ D₁` and `T₂ : C₂ ⥤ D₂` be localization functors at the morphisms of pretriangulated
 categories whose mapping cone is `M`-torsion. If a triangulated functor `F : C₁ ⥤ C₂` is a left
-adjoint and `F ⋙ T₂ ≅ T₁ ⋙ F'`, then `F'` is a left adjoint
-(`CategoryTheory.Rationalization.isLeftAdjoint_of_isLocalization`): it is the rationalization of
-`F`, and the rationalization of an adjunction is an adjunction
+adjoint and `F ⋙ T₂ ≅ T₁ ⋙ F'`,
+```
+       F
+   C₁ ───→ C₂
+   │        │
+ T₁│        │T₂
+   ↓        ↓
+   D₁ ───→ D₂
+       F'
+```
+then `F'` is a left adjoint (`CategoryTheory.Rationalization.isLeftAdjoint_of_isLocalization`):
+it is the rationalization of `F`, and the rationalization of an adjunction is an adjunction
 (`CategoryTheory.Rationalization.mapAdjunction`).
 -/
 

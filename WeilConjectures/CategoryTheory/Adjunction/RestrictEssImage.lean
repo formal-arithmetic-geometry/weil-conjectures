@@ -12,9 +12,19 @@ public import Mathlib.CategoryTheory.EssentialImage
 # Left adjoints restricted along fully faithful functors
 
 Let `iC : C ⥤ C'` and `iD : D ⥤ D'` be fully faithful, let `L' ⊣ R'` be an adjunction
-`C' ⇄ D'`, and let `L : C ⥤ D` be a functor with `iC ⋙ L' ≅ L ⋙ iD`. If `R'` maps the image of
-`iD` into the essential image of `iC`, then `L` is a left adjoint: its right adjoint is the lift
-of `iD ⋙ R'` along `iC` (`CategoryTheory.Adjunction.isLeftAdjoint_of_essImage`).
+`C' ⇄ D'`, and let `L : C ⥤ D` be a functor with `iC ⋙ L' ≅ L ⋙ iD`:
+```
+       L
+   C ────→ D
+   │       │
+ iC│       │iD
+   ↓       ↓
+   C' ───→ D'
+       L'
+```
+If `R'` maps the image of `iD` into the essential image of `iC`, then `L` is a left adjoint: its
+right adjoint is the lift of `iD ⋙ R'` along `iC`
+(`CategoryTheory.Adjunction.isLeftAdjoint_of_essImage`).
 -/
 
 @[expose] public section

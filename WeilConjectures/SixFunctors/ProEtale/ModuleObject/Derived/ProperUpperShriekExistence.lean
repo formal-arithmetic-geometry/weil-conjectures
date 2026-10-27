@@ -133,7 +133,7 @@ extension `E` of `ℚ_ℓ`, a separated finite-type `k`-morphism `f : X ⟶ Y` a
 into `Dᵇc(X)⟦E⟧`. -/
 theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
-    (hf : f ≫ aY = aX) (hk : Finite k ∨ IsSepClosed k)
+    (hf : f ≫ aY = aX)
     {G : LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) Y ⥤
       LocalizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X}
     (adj : rightDerivedLowerShriekLocalizing
@@ -152,7 +152,7 @@ of `f`, every right adjoint `f^!` of the compact-support direct image
 theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    (hf : f ≫ aY = aX) (hk : Finite k ∨ IsSepClosed k)
+    (hf : f ≫ aY = aX)
     {G : LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) Y ⥤
       LocalizingBoundedConstructible (Profinite.padicIntegersRingObj.{u} ℓ E) X}
     (adj : rightDerivedLowerShriekLocalizing
@@ -168,7 +168,7 @@ finite-type `k`-morphism `f : X ⟶ Y` and a compactification `c` of `f`, every 
 of the compact-support direct image `Rf_! : Loc(Dᵇc(X)⟦ℚ̄_ℓ⟧) ⥤ Loc(Dᵇc(Y)⟦ℚ̄_ℓ⟧)` (blueprint
 `sk-prop-sf-existence`) maps `Dᵇc(Y)⟦ℚ̄_ℓ⟧` into `Dᵇc(X)⟦ℚ̄_ℓ⟧`. -/
 theorem boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj
-    (hf : f ≫ aY = aX) (hk : Finite k ∨ IsSepClosed k)
+    (hf : f ≫ aY = aX)
     {G : LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) Y ⥤
       LocalizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X}
     (adj : rightDerivedLowerShriekLocalizing
@@ -203,7 +203,7 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_fini
   exact isLeftAdjoint_lift_rightDerivedLowerStar_of_localizing _ g.left _ hc adj
     fun L hL ↦
       boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj
-        ℓ Z.hom Y.hom _ E (Over.w g) hk adj L hL
+        ℓ Z.hom Y.hom _ E (Over.w g) adj L hL
 
 /-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-oe`, for `k` finite or separably closed:
 for a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
@@ -220,7 +220,7 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_fini
   exact isLeftAdjoint_lift_rightDerivedLowerStar_of_localizing _ g.left _ hc adj
     fun L hL ↦
       boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj
-        ℓ Z.hom Y.hom _ E (Over.w g) hk adj L hL
+        ℓ Z.hom Y.hom _ E (Over.w g) adj L hL
 
 /-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, for `k` finite or separably
 closed: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
@@ -235,7 +235,7 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_
   exact isLeftAdjoint_lift_rightDerivedLowerStar_of_localizing _ g.left _ hc adj
     fun L hL ↦
       boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj
-        ℓ Z.hom Y.hom _ (Over.w g) hk adj L hL
+        ℓ Z.hom Y.hom _ (Over.w g) adj L hL
 
 /-! ### Fields of infinite cohomological dimension -/
 
