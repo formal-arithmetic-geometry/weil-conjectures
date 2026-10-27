@@ -37,6 +37,7 @@ is imposed on the sheaf.
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 
 universe u
 
@@ -137,6 +138,23 @@ noncomputable def sfProperOpenSheafComparison {U V W T : Scheme.{u}}
     whiskerLeft (sfIntrinsicExtensionByZero k A ⋙ proEtaleConstantModuleDirectImage p A)
       (sfIntrinsicExtensionByZeroAdjunction i A).counit
 
+/-- The proper-support input for the open counit appearing in the comparison.
+The proof is the affine specialization-localization argument in Steps 2--11 of the
+blueprint proof of `lem-exc-proetale-proper-open-sheaf-comparison`: after a base
+change to an affine pro-etale object, quasi-compact representatives reduce to a
+finite principal open and the specialization-zero lemma kills the complement.
+This statement is strictly the componentwise counit assertion needed below.
+(blueprint: lem-exc-proetale-proper-open-sheaf-comparison). -/
+theorem sfProperOpenCounit_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [IsProper p]
+    (i : W ⟶ T) [IsOpenImmersion i] (M :
+      proEtaleRingModules (pullback p i)
+        (proEtaleConstantRing (pullback p i) A)) :
+    IsIso ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
+      ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
+        proEtaleConstantModuleDirectImage p A).obj M)) := by
+  sorry
+
+
 /-- Proper direct image commutes with open extension by zero for every pro-etale module
 sheaf over a finite commutative constant ring, with its canonical comparison and naturality.
 There is no quasi-compactness condition on the open immersion and no boundedness or
@@ -222,6 +240,14 @@ theorem sfProperOpenSheafComparison_isIso {V W T : Scheme.{u}} (p : V ⟶ T) [Is
     (i : W ⟶ T) [IsOpenImmersion i] :
     IsIso (sfProperOpenSheafComparison A (pullback.snd p i) (pullback.fst p i) i p
       (IsPullback.of_hasPullback p i).flip) := by
-  sorry
+  apply (NatTrans.isIso_iff_isIso_app _).mpr
+  intro M
+  dsimp only [sfProperOpenSheafComparison]
+  letI : IsIso ((sfIntrinsicExtensionByZeroAdjunction i A).counit.app
+      ((sfIntrinsicExtensionByZero (pullback.fst p i) A ⋙
+        proEtaleConstantModuleDirectImage p A).obj M)) :=
+    sfProperOpenCounit_isIso A p i M
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  infer_instance
 
 end AlgebraicGeometry.Scheme
