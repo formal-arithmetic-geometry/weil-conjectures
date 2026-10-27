@@ -1,0 +1,138 @@
+{
+ "id": "lem-coef-rational-verdier-completion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "paragraphs 1--2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized completion comparison for any ordinary tensor presentation",
+ "statement": "Fix the finite-field datum D, prime l different from its characteristic, finite coefficient extension E, and a scheme X over D.k with quasicompact separated structure morphism, as in def-sf-rational-verdier-data; no finite-type assumption is required. Let a be any ordinary normalized integral tensor-Hom presentation. Then the Completion(D,l,hl,X,E,a) structure is inhabited: it has a natural comparison to completed tensor, invertible on constructible pairs, whose good K-flat representative is exactly the fixed completionChain of def-sf-rational-verdier-data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; fixed integral duality localization"
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "def-sf-integral-verdier-models"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the normalized constructible tensor-completion theorem with the same chosen chain map as completionChain. Restrict a.representative to the good-complex subcategory.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "def-sf-rational-verdier-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The good-complex functor is a localization. Full faithfulness of restriction to its product descends the ratio of the two ordinary tensor comparisons to an isomorphism from a.tensor to the ordinary tensor supplied by completion.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose that isomorphism with the supplied completion map. Its components on constructible pairs are invertible. The fully faithful preimage equation and associativity prove the exact prescribed representative equation.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-tensor-completion",
+  "def-sf-rational-verdier-data",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; B7 explicit construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization|braiding_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightOp",
+   "results": "12 hits: CategoryTheory.Functor.rightOp, CategoryTheory.Functor.rightOp_leftOp_eq, CategoryTheory.Functor.instEssSurjOppositeRightOp, CategoryTheory.Functor.instIsEquivalenceOppositeRightOp, CategoryTheory.Functor.rightOp_faithful, CategoryTheory.Functor.rightOp_full, CategoryTheory.Functor.FullyFaithful.rightOp, CategoryTheory.Functor.leftOpRightOpIso. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of an integral contravariant duality functor and its biduality isomorphism",
+   "results": "8 hits: IsLocalizedModule.mapEquiv, CategoryTheory.Localization.functor_linear_iff, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalizationEquiv, FGModuleCat.exactPairing, Module.FinitePresentation.linearEquivMapExtendScalars, IsLocalizedModule.mapEquiv_apply, Module.FinitePresentation.linearEquivMap. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation after scalar localization of a bilinear tensor functor",
+   "results": "8 hits: LinearMap.compBilinForm_apply_apply, TensorProduct.AlgebraTensorModule.lift_apply, IsLocalization.instIsLocalizedModuleTensorProductMap, WeakBilin.eval, TensorProduct.uncurry_apply, TensorProduct.AlgebraTensorModule.lift, LinearMap.restrictScalars₁₂_apply_apply, CategoryTheory.Localization.Monoidal.tensorBifunctor. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierDatumFromIntegral",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierCompletion",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierCompletion.lean",
+  "declaration": "WeilConjectures.RationalVerdier.completion_exists",
+  "statement": "theorem completion_exists\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l E X)) :\n    Nonempty (Completion D l hl X E a)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.completion_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

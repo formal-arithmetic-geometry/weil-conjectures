@@ -1,0 +1,142 @@
+{
+ "id": "lem-coef-rational-verdier-localized-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "paragraphs 1--2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Naturality of the constructed localized completed evaluation",
+ "statement": "In the context of def-sf-rational-verdier-data, let w be integral constructible and hp preserve constructibility of its integral dual. Fix an ordinary tensor-Hom presentation a and a normalized Completion c. Define integralEvaluation by inverse completion followed by the actual counit of a.adjunction. Define localizedEvaluation by localizing that map and transporting its source using the tensor and localizedDual object equations. For every rational f:K to M, rational tensor(f,id) followed by localizedEvaluation(M) equals rational tensor(id,localizedDual(f.op)) followed by localizedEvaluation(K).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; fixed integral duality localization"
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "lem-coef-rational-verdier-localized-core"
+ ],
+ "proof": [
+  {
+   "text": "The existing first-variable naturality theorem gives the ordinary evaluation square. Use naturality of the completion transformation, cancel its invertible component at (K,DM), and cancel its two other inverse components to obtain the completed integral square.",
+   "uses": [
+    "lem-sf-integral-hom-evaluation-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The rational tensor and dual object equations give the source equality, so localizedEvaluation is an actual composite of eqToHom and the localized integral map. Their pure-tensor arrow equations reduce the desired square on a tensor f to a tensor the completed integral square.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-coef-rational-verdier-localized-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the tensor-product description of an arbitrary localized arrow. Zero and sum cases follow from separate additivity of tensor, additivity of dual, and distributivity of composition. The pure-tensor case is the preceding equation with coefficient multiplication by one.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-hom-evaluation-naturality",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-rational-verdier-localized-core",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; B7 explicit construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization|braiding_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightOp",
+   "results": "12 hits: CategoryTheory.Functor.rightOp, CategoryTheory.Functor.rightOp_leftOp_eq, CategoryTheory.Functor.instEssSurjOppositeRightOp, CategoryTheory.Functor.instIsEquivalenceOppositeRightOp, CategoryTheory.Functor.rightOp_faithful, CategoryTheory.Functor.rightOp_full, CategoryTheory.Functor.FullyFaithful.rightOp, CategoryTheory.Functor.leftOpRightOpIso. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of an integral contravariant duality functor and its biduality isomorphism",
+   "results": "8 hits: IsLocalizedModule.mapEquiv, CategoryTheory.Localization.functor_linear_iff, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalizationEquiv, FGModuleCat.exactPairing, Module.FinitePresentation.linearEquivMapExtendScalars, IsLocalizedModule.mapEquiv_apply, Module.FinitePresentation.linearEquivMap. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation after scalar localization of a bilinear tensor functor",
+   "results": "8 hits: LinearMap.compBilinForm_apply_apply, TensorProduct.AlgebraTensorModule.lift_apply, IsLocalization.instIsLocalizedModuleTensorProductMap, WeakBilin.eval, TensorProduct.uncurry_apply, TensorProduct.AlgebraTensorModule.lift, LinearMap.restrictScalars₁₂_apply_apply, CategoryTheory.Localization.Monoidal.tensorBifunctor. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierDatumFromIntegral",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierLocalizedEvaluation",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierLocalizedEvaluation.lean",
+  "declaration": "WeilConjectures.RationalVerdier.localizedEvaluation_natural",
+  "statement": "theorem localizedEvaluation_natural\n    (K M : sfRationalConstructibleCategory l E X) (f : K ⟶ M) :\n    (tensor D l hl X E).map\n        (Prod.mkHom f (𝟙 ((localizedDual l E X w hp).obj (op M)))) ≫\n      localizedEvaluation D l hl X E w hp a c M =\n    (tensor D l hl X E).map\n        (Prod.mkHom (𝟙 K) ((localizedDual l E X w hp).map f.op)) ≫\n      localizedEvaluation D l hl X E w hp a c K",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.integralEvaluation",
+   "WeilConjectures.RationalVerdier.localizedEvaluation_source",
+   "WeilConjectures.RationalVerdier.localizedEvaluation",
+   "WeilConjectures.RationalVerdier.localizedEvaluation_natural"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

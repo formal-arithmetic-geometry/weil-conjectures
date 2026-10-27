@@ -1,0 +1,131 @@
+{
+ "id": "lem-coef-rational-verdier-localized-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "paragraphs 1--2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rational internal Hom with a fixed integral second argument",
+ "statement": "For a scheme X, coefficient prime l and finite coefficient extension E, let w be an integral constructible object, and assume that RHom(K,w) is integral constructible for every integral constructible K. Restrict the permitted-pair rational internal Hom of def-weil-derived-pullback-tensor-hom to pairs (K,Qw). This defines localizedDual. Its object at op K is Q of the integral restricted dual of K.obj. It is additive and linear over the localized coefficient ring, and its map on every a tensor f is HEq to a tensor the actual integral restricted-dual map of f.op.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; fixed integral duality localization"
+ },
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-sf-integral-verdier-models",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Construct the functor into permitted rational pairs by fixing the second object to Qw; preservation supplies the pair predicate. Compose with the actual rational internal Hom.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize its bilinear arrow specification to the identity in the second factor. The resulting linear map proves additivity and homogeneity. The pure-tensor specification, with second scalar one, is the required integral dual map.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; B7 explicit construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization|braiding_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightOp",
+   "results": "12 hits: CategoryTheory.Functor.rightOp, CategoryTheory.Functor.rightOp_leftOp_eq, CategoryTheory.Functor.instEssSurjOppositeRightOp, CategoryTheory.Functor.instIsEquivalenceOppositeRightOp, CategoryTheory.Functor.rightOp_faithful, CategoryTheory.Functor.rightOp_full, CategoryTheory.Functor.FullyFaithful.rightOp, CategoryTheory.Functor.leftOpRightOpIso. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of an integral contravariant duality functor and its biduality isomorphism",
+   "results": "8 hits: IsLocalizedModule.mapEquiv, CategoryTheory.Localization.functor_linear_iff, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalizationEquiv, FGModuleCat.exactPairing, Module.FinitePresentation.linearEquivMapExtendScalars, IsLocalizedModule.mapEquiv_apply, Module.FinitePresentation.linearEquivMap. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation after scalar localization of a bilinear tensor functor",
+   "results": "8 hits: LinearMap.compBilinForm_apply_apply, TensorProduct.AlgebraTensorModule.lift_apply, IsLocalization.instIsLocalizedModuleTensorProductMap, WeakBilin.eval, TensorProduct.uncurry_apply, TensorProduct.AlgebraTensorModule.lift, LinearMap.restrictScalars₁₂_apply_apply, CategoryTheory.Localization.Monoidal.tensorBifunctor. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierDatumFromIntegral",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierLocalizedCore",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierLocalizedCore.lean",
+  "declaration": "WeilConjectures.RationalVerdier.localizedDual_spec",
+  "statement": "theorem localizedDual_spec (w : sfIntegralConstructibleCategory l E X)\n    (hp : ∀ K : sfIntegralConstructibleCategory l E X,\n      sfIntegralConstructible l E X ((IntegralVerdier.dual l E X w.obj).obj (op K.obj))) :\n    (∀ K : sfRationalConstructibleCategory l E X,\n      (localizedDual l E X w hp).obj (op K) =\n        (sfRationalConstructibleLocalization l E X).obj\n          ((IntegralVerdier.restrictedDual l E X w.obj hp).obj (op K.obj))) ∧\n    (localizedDual l E X w hp).Additive ∧\n    (∀ (K M : sfRationalConstructibleCategory l E X) (f : K ⟶ M)\n      (c : Localization.Away (Padic.coefficientExtensionUniformizer l E)),\n      (localizedDual l E X w hp).map (c • f).op =\n        c • (localizedDual l E X w hp).map f.op) ∧\n    (∀ (K M : sfIntegralConstructibleCategory l E X) (f : K ⟶ M)\n      (c : Localization.Away (Padic.coefficientExtensionUniformizer l E)),\n      HEq ((localizedDual l E X w hp).map (Quiver.Hom.op\n        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] f :\n          (sfRationalConstructibleLocalization l E X).obj K ⟶\n            (sfRationalConstructibleLocalization l E X).obj M)))\n        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E]\n          (IntegralVerdier.restrictedDual l E X w.obj hp).map f.op))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.dualInput",
+   "WeilConjectures.RationalVerdier.localizedDual",
+   "WeilConjectures.RationalVerdier.localizedDual_spec"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

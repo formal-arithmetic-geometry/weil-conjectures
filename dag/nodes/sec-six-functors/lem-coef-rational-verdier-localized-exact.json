@@ -1,0 +1,140 @@
+{
+ "id": "lem-coef-rational-verdier-localized-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "paragraphs 1--2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exactness of the fixed rational dual",
+ "statement": "With w, its constructibility preservation hp, and localizedDual as in lem-coef-rational-verdier-localized-core, assume an ambient integral dual CommShift whose image of every distinguished triangle with integral-constructible vertices is distinguished. Then localizedDual has a CommShift and carries every distinguished triangle in the opposite rational constructible category to a distinguished rational triangle with this shift comparison. This asserts only exactness, without biduality or evaluation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; fixed integral duality localization"
+ },
+ "stmt_deps": [
+  "lem-coef-rational-verdier-localized-core",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the shift structure to the integral constructible subcategory using full faithfulness of its inclusion. Compare mapped triangles along the defining factorization, and use the given distinguished-triangle hypothesis and reflection by the inclusion.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The object and pure-tensor equations identify Q.op followed by the rational dual with the integral restricted dual followed by Q. Raw scalar localization is a categorical localization, and so is its opposite. Descend the shift through this factorization.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-coef-rational-verdier-localized-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localization has a calculus of fractions, hence its arrow functor is essentially surjective. Apply exactness descent through precomposition with this exact functor to the factorization.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-coef-rational-verdier-localized-core",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraphs 1--2; B7 explicit construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization|braiding_naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/Enriched/Opposite.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightOp",
+   "results": "12 hits: CategoryTheory.Functor.rightOp, CategoryTheory.Functor.rightOp_leftOp_eq, CategoryTheory.Functor.instEssSurjOppositeRightOp, CategoryTheory.Functor.instIsEquivalenceOppositeRightOp, CategoryTheory.Functor.rightOp_faithful, CategoryTheory.Functor.rightOp_full, CategoryTheory.Functor.FullyFaithful.rightOp, CategoryTheory.Functor.leftOpRightOpIso. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of an integral contravariant duality functor and its biduality isomorphism",
+   "results": "8 hits: IsLocalizedModule.mapEquiv, CategoryTheory.Localization.functor_linear_iff, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalizationEquiv, FGModuleCat.exactPairing, Module.FinitePresentation.linearEquivMapExtendScalars, IsLocalizedModule.mapEquiv_apply, Module.FinitePresentation.linearEquivMap. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation after scalar localization of a bilinear tensor functor",
+   "results": "8 hits: LinearMap.compBilinForm_apply_apply, TensorProduct.AlgebraTensorModule.lift_apply, IsLocalization.instIsLocalizedModuleTensorProductMap, WeakBilin.eval, TensorProduct.uncurry_apply, TensorProduct.AlgebraTensorModule.lift, LinearMap.restrictScalars₁₂_apply_apply, CategoryTheory.Localization.Monoidal.tensorBifunctor. No theorem assembles the specified Verdier localization data.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierDatumFromIntegral",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierLocalizedExact",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierLocalizedExact.lean",
+  "declaration": "WeilConjectures.RationalVerdier.localizedDual_exact",
+  "statement": "theorem localizedDual_exact (w : sfIntegralConstructibleCategory l E X)\n    (hp : ∀ K : sfIntegralConstructibleCategory l E X,\n      sfIntegralConstructible l E X ((IntegralVerdier.dual l E X w.obj).obj (op K.obj)))\n    (hex : ∃ s : (IntegralVerdier.dual l E X w.obj).CommShift ℤ,\n      ∀ T : Triangle (IntegralVerdier.Ambient l E X)ᵒᵖ,\n        sfIntegralConstructible l E X T.obj₁.unop →\n        sfIntegralConstructible l E X T.obj₂.unop →\n        sfIntegralConstructible l E X T.obj₃.unop →\n        T ∈ distTriang (IntegralVerdier.Ambient l E X)ᵒᵖ →\n        Triangle.mk ((IntegralVerdier.dual l E X w.obj).map T.mor₁)\n          ((IntegralVerdier.dual l E X w.obj).map T.mor₂)\n          ((IntegralVerdier.dual l E X w.obj).map T.mor₃ ≫\n            (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈\n          distTriang (IntegralVerdier.Ambient l E X)) :\n    ∃ s : (localizedDual l E X w hp).CommShift ℤ,\n      ∀ T : Triangle (sfRationalConstructibleCategory l E X)ᵒᵖ,\n        T ∈ distTriang (sfRationalConstructibleCategory l E X)ᵒᵖ →\n        Triangle.mk ((localizedDual l E X w hp).map T.mor₁)\n          ((localizedDual l E X w hp).map T.mor₂)\n          ((localizedDual l E X w hp).map T.mor₃ ≫\n            (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈\n          distTriang (sfRationalConstructibleCategory l E X)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.localizedDual_exact"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T233812-L-4116804",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
