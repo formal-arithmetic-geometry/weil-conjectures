@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
+import Sheaf.Paper.PullbackTensorIntegralUnitExistence
+import Sheaf.Paper.PullbackTensorIntegralUnitUniqueness
 
 /-! Integral unit coherence for the completed pullback tensor comparison.
 
@@ -12,9 +14,8 @@ Source: Stacks Project, Tags 07A4 and 0941; the integral part of
 `lem-pur-pullback-tensor-unit-coherence`.
 (blueprint: lem-pur-pullback-tensor-integral-unit-coherence)
 
-The proof lifts the normalized system unit comparison through coherent fully
-faithful reduction and transports both unitor equations. Uniqueness follows by
-faithfulness and cancellation with the tensor unitors.
+The existence and uniqueness halves are supplied by the normalized reduction
+construction and the cancellation lemma, respectively.
 -/
 
 @[expose] public noncomputable section
@@ -32,6 +33,11 @@ variable (l : ℕ) [Fact l.Prime]
 theorem pullbackTensorIntegralUnitCoherence {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
-    canonicalIntegralPullbackTensor_unit l E f := by sorry
+    canonicalIntegralPullbackTensor_unit l E f := by
+  unfold canonicalIntegralPullbackTensor_unit
+  obtain ⟨ε, hε⟩ := canonicalIntegralPullbackTensor_unit_exists l E f
+  refine ⟨ε, hε, ?_⟩
+  intro δ hδ
+  exact canonicalIntegralPullbackTensor_unit_unique l E f ε δ hε hδ |>.symm
 
 end WeilConjectures

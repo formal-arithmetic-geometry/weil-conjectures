@@ -1,0 +1,111 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product; integral unit coherence."
+ },
+ "stmt_deps": [
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; integral coefficient-level unit coherence descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integral pullback tensor unit coherence via fully faithful reduction",
+   "results": "No exact project specialization; generic fully faithful unit lemmas found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "canonicalIntegralPullbackTensor_unit l E f",
+   "results": "No project identifier in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalIntegralPullbackTensor_unit l E f",
+   "results": "No existing project declaration outside the assigned modules.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PullbackTensorIntegralUnitCoherence",
+  "date": "2026-10-28",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-pullback-tensor-integral-unit-coherence",
+   "place": "integral component of the unit coherence proof.",
+   "via": [
+    "lem-pur-pullback-tensor-integral-unit-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "id": "lem-pur-pullback-tensor-integral-unit-coherence-existence",
+ "kind": "statement",
+ "title": "Existence of integral pullback tensor unit coherence",
+ "statement": "The normalized integral pullback tensor comparison admits an isomorphism from the pullback of the source unit to the target unit satisfying both prescribed left and right unitor equations for every integral constructible input.",
+ "proof": [
+  {
+   "text": "Construct the normalized coherent system unit comparison, transport both system unitor equations through the integral reduction and the tensor/pullback counits, and lift the resulting isomorphism along fully faithful coherent reduction.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PullbackTensorIntegralUnitExistence",
+  "file": "lean/Sheaf/Paper/PullbackTensorIntegralUnitExistence.lean",
+  "declaration": "WeilConjectures.canonicalIntegralPullbackTensor_unit_exists",
+  "statement": "theorem canonicalIntegralPullbackTensor_unit_exists {X Y : Scheme.{u}} (f : X ⟶ Y) [hX : ∀ x : X, Invertible (l : X.residueField x)] [hY : ∀ y : Y, Invertible (l : Y.residueField y)] : ∃ ε : ((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj ((@pullbackTensorIntegralUnit l _ E _ _ _ Y hY)) ≅ (@pullbackTensorIntegralUnit l _ E _ _ _ X hX), ∀ M : sfIntegralConstructibleCategory l E Y, (((@canonicalIntegralPullbackTensor l _ E _ _ _ X Y f hX hY) ((@pullbackTensorIntegralUnit l _ E _ _ _ Y hY)) M).hom ≫ ((@constructibleIntegralTensor l _ E _ _ _ X hX)).map (Prod.mkHom ε.hom (𝟙 _)) ≫ ((@pullbackTensorIntegralLeftUnitor l _ E _ _ _ X hX) (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M)).hom = ((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).map ((@pullbackTensorIntegralLeftUnitor l _ E _ _ _ Y hY) M).hom) ∧ (((@canonicalIntegralPullbackTensor l _ E _ _ _ X Y f hX hY) M ((@pullbackTensorIntegralUnit l _ E _ _ _ Y hY))).hom ≫ ((@constructibleIntegralTensor l _ E _ _ _ X hX)).map (Prod.mkHom (𝟙 _) ε.hom) ≫ ((@pullbackTensorIntegralRightUnitor l _ E _ _ _ X hX) (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M)).hom = ((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).map ((@pullbackTensorIntegralRightUnitor l _ E _ _ _ Y hY) M).hom)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T233848-L-4125362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261027T233848-L-4125362",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
