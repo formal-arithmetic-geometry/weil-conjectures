@@ -67,9 +67,11 @@ noncomputable def dualizingMap (h : N.IsTraitModelOfBase k q g) :
   dualizingExchange ℓ (traitSpecializationUnit k k' (ℓ := ℓ)) (h.compactSupportExchange ℓ)
 
 /-- **The dualizing map of a proper model is compatible with the traces**:
-`tr_{Y'} ∘ Ra'_*(θ_N) ∘ χ_a(ω_Y) = σ⁻¹ ∘ Ψ_S(tr_Y)`. -/
+`tr_{Y'} ∘ Ra'_*(θ_N) ∘ χ_a(ω_Y) = σ⁻¹ ∘ Ψ_S(tr_Y)`, for `q` proper and geometric generic fibre
+all of `Y ×_k Spec Ω` (then `χ_a` is invertible, and `ν_a = χ_a⁻¹` under `Ra_! ≅ Ra_*`). -/
 theorem pushforwardExchange_app_comp_map_dualizingMap_comp_trace [IsProper (toPoint Y).left]
-    [IsProper (toPoint Y').left] (h : N.IsTraitModelOfBase k q g) :
+    [IsProper (toPoint Y').left] (h : N.IsTraitModelOfBase k q g) [IsProper q]
+    (hgen : IsPullback N.ε g Y.hom (traitGenericPoint k' ≫ traitToBase k k')) :
     (h.pushforwardExchange ℓ).app (dualizingComplex ℓ Y) ≫
         (boundedConstructibleLowerStar ℓ (toPoint Y')).map (h.dualizingMap ℓ) ≫ trace ℓ Y' =
       (traitSpecialization k k' (ℓ := ℓ)).map (trace ℓ Y) ≫

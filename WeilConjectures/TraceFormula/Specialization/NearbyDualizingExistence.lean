@@ -60,8 +60,8 @@ isomorphism `RΓ(X_Ω, -) ≅ RΓ(X', Ψ -)`, and the property is the compatibil
 traces. -/
 theorem nonempty_nearbyDualizingData : Nonempty (NearbyDualizingData k k' ℓ) :=
   ⟨{ θ := fun h ↦ h.dualizingMap ℓ
-     pushforwardExchange_comp_map_θ_comp_trace := fun h _ _ ↦
-       h.pushforwardExchange_app_comp_map_dualizingMap_comp_trace ℓ
+     pushforwardExchange_comp_map_θ_comp_trace := fun h _ hgen ↦
+       h.pushforwardExchange_app_comp_map_dualizingMap_comp_trace ℓ hgen
      map_θ_comp_dualizingComplexUpperStarIso := fun hM hN j _ j' _ φ _ hφ hq hg ↦
        IsTraitModelOfBase.map_dualizingMap_comp_dualizingComplexUpperStarIso ℓ hM hN j j' φ hφ
          hq hg }⟩
