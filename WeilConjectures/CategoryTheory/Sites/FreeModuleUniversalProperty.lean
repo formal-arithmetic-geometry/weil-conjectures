@@ -37,13 +37,13 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 
 /-- The underlying sheaf of sets without the inverse-image interface's `ULift`.
 Source: Stacks 04BL (auxiliary; not a blueprint node). -/
-abbrev underlyingRaw : ringedSiteModules.{w, w, vC, uC} (ring B) ⥤ Sheaf J (Type w) :=
+abbrev underlyingRaw : SheafOfModules.{w} (ring B) ⥤ Sheaf J (Type w) :=
   SheafOfModules.toSheaf (ring B) ⋙ sheafCompose J (forget AddCommGrpCat.{w})
 
 /-- Restriction of a module map to the canonical generators.
 Source: Stacks 04BL (auxiliary; not a blueprint node). -/
 def restrictGenerators (E : Sheaf J (Type w))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B))
+    (M : SheafOfModules.{w} (ring B))
     (h : (free B).obj E ⟶ M) : E ⟶ (underlyingRaw B).obj M :=
   generatorRaw B E ≫ (underlyingRaw B).map h
 
@@ -52,7 +52,7 @@ This is the actual inverse of the composite of the two Mathlib Hom equivalences.
 Source: Stacks 04BL and 03CY
 (auxiliary; not a blueprint node). -/
 def extendGenerators (E : Sheaf J (Type w))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B))
+    (M : SheafOfModules.{w} (ring B))
     (a : E ⟶ (underlyingRaw B).obj M) : (free B).obj E ⟶ M :=
   letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
   letI : ∀ U : Cᵒᵖ,
@@ -80,7 +80,7 @@ def freeModuleUnit (E : Sheaf J (Type w)) :
   toSheafify J (PresheafOfModules.freeObj (R := (ring B).obj) E.obj).presheaf
 
 private def freeHomEquivRaw (E : Sheaf J (Type w))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) :
+    (M : SheafOfModules.{w} (ring B)) :
     ((free B).obj E ⟶ M) ≃ (E.obj ⟶ ((underlyingRaw B).obj M).obj) :=
   letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
   letI : ∀ U : Cᵒᵖ,
@@ -93,7 +93,7 @@ private def freeHomEquivRaw (E : Sheaf J (Type w))
     (PresheafOfModules.sheafificationAdjunction (𝟙 (ring B).obj))).homEquiv E.obj M
 
 private lemma freeHomEquivRaw_apply (E : Sheaf J (Type w))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) (h : (free B).obj E ⟶ M) :
+    (M : SheafOfModules.{w} (ring B)) (h : (free B).obj E ⟶ M) :
     freeHomEquivRaw B E M h = (restrictGenerators B E M h).hom := by
   ext U e
   rfl
@@ -110,7 +110,7 @@ factors it uniquely (step 3). The two inverse identities follow because linear m
 agreeing on basis vectors agree, and the sheafification factorization is unique (step 4).
 These use def-weil-pbc-free-module and def-weil-presheaf-modules-sheafification. -/
 theorem freeModule_restrict_bijective (E : Sheaf J (Type w))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) :
+    (M : SheafOfModules.{w} (ring B)) :
     Function.Bijective (restrictGenerators B E M) := by
   constructor
   · intro h h' hh
@@ -132,7 +132,7 @@ unit and the extension of its generator values agree on [e], hence on finite sum
 Uniqueness in def-weil-presheaf-modules-sheafification gives the second identity.
 These are steps 2--4 of the node's proof. -/
 theorem freeModule_extend_inverse (E : Sheaf J (Type w))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) :
+    (M : SheafOfModules.{w} (ring B)) :
     (∀ a : E ⟶ (underlyingRaw B).obj M,
       restrictGenerators B E M (extendGenerators B E M a) = a) ∧
     (∀ h : (free B).obj E ⟶ M,
@@ -157,7 +157,7 @@ coefficient family v to the sum of v(e) times a(e). The defining Hom equivalence
 for module sheafification says that composing the extension with its unit is this
 presheaf map. No surjectivity of the unit on sections is asserted or needed. -/
 theorem freeModule_extend_formula (E : Sheaf J (Type w))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B))
+    (M : SheafOfModules.{w} (ring B))
     (a : E ⟶ (underlyingRaw B).obj M) (U : Cᵒᵖ)
     (v : E.obj.obj U →₀ (ring B).obj.obj U) :
     (extendGenerators B E M a).val.app U
@@ -198,7 +198,7 @@ the same way is simply functoriality of the underlying-set functor. The inverse
 bijections are natural too, by applying these equalities and injectivity. -/
 theorem freeModule_restrict_naturality
     (E E' : Sheaf J (Type w)) (f : E ⟶ E')
-    (M M' : ringedSiteModules.{w, w, vC, uC} (ring B)) :
+    (M M' : SheafOfModules.{w} (ring B)) :
     (∀ h : (free B).obj E' ⟶ M,
       restrictGenerators B E M ((free B).map f ≫ h) =
         f ≫ restrictGenerators B E' M h) ∧
@@ -235,9 +235,9 @@ fix k and i respectively, so injectivity of the two restriction maps makes them
 identities. Hence p and q are inverse. Injectivity at B[E] also makes p the unique
 normalized isomorphism, and injectivity for the free module makes q unique. -/
 theorem freeModule_unique_iso (E : Sheaf J (Type w))
-    (P : ringedSiteModules.{w, w, vC, uC} (ring B))
+    (P : SheafOfModules.{w} (ring B))
     (k : E ⟶ (underlyingRaw B).obj P)
-    (hP : ∀ M : ringedSiteModules.{w, w, vC, uC} (ring B),
+    (hP : ∀ M : SheafOfModules.{w} (ring B),
       Function.Bijective (fun h : P ⟶ M ↦ k ≫ (underlyingRaw B).map h)) :
     ∃! p : P ≅ (free B).obj E,
       (k ≫ (underlyingRaw B).map p.hom = generatorRaw B E) ∧

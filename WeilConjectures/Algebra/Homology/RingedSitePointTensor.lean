@@ -266,7 +266,7 @@ theorem tensor (s : RingedSitePoint R p) :
     letI := SheafOfModules.monoidalCategory R
     letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
     letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
-    ∀ F K : CochainComplex (ringedSiteModules.{w}
+    ∀ F K : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ,
       Nonempty (((s.modules.mapHomologicalComplex (.up ℤ)).obj
         (CochainComplex.mapBifunctor F K (curriedTensor _))) ≅

@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 import all WeilConjectures.Algebra.Homology.ExactMonoidalEquivalenceTotalKFlat
 import WeilConjectures.AlgebraicGeometry.SectionModuleAlgebraicInverseImage
 import WeilConjectures.AlgebraicGeometry.ProEtaleEnoughPoints
-import WeilConjectures.CategoryTheory.RingedSiteModules
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
@@ -35,9 +34,6 @@ Source: Stacks Project, Tags 0DEN and 0DEP.
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
-
-attribute [-instance] CategoryTheory.Sheaf.monoidalCategory
-  CategoryTheory.Sheaf.symmetricCategory
 
 universe u
 
@@ -66,31 +62,6 @@ private instance proEtaleBaseChange_isContinuous {X Y : Scheme.{u}} (f : X ⟶ Y
 private instance proEtaleBaseChange_preservesFiniteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (proEtaleBaseChange f) :=
   inferInstanceAs (PreservesFiniteLimits (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f))
-
-/-- Direct image, by precomposition on sections and morphisms, for any value category.
-Source: Stacks, Tags 09A5, 00VC and 00WX (auxiliary; not a blueprint node). -/
-private noncomputable abbrev proEtaleSheafDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (D : Type*) [Category.{u + 1} D] :
-    Sheaf (ProEt.topology X) D ⥤ Sheaf (ProEt.topology Y) D :=
-  AlgebraicGeometry.ProEtale.lowerStar D f
-
-/-- Inverse image is left Kan extension followed by sheafification.
-Source: Stacks, Tags 09A5, 00VC and 00WX (auxiliary; not a blueprint node). -/
-private noncomputable abbrev proEtaleSheafInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (D : Type*) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
-    [HasWeakSheafify (ProEt.topology X) D] :
-    Sheaf (ProEt.topology Y) D ⥤ Sheaf (ProEt.topology X) D :=
-  Functor.sheafPullbackConstruction.sheafPullback (proEtaleBaseChange f) D
-    (ProEt.topology Y) (ProEt.topology X)
-
-/-- The inverse-image/direct-image adjunction. Source: Stacks, Tags 09A5, 00VC and 00WX
-(auxiliary; not a blueprint node). -/
-private noncomputable abbrev proEtaleSheafAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (D : Type*) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
-    [HasWeakSheafify (ProEt.topology X) D] :
-    proEtaleSheafInverseImage f D ⊣ proEtaleSheafDirectImage f D :=
-  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (proEtaleBaseChange f) D
-    (ProEt.topology Y) (ProEt.topology X)
 
 end AlgebraicGeometry.Scheme
 
@@ -157,7 +128,6 @@ private theorem section_kflat_iff (T : Scheme.{u})
       CochainComplex.IsKFlatIndependentCoefficients
         ((((InternalAbelianSheafModule.sectionModuleEquivalence
           (Scheme.ProEt.topology T) R).functor).mapHomologicalComplex (.up ℤ)).obj P) := by
-  change P.IsKFlatForTotalTensor ↔ _
   obtain ⟨e, e₀, _, _, _, _, _, _, _, _, _, _, hk⟩ :=
     (InternalAbelianSheafModule.internal_section_tensor_comparison
       (Scheme.ProEt.topology T) R).2
@@ -189,9 +159,15 @@ theorem preservesKFlatComplexes_mapMod_proEtale
   let geom : GeometricMorphism
       (Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))
       (Sheaf (Scheme.ProEt.topology Y) (Type (u + 1))) :=
-    { inverse := Scheme.proEtaleSheafInverseImage f (Type (u + 1))
-      direct := Scheme.proEtaleSheafDirectImage f (Type (u + 1))
-      adj := Scheme.proEtaleSheafAdjunction f (Type (u + 1))
+    -- `ProEtale.upperStar` needs an abelian Grothendieck coefficient category, so for
+    -- `Type`-valued sheaves the inverse image is spelled out as in its definition.
+    { inverse := Functor.sheafPullbackConstruction.sheafPullback
+        (Scheme.proEtaleBaseChange f)
+        (Type (u + 1)) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+      direct := ProEtale.lowerStar (Type (u + 1)) f
+      adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Scheme.proEtaleBaseChange f)
+        (Type (u + 1)) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
       leftExact := by
         have : PreservesFiniteLimits
             ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.lan :
@@ -199,8 +175,7 @@ theorem preservesKFlatComplexes_mapMod_proEtale
           let : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
             AB5OfSize_shrink.{u, u + 1, u + 1, u + 1} (Type (u + 1))
           apply preservesFiniteLimits_op_lan_of_flat
-        unfold Scheme.proEtaleSheafInverseImage
-          Functor.sheafPullbackConstruction.sheafPullback
+        unfold Functor.sheafPullbackConstruction.sheafPullback
         infer_instance }
   obtain ⟨ι, p, hp⟩ := proEtale_enoughPoints.{u, u} X
   let s : ∀ i, RingedSitePoint

@@ -103,9 +103,9 @@ throughout, and no flatness of K's individual terms is assumed.
 -/
 theorem ringedSite_kFlat_stalk_criterion
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
-    (J : Precoverage C) (hJ : J.IsSiteForCoverings)
+    (J : Precoverage C)
     (R : Sheaf J.toGrothendieck CommRingCat.{w})
-    (K : CochainComplex (ringedSiteModules.{w}
+    (K : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) :
     (∀ (p : GeometricMorphism (Type w) (Sheaf J.toGrothendieck (Type w)))
       (s : RingedSitePoint R p),

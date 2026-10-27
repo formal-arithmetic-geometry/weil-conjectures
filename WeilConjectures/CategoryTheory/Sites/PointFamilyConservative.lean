@@ -59,7 +59,7 @@ jointly faithful. Mathlib's criterion for jointly faithful functors from a balan
 then gives joint reflection of isomorphisms, since sheaves of sets form a balanced category. -/
 lemma point_family_conservative
     {C : Type u} [Category.{v} C]
-    (J : Precoverage C) (hJ : J.IsSiteForCoverings)
+    (J : Precoverage C)
     (I : Type w')
     (p : I → GeometricMorphism (Type (max u v w))
       (Sheaf J.toGrothendieck (Type (max u v w))))
@@ -70,7 +70,6 @@ lemma point_family_conservative
           (uliftYoneda.{max u v w, v}.obj U))),
         pointSectionImage J (p i) F U x s ≠ pointSectionImage J (p i) F U x s') :
     JointlyReflectIsomorphisms (fun i : I ↦ (p i).inverse) := by
-  have _ := hJ
   have hnat (F G : Sheaf J.toGrothendieck (Type (max u v w))) (a : F ⟶ G)
       (U : C) (t : F.obj.obj (op U)) :
       sectionMorphism J F U t ≫ a = sectionMorphism J G U (a.hom.app (op U) t) := by

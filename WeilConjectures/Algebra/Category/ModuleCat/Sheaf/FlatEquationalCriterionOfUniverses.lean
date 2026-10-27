@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
@@ -416,7 +416,7 @@ theorem isFlatOnSite_of_local_equationalCriterion
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}]
     (R : Sheaf J CommRingCat.{r})
-    (M : ringedSiteModules.{m}
+    (M : SheafOfModules.{m}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
     (hM : ∀ (U : C) (n : ℕ) (a : Fin n → R.obj.obj (op U))
         (s : Fin n → M.val.obj (op U)),
@@ -467,7 +467,7 @@ theorem isFlatOnSite_iff_local_equationalCriterion
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max r m}] [HasWeakSheafify J AddCommGrpCat.{max r m}]
     (R : Sheaf J CommRingCat.{r})
-    (M : ringedSiteModules.{max r m}
+    (M : SheafOfModules.{max r m}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :
     IsFlatOnSite M ↔
       ∀ (U : C) (n : ℕ) (a : Fin n → R.obj.obj (op U))

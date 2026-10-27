@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 import Mathlib.Algebra.Category.Ring.Limits
-import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses

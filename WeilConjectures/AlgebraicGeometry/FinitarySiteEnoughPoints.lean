@@ -85,7 +85,7 @@ private lemma sheafifiedRepresentables_separating
     Opposite.op_unop, TypeCat.Fun.toFun_apply] using he
 
 private theorem small_family_of_section_separation
-    {C : Type u} [SmallCategory C] (J : Precoverage C) (hJ : J.IsSiteForCoverings)
+    {C : Type u} [SmallCategory C] (J : Precoverage C)
     (hsep : ∀ (F : Sheaf J.toGrothendieck (Type (max u w))) (U : C)
       (s s' : F.obj.obj (Opposite.op U)), s ≠ s' →
       ∃ (p : GeometricMorphism (Type (max u w))
@@ -115,7 +115,7 @@ private theorem small_family_of_section_separation
   let ι := {i : D // s i ≠ t i}
   choose p x hp using fun i : ι ↦ hsep (Q i.1) i.1.1 (s i.1) (t i.1) i.2
   refine ⟨ι, p, ?_⟩
-  have hc := point_family_conservative.{u, u, w, max u w} J hJ ι p ?_
+  have hc := point_family_conservative.{u, u, w, max u w} J ι p ?_
   · intro F G f hf
     have (i : ι) : IsIso ((p i).inverse.map f) :=
       (CategoryTheory.isIso_iff_bijective _).2 (hf i)
@@ -250,7 +250,7 @@ theorem finitarySite_enoughPoints
         (∀ i, Function.Bijective ((p i).inverse.map a)) → IsIso a := by
   classical
   -- Select the family through small subobject sets of sheafified representables.
-  apply small_family_of_section_separation J hJ
+  apply small_family_of_section_separation J
   intro F W s s' hne
   obtain ⟨I, po, ne, di, U, i, a, hd, hl⟩ :=
     exists_pointSystem_finiteCoverLifting J hJ F W s s' hne
@@ -285,7 +285,7 @@ theorem finitarySite_enoughPoints
     refine ⟨(r (e k)).down, H.map q y, ?_⟩
     rw [← ConcreteCategory.comp_apply, ← H.map_comp, hq]
     exact hy
-  obtain ⟨_, _, p, ⟨e⟩⟩ := inverseSystemSitePoint.{w} J hJ U.leftOp hcover
+  obtain ⟨_, _, p, ⟨e⟩⟩ := inverseSystemSitePoint.{w} J U.leftOp hcover
   let A := (presheafToSheaf J.toGrothendieck (Type (max u w))).obj
     (uliftYoneda.{max u w}.obj W)
   let η := toSheafify J.toGrothendieck (uliftYoneda.{max u w}.obj W)

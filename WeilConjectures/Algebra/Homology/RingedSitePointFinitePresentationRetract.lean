@@ -420,7 +420,7 @@ theorem finitePresentation_retract
     {p : GeometricMorphism (Type w) (Sheaf J (Type w))}
     (s : RingedSitePoint R p) (M : ModuleCat.{w} s.ring)
     (hM : Module.FinitePresentation s.ring M) :
-    ∃ F : ringedSiteModules.{w}
+    ∃ F : SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R),
       Nonempty (Retract M (s.modules.obj F)) := by
   classical

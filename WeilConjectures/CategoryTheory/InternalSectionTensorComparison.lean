@@ -34,7 +34,8 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct
 
-attribute [instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
 
 namespace CategoryTheory.InternalAbelianSheafModule
 /-- The site is essentially small in the coefficient universe.

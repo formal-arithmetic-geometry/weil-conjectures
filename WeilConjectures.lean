@@ -38,7 +38,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdju
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainModuleAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensoratorExistence
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalars
@@ -590,7 +589,6 @@ public import WeilConjectures.Algebra.Homology.OpenSupportedHomologyApproximatio
 public import WeilConjectures.Algebra.Homology.PreciseVanishing
 public import WeilConjectures.Algebra.Homology.PreciseVanishingCore
 public import WeilConjectures.Algebra.Homology.PreorderModuleMapEqualityDescent
-public import WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 public import WeilConjectures.Algebra.Homology.ProjectiveRestrictionTorBound
 public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 public import WeilConjectures.Algebra.Homology.QuasiIsoOfSections
@@ -8438,7 +8436,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
 public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
-public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.CategoryTheory.RingedToposMorphism
 public import WeilConjectures.CategoryTheory.RingedToposRingData
 public import WeilConjectures.CategoryTheory.RoosAcyclicResolution

@@ -61,7 +61,7 @@ theorem acyclic_iff
     {I : Type t} (p : I → GeometricMorphism (Type w) (Sheaf J (Type w)))
     (s : ∀ i : I, RingedSitePoint R (p i))
     (hp : JointlyReflectIsomorphisms (fun i : I ↦ (p i).inverse))
-    (K : CochainComplex (ringedSiteModules.{w}
+    (K : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) :
     K.Acyclic ↔ ∀ i : I,
       (((s i).modules.mapHomologicalComplex (.up ℤ)).obj K).Acyclic := by
@@ -74,7 +74,7 @@ theorem acyclic_iff
   · intro h n
     let H := (K.sc n).homology
     have hi (i : I) : IsIso ((s i).modules.map
-        (0 : H ⟶ (0 : ringedSiteModules.{w}
+        (0 : H ⟶ (0 : SheafOfModules.{w}
           ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)))) := by
       have he := (exactFunctor_iff _).1 ((s i).exact)
       have : PreservesFiniteLimits (s i).modules := he.1
@@ -87,7 +87,7 @@ theorem acyclic_iff
       exact (isIsoZero_iff_source_target_isZero _ _).2
         ⟨hz, (s i).modules.map_isZero (isZero_zero _)⟩
     have := (jointlyReflectModules p s hp).isIso
-      (0 : H ⟶ (0 : ringedSiteModules.{w}
+      (0 : H ⟶ (0 : SheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)))
     exact (ShortComplex.exact_iff_isZero_homology _).2
       ((isIsoZero_iff_source_target_isZero _ _).1 this).1

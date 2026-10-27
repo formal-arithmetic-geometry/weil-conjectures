@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
@@ -350,27 +350,27 @@ theorem isKFlat_ringedToposPullback_of_acyclic
     (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w)))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]
     (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)
-    (uStar : ringedSiteModules.{w} ((sheafCompose JC
+    (uStar : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤
-      ringedSiteModules.{w} ((sheafCompose JD
+      SheafOfModules.{w} ((sheafCompose JD
         (forget₂ CommRingCat.{w} RingCat.{w})).obj S))
-    (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC
+    (hobj : ∀ M : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R),
       uStar.obj M = changeOfRings c (I.modules.obj M))
-    (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC
+    (hmap : ∀ {M N : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N),
       uStar.map a = eqToHom (hobj M) ≫
         changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm)
     [uStar.Additive]
-    (P : CochainComplex (ringedSiteModules.{w} ((sheafCompose JC
+    (P : CochainComplex (SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)
     (hacyclic : P.Acyclic) (hP : P.IsKFlatIndependentCoefficients)
     (hflat : ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) :
     CochainComplex.IsKFlatIndependentCoefficients
       ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) := by
-  let 𝒜 := ringedSiteModules.{w}
+  let 𝒜 := SheafOfModules.{w}
     ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
-  let ℬ := ringedSiteModules.{w}
+  let ℬ := SheafOfModules.{w}
     ((sheafCompose JD (forget₂ CommRingCat.{w} RingCat.{w})).obj S)
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R

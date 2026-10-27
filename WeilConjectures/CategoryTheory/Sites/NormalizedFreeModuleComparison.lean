@@ -76,7 +76,7 @@ private abbrev coefficientSets (B : Sheaf J CommRingCat.{w}) :=
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 private def addSections {B : Sheaf J CommRingCat.{w}}
-    (M : ringedSiteModules.{w} (ring B)) :
+    (M : SheafOfModules.{w} (ring B)) :
     (moduleSets B).obj M ⊗ (moduleSets B).obj M ⟶ (moduleSets B).obj M :=
   ⟨{ app := fun U ↦ ↾(fun z ↦ ULift.up (z.1.down + z.2.down))
      naturality := by
@@ -87,7 +87,7 @@ private def addSections {B : Sheaf J CommRingCat.{w}}
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 private def smulSections {B : Sheaf J CommRingCat.{w}}
-    (M : ringedSiteModules.{w} (ring B)) :
+    (M : SheafOfModules.{w} (ring B)) :
     coefficientSets B ⊗ (moduleSets B).obj M ⟶ (moduleSets B).obj M :=
   ⟨{ app := fun U ↦ ↾(fun z ↦ ULift.up
         ((@id (B.obj.obj U) z.1.down) • (@id (M.val.obj U) z.2.down)))
@@ -123,7 +123,7 @@ private theorem transport_semilinear
       (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).map b) ≫ F'.ringUnderlying.hom =
       F.ringUnderlying.hom ≫ (sheafCompose K
         (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).map bi)
-    (M : ringedSiteModules.{w} (ring B)) (M' : ringedSiteModules.{w} (ring B'))
+    (M : SheafOfModules.{w} (ring B)) (M' : SheafOfModules.{w} (ring B'))
     (h : (moduleSets B).obj M ⟶ (moduleSets B').obj M')
     (ha : ∀ U (x y : M.val.obj U),
       (h.hom.app U (ULift.up (x + y))).down =
@@ -221,7 +221,7 @@ private theorem transport_semilinear
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 private def linearMapOfSets {B : Sheaf J CommRingCat.{w}}
-    {M N : ringedSiteModules.{w} (ring B)}
+    {M N : SheafOfModules.{w} (ring B)}
     (f : (moduleSets B).obj M ⟶ (moduleSets B).obj N)
     (ha : ∀ U (x y : M.val.obj U),
       (f.hom.app U (ULift.up (x + y))).down =
@@ -242,7 +242,7 @@ private def linearMapOfSets {B : Sheaf J CommRingCat.{w}}
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 private theorem linearMapOfSets_underlying {B : Sheaf J CommRingCat.{w}}
-    {M N : ringedSiteModules.{w} (ring B)}
+    {M N : SheafOfModules.{w} (ring B)}
     (f : (moduleSets B).obj M ⟶ (moduleSets B).obj N) (ha hs) :
     (moduleSets B).map (linearMapOfSets f ha hs) = f := by
   ext U x
@@ -301,7 +301,7 @@ def HasTransportedFreeUniversalProperty
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
     (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} L B BI)
     (E : Sheaf J (Type w)) : Prop :=
-  ∀ M : ringedSiteModules.{w, w, vD, uD} (ring BI),
+  ∀ M : SheafOfModules.{w} (ring BI),
     Function.Bijective (fun h : F.modules.obj ((free B).obj E) ⟶ M ↦
       L.map (generator B E) ≫ F.moduleUnderlying.inv.app ((free B).obj E) ≫
         (moduleSets BI).map h)

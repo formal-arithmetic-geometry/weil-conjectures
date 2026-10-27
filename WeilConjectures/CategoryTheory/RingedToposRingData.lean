@@ -217,7 +217,7 @@ theorem reflect_mul [g.inverse.Faithful] [Mono g.ringMap]
 /-- A lift of the direct image to modules, with the structural-map-induced action. -/
 structure Modules (d : RingedToposMorphism.RingData A B) where
   /-- The induced direct image on module sheaves. -/
-  modules : ringedSiteModules.{u, u, u, u} A ⥤ ringedSiteModules.{u, u, u, u} B
+  modules : SheafOfModules.{u} A ⥤ SheafOfModules.{u} B
   /-- Additivity of the induced direct image. -/
   additive : modules.Additive
   /-- The underlying direct image of sheaves of sets, naturally in the module. -/
@@ -225,7 +225,7 @@ structure Modules (d : RingedToposMorphism.RingData A B) where
     modules ⋙ SheafOfModules.toSheaf B ⋙ sheafCompose K (forget AddCommGrpCat) ≅
       (SheafOfModules.toSheaf A ⋙ sheafCompose J (forget AddCommGrpCat)) ⋙ d.direct
   /-- Addition and the structural-map-induced scalar action, under adjunction. -/
-  module_linear : ∀ (M : ringedSiteModules.{u, u, u, u} A) (T : Sheaf K (Type u))
+  module_linear : ∀ (M : SheafOfModules.{u} A) (T : Sheaf K (Type u))
     (a : T ⟶ (sheafCompose K (forget RingCat)).obj B)
     (x y z : T ⟶ (sheafCompose K (forget AddCommGrpCat)).obj
       ((SheafOfModules.toSheaf B).obj (modules.obj M))),
@@ -240,24 +240,6 @@ structure Modules (d : RingedToposMorphism.RingData A B) where
             (((d.inverse.map a) ≫ d.ringMap).hom.app U t)
             (((d.adj.homEquiv T _).symm (x ≫ underlying.hom.app M)).hom.app U t))
           (((d.adj.homEquiv T _).symm (y ≫ underlying.hom.app M)).hom.app U t)
-
-/-- Assemble geometric ring data and its induced module direct image. -/
-def withModules (d : RingedToposMorphism.RingData A B) (m : d.Modules) :
-    RingedToposMorphism A B where
-  inverse := d.inverse
-  direct := d.direct
-  adj := d.adj
-  leftExact := d.leftExact
-  ringMap := d.ringMap
-  ring_zero := d.ring_zero
-  ring_one := d.ring_one
-  ring_add := d.ring_add
-  ring_mul := d.ring_mul
-  modules := m.modules
-  additive := m.additive
-  underlying := m.underlying
-  module_linear := m.module_linear
-
 
 end RingedToposMorphism.RingData
 end CategoryTheory

@@ -10,7 +10,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniv
 import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
 import all WeilConjectures.CategoryTheory.GeometricModuleTransport
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
-import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensoratorExistence
 
 /-! # Module adjunction for an independently sized inverse image
 Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.

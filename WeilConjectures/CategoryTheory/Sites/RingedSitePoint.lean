@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Sites.GeometricMorphism
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Algebra.Category.Ring.Limits
@@ -73,11 +73,11 @@ structure RingedSitePoint
     (∀ (U : Cᵒᵖ) (x : T.obj.obj U), (@id (R.obj.obj U) (a.hom.app U x)) = 1) →
     ∀ x : p.inverse.obj T,
       (@id ring (ringUnderlying.hom (p.inverse.map a x))) = 1
-  modules : ringedSiteModules.{w} ((sheafCompose J
+  modules : SheafOfModules.{w} ((sheafCompose J
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤ ModuleCat.{w} ring
   moduleUnderlying : modules ⋙ forget (ModuleCat.{w} ring) ≅
     (SheafOfModules.toSheaf _ ⋙ sheafCompose J (forget AddCommGrpCat.{w})) ⋙ p.inverse
-  moduleAdd : ∀ (M : ringedSiteModules.{w} ((sheafCompose J
+  moduleAdd : ∀ (M : SheafOfModules.{w} ((sheafCompose J
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R))
     (T : Sheaf J (Type w)) (a b t : T ⟶ ((SheafOfModules.toSheaf _ ⋙ sheafCompose J
       (forget AddCommGrpCat.{w})).obj M)),
@@ -88,14 +88,14 @@ structure RingedSitePoint
       (@id (modules.obj M) ((moduleUnderlying.inv.app M) (p.inverse.map t x))) =
         (@id (modules.obj M) ((moduleUnderlying.inv.app M) (p.inverse.map a x))) +
           (@id (modules.obj M) ((moduleUnderlying.inv.app M) (p.inverse.map b x)))
-  moduleZero : ∀ (M : ringedSiteModules.{w} ((sheafCompose J
+  moduleZero : ∀ (M : SheafOfModules.{w} ((sheafCompose J
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R))
     (T : Sheaf J (Type w)) (a : T ⟶ ((SheafOfModules.toSheaf _ ⋙ sheafCompose J
       (forget AddCommGrpCat.{w})).obj M)),
     (∀ (U : Cᵒᵖ) (x : T.obj.obj U), (@id (M.val.obj U) (a.hom.app U x)) = 0) →
     ∀ x : p.inverse.obj T,
       (@id (modules.obj M) ((moduleUnderlying.inv.app M) (p.inverse.map a x))) = 0
-  moduleSMul : ∀ (M : ringedSiteModules.{w} ((sheafCompose J
+  moduleSMul : ∀ (M : SheafOfModules.{w} ((sheafCompose J
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R))
     (T : Sheaf J (Type w)) (a : T ⟶ ((sheafCompose J (forget CommRingCat.{w})).obj R))
     (b t : T ⟶ ((SheafOfModules.toSheaf _ ⋙ sheafCompose J

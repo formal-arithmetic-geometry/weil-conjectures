@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Sites.GeometricMorphism
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
@@ -49,7 +49,7 @@ abbrev ring (B : Sheaf J CommRingCat.{w}) : Sheaf J RingCat.{w} :=
 /-- Underlying set sheaves of modules, with the lift used by algebraic inverse image.
 Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
 noncomputable abbrev moduleSets (B : Sheaf J CommRingCat.{w}) :
-    ringedSiteModules.{w, w, vC, uC} (ring B) ⥤ Sheaf J (Type w) :=
+    SheafOfModules.{w} (ring B) ⥤ Sheaf J (Type w) :=
   SheafOfModules.toSheaf (ring B) ⋙
     sheafCompose J (forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w})
 
@@ -58,7 +58,7 @@ restrictions to the semilinear extension of `[s] ↦ [s|V]`, and its map on gene
 sheaves is the sectionwise linear extension. Source: Stacks 04BL and 03CY
 (auxiliary; not a blueprint node). -/
 noncomputable def free (B : Sheaf J CommRingCat.{w}) :
-    Sheaf J (Type w) ⥤ ringedSiteModules.{w, w, vC, uC} (ring B) :=
+    Sheaf J (Type w) ⥤ SheafOfModules.{w} (ring B) :=
   letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
   letI : ∀ U : Cᵒᵖ,
       HasLimitsOfShape (StructuredArrow U (equivSmallModel.{w} C).inverse.op)

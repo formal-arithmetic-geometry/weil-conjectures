@@ -5,7 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.Algebra.Homology.CountableTensorStructures
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
@@ -327,7 +328,7 @@ private theorem acyclic_tensor_swap (P : CochainComplex M ℤ) :
 
 private theorem acyclic_tensor_iff_kFlat (P : CochainComplex M ℤ) :
     (∀ N : CochainComplex M ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔
-      P.IsKFlatForTotalTensor := by
+      (HomologicalComplex.quasiIso M (.up ℤ)).kFlat P := by
   constructor
   · intro h
     have hleft : ∀ {X Y : CochainComplex M ℤ} (s : X ⟶ Y), QuasiIso s →
@@ -338,8 +339,9 @@ private theorem acyclic_tensor_iff_kFlat (P : CochainComplex M ℤ) :
       apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).mpr
       exact acyclic_of_iso (φ P X Y s)
         (h _ ((CochainComplex.mappingCone.quasiIso_iff_acyclic s).mp hs))
-    refine ⟨hleft, ?_⟩
+    refine ⟨fun _ _ s hs ↦ hleft s hs, ?_⟩
     intro X Y s hs
+    change QuasiIso (HomologicalComplex.tensorHom s (𝟙 P))
     have := hleft s hs
     have he : HomologicalComplex.tensorHom s (𝟙 P) =
         (CochainComplex.Monoidal.braiding P X).inv ≫
@@ -358,7 +360,7 @@ private theorem acyclic_tensor_iff_kFlat (P : CochainComplex M ℤ) :
       rw [quasiIso_iff]
       intro n
       exact (quasiIsoAt_iff_exactAt _ n (hZ n)).mpr (hN n)
-    have ht := h.1 (0 : Z ⟶ N) hs
+    have ht : QuasiIso (HomologicalComplex.tensorHom (𝟙 P) (0 : Z ⟶ N)) := h.1 _ hs
     have hz : (P ⊗ Z).Acyclic := by
       have : (tensorLeft P).Additive :=
         inferInstanceAs (((curriedTensor M).map₂HomologicalComplex
@@ -642,8 +644,9 @@ theorem exactMonoidal_totalTensor_kFlat (E : M ≌ A)
         (∀ N : CochainComplex A ℤ,
           N.Acyclic → ((E.functor.mapHomologicalComplex (.up ℤ)).obj P ⊗ N).Acyclic)) ∧
     (∀ P : CochainComplex M ℤ,
-      CochainComplex.IsKFlatForTotalTensor P ↔
-        CochainComplex.IsKFlatForTotalTensor ((E.functor.mapHomologicalComplex (.up ℤ)).obj P)) ∧
+      (HomologicalComplex.quasiIso M (.up ℤ)).kFlat P ↔
+        (HomologicalComplex.quasiIso A (.up ℤ)).kFlat
+          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P)) ∧
     (∀ P : CochainComplex A ℤ,
       P.Acyclic ↔ ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P).Acyclic) ∧
     (∀ (P Q : CochainComplex A ℤ) (s : P ⟶ Q),
@@ -654,17 +657,18 @@ theorem exactMonoidal_totalTensor_kFlat (E : M ≌ A)
         (∀ N : CochainComplex M ℤ,
           N.Acyclic → ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P ⊗ N).Acyclic)) ∧
     (∀ P : CochainComplex A ℤ,
-      CochainComplex.IsKFlatForTotalTensor P ↔
-        CochainComplex.IsKFlatForTotalTensor ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P)) ∧
+      (HomologicalComplex.quasiIso A (.up ℤ)).kFlat P ↔
+        (HomologicalComplex.quasiIso M (.up ℤ)).kFlat
+          ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P)) ∧
     (∀ P : CochainComplex M ℤ,
       (∀ N : CochainComplex M ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔
-        P.IsKFlatForTotalTensor) ∧
+        (HomologicalComplex.quasiIso M (.up ℤ)).kFlat P) ∧
     (∀ P : CochainComplex M ℤ,
       (∀ N : CochainComplex M ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔
         (∀ N : CochainComplex M ℤ, N.Acyclic → (N ⊗ P).Acyclic)) ∧
     (∀ P : CochainComplex A ℤ,
       (∀ N : CochainComplex A ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔
-        P.IsKFlatForTotalTensor) ∧
+        (HomologicalComplex.quasiIso A (.up ℤ)).kFlat P) ∧
     (∀ P : CochainComplex A ℤ,
       (∀ N : CochainComplex A ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔
         (∀ N : CochainComplex A ℤ, N.Acyclic → (N ⊗ P).Acyclic)) := by

@@ -42,15 +42,15 @@ theorem exists_kFlat_resolution
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}
     {p : GeometricMorphism (Type w) (Sheaf J (Type w))}
     (s : RingedSitePoint R p)
-    (K : CochainComplex (ringedSiteModules.{w}
+    (K : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) :
-    ∃ (P : CochainComplex (ringedSiteModules.{w}
+    ∃ (P : CochainComplex (SheafOfModules.{w}
         ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)
       (q : P ⟶ K), P.IsKFlatIndependentCoefficients ∧ QuasiIso q ∧
       (HomologicalComplex.quasiIso (ModuleCat.{w} s.ring) (.up ℤ)).kFlat
         ((s.modules.mapHomologicalComplex (.up ℤ)).obj P) := by
   classical
-  let A := ringedSiteModules.{w}
+  let A := SheafOfModules.{w}
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
   let := SheafOfModules.isMonoidal_W_independentCoefficients R
   let := SheafOfModules.monoidalCategory R

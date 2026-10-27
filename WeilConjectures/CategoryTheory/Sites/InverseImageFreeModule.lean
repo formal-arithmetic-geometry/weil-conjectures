@@ -53,13 +53,13 @@ local instance : K.HasSheafCompose (forget CommRingCat.{w} ⋙ uliftFunctor.{w, 
 local instance : K.HasSheafCompose (forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w, w}) := inferInstance
 
 private def rawLift (B : Sheaf J CommRingCat.{w})
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) :
+    (M : SheafOfModules.{w} (ring B)) :
     (underlyingRaw B).obj M ≅ (moduleSets B).obj M where
   hom := ⟨{ app := fun _ ↦ ↾ULift.up, naturality := by intros; rfl }⟩
   inv := ⟨{ app := fun _ ↦ ↾ULift.down, naturality := by intros; rfl }⟩
 
 private theorem rawLift_naturality (B : Sheaf J CommRingCat.{w})
-    {M N : ringedSiteModules.{w, w, vC, uC} (ring B)} (a : M ⟶ N) :
+    {M N : SheafOfModules.{w} (ring B)} (a : M ⟶ N) :
     (underlyingRaw B).map a ≫ (rawLift B N).hom =
       (rawLift B M).hom ≫ (moduleSets B).map a := rfl
 
@@ -83,7 +83,7 @@ private def identityUnderlying
       (𝟭 (Sheaf J (Type w))) B B)
     (hB : F.ringUnderlying = Iso.refl ((sheafCompose J
       (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).obj B))
-    (M : ringedSiteModules.{w, w, vC, uC} (ring B)) : M ⟶ F.modules.obj M := by
+    (M : SheafOfModules.{w} (ring B)) : M ⟶ F.modules.obj M := by
   let α := F.moduleUnderlying.inv.app M
   refine { val :=
     { app := fun U ↦ ModuleCat.ofHom
@@ -183,7 +183,7 @@ theorem inverseFreeModule_existsUnique
   let P := F.modules.obj ((free B).obj E)
   let k := f.inverse.map (generator B E) ≫ F.moduleUnderlying.inv.app ((free B).obj E)
   let kRaw := k ≫ (rawLift BI P).inv
-  have hP : ∀ M : ringedSiteModules.{w, w, vD, uD} (ring BI),
+  have hP : ∀ M : SheafOfModules.{w} (ring BI),
       Function.Bijective (fun h : P ⟶ M ↦ kRaw ≫ (underlyingRaw BI).map h) := by
     intro M
     have h := transportedFreeProperty f F E M

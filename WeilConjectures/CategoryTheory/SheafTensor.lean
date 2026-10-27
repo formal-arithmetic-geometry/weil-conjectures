@@ -20,8 +20,9 @@ Source: the Weil conjectures blueprint, `sec-proetale-coefficients`,
 
 The tensor and symmetric structure are the existing `sfbSheafTensorStructure`, not a
 second construction. The first two statements discharge its additivity and sheafification
-inputs from the hypotheses of this node. The comparison realizes the tensor formula;
-the last statement records its unit, closedness, and colimit preservation.
+inputs from the hypotheses of this node; they are local instances, to be enabled with
+`attribute [local instance]` where needed. The last statement records the unit,
+closedness, and colimit preservation of the tensor.
 -/
 
 @[expose] public section
@@ -45,7 +46,7 @@ biproducts. Preservation of the injections and zero maps forces preservation of 
 projections, then diagonals and codiagonals. The biproduct formula for addition therefore
 shows that both tensor functors are additive.
 -/
-@[instance] theorem sfbSheafTensor_monoidalPreadditive
+@[local instance] theorem sfbSheafTensor_monoidalPreadditive
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A] :
     MonoidalPreadditive A := by
@@ -75,7 +76,7 @@ unique factorization into every sheaf. Transport the adjunction along the equiva
 of sites. This is the sheafification universal property of
 `def-weil-pbc-sheafification`; no choice of an undetermined sheaf is used here.
 -/
-@[instance] theorem sfbSheafTensor_hasWeakSheafify
+@[local instance] theorem sfbSheafTensor_hasWeakSheafify
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{vA} C]
     (J : GrothendieckTopology C)
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] :
@@ -84,30 +85,6 @@ of sites. This is the sheafification universal property of
     GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ A
   have : HasSheafify J A := hasSheafifyEssentiallySmallSite J A
   infer_instance
-
-/-- The canonical comparison from the localized sheaf tensor to the sheafified
-objectwise tensor. It uses the inverse sheafification counits followed by the tensor
-comparison of the strong monoidal sheafification functor, so it is natural in both
-sheaves and specifies the tensor, not an arbitrary isomorphism.
-
-Source: blueprint `sk-def-sfb-sheaf-tensor`, the displayed tensor definition and proof,
-Monoidal structure on sheaves paragraph (auxiliary; not a blueprint node).
--/
-noncomputable def sfbSheafTensor_comparison
-    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{vA} C]
-    (J : GrothendieckTopology C)
-    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
-    [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
-    (F G : Sheaf J A) :
-    (sfbSheafTensorStructure (A := A) J).monoidal.tensorObj F G ≅
-      (presheafToSheaf J A).obj (F.obj ⊗ G.obj) := by
-  let t := sfbSheafTensorStructure (A := A) J
-  letI : MonoidalCategory (Sheaf J A) := t.monoidal
-  letI : (presheafToSheaf J A).Monoidal := t.sheafificationMonoidal
-  exact
-    ((asIso ((sheafificationAdjunction J A).counit.app F)).symm ⊗ᵢ
-        (asIso ((sheafificationAdjunction J A).counit.app G)).symm) ≪≫
-      Functor.Monoidal.μIso (presheafToSheaf J A) F.obj G.obj
 
 /-- The canonical tensor is sheafified objectwise tensor, its unit is the sheafified
 constant coefficient unit, and it is closed and right exact in both variables.
@@ -127,8 +104,9 @@ sheafification-isomorphisms are stable under left tensor. Symmetry gives right t
 stability. The units of sheafification are local isomorphisms, so their tensor product
 is too, as stated in `det-def-sfb-sheaf-tensor-local-iso`.
 3. Use `det-def-sfb-sheaf-tensor-structure`: its canonical localized monoidal tensor is
-canonically identified with the sheafified objectwise tensor by the natural comparison
-`sfbSheafTensor_comparison`, and its unit is the sheafified constant unit. Its associator,
+canonically identified with the sheafified objectwise tensor by the inverse sheafification
+counits followed by the tensor comparison of the strong monoidal sheafification functor, and
+its unit is the sheafified constant unit. Its associator,
 unitors and symmetry descend the pointwise
 ones using the local-isomorphism comparisons. The sheafification counit is invertible
 by the fully faithful inclusion. The resulting comparisons give coherent strong

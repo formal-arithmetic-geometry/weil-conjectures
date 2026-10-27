@@ -147,20 +147,6 @@ private noncomputable def compositePoint : RingedSitePoint R (p.comp f) where
         (f.inverse.map z ≫ I.moduleUnderlying.inv.app M) (I.moduleSMul M T a b z hz) x
   modules_additive := inferInstance
 
-private theorem precoverageSite {E : Type uC} [Category.{vC} E] [HasPullbacks E]
-    (J : GrothendieckTopology E) : J.toPrecoverage.IsSiteForCoverings := by
-  refine ⟨inferInstance, ?_, ?_⟩
-  · intro X R T hR hT
-    exact J.toPretopology.transitive R (fun _ a ha ↦ T a ha) hR
-      (fun _ a ha ↦ hT _ a ha)
-  · intro ι X U a ha Y b
-    refine ⟨fun i ↦ pullback b (a i), fun i ↦ pullback.fst _ _,
-      fun i ↦ pullback.snd _ _, fun i ↦ IsPullback.of_hasPullback _ _, ?_⟩
-    change Sieve.ofArrows _ _ ∈ J Y
-    rw [Sieve.ofArrows_eq_pullback_of_isPullback _
-      (fun i ↦ IsPullback.of_hasPullback b (a i))]
-    exact J.pullback_stable b ha
-
 private theorem precoverageTopology {E : Type uC} [Category.{vC} E]
     (J : GrothendieckTopology E) : J.toPrecoverage.toGrothendieck = J := by
   apply le_antisymm J.toGrothendieck_toPrecoverage_le
@@ -181,8 +167,7 @@ presentations successively. The forward stalk criterion at the composite point m
 each target stalk K-flat. Apply the reverse stalk criterion to the conservative family.
 The construction also covers an empty conservative family and the zero ring. -/
 theorem AlgebraicInverseImageOfUniverses.isKFlat_of_points
-    (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)
-    [HasPullbacks C] [HasPullbacks D] :
+    (JC : GrothendieckTopology C) (JD : GrothendieckTopology D) :
     ∀ (f : GeometricMorphism (Sheaf JD (Type w)) (Sheaf JC (Type w)))
     {R : Sheaf JC CommRingCat.{w}} {S : Sheaf JD CommRingCat.{w}}
     (I : AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse R S)
@@ -195,16 +180,14 @@ theorem AlgebraicInverseImageOfUniverses.isKFlat_of_points
     CochainComplex.IsKFlatIndependentCoefficients (R := R) P →
     CochainComplex.IsKFlatIndependentCoefficients (R := S)
       ((I.modules.mapHomologicalComplex (.up ℤ)).obj P) := by
-  have hJC := precoverageSite JC
-  have hJD := precoverageSite JD
   rw [← precoverageTopology JC, ← precoverageTopology JD]
   intro f R S I _ ι p s hp P hP
   let I₀ := unliftInverseImage f I
   have : I₀.modules.Additive := ‹I.modules.Additive›
   apply (CochainComplex.ringedSite_kFlat_stalk_criterion
-    JD.toPrecoverage hJD S _).2 ι p s hp
+    JD.toPrecoverage S _).2 ι p s hp
   intro i
   exact (CochainComplex.ringedSite_kFlat_stalk_criterion.{uC, vC, w, 0}
-    JC.toPrecoverage hJC R P).1 ((p i).comp f) (compositePoint f I₀ (p i) (s i)) hP
+    JC.toPrecoverage R P).1 ((p i).comp f) (compositePoint f I₀ (p i) (s i)) hP
 
 end SheafOfModules

@@ -112,8 +112,6 @@ sheaf categories (`AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf`
 -/
 
 @[expose] public section
-set_option maxSynthPendingDepth 10
-set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
@@ -134,6 +132,11 @@ attribute [local irreducible] Mod.monoidalClosed Mod.monoidalCategory
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
 
 attribute [local instance 20000] preservesKFlatComplexes_mapMod_proEtale
+
+section CachedInstances
+
+set_option maxSynthPendingDepth 10
+set_option backward.isDefEq.respectTransparency.types false
 
 private noncomputable instance cachedSheafColimits (T : Scheme.{u}) :
     HasColimitsOfSize.{0, 0} (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) :=
@@ -205,6 +208,8 @@ private instance cachedTensorRightSequential (T : Scheme.{u})
     PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) := by
   infer_instance
 
+end CachedInstances
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
@@ -256,6 +261,8 @@ section DerivedUpperStar
 instance preservesHomology_mapMod_upperStar :
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesHomology := {}
 
+set_option maxSynthPendingDepth 10 in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Blueprint `lem-sfb-module-mapmod-pullback-kflat`: the pullback
 `mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to K-flat complexes. See the
 module docstring for the argument. -/

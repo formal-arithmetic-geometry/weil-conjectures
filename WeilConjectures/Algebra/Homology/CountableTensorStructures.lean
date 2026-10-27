@@ -74,17 +74,5 @@ noncomputable instance tensorFour (W X Y Z : GradedObject ℤ C) :
     GradedObject.HasTensor₄ObjExt W X Y Z :=
   fun _ _ ↦ inferInstance
 
-/-- The standard signed direct-sum monoidal structure on integer cochain complexes.
-Source: Mathlib `HomologicalComplex.monoidalCategory`, Stacks Tag 0G6E
-(auxiliary; not a blueprint node). -/
-noncomputable instance monoidal : MonoidalCategory (CochainComplex C ℤ) :=
-  HomologicalComplex.monoidalCategory C (.up ℤ)
-
-/-- The standard Koszul braiding, with summand map `(-1)^(pq)` times the base braiding.
-Source: `CochainComplex.Monoidal.braidedCategory`, Stacks Tag 0G6E
-(auxiliary; not a blueprint node). -/
-noncomputable instance braided [BraidedCategory C] : BraidedCategory (CochainComplex C ℤ) :=
-  CochainComplex.Monoidal.braidedCategory
-
 end CountableTensorStructures
 end CategoryTheory

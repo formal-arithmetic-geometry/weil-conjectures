@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
@@ -724,7 +724,7 @@ theorem isFlat_algebraicInverseImageOfUniverses
     (uPush : Sheaf K (Type (max r m)) ⥤ Sheaf J (Type (max r m)))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]
     (I : AlgebraicInverseImageOfUniverses uInv R RI)
-    (F : ringedSiteModules.{max r m, r, vC, uC}
+    (F : SheafOfModules.{max r m}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
     (hF : IsFlatOnSite F) : IsFlatOnSite (I.modules.obj F) := by
   apply (isFlatOnSite_iff_local_equationalCriterion RI (I.modules.obj F)).mpr

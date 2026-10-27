@@ -22,9 +22,9 @@ construction in Tag 00YQ (auxiliary; not a blueprint node).
 The inverse system is represented by a functor from the opposite of a directed
 poset.  Its colimit of representables is the functor `inverseSystemHomFunctor`,
 and the colimit of sections along it is the functor
-`inverseSystemSectionColimitFunctor`.  The site is a precoverage satisfying the
-site axioms `Precoverage.IsSiteForCoverings`, with sheaves for the generated
-Grothendieck topology, as in the dependency def-weil-pbc-sites-and-cohomology.
+`inverseSystemSectionColimitFunctor`.  The site is a precoverage, with sheaves for the
+generated Grothendieck topology, as in the dependency def-weil-pbc-sites-and-cohomology;
+the construction does not need the site axioms `Precoverage.IsSiteForCoverings`.
 -/
 
 @[expose] public section
@@ -226,7 +226,7 @@ Proof sketch (the node's steps):
    morphism `Set → Sh(C)` whose inverse image is exactly `S`.
 -/
 theorem inverseSystemSitePoint {C : Type u} [Category.{u} C]
-    [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings)
+    [HasFiniteLimits C] (J : Precoverage C)
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (U : Iᵒᵖ ⥤ C)
     (hcover : ∀ {K : Type u} {W : C} (V : K → C) (a : ∀ k, V k ⟶ W),
@@ -243,7 +243,6 @@ theorem inverseSystemSitePoint {C : Type u} [Category.{u} C]
       ∃ (p : GeometricMorphism (Type (max u w))
           (Sheaf J.toGrothendieck (Type (max u w)))),
         Nonempty (p.inverse ≅ inverseSystemSectionColimitFunctor.{w} J.toGrothendieck U) := by
-  have _ := hJ
   have hlim := hom_preservesFiniteLimits U
   have := (inverseSystemHomFunctor U).isCofiltered_elements
   have hpre : ∀ (X : C) (R : Presieve X), R ∈ J X →

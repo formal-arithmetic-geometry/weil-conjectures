@@ -42,14 +42,14 @@ theorem acyclic_tensor_finitePresentation
     {R : Sheaf J CommRingCat.{w}}
     {p : GeometricMorphism (Type w) (Sheaf J (Type w))}
     (s : RingedSitePoint R p)
-    (E : CochainComplex (ringedSiteModules.{w}
+    (E : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J
         (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)
     (hE : letI := SheafOfModules.isMonoidal_W_independentCoefficients R
       letI := SheafOfModules.monoidalCategory R
       letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
       letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
-      ∀ F : CochainComplex (ringedSiteModules.{w}
+      ∀ F : CochainComplex (SheafOfModules.{w}
         ((sheafCompose J
           (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ,
         (CochainComplex.mapBifunctor F E (MonoidalCategory.curriedTensor _)).Acyclic)

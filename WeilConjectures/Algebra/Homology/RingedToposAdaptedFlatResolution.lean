@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
@@ -322,30 +322,30 @@ theorem exists_pullback_adapted_flat_resolution
     (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w)))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]
     (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)
-    (uStar : ringedSiteModules.{w} ((sheafCompose JC
+    (uStar : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤
-      ringedSiteModules.{w} ((sheafCompose JD
+      SheafOfModules.{w} ((sheafCompose JD
         (forget₂ CommRingCat.{w} RingCat.{w})).obj S))
-    (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC
+    (hobj : ∀ M : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R),
       uStar.obj M = changeOfRings c (I.modules.obj M))
-    (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC
+    (hmap : ∀ {M N : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N),
       uStar.map a = eqToHom (hobj M) ≫
         changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm)
     [uStar.Additive]
-    (P : CochainComplex (ringedSiteModules.{w} ((sheafCompose JC
+    (P : CochainComplex (SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) :
-    ∃ (L : CochainComplex (ringedSiteModules.{w} ((sheafCompose JC
+    ∃ (L : CochainComplex (SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) (q : L ⟶ P),
       L.IsKFlatIndependentCoefficients ∧
       (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (L.X n)) ∧ QuasiIso q ∧
       CochainComplex.IsKFlatIndependentCoefficients
         ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj L) := by
   classical
-  let A := ringedSiteModules.{w} ((sheafCompose JC
+  let A := SheafOfModules.{w} ((sheafCompose JC
     (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
-  let B := ringedSiteModules.{w} ((sheafCompose JD
+  let B := SheafOfModules.{w} ((sheafCompose JD
     (forget₂ CommRingCat.{w} RingCat.{w})).obj S)
   let := isMonoidal_W_independentCoefficients R
   let := monoidalCategory R

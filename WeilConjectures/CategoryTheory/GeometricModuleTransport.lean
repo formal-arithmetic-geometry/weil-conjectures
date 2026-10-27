@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Category.Ring.Limits
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 import Mathlib.CategoryTheory.Sites.Equivalence

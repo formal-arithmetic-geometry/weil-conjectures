@@ -51,7 +51,7 @@ def inverseFreeRestriction
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
     (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w}
       f.inverse B BI) (E : Sheaf J (Type w))
-    (H : ringedSiteModules.{w, w, vD, uD} (ring BI))
+    (H : SheafOfModules.{w} (ring BI))
     (h : F.modules.obj ((free B).obj E) ⟶ H) :
     f.inverse.obj E ⟶ (moduleSets BI).obj H :=
   f.inverse.map (generator B E) ≫ F.moduleUnderlying.inv.app ((free B).obj E) ≫
@@ -63,8 +63,8 @@ Source: Stacks 03D3, underlying sheaf adjunction
 def directModuleTranspose
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
-    {N : ringedSiteModules.{w, w, vC, uC} (ring B)}
-    {H : ringedSiteModules.{w, w, vD, uD} (ring BI)}
+    {N : SheafOfModules.{w} (ring B)}
+    {H : SheafOfModules.{w} (ring BI)}
     (e : (moduleSets B).obj N ≅ f.direct.obj ((moduleSets BI).obj H))
     {T : Sheaf J (Type w)} (a : T ⟶ (moduleSets B).obj N) :
     f.inverse.obj T ⟶ (moduleSets BI).obj H :=
@@ -591,10 +591,10 @@ theorem geometricFreeModule_hom_chain
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
     (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w}
       f.inverse B BI) :
-    ∃ (P : ringedSiteModules.{w, w, vD, uD} (ring BI) ⥤
-        ringedSiteModules.{w, w, vC, uC} (ring B))
+    ∃ (P : SheafOfModules.{w} (ring BI) ⥤
+        SheafOfModules.{w} (ring B))
       (eP : P ⋙ moduleSets B ≅ moduleSets BI ⋙ f.direct),
-      (∀ (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (T : Sheaf J (Type w))
+      (∀ (H : SheafOfModules.{w} (ring BI)) (T : Sheaf J (Type w))
         (a b t : T ⟶ (moduleSets B).obj (P.obj H)),
         (∀ (U : Cᵒᵖ) (x : T.obj.obj U),
           @id ((P.obj H).val.obj U) (t.hom.app U x).down =
@@ -604,7 +604,7 @@ theorem geometricFreeModule_hom_chain
           @id (H.val.obj V) ((directModuleTranspose f (eP.app H) t).hom.app V x).down =
             @id (H.val.obj V) ((directModuleTranspose f (eP.app H) a).hom.app V x).down +
               @id (H.val.obj V) ((directModuleTranspose f (eP.app H) b).hom.app V x).down) ∧
-      (∀ (H : ringedSiteModules.{w, w, vD, uD} (ring BI)) (T : Sheaf J (Type w))
+      (∀ (H : SheafOfModules.{w} (ring BI)) (T : Sheaf J (Type w))
         (a : T ⟶ (sheafCompose J
           (forget CommRingCat.{w} ⋙ uliftFunctor.{w, w})).obj B)
         (b t : T ⟶ (moduleSets B).obj (P.obj H)),
@@ -619,49 +619,49 @@ theorem geometricFreeModule_hom_chain
                 @id (H.val.obj V)
                   ((directModuleTranspose f (eP.app H) b).hom.app V x).down) ∧
       ∃ (A : ∀ (E : Sheaf J (Type w))
-          (H : ringedSiteModules.{w, w, vD, uD} (ring BI)),
+          (H : SheafOfModules.{w} (ring BI)),
           (F.modules.obj ((free B).obj E) ⟶ H) ≃ ((free B).obj E ⟶ P.obj H))
         (G : ∀ (E : Sheaf J (Type w))
-          (H : ringedSiteModules.{w, w, vD, uD} (ring BI)),
+          (H : SheafOfModules.{w} (ring BI)),
           ((free B).obj E ⟶ P.obj H) ≃ (E ⟶ (moduleSets B).obj (P.obj H))),
-        (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI))
+        (∀ (E : Sheaf J (Type w)) (H : SheafOfModules.{w} (ring BI))
           (h : F.modules.obj ((free B).obj E) ⟶ H),
           (moduleSets B).map (A E H h) ≫ eP.hom.app H =
             f.adj.homEquiv _ _ (F.moduleUnderlying.inv.app ((free B).obj E) ≫
               (moduleSets BI).map h)) ∧
-        (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI))
+        (∀ (E : Sheaf J (Type w)) (H : SheafOfModules.{w} (ring BI))
           (b : (free B).obj E ⟶ P.obj H),
           G E H b = generator B E ≫ (moduleSets B).map b) ∧
-        (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI))
+        (∀ (E : Sheaf J (Type w)) (H : SheafOfModules.{w} (ring BI))
           (h : F.modules.obj ((free B).obj E) ⟶ H),
           (f.adj.homEquiv E ((moduleSets BI).obj H)).symm
             (G E H (A E H h) ≫ eP.hom.app H) = inverseFreeRestriction f F E H h) ∧
         (∀ (E E' : Sheaf J (Type w)) (u : E' ⟶ E)
-          (H : ringedSiteModules.{w, w, vD, uD} (ring BI))
+          (H : SheafOfModules.{w} (ring BI))
           (h : F.modules.obj ((free B).obj E) ⟶ H),
           A E' H (F.modules.map ((free B).map u) ≫ h) =
             (free B).map u ≫ A E H h) ∧
         (∀ (E : Sheaf J (Type w))
-          (H H' : ringedSiteModules.{w, w, vD, uD} (ring BI))
+          (H H' : SheafOfModules.{w} (ring BI))
           (v : H ⟶ H') (h : F.modules.obj ((free B).obj E) ⟶ H),
           A E H' (h ≫ v) = A E H h ≫ P.map v) ∧
         (∀ (E E' : Sheaf J (Type w)) (u : E' ⟶ E)
-          (H : ringedSiteModules.{w, w, vD, uD} (ring BI))
+          (H : SheafOfModules.{w} (ring BI))
           (b : (free B).obj E ⟶ P.obj H),
           G E' H ((free B).map u ≫ b) = u ≫ G E H b) ∧
         (∀ (E : Sheaf J (Type w))
-          (H H' : ringedSiteModules.{w, w, vD, uD} (ring BI))
+          (H H' : SheafOfModules.{w} (ring BI))
           (v : H ⟶ H') (b : (free B).obj E ⟶ P.obj H),
           G E H' (b ≫ P.map v) = G E H b ≫ (moduleSets B).map (P.map v)) ∧
-        (∀ (E : Sheaf J (Type w)) (H : ringedSiteModules.{w, w, vD, uD} (ring BI)),
+        (∀ (E : Sheaf J (Type w)) (H : SheafOfModules.{w} (ring BI)),
           Function.Bijective (inverseFreeRestriction f F E H)) ∧
         (∀ (E E' : Sheaf J (Type w)) (u : E' ⟶ E)
-          (H : ringedSiteModules.{w, w, vD, uD} (ring BI))
+          (H : SheafOfModules.{w} (ring BI))
           (h : F.modules.obj ((free B).obj E) ⟶ H),
           inverseFreeRestriction f F E' H (F.modules.map ((free B).map u) ≫ h) =
             f.inverse.map u ≫ inverseFreeRestriction f F E H h) ∧
         (∀ (E : Sheaf J (Type w))
-          (H H' : ringedSiteModules.{w, w, vD, uD} (ring BI))
+          (H H' : SheafOfModules.{w} (ring BI))
           (v : H ⟶ H') (h : F.modules.obj ((free B).obj E) ⟶ H),
           inverseFreeRestriction f F E H' (h ≫ v) =
             inverseFreeRestriction f F E H h ≫ (moduleSets BI).map v) := by

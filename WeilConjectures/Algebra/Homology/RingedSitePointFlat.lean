@@ -40,7 +40,7 @@ theorem flat
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}
     {p : GeometricMorphism (Type w) (Sheaf J (Type w))}
     (s : RingedSitePoint R p)
-    (M : ringedSiteModules.{w}
+    (M : SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))
     (hM : SheafOfModules.IsFlatOnSite.{u, v, w, w} (J := J) (R := R) M) :
     Module.Flat s.ring (s.modules.obj M) := by

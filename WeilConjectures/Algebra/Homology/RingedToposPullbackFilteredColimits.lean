@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.CategoryTheory.AlgebraicInverseImage
-public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
@@ -310,14 +310,14 @@ theorem preservesFilteredColimits_ringedToposPullback
     (uPush : Sheaf JD (Type (w)) ⥤ Sheaf JC (Type (w)))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]
     (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)
-    (uStar : ringedSiteModules.{w} ((sheafCompose JC
+    (uStar : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤
-      ringedSiteModules.{w} ((sheafCompose JD
+      SheafOfModules.{w} ((sheafCompose JD
         (forget₂ CommRingCat.{w} RingCat.{w})).obj S))
-    (hobj : ∀ M : ringedSiteModules.{w} ((sheafCompose JC
+    (hobj : ∀ M : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R),
       uStar.obj M = changeOfRings c (I.modules.obj M))
-    (hmap : ∀ {M N : ringedSiteModules.{w} ((sheafCompose JC
+    (hmap : ∀ {M N : SheafOfModules.{w} ((sheafCompose JC
       (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (a : M ⟶ N),
       uStar.map a = eqToHom (hobj M) ≫
         changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫ eqToHom (hobj N).symm)

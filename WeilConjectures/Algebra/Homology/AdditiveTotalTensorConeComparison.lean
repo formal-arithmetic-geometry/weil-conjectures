@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Algebra.Homology.CountableTensorStructures
 public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 
