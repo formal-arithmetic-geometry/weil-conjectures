@@ -1,5 +1,6 @@
 module
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionHomMapInvertibility
 /-! Auxiliary reduction for evaluation invertibility.
 Source: current blueprint, lem-coef-integral-finite-extension.proof.md, paragraphs 4-5
 (blueprint: lem-sf-integral-finite-extension-invertibility). -/
@@ -18,6 +19,7 @@ variable (l : ℕ) [Fact l.Prime]
     (completedIntegralCommRingSheafUnrestricted l L X))
   (K M : IntegralVerdier.Ambient l E X)
   (hK : IsSfDerivedComplete l E X K) (hM : IsSfDerivedComplete l E X M)
+set_option linter.style.haveILetI false in
 /-- The evaluation-defined finite-extension comparison is invertible on complete inputs.
 Source: finite-free basis computation of the evaluation transpose, followed by
 conjugation with the completion comparisons.
@@ -25,5 +27,17 @@ conjugation with the completion comparisons.
 -/
 theorem comparison_invertibility_v :
     IsIso (v l E L ι X a b K M hK hM) := by
-  sorry
+  unfold v
+  apply IsIso.comp_isIso'
+  · infer_instance
+  apply IsIso.comp_isIso'
+  · exact (homMap_isIso l E L ι X a b K M)
+  · let eK := completion l E L ι X K hK
+    let eM := completion l E L ι X M hM
+    letI : IsIso eK.inv := eK.isIso_inv
+    letI : IsIso eM.hom := eM.isIso_hom
+    letI : IsIso (Prod.mkHom eK.inv.op eM.hom) :=
+      (isIso_prod_iff _ _).mpr ⟨inferInstance, inferInstance⟩
+    exact (IntegralHom.hom X
+      (completedIntegralCommRingSheafUnrestricted l L X)).map_isIso _
 end WeilConjectures.IntegralFiniteExtension
