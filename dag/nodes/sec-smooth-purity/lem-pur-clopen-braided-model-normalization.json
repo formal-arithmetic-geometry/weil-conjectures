@@ -6,7 +6,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; Tag 0G7D, sites-cohomology-lemma-factor-through-K-flat; Tag 06YU, sites-cohomology-definition-derived-tor; Tag 0FPT, sites-cohomology-lemma-symmetric-monoidal-derived. Agent normalized finite-clopen application: returned item steps 8-9."
+  "place": "Steps 1-5 implemented by the three support interfaces: generic and concrete cochain lifting, braided localization, and native cancellation squares."
  },
  "mathlib_searches": [
   {
@@ -64,45 +64,31 @@
  ],
  "proof": [
   {
-   "text": "Let F be ordinary clopen restriction, equipped with the given braided structure h. Exactness and preservation of coproducts imply preservation of countable colimits. The signed total-complex construction gives a braided cochain functor. Its inverse tensorator has the summand formula F(ι_pq)≫δ = δ_h≫ι_pq. The assumed summand formula for b and the coproduct universal property identify b with this inverse tensorator, degree by degree.",
+   "text": "Apply clopen_braided_cochain_normalization to h, b, hsum and hcolim. This proved construction supplies a braided cochain structure c, identifies its inverse tensorator with b by coproduct extensionality, and gives its inverse unit as the single-complex comparison followed by the single of the ordinary inverse unit. Keep c abstract when applying derived localization.",
    "uses": [
-    "lem-pur-clopen-total-tensor-kflat-detection",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+    "lem-pur-clopen-braided-cochain-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "Functorial flat resolutions give the categorical K-flat left derivability structure. The native tensor theorem identifies the independent-coefficient K-flat predicate with categorical K-flatness: for the reverse implication tensor the quasi-isomorphism 0→Z for an acyclic Z. Flat-term K-flat resolutions give a model for every derived object. The assumed hk therefore gives preservation of the categorical K-flat models.",
+   "text": "Apply clopen_braided_localization to the concrete canonical cochain braided lift and hk. This proved specialization supplies a braided structure d on the specified derived restriction and proves that the canonical factors.hom is monoidal for the fixed native localization data. It contains the categorical K-flat criterion, K-flat resolution models and application of normalizedBraidedLocalization.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-sf-ringed-derived-native-tensor"
+    "lem-pur-clopen-braided-localization"
    ],
    "elementary": false
   },
   {
-   "text": "Use the native lax braided localization functors Q_R and Q_RY and the specified exact derived restriction G, with the canonical factorization factors. Their unit maps are invertible, and their tensor maps are invertible when the appropriate input is K-flat. Apply normalizedBraidedLocalization to obtain a braided structure d on G with factors.hom monoidal for these precise structures.",
+   "text": "For the monoidal factorization given by normalizedBraidedLocalization, expand NatTrans.IsMonoidal.tensor. Cancel the strong tensorator of the derived restriction, the source localization tensorator and the target localization tensorator at the K-flat pair, using the inverse cochain tensorator. Their inverses are definitionally the native tensorIso maps. Replace the cochain oplax tensorator by b.hom using the summand computation; this is ModelNormalization, with the unused flat-term assumptions retained. Likewise expand NatTrans.IsMonoidal.unit and cancel the derived strong unit and target localization unit. Expand the canonical cochain unit mapCochainComplex_η as the single-complex comparison followed by the ordinary inverse unit. The resulting isomorphism is exactly unitComparison. Neither cancellation uses a nonzero ring or nonempty scheme.",
    "uses": [
-    "lem-sf-ringed-derived-native-tensor",
-    "lem-pur-u2-normalized-braided-localization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In the tensor equation of monoidality of factors.hom, cancel the native tensor maps at a K-flat pair. Their inverses are the specified native tensorIso maps; replace the cochain inverse tensorator by b using step 1. The result is exactly ModelNormalization for braidedComparison d. In the unit equation cancel the native unit maps; the cochain unit is the single-complex restriction of the ordinary coefficient ring. Its composite with the canonical localization factor is precisely unitComparison, giving the claimed equality with braidedUnit d. All arguments are valid for empty schemes and zero rings, since every map cancelled is an isomorphism without a nonzero hypothesis.",
-   "uses": [
-    "def-pur-clopen-monoidal-normalization",
-    "lem-sf-ringed-derived-native-tensor"
+    "lem-pur-clopen-braided-model-squares"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-clopen-total-tensor-kflat-detection",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-pc-kflat-resolution",
-  "lem-sf-ringed-derived-native-tensor",
-  "lem-pur-u2-normalized-braided-localization",
-  "def-pur-clopen-monoidal-normalization"
+  "lem-pur-clopen-braided-cochain-normalization",
+  "lem-pur-clopen-braided-localization",
+  "lem-pur-clopen-braided-model-squares"
  ],
  "lean": {
   "existing": false,
@@ -145,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-37cd4",
-  "group": "P9",
+  "reviewer": "COMPILER",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261025T123513-L-1875872",
+  "landing": "20261027T234122-L-3336",
   "kind": "interface",
-  "note": "independent cc review: item proof vs node lem-pur-clopen-kflat-monoidal-descent and its deps; extracted interface module diffed verbatim against clone item file; new sorry lemma clopen_braided_model_normalization vs its node and normalized-braided-localization route"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-clopen-braided-model-squares",
+ "kind": "statement",
+ "title": "Native braided model and unit squares from monoidal factorization",
+ "statement": "Given the braided cochain restriction c with its inverse tensorator and unit equations, and a braided derived restriction d whose canonical factorization is monoidal for the native localization structures, the native K-flat model normalization square and the canonical unit equation hold for d. This cancellation statement assumes the K-flat and flat-term hypotheses in the ModelNormalization interface only through its conclusion and asserts no existence of d.",
+ "stmt_deps": [
+  "def-pur-clopen-monoidal-normalization",
+  "lem-pur-clopen-braided-cochain-normalization",
+  "lem-pur-clopen-braided-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 0FPT; cancellation step of lem-pur-clopen-braided-model-normalization."
+ },
+ "proof": [
+  {
+   "text": "Instantiate the native lax braided localization structures and the supplied braided cochain and derived structures. Apply monoidality of the canonical factorization at a K-flat pair, and cancel the native tensorators, whose inverses are the recorded tensorIso maps. Replace the cochain inverse tensorator by b using hcδ.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the unit component of monoidality and cancel the native unit maps. Replace the cochain unit by hcη and unfold unitComparison and braidedUnit; the resulting composites agree by functoriality and associativity.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 0FPT; cancellation step of lem-pur-clopen-braided-model-normalization.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "native braided model square cancellation",
+   "results": "{\"ok\":true,\"n_hits\":0}",
+   "date": "2026-10-28",
+   "verdict": "No existing specialized cancellation theorem; the split statement packages the explicit monoidal cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.IsMonoidal.tensor inverse lax monoidal",
+   "results": "{\"ok\":true,\"n_hits\":1}",
+   "date": "2026-10-28",
+   "verdict": "Generic monoidality tensor equation is used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived restriction normalized model unit square",
+   "results": "{\"ok\":true,\"n_hits\":0}",
+   "date": "2026-10-28",
+   "verdict": "No direct library theorem found; this is a genuine intermediate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedModelNormalization",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-braided-model-normalization",
+   "place": "Proof steps 4-5: cancellation of native tensor and unit equations after the cochain and localization constructions."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedModelSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenBraidedModelSquares.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.clopen_braided_model_squares",
+  "statement": "theorem clopen_braided_model_squares\n    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})\n    (h : (clopenTensorRestriction.{t, u} j R).Braided)\n    (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙\n        clopenTensorComplexRestriction.{t, u} j R ≅\n      ((clopenTensorComplexRestriction.{t, u} j R).prod\n        (clopenTensorComplexRestriction.{t, u} j R)) ⋙\n          coefficientTotalTensor.{u, t + 1, t} (topology Y)\n            ((clopenTensorRings.{t, u} j).obj R))\n    (c : (clopenTensorComplexRestriction.{t, u} j R).Braided)\n    (hcδ : ∀ P Q : CochainComplex (clopenTensorModules.{t, u} R) ℤ,\n      c.toMonoidal.toOplaxMonoidal.δ P Q = b.hom.app (P, Q))\n    (hcη : c.toMonoidal.toOplaxMonoidal.η =\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (clopenTensorRestriction.{t, u} j R) (.up ℤ) (0 : ℤ)).app\n          (𝟙_ (clopenTensorModules.{t, u} R))).hom ≫\n        (HomologicalComplex.single _ (.up ℤ) (0 : ℤ)).map\n          (clopenTensorUnitComparison.{t, u} j R h).hom)\n    (d : (derivedRestriction.{t, u} j R).Braided) :\n    letI := c\n    letI := d\n    letI := RingedDerivedNative.laxBraided.{t + 1, t, u, max (u + 1) (t + 2)}\n      (topology X) R\n    letI := RingedDerivedNative.laxBraided.{t + 1, t, u, max (u + 1) (t + 2)}\n      (topology Y) ((clopenTensorRings.{t, u} j).obj R)\n    NatTrans.IsMonoidal (factors.{t, u} j R).hom →\n      ModelNormalization.{t, u} j R b (braidedComparison.{t, u} j R d) ∧\n        braidedUnit.{t, u} j R d = unitComparison.{t, u} j R h",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T234122-L-3336",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T234122-L-3336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
