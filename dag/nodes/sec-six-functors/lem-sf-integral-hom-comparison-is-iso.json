@@ -27,65 +27,51 @@
  ],
  "proof": [
   {
-   "text": "The coefficient ring is a DVR and hence Noetherian. The standard quotient resolution and completed-constant-sheaf comparison identify U_n B_n with [B --varpi^(n+1)--> B]. This bounded free complex is K-flat.",
+   "text": "Apply the chain-representative theorem to the given presentations and K,L. It supplies the supported rank-one coefficient complex, the signed chain map f, and the square identifying the restricted specified comparison with its localization.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-sf-integral-hom-comparison-representative"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
     "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
    }
   },
   {
-   "text": "The scalar adjunction and tensor-Hom adjunction identify restricted finite Hom with H_B(K,U_n N), naturally in N. Take a K-flat source P and K-injective target I; tensoring I with the two-term split-free quotient model remains K-injective.",
+   "text": "Apply the degreewise signed Hom-tensor calculation to each component f^j. HomologicalComplex.Hom.isIso_of_components makes f an isomorphism. Localization preserves this isomorphism. The normalization square and cancellation of the endpoint isomorphisms show that the restricted comparison is invertible.",
    "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-split-perfect-tensor-kinjective",
-    "def-pur-derived-internal-hom"
+    "lem-sf-two-term-free-hom-tensor-components",
+    "lem-sf-integral-hom-comparison-representative"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
     "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
    }
   },
   {
-   "text": "The restricted comparison is represented by f tensor z mapping x to (-1)^(degree(z)*degree(x)) f(x) tensor z. The three differential terms have matching signs bp, a+1+bp and a+bp+p. In each total degree only the two coefficient degrees commute with the product over p, so this chain map is invertible for unbounded P. The presentation normalizations identify it with the specified comparison. Conservative scalar restriction reflects its invertibility.",
+   "text": "Scalar restriction preserves finite limits and colimits. Its composition with the forgetful functor to sheaves is the finite-coefficient forgetful functor, which reflects isomorphisms. Thus scalar restriction reflects isomorphisms on modules. Exactness identifies its application to every cohomology map with cohomology of the restricted derived map. Reflect these cohomology isomorphisms and apply the derived-category cohomology criterion to conclude that the original specified comparison is invertible.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-sf-integral-hom-reduction-models",
-    "lem-sfb-dc-hom-scalar-adjunction"
+    "def-sf-scalar-reduction-categories-restriction",
+    "lem-weil-restriction-of-scalars-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
     "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-split-perfect-tensor-kinjective",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-sf-integral-hom-reduction-models"
+  "lem-sf-integral-hom-comparison-representative",
+  "lem-sf-two-term-free-hom-tensor-components",
+  "def-sf-scalar-reduction-categories-restriction",
+  "lem-weil-restriction-of-scalars-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
-  "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2; E4 formal reduction through signed chain components and exact conservative restriction"
  },
  "mathlib_searches": [
   {
@@ -151,13 +137,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-79bab",
-  "group": "M4",
+  "reviewer": "COMPILER",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261020T230810-L-613944",
+  "landing": "20261027T233912-L-4134013",
   "kind": "interface",
-  "note": "independent cc review: files identical to PASSed head 1e5bfa41a6 (landing failed on a missing file outside the delivery); re-verified vs live: 7 modules + importer PointDerivedHomEvaluation compile, integralHomReduction statement byte-identical to live, homModelMap old=new by rfl, axioms clean (sorryAx only via models_exist, comparison_isIso, reductionTower_components)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

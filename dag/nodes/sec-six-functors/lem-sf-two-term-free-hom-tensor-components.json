@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-two-term-free-hom-tensor-components",
+ "kind": "statement",
+ "title": "Degreewise invertibility of two-term free signed Hom-tensor exchange",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let $Y$ be a scheme in universe $t$ and $R$ a sheaf of commutative rings of universe $\\max(u,t+1)$ on its small pro-etale site. Use the module category and its direct-sum total tensor $T$ and product internal Hom $H$ [def-sf-integral-hom-reduction-models, def-pur-hom-complex, def-pc-tensor-complex-sheaves]. Let $P,I,Q$ be arbitrary unbounded cochain complexes of $R$-modules. Suppose $Q^k=0$ for $k\\notin\\{-1,0\\}$ and given isomorphisms identify $Q^{-1}$ and $Q^0$ with the unit module $R$. Let $f:T(H(P,I),Q)\\to H(P,T(I,Q))$ be a chain map. Assume that on every site object $U$, for all integers $a,b,p$, sections $v\\in H(P,I)^a(U)$, $z\\in Q^b(U)$ and $x\\in P^p(U)$, evaluation of $f^{a+b}(v\\otimes z)$ on $x$ equals $(-1)^{bp}v(x)\\otimes z$, using the canonical total-tensor inclusions and reassociation $(p+a)+b=p+(a+b)$. Then for every integer $j$, the module morphism $f^j$ is an isomorphism. No boundedness condition on $P,I$ and no constraint on the differential of $Q$ are imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: finite-free coefficient Hom-tensor calculation"
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Fix j. The coefficient support removes all summands except b=-1,0 from the direct-sum total tensor, leaving the biproduct of Hom(P,I)^(j+1) tensor Q^(-1) and Hom(P,I)^j tensor Q^0. Use the two unit isomorphisms to remove these tensor factors.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+   }
+  },
+  {
+   "text": "In degree p+j, I tensor Q is the biproduct of I^(p+j+1) and I^(p+j). Internal Hom from P^p preserves this finite product. Commute the product over all integers p with this two-factor product using their universal properties. No exchange of an infinite sum and product occurs. This gives the same two summands as in the source.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+   }
+  },
+  {
+   "text": "The coordinate indexed by b=-1 and p is multiplied by (-1)^p, and the b=0 coordinate is unchanged. Squaring these factors gives 1, so the signed coordinate map is invertible. The given local formula identifies f^j with it: equality follows from the tensor universal property, local pure-tensor generation, and Hom product projections, after all restrictions. This also handles zero modules and the empty scheme.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 1: finite-free coefficient Hom-tensor calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom commutes with tensor product by a perfect complex or a finite free two term complex, for unbounded complexes",
+   "date": "2026-10-28",
+   "results": "8 hits: DerivedCategory.instLinear, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor_map, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_obj_map",
+   "verdict": "No match for this ringed-site statement with arbitrary unbounded Hom inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ReflectsIsomorphisms",
+   "date": "2026-10-28",
+   "results": "12 hits: CategoryTheory.Functor.ReflectsIsomorphisms, CategoryTheory.Functor.FullyFaithful.reflectsIsomorphisms, CategoryTheory.reflectsIsomorphisms_of_full_and_faithful, CategoryTheory.reflectsIsomorphisms_of_comp, CategoryTheory.reflectsIsomorphisms_of_iso, CategoryTheory.reflectsIsomorphisms_iso_iff, CategoryTheory.reflectsIsomorphisms_comp, CategoryTheory.isIso_of_reflects_iso",
+   "verdict": "General categorical reflection lemmas used in the final descent; no finite-coefficient signed representative theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(internalHom|comparison)|hom.*tensor.*[Ii]so",
+   "date": "2026-10-28",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "verdict": "No match for this ringed-site statement with arbitrary unbounded Hom inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For unbounded complexes P and I, tensoring the internal Hom complex Hom(P,I) with a bounded finite free two term complex Q commutes with internal Hom in each degree",
+   "date": "2026-10-28",
+   "results": "8 hits: lTensorHomEquivHomLTensor, rTensorHomEquivHomRTensor, lTensorHomEquivHomLTensor.congr_simp, HomologicalComplex.mapBifunctorMapHomotopy.comm₁_aux, HomologicalComplex.tensorObj, homTensorHomEquiv, HomologicalComplex.ιTensorObj.congr_simp, HomologicalComplex.monoidalCategoryStruct",
+   "verdict": "No match for this ringed-site statement with arbitrary unbounded Hom inputs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomComparisonIsIso",
+  "date": "2026-10-28",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 1: finite-free coefficient Hom-tensor calculation",
+   "via": [
+    "lem-sf-integral-hom-comparison-is-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TwoTermFreeHomTensorComponents",
+  "file": "lean/Sheaf/Algebra/Homology/TwoTermFreeHomTensorComponents.lean",
+  "declaration": "WeilConjectures.IntegralHom.twoTermFreeHomTensor_component_isIso",
+  "statement": "theorem twoTermFreeHomTensor_component_isIso\n    (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)\n    (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))\n    (eNeg : Q.X (-1) ≅ (show Modules.{t, u} Y R from SheafOfModules.unit\n      ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))\n    (eZero : Q.X 0 ≅ (show Modules.{t, u} Y R from SheafOfModules.unit\n      ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))\n    (f : ((totalTensor Y R).obj\n        (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶\n      homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P\n        (((totalTensor Y R).obj I).obj Q))\n    (hf : IsSignedHomTensor Y R P I Q f) (j : ℤ) : IsIso (f.f j)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233912-L-4134013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233912-L-4134013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
