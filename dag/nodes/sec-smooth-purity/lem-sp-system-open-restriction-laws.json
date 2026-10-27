@@ -1,0 +1,80 @@
+{
+ "id": "lem-sp-system-open-restriction-laws",
+ "kind": "statement",
+ "title": "Coherence laws for normalized open restriction data",
+ "statement": "Normalized open comparisons satisfy the derived coefficient-composition cocycle and identity-unit equations.",
+ "stmt_deps": [
+  "def-sp-system-compact-support-restriction-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ"
+ },
+ "proof": [
+  {
+   "text": "The comparison words agree on every summand; sheafification uniqueness and exact localization preserve the equations.",
+   "uses": [
+    "lem-sp-system-open-restriction-data-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-system-open-restriction-data-existence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemOpenRestrictionCoherence",
+  "date": "2026-10-28",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-system-open-restriction-coherence",
+   "place": "proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemOpenRestrictionLaws",
+  "file": "lean/Sheaf/Paper/SystemOpenRestrictionLaws.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SystemCompactSupportRestriction.systemOpenRestrictionLaws",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-28",
+  "statement": "theorem systemOpenRestrictionLaws (l : ℕ) [Fact l.Prime] {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (c : RestrictionIdentifications.{u} l) (g : ∀ (B C : Etale.SystemProjection.Coefficients.{u} l) (a : B.rings ⟶ C.rings), GeometricSquare a j) (o : ∀ (B C : Etale.SystemProjection.Coefficients.{u} l) (a : B.rings ⟶ C.rings), OpenComparison (g B C a)) : (∀ (B C D : Etale.SystemProjection.Coefficients.{u} l) (a : B.rings ⟶ C.rings) (b : C.rings ⟶ D.rings) (L : VaryingRing.Derived (levels D) (steps D) X), (VaryingRing.J (levels B) (steps B) j).map ((c.rho X a b).hom.app L) ≫ (o B D (a ≫ b)).derived.hom.app L = (o B C a).derived.hom.app ((derivedRestriction X b).obj L) ≫ (derivedRestriction Z a).map ((o C D b).derived.hom.app L) ≫ (c.rho Z a b).hom.app ((VaryingRing.J (levels D) (steps D) j).obj L)) ∧ (∀ (B : Etale.SystemProjection.Coefficients.{u} l) (L : VaryingRing.Derived (levels B) (steps B) X), (o B B (𝟙 B.rings)).derived.hom.app L ≫ (c.derivedUnit Z B).hom.app ((VaryingRing.J (levels B) (steps B) j).obj L) = (VaryingRing.J (levels B) (steps B) j).map ((c.derivedUnit X B).hom.app L))"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T180928-L-3914049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T180928-L-3914049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
