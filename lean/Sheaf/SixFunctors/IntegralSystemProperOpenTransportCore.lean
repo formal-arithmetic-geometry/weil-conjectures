@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralCompactificationRealizationData
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportCanonical
 
 /-! Core transport package for intrinsic proper/open coherence. -/
 
@@ -53,6 +54,8 @@ structure ProperOpenTransportCore (o : Operations l E) (c : Compositors l E o)
 theorem integralSystemProperOpenTransportCore (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o) :
     Nonempty (ProperOpenTransportCore l E o c a b) := by
-  sorry
+  obtain ⟨h₀⟩ := integralSystemProperOpenTransportAdjunct l E o c a b
+  refine ⟨{ gamma := h₀.gamma, adjunct := h₀.adjunct, canonical := ?_ }⟩
+  exact integralSystemProperOpenTransportCanonical l E o c a b h₀
 
 end WeilConjectures.IntegralSystemRealization
