@@ -24,10 +24,11 @@
  },
  "proof": [
   {
-   "text": "For B-module N, identify S tensor_R Res(N) with (S tensor_R B) tensor_B N by s tensor x ↦ (s tensor 1) tensor x. The inverse is (s tensor b) tensor x ↦ s tensor bx. The balancing identities prove the maps inverse before sheafification, and tensor cancellation/sheafification descends this identification to sheaves. No flatness is needed.",
+   "text": "Use the existing object equality identifying scalar(c)(M) with the sheafified section tensor S tensor_R M. The sheafification unit gives pure tensors, their naturality, and scalar multiplication on their first factor. The normalized extension/restriction adjunction shows that maps out of scalar extension are determined by unit tensors. These identities are proved as private helpers and then transported back through the specified scalar object equalities.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "lem-pur-change-of-rings-tensor-cancellation-independent"
+    "def-pur-cochain-coefficient-arrows",
+    "def-weil-ramified-pullback-tower-data"
    ],
    "elementary": false,
    "source": {
@@ -36,7 +37,19 @@
    }
   },
   {
-   "text": "The coefficient_formula makes data.coefficientIso B-linear for the B-action on the second tensor factor and the action through j on T: multiply b by b0 in the formula and obtain multiplication of the image by j(b0). Tensor generation and sheafification extend this calculation to all sections; its inverse is then B-linear as well. Tensor this isomorphism with N, retaining S-linearity, to identify (S tensor_R B) tensor_B N with T tensor_B N restricted along q. The formula sends (s tensor 1) tensor x to q(s) tensor x; tensoring the inverse coefficient isomorphism gives its inverse. Compose with the previous associator. The square data.ramified_projection identifies the specified restricted scalar actions, and the sheafification unit preserves the displayed formula and inverse identities.",
+   "text": "The completed projections p:R→B and q:S→T are surjective on sections: a finite constant quotient map is sectionwise surjective, since its underlying set map has a section and constant sheafification commutes with underlying sets; the constant quotient map factors through completion by the limit-lift projection identity. Lean reuses the proved private constantQuotient_surjective helper from CompletedIntegralFiniteQuotientHomExt for the first assertion.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+   }
+  },
+  {
+   "text": "Let z be a local section of ker(q). The supplied coefficient isomorphism and its normalization send the image of z tensor 1 to zero. Its injectivity implies that this tensor has zero image in the coefficient tensor sheaf. Local injectivity of the sheafification unit makes z tensor 1 zero locally in the raw tensor. For a B-module section x, apply the sectionwise contraction s tensor b ↦ s tensor (b x) to obtain z tensor x = 0 locally, hence in the module tensor sheaf. Local surjectivity of the sheafification unit and tensor induction show that z annihilates every section of S tensor_R Res_p N.",
    "uses": [
     "def-weil-ramified-pullback-tower-data",
     "def-pur-sheaf-tensor-product"
@@ -46,17 +59,33 @@
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
    }
+  },
+  {
+   "text": "Descend the S-action on P=S tensor_R Res_p N through the surjective q using the ring homomorphism into additive endomorphisms and kernel annihilation, obtaining a T-module D with the same underlying abelian sheaf. The identity q(s)x=sx proves restriction compatibility, so D is a sheaf of T-modules. The projection p is surjective, so the unit N→P is B-linear with target D restricted along j: lift a B scalar to R and use cq=pj. Extension along j gives T tensor_B N→D. The j-extension unit, restricted to R, gives P→Res_q(T tensor_B N) by the c-adjunction. Unit tensor calculations show the maps inverse. For the second composite, surjectivity of q upgrades restricted S-linear maps to T-linear maps, after which unit tensor extensionality applies. The forward map sends s tensor x to q(s) tensor x. Finally transport this isomorphism through the scalar object equalities. Every construction and identity is proved in Lean; no new statement is left unproved.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-ramified-pullback-tower-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-ramified-pullback-tower-data",
+  "def-pur-cochain-coefficient-arrows",
   "def-pur-sheaf-tensor-product",
-  "lem-pur-change-of-rings-tensor-cancellation-independent"
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-ramified-pullback-tower-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions."
+  "place": "Tags 03CZ, 03EK (section-tensor-product) and 03EL (lemma-tensor-product-pullback); balanced scalar base change and composition of the extension/restriction and pullback/direct-image adjunctions.",
+  "note": "F1: complete Lean proof through local kernel annihilation and descent of the scalar action along the sectionwise surjective completed projection; no tensor cancellation theorem or split-off hole is used."
  },
  "mathlib_searches": [
   {
@@ -151,9 +180,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261027T135103-L-3665630",
+  "landing": "20261027T151700-L-1191584",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
