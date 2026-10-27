@@ -12471,6 +12471,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExcha
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
@@ -13292,6 +13293,9 @@ public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.Tactic.FirstOrderApply
+public import WeilConjectures.Tactic.MatchTactic
+public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.TateTwist.LocallyFreeOfTrivial
 public import WeilConjectures.TateTwist.ProEtale
@@ -13700,12 +13704,14 @@ public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.CompactSupportRefinement
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteClosedExtension
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteCoherence
 public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
 public import WeilConjectures.TraceFormula.Specialization.ComponentClass
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
+public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
 public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClass
@@ -13729,6 +13735,8 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibr
 public import WeilConjectures.TraceFormula.Specialization.DeformationSupport
 public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
 public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
+public import WeilConjectures.TraceFormula.Specialization.DiagExternalProduct
+public import WeilConjectures.TraceFormula.Specialization.ExceptionalTensor
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
 public import WeilConjectures.TraceFormula.Specialization.FinitePointReflection
@@ -13746,7 +13754,10 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangul
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
+public import WeilConjectures.TraceFormula.Specialization.KernelPullback
+public import WeilConjectures.TraceFormula.Specialization.KernelPullbackDeformation
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
+public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesBraided
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityCompactification
@@ -13776,6 +13787,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAux
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnProperShape
@@ -13783,10 +13796,12 @@ public import WeilConjectures.TraceFormula.Specialization.PointExchangeOpen
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 public import WeilConjectures.TraceFormula.Specialization.PointSupport
 public import WeilConjectures.TraceFormula.Specialization.PointsSupport
+public import WeilConjectures.TraceFormula.Specialization.ProjectionFormulaExchange
 public import WeilConjectures.TraceFormula.Specialization.ProperUnitClass
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
+public import WeilConjectures.TraceFormula.Specialization.StructuralProduct
 public import WeilConjectures.TraceFormula.Specialization.SupportClosureProper
 public import WeilConjectures.TraceFormula.Specialization.SupportCompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.SupportExchange
@@ -13816,6 +13831,10 @@ public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGeneric
 public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
+public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
+public import WeilConjectures.TraceFormula.Specialization.UniversalKernelDiagonal
+public import WeilConjectures.TraceFormula.Specialization.UniversalKernelFirst
+public import WeilConjectures.TraceFormula.Specialization.UniversalKernelFirstInputs
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine
