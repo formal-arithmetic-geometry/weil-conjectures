@@ -42,9 +42,10 @@
  "statement": "Let k be a field, r>=3, and let overlap units satisfy the triple-overlap cocycle equation. Given pairwise Laurent exponents and scalar coefficients on distinct overlaps, the cocycle equation yields one common integer exponent and chart units satisfying the off-diagonal normalization equation.",
  "proof": [
   {
-   "text": "Restrict the cocycle equation to triples of distinct indices. Independence of the two Laurent ratios forces the three pairwise exponents to agree. Since r>=3, the distinct-pair graph is connected, so one integer works everywhere. Scalar comparison gives a multiplicative coboundary; fixing a base chart supplies chart units and substitution gives the normalization equation.",
+   "text": "Work on the open T where all homogeneous coordinates are invertible. Use the already proved source theorem ProjectiveSpace.bijective_sum_awayMonomial (TwistSections) with the full coordinate set: finite sums of degree-zero Laurent monomials have unique coefficients. The private torus_monomial_injective helper specializes its injectivity to two nonzero scalar monomials. Compute the restriction of x_i/x_j using map_ratio, with denominator the product of all coordinates and numerator x_i times the product excluding j. Its exponent vector is delta_i-delta_j. The proved awayMonomial multiplication and power identities in LineDifferentials give exponent d(delta_i-delta_j) for every integer d, including negative d. Structural constants commute with restriction.",
    "uses": [
-    "new-sfb-projective-pairwise-laurent-unit-expansion",
+    "def-pc-proj",
+    "def-nagata-homogeneous-localization-degree-zero",
     "def-pc-projective-space-twist"
    ],
    "elementary": false,
@@ -52,16 +53,52 @@
     "document": "literature/stacks-project/divisors.tex",
     "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, triple-overlap cocycle calculation."
    }
+  },
+  {
+   "text": "Restrict the supplied pairwise expansions and cocycle equation to T for three distinct indices i,j,l. Monomial injectivity gives e_ij(delta_i-delta_j)+e_jl(delta_j-delta_l)=e_il(delta_i-delta_l) and c_ij*c_jl=c_il. Evaluate the exponent equality at i and l to get e_ij=e_jl=e_il. This uses the given expansions as hypotheses; the existence theorem exists_pairwise_laurent_unit_expansion is not applied. Its module supplies only the concrete structural constant units.",
+   "uses": [
+    "new-sfb-projective-pairwise-laurent-unit-expansion",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, triple-overlap cocycle calculation."
+   }
+  },
+  {
+   "text": "Fix b=0 and q=1 and put d=e_bq. Because r>=3, among 0,1,2 there is an index different from any given two. The triple equalities first imply constancy within a row and then e_ij=e_ji; comparison with row b therefore gives e_ij=d for every distinct pair. Apply the scalar triple identity to (i,j,l) and (j,i,l) and cancel c_il to obtain c_ij*c_ji=1. Set a_b=1 and a_i=c_ib inverse for i different from b. For i=b use the reverse-pair identity, for j=b use inverse cancellation, and otherwise use c_ij*c_jb=c_ib; in all cases a_i*c_ij=a_j.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, triple-overlap cocycle calculation."
+   }
+  },
+  {
+   "text": "Regard the explicit scalar units a_i as standardOpenConstUnit on the charts. Their restrictions are the same structural constants on the overlap. Substitute hpair, e_ij=d and a_i*c_ij=a_j; multiplicativity of the structural map and commutativity give exactly the required normalization equation on every distinct overlap.",
+   "uses": [
+    "new-sfb-projective-pairwise-laurent-unit-expansion",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, triple-overlap cocycle calculation."
+   }
   }
  ],
  "proof_deps": [
-  "new-sfb-projective-pairwise-laurent-unit-expansion",
-  "def-pc-projective-space-twist"
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pc-projective-space-twist",
+  "new-sfb-projective-pairwise-laurent-unit-expansion"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "W2",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 0BXJ, triple-overlap cocycle comparison."
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, triple-overlap cocycle calculation. Complete Lean proof using the existing source monomial basis and explicit scalar normalization; no new obligations."
  },
  "lean": {
   "existing": false,
@@ -110,9 +147,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X9",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261027T181012-L-3921196",
+  "landing": "20261027T210303-L-1684171",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
