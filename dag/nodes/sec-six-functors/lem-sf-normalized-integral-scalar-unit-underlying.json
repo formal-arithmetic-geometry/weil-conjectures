@@ -16,36 +16,21 @@
  },
  "proof": [
   {
-   "text": "The included functor equality identifies the underlying scalar objects. On flat-term K-flat representatives, the adjunction unit sends x to 1 tensor x, while identity restriction is identity on sections. Tensor multiplication s tensor x to s*x is inverse to this unit. The adjunction Hom bijection identifies the transported adjunction unitor with the normalized ordinary K-flat multiplication unitor. Naturality and localization extend the calculation to all derived objects. The two ordinary derived presentations select the same universal scalar-change witness.",
+   "text": "Apply the bridge theorem identifying the normalized restricted identity with the completed tensor unit, then apply the identity clause of CompletedLineTensor.canonical_restriction to identify that completed unit with the intrinsic sfIntegralScalarUnit component.",
    "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-sf-ring-scalar-multiplication-unit",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The inverse realization hypothesis and the scalar-object equality identify the realization with chi inverse. Substituting the ordinary unitor calculation into e.normalized gives chi inverse followed by ordinary multiplication, exactly the completed unit. The identity clause of CompletedLineTensor.canonical_restriction identifies this with the underlying sfIntegralScalarUnit component on the same intrinsic integral object.",
-   "uses": [
-    "lem-pur-completed-line-tensor-coherence",
-    "lem-weil-scalar-extension-composition"
+    "lem-sf-normalized-integral-scalar-unit-underlying-bridge",
+    "lem-pur-completed-line-tensor-coherence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-compact-support-integral-coefficient-comparison",
-  "def-weil-pbc-bounded-constructible-tower",
-  "def-sf-ring-scalar-multiplication-unit",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pur-completed-line-tensor-coherence",
-  "lem-weil-scalar-extension-composition"
+  "lem-sf-normalized-integral-scalar-unit-underlying-bridge"
  ],
  "proof_origin": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YY, lemma-derived-base-change, and 07A6, lemma-adjoint, specialized to the identity coefficient map. The multiplication and restriction identity formulas are the exceptional coefficient construction normalizations. The comparison is an agent expansion of these constructions. Combined with the integral identity clause of the exceptional coefficient construction and the completed-line canonical restriction.",
-  "by": "agent"
+  "by": "F2"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -106,8 +91,8 @@
   "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.normalized_integral_scalar_unit_underlying",
   "statement": "theorem normalized_integral_scalar_unit_underlying\n    (E : FieldStage.{max u v} l) (T : Scheme.{max u v})\n    (S : Scalar.{u, v} l Ω (s := .integral E) (t := .integral E)\n      (PurCompactSupport.completedChange l E.carrier E.carrier\n        (AlgHom.id (Padic l) E.carrier)) T)\n    (hS : S.functor ⋙ RingStage.inclusion.{u, v} l Ω T (.integral E) =\n      RingStage.inclusion.{u, v} l Ω T (.integral E) ⋙\n        integralScalarExtensionOfUniverses l E.carrier E.carrier\n          (AlgHom.id (Padic l) E.carrier) T)\n    (hχ : ∀ K : C.{u, v} l Ω T (.integral E),\n      HEq (S.realization.inv.app K)\n        ((completedScalarComparison l E.carrier E.carrier\n          (AlgHom.id (Padic l) E.carrier) T).app K.obj))\n    (h : ∀ W : Scheme.{max u v},\n      (PurCompactSupport.completedChange l E.carrier E.carrier\n        (AlgHom.id (Padic l) E.carrier)).map W = 𝟙 _)\n    (e : ScalarIdentity.{u, v} l Ω h T S)\n    (K : C.{u, v} l Ω T (.integral E)) :\n    HEq ((e.iso.hom.app K).hom)\n      (((sfIntegralScalarUnit l E.carrier T 0 (Fact.out : l.Prime).ne_zero).hom.app\n        ((PurCompactSupport.finiteTorIntegralInclusion l E.carrier T).obj K)).hom)",
   "branch": "sheaf-dag",
-  "by": "X9",
-  "date": "2026-10-27"
+  "by": "F2",
+  "date": "2026-10-28"
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -123,9 +108,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X9",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261027T123554-L-2321438",
+  "landing": "20261027T205938-L-1636393",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
