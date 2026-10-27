@@ -278,6 +278,50 @@ def WfTensorCompletion.FullProperty (D : FiniteFieldDatum.{u})
         ∃ e : R.ordinaryPair D c X₀ E K L ≅ R.completedPair D c X₀ E K L,
           e.hom.hom.f = R.chi.hom.app (K.carrier, L.carrier)
 
+/-- The raw scalar-localized ordinary and completed tensor data admit a normalized package.
+Source: blueprint proof step 13, first paragraph of the rational construction
+(blueprint: lem-wf-tensor-completion-frobenius-rational-normalized-existence).
+Proof: construct the integral ordinary/completed restrictions from `integral`, extend their
+separately linear Hom maps across the two scalar localizations by the pure-tensor formula,
+and localize the completion unit and both integral pullback comparisons. The resulting
+functors and isomorphisms have the prescribed object and component equations by the
+universal property of scalar localization. -/
+theorem wfTensorCompletionFrobenius_normalized_exists (D : FiniteFieldDatum.{u})
+    (c : D.CoefficientDatum) (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom]
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (E : Padic.FiniteCoefficientFields c.l c.Qbar) :
+    ∃ R : WfTensorCompletion.RationalComparison D c X₀ E,
+      R.Normalized D c X₀ E := by
+  sorry
+
+/-- A normalized package satisfies the rational Weil equation and yields the underlying
+Weil-pair isomorphism for every pair of Weil objects.
+Source: blueprint proof step 13, second paragraph of the rational construction
+(blueprint: lem-wf-tensor-completion-frobenius-weil-property).
+Proof: apply the integral pullback/unit square on integral representatives, then extend its
+naturality through scalar localization by the pure-tensor denominator formula. Naturality
+of the localized completion comparison on the product of the two Weil structure arrows
+is exactly the displayed Weil equation. The inverse component gives the inverse equation,
+and the faithful IsoAlgebra forgetful functor lifts the two inverse identities to the
+required Weil-pair isomorphism whose underlying arrow is `R.chi`. -/
+theorem wfTensorCompletionFrobenius_weil_property (D : FiniteFieldDatum.{u})
+    (c : D.CoefficientDatum) (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom]
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (E : Padic.FiniteCoefficientFields c.l c.Qbar)
+    (R : WfTensorCompletion.RationalComparison D c X₀ E)
+    (_hR : R.Normalized D c X₀ E) :
+    ∀ K L : WeilD D c X₀ E,
+      (R.ordinaryMu.app (K.carrier, L.carrier) ≪≫
+          R.ordinary.mapIso (K.str.prod L.str)).hom ≫
+          R.chi.hom.app (K.carrier, L.carrier) =
+        ((weilFrobeniusPullback D c X₀ E).mapIso
+            (R.chi.app (K.carrier, L.carrier)) ≪≫
+          R.completedMu.app (K.carrier, L.carrier) ≪≫
+          R.completed.mapIso (K.str.prod L.str)).hom ∧
+      ∃ e : R.ordinaryPair D c X₀ E K L ≅ R.completedPair D c X₀ E K L,
+        e.hom.hom.f = R.chi.hom.app (K.carrier, L.carrier) := by
+  sorry
+
 /-- Existence part of the normalized rational comparison; uniqueness is omitted.
 Source: blueprint proof step 13. The construction supplies the ordinary and completed
 localized bifunctors, the completion-unit comparison, the two Frobenius comparisons,
@@ -309,7 +353,8 @@ theorem wfTensorCompletionFrobenius_exists (D : FiniteFieldDatum.{u}) (c : D.Coe
     (E : Padic.FiniteCoefficientFields c.l c.Qbar) :
     ∃ R : WfTensorCompletion.RationalComparison D c X₀ E,
       WfTensorCompletion.FullProperty D c X₀ E R := by
-  sorry
+  obtain ⟨R, hR⟩ := wfTensorCompletionFrobenius_normalized_exists D c X₀ E
+  exact ⟨R, ⟨hR, wfTensorCompletionFrobenius_weil_property D c X₀ E R hR⟩⟩
 
 
 
@@ -415,11 +460,11 @@ theorem wfTensorCompletionFrobenius (D : FiniteFieldDatum.{u}) (c : D.Coefficien
             R.completed.mapIso (K.str.prod L.str)).hom ∧
         ∃ e : R.ordinaryPair D c X₀ E K L ≅ R.completedPair D c X₀ E K L,
           e.hom.hom.f = R.chi.hom.app (K.carrier, L.carrier) := by
-  obtain ⟨R, hR⟩ := wfTensorCompletionFrobenius_exists D c X₀ E
-  -- The existence package already has exactly the target's normalized property.
-  refine ⟨R, hR, ?_⟩
+  obtain ⟨R, hR⟩ := wfTensorCompletionFrobenius_normalized_exists D c X₀ E
+  have hW := wfTensorCompletionFrobenius_weil_property D c X₀ E R hR
+  refine ⟨R, ⟨hR, hW⟩, ?_⟩
   intro S hS
-  exact wfTensorCompletionFrobenius_unique D c X₀ E S R hS hR
+  exact wfTensorCompletionFrobenius_unique D c X₀ E S R hS ⟨hR, hW⟩
 
 
 
