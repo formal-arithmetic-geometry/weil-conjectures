@@ -19933,3 +19933,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/C4/Sheaf.Paper.TateTensorNormalizedSquare (stage 3; reviewer PASS; first push; landing 20261027T205844-L-1624259 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:58 L: merged deliver/C5/Sheaf.Paper.ExceptionalRingTransportCore (stage 3; reviewer PASS; first push; landing 20261027T205845-L-1624541 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:58 L: merged deliver/C5/Sheaf.Paper.FinitePartialTensorIdentityNaturality (stage 3; reviewer PASS; first push; landing 20261027T205846-L-1624703 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 20:58 L: merged deliver/C6/Sheaf.Paper.IntegralPullbackReductionAugmentation (stage 3; reviewer PASS; first push; landing 20261027T205848-L-1625313 (interface); batch 20261027T205736; modules 3; new nodes 2)

@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized reduction pullback adjunct equation on good derived representatives",
+   "results": "Generic adjunction and localization APIs; no specialized theorem for the strict coefficient pullback model.",
+   "date": "2026-10-28",
+   "verdict": "no existing specialized declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv unit derived localization natural isomorphism",
+   "results": "Generic CategoryTheory.Adjunction lemmas only.",
+   "date": "2026-10-28",
+   "verdict": "no direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackReductionAugmentation_good|pullbackReductionAugmentation_of_good",
+   "results": "No prior declaration in the library.",
+   "date": "2026-10-28",
+   "verdict": "new intermediate statements required."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackReductionAugmentation",
+  "date": "2026-10-28",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-pullback-reduction-augmentation",
+   "place": "proof decomposition of the coherent reduction mate",
+   "via": [
+    "lem-sf-pullback-reduction-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-sf-pullback-reduction-augmentation-descent",
+ "title": "Descent of the coherent reduction/pullback adjunct equation",
+ "statement": "Let the notation and hypotheses be as in the Lean declaration below. Descent of the coherent reduction/pullback adjunct equation holds.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 08TC and 0941; the representative/localization steps of the parent proof."
+ },
+ "proof": [
+  {
+   "text": "Carry out the corresponding representative calculation or localization descent described in the declaration docstring.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Decomposition of the coherent reduction mate into representative calculation and localization descent"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackReductionAugmentationDescent",
+  "file": "lean/Sheaf/Paper/IntegralPullbackReductionAugmentationDescent.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.pullbackReductionAugmentation_of_good",
+  "statement": "theorem pullbackReductionAugmentation_of_good {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (a : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⋙\n        (pullbackTensorCalculus l E X).reduction ≅\n      (pullbackTensorCalculus l E Y).reduction ⋙ pullbackTensorSequenceDerived l E f)\n    (ha : ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,\n      (pullComparison l E f).app (DerivedCategory.Q.obj P.obj) ≫\n          (pullbackTensorIntegralPullbackModel l E f).hom.app (DerivedCategory.Q.obj P.obj) =\n        (pullbackTensorCalculus l E X).adjunction.unit.app\n            ((PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj\n              (DerivedCategory.Q.obj P.obj)) ≫\n          (coefficientSequenceLimit l E X).map\n            (a.hom.app (DerivedCategory.Q.obj P.obj))) :\n    ∀ K : DerivedCategory (integralTowerModules l E Y),\n      (pullComparison l E f).app K ≫\n          (pullbackTensorIntegralPullbackModel l E f).hom.app K =\n        (pullbackTensorCalculus l E X).adjunction.unit.app\n            ((PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj K) ≫\n          (coefficientSequenceLimit l E X).map (a.hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-28"
+ },
+ "stmt_deps": [
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "def-pur-completed-pullback-tower-core",
+  "lem-pur-integral-pullback-roos-realization",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T205848-L-1625313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T205848-L-1625313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

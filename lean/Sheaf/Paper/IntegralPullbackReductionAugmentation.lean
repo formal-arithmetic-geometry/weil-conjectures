@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.IntegralOrdinaryPullbackComparison
 public import Sheaf.Paper.CompletedPullbackTowerRealizations
+import Sheaf.Paper.IntegralPullbackReductionAugmentationGood
+import Sheaf.Paper.IntegralPullbackReductionAugmentationDescent
 
 /-! # The coherent reduction mate of ordinary pullback
 
@@ -53,7 +55,9 @@ theorem pullbackReductionAugmentation_exists {X Y : Scheme.{u}} (f : X ⟶ Y) :
             (pullbackTensorIntegralPullbackModel l E f).hom.app K =
           (pullbackTensorCalculus l E X).adjunction.unit.app
               ((PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj K) ≫
-            (coefficientSequenceLimit l E X).map (a.hom.app K) := by sorry
+            (coefficientSequenceLimit l E X).map (a.hom.app K) := by
+  obtain ⟨a, ha⟩ := pullbackReductionAugmentation_good l E f
+  exact ⟨a, pullbackReductionAugmentation_of_good l E f a ha⟩
 
 /-- An adjunction determines the coherent inverse-image comparison from its adjunct.
 Source: Stacks 07A6; the reduction/limit adjunction
