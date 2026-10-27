@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-tower-integral-inverse-system-normalization",
+ "kind": "statement",
+ "title": "Underlying abelian and normalized unit comparisons for integral ordinary inverse systems",
+ "statement": "Let l be prime, f:X→Y a scheme morphism, and R_T the actual tower of constant rings Z/l^(n+1), with quotient maps [def-sp-tower-class-coefficients]. Let I_n be algebraic inverse images [lem-sp-proetale-algebraic-inverse-image] along the set inverse image of f [def-weil-proetale-inverse-image] from R_Y,n to R_X,n, and let P be an OrdinaryInverseSystem for them [lem-coef-ordinary-inverse-system]. For any recorded forgetful functors F_Y,F_X [def-sp-tower-class-systems], there exist a natural isomorphism e:F_Y∘abPull(f)≅P.pull∘F_X and a coefficient-unit isomorphism i:P.pull(R_Y)≅R_X such that abPull(f)(integerGenerator_Y) followed by e and F_X(i) equals integerPull(f) followed by integerGenerator_X [lem-sp-tower-integral-class-pullback]. No Chern data, root comparison, Kummer morphism or K-flat assertion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-coefficients",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-ordinary-inverse-system",
+  "lem-sp-tower-integral-class-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Lift I.moduleUnderlying to abelian sheaves using its addition and zero graph equations. Compose with P.component and the evaluation identifications of the two Forget functors. The transition and restriction_underlying equations of P make these level comparisons compatible with every horizontal arrow, yielding e, natural in the module system.",
+   "uses": [
+    "lem-sp-proetale-algebraic-inverse-image",
+    "lem-coef-ordinary-inverse-system",
+    "lem-sp-tower-forget-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Apply ringUnderlying to the coefficient module and its multiplication action; ringAdd, ringMul, ringZero, ringOne and moduleSMul make the resulting comparison linear and invertible. The transition equations assemble the unit isomorphism i. The composite e followed by i preserves 1 and addition, hence every integer. The constant sheafification local-section principle extends this to integerGenerator, and the adjunction defining integerPull gives the displayed equality. This works also on empty charts.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "lem-sp-tower-integral-class-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-coef-ordinary-inverse-system",
+  "lem-sp-tower-forget-evaluation",
+  "def-sp-tower-class-systems",
+  "lem-sp-tower-integral-class-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*flat|flat.*pullback",
+   "results": "15 hits: Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-27",
+   "verdict": "General pullback, scalar and flatness tools; no normalized integral inverse-system comparison. The K-flat proof uses the existing project ringed-topos theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-27",
+   "verdict": "General pullback, scalar and flatness tools; no normalized integral inverse-system comparison. The K-flat proof uses the existing project ringed-topos theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves of modules preserves K-flat complexes with flat terms",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.compatiblePreservingOfFlat, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-27",
+   "verdict": "General pullback, scalar and flatness tools; no normalized integral inverse-system comparison. The K-flat proof uses the existing project ringed-topos theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerIntegralCoefficientPullbackExistence",
+  "group": "H1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-integral-coefficient-pullback-existence",
+   "place": "Underlying abelian and normalized unit comparisons for integral ordinary inverse systems",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIntegralInverseSystemNormalization",
+  "file": "lean/Sheaf/Paper/TowerIntegralInverseSystemNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.integralInverseSystem_normalization",
+  "statement": "theorem integralInverseSystem_normalization (l : ℕ) [Fact l.Prime]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage\n      (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))\n      ((Rrings l Y).obj (Opposite.op n)) ((Rrings l X).obj (Opposite.op n)))\n    (P : WeilConjectures.SemilinearSections.OrdinaryInverseSystem.{u + 1, u, u + 1}\n      (Scheme.ProEt.topology Y) (fun n ↦ (Rrings l Y).obj (Opposite.op n))\n      (fun n ↦ (Rrings l Y).map (homOfLE (Nat.le_succ n)).op)\n      (Scheme.ProEt.topology X) (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))\n      (fun n ↦ (Rrings l X).obj (Opposite.op n))\n      (fun n ↦ (Rrings l X).map (homOfLE (Nat.le_succ n)).op) I)\n    (FY : Forget Y (Rrings l Y)) (FX : Forget X (Rrings l X)) :\n    ∃ e : FY.F ⋙ abPull f ≅ P.pull ⋙ FX.F,\n      ∃ i : P.pull.obj (coefficient Y (Rrings l Y)) ≅ coefficient X (Rrings l X),\n        (abPull f).map (integerGenerator Y (Rrings l Y) FY) ≫\n          e.hom.app (coefficient Y (Rrings l Y)) ≫ FX.F.map i.hom =\n        integerPull f ≫ integerGenerator X (Rrings l X) FX",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T180629-L-3884431",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T180629-L-3884431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

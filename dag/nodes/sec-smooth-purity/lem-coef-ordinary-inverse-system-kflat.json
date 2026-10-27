@@ -1,0 +1,142 @@
+{
+ "id": "lem-coef-ordinary-inverse-system-kflat",
+ "kind": "statement",
+ "title": "Ordinary inverse systems preserve flat-term K-flat complexes",
+ "statement": "Let J,J′ be sites in the coefficient universe, uInv:Sh(J,Set)→Sh(J′,Set) a finite-limit-preserving left adjoint with right adjoint uPush. Let B_n,F_n be coefficient ring sheaves with adjacent transitions τ,σ [def-coef-semilinear-system-models], I_n algebraic inverse images along uInv from B_n to F_n [def-weil-pbc-algebraic-inverse-image] whose module functors are additive, and P an OrdinaryInverseSystem with additive P.pull [lem-coef-ordinary-inverse-system]. Then P.pull carries every K-flat complex of B-systems with flat terms on the vertical sequence site to a K-flat complex of F-systems [def-pc-kflat-complex; def-pc-flat-sheaf-modules].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-coef-ordinary-inverse-system",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Identify semilinear evaluation with the strict system sequence evaluation; the structural coefficient map is the identity on sections. The vertical evaluation K-flat theorem shows that every evaluated source complex is K-flat with flat terms.",
+   "uses": [
+    "lem-pur-system-evaluation-kflat",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-pullback-K-flat, applied to vertical restriction"
+   }
+  },
+  {
+   "text": "Extend each algebraic inverse image I_n along the identity scalar map, apply ringed-topos K-flat pullback, and transport through the normalized scalar-unit isomorphism. Compose with P.component to get K-flatness of each evaluated whole inverse image.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-coef-ordinary-inverse-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-pullback-K-flat"
+   }
+  },
+  {
+   "text": "Tensor the image with an arbitrary acyclic system complex. Exactness of evaluation and its total-tensor comparison make every level acyclic. Componentwise exactness on the vertical sequence site implies acyclicity of the tensor, which is the K-flat criterion.",
+   "uses": [
+    "lem-coef-semilinear-total-tensor-evaluation",
+    "lem-coef-semilinear-system-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-evaluation-kflat",
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-coef-ordinary-inverse-system",
+  "lem-coef-semilinear-total-tensor-evaluation",
+  "lem-coef-semilinear-system-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*flat|flat.*pullback",
+   "results": "15 hits: Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-27",
+   "verdict": "General pullback, scalar and flatness tools; no normalized integral inverse-system comparison. The K-flat proof uses the existing project ringed-topos theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso",
+   "date": "2026-10-27",
+   "verdict": "General pullback, scalar and flatness tools; no normalized integral inverse-system comparison. The K-flat proof uses the existing project ringed-topos theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves of modules preserves K-flat complexes with flat terms",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.compatiblePreservingOfFlat, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-27",
+   "verdict": "General pullback, scalar and flatness tools; no normalized integral inverse-system comparison. The K-flat proof uses the existing project ringed-topos theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerIntegralCoefficientPullbackExistence",
+  "group": "H1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-integral-coefficient-pullback-existence",
+   "place": "Ordinary inverse systems preserve flat-term K-flat complexes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOrdinaryInverseSystemKFlat",
+  "file": "lean/Sheaf/Paper/SemilinearOrdinaryInverseSystemKFlat.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ordinaryInverseSystem_kflat",
+  "statement": "theorem ordinaryInverseSystem_kflat [∀ n, (I n).modules.Additive]\n    (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I) [P.pull.Additive]\n    (K : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)\n    (hK : CochainComplex.IsKFlatIndependentCoefficients (R := systemRing.{c, v, max c v r} J B τ) K)\n    (hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := coefficientSequenceTopology J)\n      (R := systemRing.{c, v, max c v r} J B τ) (K.X i)) :\n    CochainComplex.IsKFlatIndependentCoefficients (R := systemRing.{c, v, max c v r} J' F σ)\n      ((P.pull.mapHomologicalComplex (.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T180629-L-3884431",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T180629-L-3884431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
