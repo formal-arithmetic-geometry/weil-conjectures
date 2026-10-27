@@ -28,128 +28,56 @@
  ],
  "proof": [
   {
-   "text": "Work on the fixed small skeleton of the pro-etale site. By the integral constructible definition, $M$ and $N$ are derived complete. Apply the internal-Hom completeness clause of [lem-pur-integral-operations-scalar-extension] with $f=\\mathrm{id}_X$ and $W=X$: its only completeness requirement for this clause is completeness of $N$, and its constructible hypotheses hold for $M,N$. Thus $H=H_R(M,N)$ is derived $t$-complete; bounded constructibility of $H$ is not needed. By [lem-weil-finite-free-completed-scalar-comparison], $S$ is a finite free $R$-module and the specified $\\chi_Z:TZ\\to CZ$ is invertible and natural for $Z=M,N,H$. Its explicit cone-unit description also identifies the units used in the specified comparison.",
+   "text": "Use the internal-Hom completeness and finite-free completion results to prove the first four completeness/isomorphism clauses and the displayed integral evaluation identity; the existing specifiedHomIdentified_eq calculation cancels the normalized completion units.",
    "uses": [
-    "def-weil-derived-complete-integral-detailed",
     "lem-pur-integral-operations-scalar-extension",
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
+   "elementary": false
   },
   {
-   "text": "Use the representatives $P,I,q:Q\\to\\mathcal Hom_R^\\bullet(P,I)$ and $j:I\\otimes_RS\\to J$ fixed in the statement. K-flat and K-injective existence are [lem-pc-kflat-resolution] and [prop-pur-kinjective-resolutions-exist]. Write $d$ for the ordinary coefficient map represented by the chain-Hom formula in the statement. Its $S$-linearity is the balancing identity $q(x)(rm)\\otimes sb=q(x)(m)\\otimes r sb$, together with linearity in $s,b$. Its compatibility with the Hom differential is immediate by substituting $d(h)=d_Ih-(-1)^{|h|}h d_P$: the two terms become $j(d_Ih(m)\\otimes sb)$ and $-(-1)^{|h|}j(h(d_Pm)\\otimes sb)$ on both sides. Scalars have degree zero. Thus this is an actual map of sheaf Hom complexes, with the fixed augmentations, not a comparison chosen solely for being invertible.",
+   "text": "Apply the strict existence and uniqueness chain-map substatements to the two fixed resolution units. Their conjunction and extensional uniqueness assemble specifiedHomScalarChain.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex"
+    "lem-zl-specified-hom-scalar-chain-existence",
+    "lem-zl-specified-hom-scalar-chain-uniqueness"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
+   "elementary": false
   },
   {
-   "text": "Compute the transpose of $d$ before localization. On the total-tensor summand with $m\\in P^i$, $x\\in Q^r$ it is\n$$(m\\otimes b)\\otimes(x\\otimes s)\\longmapsto(-1)^{ir}j(q(x)(m)\\otimes bs).$$\nThe sign occurs because the order is $P\\otimes\\mathcal Hom(P,I)$; with Hom first it is absent. The representative evaluation and its fixed localized augmentation are exactly [def-coef-hom-representative-evaluation], with the normalized tensor model of [def-coef-ringed-tensor-hom-model]. The ordinary scalar-association map first sends the same tensor to $(m\\otimes x)\\otimes bs$, and applying scalar-extended $R$-evaluation followed by $j$ gives precisely the same formula. Equality on every sheafified pure-tensor summand gives equality of these chain maps: tensor relations and sheafification extend equal maps uniquely. Consequently their localizations, followed by the identical inverse augmentations, agree. Derived change of rings [lem-pur-derived-change-of-rings] computes the scalar functor on $P,Q$. Here $I\\otimes_RS$ represents $TN$ because tensoring with the finite free $S$ is, after restriction, a finite direct sum; it preserves the quasi-isomorphism to $I$. No assertion that $I\\otimes_RS$ is K-injective is made: that is the role of $J$. By [lem-pur-kflat-change-of-rings], $P\\otimes_RS$ and $Q\\otimes_RS$ remain flat-term K-flat over $S$, so the displayed total tensor also computes the derived tensor on the target side.",
-   "uses": [
-    "def-coef-hom-representative-evaluation",
-    "def-coef-ringed-tensor-hom-model",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
-  },
-  {
-   "text": "The transpose computed in Step 3 is the pairing defining $c_{M,N}$ in [lem-sf-ringed-finite-free-hom-base-change]. The tensor-Hom bijection is injective, so $d=c_{M,N}$ as $S$-linear derived morphisms, and $d$ is invertible by that node. This argument also proves independence of the resolutions used to describe $d$: every such description has that same transpose. In particular no inference of equality from restriction of scalars, from finite-level evaluations, or from an isomorphism of limit objects is involved.",
-   "uses": [
-    "lem-sf-ringed-finite-free-hom-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
-  },
-  {
-   "text": "Unfold the recorded scalarHomCompleted and scalarHomCompleteInputs constructions. The completed comparison is the inverse Hom-output completion isomorphism, followed by scalarHomOrdinary, followed by the internal-Hom image of the inverse first-input and direct second-input completion isomorphisms. Cancel the Hom-output completion map to obtain the first displayed comparison identity. Composing with the opposite input identifications cancels both input maps by functoriality, proving specifiedHomIdentified = scalarHomOrdinary. The ordinary map is defined as the closed transpose of scalar-extended evaluation; apply the inverse transpose and its inverse law. This proves specifiedHomScalarEvaluation directly from the actual construction. Steps 2--4 separately establish its representative chain normalization.",
+   "text": "The integral unit and tower equalities are the already proved ordinary scalar unit and tower equations after rewriting specifiedHomIdentified by specifiedHomIdentified_eq. The rational naturality and rational unit/tower clauses are supplied by their strict localization substatements.",
    "uses": [
     "lem-pur-integral-operations-scalar-extension",
-    "def-pur-derived-internal-hom"
+    "lem-zl-specified-hom-scalar-rational-naturality",
+    "lem-zl-specified-hom-scalar-rational-unit",
+    "lem-zl-specified-hom-scalar-rational-tower"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
+   "elementary": false
   },
   {
-   "text": "For the integral identity equation, first cancel the completion isomorphisms in specifiedHomIdentified as in Step 5. The result is scalarHomOrdinary. Apply the Hom clause of the already recorded scalarOperationsOrdinary_unit in lem-pur-integral-operations-scalar-extension, specialized to the identity scheme map. This gives exactly the stated equation with the prescribed ordinary scalar unit, without identifying strict cone complexes literally.",
+   "text": "The raw rational evaluation clause is definitionally the localization of scalarHomCompleted, so it closes by reflexivity.",
    "uses": [
-    "lem-pur-integral-operations-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
-  },
-  {
-   "text": "For the integral tower equation, cancel the completion isomorphisms in each specifiedHomIdentified as in Step 5. Apply the Hom clause of scalarOperationsOrdinary_tower from lem-pur-integral-operations-scalar-extension, specialized to the identity scheme map. Its contravariant inverse input component and covariant direct input component are precisely those displayed. The representative coefficient multiplication and signs remain as in Steps 2--4; this proof reuses the declared coherence theorem rather than reproving that calculation.",
-   "uses": [
-    "lem-pur-integral-operations-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
-  },
-  {
-   "text": "Suppose now that $H$ is bounded constructible. The coefficient-operation theorem places $CM,CN,CH$ in the integral constructible domains, so all the established maps can be rationalized. The rationalization definition keeps objects and tensors each Hom group with the coefficient field; it preserves an equality, its composites and its inverses. The rational internal-Hom action in [def-weil-derived-pullback-tensor-hom] is bilinear: $H(a\\otimes c,b\\otimes d)=H(a,b)\\otimes cd$, with the first input contravariant. Thus an integral naturality equality for an input map remains true after multiplication by a scalar, and expanding finite sums proves it for arbitrary localized morphisms in either input. In particular a denominator $t^{-r}$ acts through its image in $L$, which is invertible even when $L/E$ is ramified. Applying this to Step 5 and to the unit/tower equations proves the asserted identities in the raw rationalized categories. No idempotent completion or perfectness assumption is used. The theorem specifiedHomScalarRationalEvaluation itself is definitionally the localization of scalarHomCompleted: integralHomScalarComparison is its full-subcategory lift, and scalarHomCompleted is exactly the three-completion-unit conjugate displayed on the right. Thus this evaluation clause is proved by reflexivity, independently of the remaining rational naturality and coherence assertions.",
-   "uses": [
-    "lem-pur-integral-operations-scalar-extension",
     "def-weil-rationalization-karoubi",
     "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Final compatible-reductions/common-stage paragraph; the chosen integral Hom coefficient comparison is the chain-Hom construction exposed in lem-pur-integral-operations-scalar-extension, Steps 11–12. Agent-written normalization calculation; Stacks 08J9 (sites-cohomology.tex, lemma-internal-hom) and 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor) give the tensor-Hom conventions."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-derived-complete-integral-detailed",
   "lem-pur-integral-operations-scalar-extension",
   "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pc-kflat-resolution",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-coef-hom-representative-evaluation",
-  "def-coef-ringed-tensor-hom-model",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "def-pc-tensor-complex-sheaves",
-  "lem-sf-ringed-finite-free-hom-base-change",
   "def-weil-rationalization-karoubi",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-zl-specified-hom-scalar-rational-naturality",
+  "lem-zl-specified-hom-scalar-rational-unit",
+  "lem-zl-specified-hom-scalar-rational-tower",
+  "lem-zl-specified-hom-scalar-chain-existence",
+  "lem-zl-specified-hom-scalar-chain-uniqueness"
  ],
  "proof_origin": {
   "kind": "agent-written",
-  "by": "N4",
-  "date": "2026-10-25",
-  "description": "Partial stage-3 proof: cancel the actual completion conjugations for evaluation; specialize declared ordinary unit/tower coherence; unfold rationalized completed comparison for rational evaluation. Remaining representative-chain and rational naturality/coherence plans retained."
+  "by": "J8",
+  "date": "2026-10-28",
+  "description": "Assembled the proved clauses and five strict stage-3 substatements: chain existence/uniqueness, rational naturality, rational unit and rational tower."
  },
  "mathlib_searches": [
   {
@@ -326,7 +254,7 @@
    "WeilConjectures.specifiedHomScalarRationalEvaluation"
   ],
   "file": "lean/Sheaf/Paper/SpecifiedHomScalarEvaluation.lean",
-  "statement": "theorem specifiedHomScalarEvaluation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (M N : DerivedCategory (integralTowerModules l E X)) (hM : sfIntegralConstructible l E X M) (hN : sfIntegralConstructible l E X N) : IsSfDerivedComplete l E X ((integralDerivedInternalHom l E X).obj (op M, N)) ∧ IsIso ((scalarCompletion l E L ι X).app M) ∧ IsIso ((scalarCompletion l E L ι X).app N) ∧ IsIso ((scalarCompletion l E L ι X).app ((integralDerivedInternalHom l E X).obj (op M, N))) ∧ ((scalarCompletion l E L ι X).app ((integralDerivedInternalHom l E X).obj (op M, N)) ≫ (scalarHomCompleteInputs l E L ι X M N hM.1 hN.1).hom = scalarHomOrdinary l E L ι X M N ≫ (integralDerivedInternalHom l L X).map (Prod.mkHom ((scalarCompletionIso l E L ι X M hM.1).inv.op) ((scalarCompletionIso l E L ι X N hN.1).hom))) ∧ ((scalarIntegralClosed l L X).transpose _ ((integralOrdinaryDerivedScalar l E L ι X).obj M) ((integralOrdinaryDerivedScalar l E L ι X).obj N)).symm (specifiedHomIdentified l E L ι X M N hM.1 hN.1) = (scalarClosedTensor l E L ι X).inv.app ((integralDerivedInternalHom l E X).obj (op M, N), M) ≫ (integralOrdinaryDerivedScalar l E L ι X).map ((scalarIntegralClosed l E X).evaluation M N)",
+  "statement": "theorem specifiedHomScalarEvaluation\n    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (X : Scheme.{u})\n    [X.Over (Spec (CommRingCat.of D.k))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))]\n    (M N : DerivedCategory (integralTowerModules l E X))\n    (hM : sfIntegralConstructible l E X M) (hN : sfIntegralConstructible l E X N) :\n    IsSfDerivedComplete l E X ((integralDerivedInternalHom l E X).obj (op M, N)) ∧\n    IsIso ((scalarCompletion l E L ι X).app M) ∧\n    IsIso ((scalarCompletion l E L ι X).app N) ∧\n    IsIso ((scalarCompletion l E L ι X).app\n      ((integralDerivedInternalHom l E X).obj (op M, N))) ∧\n    ((scalarCompletion l E L ι X).app\n        ((integralDerivedInternalHom l E X).obj (op M, N)) ≫\n      (scalarHomCompleteInputs l E L ι X M N hM.1 hN.1).hom =\n      scalarHomOrdinary l E L ι X M N ≫\n        (integralDerivedInternalHom l L X).map (Prod.mkHom\n          ((scalarCompletionIso l E L ι X M hM.1).inv.op)\n          ((scalarCompletionIso l E L ι X N hN.1).hom))) ∧\n    ((scalarIntegralClosed l L X).transpose _\n        ((integralOrdinaryDerivedScalar l E L ι X).obj M)\n        ((integralOrdinaryDerivedScalar l E L ι X).obj N)).symm\n      (specifiedHomIdentified l E L ι X M N hM.1 hN.1) =\n        (scalarClosedTensor l E L ι X).inv.app\n          ((integralDerivedInternalHom l E X).obj (op M, N), M) ≫\n        (integralOrdinaryDerivedScalar l E L ι X).map\n          ((scalarIntegralClosed l E X).evaluation M N)",
   "branch": "newtargets-dag",
   "by": "NK",
   "date": "2026-10-18",
@@ -354,13 +282,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "J8",
   "result": "pass",
-  "landing": "20261025T095653-L-3461228",
-  "kind": "proof",
+  "landing": "20261027T234026-L-4164656",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

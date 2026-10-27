@@ -20304,3 +20304,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:40 L: merged deliver/J5/Sheaf.Paper.NativeOrdinaryTensorModelNaturality (stage 3; reviewer PASS; first push; landing 20261027T234022-L-4162784 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:40 L: merged deliver/J6/Sheaf.Paper.NativeOrdinaryTensorModelResolutionExtension (stage 3; reviewer PASS; first push; landing 20261027T234023-L-4163300 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:40 L: merged deliver/J7/Sheaf.Paper.TowerIntegralAbelianComparison (stage 3; reviewer PASS; first push; landing 20261027T234025-L-4163986 (interface); batch 20261027T233735; modules 1; new nodes 0)
+- 23:40 L: merged deliver/J8/Sheaf.Paper.SpecifiedHomScalarEvaluation (stage 3; reviewer PASS; first push; landing 20261027T234026-L-4164656 (interface); batch 20261027T233735; modules 6; new nodes 5)

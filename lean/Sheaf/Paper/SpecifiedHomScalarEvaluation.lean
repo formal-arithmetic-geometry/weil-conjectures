@@ -10,6 +10,11 @@ public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.Paper.SpecifiedHomScalarRationalNaturality
+import Sheaf.Paper.SpecifiedHomScalarRationalUnit
+import Sheaf.Paper.SpecifiedHomScalarTower
+import Sheaf.Paper.SpecifiedHomScalarChainExistence
+import Sheaf.Paper.SpecifiedHomScalarChainUniqueness
 
 /-! # The specified Hom comparison and scalar-extended evaluation
 
@@ -178,7 +183,17 @@ theorem specifiedHomScalarChain (X : Scheme.{u})
             ((integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app I)) ≫
           (coefficientHomResolutionIso.{u, u+1, u} (Scheme.ProEt.topology X)
             (completedIntegralCommRingSheafUnrestricted l L X) _ _).hom := by
-  sorry
+  obtain ⟨δ, hδ⟩ := specifiedHomScalarChain_exists l E L ι X
+    (specifiedHomResolutionUnit l E X) (specifiedHomResolutionUnit l L X)
+    P I Q _hP _hQ _hM _hN q
+  refine ⟨δ, ?_, ?_⟩
+  · simpa only [specifiedHomResolutionUnit] using hδ
+  · intro δ' hδ'
+    exact (specifiedHomScalarChain_unique l E L ι X
+      (specifiedHomResolutionUnit l E X) (specifiedHomResolutionUnit l L X)
+      P I Q _hP _hQ _hM _hN q δ δ' (by
+        simpa only [specifiedHomResolutionUnit] using hδ) (by
+        simpa only [specifiedHomResolutionUnit] using hδ')).symm
 
 /-- Identity and tower equations after the specified completion identifications.
 The unit is ordinary multiplication followed by the canonical completeness unit;
@@ -256,7 +271,9 @@ theorem specifiedHomScalarRational (X : Scheme.{u})
               (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map a).op)
             ((sfRationalScalarExtension l E X 0
               (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map b))) := by
-  sorry
+  constructor
+  · exact (rationalHomScalarComparison_existsUnique l E L ι X P).exists.choose_spec
+  · exact specifiedHomScalarRational_naturality l E L ι X P P' a b
 
 /-- Identity and tower coherence survive in the raw rationalized categories.
 Source: blueprint common-stage paragraph (blueprint: lem-zl-specified-hom-scalar-evaluation).
@@ -299,7 +316,10 @@ theorem specifiedHomScalarRationalCoherence (X : Scheme.{u})
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) F j).hom.app
             ((rationalDerivedInternalHom l E X).obj P) ≫
           (rationalHomScalarComparison l E F (j.comp ι) X P).hom) := by
-  sorry
+  constructor
+  · exact specifiedHomScalarRational_unit l E X P
+  · intro F _ _ _ j
+    exact specifiedHomScalarRational_tower l E L ι X P F j
 
 /-- The displayed evaluation identity itself in raw rationalization, when its Hom
 output is constructible. The right side is the localized conjugate of the ordinary
