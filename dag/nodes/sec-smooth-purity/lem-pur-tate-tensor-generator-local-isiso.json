@@ -1,0 +1,100 @@
+{
+ "id": "lem-pur-tate-tensor-generator-local-isiso",
+ "kind": "statement",
+ "title": "Pointwise invertibility of the normalized integral Tate quotient morphism",
+ "statement": "For a Noetherian scheme T and a prime ell invertible on T, and n,d natural numbers, any morphism f from realization T ell n of finiteSheaf T ell n d to quotientLine T ell n d satisfying GeneratorCompatible induces an isomorphism on every pro-etale section.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2: local rank-one argument in the ordinary quotient comparison"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pur-tate-tensor-generator-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose the common pro-etale covering with compatible primitive roots. Scalar coordinates identify the inverse-limit root line and its finite quotient with rank-one coordinate modules. GeneratorCompatible identifies the section map with the identity in these coordinates, hence the section morphism is invertible; restriction compatibility handles every pro-etale section.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "det-def-sp-tate-twist-locally-free",
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2: local rank-one argument in the ordinary quotient comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Sheaf.isIso_of_isIso_app_of_mem; Functor.map_isIso",
+   "results": "The sheaf local isomorphism criterion and preservation of isomorphisms by the forgetful functor are used in the reduction.",
+   "date": "2026-10-28",
+   "verdict": "match: the final item proof uses these Mathlib/library declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TateTensorGeneratorIsIso",
+  "date": "2026-10-28",
+  "group": "E4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-tate-tensor-generator-isiso",
+   "place": "Step 2 local rank-one argument",
+   "via": [
+    "lem-pur-tate-tensor-generator-map"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TateTensorGeneratorLocalIsIso",
+  "file": "lean/Sheaf/Paper/TateTensorGeneratorLocalIsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.tateTensorQuotient_generator_local_isIso",
+  "statement": "theorem tateTensorQuotient_generator_local_isIso\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (n d : ℕ)\n    (f : (realization T ell n).obj (finiteSheaf T ell n d) ⟶ quotientLine T ell n d)\n    (hf : GeneratorCompatible T ell n d f) :\n    ∀ W, IsIso (f.val.app W)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233913-L-4134230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233913-L-4134230",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

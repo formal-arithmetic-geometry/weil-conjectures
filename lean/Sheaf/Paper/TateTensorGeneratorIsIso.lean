@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.TateTensorGeneratorMap
+import Sheaf.Paper.TateTensorGeneratorLocalIsIso
 
 /-! Fixed-level root-generator comparison for the integral Tate tensor.
 
@@ -15,6 +16,7 @@ Source: smooth-purity transport, normalized Tate tower, Step 1.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.MonoidalCategory
@@ -41,6 +43,19 @@ theorem tateTensorQuotient_generator_isIso
     (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]
     (hT : IsUnit (ell : Γ(T, ⊤))) (n d : ℕ)
     (f : (realization T ell n).obj (finiteSheaf T ell n d) ⟶ quotientLine T ell n d)
-    (hf : GeneratorCompatible T ell n d f) : IsIso f := by sorry
+    (hf : GeneratorCompatible T ell n d f) : IsIso f := by
+  have hlocal := tateTensorQuotient_generator_local_isIso T ell hT n d f hf
+  let F := SheafOfModules.toSheaf
+    ((adicLisseForget T).obj ((pbcAdicRings T (datum.{u} ell)).obj (op n)))
+  haveI : IsIso (F.map f) := by
+    apply Sheaf.isIso_of_isIso_app_of_mem
+      (J := ProEt.topology T) (F.map f)
+    intro X
+    refine ⟨⊤, (ProEt.topology T).top_mem _, ?_⟩
+    intro Y g _
+    letI := hlocal (op Y)
+    change IsIso ((forget₂ (ModuleCat _) AddCommGrpCat).map (f.val.app (op Y)))
+    infer_instance
+  exact isIso_of_reflects_iso f F
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower
