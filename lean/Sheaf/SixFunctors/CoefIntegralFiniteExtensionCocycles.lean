@@ -1,6 +1,9 @@
 module
 
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionIdentityE
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionIdentityL
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionComposition
 
 /-! # Canonical integral finite-extension comparisons
 
@@ -90,7 +93,9 @@ theorem comparison_cocycles
               (completedIntegralCommRingSheafUnrestricted l F X)).map
               (Prod.mkHom f.op (𝟙 M)))) ≫ (c.adjunction K').counit.app M =
           c.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (c.adjunction K).counit.app M) →
-      CompositionConclusion l E L ι X D hl wE wL a b F j wF c) := by
-  sorry
+    CompositionConclusion l E L ι X D hl wE wL a b F j wF c) := by
+  refine ⟨comparison_identity_E l E X D hl wE a hevalE,
+    comparison_identity_L l L X D hl wL b hevalL, ?_⟩
+  exact comparison_composition l E L ι X D hl wE wL a b hevalE hevalL
 
 end WeilConjectures.IntegralFiniteExtension

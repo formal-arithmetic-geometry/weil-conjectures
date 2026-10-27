@@ -19736,3 +19736,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:06 L: merged deliver/G7/Sheaf.Paper.WfTensorCompletionFrobenius (stage 3; reviewer PASS; first push; landing 20261027T180619-L-3882638 (proof); batch 20261027T180444; modules 1; new nodes 0)
 - 18:06 L: merged deliver/G7/Sheaf.SixFunctors.IntegralVerdierReductionPairing (stage 3; reviewer PASS; first push; landing 20261027T180620-L-3882964 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:06 L: merged deliver/G8/Sheaf.AlgebraicGeometry.ProEtaleClopenKFlatDetection (stage 3; reviewer PASS; first push; landing 20261027T180622-L-3883320 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:06 L: merged deliver/G8/Sheaf.SixFunctors.CoefIntegralFiniteExtensionCocycles (stage 3; reviewer PASS; first push; landing 20261027T180623-L-3883660 (interface); batch 20261027T180444; modules 4; new nodes 3)

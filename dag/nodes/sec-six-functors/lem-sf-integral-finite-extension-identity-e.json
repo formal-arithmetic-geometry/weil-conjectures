@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: the corresponding component of the unit, composition and tensor-associator equations."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionCocycles",
+  "date": "2026-10-28",
+  "group": "G8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Final paragraph: component unit/composition equations for integral finite-extension comparisons.",
+   "via": [
+    "lem-sf-integral-finite-extension-cocycles"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-integral-finite-extension-identity-e",
+ "title": "E-side identity equations for the integral finite-extension comparison",
+ "statement": "For fixed E, dualizing datum wE and normalized tensor presentation a satisfying first-variable evaluation naturality, the prescribed integral finite-extension maps satisfy IdentityConclusion for E [def-sf-integral-finite-extension-core].",
+ "proof": [
+  {
+   "text": "Use the finite dualizing and semilinear coefficient comparison statements to identify the counit transpose of the identity coefficient map with the prescribed completion-conjugated unit. The uniqueness clause for the coherent finite-counit map fixes u.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "lem-coef-semilinear-derived-sections",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the v equation through the tensor-Hom adjunction and postcompose with internal Hom into the u equation. The normalized identity coefficient map is multiplication, so the resulting equations are exactly the v and beta clauses of IdentityConclusion, including degenerate objects.",
+   "uses": [
+    "def-sf-integral-finite-extension-core",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-core",
+  "lem-coef-finite-dualizing",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: the corresponding component of the unit, composition and tensor-associator equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "identity and composition equations for normalized finite coefficient scalar extension comparisons",
+   "results": "Generic adjunction and tensor coherence lemmas only; no completed integral finite-extension cocycle theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory tensor associator adjunction counit naturality scalar extension",
+   "results": "Generic functor map and associator declarations; no theorem for the specified integral comparisons.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "IdentityConclusion CompositionConclusion comparison_cocycles",
+   "results": "The project contains only the definitions and parent statement; no duplicate component theorem.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate declaration."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionIdentityE",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionIdentityE.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.comparison_identity_E",
+  "statement": "theorem comparison_identity_E\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]\n    (wE : DualizingDatum l X D hl E)\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l E X))\n    (_hevalE : ∀ (K K' M : IntegralVerdier.Ambient l E X) (f : K' ⟶ K),\n      a.tensor.map (Prod.mkHom (𝟙 K')\n          ((IntegralHom.hom.{u, u} X\n            (completedIntegralCommRingSheafUnrestricted l E X)).map\n            (Prod.mkHom f.op (𝟙 M)))) ≫ (a.adjunction K').counit.app M =\n        a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app M) :\n    IdentityConclusion l E X D hl wE a",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T180623-L-3883660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T180623-L-3883660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
