@@ -12,20 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite Tate scalar source normalization to the coefficient map. Its degree-one comparison is c, and its line-normalization clause is exactly PurityScalarLineNormalization after unfolding the degree-one Tate line.",
+   "text": "Apply the coefficient homomorphism to the equation N = 0 in A to obtain N = 0 in A′. Map the given global unit through the germ ring homomorphism at each point of B; ring homomorphisms preserve natural-number casts and units, giving the stalkwise unit hypothesis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply finite_tate_scalar_source_normalization_exists of [lem-pur-finite-tate-scalar-source-existence] to obtain a family beta with IsFiniteTateScalarBalancing of [def-pur-finite-tate-scalar-source-data]. Take c = beta 1; the degree-one finite Tate twist is definitionally the finite Tate line.",
    "uses": [
-    "lem-pur-finite-tate-scalar-source-normalization"
+    "lem-pur-finite-tate-scalar-source-existence",
+    "def-pur-finite-tate-scalar-source-data"
    ],
    "elementary": false
+  },
+  {
+   "text": "Specialize the balancing generator equation to degree one, new coefficient b = 1, and the constant singleton root tuple z. The power generator reduces to the line generator, scalar multiplication by 1 and multiplication by 1 disappear, and the unit followed by restriction of c.hom is the scalar-adjunction transpose. This is exactly PurityScalarLineNormalization of [def-pur-vector-purity-finite-reduction].",
+   "uses": [
+    "def-pur-finite-tate-scalar-source-data",
+    "def-pur-vector-purity-finite-reduction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-finite-tate-scalar-source-normalization"
+  "lem-pur-finite-tate-scalar-source-existence",
+  "def-pur-finite-tate-scalar-source-data",
+  "def-pur-vector-purity-finite-reduction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-  "place": "paragraph 2, Kummer normalization"
+  "place": "paragraph 2, coefficient reduction; direct degree-one specialization of the existing balancing existence theorem, formalized by T2"
  },
  "mathlib_searches": [
   {
@@ -92,10 +108,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261027T180721-L-3894638",
-  "kind": "interface",
+  "landing": "20261027T210236-L-1678749",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

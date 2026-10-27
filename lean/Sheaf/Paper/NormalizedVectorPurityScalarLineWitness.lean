@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.VectorPurityFiniteReduction
+import Sheaf.Paper.FiniteTateScalarSourceExistence
 
 /-! # Existence of the normalized scalar Tate line comparison.
 
@@ -44,6 +45,21 @@ theorem exists_purityScalarLineNormalization
         (Scheme.finiteEtaleTateLine B N A hA) ≅
       Scheme.finiteEtaleTateLine B N A' hA',
     PurityScalarLineNormalization φ N hA hA' B c := by
-  sorry
+  have hA' : (N : A') = 0 := by
+    simpa only [map_natCast, map_zero] using congrArg φ hA
+  have hstalk : ∀ x : B, IsUnit (N : B.presheaf.stalk x) := by
+    intro x
+    simpa only [map_natCast] using hB.map (B.presheaf.germ ⊤ x (by trivial)).hom
+  obtain ⟨β, hβ, _⟩ :=
+    finite_tate_scalar_source_normalization_exists φ N hN hA hA' B hstalk
+  refine ⟨hA', β 1, ?_⟩
+  intro U a z
+  rw [Adjunction.homEquiv_apply]
+  change ((β 1).hom.hom.app U)
+      (((Etale.purityScalarSheafAdjunction φ B).unit.app
+        (Scheme.finiteEtaleTateTwist B N A hA 1)).hom.app U
+          (Scheme.finiteEtaleTateOneGenerator A N B hA U a z)) = _
+  have hgen := hβ.1 1 U a 1 (fun _ ↦ z)
+  simpa only [one_smul, mul_one, id_eq, Scheme.finiteTateEtalePowerGenerator] using hgen
 
 end WeilConjectures.PurityFiniteSetting
