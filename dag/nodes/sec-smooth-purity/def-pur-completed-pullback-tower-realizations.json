@@ -12,7 +12,8 @@
   "def-sf-strict-roos-functor",
   "def-a1-integral-finite-pullback-tower",
   "def-pur-finite-pullback-tensor-construction",
-  "def-pur-completed-pullback-tower-core"
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tower-tensor-level"
  ],
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
@@ -44,10 +45,12 @@
    }
   },
   {
-   "text": "Use the strict pullback tower comparison of the core and the tensor tower node, each with its prescribed level components. Their uniqueness is uniqueness of strict tower maps with actual quotient transitions. Apply the Roos functor to those whole tower isomorphisms; this supplies the strict reference realizations used in the next step.",
+   "text": "Use the prescribed finite tensor components from the tensor-level node. The adjacent n+1 to n transition-square node supplies the hypothesis for NatTrans.ofOpSequence; NatIso.ofComponents assembles the levelwise isomorphisms, and Iso.ext/NatTrans.ext prove uniqueness from the displayed components. Apply the Roos functor to the resulting strict tower comparison.",
    "uses": [
     "def-pur-completed-pullback-tower-core",
-    "lem-pur-coherent-tensor-tower",
+    "def-pur-completed-pullback-tower-tensor-level",
+    "lem-pur-completed-pullback-tower-level-transition",
+    "lem-pur-completed-pullback-tower-iso-existence",
     "def-sf-strict-roos-functor"
    ],
    "elementary": false,
@@ -93,12 +96,17 @@
   "lem-pur-integral-tensor-roos-realization",
   "lem-pur-sequence-pullback-tensor-cochain",
   "lem-pur-sequence-pullback-kflat",
-  "lem-pur-coherent-derived-pullback-tensor"
+  "lem-pur-coherent-derived-pullback-tensor",
+  "def-pur-completed-pullback-tower-tensor-level",
+  "lem-pur-completed-pullback-tower-level-transition",
+  "lem-pur-completed-pullback-tower-iso-existence"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Released stage-1 repair order 2026-10-27; existing Stacks-derived coherent quotient, Roos and tensor/pullback constructions, with each named normalized obligation delegated separately."
+  "place": "The strict tensor-tower assembly uses the adjacent transition square and levelwise NatIso construction."
  },
  "mathlib_searches": [
   {
@@ -150,7 +158,6 @@
   "file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
   "declaration": "WeilConjectures.pullbackTensorLimitRoos",
   "declarations": [
-   "WeilConjectures.pullbackTensorTensorTowerLevel",
    "WeilConjectures.pullbackTensorTensorTower_existsUnique",
    "WeilConjectures.pullbackTensorTensorTower",
    "WeilConjectures.pullbackTensorLimitRoos",
@@ -187,20 +194,12 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G3",
-  "result": "pass",
-  "landing": "20261027T151707-L-1193701",
+  "reviewer": "C-30cfe",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T233820-L-4119141",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
-   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
-   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
-  ],
-  "sorry_after": [
-   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
-  ]
+  "note": "independent cc review: 30cf delivered files vs e7cf delivery (byte-identical) and e7cf fixes; item ∃! vs node lem-pur-coherent-tensor-tower; transition sorry vs its reviewed steps 1-4; importer TensorReductionFiniteProjection SLOW vs published timing"
  },
  "split_report": {
   "date": "2026-10-27",

@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-completed-pullback-tower-iso-existence",
+ "kind": "lemma",
+ "title": "Existence of the normalized coherent tensor tower comparison",
+ "status": "split",
+ "statement": "For every scheme W and pair P,Q, the prescribed finite components extend to an isomorphism between the restricted coherent tensor tower and the integral operations tensor tower, with component at op n equal to pullbackTensorTensorTowerLevel n.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-tensor-level",
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-integral-finite-tensor-tower",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 07A4, strict tower comparison from prescribed finite components"
+ },
+ "proof": [
+  {
+   "text": "Let F and G be the two tower functors and let L n be the hom of the prescribed level isomorphism. The adjacent transition square gives the naturality hypothesis of NatTrans.ofOpSequence, producing a natural transformation h:F⟶G. NatIso.ofComponents applied to L n.unop and h.naturality gives the required levelwise isomorphism; the component formula follows from NatIso.ofComponents_hom_app.",
+   "uses": [
+    "def-pur-completed-pullback-tower-tensor-level",
+    "lem-pur-completed-pullback-tower-level-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0941 and 07A4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-tensor-level",
+  "lem-pur-completed-pullback-tower-level-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 07A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NatTrans.ofOpSequence NatIso.ofComponents",
+   "results": "Mathlib examples show adjacent transition squares packaged by NatTrans.ofOpSequence and levelwise isomorphisms by NatIso.ofComponents.",
+   "date": "2026-10-28",
+   "verdict": "Use these standard categorical constructors."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.ofOpSequence",
+   "results": "Mathlib declaration NatTrans.ofOpSequence has exactly the adjacent-square hypothesis needed here.",
+   "date": "2026-10-28",
+   "verdict": "Use NatTrans.ofOpSequence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism from adjacent sequence components",
+   "results": "No shorter project-independent constructor than NatIso.ofComponents.",
+   "date": "2026-10-28",
+   "verdict": "Use the explicit levelwise construction."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tower-realizations",
+   "place": "strict tensor tower realization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTowerIsoExistence",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTowerIsoExistence.lean",
+  "declaration": "WeilConjectures.pullbackTensorTensorTower_exists",
+  "statement": "theorem pullbackTensorTensorTower_exists (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) :\n    ∃ e : pullbackTensorRestrictedTower l E W\n      ((coefficientTotalTensor.{u, u + 1, u}\n        (coefficientSequenceTopology (ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l E W)).obj\n        ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P),\n          (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q))) ≅\n      (integralOperationsTensorTowerFunctor l E W).obj (P,Q),\n      ∀ n : ℕ, e.app (op n) = pullbackTensorTensorTowerLevel l E W P Q n"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-30cfe",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T233820-L-4119141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-30cfe",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T233820-L-4119141",
+  "kind": "interface",
+  "note": "independent cc review: 30cf delivered files vs e7cf delivery (byte-identical) and e7cf fixes; item ∃! vs node lem-pur-coherent-tensor-tower; transition sorry vs its reviewed steps 1-4; importer TensorReductionFiniteProjection SLOW vs published timing"
+ }
+}

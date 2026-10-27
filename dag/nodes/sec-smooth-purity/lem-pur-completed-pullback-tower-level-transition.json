@@ -1,0 +1,162 @@
+{
+ "id": "lem-pur-completed-pullback-tower-level-transition",
+ "kind": "lemma",
+ "title": "Adjacent transition square for the normalized coherent tensor tower",
+ "status": "split",
+ "statement": "For every scheme W, pair of cochain complexes P,Q and n, the prescribed level comparison at n+1 commutes with the quotient transition: the (n+1)-level comparison followed by the target transition equals the source transition followed by the n-level comparison.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-tensor-level",
+  "def-pur-integral-finite-tensor-tower",
+  "def-pur-completed-pullback-tower-core",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 07A4, compatibility of the prescribed finite tensor comparison with consecutive quotient transitions"
+ },
+ "proof": [
+  {
+   "text": "Suppress $W$, and write $\\tau_n:B_{n+1}\\to B_n$ and $t_n$ for actual horizontal transitions. For an $A$-module $M$ put $\\nu_n=\\pi_n\\eta^0_M$. The limit-cone identity gives $t_n\\nu_{n+1}=\\nu_n$. The stipulated scalar-adjunction transpose of $a_{n,M}$ says precisely $a_{n,M}(b\\otimes x)=b\\nu_n(x)$ on local pure tensors. Consequently\n$$t_n a_{n+1,M}(b\\otimes x)=\\tau_n(b)\\nu_n(x)=a_{n,M}(\\tau_n(b)\\otimes x).$$\nPure tensors generate the presheaf tensor, and the sheafification universal property extends this equality to the sheaf tensor. Thus $a_n$ intertwines the actual quotient transition with that of $rM$, and its inverse does too, by composing the square with $a_{n+1}^{-1}$ and $a_n^{-1}$. Apply this to every $P^k$ and $Q^k$; naturality of $a_n$ for the differentials makes these comparisons cochain isomorphisms with the same transition squares.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; the scalar-unit and cone calculation uses exactly the adjunction normalization in the item."
+   }
+  },
+  {
+   "text": "Put $C=r^cP$ and $D=r^cQ$. Evaluation $e_n$ is the inverse image of the vertical inclusion with its identity coefficient identification. Apply lem-pur-cochain-pullback-tensor-coherence to this ringed-topos morphism to obtain a cochain isomorphism\n$$\\kappa_n:e_n\\operatorname{Tot}_s(C,D)\\xrightarrow{\\sim}\\operatorname{Tot}_{B_n}(e_nC,e_nD).$$\nThis is the prescribed evaluation/total-tensor isomorphism: lem-coef-semilinear-tensor-evaluation fixes the ordinary evaluation comparison and its chain summands for the chosen models. On every $(p,q)$ summand both comparisons are that ordinary evaluation comparison; the direct-sum universal property makes the chain maps equal. In particular the inverse-model-chain convention and the displayed forward $\\kappa_n$ agree. The cochain theorem applies to arbitrary unbounded complexes, with the same $(-1)^p$ differential and no flatness assumption.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-coef-semilinear-tensor-evaluation",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, ordinary total-complex comparison in its proof; representative normalization supplied by the cited semilinear evaluation node."
+   }
+  },
+  {
+   "text": "Apply lem-pur-system-cochain-tensor-reduction to $C,D$ and $n\\le n+1$. Its identity identifies the horizontal scalar-extension adjoint of the total-system transition with the scalar tensor comparison followed by the tensor of the two horizontal adjoints, under the prescribed evaluation comparisons. Transpose through the scalar-extension/restriction adjunction. Equivalently, on every evaluated tensor summand the resulting transition is\n$$x\\otimes y\\longmapsto t_n^C(x)\\otimes t_n^D(y).$$\nThus $\\kappa_n$ intertwines the actual total-system transition with this tensor transition, before localization. This uses the cochain identity of the cited node, not a claim that maps of derived evaluations lift. Restrict scalars along $A\\to B_n$: the underlying section maps are unchanged, and $A\\to B_n$ is $A\\to B_{n+1}\\to B_n$, so the same square is an equality of $A$-linear cochain maps.",
+   "uses": [
+    "lem-pur-system-cochain-tensor-reduction",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 ordinary total-complex construction and the ringed sequence site preceding Tag 0941; the horizontal tensor-adjoint identity is the statement of the cited cochain-reduction node."
+   }
+  },
+  {
+   "text": "After the specified reordering $J$, define $d_n$ to be $\\operatorname{Res}_n$ of $\\kappa_n$ followed by $\\operatorname{Tot}_{B_n}(a_{n,P}^{-1},a_{n,Q}^{-1})$. This is exactly the component prescribed in the item. Tensor the two transition squares from step 1 and paste them with step 3. The result is\n$$d_n\\,t_n^T=t_n^{B_\\otimes^0}\\,d_{n+1}.$$\nThe target transition is the actual quotient transition: on a $(p,q)$ summand it sends $(b\\otimes x)\\otimes(c\\otimes y)$ to $(\\tau_n(b)\\otimes x)\\otimes(\\tau_n(c)\\otimes y)$. Functoriality of total tensor gives the pasted equality on complexes. The reordering just evaluates the same section maps in the opposite order. This is the displayed adjacent square: level $n+1$ followed by the target transition equals the source transition followed by level $n$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-integral-derived-operations",
+    "def-pur-completed-pullback-tower-core",
+    "def-pur-completed-pullback-tower-tensor-level",
+    "def-pur-integral-finite-tensor-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, ringed sequence-site construction preceding lemma-derived-limit-is-ok; elementary pasting of steps 1 and 3 with the specified tower definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-coef-semilinear-tensor-evaluation",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-system-cochain-tensor-reduction",
+  "def-pur-integral-derived-operations",
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tower-tensor-level",
+  "def-pur-integral-finite-tensor-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 07A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Functor.ofOpSequence_map_homOfLE_succ coefficient evaluation tensor naturality",
+   "results": "Repository search found the transition formulas and naturality declarations used by the prescribed finite comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the project transition and naturality APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.naturality Iso.trans_hom",
+   "results": "Mathlib supplies the categorical naturality and composition API.",
+   "date": "2026-10-28",
+   "verdict": "No shorter replacement for the project-specific transition computation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "consecutive quotient transition square tensor evaluation comparison",
+   "results": "No single Mathlib theorem packages this project-specific square.",
+   "date": "2026-10-28",
+   "verdict": "Retain the explicit four-factor calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tower-realizations",
+   "place": "adjacent transition compatibility of the prescribed tensor components"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTowerTransitionSquare",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTowerTransitionSquare.lean",
+  "declaration": "WeilConjectures.pullbackTensorTensorTowerLevel_transition",
+  "statement": "theorem pullbackTensorTensorTowerLevel_transition\n    (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :\n    (pullbackTensorTensorTowerLevel l E W P Q (n + 1)).hom ≫\n        ((integralOperationsTensorTowerFunctor l E W).obj (P,Q)).map\n          (homOfLE (Nat.le_succ n)).op =\n      (pullbackTensorRestrictedTower l E W\n        ((coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology W))\n          (coefficientSequenceCommRingSheaf l E W)).obj\n          ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P),\n            (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q)))\n        ).map (homOfLE (Nat.le_succ n)).op ≫\n      (pullbackTensorTensorTowerLevel l E W P Q n).hom"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-30cfe",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T233820-L-4119141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-30cfe",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T233820-L-4119141",
+  "kind": "interface",
+  "note": "independent cc review: 30cf delivered files vs e7cf delivery (byte-identical) and e7cf fixes; item ∃! vs node lem-pur-coherent-tensor-tower; transition sorry vs its reviewed steps 1-4; importer TensorReductionFiniteProjection SLOW vs published timing"
+ }
+}

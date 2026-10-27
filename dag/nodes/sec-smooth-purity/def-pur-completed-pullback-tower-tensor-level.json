@@ -1,0 +1,96 @@
+{
+ "id": "def-pur-completed-pullback-tower-tensor-level",
+ "kind": "definition",
+ "title": "The prescribed finite component of the coherent tensor tower",
+ "status": "split",
+ "statement": "For each finite quotient level n, define the normalized component of the coherent tensor tower comparison by composing the restricted-level comparison, the normalized evaluation tensor isomorphism, and the two inverse reduction evaluations.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-integral-finite-tensor-tower",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-integral-reduction-tower",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 07A4, prescribed finite tensor tower component"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941 and 07A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackTensorRestrictedLevel pullbackTensorReductionEvaluationComplex",
+   "results": "Repository search identifies the core level and evaluation-complex declarations used by the composite.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing core constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans Functor.mapIso",
+   "results": "Mathlib categorical Iso composition and mapped isomorphism API.",
+   "date": "2026-10-28",
+   "verdict": "The standard mapped-Iso composition API is sufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite tensor evaluation comparison inverse reduction evaluation isomorphism",
+   "results": "No shorter Mathlib declaration; use the existing project comparison declarations.",
+   "date": "2026-10-28",
+   "verdict": "Retain the prescribed project composite."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-28",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tower-realizations",
+   "place": "finite component of the strict tensor tower"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTowerTensorLevel",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTowerTensorLevel.lean",
+  "declaration": "WeilConjectures.pullbackTensorTensorTowerLevel",
+  "statement": "def pullbackTensorTensorTowerLevel (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :\n    (pullbackTensorRestrictedTower l E W\n      ((coefficientTotalTensor.{u, u + 1, u}\n        (coefficientSequenceTopology (ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l E W)).obj\n        ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P),\n          (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q))) ).obj\n            (op n) ≅\n      ((integralOperationsTensorTowerFunctor l E W).obj (P,Q)).obj (op n)"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-30cfe",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T233820-L-4119141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-30cfe",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T233820-L-4119141",
+  "kind": "interface",
+  "note": "independent cc review: 30cf delivered files vs e7cf delivery (byte-identical) and e7cf fixes; item ∃! vs node lem-pur-coherent-tensor-tower; transition sorry vs its reviewed steps 1-4; importer TensorReductionFiniteProjection SLOW vs published timing"
+ }
+}

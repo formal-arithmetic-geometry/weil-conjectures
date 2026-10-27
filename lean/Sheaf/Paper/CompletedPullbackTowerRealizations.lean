@@ -12,6 +12,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Paper.CompletedPullbackTowerCore
 import Sheaf.Paper.CompletedPullbackTowerNaturality
+public import Sheaf.Paper.CompletedPullbackTowerTensorLevel
+import Sheaf.Paper.CompletedPullbackTowerIsoExistence
 import all Sheaf.Paper.CoherentTensorRoosComparison
 import Sheaf.Paper.NaturalCoherentTensorLevel
 import Sheaf.Paper.UnitNormalizedCochainTensor
@@ -71,34 +73,7 @@ open CategoryTheory.Limits CategoryTheory.Functor Opposite
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Each coherent tensor slice is the recorded strict finite total tensor.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/
-def pullbackTensorTensorTowerLevel (W : Scheme.{u})
-    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
-    (pullbackTensorRestrictedTower l E W
-      ((coefficientTotalTensor.{u, u + 1, u}
-        (coefficientSequenceTopology (ProEt.topology W))
-        (coefficientSequenceCommRingSheaf l E W)).obj
-        ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P),
-          (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q)))).obj
-            (op n) ≅
-      ((integralOperationsTensorTowerFunctor l E W).obj (P,Q)).obj (op n) :=
-  pullbackTensorRestrictedLevel l E W _ n ≪≫
-  ((scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ)).mapIso
-    (coefficientEvaluationTensorIso l E W n _ _) ≪≫
-  ((scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ)).mapIso
-    ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
-      (integralCoefficientCommRingSheaf l E W n)).mapIso
-        (Iso.prod ((pullbackTensorReductionEvaluationComplex l E W n).app P).symm
-          ((pullbackTensorReductionEvaluationComplex l E W n).app Q).symm))
-
-/-- The tensor slice comparisons form a strict system map with the actual quotient maps.
-Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations).
-Proof: the reduction comparisons preserve scalar-extension units and the evaluation
-tensor map sends pure tensors to their two evaluated factors. Across every quotient
-transition both routes send x tensor y to its two reduced factors. Tensor generators,
-sheafification and total-summand injections give strict equality. The displayed
-components therefore define a tower isomorphism and determine it uniquely. -/
+attribute [local irreducible] pullbackTensorTensorTowerLevel in
 theorem pullbackTensorTensorTower_existsUnique (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     ∃! e : pullbackTensorRestrictedTower l E W
@@ -109,7 +84,18 @@ theorem pullbackTensorTensorTower_existsUnique (W : Scheme.{u})
           (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q))) ≅
       (integralOperationsTensorTowerFunctor l E W).obj (P,Q),
       ∀ n : ℕ, e.app (op n) = pullbackTensorTensorTowerLevel l E W P Q n := by
-  sorry
+  obtain ⟨e, he⟩ := pullbackTensorTensorTower_exists l E W P Q
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext n
+  obtain ⟨n⟩ := n
+  have he'h := congrArg Iso.hom (he' n)
+  have heh := congrArg Iso.hom (he n)
+  change (e'.app (op n)).hom = (e.app (op n)).hom
+  exact he'h.trans heh.symm
+
 
 /-- The uniquely prescribed strict tensor tower comparison.
 Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/
