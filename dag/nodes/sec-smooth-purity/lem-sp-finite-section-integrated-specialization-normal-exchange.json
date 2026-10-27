@@ -2,25 +2,64 @@
  "id": "lem-sp-finite-section-integrated-specialization-normal-exchange",
  "kind": "statement",
  "title": "The canonical normal-cone exchange map for an arbitrary Cartesian square of smooth sections.",
- "statement": "The canonical normal-cone exchange map for an arbitrary Cartesian square of smooth sections. This is a strict factor of the integrated specialization base-change equality.",
+ "statement": "Let S and Sprime be Noetherian schemes and g:V to S and gprime:Vprime to Sprime be morphisms with closed sections s:S to V and sprime:Sprime to Vprime, explicitly satisfying s followed by g = id_S and sprime followed by gprime = id_Sprime. Let b:Sprime to S and q:Vprime to V form a Cartesian square preserving the sections. For d a natural number assume the geometric section-deformation conclusions Geometry d g s and Geometry d gprime sprime [def-pur-finite-ring-section-data]. Then there is a morphism nu from the actual extended-Rees normal cone of sprime to that of s such that its square with the normal projections and b is Cartesian and the zero section of sprime followed by nu equals b followed by the zero section of s. This is the geometric normal-fibre factor of integrated specialization base change, including arbitrary nonflat b, d=0, and empty schemes.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
   "place": "Proof (1), closed-section DNC and normal-bundle integration square"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pur-finite-ring-section-data",
+  "def-pc-fibre-product"
+ ],
  "proof": [
   {
-   "text": "This factor is the corresponding geometric, specialization, or integration square in the displayed DNC base-change argument; its proof is left as a named intermediate theorem for a parallel worker.",
-   "uses": [],
+   "text": "Pull the Geometry deformation back along the one section of the affine line. The existing one-fibre square recovers smooth relative dimension d, separatedness and quasi-compactness for g. Smoothness supplies local finite type.",
+   "uses": [
+    "def-pur-finite-ring-section-data",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply SectionReesBaseChange.base_change to g,s,hs,b. It supplies the canonical base-changed closed section s0, a normal map nu0 and its Cartesian square. Its Compatible data supply a zero-preserving normal map mu0. Both have the same composite with the closed zero-fibre immersion, hence mu0=nu0.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let e:Vprime isomorphic to V times_S Sprime be the isomorphism induced by the given Cartesian square. The two section equations and section compatibility identify sprime followed by e with s0 by the two pullback projections. Thus the centre square with e and id_Sprime is Cartesian.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply SectionReesBaseChange.etale to the isomorphism e. This supplies an isomorphism nu1 of the normal cones. Identify it with the normal map in Compatible by cancelling the closed zero-fibre immersion. The resulting projection and zero-section equations give a Cartesian square for nu1 over the identity.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take nu=nu1 followed by nu0. Horizontal pasting proves the required Cartesian square, and the two zero-section equations compose to the required zero-section equation.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pur-finite-ring-section-data",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-trf-section-rees-base-change-etale",
+  "def-pc-fibre-product"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "E2",
+  "group": "G3",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
-  "place": "Proof (1), corresponding strict factor of the integrated square."
+  "place": "Proof (1), normal-fibre base change. Lean proof reuses the proved section Rees base_change and etale theorems and the Cartesian-square isomorphism."
  },
  "mathlib_searches": [
   {
@@ -69,7 +108,7 @@
   "module": "Sheaf.Paper.FiniteSectionIntegratedSpecializationNormalExchange",
   "file": "lean/Sheaf/Paper/FiniteSectionIntegratedSpecializationNormalExchange.lean",
   "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.normalExchange_exists",
-  "statement": "theorem normalExchange_exists\n    {V S V' S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S']\n    (g : V ⟶ S) (g' : V' ⟶ S')\n    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']\n    (b : S' ⟶ S) (q : V' ⟶ V) (cart : IsPullback q g' g b)\n    (hsec : s' ≫ q = b ≫ s)\n    (d : ℕ) [FiniteRingSectionDeformation.Geometry d g s]\n    [FiniteRingSectionDeformation.Geometry d g' s'] :\n    ∃ (ν : s'.ker.normalCone ⟶ s.ker.normalCone),\n      IsPullback ν (Scheme.Hom.normalConeProj g' s')\n        (Scheme.Hom.normalConeProj g s) b ∧\n      s'.normalConeZeroSection ≫ ν = b ≫ s.normalConeZeroSection",
+  "statement": "theorem normalExchange_exists\n    {V S V' S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S']\n    (g : V ⟶ S) (g' : V' ⟶ S')\n    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']\n    (hs : s ≫ g = 𝟙 S) (hs' : s' ≫ g' = 𝟙 S')\n    (b : S' ⟶ S) (q : V' ⟶ V) (cart : IsPullback q g' g b)\n    (hsec : s' ≫ q = b ≫ s)\n    (d : ℕ) [FiniteRingSectionDeformation.Geometry d g s]\n    [FiniteRingSectionDeformation.Geometry d g' s'] :\n    ∃ (ν : s'.ker.normalCone ⟶ s.ker.normalCone),\n      IsPullback ν (Scheme.Hom.normalConeProj g' s')\n        (Scheme.Hom.normalConeProj g s) b ∧\n      s'.normalConeZeroSection ≫ ν = b ≫ s.normalConeZeroSection",
   "branch": "sheaf-dag",
   "by": "E2",
   "date": "2026-10-28"
@@ -87,11 +126,39 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
+  "reviewer": "C-b9f63",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261027T180534-L-3872725",
+  "landing": "20261027T210004-L-1642220",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: normalExchange_exists (+hs, hs') against node lem-sp-finite-section-integrated-specialization-normal-exchange, source proof (1), Geometry class (no section eq), change record; adapted FiniteSectionIntegratedSpecialization compiled (original fails at 172:60, adapted OK 24 s); axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "G3 stage 3",
+  "old_statement": "The canonical normal-cone exchange map for an arbitrary Cartesian square of smooth sections. This is a strict factor of the integrated specialization base-change equality.",
+  "old_stmt_deps": [],
+  "what": "Restore the two section equations omitted from the old Lean signature, although the source and node already describe closed sections. Geometry does not include these equations. Without them the old Lean assertion is false: let P=Spec k, S=V=P disjoint-union P, s=id, g the map taking both components identically onto the first, Sprime=P with b the first inclusion, Vprime=V with q=id and gprime the fold to P, and sprime the first inclusion. The ambient square is Cartesian and the d=0 Geometry conditions hold (the second deformation is A1_P disjoint-union Gm_P). The normal cone of s is V, that of sprime is P, while the pullback of normalConeProj g s along b is two copies of P. No required normal pullback exists. The corrected assertion is exactly about sections as in the source; the conclusion is unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+   "place": "Proof (1), closed-section DNC and normal-bundle integration square"
+  },
+  "citers": [
+   {
+    "id": "lem-sp-finite-section-integrated-specialization-base-change",
+    "holds": true,
+    "note": "The sole Lean caller already binds hs and hsprime. Pass them to normalExchange_exists; its own signature and conclusion are unchanged."
+   },
+   {
+    "id": "lem-sp-finite-section-integrated-specialization-specialization-factor",
+    "holds": true,
+    "note": "Already assumes both section equations and is parameterized by nu, its pullback square and zero equation. Does not call normalExchange_exists; source and statement unchanged."
+   },
+   {
+    "id": "lem-sp-finite-section-integrated-specialization-integration-factor",
+    "holds": true,
+    "note": "Already assumes both section equations and is parameterized by nu, its pullback square and zero equation. Does not call normalExchange_exists; source and statement unchanged."
+   }
+  ]
  }
 }

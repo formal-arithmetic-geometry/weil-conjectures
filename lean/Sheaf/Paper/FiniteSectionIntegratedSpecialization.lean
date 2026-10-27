@@ -169,7 +169,7 @@ theorem integratedSpecialization_baseChange
           (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hS d).hom =
       NoetherianSectionSpecialization.sectionMap A g g' b q cart s s' hsec ≫
         integratedSpecialization A d g' s' hs' sq' N hN hA hS' κ' := by
-  obtain ⟨ν, sqν, hzero⟩ := normalExchange_exists g g' s s' b q cart hsec d
+  obtain ⟨ν, sqν, hzero⟩ := normalExchange_exists g g' s s' hs hs' b q cart hsec d
   let e := NoetherianSectionSpecialization.sectionMap A
     (Scheme.Hom.normalConeProj g s) (Scheme.Hom.normalConeProj g' s') b ν sqν
     s.normalConeZeroSection s'.normalConeZeroSection hzero
