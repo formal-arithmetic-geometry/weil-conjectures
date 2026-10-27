@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-finite-derived-pullback-tensor-identity-composition",
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "title": "Identity specialization of fixed-coefficient pullback tensor composition",
+ "statement": "For a coefficient category with the prescribed pro-etale monoidal pullback comparison, the derived pullback/tensor comparison composition square holds when both pullback maps are identities.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, fixed-coefficient pullback/tensor composition calculation."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the existing pro-etale derived pullback tensor composition theorem to the two identity morphisms.",
+   "uses": [
+    "lem-sf-proetale-derived-pullback-tensor-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-derived-pullback-tensor-composition"
+ ],
+ "proof_origin": {
+  "by": "B9 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, fixed-coefficient pullback/tensor composition calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback tensor comparison composition for identity morphisms",
+   "results": "The exact pro-etale composition theorem was found and specialized in the delivered module.",
+   "date": "2026-10-28",
+   "verdict": "exact match used"
+  },
+  {
+   "tool": "loogle",
+   "query": "leftDerivedUpperStarTensorComparison_comp",
+   "results": "The existing pro-etale composition theorem matches the fixed-coefficient step.",
+   "date": "2026-10-28",
+   "verdict": "exact match used"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStarTensorComparison_comp",
+   "results": "Found in Sheaf/SixFunctors/ProEtaleDerivedPullbackTensorComposition.lean.",
+   "date": "2026-10-28",
+   "verdict": "exact match used"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "B9",
+  "item": "Sheaf.Paper.FinitePartialTensorIdentityComponent",
+  "date": "2026-10-28",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-partial-tensor-identity-component",
+   "place": "Fixed-coefficient expansion",
+   "via": [
+    "lem-sf-finite-partial-tensor-identity-component"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDerivedPullbackTensorIdentityComposition",
+  "file": "lean/Sheaf/Paper/FiniteDerivedPullbackTensorIdentityComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison_identityComposition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison_identityComposition"
+  ],
+  "statement": "theorem leftDerivedUpperStarTensorComparison_identityComposition {X : Scheme.{u}} [NatTrans.IsMonoidal (upperStarComp A (𝟙 X) (𝟙 X)).inv] (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : (leftDerivedUpperStarComp A (𝟙 X) (𝟙 X)).hom.app (((derivedTensor A X).obj M).obj N) ≫ (ProEtale.upperStar A (𝟙 X)).leftDerivedFunctor.map (leftDerivedUpperStarTensorIso A (𝟙 X) M N).hom ≫ (leftDerivedUpperStarTensorIso A (𝟙 X) ((ProEtale.upperStar A (𝟙 X)).leftDerivedFunctor.obj M) ((ProEtale.upperStar A (𝟙 X)).leftDerivedFunctor.obj N)).hom = (leftDerivedUpperStarTensorIso A ((𝟙 X) ≫ (𝟙 X)) M N).hom ≫ ((derivedTensor A X).map ((leftDerivedUpperStarComp A (𝟙 X) (𝟙 X)).hom.app M)).app ((ProEtale.upperStar A ((𝟙 X) ≫ (𝟙 X))).leftDerivedFunctor.obj N) ≫ ((derivedTensor A X).obj ((ProEtale.upperStar A (𝟙 X)).leftDerivedFunctor.obj ((ProEtale.upperStar A (𝟙 X)).leftDerivedFunctor.obj M))).map ((leftDerivedUpperStarComp A (𝟙 X) (𝟙 X)).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T205818-L-1619156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T205818-L-1619156",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

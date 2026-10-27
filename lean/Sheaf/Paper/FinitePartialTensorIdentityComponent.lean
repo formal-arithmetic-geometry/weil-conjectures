@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FinitePartialPullbackTensor
+import Sheaf.Paper.FiniteDerivedPullbackTensorIdentityComposition
 
 /-! The component composition equation for the finite partial tensor comparison.
 (blueprint: lem-sf-finite-partial-tensor-identity-component) -/
