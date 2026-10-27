@@ -6,6 +6,7 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.Paper.RationalP1SecondPretraceData
+import Sheaf.Paper.RationalP1SecondExchangeProjectionNative
 
 /-! # Forward exchange and projection on the projective-line self-square
 
@@ -65,6 +66,8 @@ theorem second_exchange_projection
           ((twist Λ (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj (F.obj K)) =
       (secondTraceTensorIso Λ Y K (R.obj T)).inv ≫
         (F.obj K ◁ secondTraceExchange l c k p hpl Y) ≫
-        secondExtractProjection l c k p hpl Y K := by sorry
+        secondExtractProjection l c k p hpl Y K := by
+  simpa only [secondPretraceExchangeMap, nativeExchange] using
+    second_exchange_projection_native l c k p hpl Y K
 
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-rational-p1-native-exchange-endpoint",
+ "kind": "definition",
+ "title": "Native module-object endpoint for ambient exchange",
+ "statement": "For every coefficient ring, projective-line scheme Y, and derived module M, nativeExchange is the ambient exchange component with the module-object pullback and pushforward endpoints exposed.",
+ "stmt_deps": [
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: fixed module-object endpoint normalization."
+ },
+ "proof": [
+  {
+   "text": "Unfold the module-object pullback and pushforward definitions and use the ambient exchange component directly.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: endpoint normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula for a monoidal adjunction is compatible with base change exchange and tensor associativity",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightHomEquiv_tensor",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor_mate_coherence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "exchange.*tensor|tensor.*exchange|projection.*tensor",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula map is compatible with the associator and the braiding of an even shifted rank one line",
+   "results": "8 hits: CategoryTheory.CommShift₂Setup.hε, CategoryTheory.CommShift₂Setup.ε, CategoryTheory.CommShift₂Setup.int, CategoryTheory.CommShift₂Setup.int_ε, CategoryTheory.Center.tensorObj_snd_β, CategoryTheory.CommShift₂Setup.toTwistShiftData, CategoryTheory.GradedObject.symmetricCategory, CategoryTheory.CommShift₂Setup.int_z",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondExchangeProjection",
+  "date": "2026-10-28",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-exchange-projection",
+   "place": "Native endpoint wrapper",
+   "via": [
+    "lem-sfb-rational-p1-second-exchange-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondExchangeProjectionNative",
+  "file": "lean/Sheaf/Paper/RationalP1SecondExchangeProjectionNative.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.nativeExchange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.nativeExchange"
+  ],
+  "statement": "def nativeExchange\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})\n    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :\n    (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj\n      ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj M) ⟶\n    (moduleObjectDerivedPushforward Λ (secondProjection Y)).obj\n      ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T233816-L-4118018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T233816-L-4118018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
