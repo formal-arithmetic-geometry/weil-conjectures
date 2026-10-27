@@ -6,6 +6,8 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.Paper.ScalarExtensionTowerRealizationData
+import Sheaf.Paper.ScalarTowerPullbackLimitBridge
+import Sheaf.Paper.ScalarTowerPullbackStrictSquare
 
 /-! # Canonical scalar comparison in total-limit coordinates
 
@@ -77,6 +79,13 @@ theorem scalarTowerPullbackLimitSquare (W : Bool → Scheme.{u})
           ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι (W true)).map
             (pullbackReduction l E W ME f M.obj) ≫
           (integralComparisonSystemScalarPullback.{u, u} l E L ι f).hom.app
-            ((ME.calculus false).reduction.obj M.obj)) := by sorry
+            ((ME.calculus false).reduction.obj M.obj)) := by
+  let k := (coefficientSequenceLimit.{u, u} l L (W true)).map
+    ((integralComparisonSystemScalarPullback.{u, u} l E L ι f).inv.app
+      ((ME.calculus false).reduction.obj M.obj))
+  apply (cancel_mono k).1
+  simpa only [k, Category.assoc] using
+    scalarTowerPullbackLimitSquare_mate l E L ι W ME ML SX SY f _hX _hY M hF
+      (scalarTowerPullbackStrictSquare l E L ι f)
 
 end WeilConjectures.ScalarExtensionTower
