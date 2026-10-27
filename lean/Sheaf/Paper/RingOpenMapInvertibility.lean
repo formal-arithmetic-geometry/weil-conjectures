@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientAssemblyData
 public import Sheaf.Paper.RefinementOpenRestriction
+import Sheaf.Paper.RingOpenMapNormalizedRefinement
+import Sheaf.Paper.RingOpenMapOpenUnit
 
 /-! # Invertibility of the canonical open map on the finite-Tor domain -/
 
@@ -59,6 +61,33 @@ theorem ringOpenMap_isIso
         ((s.coefficients l).pull r.hom) ((s.coefficients l).pull c.i))
     (K : C.{u, v} l Ω X (s.stage l)) :
     IsIso ((PurCompactSupport.refinementOpenMap (s.coefficients l) r hi).app
-      ((RingStage.inclusion.{u, v} l Ω X s).obj K)) := by sorry
+      ((RingStage.inclusion.{u, v} l Ω X s).obj K)) := by
+  obtain ⟨ε, hε⟩ := exists_normalized_refinement_iso l Ω D hl r s hi K
+  have hu : IsIso (PurCompactSupport.openDerivedAdjunction (s.coefficients l) c.i).unit :=
+    PurCompactSupport.openDerivedAdjunction_unit_isIso (s.coefficients l) c.i
+  let _ : IsIso (PurCompactSupport.openDerivedAdjunction (s.coefficients l) c.i).unit := hu
+  have hcomp : IsIso ((PurCompactSupport.openDerivedAdjunction (s.coefficients l) d.i).homEquiv _ _
+      ε.hom ≫ PurCompactSupport.refinementRestriction (s.coefficients l) r hi
+        ((RingStage.inclusion.{u, v} l Ω X s).obj K)) := by
+    rw [hε]
+    infer_instance
+  obtain ⟨θ, hθ, hθiso, _⟩ :=
+    PurCompactSupport.exists_refinementRestriction (s.coefficients l) r hi
+  have hres : IsIso (PurCompactSupport.refinementRestriction (s.coefficients l) r hi
+      ((RingStage.inclusion.{u, v} l Ω X s).obj K)) := by
+    let _ : IsIso θ := hθiso
+    rw [← hθ]
+    infer_instance
+  have heq : (PurCompactSupport.refinementOpenMap (s.coefficients l) r hi).app
+      ((RingStage.inclusion.{u, v} l Ω X s).obj K) = ε.hom := by
+    apply ((PurCompactSupport.openDerivedAdjunction (s.coefficients l) d.i).homEquiv
+      _ _).injective
+    apply (cancel_mono
+      (PurCompactSupport.refinementRestriction (s.coefficients l) r hi
+        ((RingStage.inclusion.{u, v} l Ω X s).obj K))).1
+    rw [PurCompactSupport.refinementOpenMap_normalization]
+    exact hε.symm
+  rw [heq]
+  infer_instance
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
