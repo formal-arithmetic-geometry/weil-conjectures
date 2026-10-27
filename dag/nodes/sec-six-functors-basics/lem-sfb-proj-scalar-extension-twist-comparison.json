@@ -11,114 +11,45 @@
   "lem-nagata-affine-proj-scalar-extension",
   "def-weil-pbc-proj-twisting-sheaf",
   "def-pc-module-pullback",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-proj-scalar-extension-twist-normalization"
  ],
  "proof": [
   {
-   "text": "Put $V_f=D_+(f)$ and $U_f=D_+(\\psi(f))$. The scalar-extension Proj lemma gives $r^{-1}V_f=U_f$, their affine chart ring map, and the covering $Q=\\bigcup_fU_f$. The twists are quasi-coherent: apply the graded-module sheaf existence theorem (c) to $A(j)$ and $B(j)$. Pullback preserves quasi-coherence. Consequently the affine pullback-sections theorem identifies $\\Gamma(U_f,r^*\\mathcal O_P(j))$ with $(A_f)_j\\otimes_{(A_f)_0}(B_{\\psi(f)})_0$, by $(a/f^m)\\otimes c\\mapsto c\\,r^*(a/f^m)$. Its hypotheses hold because both $V_f$ and $U_f$ are affine, $U_f\\subseteq r^{-1}V_f$, and $\\mathcal O_P(j)$ is quasi-coherent. This applies to every integer $j$, with no assertion that the twist is invertible.",
+   "text": "Apply scalarExtension_twist_exists to obtain theta and its normalized fraction law. Apply scalarExtension_twist_fraction_laws to this theta to obtain uniqueness, multiplication, degree-zero unit and identity normalization.",
    "uses": [
-    "lem-nagata-affine-proj-scalar-extension",
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-sfb-proj-scalar-extension-twist-existence",
+    "lem-sfb-proj-scalar-extension-twist-fraction-laws"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens; Tag 01MY (lemma-morphism-proj), normalized fractions; Tag 01MZ (lemma-morphism-proj-transitive)."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $H=(A_f)_0$ and $L_j=(A_f)_j$. The degree-zero localization comparison, followed by $\\beta$ on fractions, identifies $(B_{\\psi(f)})_0$ with $S\\otimes_RH$. There is an explicit isomorphism $L_j\\otimes_H(S\\otimes_RH)\\cong S\\otimes_RL_j$: send $u\\otimes(s\\otimes h)$ to $s\\otimes hu$, with inverse $s\\otimes u\\mapsto u\\otimes(s\\otimes1)$. These formulas respect the $R$- and $H$-balancing relations and their composites are identities on pure tensors. Apply the homogeneous-module localization comparison to $M=A$ and degree $j$, and then the map on localized modules induced by the graded isomorphism $\\beta$. The resulting isomorphism\n$$F_{f,j}:L_j\\otimes_H(B_{\\psi(f)})_0\\xrightarrow{\\sim}(B_{\\psi(f)})_j$$\nis exactly $(a/f^m)\\otimes c\\mapsto c\\psi(a)/\\psi(f)^m$: first check $c=\\beta_f(s\\otimes h)$, then use additivity. The extension from pure tensors uses only the balanced tensor relations.",
+   "text": "For a homogeneous a in A_n, specialize the fraction law to j=n, i=n, k=0, b=1, U=top, c=1 and s=unitToTwist(a)(1). The source fraction equation follows from val_unitToTwist_app_apply. Pointwise extensionality and restriction by evaluation give the homogeneous-section clause.",
    "uses": [
-    "lem-nagata-homogeneous-localization-scalar-extension",
-    "lem-sfb-graded-module-localization-scalar-extension"
+    "def-sfb-proj-scalar-extension-twist-normalization",
+    "def-weil-pbc-proj-twisting-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens; Tag 01MY (lemma-morphism-proj), normalized fractions; Tag 01MZ (lemma-morphism-proj-transitive)."
-   }
+   "elementary": true
   },
   {
-   "text": "On the affine scheme $U_f$, both sheaves in question are quasi-coherent by step 1. The affine tilde--global-sections adjunction, with its isomorphic counit for quasi-coherent modules, therefore turns $F_{f,j}$ into a unique sheaf isomorphism $\\theta_{f,j}$. Its inverse is obtained from $F_{f,j}^{-1}$ by the same functor. This supplies the sheaf maps as well as their inverses, rather than just an abstract bijection of section modules.",
+   "text": "For a second extension, explicitly define delta as cancelBaseChange.symm, followed by tensor congr(refl,beta), followed by gamma. The pure-tensor formula follows from the standard associator and gamma linearity. To prove the composite degreewise span equality, induct on the S-span defining B_n. Images of generators lie in the T-span of chi psi(A_n), and chi(s*b)=algebraMap(S,T)(s)*chi(b), as follows from gamma on tensors. The reverse inclusion is immediate from gradedness. The degreewise span conditions put the irrelevant ideal in the mapped irrelevant ideal. Equality of the chart morphisms identifies r, q and p with the canonical Proj maps by mapAffineOpenCover.hom_ext. Mathlib Proj.map_comp then proves p=q followed by r. Apply scalarExtension_twist_composition_law to this proved equality to obtain the twist comparison equation. Assemble all conjuncts with these explicitly proved coefficient and homogeneous-section clauses.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-sfb-proj-scalar-extension-twist-composition-law"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01I7 (lemma-compare-constructions), 01IA (lemma-quasi-coherent-affine), 01IB (lemma-equivalence-quasi-coherent); application to the local maps of constructions.tex 01MY."
-   }
-  },
-  {
-   "text": "The local maps agree on overlaps. On $U_{fg}=U_f\\cap U_g$, a section $a/f^m$ restricts to $ag^m/(fg)^m$; applying either local formula gives $\\psi(a)\\psi(g)^m/\\psi(fg)^m$. For the map from the $g$-chart the identical argument uses $bf^n/(fg)^n$. These checks determine the maps on the entire overlap: by the affine pullback-sections theorem the pullbacks of sections on $V_f$, together with coefficients on $U_{fg}$, generate the source there. Equality on global sections determines maps between these quasi-coherent sheaves on the affine overlap by the affine adjunction. More generally, for $D_+(g)\\subseteq D_+(f)$ choose $g^e=hf$ as in the graded-module sheaf theorem (a). Restriction sends $a/f^m$ to $h^ma/g^{em}$, and both orders of restriction and comparison send it to $\\psi(h)^m\\psi(a)/\\psi(g)^{em}$; coefficients restrict by the ring map. Thus all specified standard-open restrictions commute. Glue the $\\theta_{f,j}$ by the module-sheaf gluing theorem (1). Their inverses agree as well, since they are inverses to equal maps on overlaps, so gluing them gives the inverse of the resulting canonical $\\theta_j^\\psi$.",
-   "uses": [
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "lem-weil-pbc-proj-basic-open-intersection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MY (lemma-morphism-proj), final paragraph of proof; Tag 01M7 (lemma-proj-sheaves), restrictions. Sheaves Tag 04TN (lemma-glue-maps), applied to modules."
-   }
-  },
-  {
-   "text": "Multiplication is respected on each $U_f$: on two pure tensors $(a/f^m)\\otimes c$ and $(b/f^n)\\otimes e$, the two orders of comparison and multiplication both give $ce\\,\\psi(ab)/\\psi(f)^{m+n}$. Balancing and additivity extend this to all tensors. The affine quasi-coherent tensor-sections theorem identifies these tensor modules with the section modules of the sheaf tensor products. The canonical pullback--tensor comparison [lem-weil-pbc-module-pullback-tensor] sends $r^*(u\\otimes v)$ to $r^*u\\otimes r^*v$; on the chart it is therefore precisely the rebracketing $(u\\otimes c)\\otimes(v\\otimes e)\\mapsto(u\\otimes v)\\otimes ce$; its inverse sends $(u\\otimes v)\\otimes c$ to $(u\\otimes1)\\otimes(v\\otimes c)$, so the comparison in this diagram is the canonical one. The local product formulas also define the twist multiplication maps, since multiplication of graded fractions commutes with restrictions. The unit is $1/1$, sent to $1/1$; at $j=0$ the formula $h\\otimes c\\mapsto c\\psi(h)$ is exactly the structural identification $r^*\\mathcal O_P\\cong\\mathcal O_Q$. Finally for $a\\in A_j$, $j\\geq0$, its canonical global section restricts to $a/1$, which the local formula sends to $\\psi(a)/1$. Gluing uniqueness proves these identities globally.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "lem-weil-pbc-module-pullback-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens; Tag 01MY (lemma-morphism-proj), normalized fractions; Tag 01MZ (lemma-morphism-proj-transitive)."
-   }
-  },
-  {
-   "text": "For $S\\to T$ and $\\gamma$ as in the statement, the tensor associator sends $t\\otimes a$ to $t\\otimes(1\\otimes a)$; its inverse sends $t\\otimes(s\\otimes a)$ to $ts\\otimes a$. Balancing verifies these are inverse graded $T$-algebra maps. Composing with $\\gamma(\\mathrm{id}\\otimes\\beta)$ therefore gives the asserted graded isomorphism and map $a\\mapsto\\chi\\psi(a)$. The inverse image under $r_\\psi r_\\chi$ of $D_+(f)$ is $D_+(\\chi\\psi(f))$; both scheme morphisms there have fraction map $a/f^m\\mapsto\\chi\\psi(a)/\\chi\\psi(f)^m$. Uniqueness in the scalar-extension Proj lemma proves $r_{\\chi\\psi}=r_\\psi r_\\chi$. On this covering of $\\operatorname{Proj}(C)$, affine pullback computes the iterated pullback by triple tensors. The canonical pullback-composition isomorphism sends $((u\\otimes b)\\otimes c)$ to $u\\otimes\\chi(b)c$. Both candidate twist comparisons consequently send $((a/f^m)\\otimes b)\\otimes c$ to $c\\chi(b)\\chi\\psi(a)/\\chi\\psi(f)^m$. Pure tensors generate, and affine adjunction and gluing uniqueness give the composition equation for every $j$. For the identity coefficient extension, the Proj chart maps are identities, hence $r=\\mathrm{id}$ by the same uniqueness. The twist chart formula becomes $u\\otimes c\\mapsto cu$, the canonical identity-pullback identification; gluing gives the claimed identity comparison.",
-   "uses": [
-    "lem-nagata-affine-proj-scalar-extension",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-glue-sheaves-of-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens; Tag 01MY (lemma-morphism-proj), normalized fractions; Tag 01MZ (lemma-morphism-proj-transitive)."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-pur-sheaf-tensor-product",
+  "def-sfb-proj-scalar-extension-twist-normalization",
   "def-weil-pbc-proj-twisting-sheaf",
-  "lem-nagata-affine-proj-scalar-extension",
-  "lem-nagata-homogeneous-localization-scalar-extension",
-  "lem-sfb-graded-module-localization-scalar-extension",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-glue-sheaves-of-modules",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-sfb-proj-scalar-extension-twist-composition-law",
+  "lem-sfb-proj-scalar-extension-twist-existence",
+  "lem-sfb-proj-scalar-extension-twist-fraction-laws"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens; Tag 01MY (lemma-morphism-proj), normalized fractions; Tag 01MZ (lemma-morphism-proj-transitive)."
+  "place": "Tags 01N2, 01MY, 01MZ; decomposition of the six original steps, with direct Lean proofs of the coefficient associator, composite graded span and homogeneous-section clauses."
  },
  "mathlib_searches": [
   {
@@ -446,8 +377,6 @@
   "module": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistComparison",
   "declaration": "AlgebraicGeometry.Proj.scalarExtension_twist_comparison",
   "declarations": [
-   "AlgebraicGeometry.Proj.scalarExtensionTwistSection",
-   "AlgebraicGeometry.Proj.IsScalarExtensionTwistComparison",
    "AlgebraicGeometry.Proj.scalarExtension_twist_comparison"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ProjScalarExtensionTwistComparison.lean",
@@ -464,5 +393,15 @@
   "group": "Q85",
   "result": "pass",
   "note": "Read the item, all 4 stmt_dep records (byte-identical to side-live; only the item's lean field changed) and the upstream twist/unitToTwistZero/unitToTwist/tensorPullbackSection{Comp,Id} declarations; lean.statement is verbatim in the file, ends in sorry, imports exist, no name clash. r is pinned by hpre/hchart, the dep's uniqueness hypotheses. IsScalarExtensionTwistComparison (denominator-multiplied fraction rule over all opens, any j in Z, degree-0 denominators): checked that the true comparison satisfies it and that it determines θ (ψ(b) a unit on r⁻¹U). Uniqueness conjunct = canonical. Pointwise product law is equivalent to the sheaf multiplication square. Degree-0/unit clause via unitToTwistZero and r.app; a/1 ↦ ψ(a)/1 for all n. Composition: δ(t⊗a)=t•χψ(a) = γ∘(id⊗β)∘assoc; p,q pinned by charts; p = q≫r true; ζ = eqToIso≫normalized comp≫q^*θ≫η; T→C_0 automatic. Identity case via normalized tensorPullbackSectionId. One common universe u, as in the dep. Edge cases: empty Proj, killed f, nonflat S, odd/negative j. No hollow defs, docstrings OK. No compile run (no file changed). Note: the second reading was done by the same worker in one session."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ceea7",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T180741-L-3897713",
+  "kind": "interface",
+  "note": "independent cc review: item theorem stmt byte-identical to clone; moved defs verbatim vs clone; combined scratch compile (exit 0, 6.9 s): helpers propext/choice/Quot.sound only, item sorryAx only via the 3 new holes; 0 importers/users in clone; node proof_deps = union of uses"
  }
 }

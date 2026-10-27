@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-proj-scalar-extension-twist-fraction-laws",
+ "kind": "statement",
+ "title": "Uniqueness, multiplication, unit and identity from normalized fractions",
+ "statement": "Let $R,S,A,B$ be commutative rings with an $R$-algebra structure on $S$, an $R$-algebra structure on $A$, and an $S$-algebra structure on $B$. Let $A=\\bigoplus_{n\\geq0}A_n$ and $B=\\bigoplus_{n\\geq0}B_n$ be graded rings with $A_n$ an $R$-submodule and $B_n$ an $S$-submodule. Fix ring maps $\\rho_A:R\\to A_0$ and $\\rho_B:S\\to B_0$ whose composites into $A$ and $B$ are the specified algebra maps. Let $\\beta:S\\otimes_R A\\simeq B$ be an $S$-algebra isomorphism and $\\psi:A\\to B$ a graded ring map such that $\\beta(1\\otimes a)=\\psi(a)$ and $B_n=\\operatorname{span}_S\\psi(A_n)$ for every $n$. Write $P=\\operatorname{Proj}(A)$, $Q=\\operatorname{Proj}(B)$ and use their standard opens and chart inclusions [lem-nagata-affine-proj-scalar-extension], their twisting module sheaves [def-weil-pbc-proj-twisting-sheaf], pullback [def-pc-module-pullback] and tensor product [def-pur-sheaf-tensor-product]. Suppose $r:Q\\to P$ satisfies $r^{-1}D_+(f)=D_+(\\psi(f))$ for every positive-degree homogeneous $f$, and on this chart is the spectrum map of $A_{(f)}\\to B_{(\\psi(f))}$ induced by $\\psi$. Fix a family $\\theta_j:r^*\\mathcal O_P(j)\\simeq\\mathcal O_Q(j)$ satisfying [def-sfb-proj-scalar-extension-twist-normalization]. Then (1) every other normalized family equals $\\theta$; (2) for sections $s,t,v$ of twists $i,j,i+j$ on any open $U\\subseteq P$ with $v=st$ pointwise, their transported sections satisfy $\\theta_{i+j}(1\\otimes v)=\\theta_i(1\\otimes s)\\theta_j(1\\otimes t)$ pointwise on $r^{-1}U$; (3) in degree zero, applying $\\theta_0$ to the pullback of the canonical map $\\mathcal O_P\\to\\mathcal O_P(0)$ agrees with the canonical map $\\mathcal O_Q\\to\\mathcal O_Q(0)$ applied to $r^\\sharp$ on every open; and (4) for any family $\\iota_j:\\operatorname{id}_P^*\\mathcal O_P(j)\\simeq\\mathcal O_P(j)$ normalized for the identity graded ring map and identity scheme map, $\\iota_j$ is the identity-pullback isomorphism induced by the section-normalized adjunction for every $j$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N2 (lemma-base-change-map-proj), clause (3); 01MY (lemma-morphism-proj), graded-algebra map and its fraction formula; 01MZ (lemma-morphism-proj-transitive), twist-composition identity."
+ },
+ "stmt_deps": [
+  "lem-nagata-affine-proj-scalar-extension",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-proj-scalar-extension-twist-normalization"
+ ],
+ "proof": [
+  {
+   "text": "For two given normalized comparisons, local homogeneous fractions determine their maps: on an open with b invertible, psi(b) is invertible and the denominator-multiplied normalization determines theta(1 tensor a/b). The affine pullback-sections theorem says these sections with coefficients generate. Affine faithfulness and gluing give equality of the maps, and isomorphism extensionality and funext give equality of the families.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), final paragraph of proof; Tag 01M7 (lemma-proj-sheaves), restrictions. Sheaves Tag 04TN (lemma-glue-maps), applied to modules."
+   }
+  },
+  {
+   "text": "Multiplication is respected on each $U_f$: on two pure tensors $(a/f^m)\\otimes c$ and $(b/f^n)\\otimes e$, the two orders of comparison and multiplication both give $ce\\,\\psi(ab)/\\psi(f)^{m+n}$. Balancing and additivity extend this to all tensors. The affine quasi-coherent tensor-sections theorem identifies these tensor modules with the section modules of the sheaf tensor products. The canonical pullback--tensor comparison [lem-weil-pbc-module-pullback-tensor] sends $r^*(u\\otimes v)$ to $r^*u\\otimes r^*v$; on the chart it is therefore precisely the rebracketing $(u\\otimes c)\\otimes(v\\otimes e)\\mapsto(u\\otimes v)\\otimes ce$; its inverse sends $(u\\otimes v)\\otimes c$ to $(u\\otimes1)\\otimes(v\\otimes c)$, so the comparison in this diagram is the canonical one. The local product formulas also define the twist multiplication maps, since multiplication of graded fractions commutes with restrictions. The unit is $1/1$, sent to $1/1$; at $j=0$ the formula $h\\otimes c\\mapsto c\\psi(h)$ is exactly the structural identification $r^*\\mathcal O_P\\cong\\mathcal O_Q$.  This proves only the product and degree-zero unit assertions; the homogeneous-section formula is proved directly in the parent.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens; Tag 01MY (lemma-morphism-proj), normalized fractions; Tag 01MZ (lemma-morphism-proj-transitive)."
+   }
+  },
+  {
+   "text": "For the identity coefficient extension, the normalized adjunction unit and left-adjoint uniqueness give the identity-pullback comparison on sections by u tensor c mapped to cu. This satisfies the identity normalized fraction law. The preceding uniqueness argument therefore identifies any given normalized identity comparison with tensorPullbackSectionId, degree by degree.",
+   "uses": [
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens; Tag 01MY (lemma-morphism-proj), normalized fractions; Tag 01MZ (lemma-morphism-proj-transitive)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N2 (lemma-base-change-map-proj), clause (3); 01MY (lemma-morphism-proj), graded-algebra map and its fraction formula; 01MZ (lemma-morphism-proj-transitive), twist-composition identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "twist.*scalar|scalar.*twist|fraction.*comparison",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "No matching arbitrary-twist scalar-extension construction or normalized fraction calculus; Proj pullbackAwayιIso concerns chart intersections only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, \"twist\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "No matching arbitrary-twist scalar-extension construction or normalized fraction calculus; Proj pullbackAwayιIso concerns chart intersections only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pullback comparison of all Proj twisting sheaves normalized on homogeneous fractions is unique, multiplicative, and compatible with composition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc"
+    ],
+    "digest": "4b4315200b1c7934"
+   },
+   "date": "2026-10-27",
+   "verdict": "No matching arbitrary-twist scalar-extension construction or normalized fraction calculus; Proj pullbackAwayιIso concerns chart intersections only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistComparison",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tags 084B (lemma-relative-proj), 085Q (definition-blow-up), 085R (lemma-blowing-up-affine), 085S (lemma-flat-base-change-blowing-up), 085T (lemma-blowing-up-gives-effective-Cartier-divisor), 085Z (lemma-blowing-up-projective), and 083S (lemma-complement-effective-Cartier-divisor). Scheme coefficient comparison: descent.tex Tags 03DX (proposition-equivalence-quasi-coherent) and 05VG (lemma-equivalence-quasi-coherent-properties).. General graded-algebra construction underlying the blowup: representability and arbitrary-base-change comparison of relative Proj (084B and 085C). Scheme prerequisite for the compactification/direct-image paragraph of sk-thm-sf-ctf-stability.proof.md: constructions.tex 01NW, 01NY and 01NZ, the scheme functor used in the proof of spaces-divisors.tex 084B. Technical input: Tag 01NR (lemma-glue-relative-proj-twists), Tag 01MS (lemma-when-invertible), equation-Ud before Tag 01N8, and the open-immersion comparison in Tag 01NY (lemma-relative-proj). Input for the affine twist transition maps in Tag 01NR: scalar-extension twist comparison (01N2), normalization (01MY), and composition (01MZ). Extracted proof component: Uniqueness, multiplication, unit and identity from normalized fractions.",
+   "via": [
+    "lem-sfb-proj-scalar-extension-twist-comparison",
+    "lem-sfb-relative-proj-twists-degree-opens",
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-space-blowup-chart-properties",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistFractionLaws",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjScalarExtensionTwistFractionLaws.lean",
+  "declaration": "AlgebraicGeometry.Proj.scalarExtension_twist_fraction_laws",
+  "statement": "theorem scalarExtension_twist_fraction_laws\n    {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]\n    [Algebra R S] [Algebra R A] [Algebra S B]\n    (𝒜 : ℕ → Submodule R A) (ℬ : ℕ → Submodule S B)\n    [GradedRing 𝒜] [GradedRing ℬ]\n    (ρA : R →+* 𝒜 0) (ρB : S →+* ℬ 0)\n    (hρA : ∀ a : R, (ρA a : A) = algebraMap R A a)\n    (hρB : ∀ b : S, (ρB b : B) = algebraMap S B b)\n    (β : TensorProduct R S A ≃ₐ[S] B) (ψ : 𝒜 →+*ᵍ ℬ)\n    (hβψ : ∀ a : A, β (TensorProduct.tmul R (1 : S) a) = ψ a)\n    (hgraded : ∀ n : ℕ, ℬ n = Submodule.span S (ψ '' (𝒜 n : Set A)))\n    (r : Proj ℬ ⟶ Proj 𝒜)\n    (hpre : ∀ (n : ℕ) (f : A), f ∈ 𝒜 n → 0 < n →\n      r ⁻¹ᵁ basicOpen 𝒜 f = basicOpen ℬ (ψ f))\n    (hchart : ∀ (n : ℕ) (f : A) (hf : f ∈ 𝒜 n) (hn : 0 < n),\n      awayι ℬ (ψ f) (ψ.map_mem hf) hn ≫ r =\n        Spec.map (CommRingCat.ofHom (HomogeneousLocalization.Away.map ψ f)) ≫\n          awayι 𝒜 f hf hn)\n    (θ : ∀ j : ℤ, (tensorPullback r).obj (twist 𝒜 j) ≅ twist ℬ j)\n    (hθ : IsScalarExtensionTwistComparison ψ r θ) :\n    (∀ θ' : ∀ j : ℤ, (tensorPullback r).obj (twist 𝒜 j) ≅ twist ℬ j,\n        IsScalarExtensionTwistComparison ψ r θ' → θ' = θ) ∧\n      (∀ (i j : ℤ) (U : (Proj 𝒜).Opens)\n        (s : Γ(twist 𝒜 i, U)) (t : Γ(twist 𝒜 j, U))\n        (v : Γ(twist 𝒜 (i + j), U)),\n        (∀ x : U, (v.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =\n          (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) * t.1 x) →\n        ∀ x : r ⁻¹ᵁ U,\n          ((scalarExtensionTwistSection r θ (i + j) U v).1 x :\n            Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =\n          ((scalarExtensionTwistSection r θ i U s).1 x :\n            Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) *\n          (scalarExtensionTwistSection r θ j U t).1 x) ∧\n      (∀ (U : (Proj 𝒜).Opens) (s : Γ(Proj 𝒜, U)),\n        scalarExtensionTwistSection r θ 0 U\n          (Scheme.Modules.Hom.app (unitToTwistZero (𝒜 := 𝒜)) U s) =\n          Scheme.Modules.Hom.app (unitToTwistZero (𝒜 := ℬ)) (r ⁻¹ᵁ U) (r.app U s)) ∧\n(∀ ι : ∀ j : ℤ, (tensorPullback (𝟙 (Proj 𝒜))).obj (twist 𝒜 j) ≅ twist 𝒜 j,\n        IsScalarExtensionTwistComparison (GradedRingHom.id 𝒜) (𝟙 (Proj 𝒜)) ι →\n        ∀ j : ℤ, ι j = (tensorPullbackSectionId (Proj 𝒜)).app (twist 𝒜 j))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ceea7",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T180741-L-3897713",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ceea7",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T180741-L-3897713",
+  "kind": "interface",
+  "note": "independent cc review: item theorem stmt byte-identical to clone; moved defs verbatim vs clone; combined scratch compile (exit 0, 6.9 s): helpers propext/choice/Quot.sound only, item sorryAx only via the 3 new holes; 0 importers/users in clone; node proof_deps = union of uses"
+ }
+}
