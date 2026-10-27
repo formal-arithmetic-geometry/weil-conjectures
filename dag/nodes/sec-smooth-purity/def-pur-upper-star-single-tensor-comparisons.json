@@ -1,0 +1,127 @@
+{
+ "id": "def-pur-upper-star-single-tensor-comparisons",
+ "kind": "definition",
+ "title": "Canonical tensor-single and inverse-image comparisons",
+ "statement": "For a Grothendieck abelian braided closed monoidal category C with functorial flat resolutions, define tensorSingleRepresentative M P to be the lax tensorator of Q at P and single M followed by Q of the total-tensor/single-complex isomorphism. For a commutative ring A, f:Z -> W and a specified iso k:f^{-1}M ~= N, define upperStarSingleCoefficientIso to be the exact-derived inverse-image comparison followed by the single-functor comparison and the single image of k. Define upperStarTensorSingleIso to have component at X the ordinary oplax tensor comparison f^{-1}(X tensor M) ~= f^{-1}X tensor f^{-1}M followed by tensoring with k. These are exactly the existing constructions formerly declared in UpperStarSingleTensorRepresentative, with unchanged signatures and bodies.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E and 07A4; unchanged canonical single-complex comparisons."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map",
+  "def-pur-scalar-pullback-representative-data"
+ ],
+ "proof": [
+  {
+   "text": "The first two maps are the specified composites. The third is a natural isomorphism because ordinary inverse image is strong monoidal. Its naturality follows from δ_natural_left and whisker_exchange. This preserves the original construction and its naturality proof verbatim; only its file changes.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-derived-categories",
+    "def-kun-projection-formula-map",
+    "def-pur-scalar-pullback-representative-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map",
+  "def-pur-scalar-pullback-representative-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E and 07A4; unchanged canonical single-complex comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image tensor comparison counit square complex concentrated degree zero",
+   "results": "8 hits: HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor'_inv, HomologicalComplex.rightUnitor', HomologicalComplex.leftUnitor, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural_right",
+   "results": "1 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural_right",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison.*single₂|whiskerRight_whiskerLeft_μ_map_whiskerLeft",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse image tensor comparison with a sheaf concentrated in degree zero; exact derived functor on a single complex",
+   "results": "not run: the review machine has no network access (reviewer W4 S3 4de56d6ae995). Substitute rg over Mathlib: mapDerivedCategorySingleFunctor only in Algebra/Homology/DerivedCategory/ExactFunctor.lean and Ext/Map.lean (exact functors, no tensor); mapBifunctorSingle|map₂HomologicalComplexFlipObjSingleIso 0 files; upperStar|pullbackTensor 0 files",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the library's single-complex and derived tensor comparisons are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.UpperStarSingleTensorRepresentative",
+  "group": "W4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5; canonical single-coefficient comparisons",
+   "via": [
+    "lem-pur-upper-star-single-tensor-representative",
+    "lem-pur-scalar-tensor-pullback-normalization",
+    "lem-pur-etale-scalar-mate-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.UpperStarSingleTensorDefinitions",
+  "file": "lean/Sheaf/Paper/UpperStarSingleTensorDefinitions.lean",
+  "declaration": "AlgebraicGeometry.Etale.tensorSingleRepresentative",
+  "declarations": [
+   "AlgebraicGeometry.Etale.tensorSingleRepresentative",
+   "AlgebraicGeometry.Etale.upperStarSingleCoefficientIso",
+   "AlgebraicGeometry.Etale.upperStarTensorSingleIso"
+  ],
+  "statement": "def tensorSingleRepresentative\n    {C : Type w} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]\n    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]\n    [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]\n    (M : C) (P : CochainComplex C ℤ) :\n    (scalarTensorModelFunctor M).obj (DerivedCategory.Q.obj P) ⟶\n      DerivedCategory.Q.obj (((tensorRight M).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4de56",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261027T151747-L-1204147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4de56",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261027T151747-L-1204147",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 5 new modules against node lem-pur-upper-star-single-tensor-representative and its plan; moved defs diffed verbatim against clone; both direct importers compiled OK in sandbox /tmp/w4rev; axioms clean; monolith 67 s shows the split is forced"
+ }
+}

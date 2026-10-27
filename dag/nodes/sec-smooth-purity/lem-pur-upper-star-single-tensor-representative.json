@@ -16,44 +16,42 @@
  ],
  "proof": [
   {
-   "text": "Apply the defining counit square of the specified derived inverse-image tensor comparison to P and the complex concentrated in degree zero at M. This square holds for arbitrary complexes, including non-K-flat ones.",
+   "text": "Use the cochain tensor counit square on P and single M. Rewrite the exact single-coefficient comparison as its geometric representative followed by Q of the ordinary single comparison and k. Lax monoidal naturality moves this coefficient morphism through the tensorator.",
    "uses": [
-    "def-kun-projection-formula-map"
+    "lem-pur-upper-star-tensor-cochain-representative",
+    "lem-pur-upper-star-single-coefficient-representative"
    ],
    "elementary": false
   },
   {
-   "text": "The geometric representative on the single complex is exact inverse image on the single sheaf: the exact-derived comparison and mapDerivedCategorySingleFunctor identify the counit with that map. Compose with k.",
+   "text": "The proved mapBifunctorComparison_δNatTrans_single₂ and coefficient naturality of mapBifunctorSingle₂Iso identify the resulting cochain morphism with upperStarTensorSingleIso. Naturality of scalarGeometricRepresentative moves the total-tensor/single isomorphism across the representative; functoriality and associativity finish the displayed equation. The proved generic tensor_single_cochain_counit packages this calculation as TensorSingleCounitSquare, so the final theorem specializes it without repeating concrete cochain structure conversions.",
    "uses": [
-    "def-pur-scalar-pullback-representative-data"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Compose with the total-tensor/single-complex comparisons. In degree n the only nonzero summand is (n,0), so the ordinary total-tensor pullback comparison reduces to its degree n tensor comparison. Naturality in k gives precisely the stated ordinary map t, and there is no sign or degree interchange.",
-   "uses": [
-    "def-kun-projection-formula-map"
+    "def-pur-scalar-pullback-representative-data",
+    "lem-pur-tensor-single-cochain-counit"
    ],
    "elementary": false
   },
   {
-   "text": "The scalar coefficient iso is the exact single-coefficient comparison for its ordinary coefficient iso: both definitions apply the same exact-derived and single-functor comparison and then the single functor to the same composite coefficient isomorphism.",
+   "text": "Apply scalarCoefficientSinglePullbackIso_eq, preserved verbatim in its separate module: upperStarSingleCoefficientIso evaluated on the ordinary coefficient iso scalarCoefficientSheafPullbackIso of lem-pur-scalar-sheaf-tensor-pullback is the specified scalar coefficient comparison. Both coefficient comparisons have the identical defining composite.",
    "uses": [
-    "lem-pur-scalar-sheaf-tensor-pullback",
-    "def-pur-scalar-pullback-representative-data"
+    "lem-pur-scalar-coefficient-single-pullback-iso",
+    "lem-pur-scalar-sheaf-tensor-pullback"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-kun-projection-formula-map",
+  "lem-pur-upper-star-tensor-cochain-representative",
+  "lem-pur-upper-star-single-coefficient-representative",
   "def-pur-scalar-pullback-representative-data",
-  "lem-pur-scalar-sheaf-tensor-pullback"
+  "lem-pur-scalar-sheaf-tensor-pullback",
+  "lem-pur-scalar-coefficient-single-pullback-iso",
+  "lem-pur-tensor-single-cochain-counit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0FPH (lemma-tensor-pull-compatibility); single-complex specialization of parent proof step 2"
+  "place": "Tags 07A4 and 0FPH; specialization of the existing derived tensor counit square and proved bifunctor/single comparison."
  },
  "mathlib_searches": [
   {
@@ -154,11 +152,7 @@
   "file": "lean/Sheaf/Paper/UpperStarSingleTensorRepresentative.lean",
   "declaration": "AlgebraicGeometry.Etale.upperStar_single_tensor_representative",
   "declarations": [
-   "AlgebraicGeometry.Etale.tensorSingleRepresentative",
-   "AlgebraicGeometry.Etale.upperStarSingleCoefficientIso",
-   "AlgebraicGeometry.Etale.upperStarTensorSingleIso",
-   "AlgebraicGeometry.Etale.upperStar_single_tensor_representative",
-   "AlgebraicGeometry.Etale.scalarCoefficientSinglePullbackIso_eq"
+   "AlgebraicGeometry.Etale.upperStar_single_tensor_representative"
   ],
   "statement": "theorem upperStar_single_tensor_representative\n    (A : Type (u + 1)) [CommRing A] {Z W : Scheme.{u}} (f : Z ⟶ W)\n    {M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)}\n    {N : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)}\n    (k : (upperStar (ModuleCat.{u + 1} A) f).obj M ≅ N)\n    (P : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :\n    ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) f).app\n          (DerivedCategory.Q.obj P)).app ((DerivedCategory.singleFunctor _ 0).obj M) ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) Z).obj\n          (L(upperStar (ModuleCat.{u + 1} A) f).obj (DerivedCategory.Q.obj P))).map\n          (upperStarSingleCoefficientIso A f k).hom ≫\n        (scalarTensorModelFunctor N).map (scalarGeometricRepresentative A f P) ≫\n        tensorSingleRepresentative N\n          (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) =\n      L(upperStar (ModuleCat.{u + 1} A) f).map (tensorSingleRepresentative M P) ≫\n        scalarGeometricRepresentative A f\n          (((tensorRight M).mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map\n          ((Functor.mapHomologicalComplexCompIso (upperStarTensorSingleIso A f k) (.up ℤ) ≪≫\n            (Functor.mapHomologicalComplexCompIso (Iso.refl\n              (upperStar (ModuleCat.{u + 1} A) f ⋙ tensorRight N)) (.up ℤ)).symm).hom.app P)",
   "branch": "sheaf-dag",
@@ -178,11 +172,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q5",
-  "result": "pass",
-  "landing": "20261027T021351-L-2762338",
+  "reviewer": "C-4de56",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261027T151747-L-1204147",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof and 5 new modules against node lem-pur-upper-star-single-tensor-representative and its plan; moved defs diffed verbatim against clone; both direct importers compiled OK in sandbox /tmp/w4rev; axioms clean; monolith 67 s shows the split is forced"
  }
 }

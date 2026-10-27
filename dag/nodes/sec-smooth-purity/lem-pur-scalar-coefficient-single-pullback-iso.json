@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-scalar-coefficient-single-pullback-iso",
+ "kind": "statement",
+ "title": "The scalar coefficient comparison is its specified single-sheaf comparison",
+ "statement": "For rings A,B in Type(u+1), a ring homomorphism phi:A -> B and a morphism f:Z -> W of schemes in universe u, upperStarSingleCoefficientIso A f evaluated at scalarCoefficientSheafPullbackIso phi f equals scalarCoefficientPullbackIso phi f. Both sides use the same exact-derived inverse-image comparison, single-functor comparison and single image of the ordinary scalar coefficient iso.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E and 07A4; unchanged canonical single-complex comparisons."
+ },
+ "stmt_deps": [
+  "def-pur-upper-star-single-tensor-comparisons",
+  "def-pur-scalar-pullback-representative-data",
+  "lem-pur-scalar-sheaf-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the two named isomorphisms. Both apply the exact-derived and single-functor comparisons, then the single image of the restriction/pullback iso on the B-unit followed by restriction of the inverse unit comparison. Thus their defining expressions are identical, and reflexivity proves the equality. This is the original proved theorem moved unchanged to a smaller module.",
+   "uses": [
+    "def-pur-upper-star-single-tensor-comparisons",
+    "def-pur-scalar-pullback-representative-data",
+    "lem-pur-scalar-sheaf-tensor-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-upper-star-single-tensor-comparisons",
+  "def-pur-scalar-pullback-representative-data",
+  "lem-pur-scalar-sheaf-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E and 07A4; unchanged canonical single-complex comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image tensor comparison counit square complex concentrated degree zero",
+   "results": "8 hits: HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor'_inv, HomologicalComplex.rightUnitor', HomologicalComplex.leftUnitor, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural_right",
+   "results": "1 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural_right",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison.*single₂|whiskerRight_whiskerLeft_μ_map_whiskerLeft",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse image tensor comparison with a sheaf concentrated in degree zero; exact derived functor on a single complex",
+   "results": "not run: the review machine has no network access (reviewer W4 S3 4de56d6ae995). Substitute rg over Mathlib: mapDerivedCategorySingleFunctor only in Algebra/Homology/DerivedCategory/ExactFunctor.lean and Ext/Map.lean (exact functors, no tensor); mapBifunctorSingle|map₂HomologicalComplexFlipObjSingleIso 0 files; upperStar|pullbackTensor 0 files",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the library's single-complex and derived tensor comparisons are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.UpperStarSingleTensorRepresentative",
+  "group": "W4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5; canonical single-coefficient comparisons",
+   "via": [
+    "lem-pur-upper-star-single-tensor-representative",
+    "lem-pur-scalar-tensor-pullback-normalization",
+    "lem-pur-etale-scalar-mate-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarCoefficientSinglePullbackIso",
+  "file": "lean/Sheaf/Paper/ScalarCoefficientSinglePullbackIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarCoefficientSinglePullbackIso_eq",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarCoefficientSinglePullbackIso_eq"
+  ],
+  "statement": "theorem scalarCoefficientSinglePullbackIso_eq\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {Z W : Scheme.{u}} (f : Z ⟶ W) :\n    upperStarSingleCoefficientIso A f (scalarCoefficientSheafPullbackIso φ f) =\n      scalarCoefficientPullbackIso φ f",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4de56",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261027T151747-L-1204147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4de56",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261027T151747-L-1204147",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 5 new modules against node lem-pur-upper-star-single-tensor-representative and its plan; moved defs diffed verbatim against clone; both direct importers compiled OK in sandbox /tmp/w4rev; axioms clean; monolith 67 s shows the split is forced"
+ }
+}

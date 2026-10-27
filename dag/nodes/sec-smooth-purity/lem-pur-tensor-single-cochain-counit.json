@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-tensor-single-cochain-counit",
+ "kind": "statement",
+ "title": "A tensor counit square specialized to a coefficient in degree zero",
+ "statement": "Let C and D be Grothendieck abelian braided closed monoidal categories with functorial flat resolutions and chosen derived categories. Let F:C -> D be additive and monoidal and preserve the coproducts indexed by each fiber of addition on integers. Let L:D(C) -> D(D), a derived tensor comparison delta, and geometric representatives g(P):L(QP) -> Q(FP) satisfy the cochain tensor counit square and naturality. Given k:F(M) ~= N, a single-coefficient comparison s:L(M[0]) ~= N[0] whose hom is g(single M) followed by Q of the ordinary single comparison and k, and t:tensorRight(M);F ~= F;tensorRight(N) whose hom is the ordinary oplax comparison followed by k, the canonical tensor-single comparisons q satisfy delta;(id tensor s);(g(P) tensor id);q(FP,N) = L(q(P,M));g(P tensor M);Q(t_P) for every cochain complex P. TensorSingleCounitSquare is exactly this equation, packaged as a regular predicate.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0FPH; the single-complex specialization of the tensor counit square."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-upper-star-single-tensor-comparisons",
+  "def-kun-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the coefficient hypothesis to replace s by g(single M) followed by Q of the ordinary single-complex comparison and k. Lax monoidal naturality of Q moves the latter morphism through its tensorator. Apply the given cochain tensor counit square to P and single M. This is the abstract tensorCounitSingleDiagram calculation.",
+   "uses": [
+    "def-pur-upper-star-single-tensor-comparisons",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved source-library mapBifunctorComparison_δNatTrans_single₂ and mapBifunctorSingle₂Iso_inv_naturality₂ identify the ordinary cochain tensor comparison followed by the single-complex comparison and k with the degreewise natural tensor comparison t. Convert mapHomologicalComplexδNatTrans to the cochain oplax map generically using mapCochainComplex_δ; transport t using complex_square_hom. Naturality of g, functoriality of Q and associativity finish the equation. All these calculations are proved in the module.",
+   "uses": [
+    "def-pur-scalar-pullback-representative-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-upper-star-single-tensor-comparisons",
+  "def-kun-projection-formula-map",
+  "def-pur-scalar-pullback-representative-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0FPH; the single-complex specialization of the tensor counit square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image tensor comparison counit square complex concentrated degree zero",
+   "results": "8 hits: HomologicalComplex.rightUnitor'_inv, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor'_inv, HomologicalComplex.rightUnitor', HomologicalComplex.leftUnitor, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_inv_app_f, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural_right",
+   "results": "1 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural_right",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison.*single₂|whiskerRight_whiskerLeft_μ_map_whiskerLeft",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib theorem; reuse the general lax naturality lemma and the upstream proved single-complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse image tensor comparison with a sheaf concentrated in degree zero; exact derived functor on a single complex",
+   "results": "not run: the review machine has no network access (reviewer W4 S3 4de56d6ae995). Substitute rg over Mathlib: mapDerivedCategorySingleFunctor only in Algebra/Homology/DerivedCategory/ExactFunctor.lean and Ext/Map.lean (exact functors, no tensor); mapBifunctorSingle|map₂HomologicalComplexFlipObjSingleIso 0 files; upperStar|pullbackTensor 0 files",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the library's single-complex and derived tensor comparisons are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.UpperStarSingleTensorRepresentative",
+  "group": "W4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5; the generic single-complex tensor counit calculation",
+   "via": [
+    "lem-pur-upper-star-single-tensor-representative",
+    "lem-pur-scalar-tensor-pullback-normalization",
+    "lem-pur-etale-scalar-mate-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorSingleCounit",
+  "file": "lean/Sheaf/Algebra/Homology/TensorSingleCounit.lean",
+  "declaration": "AlgebraicGeometry.Etale.tensor_single_cochain_counit",
+  "statement": "theorem tensor_single_cochain_counit\n    {C : Type w} {D : Type w'} [Category.{v} C] [Category.{v'} D]\n    [Abelian C] [Abelian D]\n    [IsGrothendieckAbelian.{v} C] [IsGrothendieckAbelian.{v'} D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    [MonoidalPreadditive C] [MonoidalPreadditive D]\n    [MonoidalClosed C] [MonoidalClosed D] [BraidedCategory C] [BraidedCategory D]\n    [HasDerivedCategory.{v} C] [HasDerivedCategory.{v'} D]\n    [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]\n    (F : C ⥤ D) [F.Additive] [F.Monoidal] [∀ j, PreservesColimitsOfShape\n      (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) F]\n    (L : DerivedCategory C ⥤ DerivedCategory D)\n    (δ : (Functor.postcompose₂.obj L).obj (curriedTensor (DerivedCategory C)) ⟶\n      (((Functor.whiskeringLeft₂ (DerivedCategory D)).obj L).obj L).obj\n        (curriedTensor (DerivedCategory D)))\n    (g : ∀ P : CochainComplex C ℤ, L.obj (DerivedCategory.Q.obj P) ⟶\n      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P))\n    {M : C} {N : D} (k : F.obj M ≅ N)\n    (s : L.obj ((DerivedCategory.singleFunctor _ 0).obj M) ≅\n      (DerivedCategory.singleFunctor _ 0).obj N)\n    (t : tensorRight M ⋙ F ≅ F ⋙ tensorRight N)\n    (hs : s.hom = g ((HomologicalComplex.single _ (.up ℤ) 0).obj M) ≫\n      DerivedCategory.Q.map\n        ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).hom.app M ≫\n          (HomologicalComplex.single _ (.up ℤ) 0).map k.hom))\n    (ht : Functor.OplaxMonoidal.δRightNatTrans F M ≫\n      Functor.whiskerLeft F ((curriedTensor D).flip.map k.hom) = t.hom)\n    (hd : LaxSquareHδ (Q₁ := DerivedCategory.Q) (Q₂ := DerivedCategory.Q)\n      (F := F.mapHomologicalComplex (.up ℤ)) δ g)\n    (hn : ∀ {P R : CochainComplex C ℤ} (a : P ⟶ R),\n      L.map (DerivedCategory.Q.map a) ≫ g R =\n        g P ≫ DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map a))\n    (P : CochainComplex C ℤ) : TensorSingleCounitSquare F L δ g M N s t P",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.TensorSingleCounitSquare",
+   "AlgebraicGeometry.Etale.tensor_single_cochain_counit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4de56",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261027T151747-L-1204147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4de56",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261027T151747-L-1204147",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 5 new modules against node lem-pur-upper-star-single-tensor-representative and its plan; moved defs diffed verbatim against clone; both direct importers compiled OK in sandbox /tmp/w4rev; axioms clean; monolith 67 s shows the split is forced"
+ }
+}
