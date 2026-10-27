@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.ProperSupportedKunnethRoute
-import Sheaf.AlgebraicGeometry.ProperShriekCompSupportsRaw
+import Sheaf.AlgebraicGeometry.ProperShriekCompSupportsCanonical
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-! # Proper forget supports and the specified compact-support compositor
@@ -82,6 +82,7 @@ theorem properShriekComp_comp_forgetSupports {W X S : Scheme.{u}}
             ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫
         (rightDerivedLowerStarCompIsoOfComp
           (ModuleCat.{u + 1} A) p f h w).hom.app E := by
-  sorry
+  subst h
+  exact properShriekComp_comp_forgetSupports_canonical A p f E
 
 end AlgebraicGeometry.Etale
