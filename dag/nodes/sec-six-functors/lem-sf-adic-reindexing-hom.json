@@ -12,24 +12,39 @@
  ],
  "proof": [
   {
-   "text": "Uncurry the asserted equation using the target tensor-Hom adjunction. Naturality\nof this adjunction in its parameter and both Hom variables rewrites the left side as\npulled-back realized evaluation, followed by the comparison at the second input.\nHere pullHom is by definition the transpose of pulled-back evaluation, so its counit\nidentity supplies this rewrite. Apply tensor compatibility and naturality of comparison\nto the source evaluation arrow. The evaluation equation for the permitted-pair pullback\nHom comparison identifies the result with the uncurrying of the right side. The\nrealization HomLaws evaluation identities give the same realized evaluation on both\nsides. Injectivity of uncurrying proves equality. All Hom objects used are the recorded\npermitted pairs; no perfection assertion on their first input is needed.",
+   "text": "Prove the abstract hom_square calculation for two ambient closed structures and an inverse-image functor with its tensor natural isomorphism. Uncurrying a transported internal-Hom arrow is tensoring the two input arrows and then uncurrying, followed by the output arrow. This follows from the adjunction counit naturality and the closed structure evaluation_naturality. Conjugate the tensor square by the comparison isomorphisms, apply inverse tensorator naturality, and combine with the evaluation square. Injectivity of the target transpose proves the abstract square. The private Lean helpers prove this calculation completely.",
    "uses": [
-    "lem-pod-derived-automorphism-hom-evaluation",
-    "lem-pur-isomorphism-inverse-image-tensor-hom",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "def-sf-native-adic-realization-data",
+    "def-sf-native-adic-tensor-reindexing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the given permitted pair P, set H = RHom(P), M = P.1 and N = P.2, and let Q be its recorded pulled-back pair. The inverse transpose of the source realized Hom comparison is the source tensorator followed by realized evaluation, by SpaceData.hom.evaluation. The inverse transpose of realized podCommonHomComparison followed by the target realized Hom comparison is the target tensorator followed by realization of the inverse common tensor comparison and pulled-back evaluation. Prove this using tensorator naturality, the target SpaceData.hom.evaluation, and podCommonHomComparison_laws.evaluation. No new perfectness condition on M is used.",
+   "uses": [
+    "def-sf-native-adic-realization-data",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the given tensor compatibility equation at (H,M) by the realized inverse common tensor comparison and cancel its isomorphism. Naturality of C.comparison at the source evaluation is the required evaluation square. Apply the proved abstract hom_square, with the ambient pullHom unfolded as its defining transpose. This yields the original Hom equation with exactly the recorded pair transport and comparison components.",
+   "uses": [
+    "def-sf-native-adic-realization-data",
+    "def-sf-native-adic-tensor-reindexing"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pod-derived-automorphism-hom-evaluation",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+  "def-sf-native-adic-realization-data",
+  "def-sf-native-adic-tensor-reindexing",
+  "lem-pod-derived-automorphism-hom-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Explicit stage-3 subargument of lem-sf-adic-realization-isomorphism-normalization; 7. Not claimed verbatim in the source."
+  "place": "BS Remark 6.8.15; Stacks 0GMX. H2 formalizes the existing agent-written evaluation-transpose argument using closed adjunction naturality, the supplied HomLaws and the common-stage evaluation law; not claimed verbatim in BS."
  },
  "mathlib_searches": [
   {
@@ -98,13 +113,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-3d4c5",
-  "group": "B9",
+  "reviewer": "COMPILER",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261025T142905-L-826383",
-  "kind": "interface",
-  "note": "independent cc review: item proof assembly + 4 split statements against AdicRealizationFamilyData Family/FamilyCore fields and pinning structures (RingReindex, IntegralReindex, ReindexTensor); item node proof_deps against Lean; unit sk-prop-sfb-cartesian-coefficients against core child proof_deps; importers AdicQbarConstructibleRealization + NativeWeilScalarFrobeniusCounit compiled against delivered modules"
+  "landing": "20261027T151711-L-1194603",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
