@@ -1,0 +1,129 @@
+{
+ "id": "lem-coef-qbar-finite-omega-stage-coherence",
+ "kind": "statement",
+ "title": "The normalized finite dualizing maps satisfy the recorded stage tower equation",
+ "statement": "Fix a finite-field datum D, a prime l different from D.p, an algebraic closure Ω of Q_l in an independent universe, and a separated finite-type D.k-scheme X. Let F be a Finite datum with the actual raw rational finite stages and normalized scalar comparisons of [def-sf-common-stage-verdier-data]. For every E ≤ L ≤ M in the index of [def-weil-algebraically-closed-coefficients], put W_E = localization_E((F.omega E).omega) and o_h = operationStageTransitionIso(h).app(W_E) followed by (F.scalar E L h).omega. Then T_k(o_h.hom) ≫ o_k.hom = assoc(h,k).hom.app(W_E) ≫ o_(h.trans k).hom in the rational M-stage category. No FiniteCoherent hypothesis and no descended dual, descended omega, or descended evaluation is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: the unit and composition equations for u are transported through derived inverse limit; rationalize this equation and transport to the recorded stage system."
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "For the three finite coefficient fields choose the actual integral dualizing data F.omega. The composition clause of IntegralFiniteExtension.comparison_composition gives scalar(u(E,L)) followed by u(L,M) equal to the balanced tensor associator followed by u(E,M). Its presentation naturality hypotheses are supplied by IntegralHom.evaluation_naturality. This step uses only the u component of CompositionConclusion.",
+   "uses": [
+    "lem-sf-integral-finite-extension-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace the hom of each F.scalar.omega by its localized integral u using F.normalized. Rational scalar extension maps a localized integral morphism to the localization of its integral scalar extension, and localization preserves composition. The defining normalization of sfRationalScalarComp is the localization of the same completed balanced tensor associator. The preceding integral equality therefore gives the rational omega tower equation, with the prescribed rational scalar associator, not an arbitrary associator.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use coefficientInclusion_laws to identify the composite field inclusion with the direct inclusion. The chosen associator equals scalarAssociator by associator_existsUnique. Transport the rational equation along the transition equalities defining operationStageTransitionIso. Naturality moves the intermediate equality isomorphism through the omega map, cancelling it; the remaining equation is exactly the displayed stage equation. This works for identity inclusions, the zero object, and empty X.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-sf-common-stage-verdier-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-finite-extension-composition",
+  "def-sf-common-stage-verdier-data",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: the unit and composition equations for u are transported through derived inverse limit; rationalize this equation and transport to the recorded stage system."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized dualizing object scalar extension maps satisfy the tensor associator tower equation after localization",
+   "results": "8 hits: ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc', Module.Dual.baseChange_baseChange and related module scalar extension lemmas; none concerns normalized derived dualizing maps.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; the project integral u equation and the normalized localization API are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.assoc",
+   "results": "0 hits; unknown identifier CategoryTheory.StageSystem.assoc.",
+   "date": "2026-10-28",
+   "verdict": "The recorded stage system is project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "omega.*(tower|composition)|dualizing.*(tower|composition)",
+   "results": "0 Mathlib hits. Project search found compatibility lemmas for already constructed Duality data, which assume the descended omega equation and cannot prove this finite tower statement.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate finite-stage omega tower statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierEvaluationDescent",
+  "date": "2026-10-28",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Coefficient transport, retained core steps 4--5: composition of the normalized finite dualizing u maps before common-stage descent.",
+   "via": [
+    "lem-coef-qbar-verdier-evaluation-equations",
+    "lem-coef-qbar-verdier-core-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarFiniteOmegaStageCoherence",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarFiniteOmegaStageCoherence.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.finiteOmegaStageComparison_tower",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.finiteOmegaStageComparison",
+   "WeilConjectures.CoefQbarVerdier.finiteOmegaStageComparison_tower"
+  ],
+  "statement": "theorem finiteOmegaStageComparison_tower (F : Finite D l hl Ω X)\n    {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M) :\n    ((stageSystem l Ω X).T k).map (finiteOmegaStageComparison D l hl Ω X F h).hom ≫\n        (finiteOmegaStageComparison D l hl Ω X F k).hom =\n      ((stageSystem l Ω X).assoc h k).hom.app\n          ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).obj\n            (F.omega E).omega) ≫\n        (finiteOmegaStageComparison D l hl Ω X F (h.trans k)).hom",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T234154-L-21430",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T234154-L-21430",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
