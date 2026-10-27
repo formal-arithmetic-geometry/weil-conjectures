@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-exceptional-evaluation-singleton",
+ "kind": "statement",
+ "title": "ExceptionalEvaluationSingleton",
+ "statement": "Let O be a commutative ring, ell an element, T a scheme, and PE a StrictEtaleEvaluation as in def-per-strict-etale-system-interfaces. For every index n and derived finite-level object N with N in D>=a, there is a derived strict etale coefficient system M in D>=a whose n-th evaluation is isomorphic to N and whose other evaluations are zero. This uses the unrestricted system category, without cartesianness requirements.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1: exact coefficient evaluation; single-level section in the unrestricted system category."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Put the module at index n, zero at every other index, and use zero transition maps. This defines a genuine additive functor. After any evaluation it is isomorphic to identity or zero. Evaluations jointly reflect isomorphisms and consequently jointly reflect finite limits and colimits. Thus the single-level functor is exact.",
+   "uses": [
+    "def-per-strict-etale-system-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take its canonical exact derived functor. The exact-localization universal property identifies evaluation with the derived identity or derived zero functor. Exactness preserves D>=a. These isomorphisms provide the asserted witness and vanishing.",
+   "uses": [
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1: exact coefficient evaluation; single-level section in the unrestricted system category."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "single.*[Ee]valuation|[Ee]valuation.*single",
+   "results": "14 hits; Mathlib/Analysis/Normed/Lp/lpSpace.lean, Mathlib/Analysis/Normed/Lp/lpSpace.lean, Mathlib/CategoryTheory/Shift/SingleFunctors.lean",
+   "date": "2026-10-28",
+   "verdict": "No specialized statement found; generic categorical API used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.JointlyReflectIsomorphisms\"",
+   "results": "12 hits; CategoryTheory.JointlyReflectIsomorphisms, CategoryTheory.JointlyReflectIsomorphisms.jointlyFaithful, CategoryTheory.JointlyReflectIsomorphisms.jointlyReflectEpimorphisms",
+   "date": "2026-10-28",
+   "verdict": "No specialized statement found; generic categorical API used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor embeds a module at one level of a diagram of modules and zero at every other level",
+   "results": "Eight hits, including HomologicalComplex.single; no single-index section for these varying coefficient rings.",
+   "date": "2026-10-28",
+   "verdict": "Construct the exact section explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalProperOpenOriginProperties",
+  "date": "2026-10-28",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-proper-open-origin-properties",
+   "place": "Construction 4.1: exact coefficient evaluation; single-level section in the unrestricted system category.",
+   "via": [
+    "lem-sf-exceptional-proper-open-origin-properties"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalEvaluationSingleton",
+  "file": "lean/Sheaf/Paper/ExceptionalEvaluationSingleton.lean",
+  "declaration": "AlgebraicGeometry.systemHom_ext",
+  "statement": "theorem systemHom_ext {M N : strictEtaleCoefficientSystem T O ell}\n    (f g : M ⟶ N) (h : f.app = g.app) : f = g",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T205952-L-1639461",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T205952-L-1639461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

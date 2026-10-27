@@ -19979,3 +19979,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/F6/Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteCalculation (stage 3; reviewer PASS; first push; landing 20261027T205947-L-1638222 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:59 L: merged deliver/F7/Sheaf.Paper.ExceptionalProperOpenOriginConstruction (stage 3; reviewer PASS; first push; landing 20261027T205949-L-1638611 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:59 L: merged deliver/F7/Sheaf.Paper.ProjectionFiniteBaseChangeRightRouteCalculation (stage 3; reviewer PASS; first push; landing 20261027T205950-L-1639081 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:59 L: merged deliver/F8/Sheaf.Paper.ExceptionalProperOpenOriginProperties (stage 3; reviewer PASS; first push; landing 20261027T205952-L-1639461 (interface); batch 20261027T205736; modules 3; new nodes 2)

@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-exceptional-finite-proper-mate",
+ "kind": "statement",
+ "title": "ExceptionalFiniteProperMate",
+ "statement": "In the notation of def-pur-exceptional-system-transport-interfaces and def-sf-exceptional-system-interfaces, assume every O/(ell^(n+1)) is finite. For supplied proper/open compactifications S and P and their normalized comparison R, the mate of the finite proper inverse-image square R.properSquare.derivedLevel n is invertible at every bounded-below object of the finite etale coefficient category of c.Z. This is solely the proper finite mate, with no exceptional support, open, right-adjoint or origin conclusions.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Lemma 4.10 and Construction 5.15; Stacks 099R and 0B65, finite coefficient proper direct-image comparison."
+ },
+ "stmt_deps": [
+  "def-sf-exceptional-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Identify modules over the constant finite quotient-ring sheaf with sheaves of modules over the quotient ring. The specified geometric underlying inverse-image maps and scalar-action normalizations identify the ordinary lifts with the usual fixed-coefficient inverse-image operations. Their exact localizations and right-derived adjoints identify the derived operations and preserve the normalized square.",
+   "uses": [
+    "def-sf-exceptional-system-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Taking mates under these identifications gives the canonical fixed-coefficient proper comparison, with its actual unit and counit normalization. That comparison is invertible on bounded-below objects for a proper, hence qcqs, morphism. Transport its inverse through the identifications.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-exceptional-system-interfaces",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Lemma 4.10 and Construction 5.15; Stacks 099R and 0B65, finite coefficient proper direct-image comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*[Cc]omparison|[Cc]omparison.*proper",
+   "results": "2 hits; Mathlib/Topology/UniformSpace/AbstractCompletion.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "No specialized statement found; generic categorical API used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.mateEquiv\", \"CategoryTheory.IsIso\"",
+   "results": "0 hits; ",
+   "date": "2026-10-28",
+   "verdict": "No specialized statement found; generic categorical API used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to proetale site comparison commutes with derived direct image of a proper morphism for finite coefficient rings",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-28",
+   "verdict": "No specialized statement found; generic categorical API used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalProperOpenOriginProperties",
+  "date": "2026-10-28",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-proper-open-origin-properties",
+   "place": "Zheng Lemma 4.10 and Construction 5.15; Stacks 099R and 0B65, finite coefficient proper direct-image comparison.",
+   "via": [
+    "lem-sf-exceptional-proper-open-origin-properties"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalFiniteProperMate",
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteProperMate.lean",
+  "declaration": "AlgebraicGeometry.exceptionalFiniteProperMate",
+  "statement": "theorem exceptionalFiniteProperMate\n    {O : Type (u + 1)} [CommRing O] {ell : O}\n    [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}\n    {S : StrictEtaleCompactSupport O ell c}\n    {CX : ExceptionalSystemSiteComparison O ell X S.PX}\n    {CY : ExceptionalSystemSiteComparison O ell Y S.PY}\n    {CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ}\n    {P : ExceptionalProCompactSupport O ell c\n      CX.proEvaluation CY.proEvaluation CZ.proEvaluation}\n    (R : ExceptionalSystemCompactificationComparison S CX CY CZ P)\n    (n : ℕ) (M : DerivedCategory (strictEtaleLevel c.Z O ell n))\n    (hM : ∃ a : ℤ, M.IsGE a) :\n    IsIso ((mateEquiv (S.properDerived.level n).adjunction\n      (P.val.properDerived.level n).adjunction\n      (.mk _ _ _ _ (R.properSquare.derivedLevel n).hom)).app M)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T205952-L-1639461",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T205952-L-1639461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
