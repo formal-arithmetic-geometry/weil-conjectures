@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-adic-tensor-reindexing-models",
+ "kind": "statement",
+ "title": "Native ordinary tensor reindexing on K-flat models",
+ "statement": "Fix a prime l and a scheme isomorphism g:X≅Y, with l invertible in every residue field on X and Y. Let R,S be native locally finite adic realizations, let A:At(l,X,R), C:At(l,Y,S), and let B:RingReindex(l,X,g,R,S) be function-normalized [def-sf-native-adic-reindexing-data]. There exists ReindexTensor(l,X,g,A,C,B) [def-sf-native-adic-tensor-reindexing]: a cochain total-tensor comparison with the homogeneous pure-tensor formula, preservation of the supplied K-flat tests, its derived comparison with the prescribed representative equation, and the coefficient-unit comparison fixed on sections. This is about ambient ordinary modules and asserts no common-stage realization coherence.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; explicit subargument of lem-sf-adic-reindexing-core, not a verbatim statement of either source."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "proof": [
+  {
+   "text": "Sectionwise inverse image is an exact equivalence. Compose its tensor identification with transport of scalars by B to obtain the exact monoidal equivalence of ordinary module sheaves. On pure sections its tensorator sends the same two sections to their tensor at the reindexed object. Use inverse reindexing to invert it; the unit map is the coefficient map B.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the tensorator through the direct sums in total degree. Check the two differential summands on each homogeneous pure tensor: additivity preserves the first term and the second term retains its sign (-1)^p. The inverse tensorator inverts the chain map. Exact monoidal equivalence preserves acyclic tensor tests, hence preserves K-flatness.",
+   "uses": [
+    "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend this cochain comparison through the supplied total K-flat model functors A.models and C.models. The exact-derived factorization and their counits give the ReindexTensor representative equation. Apply the coefficient-unit comparison in degree zero; its sections equation is exactly B.functions. No constructible tensor-completion theorem is needed because the ambient model presentations are supplied in At.",
+   "uses": [
+    "def-sf-native-adic-tensor-reindexing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "C4, 2026-10-28: explicit native ordinary tensor reindexing on k-flat models subargument of lem-sf-adic-reindexing-core."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence carries K-flat complexes and their derived tensor product to the tensor product of their images",
+   "results": "8 hits; Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits; CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuousId|pushforwardCongr₂|mapDerivedCategoryNatIso",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingCore",
+  "date": "2026-10-28",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation from lem-sf-adic-reindexing-core: native ordinary tensor reindexing on k-flat models. No imported blueprint node states this native normalization.",
+   "via": [
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicTensorReindexingModels",
+  "file": "lean/Sheaf/Paper/AdicTensorReindexingModels.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_tensor_reindexing_models",
+  "statement": "theorem exists_tensor_reindexing_models {X Y : Scheme.{u}} (g : X ≅ Y)\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    (S : LocallyFiniteAdicRealization.Realization l Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (A : At l X R) (C : At l Y S) (B : RingReindex l X g.hom R S) :\n    Nonempty (ReindexTensor l X g.hom A C B)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "independent cc review: AdicReindexingCore assembly vs FamilyCore fields/item node; 3 new sorry statements vs RingReindex/IntegralReindex/ReindexTensor/compositor specs; FamilyData adaptation vs published original timing (52 s CPU) and compile of all delivered modules plus importer AdicRealizationIsomorphismNormalization against the published FamilyData"
+ }
+}

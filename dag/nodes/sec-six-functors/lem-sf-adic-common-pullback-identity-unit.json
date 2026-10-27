@@ -1,0 +1,137 @@
+{
+ "id": "lem-sf-adic-common-pullback-identity-unit",
+ "kind": "statement",
+ "title": "Identity unit for the specified common-stage compositor",
+ "statement": "Fix a prime l, a finite-field datum D and a geometric space T over D [def-sf-adic-realization-isomorphism-data], with l invertible at each residue field. There exists e:commonStageDerivedPullback(l,Qbar_l,id_T)≅Id. For every common-stage constructible object M, the hom of pullbackTensorCommonComposition(l,Qbar_l,id_T,id_T,M), followed by e at the identity-pullback object, is heterogeneously equal to that object identity. The pullback functor and compositor are the specified maps of [def-weil-derived-pullback-tensor-hom] and [def-pod-rational-common-pullback-composition]; no new compositor is chosen.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; explicit subargument of lem-sf-adic-reindexing-core, not a verbatim statement of either source."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pod-rational-common-pullback-composition",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "At finite coefficient complexes use the ordinary inverse-image identity comparison on sections. Its twice-identity composition equation is the identity adjunction equation. The completed integral comparison is fixed by quotient-system realization, so the same identity holds after inserting the specified completion units.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the components and inverse components to the raw rational category. Scalar compatibility of the fixed completion units identifies them after finite field extension, so common-field arrow representatives give naturality of their common-stage inclusions. Use the literal-object transports in the pullback specification at the endpoints.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining representative formula of pullbackTensorCommonComposition identifies its twice-identity component with the rational one at the object own finite field. Apply the integral identity cancellation localized to that field. The literal-object transports give exactly the displayed HEq rather than a change of compositor.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-trf-integral-inverse-image-comparison-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "C4, 2026-10-28: explicit identity unit for the specified common-stage compositor subargument of lem-sf-adic-reindexing-core."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits; CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuousId|pushforwardCongr₂|mapDerivedCategoryNatIso",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingCore",
+  "date": "2026-10-28",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation from lem-sf-adic-reindexing-core: identity unit for the specified common-stage compositor. No imported blueprint node states this native normalization.",
+   "via": [
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCommonPullbackIdentityUnit",
+  "file": "lean/Sheaf/Paper/AdicCommonPullbackIdentityUnit.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_common_pullback_identity_unit",
+  "statement": "theorem exists_common_pullback_identity_unit (D : FiniteFieldDatum.{u})\n    (T : GeometricSpace D)\n    [∀ x : T.base.left, Invertible (l : T.base.left.residueField x)] :\n    ∃ e : commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left) ≅ 𝟭 _,\n    ∀ M : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.base.left,\n      HEq\n        ((pullbackTensorCommonComposition l (PadicAlgCl l) (𝟙 T.base.left) (𝟙 T.base.left) M).hom ≫\n          e.hom.app ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M))\n        (𝟙 ((commonStageDerivedPullback l (PadicAlgCl l) (𝟙 T.base.left)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "independent cc review: AdicReindexingCore assembly vs FamilyCore fields/item node; 3 new sorry statements vs RingReindex/IntegralReindex/ReindexTensor/compositor specs; FamilyData adaptation vs published original timing (52 s CPU) and compile of all delivered modules plus importer AdicRealizationIsomorphismNormalization against the published FamilyData"
+ }
+}

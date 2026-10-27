@@ -12,52 +12,55 @@
  ],
  "proof": [
   {
-   "text": "Use sectionwise inverse image along each underlying scheme isomorphism. Its\ncoefficient map fixes the finite-extension-valued functions, and coefficient naturality\nidentifies the integral quotient projections and finite scalar transitions. Balanced scalar\nextension gives the section-normalized IntegralReindex. Localize its cochain comparison\nthrough the exact-derived factorizations and scalar-extension counits. Compose its inverse\nwith the specified completion-unit inverse and the integral realization isomorphisms; this\nis precisely integralRealizationAgreement, including both mapping-fiber coordinates.\nThe scalar-compatibility equation for the specified completion unit makes these components\ncompatible with finite scalar extension. Naturality first descends through the raw finite\nrationalizations and then through common-stage Hom groups: represent an arrow at a common\nfield, use naturality there, and cancel the two scalar comparisons. Equality at a larger\nstage proves independence of representatives. The inverse components descend by the same\nsquare. Construct tensor reindexing on total K-flat models by the homogeneous pure-tensor\nmap and descend it by the representative equation. Reindexing preserves K-flatness since\nit is an exact monoidal equivalence. The coefficient unit pulls back to itself, supplying\nthe canonical common-stage unit assertion. For the ordinary identity and compositor use\nsectionwise identity maps. For the source identity use the integral pullback identity and\ndescend it through rationalization and common-stage inclusion; its unit equation is the\nidentity of the specified pullback composition on the same representatives. These maps\nretain the given objectwise data exactly. No linearity over the base field is used.",
+   "text": "Apply the proved function-normalized coefficient-ring reindexing theorem at every pair of spaces and underlying isomorphism. That theorem constructs the identity on actual functions using the native section-ring multiplication equation. The coefficient functions formula fixes the resulting ring isomorphism uniquely.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "lem-pur-isomorphism-inverse-image-tensor-hom",
-    "lem-sfb-exact-monoidal-equivalence-total-kflat",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "lem-weil-isomorphism-comparison-natural",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-isomorphism-derived-pullback",
-    "def-weil-rationalization-karoubi",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-isomorphism-comparison-scalar-extension",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-fix-constructible-tensor-completion",
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-trf-integral-inverse-image-comparison-composition"
+    "lem-sf-adic-coefficient-ring-reindexing"
    ],
    "elementary": false
+  },
+  {
+   "text": "For any normalized coefficient isomorphism, its inverse also fixes functions: apply the functions equation to an inverse image and cancel the inverse/hom composite. Extensionality now identifies the identity and composite coefficient maps. Apply the Mathlib module pushforward identity, composition and site-isomorphism comparisons to these equalities. Prove their section formulas once for arbitrary ring sheaves, where they are reflexivity. The site identity and compositor are eqToHom of equal site objects, since they have identity underlying scheme arrows. The presheaf map_id equation therefore gives the required HEq of sections.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-sf-native-adic-reindexing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply balanced integral reindexing and realization descent separately to every pair of geometric spaces and underlying scheme isomorphism, using the constructed coefficient map. This supplies the integral maps, natural realization comparison and every integralRealizationAgreement equation, without changing the given objectwise SpaceData.",
+   "uses": [
+    "lem-sf-adic-integral-reindexing-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the tensor-model reindexing lemma to the two supplied At structures and the constructed coefficient map. Extract the canonical common-stage pullback unit assertion from derivedPullbackTensorIso. At each geometric space take the source identity normalized against the specified twice-identity compositor.",
+   "uses": [
+    "lem-sf-adic-tensor-reindexing-models",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-sf-adic-common-pullback-identity-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble these fields into FamilyCore with data literally d. The data equality is reflexivity; the four displayed normalization conclusions are exactly the two proved ordinary section formulas, the integral agreement supplied in step 3, and the source-unit equation supplied in step 4.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sf-adic-coefficient-ring-reindexing",
   "lem-weil-proetale-isomorphism-inverse-image",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "lem-sfb-exact-monoidal-equivalence-total-kflat",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "lem-weil-isomorphism-comparison-natural",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-isomorphism-derived-pullback",
-  "def-weil-rationalization-karoubi",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-isomorphism-comparison-scalar-extension",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-fix-constructible-tensor-completion",
+  "def-sf-native-adic-reindexing-data",
+  "lem-sf-adic-integral-reindexing-descent",
+  "lem-sf-adic-tensor-reindexing-models",
   "lem-pur-derived-pullback-tensor-iso",
-  "lem-trf-integral-inverse-image-comparison-composition"
+  "lem-sf-adic-common-pullback-identity-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Explicit stage-3 subargument of lem-sf-adic-realization-isomorphism-normalization; 1, 2, 3, 4, 5. Not claimed verbatim in the source."
+  "place": "C4, 2026-10-28: complete Lean assembly, explicit native coefficient and ordinary module coherence constructions, and three strictly smaller normalized subarguments. See coord/reports/C4/Sheaf.Paper.AdicReindexingCore.md."
  },
  "mathlib_searches": [
   {
@@ -126,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-3d4c5",
-  "group": "B9",
-  "result": "pass",
-  "landing": "20261025T142905-L-826383",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
   "kind": "interface",
-  "note": "independent cc review: item proof assembly + 4 split statements against AdicRealizationFamilyData Family/FamilyCore fields and pinning structures (RingReindex, IntegralReindex, ReindexTensor); item node proof_deps against Lean; unit sk-prop-sfb-cartesian-coefficients against core child proof_deps; importers AdicQbarConstructibleRealization + NativeWeilScalarFrobeniusCounit compiled against delivered modules"
+  "note": "independent cc review: AdicReindexingCore assembly vs FamilyCore fields/item node; 3 new sorry statements vs RingReindex/IntegralReindex/ReindexTensor/compositor specs; FamilyData adaptation vs published original timing (52 s CPU) and compile of all delivered modules plus importer AdicRealizationIsomorphismNormalization against the published FamilyData"
  }
 }

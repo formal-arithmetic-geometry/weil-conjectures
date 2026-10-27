@@ -1,0 +1,142 @@
+{
+ "id": "lem-sf-adic-integral-reindexing-descent",
+ "kind": "statement",
+ "title": "Balanced integral reindexing and common-stage realization descent",
+ "statement": "Fix a prime l, a finite-field datum D and objectwise SpaceData d(T) as in [def-sf-adic-realization-isomorphism-data]. For geometric spaces T,U over D and an underlying scheme isomorphism g:T→U, let B be a function-normalized RingReindex between their native coefficient rings [def-sf-native-adic-reindexing-data]. There are normalized IntegralReindex maps I(E) at all finite coefficient fields, and a natural isomorphism from common-stage pullback followed by ordinary realization on T to ordinary realization on U followed by module-derived inverse image along B. On each integral representative the isomorphism satisfies integralRealizationAgreement with I(E). No tensor or identity/composition coherence is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; explicit subargument of lem-sf-adic-reindexing-core, not a verbatim statement of either source."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "The functions condition on B identifies the coefficient inverse-image map on actual locally finite functions. Compatibility with completed integral inclusions is checked on every finite quotient and the rational inclusion by localization. The balanced map on scalar-extended sections is a tensor generator map; its inverse comes from inverse site transport. Exact-derived factorization through the scalar cochain counits gives IntegralReindex with its representative equation.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an integral constructible representative compose the specified integral realization isomorphism, the inverse derived balanced comparison, and the inverse specified completion-unit comparison, in the order of integralRealizationAgreement. This supplies both mapping-fiber coordinates. Naturality of the completion unit gives naturality on integral arrows. Extend linearly across raw rationalization, using that B fixes the uniformizer.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The common-field equations of the input realizations identify the components after finite scalar extension: insert the specified finite-free completion comparison and then apply the completion-unit scalar square. Represent a common-stage arrow at one common field and cancel its two scalar comparisons to prove naturality there. Enlargement of the field preserves this computation. Descend the inverse components by the same square; their composites are identities on representatives.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-weil-isomorphism-comparison-natural",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "C4, 2026-10-28: explicit balanced integral reindexing and common-stage realization descent subargument of lem-sf-adic-reindexing-core."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits; CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuousId|pushforwardCongr₂|mapDerivedCategoryNatIso",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingCore",
+  "date": "2026-10-28",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation from lem-sf-adic-reindexing-core: balanced integral reindexing and common-stage realization descent. No imported blueprint node states this native normalization.",
+   "via": [
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicIntegralReindexingDescent",
+  "file": "lean/Sheaf/Paper/AdicIntegralReindexingDescent.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_integral_realization_reindexing",
+  "statement": "theorem exists_integral_realization_reindexing (D : FiniteFieldDatum.{u})\n    (d : ∀ T : GeometricSpace D, SpaceData l D T)\n    (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n    (B : RingReindex l T.base.left g.hom (d T).realization (d U).realization) :\n    letI := (d T).units\n    letI := (d U).units\n    ∃ I : ∀ E, IntegralReindex l T.base.left g.hom B E,\n    ∃ c : commonStageDerivedPullback l (PadicAlgCl l) g.hom ⋙\n        ordinary l T.base.left (d T).realization ≅\n      ordinary l U.base.left (d U).realization ⋙ derivedPull l T.base.left g.hom B,\n    ∀ E, integralRealizationAgreement l g.hom (d T).realization (d U).realization\n      B E (I E) c",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "independent cc review: AdicReindexingCore assembly vs FamilyCore fields/item node; 3 new sorry statements vs RingReindex/IntegralReindex/ReindexTensor/compositor specs; FamilyData adaptation vs published original timing (52 s CPU) and compile of all delivered modules plus importer AdicRealizationIsomorphismNormalization against the published FamilyData"
+ }
+}

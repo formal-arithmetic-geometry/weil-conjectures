@@ -1,0 +1,109 @@
+{
+ "id": "lem-sf-adic-coefficient-ring-reindexing",
+ "kind": "statement",
+ "title": "Function-normalized native coefficient-ring reindexing",
+ "statement": "For a prime l, an isomorphism g:X≅Y of schemes and native locally finite adic realizations R on X and S on Y, there is a RingReindex(l,X,g,R,S) [def-sf-native-adic-reindexing-data]. Its coefficient-ring sheaf isomorphism carries every section to the same locally finite continuous function on the unchanged underlying scheme of the site object. No invertibility or finite-type hypothesis is needed for this coefficient-ring assertion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS 6.8.1--6.8.2 and Remark 6.8.15; explicit coefficient-ring part of lem-sf-adic-reindexing-core."
+ },
+ "stmt_deps": [
+  "def-sf-native-adic-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "At every site object use the identity equivalence on the ULift of the subalgebra of locally finite continuous functions. The proved sectionRing_mul helper from NativeScalarForgetting and the native adic multiplication formula identify both products with the pointwise product. Addition and restriction compatibility are reflexivity. Thus these identities define a natural isomorphism of ring-valued presheaves. Full faithfulness of sheafToPresheaf lifts it to the ring-sheaf isomorphism. Its functions formula is reflexivity. The delivered Lean proof is complete.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-sf-native-scalar-forgetting-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-sf-native-scalar-forgetting-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "C4, 2026-10-28: fully proved coefficient construction extracted after generic pushforward optimization, to keep the item compilation comfortably below 60 seconds."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of schemes induces normalized reindexing of adic realization and common stage derived coefficient categories",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.map_reindex, AlgebraicGeometry.AffineSpace.map_reindex_assoc, localCohomology.diagramComp, AlgebraicGeometry.AffineSpace.reindex_comp. No function-normalized native coefficient-ring comparison is stated in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app. No function-normalized native coefficient-ring comparison is stated in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isoSectionwiseModuleInverseImage|RingReindex",
+   "results": "0 hits: . No function-normalized native coefficient-ring comparison is stated in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingCore",
+  "date": "2026-10-28",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation from lem-sf-adic-reindexing-core: its coefficient-ring construction on actual functions. No imported blueprint statement is the same.",
+   "via": [
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCoefficientRingReindexing",
+  "file": "lean/Sheaf/Paper/AdicCoefficientRingReindexing.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_function_normalized_ring_reindex",
+  "statement": "theorem exists_function_normalized_ring_reindex {X Y : Scheme.{u}} (g : X ≅ Y)\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    (S : LocallyFiniteAdicRealization.Realization l Y) :\n    Nonempty (RingReindex l X g.hom R S)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4bf2f",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T205827-L-1622128",
+  "kind": "interface",
+  "note": "independent cc review: AdicReindexingCore assembly vs FamilyCore fields/item node; 3 new sorry statements vs RingReindex/IntegralReindex/ReindexTensor/compositor specs; FamilyData adaptation vs published original timing (52 s CPU) and compile of all delivered modules plus importer AdicRealizationIsomorphismNormalization against the published FamilyData"
+ }
+}
