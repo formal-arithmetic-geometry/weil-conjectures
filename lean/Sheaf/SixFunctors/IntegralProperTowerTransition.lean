@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.SixFunctors.IntegralSystemCanonicalBridge
+import Sheaf.SixFunctors.IntegralProperTowerTransitionCore
+import Sheaf.SixFunctors.IntegralProperTowerTransitionDirect
 
 /-! # Proper realization and its defining projections -/
 
@@ -49,7 +51,24 @@ theorem integralProperTowerTransition (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p
     ∀ n : ℕ,
       (normalizedDVRTowerTransition l E Y D hl n.le_succ).app
           ((coefficientSequenceDerivedRestriction l E Y).obj M) ≫ (a n).hom =
-        (a (n + 1)).hom ≫ sfDirectImageTransition l E p K n := by
-  sorry
+        (a (n + 1)).hom ≫ sfDirectImageTransition l E p K n  := by
+  dsimp only
+  intro n
+  let N := (Operations.push l E o p).obj ((calculus l E X).reduction.obj K)
+  have ht := normalizedTowerEvaluationTransition l E D hl N n
+  have hd := directImageEvaluationTransition l E D hl o p K n
+  dsimp only at hd
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp,
+    NatTrans.comp_app]
+  rw [← Category.assoc, ht]
+  change _ ≫ (normalizedDVRResCompleted l E Y D hl n).map _ = _
+  simp only [Category.assoc]
+  rw [← (normalizedDVRResCompletedComp l E Y D hl n.le_succ).hom.naturality]
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
+  change _ ≫ (normalizedDVRResCompleted l E Y D hl (n + 1)).map _ ≫
+      (normalizedDVRResCompleted l E Y D hl (n + 1)).map _ ≫ _ =
+    _ ≫ (normalizedDVRResCompleted l E Y D hl (n + 1)).map _ ≫
+      (normalizedDVRResCompleted l E Y D hl (n + 1)).map _ ≫ _
+  rw [hd]
 
 end WeilConjectures.IntegralSystemRealization

@@ -1,0 +1,110 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons."
+ },
+ "unit": "sk-thm-sf-compatibility",
+ "chapter": "sec-six-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Primitive tensor reassociation and evaluation comparison.",
+   "via": [
+    "lem-sf-integral-basic-realization"
+   ]
+  }
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralProperTowerTransition",
+  "date": "2026-10-28",
+  "group": "Y7"
+ },
+ "id": "lem-sf-integral-proper-tower-transition-core",
+ "kind": "statement",
+ "title": "Normalized tower transition evaluation core",
+ "statement": "theorem normalizedTowerEvaluationTransition (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {Y : Scheme.{u}} (N : coefficientSequenceDerived l E Y) (n : ℕ) :\n    (normalizedDVRTowerTransition l E Y D hl n.le_succ).app\n        ((coefficientSequenceDerivedRestriction l E Y).obj N) ≫\n      (coefficientRestrictedEvaluationIso l E Y n).hom.app N =\n    (coefficientRestrictedEvaluationIso l E Y (n + 1)).hom.app N ≫\n      (scalarReductionDerivedRestriction l E Y (n + 1)).map\n        ((coefficientSequenceDerivedTransition l E Y n.le_succ).app N) ≫\n      (normalizedDVRResCompletedComp l E Y D hl n.le_succ).hom.app\n        ((coefficientSequenceDerivedEvaluation l E Y n).obj N)",
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "Compute the quotient transition on the strict coefficient system and localize the sectionwise identity through the exact evaluation and restriction functors.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "the normalized restricted-transition calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "the normalized restricted-transition calculation"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralProperTowerTransitionCore",
+  "file": "lean/Sheaf/SixFunctors/IntegralProperTowerTransitionCore.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.normalizedTowerEvaluationTransition",
+  "statement": "theorem normalizedTowerEvaluationTransition (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {Y : Scheme.{u}} (N : coefficientSequenceDerived l E Y) (n : ℕ) :\n    (normalizedDVRTowerTransition l E Y D hl n.le_succ).app\n        ((coefficientSequenceDerivedRestriction l E Y).obj N) ≫\n      (coefficientRestrictedEvaluationIso l E Y n).hom.app N =\n    (coefficientRestrictedEvaluationIso l E Y (n + 1)).hom.app N ≫\n      (scalarReductionDerivedRestriction l E Y (n + 1)).map\n        ((coefficientSequenceDerivedTransition l E Y n.le_succ).app N) ≫\n      (normalizedDVRResCompletedComp l E Y D hl n.le_succ).hom.app\n        ((coefficientSequenceDerivedEvaluation l E Y n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized derived tower transition evaluation restriction naturality",
+   "results": "No exact theorem for the normalized geometric comparison; only generic evaluation and transition lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedTransition_comp\"",
+   "results": "Generic derived transition composition results; no theorem for this direct-image normalization.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDVRTowerTransition.*coefficientRestrictedEvaluationIso",
+   "results": "The local coefficient sequence Roos model contains the lower-level private calculation, but no public theorem matching these declarations.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261027T181015-L-3921514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261027T181015-L-3921514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
