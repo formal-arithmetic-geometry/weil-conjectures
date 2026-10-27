@@ -24,17 +24,6 @@
    "elementary": false
   },
   {
-   "text": "Apply [lem-pur-normalized-scalar-comparison-realization] to the stated $P,Q$, $E\\subset L$ and $f$. It supplies flat-term K-flat finite models, their normalized scalar extensions, the simultaneous association $(x\\otimes a)\\otimes b\\mapsto x\\otimes i_m(a)b$, and the normalized finite pullback and tensor systems. Thus these are the actual quotient systems of the item, with every transition, and all ordinary complexes used below have their derived interpretations.",
-   "uses": [
-    "lem-pur-normalized-scalar-comparison-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-    "place": "Agent re-split assembly step 1; original proof steps 1--2 and 8"
-   }
-  },
-  {
    "text": "For quotientModels obtain d and d0 from coefficientExtensionReductionModel using the given global unit on Y. For each good representative apply stage3-pur-scalar-quotient-association to construct its strict association. Prove uniqueness: transpose a competing map through the ordinary sequence scalar adjunction; equality on the prescribed generators with outer coefficient one determines the transposes. Conjugate finite evaluation by d0.directEvaluation and use sheafified finite tensor-generator extensionality to prove this determination. HomologicalComplex.hom_ext and Iso.ext finish. Evaluate the already proved square at the chosen d0 representatives P,Q for the last conjunct. This completely assembles quotientModels while leaving only the association construction as a new hole. The generator determination is the proved quotientModelSection_hom_ext, isolated in its own compilation unit with the unchanged modelSection definition.",
    "uses": [
     "lem-pur-coefficient-extension-reduction-model",
@@ -66,6 +55,14 @@
     "stage3-pur-scalar-tensor-limit-square"
    ],
    "elementary": false
+  },
+  {
+   "text": "For realizationModels use the source invertibility hypothesis at each of the two locations. Construct the tensor realization by transporting the uniquely strict-Roos-normalized pullbackTensorIntegralTensorModel through the unit-compatible comparison of reduction left adjoints and the transpose-preserving comparison of closed tensors. Apply stage3-pur-scalar-tensor-model-normalization to this explicitly constructed isomorphism, and form the TensorModel structure. The scalar model is primitiveQuotientScalarModelExistence at the same location and calculus. These two independently constructed models give the conjunction. The sole caller supplies the residue-field units from its unchanged invertibility instances. This is a decomposition: only normalization of the constructed tensor remains a new hole.",
+   "uses": [
+    "stage3-pur-scalar-tensor-model-normalization",
+    "lem-trf-primitive-quotient-scalar-model-existence"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -73,20 +70,21 @@
   "stage3-pur-derived-scalar-tensor-normalization",
   "def-trf-integral-comparison-sequence-systems",
   "lem-pur-scalar-tensor-unit",
-  "lem-pur-normalized-scalar-comparison-realization",
   "lem-pur-coefficient-extension-reduction-model",
   "stage3-pur-scalar-quotient-association",
+  "stage3-pur-scalar-quotient-section-extensionality",
   "stage3-pur-scalar-tower-composition",
   "lem-pur-integral-operations-well-defined",
   "lem-pur-integral-operation-roos-effectivity",
   "stage3-pur-scalar-pullback-limit-square",
   "stage3-pur-scalar-tensor-limit-square",
-  "stage3-pur-scalar-quotient-section-extensionality"
+  "stage3-pur-scalar-tensor-model-normalization",
+  "lem-trf-primitive-quotient-scalar-model-existence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex; literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
-  "place": "D2 stage 3: direct generator proofs of strict square and scalar composition, in addition to the existing comparisons_existsUnique, unit, and derivedSigma_existsUnique proofs. Realization models, completed coherence, and quotient association remain the original named holes. No new statements or holes. The proved comparison construction and composition theorem are isolated in self-contained modules after profiling. D3: quotientModels is decomposed into the proved existing reduction-model construction, a new strict-association existence lemma, generator-based uniqueness, and evaluation of the proved square. realizationModels and scalarExtensionTowerCoherence remain unchanged. B4: existing strict and quotient proofs retained; completed coherence assembled from the two limit-coordinate steps by counit naturality."
+  "place": "D2 stage 3: direct generator proofs of strict square and scalar composition, in addition to the existing comparisons_existsUnique, unit, and derivedSigma_existsUnique proofs. Realization models, completed coherence, and quotient association remain the original named holes. No new statements or holes. The proved comparison construction and composition theorem are isolated in self-contained modules after profiling. D3: quotientModels is decomposed into the proved existing reduction-model construction, a new strict-association existence lemma, generator-based uniqueness, and evaluation of the proved square. realizationModels and scalarExtensionTowerCoherence remain unchanged. B4: existing strict and quotient proofs retained; completed coherence assembled from the two limit-coordinate steps by counit naturality. M3: repair tensor presentation tests by whole-system coherence; supply the source invertibility hypothesis in realizationModels; construct the tensor realization explicitly by normalized reference-model transport and assemble both models from the separate tensor normalization and existing scalar-model existence theorem."
  },
  "mathlib_match": null,
  "status": "split",
@@ -266,7 +264,7 @@
   "by": "Q55",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The complete node is rendered by the main derived-reduction theorem together with square, unit, composition, quotientModels and their pure-tensor-normalized canonical adapters. All maps live on actual ringed quotient sequence sites, so equality includes every transition and inverse; the representative-normalized realizations pin the named completed comparisons. Strict comparison data and comparisons_existsUnique are relocated to stage3-pur-normalized-scalar-tower-comparisons and publicly re-exported by this module. The unchanged composition signature is owned by stage3-pur-scalar-tower-composition and publicly re-exported here. Realization data and derivedSigma are unchanged and publicly re-exported from ScalarExtensionTowerRealizationData; the relocated derivedSigma_existsUnique proof is recorded by stage3-pur-derived-scalar-tensor-normalization. The unchanged modelSection and its proved generator extensionality criterion are publicly re-exported from ScalarExtensionQuotientSectionExt, recorded by stage3-pur-scalar-quotient-section-extensionality."
+  "note": "The complete node is rendered by the main derived-reduction theorem together with square, unit, composition, quotientModels and their pure-tensor-normalized canonical adapters. All maps live on actual ringed quotient sequence sites, so equality includes every transition and inverse; the representative-normalized realizations pin the named completed comparisons. Strict comparison data and comparisons_existsUnique are relocated to stage3-pur-normalized-scalar-tower-comparisons and publicly re-exported by this module. The unchanged composition signature is owned by stage3-pur-scalar-tower-composition and publicly re-exported here. Realization data and derivedSigma are unchanged and publicly re-exported from ScalarExtensionTowerRealizationData; the relocated derivedSigma_existsUnique proof is recorded by stage3-pur-derived-scalar-tensor-normalization. The unchanged modelSection and its proved generator extensionality criterion are publicly re-exported from ScalarExtensionQuotientSectionExt, recorded by stage3-pur-scalar-quotient-section-extensionality. M3: realizationModels now includes the source residue-field invertibility hypothesis, already available in its sole caller. Its proof constructs the tensor isomorphism and uses stage3-pur-scalar-tensor-model-normalization plus the existing scalar-model existence theorem. The main scalarExtensionTowerCoherence signature and all strict/quotient proofs remain unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -279,12 +277,12 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-1df29",
-  "group": "B4",
+  "reviewer": "C-6d40f",
+  "group": "M3",
   "result": "fix",
-  "landing": "20261027T180457-L-3864318",
+  "landing": "20261027T210136-L-1662686",
   "kind": "interface",
-  "note": "independent cc review: delivered Lean vs clone item module (verbatim relocations of the TensorModel..derivedSigma block and modelSection/hom_ext); new limit squares vs the original theorem's two equations (exact adjoint transposes); nodes vs Lean; 5 direct importers compiled against delivered modules"
+  "note": "independent cc review: delivered item/RealizationData/caller/new module and node JSONs vs clone main; IsTensorModelNormalized repair vs main IsIntegralComparisonScalarNormalized (J5); new node stmt_deps vs owners of names in its statement"
  },
  "lean_audit": {
   "master": {

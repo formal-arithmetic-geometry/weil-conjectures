@@ -66,7 +66,9 @@ def integralTensorGenerator (W : Scheme.{u})
   integralOperationsTotalTensorSection.{u, u} l E W n P Q p r U x y
 
 /-- Representative normalization of the completed tensor realization, including its
-local tensor formula and its specified Roos comparison.
+local tensor formula and its specified Roos comparison. Both input presentations
+must fix the derived comparison in the whole tower through its adjunction transpose;
+finite derived evaluations alone do not determine that comparison.
 Source: Stacks 06YS, 07A4, 0941 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
 def IsTensorModelNormalized (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
@@ -91,6 +93,8 @@ def IsTensorModelNormalized (W : Scheme.{u})
       P.obj P.property.1 C eC κC →
     CoefficientReductionPresentation.{u, u} l E W S.toCoefficientDerivedSystemReduction
       Q.obj Q.property.1 D eD κD →
+    IsIntegralComparisonPresentationCoherent l E W S P.obj C eC κC →
+    IsIntegralComparisonPresentationCoherent l E W S Q.obj D eD κD →
     ∃ q : (((coefficientSequenceRestriction.{u, u} l E W).mapHomologicalComplex (.up ℤ)).obj
         ((tensor l E W).obj (C, D))).asFunctor ≅
       (integralOperationsTensorTowerFunctor.{u, u} l E W).obj (P.obj, Q.obj),
@@ -128,7 +132,7 @@ structure TensorModel (W : Scheme.{u})
   /-- The named completed tensor, realized by the specified system closed tensor. -/
   realization : integralCompletedTensor.{u, u} l E W ≅ S.reduction.prod S.reduction ⋙
     S.systemClosed.tensor ⋙ coefficientSequenceLimit.{u, u} l E W
-  /-- Normalization at every simultaneous good quotient presentation. -/
+  /-- Normalization at every whole-system coherent good quotient presentation. -/
   normalization : IsTensorModelNormalized l E W S ρ realization
 
 /-- The actual reduction of a completed pullback, followed by the coherent counit.

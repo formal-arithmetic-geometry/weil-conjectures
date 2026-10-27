@@ -1,0 +1,157 @@
+{
+ "id": "stage3-pur-scalar-tensor-model-normalization",
+ "kind": "statement",
+ "title": "Coherent strict quotient normalization of the transported completed tensor",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme W. Let S be a coefficient derived system calculus and rho its normalized total-limit/Roos comparison [def-trf-integral-comparison-realization-models]. Construct tensorModelRealization by taking the uniquely strict-Roos-normalized pullbackTensorIntegralTensorModel [def-pur-completed-pullback-tower-realizations], then transport its two reduction functors through the unique unit-compatible comparison of left adjoints to the same total limit, and its closed tensor through the canonical transpose-preserving comparison [lem-coef-closed-tensor-comparison]. This explicitly constructed natural isomorphism satisfies IsTensorModelNormalized [def-pur-scalar-extension-tower-data]: on every pair of whole-system coherent good strict quotient presentations it has the prescribed local homogeneous tensor formula and the stated whole-system Roos equation. No residue-characteristic, boundedness or constructibility hypothesis on the inputs is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 06YY, 07A4 and 0941; tensor realization portion of original steps 4 and 8 of lem-pur-scalar-extension-tower-coherence. Whole-system coherence is the same correction already made for scalar/pullback models."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-closed-tensor-comparison",
+  "def-pur-scalar-extension-tower-data",
+  "def-pur-completed-pullback-tower-core",
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the uniquely normalized reference tensor realization and its strict quotient/Roos factorization. Its defining comparison is a natural isomorphism on pairs of good representatives and fixes the actual tensor tower, not just evaluated objects.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the input presentations through the left-adjoint comparison from the reference reduction to S.reduction. Its unit equation preserves the whole-system coherence predicate. The coherent quotient-model comparison identifies their derived comparisons with strict ordinary quotient isomorphisms whose finite identifications are precisely kappaC and kappaD.",
+   "uses": [
+    "lem-trf-coherent-quotient-model-comparison",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor these strict quotient isomorphisms and compose with the reference strict tensor-tower comparison. On each homogeneous tensor generator the result is the tensor of the two specified quotient sections. Naturality of finite evaluation and every quotient transition proves that this is an isomorphism of strict towers.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-scalar-extension-tower-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical comparison of closed tensors preserves the common tensor-Hom transpose. Its naturality and the two whole-system coherence equations identify the derived tensor-model factors with the strict tower map just constructed. Naturality and K-injective normalization of the Roos bridge give FiveStepEquation. The defining reference tensor normalization fixes its first factor to integralCompletedTensorComparison. This proves normalization of the explicitly transported realization, without any claim about arbitrary realizations or faithfulness of finite derived evaluations.",
+   "uses": [
+    "lem-coef-closed-tensor-comparison",
+    "def-trf-integral-comparison-realization-models",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-trf-coherent-quotient-model-comparison",
+  "def-trf-integral-comparison-realization-models",
+  "def-pur-scalar-extension-tower-data",
+  "lem-coef-closed-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 06YY, 07A4 and 0941; the original scalar tower tensor-realization step, using the existing uniquely strict-Roos-normalized reference tensor and canonical adjunction transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of completed tensor products obtained by coherent reduction and derived inverse limit",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality and six other adic-completion results; no strict sheaf-system normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the project normalized tensor realization and Mathlib adjunction transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.isoWhiskerLeft",
+   "results": "No result: unqualified identifier not recognized by the service. Local source confirms the whiskering API.",
+   "date": "2026-10-28",
+   "verdict": "Whiskering is formal assembly; it does not prove strict quotient normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniqueness of left adjoints gives a natural isomorphism compatible with tensor Hom adjunctions",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq, unit_leftAdjointUniq_hom_app, homEquiv_leftAdjointUniq_hom_app and composition formulas.",
+   "date": "2026-10-28",
+   "verdict": "Use these for the canonical transport, and retain the strictly smaller tensor normalization step."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorModel|IsIntegralComparisonScalarNormalized; rg completedTensor_global_comparison, pullbackTensorIntegralTensorModel, IsTensorModelNormalized in lean/Sheaf, lean/WeilConjectures and Mathlib",
+   "results": "Found the existing normalized reference tensor in CompletedPullbackTowerRealizations, primitiveQuotientScalarModelExistence and the sole IsTensorModelNormalized definition. No existing theorem establishes its every-coherent-presentation equation.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the normalized reference construction; add only its normalization in the specified arbitrary calculus."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionTowerCoherence",
+  "date": "2026-10-28",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Tensor realization part of scalar-extension tower coherence, original proof step 8.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionTensorModelNormalization",
+  "file": "lean/Sheaf/Paper/ScalarExtensionTensorModelNormalization.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.tensorModelRealization_normalized",
+  "declarations": [
+   "WeilConjectures.ScalarExtensionTower.tensorModelRealization",
+   "WeilConjectures.ScalarExtensionTower.tensorModelRealization_normalized"
+  ],
+  "statement": "theorem tensorModelRealization_normalized (W : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E W)\n    (ρ : IntegralComparisonRoosModel.{u, u} l E W) :\n    IsTensorModelNormalized l E W S ρ (tensorModelRealization l E W S)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6d40f",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261027T210136-L-1662686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6d40f",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261027T210136-L-1662686",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/RealizationData/caller/new module and node JSONs vs clone main; IsTensorModelNormalized repair vs main IsIntegralComparisonScalarNormalized (J5); new node stmt_deps vs owners of names in its statement"
+ }
+}

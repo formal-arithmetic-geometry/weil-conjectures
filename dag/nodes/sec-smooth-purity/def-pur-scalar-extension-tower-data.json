@@ -3,7 +3,7 @@
  "kind": "definition",
  "title": "Strict scalar comparisons and normalized tensor realizations",
  "status": "split",
- "statement": "Fix a prime $\\ell$, finite extensions $E\\subset L$ [def-weil-l-adic-coefficient-extension], schemes and their coefficient sequence systems [def-coef-ringed-sequence-site]. Use the actual sequence pullbacks, quotient scalar maps, scalar action unitors and successive scalar associators [def-trf-integral-comparison-sequence-systems]. Lift these to integer-indexed cochains. Comparisons records natural isomorphisms $\\sigma:S\\operatorname{Tot}\\simeq\\operatorname{Tot}(S,S)$ and $c:f^*\\operatorname{Tot}\\simeq\\operatorname{Tot}(f^*,f^*)$, normalized on every local homogeneous tensor by $b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y)$. The chosen comparisons are the uniquely generator-normalized ones. Define leftRoute as scalar/pullback association, then pullback of $\\sigma$, then $c_L$; define rightRoute as scalar image of $c_E$, then $\\sigma$, then tensor of the two scalar/pullback associations. A TensorModel is a realization of the named completed tensor [def-pur-integral-derived-operations] by reduction, system tensor and total limit, normalized on every strict quotient presentation [def-pur-coefficient-reduction-presentation] by the balanced tensor generators and its fixed Roos bridge [def-trf-integral-comparison-realization-models]. Define scalar, pullback and tensor reduction comparisons by applying coherent reduction to the corresponding realization and then its counit [def-coef-derived-system-calculus-data]. DerivedSigmaModel fixes the derived scalar/tensor comparison on flat-term K-flat systems [def-pc-kflat-complex], [def-pc-flat-sheaf-modules]; derivedSigma is the unique comparison with that normalization. modelSection reads a section in the normalized direct quotient model [def-pur-coefficient-extension-reduction-data]. These definitions include no equality of the two routes or completed coherence theorem.",
+ "statement": "Fix a prime $\\ell$, finite extensions $E\\subset L$ [def-weil-l-adic-coefficient-extension], schemes and their coefficient sequence systems [def-coef-ringed-sequence-site]. Use the actual sequence pullbacks, quotient scalar maps, scalar action unitors and successive scalar associators [def-trf-integral-comparison-sequence-systems]. Lift these to integer-indexed cochains. Comparisons records natural isomorphisms $\\sigma:S\\operatorname{Tot}\\simeq\\operatorname{Tot}(S,S)$ and $c:f^*\\operatorname{Tot}\\simeq\\operatorname{Tot}(f^*,f^*)$, normalized on every local homogeneous tensor by $b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y)$. The chosen comparisons are the uniquely generator-normalized ones. Define leftRoute as scalar/pullback association, then pullback of $\\sigma$, then $c_L$; define rightRoute as scalar image of $c_E$, then $\\sigma$, then tensor of the two scalar/pullback associations. A TensorModel is a realization of the named completed tensor [def-pur-integral-derived-operations] by reduction, system tensor and total limit, normalized on every whole-system coherent strict quotient presentation [def-pur-coefficient-reduction-presentation] by the balanced tensor generators and its fixed Roos bridge [def-trf-integral-comparison-realization-models]. Define scalar, pullback and tensor reduction comparisons by applying coherent reduction to the corresponding realization and then its counit [def-coef-derived-system-calculus-data]. DerivedSigmaModel fixes the derived scalar/tensor comparison on flat-term K-flat systems [def-pc-kflat-complex], [def-pc-flat-sheaf-modules]; derivedSigma is the unique comparison with that normalization. modelSection reads a section in the normalized direct quotient model [def-pur-coefficient-extension-reduction-data]. These definitions include no equality of the two routes or completed coherence theorem. Whole-system coherence means that the double adjunction transpose of each input presentation is the localization of the strict tensor-unit map specified by its quotient identifications, as in the pullback and scalar realization models. Finite derived evaluation alone is not required to detect arbitrary morphisms.",
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension",
   "def-coef-ringed-sequence-site",
@@ -125,7 +125,7 @@
   "by": "Q128",
   "date": "2026-10-23",
   "existing": true,
-  "note": "Definition ownership only: these are existing data/predicates in a theorem module, not objects constructed by that module's theorem. No Lean source is duplicated. X7 performance repair: generic categorical composite predicates and a generic four-field comparison record specialize to the original conditions. FiveStepEquation uses heterogeneous equality; at the fixed original morphism endpoints it is equivalent to equality by heq_iff_eq. tensor has an explicit functor type and unchanged body."
+  "note": "Definition ownership only: these are existing data/predicates in a theorem module, not objects constructed by that module's theorem. No Lean source is duplicated. X7 performance repair: generic categorical composite predicates and a generic four-field comparison record specialize to the original conditions. FiveStepEquation uses heterogeneous equality; at the fixed original morphism endpoints it is equivalent to equality by heq_iff_eq. tensor has an explicit functor type and unchanged body. M3: IsTensorModelNormalized now requires IsIntegralComparisonPresentationCoherent for both input presentations. This matches the corrected scalar and pullback interfaces and removes the false finite-evaluation-only universal normalization."
  },
  "import_flags": [],
  "reviewed": {
@@ -147,18 +147,78 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-1df29",
-  "group": "B4",
+  "reviewer": "C-6d40f",
+  "group": "M3",
   "result": "fix",
-  "landing": "20261027T180457-L-3864318",
+  "landing": "20261027T210136-L-1662686",
   "kind": "interface",
-  "note": "independent cc review: delivered Lean vs clone item module (verbatim relocations of the TensorModel..derivedSigma block and modelSection/hom_ext); new limit squares vs the original theorem's two equations (exact adjoint transposes); nodes vs Lean; 5 direct importers compiled against delivered modules",
-  "sorry_before": [
-   "WeilConjectures.ScalarExtensionTower.realizationModels",
-   "WeilConjectures.ScalarExtensionTower.scalarExtensionTowerCoherence"
-  ],
-  "sorry_after": [
-   "WeilConjectures.ScalarExtensionTower.realizationModels"
+  "note": "independent cc review: delivered item/RealizationData/caller/new module and node JSONs vs clone main; IsTensorModelNormalized repair vs main IsIntegralComparisonScalarNormalized (J5); new node stmt_deps vs owners of names in its statement"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "M3 stage 2",
+  "old_statement": "Fix a prime $\\ell$, finite extensions $E\\subset L$ [def-weil-l-adic-coefficient-extension], schemes and their coefficient sequence systems [def-coef-ringed-sequence-site]. Use the actual sequence pullbacks, quotient scalar maps, scalar action unitors and successive scalar associators [def-trf-integral-comparison-sequence-systems]. Lift these to integer-indexed cochains. Comparisons records natural isomorphisms $\\sigma:S\\operatorname{Tot}\\simeq\\operatorname{Tot}(S,S)$ and $c:f^*\\operatorname{Tot}\\simeq\\operatorname{Tot}(f^*,f^*)$, normalized on every local homogeneous tensor by $b\\otimes(x\\otimes y)\\mapsto(b\\otimes x)\\otimes(1\\otimes y)$. The chosen comparisons are the uniquely generator-normalized ones. Define leftRoute as scalar/pullback association, then pullback of $\\sigma$, then $c_L$; define rightRoute as scalar image of $c_E$, then $\\sigma$, then tensor of the two scalar/pullback associations. A TensorModel is a realization of the named completed tensor [def-pur-integral-derived-operations] by reduction, system tensor and total limit, normalized on every strict quotient presentation [def-pur-coefficient-reduction-presentation] by the balanced tensor generators and its fixed Roos bridge [def-trf-integral-comparison-realization-models]. Define scalar, pullback and tensor reduction comparisons by applying coherent reduction to the corresponding realization and then its counit [def-coef-derived-system-calculus-data]. DerivedSigmaModel fixes the derived scalar/tensor comparison on flat-term K-flat systems [def-pc-kflat-complex], [def-pc-flat-sheaf-modules]; derivedSigma is the unique comparison with that normalization. modelSection reads a section in the normalized direct quotient model [def-pur-coefficient-extension-reduction-data]. These definitions include no equality of the two routes or completed coherence theorem.",
+  "what": "Stage-3 auxiliary-definition repair (the shared statement-change schema requires the author suffix \"stage 2\"). Repair the tensor analogue of the reviewed T6 invisible-presentation-twist defect, already repaired for pullback and scalar models. Require the existing whole-system coherence predicate for each of the two tensor input presentations. Canonical coherent presentations exist for every good input; the coefficient objects, completed tensor, generator formula and Roos equation are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 06YY, 07A4 and 0941: the whole-system adjunction transpose, strict tensor construction and derived Roos comparison. Existing T6 report and J5 scalar-coherence correction."
+  },
+  "citers": [
+   {
+    "id": "stage3-pur-derived-scalar-tensor-normalization",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "stage3-pur-scalar-pullback-limit-square",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "stage3-pur-scalar-tower-composition",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "stage3-pur-normalized-scalar-tower-comparisons",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "lem-pur-completed-comparison-quotient-realization",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "stage3-pur-scalar-quotient-section-extensionality",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "lem-pur-completed-comparison-quotient-normalization",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "lem-pur-completed-comparison-canonical-identification",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "lem-pur-completed-comparison-scalar-limit-image",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "stage3-pur-scalar-tensor-limit-square",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   },
+   {
+    "id": "def-pur-completed-comparison-quotient-realization-data",
+    "holds": true,
+    "note": "The actual operations and comparison equations are unchanged. Tensor models now test whole-system coherent presentations of the two inputs, matching the already repaired scalar and pullback models. Canonical coherent presentations exist for all good inputs; no additional hypothesis is imposed on the input objects."
+   }
   ]
  }
 }

@@ -32,6 +32,8 @@ public import Sheaf.Paper.ScalarExtensionTowerRealizationData
 public import Sheaf.Paper.ScalarExtensionQuotientSectionExt
 import Sheaf.Paper.ScalarTowerPullbackLimitSquare
 import Sheaf.Paper.ScalarTowerTensorLimitSquare
+import Sheaf.Paper.ScalarExtensionTensorModelNormalization
+import Sheaf.Paper.PrimitiveQuotientScalarModelExistence
 import Sheaf.Paper.IntegralOperationRoosEffectivity
 import all Sheaf.Paper.IntegralOperationsWellDefined
 import all Sheaf.Paper.ScalarExtensionTowerComparisonData
@@ -196,17 +198,19 @@ normalized coherent counit. Completed-operation substitution identifies the tens
 limit; scalar extension is its defining strict Roos limit. The K-injective-normalized
 Roos bridge identifies these with total derived limit. The generator formulas fix
 all tower identifications. Universal localization gives the displayed realizations
-and their normalization on every simultaneous presentation. -/
--- STATEMENT-DISPUTED: the scalar-model predicate quantifies over presentations
--- fixed only by finite derived evaluations. Invisible whole-system automorphisms
--- can alter its required limit equation; see the T6 primitive-realization report.
--- The tensor normalization has the same missing whole-system coherence condition.
+and their normalization on every whole-system coherent simultaneous presentation.
+The residue-field unit assumption is the invertibility hypothesis of the source. -/
 theorem realizationModels (W : Bool → Scheme.{u})
-    (ME : CompletedOperations.Models.{u, u} l E W) (ML : CompletedOperations.Models.{u, u} l L W) :
+    (ME : CompletedOperations.Models.{u, u} l E W) (ML : CompletedOperations.Models.{u, u} l L W)
+    (hl : ∀ (a : Bool) (x : W a), IsUnit (l : (W a).residueField x)) :
     ∀ a : Bool, Nonempty (TensorModel l E (W a) (ME.calculus a) (ME.roos a)) ∧
       Nonempty (IntegralComparisonScalarModel.{u, u} l E L ι (W a)
         (ME.calculus a) (ML.roos a)) := by
-  sorry
+  intro a
+  refine ⟨⟨⟨tensorModelRealization l E (W a) (ME.calculus a),
+    tensorModelRealization_normalized l E (W a) (ME.calculus a) (ME.roos a)⟩⟩, ?_⟩
+  exact primitiveQuotientScalarModelExistence l E L ι (W a) (hl a)
+    (ME.calculus a) (ML.roos a)
 
 private theorem reduction_of_limit_square
     {C D : Type*} [Category C] [Category D] {R : C ⥤ D} {G : D ⥤ C}

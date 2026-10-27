@@ -125,9 +125,17 @@ theorem integralScalarPullbackCounit_compatibility
     · exact fun x ↦ isUnit_of_invertible (l : X.residueField x))
   let ME := scalarCounitModels l E (C.coefficient E) W ME₀
   let ML := scalarCounitModels l L (C.coefficient L) W ML₀
-  obtain ⟨TE⟩ := (ScalarExtensionTower.realizationModels l E L ι W ME ML false).1
+  obtain ⟨TE⟩ := (ScalarExtensionTower.realizationModels l E L ι W ME ML (by
+    intro a
+    cases a
+    · exact fun x ↦ isUnit_of_invertible (l : Y.residueField x)
+    · exact fun x ↦ isUnit_of_invertible (l : X.residueField x)) false).1
   obtain ⟨TL⟩ := (ScalarExtensionTower.realizationModels l L L
-    (AlgHom.id ℚ_[l] L) W ML ML false).1
+    (AlgHom.id ℚ_[l] L) W ML ML (by
+      intro a
+      cases a
+      · exact fun x ↦ isUnit_of_invertible (l : Y.residueField x)
+      · exact fun x ↦ isUnit_of_invertible (l : X.residueField x)) false).1
   obtain ⟨hF', _, h, _⟩ := ScalarExtensionTower.scalarExtensionTowerCoherence
     l E L ι W ME ML ((C.scalar E L ι).model X) ((C.scalar E L ι).model Y)
     TE TL f (scalarCounitPrimeUnit l X) (scalarCounitPrimeUnit l Y) K K
