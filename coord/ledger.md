@@ -19582,3 +19582,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:16 L: merged deliver/C2/Sheaf.SixFunctorsBasics.BrownHypotheses (stage 3; reviewer PASS; after a return; landing 20261027T151650-L-1188987 (interface); batch 20261027T151642; modules 3; new nodes 1; change records: coord/changes/C2-brown-specialization-import-pruning.md)
 - 15:16 L: merged deliver/C3/Sheaf.Paper.PodReindexingHomResolutionModel (stage 3; reviewer PASS; first push; landing 20261027T151651-L-1189257 (proof); batch 20261027T151642; modules 1; new nodes 2)
 - 15:16 L: merged deliver/D3/Sheaf.Paper.ScalarExtensionTowerCoherence (stage 3; reviewer PASS; first push; landing 20261027T151652-L-1189535 (interface); batch 20261027T151642; modules 2; new nodes 1)
+- 15:16 L: merged deliver/D4/Sheaf.Paper.ReindexingSystemHomReductionSquare (stage 3; reviewer PASS; first push; landing 20261027T151653-L-1189826 (proof); batch 20261027T151642; modules 1; new nodes 0)
