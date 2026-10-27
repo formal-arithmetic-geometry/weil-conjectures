@@ -37,6 +37,12 @@ chosen representatives. The representative isomorphisms and their inverses trans
 these squares to the derived category; independence of the roofs follows from
 functoriality of the derived localization. -/
 theorem datum_naturality_of_kflat
+    -- STATEMENT-DISPUTED: `SignedSymmetry` constrains `swap` only on literal
+    -- K-flat representatives.  Its `swap` family has no naturality or
+    -- normalization condition at arbitrary derived objects, so changing one
+    -- non-K-flat component by an automorphism preserves `hflat` and all
+    -- structure fields while changing the displayed conclusion.  A valid
+    -- descent theorem needs an additional naturality/transport hypothesis.
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (wE : IntegralFiniteExtension.DualizingDatum l X D hl E)
     (A : Datum D l hl X E wE)
