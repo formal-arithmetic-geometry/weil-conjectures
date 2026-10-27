@@ -1,13 +1,13 @@
 # Work queue
 
-84 items; claim with `tools/claim.py next <group> [--stage N]`.
+85 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (0 clusters, 3821 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 0, stage 3 5 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 0, stage 3 3 items.
 
 ## Stage 1: nodes to split (0)
 
@@ -21,7 +21,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 1138 nodes that below a finished node, not needed, 2 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (82)
+## Stage 3: modules to prove (81)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -60,8 +60,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProperShriekCompSupports` | 14 | 1 | proof | route |
 | `Sheaf.Paper.FiniteCoefficientEtaleLocalEncodingForward` | 14 | 1 | proof | route |
 | `Sheaf.Paper.FiniteCoefficientEtaleLocalEncodingReverse` | 14 | 1 | proof | route |
-| `Sheaf.Paper.FinitePerfectAdicActualNormalization` | 14 | 1 | proof | route |
-| `Sheaf.Paper.FinitePerfectAdicConstantNormalization` | 15 | 1 | proof | route |
 | `Sheaf.Paper.ConstantAdicQuotientModelReduction` | 17 | 1 | proof | route |
 | `Sheaf.Paper.LisseFiniteQuotientEtaleOrigin` | 17 | 1 | proof | route |
 | `Sheaf.Paper.LisseTowerEtaleDescent` | 17 | 1 | proof | route |
@@ -76,7 +74,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.SymmetricProjOrderedTwistLine` | - | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.SymmetricProjSectionCompatibility` | - | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.VaryingRingOrdinaryComparisonNormalization` | - | 1 | proof | route |
-| `Sheaf.Paper.AdicReindexingFunctoriality` | - | 1 | proof | route |
 | `Sheaf.Paper.AmbientComparisonSystemExistence` | - | 1 | proof | route |
 | `Sheaf.Paper.CoefNativeOpenTensorCochains` | - | 1 | proof | route |
 | `Sheaf.Paper.CoefNativeOpenTensorGammaEvaluation` | - | 1 | proof | route |
@@ -90,6 +87,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives` | - | 1 | proof | route |
 | `Sheaf.Paper.FiniteScalarTensorRealizationCoefficientsEquality` | - | 1 | proof | route |
 | `Sheaf.Paper.FiniteScalarTotalTensorIsoComponentEquality` | - | 1 | proof | route |
+| `Sheaf.Paper.IdentityFactorFixedSupport` | - | 1 | proof | route |
+| `Sheaf.Paper.IntrinsicDirectCompositorCoordinates` | - | 1 | proof | route |
 | `Sheaf.Paper.KummerStrictAdjunctCompatibility` | - | 1 | proof | route |
 | `Sheaf.Paper.NormalizedVectorPurityBaseChange` | - | 1 | proof | route |
 | `Sheaf.Paper.PodReindexingHomCoefficientDescent` | - | 21 | proof | route |
