@@ -99,30 +99,36 @@
  ],
  "proof": [
   {
-   "text": "The Over equation identifies a0 with the model structure map. The second projection pointGeometricIso identifies s with Spec(k), and a followed by this isomorphism is a_X. The realization family isomorphism comparison sends the normalized point coefficient unit to the literal point unit.",
+   "text": "Apply Over.w to the geometric base-change morphism. Its target structure map is exactly pointGeometricIso.hom, so geometricMap(a0) followed by this isomorphism is the literal structural map. Apply constructible_compact_support_target_iso to S,c and S',c' with this equation to compare the left functors.",
    "uses": [
-    "lem-sf-adic-qbar-constructible-realization"
+    "lem-sf-constructible-compact-support-target-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Factor compact support for this composite as compact support along a followed by exact isomorphism transport. Compactification and coefficient-system normalization give the same left functor for any displayed systems and compactifications. Transpose this left comparison under their specified ordinary adjunctions. Uniqueness of right adjoints identifies the exceptional images of the corresponding units. Apply rho_X.",
+   "text": "Apply isomorphismFieldTransport to pointGeometricIso.hom. Identify its residue invertibility instances with those supplied by R using subsingleton equality. Its two epsilon isomorphisms identify pullback along the point isomorphism and pullback along its inverse as inverse functors. Equivalence.mk and toAdjunction give the ordinary pullback adjunction. Compose this with S''s displayed adjunction and transport its left functor through the preceding comparison. Uniqueness of right adjoints gives G_{S,c} ≅ (pointGeometricIso.inv)* ⋙ G_{S',c'}.",
    "uses": [
-    "lem-sf-constructible-exceptional-adjunction-coefficients",
-    "prop-compactification-coherence-detailed"
+    "lem-pod-isomorphism-field-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate that natural isomorphism at omega on the geometric model point. R.unit_spec for the inverse point isomorphism identifies its pullback with geometricPointOmega, the normalized unit on literal Spec(k). Map this unit isomorphism through S'.G, compose, and apply rho_X.mapIso. This proves exactly the original Nonempty isomorphism without a native adjunction.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-adic-qbar-constructible-realization",
-  "lem-sf-constructible-exceptional-adjunction-coefficients",
-  "prop-compactification-coherence-detailed"
+  "lem-sf-constructible-compact-support-target-iso",
+  "lem-pod-isomorphism-field-transport",
+  "lem-sf-adic-qbar-constructible-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Final exceptional-adjunction sentence, with the native-derived expansion of lem-sf-weil-native-exceptional-forgetful."
+  "place": "Final exceptional-adjunction sentence and structural specialization; Y3 formalized the point geometry, inverse-pullback adjunction, uniqueness of right adjoints, normalized unit transport and realization. Ordinary compact-support target transport is the named remaining step."
  },
  "lean": {
   "existing": false,
@@ -145,13 +151,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-a9e6c",
-  "group": "A2",
+  "reviewer": "COMPILER",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261025T122433-L-1771219",
+  "landing": "20261027T151752-L-1205031",
   "kind": "interface",
-  "note": "independent cc review: Data module vs published item block (byte-identical diff); item theorem signature vs published; left-models output vs forgetful_representingPair_rightMate hypotheses; node proof_deps vs Lean proof; 5 delivered modules + 2 direct importers compiled (exit 0)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
