@@ -54,6 +54,11 @@ representatives; extension to arbitrary derived objects is a separate step. -/
 -- of the selected calculus. RingedDerivedTensorCoherence.associator_model records the
 -- needed compatibility, but its existence theorem chooses a different closed structure
 -- and tensor model; it does not apply to the arbitrary calculus chosen here.
+-- The missing equation is the associator-model square for the *selected* pair
+-- `(pullbackTensorCalculus l E W).systemClosed` and
+-- `(pullbackTensorCalculus l E W).systemTensorModel`; no declaration in the imported
+-- interface supplies that square. The representative theorem is therefore retained
+-- as a disputed obligation until that interface is repaired.
 theorem completedPullbackTensor_associativity_representatives {X Y : Scheme.{u}}
     (f : X ⟶ Y) (A B C : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
