@@ -66,7 +66,9 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-asd-smooth-generic-direct-image`: A smooth source with locally constant
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-asd-smooth-generic-direct-image`.
+Blueprint `lem-asd-smooth-generic-direct-image`: A smooth source with locally constant
 coefficients.
 
 For a separated smooth morphism of finite type `a : X ⟶ S` to an integral scheme of finite type

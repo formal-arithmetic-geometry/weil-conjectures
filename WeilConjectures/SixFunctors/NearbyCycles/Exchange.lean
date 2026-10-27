@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 
 /-!
 
@@ -37,6 +39,9 @@ unbounded derived categories of module objects (blueprint `det-sp-nearby-cycles-
   `χ_f ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}` (blueprint `det-tf-sp-trace-morphism`), and
   `NearbyCyclesModel.Hom.homEquiv_symm_unit_comp_pushforwardExchange_app`: specialization
   commutes with the adjunction `Lf^* ⊣ Rf_*`.
+- `NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isIso`: a morphism of models whose morphisms
+  of total spaces and of geometric generic fibres are isomorphisms has an invertible pullback
+  exchange.
 
 ## Implementation notes
 
@@ -363,6 +368,26 @@ noncomputable def pullbackExchange :
             (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans ≫
         Functor.whiskerRight (pullbackSquareComparison Λ φ.commSq_ε).hom R((M.j)_*⟦Λ⟧))
       L((M.i)^*⟦Λ⟧)
+
+/-- If the morphisms of total spaces and of geometric generic fibres of a morphism of models are
+isomorphisms, its pullback exchange `α : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` is an isomorphism: the base change
+morphism of the square of geometric generic fibres is invertible by weakly étale base change.
+The morphism of models is the commutative diagram
+```
+X ←─ε── M.generic ──j─→ M.total ←──i── X'
+│f      │φ.generic      │φ.total       │f'
+Y ←─ε── N.generic ──j─→ N.total ←──i── Y'
+```
+-/
+lemma isIso_pullbackExchange_of_isIso [IsIso φ.total] [IsIso φ.generic] :
+    IsIso (φ.pullbackExchange Λ) := by
+  have : IsIso (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
+      (derivedUpperStarLowerStarAdjunction Λ M.j)
+      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans := by
+    have := isIso_baseChangeMap_of_weaklyEtale Λ (IsPullback.of_horiz_isIso φ.commSq_j)
+    rwa [baseChangeMap, Adjunction.exchangeRight_eq_mateEquiv] at this
+  unfold pullbackExchange
+  infer_instance
 
 /-- The *pushforward exchange* `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` of a morphism of models (blueprint
 `det-sp-nearby-cycles-exchanges` (2)): the mate of the pullback exchange `α_f` along the
