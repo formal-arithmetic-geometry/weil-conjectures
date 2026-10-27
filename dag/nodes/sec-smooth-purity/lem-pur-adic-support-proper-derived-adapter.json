@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-adic-support-proper-derived-adapter",
+ "kind": "statement",
+ "title": "Strict-presentation proper derived comparison adapter",
+ "statement": "For a compactification c of g and its strict etale compact-support system S, at every coefficient level n there exists a natural isomorphism from the strict proper-derived level followed by integral exceptional realization on Y to integral exceptional realization on c.Z followed by the etale derived lower-star functor for c.g.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
+  "place": "node thm-pur-adic-reconstruction, proper derived comparison factor"
+ },
+ "stmt_deps": [
+  "def-pur-adic-etale-realization",
+  "lem-pur-adic-etale-derived-right-existence"
+ ],
+ "proof": [
+  {
+   "text": "Transport the published proper derived comparison through the equivalence between its semilinear coefficient presentation and the strict coefficient presentation used by S.properDerived.level n. Compose the transported comparison with the presentation isomorphisms; the resulting natural isomorphism has the displayed source and target.",
+   "uses": [
+    "lem-pur-adic-etale-derived-right-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-adic-etale-derived-right-existence"
+ ],
+ "proof_origin": {
+  "by": "agent A4",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
+  "place": "The proper comparison factor in the compact-support realization proof."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralExceptionalEtaleDerivedRight and properDerived.level presentation adapter",
+   "results": "No existing declaration states the strict-presentation adapter.",
+   "date": "2026-10-28",
+   "verdict": "No exact project declaration; split the adapter."
+  },
+  {
+   "tool": "loogle",
+   "query": "natural isomorphism between strict and semilinear derived coefficient presentations",
+   "results": "No exact normalized comparison found.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport a derived comparison across equivalent coefficient presentations",
+   "results": "Generic equivalence APIs only.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project comparison and presentation equivalences."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalFiniteSupportRealization",
+  "date": "2026-10-28",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-adic-support-realization",
+   "place": "The proper derived comparison factor in the compact-support realization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalFiniteSupportProperComparison",
+  "declaration": "WeilConjectures.integralExceptionalEtaleProperDerivedRight_exists",
+  "declarations": [
+   "WeilConjectures.integralExceptionalEtaleProperDerivedRight_exists"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteSupportProperComparison.lean",
+  "statement": "theorem integralExceptionalEtaleProperDerivedRight_exists (n : ℕ) : ∃ e : (S.properDerived.level n).direct ⋙ (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ≅ (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory ⋙ (Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c.g).rightDerivedFunctor, True",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T231521-L-3768754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T231521-L-3768754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
