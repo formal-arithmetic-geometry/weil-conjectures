@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.DefectCentreMap
+public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeLocal
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 
 /-!
 
@@ -21,11 +23,15 @@ isomorphism on bounded constructible `ℚ̄_ℓ`-complexes
 
 ## Sorried input
 
-`ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth` is the smooth half
-of blueprint `det-sp-nearby-cycles-exchanges` (1), a node of the subsection
-`sk-lem-tf-sp-constant-family`, applied to the smooth morphism of deformation models of blueprint
-`det-sp-dnc-base-change` (3); it is `sorry`ed, to be proved with that node (smooth base change
-`sbc-thm-bounded-derived-smooth-base-change` along the inclusion of the geometric generic fibre).
+`ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth` (the smooth half
+of blueprint `det-sp-nearby-cycles-exchanges` (1), applied to the smooth morphism of deformation
+models of blueprint `det-sp-dnc-base-change` (3)) is reduced, by
+`ProEtale.CondensedRing.NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isIso_baseChangeMap_app`
+and `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth` (locally on the source a smooth
+morphism is étale over an affine space), to smooth base change along the projections
+`𝔸ⁿ_𝒴 ⟶ 𝒴` for the inclusion `j` of the geometric generic fibre,
+`ProEtale.CondensedRing.isIso_baseChangeMap_affineSpace_deformationModel_app`, which is `sorry`ed
+(blueprint `sbc-thm-bounded-derived-smooth-base-change`).
 
 -/
 
@@ -35,7 +41,7 @@ universe u
 
 open CategoryTheory
 
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -44,6 +50,30 @@ open Scheme
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+
+/-- **Smooth base change along affine spaces for the geometric generic fibre** (blueprint
+`sbc-thm-bounded-derived-smooth-base-change`, for the projection `π : 𝔸ⁿ_𝒴 ⟶ 𝒴`): for the inclusion
+`j : 𝒴_Ω ⟶ 𝒴` of the geometric generic fibre of the deformation model `𝒴 = 𝒟_I Y` and the cartesian
+square of `j` along `π`, the base change morphism `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*` is invertible at
+`Lε^* K` for every bounded constructible `ℚ̄_ℓ`-complex `K` on `Y`.
+
+This is the input that remains: `j` is not of finite type (it is a base change of the geometric
+generic point `Spec Ω ⟶ Spec k'⟦t⟧` of the trait), so the finite-type smooth base change
+`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_smooth` does not apply, and the
+homotopy invariance `Rπ_* Lπ^* ≅ id` needed for the projections of affine spaces is not available
+in the formalism of module objects over `condensedRingObj`. -/
+theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (I : Y.left.IdealSheafData) (n : ℕ)
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))}
+    (hK : boundedConstructible _ K) :
+    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ)
+      (IsPullback.of_hasPullback (deformationModel Y I k').j
+        (𝔸(ULift.{u} (Fin n); (deformationModel Y I k').total) ↘
+          (deformationModel Y I k').total)).toCommSq).app
+      ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)) :=
+  sorry
 
 /-- **The smooth exchange of nearby cycles** (blueprint `det-sp-nearby-cycles-exchanges` (1),
 smooth case, for the morphism of deformation models of blueprint `det-sp-dnc-base-change` (3);
@@ -62,7 +92,19 @@ theorem isIso_pullbackExchange_deformationModel_app_of_smooth {X Y : Over (Spec 
     {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))}
     (hK : boundedConstructible _ K) :
-    IsIso ((φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
-  sorry
+    IsIso ((φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app K) := by
+  have : CompactSpace (deformationModel X J k').total :=
+    QuasiCompact.compactSpace_of_compactSpace (deformationTotalToTrait X J k')
+  have : QuasiSeparatedSpace (deformationModel X J k').total :=
+    quasiSeparatedSpace_of_quasiSeparated (deformationTotalToTrait X J k')
+  have hA (n : ℕ) := isIso_baseChangeMap_affineSpace_deformationModel_app k' I n hK
+  have h₁ := φ.isIso_pullbackExchange_app_of_isIso_baseChangeMap_app
+    (Profinite.padicAlgClRingObj ℓ) K
+  have h₂ := isIso_baseChangeMap_app_of_smooth (Profinite.padicAlgClRingObj ℓ) φ.commSq_j hj
+    ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)
+  revert hA h₁ h₂
+  normalize_precoherent
+  intro hA h₁ h₂
+  exact h₁ (h₂ hA)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
