@@ -13,24 +13,25 @@
  ],
  "proof": [
   {
-   "text": "Expand rightAdjointProjectionMap into its unit, tensor comparison, and counit. Apply the ordinary tensor and pullback comparison equations, then paste the unit and counit identities of the proper adjunction. Naturality inserts the coefficient maps of e and t, yielding the displayed projection equality without cartesianness or invertibility.",
+   "text": "Invert canonicalReductionTensorPull by cancelling the tensor of the two reductionPull isomorphisms and the reductionPull isomorphism at the tensor object. Curry this equation to obtain the tensor compatibility hypothesis of rightAdjointProjectionMap_mate.",
    "uses": [
-    "lem-sf-integral-ordinary-canonical-iso-square",
-    "lem-sf-tensor-adjunction-reduction-squares",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+    "lem-sf-canonical-reduction-tensor-pull"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply CategoryTheory.Adjunction.rightAdjointProjectionMap_mate to the ringed and system pull/push adjunctions. The mateEquiv_counit identity identifies the direct-image mate with ordinaryPushReduction. Postcompose by the tensor of the expression coefficient maps, cancel reductionPull.inv followed by reductionPull.hom, and use naturality of properProjection in both variables. Expand only ordinaryReduction, properProjection, and ringedProperProjection to conclude.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-integral-ordinary-canonical-iso-square",
-  "lem-sf-tensor-adjunction-reduction-squares",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-sf-canonical-reduction-tensor-pull"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "V4",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-  "place": "Strict component decomposition of lem-sf-integral-ordinary-exchange-projection-squares."
+  "place": "Projection component, using the existing normalized tensor/pullback coefficient square and the adopted generic adjunction mate theorem."
  },
  "mathlib_searches": [
   {
@@ -99,10 +100,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X7",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261027T181010-L-3920877",
-  "kind": "interface",
+  "landing": "20261027T234343-L-111805",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
