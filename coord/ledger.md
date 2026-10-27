@@ -20406,3 +20406,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/S4/Sheaf.Paper.FiniteFreeScalarDerivedComparison (stage 3; reviewer PASS; first push; landing 20261027T234309-L-91450 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:43 L: merged deliver/S4/Sheaf.Paper.IntegralCompactSupportScalarTensor (stage 3; reviewer PASS; first push; landing 20261027T234310-L-92082 (proof); batch 20261027T233735; modules 1; new nodes 2)
 - 23:43 L: merged deliver/S4/Sheaf.SixFunctors.FiniteDualizingRealizationRestrictionComp (stage 3; reviewer PASS; first push; landing 20261027T234312-L-92682 (interface); batch 20261027T233735; modules 3; new nodes 2)
+- 23:43 L: merged deliver/T1/Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjectiveCore (stage 3; reviewer PASS; first push; landing 20261027T234313-L-93244 (interface); batch 20261027T233735; modules 2; new nodes 1)

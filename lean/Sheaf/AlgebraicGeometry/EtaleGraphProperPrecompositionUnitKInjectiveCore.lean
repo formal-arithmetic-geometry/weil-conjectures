@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleGraphChosenComparisons
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
+import Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjectiveCoreAfterIdentity
 
 /-! # Component of proper-first graph normalization
 
@@ -80,6 +81,8 @@ theorem graph_proper_precomposition_unit_component_on_complex
           (lowerStar (ModuleCat.{u + 1} A) c.g)).app
         ((HomotopyCategory.quotient
           (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)).obj K) := by
-  sorry
+  apply (cancel_epi (𝟙 _)).1
+  exact graph_proper_precomposition_unit_component_on_complex_after_identity
+    A q v hf c τ hτ K
 
 end AlgebraicGeometry.Etale
