@@ -12,6 +12,7 @@ import Sheaf.Paper.NativeDirectImageSections
 import Sheaf.CategoryTheory.EquivalenceAdjunctionComparison
 import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetMonoidalAdjunction
 import WeilConjectures.CategoryTheory.Sites.SheafComposeBraided
+import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 
 /-! # Native locally finite coefficient transport
 
