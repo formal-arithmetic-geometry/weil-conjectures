@@ -6,6 +6,7 @@ module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.TateTwist
+import Sheaf.WeilSheaf.SmoothDualizingVanishing
 
 /-! # Concentration of native smooth dualizing purity
 
@@ -18,7 +19,7 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry.WeilComplex
 
@@ -54,6 +55,18 @@ theorem smooth_dualizing_concentration
         (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).obj.IsGE (-2 * (d : ℤ))) ∧
     ((J.obj (WeilSheaf.toComplex.obj
         (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).obj.IsLE (-2 * (d : ℤ))) := by
-  sorry
+  let K := J.obj (WeilSheaf.toComplex.obj
+    (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))
+  let b : ℤ := -2 * (d : ℤ)
+  have hz : ∀ i : ℤ, i ≠ b → IsZero ((homologySheaf i).obj K) := by
+    intro i hi
+    exact smooth_dualizing_homology_vanishing J adj d i (by simpa [b] using hi)
+  have hge : K.obj.IsGE b :=
+    (_root_.DerivedCategory.isGE_iff K.obj b).2 (fun i hi ↦
+      (isZero_homologySheaf_obj_iff i K).1 (hz i (ne_of_lt hi)))
+  have hle : K.obj.IsLE b :=
+    (_root_.DerivedCategory.isLE_iff K.obj b).2 (fun i hi ↦
+      (isZero_homologySheaf_obj_iff i K).1 (hz i (ne_of_gt hi)))
+  exact ⟨by simpa [K, b] using hge, by simpa [K, b] using hle⟩
 
 end AlgebraicGeometry.WeilComplex

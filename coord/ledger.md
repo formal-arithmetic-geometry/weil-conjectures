@@ -20010,3 +20010,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:00 L: merged deliver/H8/Sheaf.SixFunctors.IntegralSystemProperOpenTransportCore (stage 3; reviewer PASS; first push; landing 20261027T210032-L-1649330 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:00 L: merged deliver/H8/Sheaf.WeilSheaf.SmoothDualizingCohomology (stage 3; reviewer PASS; first push; landing 20261027T210051-L-1651872 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:00 L: merged deliver/H9/Sheaf.SixFunctors.IntegralSystemProperOpenTransportPasting (stage 3; reviewer PASS; first push; landing 20261027T210052-L-1652256 (proof); batch 20261027T205736; modules 1; new nodes 0)
+- 21:00 L: merged deliver/H9/Sheaf.WeilSheaf.SmoothDualizingConcentration (stage 3; reviewer PASS; first push; landing 20261027T210053-L-1652721 (interface); batch 20261027T205736; modules 2; new nodes 1)
