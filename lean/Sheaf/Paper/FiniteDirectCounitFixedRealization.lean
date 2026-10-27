@@ -6,6 +6,7 @@ Authors: SHEAF group P6
 module
 
 public import Sheaf.Paper.FiniteProjectionFixedCoordinates
+import Sheaf.Paper.FiniteDirectCounitFixedRealizationTransport
 
 /-! # Direct counit in fixed coefficients
 
@@ -52,6 +53,23 @@ theorem directCounit_fixed_realization (S : SixFunctorFiniteOperations D C E n h
         ((coordinates (C := C) (E := E) (n := n) (hn := hn) X).obj K) =
     (coordinates (C := C) (E := E) (n := n) (hn := hn) X).map
       ((S.finite.pullDirectAdjunction f).counit.app K) := by
-  sorry
+  obtain ⟨a, haL, haR⟩ := S.finiteDirectAdjunctionNormalization f
+  rw [directCounit_coordinate_transport S f K]
+  have h := congrArg
+    (fun t ↦ (realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.map
+      ((S.finitePullback f).hom.app ((S.finite.direct f).obj K) ≫ t))
+    (a.counit K)
+  have hc :
+      (S.finitePullback f).hom.app ((S.finite.direct f).obj K) ≫
+          (S.finitePullback f).inv.app ((S.finite.direct f).obj K) ≫
+        (intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι.map
+          ((S.finite.pullDirectAdjunction f).counit.app K) =
+      (intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι.map
+        ((S.finite.pullDirectAdjunction f).counit.app K) := by
+    rw [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  rw [haL, haR] at h
+  rw [hc] at h
+  simpa only [coordinates, Functor.comp_map, Functor.comp_obj, Category.assoc,
+    Iso.hom_inv_id_app, Category.comp_id, Category.id_comp] using h
 
 end WeilConjectures.CompactSupportFiniteProjection

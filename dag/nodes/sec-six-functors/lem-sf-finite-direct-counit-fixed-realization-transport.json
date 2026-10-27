@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-finite-direct-counit-fixed-realization-transport",
+ "kind": "statement",
+ "title": "Transport fixed-coordinate direct counit to the intrinsic coefficient adjunction",
+ "statement": "The composite fixed-coordinate counit is the inverse realization of the normalized intrinsic pullback, direct-image comparison, and constant-module adjunction counit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proper-factor paragraph: finite coefficient normalization in the direct counit calculation"
+ },
+ "stmt_deps": [
+  "def-sf-finite-projection-fixed-coordinates",
+  "def-fix-six-functor-datum"
+ ],
+ "proof": [
+  {
+   "text": "Expand fixedPullRealization, directCoordinates, and fixedAdjunction through the coefficient realization and the normalized intrinsic derived adjunction; cancel the comparison units and counits by naturality and the triangle identities.",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-sf-finite-projection-fixed-coordinates",
+    "def-sf-operation-stages",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-finite-projection-fixed-coordinates",
+  "def-sf-operation-stages",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "finite coefficient normalization in the proper-factor direct counit calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adjunction counit naturality and equivalence triangle identity for derived coefficient realization",
+   "results": "Generic adjunction and equivalence identities are available, but no theorem packages this prescribed finite-coordinate transport.",
+   "date": "2026-10-28",
+   "verdict": "The split statement records the missing normalization calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Iso.hom_inv_id_app Category.assoc Adjunction.counit",
+   "results": "Only generic cancellation lemmas found; no specialized coefficient realization theorem.",
+   "date": "2026-10-28",
+   "verdict": "Use generic cancellation in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "directCounit_coordinate_transport sfIntrinsicDerivedDirectImageComparison fixedPullRealization",
+   "results": "The named constructions occur in the finite projection coordinate modules; no existing transport declaration was found.",
+   "date": "2026-10-28",
+   "verdict": "This is a new split-off declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDirectCounitFixedRealization",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-direct-counit-fixed-realization",
+   "place": "finite coefficient normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDirectCounitFixedRealizationTransport",
+  "file": "lean/Sheaf/Paper/FiniteDirectCounitFixedRealizationTransport.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.directCounit_coordinate_transport",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.directCounit_coordinate_transport"
+  ],
+  "statement": "theorem directCounit_coordinate_transport (S : SixFunctorFiniteOperations D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    (K : sixFunctorFiniteCategory D C E n hn X) :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    (fixedPullRealization S f ((S.finite.direct f).obj K)).hom ≫\n      (fixedDerivedPull (C := C) (E := E) (n := n) f).map\n        (directCoordinates S f K).hom ≫\n      (fixedAdjunction (C := C) (E := E) (n := n) f).counit.app\n        ((coordinates (C := C) (E := E) (n := n) (hn := hn) X).obj K) =\n    (realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.map\n      ((S.finitePullback f).hom.app ((S.finite.direct f).obj K) ≫\n        (sfIntrinsicPullback (Padic.coefficientExtensionRing C.l E n)\n          f.hom.left).mapDerivedCategory.map\n          ((S.finiteDirectImage f).hom.app K) ≫\n        ((sfIntrinsicConstantModuleAdjunction f.hom.left\n          (Padic.coefficientExtensionRing C.l E n)).mapDerivedCategoryRightDerivedAdjunction\n          ).counit.app\n          ((intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι.obj K))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T180502-L-3865829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T180502-L-3865829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
