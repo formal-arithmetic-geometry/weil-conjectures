@@ -1,0 +1,134 @@
+{
+ "id": "lem-sp-recorded-open-scalar-fixed-normalization",
+ "kind": "statement",
+ "title": "The recorded open scalar comparison has its fixed-module realization normalization",
+ "statement": "Let A and B be finite commutative unital rings, φ:A→B, and j:X→Z an open immersion. On the entire unbounded derived category of fixed pro-etale modules over ULift A, let E_A,E_B be intrinsic realization, s_X,s_Z the specified scalarPresentation comparisons [def-sp-et-proet-coefficient-transport], and o_A,o_B the open realization comparisons [def-finite-compact-scalar-coordinates]. The recorded open coefficient arrow reductionOpenScalarIso [def-sp-reduction-direct-image-comparison], followed by intrinsic B-open extension of s_X and o_B, equals scalar extension of o_A, followed by s_Z evaluated on fixed A-open extension, followed by E_B of OpenScalarSite.scalarOpen [lem-sp-open-scalar-site-coherence]. No direct image, compactification, etale-origin or boundedness hypothesis occurs.",
+ "stmt_deps": [
+  "def-sp-et-proet-coefficient-transport",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-proetale-inverse-image",
+  "def-finite-compact-scalar-coordinates",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-sp-open-scalar-site-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; open factor of Step 1 of lem-sp-recorded-compact-scalar-fixed-normalization. Realization, adjunction and derived-unit arguments use Stacks Tags 00YV, 03DI, 03D3, 0D6E and 07A6."
+ },
+ "proof": [
+  {
+   "text": "The scalar presentation and realizationScalarIso satisfy the same scalar-unit equation. The defining right square of scalarPresentation is the conjugate of the derived section-identity realization/restriction square. Expand the conjugate, use unit naturality and cancel the realization triangles. Apply the proved realization scalar-unit equation, then injectivity of the scalar Hom bijection to identify the two left-adjoint uniqueness isomorphisms.",
+   "uses": [
+    "def-sp-et-proet-coefficient-transport",
+    "lem-finite-open-scalar-realization-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intrinsic scalar transpose of sfOpenRestrictionDerived equals reductionOpenScalarIso: apply the scalar Hom equivalence, use the recorded open scalar counit square and the scalar triangle identities. The fixed scalar transpose equals OpenScalarSite.scalarOpen: descend the ordinary fixed open-unit equation termwise and apply the composite-left-adjoint uniqueness unit equation.",
+   "uses": [
+    "lem-sp-open-scalar-counit-square",
+    "lem-finite-open-scalar-site-transport",
+    "lem-sp-open-scalar-site-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply fixedOpenScalar_realization_transport on an arbitrary fixed-module complex, substitute these three identifications and postcompose with the B-open realization isomorphism. Its inverse cancels, giving precisely the asserted square.",
+   "uses": [
+    "lem-finite-open-scalar-realization-transport",
+    "def-finite-compact-scalar-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-et-proet-coefficient-transport",
+  "lem-finite-open-scalar-realization-transport",
+  "lem-sp-open-scalar-counit-square",
+  "lem-finite-open-scalar-site-transport",
+  "lem-sp-open-scalar-site-coherence",
+  "def-finite-compact-scalar-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; open factor of Step 1 of lem-sp-recorded-compact-scalar-fixed-normalization. Realization, adjunction and derived-unit arguments use Stacks Tags 00YV, 03DI, 03D3, 0D6E and 07A6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories preserves scalar adjunction mates and their composition with extension by zero",
+   "results": "8 hits, including mateEquiv and Equivalence.toAdjunction; no theorem for the specified intrinsic and fixed derived presentation comparisons.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project comparison theorems with adjunction identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of adjunction mates along equivalences commutes with pasting natural transformations",
+   "results": "8 hits, including mateEquiv_apply, iterated_mateEquiv_conjugateEquiv and mateEquiv_vcomp; no prescribed realization normalization.",
+   "date": "2026-10-28",
+   "verdict": "Generic mate identities apply only after proving the normalized coordinate squares."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|whisker)|mateEquiv_(comp|whisker)",
+   "results": "15 Mathlib hits in Adjunction.Mates and Monoidal.Closed.Functor. Project searches locate FiniteOpenScalarRealizationTransport and FiniteRealizationScalarMate, whose scalar transposes require the coordinate identifications proved here.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the project restriction cubes and Mathlib naturality and uniqueness identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RecordedCompactScalarNormalization",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: open realization factor of the recorded compact scalar normalization.",
+   "via": [
+    "lem-sp-recorded-compact-scalar-fixed-normalization",
+    "lem-sp-transported-compact-scalar-site-square",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RecordedOpenScalarNormalization",
+  "file": "lean/Sheaf/Paper/RecordedOpenScalarNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.recordedOpenScalar_fixed_normalization",
+  "statement": "theorem recordedOpenScalar_fixed_normalization\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (K : DerivedCategory\n      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :\n    (reductionOpenScalarIso φ j).hom.app\n          ((sfIntrinsicDerivedEquivalence X A).functor.obj K) ≫\n        (sfIntrinsicExtensionByZero j B).mapDerivedCategory.map\n          ((scalarPresentation φ X).hom.app K) ≫\n        (FiniteCompactScalar.openRealizationIso B j).hom.app\n          ((liftedScalarExtension φ X).obj K) =\n      (scalarExtensionFunctor φ Z).map\n          ((FiniteCompactScalar.openRealizationIso A j).hom.app K) ≫\n        (scalarPresentation φ Z).hom.app\n          ((openImmersionLowerShriek\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.obj K) ≫\n        (sfIntrinsicDerivedEquivalence Z B).functor.map\n          ((OpenScalarSite.scalarOpen (uliftRingHom φ) j).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T180650-L-3888016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T180650-L-3888016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

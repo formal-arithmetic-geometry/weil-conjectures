@@ -1,0 +1,124 @@
+{
+ "id": "lem-sp-recorded-proper-scalar-fixed-normalization",
+ "kind": "statement",
+ "title": "The recorded geometric scalar mate has its fixed-module realization normalization",
+ "statement": "Let A and B be finite commutative unital rings, φ:A→B, and g:Z→Y any morphism of schemes. Write E_A,E_B for fixed-module intrinsic realization and use exactly scalarPresentation and directImagePresentation [def-sp-et-proet-coefficient-transport]. On every unbounded fixed pro-etale derived A-module K, directImageScalarComparison [def-sp-direct-image-scalar-adjunction-mate] on E_A(K), followed by the B-direct image of scalarPresentation at Z and directImagePresentation for B, equals scalar extension of directImagePresentation for A, followed by scalarPresentation at Y on Rg_*K, followed by E_B of the fixed geometric mate of scalarPullbackProEtaleIso [lem-sfb-scalar-site-comparison-normalized-data]. This is the direct-image factor alone: no open extension, support functor, compactification or boundedness assumption occurs, and no scalar mate is inverted.",
+ "stmt_deps": [
+  "def-sp-et-proet-coefficient-transport",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-proetale-inverse-image",
+  "def-sp-direct-image-scalar-adjunction-mate",
+  "lem-sfb-scalar-site-comparison-normalized-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; proper factor of Step 1 of lem-sp-recorded-compact-scalar-fixed-normalization. Realization, adjunction and derived-unit arguments use Stacks Tags 00YV, 03DI, 03D3, 0D6E and 07A6."
+ },
+ "proof": [
+  {
+   "text": "Use the proved recordedRestriction_directImage_cube: it compares the recorded ring-sheaf direct-image presentation with fixed-module scalar restriction, by the prescribed ordinary section identities and derived-unit normalizations.",
+   "uses": [
+    "lem-sp-recorded-restriction-direct-image-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the resulting cube under the scalar adjunctions, using realizationScalar_unit and scalarTranspose_realization_cube. Identify realizationScalarIso with scalarPresentation by the proved open-factor coordinate helper. The intrinsic transpose is directImageScalarComparison by the scalar clause of properScalarCounitSquare. The iterated-mates identity scalarTranspose_inverse_mate identifies the fixed transpose with the geometric mate of scalarPullbackProEtaleIso. This yields the displayed square on every K.",
+   "uses": [
+    "lem-finite-realization-mate-algebra",
+    "lem-sp-proper-scalar-counit-square",
+    "lem-sp-recorded-open-scalar-fixed-normalization",
+    "def-sp-proetale-scalar-pullback-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-recorded-restriction-direct-image-normalization",
+  "lem-finite-realization-mate-algebra",
+  "lem-sp-proper-scalar-counit-square",
+  "lem-sp-recorded-open-scalar-fixed-normalization",
+  "def-sp-proetale-scalar-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; proper factor of Step 1 of lem-sp-recorded-compact-scalar-fixed-normalization. Realization, adjunction and derived-unit arguments use Stacks Tags 00YV, 03DI, 03D3, 0D6E and 07A6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories preserves scalar adjunction mates and their composition with extension by zero",
+   "results": "8 hits, including mateEquiv and Equivalence.toAdjunction; no theorem for the specified intrinsic and fixed derived presentation comparisons.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project comparison theorems with adjunction identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of adjunction mates along equivalences commutes with pasting natural transformations",
+   "results": "8 hits, including mateEquiv_apply, iterated_mateEquiv_conjugateEquiv and mateEquiv_vcomp; no prescribed realization normalization.",
+   "date": "2026-10-28",
+   "verdict": "Generic mate identities apply only after proving the normalized coordinate squares."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|whisker)|mateEquiv_(comp|whisker)",
+   "results": "15 Mathlib hits in Adjunction.Mates and Monoidal.Closed.Functor. Project searches locate FiniteOpenScalarRealizationTransport and FiniteRealizationScalarMate, whose scalar transposes require the coordinate identifications proved here.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the project restriction cubes and Mathlib naturality and uniqueness identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RecordedCompactScalarNormalization",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: proper realization factor of the recorded compact scalar normalization.",
+   "via": [
+    "lem-sp-recorded-compact-scalar-fixed-normalization",
+    "lem-sp-transported-compact-scalar-site-square",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RecordedProperScalarNormalization",
+  "file": "lean/Sheaf/Paper/RecordedProperScalarNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.recordedProperScalar_fixed_normalization",
+  "statement": "theorem recordedProperScalar_fixed_normalization\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)\n    (K : DerivedCategory\n      (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :\n    (directImageScalarComparison φ g).app\n          ((sfIntrinsicDerivedEquivalence Z A).functor.obj K) ≫\n        (directImageConstantPush B g).map ((scalarPresentation φ Z).hom.app K) ≫\n        (directImagePresentation B g).hom.app ((liftedScalarExtension φ Z).obj K) =\n      (scalarExtensionFunctor φ Y).map ((directImagePresentation A g).hom.app K) ≫\n        (scalarPresentation φ Y).hom.app\n          ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).rightDerivedFunctor.obj K) ≫\n        (sfIntrinsicDerivedEquivalence Y B).functor.map\n          ((mateEquiv\n            (derivedUpperStarLowerStarAdjunction\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g)\n            (derivedUpperStarLowerStarAdjunction\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) g)\n            (TwoSquare.mk _ _ _ _\n              (scalarPullbackProEtaleIso (uliftRingHom φ) g).hom)).natTrans.app K)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T180650-L-3888016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T180650-L-3888016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

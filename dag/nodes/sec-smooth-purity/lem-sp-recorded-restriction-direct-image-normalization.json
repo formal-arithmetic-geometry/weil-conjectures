@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-recorded-restriction-direct-image-normalization",
+ "kind": "statement",
+ "title": "Scalar restriction commutes with the recorded direct-image presentation",
+ "statement": "Let A and B be finite commutative unital rings, φ:A→B and g:Z→Y a morphism of schemes. For every unbounded fixed pro-etale derived B-module L, the A-direct image of realizationRestrictionIso at Z, followed by directImagePresentation for A on the scalar restriction of L, followed by A-realization of fixedScalarRestrictionDirectImage, equals directImageScalarRestrictionIso on B-realization of L, followed by intrinsic scalar restriction of directImagePresentation for B, followed by realizationRestrictionIso at Y on the B-direct image of L. Use exactly the recorded presentations [def-sp-et-proet-coefficient-transport], the intrinsic restriction comparisons [lem-weil-pbc-ring-sheaf-change-adjunction], and the fixed scalar restriction comparison [lem-weil-proetale-direct-image-restriction-of-scalars]. This is the scalar-restriction face alone; it contains no scalar extension mate, open extension, compactification or properness hypothesis.",
+ "stmt_deps": [
+  "def-sp-et-proet-coefficient-transport",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-finite-realization-restriction-cube"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 00YV, 03D3, 0D6E, 0D6J and 07A6; restriction face of the proper-factor normalization of the recorded compact scalar comparison."
+ },
+ "proof": [
+  {
+   "text": "The unit-normalized openSquarePullbackModel is the left-adjoint uniqueness comparison induced by the section-identity isomorphism of the two ordinary direct images. Its recorded right-adjoint uniqueness comparison is therefore that section-identity isomorphism; prove this by the adjunction Hom bijection, counit naturality and the two inverse identities.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "def-sp-et-proet-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary ring-sheaf restriction comparison is the ordinary section-pushforward comparison conjugated by these two section-identity isomorphisms. Its defining section equation gives uniqueness. Transfer the inverse direct-image realization normalization through the derived model isomorphism, using naturality and compatibility of rightDerivedFunctorNatIso with derived units. Paste these normalizations with the normalized ring-sheaf restriction square and the fixed scalar restriction square. The existing ordinary realization/restriction cube supplies the ordinary face; the proved normalized derived cube then gives the corresponding cube for directImagePresentation.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-finite-realization-ordinary-restriction-cube",
+    "lem-finite-realization-direct-image-unit-normalization",
+    "lem-finite-fixed-scalar-restriction-unit-normalization",
+    "lem-finite-realization-restriction-cube"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-open-square-exchange",
+  "def-sp-et-proet-coefficient-transport",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-finite-realization-ordinary-restriction-cube",
+  "lem-finite-realization-direct-image-unit-normalization",
+  "lem-finite-fixed-scalar-restriction-unit-normalization",
+  "lem-finite-realization-restriction-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 00YV, 03D3, 0D6E, 0D6J and 07A6; restriction face of the proper-factor normalization of the recorded compact scalar comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories preserves scalar adjunction mates and their composition with extension by zero",
+   "results": "8 hits, including mateEquiv and Equivalence.toAdjunction; no theorem for the specified intrinsic and fixed derived presentation comparisons.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project comparison theorems with adjunction identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of adjunction mates along equivalences commutes with pasting natural transformations",
+   "results": "8 hits, including mateEquiv_apply, iterated_mateEquiv_conjugateEquiv and mateEquiv_vcomp; no prescribed realization normalization.",
+   "date": "2026-10-28",
+   "verdict": "Generic mate identities apply only after proving the normalized coordinate squares."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|whisker)|mateEquiv_(comp|whisker)",
+   "results": "15 Mathlib hits in Adjunction.Mates and Monoidal.Closed.Functor. Project searches locate FiniteOpenScalarRealizationTransport and FiniteRealizationScalarMate, whose scalar transposes require the coordinate identifications proved here.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the project restriction cubes and Mathlib naturality and uniqueness identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RecordedCompactScalarNormalization",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Recorded ring-sheaf direct-image restriction cube, used to prove the proper scalar factor.",
+   "via": [
+    "lem-sp-recorded-proper-scalar-fixed-normalization",
+    "lem-sp-recorded-compact-scalar-fixed-normalization",
+    "lem-sp-transported-compact-scalar-site-square",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RecordedRestrictionNormalization",
+  "file": "lean/Sheaf/Paper/RecordedRestrictionNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.recordedRestriction_directImage_cube",
+  "statement": "theorem recordedRestriction_directImage_cube\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)\n    (L : DerivedCategory\n      (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))) :\n    (directImageConstantPush A g).map\n        ((FiniteCompactScalar.realizationRestrictionIso φ Z).hom.app L) ≫\n      (directImagePresentation A g).hom.app\n        ((@Sheaf.derivedRestrictScalars.{u} Z.ProEt inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) (ProEt.topology Z)\n          (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance\n          (uliftRingHom φ)).obj L) ≫\n      (sfIntrinsicDerivedEquivalence Y A).functor.map\n        ((fixedScalarRestrictionDirectImage (uliftRingHom φ) g).hom.app L) =\n    (directImageScalarRestrictionIso φ g).hom.app\n        ((sfIntrinsicDerivedEquivalence Z B).functor.obj L) ≫\n      (scalarRestriction φ Y).map ((directImagePresentation B g).hom.app L) ≫\n      (FiniteCompactScalar.realizationRestrictionIso φ Y).hom.app\n        ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) g).rightDerivedFunctor.obj L)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T180650-L-3888016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T180650-L-3888016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

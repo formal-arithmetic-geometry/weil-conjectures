@@ -22,34 +22,32 @@
  },
  "proof": [
   {
-   "text": "Apply the fully faithful intrinsic realization functor at Y to identify the fixed-module composite γ after J_A followed by R_B(s) with transport of the recorded intrinsic reduction comparison. The fully faithful preimage equation expands its image as the scalar presentation inverse, support presentation inverse, recorded arrow, scalar presentation hom and support presentation hom. For the proper factor, the direct-image presentation changes adjunction coordinates by the unique pullback comparison preserving units, followed by the K-injective-normalized realization comparison. Transpose under the geometric adjunction: the resulting counit equation is precisely that of the fixed-module proper scalar mate. For the open factor, cancel the realization unit in supportPresentation. The open coordinate isomorphism is left-adjoint uniqueness, hence its scalar map agrees with reductionOpenScalarIso by equality of their open-unit transposes. The section-identity comparison defining scalarPresentation preserves the scalar adjunction units, so these proper and open identifications paste without an extra automorphism. Cancel the realization unit/counit pairs and use faithfulness to descend equality. This proves the equality of natural transformations by extensionality; only presentation isomorphisms have been inverted, never a coefficient mate. No change of site is involved in this step.",
+   "text": "Use recordedProperScalar_fixed_normalization for c.g and recordedOpenScalar_fixed_normalization for c.i, on arbitrary fixed-module inputs. These identify the two factors in the same specified scalarPresentation and directImagePresentation coordinates. They require no properness, etale-origin or boundedness hypothesis.",
    "uses": [
-    "def-sp-et-proet-coefficient-transport",
-    "def-sp-reduction-direct-image-comparison",
-    "lem-sf-compact-support-restriction-of-scalars",
-    "lem-trf-open-square-exchange",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-mate-pasting",
-    "lem-sp-open-scalar-site-coherence",
-    "lem-sfb-scalar-site-comparison-normalized-data"
+    "lem-sp-recorded-proper-scalar-fixed-normalization",
+    "lem-sp-recorded-open-scalar-fixed-normalization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand supportPresentation as direct image of the open realization comparison followed by directImagePresentation, and reductionDirectImageComparison as its proper and open factors. The private categorical pasting calculation first applies the open square inside the B-direct image. Naturality of the B-direct-image presentation on the fixed open scalar arrow and naturality of the intrinsic proper scalar arrow on the A-open realization map move the two factors into position; apply the proper square. Functoriality and associativity identify this composite with realization of the fixed proper/open arrow. Apply the fully faithful realization on natural transformations to the transported arrow. The defining preimage equation gives the conjugated intrinsic arrow; substitute the pasted square and cancel scalarPresentation.inv with its hom and scalar extension of supportPresentation.inv with its hom. Faithfulness gives the desired equality. Only presentation isomorphisms are canceled, never a scalar mate.",
+   "uses": [
+    "def-sp-et-proet-coefficient-transport",
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sp-recorded-proper-scalar-fixed-normalization",
+  "lem-sp-recorded-open-scalar-fixed-normalization",
   "def-sp-et-proet-coefficient-transport",
-  "def-sp-reduction-direct-image-comparison",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "lem-trf-open-square-exchange",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-mate-pasting",
-  "lem-sp-open-scalar-site-coherence",
-  "lem-sfb-scalar-site-comparison-normalized-data"
+  "def-sp-reduction-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper/open factorization; the agent-written realization normalization of Step 3 of lem-sp-transported-compact-scalar-site-square, expanding the Charts paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md."
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper/open factorization; explicit realization-factor pasting and faithful-preimage cancellation by J3, 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -120,9 +118,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261027T112447-L-1586418",
+  "landing": "20261027T180650-L-3888016",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
