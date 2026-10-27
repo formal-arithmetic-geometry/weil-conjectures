@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantNormalization
 public import Sheaf.Paper.FinitePerfectAdicStalkModels
-import Sheaf.Paper.FinitePerfectAdicActualLevels
 import Sheaf.Paper.FinitePerfectAdicActualRealization
 
 /-! # The actual-quotient half of a finite perfect normalization diagram
@@ -136,9 +135,8 @@ theorem finitePerfectAdic_actual_normalization
     (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n))
     (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) :
     Nonempty (FinitePerfectAdicActualNormalization X d M V T) := by
-  obtain ⟨L⟩ := finitePerfectAdic_actual_levels X d φ hφ hcompat M V T hperfect hmark
-  obtain ⟨R⟩ := finitePerfectAdic_actual_realization X d φ hφ hcompat M V T L
-    hperfect hmark
+  obtain ⟨L, ⟨R⟩⟩ :=
+    finitePerfectAdic_actual_realization X d φ hφ hcompat M V T hperfect hmark
   exact ⟨{
     K := L.K
     boundedK := L.boundedK

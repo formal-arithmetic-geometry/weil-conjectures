@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-scalar-model",
+ "kind": "statement",
+ "title": "Constant algebraic quotient models under explicit scalar realization",
+ "statement": "For X,d,V,T as in [def-weil-pbc-finite-perfect-adic-tower-data], with every T.level n perfect, the explicit realization [def-weil-pbc-finite-perfect-adic-scalar-realization] of the etale constant T.level n is isomorphic to the specified completed constant model on each W. The comparisons intertwine the specified consecutive constant arrows with the model diagram arrows using the scalar compositor [lem-weil-pbc-finite-perfect-adic-scalar-coherence]. This assertion has no actual quotient system M or descended etale K.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, the constant algebraic quotient model; Modules on Sites Tags 093J--093M and Cohomology on Sites Tag 06YY."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-scalar-realization",
+  "lem-weil-pbc-finite-perfect-adic-scalar-coherence",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Represent a perfect level by a bounded finite projective complex. Constants, universe transport and restriction commute on the representatives. The locally bijective finite scalar unit identifies associated fixed-ring modules with actual finite-ring modules. Completed constant flatness and canonical finite quotient identification identify the latter with completed extension of the underlying A-complex.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each constant pure tensor, the two consecutive comparisons send the generator to the same section. Consecutive projection compatibility and associativity of restriction prove the normalized arrow square. Pass the equality through sheafification, total complexes and derived localization.",
+   "uses": [
+    "lem-weil-pbc-finite-perfect-adic-scalar-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-finite-perfect-adic-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, the constant algebraic quotient model; Modules on Sites Tags 093J--093M and Cohomology on Sites Tag 06YY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalarsComp|restrictScalars.*[Cc]omp|restrictScalarsId",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary scalar restriction and sheafification APIs apply; no complete derived slice realization and normalized comparison matching this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary scalar restriction and sheafification APIs apply; no complete derived slice realization and normalized comparison matching this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of modules on a ringed site commutes with composition and localization to the derived category",
+   "results": "8 hits: SheafOfModules.restrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_mapFree_inv_assoc, PresheafOfModules.restrictScalarsCompToPresheaf.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary scalar restriction and sheafification APIs apply; no complete derived slice realization and normalized comparison matching this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of scalars for module sheaves commutes with localization and realizes finite coefficient complexes",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, SheafOfModules.restrictScalars, RestrictScalars, IsLocalizedModule.of_restrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.Tilde.toOpen, LocalizedModule.restrictScalars_map_eq.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary scalar restriction and sheafification APIs apply; no complete derived slice realization and normalized comparison matching this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Cc]hange|[Cc]hange.*constantSheaf",
+   "results": "0 hits: .",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary etale algebras, constant sheaves, completion and condensed constants do not state this normalized derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realization of constant perfect quotient complexes under completed scalar extension and finite coefficient sheafification",
+   "results": "8 hits: CategoryTheory.constantSheaf, LinearMap.IsPerfPair.restrictScalars_of_field, CondensedSet.LocallyConstant.functorFullyFaithful, LightCondensed.IsDiscrete, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.IsConstant.mk, instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences.",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary etale algebras, constant sheaves, completion and condensed constants do not state this normalized derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant perfect complexes over quotient rings realized as module sheaves over completed scalar rings",
+   "results": "8 hits: BDeRhamPlus, CondensedMod, Condensed.profiniteFree, CondensedMod.LocallyConstant.functor, AdicCompletion, LightCondMod.LocallyConstant.functor, localCohomology.ringModIdeals, localCohomology.diagram.",
+   "date": "2026-10-27",
+   "verdict": "No exact match: ordinary etale algebras, constant sheaves, completion and condensed constants do not state this normalized derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicActualRealization",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Finite-extension proof: finite quotient descent and realization in the connected adic-lisse argument (Stacks Tag 09C6).",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-actual-realization",
+    "lem-weil-pbc-finite-perfect-adic-actual-normalization",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicScalarModel",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicScalarModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicScalar_model",
+  "statement": "theorem finitePerfectAdicScalar_model\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (V : X.Etale) (T : FinitePerfectAdicAlgebraTower d)\n    (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n)) :\n    ∃ model : ∀ (U : V.left.ProEt) (W : X.ProEt)\n    (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ),\n    (finitePerfectAdicScalarRealization X d V U W f n).obj\n        ((localProEtaleComparison U.hom (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))).obj\n          (finitePerfectAdicEtaleConstant V.left T n)) ≅\n      (finitePerfectAdicModelDiagram X d W T).obj (op n),\n      ∀ (U : V.left.ProEt) (W : X.ProEt)\n    (f : W ⟶ finitePerfectAdicChartObject V U) (n : ℕ),\n    (finitePerfectAdicScalarRealization X d V U W f (n + 1)).map (localProEtaleNormalization U.hom\n        (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))\n        (finitePerfectAdicEtaleConstantTransition V.left T n)) ≫\n      (finitePerfectAdicScalarCoherence X d V U W f n).hom.app\n        ((localProEtaleComparison U.hom (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))).obj\n          (finitePerfectAdicEtaleConstant V.left T n)) ≫\n      (model U W f n).hom =\n    (model U W f (n + 1)).hom ≫\n      (finitePerfectAdicModelDiagram X d W T).map (homOfLE (Nat.le_succ n)).op",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-52f7a",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261027T210227-L-1674906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-52f7a",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261027T210227-L-1674906",
+  "kind": "interface",
+  "note": "independent cc review: ∃L repair of finitePerfectAdic_actual_realization (old ∀L false: L phantom in M) and its assembly from the explicit realization, proved compositor, level-descent and scalar-model holes, checked against the clone's LevelData/RealizationData/TowerData and the node records; Normalization adaptation and its importer (3b OK)"
+ }
+}

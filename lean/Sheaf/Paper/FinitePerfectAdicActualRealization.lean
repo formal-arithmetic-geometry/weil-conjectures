@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicActualLevels
 public import Sheaf.Paper.FinitePerfectAdicStalkModels
+import Sheaf.Paper.FinitePerfectAdicActualLevelDescent
+import Sheaf.Paper.FinitePerfectAdicScalarModel
 
 /-! # Realization of the actual finite quotient levels
 
@@ -76,8 +78,12 @@ structure FinitePerfectAdicActualRealizationData
       (finitePerfectAdicModelDiagram X d W T).map (homOfLE (Nat.le_succ n)).op
 
 /-- The descended actual levels admit scalar realization and both normalized comparison
-systems. This is the coefficient restriction and tensor-balancing part of Tags 06YY and
-09C6, applied to the levelwise data L.
+systems. The etale levels are chosen together with their actual descent comparison.
+Source: the coefficient restriction and tensor-balancing part of Tags 06YY and 09C6.
+Proof: combine the explicit exact realization and its canonical scalar compositor with
+the actual descent theorem and the independent constant-model comparison. The actual
+descent theorem chooses the levels together with their comparison, rather than
+asserting that arbitrary stalkwise models descend M.
 (blueprint: lem-weil-pbc-finite-perfect-adic-actual-realization). -/
 theorem finitePerfectAdic_actual_realization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
@@ -86,9 +92,19 @@ theorem finitePerfectAdic_actual_realization
     (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
     (T : FinitePerfectAdicAlgebraTower d)
-    (L : FinitePerfectAdicActualLevelData X d M V T)
     (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n))
     (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) :
-    Nonempty (FinitePerfectAdicActualRealizationData X d M V T L) := by sorry
+    ∃ L : FinitePerfectAdicActualLevelData X d M V T,
+      Nonempty (FinitePerfectAdicActualRealizationData X d M V T L) := by
+  obtain ⟨L, ⟨hL⟩⟩ :=
+    finitePerfectAdic_actual_level_descent X d φ hφ hcompat M V T hperfect hmark
+  obtain ⟨model, hmodel⟩ := finitePerfectAdicScalar_model X d V T hperfect
+  exact ⟨L, ⟨{
+    realization := finitePerfectAdicScalarRealization X d V
+    scalar := finitePerfectAdicScalarCoherence X d V
+    actual := hL.actual
+    model := model
+    actual_normalized := hL.actual_normalized
+    model_normalized := hmodel }⟩⟩
 
 end AlgebraicGeometry.Scheme
