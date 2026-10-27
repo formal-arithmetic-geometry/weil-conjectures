@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-relative-proj-chart-scalar",
+ "kind": "statement",
+ "title": "Base coefficients in a relative Proj chart",
+ "statement": "Let S be a scheme, A a graded algebra datum [def-nagata-relative-proj], U an affine base open, r a section of O_S on U, and x a point of the U Proj chart above U. Pull r back along the relative Proj structural map and then its chart inclusion. Evaluation at x, as an element of the ordinary localization at the homogeneous prime x, is algebraMap(r)/1. This asserts only a structure-sheaf section identity.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01ME and 01NQ, structural morphism on affine Proj charts"
+ },
+ "stmt_deps": [
+  "def-nagata-relative-proj",
+  "def-nagata-affine-proj"
+ ],
+ "proof": [
+  {
+   "text": "The relative Proj chart followed by its structural map is the affine Proj structural map followed by the inclusion of U.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand toSpecOfAlgebra and toSpecZero. The latter uses fromZeroRingHom and awayToSection on D_+(1), which is the whole Proj. Cancel the section isomorphisms for open subschemes. The pointwise awayToSection formula is further localization, and IsLocalization.map_eq shows that a/1 maps to a/1. This gives the asserted coefficient identity.",
+   "uses": [
+    "def-nagata-affine-proj"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-relative-proj-exists",
+  "def-nagata-affine-proj"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01ME and 01NQ, structural morphism on affine Proj charts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative Proj twist gluing; base coefficients as constant homogeneous fractions; linear symmetric degree-one section",
+   "results": "Absolute Proj chart maps, basicOpenToSpec_app_top, and SymmetricAlgebra.ι; no relative twist descent or packaged normalized section map.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue twisting sheaves on relative Proj and their canonical degree one sections",
+   "results": "Absolute Proj awayToSection, awayι, fromOfGlobalSections; no relative twist descent.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relProj.*[Tt]wist|[Tt]wist.*relProj|unitToTwist|toSpecOfAlgebra",
+   "results": "Source structural maps, unitToTwist pointwise formula, generic module descent; no theorem with this interface.",
+   "date": "2026-10-27",
+   "verdict": "components used; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SymmetricProjGluedSections",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 1--3, open-base part of step 9, and step 11. This child isolates original steps 1, 2, 3, 4, 5, 6, 7, 8, 11: Normalized degree-one symmetric Proj quotient and affine descent. This child handles Normalized twist descent: Tags 01ME and 01NQ, structural morphism on affine Proj charts.",
+   "via": [
+    "lem-trf-symmetric-proj-glued-sections",
+    "lem-trf-symmetric-proj-affine-comparison",
+    "lem-trf-symmetric-proj-normalized-descent",
+    "lem-trf-symmetric-proj-tautological-chart-gluing",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjChartScalar",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjChartScalar.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.chart_scalar_value",
+  "statement": "theorem chart_scalar_value {S : Scheme.{u}} (A : S.GradedAlgebraData)\n    (U : S.affineOpens) (r : Γ(S, U.1))\n    (x : A.relProjι U ⁻¹ᵁ (A.relProjHom ⁻¹ᵁ U.1)) :\n    (((A.relProjι U).app (A.relProjHom ⁻¹ᵁ U.1)\n      (A.relProjHom.app U.1 r)).1 x).val =\n        Localization.mk (algebraMap Γ(S, U.1) (A.obj U) r) 1",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.AlgebraicGeometry.SymmetricProjGluedSections",
+  "worker": "stage3",
+  "summary": "Isolate a genuine step of normalized twist descent; edge cases and its exact interface are checked in report.md.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 1--3, open-base part of step 9, and step 11. This child isolates original steps 1, 2, 3, 4, 5, 6, 7, 8, 11: Normalized degree-one symmetric Proj quotient and affine descent. This child handles Normalized twist descent: Tags 01ME and 01NQ, structural morphism on affine Proj charts.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Only the chart structural-map identity is used, as a generic relative Proj calculation; no unit step is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T180539-L-3874322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T180539-L-3874322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
