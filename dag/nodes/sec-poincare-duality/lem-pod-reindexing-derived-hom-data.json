@@ -1,0 +1,123 @@
+{
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Expanded tensor/Hom comparison subargument of the item proof."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image along an equivalence preserves tensor and internal Hom sheaves",
+   "results": "No exact combined theorem; the local comparison is supplied by inverseImage_tensor_hom_iso.",
+   "date": "2026-10-27",
+   "verdict": "use existing project theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "?F.obj (?tensor ?M ?N) ≅ ?tensor (?F.obj ?M) (?F.obj ?N)",
+   "results": "No exact project-independent match.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*map|derivedInternalHomOfUniverses.*comparison",
+   "results": "Existing Hom-complex and localization APIs were inspected in the imported project modules.",
+   "date": "2026-10-27",
+   "verdict": "use the recorded APIs"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-hom-resolution-model",
+   "place": "Steps 4 and 7--8, separated as a strictly smaller tensor and underived Hom comparison.",
+   "via": [
+    "lem-pod-reindexing-hom-resolution-model"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingHomResolutionModel",
+  "date": "2026-10-27",
+  "group": "C3"
+ },
+ "id": "lem-pod-reindexing-derived-hom-data",
+ "title": "Derived Hom-complex and localization comparison data",
+ "statement": "theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] [EssentiallySmall.{u+1} X.ProEt] [EssentiallySmall.{u+1} Y.ProEt] (s : Option ℕ) (η : ∀ M N : podReindexingModules l E Y s, (podReindexingFunctor l E g s).obj (SheafOfModules.homObj (J := ProEt.topology Y) (R := podReindexingRing l E Y s) M N) ≅ SheafOfModules.homObj (J := ProEt.topology X) (R := podReindexingRing l E X s) ((podReindexingFunctor l E g s).obj M) ((podReindexingFunctor l E g s).obj N)) : ∃ χ : ∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (_hI : I.IsKInjective), (podReindexingComplexFunctor l E g s).obj (homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I) ≅ homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I), ∃ δ : podReindexingDerivedHom l E Y s ⋙ podReindexingDerivedFunctor l E g s ≅ ((podReindexingDerivedFunctor l E g s).op.prod (podReindexingDerivedFunctor l E g s)) ⋙ podReindexingDerivedHom l E X s, (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) (r p : ℤ), (χ K I hI).hom.f r ≫ homComplexπ.{u+1,u,u+1,u+1} (R := podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I) r p (p+r) rfl = (podReindexingFunctor l E g s).map (homComplexπ.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I r p (p+r) rfl) ≫ (η (K.X p) (I.X (p+r))).hom) ∧ (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) (hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'), (podReindexingComplexFunctor l E g s).map (((podReindexingHom l E Y s).map a.op).app I ≫ ((podReindexingHom l E Y s).obj (op K')).map b) ≫ (χ K' I' hI').hom = (χ K I hI).hom ≫ ((podReindexingHom l E X s).map ((podReindexingComplexFunctor l E g s).map a).op).app ((podReindexingComplexFunctor l E g s).obj I) ≫ ((podReindexingHom l E X s).obj (op ((podReindexingComplexFunctor l E g s).obj K'))).map ((podReindexingComplexFunctor l E g s).map b)) ∧ (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ) (_hI : I.IsKInjective) (_hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'), QuasiIso a → QuasiIso b → QuasiIso ((podReindexingComplexFunctor l E g s).map (((podReindexingHom l E Y s).map a.op).app I ≫ ((podReindexingHom l E Y s).obj (op K')).map b))) ∧ (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective), ∃ hFI : CochainComplex.IsKInjective ((podReindexingComplexFunctor l E g s).obj I), δ.hom.app (op ((podReindexingQ l E Y s).obj K), (podReindexingQ l E Y s).obj I) = (podReindexingDerivedFunctor l E g s).map (@podReindexingHomModel l _ E _ _ _ Y s K I hI).hom ≫ (podReindexingDerivedFactors l E g s).hom.app (homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I) ≫ (podReindexingQ l E X s).map (χ K I hI).hom ≫ (@podReindexingHomModel l _ E _ _ _ X s ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I) hFI).inv ≫ ((podReindexingDerivedHom l E X s).mapIso (((podReindexingDerivedFactors l E g s).app K).op.prod ((podReindexingDerivedFactors l E g s).app I).symm)).hom)",
+ "stmt_deps": [
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "For each degree, reindex the product Hom factors and use the ordinary Hom comparison from the tensor/Hom data. Product projections prove the signed differential and joint naturality. Transport quasi-isomorphisms and K-injective resolutions through the exact equivalence, then descend through the derived internal-Hom localization and the canonical `podReindexingHomModel`; this is strictly the derived portion of the parent theorem.",
+   "uses": [
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "lem-pur-rhom-well-defined",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Expanded tensor/Hom comparison subargument of the item proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-rhom-well-defined",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "C3 stage 3 decomposition",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Expanded tensor/Hom comparison subargument of the item proof."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingHomResolutionModel",
+  "file": "lean/Sheaf/Paper/PodReindexingHomResolutionModel.lean",
+  "declaration": "WeilConjectures.podReindexing_derived_hom_data",
+  "declarations": [
+   "WeilConjectures.podReindexing_derived_hom_data"
+  ],
+  "statement": "theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] [EssentiallySmall.{u+1} X.ProEt] [EssentiallySmall.{u+1} Y.ProEt] (s : Option ℕ) (η : ∀ M N : podReindexingModules l E Y s, (podReindexingFunctor l E g s).obj (SheafOfModules.homObj (J := ProEt.topology Y) (R := podReindexingRing l E Y s) M N) ≅ SheafOfModules.homObj (J := ProEt.topology X) (R := podReindexingRing l E X s) ((podReindexingFunctor l E g s).obj M) ((podReindexingFunctor l E g s).obj N)) : ∃ χ : ∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (_hI : I.IsKInjective), (podReindexingComplexFunctor l E g s).obj (homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I) ≅ homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I), ∃ δ : podReindexingDerivedHom l E Y s ⋙ podReindexingDerivedFunctor l E g s ≅ ((podReindexingDerivedFunctor l E g s).op.prod (podReindexingDerivedFunctor l E g s)) ⋙ podReindexingDerivedHom l E X s, (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) (r p : ℤ), (χ K I hI).hom.f r ≫ homComplexπ.{u+1,u,u+1,u+1} (R := podReindexingRing l E X s) ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I) r p (p+r) rfl = (podReindexingFunctor l E g s).map (homComplexπ.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I r p (p+r) rfl) ≫ (η (K.X p) (I.X (p+r))).hom) ∧ (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) (hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'), (podReindexingComplexFunctor l E g s).map (((podReindexingHom l E Y s).map a.op).app I ≫ ((podReindexingHom l E Y s).obj (op K')).map b) ≫ (χ K' I' hI').hom = (χ K I hI).hom ≫ ((podReindexingHom l E X s).map ((podReindexingComplexFunctor l E g s).map a).op).app ((podReindexingComplexFunctor l E g s).obj I) ≫ ((podReindexingHom l E X s).obj (op ((podReindexingComplexFunctor l E g s).obj K'))).map ((podReindexingComplexFunctor l E g s).map b)) ∧ (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ) (_hI : I.IsKInjective) (_hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'), QuasiIso a → QuasiIso b → QuasiIso ((podReindexingComplexFunctor l E g s).map (((podReindexingHom l E Y s).map a.op).app I ≫ ((podReindexingHom l E Y s).obj (op K')).map b))) ∧ (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective), ∃ hFI : CochainComplex.IsKInjective ((podReindexingComplexFunctor l E g s).obj I), δ.hom.app (op ((podReindexingQ l E Y s).obj K), (podReindexingQ l E Y s).obj I) = (podReindexingDerivedFunctor l E g s).map (@podReindexingHomModel l _ E _ _ _ Y s K I hI).hom ≫ (podReindexingDerivedFactors l E g s).hom.app (homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I) ≫ (podReindexingQ l E X s).map (χ K I hI).hom ≫ (@podReindexingHomModel l _ E _ _ _ X s ((podReindexingComplexFunctor l E g s).obj K) ((podReindexingComplexFunctor l E g s).obj I) hFI).inv ≫ ((podReindexingDerivedHom l E X s).mapIso (((podReindexingDerivedFactors l E g s).app K).op.prod ((podReindexingDerivedFactors l E g s).app I).symm)).hom)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T151651-L-1189257",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T151651-L-1189257",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
