@@ -199,6 +199,30 @@ variable (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
   (Sfg : System P.coefficients.l P.coefficients.Qbar P.field
     P.coefficients.different (f := f ≫ g))
 
+/-- Existence of the finite-stage common compact-support compositor.
+Source: proof Steps 4--6 (blueprint: lem-pur-rational-common-support-composition-existence).
+The construction conjugates the rational support compositor by the three counit-normalized
+finite-stage comparisons and descends the resulting natural isomorphism. -/
+theorem commonSupportComposition_exists :
+    ∃ c : (Sf.ring.operation cf .closed).F ⋙ (Sg.ring.operation cg .closed).F ≅
+        (Sfg.ring.operation cfg .closed).F,
+      ∀ (i : Index P.coefficients.l P.coefficients.Qbar)
+        (K : Stage P.coefficients.l P.coefficients.Qbar X i),
+        (c.hom.app ⟨i,K⟩) =
+          (Sg.ring.operation cg .closed).F.map ((Sf.common.commonComparison cf i).q.inv.app K) ≫
+          (Sg.common.commonComparison cg i).q.inv.app
+            ((Sf.ring.operation cf (.rational
+              (commonField P.coefficients.l P.coefficients.Qbar i))).F.obj K) ≫
+          (GeneralAlgebraicallyClosedCoefficients.inclusion (Y := Z) i).map
+            (by
+              have e := rationalSupportComposition P f g cf cg cfg Sf Sg Sfg
+                (commonField P.coefficients.l P.coefficients.Qbar i)
+              have t := e.hom.app K
+              exact (commonCategory_eq P Z i) ▸ t) ≫
+          (Sfg.common.commonComparison cfg i).q.hom.app K := by
+  sorry
+
+
 /-- The common-stage support compositor is uniquely fixed by the rational compositor
 and the counit-normalized inclusion comparisons. This does not use purity.
 Source: proof Steps 4--6 (blueprint: def-pur-rational-purity-common-comparisons).
@@ -224,7 +248,14 @@ theorem commonSupportComposition_existsUnique :
               have t := e.hom.app K
               exact (commonCategory_eq P Z i) ▸ t) ≫
           (Sfg.common.commonComparison cfg i).q.hom.app K := by
-  sorry
+  obtain ⟨c, hc⟩ := commonSupportComposition_exists P f g cf cg cfg Sf Sg Sfg
+  refine ⟨c, hc, ?_⟩
+  intro d hd
+  apply Iso.ext
+  apply NatTrans.ext
+  funext j
+  rcases j with ⟨i, K⟩
+  exact (hd i K).trans (hc i K).symm
 
 /-- The specified common-stage compact-support compositor.
 Source: proof Step 6 (blueprint: def-pur-rational-purity-common-comparisons). -/
