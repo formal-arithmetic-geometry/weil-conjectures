@@ -19702,3 +19702,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:05 L: merged deliver/E1/Sheaf.Paper.FinitePullbackTensorFixedCoordinates (stage 3; reviewer PASS; first push; landing 20261027T180533-L-3872094 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:05 L: merged deliver/E2/Sheaf.Paper.FiniteSectionIntegratedSpecialization (stage 3; reviewer PASS; first push; landing 20261027T180534-L-3872725 (interface); batch 20261027T180444; modules 4; new nodes 3)
 - 18:05 L: merged deliver/E2/Sheaf.Paper.IdentityFactorCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261027T180536-L-3873089 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:05 L: merged deliver/E3/Sheaf.Paper.FiniteSmoothOrdinaryTwistedCocycles (stage 3; reviewer PASS; first push; landing 20261027T180537-L-3873605 (interface); batch 20261027T180444; modules 3; new nodes 2)

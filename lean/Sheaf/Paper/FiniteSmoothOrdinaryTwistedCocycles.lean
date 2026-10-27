@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Paper.FiniteSmoothCoefficientArrows
+import Sheaf.Paper.FiniteSmoothOrdinaryTwistCocycle
+import Sheaf.Paper.FiniteSmoothPuritySourceCocycle
 
 /-! # FiniteSmoothOrdinaryTwistedCocycles
 
@@ -95,7 +97,10 @@ theorem finiteSmoothOrdinaryTwistedCocycles
       (finiteSource ell n f d)
       (finiteLambda ell hmr f d (twists r m (hn.trans hnm) hmr))
       (finiteLambda ell hnm f d (twists m n hn hnm))
-      (finiteLambda ell (hnm.trans hmr) f d (twists r n hn (hnm.trans hmr))) K) := by sorry
+      (finiteLambda ell (hnm.trans hmr) f d (twists r n hn (hnm.trans hmr))) K) := by
+  constructor
+  · exact ordinaryTwistCocycle ell f d hY twists
+  · exact puritySourceCocycle ell f d hY twists hpull
 
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity
