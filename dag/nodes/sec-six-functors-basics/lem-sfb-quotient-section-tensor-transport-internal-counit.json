@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-quotient-section-tensor-transport-internal-counit",
+ "kind": "statement",
+ "title": "Pasting the internal scalar tensor counit square",
+ "statement": "Under normalized scalar data, an internal tensorator, its compatible section conjugate and an ordinary scalar-unit tensor formula, the two localization-counit paths agree on section images of internal flat-term K-flat complexes. Compare their separate evaluations against the explicit internal scalar-total path and cancel the input.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4, lemma-pullback-tensor-product; ordinary scalar balancing: literature/stacks-project/sites-modules.tex, change-of-rings functor and tensor product sheaf, Tag 03EL."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the derived-side and ordinary-side evaluations. Both give scalarTensorSectionPath.",
+   "uses": [
+    "lem-sfb-quotient-section-tensor-transport-internal-left",
+    "lem-sfb-quotient-section-tensor-transport-internal-right"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "scalarTensorSectionInput is a composite of isomorphisms, so cancel it from the equal evaluations.",
+   "uses": [
+    "def-sfb-quotient-section-tensor-transport-internal-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-section-tensor-transport-internal-left",
+  "lem-sfb-quotient-section-tensor-transport-internal-right",
+  "def-sfb-quotient-section-tensor-transport-internal-data"
+ ],
+ "proof_origin": {
+  "by": "Y3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4, lemma-pullback-tensor-product; ordinary scalar balancing: literature/stacks-project/sites-modules.tex, change-of-rings functor and tensor product sheaf, Tag 03EL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The localization counit for extension of scalars on sheaves is compatible with tensor products and the termwise equivalence to internal modules",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.moduleLid, IsLocalizedModule.rTensor, IsLocalization.moduleTensorEquiv, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.Away.tensorEquiv, IsLocalizedModule.map_lTensor, IsLocalization.tensor",
+   "date": "2026-10-27",
+   "verdict": "No specialized section scalar evaluation; use the project normalization interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorComparison\"",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No specialized section scalar evaluation; use the project normalization interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|TensorRepresentativeNormalization|mapBifunctorComparison",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean, Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean, Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean, Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/Characterization.lean",
+   "date": "2026-10-27",
+   "verdict": "No specialized section scalar evaluation; use the project normalization interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportNormalizedTotal",
+  "date": "2026-10-28",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-normalized-total",
+   "place": "Tags 06YY and 07A4, lemma-pullback-tensor-product; ordinary scalar balancing: literature/stacks-project/sites-modules.tex, change-of-rings functor and tensor product sheaf, Tag 03EL.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTransportInternalCounit",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTransportInternalCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_internal_counit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_internal_counit"
+  ],
+  "statement": "theorem section_tensor_transport_internal_counit (T : Scheme.{u}) (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c) (b : TensorIso a T) (hb : TensorNormalized a T b) (barB : tensor Λ T ⋙ c.model.T ≅ (c.model.T.prod c.model.T) ⋙ tensor Λ' T) [PreservesColimitsOfSize.{0, 0} c.model.E] (hbarB : TensorSectionCondition a T c b barB) (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶ (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj (curriedTensor (modules Λ' T))) (he : ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) (s : (ring Λ' T).obj.obj W), (((e.app M).app N).val.app W) (sectionScalarElement a T c (M ⊗ N) W (sectionPureTensor Λ T M N W m n) s) = sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W (sectionScalarElement a T c M W m 1) (sectionScalarElement a T c N W n s)) : ∀ P Q : CochainComplex (Modules Λ T) ℤ, let EP := ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P let EQ := ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q CochainComplex.IsKFlatIndependentCoefficients (R := ring Λ T) EP → CochainComplex.IsKFlatIndependentCoefficients (R := ring Λ T) EQ → (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T) (R := ring Λ T) (EP.X i)) → (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T) (R := ring Λ T) (EQ.X i)) → barB.hom.app (DerivedCategory.Q.obj EP, DerivedCategory.Q.obj EQ) ≫ (tensor Λ' T).map (Prod.mkHom (c.model.ε.app EP) (c.model.ε.app EQ)) ≫ (qTensor Λ' T).app ((c.model.E.mapHomologicalComplex (.up ℤ)).obj EP, (c.model.E.mapHomologicalComplex (.up ℤ)).obj EQ) = c.model.T.map ((qTensor Λ T).app (EP, EQ)) ≫ c.model.ε.app ((totalTensor Λ T).obj (EP, EQ)) ≫ DerivedCategory.Q.map (HomologicalComplex.mapBifunctorComparison e (.up ℤ) EP EQ)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f6f1a",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T210317-L-1687664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f6f1a",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T210317-L-1687664",
+  "kind": "interface",
+  "note": "independent cc review: Disputed statement section_tensor_transport_normalized_total (+hbarB TensorSectionCondition) against the old signature: sign-flip counterexample confirmed; parent adaptation (import swap + 2 proof lines) against the change record and 3b (QuotientSectionTensorTransport OK); internal_left/right sorry statements against TensorNormalized, ScalarSectionNormalized, TensorRepresentativeNormalization and scalarTensorSectionPath; node proof_deps against step uses"
+ }
+}

@@ -41,31 +41,46 @@
  ],
  "id": "lem-sfb-quotient-section-tensor-transport-normalized-total",
  "title": "Derived total normalization of the quotient section tensor comparison",
- "statement": "Given the underlying comparison and its pure-tensor formula, it extends to the normalized signed total on K-flat pairs and satisfies the summand and counit equations.",
+ "statement": "Given normalized scalar section data c, a normalized internal tensorator b, and a section tensor isomorphism barB satisfying TensorSectionCondition a T c b barB, every ordinary tensor map with the specified pure-scalar formula extends to a signed-total map on flat-term independent K-flat section pairs, with the prescribed summand and localization-counit equations.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5."
  },
  "proof": [
   {
-   "text": "Totalize the balancing map with the Koszul sign on each bidegree. Coproduct inclusions give the summand equations, while localization counits give the derived comparison equation.",
+   "text": "The ordinary scalar section isomorphism transports preservation of countable colimits to E. Construct the signed total and its coproduct-inclusion formula using mapBifunctorComparison.",
    "uses": [
-    "lem-pur-kflat-total-tensor-model",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-sfb-quotient-section-tensor-data",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the internal-image counit equation. Take internal inverse images under the termwise section equivalence, transferring K-flatness and flat terms along the counit isomorphisms.",
+   "uses": [
+    "lem-sfb-quotient-section-tensor-transport-internal-counit",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-site-sheaf-tensor-presentation-data"
    ],
    "elementary": false
+  },
+  {
+   "text": "Form the two natural transformations from the tensor localization, model counit and total comparison. Naturality transports their equality along the termwise equivalence counits.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "def-sfb-quotient-section-tensor-data",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-quotient-section-tensor-transport-internal-counit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-site-sheaf-tensor-presentation-data"
  ],
  "proof_origin": {
-  "by": "A5",
+  "by": "Y3",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Parent proof steps 1--5, split into a strictly simpler obligation."
+  "place": "Explicit total construction, internal-image evaluation and naturality transport through the termwise section equivalence."
  },
  "lean": {
   "existing": false,
@@ -75,10 +90,10 @@
   "declarations": [
    "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_normalized_total"
   ],
+  "statement": "theorem section_tensor_transport_normalized_total (T : Scheme.{u}) (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c) (b : TensorIso a T) (hb : TensorNormalized a T b) (barB : tensor Λ T ⋙ c.model.T ≅ (c.model.T.prod c.model.T) ⋙ tensor Λ' T) (hbarB : TensorSectionCondition a T c b barB) (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶ (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj (curriedTensor (modules Λ' T))) (he : ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) (s : (ring Λ' T).obj.obj W), (((e.app M).app N).val.app W) (sectionScalarElement a T c (M ⊗ N) W (sectionPureTensor Λ T M N W m n) s) = sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W (sectionScalarElement a T c M W m 1) (sectionScalarElement a T c N W n s)) : ∀ P Q : CochainComplex (modules Λ T) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := ring Λ T) P → CochainComplex.IsKFlatIndependentCoefficients (R := ring Λ T) Q → (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T) (R := ring Λ T) (P.X i)) → (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T) (R := ring Λ T) (Q.X i)) → ∃ g : (c.model.E.mapHomologicalComplex (.up ℤ)).obj ((totalTensor Λ T).obj (P, Q)) ⟶ (totalTensor Λ' T).obj ((c.model.E.mapHomologicalComplex (.up ℤ)).obj P, (c.model.E.mapHomologicalComplex (.up ℤ)).obj Q), (∀ (i j k : ℤ) (h : i + j = k), c.model.E.map (CochainComplex.ιMapBifunctor P Q (curriedTensor (modules Λ T)) i j k h) ≫ g.f k = (e.app (P.X i)).app (Q.X j) ≫ CochainComplex.ιMapBifunctor ((c.model.E.mapHomologicalComplex (.up ℤ)).obj P) ((c.model.E.mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor (modules Λ' T)) i j k h) ∧ barB.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫ (tensor Λ' T).map (Prod.mkHom (c.model.ε.app P) (c.model.ε.app Q)) ≫ (qTensor Λ' T).app ((c.model.E.mapHomologicalComplex (.up ℤ)).obj P, (c.model.E.mapHomologicalComplex (.up ℤ)).obj Q) = c.model.T.map ((qTensor Λ T).app (P, Q)) ≫ c.model.ε.app ((totalTensor Λ T).obj (P, Q)) ≫ DerivedCategory.Q.map g",
   "branch": "sheaf-dag",
-  "by": "A5",
-  "date": "2026-10-27",
-  "statement": "theorem section_tensor_transport_normalized_total (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (b : TensorIso a T) (hb : TensorNormalized a T b)\n    (barB : tensor Λ T ⋙ c.model.T ≅\n      (c.model.T.prod c.model.T) ⋙ tensor Λ' T)\n    (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶\n        (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj\n          (curriedTensor (modules Λ' T)))\n    (he : ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W)\n      (n : N.val.obj W) (s : (ring Λ' T).obj.obj W),\n      (((e.app M).app N).val.app W)\n          (sectionScalarElement a T c (M ⊗ N) W\n            (sectionPureTensor Λ T M N W m n) s) =\n        sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W\n          (sectionScalarElement a T c M W m 1)\n          (sectionScalarElement a T c N W n s)) :\n    ∀ P Q : CochainComplex (modules Λ T) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients (R := ring Λ T) P →\n      CochainComplex.IsKFlatIndependentCoefficients (R := ring Λ T) Q →\n      (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T)\n        (R := ring Λ T) (P.X i)) →\n      (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T)\n        (R := ring Λ T) (Q.X i)) →\n      ∃ g : (c.model.E.mapHomologicalComplex (.up ℤ)).obj\n            ((totalTensor Λ T).obj (P, Q)) ⟶\n          (totalTensor Λ' T).obj\n            ((c.model.E.mapHomologicalComplex (.up ℤ)).obj P,\n              (c.model.E.mapHomologicalComplex (.up ℤ)).obj Q),\n        (∀ (i j k : ℤ) (h : i + j = k),\n          c.model.E.map\n              (CochainComplex.ιMapBifunctor P Q (curriedTensor (modules Λ T))\n                i j k h) ≫ g.f k =\n            (e.app (P.X i)).app (Q.X j) ≫\n              CochainComplex.ιMapBifunctor\n                ((c.model.E.mapHomologicalComplex (.up ℤ)).obj P)\n                ((c.model.E.mapHomologicalComplex (.up ℤ)).obj Q)\n                (curriedTensor (modules Λ' T)) i j k h) ∧\n        barB.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n            (tensor Λ' T).map (Prod.mkHom (c.model.ε.app P) (c.model.ε.app Q)) ≫\n            (qTensor Λ' T).app\n              ((c.model.E.mapHomologicalComplex (.up ℤ)).obj P,\n                (c.model.E.mapHomologicalComplex (.up ℤ)).obj Q) =\n          c.model.T.map ((qTensor Λ T).app (P, Q)) ≫\n            c.model.ε.app ((totalTensor Λ T).obj (P, Q)) ≫ DerivedCategory.Q.map g"
+  "by": "Y3",
+  "date": "2026-10-28"
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -93,11 +108,44 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A5",
+  "reviewer": "C-f6f1a",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261027T180450-L-3863257",
+  "landing": "20261027T210317-L-1687664",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Disputed statement section_tensor_transport_normalized_total (+hbarB TensorSectionCondition) against the old signature: sign-flip counterexample confirmed; parent adaptation (import swap + 2 proof lines) against the change record and 3b (QuotientSectionTensorTransport OK); internal_left/right sorry statements against TensorNormalized, ScalarSectionNormalized, TensorRepresentativeNormalization and scalarTensorSectionPath; node proof_deps against step uses"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "Y3 stage 2",
+  "old_statement": "Given the underlying comparison and its pure-tensor formula, it extends to the normalized signed total on K-flat pairs and satisfies the summand and counit equations.",
+  "old_proof": [
+   {
+    "text": "Totalize the balancing map with the Koszul sign on each bidegree. Coproduct inclusions give the summand equations, while localization counits give the derived comparison equation.",
+    "uses": [
+     "lem-pur-kflat-total-tensor-model",
+     "lem-weil-pbc-site-derived-tensor-descent",
+     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-kflat-total-tensor-model",
+   "lem-weil-pbc-site-derived-tensor-descent",
+   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  ],
+  "what": "The old signature quantified over arbitrary barB without relating it to c or b. Multiplication of barB by -1 where 1 differs from -1 changes the required equation with all hypotheses unchanged. Add TensorSectionCondition, and adapt the sole caller to construct a compatible conjugate by a proved categorical theorem. The caller and all targets retain their signatures.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 07A4: the comparison is induced by the ordinary tensor maps, rather than an arbitrary tensor isomorphism."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-quotient-section-tensor-transport-normalized",
+    "holds": true,
+    "note": "Choose barB by proved categorical conjugation and pass its TensorSectionCondition to the repaired total theorem; the existential parent statement is unchanged."
+   }
+  ]
  }
 }
