@@ -19635,3 +19635,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:32 L: returned deliver/C6/Sheaf.Paper.RationalP1SectionEvaluation (reviewer RETURN: (reviewer C-54a7f, head 54a7f8031) E2: rationalP1_section_evaluation_core is false: X₀, a, b are arbitrary and appear on)
 - 17:43 L: returned deliver/U4/Sheaf.SixFunctors.CoefQbarVerdierCore (reviewer RETURN: (reviewer C-73b31, head 73b31bacd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.CoefQbar)
 - 18:04 L: returned deliver/A2/WeilConjectures.SmoothPurity.Defs (reviewer RETURN: (the landing tools, head f14b961d6) the delivery did not land: lean/WeilConjectures/SmoothPurity/Defs.lean was removed f)
+- 18:04 L: returned deliver/A3/Sheaf.Paper.LocallyClosedOrdinaryComparisonIso (reviewer RETURN: (the landing tools, head 4dbcee59c) the delivery did not land: lean/Sheaf/Paper/LocallyClosedOrdinaryComparisonIso.lean )
