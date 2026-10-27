@@ -1,5 +1,7 @@
 module
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionUReductionIsInvertible
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionUReconstruction
 /-! Auxiliary reduction for dualizing invertibility.
 Source: current blueprint, lem-coef-integral-finite-extension.proof.md, paragraphs 2-3
 (blueprint: lem-sf-integral-finite-extension-invertibility). -/
@@ -24,5 +26,6 @@ reduction comparison identify the total-limit map with `u`.
 -/
 theorem comparison_invertibility_u :
     IsIso (u l E L ι X D hl wE wL) := by
-  sorry
+  apply comparison_invertibility_u_of_reductions l E L ι X D hl wE wL
+  exact comparison_reduction_isIso_u l E L ι X D hl wE wL
 end WeilConjectures.IntegralFiniteExtension
