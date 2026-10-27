@@ -2,7 +2,7 @@
  "id": "def-sp-tower-shriek-data",
  "kind": "definition",
  "title": "Normalized interface for strict tower compact support",
- "statement": "Fix a prime ell and a finite extension E/Q_ell. Set R_n=O_E/ell^(n+1), with the actual quotient maps, and B_n,T the constant ring sheaves on the small pro-etale site. Define S(T) as the existing category of strict semilinear module systems and D(T) as its ordinary unbounded derived category, with exact ordinary and derived evaluations. Base records the ramification equation, ideal equality, finiteness, the section-preserving presentation of coefficient towers, the existing semilinear derived calculus, and K-injective resolutions. Geometry records the fixed constant-coefficient coordinates of that calculus, retaining ordinary and derived adjunctions and their normalized evaluation equations. Open records the exact ordinary extension by zero with its normalized adjunction. Operations collects geometric operations, termwise composition and the open tensor mate; OpenExchange records the open base-change isomorphism fixed by its inverse adjunction mate. Define compactification F=Rp_* j_!, its proper-counit/open-tensor projection, its proper-square/open-mate exchange, and its finite evaluation isomorphism. Origin retains one bounded-below etale antecedent at a finite level. GoodLevel is the published finite-Tor constructibility predicate after canonical quotient-ideal equality transport. LocalizationData records the exact closed pushforward and the counit-unit distinguished triangle with evaluated boundary. Laws collects boundedness, the finite-field projection claim with both GoodLevel hypotheses, arbitrary-base exchange on level origins, localization, and unbounded joint detection of isomorphisms. The level coordinate normalization identifies the dependent package of the two ordinary functors and their adjunction with the canonical constant-ring package, not just the adjunction values in isolation. The remaining interfaces are the existing ones extracted from SmoothPurityTowerShriekLevels.",
+ "statement": "Fix a prime ell and a finite extension E/Q_ell. Set R_n=O_E/ell^(n+1), with the actual quotient maps, and B_n,T the constant ring sheaves on the small pro-etale site. Define S(T) as the existing category of strict semilinear module systems and D(T) as its ordinary unbounded derived category, with exact ordinary and derived evaluations. Base records the ramification equation, ideal equality, finiteness, the section-preserving presentation of coefficient towers, the existing semilinear derived calculus, and K-injective resolutions. Geometry records the fixed constant-coefficient coordinates of that calculus, retaining ordinary and derived adjunctions and their normalized evaluation equations. Open records the exact ordinary extension by zero with its normalized adjunction. Operations collects geometric operations, termwise composition and the open tensor mate; OpenExchange records the open base-change isomorphism fixed by its inverse adjunction mate. Define compactification F=Rp_* j_!, its proper-counit/open-tensor projection, its proper-square/open-mate exchange, and its finite evaluation isomorphism. Origin retains one bounded-below etale antecedent at a finite level. GoodLevel is the published finite-Tor constructibility predicate after canonical quotient-ideal equality transport. LocalizationData records the exact closed pushforward and the counit-unit distinguished triangle with evaluated boundary. Laws collects boundedness, the finite-field projection claim with both GoodLevel hypotheses, arbitrary-base exchange on level origins, localization, and unbounded joint detection of isomorphisms. The level coordinate normalization identifies the dependent package of the two ordinary functors and their adjunction with the canonical constant-ring package, not just the adjunction values in isolation. The remaining interfaces are the existing ones extracted from SmoothPurityTowerShriekLevels. The ordinary horizontal normalization is anchored to the actual constant-ring finite adjunction units: OrdinaryUnitTransition says that the finite adjunct of the pulled system transition, conjugated by ordinaryPullEvaluation, is the lower finite unit precomposed with the original horizontal transition. This equation holds on every chart and every section, independently of the freely supplied generic underlying-sheaf comparisons.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
   "place": "paragraph (2)"
@@ -133,7 +133,9 @@
    "AlgebraicGeometry.ProEtale.SpTowerShriek.quotientTransport",
    "AlgebraicGeometry.ProEtale.SpTowerShriek.GoodLevel",
    "AlgebraicGeometry.ProEtale.SpTowerShriek.LocalizationData",
-   "AlgebraicGeometry.ProEtale.SpTowerShriek.Laws"
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.Laws",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.OrdinaryUnitTransition",
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.OrdinaryUnitTransitionModel"
   ]
  },
  "reviewed": {
@@ -147,50 +149,297 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
-  "result": "pass",
-  "landing": "20261026T022945-L-508607",
+  "reviewer": "C-5aacb",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T151703-L-1192563",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: linePullback_components_horizontal proof + new Geometry.ordinaryUnitTransition field and B re-body against node lem-sfb-tower-class-line-pullback-horizontal, def-sp-tower-shriek-data and its change record; 17 direct importers (3b OK) plus 4 exposed transitive users compiled against the delivered build"
  },
  "statement_change": {
-  "date": "2026-10-26",
-  "by": "C4 stage 2",
-  "old_statement": "Fix a prime ell and a finite extension E/Q_ell. Set R_n=O_E/ell^(n+1), with the actual quotient maps, and B_n,T the constant ring sheaves on the small pro-etale site. Define S(T) as the existing category of strict semilinear module systems and D(T) as its ordinary unbounded derived category, with exact ordinary and derived evaluations. Base records the ramification equation, ideal equality, finiteness, the section-preserving presentation of coefficient towers, the existing semilinear derived calculus, and K-injective resolutions. Geometry records the fixed constant-coefficient coordinates of that calculus, retaining ordinary and derived adjunctions and their normalized evaluation equations. Open records the exact ordinary extension by zero with its normalized adjunction. Operations collects geometric operations, termwise composition and the open tensor mate; OpenExchange records the open base-change isomorphism fixed by its inverse adjunction mate. Define compactification F=Rp_* j_!, its proper-counit/open-tensor projection, its proper-square/open-mate exchange, and its finite evaluation isomorphism. Origin retains one bounded-below etale antecedent at a finite level. GoodLevel is the published finite-Tor constructibility predicate after canonical quotient-ideal equality transport. LocalizationData records the exact closed pushforward and the counit-unit distinguished triangle with evaluated boundary. Laws collects boundedness, the finite-field projection claim with both GoodLevel hypotheses, arbitrary-base exchange on level origins, localization, and unbounded joint detection of isomorphisms. These are the exact existing interfaces formerly in SmoothPurityTowerShriekLevels; no data or condition is changed.",
-  "what": "Repair the underspecified HEq normalization of Geometry.levelAdjunction_eq. Identifying adjunction values does not identify their type parameters; bundle both functors with the ordinary adjunction so projection and dependent elimination provide the required coordinate transport. No evaluation equation is added as an assumption. The original constant-section normalization intent is retained. See coord/changes/C4-tower-level-adjunction-coordinates.md.",
+  "date": "2026-10-27",
+  "by": "F5 stage 2",
+  "old_statement": "Fix a prime ell and a finite extension E/Q_ell. Set R_n=O_E/ell^(n+1), with the actual quotient maps, and B_n,T the constant ring sheaves on the small pro-etale site. Define S(T) as the existing category of strict semilinear module systems and D(T) as its ordinary unbounded derived category, with exact ordinary and derived evaluations. Base records the ramification equation, ideal equality, finiteness, the section-preserving presentation of coefficient towers, the existing semilinear derived calculus, and K-injective resolutions. Geometry records the fixed constant-coefficient coordinates of that calculus, retaining ordinary and derived adjunctions and their normalized evaluation equations. Open records the exact ordinary extension by zero with its normalized adjunction. Operations collects geometric operations, termwise composition and the open tensor mate; OpenExchange records the open base-change isomorphism fixed by its inverse adjunction mate. Define compactification F=Rp_* j_!, its proper-counit/open-tensor projection, its proper-square/open-mate exchange, and its finite evaluation isomorphism. Origin retains one bounded-below etale antecedent at a finite level. GoodLevel is the published finite-Tor constructibility predicate after canonical quotient-ideal equality transport. LocalizationData records the exact closed pushforward and the counit-unit distinguished triangle with evaluated boundary. Laws collects boundedness, the finite-field projection claim with both GoodLevel hypotheses, arbitrary-base exchange on level origins, localization, and unbounded joint detection of isomorphisms. The level coordinate normalization identifies the dependent package of the two ordinary functors and their adjunction with the canonical constant-ring package, not just the adjunction values in isolation. The remaining interfaces are the existing ones extracted from SmoothPurityTowerShriekLevels.",
+  "what": "The old Geometry interface normalized ordinaryPullTransition only through freely supplied moduleUnderlying identifications. Level-dependent scalar conjugation changes horizontal transitions while preserving those generic identities and the specified finite functors/adjunctions. This makes the normalized finite-line horizontal theorem false for that interface (f=id, l=3, opposite signs at levels 0 and 1). Add the actual finite-unit compatibility that termwise inverse image satisfies. This is a proof field in Geometry, with its formula in a real irreducible predicate; no new object or arbitrary witness is chosen.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+   "place": "clause (2), actual termwise inverse image and its normalized adjunction"
+  },
   "citers": [
    {
-    "id": "det-sp-tower-shriek-levels",
+    "id": "lem-sfb-diagonal-trace-finite-chern-comparison",
     "holds": true,
-    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
    },
    {
-    "id": "lem-sp-finite-level-projection-criterion",
+    "id": "lem-sfb-tensor-comparison-unit-coordinates",
     "holds": true,
-    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
    },
    {
-    "id": "lem-sp-tower-exchange-realization",
+    "id": "lem-sfb-tensor-comparison-adjoint-evaluation",
     "holds": true,
-    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
    },
    {
-    "id": "lem-sp-tower-localization-realization",
+    "id": "lem-sfb-tower-class-tensor-geometry-existence",
     "holds": true,
-    "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-unit-level-coordinates",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-line-pullback-horizontal",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-finite-section-inverse-images",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-positive-pullback-unit-square",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-unit-arrow-comparison",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-unit-successor-compatibility",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-section-geometry-existence",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-geometric-model-existence",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-ordinary-scalars",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-scalar-comparisons",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "def-sfb-tower-class-tensor-comparison",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "def-sfb-tower-class-section-adjoint",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-finite-line-comparisons",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tensor-comparison-coordinate-conjugation",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "def-sfb-tower-class-tensor-pullback",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-tensor-comparison-normalization",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-tensor-level-coordinates",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-finite-unit-cohomology",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-finite-unit",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-tower-class-line-pullback-existence",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-varying-scalar-square",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-strict-coordinates-existence",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
    },
    {
     "id": "lem-sp-tower-ordinary-localization",
     "holds": true,
-    "note": "The canonical coordinate statement and its use remain applicable; the corrected package retains both functors."
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-tower-localization-realization",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-tower-ordinary-unit-evaluation",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-finite-level-projection-criterion",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-tower-geometry-adjunction-evaluation",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "def-sp-tower-class-finite-diagonal",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-strict-base-coordinates",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "det-sp-tower-shriek-levels",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-closed-tower-direct-image-exact",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-field-projection-origin-witnesses-transport",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "def-pur-tower-purity-base-change-words",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "def-pur-tower-composition-reassociation",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-strict-geometric-coordinates",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-field-exceptional-finite-compatibility",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-tower-exchange-realization",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-coefficient-unit-tower-normalized",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-strict-open-tensor-coordinates",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-pulled-ordered-line-single",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-tower-open-adjunction-unit-evaluation",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
+   },
+   {
+    "id": "lem-sp-field-projection-origin-witnesses-good-levels",
+    "holds": true,
+    "note": "The reference is to the actual constant-coefficient geometric operations. The added unit-transition law is true of those operations and makes their existing horizontal normalization explicit; existing conclusions and the route are retained."
    }
   ],
-  "source": {
-   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
-   "place": "paragraph (2)"
+  "previous": {
+   "date": "2026-10-26",
+   "by": "C4 stage 2",
+   "old_statement": "Fix a prime ell and a finite extension E/Q_ell. Set R_n=O_E/ell^(n+1), with the actual quotient maps, and B_n,T the constant ring sheaves on the small pro-etale site. Define S(T) as the existing category of strict semilinear module systems and D(T) as its ordinary unbounded derived category, with exact ordinary and derived evaluations. Base records the ramification equation, ideal equality, finiteness, the section-preserving presentation of coefficient towers, the existing semilinear derived calculus, and K-injective resolutions. Geometry records the fixed constant-coefficient coordinates of that calculus, retaining ordinary and derived adjunctions and their normalized evaluation equations. Open records the exact ordinary extension by zero with its normalized adjunction. Operations collects geometric operations, termwise composition and the open tensor mate; OpenExchange records the open base-change isomorphism fixed by its inverse adjunction mate. Define compactification F=Rp_* j_!, its proper-counit/open-tensor projection, its proper-square/open-mate exchange, and its finite evaluation isomorphism. Origin retains one bounded-below etale antecedent at a finite level. GoodLevel is the published finite-Tor constructibility predicate after canonical quotient-ideal equality transport. LocalizationData records the exact closed pushforward and the counit-unit distinguished triangle with evaluated boundary. Laws collects boundedness, the finite-field projection claim with both GoodLevel hypotheses, arbitrary-base exchange on level origins, localization, and unbounded joint detection of isomorphisms. These are the exact existing interfaces formerly in SmoothPurityTowerShriekLevels; no data or condition is changed.",
+   "what": "Repair the underspecified HEq normalization of Geometry.levelAdjunction_eq. Identifying adjunction values does not identify their type parameters; bundle both functors with the ordinary adjunction so projection and dependent elimination provide the required coordinate transport. No evaluation equation is added as an assumption. The original constant-section normalization intent is retained. See coord/changes/C4-tower-level-adjunction-coordinates.md.",
+   "citers": [
+    {
+     "id": "det-sp-tower-shriek-levels",
+     "holds": true,
+     "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    },
+    {
+     "id": "lem-sp-finite-level-projection-criterion",
+     "holds": true,
+     "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    },
+    {
+     "id": "lem-sp-tower-exchange-realization",
+     "holds": true,
+     "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    },
+    {
+     "id": "lem-sp-tower-localization-realization",
+     "holds": true,
+     "note": "Same normalized constant-coefficient operations; their coordinate witness now retains the functor parameters. Existing statements and proof plans remain applicable; no hypothesis is dropped."
+    },
+    {
+     "id": "lem-sp-tower-ordinary-localization",
+     "holds": true,
+     "note": "The canonical coordinate statement and its use remain applicable; the corrected package retains both functors."
+    }
+   ],
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+    "place": "paragraph (2)"
+   }
   }
  }
 }

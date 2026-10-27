@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-tower-line-transition-tensor",
+ "kind": "statement",
+ "title": "Transition of the evaluated root line on tensor generators",
+ "statement": "Fix l,E,T and Chern data c [def-sp-tower-class-chern]. For n<=m, a chart U and an actual root z at level m, the actual lineModule transition sends lineEvaluation(m).inv(tateFiniteTensor(1,z)) to a section HEq to lineEvaluation(n).inv(tateFiniteTensor(1, roots.map(n<=m)(z))). HEq retains the unchanged section carrier under coefficient restriction while distinguishing the module scalar structures. No base change morphism or geometric inverse image occurs.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-diagonal",
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-systems"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension of the roots tower; horizontal transition calculation of lem-sfb-tower-class-line-pullback-existence"
+ },
+ "proof": [
+  {
+   "text": "Lift z through rootForget and the Forget section equality. The lineEvaluation normalization identifies the inverse image of a unit tensor z with the scalar-adjunction unit of that lifted root.",
+   "uses": [
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the scalar-adjunction unit at coefficient one. Naturality of that unit along the horizontal product-site arrow commutes it with the root-module restriction. This proves the unit-tensor formula directly; scalar-action comparisons are unnecessary.",
+   "uses": [
+    "lem-coef-scalar-extension-section-naturality",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transitions equation of Forget and naturality of rootForget identify the restricted root with the actual roots-tower transition. Apply the lineEvaluation normalization at n and cancel the evaluation isomorphism to identify the normalized inverse tensor generator. These section calculations include empty charts and m=n.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-diagonal",
+  "lem-coef-scalar-extension-section-naturality",
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-chern"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "classes (2), scalar extension and horizontal naturality of the roots tower"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a sheaf of roots of unity commutes with inverse image and coefficient restriction transition maps",
+   "date": "2026-10-27",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.restrictScalars_map_val, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.unitHomEquiv_comp_apply, AlgebraicGeometry.Scheme.Modules.map_smul, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "verdict": "No theorem computes this root-line transition or its pullback path."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionSection|ordinaryPullTransition",
+   "date": "2026-10-27",
+   "results": "0 hits: ",
+   "verdict": "No theorem computes this root-line transition or its pullback path."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_pow\"",
+   "date": "2026-10-27",
+   "results": "12 hits: map_pow, iterate_map_pow, MonoidHom.map_pow, RingHom.map_pow, Multiset.prod_map_pow, Subgroup.subgroupOf_map_powMonoidHom_eq_range, Submonoid.map_powers, Submonoid.IsLocalizationMap.map_pow",
+   "verdict": "No theorem computes this root-line transition or its pullback path."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassLinePullbackHorizontal",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-tower-class-line-pullback-horizontal",
+   "place": "Horizontal transition calculation",
+   "via": [
+    "lem-sfb-tower-class-line-pullback-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerLineTransitionTensor",
+  "file": "lean/Sheaf/Paper/TowerLineTransitionTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.lineEvaluation_transition_tensor",
+  "statement": "theorem lineEvaluation_transition_tensor {T : Scheme.{u}} (c : Chern l E T)\n    {m n : ℕ} (h : n ≤ m) (U : T.ProEtᵒᵖ)\n    (z : (Scheme.proEtaleRootsOfUnitySheaf T (l ^ (m + 1))).obj.obj U) :\n    HEq\n      (((SemilinearSections.transition.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (SpTowerShriek.B l E T)\n        (SpTowerShriek.tau l E T) h).app (lineModule l E c)).val.app U\n          ((lineEvaluation l E c m).inv.val.app U\n            (Scheme.tateFiniteTensor T l (FiniteRing l E m) m (finiteScalar l E m)\n              U.unop 1 z)))\n      ((lineEvaluation l E c n).inv.val.app U\n        (Scheme.tateFiniteTensor T l (FiniteRing l E n) n (finiteScalar l E n)\n          U.unop 1 (((roots l T).map (homOfLE h).op).hom.app U z)))",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5aacb",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T151703-L-1192563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5aacb",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T151703-L-1192563",
+  "kind": "interface",
+  "note": "independent cc review: linePullback_components_horizontal proof + new Geometry.ordinaryUnitTransition field and B re-body against node lem-sfb-tower-class-line-pullback-horizontal, def-sp-tower-shriek-data and its change record; 17 direct importers (3b OK) plus 4 exposed transitive users compiled against the delivered build"
+ }
+}

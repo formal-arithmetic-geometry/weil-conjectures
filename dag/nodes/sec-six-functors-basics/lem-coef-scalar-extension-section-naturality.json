@@ -1,0 +1,105 @@
+{
+ "id": "lem-coef-scalar-extension-section-naturality",
+ "kind": "statement",
+ "title": "Naturality of the normalized scalar-extension section",
+ "statement": "Let J be a small site with coefficient tower B and a coefficient map phi:R->systemRing(J,B). Fix normalized ScalarData A and an R-module sheaf M on the sequence site. For n<=m, a section x of M(m,U), and evaluated sections v at m and w at n identified by HEq with the scalar-extension units of x and its horizontal restriction, the evaluated transition of A.model.E(M) sends v to a section HEq to w. This uses no roots, Chern datum, geometric pullback, or finite line comparison.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension of the roots tower; horizontal transition calculation of lem-sfb-tower-class-line-pullback-existence"
+ },
+ "proof": [
+  {
+   "text": "The defining unit_section equation and cancellation of the canonical object comparison identify scalarExtensionSection with the ordinary adjunction unit. The unit is a module-sheaf morphism; apply its presheaf naturality to the horizontal sequence-site arrow and x. The defining transition equation identifies the evaluated map with that presheaf restriction. Scalar restriction changes no underlying sections or restriction maps.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "classes (2), scalar extension and horizontal naturality of the roots tower"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a sheaf of roots of unity commutes with inverse image and coefficient restriction transition maps",
+   "date": "2026-10-27",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.restrictScalars_map_val, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.unitHomEquiv_comp_apply, AlgebraicGeometry.Scheme.Modules.map_smul, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "verdict": "No theorem computes this root-line transition or its pullback path."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionSection|ordinaryPullTransition",
+   "date": "2026-10-27",
+   "results": "0 hits: ",
+   "verdict": "No theorem computes this root-line transition or its pullback path."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_pow\"",
+   "date": "2026-10-27",
+   "results": "12 hits: map_pow, iterate_map_pow, MonoidHom.map_pow, RingHom.map_pow, Multiset.prod_map_pow, Subgroup.subgroupOf_map_powMonoidHom_eq_range, Submonoid.map_powers, Submonoid.IsLocalizationMap.map_pow",
+   "verdict": "No theorem computes this root-line transition or its pullback path."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassLinePullbackHorizontal",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-tower-class-line-pullback-horizontal",
+   "place": "Horizontal transition calculation",
+   "via": [
+    "lem-sfb-tower-class-line-pullback-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionSectionNaturality",
+  "file": "lean/Sheaf/Paper/ScalarExtensionSectionNaturality.lean",
+  "declaration": "WeilConjectures.SemilinearSections.scalarExtensionSection_transition",
+  "statement": "theorem scalarExtensionSection_transition\n    {D : Type (u + 1)} [Category.{u} D] (K : GrothendieckTopology D)\n    [EssentiallySmall.{u + 1} D]\n    (B : ℕ → Sheaf K CommRingCat.{u + 1}) (τ : ∀ n, B (n + 1) ⟶ B n)\n    {R : Sheaf (coefficientSequenceTopology K) CommRingCat.{u + 1}}\n    (φ : R ⟶ systemRing K B τ)\n    (A : ScalarData.{u + 1, u, u + 1} φ)\n    (M : Mod.{u + 1, u, u + 1} (coefficientSequenceTopology K) R)\n    {m n : ℕ} (h : n ≤ m) (U : Dᵒᵖ) (x : M.val.obj (op (m, U.unop)))\n    (v : ((evaluation.{u + 1, u, u + 1} K B τ m).obj (A.model.E.obj M)).val.obj U)\n    (w : ((evaluation.{u + 1, u, u + 1} K B τ n).obj (A.model.E.obj M)).val.obj U)\n    (hv : HEq v (scalarExtensionSection.{u + 1, u, u + 1}\n      φ A M (op (m, U.unop)) x))\n    (hw : HEq w (scalarExtensionSection.{u + 1, u, u + 1}\n      φ A M (op (n, U.unop))\n        (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x))) :\n    HEq (((transition.{u + 1, u, u + 1} K B τ h).app\n      (A.model.E.obj M)).val.app U v) w",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5aacb",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T151703-L-1192563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5aacb",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T151703-L-1192563",
+  "kind": "interface",
+  "note": "independent cc review: linePullback_components_horizontal proof + new Geometry.ordinaryUnitTransition field and B re-body against node lem-sfb-tower-class-line-pullback-horizontal, def-sp-tower-shriek-data and its change record; 17 direct importers (3b OK) plus 4 exposed transitive users compiled against the delivered build"
+ }
+}

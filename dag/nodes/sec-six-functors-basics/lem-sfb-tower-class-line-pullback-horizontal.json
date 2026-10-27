@@ -16,43 +16,34 @@
  },
  "proof": [
   {
-   "text": "Use naturality of the scalar-extension sheafification unit and the transition equation of rootForget. Under lineEvaluation the actual transition sends a tensor a tensor z at level m to coefficientMap(h)(a) tensor z^(l^(m-n)) at level n. Tensor induction and the sheafification universal property determine this map from the displayed generators. This computes the transition for each of cY and cX.",
+   "text": "Conjugate the two horizontal composites by the inverse source pull/line evaluations at m and the target line evaluation at n. Transpose with the actual level-m adjunction. The finite Tate-line universal property reduces equality to values on unit tensors 1 tensor z.",
    "uses": [
-    "def-sp-tower-class-chern",
-    "def-sp-tower-class-diagonal",
-    "lem-sp-tower-line-evaluation-universal",
-    "lem-sp-finite-tate-line-universal"
+    "lem-sp-finite-tate-line-universal",
+    "def-sp-tower-class-diagonal"
    ],
    "elementary": false
   },
   {
-   "text": "Transport g.generic.ordinaryPullTransition through g.coefficients, g.transitions and the ordinary pull-evaluation equalities. Transpose the square with the finite adjunctions and test on pure tensors. Substitute the assumed normalized finite formulas. The coefficient parts agree by naturality of the constant direct-image map under the quotient map; the roots agree because the global-sections projection map preserves powers. Tensor induction and sheafification give equality of morphisms. Cancel the evaluation isomorphisms to obtain the horizontal square. The argument includes empty charts and m=n.",
+   "text": "The proved lower-path unit-tensor lemma computes the first adjunct using only the comparison at n. Ring homomorphisms preserve one, so the given all-coefficient normalization supplies both needed unit-tensor formulas. Naturality of the finite adjunction computes the other adjunct as the comparison at m followed by the actual X transition. The proved lineEvaluation HEq transition formula, and the fact that scalar restriction keeps the same underlying map, give the same inverse tensor generator. The target evaluation cancels its inverse, giving the identical finite root tensor. Cancel the evaluation isomorphisms, including the component identities of the natural pull evaluation.",
    "uses": [
-    "def-sp-tower-shriek-data",
-    "def-coef-semilinear-geometry-derived",
-    "def-cbc-strict-constant-tower-operations",
-    "def-sp-tower-class-pullback",
-    "lem-sp-finite-tate-line-universal"
+    "lem-sfb-tower-line-pullback-lower-tensor",
+    "lem-sfb-tower-line-transition-tensor"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-tower-class-chern",
-  "def-sp-tower-class-diagonal",
-  "lem-sp-tower-line-evaluation-universal",
   "lem-sp-finite-tate-line-universal",
-  "def-sp-tower-shriek-data",
-  "def-coef-semilinear-geometry-derived",
-  "def-cbc-strict-constant-tower-operations",
-  "def-sp-tower-class-pullback"
+  "def-sp-tower-class-diagonal",
+  "lem-sfb-tower-line-pullback-lower-tensor",
+  "lem-sfb-tower-line-transition-tensor"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "H5",
+  "group": "F5",
   "date": "2026-10-27",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-  "place": "clause (2); detailed horizontal calculation in the assigned parent proof"
+  "place": "classes (2); finite adjunction transposition and separate path calculations after actual-unit geometry normalization repair"
  },
  "mathlib_searches": [
   {
@@ -128,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H5",
-  "result": "pass",
-  "landing": "20261027T034654-L-3673013",
+  "reviewer": "C-5aacb",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T151703-L-1192563",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: linePullback_components_horizontal proof + new Geometry.ordinaryUnitTransition field and B re-body against node lem-sfb-tower-class-line-pullback-horizontal, def-sp-tower-shriek-data and its change record; 17 direct importers (3b OK) plus 4 exposed transitive users compiled against the delivered build"
  }
 }
