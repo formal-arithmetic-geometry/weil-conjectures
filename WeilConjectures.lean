@@ -13446,6 +13446,7 @@ public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExcha
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportExchangeProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesVerdierDual
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
@@ -13460,7 +13461,9 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingConstruction
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingExistence
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure

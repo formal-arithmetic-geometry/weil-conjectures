@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingConstruction
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingExistence
 
 /-!
 
