@@ -12760,3 +12760,9 @@ public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.RelativeFrobenius
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
+public import WeilConjectures.TraceFormula.BaseChangeCoherence
+public import WeilConjectures.TraceFormula.CompactPullback
+public import WeilConjectures.TraceFormula.FibreCoherence
+public import WeilConjectures.TraceFormula.FixedPointScheme
