@@ -6976,6 +6976,12 @@ public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 public import WeilConjectures.AlgebraicGeometry.Sites.ProEtaleRootsOfUnity
+public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.AffineModel
+public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.AffineModelBaseChange
+public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.AffineModelCover
+public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.Covers
+public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.IndEtaleFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Sites.QuasiAlgClosedCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityConstant
@@ -11318,6 +11324,7 @@ public import WeilConjectures.RingTheory.PrincipalLocalizationConormalAtPrimeBas
 public import WeilConjectures.RingTheory.PrincipalNeighborhoodDimension
 public import WeilConjectures.RingTheory.PrincipalPrimeQuotientFractionFinite
 public import WeilConjectures.RingTheory.ProEtale.Bijective
+public import WeilConjectures.RingTheory.ProEtale.BijectiveOnStalksPullback
 public import WeilConjectures.RingTheory.ProEtale.ClosedLift
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftAdjunction
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftConnectedComponents
@@ -11354,11 +11361,14 @@ public import WeilConjectures.RingTheory.ProEtale.WLocal
 public import WeilConjectures.RingTheory.ProEtale.WLocalization.Basic
 public import WeilConjectures.RingTheory.ProEtale.WLocalization.Ideal
 public import WeilConjectures.RingTheory.ProEtale.WStrictLocalization
+public import WeilConjectures.RingTheory.ProEtale.WStrictlyLocalUniversalHomeomorphism
 public import WeilConjectures.RingTheory.ProEtale.WeakDimension
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleFiber
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
+public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleUniversalHomeomorphism
+public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleWStrictlyLocal
 public import WeilConjectures.RingTheory.ProjectiveDimensionLocusOpen
 public import WeilConjectures.RingTheory.ProjectiveResolutionAugmentationKernel
 public import WeilConjectures.RingTheory.ProjectiveResolutionExtAllDegrees
@@ -13174,6 +13184,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionCounit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLowerStarProj
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UpperStarIsoId
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.WeaklyEtaleBaseChange
