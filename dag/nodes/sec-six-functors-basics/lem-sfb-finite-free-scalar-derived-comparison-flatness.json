@@ -1,0 +1,113 @@
+{
+ "id": "lem-sfb-finite-free-scalar-derived-comparison-flatness",
+ "kind": "statement",
+ "title": "Flatness and augmentation for the finite-free derived comparison",
+ "statement": "For the specified finite-free short exact point resolution, every scheme pullback has a quasi-isomorphic augmentation, an independent-coefficient K-flat cone, and an invertible native localization tensor comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free paragraph"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-finite-scalar-model-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Pull the short exact point resolution back to each scheme, transport it across the internal section tensor equivalence, and apply the finite-free mono-cokernel K-flat theorem. The resulting augmentation and native tensor comparison are exactly the displayed maps.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-finite-free-mono-cokernel-kflat",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite free paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-finite-free-mono-cokernel-kflat",
+  "lem-weil-pbc-site-pullback-abelian-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite free derived tensor comparison",
+   "results": "No exact match; generic finite-module tensor lemmas only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso projection tensor derived category",
+   "results": "No result; identifier query unavailable.",
+   "date": "2026-10-28",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFreeScalarProjection|derivedAssertions_of_finite_integral_resolution",
+   "results": "No existing declaration in source libraries.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-finite-free-scalar-derived-comparison",
+   "place": "first conjunct"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeScalarDerivedComparisonFlatness",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarDerivedComparisonFlatness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.finiteFreeScalarDerivedComparison_flatness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.finiteFreeScalarDerivedComparison_flatness"
+  ],
+  "statement": "theorem finiteFreeScalarDerivedComparison_flatness (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (S : ShortComplex (PointModules Λ)) (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X)) (hS : S.ShortExact) (r : ℕ) (e₁ : S.X₁ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X)) (e₂ : S.X₂ ≅ biproduct (fun _ : Fin r ↦ Mod.regular Λ.X)) : ∀ Z : Scheme.{u}, QuasiIso (augmentation Λ S Z) ∧ CochainComplex.IsKFlatIndependentCoefficients (((ModuleRingedComparison.equivalence Λ.X Z).functor.mapHomologicalComplex (.up ℤ)).obj (complex Λ S Z)) ∧ ∀ C : CochainComplex (ModuleRingedComparison.internalModules Λ.X Z) ℤ, IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q (complex Λ S Z) C)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeScalarDerivedComparison",
+  "date": "2026-10-28",
+  "group": "S4"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T234309-L-91450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T234309-L-91450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

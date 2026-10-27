@@ -20403,3 +20403,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/S3/Sheaf.Paper.DiagonalTraceFinitePushUnit (stage 3; reviewer PASS; first push; landing 20261027T234305-L-89558 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:43 L: merged deliver/S3/Sheaf.Paper.IsomorphismScalarCompletedModel (stage 3; reviewer FIX; first push; landing 20261027T234306-L-90167 (interface); batch 20261027T233735; modules 4; new nodes 3)
 - 23:43 L: merged deliver/S3/Sheaf.Paper.QuotientScalarSectionOrdinaryNormalizedMap (stage 3; reviewer PASS; first push; landing 20261027T234308-L-90845 (interface); batch 20261027T233735; modules 1; new nodes 0)
+- 23:43 L: merged deliver/S4/Sheaf.Paper.FiniteFreeScalarDerivedComparison (stage 3; reviewer PASS; first push; landing 20261027T234309-L-91450 (interface); batch 20261027T233735; modules 3; new nodes 2)

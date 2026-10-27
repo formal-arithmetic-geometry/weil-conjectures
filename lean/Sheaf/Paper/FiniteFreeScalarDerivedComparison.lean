@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.IntegralFiniteScalarModelDefinitions
 
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonFlatness
+import Sheaf.Paper.FiniteFreeScalarDerivedComparisonBeta
+
 /-!  # Derived assertions and projection for a specified finite free resolution -/
 
 @[expose] public noncomputable section
@@ -75,7 +78,8 @@ theorem derivedAssertions_of_finite_integral_resolution
           (moduleObjectDerivedPushforward Λ.X f).map ((β X).inv.app K) =
         projection Λ f (DerivedCategory.Q.obj (complex Λ S Y))
           (DerivedCategory.Q.obj (complex Λ S X)) (modelPull Λ S f) K) := by
-  sorry
+  exact ⟨finiteFreeScalarDerivedComparison_flatness D a S t hS r e₁ e₂,
+    finiteFreeScalarDerivedComparison_beta D a S t hS r e₁ e₂⟩
 
 /-- Projection is invertible on the pulled-back cone of a map between finite free
 point modules. No exactness of the map or condition on its cokernel is needed.
