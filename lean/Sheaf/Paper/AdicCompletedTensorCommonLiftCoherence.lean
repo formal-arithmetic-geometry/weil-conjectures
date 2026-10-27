@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicCompletedTensorFiniteModels
+import Sheaf.Paper.AdicCompletedTensorCommonLiftConstraints
 
 /-! # Coherence part of the common-stage completed tensor lift
 
@@ -78,6 +79,15 @@ theorem completed_tensor_common_lift_coherence
     (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}
       (ProEt.topology X) (ring l X R) closed models symmetry) :
     Nonempty (CompletedTensorCommonLiftCoherence l X R closed symmetry) := by
-  sorry
+  obtain ⟨data⟩ := completed_tensor_common_lift_tensor_unit l X R closed models symmetry N
+    coherence
+  obtain ⟨constraints⟩ := completed_tensor_common_lift_constraints l X R closed models symmetry N
+    coherence data
+  exact ⟨{ tensor := data.tensor
+           unit := data.unit
+           associative := constraints.associative
+           left_unit := constraints.left_unit
+           right_unit := constraints.right_unit
+           symmetric := constraints.symmetric }⟩
 
 end WeilConjectures.AdicQbarRealization
