@@ -20,41 +20,45 @@
  ],
  "proof": [
   {
-   "text": "The uniquely section-normalized restriction comparisons respect identity and composition before localization. Exact derived localization preserves these squares. Conjugation through the intrinsic equivalence and the comparison-site scalar mate gives an invertible scalar-extension comparison, so transposition of the conjugated adjunct preserves invertibility.",
+   "text": "The inverse realization restriction square is the vertical pasting of the comparison-site square and the intrinsic square. The first left mate is the invertible pbcComparisonReductionMap. The intrinsic left mate is invertible by transposing again through the two intrinsic equivalences and using conjugateEquiv_of_iso. mateEquiv_vcomp identifies the full mate with their invertible composite. Naturality of homEquiv expresses the transpose of an arbitrary realized adjunct as this mate followed by realization of the original arrow. Endpoint conjugation preserves invertibility.",
    "uses": [
-    "def-weil-pbc-witness-compatibility",
-    "def-coef-normalized-dvr-tower",
-    "lem-coef-dualizing-site-mates"
+    "def-coef-finite-dualizing-data",
+    "def-weil-pbc-witness-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "Paragraphs 1--3 and final sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "Transpose the ordinary unit and cocycle through the scalar adjunctions; their triangle and composition equations give the corresponding restriction equations. Apply the coherent realization restriction squares, naturality at e_n and cancellation of adjacent e_n and its inverse. This proves the two displayed intrinsic semilinear equations.",
+   "text": "unit_conjugateEquiv identifies the adjunct of the normalized scalar unit with the inverse restriction unit. Apply the realization restriction identity square, functoriality and cancellation. Naturality of normalizedDVRResUnit cancels the endpoint isomorphism.",
    "uses": [
-    "def-weil-pbc-witness-compatibility",
+    "lem-coef-dualizing-realization-restriction-unit",
     "def-coef-normalized-dvr-tower",
-    "lem-coef-dualizing-site-mates"
+    "def-weil-pbc-witness-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-    "place": "Paragraphs 1--3 and final sentence"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the composite adjunction Hom equivalence to the assumed scalar cocycle. unit_conjugateEquiv and leftAdjointCompIso give the ordinary restriction cocycle. Apply realization and its restriction composition square. Naturality of the first restriction square gives the intrinsic cocycle. Naturality of normalizedDVRResComp moves the last endpoint map; functoriality cancels the middle endpoint isomorphism and its inverse.",
+   "uses": [
+    "lem-coef-dualizing-realization-restriction-comp",
+    "def-coef-normalized-dvr-tower",
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-coef-finite-dualizing-data",
   "def-coef-normalized-dvr-tower",
   "def-weil-pbc-witness-compatibility",
-  "lem-coef-dualizing-site-mates"
+  "lem-coef-dualizing-realization-restriction-comp",
+  "lem-coef-dualizing-realization-restriction-unit"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "P7",
+  "date": "2026-10-27",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
-  "place": "Paragraphs 1--3 and final sentence"
+  "place": "Final sentence: transport by the finite dualizing comparison, with identity and successive-coefficient normalization"
  },
  "mathlib_searches": [
   {
@@ -131,13 +135,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-67991",
-  "group": "G1",
-  "result": "pass",
-  "landing": "20261025T162424-L-444505",
+  "reviewer": "C-0db09",
+  "group": "J5",
+  "result": "fix",
+  "landing": "20261027T210058-L-1653974",
   "kind": "interface",
-  "note": "independent cc review: the item theorem's statement against the clone (identical); FiniteDualizingData against the clone's FiniteDualizing prefix (verbatim apart from the Prop instance additivity proof); the three new sorry statements against their nodes and the canonical published constructions; the item node against its proof as written; 10 of 11 direct importers compiled against the delivered modules"
+  "note": "independent cc review: item proof (mate transport) and the 2 new sorry coherence lemmas against their nodes and the canonical pinned definitions in FiniteDualizingData/NormalizedDVRTower/WitnessCompatibility; IntegralProperReductionBound against the published clone (published compiles unchanged, 23.8 s)"
  }
 }
