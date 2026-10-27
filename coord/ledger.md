@@ -20195,3 +20195,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:38 L: merged deliver/B6/Sheaf.Paper.CanonicalSectionProjectionTransport (stage 3; reviewer PASS; first push; landing 20261027T233807-L-4115910 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:38 L: merged deliver/B6/Sheaf.SixFunctors.CanonicalReductionTensorPullComplex (stage 3; reviewer PASS; first push; landing 20261027T233808-L-4116113 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:38 L: merged deliver/B6/Sheaf.SixFunctors.RationalVerdierCompositionNormalization (stage 3; reviewer PASS; first push; landing 20261027T233809-L-4116298 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:38 L: merged deliver/B7/Sheaf.SixFunctors.IntegralOrdinaryCompactificationExchangeSquare (stage 3; reviewer PASS; first push; landing 20261027T233810-L-4116553 (interface); batch 20261027T233735; modules 1; new nodes 0)
