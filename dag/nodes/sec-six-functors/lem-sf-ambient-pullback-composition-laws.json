@@ -13,44 +13,30 @@
  ],
  "proof": [
   {
-   "text": "The section-normalized pushComp and pushId act by restriction along the canonical base-change comparisons. Under a triple composition both maps preserve each of the three fiber-product projections. Uniqueness of the fiber product identifies them; apply the same argument to both identity cases, including transport along associativity and identity equalities of scheme maps.",
+   "text": "Apply the ordinary split theorem to obtain the associativity, right-unit and left-unit clauses for Modules. These are exactly the first three conjuncts of CompositionLaws.",
    "uses": [
-    "lem-sf-ambient-pullback-site-constructions",
-    "def-pc-fibre-product"
+    "new-lem-sf-ambient-pullback-ordinary-composition-laws"
    ],
    "elementary": false
   },
   {
-   "text": "Apply leftAdjointCompIso_assoc and the two identity lemmas to these right-adjoint equations and the specified module adjunctions. Their mates are exactly comp and identity by definition, so evaluating at a module proves the ordinary three clauses of CompositionLaws.",
+   "text": "Apply the derived split theorem to obtain the corresponding three exact-localization clauses for Derived. Assemble the six clauses in the definition of CompositionLaws.",
    "uses": [
-    "lem-trf-adjoint-composition-coherence",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Pass the three equations to termwise complex functors. The exact localization universal property preserves compositions, identities and natural isomorphisms; its full faithfulness identifies the two natural transformations. The mapDerivedCategory factorization equations identify the localized comparators with derivedComp and derivedIdentity, including all endpoint transports.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
+    "new-lem-sf-ambient-pullback-derived-composition-laws"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-ambient-pullback-site-constructions",
-  "def-pc-fibre-product",
-  "lem-trf-adjoint-composition-coherence",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property"
+  "new-lem-sf-ambient-pullback-ordinary-composition-laws",
+  "new-lem-sf-ambient-pullback-derived-composition-laws"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "F1",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Explicit specialization and glue for the cited adjunction, tensor and K-flat arguments; no change to the unit route."
+  "place": "The target is assembled from the strictly smaller ordinary and derived coherence statements."
  },
  "mathlib_searches": [
   {
@@ -112,8 +98,8 @@
   "declaration": "WeilConjectures.AmbientPullbackTensor.pullback_compositionLaws",
   "statement": "theorem pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :\n    CompositionLaws ell E K s",
   "branch": "sheaf-dag",
-  "by": "G2",
-  "date": "2026-10-26"
+  "by": "F1",
+  "date": "2026-10-28"
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -128,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-c03e3",
-  "group": "G2",
-  "result": "fix",
-  "landing": "20261027T205959-L-1641374",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233919-L-4135976",
   "kind": "interface",
-  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

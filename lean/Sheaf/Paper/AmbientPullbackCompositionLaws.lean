@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.Paper.AmbientPullbackTensorData
+import Sheaf.Paper.AmbientPullbackOrdinaryCompositionLaws
+import Sheaf.Paper.AmbientPullbackDerivedCompositionLaws
 
 /-! # Components of ambient pullback coherence
 
@@ -41,6 +43,9 @@ categories. The exact-factorization isomorphisms identify these localized
 comparisons with derivedComp and derivedIdentity. All restrictions, including
 horizontal restrictions, occur on the original ringed site. -/
 theorem pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
-    CompositionLaws ell E K s := by sorry
+    CompositionLaws ell E K s := by
+  obtain ⟨ho₁, ho₂, ho₃⟩ := ordinary_pullback_compositionLaws ell E K s
+  obtain ⟨hd₁, hd₂, hd₃⟩ := derived_pullback_compositionLaws ell E K s
+  exact ⟨ho₁, ho₂, ho₃, hd₁, hd₂, hd₃⟩
 
 end WeilConjectures.AmbientPullbackTensor
