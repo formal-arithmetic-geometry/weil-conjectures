@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.Sites.UnitHomEval
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
@@ -23,8 +24,8 @@ global section of `T̲ = C(-, T)`
 
 ## Main definitions and results
 
-* `Mod.globalSmul σ M`: the action `M ⟶ M` of a global section `σ : 𝟙 ⟶ R` of a monoid object
-  `R` on an `R`-module object `M`.
+* `Mod.regularHomAddEquiv`: morphisms of module objects out of `A` are the global sections of
+  the target.
 * `Sheaf.unitHomEvalAddEquiv`: morphisms `𝟙 ⟶ F` of abelian sheaves are the sections of `F`
   over a terminal object.
 * `Sheaf.constRingSheafSection`: the constant global section `t` of the constant ring sheaf `T`;
@@ -44,44 +45,11 @@ open CategoryTheory MonoidalCategory MonObj Limits Opposite Functor.LaxMonoidal
 
 open scoped CategoryTheory.Obj
 
-/-! ### The action of a global section on a module object -/
+/-! ### Morphisms out of the regular module object -/
 
 namespace CategoryTheory.Mod
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] {A : C} [MonObj A]
-
-/-- The action `M ⟶ M` of a global section `σ : 𝟙 ⟶ A` of a monoid object `A` on an `A`-module
-object `M`: `M ≅ 𝟙 ⊗ M ⟶ A ⊗ M ⟶ M`. -/
-def globalSmul (σ : 𝟙_ C ⟶ A) (M : Mod C A) : M.X ⟶ M.X :=
-  (λ_ M.X).inv ≫ σ ▷ M.X ≫ act M.X
-
-/-- The linear map `A ⟶ M` sending `1` to `m` sends the global section `σ` to `σ • m`. -/
-lemma comp_regularLift_hom (σ : 𝟙_ C ⟶ A) (M : Mod C A) (m : 𝟙_ C ⟶ M.X) :
-    σ ≫ (regularLift M m).hom = m ≫ globalSmul σ M := by
-  rw [regularLift, homMk_hom, globalSmul, rightUnitor_inv_naturality_assoc,
-    leftUnitor_inv_naturality_assoc, ← whisker_exchange_assoc, unitors_inv_equal]
-
-/-- The action of a global section on a restriction of scalars is the action of its image. -/
-lemma globalSmul_comap {B : C} [MonObj B] (f : A ⟶ B) [IsMonHom f] (σ : 𝟙_ C ⟶ A)
-    (M : Mod C B) : globalSmul σ ((comap f).obj M) = globalSmul (σ ≫ f) M := by
-  rw [globalSmul, globalSmul, act_comap_obj, comp_whiskerRight, Category.assoc]
-  rfl
-
-/-- Precomposing a morphism `x : A ⟶ M` with the multiplication by a global section `σ` of `A`
-is acting by `σ` on its value at `1`. -/
-lemma one_comp_regularLift_comp_hom (σ : 𝟙_ C ⟶ A) {M : Mod C A} (x : regular A ⟶ M) :
-    η[A] ≫ (regularLift (regular A) σ ≫ x).hom = (η[A] ≫ x.hom) ≫ globalSmul σ M := by
-  have hx : x = regularLift M (η[A] ≫ x.hom) := regular_hom_ext (one_comp_regularLift M _).symm
-  rw [Mod.comp_hom', ← Category.assoc, one_comp_regularLift, ← comp_regularLift_hom, ← hx]
-
-/-- The action of the image `ε ≫ F σ` of a global section on `F M` is the image of the action
-of `σ` on `M`, for a lax monoidal functor `F`. -/
-lemma globalSmul_mapMod {D : Type*} [Category* D] [MonoidalCategory D] (F : C ⥤ D)
-    [F.LaxMonoidal] (σ : 𝟙_ C ⟶ A) (M : Mod C A) :
-    globalSmul (ε F ≫ F.map σ) ((F.mapMod A).obj M) = F.map (globalSmul σ M) := by
-  rw [globalSmul, globalSmul, Functor.map_comp, Functor.map_comp, ← left_unitality_inv,
-    Category.assoc, Category.assoc, ← μ_natural_left_assoc, comp_whiskerRight_assoc]
-  rfl
 
 section Preadditive
 

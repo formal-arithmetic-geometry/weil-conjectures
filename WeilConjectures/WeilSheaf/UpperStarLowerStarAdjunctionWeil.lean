@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Triangulated.AdjunctionUnitLocal
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.Triangle
@@ -33,28 +34,6 @@ open CategoryTheory Limits Endofunctor
 namespace CategoryTheory.Adjunction
 
 variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
-
-/-- The unit of an adjunction is invertible at `X` if and only if it is at an isomorphic `Y`. -/
-lemma isIso_unit_app_iff_of_iso_obj {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) {X Y : C} (e : X ≅ Y) :
-    IsIso (adj.unit.app X) ↔ IsIso (adj.unit.app Y) := by
-  have h := adj.unit.naturality e.hom
-  simp only [Functor.id_map, Functor.comp_map] at h
-  constructor
-  · intro
-    have : IsIso (e.hom ≫ adj.unit.app Y) := by rw [h]; infer_instance
-    exact IsIso.of_isIso_comp_left e.hom _
-  · intro
-    have : IsIso (adj.unit.app X ≫ R.map (L.map e.hom)) := by rw [← h]; infer_instance
-    exact IsIso.of_isIso_comp_right _ (R.map (L.map e.hom))
-
-/-- If the counit of an adjunction is invertible at `L X`, the image under `L` of the unit at `X`
-is invertible. -/
-instance isIso_map_unit_app_of_isIso_counit_app {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (X : C)
-    [IsIso (adj.counit.app (L.obj X))] : IsIso (L.map (adj.unit.app X)) := by
-  have h : L.map (adj.unit.app X) ≫ adj.counit.app (L.obj X) = 𝟙 _ :=
-    adj.left_triangle_components X
-  have : IsIso (L.map (adj.unit.app X) ≫ adj.counit.app (L.obj X)) := by rw [h]; infer_instance
-  exact IsIso.of_isIso_comp_right _ (adj.counit.app (L.obj X))
 
 /-- Let `L ⊣ R` be an adjunction whose right adjoint is a composite `R ≅ R₂ ⋙ R₁` of right
 adjoints of `L₁ ⊣ R₁` and `L₂ ⊣ R₂`. If the unit of `L₁ ⊣ R₁` is invertible at `X` and the unit
