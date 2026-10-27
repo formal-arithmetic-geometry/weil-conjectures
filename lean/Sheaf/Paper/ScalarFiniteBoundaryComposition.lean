@@ -45,6 +45,28 @@ def scalarFiniteBoundary_integral (l : ℕ) [Fact l.Prime]
   mapSingleArrow (abEvaluation T n) (2 : ℤ) (underlyingChernArrow l c f)
 
 
+/-! Endpoint-witness reduction for the finite-boundary calculation.
+
+Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`,
+clause (2), endpoint transport and evaluation calculation.
+(blueprint: lem-sfb-scalar-finite-boundary-composition-endpoints). -/
+theorem scalarFiniteBoundary_boundaryEquality (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {T : Scheme.{u}} (c : Chern l E T)
+    (hc : unitNormalization c.scalar.T
+      (SemilinearSections.res.{u + 1, u, u + 1} (coefficientSystemMap l E T))
+      c.scalar.adjunction c.scalarUnit (scalarGenerator l E T))
+    (f : unit T (Rrings l T) ⟶
+      ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj
+        c.rootModule)⟦(2 : ℤ)⟧) (n : ℕ) :
+    finiteBoundaryEquality
+      ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map (finiteQuotient l E T n))
+      ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+        (finiteRootMap l E T n)⟦(2 : ℤ)⟧')
+      (scalarFiniteBoundary_eval l E c f n)
+      (scalarFiniteBoundary_integral l E c f n) := by
+  sorry
+
 /--
 The evaluated scalar arrow and the underlying integral arrow have the same finite
 boundary composite. This is the composition identity used to construct the
@@ -82,7 +104,11 @@ theorem scalarFiniteBoundary_composition (l : ℕ) [Fact l.Prime]
       scalarFiniteBoundary_integral l E c f n ≫
         (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
           (finiteRootMap l E T n)⟦(2 : ℤ)⟧' := by
-  sorry
+  rcases scalarFiniteBoundary_boundaryEquality l E c hc f n with
+    ⟨a, b, ha, hb, hab⟩
+  have ha' : a = scalarFiniteBoundary_eval l E c f n := eq_of_heq ha
+  have hb' : b = scalarFiniteBoundary_integral l E c f n := eq_of_heq hb
+  simpa [ha', hb'] using hab
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 
