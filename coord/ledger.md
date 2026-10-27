@@ -20013,3 +20013,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:00 L: merged deliver/H9/Sheaf.WeilSheaf.SmoothDualizingConcentration (stage 3; reviewer PASS; first push; landing 20261027T210053-L-1652721 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:00 L: merged deliver/J3/Sheaf.Paper.RationalP1ScalarChernQSplitting (stage 3; reviewer PASS; first push; landing 20261027T210055-L-1653112 (interface); batch 20261027T205736; modules 3; new nodes 2; change records: coord/changes/scalar-q-splitting-inverse-components.md)
 - 21:00 L: merged deliver/J5/Sheaf.Paper.AdicSmoothDualizingComplexes (stage 3; reviewer PASS; first push; landing 20261027T210056-L-1653543 (interface); batch 20261027T205736; modules 1; new nodes 0)
+- 21:00 L: merged deliver/J5/Sheaf.Paper.IntegralSitePullbackEndpoints (stage 3; reviewer PASS; first push; landing 20261027T210057-L-1653813 (interface); batch 20261027T205736; modules 3; new nodes 2)

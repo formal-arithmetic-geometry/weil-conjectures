@@ -1,0 +1,118 @@
+{
+ "id": "lem-sp-integral-site-pullback-units-endpoint",
+ "kind": "statement",
+ "title": "Units endpoint square for etale-to-pro-etale pullback",
+ "statement": "For an arbitrary morphism f of schemes and a units map satisfying the chartwise pullback formula, the units endpoint equality in lem-sp-integral-site-pullback-endpoints.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), integral class change of site and its canonical units maps; Stacks Tag 00WX for inverse-image adjunctions"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-reduction",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-sfb-cartier-reduction-data",
+  "def-pur-proetale-units-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Transpose through the two inverse-image adjunctions. The hypothesis on a, the adjunction definition of cartierUnitsComparison, and the definition of upperStarGmSheafToGmSheaf give pullback of a unit along the same fibre-product projection on every chart. Adjunction injectivity proves the identity.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-sfb-cartier-reduction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), the ordinary integer and units comparison checks underlying the change-of-site step; expanded via Stacks Tag 00WX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the Picard line bundle Ext one class under pullback of schemes",
+   "results": "Generic scheme pullback composition only; local source search finds gmCohomologyMap_toCohomologicalPicardGroup, which will be used separately.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the integer and units endpoint squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySingleFunctor",
+   "results": "No remote hits; declaration not indexed by this service.",
+   "date": "2026-10-27",
+   "verdict": "Use local exact-functor API."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStarCompUpperStarIso|cartierUnitsComparison|integerComparison",
+   "results": "Source canonical site square and adjoint-defined units comparison; no combined endpoint comparison. Blueprint search for the same names finds general inverse-image coherence and Picard naturality, which do not assert these endpoint squares.",
+   "date": "2026-10-27",
+   "verdict": "The generic adjunction API supplies the proof, not a matching statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image comparison of constant integer sheaves and units sheaves across etale proetale site comparison",
+   "results": "Sheaf.mem_essImage_of_isConstant, sheafCongr.inverse_map_val_app, pullbackObjUnitToUnit and constant-sheaf counit lemmas. No compatibility of these concrete units and integer maps.",
+   "date": "2026-10-27",
+   "verdict": "No matching endpoint-square statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSitePullbackEndpoints",
+  "date": "2026-10-28",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-integral-site-pullback-endpoints",
+   "place": "Strictly simpler endpoint component of the conjunction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSitePullbackUnitsEndpoint",
+  "file": "lean/Sheaf/Paper/IntegralSitePullbackUnitsEndpoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.integral_site_pullback_units_endpoint",
+  "statement": "theorem integral_site_pullback_units_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (a : (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶\n      Scheme.proEtaleUnitsSheaf X)\n    (ha : ∀ (U : Y.ProEtᵒᵖ) (x : (Scheme.proEtaleUnitsSheaf Y).obj.obj U),\n      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _) a).hom.app\n          U x =\n        ULift.up (Additive.ofMul\n          (Units.map (pullback.fst U.unop.hom f).appTop.hom.toMonoidHom x.down.toMul))) :\n    let κ := comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f\n    (κ.inv.app Y.gmSheaf ≫\n        (upperStar AddCommGrpCat.{u + 1} f).map (cartierUnitsComparison Y) ≫ a =\n      (comparisonUpperStar AddCommGrpCat.{u + 1} X).map\n          (Scheme.upperStarGmSheafToGmSheaf f) ≫ cartierUnitsComparison X)",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T210057-L-1653813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T210057-L-1653813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

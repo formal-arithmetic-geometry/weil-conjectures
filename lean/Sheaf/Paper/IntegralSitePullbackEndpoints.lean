@@ -9,6 +9,8 @@ public import Sheaf.Paper.TowerClassReduction
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import Sheaf.Paper.IntegralSitePullbackIntegerEndpoint
+import Sheaf.Paper.IntegralSitePullbackUnitsEndpoint
 
 /-! # Integer and units endpoints in the change-of-site pullback square
 
@@ -79,7 +81,10 @@ theorem integral_site_pullback_endpoints {X Y : Scheme.{u}} (f : X ⟶ Y)
     (κ.inv.app Y.gmSheaf ≫
         (upperStar AddCommGrpCat.{u + 1} f).map (cartierUnitsComparison Y) ≫ a =
       (comparisonUpperStar AddCommGrpCat.{u + 1} X).map
-          (Scheme.upperStarGmSheafToGmSheaf f) ≫ cartierUnitsComparison X) := by sorry
+          (Scheme.upperStarGmSheafToGmSheaf f) ≫ cartierUnitsComparison X) := by
+  constructor
+  · exact integral_site_pullback_integer_endpoint f
+  · exact integral_site_pullback_units_endpoint f a ha
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 
