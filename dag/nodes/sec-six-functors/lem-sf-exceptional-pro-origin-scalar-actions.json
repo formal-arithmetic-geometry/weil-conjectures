@@ -1,0 +1,106 @@
+{
+ "id": "lem-sf-exceptional-pro-origin-scalar-actions",
+ "kind": "statement",
+ "title": "Scalar actions for exceptional pro-etale operations",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "For the fixed strict etale exceptional adjunction, site comparisons and pro-etale compact-support package, there are canonical coefficient scalar-action packages on the source and target pro-etale systems, and both exceptional composites carry derived scalar multiplication to the corresponding scalar component.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Proposition 2.29(2), Construction 5.15 and Lemma 5.22."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-system-transport-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Define multiplication by the scalar image on each quotient coefficient sheaf, form the compatible ordinary system endomorphisms, and descend them through derived localization. The comparison equations for inverse image, open extension, proper direct image and the etale right adjoint transport these maps through both composites. The localization universal property gives the two displayed derived linearity equations.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-etale-coefficient-system-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Separated scalar-localization portion of system-transport step 8"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalProScalarActions",
+  "file": "lean/Sheaf/Paper/ExceptionalProScalarActions.lean",
+  "declaration": "AlgebraicGeometry.exceptionalProScalarActions",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-28",
+  "statement": "theorem exceptionalProScalarActions : ∃ (scalarX : ExceptionalProScalarAction X O ell) (scalarY : ExceptionalProScalarAction Y O ell), (∀ r M, (exceptionalProSupport P).map ((scalarX.derived r).app M) = (scalarY.derived r).app ((exceptionalProSupport P).obj M)) ∧ (∀ r N, (exceptionalSystemRight G CX CY).map ((scalarY.derived r).app N) = (scalarX.derived r).app ((exceptionalSystemRight G CX CY).obj N))"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural scalar action on derived localization functor",
+   "results": "No matching project-specific scalar-localization construction found; generic derived functor APIs only.",
+   "date": "2026-10-28",
+   "verdict": "no match: the required coefficient-system scalar packages are project-specific."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory localization natural transformation scalar action",
+   "results": "No matching theorem gives the two exceptional-system linearity equations.",
+   "date": "2026-10-28",
+   "verdict": "no match: generic localization declarations do not construct these actions."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*derived|linear.*exceptionalPro|ExceptionalProScalarAction",
+   "results": "Search found only the project interfaces and this split theorem; no existing proof declaration.",
+   "date": "2026-10-28",
+   "verdict": "no existing library theorem closes the scalar-action construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalProOriginExactLinear",
+  "date": "2026-10-28",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-pro-origin-exact-linear",
+   "place": "Scalar-action portion of exactness and scalar actions of pro-etale origin operations",
+   "via": [
+    "lem-sf-exceptional-pro-origin-exact-linear"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261027T180839-L-3908799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261027T180839-L-3908799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

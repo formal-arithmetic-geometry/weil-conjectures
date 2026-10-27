@@ -19827,3 +19827,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:08 L: merged deliver/U5/Sheaf.Paper.EtaleCofinalSupportComposition (stage 3; reviewer PASS; first push; landing 20261027T180835-L-3908230 (proof); batch 20261027T180444; modules 1; new nodes 0)
 - 18:08 L: merged deliver/U6/Sheaf.Paper.EtaleCofinalSupportRealization (stage 3; reviewer PASS; first push; landing 20261027T180837-L-3908390 (interface); batch 20261027T180444; modules 4; new nodes 3)
 - 18:08 L: merged deliver/U7/Sheaf.Paper.ExceptionalOriginAdjunctionEvaluation (stage 3; reviewer PASS; first push; landing 20261027T180838-L-3908576 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:08 L: merged deliver/U8/Sheaf.Paper.ExceptionalProOriginExactLinear (stage 3; reviewer PASS; first push; landing 20261027T180839-L-3908799 (interface); batch 20261027T180444; modules 2; new nodes 1; change records: coord/changes/ExceptionalProOriginExactLinear.md)
