@@ -6,6 +6,7 @@ Authors: SHEAF group E9
 module
 
 public import Sheaf.Paper.RationalP1ScalarChernMaps
+import Sheaf.Paper.ScalarP1UnitMateComponent
 
 /-! # Component equations for scalar Chern base change
 
@@ -19,6 +20,7 @@ set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -65,6 +67,9 @@ theorem scalar_chern_base_change_unit
     let c₂ := scalarP2Chern l c Y r b
     let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)
     F.map uq ≫ secondTraceExchange l c k p hpl Y =
-        (scalarQLineIso l c k p hpl Y).hom ≫ u₂ := by sorry
+        (scalarQLineIso l c k p hpl Y).hom ≫ u₂   := by
+  simpa only using
+    (scalar_p1_unit_mate_component l c k p hpl Y)
+
 
 end AlgebraicGeometry.ProEtale.RationalP1
