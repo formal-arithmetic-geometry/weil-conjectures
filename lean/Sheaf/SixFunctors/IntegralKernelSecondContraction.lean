@@ -6,6 +6,7 @@ Authors: SHEAF group P2
 module
 public import Sheaf.SixFunctors.IntegralKernelUnitCounit
 public import Sheaf.SixFunctors.IntegralNormalizedFamily
+import Sheaf.SixFunctors.IntegralKernelSecondContractionPostcomp
 /-! # Split integral diagonal contraction -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,5 +58,11 @@ theorem integralKernel_second_contraction
             (RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)
               (ProjectiveLine Y)).hom)) ≫
         (ρ_ (((restrictedPull ℓ E (ProjectiveLine Y ↘ Y) 1 hq).obj K).obj)).hom) := by
-  sorry
+  intro K
+  let e := (integralAmbientTwistIso ℓ E (ProjectiveLine Y ↘ Y)).app K.obj
+  have h := integralKernel_second_contraction_postcomp ℓ E k Y hq hr family _href a _hnorm K
+  apply (cancel_mono e.hom).mp
+  simpa only [Category.assoc] using h
+
+
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction

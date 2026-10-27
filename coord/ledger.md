@@ -19925,3 +19925,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/C1/Sheaf.TraceFormula.ProjectiveBundleProper (stage 3; reviewer PASS; after a return; landing 20261027T205822-L-1620572 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:58 L: merged deliver/C3/Sheaf.AlgebraicGeometry.SymmetricProjSectionCompatibility (stage 3; reviewer PASS; first push; landing 20261027T205823-L-1620957 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 20:58 L: merged deliver/C3/Sheaf.Paper.StrictTateTensorTowerLift (stage 3; reviewer PASS; first push; landing 20261027T205824-L-1621301 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:58 L: merged deliver/C3/Sheaf.SixFunctors.IntegralKernelSecondContraction (stage 3; reviewer PASS; first push; landing 20261027T205826-L-1621801 (interface); batch 20261027T205736; modules 2; new nodes 1)
