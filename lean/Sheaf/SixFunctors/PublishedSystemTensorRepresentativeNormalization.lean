@@ -72,6 +72,88 @@ noncomputable def publishedSystemTransportedTensor {X Y : Scheme.{u}} (f : X ⟶
         (publishedSystemAmbientPullIso l E f)).symm
       (pullbackTensorCalculus l E X).systemClosed.tensor)
 
+/-- The ambient representative rectangle on flat-term K-flat complexes. This is the
+flat representative part of the descent argument for arbitrary K-flat complexes.
+Source: Stacks 03D3, 03EL, 07A4 and 07A7.
+(blueprint: lem-sf-published-system-tensor-identification-representative-flat).
+-/
+theorem publishedSystemTransportedTensor_normalized_flat {X Y : Scheme.{u}}
+    (f : X ⟶ Y)
+    (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)
+    (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))
+      (pullbackTensorSequenceSmall Y)
+      (coefficientSequenceTopology (ProEt.topology Y))
+      (coefficientSequenceCommRingSheaf l E Y) P)
+    (hQ : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))
+      (pullbackTensorSequenceSmall Y)
+      (coefficientSequenceTopology (ProEt.topology Y))
+      (coefficientSequenceCommRingSheaf l E Y) Q)
+    (flatP : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+      (coefficientSequenceTopology (ProEt.topology Y))
+      (coefficientSequenceCommRingSheaf l E Y) P)
+    (flatQ : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+      (coefficientSequenceTopology (ProEt.topology Y))
+      (coefficientSequenceCommRingSheaf l E Y) Q) :
+    (pullbackTensorSequenceDerived l E f).map
+        (pullbackTensorSystemModel l E Y P Q hP hQ).hom ≫
+      (publishedSystemTransportedTensor l E f).hom.app
+        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+      (pullbackTensorCalculus l E X).systemClosed.tensor.map
+        (Prod.mkHom
+          ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P)
+          ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app Q)) =
+    (pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app _ ≫
+      DerivedCategory.Q.map ((pullbackTensorSequenceCochain l E f).hom.app (P, Q)) ≫
+      (pullbackTensorSystemModel l E X _ _
+        (pullbackTensorSequenceGood l E f P hP)
+        (pullbackTensorSequenceGood l E f Q hQ)).hom := by
+  sorry
+
+/-- The flat representative rectangle determines the transported comparison by
+K-flat tensor descent. The conclusion is an equality of tensor comparison isomorphisms,
+which is then used to extend the flat representative equation to all independent
+K-flat complexes.
+Source: Stacks 06YU and 07A4.
+(blueprint: lem-sf-published-system-tensor-identification-representative-descent).
+-/
+theorem publishedSystemTransportedTensor_eq_of_flat_normalized {X Y : Scheme.{u}}
+    (f : X ⟶ Y)
+    (hflat : ∀ (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)
+      (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+        (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))
+        (pullbackTensorSequenceSmall Y)
+        (coefficientSequenceTopology (ProEt.topology Y))
+        (coefficientSequenceCommRingSheaf l E Y) P)
+      (hQ : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+        (ℕ × Y.ProEt) (inferInstance : Category.{u} (ℕ × Y.ProEt))
+        (pullbackTensorSequenceSmall Y)
+        (coefficientSequenceTopology (ProEt.topology Y))
+        (coefficientSequenceCommRingSheaf l E Y) Q)
+      (flatP : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (ProEt.topology Y))
+        (coefficientSequenceCommRingSheaf l E Y) P)
+      (flatQ : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (ProEt.topology Y))
+        (coefficientSequenceCommRingSheaf l E Y) Q),
+      (pullbackTensorSequenceDerived l E f).map
+          (pullbackTensorSystemModel l E Y P Q hP hQ).hom ≫
+        (publishedSystemTransportedTensor l E f).hom.app
+          (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+        (pullbackTensorCalculus l E X).systemClosed.tensor.map
+          (Prod.mkHom
+            ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app P)
+            ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app Q)) =
+      (pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app _ ≫
+        DerivedCategory.Q.map ((pullbackTensorSequenceCochain l E f).hom.app (P, Q)) ≫
+        (pullbackTensorSystemModel l E X _ _
+          (pullbackTensorSequenceGood l E f P hP)
+          (pullbackTensorSequenceGood l E f Q hQ)).hom) :
+    publishedSystemTransportedTensor l E f =
+      pullbackTensorSystemComparison l E f := by
+  sorry
+
 /-- On flat K-flat representatives, the transported ambient comparison has the
 same inverse representative rectangle as `pullbackTensorSystemComparison`.
 Source: Stacks 03D3, 03EL, 07A4 and 07A7, representative normalization of the
@@ -106,7 +188,12 @@ theorem publishedSystemTransportedTensor_normalized {X Y : Scheme.{u}}
       (pullbackTensorSystemModel l E X _ _
         (pullbackTensorSequenceGood l E f P hP)
         (pullbackTensorSequenceGood l E f Q hQ)).hom := by
-  sorry
+  have heq := publishedSystemTransportedTensor_eq_of_flat_normalized l E f
+    (fun P Q hP hQ flatP flatQ ↦
+      publishedSystemTransportedTensor_normalized_flat l E f P Q hP hQ flatP flatQ)
+  rw [heq]
+  exact (pullbackTensorSystemComparison_existsUnique l E f).exists.choose_spec P Q hP hQ
+
 
 /-- The representative normalization determines the transported comparison by the
 existing uniqueness theorem. -/
