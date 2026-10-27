@@ -298,6 +298,18 @@ theorem coefficient_proper_transpose {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     (CondensedRing.derivedUpperStarLowerStarAdjunction Λ' g)
     (CondensedRing.derivedComapLowerStarIso α g) L
 
+private theorem scalarOpenInverseMate'
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {LA : C ⥤ D} {JA : D ⥤ C} {LB : E ⥤ F} {JB : F ⥤ E}
+    {SX : D ⥤ F} {RX : F ⥤ D} {SU : C ⥤ E} {RU : E ⥤ C}
+    (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (u : SU ⊣ RU)
+    (q : JB ⋙ RU ≅ RX ⋙ JA) :
+    ((mateEquiv a b).symm
+      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans =
+      ((conjugateIsoEquiv (u.comp b) (a.comp x)).symm q).inv := by
+  exact congrArg TwoSquare.natTrans
+    (iterated_mateEquiv_conjugateEquiv_symm a b u x (TwoSquare.mk _ _ _ _ q.inv))
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The inverse open scalar comparison is exactly the open-unit adjunct.
@@ -315,6 +327,7 @@ theorem coefficient_open_unit {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion 
           (CondensedRing.derivedPullIso α j).hom.app
             ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj K)) := by
   sorry
+
 
 end CoefficientProjection
 
