@@ -1,31 +1,31 @@
 # Work queue
 
-329 items; claim with `tools/claim.py next <group> [--stage N]`.
+325 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (1 clusters, 183 modules)
+## Rework: quarantined by the upstream sync (2 clusters, 12 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
+| `Sheaf.Paper.ClopenCanonicalFiniteEvaluation` | 1 |  | error: Sheaf/Paper/ClopenCanonicalFiniteEvaluation.lean:96:63: error: synthesized type class instance is not definitionally equal to expression inferred by typi |
 | `Sheaf.Paper.NativeWeilScalarCounitData` | 1 |  | error: NOT ACCEPTED: compiled in 84.6 s > 60 s, the limit for one file (SHEAF_FILE_TIMEOUT). It ran up to 120 s only so that the slow declarations finish and re |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 0, stage 3 3 items.
 
-## Stage 1: nodes to split (3)
+## Stage 1: nodes to split (1)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-route-twist-scalar-maps-exists-unique` | 2006 | none |
-| `lem-pur-integral-scalar-reduction-intertwining` | 6005 | none |
-| `lem-pur-system-scalar-associator-coherence` | 6005 | none |
+| `lem-pur-scalar-reduction-transpose-normalization` | 6006 | none |
 
-## Stage 2: nodes to state (14)
+## Stage 2: nodes to state (16)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `lem-pur-general-legacy-hom-coordinates` | 1 | state | 2 |
 | `lem-sp-ctf-tower-pullback-reconstruction` | 1 | state | 1 |
+| `lem-pur-system-scalar-associator-coherence` | 1 | state | 0 |
 | `lem-pur-tower-purity-ground-field-retagging` | 1 | state | 0 |
 | `lem-sf-native-ordinary-chain-currying` | 1 | state | 0 |
 | `lem-sf-native-ordinary-model-uniqueness` | 1 | state | 0 |
@@ -34,14 +34,15 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-composition-comparison-scalar-compatibility` | 2 | state | 0 |
 | `lem-pur-integral-braiding-naturality` | 2 | state | 0 |
 | `lem-pur-integral-braiding-scalar-extension-square` | 2 | state | 0 |
+| `lem-pur-integral-scalar-reduction-intertwining` | 2 | state | 0 |
 | `lem-pur-integral-tensor-associator-naturality` | 2 | state | 0 |
 | `lem-pur-rational-normalized-purity-diagrams` | 2 | state | 0 |
 | `lem-pur-rational-tensor-associator-scalar-square` | 2 | state | 0 |
 | `lem-pur-rational-braiding-scalar-compatibility` | 3 | state | 0 |
 
-Not open yet: 1130 nodes that below a finished node, not needed, 3 nodes that wait for a statement dependency (bottom-up), 2 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 1130 nodes that below a finished node, not needed, 3 nodes that wait for a statement dependency (bottom-up), 1 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (309)
+## Stage 3: modules to prove (305)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -61,10 +62,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedLineTensorCoherence` | 4 | 7 | proof | route |
 | `Sheaf.Paper.CoefficientTwistsDetailed` | 5 | 2 | proof | route |
 | `Sheaf.Paper.DerivedPullbackTensorHom` | 5 | 1 | proof | route |
-| `Sheaf.Paper.StrictTateTensorTowerLiftData` | 5 | 1 | proof | route |
-| `Sheaf.Paper.StrictTateTensorTowerLiftEvaluation` | 5 | 1 | proof | route |
-| `Sheaf.Paper.TateTensorGeneratorIsIso` | 5 | 1 | proof | route |
-| `Sheaf.Paper.TateTensorNormalizedSquarePair` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison` | 6 | 1 | proof | route |
 | `Sheaf.Paper.CompletedPullbackTensorConstruction` | 6 | 1 | proof | route |
 | `Sheaf.Paper.PullbackTensorCommonStageCompositionCoherence` | 6 | 1 | proof | route |
@@ -74,7 +71,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PullbackTensorRationalCompositionCoherence` | 6 | 1 | proof | route |
 | `Sheaf.Paper.PullbackTensorRationalUnitCoherence` | 6 | 1 | proof | route |
 | `Sheaf.Paper.SfCompactSupportRestrictionOfScalars` | 6 | 1 | proof | route |
-| `Sheaf.Paper.TateTensorGeneratorMap` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclic` | 7 | 1 | proof | route |
 | `Sheaf.CategoryTheory.GeometricRingInverseImage` | 7 | 1 | proof | route |
 | `Sheaf.Paper.CompletedPullbackTowerRealizations` | 7 | 1 | proof | route |
@@ -215,6 +211,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProEtaleClopenBraidedModelNormalization` | 16 | 1 | proof | route |
 | `Sheaf.Paper.AdicCompletedTensorCommonLiftCoherence` | 16 | 1 | proof | route |
 | `Sheaf.Paper.CanonicalSectionProjectionTransport` | 16 | 1 | proof | route |
+| `Sheaf.Paper.DerivedAutomorphismHomEvaluationBase` | 16 | 2 | proof | route |
 | `Sheaf.Paper.DiagonalCyclicEvaluationTransport` | 16 | 1 | proof | route |
 | `Sheaf.Paper.ExceptionalScalarMateLocalization` | 16 | 1 | proof | route |
 | `Sheaf.Paper.FiniteFreeScalarDerivedComparison` | 16 | 2 | proof | route |
