@@ -1,0 +1,111 @@
+{
+ "kind": "lemma",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Retained proof steps 6--8: exceptional scalar cocycles and prescribed common-stage associators"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "group": "G4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Retained proof steps 6--8: exceptional scalar cocycles and prescribed common-stage associators"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierExceptional",
+  "date": "2026-10-28",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Retained steps 6--8, finite exceptional scalar cocycles",
+   "via": [
+    "lem-coef-qbar-verdier-exceptional-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-coef-qbar-rational-scalar-cocycles",
+ "title": "Reindex the rational exceptional scalar cocycles",
+ "statement": "Fix a finite-field datum D, a prime l different from D.p, separated finite-type D.k-schemes X and Y, a separated finite-type morphism f:X to Y, a compactification c and a coefficient-compatible exceptional system S at the auxiliary small closure as in [lem-sf-constructible-exceptional-adjunction-coefficients]. For finite coefficient field stages E,L,M, algebra maps i:E to L, j:L to M and k:E to M with j.comp i=k, both the left and the right S scalar comparisons satisfy CoefficientCocycleCondition for the literal scalarAssociator on X and Y (in reversed order for the right functors). Here CoefficientCocycleCondition means the component equation T_Y(j).map(q_i.hom.app K) followed by q_j.hom.app(T_X(i).obj K) followed by F_M.map(aX.hom.app K) equals aY.hom.app(F_E.obj K) followed by q_k.hom.app K, for every finite-stage object K; the right equation replaces F by G, q by b and interchanges X and Y.",
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Substitute k using the equality j.comp i=k. Unfold scalarAssociator; its final equality comparison is the identity, so the assertion is the existing rationalCocycle of S. Retain its two equations in CoefficientCocycleCondition, whose constructor is proved for abstract field stages before specialization to small coefficient models.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FieldCocycle|scalarAssociator|coefficientInclusion_laws",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; direct equality transport of the existing system cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.NatIso",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; direct equality transport of the existing system cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindex scalar extension cocycles by equality of composite algebra maps and transport them to chosen stage associators",
+   "results": "{\"n_hits\": 8, \"top\": [\"Algebra.Extension.H1Cotangent.map_comp\", \"Algebra.Extension.H1Cotangent.map_eq\", \"Algebra.Generators.H1Cotangent.\\u03b4_comp_equiv\", \"Algebra.H1Cotangent.mapEquiv\", \"ModuleCat.extendScalars_assoc_assoc\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"ModuleCat.extendScalarsComp\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\"], \"note\": \"\", \"digest\": \"4106735136aa554e\"}",
+   "date": "2026-10-28",
+   "verdict": "no exact match; direct equality transport of the existing system cocycle"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarRationalScalarCocycles",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarRationalScalarCocycles.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.rational_scalar_cocycles",
+  "declarations": [
+   "CoefficientCocycleCondition",
+   "WeilConjectures.CoefQbarVerdier.rational_scalar_cocycles"
+  ],
+  "statement": "theorem rational_scalar_cocycles (c : Compactification f)\n    (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f))\n    (E L M : ConstructibleExceptionalCoefficients.FieldStage.{u} l)\n    (i : E.carrier →ₐ[Padic l] L.carrier) (j : L.carrier →ₐ[Padic l] M.carrier)\n    (k : E.carrier →ₐ[Padic l] M.carrier) (hk : j.comp i = k) :\n    let r₀ := S.fields.rationalComparison c E L i\n    let r₁ := S.fields.rationalComparison c L M j\n    let r₂ := S.fields.rationalComparison c E M k\n    let aX := GeneralAlgebraicallyClosedCoefficients.scalarAssociator\n      l E.carrier L.carrier M.carrier i j k hk X\n    let aY := GeneralAlgebraicallyClosedCoefficients.scalarAssociator\n      l E.carrier L.carrier M.carrier i j k hk Y\n    CoefficientCocycleCondition (S.ring.operation c (.rational E)).F\n      (S.ring.operation c (.rational L)).F (S.ring.operation c (.rational M)).F\n      r₀.q r₁.q r₂.q aX aY ∧\n    CoefficientCocycleCondition (S.ring.operation c (.rational E)).G\n      (S.ring.operation c (.rational L)).G (S.ring.operation c (.rational M)).G\n      r₀.b r₁.b r₂.b aY aX",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T210010-L-1643710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T210010-L-1643710",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

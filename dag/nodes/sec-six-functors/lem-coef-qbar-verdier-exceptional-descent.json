@@ -12,47 +12,44 @@
  ],
  "proof": [
   {
-   "text": "Take the single exceptional system from RationalOperations at the auxiliary small closure and use only its finite rational fields. Its scalar cocycle and identity formulas, together with the canonical scalar associator normalization, define coherent morphisms of the actual X and Y stage systems. Their descended object maps retain the coefficient stage and yield identity inclusion comparisons.",
+   "text": "Choose the existing coefficient-compatible exceptional system at the auxiliary small closure. Reindex its finite rational scalar cocycles by the actual coefficient-inclusion composition law. Equality transport along the prescribed stage-transition equalities gives coherent left and right StageSystem morphisms with literal finite functors as their components.",
    "uses": [
-    "lem-coef-rational-operations",
-    "lem-weil-scalar-extension-composition",
-    "lem-sbc-coherent-pair-functor-descent",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-coef-qbar-finite-scalar-cocycles",
     "def-weil-algebraically-closed-coefficients"
    ],
    "elementary": false
   },
   {
-   "text": "The finite scalar comparison is the adjunction mate, so the finite units and counits form compatible natural-transformation families. Apply compatible-unit-and-counit adjunction descent. Its explicit components give every required unit, counit and scalar equation in ExceptionalProperties.",
+   "text": "The coefficient-system mate equations give compatible finite units and counits after the same equality transport. Apply StageSystem.Morphism.adjunction to construct the descended adjunction. Its component theorems prove both unit and counit equations. Prove the scalar squares directly on common-stage representatives using the morphism cocycle at a repeated final stage. The inclusion comparisons have identity components, and both object formulas are definitional. Thus every ExceptionalProperties conjunct holds.",
    "uses": [
-    "lem-coef-qbar-stage-adjunction-descent"
+    "lem-coef-qbar-stage-adjunction-descent",
+    "lem-pur-associative-stage-family-descent"
    ],
    "elementary": false
   },
   {
-   "text": "At each field identify the specified rational dualities with the canonical finite internal-Hom descriptions by uniqueness of the normalized evaluation transpose. Transport the rational exceptional comparison through those identifications. Its scalar squares and those of pullback make it and its inverse compatible families. Descend them to inverse natural transformations. The published pullback object formula and the given BX and BY inclusion comparisons give exactly ExceptionalFormula.normalized.",
+   "text": "Apply the normalized finite-exceptional-formula theorem to the chosen system and specified BX and BY. At each field compose the inverse exceptional inclusion comparison with its finite formula comparison. Their transition compatibility follows by cancelling the invertible scalar map in the two scalar squares. Glue these local isomorphisms: every common-stage map factors as an inverse transition, an included finite map and a transition, so local naturality and the transition squares imply naturality on all pair morphisms. NatIso.ofComponents supplies the global inverse. At a finite pair its component is literally the local component, so cancellation with the exceptional inclusion comparison proves ExceptionalFormula.normalized.",
    "uses": [
-    "lem-coef-rational-operations",
-    "lem-pur-integral-operations-scalar-extension",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-exceptional-inverse-image"
+    "lem-coef-qbar-finite-exceptional-formula",
+    "def-weil-algebraically-closed-coefficients"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-rational-operations",
-  "lem-sbc-coherent-pair-functor-descent",
-  "lem-coef-qbar-stage-adjunction-descent",
-  "lem-weil-scalar-extension-composition",
-  "lem-pur-integral-operations-scalar-extension",
-  "def-weil-exceptional-inverse-image",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-coef-qbar-finite-scalar-cocycles",
   "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-pullback-tensor-hom"
+  "lem-coef-qbar-stage-adjunction-descent",
+  "lem-pur-associative-stage-family-descent",
+  "lem-coef-qbar-finite-exceptional-formula"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "G4",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
-  "place": "Formal categorical expansion of the retained common-stage argument, retained proof steps 6--9, exceptional functor and normalized Verdier formula"
+  "place": "Retained steps 6--9: explicit finite cocycle reindexing, unit/counit descent, and gluing normalized finite formula comparisons"
  },
  "mathlib_searches": [
   {
@@ -124,13 +121,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-07b3e",
-  "group": "V1",
-  "result": "fix",
-  "landing": "20261025T203436-L-2817454",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T210010-L-1643710",
   "kind": "interface",
-  "note": "independent cc review: delivered CoefQbarVerdier/Data/Core/InternalHom/Exceptional/Dualizing + StageSystemOpposite/Adjunction and 8 node files against the published CoefQbarVerdier.lean (diff: data block verbatim except subtype wrappers and 4 dropped private imports), the RationalOperations identification theorems, and the six direct importers compiled against the delivered oleans"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
