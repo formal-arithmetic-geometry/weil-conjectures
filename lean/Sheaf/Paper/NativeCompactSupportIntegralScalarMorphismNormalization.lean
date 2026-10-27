@@ -8,6 +8,9 @@ public import Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismExistence
 
 /-! Six-arrow normalization for a factorized integral scalar morphism. -/
 
+/- STATEMENT-DISPUTED: hfac permits arbitrary middle automorphism adjustments
+   of b and d, while the conclusion fixes their canonical outer factors. -/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
