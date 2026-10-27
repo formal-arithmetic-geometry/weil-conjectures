@@ -19574,3 +19574,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:16 L: returned deliver/E2/Sheaf.Paper.QcqsCompactSupportTorsionInputDetection (reviewer RETURN: (the landing tools, head cae3e2f59) the delivery did not land: lean/Sheaf/Paper/QcqsCompactSupportTorsionInputDetection.)
 - 15:16 L: returned deliver/H1/Sheaf.Paper.AdicReindexingFunctoriality (reviewer RETURN: (the landing tools, head 31889a742) the delivery did not land: lean/Sheaf/Paper/AdicReindexingFunctoriality.lean was rem)
 - 15:16 L: returned deliver/R8/Sheaf.AlgebraicGeometry.SfDiagonalSectionForgetSupports (reviewer RETURN: (the landing tools, head 019de3f60) the delivery did not land: missing import source modules: Sheaf.AlgebraicGeometry.Sf)
+- 15:16 L: merged deliver/A4/Sheaf.AlgebraicGeometry.ProperOpenAlphaPasting (stage 3; reviewer PASS; after a return; landing 20261027T151644-L-1187363 (proof); batch 20261027T151642; modules 1; new nodes 0)
