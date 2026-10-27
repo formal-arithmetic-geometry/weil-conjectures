@@ -1,31 +1,21 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group B9
+Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.Paper.RationalP1SecondPullComparison
+public import Sheaf.Paper.ProjectiveSupportedSourceArrow
 
 /-! # Normalization of the supported coefficient source -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option Elab.async false
-set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-
 namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
-
-attribute [local irreducible] firstProjection secondProjection square
-attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
-attribute [local irreducible] projectionMap singleUnitIso
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
@@ -37,12 +27,8 @@ sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
 Second identity, source normalization after the full second derived unit.
 (blueprint: lem-sfb-projective-supported-source-normalization).
 
-Proof: unfold secondDiagramPushIso and use the canonical right-derived unit equation
-`d.p₂_unit` on the single regular module. The SupportNormalization field of
-`d.support₂` identifies its ordinary source isomorphism with the closed-section
-composition, which is exactly supportedUnitIso after passage to the fixed derived
-module interface. Naturality of the comparison then gives the displayed equality.
-No delta, trace, integration, or twist data is used. -/
+Proof: apply the supported arrow identity before tensor normalization, then
+precompose by `singleUnitIso.inv` and tensor by `M`. -/
 theorem supported_source_normalization
     (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)
     (d : Diagram Λ Y L)
@@ -55,6 +41,8 @@ theorem supported_source_normalization
       (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫
       (moduleObjectDerivedPushforward Λ (secondProjection Y)).map
         (supportedUnitIso Λ Y).hom)) := by
-  sorry
+  have h := supported_source_arrow Λ Y L d
+  simpa only [Category.assoc] using congrArg
+    (fun z ↦ M ◁ ((singleUnitIso Λ (ProjectiveLine Y)).inv ≫ z)) h
 
 end AlgebraicGeometry.ProEtale.RationalP1

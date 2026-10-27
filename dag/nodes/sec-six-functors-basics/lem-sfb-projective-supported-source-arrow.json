@@ -1,0 +1,114 @@
+{
+ "id": "lem-sfb-projective-supported-source-arrow",
+ "kind": "lemma",
+ "title": "Supported source arrow before tensor normalization",
+ "statement": "theorem supported_source_arrow\n    (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)\n    (d : Diagram Λ Y L) :\n    d.support₂.hom ≫ (secondDiagramPushIso Λ Y L d).hom.app\n        ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n          (source Λ Y)) =\n      (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫\n        (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n          (supportedUnitIso Λ Y).hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, before precomposition by singleUnitIso.inv and tensoring."
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-rational-p1-second-pull-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the canonical diagram right-derived unit on the supported module; apply support normalization and the ordinary-to-derived section comparison; cancel the diagonal single comparison. This is the untensored arrow identity used by the parent normalization theorem.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-category",
+    "def-sfb-rational-p1-second-pull-comparison",
+    "def-sfb-projective-diagonal-pullback",
+    "def-sfb-projective-diagonal-composition",
+    "lem-kun-right-derived-single-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-projective-diagonal-composition",
+  "lem-kun-right-derived-single-counit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity; split from the parent normalization proof by F2, 2026-10-28."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "section projection derived tensor",
+   "results": "No existing theorem states this internal-module derived identity.",
+   "date": "2026-10-28",
+   "verdict": "Use the stated canonical comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "section projection tensor derived",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "Use the project comparison declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical section projection identity for derived module pushforward",
+   "results": "No exact matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "Use the project comparison declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectiveSupportedSourceNormalization",
+  "date": "2026-10-28",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-supported-source-normalization",
+   "place": "The supported arrow before tensor normalization.",
+   "via": [
+    "lem-sfb-projective-supported-source-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectiveSupportedSourceArrow",
+  "file": "lean/Sheaf/Paper/ProjectiveSupportedSourceArrow.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.supported_source_arrow",
+  "statement": "theorem supported_source_arrow\n    (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)\n    (d : Diagram Λ Y L) :\n    d.support₂.hom ≫ (secondDiagramPushIso Λ Y L d).hom.app\n        ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n          (source Λ Y)) =\n      (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫\n        (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n          (supportedUnitIso Λ Y).hom",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T233923-L-4137111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T233923-L-4137111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

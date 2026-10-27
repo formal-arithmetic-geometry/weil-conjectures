@@ -20254,3 +20254,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/F1/Sheaf.Paper.AmbientPullbackCompositionLaws (stage 3; reviewer PASS; first push; landing 20261027T233919-L-4135976 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:39 L: merged deliver/F1/Sheaf.Paper.IntegralHomComparisonNormalization (stage 3; reviewer PASS; first push; landing 20261027T233920-L-4136269 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/F1/Sheaf.Paper.TateTensorNormalizedSquarePair (stage 3; reviewer PASS; first push; landing 20261027T233922-L-4136776 (interface); batch 20261027T233735; modules 6; new nodes 6)
+- 23:39 L: merged deliver/F2/Sheaf.Paper.ProjectiveSupportedSourceNormalization (stage 3; reviewer PASS; first push; landing 20261027T233923-L-4137111 (interface); batch 20261027T233735; modules 2; new nodes 1)
