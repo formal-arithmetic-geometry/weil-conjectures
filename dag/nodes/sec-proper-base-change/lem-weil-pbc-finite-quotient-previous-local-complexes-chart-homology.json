@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-previous-local-complexes-chart-homology",
+ "kind": "statement",
+ "title": "Homology transport for the previous quotient chart model",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "statement": "With the data of lem-weil-pbc-finite-quotient-previous-local-complexes-chart and a supplied chart comparison e, let Q be the complex obtained from P by restriction of scalars along A/I^(n+2) → A/I^(n+1). Then, in every integer degree q, the slice homology of finiteQuotientPreviousObject is isomorphic to the slice realization over φ_(n+1) of the homology of Q.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-coefficient-local-homology-models",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0942, 094H and 094I, exact realization on the previous-model cover"
+ },
+ "proof": [
+  {
+   "text": "Use exact restriction of scalars, slice restriction, and constant realization to apply the derived homology functor to the supplied comparison e; the compatibility square identifies the resulting constant complex with the restriction-of-scalars complex Q.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-coefficient-layer-data",
+    "def-weil-pbc-finite-coefficient-local-homology-models",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-finite-coefficient-local-homology-models",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0942, 094H and 094I, exact realization on the previous-model cover"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact restriction of scalars and slice realization preserve homology of a bounded complex",
+   "results": "General exact-functor homology comparison declarations were found; no theorem computes this explicit previous-model comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "mapHomologyIso homologyFunctor exact restriction",
+   "results": "CategoryTheory.Functor.preservesHomology and ShortComplex.mapHomologyIso declarations; no matching coefficient tower theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSiteDerivedRestrictionOfUniverses.*homology",
+   "results": "Existing ringed-site restriction construction and generic derived homology APIs, but no explicit previous quotient transport theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientPreviousLocalComplexesAux",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-quotient-previous-local-complexes-chart",
+   "place": "Homology transport step of the chartwise previous-model proof",
+   "via": [
+    "lem-weil-pbc-finite-quotient-previous-local-complexes-chart"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientPreviousLocalComplexesChartHomology",
+  "file": "lean/Sheaf/Paper/FiniteQuotientPreviousLocalComplexesChartHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_previous_local_complexes_chart_homology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotient_previous_local_complexes_chart_homology"
+  ],
+  "statement": "theorem finiteQuotient_previous_local_complexes_chart_homology\n    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n))\n    (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d))\n    (V : X.Etale) (W Z : X.Etale) (g : W ⟶ V) (f : Z ⟶ W)\n    (a b : ℤ) (hab : a ≤ b) (n : ℕ)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ)\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj Z) ((completedAdicQuotientReduction X d n).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj Z) ((completedAdicDerivedChange X (φ n)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :\n    let qring : A ⧸ d.ideal ^ (n + 1 + 1) →+* A ⧸ d.ideal ^ (n + 1) :=\n      Ideal.Quotient.factorPowSucc d.ideal (n + 1)\n    let Q := ((ModuleCat.restrictScalars qring).mapHomologicalComplex (.up ℤ)).obj P\n    ∀ q : ℤ, Nonempty\n      ((SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n          ((DerivedCategory.homologyFunctor _ q).obj\n            (finiteQuotientPreviousObject X d M n)) ≅\n        (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n          ((finiteCoefficientConstantFunctor X\n            (A ⧸ d.ideal ^ (n + 1 + 1)) (φ (n + 1))).obj (Q.homology q)))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T210204-L-1669160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T210204-L-1669160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

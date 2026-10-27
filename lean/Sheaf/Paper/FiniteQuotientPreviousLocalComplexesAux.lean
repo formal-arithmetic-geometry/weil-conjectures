@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.FiniteQuotientCoefficientLayerData
 public import Sheaf.Paper.FiniteCoefficientLocalHomologyModels
+import Sheaf.Paper.FiniteQuotientPreviousLocalComplexesChartHomology
 
 /-! # Single-chart conversion for the previous quotient model
 Source: Stacks Project, Tags 0942, 094H and 094I.
@@ -56,6 +57,21 @@ theorem finiteQuotient_previous_local_complexes_chart
             (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj
               ((finiteCoefficientConstantFunctor X
                 (A ⧸ d.ideal ^ (n + 1 + 1)) (φ (n + 1))).obj (Q.homology q))) := by
-  sorry
+  let qring : A ⧸ d.ideal ^ (n + 1 + 1) →+* A ⧸ d.ideal ^ (n + 1) :=
+    Ideal.Quotient.factorPowSucc d.ideal (n + 1)
+  let Q := ((ModuleCat.restrictScalars qring).mapHomologicalComplex (.up ℤ)).obj P
+  refine ⟨Q, ?_, ?_, ?_, ?_⟩
+  · exact (CochainComplex.isStrictlyGE_mapHomologicalComplex_obj_iff P
+      (ModuleCat.restrictScalars qring) a).2 ha
+  · exact (CochainComplex.isStrictlyLE_mapHomologicalComplex_obj_iff P
+      (ModuleCat.restrictScalars qring) b).2 hb
+  · intro i
+    let _ : Finite (A ⧸ d.ideal ^ (n + 1)) := d.quotientFinite n
+    let _ : Finite (P.X i) := (Module.finite_iff_finite).mp (hfinite i).2
+    let _ : Finite (Q.X i) := by change Finite (P.X i); infer_instance
+    exact Module.Finite.of_finite
+  · intro q
+    exact finiteQuotient_previous_local_complexes_chart_homology X d φ hφ hcompat M V W Z g f
+      a b hab n P e q
 
 end AlgebraicGeometry.Scheme
