@@ -13,60 +13,42 @@
  ],
  "proof": [
   {
-   "text": "Fix $j\\in\\mathbf Z$ and put $D_m=M_{md+j}$ for $m\\in\\mathbf N$, with transition $t_{nm}:D_m\\to D_n$, $x\\mapsto f^{n-m}x$ for $m\\le n$. These are $R$-linear and satisfy $t_{pm}=t_{pn}t_{nm}$ because powers add. The maps $u_m:D_m\\to H=(M_f)_j$, $x\\mapsto x/f^m$, form a cocone: $f^{n-m}x/f^n=x/f^m$ by the localization relation. Addition of fractions with denominators $m,n$ takes place at the common stage $m+n$, and scalar multiplication changes only the numerator; thus $H$ is the stated $R$-submodule.",
+   "text": "Construct the R-submodule H of homogeneous fractions using a common denominator: multiplying the numerator by f^n shifts its degree by nd, so addition and coefficient scalar multiplication preserve the carrier. Apply lem-sfb-homogeneous-localization-retraction to obtain an R-linear retraction of H → M_f. Tensoring this retraction shows that S⊗H → S⊗M_f is injective, without flatness.",
    "uses": [
+    "def-sc-localized-homogeneous-piece",
     "def-weil-pbc-module-localization",
-    "def-weil-pbc-category-colimit"
+    "lem-sfb-homogeneous-localization-retraction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation, agent-supplied graded-module refinement; fraction relation from algebra.tex Tag 07JZ (definition-localization-module)."
-   }
+   "elementary": false
   },
   {
-   "text": "This cocone is a colimit. Given compatible $R$-linear maps $v_m:D_m\\to P$, define $v(x/f^m)=v_m(x)$. If $x/f^m=y/f^n$, choose $k\\ge0$ with $f^{k+n}x=f^{k+m}y$; both sides lie in $D_{k+m+n}$. Compatibility gives $v_m(x)=v_{k+m+n}(f^{k+n}x)=v_{k+m+n}(f^{k+m}y)=v_n(y)$. Hence $v$ is well-defined. Passing to a common denominator proves additivity; $v_m(rx)=rv_m(x)$ proves $R$-linearity. Every fraction comes from some $u_m$, proving uniqueness. Apply the identical construction to $N$ and $f_S$: with $E_m=N_{md+j}$, transitions $y\\mapsto f_S^{n-m}y$, and $w_m(y)=y/f_S^m$, $H^\\prime=(N_{f_S})_j$ is a colimit of $E_m$ as $R$-modules and also as $S$-modules. Here the test cocones may be $R$-linear or $S$-linear respectively, so no claim that restriction of scalars preserves colimits is needed.",
-   "uses": [
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation, agent-supplied graded-module refinement; fraction relation from algebra.tex Tag 07JZ (definition-localization-module)."
-   }
-  },
-  {
-   "text": "By the tensor-colimit theorem with fixed module $S$, and the balanced interchange $x\\otimes s\\leftrightarrow s\\otimes x$, $S\\otimes_R H$ with legs $q_m=1_S\\otimes u_m$ is a colimit of $S\\otimes_R D_m$ in $R$-modules. The specified tensor grading identifies $S\\otimes_R D_m$ with $E_m$ by $\\beta_m(s\\otimes x)=s\\otimes x$. These identifications intertwine transitions: $\\beta_n(s\\otimes f^{n-m}x)=f_S^{n-m}\\beta_m(s\\otimes x)$, first on pure tensors by the stated $C$-action and then on sums. There is no injectivity assumption on tensoring arbitrary inclusions here: each $M_i\\hookrightarrow M$ is split by its grading projection, and tensoring this retraction identity still gives a retraction. Thus the displayed $N_i=S\\otimes_RM_i$ really are the indicated submodules. The two colimit properties now supply inverse $R$-linear maps between $S\\otimes_RH$ and $H^\\prime$: the forward map has legs $w_m\\beta_m$, and its inverse has legs $q_m\\beta_m^{-1}$. Their composites fix all colimit legs and are identities by uniqueness.",
-   "uses": [
-    "lem-weil-pbc-tensor-commutes-with-colimits",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00DD (lemma-tensor-products-commute-with-limits); the transition and split-inclusion calculations are the agent-supplied module refinement of constructions.tex Tag 01N2."
-   }
-  },
-  {
-   "text": "Call the forward equivalence $\\lambda$. Its defining equation $\\lambda q_m=w_m\\beta_m$ gives $\\lambda(s\\otimes(x/f^m))=(s\\otimes x)/f_S^m$. For $t\\in S$, this formula gives $\\lambda(ts\\otimes(x/f^m))=t\\lambda(s\\otimes(x/f^m))$. Such pure tensors generate $S\\otimes_RH$, so additivity proves $S$-linearity, and the bijection is an $S$-module isomorphism. All steps use fraction equality by multiplication with a power, never cancellation or exactness of tensoring; they apply equally when $f$ or $f_S$ is nilpotent, and for every integer $j$.",
+   "text": "On pure tensors the canonical C-action satisfies (1⊗f)(s⊗x)=s⊗fx. Induction on a preimage under the tensor map S⊗M_i → (M_i).baseChange S shows that f_S shifts these submodules by d. The same common-denominator construction gives K with exactly the required carrier.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation, agent-supplied graded-module refinement; fraction relation from algebra.tex Tag 07JZ (definition-localization-module)."
-   }
+   "elementary": true
+  },
+  {
+   "text": "Use lem-sfb-localization-scalar-extension-coefficients to obtain the ambient S-linear equivalence e0:S⊗M_f → N_fS with its fraction formula. Its composite g with S⊗H → S⊗M_f maps into K: prove this on pure tensors of homogeneous fractions, then use tensor induction. Restrict g to K. Injectivity follows from the ambient equivalence and the tensored retraction.",
+   "uses": [
+    "lem-sfb-localization-scalar-extension-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For surjectivity take z=y/f_S^m in K, with y in (M_(j+md)).baseChange S. Lift y to S⊗M_(j+md), then induct on that tensor. Zero has preimage zero, s⊗x lifts to s⊗(x/f^m), and sums lift to sums using additivity of fractions with the same denominator. The resulting bijective S-linear map gives the requested equivalence. Its normalized fraction equation is the ambient equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sc-localized-homogeneous-piece",
   "def-weil-pbc-module-localization",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-tensor-commutes-with-colimits"
+  "lem-sfb-homogeneous-localization-retraction",
+  "lem-sfb-localization-scalar-extension-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01N2 (lemma-base-change-map-proj), proof on standard opens, expanded to graded modules using algebra.tex Tags 07JZ (definition-localization-module) and 00DD (lemma-tensor-products-commute-with-limits). The source does not itself state the arbitrary graded-module refinement."
+  "place": "Tag 01N2, standard-open calculation, expanded using the graded localization retraction and ordinary localization base change (algebra.tex Tags 07JZ, 00DK and 00D2). Explicit fraction and tensor induction replaces the original colimit argument."
  },
  "mathlib_searches": [
   {
@@ -461,5 +443,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Read the node, both stmt_deps (LocalizedModule; homogeneousPieceAway {mk m s^k, m ∈ 𝓜(n+k d)}), the source (constructions.tex:2245, Tag 01N2), the module and the report. Every clause matches: GradedAlgebra 𝒜 over ℕ with R-submodules (equivalent to R→A_0); 𝓜:ℤ→Submodule R M with IsInternal and hsmul A_n M_i ⊆ M_{n+i}; the C-action is the canonical liftEquiv(baseChangeHom∘lsmul), equal to st⊗ax on pure tensors, and no Mathlib or project instance duplicates it; N_i = Submodule.baseChange; hd, hf, f_S = 1⊗f; H and K have exactly the piece sets as carriers; e : S⊗H ≃ₗ[S] K is pinned by the fraction formula. No extra hypotheses; four independent universes. Edge cases nilpotent f, f=0, ℤ→F₂ with f=2t, S=0, M=0, j<0, m=0 are covered; the parent uses it with M=A. Compared with live, only the lean record and the landed def-sc-localized-homogeneous-piece stmt_dep are added; the statement matches the signature verbatim; the only proof is sorry; docstrings carry source and blueprint; the report has both sections. No fixes and no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T180802-L-3902024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

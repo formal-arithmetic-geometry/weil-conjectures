@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-homogeneous-localization-retraction",
+ "kind": "statement",
+ "title": "Homogeneous localized pieces are split coefficient submodules",
+ "statement": "Let R and A be commutative rings, A an R-algebra, and M an A-module with compatible R-action. Let A be graded by R-submodules 𝒜_n, and M internally decomposed into R-submodules 𝓜_i for i in Z, with A_n 𝓜_i contained in 𝓜_(n+i). If f belongs to 𝒜_d and j is an integer, any R-submodule H of M_f whose carrier is the set of fractions x/f^m with x in 𝓜_(j+md) admits an R-linear retraction p : M_f → H of its inclusion. No regularity, boundedness, or positivity hypothesis on d is needed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N2, standard-open calculation, agent-supplied graded-module refinement; fraction equality from algebra.tex Tag 07JZ."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-sc-localized-homogeneous-piece"
+ ],
+ "proof": [
+  {
+   "text": "Construct the R-linear degree projections π_i of M from its internal direct-sum decomposition. Multiplication by f shifts homogeneous degrees by d. Check on each summand that π_(i+d)(fx)=fπ_i(x), and induct to obtain the analogous formula for f^n.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-sc-localized-homogeneous-piece"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define p_j(x/f^m)=π_(j+md)(x)/f^m. Equality of two fractions is witnessed by f^k(f^n x-f^m y)=0. Project to degree j+(k+m+n)d and use the shift identity to obtain equality of the projected fractions. This also proves independence of any exponent chosen for a denominator in the powers submonoid.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Common denominators prove additivity and the R-linearity of π_i proves coefficient linearity. The projected numerator belongs to the specified component, so the image lies in H. On H its numerator is already homogeneous of that degree and π fixes it. Hence p composed with the inclusion is the identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-sc-localized-homogeneous-piece"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Fraction argument using Tag 07JZ; graded refinement of constructions.tex Tag 01N2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graded|homogeneous|degree in Mathlib/RingTheory/Localization/BaseChange.lean; degree projections in Mathlib/Algebra/DirectSum/Decomposition.lean",
+   "results": "IsLocalizedModule.rTensor and restrictScalars_powers handle ordinary localization. DirectSum.decomposeLinearEquiv and decompose_lhom_ext construct and compare projections. No matching homogeneous localization retraction.",
+   "date": "2026-10-27",
+   "verdict": "supporting matches; no exact theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"decompose\", \"smul\"",
+   "results": "DirectSum.decompose_smul",
+   "date": "2026-10-27",
+   "verdict": "supporting matches; no exact theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homogeneous degree of a graded module localized at a homogeneous element is a split submodule over the coefficient ring",
+   "results": "General localization and tensor API; no theorem with this statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous degree j part of a graded module localized at a homogeneous element is a split submodule over the coefficient ring",
+   "results": "HomogeneousLocalization.Away.span_mk_prod_pow_eq_top; HomogeneousLocalization; HomogeneousSubmodule.isHomogeneous. These concern homogeneous ring fractions or homogeneous submodules, not the retraction on ordinary module localization.",
+   "date": "2026-10-27",
+   "verdict": "supporting matches, no exact theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Module.GradedLocalizationScalarExtension",
+  "date": "2026-10-27",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tags 084B (lemma-relative-proj), 085Q (definition-blow-up), 085R (lemma-blowing-up-affine), 085S (lemma-flat-base-change-blowing-up), 085T (lemma-blowing-up-gives-effective-Cartier-divisor), 085Z (lemma-blowing-up-projective), and 083S (lemma-complement-effective-Cartier-divisor). Scheme coefficient comparison: descent.tex Tags 03DX (proposition-equivalence-quasi-coherent) and 05VG (lemma-equivalence-quasi-coherent-properties).. General graded-algebra construction underlying the blowup: representability and arbitrary-base-change comparison of relative Proj (084B and 085C). Scheme prerequisite for the compactification/direct-image paragraph of sk-thm-sf-ctf-stability.proof.md: constructions.tex 01NW, 01NY and 01NZ, the scheme functor used in the proof of spaces-divisors.tex 084B. Technical input: Tag 01NR (lemma-glue-relative-proj-twists), Tag 01MS (lemma-when-invertible), equation-Ud before Tag 01N8, and the open-immersion comparison in Tag 01NY (lemma-relative-proj). Input for the affine twist transition maps in Tag 01NR: scalar-extension twist comparison (01N2), normalization (01MY), and composition (01MZ). Algebra input in Tag 01N2: base change of homogeneous localized pieces, extended to an arbitrary graded module; no Proj or sheaf comparison is asserted here. Supporting argument for lem-sfb-graded-module-localization-scalar-extension.",
+   "via": [
+    "lem-sfb-graded-module-localization-scalar-extension",
+    "lem-sfb-proj-scalar-extension-twist-comparison",
+    "lem-sfb-relative-proj-twists-degree-opens",
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-space-blowup-chart-properties",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Module.HomogeneousLocalizationRetraction",
+  "file": "lean/Sheaf/Algebra/Module/HomogeneousLocalizationRetraction.lean",
+  "declaration": "LocalizedModule.exists_homogeneousPieceAway_retraction",
+  "statement": "theorem exists_homogeneousPieceAway_retraction\n    {R : Type u} {A : Type w} {M : Type t}\n    [CommRing R] [CommRing A] [AddCommGroup M]\n    [Algebra R A] [Module R M] [Module A M] [IsScalarTower R A M]\n    (𝒜 : ℕ → Submodule R A) [GradedAlgebra 𝒜]\n    (𝓜 : ℤ → Submodule R M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (i : ℤ) (a : A) (x : M),\n      a ∈ 𝒜 n → x ∈ 𝓜 i → a • x ∈ 𝓜 ((n : ℤ) + i))\n    {d : ℕ} {f : A} (hf : f ∈ 𝒜 d) (j : ℤ)\n    (H : Submodule R (LocalizedModule.Away f M))\n    (hH : (H : Set (LocalizedModule.Away f M)) =\n      homogeneousPieceAway (fun i ↦ (𝓜 i).toAddSubgroup) f (d : ℤ) j) :\n    ∃ p : LocalizedModule.Away f M →ₗ[R] H, p.comp H.subtype = LinearMap.id",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T180802-L-3902024",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T180802-L-3902024",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

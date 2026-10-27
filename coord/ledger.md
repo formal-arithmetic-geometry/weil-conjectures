@@ -19802,3 +19802,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:07 L: merged deliver/R8/Sheaf.Paper.CoefNativeOpenTensorCochains (stage 3; reviewer PASS; first push; landing 20261027T180758-L-3900819 (interface); batch 20261027T180444; modules 4; new nodes 3; change records: coord/changes/coef-native-open-tensor-primitives.md)
 - 18:07 L: merged deliver/R8/Sheaf.Paper.EtaleSystemRestrictionEvaluation (stage 3; reviewer PASS; first push; landing 20261027T180759-L-3901233 (proof); batch 20261027T180444; modules 1; new nodes 0)
 - 18:08 L: merged deliver/R9/Sheaf.Paper.ExceptionalIntegralScalarMates (stage 3; reviewer PASS; first push; landing 20261027T180801-L-3901640 (interface); batch 20261027T180444; modules 4; new nodes 3)
+- 18:08 L: merged deliver/S2/Sheaf.Algebra.Module.GradedLocalizationScalarExtension (stage 3; reviewer PASS; first push; landing 20261027T180802-L-3902024 (interface); batch 20261027T180444; modules 3; new nodes 2)
