@@ -295,6 +295,71 @@ def CoefFiniteHomSuccessive {n m : ℕ} (h : m ≤ n) : Prop :=
       (coefFiniteHomProUnit l E X n).hom.app
         ((coefficientFiniteInternalHom l E X n).obj (op K, M)))
 
+/-- Constructible descent component of the finite Hom site descent theorem.
+Source: blueprint `lem-coef-finite-hom-site-descent`, proof step 1.
+(blueprint: lem-coef-finite-hom-site-descent-core-descent). -/
+theorem coefFiniteHomSiteDescent_descent
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))] :
+    ∀ n : ℕ, CoefFiniteHomDescent l E X n := by
+  sorry
+
+/-- Monoidal, symmetry, quotient, square, and transport component.
+Source: blueprint `lem-coef-finite-hom-site-descent`, proof steps 2--7.
+(blueprint: lem-coef-finite-hom-site-descent-core-coherence). -/
+theorem coefFiniteHomSiteDescent_coherence
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))] :
+    ∃ βet : ∀ n : ℕ, @SymmetricCategory (finiteHomEtale l E X n) _
+        (finiteHomEtaleClosed l E X n).monoidal,
+      ∃ βpro : ∀ n : ℕ, @SymmetricCategory (normalizedDVRDerived l E X n) _
+          (finiteIntrinsicClosed l E X n).monoidal,
+        (∀ (n : ℕ) (P Q : finiteHomEtale l E X n),
+          HEq ((βet n).toBraidedCategory.braiding P Q)
+            (finiteHomKoszulIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
+              (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) P Q)) ∧
+        (∀ n : ℕ, Nonempty (RingedDerivedTensorCoherence
+          (ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)
+          (finiteIntrinsicClosed l E X n) (finiteIntrinsicTensorModels l E X n) (βpro n))) ∧
+        (∀ n : ℕ, CoefFiniteHomSymmetry
+          (finiteHomEtaleClosed l E X n) (finiteIntrinsicClosed l E X n)
+          (βet n) (βpro n) (finiteHomNu l E X n) (finiteHomNuTensor l E X n)) ∧
+        ∀ (n m : ℕ) (h : m ≤ n),
+          CoefFiniteHomMonoidalSquare
+            (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)
+            (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)
+            (finiteHomEtaleReduction l E X h) (coefficientFiniteQuotientDerived l E X h)
+            (finiteHomNu l E X n) (finiteHomNu l E X m)
+            (finiteHomEtaleTensor l E X h) (coefFiniteHomProTensor l E X h)
+            (finiteHomNuTensor l E X n) (finiteHomNuTensor l E X m)
+            (coefFiniteHomSiteIso l E X h) ∧
+          CoefFiniteHomSymmetry
+            (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)
+            (βet n) (βet m) (finiteHomEtaleReduction l E X h) (finiteHomEtaleTensor l E X h) ∧
+          CoefFiniteHomSymmetry
+            (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)
+            (βpro n) (βpro m) (coefficientFiniteQuotientDerived l E X h)
+            (coefFiniteHomProTensor l E X h) ∧
+          CoefFiniteHomQuotientCoherence l E X h ∧ CoefFiniteHomSquare l E X h ∧
+          (CoefFiniteHomLawsOn
+            (finiteHomEtaleClosed l E X n) (finiteHomEtaleClosed l E X m)
+            (finiteHomEtaleReduction l E X h) (finiteHomEtaleTensor l E X h)
+            (finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X) →
+            CoefFiniteHomLawsOn
+              (finiteIntrinsicClosed l E X n) (finiteIntrinsicClosed l E X m)
+              (coefficientFiniteQuotientDerived l E X h) (coefFiniteHomProTensor l E X h)
+              (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X)) ∧
+          CoefFiniteHomSuccessive l E X h := by
+  sorry
+
 /-- Finite-Tor constructible descent and the canonical scalar/site Hom square.
 Source: blueprint thm-coef-finite-hom, final paragraph and final sentence
 (blueprint: lem-coef-finite-hom-site-descent).
@@ -376,6 +441,7 @@ theorem coefFiniteHomSiteDescent
               (coefficientFiniteQuotientDerived l E X h) (coefFiniteHomProTensor l E X h)
               (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X)) ∧
           CoefFiniteHomSuccessive l E X h := by
-  sorry
+  exact ⟨coefFiniteHomSiteDescent_descent D l _hl E X,
+    coefFiniteHomSiteDescent_coherence D l _hl E X⟩
 
 end WeilConjectures
