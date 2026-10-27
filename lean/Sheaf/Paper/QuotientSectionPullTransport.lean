@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientSectionPullTransportExtension
 
 /-! # A step of the normalized quotient section comparison -/
 
@@ -58,7 +59,10 @@ theorem section_pull_transport_section_normalized {X Y : Scheme.{u}} (f : X ⟶ 
     (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)
     (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam) :
     ∃ barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T,
-      SectionPullNormalized a f cX cY barLam := by sorry
+      SectionPullNormalized a f cX cY barLam := by
+  obtain ⟨barLam, hflat⟩ := section_pull_transport_section_normalized_kflat
+    a f cX cY hcX hcY lam hlam
+  exact ⟨barLam, section_pull_transport_extend_kflat a f cX cY barLam hflat⟩
 
 /-- The derived section comparison satisfies the pull condition once its normalized
 counit square is fixed. Source: Stacks 06YY, 0D6D and 07A6; parent proof step 8.

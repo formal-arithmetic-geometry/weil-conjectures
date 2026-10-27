@@ -1,0 +1,87 @@
+{
+ "id": "lem-sfb-quotient-section-pull-transport-kflat",
+ "kind": "statement",
+ "title": "Flat-term construction of the normalized section pullback comparison",
+ "statement": "For normalized endpoint ScalarSectionData and a PullNormalized internal comparison, there is a section pullback comparison whose ordinary section equation holds and whose derived computation equation holds on flat-term K-flat representatives.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0D6D and 0G7E; flat-term part of parent transport proof step 8."
+ },
+ "status": "split",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Flat-term representative construction before localization descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SectionPullNormalizedOnKFlat",
+   "results": "No existing declaration; the project interface only states the all-complex SectionPullNormalized property.",
+   "date": "2026-10-28",
+   "verdict": "New intermediate statement required."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-pull-transport",
+   "place": "Parent proof step 8",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "proof": [
+  {
+   "text": "Conjugate the ordinary pullback comparison through the endpoint scalar models and compute its derived map on flat-term K-flat representatives. The endpoint generator equations and PullNormalized identify the two displayed squares.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionPullTransportKFlat",
+  "file": "lean/Sheaf/Paper/QuotientSectionPullTransportKFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_section_normalized_kflat",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.SectionPullNormalizedOnKFlat",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_section_normalized_kflat"
+  ],
+  "statement": "theorem section_pull_transport_section_normalized_kflat {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam) :\n    ∃ barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T,\n      SectionPullNormalizedOnKFlat a f cX cY barLam",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T210219-L-1671745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T210219-L-1671745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionPullTransport",
+  "date": "2026-10-28",
+  "group": "R4"
+ }
+}
