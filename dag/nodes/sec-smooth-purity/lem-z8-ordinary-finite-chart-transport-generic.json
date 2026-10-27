@@ -1,0 +1,90 @@
+{
+ "id": "lem-z8-ordinary-finite-chart-transport-generic",
+ "kind": "statement",
+ "title": "Recorded chart transport equals generic derived chart coefficient map",
+ "statement": "For arbitrary composable scheme morphisms, the recorded ordinary finite chart transport equals the canonical derived chart coefficient map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Identification of the four factors in the selected projection chart transport"
+ },
+ "stmt_deps": [
+  "def-z8-ordinary-finite-p1-diagonal-components",
+  "lem-z8-etale-chart-exchange-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Expand both constructions into their adjunction unit, composition comparison, equality comparison, and direct image factors; identify corresponding factors by the defining equations and compose by associativity.",
+   "uses": [
+    "def-z8-ordinary-finite-p1-diagonal-components",
+    "lem-z8-etale-chart-exchange-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Identification of the four factors in the selected projection chart transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-z8-ordinary-finite-p1-diagonal-components",
+  "lem-z8-etale-chart-exchange-pasting"
+ ],
+ "proof_origin": {
+  "by": "R9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Identification of the four factors in the selected projection chart transport"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteDiagonalChartExchangeAux.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteChartTransport_eq_derivedChartCoefficientMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteChartTransport_eq_derivedChartCoefficientMap"
+  ],
+  "statement": "theorem ordinaryFiniteChartTransport_eq_derivedChartCoefficientMap\n    (A : Type (u + 1)) [CommRing A] {X Y Z : Scheme.{u}}\n    (e : X ⟶ Y) (p : Y ⟶ Z) (r : X ⟶ Z) (hr : e ≫ p = r)\n    (L : DerivedCategoryModule A Y) (L' : DerivedCategoryModule A X)\n    (v : (ordinaryFinitePullback A e).obj L ⟶ L') :\n    ordinaryFiniteChartTransport A e p r hr L L' v =\n      derivedChartCoefficientMap (ModuleCat.{u + 1} A) e p r hr L L' v",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-27"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux",
+  "group": "R9",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-z8-ordinary-finite-diagonal-chart-exchange-aux",
+   "place": "Generic four-factor identification used by the diagonal specialization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T151737-L-1202199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T151737-L-1202199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

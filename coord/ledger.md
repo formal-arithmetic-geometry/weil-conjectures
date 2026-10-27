@@ -19615,3 +19615,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/Q8/Sheaf.Paper.IsomorphismScalarFiniteModel (stage 3; reviewer PASS; first push; landing 20261027T151734-L-1201238 (interface); batch 20261027T151642; modules 3; new nodes 2)
 - 15:17 L: merged deliver/Q9/Sheaf.TraceFormula.GradedLineFractionTestLocal (stage 3; reviewer PASS; first push; landing 20261027T151735-L-1201649 (interface); batch 20261027T151642; modules 1; new nodes 0)
 - 15:17 L: merged deliver/R7/Sheaf.Paper.QuotientSectionTensorTransport (stage 3; reviewer PASS; first push; landing 20261027T151736-L-1201956 (interface); batch 20261027T151642; modules 3; new nodes 2)
+- 15:17 L: merged deliver/R9/Sheaf.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux (stage 3; reviewer PASS; first push; landing 20261027T151737-L-1202199 (interface); batch 20261027T151642; modules 1; new nodes 1; change records: coord/changes/chart-transport-generic.md)
