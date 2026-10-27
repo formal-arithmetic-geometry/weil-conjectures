@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-isomorphism-scalar-completed-formula",
+ "kind": "statement",
+ "title": "Completed pure-tensor comparison",
+ "statement": "theorem scalar_completed_formula (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅ (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g, CompletedFormula l E L ι g b [def-weil-isomorphism-scalar-completed-model-vocabulary, def-weil-integral-scalar-extension, def-weil-inverse-image-pullback-comparison]",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; normalized tensor comparison after inverse-limit transport."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-iso-sectionwise-inverse-image",
+  "def-weil-integral-scalar-extension",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-isomorphism-scalar-completed-model-vocabulary"
+ ],
+ "proof": [
+  {
+   "text": "Compose coefficient maps with finite projections, apply the inverse-limit chain comparison, transport the normalized pure-tensor rule through the specified completed presentations, and restrict to good complexes.",
+   "uses": [
+    "lem-weil-isomorphism-limit-scalar-chain-comparison",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-isomorphism-limit-scalar-chain-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; normalized tensor comparison after inverse-limit transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completed pure-tensor comparison",
+   "results": "No matching specialized theorem.",
+   "date": "2026-10-28",
+   "verdict": "The project statement has no Mathlib counterpart."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\" \"mapHomologicalComplex\" inverse image tensor",
+   "results": "Only generic functoriality lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No specialized completed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalarTensorSection inverseImageCompletedCoefficientMap",
+   "results": "Only the delivered vocabulary and related finite modules.",
+   "date": "2026-10-28",
+   "verdict": "No existing duplicate."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismScalarCompletedModel",
+  "date": "2026-10-28",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Ordinary scalar tensor model: Completed scalar chain model and preservation under inverse image. First cohomology-transport arrows in def-weil-global-geometric-frobenius: the integral inverse-image component has a coefficient-compatible ordinary tensor model (returned parent proof Steps 1–2 and the K-flat setup of Step 4).",
+   "via": [
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismScalarCompletedModelFormula",
+  "file": "lean/Sheaf/Paper/IsomorphismScalarCompletedModelFormula.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.scalar_completed_formula",
+  "statement": "theorem scalar_completed_formula (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅ (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g, CompletedFormula l E L ι g b",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-63ae0",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261027T234306-L-90167",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-63ae0",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261027T234306-L-90167",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Base/Formula/PreservesModels modules and 4 nodes against the clone (verbatim vocabulary move confirmed by diff), the node statement, and the 3 direct importers (all compile)"
+ }
+}

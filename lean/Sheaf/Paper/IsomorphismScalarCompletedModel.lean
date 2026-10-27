@@ -1,26 +1,18 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NA
+Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.Paper.InverseImagePullbackComparisonDerived
-public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-public import Sheaf.Paper.IntegralScalarExtensionUniverses
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import Sheaf.Paper.IsomorphismScalarCompletedModelBase
+import Sheaf.Paper.IsomorphismScalarCompletedModelFormula
+import Sheaf.Paper.IsomorphismScalarCompletedPreservesModels
 
 /-! # Coefficient-compatible K-flat tensor models under a scheme isomorphism
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and the agent calculation
-with the specified quotient towers
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model).
-
-The index n means positive exponent n+1. Inverse image is the recorded sectionwise
-model, with its action transported by the completed or finite structure map.
-Scalar tensors use the existing sheafified tensor, with scalar written first.
+Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
+(blueprint: lem-weil-isomorphism-scalar-completed-model).
 -/
 
 @[expose] public noncomputable section
@@ -39,312 +31,23 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The existing ordinary extension at a finite level, supplied with its universal
-counit. Its objects and maps are fixed by the sheafified balanced tensor.
-Source: Stacks 03EK and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def finiteChangeData (W : Scheme.{t}) (n : ℕ) :=
-  Classical.choice (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel
-    (integralScalarQuotientSheafMap l E L ι W n))
-
-/-- Ordinary extension from E's finite coefficient ring to L's, with the same index.
-Source: Stacks 03EK (blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev finiteExtension (W : Scheme.{t}) (n : ℕ) :=
-  (finiteChangeData l E L ι W n).E
-
-/-- The actual balanced pure tensor in finite extension, including the witness's
-object identification. Source: Stacks 03EK
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def finitePure (W : Scheme.{t}) (n : ℕ)
-    (M : integralOperationsFiniteModules l E W n) (U : W.ProEtᵒᵖ)
-    (s : (integralCoefficientCommRingSheaf l L W n).obj.obj U) (x : M.val.obj U) :
-    ((finiteExtension l E L ι W n).obj M).val.obj U :=
-  (eqToHom ((finiteChangeData l E L ι W n).obj_eq M).symm).val.app U
-    ((toSheafify (ProEt.topology W)
-      (SheafOfModules.changeOfRingsPresheaf
-        (integralScalarQuotientSheafMap l E L ι W n) M).presheaf).app U
-      (s ⊗ₜ[(integralCoefficientCommRingSheaf l E W n).obj.obj U,
-        ((integralScalarQuotientSheafMap l E L ι W n).hom.app U).hom] x))
-
-/-- Completed-coefficient inverse image on complexes.
-Source: Stacks 03D6 (blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev inverseComplex :=
-  (inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)
-
-/-- Z as a functor of P. Source: Stacks 03EL
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev leftComplex :=
-  inverseComplex l E g ⋙ completedOrdinaryScalarComplex l E L ι X
-
-/-- G_L Q as a functor of P. Source: Stacks 03EL
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev rightComplex :=
-  completedOrdinaryScalarComplex l E L ι Y ⋙ inverseComplex l L g
-
-/-- The lower left: reduce over E, transport its finite action, then extend to L.
-Source: Stacks 03EK and 03EL
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev finiteLeft (n : ℕ) :=
-  unrestrictedIntegralFiniteComplex l E Y n ⋙
-    (inverseImageFiniteModules l E g n).mapHomologicalComplex (.up ℤ) ⋙
-      (finiteExtension l E L ι X n).mapHomologicalComplex (.up ℤ)
-
-/-- The lower right: extend directly to L's finite coefficients, then inverse image.
-Source: Stacks 03EK and 03EL
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev finiteRight (n : ℕ) :=
-  integralScalarFiniteComplex l E L ι Y n ⋙
-    (inverseImageFiniteModules l L g n).mapHomologicalComplex (.up ℤ)
-
-/-- Lower-left complex with its completed L action, for quotient and transition maps.
-Source: Stacks 03D2 (blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev restrictedLeft (n : ℕ) :=
-  finiteLeft l E L ι g n ⋙ integralOperationsRestrict l L X n
-
-/-- Lower-right complex with its completed L action, for quotient and transition maps.
-Source: Stacks 03D2 (blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-abbrev restrictedRight (n : ℕ) :=
-  finiteRight l E L ι g n ⋙ integralOperationsRestrict l L X n
-
-/-- A double tensor in the lower-left complex, in the canonical sectionwise model.
-Source: Stacks 03EK and 03EL
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def doublePure (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ)
-    (i : ℤ) (U : X.ProEt)
-    (s : (integralCoefficientCommRingSheaf l L X n).obj.obj (op U))
-    (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj
-      (op ((proEtaleIsoPostcompose g).obj U)))
-    (x : (P.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))) :
-    (((restrictedLeft l E L ι g n).obj P).X i).val.obj (op U) :=
-  finitePure l E L ι X n
-    ((inverseImageFiniteModules l E g n).obj
-      ((unrestrictedIntegralReductionFunctor l E Y n).obj (P.X i))) (op U) s
-    (unrestrictedIntegralTensorSection l E Y n (P.X i)
-      (op ((proEtaleIsoPostcompose g).obj U)) a x)
-
-attribute [local irreducible] completedScalarChangeData completedOrdinaryScalarExtension
-  completedDerivedScalarExtension completedScalarCounit completedScalarTensorSection
-  integralScalarReductionWitness integralScalarReduction integralScalarTensorSection
-  unrestrictedIntegralReductionExistence unrestrictedIntegralReductionFunctor
-  unrestrictedIntegralTensorSection inverseImageCompletedCoefficientMap finiteChangeData
-  finitePure doublePure
-
-/-- K-flatness and flat terms for inverse image, Q and Z.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def PreservesModels : Prop :=
-    ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
-      integralOperationsGoodComplex l E X ((inverseComplex l E g).obj P.obj) ∧
-      integralOperationsGoodComplex l L Y
-        ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj) ∧
-      integralOperationsGoodComplex l L X ((leftComplex l E L ι g).obj P.obj)
-
-/-- The local formula for the completed tensor isomorphism.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def CompletedFormula
-    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
-        (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g) : Prop :=
-    ∀ (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (i : ℤ) (U : X.ProEt)
-      (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj
-        (op ((proEtaleIsoPostcompose g).obj U)))
-      (x : (P.obj.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      ((b.hom.app P).f i).val.app (op U)
-        (completedScalarTensorSection l E L ι X
-          (((inverseComplex l E g).obj P.obj).X i) (op U)
-          ((inverseImageCompletedCoefficientMap l L g).hom.app (op U) s) x) =
-        completedScalarTensorSection l E L ι Y (P.obj.X i)
-          (op ((proEtaleIsoPostcompose g).obj U)) s x
-
-/-- The finite comparison on double pure tensors.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def FiniteFormula
-    (bfin : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅
-          (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n) : Prop :=
-    ∀ (n : ℕ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
-      (i : ℤ) (U : X.ProEt)
-      (s : (integralCoefficientCommRingSheaf l L X n).obj.obj (op U))
-      (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj
-        (op ((proEtaleIsoPostcompose g).obj U)))
-      (x : (P.obj.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      (((integralOperationsRestrict l L X n).map ((bfin n).hom.app P)).f i).val.app (op U)
-        (doublePure l E L ι g n P.obj i U s a x) =
-      integralScalarTensorSection l E L ι Y n (P.obj.X i)
-        (op ((proEtaleIsoPostcompose g).obj U))
-        ((@id ((integralCoefficientCommRingSheaf l L Y n).obj.obj
-            (op ((proEtaleIsoPostcompose g).obj U)))
-          ((inv (inverseImageFiniteCoefficientMap l L g n)).hom.app (op U) s)) *
-          (integralScalarQuotientSheafMap l E L ι Y n).hom.app
-            (op ((proEtaleIsoPostcompose g).obj U)) a) x
-
-/-- The canonical quotient from Z on pure tensors.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def LeftQuotientFormula
-    (vleft : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n) : Prop :=
-    ∀ (n : ℕ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
-      (i : ℤ) (U : X.ProEt)
-      (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj
-        (op ((proEtaleIsoPostcompose g).obj U)))
-      (x : (P.obj.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      (((vleft n).app P).f i).val.app (op U)
-        (completedScalarTensorSection l E L ι X
-          (((inverseComplex l E g).obj P.obj).X i) (op U)
-          ((inverseImageCompletedCoefficientMap l L g).hom.app (op U) s) x) =
-      doublePure l E L ι g n P.obj i U
-        ((completedIntegralCommRingProjectionUnrestricted l L X n).hom.app (op U)
-          ((inverseImageCompletedCoefficientMap l L g).hom.app (op U) s)) 1 x
-
-/-- The inverse image of the coefficient quotient from Q.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def RightQuotientFormula
-    (vright : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n) : Prop :=
-    ∀ (n : ℕ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
-      (i : ℤ) (U : X.ProEt)
-      (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj
-        (op ((proEtaleIsoPostcompose g).obj U)))
-      (x : (P.obj.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      (((vright n).app P).f i).val.app (op U)
-        (completedScalarTensorSection l E L ι Y (P.obj.X i)
-          (op ((proEtaleIsoPostcompose g).obj U)) s x) =
-      integralScalarTensorSection l E L ι Y n (P.obj.X i)
-        (op ((proEtaleIsoPostcompose g).obj U))
-        ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app
-          (op ((proEtaleIsoPostcompose g).obj U)) s) x
-
-/-- The specified completed-to-finite square.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def QuotientSquare
-    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
-        (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)
-    (bfin : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅
-          (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n)
-    (vleft : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n)
-    (vright : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n) : Prop :=
-    ∀ (n : ℕ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory),
-      b.hom.app P ≫ (vright n).app P =
-        (vleft n).app P ≫ (integralOperationsRestrict l L X n).map ((bfin n).hom.app P)
-
-/-- The quotient transition on the two scalar factors on the left.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def LeftTransitionFormula
-    (tleft : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n) : Prop :=
-    ∀ (n : ℕ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
-      (i : ℤ) (U : X.ProEt)
-      (s : (integralCoefficientCommRingSheaf l L X (n + 1)).obj.obj (op U))
-      (a : (integralCoefficientCommRingSheaf l E Y (n + 1)).obj.obj
-        (op ((proEtaleIsoPostcompose g).obj U)))
-      (x : (P.obj.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      (((tleft n).app P).f i).val.app (op U)
-        (doublePure l E L ι g (n + 1) P.obj i U s a x) =
-      doublePure l E L ι g n P.obj i U
-        ((integralCoefficientSheafTransition l L X n).hom.app (op U) s)
-        ((integralCoefficientSheafTransition l E Y n).hom.app
-          (op ((proEtaleIsoPostcompose g).obj U)) a) x
-
-/-- The quotient transition on the final scalar factor on the right.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def RightTransitionFormula
-    (tright : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n) : Prop :=
-    ∀ (n : ℕ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
-      (i : ℤ) (U : X.ProEt)
-      (s : (integralCoefficientCommRingSheaf l L Y (n + 1)).obj.obj
-        (op ((proEtaleIsoPostcompose g).obj U)))
-      (x : (P.obj.X i).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      (((tright n).app P).f i).val.app (op U)
-        (integralScalarTensorSection l E L ι Y (n + 1) (P.obj.X i)
-          (op ((proEtaleIsoPostcompose g).obj U)) s x) =
-      integralScalarTensorSection l E L ι Y n (P.obj.X i)
-        (op ((proEtaleIsoPostcompose g).obj U))
-        ((integralCoefficientSheafTransition l L Y n).hom.app
-          (op ((proEtaleIsoPostcompose g).obj U)) s) x
-
-/-- The specified finite comparison commutes with quotient transitions.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def TransitionSquare
-    (bfin : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅
-          (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n)
-    (tleft : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n)
-    (tright : ∀ n : ℕ,
-        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶
-          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n) : Prop :=
-    ∀ (n : ℕ) (P : (integralOperationsGoodComplex l E Y).FullSubcategory),
-      (integralOperationsRestrict l L X (n + 1)).map ((bfin (n + 1)).hom.app P) ≫
-          (tright n).app P =
-        (tleft n).app P ≫ (integralOperationsRestrict l L X n).map ((bfin n).hom.app P)
-
-/-- Canonical K-flat computations and descent of the same chain comparison.
-Source: the node calculation, Steps 1–7; Stacks 03EK, 03EL and 06YY
-(blueprint: lem-weil-isomorphism-scalar-tensor-kflat-model). -/
-def DerivedModel
-    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
-        (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)
-    (β : inverseImageIntegralDerived l E g ⋙ completedDerivedScalarExtension l E L ι X ≅
-        completedDerivedScalarExtension l E L ι Y ⋙ inverseImageIntegralDerived l L g) : Prop :=
-    ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
-      IsIso (completedScalarCounit l E L ι Y P.obj) ∧
-      IsIso (completedScalarCounit l E L ι X ((inverseComplex l E g).obj P.obj)) ∧
-      β.hom.app (DerivedCategory.Q.obj P.obj) ≫
-          (inverseImageIntegralDerived l L g).map (completedScalarCounit l E L ι Y P.obj) ≫
-          (inverseImageIntegralModules l L g).mapDerivedCategoryFactors.hom.app
-            ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj) =
-        (completedDerivedScalarExtension l E L ι X).map
-            ((inverseImageIntegralModules l E g).mapDerivedCategoryFactors.hom.app P.obj) ≫
-          completedScalarCounit l E L ι X ((inverseComplex l E g).obj P.obj) ≫
-          DerivedCategory.Q.map (b.hom.app P)
-
 /-- The completed chain comparison and preservation of flat-term K-flat models.
 
 Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 0G7E;
-Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), for the completed coefficient comparison.
+Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
 (blueprint: lem-weil-isomorphism-scalar-completed-model).
 
-Proof: Compose the two maps from inverse image of the completed E coefficient ring
-into the completed L coefficient ring with every finite projection. The projection
-formula for inverseImageCompletedCoefficientMap, naturality of the finite constant
-coefficient comparisons, and the residue formula for completedCoefficientMap make
-these composites equal. Joint monicity of the limit projections gives the coefficient
-square. Apply limitScalarChainComparison to the finite E and L coefficient towers.
-Identify its scalar-extension functors with completedOrdinaryScalarExtension using
-their specified object equalities to sheafified changeOfRings and their conjugated
-map equalities. These object equalities give natural isomorphisms, and their inverses
-transport the sheafification-unit pure tensors to completedScalarTensorSection.
-Transport the comparison through these isomorphisms and restrict to good complexes.
-Its forward pure-tensor rule is exactly CompletedFormula. The isomorphism of sites
-is exact and tensor compatible, so the ringed-topos K-flat pullback theorem applies
-to inverse image with its transported completed coefficient action. Apply the same
-theorem to the identity topos and each completed coefficient inclusion to show that
-ordinary extension preserves flat terms and K-flatness. This gives all three clauses
-of PreservesModels. The argument applies to unbounded complexes, including the zero
-complex and an empty site, and requires no flatness of the coefficient inclusion. -/
+The two strictly simpler components are supplied by the completed pure-tensor
+comparison and preservation statements. Their conjunction is exactly the item
+statement, so this wrapper performs no additional mathematical identification.
+-/
 theorem scalar_completed_model
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :
     ∃ b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅
       (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g,
-      PreservesModels l E L ι g ∧ CompletedFormula l E L ι g b := by sorry
+      PreservesModels l E L ι g ∧ CompletedFormula l E L ι g b := by
+  obtain ⟨b, hb⟩ := scalar_completed_formula l E L ι g _hX _hY
+  exact ⟨b, scalar_completed_preserves_models l E L ι g _hX _hY, hb⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor
