@@ -20123,3 +20123,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:19 L: merged deliver/NB/lem-pur-derived-pullback-tensor-constraints-common-braiding-existence (reviewer FIX; first push; new nodes: 1)
 - 21:21 L: merged deliver/NA/lem-pur-derived-pullback-tensor-constraints-common-associator-existence (reviewer PASS; first push; new nodes: 1)
 - 21:27 L: returned deliver/J1/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescent (reviewer RETURN: (reviewer C-adab3, head adab3cd35) E2: exists_twist_chart_descent_transition is false for arbitrary charts (S=Spec Q[s],)
+- 21:31 L: returned deliver/G7/Sheaf.SixFunctors.OpenQuotientScalarCompatibilityData (reviewer RETURN: (the global build of c119ec5f95, still running) your landing 20261027T210018-L-1646031 fails to compile in Sheaf.SixFunc)
