@@ -696,7 +696,7 @@ representability by open immersions (blueprint `def-pc-open-subfunctor`) is
 `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`, applied to the
 universal elements of the `F i`.
 
-(blueprint: `sk-prop-picard-schemes-criterion`, `lem-pc-schemes-criterion`) -/
+(blueprint: `det-prop-picard-schemes-criterion`, `lem-pc-schemes-criterion`) -/
 theorem isRepresentable_of_isSheaf_of_zariskiCovers {S : Scheme.{u}}
     {P : (Over S)ᵒᵖ ⥤ Type (max w u)} [∀ T, Small.{u} (P.obj T)]
     (hP : Presheaf.IsSheaf (Scheme.zariskiTopology.over S) P) {ι : Type u}

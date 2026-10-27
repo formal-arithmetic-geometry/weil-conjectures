@@ -59,7 +59,8 @@ sheaf of a morphism of schemes; it is constructed here. The dual sheaf `ℋom_{�
 
 ## Blueprint
 
-- `sk-d-tangent`: the tangent space of a point as the dual of the cotangent space `𝔪_x/𝔪_x²`.
+- `def-wf-lie-algebra-derivation`: the tangent space of a point as the dual of the cotangent space
+  `𝔪_x/𝔪_x²`.
 -/
 
 @[expose] public section
@@ -175,7 +176,7 @@ noncomputable def pullbackPresheafHom :
   ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat.{u} f.base).homEquiv _ _).symm f.c
 
 /-- The presheaf of relative differentials of `f : X ⟶ S`: over `U` the Kähler differentials of
-`𝒪_X(U)` relative to `(f⁻¹𝒪_S)(U)`. (blueprint: `sk-d-tangent`) -/
+`𝒪_X(U)` relative to `(f⁻¹𝒪_S)(U)`. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def cotangentPresheaf : X.PresheafOfModules :=
   PresheafOfModules.DifferentialsConstruction.relativeDifferentials' f.pullbackPresheafHom
 
@@ -185,19 +186,20 @@ noncomputable def cotangentPresheafDerivation :
   PresheafOfModules.DifferentialsConstruction.derivation' f.pullbackPresheafHom
 
 /-- The sheaf `Ω¹_{X/S}` of relative differentials of `f : X ⟶ S`: the sheafification of the
-presheaf of relative Kähler differentials. (blueprint: `sk-d-tangent`) -/
+presheaf of relative Kähler differentials. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def cotangentSheaf : X.Modules :=
   (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj f.cotangentPresheaf
 
 /-- The tangent sheaf `T_{X/S} = ℋom_{𝒪_X}(Ω¹_{X/S}, 𝒪_X)` of `f : X ⟶ S`: the sheaf of relative
-vector fields, that is of derivations of `𝒪_X` over `f⁻¹𝒪_S`. (blueprint: `sk-d-tangent`) -/
+vector fields, that is of derivations of `𝒪_X` over `f⁻¹𝒪_S`. (blueprint:
+`def-wf-lie-algebra-derivation`) -/
 noncomputable def tangentSheaf : X.Modules :=
   Modules.dual f.cotangentSheaf
 
 /-- The tangent sheaf of `f : X ⟶ S` along a section `e : S ⟶ X`: the dual
 `ℋom_{𝒪_S}(e^*Ω¹_{X/S}, 𝒪_S)` of the pullback of the cotangent sheaf, the sheaf of relative
 tangent vectors at the points of `e`. For the identity section of a group scheme this is the Lie
-algebra sheaf. (blueprint: `sk-d-tangent`) -/
+algebra sheaf. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def tangentSheafAlong (e : S ⟶ X) : S.Modules :=
   Modules.dual ((Modules.pullback e).obj f.cotangentSheaf)
 

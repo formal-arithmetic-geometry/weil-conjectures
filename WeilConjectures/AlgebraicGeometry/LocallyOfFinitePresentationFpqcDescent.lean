@@ -52,7 +52,7 @@ Proof:
    (lem-weil-pbc-finite-presentation-descends-faithfully-flat, Tag 00QQ). Every source point
    lies in an affine open, so the original morphism is locally of finite presentation.
 6. These are the isomorphism-invariance, base-change, Zariski-locality and affine-descent
-   conditions of lem-weil-pbc-fpqc-local-on-base-criterion (Tag 02KP). Applying that criterion
+   conditions of the fpqc-local-on-the-base criterion (Tag 02KP). Applying that criterion
    to the given fpqc covering proves the conclusion. -/
 theorem locallyOfFinitePresentation_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S)
     {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)

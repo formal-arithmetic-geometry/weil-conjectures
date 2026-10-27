@@ -312,8 +312,8 @@ theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlg
   exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
     continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
 
-/-- Blueprint `sk-d-real-operations`: Operations, constituents and coinvariants. Blueprint
-`def-wf-constant-weil-twist`: Constant Weil twist.
+/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
+Blueprint `def-wf-constant-weil-twist`: Constant Weil twist.
 
 The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
 acts by `b ^ deg g`; it is trivial on `π₁(C) = ker deg`. Tensoring with it,
@@ -330,7 +330,7 @@ noncomputable def constLine (b : (PadicAlgCl l)ˣ) :
     ext
     simp [smul_smul, mul_comm]
 
-/-- Blueprint `sk-d-real-operations`: Operations, constituents and coinvariants.
+/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
 
 The Tate line `ℚ̄_ℓ(n) = B_{q ^ (-n)}`, on which the geometric Frobenius acts by `q ^ (-n)`. -/
 noncomputable def tateLine (n : ℤ) :

@@ -111,8 +111,8 @@ lemma isZero_homologyFunctor_obj_of_isHomotopyLimit (hc : IsHomotopyLimit c)
 countable products in which `1 - t` is an epimorphism on `∏ Gₙ` for every tower `G` with
 epimorphic transitions (the Mittag-Leffler condition; this holds for sheaves on a replete site,
 e.g. the pro-étale site). If every term of a tower `F` in `D(C)` lies in degrees `[a, b]` and
-the transitions are surjective on `H^b`, then the derived limit of `F` lies in degrees `[a, b]`
-(blueprint `sk-prop-trace-adic` (i): the realization lies in the common range). -/
+the transitions are surjective on `H^b`, then the derived limit of `F` lies in degrees `[a, b]`.
+-/
 theorem isGE_and_isLE_of_isHomotopyLimit (hc : IsHomotopyLimit c) (a b : ℤ)
     (hF : ∀ n : ℕ, (F.obj (op n)).IsGE a ∧ (F.obj (op n)).IsLE b)
     (hb : ∀ n : ℕ, Epi ((homologyFunctor C b).map (F.map (homOfLE n.le_succ).op)))

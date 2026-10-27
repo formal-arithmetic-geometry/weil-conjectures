@@ -382,7 +382,7 @@ instance isImmersion_liftBaseChange [IsImmersion b] : IsImmersion (liftBaseChang
 /-- The lift of a closed immersion `b : T ⟶ ℙ(n; S)` along a separated morphism `g` is a
 closed immersion: `map n g` is separated, being a base change of `g`, and closed immersions
 cancel along separated morphisms.
-(blueprint: `lemma-weil-pbc-chow-embedding-over-x`, general statement) -/
+(blueprint: `lem-weil-pbc-projective-embedding`, general statement) -/
 instance isClosedImmersion_liftBaseChange [IsSeparated g] [IsClosedImmersion b] :
     IsClosedImmersion (liftBaseChange a b w) :=
   have : IsClosedImmersion (liftBaseChange a b w ≫ map n g) := by

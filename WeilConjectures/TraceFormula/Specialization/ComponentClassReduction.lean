@@ -141,4 +141,52 @@ noncomputable abbrev componentSpecializationUnit (b : RationalPoint B) :=
 
 end Correspondence.IsContractingAt
 
+namespace Correspondence.TraceSpecialization
+
+variable {ℓ : ℕ} [Fact ℓ.Prime]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {k' : Type u} [Field k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom]
+  {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom]
+  {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  {K' : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  {c : Correspondence ℓ K} {F : c.FixedLocus} {c' : Correspondence ℓ K'} {F' : c'.FixedLocus}
+  (T : c.TraceSpecialization F c' F')
+  {Ψpt : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+    Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  (σpt : 𝟙_ _ ⟶ Ψpt.obj (𝟙_ _))
+
+set_option maxHeartbeats 800000 in
+-- the objects `𝟙_ _` of the statement come with different instance paths, and checking the
+-- cancellation `comp_map_comp_app_eq_of_eq_comp'` against them unfolds the derived categories
+/-- **The class identity from facts (I)–(III)** (`comp_map_comp_app_eq_of_eq_comp'` for the
+specialization data `T`): if `Ψ_F(e)` is invertible for the counit `e : j_! ℚ̄_ℓ ⟶ ℚ̄_ℓ` of the
+component (fact (I)), if `ν_F` on `j_! ℚ̄_ℓ` factors as `φ ≫ ν_B ≫ Ψ_s(Ra_{B!} ≅ Ra_{F!} j_!)` (fact
+(II)), and if `φ` maps `Ra_{F'!}(σ_F ≫ Ψ_F(e)⁻¹) [F']` to an element that `ν_B` sends to
+`σ_s Ψ_s([B])` (fact (III) with the unit class identity of `ν_B`), then `ν_F` specializes the class
+of `B`. In the concrete situation of `IsContractingAt.specializesComponentClass_deformation` this
+reduction elaborates in seconds, unlike the cancellation applied to the goal directly. -/
+theorem specializesComponentClass_of_eq [IsProper F'.F.hom]
+    (νF : T.ΨF ⋙ boundedConstructibleLowerShriek ℓ (toPoint F'.F) ⟶
+      boundedConstructibleLowerShriek ℓ (toPoint F.F) ⋙ Ψpt)
+    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
+    [IsOpenImmersion j.left] (hI : IsIso (T.ΨF.map (IsContractingAt.componentCounit (ℓ := ℓ) j)))
+    {W : Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (φ : (boundedConstructibleLowerShriek ℓ (toPoint F'.F)).obj
+      (T.ΨF.obj ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _))) ⟶ W)
+    (νB : W ⟶ Ψpt.obj ((boundedConstructibleLowerShriek ℓ (toPoint B)).obj (𝟙_ _)))
+    (h₁ : νF.app ((boundedConstructibleLowerShriek ℓ j).obj (𝟙_ _)) = φ ≫ νB ≫
+      Ψpt.map ((lowerShriekCompOfEq ℓ j (toPoint F.F) (comp_toPoint j)).hom.app (𝟙_ _)))
+    (h₂ : BorelMooreSection.unitClass ℓ F'.F ≫ (boundedConstructibleLowerShriek ℓ
+        (toPoint F'.F)).map (T.σF ≫ inv (T.ΨF.map (IsContractingAt.componentCounit (ℓ := ℓ) j))) ≫
+        φ ≫ νB = σpt ≫ Ψpt.map (BorelMooreSection.unitClass ℓ B)) :
+    T.SpecializesComponentClass σpt νF j :=
+  comp_map_comp_app_eq_of_eq_comp' hI (c := BorelMooreSection.unitClass ℓ B)
+    (m := (lowerShriekCompOfEq ℓ j (toPoint F.F) (comp_toPoint j)).hom.app (𝟙_ _))
+    (BorelMooreSection.componentClass.eq_1 ℓ j) h₁ h₂
+
+end Correspondence.TraceSpecialization
+
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -40,11 +40,11 @@ sequences `AlgebraicGeometry.Etale.shortExact_compactlySupportedReductionSequenc
 `AlgebraicGeometry.Etale.shortExact_cohomologyReductionSequence`,
 `AlgebraicGeometry.Etale.integralDegreewise_adjoint` and the degreewise duality
 `AlgebraicGeometry.Etale.integralDegreewiseDuality`), and
-`thm-pod-adic-reconstruction-and-scalar-extension` in
+`thm-pod-derived-poincare-duality` in
 `WeilConjectures.EtaleCohomology.PoincareDuality.AdicReconstruction` (the adjoint
 `AlgebraicGeometry.Etale.poincareAdjoint`, its reductions and
 `AlgebraicGeometry.Etale.adicReconstruction_scalarExtension`). The third node,
-`thm-pod-qbar-coefficient-pairing`, is treated separately.
+`thm-pod-derived-poincare-duality`, is treated separately.
 
 ## Not stated
 
@@ -61,7 +61,7 @@ sequences `AlgebraicGeometry.Etale.shortExact_compactlySupportedReductionSequenc
   change, which the repository does not have. The transport of the degree-indexing maps, of
   the relative form and of the Frobenius squares is not stated.
 - *The `ℚ̄_ℓ` stage.* The colimit over finite `E/ℚ_ℓ` is treated with
-  `thm-pod-qbar-coefficient-pairing`.
+  `thm-pod-derived-poincare-duality`.
 - *The trace isomorphism and the Frobenius statements.* They are built from the pairing and
   the smooth trace, and transport with them; the Frobenius statements belong to
   `sk-thm-frobenius`.

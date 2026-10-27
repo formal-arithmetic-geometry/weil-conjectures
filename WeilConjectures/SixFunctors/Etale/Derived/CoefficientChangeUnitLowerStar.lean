@@ -19,7 +19,7 @@ is the mate of the coefficient comparison `Res ⋙ Lf^* ≅ Lf^* ⋙ Res`
 `Lf^* ⊣ Rf_*`, and the mate of the comparison `Res ⋙ D(f^*) ≅ D(f^*) ⋙ Res` for the adjunctions
 `D(f^*) ⊣ Rf_*`. In other words, the comparison of `Rf_*` is compatible with the units and
 counits of these adjunctions. This is used for the compatible systems of Frobenius coefficient
-morphisms (blueprint `prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+morphisms.
 -/
 
 @[expose] public section

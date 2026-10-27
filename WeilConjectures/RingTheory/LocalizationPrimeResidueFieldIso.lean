@@ -12,8 +12,7 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 /-!
 # Prime ideals, local rings and residue fields of a localization
 
-Source: Stacks Project, Algebra, Tags 00E3, 00C9 and 07BH
-(blueprint: lem-weil-pbc-localization-prime-residue-field-iso).
+Source: Stacks Project, Algebra, Tags 00E3, 00C9 and 07BH.
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ universe u v
 namespace IsLocalization
 
 /-- A localization induces the prime-ideal correspondence and canonical isomorphisms of
-local rings and residue fields. Source: Stacks Project, Algebra, Tags 00E3, 00C9 and 07BH
-(blueprint: lem-weil-pbc-localization-prime-residue-field-iso).
+local rings and residue fields. Source: Stacks Project, Algebra, Tags 00E3, 00C9 and 07BH.
 
 Proof:
 1. The contraction `q` of `q'` is prime: one does not lie in it and primality pulls back

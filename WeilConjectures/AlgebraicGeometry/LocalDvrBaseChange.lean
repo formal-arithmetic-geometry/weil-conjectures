@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.DensePoints
 /-!
 # Local orders at rational points after extension of algebraically closed fields
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 thm-sc-constant-invariance, affine-case unit quotient paragraph
 (blueprint: lem-sc-local-dvr-base-change).
 -/

@@ -13,7 +13,7 @@ public import WeilConjectures.Compactification.TwoOpenComparison
 
 This file complements `WeilConjectures.Compactification.TwoOpenComparison` with the
 scheme-level forms of the statements of the blueprint subsections
-`sk-prop-nagata-sketch-prepared` and `sk-prop-nagata-sketch-key-disjointness`, which the
+`lemma-nagata-key-boundary-disjointness`, which the
 main chain of the two-open compactification theorem only uses in topological form.
 
 * `AlgebraicGeometry.TwoOpenSide.boundaryLoci`: all clauses of
@@ -31,7 +31,7 @@ main chain of the two-open compactification theorem only uses in topological for
   over an open neighbourhood of the forbidden boundary `Z̄₁,₂`, and the comparison
   boundary lands in the self boundary of the second side (parts (3) and (4)).
 * `AlgebraicGeometry.exists_prepared_keyDisjoint_isIso_near_twoOpenSide`: the full
-  statement of `sk-prop-nagata-sketch-key-disjointness`.
+  statement of `lemma-nagata-key-boundary-disjointness`.
 
 -/
 
@@ -554,7 +554,7 @@ theorem exists_admissibleBlowup_isIso_comparisonFst_near_forbiddenBoundary [IsNo
 
 open TwoOpenSide in
 /-- **Improved comparison and key disjointness** (blueprint:
-`sk-prop-nagata-sketch-key-disjointness`). For prepared sides `σ₁, σ₂` there is a further
+`lemma-nagata-key-boundary-disjointness`). For prepared sides `σ₁, σ₂` there is a further
 `V₁`-admissible blow-up of `X₁` such that the improved first side is still prepared, the
 first projection `p₁ : X₁₂ ⟶ X₁` of the improved comparison space is an isomorphism over
 an open neighbourhood of the forbidden boundary `Z̄₁,₂`, and the key disjointness

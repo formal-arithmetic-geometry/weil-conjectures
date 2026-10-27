@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 /-!
 # The constructible exceptional inverse image on the pro-étale site
 
-Blueprint `def-weil-exceptional-inverse-image` (and `sk-def-sf-operations` (vi)) defines, at a
+Blueprint `def-weil-exceptional-inverse-image` (and `det-def-sf-operations` (vi)) defines, at a
 finite stage `A = A_{E,n}`, the exceptional inverse image on the pro-étale site as the étale
 right adjoint transported along the comparison,
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), and
@@ -121,7 +121,7 @@ lemma constructibleTorAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar {X :
   ⟨⟨hbc, homologyConcentratedIn_of_mapDerivedCategory_comparisonUpperStar Λ h.1.2⟩,
     (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b G).1 h.2⟩
 
-/-- Blueprint `sk-def-sf-operations`, the comparison of (v) and (vi): if `G` is a right adjoint of
+/-- Blueprint `det-def-sf-operations`, the comparison of (v) and (vi): if `G` is a right adjoint of
 `Rf_!` on the ambient derived categories (the ambient exceptional right adjoint `Rf^×`, which
 need not exist) and `G L` is bounded below of étale origin for a bounded below `L` (as the
 preservation clauses of `sk-def-sf-admissible` guarantee on `Dctf`), then `G L ≅ Rf^! L`, by

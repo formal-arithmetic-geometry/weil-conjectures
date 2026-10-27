@@ -101,7 +101,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 level `n`, the squared `L²`-norm of its trace function on the `𝔽_{qⁿ}`-points, with junk value
 `0` if `X₀` has infinitely many `𝔽_{qⁿ}`-points. The intended situation is that of
 `AlgebraicGeometry.Scheme.Hom.finite_fieldPoints`, where `X₀` is of finite type over the finite
-field `k₀` and the index type is finite. (blueprint: `sk-l-dl-a1-energy`) -/
+field `k₀` and the index type is finite. -/
 noncomputable def traceEnergy (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (n : ℕ) : ℝ :=
   ∑ᶠ x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n),
     ‖ι (F.traceFunction n x)‖ ^ 2
@@ -736,8 +736,7 @@ over `k₀` and punctually `ι`-pure of weight `v`. If the trace energies satisf
 
 The energy bound bounds the `L²`-weight parameter `‖N‖` by `B - 1`
 (`AlgebraicGeometry.WeilSheaf.l2Weight_le_of_traceEnergy_le`), and `‖N‖ = v` by the
-`L²`-rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`.
-(blueprint: `sk-l-dl-a1-energy`) -/
+`L²`-rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`. -/
 theorem le_sub_one_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]

@@ -71,7 +71,7 @@ variable {k V V₂ : Type*} [Field k] [AddCommGroup V] [Module k V] [AddCommGrou
   [Module k V₂]
 
 /-- An endomorphism is *finite-potent* if some power of it has finite-dimensional range
-(blueprint: `sk-thm-picard-duality`). -/
+(blueprint: `det-thm-picard-duality`). -/
 def IsFinitePotent (φ : Module.End k V) : Prop :=
   ∃ n : ℕ, (range (φ ^ n)).FG
 
@@ -99,7 +99,7 @@ lemma coe_restrict_pow (φ : Module.End k V) {U : Submodule k V} (h : ∀ x ∈ 
 open Classical in
 /-- Tate's trace of a finite-potent endomorphism: the trace of `φ` on `φ ^ n (V)` for the least
 `n` making this finite-dimensional; `0` if `φ` is not finite-potent
-(blueprint: `sk-thm-picard-duality`). -/
+(blueprint: `det-thm-picard-duality`). -/
 noncomputable def tateTrace (φ : Module.End k V) : k :=
   if h : φ.IsFinitePotent then trace k _ (φ.restrict (mapsTo_range_pow φ (Nat.find h))) else 0
 

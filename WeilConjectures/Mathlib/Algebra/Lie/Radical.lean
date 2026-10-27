@@ -42,7 +42,7 @@ theorem isSolvable_iff_exists_derivedSeries_eq_bot :
 
 /-- The radical of a Noetherian Lie algebra, defined as the supremum of all solvable ideals, is
 the largest solvable ideal: it is solvable and contains every solvable ideal.
-(blueprint: `def-wf-lie-radical-centre`, `sk-d-lie`) -/
+(blueprint: `def-wf-lie-radical-centre`, `det-d-lie`) -/
 theorem isGreatest_radical [IsNoetherian R L] :
     IsGreatest {I : LieIdeal R L | IsSolvable I} (radical R L) :=
   ⟨radicalIsSolvable R L, fun I (hI : IsSolvable I) ↦
@@ -64,7 +64,7 @@ theorem hasTrivialRadical_iff_forall_isSolvable_eq_bot :
   hasTrivialRadical_iff_no_solvable_ideals R L
 
 /-- The Killing form of a finite free Lie algebra is `B(x, y) = Tr(ad x ∘ ad y)`.
-(blueprint: `sk-d-lie`) -/
+(blueprint: `det-d-lie`) -/
 theorem killingForm_apply_eq_trace [Module.Free R L] [Module.Finite R L] (x y : L) :
     killingForm R L x y = LinearMap.trace R L (ad R L x ∘ₗ ad R L y) :=
   LieModule.traceForm_apply_apply R L L x y

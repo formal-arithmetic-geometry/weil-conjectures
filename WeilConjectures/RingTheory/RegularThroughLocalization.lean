@@ -38,7 +38,7 @@ Proof:
 thus ψ is flat (`def-weil-pbc-flat-ring-map`, Algebra 00HT (2)).
 2. For a prime q' of A', its inverse image q in A is prime and misses W.
 The localization induces an A-algebra isomorphism σ from κ(q) to κ(q') = k
-by `lem-weil-pbc-localization-prime-residue-field-iso` (Algebra 00E3, 00C9).
+(identification of residue fields under localization, Algebra 00E3, 00C9).
 3. The identity maps on C and k are module localizations at W: denominators
 act invertibly and the fraction and kernel conditions hold with denominator 1.
 By `lem-weil-pbc-localization-tensor-product` (Algebra 00DL), the canonical map

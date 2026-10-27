@@ -232,7 +232,7 @@ $F_0$ form a subfield containing $F_0$ and $\beta$
 Hence $\operatorname{Spec}F_1\to\operatorname{Spec}F_0$ is etale
 [lem-weil-pbc-finite-separable-extension-etale]. $A_0$ and $\bar\Lambda$ are local rings whose only
 prime is the maximal ideal [lem-weil-pbc-artinian-local-unique-prime], hence henselian
-[lem-weil-pbc-local-dimension-zero-henselian]. By the essential surjectivity in
+[lem-weil-pbc-henselian-of-nil-maximal-ideal]. By the essential surjectivity in
 [lem-weil-pbc-henselian-finite-etale-equivalence] for $A_0$ and the finite etale $F_0$-algebra $F_1$
 there is a finite etale $A_0$-algebra $D'$ with an $F_0$-algebra isomorphism $D'/\mathfrak
 m_{A_0}D'\cong F_1$. $D'$ is finite over $A_0$, hence Noetherian
@@ -242,7 +242,7 @@ field, so it is the maximal ideal of the local ring $D'$, which is Artinian
 local.
 Uses: lem-weil-pbc-separable-first-purely-inseparable, def-weil-pbc-separable-algebraic-extension,
 lem-weil-pbc-finite-separable-extension-etale, lem-weil-pbc-artinian-local-unique-prime,
-lem-weil-pbc-local-dimension-zero-henselian, lem-weil-pbc-henselian-finite-etale-equivalence,
+lem-weil-pbc-henselian-of-nil-maximal-ideal, lem-weil-pbc-henselian-finite-etale-equivalence,
 lem-weil-pbc-finite-type-algebra-noetherian, lem-weil-pbc-noetherian-local-quotient-artinian-local.
 
 11. *Case S: a factorization $A_0\to D'\to\bar\Lambda$ (Stacks: 'since $\bar\Lambda$ is henselian

@@ -37,7 +37,7 @@ of pro-étale sheaves are exact, so `⊕ F[n] ≅ ∏ F[n]`, while `Rp_*` sends 
 non-surjective `⊕ Hⁿ(E, F) → ∏ Hⁿ(E, F)` in degree `0`: `Rp_! = Rp_*` does not preserve
 coproducts and has no right adjoint on `D`. A separate `t`-structure argument rules out a right
 adjoint on `D⁺` as well. The sheaf `F` is not of étale origin. The blueprint's proof chain never
-assumes these data: it uses the constructible `Rf^!` of `sk-def-sf-operations`(vi) instead, and
+assumes these data: it uses the constructible `Rf^!` of `det-def-sf-operations`(vi) instead, and
 the data survive only as optional hypotheses of `sk-lem-sf-mate`(a), of the second half of
 `sk-thm-sf-package`(1), and of `sk-prop-sf-existence`(b).
 
@@ -52,7 +52,7 @@ The data are `structure`s, not `class`es: they are meant to be named and passed 
 Clauses (2) and (3) are stated for *every* right adjoint `G` of `Rf_!`: the ambient right
 adjoint `Rf^×` is not defined in this repository, since it does not exist in general. It is not
 `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`, which is the constructible `Rf^!` of
-`sk-def-sf-operations` (vi). Both predicates are closed under isomorphism, so this is no
+`det-def-sf-operations` (vi). Both predicates are closed under isomorphism, so this is no
 stronger than stating them for one right adjoint.
 
 The blueprint's "compatibly with refinements" clause of `sk-def-sf-admissible` is not among

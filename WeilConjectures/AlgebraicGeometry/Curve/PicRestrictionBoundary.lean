@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicRestrictionExact
 /-!
 # Restriction of Picard groups across a finite boundary
 
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine,
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
 restriction and boundary divisors, followed by degree splitting
 (blueprint: lem-sc-pic-restriction-boundary).
 -/
@@ -27,7 +27,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine,
+/-- Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
 restriction and boundary divisors, followed by degree splitting
 (blueprint: lem-sc-pic-restriction-boundary).
 

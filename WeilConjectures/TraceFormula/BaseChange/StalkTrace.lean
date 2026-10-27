@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ObjectProperty.FullSubcategoryEqToHom
 public import WeilConjectures.TraceFormula.BaseChange.Coherence
 public import WeilConjectures.TraceFormula.BaseChange.Iterate
 public import WeilConjectures.TraceFormula.BaseChange.WeilObject
@@ -44,18 +45,6 @@ universe u
 open CategoryTheory Endofunctor
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory.ObjectProperty.FullSubcategory
-
-variable {C : Type*} [Category C] {P : ObjectProperty C}
-
-/-- The underlying morphism of `eqToHom` in a full subcategory is `eqToHom`. -/
-lemma eqToHom_hom' {X Y : P.FullSubcategory} (h : X = Y) :
-    (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
-  subst h
-  rfl
-
-end CategoryTheory.ObjectProperty.FullSubcategory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

@@ -17,7 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 /-!
 # Base change and the neighbourhood limit
 
-Source: Weil conjectures blueprint, `sec-curve-estimates/sk-prop-h2`,
+Source: Weil conjectures blueprint, `sec-curve-estimates/lem-sc-second-kummer-divisors`,
 (blueprint: lemma-weil-pbc-fibre-product-limit).
 -/
 
@@ -36,7 +36,7 @@ This states the canonical isomorphism with the inverse limit without assuming th
 exists beforehand. The order of the two factors is immaterial: `Over.pullback f` uses
 `V ×_S X` with its projection to `X`.
 
-Source: blueprint `sec-curve-estimates/sk-prop-h2`,
+Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`,
 (blueprint: lemma-weil-pbc-fibre-product-limit).
 
 Proof:

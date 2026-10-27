@@ -16,7 +16,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 # Pullback of scheme modules by the tensor formula
 
 Source: Stacks Project, Tags 0095, 0096, 0097; blueprint module base change in
-`sec-abelian-varieties/sk-def-av-jacobian/def-pc-base-change.md`
+`sec-abelian-varieties/def-sc-jacobian/def-pc-base-change.md`
 (blueprint: def-pc-module-pullback).
 -/
 

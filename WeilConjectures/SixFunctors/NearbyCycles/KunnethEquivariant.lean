@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
+public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
 
 /-!
@@ -24,7 +25,7 @@ This is the compatibility of the Künneth map with pullbacks
 the identity isomorphisms `L(𝟙)^* ≅ 𝟭`, which are monoidal
 (`ProEtale.CondensedRing.leftDerivedUpperStarTensor_id`) and compatible with the pullback
 comparisons of the squares with identity sides
-(`ProEtale.CondensedRing.pullbackSquareComparison_id_hom_app_comp_map`).
+(`ProEtale.CondensedRing.pullbackSquareComparison_hom_app_id_right`).
 
 -/
 
@@ -54,18 +55,16 @@ lemma δ_leftDerivedUpperStarId (W : Scheme.{u})
 
 set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
-/-- The pullback comparison `L(𝟙)^* Lf^* ≅ Lf^* L(𝟙)^*` of the square with identity sides,
-followed by `Lf^*` of the identity isomorphism `L(𝟙)^* ≅ 𝟭`, is the identity isomorphism. -/
-lemma pullbackSquareComparison_id_hom_app_comp_map {Z X : Scheme.{u}} (f : Z ⟶ X)
+/-- `ProEtale.CondensedRing.pullbackSquareComparison_hom_app_id_right`, in the form used below. -/
+private lemma pullbackSquareComparison_id_hom_app_comp_map {Z X : Scheme.{u}} (f : Z ⟶ X)
     (h : f ≫ 𝟙 X = 𝟙 Z ≫ f)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
     (pullbackSquareComparison Λ (⟨h⟩ : CommSq f (𝟙 Z) (𝟙 X) f)).hom.app K ≫
         L((f)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app K) =
       (leftDerivedUpperStarId Λ Z).hom.app (L((f)^*⟦Λ⟧).obj K) := by
-  rw [pullbackSquareComparison_hom_app, Category.assoc, Category.assoc,
-    leftDerivedUpperStarComp_id_right_app]
-  simp only [eqToHom_trans]
-  rw [← Iso.app_inv, Iso.inv_comp_eq, Iso.app_hom, leftDerivedUpperStarComp_id_left_app]
+  rw [pullbackSquareComparison_hom_app_id_right, Category.assoc,
+    ← CategoryTheory.Functor.map_comp]
+  simp
 
 /-- `Lf^*` of the identity isomorphism `L(𝟙)^* ≅ 𝟭` followed by `Lf^*` of its inverse. -/
 lemma map_leftDerivedUpperStarId_hom_comp_map_inv {Z X : Scheme.{u}} (f : Z ⟶ X)

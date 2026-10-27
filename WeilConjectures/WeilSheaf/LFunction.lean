@@ -60,7 +60,7 @@ sheaves, vanish; such sets exist by finiteness
 not change the alternating determinants, the added factors being `1`.
 
 *Hypotheses.* The blueprint theorem is stated for a Weil complex satisfying the finite-level
-hypotheses of `thm-trf-trace-formula-e` (étale-origin witnesses and compactification
+hypotheses of the trace formula with `E`-coefficients (étale-origin witnesses and compactification
 admissibility for the reductions of a lattice of a representative). The Weil complexes of this
 repository are constructible `ℚ̄_ℓ`-complexes on the pro-étale site of `X`, built directly from
 pro-étale sheaves with no chosen lattice; those hypotheses are properties of the integral
