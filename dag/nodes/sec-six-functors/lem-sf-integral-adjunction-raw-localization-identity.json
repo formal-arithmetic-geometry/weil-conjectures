@@ -8,15 +8,27 @@
  },
  "proof": [
   {
-   "text": "This is a strictly smaller construction boundary of the parent localization argument; the parent combines this witness with the remaining boundary to obtain its conclusion.",
+   "text": "Define q and b by the literal identity-component natural isomorphisms rawRationalComparison. Tensor extension sends the localized integral arrow to the tensor of its integral image, so the naturality squares commute. The assumed counit normalization gives the CounitComparison counit equation because both comparison components are identities.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The left comparison commutes with shifts by the explicit normalization hypothesis. Form the right mate of inverse q using the supplied integral counit and the localized unit. The counit equation identifies that mate with b: apply the inverse localized Hom equivalence and cancel the invertible q component. The mate is a composite of whiskered shift-compatible transformations, so b commutes with shifts. This is the proved private helper mate_shift, using Mathlib mateEquiv and mateEquiv_counit.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Package these comparisons with the endpoint shifts integralRationalizationShift. Their components and both claimed shift equalities are reflexive.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Construction 6.2"
+  "place": "Constructions 6.1 and 6.2; explicit tensor identity comparisons and the counit characterization of the right mate."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -59,18 +71,25 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-compatibility",
- "statement": "theorem exists_raw_localized_identity_comparison (A : Operation.{u, v} l Ω X Y (.integral E)) [A.F.Additive] [A.G.Additive] [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) (R : RawLocalizedAdjunction l Ω E X Y A hX hY) : ∃ (q : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E) (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)), (∀ K, HEq (q.q.hom.app K) (𝟙 ((rationalization.{u, v} l Ω E Y).obj (A.F.obj K)))) ∧ (∀ M, HEq (q.b.hom.app M) (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M)))) ∧ q.shiftX = integralRationalizationShift l Ω E X ∧ q.shiftY = integralRationalizationShift l Ω E Y",
- "stmt_deps": [],
- "proof_deps": [],
+ "statement": "theorem exists_raw_localized_identity_comparison\n    (A : Operation.{u, v} l Ω X Y (.integral E))\n    [A.F.Additive] [A.G.Additive]\n    [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]\n    [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)]\n    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)\n    (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y)\n    (R : RawLocalizedAdjunction l Ω E X Y A hX hY)\n    (hc : ∀ M, (rawRationalComparison l Ω E A.F hX).hom.app (A.G.obj M) ≫\n      (rawRationalFunctor l Ω E X Y A.F hX).map\n        ((rawRationalComparison l Ω E A.G hY).hom.app M) ≫\n      R.adjunction.counit.app ((rationalization.{u, v} l Ω E Y).obj M) =\n        (rationalization.{u, v} l Ω E Y).map (A.adjunction.counit.app M))\n    (hq : letI := integralRationalizationShift l Ω E X\n          letI := integralRationalizationShift l Ω E Y\n          letI := A.leftShift\n          letI := R.leftShift\n          NatTrans.CommShift (rawRationalComparison l Ω E A.F hX).hom ℤ) :\n    ∃ (q : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E)\n        (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)),\n      (∀ K, HEq (q.q.hom.app K)\n        (𝟙 ((rationalization.{u, v} l Ω E Y).obj (A.F.obj K)))) ∧\n      (∀ M, HEq (q.b.hom.app M)\n        (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M)))) ∧\n      q.shiftX = integralRationalizationShift l Ω E X ∧\n      q.shiftY = integralRationalizationShift l Ω E Y",
+ "stmt_deps": [
+  "def-sf-integral-adjunction-raw-localization-data"
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.ExceptionalIntegralAdjunctionLocalization",
   "file": "lean/Sheaf/Paper/ExceptionalIntegralAdjunctionLocalization.lean",
   "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_raw_localized_identity_comparison",
-  "statement": "theorem exists_raw_localized_identity_comparison (A : Operation.{u, v} l Ω X Y (.integral E)) [A.F.Additive] [A.G.Additive] [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) (R : RawLocalizedAdjunction l Ω E X Y A hX hY) : ∃ (q : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E) (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)), (∀ K, HEq (q.q.hom.app K) (𝟙 ((rationalization.{u, v} l Ω E Y).obj (A.F.obj K)))) ∧ (∀ M, HEq (q.b.hom.app M) (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M)))) ∧ q.shiftX = integralRationalizationShift l Ω E X ∧ q.shiftY = integralRationalizationShift l Ω E Y",
+  "statement": "theorem exists_raw_localized_identity_comparison\n    (A : Operation.{u, v} l Ω X Y (.integral E))\n    [A.F.Additive] [A.G.Additive]\n    [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]\n    [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)]\n    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)\n    (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y)\n    (R : RawLocalizedAdjunction l Ω E X Y A hX hY)\n    (hc : ∀ M, (rawRationalComparison l Ω E A.F hX).hom.app (A.G.obj M) ≫\n      (rawRationalFunctor l Ω E X Y A.F hX).map\n        ((rawRationalComparison l Ω E A.G hY).hom.app M) ≫\n      R.adjunction.counit.app ((rationalization.{u, v} l Ω E Y).obj M) =\n        (rationalization.{u, v} l Ω E Y).map (A.adjunction.counit.app M))\n    (hq : letI := integralRationalizationShift l Ω E X\n          letI := integralRationalizationShift l Ω E Y\n          letI := A.leftShift\n          letI := R.leftShift\n          NatTrans.CommShift (rawRationalComparison l Ω E A.F hX).hom ℤ) :\n    ∃ (q : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E)\n        (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)),\n      (∀ K, HEq (q.q.hom.app K)\n        (𝟙 ((rationalization.{u, v} l Ω E Y).obj (A.F.obj K)))) ∧\n      (∀ M, HEq (q.b.hom.app M)\n        (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M)))) ∧\n      q.shiftX = integralRationalizationShift l Ω E X ∧\n      q.shiftY = integralRationalizationShift l Ω E Y",
   "branch": "sheaf-dag",
   "by": "H1",
-  "date": "2026-10-27"
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_raw_localized_identity_comparison"
+  ]
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -85,18 +104,36 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
-  "result": "pass",
-  "landing": "20261027T112416-L-1581168",
+  "reviewer": "C-021b7",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180508-L-3867217",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_raw_localized_adjunction_core",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_raw_localized_identity_comparison"
+  "note": "independent cc review: delivered Data block vs published item block (verbatim except recorded rawRationalFunctor cache + new rawRationalComparison); corrected identity helper vs its change record and node; 4 node JSONs vs the proof; Data, item, ScalarMate and RationalStage compiled in sandbox OK; axioms probe (sorryAx only upstream via rationalization)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "C4 stage 3",
+  "old_statement": "theorem exists_raw_localized_identity_comparison (A : Operation.{u, v} l Ω X Y (.integral E)) [A.F.Additive] [A.G.Additive] [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) (R : RawLocalizedAdjunction l Ω E X Y A hX hY) : ∃ (q : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E) (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)), (∀ K, HEq (q.q.hom.app K) (𝟙 ((rationalization.{u, v} l Ω E Y).obj (A.F.obj K)))) ∧ (∀ M, HEq (q.b.hom.app M) (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M)))) ∧ q.shiftX = integralRationalizationShift l Ω E X ∧ q.shiftY = integralRationalizationShift l Ω E Y",
+  "what": "An arbitrary RawLocalizedAdjunction has neither a normalized counit nor normalized shifts. Multiplying the unit and counit of an identity adjunction by -1 preserves its axioms but prevents identity comparisons in characteristic zero. Require the localized counit formula and the canonical left comparison shift square. The parent existential theorem proves both hypotheses from Adjunction.localization and Functor.commShiftOfLocalization, with its original statement unchanged. The corrected helper proves the right shift square by mates rather than assuming it.",
+  "source": {
+   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+   "place": "Construction 6.2"
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-adjunction-raw-localization",
+    "holds": true,
+    "note": "The actual localization construction proves both added normalization hypotheses; the parent statement and its endpoint shifts are unchanged."
+   }
   ],
-  "sorry_after": [
-   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_raw_localized_identity_comparison"
-  ]
+  "old_proof": [
+   {
+    "text": "This is a strictly smaller construction boundary of the parent localization argument; the parent combines this witness with the remaining boundary to obtain its conclusion.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }

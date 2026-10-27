@@ -6,7 +6,14 @@ Authors: SHEAF group M6
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientConstructionData
-import all Sheaf.Paper.SfRationalLocalizationOrthogonality
+public import Sheaf.Paper.ExceptionalIntegralAdjunctionLocalizationData
+import all Sheaf.CategoryTheory.SemilinearScalarLocalization
+import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+import Mathlib.CategoryTheory.Localization.Adjunction
+import Mathlib.CategoryTheory.Shift.Localization
+import Mathlib.CategoryTheory.Triangulated.Adjunction
+import Mathlib.CategoryTheory.Localization.Equivalence
+import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Raw localization of one integral linear adjunction
 
@@ -17,6 +24,7 @@ The functors below are actual tensor extensions, with no choice of object or arr
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard Padic
   WeilConjectures.sfIntegralConstructible WeilConjectures.sfRationalTriangulationDatum
 set_option genInjectivity false
@@ -26,185 +34,11 @@ set_option genCtorIdx false
 universe u v w
 open CategoryTheory AlgebraicGeometry TensorProduct
 namespace WeilConjectures.ConstructibleExceptionalCoefficients
-attribute [local instance] Operation.leftAdditive Operation.rightAdditive
-  Operation.leftShift Operation.rightShift
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (E : FieldStage.{max u v} l) (X Y : Scheme.{max u v})
 
-/-- Change only the membership proof of an integral representative.
-Source: the full-subcategory step of Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-def integralRepresentative
-    (h : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :
-    sfIntegralConstructibleCategory l E.carrier X ⥤ C.{u, v} l Ω X (.integral E) where
-  obj K := ⟨K.obj, h ▸ K.property⟩
-  map f := ObjectProperty.homMk f.hom
-
-/-- Extend the domain of an integral functor by the literal full inclusions.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-def fullIntegralFunctor
-    (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
-    (h : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :
-    sfIntegralConstructibleCategory l E.carrier X ⥤ sfIntegralConstructibleCategory l E.carrier Y :=
-  integralRepresentative l Ω E X h ⋙ F ⋙ PurCompactSupport.finiteTorIntegralInclusion l E.carrier Y
-
-/-- The proof-changing representative functor is additive.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-instance integralRepresentativeAdditive (h) :
-    (integralRepresentative l Ω E X h).Additive where
-  map_add := by intros; rfl
-
-/-- The proof-changing representative functor is integral-linear.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-instance integralRepresentativeLinear (h) :
-    (integralRepresentative l Ω E X h).Linear (Padic.coefficientExtensionIntegers l E.carrier) where
-  map_smul := by intros; rfl
-
-/-- The literal full integral inclusion is additive.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-instance integralInclusionAdditive (l : ℕ) [Fact l.Prime]
-    (E : FieldStage.{w} l) (X : Scheme.{w}) :
-    (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X).Additive where
-  map_add := by intros; rfl
-
-/-- The literal full integral inclusion is integral-linear.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-instance integralInclusionLinear (l : ℕ) [Fact l.Prime]
-    (E : FieldStage.{w} l) (X : Scheme.{w}) :
-    (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X).Linear
-      (Padic.coefficientExtensionIntegers l E.carrier) where
-  map_smul := by intros; rfl
-
-/-- The full-domain functor is additive, since both inclusions are literal.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-instance fullIntegralFunctorAdditive
-    (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
-    [F.Additive] (h) : (fullIntegralFunctor l Ω E X Y F h).Additive := by
-  dsimp only [fullIntegralFunctor]
-  infer_instance
-
-/-- The full-domain functor preserves integral scalar multiplication.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-instance fullIntegralFunctorLinear
-    (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
-    [F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (h) :
-    (fullIntegralFunctor l Ω E X Y F h).Linear
-      (Padic.coefficientExtensionIntegers l E.carrier) := by
-  dsimp only [fullIntegralFunctor]
-  infer_instance
-
-/-- Tensor extension of a linear functor preserves identities and composition.
-Source: the tensor Hom construction in Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-theorem rawTensorFunctorLaws
-    {R : Type*} [CommRing R] {B C : Type*} [Category B] [Category C]
-    [Preadditive B] [Preadditive C] [Linear R B] [Linear R C]
-    (p : R) (F : B ⥤ C) [F.Additive] [F.Linear R] :
-    (∀ K : B, (F.mapLinearMap R).baseChange (Localization.Away p)
-      (1 ⊗ₜ[R] 𝟙 K) = 1 ⊗ₜ[R] 𝟙 (F.obj K)) ∧
-    (∀ (K L M : B) (a : Localization.Away p ⊗[R] (K ⟶ L))
-        (b : Localization.Away p ⊗[R] (L ⟶ M)),
-      (F.mapLinearMap R).baseChange (Localization.Away p)
-        (ScalarLocalization.composition R B p K L M b a) =
-      ScalarLocalization.composition R C p (F.obj K) (F.obj L) (F.obj M)
-        ((F.mapLinearMap R).baseChange (Localization.Away p) b)
-        ((F.mapLinearMap R).baseChange (Localization.Away p) a)) := by
-  constructor
-  · intro K
-    change (1 : Localization.Away p) ⊗ₜ[R] F.map (𝟙 K) = _
-    rw [F.map_id]
-  · intro K L M a b
-    induction b using TensorProduct.induction_on with
-    | zero => simp
-    | tmul b g =>
-      induction a using TensorProduct.induction_on with
-      | zero => simp
-      | tmul a h =>
-        rw [ScalarLocalization.composition_tmul]
-        change (b * a) ⊗ₜ[R] F.map (h ≫ g) =
-          ScalarLocalization.composition R C p (F.obj K) (F.obj L) (F.obj M)
-            (b ⊗ₜ[R] F.map g) (a ⊗ₜ[R] F.map h)
-        rw [ScalarLocalization.composition_tmul, F.map_comp]
-      | add a a' ha ha' => simp [map_add, ha, ha']
-    | add b b' hb hb' => simp [map_add, hb, hb']
-
-/-- The rational functor sends each tensor to the tensor of the integral image.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-def rawRationalFunctor
-    (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
-    [F.Additive] [F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
-    (h : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :
-    C.{u, v} l Ω X (.rational E) ⥤ C.{u, v} l Ω Y (.rational E) where
-  obj K := ⟨(fullIntegralFunctor l Ω E X Y F h).obj K.obj⟩
-  map f := ((fullIntegralFunctor l Ω E X Y F h).mapLinearMap
-    (Padic.coefficientExtensionIntegers l E.carrier)).baseChange
-      (Localization.Away (Padic.coefficientExtensionUniformizer l E.carrier)) f
-  map_id K := (rawTensorFunctorLaws _ (fullIntegralFunctor l Ω E X Y F h)).1 K.obj
-  map_comp f g := (rawTensorFunctorLaws _ (fullIntegralFunctor l Ω E X Y F h)).2 _ _ _ f g
-
-/-- Canonical endpoint shift on raw rationalization, chosen without an operation.
-Source: the inherited shifts of the two full coefficient subcategories
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-@[instance_reducible]
-def integralRationalizationShift : (rationalization.{u, v} l Ω E X).CommShift ℤ := by
-  letI : (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X).CommShift ℤ :=
-    Functor.CommShift.ofComp
-      (show PurCompactSupport.finiteTorIntegralInclusion l E.carrier X ⋙
-        (sfIntegralConstructible l E.carrier X).ι ≅
-          (finiteTorConstructibleIntegral l E.carrier X).ι from Iso.refl _) ℤ
-  infer_instance
-
-/-- Only the adjunction and exact structures on the two explicitly constructed functors.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-structure RawLocalizedAdjunction
-    (A : Operation.{u, v} l Ω X Y (.integral E))
-    [A.F.Additive] [A.G.Additive]
-    [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
-    [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
-    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)
-    (hY : sfIntegralConstructible l E.carrier Y =
-      finiteTorConstructibleIntegral l E.carrier Y) where
-  adjunction : rawRationalFunctor l Ω E X Y A.F hX ⊣ rawRationalFunctor l Ω E Y X A.G hY
-  [leftShift : (rawRationalFunctor l Ω E X Y A.F hX).CommShift ℤ]
-  [rightShift : (rawRationalFunctor l Ω E Y X A.G hY).CommShift ℤ]
-  leftExact : (rawRationalFunctor l Ω E X Y A.F hX).IsTriangulated
-  rightExact : (rawRationalFunctor l Ω E Y X A.G hY).IsTriangulated
-  unitShift : adjunction.unit.CommShift ℤ
-  counitShift : adjunction.counit.CommShift ℤ
-
 variable {X Y}
-
-/-- Package the exact structures; both functor data are the explicit tensor extensions.
-Source: Zheng, Construction 6.2
-(blueprint: lem-sf-integral-adjunction-raw-localization). -/
-def RawLocalizedAdjunction.operation
-    {A : Operation.{u, v} l Ω X Y (.integral E)}
-    [A.F.Additive] [A.G.Additive]
-    [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
-    [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] {hX hY}
-    (R : RawLocalizedAdjunction l Ω E X Y A hX hY) :
-    Operation.{u, v} l Ω X Y (.rational E) where
-  F := rawRationalFunctor l Ω E X Y A.F hX
-  G := rawRationalFunctor l Ω E Y X A.G hY
-  adjunction := R.adjunction
-  leftAdditive := ⟨by intros; exact map_add _ _ _⟩
-  rightAdditive := ⟨by intros; exact map_add _ _ _⟩
-  leftShift := R.leftShift
-  rightShift := R.rightShift
-  leftExact := R.leftExact
-  rightExact := R.rightExact
-  unitShift := R.unitShift
-  counitShift := R.counitShift
 
 private def integralRepresentativeEquivalence (T : Scheme.{max u v})
     (h : sfIntegralConstructible l E.carrier T = finiteTorConstructibleIntegral l E.carrier T) :
@@ -228,46 +62,229 @@ private def integralRepresentativeEquivalence (T : Scheme.{max u v})
     change 𝟙 K.obj ≫ 𝟙 K.obj = 𝟙 K.obj
     exact Category.id_comp _
 
-private def fullIntegralAdjunction
-    (A : Operation.{u, v} l Ω X Y (.integral E))
-    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)
-    (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) :
-    fullIntegralFunctor l Ω E X Y A.F hX ⊣ fullIntegralFunctor l Ω E Y X A.G hY :=
-  ((integralRepresentativeEquivalence l Ω E X hX).toAdjunction.comp A.adjunction).comp
-    (integralRepresentativeEquivalence l Ω E Y hY).symm.toAdjunction
+private theorem localizedCounit
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    (TX : C ⥤ C') (WX : MorphismProperty C) [TX.IsLocalization WX]
+    (TY : D ⥤ D') (WY : MorphismProperty D) [TY.IsLocalization WY]
+    (Fq : C' ⥤ D') (Gq : D' ⥤ C')
+    [CatCommSq F TX TY Fq] [CatCommSq G TY TX Gq] (M : D) :
+    (CatCommSq.iso F TX TY Fq).hom.app (G.obj M) ≫
+      Fq.map ((CatCommSq.iso G TY TX Gq).hom.app M) ≫
+      (adj.localization TX WX TY WY Fq Gq).counit.app (TY.obj M) =
+        TY.map (adj.counit.app M) := by
+  rw [Adjunction.localization_counit_app]
+  rw [← Fq.map_comp_assoc, Iso.hom_inv_id_app]
+  dsimp only [Functor.comp_obj]
+  rw [Fq.map_id (TX.obj (G.obj M))]
+  rw [Category.id_comp, Iso.hom_inv_id_app_assoc]
 
-private theorem rawRationalFactor
+
+section AbstractLocalization
+variable {C₁ C₂ D₁ D₂ : Type*}
+  [Category C₁] [Category C₂] [Category D₁] [Category D₂]
+  [Limits.HasZeroObject C₁] [Limits.HasZeroObject C₂]
+  [Limits.HasZeroObject D₁] [Limits.HasZeroObject D₂]
+  [Preadditive C₁] [Preadditive C₂] [Preadditive D₁] [Preadditive D₂]
+  [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift D₁ ℤ] [HasShift D₂ ℤ]
+  [∀ n : ℤ, (shiftFunctor C₁ n).Additive] [∀ n : ℤ, (shiftFunctor C₂ n).Additive]
+  [∀ n : ℤ, (shiftFunctor D₁ n).Additive] [∀ n : ℤ, (shiftFunctor D₂ n).Additive]
+  [Pretriangulated C₁] [Pretriangulated C₂]
+  [Pretriangulated D₁] [Pretriangulated D₂]
+  {F : C₁ ⥤ C₂} {G : C₂ ⥤ C₁} (adj : F ⊣ G) [F.CommShift ℤ]
+  (TX : C₁ ⥤ D₁) (TY : C₂ ⥤ D₂) [TX.CommShift ℤ] [TY.CommShift ℤ]
+  (Fq : D₁ ⥤ D₂) (Gq : D₂ ⥤ D₁)
+  (q : F ⋙ TY ≅ TX ⋙ Fq) (b : G ⋙ TX ≅ TY ⋙ Gq)
+
+private structure ExactLocalization where
+  adjunction : Fq ⊣ Gq
+  leftShift : Fq.CommShift ℤ
+  rightShift : Gq.CommShift ℤ
+  leftExact : letI := leftShift; Fq.IsTriangulated
+  rightExact : letI := rightShift; Gq.IsTriangulated
+  unitShift : letI := leftShift; letI := rightShift; adjunction.unit.CommShift ℤ
+  counitShift : letI := leftShift; letI := rightShift; adjunction.counit.CommShift ℤ
+  comparisonShift : letI := leftShift; q.hom.CommShift ℤ
+  counit (M : C₂) : q.hom.app (G.obj M) ≫ Fq.map (b.hom.app M) ≫
+    adjunction.counit.app (TY.obj M) = TY.map (adj.counit.app M)
+
+variable (WX : MorphismProperty C₁) [TX.IsLocalization WX]
+  (WY : MorphismProperty C₂) [TY.IsLocalization WY]
+  [TX.IsTriangulated] [TY.IsTriangulated] [TX.mapArrow.EssSurj] [F.IsTriangulated]
+
+private def exactLocalization : ExactLocalization adj TX TY Fq Gq q b := by
+  let : Localization.Lifting TX WX (F ⋙ TY) Fq := ⟨q.symm⟩
+  let : Fq.CommShift ℤ := Functor.commShiftOfLocalization TX WX ℤ (F ⋙ TY) Fq
+  have : NatTrans.CommShift q.symm.hom ℤ :=
+    NatTrans.commShift_iso_hom_of_localization TX WX ℤ (F ⋙ TY) Fq
+  have hq : NatTrans.CommShift q.hom ℤ := NatTrans.CommShift.of_iso_inv q.symm ℤ
+  have : Fq.IsTriangulated := Functor.isTriangulated_of_precomp_iso q.symm
+  let : CatCommSq F TX TY Fq := ⟨q⟩
+  let : CatCommSq G TY TX Gq := ⟨b⟩
+  let aq := adj.localization TX WX TY WY Fq Gq
+  let : Gq.CommShift ℤ := aq.rightAdjointCommShift ℤ
+  have : aq.CommShift ℤ := aq.commShift_of_leftAdjoint ℤ
+  exact {
+    adjunction := aq
+    leftShift := inferInstance
+    rightShift := inferInstance
+    leftExact := inferInstance
+    rightExact := aq.isTriangulated_rightAdjoint
+    unitShift := inferInstance
+    counitShift := inferInstance
+    comparisonShift := hq
+    counit := localizedCounit adj TX WX TY WY Fq Gq }
+end AbstractLocalization
+
+private theorem mate_shift
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift C' ℤ] [HasShift D' ℤ]
+    {F : C ⥤ D} {G : D ⥤ C} {F' : C' ⥤ D'} {G' : D' ⥤ C'}
+    (adj : F ⊣ G) (adj' : F' ⊣ G')
+    [F.CommShift ℤ] [G.CommShift ℤ] [F'.CommShift ℤ] [G'.CommShift ℤ]
+    [adj.CommShift ℤ] [adj'.CommShift ℤ]
+    (TX : C ⥤ C') (TY : D ⥤ D') [TX.CommShift ℤ] [TY.CommShift ℤ]
+    (q : F ⋙ TY ≅ TX ⋙ F') (b : G ⋙ TX ⟶ TY ⋙ G')
+    [NatTrans.CommShift q.hom ℤ]
+    (hc : ∀ L, q.hom.app (G.obj L) ≫ F'.map (b.app L) ≫
+      adj'.counit.app (TY.obj L) = TY.map (adj.counit.app L)) :
+    NatTrans.CommShift b ℤ := by
+  let m := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ q.inv)).natTrans
+  have hm : NatTrans.CommShift m ℤ := by
+    dsimp [m, mateEquiv]
+    infer_instance
+  have hb : b = m := by
+    ext L
+    apply (adj'.homEquiv _ _).symm.injective
+    change F'.map (b.app L) ≫ adj'.counit.app _ =
+      F'.map (m.app L) ≫ adj'.counit.app _
+    rw [mateEquiv_counit]
+    apply (cancel_epi (q.hom.app (G.obj L))).1
+    simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using hc L
+  rw [hb]
+  exact hm
+
+private theorem rawRationalComparisonHom
     (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
     [F.Additive] [F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
-    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :
-    sfRationalConstructibleLocalization l E.carrier X ⋙ rawRationalFunctor l Ω E X Y F hX =
-      fullIntegralFunctor l Ω E X Y F hX ⋙ sfRationalConstructibleLocalization l E.carrier Y := by
-  exact sfLocalization_factor l E.carrier (fullIntegralFunctor l Ω E X Y F hX)
-    (rawRationalFunctor l Ω E X Y F hX) (fun _ ↦ rfl)
-    (by intros; exact heq_of_eq rfl)
+    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)
+    (K : C.{u, v} l Ω X (.integral E)) :
+    HEq ((rawRationalComparison l Ω E F hX).hom.app K)
+      (𝟙 ((rationalization.{u, v} l Ω E Y).obj (F.obj K))) := by
+  exact heq_of_eq rfl
 
-private theorem fullIntegralExact
-    (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))
-    [F.CommShift ℤ] [F.IsTriangulated]
-    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :
-    ∃ cs : (fullIntegralFunctor l Ω E X Y F hX).CommShift ℤ,
-      (letI := cs; (fullIntegralFunctor l Ω E X Y F hX).IsTriangulated) := by
-  let IX := (sfIntegralConstructible l E.carrier X).ι
-  let JX := (finiteTorConstructibleIntegral l E.carrier X).ι
-  let IY := (sfIntegralConstructible l E.carrier Y).ι
-  let JY := (finiteTorConstructibleIntegral l E.carrier Y).ι
-  let r := integralRepresentative l Ω E X hX
-  let j := PurCompactSupport.finiteTorIntegralInclusion l E.carrier Y
-  let er : r ⋙ JX ≅ IX := Iso.refl _
-  let ej : j ⋙ IY ≅ JY := Iso.refl _
-  let : r.CommShift ℤ := Functor.CommShift.ofComp er ℤ
-  let : j.CommShift ℤ := Functor.CommShift.ofComp ej ℤ
-  have : NatTrans.CommShift er.hom ℤ := Functor.CommShift.ofComp_compatibility er ℤ
-  have : NatTrans.CommShift ej.hom ℤ := Functor.CommShift.ofComp_compatibility ej ℤ
-  have : r.IsTriangulated := (Functor.isTriangulated_iff_comp_right er).2 inferInstance
-  have : j.IsTriangulated := (Functor.isTriangulated_iff_comp_right ej).2 inferInstance
-  exact ⟨(inferInstance : (r ⋙ F ⋙ j).CommShift ℤ),
-    (inferInstance : (r ⋙ F ⋙ j).IsTriangulated)⟩
+attribute [local irreducible] rawRationalFunctor rawRationalComparison
+
+private theorem integralLocalization (E : FieldStage.{w} l) (T : Scheme.{w}) :
+    (sfRationalConstructibleLocalization l E.carrier T).IsLocalization
+      (Rationalization.W (Submonoid.powers (Padic.coefficientExtensionUniformizer l E.carrier))
+        (sfIntegralConstructibleCategory l E.carrier T)) := by
+  have : ∀ n : ℤ, (shiftFunctor (sfIntegralConstructibleCategory l E.carrier T) n).Linear
+      (Padic.coefficientExtensionIntegers l E.carrier) :=
+    CategoryTheory.ScalarLocalization.semilinear_all_shift_linear _ _
+  exact CategoryTheory.ScalarLocalization.semilinear_localization_isLocalization _ _ _
+
+private theorem rationalizationLocalization (T : Scheme.{max u v})
+    (h : sfIntegralConstructible l E.carrier T = finiteTorConstructibleIntegral l E.carrier T) :
+    (rationalization.{u, v} l Ω E T).IsLocalization
+      ((Rationalization.W (Submonoid.powers
+        (Padic.coefficientExtensionUniformizer l E.carrier))
+          (sfIntegralConstructibleCategory l E.carrier T)).inverseImage
+            (PurCompactSupport.finiteTorIntegralInclusion l E.carrier T)) := by
+  let Q := sfRationalConstructibleLocalization l E.carrier T
+  let W := Rationalization.W (Submonoid.powers
+    (Padic.coefficientExtensionUniformizer l E.carrier))
+      (sfIntegralConstructibleCategory l E.carrier T)
+  let j := PurCompactSupport.finiteTorIntegralInclusion l E.carrier T
+  have : Q.IsLocalization W := integralLocalization l E T
+  apply Functor.IsLocalization.of_equivalence_source Q W (j ⋙ Q) (W.inverseImage j)
+    (integralRepresentativeEquivalence l Ω E T h)
+  · intro K L f hf
+    exact MorphismProperty.le_isoClosure _ _ hf
+  · intro K L f hf
+    exact Localization.inverts Q W (j.map f) hf
+  · exact Iso.refl _
+
+private theorem rationalizationExact (T : Scheme.{max u v}) :
+    letI := integralRationalizationShift.{u, v} l Ω E T
+    (rationalization.{u, v} l Ω E T).IsTriangulated := by
+  let j := PurCompactSupport.finiteTorIntegralInclusion l E.carrier T
+  let e : j ⋙ (sfIntegralConstructible l E.carrier T).ι ≅
+      (finiteTorConstructibleIntegral l E.carrier T).ι := Iso.refl _
+  let : j.CommShift ℤ := Functor.CommShift.ofComp e ℤ
+  have : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofComp_compatibility e ℤ
+  have : j.IsTriangulated := (Functor.isTriangulated_iff_comp_right e).2 inferInstance
+  exact (inferInstance : (j ⋙ sfRationalConstructibleLocalization l E.carrier T).IsTriangulated)
+
+private theorem rationalizationArrowEssSurj (T : Scheme.{max u v})
+    (h : sfIntegralConstructible l E.carrier T = finiteTorConstructibleIntegral l E.carrier T) :
+    (rationalization.{u, v} l Ω E T).mapArrow.EssSurj := by
+  let Q := sfRationalConstructibleLocalization l E.carrier T
+  let W := Rationalization.W (Submonoid.powers
+    (Padic.coefficientExtensionUniformizer l E.carrier))
+      (sfIntegralConstructibleCategory l E.carrier T)
+  have : Q.IsLocalization W := integralLocalization l E T
+  have : Q.mapArrow.EssSurj := Localization.essSurj_mapArrow Q W
+  have : (PurCompactSupport.finiteTorIntegralInclusion l E.carrier T).IsEquivalence :=
+    (integralRepresentativeEquivalence l Ω E T h).symm.isEquivalence_functor
+  exact (inferInstance : ((PurCompactSupport.finiteTorIntegralInclusion l E.carrier T).mapArrow ⋙
+    Q.mapArrow).EssSurj)
+
+attribute [local irreducible] integralRationalizationShift
+
+private theorem exists_normalized_raw_core
+    (A : Operation.{u, v} l Ω X Y (.integral E))
+    [A.F.Additive] [A.G.Additive]
+    [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
+    [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
+    (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)
+    (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) :
+    ∃ R : RawLocalizedAdjunction l Ω E X Y A hX hY,
+      (∀ M, (rawRationalComparison l Ω E A.F hX).hom.app (A.G.obj M) ≫
+        (rawRationalFunctor l Ω E X Y A.F hX).map
+          ((rawRationalComparison l Ω E A.G hY).hom.app M) ≫
+        R.adjunction.counit.app ((rationalization.{u, v} l Ω E Y).obj M) =
+          (rationalization.{u, v} l Ω E Y).map (A.adjunction.counit.app M)) ∧
+      (letI := integralRationalizationShift l Ω E X
+       letI := integralRationalizationShift l Ω E Y
+       letI := A.leftShift
+       letI := R.leftShift
+       NatTrans.CommShift (rawRationalComparison l Ω E A.F hX).hom ℤ) := by
+  let TX := rationalization.{u, v} l Ω E X
+  let TY := rationalization.{u, v} l Ω E Y
+  let WX := (Rationalization.W (Submonoid.powers
+    (Padic.coefficientExtensionUniformizer l E.carrier))
+      (sfIntegralConstructibleCategory l E.carrier X)).inverseImage
+        (PurCompactSupport.finiteTorIntegralInclusion l E.carrier X)
+  let WY := (Rationalization.W (Submonoid.powers
+    (Padic.coefficientExtensionUniformizer l E.carrier))
+      (sfIntegralConstructibleCategory l E.carrier Y)).inverseImage
+        (PurCompactSupport.finiteTorIntegralInclusion l E.carrier Y)
+  have : TX.IsLocalization WX := rationalizationLocalization l Ω E X hX
+  have : TY.IsLocalization WY := rationalizationLocalization l Ω E Y hY
+  let : TX.CommShift ℤ := integralRationalizationShift l Ω E X
+  let : TY.CommShift ℤ := integralRationalizationShift l Ω E Y
+  have : TX.IsTriangulated := rationalizationExact l Ω E X
+  have : TY.IsTriangulated := rationalizationExact l Ω E Y
+  have : TX.mapArrow.EssSurj := rationalizationArrowEssSurj l Ω E X hX
+  let : A.F.CommShift ℤ := A.leftShift
+  let : A.G.CommShift ℤ := A.rightShift
+  have : A.F.IsTriangulated := A.leftExact
+  let Fq := rawRationalFunctor l Ω E X Y A.F hX
+  let Gq := rawRationalFunctor l Ω E Y X A.G hY
+  let q : A.F ⋙ TY ≅ TX ⋙ Fq := rawRationalComparison l Ω E A.F hX
+  let b : A.G ⋙ TX ≅ TY ⋙ Gq := rawRationalComparison l Ω E A.G hY
+  let P := exactLocalization A.adjunction TX TY Fq Gq q b WX WY
+  let R : RawLocalizedAdjunction l Ω E X Y A hX hY := {
+    adjunction := P.adjunction
+    leftShift := P.leftShift
+    rightShift := P.rightShift
+    leftExact := P.leftExact
+    rightExact := P.rightExact
+    unitShift := P.unitShift
+    counitShift := P.counitShift }
+  exact ⟨R, P.counit, P.comparisonShift⟩
+
 
 set_option linter.unusedVariables false in
 /-- The localized raw functors carry the transported adjunction and exact structures.
@@ -281,43 +298,14 @@ theorem exists_raw_localized_adjunction_core
     (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)
     (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) :
     ∃ (R : RawLocalizedAdjunction l Ω E X Y A hX hY), True := by
-  let F := fullIntegralFunctor l Ω E X Y A.F hX
-  let G := fullIntegralFunctor l Ω E Y X A.G hY
-  have : F.Additive := fullIntegralFunctorAdditive l Ω E X Y A.F hX
-  have : F.Linear (Padic.coefficientExtensionIntegers l E.carrier) :=
-    fullIntegralFunctorLinear l Ω E X Y A.F hX
-  let Fq := rawRationalFunctor l Ω E X Y A.F hX
-  let Gq := rawRationalFunctor l Ω E Y X A.G hY
-  let : A.F.CommShift ℤ := A.leftShift
-  have : A.F.IsTriangulated := A.leftExact
-  obtain ⟨cs, ht⟩ := fullIntegralExact l Ω E A.F hX
-  let : F.CommShift ℤ := cs
-  have : F.IsTriangulated := ht
-  have : Fq.Additive := ⟨by intros; exact map_add _ _ _⟩
-  obtain ⟨P⟩ := sfRationalizedExact l E.carrier F Fq
-    (fun _ ↦ rfl) (by intros; exact heq_of_eq rfl)
-  let : Fq.CommShift ℤ := P.rationalShift
-  have : Fq.IsTriangulated := P.rationalExact
-  obtain ⟨adj, _, _⟩ := sfLocalizedAdjunction l E.carrier F G Fq Gq
-    (fullIntegralAdjunction l Ω E A hX hY)
-    (rawRationalFactor l Ω E A.F hX) (rawRationalFactor l Ω E A.G hY)
-  let : Gq.CommShift ℤ := adj.rightAdjointCommShift ℤ
-  have : adj.CommShift ℤ := adj.commShift_of_leftAdjoint ℤ
-  exact ⟨{
-    adjunction := adj
-    leftExact := P.rationalExact
-    rightExact := adj.isTriangulated_rightAdjoint
-    unitShift := inferInstance
-    counitShift := inferInstance }, trivial⟩
+  obtain ⟨R, _⟩ := exists_normalized_raw_core l Ω E A hX hY
+  exact ⟨R, trivial⟩
 
 /-- The localized adjunction admits the identity normalized coefficient comparison.
 Source: Zheng, Construction 6.2, normalization after scalar localization
 (blueprint: lem-sf-integral-adjunction-raw-localization-identity).
-STATEMENT-DISPUTED: an arbitrary RawLocalizedAdjunction has no normalization against
-A's counit or shifts. Rescaling its unit and counit by -1 preserves its axioms but
-contradicts identity comparison components on a nonzero characteristic-zero category.
-The comparison must concern the particular normalized construction, or assume that
-normalization explicitly. -/
+The adjunction's counit and left shift comparison are normalized explicitly; an arbitrary
+adjunction structure on the raw functors does not satisfy this assertion. -/
 theorem exists_raw_localized_identity_comparison
     (A : Operation.{u, v} l Ω X Y (.integral E))
     [A.F.Additive] [A.G.Additive]
@@ -325,7 +313,17 @@ theorem exists_raw_localized_identity_comparison
     [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)]
     (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X)
     (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y)
-    (R : RawLocalizedAdjunction l Ω E X Y A hX hY) :
+    (R : RawLocalizedAdjunction l Ω E X Y A hX hY)
+    (hc : ∀ M, (rawRationalComparison l Ω E A.F hX).hom.app (A.G.obj M) ≫
+      (rawRationalFunctor l Ω E X Y A.F hX).map
+        ((rawRationalComparison l Ω E A.G hY).hom.app M) ≫
+      R.adjunction.counit.app ((rationalization.{u, v} l Ω E Y).obj M) =
+        (rationalization.{u, v} l Ω E Y).map (A.adjunction.counit.app M))
+    (hq : letI := integralRationalizationShift l Ω E X
+          letI := integralRationalizationShift l Ω E Y
+          letI := A.leftShift
+          letI := R.leftShift
+          NatTrans.CommShift (rawRationalComparison l Ω E A.F hX).hom ℤ) :
     ∃ (q : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E)
         (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)),
       (∀ K, HEq (q.q.hom.app K)
@@ -333,7 +331,31 @@ theorem exists_raw_localized_identity_comparison
       (∀ M, HEq (q.b.hom.app M)
         (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M)))) ∧
       q.shiftX = integralRationalizationShift l Ω E X ∧
-      q.shiftY = integralRationalizationShift l Ω E Y := by sorry
+      q.shiftY = integralRationalizationShift l Ω E Y := by
+  let TX := rationalization.{u, v} l Ω E X
+  let TY := rationalization.{u, v} l Ω E Y
+  let : TX.CommShift ℤ := integralRationalizationShift l Ω E X
+  let : TY.CommShift ℤ := integralRationalizationShift l Ω E Y
+  let : (rawRationalFunctor l Ω E X Y A.F hX).CommShift ℤ := R.leftShift
+  let : (rawRationalFunctor l Ω E Y X A.G hY).CommShift ℤ := R.rightShift
+  let : A.F.CommShift ℤ := A.leftShift
+  let : A.G.CommShift ℤ := A.rightShift
+  let q := rawRationalComparison l Ω E A.F hX
+  let b := rawRationalComparison l Ω E A.G hY
+  have : NatTrans.CommShift q.hom ℤ := hq
+  have : A.adjunction.CommShift ℤ := ⟨A.unitShift, A.counitShift⟩
+  have : R.adjunction.CommShift ℤ := ⟨R.unitShift, R.counitShift⟩
+  have hb : NatTrans.CommShift b.hom ℤ :=
+    mate_shift A.adjunction R.adjunction TX TY q b.hom hc
+  let c : CounitFieldComparison.{u, v} l Ω A (R.operation l Ω E) TX TY := {
+    shiftX := integralRationalizationShift l Ω E X
+    shiftY := integralRationalizationShift l Ω E Y
+    comparison := { q := q, b := b, counit := hc, qShift := hq, bShift := hb } }
+  refine ⟨c, ?_, ?_, rfl, rfl⟩
+  · intro K
+    exact rawRationalComparisonHom l Ω E A.F hX K
+  · intro M
+    exact rawRationalComparisonHom l Ω E A.G hY M
 
 /-- A single integral linear adjunction localizes on its literal tensor Hom maps.
 There is no compactification, compact-support realization, or change of coefficient field.
@@ -356,9 +378,9 @@ theorem exists_integral_adjunction_raw_localization
         (𝟙 ((rationalization.{u, v} l Ω E X).obj (A.G.obj M)))) ∧
       q.shiftX = integralRationalizationShift l Ω E X ∧
       q.shiftY = integralRationalizationShift l Ω E Y := by
-  obtain ⟨R⟩ := exists_raw_localized_adjunction_core l Ω E A hX hY
+  obtain ⟨R, hc, hqs⟩ := exists_normalized_raw_core l Ω E A hX hY
   obtain ⟨q, hq, hb, hx, hy⟩ :=
-    exists_raw_localized_identity_comparison l Ω E A hX hY R
+    exists_raw_localized_identity_comparison l Ω E A hX hY R hc hqs
   exact ⟨R, q, hq, hb, hx, hy⟩
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

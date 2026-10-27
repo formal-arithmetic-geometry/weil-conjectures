@@ -1,0 +1,122 @@
+{
+ "id": "def-sf-integral-adjunction-raw-localization-data",
+ "kind": "definition",
+ "title": "Literal tensor data for raw integral adjunction localization",
+ "statement": "Fix the coefficient prime, algebraic closure, field stage E and schemes X,Y as in [def-sf-constructible-exceptional-coefficient-construction-data]. When the integral constructible and finite-Tor predicates agree on X, define integralRepresentative by changing only its membership proof, and fullIntegralFunctor by this representative, a given integral functor F, and the target full inclusion [def-sf-finite-tor-integral-inclusion]. For an additive integral-linear F [def-weil-linear-category], define rawRationalFunctor to retain its full integral object image and send a localized Hom tensor to the base change of F.mapLinearMap, using scalar-localized Hom composition [def-weil-rationalization-karoubi]. Its identity and composition laws follow by tensor induction. integralRationalizationShift is the canonical full-inclusion shift followed by the scalar-localization shift. RawLocalizedAdjunction stores an adjunction, exact shift structures and compatible unit/counit on the two fixed tensor functors; its operation packages those existing data without choosing new maps. rawRationalComparison is the identity-component natural isomorphism between F followed by rationalization and rationalization followed by the fixed raw tensor functor. These definitions assert no existence of normalized adjunction data.",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-category",
+  "def-sf-finite-tor-integral-inclusion"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 6.1 and 6.2, integral-to-field localization; the raw-localization part of coefficient construction step 5"
+ },
+ "proof": [
+  {
+   "text": "Define the proof-changing representative and full inclusion composites directly. Tensor-extension map_id follows from the integral functor map_id. For map_comp, induct on each tensor and use bilinearity together with the integral map_comp. The raw comparison has identity components and its naturality is the equality of the literal tensor images. The adjunction record merely packages supplied structures on fixed functors, with no existential witness chosen.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 6.1 and 6.2; direct tensor construction, separated from the adjunction proof only for the 60-second module compile limit."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A linear functor extends to tensor localized Hom modules with unchanged objects",
+   "results": "Generic tensor and localization declarations; no project-specific finite-Tor coefficient functor.",
+   "date": "2026-10-28",
+   "verdict": "Keep the existing explicit tensor construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapLinearMap",
+   "results": "Functor.mapLinearMap, coe_mapLinearMap, mapLinearMap_apply in Mathlib.CategoryTheory.Linear.LinearFunctor.",
+   "date": "2026-10-28",
+   "verdict": "Use this linear map and its base change in the existing definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rawRationalFunctor|composition_tmul",
+   "results": "Remote Mathlib search gave no match; local project sources contain the original rawRationalFunctor and ScalarLocalization.composition_tmul used by its tensor laws.",
+   "date": "2026-10-28",
+   "verdict": "Move and preserve the original project definitions; no duplicate construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralAdjunctionLocalization",
+  "date": "2026-10-28",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-adjunction-raw-localization",
+   "place": "Existing literal tensor definitions, separated solely to compile each file within 60 seconds.",
+   "via": [
+    "lem-sf-rational-stage-localization",
+    "lem-sf-field-stage-completion",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalIntegralAdjunctionLocalizationData",
+  "file": "lean/Sheaf/Paper/ExceptionalIntegralAdjunctionLocalizationData.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.rawRationalFunctor",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRepresentative",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.fullIntegralFunctor",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRepresentativeAdditive",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRepresentativeLinear",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.integralInclusionAdditive",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.integralInclusionLinear",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.fullIntegralFunctorAdditive",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.fullIntegralFunctorLinear",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rawTensorFunctorLaws",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rawRationalFunctor",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRationalizationShift",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.RawLocalizedAdjunction",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.RawLocalizedAdjunction.operation",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rawRationalComparison"
+  ],
+  "statement": "def rawRationalFunctor\n    (F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E))\n    [F.Additive] [F.Linear (Padic.coefficientExtensionIntegers l E.carrier)]\n    (h : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) :\n    C.{u, v} l Ω X (.rational E) ⥤ C.{u, v} l Ω Y (.rational E)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-021b7",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180508-L-3867217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-021b7",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180508-L-3867217",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data block vs published item block (verbatim except recorded rawRationalFunctor cache + new rawRationalComparison); corrected identity helper vs its change record and node; 4 node JSONs vs the proof; Data, item, ScalarMate and RationalStage compiled in sandbox OK; axioms probe (sorryAx only upstream via rationalization)"
+ }
+}

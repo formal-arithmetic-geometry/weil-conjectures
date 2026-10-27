@@ -8,17 +8,7 @@
  },
  "proof": [
   {
-   "text": "The predicate equality gives an equivalence between the full integral constructible category and its finite-Tor subcategory: both functors keep the underlying object and arrow. The unit and counit have identity components. Compose the adjunction of this equivalence on X, the supplied integral adjunction, and the inverse equivalence on Y. This yields an adjunction between the two fullIntegralFunctor functors.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For each inclusion, use Functor.CommShift.ofComp with its identity comparison to the ambient full-subcategory inclusion. Register ofComp_compatibility. The fully faithful target inclusion reflects triangulated functors, so the two proof-changing inclusions are exact. Their composite with the given exact left adjoint is exact.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The raw rational functor agrees with the integral functor followed by localization on objects and pure tensors by reflexivity. Apply the proved private sfRationalizedExact from SfRationalLocalizationOrthogonality, which descends its shift and exactness through the scalar localization. Apply the proved private sfLocalizedAdjunction from the same module to the two literal factorization equalities; this invokes Mathlib Adjunction.localization on the already proved scalar-localization instances.",
+   "text": "The equality of predicates gives the proof-changing equivalence integralRepresentativeEquivalence. Transport the scalar localization along this equivalence: rationalization on the finite-Tor category is localization for the inverse image of the usual scalar denominators. Its canonical endpoint shift is exact because the full integral inclusion is exact. Its arrow functor is essentially surjective because the inclusion is an equivalence and the scalar localization has a calculus of fractions.",
    "uses": [
     "lem-pur-semilinear-scalar-localization",
     "lem-weil-linear-scalar-localization-triangulated"
@@ -26,7 +16,15 @@
    "elementary": false
   },
   {
-   "text": "Choose the right-adjoint shift by Adjunction.rightAdjointCommShift. Adjunction.commShift_of_leftAdjoint provides unit and counit compatibility. Adjunction.isTriangulated_rightAdjoint then proves exactness of the right adjoint. Package these witnesses in RawLocalizedAdjunction. This construction makes no claim of normalization for an arbitrary RawLocalizedAdjunction.",
+   "text": "Define the identity-component comparison q between A.F followed by endpoint rationalization and endpoint rationalization followed by the fixed raw tensor functor. Functor.commShiftOfLocalization transports A.leftShift through this square and proves q shift compatible. Exactness reflects through the exact localization, whose arrow functor is essentially surjective.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply A.adjunction.localization to both literal comparison squares. Its counit component formula is exactly the localized integral counit because both comparison components are identities. Choose the right shift using rightAdjointCommShift. Its unit and counit commute with shifts, and its right adjoint is exact. The private exists_normalized_raw_core retains the counit and left shift normalization; discard those additional proof fields here to obtain the original core statement.",
    "uses": [
     "lem-weil-pbc-adjunction-shift-compatibility-unique",
     "lem-sf-triangulated-right-adjoint"
@@ -37,7 +35,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Construction 6.2; P4 reuses the proved sfRationalizedExact and sfLocalizedAdjunction helpers, with Mathlib adjunction and fully faithful exactness APIs."
+  "place": "Constructions 6.1 and 6.2; direct localization of the supplied adjunction through the finite-Tor equivalence, with normalized comparison and canonical endpoint shifts."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -81,7 +79,9 @@
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-compatibility",
  "statement": "theorem exists_raw_localized_adjunction_core (A : Operation.{u, v} l Ω X Y (.integral E)) [A.F.Additive] [A.G.Additive] [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) : ∃ (R : RawLocalizedAdjunction l Ω E X Y A hX hY), True",
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sf-integral-adjunction-raw-localization-data"
+ ],
  "proof_deps": [
   "lem-pur-semilinear-scalar-localization",
   "lem-weil-linear-scalar-localization-triangulated",
@@ -96,7 +96,10 @@
   "statement": "theorem exists_raw_localized_adjunction_core (A : Operation.{u, v} l Ω X Y (.integral E)) [A.F.Additive] [A.G.Additive] [A.F.Linear (Padic.coefficientExtensionIntegers l E.carrier)] [A.G.Linear (Padic.coefficientExtensionIntegers l E.carrier)] (hX : sfIntegralConstructible l E.carrier X = finiteTorConstructibleIntegral l E.carrier X) (hY : sfIntegralConstructible l E.carrier Y = finiteTorConstructibleIntegral l E.carrier Y) : ∃ (R : RawLocalizedAdjunction l Ω E X Y A hX hY), True",
   "branch": "sheaf-dag",
   "by": "H1",
-  "date": "2026-10-27"
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_raw_localized_adjunction_core"
+  ]
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -111,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
-  "result": "pass",
-  "landing": "20261027T112416-L-1581168",
+  "reviewer": "C-021b7",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180508-L-3867217",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered Data block vs published item block (verbatim except recorded rawRationalFunctor cache + new rawRationalComparison); corrected identity helper vs its change record and node; 4 node JSONs vs the proof; Data, item, ScalarMate and RationalStage compiled in sandbox OK; axioms probe (sorryAx only upstream via rationalization)"
  }
 }

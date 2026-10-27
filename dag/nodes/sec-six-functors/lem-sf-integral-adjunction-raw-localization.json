@@ -6,7 +6,8 @@
  "stmt_deps": [
   "def-sf-constructible-exceptional-coefficient-construction-data",
   "def-weil-rationalization-karoubi",
-  "def-weil-linear-category"
+  "def-weil-linear-category",
+  "def-sf-integral-adjunction-raw-localization-data"
  ],
  "source": {
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
@@ -14,14 +15,17 @@
  },
  "proof": [
   {
-   "text": "Obtain an exact shift-compatible adjunction on the fixed raw tensor functors from exists_raw_localized_adjunction_core. Its construction transports the full integral adjunction and applies the proved localization and exactness helpers.",
+   "text": "Construct the normalized raw adjunction using exists_normalized_raw_core, the same private construction underlying exists_raw_localized_adjunction_core. Transport the scalar localization across the full-subcategory equivalence, descend A.leftShift using the identity left comparison, reflect exactness through localization, and apply Adjunction.localization to the supplied integral adjunction. Its component formula proves the localized counit normalization. Use the unique compatible right-adjoint shift and its exactness.",
    "uses": [
-    "lem-sf-integral-adjunction-raw-localization-core"
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exists_raw_localized_identity_comparison to the obtained RawLocalizedAdjunction and package the two witnesses. This step remains sorry, and its arbitrary-R comparison statement is marked STATEMENT-DISPUTED in Lean because the structure has no normalization hypotheses.",
+   "text": "Apply the corrected exists_raw_localized_identity_comparison with the counit and left shift normalizations just proved. It constructs literal identity comparisons on both functors, proves the right comparison shift square by the mate calculation, and retains the canonical endpoint shifts. Package R and q to obtain the original existential statement without any extra hypothesis.",
    "uses": [
     "lem-sf-integral-adjunction-raw-localization-identity"
    ],
@@ -29,13 +33,16 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-integral-adjunction-raw-localization-core",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
   "lem-sf-integral-adjunction-raw-localization-identity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Constructions 6.1 and 6.2; H1 decomposition into core and comparison, core proved by P4, comparison remains disputed."
+  "place": "Constructions 6.1 and 6.2; direct normalized localization followed by the proved identity-comparison construction."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -101,19 +108,6 @@
   "by": "M6",
   "date": "2026-10-27",
   "declarations": [
-   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRepresentative",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.fullIntegralFunctor",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRepresentativeAdditive",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRepresentativeLinear",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.integralInclusionAdditive",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.integralInclusionLinear",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.fullIntegralFunctorAdditive",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.fullIntegralFunctorLinear",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.rawTensorFunctorLaws",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.rawRationalFunctor",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.integralRationalizationShift",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.RawLocalizedAdjunction",
-   "WeilConjectures.ConstructibleExceptionalCoefficients.RawLocalizedAdjunction.operation",
    "WeilConjectures.ConstructibleExceptionalCoefficients.exists_integral_adjunction_raw_localization"
   ]
  },
@@ -130,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
-  "result": "pass",
-  "landing": "20261027T112416-L-1581168",
+  "reviewer": "C-021b7",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T180508-L-3867217",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered Data block vs published item block (verbatim except recorded rawRationalFunctor cache + new rawRationalComparison); corrected identity helper vs its change record and node; 4 node JSONs vs the proof; Data, item, ScalarMate and RationalStage compiled in sandbox OK; axioms probe (sorryAx only upstream via rationalization)"
  }
 }
