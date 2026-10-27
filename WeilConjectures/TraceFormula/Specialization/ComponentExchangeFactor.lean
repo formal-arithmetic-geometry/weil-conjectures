@@ -74,18 +74,6 @@ section TotalMap
 variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k']
   {X Y : Over (Spec (.of k))} {I : Y.left.IdealSheafData} {J : X.left.IdealSheafData}
 
-/-- The morphism of total spaces depends only on the underlying morphism. -/
-lemma deformationTotalMap_eq_of_eq {f f' : X ⟶ Y} (e : f = f')
-    (hf : ∀ ⦃U' : X.left.AffineZariskiSite⦄ ⦃U : Y.left.AffineZariskiSite⦄
-      (hU : U'.1 ≤ f.left ⁻¹ᵁ U.1), (I.siteIdeal U).map (f.left.appLE U.1 U'.1 hU).hom ≤
-        J.siteIdeal U')
-    (hf' : ∀ ⦃U' : X.left.AffineZariskiSite⦄ ⦃U : Y.left.AffineZariskiSite⦄
-      (hU : U'.1 ≤ f'.left ⁻¹ᵁ U.1), (I.siteIdeal U).map (f'.left.appLE U.1 U'.1 hU).hom ≤
-        J.siteIdeal U') :
-    deformationTotalMap f hf k' = deformationTotalMap f' hf' k' := by
-  subst e
-  rfl
-
 /-- A composite of three morphisms of total spaces along kernels of rational points is the morphism
 of total spaces of the composite, written as any morphism equal to it. -/
 lemma deformationTotalMap_comp_comp_of_eq {Z W : Over (Spec (.of k))}
