@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.MateBiproduct
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsRegular
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented.FiberRank
 
 /-!
 # Descending a locally free module along a change of coefficients, from transition matrices
@@ -39,17 +41,6 @@ open CategoryTheory Limits MonoidalCategory MonObj
 open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
-
-/-- Morphisms out of the image of a finite biproduct under a functor preserving it are determined
-by their composites with the images of the inclusions. -/
-lemma Functor.map_biproduct_hom_ext {C D : Type*} [Category* C] [Category* D] [Preadditive C]
-    [Preadditive D] [HasFiniteBiproducts C] [HasFiniteBiproducts D] (H : C ⥤ D) [H.Additive]
-    {J : Type} [Finite J] (f : J → C) {W : D} {g h : H.obj (⨁ f) ⟶ W}
-    (w : ∀ j, H.map (biproduct.ι f j) ≫ g = H.map (biproduct.ι f j) ≫ h) : g = h := by
-  have := Fintype.ofFinite J
-  rw [← cancel_epi (H.mapBiproduct f).inv]
-  refine biproduct.hom_ext' _ _ fun j ↦ ?_
-  simpa [Functor.mapBiproduct_inv] using w j
 
 /-- If `x₁ ≫ κ = k ≫ x₂` for isomorphisms `κ` and `k`, then `x₂ ≫ κ⁻¹ = k⁻¹ ≫ x₁`. -/
 lemma comp_inv_eq_inv_comp_of_comp_hom_eq {C : Type*} [Category* C] {A B X Y : C} {x₁ : A ⟶ B}
@@ -188,13 +179,6 @@ end Square
 
 section FiniteFree
 
-variable (Λ) in
-/-- The pullback of module objects sends `Λ_Y^n` to `Λ_X^n`. -/
-noncomputable abbrev upperStarFiniteFreeIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
-    (f)^*⟦Λ⟧.obj (Mod.finiteFree (condensedRingObj Λ Y) n) ≅
-      Mod.finiteFree (condensedRingObj Λ X) n :=
-  Mod.finiteFreeIsoMap _ (upperStarObjRegularIso Λ f) n
-
 /-- The extension of scalars along `a_X : Λ_X ⟶ Λ'_X` sends `Λ_X^n` to `Λ'_X^n`. -/
 noncomputable abbrev extendScalarsFiniteFreeIso (X : Scheme.{u}) (n : ℕ) :
     (Mod.extendScalars (coefficientMap a X)).obj (Mod.finiteFree (condensedRingObj Λ X) n) ≅
@@ -209,11 +193,11 @@ lemma pullIso_hom_app_finiteFree_comp {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
         (upperStarFiniteFreeIso Λ' f n).hom =
       (Mod.extendScalars (coefficientMap a X)).map (upperStarFiniteFreeIso Λ f n).hom ≫
         (extendScalarsFiniteFreeIso a X n).hom := by
-  refine Functor.map_biproduct_hom_ext ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X)) _
+  refine Functor.map_biproduct_hom_ext ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X))
     fun i ↦ ?_
   have hn := (pullIso a f).hom.naturality
     (biproduct.ι (fun _ : Fin n ↦ Mod.regular (condensedRingObj Λ Y)) i)
-  simp only [Functor.comp_map] at hn ⊢
+  simp only [Functor.comp_map, upperStarFiniteFreeIso] at hn ⊢
   rw [reassoc_of% hn, ← Functor.map_comp_assoc, Mod.map_ι_comp_finiteFreeIsoMap_hom,
     Functor.map_comp_assoc, Mod.map_ι_comp_finiteFreeIsoMap_hom, ← Functor.map_comp_assoc,
     Mod.map_ι_comp_finiteFreeIsoMap_hom, Functor.map_comp_assoc,
@@ -258,9 +242,9 @@ lemma exists_extendScalars_map_eq_of_isDefinedOver {P V V' : Scheme.{u}} (p : P 
       (extendScalarsFiniteFreeIso a P m).hom =
       (extendScalarsFiniteFreeIso a P n).hom ≫ (upperStarFiniteFreeIso Λ' p n).inv ≫ Y ≫
         (upperStarFiniteFreeIso Λ' p' m).hom := by
-    refine Functor.map_biproduct_hom_ext (Mod.extendScalars (coefficientMap a P)) _ fun i ↦
+    refine Functor.map_biproduct_hom_ext (Mod.extendScalars (coefficientMap a P)) fun i ↦
       biproduct.hom_ext _ _ fun j ↦ ?_
-    simp only [Category.assoc, Mod.finiteFreeIsoMap_hom_comp_π,
+    simp only [upperStarFiniteFreeIso, Category.assoc, Mod.finiteFreeIsoMap_hom_comp_π,
       Mod.map_ι_comp_finiteFreeIsoMap_hom_assoc, Mod.ι_comp_finiteFreeIsoMap_inv_assoc]
     have hc : biproduct.ι (fun _ : Fin n ↦ Mod.regular (condensedRingObj Λ P)) i ≫ M ≫
         biproduct.π (fun _ : Fin m ↦ Mod.regular (condensedRingObj Λ P)) j =
