@@ -19662,3 +19662,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:04 L: returned deliver/N2/Sheaf.Paper.TowerClassPositiveUnitSquare (reviewer RETURN: (the landing tools, head 05eb06a9f) the delivery did not land: lean/Sheaf/Paper/TowerClassPositiveUnitSquare.lean was re)
 - 18:04 L: returned deliver/P2/Sheaf.Paper.IntegralDirectImageTowerData (reviewer RETURN: (the landing tools, head 7ba874b4c) the delivery did not land: lean/Sheaf/Paper/IntegralDirectImageTowerData.lean was re)
 - 18:04 L: returned deliver/R1/Sheaf.Paper.LocallyFiniteAdicConstructibleRealization (reviewer RETURN: (the landing tools, head cfc8799cb) the delivery did not land: the importer recheck at landing (tools/importer_compile.p)
+- 18:04 L: returned deliver/R2/Sheaf.Paper.DiagonalScalarPullbackCompatibility (reviewer RETURN: (the landing tools, head 8e21083b7) the delivery did not land: lean/Sheaf/Paper/DiagonalScalarPullbackCompatibility.lean)
