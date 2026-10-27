@@ -16,22 +16,37 @@
  ],
  "proof": [
   {
-   "text": "Construct the inverse sectionwise module functor using the inverse scheme isomorphism and the inverse coefficient isomorphism. The two functors are exact equivalences and their sectionwise tensor comparison is natural and invertible. Transport an exact sequence through the inverse, apply the flatness predicate, and transport back.",
+   "text": "Use the local finite-relation criterion for flatness. For an object U of X.ProEt and a finite relation in the transported module, send its coefficients through c inverse. The underlying module sections are those of M at G(U), so this is a relation in M. Apply the forward local equational criterion to obtain a covering sieve S and finite factorization matrices.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-site-flat-equational-criterion-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The site functor G is cocontinuous: assemble its stated equivalence with inverse postcomposition, and use the cover-preserving inverse and Mathlib Adjunction.isCocontinuous_iff_coverPreserving. Thus the functor pullback of S covers U.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On every arrow of that pulled-back sieve, send the factorization coefficients forward through c and keep the module sections. The identities c inverse composed with c equals identity prove the factorization equations with the transported action. Apply c to the original zero coefficient sums; additivity, multiplicativity, naturality of c, and c composed with c inverse equals identity prove the new coefficient sums vanish. The converse local criterion gives flatness. The argument includes empty relations and zero coefficient rings.",
+   "uses": [
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
     "def-pc-flat-sheaf-modules"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-proetale-isomorphism-inverse-image",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-site-flat-equational-criterion-universes"
  ],
  "proof_origin": {
-  "by": "F1 stage 3",
-  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "the flatness clause"
+  "by": "M8 stage 3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-flat-eq (Tag 08FC), applied to the sectionwise special case of lemma-pullback-flat (Tag 05VD)"
  },
  "mathlib_searches": [
   {
@@ -99,10 +114,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "M8",
   "result": "pass",
-  "landing": "20261027T131450-L-2939592",
-  "kind": "interface",
+  "landing": "20261027T151722-L-1197538",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
