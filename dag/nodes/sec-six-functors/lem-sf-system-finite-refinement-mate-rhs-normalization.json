@@ -1,0 +1,110 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Finite coordinate cancellation around the evaluated canonical bridge equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite evaluation of a proper open mate and coefficient comparison",
+   "results": "No exact project-specific declaration; generic mate transport only.",
+   "date": "2026-10-28",
+   "verdict": "Use the recorded project comparison declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp Category.assoc conjugateIsoEquiv",
+   "results": "Generic categorical identities only.",
+   "date": "2026-10-28",
+   "verdict": "No shorter specialized theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "gamma_evaluation canonicalBridge fixedShriek properOpenMate",
+   "results": "Found the semilinear evaluation and fixed-coordinate APIs used by the split.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate target proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemFiniteRefinementMateCoordinates",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-system-finite-refinement-mate-coordinates",
+   "place": "Proof steps 1-2: transport the evaluated canonical bridge to fixed finite coordinates."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-sf-system-finite-refinement-mate-rhs-normalization",
+ "kind": "statement",
+ "title": "Right normalization of the finite refinement mate",
+ "statement": "For the refinement data of the finite refinement mate, the evaluated canonical bridge target, with the same source and fixed finite coordinate transport, equals the fixed finite proper/open mate expression.",
+ "stmt_deps": [
+  "def-sf-system-finite-evaluation-coordinates",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-system-finite-refinement-mate-canonical-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Expand the fixed finite shriek and direct coordinates, transport through the intrinsic coefficient equivalence, and use naturality and triangle identities for the proper/open mate.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "def-sf-system-finite-evaluation-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Proof step 2: intrinsic coefficient and mate transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-sf-system-finite-evaluation-coordinates"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Proof step 2: intrinsic coefficient and mate transport."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemFiniteRefinementMateRhsNormalization",
+  "file": "lean/Sheaf/Paper/SystemFiniteRefinementMateRhsNormalization.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.rhsNormalization",
+  "statement": "theorem rhsNormalization (D : FiniteFieldDatum.{u}) (o : Operations l E) (z : Realizations l E D o) (m : ℕ) {X Y : Spaces D} {f : X ⟶ Y} [QuasiCompact f.hom.left] (c d : Compactification f.hom.left) (r : c.Refinement d) (M : System l E X.obj.left) : let A := ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1)) let RW := sfIntrinsicDerivedEquivalence d.Z (Padic.coefficientExtensionRing l E (m + 1)) haveI := c.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left) haveI := d.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left) (coefficientSequenceDerivedEvaluation l E d.Z m).map ((Operations.shriek l E o d.i).map ((z.canonicalBridge.push l E (𝟙 X.obj.left) ≪≫ SemilinearProperOpen.sId (scalarRings l E) (scalarTransitions l E) X.obj.left).inv.app M) ≫ (z.canonicalBridge.shriek l E d.i).hom.app ((Operations.push l E o (𝟙 X.obj.left)).obj M) ≫ (SemilinearProperOpen.J (scalarRings l E) (scalarTransitions l E) d.i).map ((z.canonicalBridge.push l E (𝟙 X.obj.left)).hom.app M) ≫ (SemilinearProperOpen.gamma (scalarRings l E) (scalarTransitions l E) c.i (𝟙 X.obj.left) r.hom d.i (r.i_hom.trans (Category.id_comp _).symm)).app M) ≫ (coefficientSequenceDerivedEvaluation l E d.Z m).map ((z.canonicalBridge.push l E r.hom).inv.app ((SemilinearProperOpen.J (scalarRings l E) (scalarTransitions l E) c.i).obj M)) ≫ (coefficientSequenceDerivedEvaluation l E d.Z m).map ((Operations.push l E o r.hom).map ((z.canonicalBridge.shriek l E c.i).inv.app M)) ≫ (push l E o m r.hom ((Operations.shriek l E o c.i).obj M)).hom ≫ RW.functor.map ((ProperOpenPush A r.hom).map (fixedShriek l E o m c.i M).hom) = (shriek l E o m d.i M).hom ≫ RW.functor.map ((ProperOpenShriek A d.i).map (((ordinary D A).sId X).inv.app (input l E m X.obj.left M)) ≫ (properOpenMate A c.i (𝟙 X.obj.left) r.hom d.i (r.i_hom.trans (Category.id_comp _).symm)).app (input l E m X.obj.left M))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T210003-L-1641988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T210003-L-1641988",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

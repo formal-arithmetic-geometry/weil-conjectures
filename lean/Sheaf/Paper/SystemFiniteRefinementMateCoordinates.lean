@@ -8,6 +8,9 @@ module
 public import Sheaf.Paper.SystemFiniteEvaluationCoordinates
 public import Sheaf.SixFunctors.IntegralCompactificationRealizationData
 public import Sheaf.SixFunctors.AmbientProperOpenCalculus
+import Sheaf.Paper.SystemFiniteRefinementMateCanonical
+import Sheaf.Paper.SystemFiniteRefinementMateLhsNormalization
+import Sheaf.Paper.SystemFiniteRefinementMateRhsNormalization
 
 /-! # Finite evaluation of the identity-normalized proper/open factor
 
@@ -19,10 +22,12 @@ of prop-sf-pf-coherence.proof.md.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 open AlgebraicGeometry.ProEtale.AmbientProperOpen
 namespace WeilConjectures.IntegralSystemRealization.FiniteCoordinates
+
 
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
   scalarReductionTargetDerived
@@ -78,6 +83,36 @@ theorem refinementMate (D : FiniteFieldDatum.{u}) (o : Operations l E)
           (((ordinary D A).sId X).inv.app (input l E m X.obj.left M)) ≫
           (properOpenMate A c.i (𝟙 X.obj.left) r.hom d.i
             (r.i_hom.trans (Category.id_comp _).symm)).app
-              (input l E m X.obj.left M)) := by sorry
+              (input l E m X.obj.left M)) := by
+  dsimp only
+  letI := c.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left)
+  letI := d.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left)
+  have hl := lhsNormalization l E D o z m c d r M
+  have hc := canonicalEvaluation l E D o z m c d r M
+  have hr := rhsNormalization l E D o z m c d r M
+  have ht := congrArg
+    (fun t ↦
+      (coefficientSequenceDerivedEvaluation l E d.Z m).map
+          ((Operations.shriek l E o d.i).map
+            ((z.canonicalBridge.push l E (𝟙 X.obj.left) ≪≫
+              SemilinearProperOpen.sId (scalarRings l E) (scalarTransitions l E)
+                X.obj.left).inv.app M)) ≫
+        t ≫
+      (coefficientSequenceDerivedEvaluation l E d.Z m).map
+        ((z.canonicalBridge.push l E r.hom).inv.app
+          ((SemilinearProperOpen.J (scalarRings l E) (scalarTransitions l E) c.i).obj M)) ≫
+      (coefficientSequenceDerivedEvaluation l E d.Z m).map
+        ((Operations.push l E o r.hom).map
+          ((z.canonicalBridge.shriek l E c.i).inv.app M)) ≫
+      (push l E o m r.hom ((Operations.shriek l E o c.i).obj M)).hom ≫
+      (sfIntrinsicDerivedEquivalence d.Z
+        (Padic.coefficientExtensionRing l E (m + 1))).functor.map
+        ((ProperOpenPush
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1))) r.hom).map
+            (fixedShriek l E o m c.i M).hom)) hc
+  calc
+    _ = _ := hl
+    _ = _ := by simpa only [Functor.map_comp, Category.assoc] using ht
+    _ = _ := hr
 
 end WeilConjectures.IntegralSystemRealization.FiniteCoordinates

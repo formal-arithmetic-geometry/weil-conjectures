@@ -1,0 +1,101 @@
+{
+ "id": "lem-sf-system-finite-refinement-mate-canonical-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the canonical bridge equation for a refinement",
+ "statement": "For finite-field data D, a system realization z, a quasi-compact refinement r:c→d and a system M, applying the mth coefficient evaluation to the canonical bridge equation of z.properOpen gives the corresponding equality of evaluated composites.",
+ "stmt_deps": [
+  "def-sf-integral-system-realization-data",
+  "def-sf-system-finite-evaluation-coordinates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: canonical bridge transport before finite coordinate cancellation."
+ },
+ "proof": [
+  {
+   "text": "Apply congrArg to the canonical field of ProperOpenCoherence and use functoriality of coefficient evaluation.",
+   "uses": [
+    "def-sf-integral-system-realization-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-realization-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Canonical bridge transport in the compactification-independence calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite evaluation of a proper open mate and coefficient comparison",
+   "results": "No exact project-specific declaration; generic mate transport only.",
+   "date": "2026-10-28",
+   "verdict": "Use the recorded project comparison declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp Category.assoc conjugateIsoEquiv",
+   "results": "Generic categorical identities only.",
+   "date": "2026-10-28",
+   "verdict": "No shorter specialized theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "gamma_evaluation canonicalBridge fixedShriek properOpenMate",
+   "results": "Found the semilinear evaluation and fixed-coordinate APIs used by the split.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate target proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemFiniteRefinementMateCoordinates",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-system-finite-refinement-mate-coordinates",
+   "place": "Proof step 1 canonical bridge equation."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemFiniteRefinementMateCanonical",
+  "file": "lean/Sheaf/Paper/SystemFiniteRefinementMateCanonical.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.canonicalEvaluation",
+  "statement": "theorem canonicalEvaluation (D : FiniteFieldDatum.{u}) (o : Operations l E) (z : Realizations l E D o) (m : ℕ) {X Y : Spaces D} {f : X ⟶ Y} [QuasiCompact f.hom.left] (c d : Compactification f.hom.left) (r : c.Refinement d) [QuasiCompact c.i] [QuasiCompact d.i] (M : System l E X.obj.left) : (coefficientSequenceDerivedEvaluation l E d.Z m).map ((z.properOpen.gamma c.i (𝟙 X.obj.left) r.hom d.i (r.i_hom.trans (Category.id_comp _).symm)).app M ≫ (z.canonicalBridge.push l E r.hom).hom.app ((Operations.shriek l E o c.i).obj M) ≫ (SemilinearProperOpen.R (scalarRings l E) (scalarTransitions l E) r.hom).map ((z.canonicalBridge.shriek l E c.i).hom.app M)) = (coefficientSequenceDerivedEvaluation l E d.Z m).map ((z.canonicalBridge.shriek l E d.i).hom.app ((Operations.push l E o (𝟙 X.obj.left)).obj M) ≫ (SemilinearProperOpen.J (scalarRings l E) (scalarTransitions l E) d.i).map ((z.canonicalBridge.push l E (𝟙 X.obj.left)).hom.app M) ≫ (SemilinearProperOpen.gamma (scalarRings l E) (scalarTransitions l E) c.i (𝟙 X.obj.left) r.hom d.i (r.i_hom.trans (Category.id_comp _).symm)).app M)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T210003-L-1641988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T210003-L-1641988",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
