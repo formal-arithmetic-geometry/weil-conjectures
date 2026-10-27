@@ -13,46 +13,48 @@
  ],
  "proof": [
   {
-   "text": "Comparison inverse image followed by intrinsic realization is an equivalence on the full constructible finite-Tor subcategories: compare the intrinsic good-object property with the fixed-module property, apply bounded-below comparison full faithfulness, and use ordinary constructible origins and Tor reflection for essential surjectivity.",
+   "text": "Use the proved ReductionDirectImage realization lemmas to identify intrinsic Dctf with fixed-module bounded constructible finite-Tor complexes. Restrict the actual reductionSite functor to the ordinary and intrinsic full Dctf subcategories. Bounded-below comparison Hom bijectivity gives full faithfulness. For essential surjectivity, realize an intrinsic object inversely, take its bounded constructible etale origin, and reflect its Tor interval by the source HomComparison theorem torAmplitudeIn_mapDerivedCategory_iff. Its realization and equivalence counit give the required intrinsic isomorphism. This directly proves siteCtf_equivalence without passing through coefficient-sized site models.",
    "uses": [
-    "det-pe-finite-tor-comparison-noetherian",
-    "det-sp-reduction-direct-image"
+    "det-sp-reduction-direct-image",
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-exc-comparison-tor-interval"
    ],
    "elementary": false
   },
   {
-   "text": "The finite ell-primary ring has invertible exponent on the field and on Y. Use the already proved ordinary-etale finite-ring preservation APIs underlying sk-prop-sf-rf-shriek-preservation: AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek in WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek and the ordinary compact-support preservation theorem. These statements concern the etale Dctf property, not the general condensed pro-etale direct-image stability package. Restrict the ordinary adjunction to the full subcategories, then transport it through the finite-ring comparison equivalence.",
+   "text": "The field and finite-type assumptions make X, Y and Z Noetherian; the finite ell-primary ring has invertible exponent on Y. Take the ordinary exceptional adjoint of the chosen default compact-support functor, and use rightDerivedLowerShriekIso to obtain an adjunction for the given compactification j,p. The ordinary-etale finite-ring preservation APIs constructibleFiniteTor_rightDerivedLowerShriek and constructibleFiniteTor_rightDerivedUpperShriek restrict this adjunction to the ordinary full Dctf categories using Adjunction.restrictFullyFaithful. The counit of this restriction maps to the original ordinary counit.",
    "uses": [
-    "def-weil-exceptional-inverse-image",
+    "thm-amb-etale-exceptional-adjoint",
     "sk-prop-sf-rf-shriek-preservation"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the restricted adjunction across the two comparison equivalences. Use reductionSiteCompactSupportIso for the left identification, the target equivalence counit for the input origin, and the definitionally identical output functor for the output comparison.",
+   "text": "Lift reductionSiteCompactSupportIso through the fully faithful intrinsic inclusion to a left comparison between the two restricted functors. Compose the restricted adjunction with the inverse source comparison equivalence and target comparison equivalence, and apply ofNatIsoLeft using this lifted comparison. The right functor is target inverse, restricted ordinary right adjoint, then source comparison. Choose the target inverse as the origin, its equivalence counit as originIso, and the definitionally identical composite as rightIso.",
    "uses": [
     "def-sp-reduction-exceptional-realization-objects"
    ],
    "elementary": false
   },
   {
-   "text": "Expand ofNatIsoLeft and composite-adjunction counits. Naturality moves the inverse equivalence unit across the left comparison; the equivalence triangle identity cancels it. The full inclusion maps the restricted counit to the ordinary counit. Lift the compact-support comparison componentwise; its naturality follows from the specified comparison. Together with the origin equivalence counit and the identity output comparison, these equations give reductionRealizationCounitEquation. This counit-transport construction remains to be formalized with an efficient definitional interface; the attempted Lean construction exceeded the kernel limit.",
+   "text": "Expand the counit of the composed adjunction and ofNatIsoLeft in the private realizationAdjunction_counit lemma. Move the inverse source-equivalence unit using naturality of the lifted left comparison; its composite with the inverse counit is the identity by the equivalence triangle law. Apply the intrinsic inclusion to this formula. The fully faithful preimage equation identifies the left comparison with reductionSiteCompactSupportIso, while map_restrictFullyFaithful_counit_app identifies the restricted counit with the ordinary counit. The identity output comparison contributes an identity morphism, so the resulting formula is exactly reductionRealizationCounitEquation.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "det-pe-finite-tor-comparison-noetherian",
   "det-sp-reduction-direct-image",
-  "def-weil-exceptional-inverse-image",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-exc-comparison-tor-interval",
+  "thm-amb-etale-exceptional-adjoint",
   "sk-prop-sf-rf-shriek-preservation",
   "def-sp-reduction-exceptional-realization-objects"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "K5",
+  "group": "F3",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Retained Steps 3--4: finite-coefficient comparison, restriction and counit transport; Lean implements the retained source argument in the named comparison coordinates."
+  "place": "Finite-coefficient comparison, restriction and counit transport, implemented using the native fixed-module comparison APIs and a proved abstract counit formula."
  },
  "mathlib_searches": [
   {
@@ -165,13 +167,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-bc7ac",
-  "group": "K5",
-  "result": "fix",
-  "landing": "20261025T211641-L-4013015",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T180601-L-3878791",
   "kind": "interface",
-  "note": "independent cc review: Lean files vs previous head 22b4d (byte-identical); Objects module vs current published ReductionExceptional prefix (verbatim); 2 sorry statements vs nodes/source Steps 3-4, 5-12; 25 direct importers compiled against sandbox build with fixed item (all exit 0)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
