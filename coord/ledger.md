@@ -19832,3 +19832,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:08 L: merged deliver/V1/Sheaf.Paper.IntegralScalarTensorChainTower (stage 3; reviewer PASS; first push; landing 20261027T180842-L-3909118 (interface); batch 20261027T180444; modules 4; new nodes 3)
 - 18:08 L: merged deliver/V2/Sheaf.Paper.QuotientScalarSectionComparisonExistence (stage 3; reviewer PASS; first push; landing 20261027T180844-L-3909286 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:08 L: merged deliver/V2/Sheaf.SixFunctors.RationalDualizingIdentification (stage 3; reviewer PASS; first push; landing 20261027T180845-L-3909548 (interface); batch 20261027T180444; modules 2; new nodes 1)
+- 18:08 L: merged deliver/V3/Sheaf.Paper.FiniteModelDerivedScalarComparison (stage 3; reviewer PASS; first push; landing 20261027T180846-L-3909698 (interface); batch 20261027T180444; modules 3; new nodes 2)

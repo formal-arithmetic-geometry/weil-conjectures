@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-finite-model-derived-scalar-comparison-core",
+ "kind": "statement",
+ "title": "Core constant-realization derived scalar comparison",
+ "statement": "For a scheme X, commutative rings B and C in universe t, a ring map q : B → C, and a cochain complex P of B-modules, the completed derived change along adicConstantMap(X,q) applied to the finite constant model of P is isomorphic to the finite constant model of the ordinary scalar extension of P along q. The two Koszul constant functors are assumed to preserve zero morphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0G7E; constant realization and derived scalar extension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-complete-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Choose a filtered-free K-projective resolution and lift it to the coefficient universe of the site. The filtration, flatness and K-projectivity are preserved by the universe-lift and scalar-restriction equivalence.",
+   "uses": [
+    "lem-pc-large-filtered-free-resolution",
+    "lem-pc-filtered-free-kprojective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the constant-realization derived scalar-extension comparison to the lifted complex. The balanced pure-tensor maps commute with differentials and the derived counit is invertible on the K-flat representative.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "def-weil-pbc-intrinsic-koszul-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-large-filtered-free-resolution",
+  "lem-pc-filtered-free-kprojective",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "def-weil-pbc-intrinsic-koszul-completion"
+ ],
+ "proof_origin": {
+  "by": "V3 stage-3 worker",
+  "document": "Stacks Project, sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 093J; lifted filtered-free resolution and constant realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf realization commutes with derived extension of scalars on unbounded complexes",
+   "results": "No exact direct theorem; existing ConstantRealizationDerivedScalarExtension supplies the comparison interface.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the listed project interfaces are used in the split theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.Q.map scalar extension KFlat",
+   "results": "Existing left-derived and K-flat representative APIs; no finite-model specialization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the listed project interfaces are used in the split theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRealizationDerivedScalarExtension finiteModelConstantComplex",
+   "results": "Existing constant realization comparison and finite model definitions found; no combined theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the listed project interfaces are used in the split theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelDerivedScalarComparison",
+  "date": "2026-10-27",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-model-derived-scalar-comparison",
+   "place": "Proof step 1 and step 2: lifted filtered-free resolution and constant realization comparison."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteModelConstantScalarExtensionCore",
+  "file": "lean/Sheaf/Paper/FiniteModelConstantScalarExtensionCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteModel_constantScalarExtension_core",
+  "statement": "theorem finiteModel_constantScalarExtension_core (X : Scheme.{t}) {B C : Type t} [CommRing B] [CommRing C] (q : B →+* C) [(koszulConstantFunctor X B).PreservesZeroMorphisms] [(koszulConstantFunctor X C).PreservesZeroMorphisms] (P : CochainComplex (ModuleCat.{t} B) ℤ) : Nonempty ((completedAdicDerivedChange X (adicConstantMap X q)).obj (DerivedCategory.Q.obj (finiteModelConstantComplex X B P)) ≅ DerivedCategory.Q.obj (finiteModelConstantComplex X C (((ModuleCat.extendScalars q).mapHomologicalComplex (.up ℤ)).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T180846-L-3909698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T180846-L-3909698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

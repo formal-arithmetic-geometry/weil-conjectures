@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.FinitePerfectQuotientModelData
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.Paper.FiniteModelConstantScalarExtensionCore
+import Sheaf.Paper.FiniteModelCoefficientTransport
 
 /-! # Derived scalar extension of the constant realization of an algebraic complex
 
@@ -67,6 +69,11 @@ theorem finiteModel_derivedScalarComparison
     Nonempty
       ((completedAdicDerivedChange X (adicConstantMap X (ρ.toRingHom.comp q))).obj
           (DerivedCategory.Q.obj (finiteModelConstantComplex X B P)) ≅
-        DerivedCategory.Q.obj (finiteModelConstantComplex X D K)) := by sorry
+        DerivedCategory.Q.obj (finiteModelConstantComplex X D K)) := by
+  dsimp
+  obtain ⟨e₁⟩ := finiteModel_constantScalarExtension_core X
+    (ρ.toRingHom.comp q) P
+  obtain ⟨e₂⟩ := finiteModel_derivedRepresentative_transport X q ρ P L ε hL
+  exact ⟨e₁ ≪≫ e₂⟩
 
 end AlgebraicGeometry.Scheme
