@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-rational-hom-scalar-evaluation",
+ "kind": "statement",
+ "title": "Finite scalar compatibility of normalized rational Hom evaluation",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, a separated finite-type D.k-scheme X, finite extensions E,L of Q_l and a Q_l-algebra embedding i:E→L. Given dualizing data wE,wL, rational Verdier data A,B [def-sf-rational-verdier-data], and full Hom identifications hE,hL [def-sf-rational-verdier-identifications], their counits satisfy HomScalarCompatibility for the recorded rational tensor and internal-Hom scalar comparisons [def-weil-derived-pullback-tensor-hom]. In other words, evaluation after the internal-Hom scalar comparison equals scalar extension of evaluation preceded by the inverse tensor scalar comparison. Existence of the identifications is not asserted here.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Original lem-sf-rational-hom-identifications steps 9--10: the finite-extension evaluation square and its rationalization."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-sf-rational-verdier-identifications",
+  "def-sf-rational-verdier-data",
+  "def-sf-rational-operation-comparison-data",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "For ordinary derived tensor-Hom, uncurry the evaluation-defined internal-Hom scalar comparison. By its definition as the transpose, the result is scalar-extended ordinary evaluation preceded by the inverse tensor scalar comparison. On local tensors this is (h tensor s,k tensor t) maps to h(k) tensor st.",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the ordinary and completed scalar functors using the canonical finite-free completion isomorphisms. Conjugate the ordinary square by their components at K, M and RHom(K,M). The normalized completion transformations of A and B have the quotient map as unshifted Roos coordinate and zero shifted coordinate. These formulas and representative descent identify the conjugated tensor comparison with the recorded completed tensor comparison and identify the counits with inverse completion followed by ordinary evaluation.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-sf-rational-verdier-data",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rational localization to this integral completed evaluation square. The rational comparison components are exactly its localized integral components. Composition and the tensor action have their recorded bilinear pure-map formulas, so the localized equality is HomScalarCompatibility. Every raw rational object is an integral object; consequently this covers all K and M, including zero and torsion inputs and ramified and identity extensions.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-rational-verdier-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-finite-free-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "The source argument restricted to this step; full proof in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars preserves internal Hom evaluation and tensor comparison for finite free coefficients",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply and lTensorHomEquivHomLTensor give module-level evaluation formulas. They do not give the normalized completed derived evaluation square.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "Adjunction transport along natural isomorphisms is available; Mathlib Adjunction.restrictFullyFaithful and its counit formula give the integral restriction. They do not identify the recorded rational functors or coefficient comparisons.",
+   "date": "2026-10-28",
+   "verdict": "generic restriction and transport APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarHom.*evalu|evalu.*scalarHom|coefficientBaseChangeHom.*eval",
+   "results": "ScalarHomPresentationEvaluation gives selected ordinary tensor presentations and the completion comparison. GeneralHomComparisonCocycles gives native evaluation coherence. Neither directly compares the arbitrary normalized presentations supplied in the two HomIdentification records.",
+   "date": "2026-10-28",
+   "verdict": "related ingredients exist; the remaining statement is their normalized completed evaluation square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalHomIdentifications",
+  "date": "2026-10-28",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-rational-hom-identifications",
+   "place": "Original lem-sf-rational-hom-identifications steps 9--10: the finite-extension evaluation square and its rationalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalHomScalarEvaluation",
+  "file": "lean/Sheaf/SixFunctors/RationalHomScalarEvaluation.lean",
+  "declaration": "WeilConjectures.RationalOperations.rationalHom_scalar_evaluation",
+  "statement": "theorem rationalHom_scalar_evaluation\n    (wE : IntegralFiniteExtension.DualizingDatum l X D hl E)\n    (wL : IntegralFiniteExtension.DualizingDatum l X D hl L)\n    (A : RationalVerdier.Datum D l hl X E wE)\n    (B : RationalVerdier.Datum D l hl X L wL)\n    (hE : HomIdentification l E X D hl wE A)\n    (hL : HomIdentification l L X D hl wL B) :\n    HomScalarCompatibility l E X D hl L ι wE wL A B hE hL",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261027T180925-L-3913752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261027T180925-L-3913752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

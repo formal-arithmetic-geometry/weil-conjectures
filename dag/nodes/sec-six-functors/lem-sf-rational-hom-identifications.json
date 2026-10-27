@@ -16,195 +16,61 @@
  ],
  "proof": [
   {
-   "text": "For $P,K\\in\\mathcal C_R(X)$ let $N=P\\otimes^L_{\\mathscr R_X}K$. Choose K-flat resolutions with flat terms. Their tensor is K-flat: tensor an acyclic complex first with one resolution and then with the other, obtaining an acyclic complex twice by the definition of K-flatness. The K-flat change-of-rings lemma makes their reductions K-flat with flat terms as well; the strict completed-tensor construction descends independently of these choices by integral-operations well-definedness. Reassociation of their ordinary tensor complexes, $(p\\otimes k)\\otimes a\\mapsto(p\\otimes1)\\otimes(k\\otimes a)$, identifies $N\\otimes^L_{\\mathscr R_X}(A_n)_X$ with $P_n\\otimes^L_{A_n}K_n$. For $m\\le n$, further reduction is $P_m\\otimes^L_{A_m}K_m$; all transition cocycles hold already on these tensor representatives. Thus this is a normalized DVR tower. The residue-Tor lemma supplies uniform finite Tor intervals $[a,b]$, $[c,d]$ for the inputs, and finite tensor preservation supplies constructibility and interval $[a+c,b+d]$. Taking the degree-zero test module $(A_n)_X$ in the definition of Tor amplitude shows that this same interval contains the cohomological support of every tensor reduction: tensor with the coefficient unit is identified with the original complex by $x\\otimes a\\mapsto ax$, inverse $x\\mapsto x\\otimes1$. Normalized effectivity identifies the reductions of its derived limit with these objects and makes the limit complete. Hence $C(N):=R\\lim_n\\operatorname{Res}_n(P_n\\otimes^L_{A_n}K_n)$ belongs to $\\mathcal C_R(X)$. By the definition of integral operations this is precisely $P\\widehat\\otimes_R^LK$. No assertion of local perfection on the site is used.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-coef-normalized-dvr-tower",
-    "lem-coef-integral-residue-tor",
-    "lem-sf-tensor-ctf",
-    "lem-coef-normalized-dvr-effectivity",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-pc-kflat-complex",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-integral-operations-well-defined",
-    "def-weil-proetale-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraphs 1-2: completed tensor and uniform intervals"
-   }
-  },
-  {
-   "text": "Use the strict K-flat tensor representative $Q$ of $N$ from Step 2. Its quotient maps $Q\\to Q\\otimes_{\\mathscr R_X}(A_n)_X$ commute strictly with the transitions. Since countable products are exact, the strict-tower limit is represented by the product mapping fiber of $1-s$. The quotient maps define a chain map $\\eta_N:Q\\to\\operatorname{Cone}(1-s)[-1]$ with zero homotopy component. This is the canonical completion unit, natural in the strict representatives, not an arbitrary triangulated lift. Write $L_n=N\\otimes^L_{\\mathscr R_X}(A_n)_X$. Normalized effectivity applied to the tower of Step 2 identifies the adjoint of the projection $C(N)\\to\\operatorname{Res}_nL_n$ with an isomorphism $e_n:C(N)\\otimes^L_{\\mathscr R_X}(A_n)_X\\to L_n$. The composite projection with $\\eta_N$ is the reduction unit of $N$. By naturality and the triangle identity for derived extension/restriction, its adjoint is the identity on $L_n$; thus $e_n\\circ(\\eta_N\\otimes^L(A_n)_X)=1_{L_n}$. Therefore $\\eta_N$ is an isomorphism modulo every $\\pi^n$.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-weil-derived-scalar-extension-restriction-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
-    "place": "Preserved blueprint_update.proof paragraphs 3-4: completion cone and its orthogonality; expanded using Stacks Tags 093M and 0149"
-   }
-  },
-  {
-   "text": "Let $C=\\operatorname{Cone}(\\eta_N)$. The coefficient ring $R$ is a DVR, hence a Noetherian domain. Flatness of $\\mathscr R_X$ over the constant $R$-sheaf and its quotient identification imply that $\\pi:\\mathscr R_X\\to\\mathscr R_X$ is injective with cokernel $(A_1)_X$. Indeed multiplication by $\\pi$ is injective on locally constant $R$-sections, and tensoring this injection with the flat completed sheaf preserves it. Consequently $F=[\\mathscr R_X\\xrightarrow{\\pi}\\mathscr R_X]$ in degrees $[-1,0]$ resolves $(A_1)_X$. It is K-flat: tensoring any acyclic complex with $F$ gives a shifted multiplication cone, acyclic by the long exact cohomology sequence. Tensor with this two-term free complex commutes with mapping cones by the signed total-complex formula. Step 3 therefore gives $C\\otimes^L_{\\mathscr R_X}(A_1)_X=0$. But tensoring $C$ with $F$ also identifies this object with the cone of $\\pi:C\\to C$. Its vanishing and the long exact sequence show that $\\pi$ induces isomorphisms on all cohomology objects, hence is invertible in the derived category.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
-    "place": "Preserved blueprint_update.proof paragraphs 3-4: completion cone and its orthogonality; expanded using Stacks Tags 093M and 0149"
-   }
-  },
-  {
-   "text": "For complete $M$, use its global Roos triangle from [def-weil-derived-complete], with terms $B=\\prod_n\\operatorname{Res}_n M_n$. For every $j\\in\\mathbf Z$ and $h:C[j]\\to\\operatorname{Res}_nM_n$, scalar linearity gives $h\\circ\\pi_{C[j]}^n=\\pi_{M_n}^n\\circ h=0$, because $M_n$ is a complex of $(A_n)_X$-modules. The first factor is invertible by Step 4, so $h=0$. The categorical product property gives $\\operatorname{Hom}(C[j],B)=\\prod_n\\operatorname{Hom}(C[j],\\operatorname{Res}_nM_n)=0$ for every $j$. Apply Hom-into-triangle exactness to the rotated Roos triangle $B[-1]\\to M\\to B$: its outer Hom groups vanish, since $\\operatorname{Hom}(C[j],B[-1])=\\operatorname{Hom}(C[j+1],B)=0$. Hence $\\operatorname{Hom}(C[j],M)=0$ for all $j$. Finally Hom-out-of-triangle exactness on $N\\xrightarrow{\\eta_N}C(N)\\to C\\to N[1]$ and its rotations gives the natural $R$-linear bijection\n$$\\operatorname{Hom}(C(N),M)\\xrightarrow{\\;\\circ\\eta_N\\;}\\operatorname{Hom}(N,M),$$\nbecause the adjacent terms are $\\operatorname{Hom}(C,M)=\\operatorname{Hom}(C[-1],M)=0$. This proves the completion adjunction needed here using the global completeness definition itself.",
-   "uses": [
-    "def-weil-derived-complete",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
-    "place": "Preserved blueprint_update.proof paragraphs 3-4: completion cone and its orthogonality; expanded using Stacks Tags 093M and 0149"
-   }
-  },
-  {
-   "text": "The ambient tensor-Hom adjunction needed here is for an arbitrary ringed site. Choose K-flat representatives $Q_P,Q_K$ with flat terms and a K-injective representative $I_M$. The internal Hom complex $\\mathcal Hom^\\bullet(Q_K,I_M)$ is K-injective. The functorial total-complex currying isomorphism gives\n$$\\mathcal Hom^\\bullet(Q_P,\\mathcal Hom^\\bullet(Q_K,I_M))\\cong\\mathcal Hom^\\bullet(\\operatorname{Tot}(Q_P\\otimes Q_K),I_M).$$\nThese represent the corresponding derived internal Homs: the definition computes internal Hom into a K-injective resolution, and the cited quasi-isomorphism invariance permits the K-flat replacements. Taking degree-zero derived global sections and using the global-sections/Hom identification yields\n$$\\operatorname{Hom}(P\\otimes^L_{\\mathscr R_X}K,M)\\cong\\operatorname{Hom}(P,R\\mathcal Hom_{\\mathscr R_X}(K,M)).$$\nThe currying formula sends a map $h$ to $p\\mapsto(k\\mapsto h(p\\otimes k))$, where, for $p\\in Q_P^i$, the tensor differential is $d(p\\otimes k)=dp\\otimes k+(-1)^ip\\otimes dk$ and the differential of a homogeneous Hom map $h$ of degree $t$ is $dh=d_Mh-(-1)^thd$. Substitution in these two formulas verifies that currying commutes with the differential, with no additional sign in the displayed currying formula. Its inverse evaluates. This describes the evaluation and the naturality of the adjunction, rather than invoking a tensor-Hom theorem for scheme structure sheaves.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-rhom-well-defined",
-    "lem-pur-rhom-global-sections",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 08JA (lemma-section-RHom-over-U), and the proof of lemma-internal-hom immediately following 08JA"
-   }
-  },
-  {
-   "text": "For $P,K,M\\in\\mathcal C_R(X)$, integral internal Hom is in $\\mathcal C_R(X)$ by the integral-Hom preservation statement. Combine Steps 2-6, using fullness of this subcategory, to obtain the natural $R$-linear bijection\n$$\\Phi_R:\\operatorname{Hom}_{\\mathcal C_R}(P\\widehat\\otimes_R^LK,M)\\cong\\operatorname{Hom}_{\\mathcal C_R}(P,R\\mathcal Hom_R(K,M)).$$\nIts left-to-right map is first precomposition with the canonical completion unit, then currying. The counit is the unique map $R\\mathcal Hom_R(K,M)\\widehat\\otimes_R^LK\\to M$ whose precomposition with that unit is ambient evaluation. The unit is $\\Phi_R(1_{P\\widehat\\otimes_R^LK}):P\\to R\\mathcal Hom_R(K,P\\widehat\\otimes_R^LK)$; the counit is $\\Phi_R^{-1}(1_{R\\mathcal Hom_R(K,M)})$. Naturality of $\\Phi_R$ makes the two triangle identities the assertion that currying and uncurrying are inverse. Thus completion has not silently changed the tensor adjunction or its evaluation.",
+   "text": "Integral internal Hom of constructible inputs is constructible. Convert intrinsic completeness to legacy completeness, apply integral_constructible_internalHom, and convert completeness back. Since raw rational objects are the same integral objects, this supplies every permitted rational Hom pair.",
    "uses": [
     "cor-coef-integral-internal-hom",
-    "def-weil-derived-complete-integral-detailed"
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraphs 3-5: apply the completion adjunction to the ambient tensor-Hom adjunction"
-   }
+   "elementary": false
   },
   {
-   "text": "The raw scalar localization has exactly the same objects and Hom groups $\\operatorname{Hom}_{\\mathcal C_R}(U,V)\\otimes_RE$. Tensoring $\\Phi_R$ with $E$ therefore gives\n$$\\operatorname{Hom}_{D^b_c(X,E)}(P\\otimes_E^LK,M)\\cong\\operatorname{Hom}_{D^b_c(X,E)}(P,R\\mathcal Hom_E(K,M)).$$\nEvery map is a finite sum of integral maps times scalars; the displayed bijection sends $h\\otimes a$ to $\\Phi_R(h)\\otimes a$. Its naturality for fractions follows from $R$-linearity: the two sides of each integral naturality identity are multiplied by the same product of the denominators' inverses. In two-variable operations $u\\otimes a$ and $v\\otimes b$ act by the integral operation on $(u,v)$ times $ab$ (precomposition in the contravariant variable). Thus these are exactly the coefficient-passage functors, on maps as well as objects. The evaluation, unit, counit and their identities are the integral ones tensored with $1$, as follows by applying this Hom bijection to identities. No new objects from a Karoubi envelope are involved.",
+   "text": "Apply the normalized rational adjunction construction independently to E and L, using the ordinary tensor presentation and completion already present in A and B.",
    "uses": [
-    "def-weil-rationalization-karoubi",
+    "lem-sf-rational-hom-adjunction",
+    "def-sf-rational-verdier-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "With the second Hom input fixed to omega, use the recorded internal-Hom object equation and A.objects to identify its objects with A.dual. Bilinearity makes this fixed-second-input functor additive. The pure-map equation is identical to A.pure. Induction on raw tensor morphisms and functor extensionality prove equality of functors. The same argument applies to B. Use these equalities as the duality isomorphisms.",
+   "uses": [
     "def-weil-derived-pullback-tensor-hom",
-    "prop-weil-pbc-rational-transport"
+    "def-sf-rational-verdier-data",
+    "def-weil-rationalization-karoubi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraphs 5-6: scalar-localized Hom bijection and its evaluation"
-   }
+   "elementary": false
   },
   {
-   "text": "Integral Verdier duality is $D_{X,R}K=R\\mathcal Hom_R(K,\\omega_{X,R})$ and the rational duality functor is its localization, with $\\omega_{X,E}$ the image of $\\omega_{X,R}$. Specialize Step 8 to that second argument. It gives the asserted equality $D_{X,E}K=R\\mathcal Hom_E(K,\\omega_{X,E})$, with evaluation the rationalized integral evaluation. The double-dual map is the same one as in rational Verdier duality, since both are obtained by transposing that evaluation; the cited integral and rational duality statements identify these actual maps.",
+   "text": "At each unchanged integral object, the normalized counit equation and A.evaluation_integral identify the evaluations. The tensor image of the equality-isomorphism component is heterogeneous transport of the same counit; equality induction removes it. This completes all fields of the HomIdentification records for E and L.",
    "uses": [
-    "thm-coef-integral-verdier",
-    "thm-coef-rational-verdier"
+    "def-sf-rational-verdier-identifications",
+    "def-sf-rational-verdier-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 6: specialize internal Hom to the dualizing object"
-   }
+   "elementary": false
   },
   {
-   "text": "We now check finite extension, including the adjunction maps. Let $E\\subset L$, $S=\\mathcal O_L$, $v=\\varpi_L$, ramification index $e$, and $r=[L:E]$. At level $n$ use $B_n=S/\\pi^nS=S/v^{en}$, finite free over $A_n$; these are the specified cofinal $S$-levels. Write $T_W$ for integral completed extension. Finite-free completed-scalar comparison identifies it, by its canonical completion map, with ordinary derived extension $-\\otimes^L_{\\mathscr R_W}\\mathscr S_W$, where $\\mathscr S_W$ is finite free of rank $r$ over $\\mathscr R_W$. This comparison is between the actual strict-tower functors, not just unrelated objects with isomorphic reductions. The integral dualizing, internal-Hom and duality comparisons $u,v_{K,M},\\beta$ preserve evaluation and biduality; pullback and tensor also have the stated scalar comparisons. In particular internal-Hom evaluation has the scalar rule $(h\\otimes s,k\\otimes t)\\mapsto h(k)\\otimes st$.",
+   "text": "Apply the finite-scalar evaluation square to the two constructed full Hom identifications and assemble the required existential witnesses.",
    "uses": [
-    "lem-coef-finite-free-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-coef-integral-finite-extension",
-    "lem-pur-integral-operations-scalar-extension"
+    "lem-sf-rational-hom-scalar-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8: use finite free extension, not arbitrary infinite coefficient extension"
-   }
-  },
-  {
-   "text": "Finally rationalize the finite-extension comparisons. By the definition of $-\\otimes_E L$, its integral representative is exactly $T$, and each component of $\\alpha,b,u,v,\\beta$ is sent to that component tensored with $1$. Composition in raw scalar localization is bilinear, so both equations of Step 17 and the evaluation identities remain the same equations after localization. Coherence for $E\\subset L\\subset L'$ follows at compact support from multiplication $(k\\otimes s)\\otimes t\\mapsto k\\otimes st$ on the finite free tower maps; taking mates gives the same equality for $b$ because their transposes are the same composite counit. For internal Hom and duality, identity and associator coherence are those of the integral comparisons. The rational duality theorem gives the corresponding evaluation and biduality comparisons as well. This proves every scalar-extension compatibility claimed in the item within the specified rationalized constructible categories.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "prop-weil-pbc-rational-transport",
-    "lem-coef-integral-finite-extension",
-    "lem-pur-integral-operations-scalar-extension",
-    "thm-coef-rational-verdier"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, final two paragraphs: rationalize the specified comparisons and their equations"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "cor-coef-integral-internal-hom",
-  "def-coef-normalized-dvr-tower",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-complete",
-  "def-weil-derived-complete-integral-detailed",
+  "def-sf-rational-verdier-data",
+  "def-sf-rational-verdier-identifications",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-proetale-tor-amplitude",
   "def-weil-rationalization-karoubi",
-  "lem-coef-finite-free-extension",
-  "lem-coef-integral-finite-extension",
-  "lem-coef-integral-residue-tor",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-rhom-global-sections",
-  "lem-pur-rhom-well-defined",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-tensor-ctf",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-proetale-countable-products-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "prop-weil-pbc-rational-transport",
-  "thm-coef-integral-verdier",
-  "thm-coef-rational-verdier"
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-sf-rational-hom-adjunction",
+  "lem-sf-rational-hom-scalar-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-  "place": "Formal interface for the cited steps; complete representative and comparison argument retained in the theorem docstring."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "V4: direct restriction and scalar localization using the completion data already supplied; duality comparison proved by object/pure-map extensionality. Only the finite-scalar evaluation square remains a split obligation."
  },
  "mathlib_searches": [
   {
@@ -276,13 +142,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-849a5",
-  "group": "D2",
-  "result": "fix",
-  "landing": "20261025T100911-L-3636679",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261027T180925-L-3913752",
   "kind": "interface",
-  "note": "independent cc review: delivered RationalOperationsData vs published RationalOperations prefix (verbatim, imports only differ); item proof vs exists_system/coef_rational_verdier/dualizingDatum_nonempty + 3 new sorry statements read against RationalVerdier.Datum/TensorPresentation/DualizingDatum pinning; nodes vs Lean; 11 direct importers compiled against sandbox build"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
