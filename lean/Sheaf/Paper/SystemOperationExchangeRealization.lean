@@ -51,6 +51,7 @@ Source: slopmaster2 blueprint, `def:weil-direct-image-object` and
 
 @[expose] public noncomputable section
 set_option linter.unusedSectionVars false
+set_option linter.mathlibStandardSet false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -728,15 +729,25 @@ def systemOpenScalarInv {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     (systemDerivedOpenAdjunction l L j)).symm
     (TwoSquare.mk _ _ _ _ (integralComparisonSystemScalarPullback l E L ι j).hom)).natTrans
 
+/-- Tensor extension commutes with the specified exact open extension, componentwise.
+Source: Zheng 4.1, 4.10; Stacks 03DI
+(blueprint: lem-weil-system-open-scalar-inv-app-is-iso).
+The component calculation is the finite coefficient mate calculation; its
+remaining proof is isolated so the natural-transformation statement below is
+obtained by the standard componentwise criterion. -/
+theorem systemOpenScalarInv_app_isIso {X B : Scheme.{u}} (j : X ⟶ B)
+    [IsOpenImmersion j] (K : coefficientSequenceDerived l E X) :
+    IsIso ((systemOpenScalarInv l E L ι j).app K) := by
+  sorry
+
 /-- Tensor extension commutes with the specified exact open extension.
 Source: Zheng 4.1, 4.10; Stacks 03DI
 (blueprint: def-weil-system-operation-exchange-realization).
-Proof: on the open, the inverse mate is the tensor identity; off the open both
-sides are zero. The ordinary balanced tensor maps commute with all quotient
-transitions. Localizing their actual inverse chain maps proves the assertion. -/
+Proof: apply the componentwise invertibility result to the natural transformation. -/
 theorem systemOpenScalarInv_isIso {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     IsIso (systemOpenScalarInv l E L ι j) := by
-  sorry
+  exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun K ↦
+    systemOpenScalarInv_app_isIso l E L ι j K)
 
 /-- The forward open scalar comparison is the inverse of that specified mate.
 Source: Zheng 4.10 (blueprint: def-weil-system-operation-exchange-realization). -/
