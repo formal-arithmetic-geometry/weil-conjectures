@@ -230,13 +230,6 @@ lemma GrpObj.mulRight_comp_of_isMonHom {H : Over (Spec (.of k))} [GrpObj H] (f :
 
 end Translation
 
-/-- The underlying scheme of a group scheme of finite type over a field is noetherian. -/
-theorem isNoetherian_left (G : Over (Spec (.of k))) [LocallyOfFiniteType G.hom]
-    [QuasiCompact G.hom] : IsNoetherian G.left :=
-  have := LocallyOfFiniteType.isLocallyNoetherian G.hom
-  have := QuasiCompact.compactSpace_of_compactSpace G.hom
-  {}
-
 /-- A group scheme of finite type over a field has finitely many connected components.
 (blueprint: `sk-p-geometry`) -/
 theorem finite_connectedComponents (G : Over (Spec (.of k))) [GrpObj G]
