@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-derived-hom-sheaf-comparison-lisse-local-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
+   "place": "finite-source local-model calculation and descent"
+  },
+  "same_as": []
+ },
+ "kind": "lemma",
+ "title": "Local finite-model comparison for derived Hom sheaves",
+ "statement": "For a scheme X, a finite commutative ring B, a bounded derived etale B-module sheaf A whose cohomology sheaves are finite locally constant, and a bounded-below target D, if A is etale locally represented by bounded complexes of finite B-modules, then the canonical derived Hom sheaf comparison is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-constructible-locally-constant",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JI and 08JA; finite-source local-model step"
+ },
+ "proof": [
+  {
+   "text": "On each cover member choose the bounded finite coefficient model. The bounded-free RHom model identifies pullback of the Hom complex with the Hom complex of pullbacks; K-injective derived sections identify degree-zero classes, and the resulting local inverses agree on overlaps because they are induced by pullback of actual derived maps. Descent gives the global canonical isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-pur-rhom-global-sections",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JI and 08JA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite free RHom model and exact pullback derived Hom sheaf",
+   "results": "No exact match; project local theorem is used.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory Sheaf IsIso derived Hom",
+   "results": "No exact match.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHomSheafComparison local model",
+   "results": "Project local APIs inspected.",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisse",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisseLocalModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedHomSheafComparisonLisseLocalModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedHomSheafComparison_isIso_of_finite_local_models",
+  "statement": "theorem derivedHomSheafComparison_isIso_of_finite_local_models\n    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]\n    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (hD : (DerivedCategory.TStructure.t\n      (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))).plus D)\n    (hmodels : ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀,\n      ∃ E : CochainComplex (ModuleCat.{u + 1} B) ℤ,\n        (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) ∧\n        (∀ n : ℤ, Finite (E.X n)) ∧ Nonempty\n          ((upperStar (ModuleCat.{u + 1} B) (𝒰.f i)).mapDerivedCategory.obj A ≅\n            DerivedCategory.Q.obj\n              (((constantSheaf (𝒰.X i).smallEtaleTopology\n                (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj E))) :\n    IsIso (derivedHomSheafComparison X B A D)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T180657-L-3889984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T180657-L-3889984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

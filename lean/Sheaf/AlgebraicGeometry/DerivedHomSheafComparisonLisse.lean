@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisseLocalModel
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
@@ -70,6 +71,19 @@ theorem derivedHomSheafComparison_isIso_lisse
         (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj A))
     (hD : (DerivedCategory.TStructure.t
       (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))).plus D) :
-    IsIso (derivedHomSheafComparison X B A D) := by sorry
+    IsIso (derivedHomSheafComparison X B A D) := by
+  obtain ⟨a, ha⟩ := hA.1
+  obtain ⟨b, hb⟩ := hA.2
+  have hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero
+      ((DerivedCategory.homologyFunctor
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj A) := by
+    refine ⟨a, b, ?_⟩
+    intro n hn
+    rcases hn with hn | hn
+    · exact (DerivedCategory.isGE_iff A a).1 ha n hn
+    · exact (DerivedCategory.isLE_iff A b).1 hb n hn
+  obtain ⟨hmodels, _, _, _⟩ :=
+    AlgebraicGeometry.Etale.finiteRing_derived_local_constancy X B A hbounded hAf
+  exact derivedHomSheafComparison_isIso_of_finite_local_models X B A D hD hmodels
 
 end AlgebraicGeometry.Scheme
