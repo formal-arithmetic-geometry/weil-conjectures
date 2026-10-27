@@ -1,0 +1,64 @@
+{
+ "id": "lem-route-koszul-quotient-reflector",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "via": [
+    "lem-per-quotient-completed-compositor-unit",
+    "lem-per-rational-pullback-composition-coherence",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ],
+   "place": "provisional: the Lean of lem-per-quotient-completed-compositor-unit (its declaration uses) uses CategoryTheory.ConstantCompletion.koszul_quotient_reflector (route sorry with no node, tools/route_nodes.py 2026-10-28)"
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Koszul and finite-quotient completion are canonically identified, preserving the units; their common functor is the reflector for the local internal-H",
+ "statement": "PROVISIONAL (machine-made from the Lean declaration; stage 1 writes it in words): Koszul and finite-quotient completion are canonically identified, preserving the units; their common functor is the reflector for the local internal-Hom completeness condition. Source: Stacks 099L, 099M, 0A0E (blueprint: lem-weil-pbc-constant-completion-equivalence). Proof: apply the ringed Koszul reflector to the global generators, including the empty list. For constant coefficients the Noetherian Koszul augmentation has pro-zero cone. Exact constant sheafification and tensor by a fixed K-flat model preserve this property. The strict-tower derived-limit theorem inverts the augmentation and identifies its unit with the quotient unit. For completed coefficients, restrict to constant coefficients: the finite reductions, strict Koszul tensors and units agree, and restriction identifies total derived limits by the flat exact adjunction on strict towers. Conservativity of exact restriction detects the augmentation isomorphism over the completion as well. Transport the reflector property and the unit-isomorphism criterion across this unit-preserving natural isomorphism.\n\nLean (CategoryTheory.ConstantCompletion.koszul_quotient_reflector):\n```lean\ntheorem koszul_quotient_reflector [IsNoetherianRing A] (b : Bool) (r : ℕ) (a : Fin r → A)\n    (ha : Ideal.span (Set.range a) = I) :\n    ∃ K : KoszulPresentation J A I b r a,\n      (∃ e : koszulCompletion J A I K ≅ completion J A I b,\n        ∀ M : D (coefficients J A I b), koszulUnit J A I K M ≫ e.hom.app M =\n          (completionUnit J A I b).app M) ∧\n      (∀ M : D (coefficients J A I b),\n        IsComplete (finiteMap J A I b 0) ((completion J A I b).obj M)) ∧\n      (∀ (M L : D (coefficients J A I b)), IsComplete (finiteMap J A I b 0) L →\n        Function.Bijective (fun f : (completion J A I b).obj M ⟶ L ↦\n          (completionUnit J A I b).app M ≫ f)) ∧\n      (∀ M : D (coefficients J A I b),\n        IsIso ((completionUnit J A I b).app M) ↔ IsComplete (finiteMap J A I b 0) M)\n```",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lem-per-quotient-completed-compositor-unit: the Lean of this node (its declaration uses) reaches CategoryTheory.ConstantCompletion.koszul_quotient_reflector, a sorry on the sorry route of batch2, batch3, batch4, batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/ConstantCompletionKoszulReflector.lean, declaration CategoryTheory.ConstantCompletion.koszul_quotient_reflector (module Sheaf.Paper.ConstantCompletionKoszulReflector, lines 95-122, proof `sorry`)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'koszul_quotient_reflector' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-28",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-per-quotient-completed-compositor-unit",
+  "date": "2026-10-28",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ConstantCompletionKoszulReflector",
+  "file": "lean/Sheaf/Paper/ConstantCompletionKoszulReflector.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.koszul_quotient_reflector",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.koszul_quotient_reflector"
+  ],
+  "statement": "theorem koszul_quotient_reflector [IsNoetherianRing A] (b : Bool) (r : ℕ) (a : Fin r → A)\n    (ha : Ideal.span (Set.range a) = I) :\n    ∃ K : KoszulPresentation J A I b r a,\n      (∃ e : koszulCompletion J A I K ≅ completion J A I b,\n        ∀ M : D (coefficients J A I b), koszulUnit J A I K M ≫ e.hom.app M =\n          (completionUnit J A I b).app M) ∧\n      (∀ M : D (coefficients J A I b),\n        IsComplete (finiteMap J A I b 0) ((completion J A I b).obj M)) ∧\n      (∀ (M L : D (coefficients J A I b)), IsComplete (finiteMap J A I b 0) L →\n        Function.Bijective (fun f : (completion J A I b).obj M ⟶ L ↦\n          (completionUnit J A I b).app M ≫ f)) ∧\n      (∀ M : D (coefficients J A I b),\n        IsIso ((completionUnit J A I b).app M) ↔ IsComplete (finiteMap J A I b 0) M) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-28",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ }
+}
