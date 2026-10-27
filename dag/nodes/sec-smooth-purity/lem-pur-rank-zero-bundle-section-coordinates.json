@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Canonical coefficient-unit identifications in the third arrow, at relative rank zero."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+  "group": "E1",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The pullback comparison of constant objects at the tensor unit agrees with the monoidal unit comparison",
+   "results": "Eight hits about units in Cartesian monoidal over categories and their pullbacks; none identifies these derived small-etale coefficient comparisons. Local source search found constantUnitPullback_unit and ordinaryFiniteUnitPullback_hom_eq_constant.",
+   "date": "2026-10-28",
+   "verdict": "Compose the existing project comparison identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"εIso\"",
+   "results": "Twelve generic monoidal unit isomorphism results, including Functor.Monoidal.εIso and its hom/inv formulas; no exact derived etale comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the project constant-unit normalization and generic identity cancellation."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorObjUnitIso|constantUnitPullback_unit",
+   "results": "Zero Mathlib hits through msearch. Local rg located the constant-unit normalization in EtaleSectionUnitNormalization and the inverse identity in the adopted ProjectionFormula.Unit module.",
+   "date": "2026-10-28",
+   "verdict": "Reuse these existing proved declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteEtaleSectionIntegration",
+  "date": "2026-10-28",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-etale-section-integration",
+   "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+   "via": [
+    "lem-pur-finite-etale-section-integration",
+    "lem-pur-finite-smooth-zero-orientation-coordinates",
+    "lem-pur-finite-smooth-intrinsic-level-properties",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "id": "lem-pur-rank-zero-bundle-section-coordinates",
+ "title": "Rank-zero bundle section comparison equals normalized etale section coordinates",
+ "statement": "Let A be a finite commutative ring, S a Noetherian scheme and M an O_S-module locally free of rank zero. Suppose the bundle projection π is etale, and let e:E≅S have inverse the bundle zero section. For every graph/homotopy-normalized comparison family C, the specified bundleSectionRankZeroComparison A S M e hz equals (finiteSmoothSectionCoordinates A C π z).hom. These constructions are those of [def-trf-bundle-section-orientation-data, def-pur-finite-smooth-comparison-coordinates]. This comparison involves no integration trace, no Rees family and no annihilating integer.",
+ "stmt_deps": [
+  "def-trf-bundle-section-orientation-data",
+  "def-pur-finite-smooth-comparison-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "The zero section is an isomorphism, so its structural square over the identity is Cartesian. Apply section-coordinate base change. The etale sum right adjoint identity law identifies the normalized omega coordinates on the identity with its adjunction-conjugate identity comparison.",
+   "uses": [
+    "lem-pur-finite-etale-specialization-coordinates",
+    "lem-pur-etale-sum-right-adjoint-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace the ordinary constant pullback at the identity by the monoidal unit comparison. Expand the specified bundleSectionRankZeroComparison. Its middle factor is the section base-change map, and its last factors are the identity section coordinates just calculated. Apply the base-change identity, commute the section coordinates through the inverse identity-pullback isomorphism by naturality, and cancel the two identity constraints.",
+   "uses": [
+    "lem-pur-ordinary-finite-unit-coordinate-identification",
+    "lem-pur-finite-etale-specialization-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-etale-specialization-coordinates",
+  "lem-pur-etale-sum-right-adjoint-coherence",
+  "lem-pur-ordinary-finite-unit-coordinate-identification"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RankZeroBundleSectionCoordinates",
+  "file": "lean/Sheaf/Paper/RankZeroBundleSectionCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.rankZeroBundleSection_coordinates",
+  "statement": "theorem rankZeroBundleSection_coordinates\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (S : Scheme.{u}) [IsNoetherian S]\n    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank 0]\n    [Etale (VectorBundleZeroSection.π S 0 M)]\n    (e : VectorBundleZeroSection.scheme S 0 M ≅ S)\n    (hz : e.inv = VectorBundleZeroSection.zero S 0 M)\n    (C : FiniteSmoothCompactSupportComparisons A)\n    (hC : FiniteSmoothComparisonNormalized A C) :\n    bundleSectionRankZeroComparison A S M e hz =\n      (finiteSmoothSectionCoordinates A C (VectorBundleZeroSection.π S 0 M)\n        (VectorBundleZeroSection.zero S 0 M)).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

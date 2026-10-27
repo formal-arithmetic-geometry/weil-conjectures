@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Canonical coefficient-unit identifications in the third arrow, at relative rank zero."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+  "group": "E1",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "id": "lem-pur-ordinary-finite-unit-coordinate-identification",
+ "title": "Ordinary finite coefficient pullback agrees with tensor-unit coordinates",
+ "statement": "Let A be any commutative ring and f:X→Y any morphism of schemes. Use the ordinary finite derived coefficient objects and their canonical pullback comparison of [def-asd-ordinary-finite-p1-arrows]. Under the canonical degree-zero tensor-unit identifications, (ordinaryFiniteUnitPullback A f).hom equals (leftDerivedUpperStarUnitIso (ModuleCat A) f).hom. No finiteness, annihilator, invertibility or nonempty hypothesis is imposed.",
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "The proved source-library identity singleFunctorObjUnitIso_inv identifies the inverse unit comparison with identity. Its inverse-hom identity therefore identifies its hom with identity as well. This is a two-line isomorphism cancellation in arbitrary coefficient categories.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Substitute these two identities into constantUnitPullback_unit from the etale section unit normalization. The functor map of identity and the two identity compositions cancel, identifying the constantSinglePullbackIso component with the monoidal unit map. Specialize to ModuleCat A. The ordinary finite pullback component is that same constant comparison by ordinaryFiniteUnitPullback_hom_eq_constant, giving the result.",
+   "uses": [
+    "lem-z8-etale-section-unit-normalization",
+    "lem-z8-ordinary-finite-unit-pullback-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-z8-etale-section-unit-normalization",
+  "lem-z8-ordinary-finite-unit-pullback-comparison"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The pullback comparison of constant objects at the tensor unit agrees with the monoidal unit comparison",
+   "results": "Eight hits about units in Cartesian monoidal over categories and their pullbacks; none identifies these derived small-etale coefficient comparisons. Local source search found constantUnitPullback_unit and ordinaryFiniteUnitPullback_hom_eq_constant.",
+   "date": "2026-10-28",
+   "verdict": "Compose the existing project comparison identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"εIso\"",
+   "results": "Twelve generic monoidal unit isomorphism results, including Functor.Monoidal.εIso and its hom/inv formulas; no exact derived etale comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the project constant-unit normalization and generic identity cancellation."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorObjUnitIso|constantUnitPullback_unit",
+   "results": "Zero Mathlib hits through msearch. Local rg located the constant-unit normalization in EtaleSectionUnitNormalization and the inverse identity in the adopted ProjectionFormula.Unit module.",
+   "date": "2026-10-28",
+   "verdict": "Reuse these existing proved declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteEtaleSectionIntegration",
+  "date": "2026-10-28",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-etale-section-integration",
+   "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+   "via": [
+    "lem-pur-finite-etale-section-integration",
+    "lem-pur-finite-smooth-zero-orientation-coordinates",
+    "lem-pur-finite-smooth-intrinsic-level-properties",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteUnitCoordinateIdentifications",
+  "file": "lean/Sheaf/Paper/FiniteUnitCoordinateIdentifications.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.ordinaryFiniteUnitPullback_eq_unitCoordinates",
+  "statement": "theorem ordinaryFiniteUnitPullback_eq_unitCoordinates\n    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (ordinaryFiniteUnitPullback A f).hom =\n      (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

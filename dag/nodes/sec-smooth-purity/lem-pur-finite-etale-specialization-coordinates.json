@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-finite-etale-specialization-coordinates",
+ "kind": "statement",
+ "title": "Etale section specialization preserves graph-normalized coordinates",
+ "statement": "For finite A annihilated by N>0, a compactifiable separated quasi-compact etale g:V→S between Noetherian schemes, a closed section s with s≫g=id, Geometry 0 g s, N invertible on S, and an etale separated normal projection, let C be graph/homotopy normalized. For every Rees-family isomorphism kappa normalized at one, specialization(A,g,s,kappa) followed by the normal-section coordinates equals the source-section coordinates. This statement involves no vector-bundle integration factor. The families and maps are those of [lem-trf-finite-ring-section-deformation, def-pur-finite-smooth-comparison-coordinates, def-pur-finite-smooth-canonical-maps].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7."
+ },
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-comparison-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Graph/homotopy normalization uniquely identifies C with the canonical compact-support/sum comparison. Adjoint uniqueness identifies its omega coordinates with etaleSumRightAdjointUnitIso. Transport the proved exact base-change coherence through left-derived/exact pullback comparisons, using mateTransport and sum_baseChange. Restrict to compatible sections; naturality of the pullback compositors and their unit laws give the section-coordinate base-change equation.",
+   "uses": [
+    "lem-pur-finite-smooth-omega-tensor-coordinates",
+    "lem-pur-etale-sum-right-adjoint-coherence",
+    "lem-pur-finite-etale-dualizing-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Geometry 0 makes the deformation projection etale. Apply the section-coordinate base-change equation at one and at zero. Construct the comparison mu explicitly from the family coordinates, the inverse affine-line unit comparison, and inverse source coordinates. The section unit law proves its normalization at one. Uniqueness of the normalized comparison identifies kappa with mu. Substitute into specialization, cancel the family isomorphism and the section compositors, and use naturality to obtain the assertion. No witness of an undetermined existence theorem supplies data.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-smooth-omega-tensor-coordinates",
+  "lem-pur-etale-sum-right-adjoint-coherence",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+  "group": "E1",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale exceptional base change agrees with inverse image in the canonical adjunction coordinates",
+   "results": "Eight hits about algebraic etaleness; none gives this derived section-coordinate identity. Local search found EtaleSumRightAdjointCoherence and the rank-zero bundle orientation normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing derived adjunction and bundle-orientation declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "Twelve hits for categorical adjoint uniqueness, not the normalized geometric maps. The existing project modules already perform the necessary adjunction-conjugacy normalization.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project normalization proofs and standard naturality/cancellation lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "specialization|bundleSectionAdjoint|finiteSmoothSectionCoordinates",
+   "results": "Mathlib results concern topological specialization. Local rg found FiniteRingSectionDeformation.existsUnique_normalized, bundleOrientation_purity, and finiteRingBundleSectionOrientation_rankZero.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib theorem with the geometric statement; compose these existing project lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteEtaleSectionIntegration",
+  "date": "2026-10-27",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-etale-section-integration",
+   "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+   "via": [
+    "lem-pur-finite-etale-section-integration",
+    "lem-pur-finite-smooth-zero-orientation-coordinates",
+    "lem-pur-finite-smooth-intrinsic-level-properties",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteEtaleSpecializationCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteEtaleSpecializationCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteEtaleSpecialization_coordinates",
+  "statement": "theorem finiteEtaleSpecialization_coordinates\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {V S : Scheme.{u}} [IsNoetherian V] [IsNoetherian S]\n    (g : V ⟶ S) [HasCompactification g] [QuasiCompact g] [IsSeparated g] [Etale g]\n    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)\n    [FiniteRingSectionDeformation.Geometry 0 g s]\n    [Etale (Scheme.Hom.normalConeProj g s)] [IsSeparated (Scheme.Hom.normalConeProj g s)]\n    (hS : IsUnit (N : Γ(S, ⊤)))\n    (C : FiniteSmoothCompactSupportComparisons A)\n    (hC : FiniteSmoothComparisonNormalized A C)\n    (kappa : NoetherianSectionSpecialization.family A g s ≅\n      (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj\n        (sectionInvariant A g s))\n    (hKappa : NoetherianSectionSpecialization.Normalized A g s hs kappa) :\n    NoetherianSectionSpecialization.specialization A g s kappa ≫\n        (finiteSmoothSectionCoordinates A C (Scheme.Hom.normalConeProj g s)\n          (Scheme.Hom.normalConeZeroSection s)).hom =\n      (finiteSmoothSectionCoordinates A C g s).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Paper.FiniteSmoothAdjunctionData
+import Sheaf.Paper.FiniteEtaleSpecializationCoordinates
+import Sheaf.Paper.FiniteRankZeroNormalIntegration
 
 /-! # Rank-zero section specialization and integration
 
@@ -70,6 +72,22 @@ theorem finiteEtaleSectionIntegration
     NoetherianSectionSpecialization.specialization A g s kappa =
       (finiteSmoothSectionCoordinates A C g s).hom ≫ (zeroLineIso A N hA S d hd).inv ≫
         FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA S hS d
-          (ConormalGradedAlgebra.piece s 1) ≫ normalSectionMap A d g s hs sq := by sorry
+          (ConormalGradedAlgebra.piece s 1) ≫ normalSectionMap A d g s hs sq := by
+  subst d
+  have := smoothOfRelativeDimension_isStableUnderBaseChange (n := 0)
+  have : SmoothOfRelativeDimension 0 (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @SmoothOfRelativeDimension 0)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have : Etale (Scheme.Hom.normalConeProj g s) :=
+    (Etale.iff_smoothOfRelativeDimension_zero _).mpr inferInstance
+  have : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  apply (cancel_mono (finiteSmoothSectionCoordinates A C
+    (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection).hom).mp
+  rw [finiteEtaleSpecialization_coordinates A N hN hA g s hs hS C hC kappa hKappa]
+  simp only [Category.assoc]
+  rw [finiteRankZeroNormalIntegration_coordinates A N hN hA g s hs hS C hC sq]
+  simp only [Iso.inv_hom_id, Category.comp_id]
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

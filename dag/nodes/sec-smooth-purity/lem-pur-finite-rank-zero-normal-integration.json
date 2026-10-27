@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-finite-rank-zero-normal-integration",
+ "kind": "statement",
+ "title": "Rank-zero bundle integration and the cone mate preserve the coefficient unit",
+ "statement": "Let finite A be annihilated by N>0, let S be Noetherian with N invertible on S, and let g:V→S and a closed section s satisfy s≫g=id and Geometry 0 g s. Suppose the normal projection is etale and separated. For graph-normalized C and the specified Cartesian cone-to-rank-zero-conormal-bundle square sq, bundleSectionAdjoint followed by normalSectionMap(sq) and the normal-section coordinates is zeroLineIso.hom. This assertion contains neither a Rees family isomorphism nor specialization. The maps are those of [lem-trf-finite-ring-section-deformation, def-pur-finite-smooth-canonical-maps, def-pur-finite-smooth-adjunction-data, def-pur-finite-smooth-comparison-coordinates].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7."
+ },
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-comparison-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use bundleOrientation_purity and the coefficient-unit projection inverse to identify the inverse bundleSectionAdjoint with the affine-normalized bundle section orientation. Apply its existing rank-zero orientation theorem. The rank-zero bundle section coordinate calculation identifies the resulting identity-adjunction comparison with the graph-normalized section coordinates.",
+   "uses": [
+    "lem-trf-finite-ring-bundle-section-orientation",
+    "lem-trf-bundle-section-purity-unit-normalization",
+    "lem-trf-bundle-section-purity-unit-isIso",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-pur-ordinary-finite-unit-coordinate-identification",
+    "lem-pur-rank-zero-bundle-section-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given cone/bundle isomorphism preserves the zero section by its specification theorems. Apply section-coordinate base change to this square. The inverse identity-pullback constraint in normalSectionMap cancels its unit comparison, so this mate carries normal coordinates to bundle coordinates. Substitute the rank-zero orientation identity and cancel bundleSectionAdjoint against its inverse. The remaining single-unit identification is exactly zeroLineIso at d=0.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-pur-finite-etale-specialization-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-ring-bundle-section-orientation",
+  "lem-trf-bundle-section-purity-unit-normalization",
+  "lem-trf-bundle-section-purity-unit-isIso",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-pur-ordinary-finite-unit-coordinate-identification",
+  "lem-pur-finite-etale-specialization-coordinates",
+  "lem-pur-rank-zero-bundle-section-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation.proof.md",
+  "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+  "group": "E1",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale exceptional base change agrees with inverse image in the canonical adjunction coordinates",
+   "results": "Eight hits about algebraic etaleness; none gives this derived section-coordinate identity. Local search found EtaleSumRightAdjointCoherence and the rank-zero bundle orientation normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing derived adjunction and bundle-orientation declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "Twelve hits for categorical adjoint uniqueness, not the normalized geometric maps. The existing project modules already perform the necessary adjunction-conjugacy normalization.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project normalization proofs and standard naturality/cancellation lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "specialization|bundleSectionAdjoint|finiteSmoothSectionCoordinates",
+   "results": "Mathlib results concern topological specialization. Local rg found FiniteRingSectionDeformation.existsUnique_normalized, bundleOrientation_purity, and finiteRingBundleSectionOrientation_rankZero.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib theorem with the geometric statement; compose these existing project lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteEtaleSectionIntegration",
+  "date": "2026-10-27",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-etale-section-integration",
+   "place": "Second and third factors of the displayed three-factor orientation; rank-zero calculation in lem-pur-finite-smooth-gamma-normalization, Steps 2 and 4--7.",
+   "via": [
+    "lem-pur-finite-etale-section-integration",
+    "lem-pur-finite-smooth-zero-orientation-coordinates",
+    "lem-pur-finite-smooth-intrinsic-level-properties",
+    "lem-pur-finite-smooth-level-of-orientation",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRankZeroNormalIntegration",
+  "file": "lean/Sheaf/Paper/FiniteRankZeroNormalIntegration.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteRankZeroNormalIntegration_coordinates",
+  "statement": "theorem finiteRankZeroNormalIntegration_coordinates\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {V S : Scheme.{u}} [IsNoetherian S]\n    (g : V ⟶ S) (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)\n    [FiniteRingSectionDeformation.Geometry 0 g s]\n    [Etale (Scheme.Hom.normalConeProj g s)] [IsSeparated (Scheme.Hom.normalConeProj g s)]\n    (hS : IsUnit (N : Γ(S, ⊤)))\n    (C : FiniteSmoothCompactSupportComparisons A)\n    (hC : FiniteSmoothComparisonNormalized A C)\n    (sq : IsPullback\n      (reesConeComparison s ≪≫ FiniteRingSectionDeformation.coneBundleIso 0 g s).hom\n      (Scheme.Hom.normalConeProj g s)\n      (VectorBundleZeroSection.π S 0 (ConormalGradedAlgebra.piece s 1)) (𝟙 S)) :\n    FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA S hS 0\n        (ConormalGradedAlgebra.piece s 1) ≫ normalSectionMap A 0 g s hs sq ≫\n        (finiteSmoothSectionCoordinates A C (Scheme.Hom.normalConeProj g s)\n          (Scheme.Hom.normalConeZeroSection s)).hom =\n      (zeroLineIso A N hA S 0 rfl).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T180531-L-3871782",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
