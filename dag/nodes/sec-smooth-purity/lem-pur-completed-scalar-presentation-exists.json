@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-completed-scalar-presentation-exists",
+ "kind": "statement",
+ "title": "Recorded completed scalar extensions admit their prescribed presentation",
+ "statement": "Fix a prime l, a scheme X, finite extensions E and F of Q_l in the same universe, and a Q_l-algebra map i:E→F. Let R_E and R_F be the actual completed integral coefficient sheaves [def-weil-completed-integral-coefficients], with coefficient map a and recorded ordinary functor O, derived functor D, tensor sections and universal cochain counit from [lem-weil-finite-free-completed-scalar-comparison]. Use the standard derived-category localization for every module-sheaf category on X. There exists a Presentation of a [def-weil-pbc-successive-derived-quotient-data] whose ordinary and derived functors are exactly O and D, whose transported pure tensor sections are the recorded tensor sections, and whose homotopy counit evaluated on every cochain complex is the recorded cochain counit. This repackages the existing presentation; it introduces no new functor, localization, sheafification or completion model.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6: ordinary change of rings and universal unbounded left-derived functors; agent specialization to the recorded completed coefficient extension. Blueprint Proof (3), final sentence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-successive-derived-quotient-data",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Take the literal recorded ordinary functor and derived functor. Supply the object equation, map equation and additive structure from the existing change-of-rings witness. Supply its homotopy counit and universal left-derived property from the same witness. Each component is already determined by that witness; no arbitrary object is selected from a mere existence assertion.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-pbc-successive-derived-quotient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The presentation tensor section uses the same object equation and sheafification unit as the recorded tensor section, so they agree definitionally. Evaluating its homotopy counit at the quotient of a cochain complex gives the recorded cochain counit definitionally. These equalities also give the stated heterogeneous equalities.",
+   "uses": [
+    "def-weil-pbc-successive-derived-quotient-data",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-successive-derived-quotient-data",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final sentence: compatibility of coefficient-field extension with the inverse tensor pair. M2 specializes the existing universal scalar adjunction to the recorded presentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The recorded ordinary scalar extension and its derived functor with universal counit form a presentation of change of rings for sheaves of modules",
+   "results": "SheafOfModules.Presentation.map, SheafOfModules.Presentation, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.mapRelations, SheafOfModules.IsFinitePresentation, PresheafOfModules.sheafificationAdjunction, SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor.*changeOfRings|changeOfRings.*IsLeftDerivedFunctor",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.changeOfRings\", \"IsLeftDerivedFunctor\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary scalar extension and its universal left derived counit give a presentation of change of rings for module sheaves",
+   "results": "ModuleCat.ExtendScalars.obj', ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.extendScalars, ModuleCat.RestrictionCoextensionAdj.counit', PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.instIsLeftAdjointExtendScalars",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "date": "2026-10-28",
+  "group": "M2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence: compatibility of scalar extension with the integral inverse tensor pair and its universal derived comparison.",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarPresentation",
+  "file": "lean/Sheaf/Paper/CompletedScalarPresentation.lean",
+  "declaration": "WeilConjectures.CompletedScalarAssociator.presentation_exists",
+  "statement": "theorem presentation_exists :\n    letI : ∀ R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X)\n        CommRingCat.{max u (t + 1)},\n        HasDerivedCategory.{max (u + 1) (t + 2)}\n          (Modules.{t + 1, t, max u (t + 1)}\n            (J := AlgebraicGeometry.Scheme.ProEt.topology X) R) :=\n      fun R ↦ HasDerivedCategory.standard\n        (Modules.{t + 1, t, max u (t + 1)}\n          (J := AlgebraicGeometry.Scheme.ProEt.topology X) R)\n    letI : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _\n    letI := integralCoefficientAbLocallyBijective.{t, u} X\n    letI := integralCoefficientAbSheafify.{t, u} X\n    ∃ p : Presentation (J := AlgebraicGeometry.Scheme.ProEt.topology X)\n        (completedCoefficientMap l E F ι X),\n      p.ordinary = completedOrdinaryScalarExtension l E F ι X ∧\n      p.derived = completedDerivedScalarExtension l E F ι X ∧\n      (∀ (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)\n          (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) (x : M.val.obj U),\n        HEq (sectionTensor p M U s x) (completedScalarTensorSection l E F ι X M U s x)) ∧\n      (∀ P : CochainComplex (integralTowerModules l E X) ℤ,\n        HEq (p.counit.app ((HomotopyCategory.quotient _ _).obj P))\n          (completedScalarCounit l E F ι X P))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234057-L-4183492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234057-L-4183492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

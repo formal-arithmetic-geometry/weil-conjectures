@@ -1,0 +1,149 @@
+{
+ "id": "lem-pur-completed-scalar-associator-exists",
+ "kind": "statement",
+ "title": "Unique normalized associators for the recorded completed coefficient extensions",
+ "statement": "Fix a prime l, a scheme X, finite extensions E,F,G of Q_l in the same universe, and algebra maps i:E→F and j:F→G; repeated fields are allowed. Use the actual completed coefficient maps and recorded ordinary and derived extensions O_i,D_i and universal cochain counits epsilon_i [lem-weil-finite-free-completed-scalar-comparison]. There exists a unique pair of isomorphisms o:O_i followed by O_j ≅ O_(ji) and d:D_i followed by D_j ≅ D_(ji) satisfying both of the following normalizations. On every section o sends t tensor (s tensor x) to t*j(s) tensor x. On every flat-term K-flat complex P from the prescribed good-complex subcategory [lem-pur-integral-operations-well-defined], D_j(epsilon_i(P)) followed by epsilon_j(O_i(P)) followed by localization of the actual termwise ordinary associator equals d(Q(P)) followed by epsilon_(ji)(P). The termwise ordinary associator is exactly Functor.mapHomologicalComplexCompIso o with the recorded cochain functors, without a new choice.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6: ordinary change of rings and universal unbounded left-derived functors; agent specialization to the recorded completed coefficient extension. Blueprint Proof (3), final sentence."
+ },
+ "stmt_deps": [
+  "lem-pur-completed-scalar-presentation-exists",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-pbc-successive-derived-quotient-data",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Completed coefficient maps compose: after each finite quotient projection this is composition of the corresponding scalar quotient maps, which agrees on every quotient representative. The uniqueness of a map to the completed coefficient sheaf proves the required equality of completed maps.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the actual recorded presentations supplied by the presentation theorem. Apply the proved extension-restriction adjunction construction for each presentation. Compose the ordinary adjunctions and the derived adjunctions; uniqueness of left adjoints produces their ordinary and derived associator isomorphisms. The normalized units are tensors with one. The generic ordinary comparison formula therefore gives t tensor (s tensor x) mapped to t*j(s) tensor x.",
+   "uses": [
+    "lem-pur-completed-scalar-presentation-exists",
+    "lem-pur-prescribed-scalar-associator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic derived representative comparison to the homotopy quotient of each cochain complex. Its formula is exactly the composite of the two recorded counits and the localized termwise ordinary associator, equal to the derived associator followed by the direct counit. The tensor formula determines the ordinary comparison: apply the two ordinary adjunction hom-equivalences, both injective, then evaluate on a section. Each unit inserts one, and the two tensor formulas agree.",
+   "uses": [
+    "lem-pur-completed-scalar-presentation-exists",
+    "lem-pur-prescribed-scalar-associator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition with the prescribed good-complex localization is faithful. On a flat-term K-flat complex the recorded universal counit is invertible by its derived-change-of-rings computation theorem. Cancel this counit in the assumed equality, then use faithful precomposition to obtain equality of the derived natural transformations. Equality of isomorphisms follows from equality of their forward transformations.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the ordinary and derived isomorphisms as one pair. Restrict the all-complex representative formula to the prescribed good complexes. Given a second normalized pair, ordinary uniqueness identifies its ordinary part. Its representative formula then identifies its derived part after the direct counit with the constructed one; the preceding determination argument proves equality of derived parts. Product extensionality proves uniqueness of the normalized pair.",
+   "uses": [
+    "lem-pur-prescribed-scalar-associator",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-scalar-presentation-exists",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-prescribed-scalar-associator",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final sentence: compatibility of coefficient-field extension with the inverse tensor pair. M2 specializes the existing universal scalar adjunction to the recorded presentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Cc]omp|[Cc]omp.*changeOfRings",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"changeOfRings\", \"comp\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings of sheaves of modules commutes with composition via balanced tensor associativity",
+   "results": "SheafOfModules.comp_val_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.comp_val, SheafOfModules.pullback_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.map_comp, AlgebraicGeometry.Scheme.Modules.Hom.comp_app",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of rings of sheaves of modules composes with a normalized associativity isomorphism compatible with the universal derived counit",
+   "results": "ModuleCat.extendScalars_assoc', SheafOfModules.comp_val_assoc, SheafOfModules.pushforward_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, ModuleCat.extendScalars_assoc, PresheafOfModules.pushforward_assoc, SheafOfModules.pullback_assoc, PresheafOfModules.map_comp_assoc",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the recorded completed coefficient sheaf presentation and universal derived counit; ordinary module or sheaf-pullback results do not provide this normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "date": "2026-10-28",
+  "group": "M2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence: compatibility of scalar extension with the integral inverse tensor pair and its universal derived comparison.",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarAssociator",
+  "file": "lean/Sheaf/Paper/CompletedScalarAssociator.lean",
+  "declaration": "WeilConjectures.CompletedScalarAssociator.exists_unique",
+  "statement": "theorem exists_unique :\n    let lift := fun (o : completedOrdinaryScalarExtension l E F ι X ⋙\n        completedOrdinaryScalarExtension l F G j X ≅\n          completedOrdinaryScalarExtension l E G (j.comp ι) X) ↦\n      (show completedOrdinaryScalarComplex l E F ι X ⋙\n          completedOrdinaryScalarComplex l F G j X ≅\n            completedOrdinaryScalarComplex l E G (j.comp ι) X from by\n        unfold completedOrdinaryScalarComplex\n        exact Functor.mapHomologicalComplexCompIso o (ComplexShape.up ℤ))\n    ∃! a : (completedOrdinaryScalarExtension l E F ι X ⋙\n        completedOrdinaryScalarExtension l F G j X ≅\n          completedOrdinaryScalarExtension l E G (j.comp ι) X) ×\n      (completedDerivedScalarExtension l E F ι X ⋙\n        completedDerivedScalarExtension l F G j X ≅\n          completedDerivedScalarExtension l E G (j.comp ι) X),\n      (∀ (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)\n          (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U)\n          (t : (completedIntegralCommRingSheafUnrestricted l G X).obj.obj U) (x : M.val.obj U),\n        (a.1.hom.app M).val.app U\n          (completedScalarTensorSection l F G j X _ U t\n            (completedScalarTensorSection l E F ι X M U s x)) =\n          completedScalarTensorSection l E G (j.comp ι) X M U\n            (t * (completedCoefficientMap l F G j X).hom.app U s) x) ∧\n      (∀ P : (integralOperationsGoodComplex l E X).FullSubcategory,\n        (completedDerivedScalarExtension l F G j X).map\n            (completedScalarCounit l E F ι X P.obj) ≫\n          completedScalarCounit l F G j X ((completedOrdinaryScalarComplex l E F ι X).obj P.obj) ≫\n          DerivedCategory.Q.map ((lift a.1).hom.app P.obj) =\n        a.2.hom.app (DerivedCategory.Q.obj P.obj) ≫\n          completedScalarCounit l E G (j.comp ι) X P.obj)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234057-L-4183492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234057-L-4183492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

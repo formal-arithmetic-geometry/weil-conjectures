@@ -21,6 +21,7 @@ public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Sheaf.Paper.CompletedScalarAssociator
 import Mathlib.CategoryTheory.Adjunction.Limits
 import all Sheaf.Paper.IntegralOperationsWellDefined
 import all Sheaf.Paper.FiniteFreeCompletedScalarComparison
@@ -584,7 +585,9 @@ the unique derived comparison. Local generation and the localization equivalence
 uniqueness of the entire package. -/
 theorem associatorData_existsUnique :
     ∃! a : AssociatorData l E X F ι G j, IsAssociatorNormalized l E X F ι G j a := by
-  sorry
+  delta AssociatorData IsAssociatorNormalized AssociatorData.sheaf
+    AssociatorData.derived scalarAssociatorComplex
+  exact CompletedScalarAssociator.exists_unique l E X F ι G j
 
 /-- The normalized ordinary scalar associator, including its representative.
 Source: Stacks 06YY (blueprint: lem-pur-completed-line-tensor-coherence). -/

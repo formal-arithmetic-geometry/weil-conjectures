@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-prescribed-scalar-associator",
+ "kind": "statement",
+ "title": "Normalized associators for prescribed universal scalar presentations",
+ "statement": "Fix a coefficient universe r. Let C be a category essentially small in r, with Grothendieck topology J. Assume J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}), J.WEqualsLocallyBijective AddCommGrpCat.{r}, and HasSheafify J AddCommGrpCat.{r}; these are the coefficient-forgetful sheaf composition, local-bijectivity and module-sheafification hypotheses of [def-weil-pbc-successive-derived-quotient-data]. Fix a derived-category localization for the module category of every commutative ring sheaf on J. For every coefficient map a let p(a) be a prescribed Presentation: its ordinary extension, derived functor, universal homotopy counit, object and map equations, and additive structure. For ring sheaves R,S,T, maps a:R→S, b:S→T and c:R→T with a followed by b equal to c, there exist ordinary and derived isomorphisms o:p(a).ordinary followed by p(b).ordinary ≅ p(c).ordinary and d:p(a).derived followed by p(b).derived ≅ p(c).derived. On every section o maps t tensor (s tensor x) to t*b(s) tensor x. On every unbounded cochain complex P the composite of the two universal counits and the localized termwise o equals d at Q(P) followed by the direct counit. The pure-tensor formula determines the ordinary isomorphism o uniquely. The presentations are supplied rather than chosen by the conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6: ordinary change of rings and universal unbounded left-derived functors; agent specialization to the recorded completed coefficient extension. Blueprint Proof (3), final sentence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-successive-derived-quotient-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved normalized extension-restriction adjunction construction to each supplied presentation [lem-sfb-successive-derived-quotient-normalization]. Compose its ordinary adjunctions and derived adjunctions. Uniqueness of left adjoints gives the two comparison isomorphisms. Replace c by a followed by b using the supplied map equation. The normalized ordinary units insert scalar one; the ordinary comparison formula therefore multiplies t and b(s).",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved generic derived representative comparison, applied to the homotopy quotient of P, gives the exact equation of the two supplied counits with the localized ordinary comparison. For uniqueness apply the injective hom-equivalence of the second ordinary adjunction and then that of the first. After these equivalences, the components are compared on the two units, so the tensor formula with both scalars one proves their equality on every section. Sheaf hom extensionality, natural-transformation extensionality and isomorphism extensionality finish.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final sentence: compatibility of coefficient-field extension with the inverse tensor pair. M2 specializes the existing universal scalar adjunction to the recorded presentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*([Aa]ssoc|[Cc]ompos)|([Aa]ssoc|[Cc]ompos).*changeOfRings",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem: the tensor-product and module-category associators do not compare the specified universal counits of a prescribed family of module-sheaf presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a prescribed family of ordinary and derived change of rings presentations on a ringed site, the associator respects the pure tensor formula and the specified universal derived counits",
+   "results": "TensorProduct.assoc, TensorProduct.leftComm, ModuleCat.MonoidalCategory.associator_hom_apply, LinearMap.lTensor_rTensor_comp_assoc, ModuleCat.MonoidalCategory.associator_def, Coalgebra.TensorProduct.assoc, HomologicalComplex.associator, LinearMap.rTensor_lTensor_comp_assoc_symm",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem: the tensor-product and module-category associators do not compare the specified universal counits of a prescribed family of module-sheaf presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"homEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem: the tensor-product and module-category associators do not compare the specified universal counits of a prescribed family of module-sheaf presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "date": "2026-10-28",
+  "group": "M2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence: compatibility of scalar extension with the integral inverse tensor pair and its universal derived comparison.",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PrescribedScalarAssociator",
+  "file": "lean/Sheaf/Algebra/Homology/PrescribedScalarAssociator.lean",
+  "declaration": "WeilConjectures.CompletedScalarAssociator.presentation_associator_exists",
+  "statement": "theorem presentation_associator_exists\n    {C : Type*} [Category C] [EssentiallySmall.{u} C]\n    {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]\n    [∀ R : Sheaf J CommRingCat.{u}, HasDerivedCategory (Modules R)]\n    (p : ∀ {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S), Presentation a)\n    {R S T : Sheaf J CommRingCat.{u}} (a : R ⟶ S) (b : S ⟶ T) (c : R ⟶ T)\n    (hc : a ≫ b = c) :\n    ∃ (o : (p a).ordinary ⋙ (p b).ordinary ≅ (p c).ordinary)\n      (d : (p a).derived ⋙ (p b).derived ≅ (p c).derived),\n      (∀ M U s t x, (o.hom.app M).val.app U\n        (sectionTensor (p b) ((p a).ordinary.obj M) U t (sectionTensor (p a) M U s x)) =\n        sectionTensor (p c) M U (t * b.hom.app U s) x) ∧\n      (∀ P : CochainComplex (Modules R) ℤ,\n        (p b).derived.map ((p a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫\n          (p b).counit.app ((HomotopyCategory.quotient _ _).obj\n            (((p a).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n          DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso o (.up ℤ)).hom.app P) =\n        d.hom.app (DerivedCategory.Q.obj P) ≫\n          (p c).counit.app ((HomotopyCategory.quotient _ _).obj P)) ∧\n      (∀ (o' : (p a).ordinary ⋙ (p b).ordinary ≅ (p c).ordinary),\n        (∀ M U s t x, (o'.hom.app M).val.app U\n          (sectionTensor (p b) ((p a).ordinary.obj M) U t (sectionTensor (p a) M U s x)) =\n          sectionTensor (p c) M U (t * b.hom.app U s) x) → o' = o)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234057-L-4183492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234057-L-4183492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
