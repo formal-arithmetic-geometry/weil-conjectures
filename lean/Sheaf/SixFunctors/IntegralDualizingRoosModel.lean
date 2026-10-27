@@ -25,6 +25,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.SixFunctors.FiniteDualizing
+import Sheaf.Paper.NormalizedDVRStrictRealization
 
 /-! # Strict Roos realization of the finite dualizing tower
 
@@ -121,6 +122,130 @@ def integralDualizingLimit (Y : Scheme.{u}) :
     (ProEt.topology Y) (completedIntegralCoefficientSheafUnrestricted l E Y)
     (completedIntegralCoefficient_mul_commUnrestricted l E Y)).choose
 
+open CategoryTheory.Pretriangulated in
+private theorem roosProductTransport
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {A B : ℕ → C} [HasProduct A] [HasProduct B]
+    (f : ∀ n, A (n + 1) ⟶ A n) (g : ∀ n, B (n + 1) ⟶ B n)
+    {M N : C} (e : M ≅ N) (a : ∀ n, A n ≅ B n)
+    (ht : ∀ n, (a (n + 1)).hom ≫ g n = f n ≫ (a n).hom)
+    (p : M ⟶ ∏ᶜ A) (δ : (∏ᶜ A) ⟶ M⟦(1 : ℤ)⟧)
+    (h : IsDerivedLimitTriangle f M p δ) :
+    ∃ (q : N ⟶ ∏ᶜ B) (δ' : (∏ᶜ B) ⟶ N⟦(1 : ℤ)⟧),
+      IsDerivedLimitTriangle g N q δ' := by
+  let b : (∏ᶜ A) ≅ (∏ᶜ B) :=
+    { hom := Limits.Pi.map (fun n ↦ (a n).hom)
+      inv := Limits.Pi.map (fun n ↦ (a n).inv)
+      hom_inv_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc]
+      inv_hom_id := by
+        apply Pi.hom_ext
+        intro n
+        simp [Category.assoc] }
+  refine ⟨e.inv ≫ p ≫ b.hom, b.inv ≫ δ ≫ (shiftFunctor C (1 : ℤ)).map e.hom, ?_⟩
+  exact (distinguished_iff_of_iso (Triangle.isoMk _ _ e b b
+    (by simp) (towerTransitionEndomorphism_natural_backward f g (fun n ↦ (a n).hom) ht).symm
+    (by simp))).mp h
+
+private theorem invertComparisonSquare
+    {C : Type*} [Category C] {A B A' B' : C}
+    (f : A ⟶ B) (g : A' ⟶ B') (a : A ≅ A') (b : B ≅ B')
+    (h : f ≫ b.hom = a.hom ≫ g) : a.inv ≫ f = g ≫ b.inv := by
+  calc
+    a.inv ≫ f = a.inv ≫ (f ≫ b.hom) ≫ b.inv := by simp [Category.assoc]
+    _ = g ≫ b.inv := by rw [h]; simp [Category.assoc]
+
+private abbrev rawDerivedTowerEvaluation
+    (A : Type*) [Category A] [Abelian A] [HasDerivedCategory A]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ A)] (n : ℕ) :
+    DerivedCategory (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory A :=
+  ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory
+
+private def rawDerivedTowerTransition
+    (A : Type*) [Category A] [Abelian A] [HasDerivedCategory A]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ A)] {m n : ℕ} (h : n ≤ m) :
+    rawDerivedTowerEvaluation A m ⟶ rawDerivedTowerEvaluation A n :=
+  Localization.liftNatTrans DerivedCategory.Q
+    (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (ComplexShape.up ℤ)) _ _
+    (rawDerivedTowerEvaluation A m) (rawDerivedTowerEvaluation A n)
+    (Functor.whiskerRight
+      (NatTrans.mapHomologicalComplex ((evaluation ℕᵒᵖ A).map (homOfLE h).op)
+        (ComplexShape.up ℤ)) DerivedCategory.Q)
+
+private theorem integralDualizing_roos_triangle (Y : Scheme.{u})
+    (Z : DerivedCategory (ℕᵒᵖ ⥤
+      ringedSiteModules.{u + 1} (completedIntegralCoefficientSheafUnrestricted l E Y))) :
+    let A := ringedSiteModules.{u + 1} (completedIntegralCoefficientSheafUnrestricted l E Y)
+    let RF := (ringedStrictTowerHomotopyLimitOfUniverses.{u + 2, u + 1, u, u}
+      (ProEt.topology Y) (completedIntegralCoefficientSheafUnrestricted l E Y)
+      (completedIntegralCoefficient_mul_commUnrestricted l E Y)).choose
+    let : HasCountableProducts (DerivedCategory A) :=
+      integralOperationsDerivedCountableProducts l E Y
+    ∃ (p : RF.obj Z ⟶ ∏ᶜ fun n : ℕ ↦ (rawDerivedTowerEvaluation A n).obj Z)
+      (δ : (∏ᶜ fun n : ℕ ↦ (rawDerivedTowerEvaluation A n).obj Z) ⟶
+        (RF.obj Z)⟦(1 : ℤ)⟧),
+      IsDerivedLimitTriangle
+        (fun n : ℕ ↦ (rawDerivedTowerTransition A n.le_succ).app Z)
+        (RF.obj Z) p δ := by
+  let A := ringedSiteModules.{u + 1} (completedIntegralCoefficientSheafUnrestricted l E Y)
+  let C := DerivedCategory.Q.objPreimage Z
+  let z : DerivedCategory.Q.obj C ≅ Z := DerivedCategory.Q.objObjPreimageIso Z
+  obtain ⟨η, _, _, _, hshift, hproducts, F, ε, p, δ, _, hroos, _⟩ :=
+    (ringedStrictTowerHomotopyLimitOfUniverses.{u + 2, u + 1, u, u}
+      (ProEt.topology Y) (completedIntegralCoefficientSheafUnrestricted l E Y)
+      (completedIntegralCoefficient_mul_commUnrestricted l E Y)).choose_spec
+  let ev (n : ℕ) := (evaluation ℕᵒᵖ A).obj (op n)
+  let tc (n : ℕ) := (NatTrans.mapHomologicalComplex
+    ((evaluation ℕᵒᵖ A).map (homOfLE n.le_succ).op) (.up ℤ)).app C
+  let c (n : ℕ) : (F.obj (DerivedCategory.Q.obj C)).obj (op n) ≅
+      DerivedCategory.Q.obj ((ev n).mapHomologicalComplex (.up ℤ) |>.obj C) :=
+    (ε.app C).app (op n)
+  have hc (n : ℕ) : (c (n + 1)).hom ≫ DerivedCategory.Q.map (tc n) =
+      (F.obj (DerivedCategory.Q.obj C)).map (homOfLE n.le_succ).op ≫ (c n).hom := by
+    exact ((ε.hom.app C).naturality (homOfLE n.le_succ).op).symm
+  let a (n : ℕ) : (F.obj (DerivedCategory.Q.obj C)).obj (op n) ≅
+      (rawDerivedTowerEvaluation A n).obj Z :=
+    c n ≪≫ ((ev n).mapDerivedCategoryFactors.app C).symm ≪≫
+      (rawDerivedTowerEvaluation A n).mapIso z
+  have ht (n : ℕ) :
+      (a (n + 1)).hom ≫ (rawDerivedTowerTransition A n.le_succ).app Z =
+        (F.obj (DerivedCategory.Q.obj C)).map (homOfLE n.le_succ).op ≫ (a n).hom := by
+    have hf : (rawDerivedTowerTransition A n.le_succ).app
+        (DerivedCategory.Q.obj C) ≫ (ev n).mapDerivedCategoryFactors.hom.app C =
+      (ev (n + 1)).mapDerivedCategoryFactors.hom.app C ≫
+        DerivedCategory.Q.map (tc n) := by
+      dsimp only [ev, A, tc]
+      simp only [rawDerivedTowerTransition, Localization.liftNatTrans_app,
+        Localization.Lifting.iso, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+      rfl
+    have hf' : (ev (n + 1)).mapDerivedCategoryFactors.inv.app C ≫
+        (rawDerivedTowerTransition A n.le_succ).app (DerivedCategory.Q.obj C) =
+        DerivedCategory.Q.map (tc n) ≫ (ev n).mapDerivedCategoryFactors.inv.app C :=
+      invertComparisonSquare _ _ ((ev (n + 1)).mapDerivedCategoryFactors.app C)
+        ((ev n).mapDerivedCategoryFactors.app C) hf
+    dsimp only [a, Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Iso.app,
+      Functor.mapIso_hom]
+    rw [Category.assoc, Category.assoc,
+      (rawDerivedTowerTransition A n.le_succ).naturality z.hom]
+    rw [reassoc_of% hf']
+    simpa only [Category.assoc] using congrArg
+      (fun k ↦ k ≫ (ev n).mapDerivedCategoryFactors.inv.app C ≫
+        (rawDerivedTowerEvaluation A n).map z.hom) (hc n)
+  let := hproducts
+  let hp : HasProduct (fun n : ℕ ↦ (F.obj (DerivedCategory.Q.obj C)).obj (op n)) :=
+    inferInstance
+  have hr := hroos (DerivedCategory.Q.obj C)
+  let : HasCountableProducts (DerivedCategory A) :=
+    integralOperationsDerivedCountableProducts l E Y
+  exact roosProductTransport _ _
+    (((ringedStrictTowerHomotopyLimitOfUniverses.{u + 2, u + 1, u, u}
+      (ProEt.topology Y) (completedIntegralCoefficientSheafUnrestricted l E Y)
+      (completedIntegralCoefficient_mul_commUnrestricted l E Y)).choose).mapIso z) a ht
+    (p (DerivedCategory.Q.obj C)) (δ (DerivedCategory.Q.obj C)) hr
+
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
   [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
@@ -188,19 +313,19 @@ its inverse-limit assertion and compatibility with lem-coef-finite-dualizing;
 Stacks Tags 0940 and 0941 (blueprint: lem-coef-integral-dualizing-roos-model).
 
 Proof: use the counit-defined finite comparisons and their unit and cocycle identities.
-Their scalar adjuncts give the semilinear transitions. Choose a representative at level
-one, then recursively represent each next transition by a roof whose backward arrow is
-a quasi-isomorphism, retaining its forward chain map. Compose these chain maps for all
-longer transitions and restrict to completed coefficients. This gives one strict tower,
-its evaluation isomorphisms, and the required normalized DVR datum; normalization follows
-from invertibility of each finite comparison by the scalar adjunction and Yoneda.
-Resolve this strict tower by a functorial K-injective tower. The total derived limit
-comes with the Roos triangle of its evaluated tower. Uniqueness of derived evaluation,
-compatible with its localization comparison, identifies this evaluation with
-normalizedDVRTowerEvaluation, including every transition. Transport its product and
-triangle along that identification to obtain the displayed p and delta. This is the
-same inverse-limit realization used in the current blueprint's reduction formula;
-no constructibility or duality conclusion is asserted here. -/
+Their scalar adjuncts give the semilinear transitions. Restrict to completed coefficients;
+canonical restriction coherence gives an inverse diagram in the derived category.
+Choose K-injective representatives of its objects and chain maps representing successor
+transitions. Compose these maps to obtain a strict sequence of complexes, then transpose
+it to a complex of sequences. Its localization gives the strict tower and its evaluation
+isomorphisms. Normalization follows from invertibility of the finite comparisons and
+the scalar adjunction. The published total derived limit has an auxiliary evaluation
+functor and a Roos triangle. On a complex representing the strict tower, its factorization
+isomorphism identifies the auxiliary evaluation with the canonical derived evaluation,
+including every transition. Transport the limit object, product and distinguished
+triangle along these isomorphisms. The explicit product isomorphism works for the
+published product witness even when it differs from the witness used by the limit theorem.
+No constructibility or duality conclusion is asserted here. -/
 theorem integralDualizing_roos_model (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -224,6 +349,43 @@ theorem integralDualizing_roos_model (D : FiniteFieldDatum.{u})
           ((integralDualizingLimit l E X).obj T.tower)⟦(1 : ℤ)⟧),
          IsDerivedLimitTriangle
            (fun n : ℕ ↦ (normalizedDVRTowerTransition l E X D hl n.le_succ).app T.tower)
-           ((integralDualizingLimit l E X).obj T.tower) p δ) := by sorry
+           ((integralDualizingLimit l E X).obj T.tower) p δ) := by
+  obtain ⟨_, _, _, hi, hu, hc⟩ := finiteDualizingCoefficientComparisons l E D X hl
+  obtain ⟨Z, e, he⟩ := normalizedDVR_strict_realization l E X D hl
+    (integralDualizingFiniteTerm l E D X)
+    (fun h ↦ integralDualizingExceptionalTransition l E D X hl h)
+    hu (fun h₁ h₂ ↦ hc h₁ h₂)
+  let T : NormalizedDVRTower l E X D hl :=
+    { M := integralDualizingFiniteTerm l E D X
+      tau := fun h ↦ integralDualizingExceptionalTransition l E D X hl h
+      tau_refl := hu
+      tau_comp := fun h₁ h₂ ↦ hc h₁ h₂
+      tower := Z
+      evaluationIso := e
+      tower_tau := fun h ↦ he h
+      normalization := by
+        intro m n h P
+        let a := Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)
+        let v := integralDualizingFiniteComparison l E D X hl h
+        have : IsIso v := hi h
+        have hb : Function.Bijective (fun f : integralDualizingFiniteTerm l E D X n ⟶ P ↦
+            v ≫ f) := by
+          constructor
+          · intro f g hfg
+            exact (cancel_epi v).mp hfg
+          · intro f
+            exact ⟨inv v ≫ f, by simp⟩
+        have hb' := (a.homEquiv _ _).bijective.comp hb
+        convert hb' using 1
+        funext f
+        simpa only [v, integralDualizingFiniteComparison, a, Equiv.apply_symm_apply,
+          Function.comp_apply] using (a.homEquiv_naturality_right v f).symm }
+  refine ⟨T, fun n ↦ Iso.refl _, ?_, ?_⟩
+  · intro m n h
+    dsimp only [T, Iso.refl_hom]
+    rw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+    exact (Equiv.apply_symm_apply
+      ((Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _) _).symm
+  · exact integralDualizing_roos_triangle l E X Z
 
 end WeilConjectures

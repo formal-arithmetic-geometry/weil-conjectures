@@ -25,15 +25,16 @@
    "elementary": true
   },
   {
-   "text": "Represent each successive derived transition by a roof, retaining its source complex and forward chain map. Compose longer maps, restrict to completed coefficients and form the complex of strict towers. Its evaluations and the roof isomorphisms give T and e, including the displayed transition equation.",
+   "text": "Use normalizedDVR_strict_realization on the actual finite exceptional transitions, with their unit and cocycle equations, to obtain the strict completed-coefficient tower and all evaluation isomorphisms. Define the normalized DVR datum with the finite dualizing terms themselves and identity e_n. Invertibility of each scalar comparison makes precomposition a Hom bijection; compose with the scalar adjunction homEquiv to prove normalization. The finite comparison is defined as the inverse homEquiv of the transition, so the displayed identification follows by Equiv.apply_symm_apply.",
    "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-coef-normalized-dvr-strict-realization",
+    "lem-coef-finite-dualizing",
     "def-coef-normalized-dvr-tower"
    ],
    "elementary": false
   },
   {
-   "text": "Apply total derived inverse limit to this strict tower. Its Roos triangle is stated using its auxiliary derived evaluation. The localization comparison uniquely identifies that evaluation, its maps and transitions with normalizedDVRTowerEvaluation. Transport the product and triangle; uniqueness of products identifies the product witness with the published one.",
+   "text": "Apply the published total derived inverse limit specification to a complex representing the strict tower. Compare its auxiliary derived evaluation with canonical evaluation using the two factorization isomorphisms through cochain localization. The localization formula for evaluation transitions and naturality identify all transition arrows. Construct the product isomorphism from its component maps and inverses; transport the distinguished Roos triangle and the limit object along these isomorphisms. This works for the published product witness without identifying it with the auxiliary witness.",
    "uses": [
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
@@ -41,15 +42,15 @@
   }
  ],
  "proof_deps": [
-  "def-coef-normalized-dvr-tower",
   "lem-coef-finite-dualizing",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-normalized-dvr-strict-realization",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "First paragraph, inverse-limit assertion and finite coefficient compatibility; strict representative construction expanded from the existing DAG step 1."
+  "place": "First paragraph inverse-limit assertion and finite coefficient compatibility; D6 proof uses K-injective representatives for strict realization and explicit transport of the published Roos triangle."
  },
  "mathlib_searches": [
   {
@@ -138,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-58c4e",
-  "group": "Z6",
-  "result": "fix",
-  "landing": "20261025T124537-L-2065790",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261027T180525-L-3870827",
   "kind": "interface",
-  "note": "independent cc review: delivered 4 modules + 4 node files vs live clone: verbatim def move (diff), item stmt byte-identical, 10 importers compiled rc 0, axioms probe, FiniteBounds import-deletion variants, sorry statements vs ringedStrictTowerHomotopyLimit spec and item conclusions"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "lem-coef-normalized-dvr-strict-realization",
+ "kind": "statement",
+ "title": "Strict completed-coefficient realization of a coherent finite system",
+ "statement": "Fix the prime l, coefficient extension E, scheme X, finite-field datum D, and l unequal to D.p as in [def-coef-normalized-dvr-tower]. Let M_n be arbitrary objects of the finite coefficient derived categories, with semilinear transitions tau_{m,n}: M_m → Res_{m,n} M_n satisfying the unit equation tau_{n,n};U_n=id and the composition equation tau_{r,n};A_{r,m,n}^{-1}=tau_{r,m};Res_{r,m}(tau_{m,n}). There exist an object Z of the derived category of strict completed-coefficient inverse sequences and isomorphisms e_n:ev_n Z ≅ C_n M_n, where C_n denotes completed scalar restriction, such that for every n≤m the actual canonical derived evaluation transition of Z followed by e_n equals e_m followed by C_m(tau_{m,n}) and the canonical completed restriction comparison G_{m,n}(M_n). No normalization condition on the transitions and no inverse-limit assertion are required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Strict representative construction in lem-coef-integral-dualizing-roos-model, expanded using Stacks derived.tex lemma-K-injective (Hom into a K-injective complex is computed in the homotopy category)."
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use completed restriction coherence and the assumed unit and cocycle equations to make K_n=C_n M_n with transition C_m(tau_{m,n});G_{m,n} into an inverse diagram in the completed coefficient derived category. Its identity and composition laws follow by functoriality and naturality.",
+   "uses": [
+    "lem-coef-normalized-dvr-completed-restriction-coherence",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The category of completed-coefficient module sheaves is Grothendieck abelian in the recorded universe. Choose a K-injective complex I_n and an isomorphism Q I_n ≅ K_n for every n. Since localization on homotopy classes into a K-injective target is bijective, each conjugated successor morphism K_{n+1}→K_n has a chain-map representative I_{n+1}→I_n. Choose these representatives and use finite composites to form the strict sequence T. Functor.ofOpSequence and NatTrans.ofOpSequence show that the isomorphisms Q I_n ≅ K_n extend to an isomorphism T⋙Q ≅ K, including every longer arrow.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the sequence of complexes T to a complex C of sequences, with the same differentials degreewise, and set Z=Q C. Compose the canonical exact-derived evaluation factorization at C with the component of T⋙Q ≅ K to define e_n. The localization formula for normalizedDVRTowerTransition says precisely that these factorization maps identify its transition with Q(T.map). Naturality of the sequence isomorphism proves the required square for every n≤m, including the identity case.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-normalized-dvr-completed-restriction-coherence",
+  "def-coef-normalized-dvr-tower",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Strict representative construction in lem-coef-integral-dualizing-roos-model, expanded using Stacks derived.tex lemma-K-injective (Hom into a K-injective complex is computed in the homotopy category)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived category countable inverse tower strictification derived evaluation essentially surjective",
+   "results": "8 hits include essential surjectivity of localization and homotopy-category localization; no simultaneous strict sequence realization.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ofOpSequence\"",
+   "results": "5 hits: Functor.ofOpSequence, its object and successor formulas, NatTrans.ofOpSequence and its component formula. These implement the elementary sequence assembly but do not provide derived strict realization.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedTower|strictification|IsDerivedLimitTriangle",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every countable inverse system of objects in an unbounded derived category admits a strict tower of complexes with compatible evaluation isomorphisms",
+   "results": "8 hits, none states this simultaneous strict realization. Local Mathlib provides IsKInjective.Qh_map_bijective, Functor.ofOpSequence and NatTrans.ofOpSequence; the source library provides exists_iso_Q_obj_of_isKInjective. These are inputs to the proof, not its conclusion.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingRoosModel",
+  "date": "2026-10-28",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-roos-model",
+   "place": "Strict representative construction in lem-coef-integral-dualizing-roos-model, expanded using Stacks derived.tex lemma-K-injective (Hom into a K-injective complex is computed in the homotopy category).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRStrictRealization",
+  "file": "lean/Sheaf/Paper/NormalizedDVRStrictRealization.lean",
+  "declaration": "WeilConjectures.normalizedDVR_strict_realization",
+  "statement": "theorem normalizedDVR_strict_realization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)\n    (M : ∀ n : ℕ, normalizedDVRDerived l E X n)\n    (tau : ∀ {m n : ℕ} (h : n ≤ m), M m ⟶ (normalizedDVRRes l E X h).obj (M n))\n    (hu : ∀ n : ℕ, tau (Nat.le_refl n) ≫\n      (normalizedDVRResUnit l E X n).hom.app (M n) = 𝟙 (M n))\n    (hc : ∀ {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m),\n      tau (le_trans hmn hrm) ≫ (normalizedDVRResComp l E X hrm hmn).inv.app (M n) =\n        tau hrm ≫ (normalizedDVRRes l E X hrm).map (tau hmn)) :\n    ∃ (Z : normalizedDVRDerivedTowers l E X D hl)\n      (e : ∀ n : ℕ, (normalizedDVRTowerEvaluation l E X D hl n).obj Z ≅\n        (normalizedDVRResCompleted l E X D hl n).obj (M n)),\n      ∀ {m n : ℕ} (h : n ≤ m),\n        (normalizedDVRTowerTransition l E X D hl h).app Z ≫ (e n).hom =\n          (e m).hom ≫ (normalizedDVRResCompleted l E X D hl m).map (tau h) ≫\n            (normalizedDVRResCompletedComp l E X D hl h).hom.app (M n)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261027T180525-L-3870827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261027T180525-L-3870827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
