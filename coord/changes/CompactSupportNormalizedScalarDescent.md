@@ -1,0 +1,1 @@
+The item module now publicly imports the two new component theorem modules because its proved conjunction applies their declarations. This is required for the parent theorem body and preserves the original theorem signature; no existing declaration was changed.

@@ -6,6 +6,8 @@ Authors: SHEAF group Q06
 module
 
 public import Sheaf.Paper.CompactSupportNormalizedScalarIsomorphisms
+import Sheaf.Paper.CompactSupportNormalizedScalarDescentUnit
+import Sheaf.Paper.CompactSupportNormalizedScalarDescentTower
 public import Sheaf.Paper.SfScalarExtensionComposition
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Paper.QcqsCompactSupportRealization
@@ -132,6 +134,8 @@ theorem sfCompactSupportNormalizedScalarDescent
           (β M N k).hom.app ((transition l Ω X A M h).obj K) ≫
           (sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω N)).map
             ((associator l Ω X A M N h k).hom.app K)) := by
-  sorry
+  constructor
+  · exact sfCompactSupportNormalizedScalarDescentUnit l K₀ hl c Ω b _hb _hsystem β _hβ
+  · exact sfCompactSupportNormalizedScalarDescentTower l K₀ hl c Ω b _hb _hsystem β _hβ
 
 end WeilConjectures

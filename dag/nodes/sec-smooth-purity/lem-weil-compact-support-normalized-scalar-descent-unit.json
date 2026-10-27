@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-compact-support-normalized-scalar-descent-unit",
+ "kind": "statement",
+ "title": "Unit equation component of normalized compact-support scalar comparisons",
+ "statement": "Prime] (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀)) {X Y : Scheme.{u}} {f : X ⟶ Y} [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (b : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B), sfCompactSupportFiniteIntegralFunctor l K₀ hl c (Coefficient.{u} l Ω A) ⋙ integralTransition l Ω Y A B h ≅ integralTransition l Ω X A B h ⋙ sfCompactSupportFiniteIntegralFunctor l K₀ hl c (Coefficient.{u} l Ω B)) (_hb : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B), SfCompactSupportIntegralBetaSpec l K₀ hl c (Coefficient.{u} l Ω A) (Coefficient.{u} l Ω B) (coefficientInclusion l Ω A B h) (b A B h)) (_hsystem : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω A) X), ((b A B h).hom.app K).hom = sfCompactSupportScalarSystemMap l K₀ hl c (Coefficient.{u} l Ω A) (Coefficient.{u} l Ω B) (coefficientInclusion l Ω A B h) K) (β : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B), sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω A) ⋙ transition l Ω Y A B h ≅ transition l Ω X A B h ⋙ sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω B)) (_hβ : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B) (K : Stage l Ω X A), HEq ((β A B h).hom.app K) ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω B) Y).map ((b A B h).hom.app K.obj))) : (∀ (A : Padic.FiniteCoefficientFields l Ω) (K : Stage l Ω X A), (β A A le_rfl).hom.app K ≫ (sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω A)).map ((unitor l Ω X A).hom.app K) = (unitor l Ω Y A).hom.app ((sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω A)).obj K))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-finite-field-independence.proof.md",
+  "place": "First sentence, decomposition of the unit and tower equations into named components."
+ },
+ "stmt_deps": [
+  "lem-weil-compact-support-normalized-scalar-descent",
+  "lem-weil-compact-support-normalized-scalar-isomorphisms",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "This component is the corresponding unit/tower half of the seven-step whole-system transpose argument recorded in the parent theorem. The unresolved system calculation is isolated here as a strictly smaller statement; the parent combines it with the other component by conjunction.",
+   "uses": [
+    "lem-weil-compact-support-system-transpose-normalization",
+    "lem-weil-system-compact-support-restriction-cocycle",
+    "lem-pur-system-scalar-coherence",
+    "lem-weil-mixed-reduction-unit-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-compact-support-system-transpose-normalization",
+  "lem-weil-system-compact-support-restriction-cocycle",
+  "lem-pur-system-scalar-coherence",
+  "lem-weil-mixed-reduction-unit-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-finite-field-independence.proof.md",
+  "place": "Named decomposition of the unit/tower proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized compact support scalar comparison unit tower equation",
+   "results": "No matching theorem; search only found generic tensor associativity.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_unit_app",
+   "results": "Generic adjunction result, not this statement.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfCompactSupportNormalizedScalarDescent",
+   "results": "Only the parent module and these new components.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNormalizedScalarDescent",
+  "date": "2026-10-28",
+  "group": "T5"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-compact-support-normalized-scalar-descent",
+   "place": "decomposition of parent proof",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportNormalizedScalarDescentUnit",
+  "declaration": "WeilConjectures.sfCompactSupportNormalizedScalarDescentUnit",
+  "file": "lean/Sheaf/Paper/CompactSupportNormalizedScalarDescentUnit.lean",
+  "statement": "theorem sfCompactSupportNormalizedScalarDescentUnit (l : ℕ) [Fact l.Prime] (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀)) {X Y : Scheme.{u}} {f : X ⟶ Y} [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (b : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B), sfCompactSupportFiniteIntegralFunctor l K₀ hl c (Coefficient.{u} l Ω A) ⋙ integralTransition l Ω Y A B h ≅ integralTransition l Ω X A B h ⋙ sfCompactSupportFiniteIntegralFunctor l K₀ hl c (Coefficient.{u} l Ω B)) (_hb : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B), SfCompactSupportIntegralBetaSpec l K₀ hl c (Coefficient.{u} l Ω A) (Coefficient.{u} l Ω B) (coefficientInclusion l Ω A B h) (b A B h)) (_hsystem : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω A) X), ((b A B h).hom.app K).hom = sfCompactSupportScalarSystemMap l K₀ hl c (Coefficient.{u} l Ω A) (Coefficient.{u} l Ω B) (coefficientInclusion l Ω A B h) K) (β : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B), sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω A) ⋙ transition l Ω Y A B h ≅ transition l Ω X A B h ⋙ sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω B)) (_hβ : ∀ (A B : Padic.FiniteCoefficientFields l Ω) (h : A ≤ B) (K : Stage l Ω X A), HEq ((β A B h).hom.app K) ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω B) Y).map ((b A B h).hom.app K.obj))) : (∀ (A : Padic.FiniteCoefficientFields l Ω) (K : Stage l Ω X A), (β A A le_rfl).hom.app K ≫ (sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω A)).map ((unitor l Ω X A).hom.app K) = (unitor l Ω Y A).hom.app ((sfCompactSupportFiniteFunctor l K₀ hl c (Coefficient.{u} l Ω A)).obj K))",
+  "branch": "newtargets-dag",
+  "by": "T5",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261027T180824-L-3905059",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261027T180824-L-3905059",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
