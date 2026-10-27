@@ -33,6 +33,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option linter.style.haveILetI false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 universe t u
@@ -107,7 +108,13 @@ theorem geometricPull_additive
     {B : Sheaf (Scheme.ProEt.topology X) RingCat.{max u (t + 1)}}
     {C : Sheaf (Scheme.ProEt.topology Z) RingCat.{max u (t + 1)}}
     (c : B ⟶ (ringPush.{t, u} f).obj C) : (geometricPull f c).Additive := by
-  sorry
+  have hp : (push f c).Additive := by
+    constructor
+    intro M N a b
+    ext U x
+    rfl
+  letI := hp
+  exact (geometricOrdinaryAdjunction f c).left_adjoint_additive
 
 attribute [instance] geometricPull_additive scalarReductionExtensionAdditive
 
@@ -127,7 +134,10 @@ Source: Stacks 03EK (blueprint: lem-sf-direct-image-reduction-hom-square).
 Proof: Mathlib's pullback is left adjoint to the actual sectionwise pushforward,
 so it preserves all colimits, in particular finite colimits. -/
 theorem completedPull_colimits : PreservesFiniteColimits (geometricPull f D.structureMap) := by
-  sorry
+  letI := SheafOfModules.module_pushforward_isRightAdjoint_of_universes D.structureMap
+  refine ⟨fun J _ _ ↦ ?_⟩
+  exact ((geometricOrdinaryAdjunction f D.structureMap).leftAdjoint_preservesColimits
+    ).preservesColimitsOfShape
 
 /-- The finite constant coefficient inverse-image comparison is an isomorphism,
 so finite-coefficient geometric pullback is left exact.
@@ -145,7 +155,11 @@ Source: Stacks 03EK (blueprint: lem-sf-direct-image-reduction-hom-square).
 Proof: apply colimit preservation of Mathlib's ordinary pullback/pushforward adjunction. -/
 theorem finitePull_colimits (n : ℕ) :
     PreservesFiniteColimits (geometricPull f (finiteStructure l E f n)) := by
-  sorry
+  letI := SheafOfModules.module_pushforward_isRightAdjoint_of_universes
+    (finiteStructure l E f n)
+  refine ⟨fun J _ _ ↦ ?_⟩
+  exact ((geometricOrdinaryAdjunction f (finiteStructure l E f n)).leftAdjoint_preservesColimits
+    ).preservesColimitsOfShape
 
 attribute [instance] completedPull_limits completedPull_colimits
   finitePull_limits finitePull_colimits
