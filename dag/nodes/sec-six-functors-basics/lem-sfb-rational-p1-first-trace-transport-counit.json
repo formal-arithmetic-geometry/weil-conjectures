@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-rational-p1-first-trace-transport-counit",
+ "kind": "statement",
+ "title": "Normalized counit equality for the terminal first projective-line trace",
+ "statement": "Assume the data of the terminal first projective-line trace transport, including explicit invertibility proofs for the ambient counit projection, exchange, second projection, and first projection. With the ambient counit replaced by its canonical counitComponent formula, the displayed trace transport morphism equality in the attached Lean statement holds.",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-completed-endpoints",
+  "def-sfb-diagonal-coefficient-category",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "lem-sfb-rational-p1-section-evaluation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity: normalize the ambient counit, then transport the terminal trace functional before inserting a diagonal class."
+ },
+ "proof": [
+  {
+   "text": "The normalized counit is the remaining categorical trace transport calculation. Expand the twisted projection and canonical counit, cancel tensor-shift and exchange comparisons, apply the Kunneth and trace base-change factorizations, and identify the resulting path with firstTerminalFunctional by coherence and conjugate-adjunction uniqueness.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "lemma-nagata-projective-space-base-change-proper",
+    "det-thm-sf-pf-field-localizing",
+    "lem-sfb-ringed-kunneth-factorizations",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-sfb-diagonal-coefficient-reference",
+    "det-prop-diagonal-tower-coefficients",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "lemma-nagata-projective-space-base-change-proper",
+  "det-thm-sf-pf-field-localizing",
+  "lem-sfb-ringed-kunneth-factorizations",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-sfb-diagonal-coefficient-reference",
+  "det-prop-diagonal-tower-coefficients",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "First identity: normalized counit and trace/path transport calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kunneth factorization transport trace along proper base change for a projective line",
+   "results": "8 hits, including LinearMap.trace_baseChange, Algebra.trace_trace_of_basis and LinearMap.trace_tensorProduct. No sheaf-theoretic trace transport equation.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth projection formula diagonal class trace projective line adjunction contraction",
+   "results": "8 hits including LinearMap.trace_eq_contract and Rep.diagonal_succ_projective. None concerns a terminal functional on derived projective-line kernels.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|trace.*baseChange|First identity in Mathlib, both library roots, DAG and current blueprint",
+   "results": "Read RingedKunnethFactorizations, TraceBaseChangeFirst and SfP1ProjectionTraceTransport. The first is the general factorization used here, the second is integral and assumes its trace square, and the third concerns ordinary finite etale coefficients and coordinate traces. Blueprint search for trace base change returned no imported node.",
+   "date": "2026-10-27",
+   "verdict": "Retain the general factorization and coefficient compatibility; no existing declaration states this rational terminal functional transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1FirstTraceTransportCore",
+  "date": "2026-10-28",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-first-trace-transport",
+   "place": "Normalized counit component of the first identity trace transport.",
+   "via": [
+    "lem-sfb-rational-p1-first-trace-transport-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1FirstTraceTransportCounit",
+  "file": "lean/Sheaf/Paper/RationalP1FirstTraceTransportCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.rationalP1_first_trace_transport_counit",
+  "statement": "theorem rationalP1_first_trace_transport_counit\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (reference : Reference l Y δ family)\n    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))\n    (hM : CategoryTheory.localizingClosure\n      (constantModelBoundedConstructible (coefficient l c).X (ProjectiveLine Y)) M)\n    (hq : IsIso (projectionMap (coefficient l c).X (ProjectiveLine Y ↘ Y)\n      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M)\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (ProjectiveLine Y)) 0).obj\n          (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)))\n    (hb : IsIso ((condensedAmbientExchange (coefficient l c).X (square Y)).app M))\n    (hp : IsIso (twistProjectionMap (coefficient l c).X (secondProjection Y)\n      (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n      (secondLineComparison l c k p hpl Y)\n      ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)))\n    (h₁ : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M\n      (((DerivedCategory.singleFunctor\n        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))) :\n    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map\n      (X := (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n      ((moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map\n        (X := ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗\n          (((DerivedCategory.singleFunctor\n            (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n              (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)))\n          (tensorShiftIso (coefficient l c).X (diagonalSurface Y)\n            (line l c (diagonalSurface Y))\n            ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)).hom ≫\n        @inv _ _ _ _ (twistProjectionMap (coefficient l c).X (secondProjection Y)\n          (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M)) hp ≫\n        (twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).map\n          (by\n            unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward\n            exact @inv _ _ _ _\n              ((condensedAmbientExchange (coefficient l c).X (square Y)).app M) hb)) ≫\n      counitComponent (coefficient l c).X Y (line l c)\n        (diagram l c Y family)\n        ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M) hq =\n    firstTerminalFunctional (coefficient l c).X Y (line l c) (diagram l c Y family) M\n      (((DerivedCategory.singleFunctor\n          (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj\n            (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n      (diagram l c Y family).trace₁ h₁",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T205843-L-1623987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T205843-L-1623987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

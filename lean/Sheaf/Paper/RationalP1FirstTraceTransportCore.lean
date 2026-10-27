@@ -10,6 +10,8 @@ public import Sheaf.Paper.RationalTatePullback
 public import Sheaf.Paper.LocalizingClosure
 public import Sheaf.Paper.DiagonalCoefficientReference
 
+import Sheaf.Paper.RationalP1FirstTraceTransportCounit
+
 /-! # Core equality for the terminal first projective-line trace
 
 Source: the Kunneth and trace base-change calculation in the first rational projective-line
@@ -129,6 +131,13 @@ theorem rationalP1_first_trace_transport_core
       (((DerivedCategory.singleFunctor
           (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
             (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-      (diagram l c Y family).trace₁ h₁ := by sorry
+      (diagram l c Y family).trace₁ h₁ := by
+  obtain ⟨hq, hε⟩ := hε
+  have he : ε = counitComponent (coefficient l c).X Y (line l c)
+      (diagram l c Y family)
+      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj M) hq :=
+    eq_of_heq hε
+  subst ε
+  exact rationalP1_first_trace_transport_counit l c k p hpl Y δ family reference M hM hq hb hp h₁
 
 end AlgebraicGeometry.ProEtale.RationalP1
