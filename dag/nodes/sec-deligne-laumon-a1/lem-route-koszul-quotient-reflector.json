@@ -11,33 +11,152 @@
     "lem-per-adic-heart-pullback-fibres",
     "lem-per-smooth-pullback-support-dimension"
    ],
-   "place": "provisional: the Lean of lem-per-quotient-completed-compositor-unit (its declaration uses) uses CategoryTheory.ConstantCompletion.koszul_quotient_reflector (route sorry with no node, tools/route_nodes.py 2026-10-28)"
+   "place": "Provisional machine-generated route: the downstream constant-completion compositor uses CategoryTheory.ConstantCompletion.koszul_quotient_reflector; the theorem supplies the Koszul/finite-quotient completion identification and reflector laws used before the pullback compositor."
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Koszul and finite-quotient completion are canonically identified, preserving the units; their common functor is the reflector for the local internal-H",
- "statement": "PROVISIONAL (machine-made from the Lean declaration; stage 1 writes it in words): Koszul and finite-quotient completion are canonically identified, preserving the units; their common functor is the reflector for the local internal-Hom completeness condition. Source: Stacks 099L, 099M, 0A0E (blueprint: lem-weil-pbc-constant-completion-equivalence). Proof: apply the ringed Koszul reflector to the global generators, including the empty list. For constant coefficients the Noetherian Koszul augmentation has pro-zero cone. Exact constant sheafification and tensor by a fixed K-flat model preserve this property. The strict-tower derived-limit theorem inverts the augmentation and identifies its unit with the quotient unit. For completed coefficients, restrict to constant coefficients: the finite reductions, strict Koszul tensors and units agree, and restriction identifies total derived limits by the flat exact adjunction on strict towers. Conservativity of exact restriction detects the augmentation isomorphism over the completion as well. Transport the reflector property and the unit-isomorphism criterion across this unit-preserving natural isomorphism.\n\nLean (CategoryTheory.ConstantCompletion.koszul_quotient_reflector):\n```lean\ntheorem koszul_quotient_reflector [IsNoetherianRing A] (b : Bool) (r : ℕ) (a : Fin r → A)\n    (ha : Ideal.span (Set.range a) = I) :\n    ∃ K : KoszulPresentation J A I b r a,\n      (∃ e : koszulCompletion J A I K ≅ completion J A I b,\n        ∀ M : D (coefficients J A I b), koszulUnit J A I K M ≫ e.hom.app M =\n          (completionUnit J A I b).app M) ∧\n      (∀ M : D (coefficients J A I b),\n        IsComplete (finiteMap J A I b 0) ((completion J A I b).obj M)) ∧\n      (∀ (M L : D (coefficients J A I b)), IsComplete (finiteMap J A I b 0) L →\n        Function.Bijective (fun f : (completion J A I b).obj M ⟶ L ↦\n          (completionUnit J A I b).app M ≫ f)) ∧\n      (∀ M : D (coefficients J A I b),\n        IsIso ((completionUnit J A I b).app M) ↔ IsComplete (finiteMap J A I b 0) M)\n```",
+ "statement": "Let \\(\\mathcal C\\) be a small category with Grothendieck topology \\(J\\), let \\(A\\) be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let \\(I\\subseteq A\\) be an ideal. Let \\(\\underline A\\) be the constant sheaf of rings [def-weil-pbc-constant-sheaf], put \\(S_n=\\underline{A/I^{n+1}}\\), and let \\(B=\\varprojlim_n S_n\\) with its quotient projections [def-pur-sheaf-inverse-limit, def-sfb-constant-completion-coefficient-data]. For \\(b\\in\\{\\mathrm{false},\\mathrm{true}\\}\\), let \\(\\mathcal O_b\\) be \\(\\underline A\\) when \\(b=\\mathrm{false}\\) and \\(B\\) when \\(b=\\mathrm{true}\\); write \\(\\operatorname{coefficients}(J,A,I,b)=\\mathcal O_b\\), \\(\\operatorname{finiteMap}(J,A,I,b,n):\\mathcal O_b\\to S_n\\), and \\(\\operatorname{completion}(J,A,I,b)\\) with unit \\(\\operatorname{completionUnit}(J,A,I,b)\\) for the normalized strict quotient-tower completion data [def-pur-strict-quotient-completion-data, def-sfb-constant-completion-coefficient-data]. Use the standard unbounded derived category \\(D(\\mathcal O_b)\\) of sheaves of modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and let \\(\\operatorname{IsComplete}(q,M)\\) denote local derived completeness for the kernel of a ring-sheaf quotient \\(q\\) [def-sfb-quotient-kernel-completeness].\n\nLet \\(r\\geq0\\), let \\(a:\\operatorname{Fin}(r)\\to A\\) (allowing the empty list), and assume \\(\\operatorname{Ideal.span}(\\operatorname{Set.range}a)=I\\). Let \\(\\operatorname{KoszulPresentation}(J,A,I,b,r,a)\\) be the strict derived Koszul-limit presentation for \\(\\mathcal O_b\\) and the images of the entries of \\(a\\), and write \\(\\operatorname{koszulCompletion}(J,A,I,K)\\) and \\(\\operatorname{koszulUnit}(J,A,I,K,-)\\) for its completion functor and normalized unit [def-sf-constant-coefficient-koszul-completion-data]. Then there exist a presentation \\(K:\\operatorname{KoszulPresentation}(J,A,I,b,r,a)\\) and an isomorphism of functors\n\\[\ne:\\operatorname{koszulCompletion}(J,A,I,K)\\xrightarrow{\\sim}\\operatorname{completion}(J,A,I,b)\n\\]\nsuch that, for every \\(M\\in D(\\mathcal O_b)\\),\n\\[\n\\operatorname{koszulUnit}(J,A,I,K,M)\\,;\\,e_M=\\operatorname{completionUnit}(J,A,I,b)_M.\n\\]\nMoreover, every \\(\\operatorname{completion}(J,A,I,b)(M)\\) satisfies \\(\\operatorname{IsComplete}(\\operatorname{finiteMap}(J,A,I,b,0),\\operatorname{completion}(J,A,I,b)(M))\\). If \\(L\\) satisfies \\(\\operatorname{IsComplete}(\\operatorname{finiteMap}(J,A,I,b,0),L)\\), precomposition with the completion unit is a bijection\n\\[\n\\operatorname{Hom}(\\operatorname{completion}(J,A,I,b)(M),L)\\xrightarrow{\\sim}\\operatorname{Hom}(M,L).\n\\]\nFor every \\(M\\), the completion unit is an isomorphism if and only if \\(\\operatorname{IsComplete}(\\operatorname{finiteMap}(J,A,I,b,0),M)\\).",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "lem-per-quotient-completed-compositor-unit: the Lean of this node (its declaration uses) reaches CategoryTheory.ConstantCompletion.koszul_quotient_reflector, a sorry on the sorry route of batch2, batch3, batch4, batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/ConstantCompletionKoszulReflector.lean, declaration CategoryTheory.ConstantCompletion.koszul_quotient_reflector (module Sheaf.Paper.ConstantCompletionKoszulReflector, lines 95-122, proof `sorry`)"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-sf-constant-coefficient-koszul-completion-data",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-quotient-kernel-completeness"
+ ],
+ "proof": [
+  {
+   "text": "For the given finite list a, the constant-coefficient completion data define the coefficient sheaf coefficients J A I b, the quotient maps finiteMap and quotient-tower completion completion with its prescribed unit, and the strict Koszul presentation whose generators are the images of a. Choose K to be this RingedKoszulLimitPresentation; its koszulCompletion and koszulUnit are exactly the functor and unit in the statement. The empty-list case is the empty tensor and is included by the same construction.",
+   "uses": [
+    "def-sfb-constant-completion-coefficient-data",
+    "def-pur-strict-quotient-completion-data",
+    "def-sf-constant-coefficient-koszul-completion-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, construction of the strict Koszul presentation and its normalized degree-zero unit"
+   }
+  },
+  {
+   "text": "On the constant coefficient sheaf, the Noetherian hypothesis and ha identify the ideal generated by the images of a with I. The finite Koszul augmentation to the quotient tower therefore has a pro-zero cone in the derived category: every level is killed by a sufficiently far transition. This applies also for r=0, when both towers are constant and the cone is zero.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, Noetherian Koszul augmentation and pro-zero cone"
+   }
+  },
+  {
+   "text": "Apply exact constant sheafification followed by the flat scalar extension along \\(\\underline A\\to\\mathcal O_b\\) to the pro-zero cone of Step 2. For b=false this map is the identity; for b=true the constant-completion equivalence states that \\(B\\) is flat over \\(\\underline A\\) and that the projections induce \\(B/I^{n+1}B\\cong\\underline{A/I^{n+1}}=S_n\\), so \\(\\mathcal O_b\\otimes_{\\underline A}\\underline{A/I^{n+1}}\\cong S_n\\) and \\(\\mathcal O_b\\otimes_{\\underline A}\\underline{Q_{n+1}(A)}\\) is the strict Koszul tower of the images of a (reindexing the Koszul exponent n+1 against the quotient index n). The flat-constant-tensor pro-zero lemma, applied with \\(R=\\underline A\\to\\mathcal O_b\\), says that tensoring by any K-flat model P preserves pro-zero cones, induces an isomorphism on total right derived inverse limits, and carries the compatible augmentation maps P→Rlim to each other. Thus the strict Koszul and finite-quotient towers have canonically isomorphic derived-limit objects, compatibly with the units, over either coefficient sheaf coefficients J A I false or coefficients J A I true.",
+   "uses": [
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion), proof: pro-isomorphism of {K_n} and {Λ/I^n} transported to K ⊗^L"
+   }
+  },
+  {
+   "text": "The strict-tower derived-limit comparison identifies the derived limit of the finite reductions with the normalized total right derived inverse limit, and carries the Koszul augmentation to the quotient completion unit. The constant-completion equivalence records this identification for both the constant and completed coefficient sheaves, with the finite transition maps respected. Hence there is an isomorphism e : koszulCompletion J A I K ≅ completion J A I b satisfying koszulUnit J A I K M ≫ e.hom.app M = (completionUnit J A I b).app M for every M.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099M and 0A0E, normalized derived-limit comparison and unit equation"
+   }
+  },
+  {
+   "text": "For the completed branch, apply the constant-completion equivalence directly. It identifies restriction along the canonical map from the constant sheaf to B with an equivalence of complete derived subcategories, and its finite-reduction comparison identifies the Koszul and quotient derived limits while respecting their units. Thus the same unit-preserving e exists for b=true; exact restriction is conservative, so the augmentation isomorphism and completeness criterion transport from the constant branch.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099I, 099L and 099M, restriction to constants and conservativity"
+   }
+  },
+  {
+   "text": "The ringed Koszul reflector gives, for every locally complete L, a bijection by precomposition with koszulUnit. Conjugating this bijection by e gives the displayed bijection by precomposition with completionUnit. At n=0, the kernel of finiteMap is I times O_b: for b=false this is the sheafification of the quotient kernel, and for b=true the canonical isomorphism B/IB isomorphic to the constant sheaf A/I from the constant-completion equivalence identifies the kernel with I times B. By the definition of IsComplete for a quotient kernel, this is exactly the local completeness predicate. Taking L=completion(M) gives the unit-isomorphism criterion; naturality and uniqueness follow from injectivity of the Hom bijections.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-sfb-quotient-kernel-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B, 099L and 0A0E, reflector universal property and unit-isomorphism criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-strict-quotient-completion-data",
+  "def-sf-constant-coefficient-koszul-completion-data",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-sfb-quotient-kernel-completeness",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B, 099I, 099L, 099M and 0A0E"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "Koszul and finite quotient completion are canonically identified and the completion is a reflector for derived complete objects",
+   "results": "8 hits: AdicCompletion.ofLinearEquiv_apply, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.ofLinearEquiv, AdicCompletion.of_bijective, AdicCompletion.of_bijective_iff, AdicCompletion.ofAlgEquiv, AdicCompletion.of_ofLinearEquiv_symm, IsAdicComplete.toIsPrecomplete; none states the sheaf-derived Koszul/quotient reflector",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Reflective, derived completion reflector",
+   "results": "0 hits; service returned Unknown identifier `derived`",
+   "date": "2026-10-27",
+   "verdict": "unavailable"
+  },
+  {
    "tool": "grep",
-   "query": "grep -rlw 'koszul_quotient_reflector' lean/.lake/packages/mathlib/Mathlib/",
-   "results": "none",
-   "date": "2026-10-28",
-   "verdict": "no match",
-   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+   "query": "koszul.*quotient.*reflector|derived.*completion.*reflector [Mathlib/CategoryTheory]",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Koszul completion functor is naturally isomorphic to finite quotient completion and satisfies the reflector Hom bijection",
+   "results": "8 hits: CategoryTheory.Quotient.lift.isLift, Profinite.toProfiniteAdjToCompHaus, UniformSpaceCat.adj, DerivedCategory.quotientCompQhIso, UniformSpaceCat.completionFunctor, HomotopyCategory.quotient_map_mem_quasiIso_iff, HomologicalComplexUpToQuasiIso.quotientCompQhIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; none states this theorem",
+   "date": "2026-10-27",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer",
@@ -60,5 +179,49 @@
   "by": "maintainer",
   "date": "2026-10-28",
   "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-route-koszul-quotient-reflector",
+  "worker": "stage1",
+  "summary": "Repaired the machine-made item into a self-contained natural-language theorem with explicit coefficient, quotient, Koszul and completeness data. Removed the completed-fiber citation because it concerns scheme AsSmall pro-etale presentations rather than the abstract site; the constant-completion equivalence supplies the completed-branch unit-preserving comparison. Added the missing constant-sheaf and inverse-limit dependencies, and made the kernel identification at n=0 explicit in the final step.",
+  "blueprint": "The steps realize the provisional route attached to lem-per-smooth-pullback-t-exact: construction of the Koszul presentation, Noetherian pro-zero augmentation, flat/sheaf transport, normalized quotient/Koszul unit comparison, restriction to completed coefficients, and transport of the reflector universal property.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Provides the generic ringed-site Koszul reflection and Hom bijection; the Deligne–Laumon unit has no local-unit lemma in its own unit."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+    "why": "Provides the Noetherian finite-list Koszul augmentation pro-zero cone used to compare finite quotients; no node in this unit supplies commutative-algebra Koszul control."
+   },
+   {
+    "node": "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+    "why": "Provides preservation of pro-zero cones under flat constant sheafification/tensor; this is coefficient infrastructure outside the unit."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Provides the constant/completed coefficient equivalence and normalized finite-reduction/Koszul unit comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Provides the total derived inverse-limit comparison for pro-zero strict towers."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NC-b67ec447c",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-b67ec447c (reviewer sub-agent of L); spot-checked: I read the item, all 14 cited node statements, the Lean signature at ConstantCompletionKoszulReflector.lean:95-122, Stacks 0A0E (algebraization.tex l.1091) and 099M (proetale.tex l.4305). The NL statement matches the Lean clause by clause, with no hypothesis added or dropped. The route is 099M's proof: Noetherian Koszul pro-zero cone, then flat constant tensor, then the strict-tower Rlim iso. The b=true branch goes through lem-weil-pbc-constant-completion-equivalence (flatness, B/I^nB≅A/I^n, and the unit-preserving Koszul/quotient iso). Step 6: ker(finiteMap 0) is exactly (b_i)O_b in both branches, by exact sheafification and B/IB≅A/I. So IsComplete is literally the reflector's local condition, and conjugating by e gives the Hom bijection and the iff. Koszul tower check: the def-weil-pbc-ringed-koszul-system Q_n (exponent n+1) is the reflector's Q_m with m=n+1, and matches S_n=A/I^{n+1}. Edge cases checked: r=0/I=0 (O[1/0]=0, unit always iso), I=A, zero ring. No cycle: the equivalence node's proof does not cite the item. No new nodes. The 5 tool_uses are proper-base-change coefficient infrastructure and are accepted. Fix (C1/E1): step 3 applied the flat-constant-tensor lemma for R→B without citing the flatness and quotient clauses of lem-weil-pbc-constant-completion-equivalence. Step 3 now cites that node, states the reindexing, and its source is corrected to proetale.tex Tag 099M. proof_deps is unchanged. Advisory: the equivalence node already carries the Koszul/quotient identification clause, and the item is its route corollary combined with the reflector.; 1 file(s) fixed by the reviewer"
  }
 }
