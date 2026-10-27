@@ -1,15 +1,11 @@
 # Work queue
 
-85 items; claim with `tools/claim.py next <group> [--stage N]`.
+83 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (2 clusters, 1191 modules)
+## Rework: quarantined by the upstream sync (0 clusters, 1178 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
-| item (root) | modules | other roots | cause of the root |
-|---|---|---|---|
-| `Sheaf.Paper.ConstructibleRingLeftRefinement` | 1 |  | error: Sheaf/Paper/ConstructibleRingLeftRefinement.lean:168:11: failed to synthesize | Mono ((R.left d (RingStage.integral L)).hom.app (SX.functor.obj K) ≫ Hd.m |
-| `Sheaf.Paper.TraceBoundedQuotientStalkRealization` | 1 |  | error: Sheaf/Paper/TraceBoundedQuotientStalkRealization.lean:311:8: stuck at solving universe constraint | u + 1 =?= max (u + 1) ?u.37 | while trying to unify | |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 1, stage 3 1 items.
 
