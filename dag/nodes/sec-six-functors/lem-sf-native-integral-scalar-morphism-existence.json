@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-native-integral-scalar-morphism-existence",
+ "kind": "statement",
+ "title": "Existence of the factorized integral scalar morphism",
+ "status": "split",
+ "statement": "Fix the data of lem-sf-native-integral-scalar-morphism. For each finite coefficient index E, there exists a natural morphism tau between the two finite-stage compact-support functors after integral-to-rational localization, and for every finite-Tor integral input K its native-section component factors as b_K followed by PurCompactSupport.comparison(change E,c) and d_K, with b_K and d_K isomorphisms.",
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-rationalization-karoubi"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
+ },
+ "proof": [
+  {
+   "text": "Construct the natural transformation by restricting the StageAction inclusion comparison to integral objects, extending through rationalization, and transporting along the target and source realization and operation maps. The resulting component is the displayed b/comparison/d factorization.",
+   "uses": [
+    "def-sf-locally-finite-adic-compact-support-data",
+    "def-sf-constructible-exceptional-coefficient-construction-data",
+    "def-pur-integral-compact-support-coefficient-data",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; original finite-comparison steps 4 and 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; strict decomposition of the parent construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with compactly supported derived pushforward for finite adic coefficient fields and locally finite algebraic closure coefficients",
+   "results": "8 hits: CompactlySupportedContinuousMap.compLinearMap, AdicCompletion.tensor_map_id_left_eq_map, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, PresheafOfModules.pushforward_obj_obj, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforward_map_app_apply', SheafOfModules.pushforwardSections_coe. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support.*scalar|scalar.*compact.support",
+   "results": "0 hits: . ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation obtained by extension of scalars commutes with compact support and coefficient field inclusions",
+   "results": "8 hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.extendScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.extendScalars_id_comp, ModuleCat.ExtendRestrictScalarsAdj.Unit.map. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of completed finite p-adic integral coefficient sheaves into locally finite algebraic closure valued functions commutes with inverse image",
+   "results": "8 hits: PadicAlgCl.instCoePadic, CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp, CondensedSet.LocallyConstant.functorFullyFaithful, Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_symm_apply, Padic.adicCompletionEquiv, CategoryTheory.Sheaf.imageι_val. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CommRingCat",
+   "results": "4 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.Modules.sheafComposePushforwardComp, AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "grep",
+   "query": "integralCoefficientSheaf|completedIntegralCommRing|locallyFiniteFunctions",
+   "results": "0 hits: . ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportIntegralScalarMorphism",
+  "date": "2026-10-28",
+  "group": "D7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-integral-scalar-morphism",
+   "place": "strict proof decomposition of the parent node",
+   "via": [
+    "lem-sf-native-integral-scalar-morphism"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismExistence",
+  "file": "lean/Sheaf/Paper/NativeCompactSupportIntegralScalarMorphismExistence.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_integral_scalar_morphism_exists",
+  "statement": "theorem native_integral_scalar_morphism_exists [G : NativeGeometry.{u} l]\n    (source : Realization l X) (target : Realization l Y)\n    (stage : StageAction l D hl P c)\n    (change : ∀ E : Index l (PadicAlgCl l),\n      PurCompactSupport.Change (PurCompactSupport.completed l\n        (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (hs : ∀ E, (change E).map X = (source.coefficient E).integralMap l X)\n    (ht : ∀ E, (change E).map Y = (target.coefficient E).integralMap l Y)\n    (E : Index l (PadicAlgCl l)) :\n    ∃ tau : sfRationalConstructibleLocalization l\n        (Coefficient l (PadicAlgCl l) E) X ⋙\n        finiteSourceAux l D hl P c target stage E ⟶\n      sfRationalConstructibleLocalization l\n        (Coefficient l (PadicAlgCl l) E) X ⋙\n        finiteTargetAux l c source E,\n      ∀ K : finiteTorConstructibleIntegralCategory l\n          (Coefficient l (PadicAlgCl l) E) X,\n        ∃ (b : (sections l Y).mapDerivedCategory.obj\n              ((sfRationalConstructibleLocalization l\n                (Coefficient l (PadicAlgCl l) E) X ⋙\n                finiteSourceAux l D hl P c target stage E).obj\n                  ((PurCompactSupport.finiteTorIntegralInclusion l\n                    (Coefficient l (PadicAlgCl l) E) X).obj K)) ≅\n            (PurCompactSupport.image (PurCompactSupport.completed l\n              (Coefficient l (PadicAlgCl l) E)) c ⋙\n              pbcDerivedExtend ((change E).map Y)).obj K.obj)\n          (d : (pbcDerivedExtend ((change E).map X) ⋙\n              PurCompactSupport.image (nativeCoefficients l) c).obj K.obj ≅\n            (sections l Y).mapDerivedCategory.obj\n              ((sfRationalConstructibleLocalization l\n                (Coefficient l (PadicAlgCl l) E) X ⋙\n                finiteTargetAux l c source E).obj\n                  ((PurCompactSupport.finiteTorIntegralInclusion l\n                    (Coefficient l (PadicAlgCl l) E) X).obj K))),\n          (sections l Y).mapDerivedCategory.map\n              (tau.app ((PurCompactSupport.finiteTorIntegralInclusion l\n                (Coefficient l (PadicAlgCl l) E) X).obj K)) =\n            b.hom ≫ (PurCompactSupport.comparison (change E) c).app K.obj ≫ d.hom",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T205907-L-1630480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T205907-L-1630480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

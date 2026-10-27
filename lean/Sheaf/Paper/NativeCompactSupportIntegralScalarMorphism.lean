@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.LocallyFiniteAdicCompactSupportData
 
+import Sheaf.Paper.NativeCompactSupportIntegralScalarMorphismNormalization
+
 /-! # Integral scalar-mate steps for native compact support -/
 
 @[expose] public noncomputable section
@@ -153,6 +155,15 @@ theorem native_integral_scalar_morphism [G : NativeGeometry.{u} l]
             b.hom ≫ (PurCompactSupport.comparison (change E) c).app K.obj ≫ d.hom) ∧
         IntegralComponent l D hl P c source target change E K
           (tau.app ((PurCompactSupport.finiteTorIntegralInclusion l
-            (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)) := by sorry
+            (Coefficient.{u} l (PadicAlgCl l) E) X).obj K)) := by
+  obtain ⟨tau, hfac⟩ := native_integral_scalar_morphism_exists l D hl P c
+    source target stage change hs ht E
+  refine ⟨tau, ?_⟩
+  intro K
+  refine ⟨?_, ?_⟩
+  · exact hfac K
+  · simpa only [IntegralComponent] using
+      (native_integral_scalar_morphism_normalization l D hl P c source target stage
+        change hs ht E tau hfac K)
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
