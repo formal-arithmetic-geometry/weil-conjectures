@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-qbar-verdier-internal-hom-universal",
+ "kind": "lemma",
+ "title": "Finite-origin evaluation transpose descends to common-stage Hom groups",
+ "statement": "theorem internal_hom_universal_of_comparison\n    (B : Duality D l hl Ω X)\n    (permitted : ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω X,\n      commonStageHomPairs l Ω X (op K, B.omega))\n    (_comparison : B.duality.dual ≅ homDual l Ω X B.omega permitted)\n    (hproperties : DualityProperties D l hl Ω X B.val) :\n    ∀ (K P : generalAlgebraicallyClosedConstructibleCategory l Ω X),\n      Function.Bijective (fun h : P ⟶ B.duality.dual.obj (op K) ↦\n        (CoefQbarTensor D l hl Ω X).map (Prod.mkHom (𝟙 K) h) ≫ B.evaluation K)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph (thm-coef-qbar-verdier); formal expansion of retained proof step 5, tensor-Hom adjunction and actual internal Hom; detailed retained argument: dag/nodes/sec-six-functors/thm-coef-qbar-verdier.json, original proof steps"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose a common compositum representative for K, P and every morphism. The finite evaluation transpose is bijective there, and the normalized evaluation square makes the forward and inverse maps invariant under scalar extension; hence they descend to inverse maps on the common-stage Hom groups.",
+   "uses": [
+    "lem-coef-rational-operations",
+    "lem-coef-integral-finite-extension",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-integral-finite-extension",
+  "lem-coef-rational-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal categorical expansion of the retained common-stage argument, retained proof step 5, tensor-Hom adjunction and actual internal Hom"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent finite-stage Verdier dualities, internal Hom evaluations, dualizing objects and exceptional adjunctions descend to the pair category over an algebraic closure",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.closedCounit\", \"CategoryTheory.Pi.closedCounit\", \"CategoryTheory.Adjunction.derived\", \"FGModuleCat.FGModuleCatDual\", \"FGModuleCat.rightDual\", \"FGModuleCat.exactPairing\", \"FGModuleCat.FGModuleCatDual_coe\", \"FGModuleCat.FGModuleCatDual_obj\"], \"note\": \"\", \"digest\": \"1ab70b1bb79f4957\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant Verdier duality on a filtered common-stage coefficient category from coherent finite coefficient dualities",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.isCofiltered_op_of_isFiltered\", \"CategoryTheory.IsFilteredOrEmpty.isSiftedOrEmpty\", \"CategoryTheory.IsFiltered.isSifted\", \"CategoryTheory.AB5Star\", \"CategoryTheory.isFiltered_of_isCofiltered_op\", \"CategoryTheory.isCofilteredOrEmpty_op_of_isFilteredOrEmpty\", \"CategoryTheory.isCofiltered_of_isFiltered_op\", \"CategoryTheory.isFiltered_op_of_isCofiltered\"], \"note\": \"\", \"digest\": \"2c3d936545c8526c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism.adjunction",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.StageSystem.Morphism.adjunction'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefQbarVerdier|commonStageHomPairs|SfClassDuality",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHom",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-qbar-verdier-internal-hom",
+   "place": "retained proof step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomUniversal",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierInternalHomUniversal.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.internal_hom_universal_of_comparison",
+  "statement": "theorem internal_hom_universal_of_comparison\n    (B : Duality D l hl Ω X)\n    (permitted : ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω X,\n      commonStageHomPairs l Ω X (op K, B.omega))\n    (_comparison : B.duality.dual ≅ homDual l Ω X B.omega permitted)\n    (hproperties : DualityProperties D l hl Ω X B.val) :\n    ∀ (K P : generalAlgebraicallyClosedConstructibleCategory l Ω X),\n      Function.Bijective (fun h : P ⟶ B.duality.dual.obj (op K) ↦\n        (CoefQbarTensor D l hl Ω X).map (Prod.mkHom (𝟙 K) h) ≫ B.evaluation K)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T151744-L-1203599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T151744-L-1203599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
