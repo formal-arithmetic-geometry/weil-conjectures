@@ -7906,6 +7906,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.NatIso
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.PreservesKFlatComplexesCriterion
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
@@ -13038,6 +13039,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarEllAdicReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalComp
@@ -13099,6 +13101,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.IntegralReductionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStarBoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Profinite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
