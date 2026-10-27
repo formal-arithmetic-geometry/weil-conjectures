@@ -765,7 +765,7 @@ include ℓ k
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
@@ -774,7 +774,7 @@ form a monoidal subcategory of
 `ℚ̄_ℓ,X` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
 is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
@@ -782,8 +782,10 @@ instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
   { prop_unit := boundedConstructible_tensorUnit _ X.left
     prop_tensor _ _ hK hL :=
       boundedConstructible_tensorObj (tensorHypotheses_padicAlgClRingObj ℓ) hK hL }
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidal_boundedConstructible
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
@@ -791,12 +793,14 @@ are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a
 geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
   ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_padicAlgClRingObj ℓ) X
     (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ j ⟨A, hA⟩)
     hK hL⟩
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the
@@ -868,7 +872,7 @@ variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves form a monoidal subcategory of
@@ -876,7 +880,7 @@ set_option linter.overlappingInstances false in
 stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It is false for a
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidal_boundedConstructible
+theorem isMonoidal_boundedConstructible
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
@@ -886,21 +890,25 @@ instance isMonoidal_boundedConstructible
   { prop_unit := boundedConstructible_tensorUnit _ X.left
     prop_tensor _ _ hK hL :=
       boundedConstructible_tensorObj (tensorHypotheses_continuousMapRingObj ℓ E) hK hL }
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidal_boundedConstructible
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6;
 Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric
 point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-instance isMonoidalClosed_boundedConstructible
+theorem isMonoidalClosed_boundedConstructible
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
   ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_continuousMapRingObj ℓ E) X
     (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
     hK hL⟩
+set_option linter.overlappingInstances false in
+attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full
@@ -976,7 +984,7 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves form a monoidal subcategory of
@@ -991,7 +999,7 @@ instance isMonoidal_boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal :=
   sorry
 
--- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
+-- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves are stable under the derived hom
