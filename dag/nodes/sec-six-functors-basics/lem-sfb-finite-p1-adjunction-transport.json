@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-finite-p1-adjunction-transport",
+ "kind": "statement",
+ "title": "Intrinsic inverse-image coordinates and invertible mates",
+ "statement": "For a finite commutative ring A, schemes X,S and an isomorphism e:X≅P¹_S over f, explicitly construct the comparison from fixed-scalar realization on S followed by actual intrinsic derived pullback to the projection inverse image followed by e inverse image and realization on X. In general, for adjunctions L⊣R and L′⊣R′, equivalences F:C→C′ and H:D→D′ and an isomorphism p:F L′≅L H, there is q:H R′≅R F such that unit′ at F(M), followed by R′(p_M) and q at L(M), equals F(unit_M) for every M.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), finite coefficient identification before the system splitting"
+ },
+ "stmt_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "sk-lem-geo-p1-cohomology",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-finite-upper-star",
+  "sk-d-lines"
+ ],
+ "proof": [
+  {
+   "text": "Identify the actual constant-ring pushforward with the intrinsic constant-module direct image using the inverse-image ring adjunction. Uniqueness of left adjoints supplies native pullback comparison. Derive it and compose the inverse-image composition and exact/left-derived comparisons along e and the projection.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "sk-lem-geo-p1-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse of the mate of p. It is invertible by the equivalence-mate theorem. Postcompose unit_mateEquiv with its inverse and cancel.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "sk-lem-geo-p1-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); D2 constructs normalized coefficient coordinates and transports adjunctions, allowing the existential inverse-image comparison to be adjusted on the tensor unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of scalar extension of a roots of unity module represents additive maps from the roots sheaf",
+   "results": "PresheafOfModules.sheafify, sheafification, toSheafify and toSheafify_app_apply. These supply the generic associated-module adjunction; no project-specific normalized coordinate statement.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing generic sheafification adjunction and library root universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction.homEquiv, homEquiv_apply, homEquiv_counit and their naturality infrastructure. Local reading found finiteTateLine_universal, proLineHomEquiv, sfIntrinsicConstantModuleAdjunction.",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction ingredients, used in the proofs; no exact finite-coordinate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRootProTensor|sfIntrinsicRealizationUnit|unit_mateEquiv",
+   "results": "Mathlib has unit_mateEquiv in CategoryTheory/Adjunction/Mates. The root tensor and realization-unit names are project definitions. Local reading also found the proved nativePullRealization and linePullRealization in DiagonalTraceUnitArrowComparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the mate identity and the existing native pullback construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), identification of the finite coefficient unit and Tate line with their ordinary derived presentations",
+   "via": [
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1AdjunctionTransport",
+  "file": "lean/Sheaf/Paper/FiniteP1AdjunctionTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteAdjunctionCoordinates",
+  "statement": "theorem finiteAdjunctionCoordinates\n    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']\n    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}\n    (a : L ⊣ R) (b : L' ⊣ R') (F : C ⥤ C') (H : D ⥤ D')\n    [F.IsEquivalence] [H.IsEquivalence] (p : F ⋙ L' ≅ L ⋙ H) :\n    ∃ q : H ⋙ R' ≅ R ⋙ F,\n      ∀ M, b.unit.app (F.obj M) ≫ R'.map (p.hom.app M) ≫\n        q.hom.app (L.obj M) = F.map (a.unit.app M)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteNativePullCoordinate",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteProjectionPullCoordinate",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteAdjunctionCoordinates"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 5 new modules vs node lem-sfb-finite-p1-coefficient-adjunction-coordinates and new nodes; Kummer consumer adaptation vs published original timed concurrently (48.5/45.9 s vs 16.6 s)"
+ }
+}

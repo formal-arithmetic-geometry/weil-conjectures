@@ -1,12 +1,15 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group F7
+Authors: SHEAF groups F7 and D2
 -/
 module
 
-public import Sheaf.Paper.TowerP1CoefficientCoordinates
-public import Sheaf.AlgebraicGeometry.GeoP1Cohomology
+public import Sheaf.Paper.FiniteP1CoefficientCoordinateDefinitions
+import Sheaf.Paper.FiniteP1AdjunctionTransport
+import Sheaf.Paper.FiniteP1CoefficientExistence
+import Sheaf.Paper.FiniteP1UnitAdjustment
+import Sheaf.AlgebraicGeometry.FiniteP1UnitOnPullback
 
 /-! # Finite coefficient and adjunction coordinates
 
@@ -20,48 +23,27 @@ set_option autoImplicit false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
+attribute [local irreducible] Padic Padic.coefficientExtensionIntegers
 universe u
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The inverse of the constant-section-normalized coefficient word.
-Source: diagonal-tower trace (1), constant coefficient identification
-(blueprint: lem-sfb-finite-p1-coefficient-adjunction-coordinates). -/
-def finiteUnitCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
-    (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
-    (c : SpTowerP1.CoefficientCoordinates l E n T hT) :
-    (SpTowerShriek.Ev l E T n).obj (unit T (Arings l E T)) ≅
-      (Scheme.sfIntrinsicModuleEquivalence T (SpTowerShriek.R l E n)).functor.mapDerivedCategory.obj
-        (geoP1Unit (FiniteRing l E n) T) :=
-  (SpTowerP1.nuSingle l E n T _ ≪≫
-    (DerivedCategory.singleFunctor _ 0).mapIso c.unit ≪≫
-    (((SpTowerShriek.ev l E T n).mapDerivedCategorySingleFunctor 0).app _).symm).symm
+private def finiteGeoUnitIso (A : Type (u + 1)) [CommRing A] [Finite A]
+    (T : Scheme.{u}) :
+    geoP1Unit A T ≅ 𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology T)
+      (ModuleCat.{u + 1} A))) :=
+  ((comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategorySingleFunctor 0).app
+      (Etale.ordinaryFiniteConstant A T) ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso
+      (asIso (Functor.OplaxMonoidal.η (comparisonUpperStar (ModuleCat.{u + 1} A) T))) ≪≫
+    DerivedCategory.singleFunctorObjUnitIso _
 
-/-- Realize a fixed-scalar object on P¹ on an isomorphic scheme X.
-Source: diagonal-tower trace (1), transport over the base
-(blueprint: lem-sfb-finite-p1-coefficient-adjunction-coordinates). -/
-abbrev finiteOverRealization (n : ℕ) [Finite (SpTowerShriek.R l E n)]
-    {X S : Scheme.{u}} (e : X ≅ ProjectiveLine S) :=
-  geoP1Pullback (FiniteRing l E n) e.hom ⋙
-    (Scheme.sfIntrinsicModuleEquivalence X (SpTowerShriek.R l E n)).functor.mapDerivedCategory
-
-/-- The normalized source comparison, including pullback along e.
-Source: diagonal-tower trace (1), coefficient units
-(blueprint: lem-sfb-finite-p1-coefficient-adjunction-coordinates). -/
-def finiteOverUnitCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]
-    {X S : Scheme.{u}} (e : X ≅ ProjectiveLine S)
-    {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}
-    (c : SpTowerP1.CoefficientCoordinates l E n X hX) :
-    (SpTowerShriek.Ev l E X n).obj (unit X (Arings l E X)) ≅
-      (finiteOverRealization l E n e).obj (geoP1Unit (FiniteRing l E n) (ProjectiveLine S)) :=
-  finiteUnitCoordinate l E n X c ≪≫
-    (Functor.mapDerivedCategory
-      (Scheme.sfIntrinsicModuleEquivalence X (SpTowerShriek.R l E n)).functor).mapIso
-      (geoP1UnitPullback (FiniteRing l E n) e.hom).symm
+attribute [local irreducible] finiteNativePullCoordinate finiteProjectionPullCoordinate
+  finiteGeoUnitIso finiteUnitCoordinate finiteOverUnitCoordinate
 
 /-- Finite coordinate comparisons preserve the ordinary adjunction and the
 normalized coefficient pullback. This statement contains no Chern class.
@@ -70,24 +52,20 @@ Source: `sk-prop-diagonal-tower-trace.proof.md` (1), finite unit and direct-imag
 identifications; `sk-prop-sp-tower-geometric-p1.proof.md`, Levels.
 (blueprint: lem-sfb-finite-p1-coefficient-adjunction-coordinates).
 
-Proof: on each etale chart and each pro-etale refinement, the constant module
-comparison sends a scalar to that same scalar. For the positive line send
-`a tensor z` to `a tensor z`, using cartierRootsIso. The universal properties
-of constant-sheaf extension and of the tensor sheaf give CoefficientCoordinates
-on S and X; the displayed section formulas determine these isomorphisms.
-The section-normalized direct-image realization comparison, derived on
-K-injective representatives, identifies intrinsic and fixed-scalar direct
-images. Pullback along the isomorphism e is an equivalence, and he identifies
-the composite direct image with that for the projection. These comparisons
-and their inverse-image mates give p and q. The mate unit equation is the
-first displayed equation, for every derived object M. On the coefficient
-single complexes the second equation is the ordinary adjoint of cp.iso:
-cp.normalization identifies its sections with the constant-ring restriction.
-All the realization comparisons have that same section normalization, so
-these ordinary maps agree; exact localization and the single comparisons
-then give the second displayed equation. No cohomology or decomposition
-isomorphism is used. The constructions work for empty schemes and the zero
-ring, and the exponent n+1 is positive even at n=0. -/
+Proof: the constant-module and root-tensor universal properties construct
+normalized coefficient coordinates on S and X. Invertibility of the exponent
+pulls back along f. Uniqueness of the intrinsic inverse-image adjoint and
+composition with the isomorphism e give an initial comparison p0. Its value on
+the coefficient unit may differ from the evaluated coefficient pullback by an
+automorphism of H(geoP1Unit). Since H is an equivalence, lift this discrepancy
+to the ordinary projective-line category. The coefficient unit is its tensor
+unit, so tensoring this automorphism with every object and conjugating by
+unitors extends it to a natural automorphism. Adjust p0 by this automorphism
+to get p with exactly the displayed coefficient equation. The invertible mate
+of p gives q, and the mate unit identity gives the first equation for every
+object. This uses only the given coefficient isomorphism, not an additional
+normalization theorem for a fixed choice of p. Empty schemes, the zero ring,
+and n=0 are included in the same categorical and tensor arguments. -/
 theorem finiteP1_coefficient_adjunction_coordinates
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     (b : SpTowerShriek.Base l E) {f : X ⟶ S}
@@ -116,6 +94,57 @@ theorem finiteP1_coefficient_adjunction_coordinates
         (SpTowerShriek.Ev l E X n).map (cp.derivedIso l E).hom ≫
         (finiteOverUnitCoordinate l E n e cX).hom =
       L.map (finiteUnitCoordinate l E n S cS).hom ≫ p.hom.app (geoP1Unit A S) ≫
-        H.map (geoP1UnitPullback A (ProjectiveLine S ↘ S)).hom) := by sorry
+        H.map (geoP1UnitPullback A (ProjectiveLine S ↘ S)).hom)  := by
+  let hS' : IsUnit ((l ^ (n + 1) : ℕ) : Γ(S, ⊤)) := by
+    simpa only [Nat.cast_pow] using hS.pow (n + 1)
+  have hX := finiteP1_unitOnPullback (l ^ (n + 1)) f hS'
+  let cX := Classical.choice
+    (SpTowerP1.finiteP1_coefficient_coordinates_exists l E n X hX)
+  let cS := Classical.choice
+    (SpTowerP1.finiteP1_coefficient_coordinates_exists l E n S hS')
+  let F := (Scheme.sfIntrinsicModuleEquivalence S
+    (SpTowerShriek.R l E n)).functor.mapDerivedCategory
+  let H := finiteOverRealization l E n e
+  let L := Scheme.proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) f
+  let P := geoP1Pullback (FiniteRing l E n) (ProjectiveLine S ↘ S)
+  let U := geoP1Unit (FiniteRing l E n) S
+  let V := geoP1Unit (FiniteRing l E n) (ProjectiveLine S)
+  let i := geoP1UnitPullback (FiniteRing l E n) (ProjectiveLine S ↘ S)
+  let p0 := finiteProjectionPullCoordinate (SpTowerShriek.R l E n) e he
+  let u : L.obj (F.obj U) ≅ H.obj V :=
+    L.mapIso (finiteUnitCoordinate l E n S cS).symm ≪≫
+      (g.pullEvaluation n).symm.app (unit S (Arings l E S)) ≪≫
+      (SpTowerShriek.Ev l E X n).mapIso (cp.derivedIso l E) ≪≫
+      finiteOverUnitCoordinate l E n e cX
+  have : H.IsEquivalence := by
+    have : (upperStar (ModuleCat.{u + 1} (FiniteRing l E n)) e.hom).IsEquivalence :=
+      inferInstance
+    have : (geoP1Pullback (FiniteRing l E n) e.hom).IsEquivalence :=
+      Functor.isEquivalence_of_iso
+        (leftDerivedUpperStarIsoMapDerivedCategory
+          (ModuleCat.{u + 1} (FiniteRing l E n)) e.hom).symm
+    exact inferInstanceAs
+      (geoP1Pullback (FiniteRing l E n) e.hom ⋙
+        (Scheme.sfIntrinsicModuleEquivalence X
+          (SpTowerShriek.R l E n)).functor.mapDerivedCategory).IsEquivalence
+  obtain ⟨p, hp⟩ := finiteP1_adjust_coordinate_unit (F ⋙ L) P H p0 U V
+    (finiteGeoUnitIso (FiniteRing l E n) (ProjectiveLine S)) i u
+  have : F.IsEquivalence := by
+    exact inferInstanceAs (Scheme.sfIntrinsicModuleEquivalence S
+      (SpTowerShriek.R l E n)).functor.mapDerivedCategory.IsEquivalence
+  let hq0 := finiteAdjunctionCoordinates
+    (derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} (FiniteRing l E n)) (ProjectiveLine S ↘ S))
+    (Scheme.proEtaleConstantRingAdjunction
+      (SpTowerShriek.R l E n) f).mapDerivedCategoryRightDerivedAdjunction F H p
+  let q := Classical.choose hq0
+  have hq := Classical.choose_spec hq0
+  refine ⟨hX, cX, cS, p, q, hq, ?_⟩
+  symm
+  change L.map (finiteUnitCoordinate l E n S cS).hom ≫ p.hom.app U ≫ H.map i.hom = _
+  rw [hp]
+  dsimp only [u, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
+    Iso.app_hom, Iso.app_inv]
+  rw [← Category.assoc, ← L.map_comp, Iso.hom_inv_id, L.map_id, Category.id_comp]
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

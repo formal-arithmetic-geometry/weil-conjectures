@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-finite-p1-unit-adjustment",
+ "kind": "statement",
+ "title": "Adjust a natural coordinate on a tensor-unit object",
+ "statement": "Let C,D,E be categories, with D monoidal. Let K:C→E and P:C→D be functors, H:D→E an equivalence, p0:K≅P H a natural isomorphism, U in C, V in D with j:V≅1_D, i:P(U)≅V and u:K(U)≅H(V). There is a natural isomorphism p:K≅P H with p_U followed by H(i)=u. This asserts no new data on tensor products or monoidal structure of p.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), finite coefficient identification before the system splitting"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "A unit automorphism e induces a natural automorphism of the identity: conjugate tensoring with e by left unitors. Equality of left and right unitors at the unit shows its component there is e. Naturality transports this assertion to any object isomorphic to the unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the discrepancy (p0_U H(i)) inverse followed by u through the fully faithful H. Extend it as above, whisker with H and P, and postcompose p0. Naturality at i and cancellation of the discrepancy give the prescribed component.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); D2 constructs normalized coefficient coordinates and transports adjunctions, allowing the existential inverse-image comparison to be adjusted on the tensor unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An endomorphism of the tensor unit extends to a natural endomorphism of the identity functor in a monoidal category",
+   "results": "Monoidal unit and endofunctor unit identities; no exact extension theorem returned.",
+   "date": "2026-10-28",
+   "verdict": "Prove directly by tensoring with the unit automorphism and conjugating by unitors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic adjunction Hom-equivalences, not a unit-automorphism extension theorem.",
+   "date": "2026-10-28",
+   "verdict": "No direct match; use the monoidal unitors and fully faithful preimageIso."
+  },
+  {
+   "tool": "grep",
+   "query": "End.*tensorUnit|tensorUnit.*End|unit.*End.*Nat|leftUnitorNatIso|unitors_equal|preimageIso",
+   "results": "Mathlib Monoidal/Category defines leftUnitorNatIso, CoherenceLemmas proves unitors_equal, Functor/FullyFaithful defines preimageIso. Local blueprint search for tensor unit automorphism found no duplicate.",
+   "date": "2026-10-28",
+   "verdict": "These generic ingredients prove the extension and comparison-adjustment theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), identification of the finite coefficient unit and Tate line with their ordinary derived presentations",
+   "via": [
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1UnitAdjustment",
+  "file": "lean/Sheaf/Paper/FiniteP1UnitAdjustment.lean",
+  "declaration": "finiteP1_adjust_coordinate_unit",
+  "statement": "theorem finiteP1_adjust_coordinate_unit\n    {C D E : Type*} [Category C] [Category D] [Category E] [MonoidalCategory D]\n    (K : C ⥤ E) (P : C ⥤ D) (H : D ⥤ E) [H.IsEquivalence]\n    (p0 : K ≅ P ⋙ H) (U : C) (V : D) (j : V ≅ 𝟙_ D)\n    (i : P.obj U ≅ V) (u : K.obj U ≅ H.obj V) :\n    ∃ p : K ≅ P ⋙ H, p.hom.app U ≫ H.map i.hom = u.hom",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28",
+  "declarations": [
+   "finiteP1_adjust_coordinate_unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 5 new modules vs node lem-sfb-finite-p1-coefficient-adjunction-coordinates and new nodes; Kummer consumer adaptation vs published original timed concurrently (48.5/45.9 s vs 16.6 s)"
+ }
+}

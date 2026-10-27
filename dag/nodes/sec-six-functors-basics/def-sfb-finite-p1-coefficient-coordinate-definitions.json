@@ -1,0 +1,136 @@
+{
+ "id": "def-sfb-finite-p1-coefficient-coordinate-definitions",
+ "kind": "definition",
+ "title": "Finite coefficient unit and over-line realization coordinates",
+ "statement": "Let l be prime, E a finite extension of Q_l, n≥0 with finite R=O_E/l^(n+1), and A=ULift R. For any scheme T with an exponent-unit witness hT and section-normalized coordinates c:CoefficientCoordinates l E n T hT [def-sp-p1-coefficient-coordinates], define finiteUnitCoordinate as the inverse composite of the exact single-functor comparison, c.unit, and coefficient evaluation. It identifies evaluation of the coefficient-system unit [def-sp-tower-class-coefficients] with intrinsic realization of the ordinary derived coefficient unit [sk-lem-geo-p1-cohomology]. For schemes X,S and e:X≅P¹_S, define finiteOverRealization as ordinary derived inverse image along e followed by intrinsic realization on X. Given coordinates cX on X, finiteOverUnitCoordinate composes finiteUnitCoordinate with the inverse ordinary-unit pullback along e. These are the same existing definitions, with the same names, signatures and bodies, relocated from the parent module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), finite coefficient identification before the system splitting"
+ },
+ "stmt_deps": [
+  "def-sp-p1-coefficient-coordinates",
+  "sk-lem-geo-p1-cohomology",
+  "def-sp-tower-class-coefficients",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-diagonal",
+  "def-weil-extension-by-zero",
+  "sk-d-lines"
+ ],
+ "proof": [
+  {
+   "text": "Use exact single-functor comparisons and the given normalized unit coordinate, then the ordinary unit pullback along e. These are explicit composites of existing isomorphisms; no data are chosen from an existence theorem.",
+   "uses": [
+    "def-sp-p1-coefficient-coordinates",
+    "sk-lem-geo-p1-cohomology",
+    "def-sp-tower-class-coefficients",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-p1-coefficient-coordinates",
+  "sk-lem-geo-p1-cohomology",
+  "def-sp-tower-class-coefficients",
+  "def-sp-finite-intrinsic-direct-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); D2 constructs normalized coefficient coordinates and transports adjunctions, allowing the existential inverse-image comparison to be adjusted on the tensor unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of scalar extension of a roots of unity module represents additive maps from the roots sheaf",
+   "results": "PresheafOfModules.sheafify, sheafification, toSheafify and toSheafify_app_apply. These supply the generic associated-module adjunction; no project-specific normalized coordinate statement.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing generic sheafification adjunction and library root universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction.homEquiv, homEquiv_apply, homEquiv_counit and their naturality infrastructure. Local reading found finiteTateLine_universal, proLineHomEquiv, sfIntrinsicConstantModuleAdjunction.",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction ingredients, used in the proofs; no exact finite-coordinate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRootProTensor|sfIntrinsicRealizationUnit|unit_mateEquiv",
+   "results": "Mathlib has unit_mateEquiv in CategoryTheory/Adjunction/Mates. The root tensor and realization-unit names are project definitions. Local reading also found the proved nativePullRealization and linePullRealization in DiagonalTraceUnitArrowComparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the mate identity and the existing native pullback construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), identification of the finite coefficient unit and Tate line with their ordinary derived presentations",
+   "via": [
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1CoefficientCoordinateDefinitions",
+  "file": "lean/Sheaf/Paper/FiniteP1CoefficientCoordinateDefinitions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteOverUnitCoordinate",
+  "statement": "def finiteOverUnitCoordinate (n : ℕ) [Finite (SpTowerShriek.R l E n)]\n    {X S : Scheme.{u}} (e : X ≅ ProjectiveLine S)\n    {hX : IsUnit ((l ^ (n + 1) : ℕ) : Γ(X, ⊤))}\n    (c : SpTowerP1.CoefficientCoordinates l E n X hX) :\n    (SpTowerShriek.Ev l E X n).obj (unit X (Arings l E X)) ≅\n      (finiteOverRealization l E n e).obj (geoP1Unit (FiniteRing l E n) (ProjectiveLine S))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteUnitCoordinate",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteOverRealization",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteOverUnitCoordinate"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 5 new modules vs node lem-sfb-finite-p1-coefficient-adjunction-coordinates and new nodes; Kummer consumer adaptation vs published original timed concurrently (48.5/45.9 s vs 16.6 s)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-finite-p1-coefficient-existence",
+ "kind": "statement",
+ "title": "Existence of section-normalized finite coefficient coordinates",
+ "statement": "Let l be prime, E a finite extension of Q_l, n≥0 with finite quotient R=O_E/l^(n+1), and T a scheme with hT:IsUnit(l^(n+1) in Γ(T,O_T)). Then CoefficientCoordinates l E n T hT [def-sp-p1-coefficient-coordinates] is nonempty. Its unit and line isomorphisms send every scalar generator and every scalar-times-root generator, on every etale chart and pro-etale refinement, to the prescribed identical scalar and root-tensor sections.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), finite coefficient identification before the system splitting"
+ },
+ "stmt_deps": [
+  "def-sp-p1-coefficient-coordinates",
+  "def-sp-tower-shriek-data"
+ ],
+ "proof": [
+  {
+   "text": "For the unit, compose realization of the oplax monoidal comparison unit with proEtaleConstantModuleUnit and the actual coefficient evaluation map. Naturality of the associated-module unit, comparison_pure_sections, and the unique regular-module normalization prove unit_sections. The evaluation ring equality acts as the identity on every section.",
+   "uses": [
+    "def-pur-proetale-constant-module-unit",
+    "lem-amb-comparison-pure-sections",
+    "def-sp-p1-coefficient-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the line, compose realization of finiteRootSiteComparison.sigma with the uniquely normalized intrinsic root-tensor isomorphism. Naturality of the realization unit, the sigma pure-tensor equation, and the intrinsic tensor equation prove line_sections.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison",
+    "lem-sfb-finite-p1-intrinsic-root-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-proetale-constant-module-unit",
+  "lem-amb-comparison-pure-sections",
+  "def-sp-p1-coefficient-coordinates",
+  "lem-amb-finite-root-site-comparison",
+  "lem-sfb-finite-p1-intrinsic-root-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); D2 constructs normalized coefficient coordinates and transports adjunctions, allowing the existential inverse-image comparison to be adjusted on the tensor unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of scalar extension of a roots of unity module represents additive maps from the roots sheaf",
+   "results": "PresheafOfModules.sheafify, sheafification, toSheafify and toSheafify_app_apply. These supply the generic associated-module adjunction; no project-specific normalized coordinate statement.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing generic sheafification adjunction and library root universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction.homEquiv, homEquiv_apply, homEquiv_counit and their naturality infrastructure. Local reading found finiteTateLine_universal, proLineHomEquiv, sfIntrinsicConstantModuleAdjunction.",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction ingredients, used in the proofs; no exact finite-coordinate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRootProTensor|sfIntrinsicRealizationUnit|unit_mateEquiv",
+   "results": "Mathlib has unit_mateEquiv in CategoryTheory/Adjunction/Mates. The root tensor and realization-unit names are project definitions. Local reading also found the proved nativePullRealization and linePullRealization in DiagonalTraceUnitArrowComparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the mate identity and the existing native pullback construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), identification of the finite coefficient unit and Tate line with their ordinary derived presentations",
+   "via": [
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1CoefficientExistence",
+  "file": "lean/Sheaf/Paper/FiniteP1CoefficientExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.finiteP1_coefficient_coordinates_exists",
+  "statement": "theorem finiteP1_coefficient_coordinates_exists (n : ℕ)\n    [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})\n    (hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))) :\n    Nonempty (CoefficientCoordinates l E n T hT)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteP1_coefficient_coordinates_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 5 new modules vs node lem-sfb-finite-p1-coefficient-adjunction-coordinates and new nodes; Kummer consumer adaptation vs published original timed concurrently (48.5/45.9 s vs 16.6 s)"
+ }
+}

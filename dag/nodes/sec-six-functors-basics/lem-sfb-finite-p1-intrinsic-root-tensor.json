@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-finite-p1-intrinsic-root-tensor",
+ "kind": "statement",
+ "title": "Realization preserves the finite root scalar extension on every pure tensor",
+ "statement": "Let l be prime, E a finite extension of Q_l, n≥0 with finite residue quotient R=O_E/l^(n+1), B=ULift R, and T a scheme. Use the actual root module and balanced fixed-scalar root tensor [def-pur-finite-root-pro-tensor] and the realization and intrinsic finite-line definitions [def-sp-p1-level-words]. There is a unique isomorphism from realization of finiteRootProTensor B l^(n+1) T to finiteLine l E T n whose value on the realization unit of every generator a⊗z over every pro-etale test W is tateFiniteTensor of the constant scalar section a and the same root z in μ_(l^(n+1))(W). No invertibility assumption on l on T is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), finite coefficient identification before the system splitting"
+ },
+ "stmt_deps": [
+  "def-sp-p1-level-words",
+  "def-pur-finite-root-pro-tensor",
+  "def-sp-p1-tensor-ordinary-coordinates",
+  "def-sp-tower-class-diagonal",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-finite-tate-line-signed-comparison",
+  "def-sp-tower-shriek-data"
+ ],
+ "proof": [
+  {
+   "text": "The associated-module sheafification adjunction identifies maps out of the realization of a fixed-scalar sheaf with fixed-scalar maps into scalar restriction of an intrinsic module. Compose with proLineHomEquiv to obtain a natural Hom-equivalence from the realized finite root tensor to additive maps from the actual finite roots sheaf.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finiteTateLine_universal for the intrinsic finite line. The two natural Hom-equivalences give maps in both directions; naturality for composition and the two inverse-equivalence identities prove that they are mutually inverse.",
+   "uses": [
+    "lem-sp-finite-tate-line-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a=1, proLineHomEquiv_generator and the realization unit give the root-section formula. proGenerator_smul and linearity of the realization unit and of the resulting map give the formula for every a. Injectivity of the Hom-equivalence and equality on roots prove uniqueness.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-amb-finite-root-site-comparison",
+  "lem-sp-finite-tate-line-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); D2 constructs normalized coefficient coordinates and transports adjunctions, allowing the existential inverse-image comparison to be adjusted on the tensor unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of scalar extension of a roots of unity module represents additive maps from the roots sheaf",
+   "results": "PresheafOfModules.sheafify, sheafification, toSheafify and toSheafify_app_apply. These supply the generic associated-module adjunction; no project-specific normalized coordinate statement.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing generic sheafification adjunction and library root universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction.homEquiv, homEquiv_apply, homEquiv_counit and their naturality infrastructure. Local reading found finiteTateLine_universal, proLineHomEquiv, sfIntrinsicConstantModuleAdjunction.",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction ingredients, used in the proofs; no exact finite-coordinate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRootProTensor|sfIntrinsicRealizationUnit|unit_mateEquiv",
+   "results": "Mathlib has unit_mateEquiv in CategoryTheory/Adjunction/Mates. The root tensor and realization-unit names are project definitions. Local reading also found the proved nativePullRealization and linePullRealization in DiagonalTraceUnitArrowComparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the mate identity and the existing native pullback construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), identification of the finite coefficient unit and Tate line with their ordinary derived presentations",
+   "via": [
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteP1IntrinsicRootTensor",
+  "file": "lean/Sheaf/Paper/FiniteP1IntrinsicRootTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.finiteP1_intrinsic_root_tensor",
+  "statement": "theorem finiteP1_intrinsic_root_tensor (n : ℕ) [Finite (SpTowerShriek.R l E n)]\n    (T : Scheme.{u}) :\n    ∃! e : (realization l E n T).obj\n        (Scheme.finiteRootProTensor (levelRing l E n) (l ^ (n + 1))\n          (pow_pos (Fact.out : l.Prime).pos _) (levelAnnihilates l E n) T) ≅\n      finiteLine l E T n,\n      ∀ (W : T.ProEtᵒᵖ) (a : levelRing l E n)\n        (z : (Scheme.proEtaleRootsOfUnitySheaf T (l ^ (n + 1))).obj.obj W),\n        e.hom.val.app W\n          (Scheme.sfIntrinsicRealizationUnit T (SpTowerShriek.R l E n) _ W\n            (Scheme.finiteRootProGenerator (levelRing l E n) (l ^ (n + 1))\n              (pow_pos (Fact.out : l.Prime).pos _) (levelAnnihilates l E n) T W a z)) =\n          Scheme.tateFiniteTensor T l (levelRing l E n) n (finiteScalar l E n) W.unop\n            ((toSheafify (Scheme.ProEt.topology T)\n              ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (levelRing l E n)))).app W a) z",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.finiteP1_intrinsic_root_tensor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fec33",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T205858-L-1628476",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 5 new modules vs node lem-sfb-finite-p1-coefficient-adjunction-coordinates and new nodes; Kummer consumer adaptation vs published original timed concurrently (48.5/45.9 s vs 16.6 s)"
+ }
+}
