@@ -372,6 +372,7 @@ def foInstantiate (fe : Expr) (args : Array Term) (target? : Option Expr) :
   let mut given : Array (Nat × Nat) := #[]
   let mut refls : Array Nat := #[]
   let mut tacs : Array (Nat × Nat) := #[]
+  let mut lates : Array (Nat × Term) := #[]
   let mut newGoals : Array MVarId := #[]
   let mut k := 0
   for i in [:mvs.size] do
@@ -382,6 +383,9 @@ def foInstantiate (fe : Expr) (args : Array Term) (target? : Option Expr) :
             args[k].raw[1].isOfKind ``Lean.Parser.Term.byTactic)
         if isBy then
           tacs := tacs.push (i, k)
+        else if args[k].raw.isOfKind ``Lean.Parser.Term.app &&
+            args[k].raw[0].isIdent && args[k].raw[0].getId == `fo_late then
+          lates := lates.push (i, ⟨args[k].raw[1][0]⟩)
         else if args[k].raw.isOfKind ``Lean.Parser.Term.hole then
           newGoals := newGoals.push mvs[i]!.mvarId!
         else if args[k].raw.isIdent &&
@@ -430,6 +434,15 @@ def foInstantiate (fe : Expr) (args : Array Term) (target? : Option Expr) :
     let v ← elabTermEnsuringType args[kt]! (← instantiateMVars (← inferType mvs[i]!))
     Term.synthesizeSyntheticMVarsNoPostponing
     mvs[i]!.mvarId!.assign (← instantiateMVars v)
+  -- the hypotheses given by `fo_late t`: transported, without matching
+  for (i, t) in lates do
+    let a ← elabTerm t none
+    Term.synthesizeSyntheticMVarsNoPostponing
+    let a ← instantiateMVars a
+    let B ← instantiateMVars (← inferType mvs[i]!)
+    if B.hasMVar then
+      throwError "fo_apply: the hypothesis given by `fo_late` is not determined{indentExpr B}"
+    mvs[i]!.mvarId!.assign (← transport a (← instantiateMVars (← inferType a)) B)
   let goals ← newGoals.filterM fun g => return !(← g.isAssigned)
   let pf ← instantiateMVars (mkAppN fe mvs)
   match target? with
@@ -441,8 +454,15 @@ application to the local context. The kernel then checks `pf` on its own, and th
 only refers to the auxiliary theorem. (`mkAuxTheorem` computes a minimal closure instead, which
 is very slow on large terms.) -/
 def sealProof (ty pf : Expr) : MetaM Expr := do
-  let fvars := (← getLCtx).foldl (init := #[]) fun acc d =>
-    if d.isImplementationDetail || d.isLet then acc else acc.push d.toExpr
+  -- the local hypotheses `pf` and `ty` depend on, closed under dependencies
+  let lctx ← getLCtx
+  let mut needed := (collectFVars (collectFVars {} ty) pf).fvarSet
+  for d in lctx.decls.toArray.reverse do
+    if let some d := d then
+      if needed.contains d.fvarId then
+        needed := (collectFVars { fvarSet := needed } d.type).fvarSet
+  let fvars := lctx.foldl (init := #[]) fun acc d =>
+    if needed.contains d.fvarId && !d.isLet then acc.push d.toExpr else acc
   let type ← instantiateMVars (← mkForallFVars fvars ty)
   let value ← instantiateMVars (← mkLambdaFVars fvars pf)
   let lps := (collectLevelParams (collectLevelParams {} type) value).params.toList
