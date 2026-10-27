@@ -6,6 +6,9 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
+import Sheaf.Paper.PullbackTensorIntegralCompositionCoherence
+import Sheaf.Paper.PullbackTensorRationalCompositionCoherence
+import Sheaf.Paper.PullbackTensorCommonStageCompositionCoherence
 
 /-! # Composition of the higher pullback tensor comparisons
 
@@ -78,6 +81,10 @@ theorem pullbackTensorCompositionCoherence {X Y Z : Scheme.{u}}
     (∀ M N : sfRationalConstructibleCategory l E Y,
       canonicalRationalPullbackTensor_composition l E f h M N) ∧
     (∀ M N : generalAlgebraicallyClosedConstructibleCategory l Ω Y,
-      canonicalCommonStagePullbackTensor_composition l Ω f h M N) := by sorry
+      canonicalCommonStagePullbackTensor_composition l Ω f h M N) := by
+  refine ⟨?_, ?_, ?_⟩
+  · exact pullbackTensorIntegralCompositionCoherence l E f h
+  · exact pullbackTensorRationalCompositionCoherence l E f h
+  · exact pullbackTensorCommonStageCompositionCoherence l Ω f h
 
 end WeilConjectures
