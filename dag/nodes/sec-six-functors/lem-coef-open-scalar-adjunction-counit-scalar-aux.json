@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-open-scalar-adjunction-counit-scalar-aux",
+ "kind": "statement",
+ "title": "Unbounded scalar/open counit identity",
+ "statement": "For any commutative coefficient rings and any open immersion, the normalized scalar extension, open extension, tensor pullback comparison, and open adjunction counits satisfy the unbounded scalar/open counit equation of [lem-coef-open-scalar-adjunction-counit].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+  "place": "Proof paragraph 3, steps 4–7: normalized scalar/open mate and counit calculation on the unbounded derived category."
+ },
+ "stmt_deps": [
+  "lem-coef-open-scalar-adjunction-counit",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof": [
+  {
+   "text": "Compose the normalized scalar and open adjunctions, identify their right adjoints, use the open unit formula for the inverse comparison, and reduce the desired equality by naturality and the open triangle identity.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-fix-open-scalar-tensor-normalization",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-fix-open-scalar-tensor-normalization",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived scalar extension open immersion counit identity",
+   "results": "No exact existing declaration; the searched result is only the generic source theorem family.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "unbounded derived scalar extension open immersion counit identity",
+   "results": "No exact existing declaration in the pinned Mathlib index.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "unbounded derived scalar extension open immersion counit identity",
+   "results": "No exact existing declaration in Mathlib source.",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenScalarAdjunctionCounit",
+  "date": "2026-10-28",
+  "group": "D7"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-open-scalar-adjunction-counit",
+   "place": "Proof paragraph 3, steps 4–7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenScalarAdjunctionCounitScalarAux",
+  "file": "lean/Sheaf/SixFunctors/OpenScalarAdjunctionCounitScalarAux.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefOpenCounit.scalar_counit_aux",
+  "statement": "theorem scalar_counit_aux {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) {V X : Scheme.{u}} (j : V ⟶ X) [IsOpenImmersion j] : ∀ M : _root_.DerivedCategory (proEtaleRingModules X (proEtaleConstantRing X A)), (openScalarIso φ j).hom.app ((constantPullback (A := A) j).obj M) ≫ (openExtension (A := B) j).map ((tensorPullbackIso φ j).inv.app M) ≫ (proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X B) (proEtaleConstantRing V B) (proEtaleConstantRingComparison j B)).counit.app ((scalarExtension φ X).obj M) = (scalarExtension φ X).map ((proEtaleRingDerivedOpenAdjunction j (proEtaleConstantRing X A) (proEtaleConstantRing V A) (proEtaleConstantRingComparison j A)).counit.app M)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T233901-L-4131080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T233901-L-4131080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

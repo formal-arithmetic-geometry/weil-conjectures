@@ -29,6 +29,7 @@ import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.Paper.KFlatScalarComparisonNormalization
 import Sheaf.SixFunctors.OpenScalarTensorNormalization
+import Sheaf.SixFunctors.OpenScalarAdjunctionCounitScalarAux
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Open scalar adjunction and the locally closed exceptional counit
@@ -273,6 +274,36 @@ def ScalarCounit {A B : Type u} [CommRing A] [CommRing B]
         (proEtaleConstantRing X A) (proEtaleConstantRing V A)
         (proEtaleConstantRingComparison j A)).counit.app M)
 
+/-- The two coefficient-domain packages in the locally closed factorization.
+
+This is the geometric and finite-Tor portion of the proof plan. Finite type over
+`F.k` supplies the Noetherian hypotheses, the exact closed image and open extension
+preserve etale origins, and the bounded flat model plus the preservation-class
+comparison supplies the displayed finite-Tor and counit data. The remaining
+unbounded scalar calculation is isolated in `scalar_counit_aux`.
+Source: Weil blueprint, `lem-coef-finite-closed-shriek`, proof paragraph 3
+(blueprint: lem-coef-open-scalar-adjunction-counit-factored-aux). -/
+theorem coefficient_factored_aux
+    (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p)
+    (E L : Type u) [Field E] [Field L]
+    [Algebra (Padic l) E] [Algebra (Padic l) L]
+    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]
+    (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n)
+    (φ : Padic.coefficientExtensionRing l E m →+* Padic.coefficientExtensionRing l L n)
+    {W V X : Scheme.{u}}
+    [W.Over (Spec (.of F.k))] [V.Over (Spec (.of F.k))] [X.Over (Spec (.of F.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of F.k))] [QuasiCompact (V ↘ Spec (.of F.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))]
+    [IsSeparated (W ↘ Spec (.of F.k))] [IsSeparated (V ↘ Spec (.of F.k))]
+    [IsSeparated (X ↘ Spec (.of F.k))]
+    (t : W ⟶ V) (j : V ⟶ X) [t.IsOver (Spec (.of F.k))]
+    [j.IsOver (Spec (.of F.k))] [IsClosedImmersion t] [IsOpenImmersion j]
+    (c : Compactification (t ≫ j)) :
+    CoefficientFactored F.k l E m hm t j c ∧
+      CoefficientFactored F.k l L n hn t j c := by
+  sorry
+
 /-- Open scalar adjunction and the factored actual exceptional counit.
 Source: Weil blueprint, lem-coef-finite-closed-shriek, proof paragraph 3
 (blueprint: lem-coef-open-scalar-adjunction-counit).
@@ -320,6 +351,8 @@ theorem open_scalar_adjunction_counit
     (c : Compactification (t ≫ j)) :
     CoefficientFactored F.k l E m hm t j c ∧
       CoefficientFactored F.k l L n hn t j c ∧ ScalarCounit φ j := by
-  sorry
+  obtain ⟨hE, hL⟩ := coefficient_factored_aux F l _hl E L m n hm hn φ t j c
+  refine ⟨hE, hL, ?_⟩
+  exact scalar_counit_aux φ j
 
 end AlgebraicGeometry.ProEtale.CoefOpenCounit
