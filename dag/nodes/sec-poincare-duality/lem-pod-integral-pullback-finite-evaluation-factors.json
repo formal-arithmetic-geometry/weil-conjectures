@@ -1,0 +1,120 @@
+{
+ "id": "lem-pod-integral-pullback-finite-evaluation-factors",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-local-frobenius-trace",
+   "place": "Exact-functor finite evaluation factorization in the finite pullback counit projection.",
+   "via": [
+    "lem-pod-integral-pullback-strict-finite-component",
+    "lem-pod-integral-pullback-counit-projection",
+    "lem-pod-integral-pullback-system-comparison",
+    "lem-pod-integral-pullback-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "Finite evaluation factors followed by an arbitrary chain map",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme morphism $f:X\\to Y$, a complex $C$ of strict quotient systems, and $n\\geq0$ [def-trf-integral-comparison-realization-models]. Let $N$ be any complex of $A_{E,n+1}$-module sheaves on $Y$, and $k:C_n\\to N$ any chain map. Write $F$ for system pullback, $V_X,V_Y$ for finite evaluation, and $B$ for ordinary finite constant-ring pullback. Let $H_C:V_XF(C)\\to BV_Y(C)$ be the specified ordinary finite evaluation comparison, and $\\beta$ its specified derived comparison [lem-pod-finite-system-pullback-coherence]. Write $F_D,V_{X,D},B_D$ for their exact derived functors and $\\theta_T:Q\\mathbin{\\ggg}T_D\\simeq T_{\\mathrm{complex}}\\mathbin{\\ggg}Q$, where $\\ggg$ denotes functor composition in diagrammatic order, for the exact localization factors, in precisely the direction of Functor.mapDerivedCategoryFactors [lem-weil-pbc-exact-functor-derived-factorization]. Then the composite $V_{X,D}(\\theta_F(C)^{-1})$, $\\beta_{Q(C)}$, $B_D(\\theta_{V_Y}(C)\\,;\\,Q(k))$, and $\\theta_B(N)$ equals $\\theta_{V_X}(F(C))\\,;\\,Q(H_C\\,;\\,B(k))$, with semicolon denoting first the left map and then the right map. This is exactly the equality of finiteEvaluation_fac_comp; no isomorphism hypothesis is imposed on k.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-pod-finite-system-pullback-coherence",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, lemma-right-derived-exact-functor; exact localization composition and naturality, as implemented by Functor.mapDerivedCategoryFactors and MapDerivedCategoryMate. The finite system comparison is the specified one of lem-pod-finite-system-pullback-coherence."
+ },
+ "proof": [
+  {
+   "text": "Unfold the specified derived finite evaluation comparison into the inverse source compositor, the derived ordinary evaluation isomorphism, and the target compositor. The composition and natural-isomorphism factorization identities calculate its component on Q(C) and give finiteEvaluation_fac.",
+   "uses": [
+    "lem-pod-finite-system-pullback-coherence",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the finite pullback factor at k to move Q(k) through its target factor. Substitute the preceding component equation. The inverse and forward F factors cancel after applying derived evaluation. Functoriality of Q identifies the remaining composite with Q(H_C followed by B(k)).",
+   "uses": [
+    "lem-pod-finite-system-pullback-coherence",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-finite-system-pullback-coherence",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P3",
+  "date": "2026-10-27",
+  "note": "Complete Lean calculation, placed in its own support module after profiling local coefficient presentation conversions; zero new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor derived category composition factorization natural transformation commutes with localization on cochain complexes",
+   "results": "Functor.mapDerivedCategoryFactors, mapDerivedCategoryFactorsh, mapDerivedCategoryFactorsh_hom_app (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor).",
+   "date": "2026-10-27",
+   "verdict": "Reuse these exact localization factors; the displayed statement also computes the specified project finite-system comparison and cancels its source factor."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "mapDerivedCategoryFactors_hom_naturality, mapDerivedCategoryFactors, and the single-functor factor equations in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-27",
+   "verdict": "The naturality ingredient is already available and is used directly."
+  },
+  {
+   "tool": "grep",
+   "query": "rg mapDerivedCategoryCompIso.*factors|mapDerivedCategoryNatIso_fac|mapDerivedCategoryFactors_hom_naturality Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryMate.lean",
+   "results": "mapDerivedCategoryCompIso_hom_app_factors, mapDerivedCategoryNatIso_fac and mapDerivedCategoryFactors_hom_naturality; these supply all localization steps.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing identities and prove only their concrete finite evaluation calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPullbackStrictFiniteComponent",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackFiniteEvaluationFactors",
+  "file": "lean/Sheaf/Paper/IntegralPullbackFiniteEvaluationFactors.lean",
+  "declaration": "WeilConjectures.finiteEvaluation_fac_comp",
+  "statement": "theorem finiteEvaluation_fac_comp {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (n : ℕ)\n    (N : CochainComplex (normalizedDVRModules l E Y n) ℤ)\n    (k : ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj C ⟶ N) :\n  letI := finiteEvaluation_zero l E f n\n  let B : normalizedDVRModules l E Y n ⥤ normalizedDVRModules l E X n :=\n      proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f\n  let V := coefficientSequenceEvaluation l E X n\n  let F := integralComparisonSequencePullback l E f\n  let D := (F.mapHomologicalComplex (.up ℤ)).obj C\n  let H : (V.mapHomologicalComplex (.up ℤ)).obj D ⟶\n      (B.mapHomologicalComplex (.up ℤ)).obj\n        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj C) :=\n      (NatTrans.mapHomologicalComplex (finiteEvaluation l E f n).hom (.up ℤ)).app C\n  let VD := coefficientSequenceDerivedEvaluation l E X n\n  let BD := proEtaleConstantRingDerivedPullback\n    (Padic.coefficientExtensionRing l E (n + 1)) f\n  let β : F.mapDerivedCategory ⋙ VD ≅\n      (coefficientSequenceEvaluation l E Y n).mapDerivedCategory ⋙ BD :=\n    finiteSystemDerivedPullbackEvaluation (integralSystemRings l E)\n      (integralSystemTransition l E) f n\n  VD.map (F.mapDerivedCategoryFactors.inv.app C) ≫\n    β.hom.app (DerivedCategory.Q.obj C) ≫\n    BD.map ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app C ≫\n      DerivedCategory.Q.map k) ≫ B.mapDerivedCategoryFactors.hom.app N =\n  V.mapDerivedCategoryFactors.hom.app D ≫\n    DerivedCategory.Q.map (H ≫ (B.mapHomologicalComplex (.up ℤ)).map k)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T151730-L-1199419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T151730-L-1199419",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
