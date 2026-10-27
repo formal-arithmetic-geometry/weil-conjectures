@@ -8,6 +8,9 @@ module
 public import Sheaf.Paper.IntegralOperationsScalarComparisonModels
 public import Sheaf.Paper.ScalarExtensionComposition
 
+import Sheaf.Paper.AdditiveRoosHorizontal
+import Sheaf.Paper.IntegralScalarTensorTowerComposition
+
 /-! # Scalar completed tensor chain comparisons and coefficient towers
 
 Source: Stacks 07A4, 08TC; coefficient-comparison coherence in the blueprint.
@@ -27,8 +30,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
   coefficientTotalTensor
 attribute [local irreducible] integralOperationsPullbackComplexFunctor
-  integralOperationsTensorComplexFunctor integralOperationsPullbackTowerFunctor
-  integralOperationsTensorTowerFunctor scalarPullbackChain scalarTensorChain
+  integralOperationsPullbackTowerFunctor scalarPullbackChain scalarTensorChain
 attribute [-instance] scalarReductionSourceDerived scalarReductionTargetDerived
 attribute [-instance] integralOperationsSiteSmall
 attribute [local instance 3000] integralTowerHasDerivedCategory
@@ -62,6 +64,13 @@ variable (l : ℕ) [Fact l.Prime]
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (j : L →ₐ[ℚ_[l]] F)
 
+
+
+attribute [local irreducible] integralOperationsTensorLevel integralOrdinaryScalarComp
+  integralOperationsTensorTowerFunctor integralOperationsRoos integralOperationsRoosMap
+attribute [local implicit_reducible] Functor.mapHomologicalComplex
+  integralOperationsTensorComplexFunctor integralOperationsRoosFunctor
+
 /-- The normalized completed-tensor Roos chain maps respect coefficient towers.
 Source: Stacks 07A4, 08TC; blueprint scalar comparison proof step 9
 (blueprint: lem-pur-integral-scalar-tensor-chain-tower).
@@ -73,8 +82,8 @@ this equality. Balanced tensor relations, sheafification, and the coproducts in
 total degree extend it to the finite total complex, respecting both signed
 differential summands. Consecutive reduction compatibility gives equality of
 strict tower maps. Project the Roos comparison onto each of its two product
-coordinates. Finite freeness commutes with these products, and the finite-level
-equality identifies both routes. Product projections are jointly injective,
+coordinates. Naturality of the canonical product comparisons and the finite-level
+equality identify both routes. Product projections are jointly injective,
 so the chain maps agree. Zero complexes, identity extensions and arbitrary
 unbounded inputs are included. -/
 theorem integralScalarTensorChainTower (W : AlgebraicGeometry.Scheme.{u})
@@ -91,6 +100,35 @@ theorem integralScalarTensorChainTower (W : AlgebraicGeometry.Scheme.{u})
           (.up ℤ)).hom.app Q)) =
     (NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)
       (.up ℤ)).hom.app ((integralOperationsTensorComplexFunctor l E W).obj (P, Q)) ≫
-        scalarTensorChain l E F (j.comp ι) W P Q := by sorry
+        scalarTensorChain l E F (j.comp ι) W P Q := by
+  let S := integralOrdinaryScalar l E L ι W
+  let T := integralOrdinaryScalar l L F j W
+  let U := integralOrdinaryScalar l E F (j.comp ι) W
+  let SC := S.mapHomologicalComplex (.up ℤ)
+  let TC := T.mapHomologicalComplex (.up ℤ)
+  let κ := integralOrdinaryScalarComp l E L ι W F j
+  let κC := NatIso.mapHomologicalComplex κ (.up ℤ)
+  let X := (integralOperationsTensorTowerFunctor l E W).obj (P, Q)
+  let Y := (integralOperationsTensorTowerFunctor l L W).obj (SC.obj P, SC.obj Q)
+  let Z := (integralOperationsTensorTowerFunctor l F W).obj
+    ((U.mapHomologicalComplex (.up ℤ)).obj P, (U.mapHomologicalComplex (.up ℤ)).obj Q)
+  let a := (scalarTensorTower l E L ι W).app (P, Q)
+  let b :=
+    (scalarTensorTower l L F j W).app (SC.obj P, SC.obj Q) ≫
+      (integralOperationsTensorTowerFunctor l F W).map
+        (CategoryTheory.Prod.mkHom (κC.hom.app P) (κC.hom.app Q))
+  let c :=
+    (scalarTensorTower l E F (j.comp ι) W).app (P, Q)
+  have h : Functor.whiskerRight a TC ≫ b =
+      Functor.whiskerLeft X κC.hom ≫ c := by
+    exact integralScalarTensorTowerComposition l E L ι F j W P Q
+  have hr := additiveRoosComposite S T U κ X Y Z a b c h
+  dsimp only [b] at hr
+  rw [integralOperationsRoosMap_comp] at hr
+  unfold scalarTensorChain
+  dsimp only [a, c, X, Y, Z, S, T, U, SC, TC, κ, κC,
+    integralOperationsTensorComplexFunctor, Functor.comp_obj, Functor.comp_map,
+    integralOperationsRoosFunctor] at hr ⊢
+  simpa only [Category.assoc] using hr
 
 end WeilConjectures

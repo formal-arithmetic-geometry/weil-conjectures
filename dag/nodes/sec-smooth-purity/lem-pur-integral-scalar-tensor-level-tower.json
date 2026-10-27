@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-level-tower",
+ "kind": "statement",
+ "title": "Finite scalar tensor comparisons respect coefficient composition",
+ "statement": "For finite coefficient extensions E to L to F over Q_l, every scheme W, level n and arbitrary completed E-module cochain complexes P,Q, the normalized finite tensor maps of [lem-pur-integral-scalar-finite-comparison-models] satisfy S_j(delta_i);delta_j(S_i P,S_i Q);T_n^F(kappa_P,kappa_Q) = kappa_(T_n^E(P,Q));delta_(ji), with the termwise associator kappa of [lem-weil-scalar-extension-composition]. This asserts equality at one finite tensor level, before forming a tower or a Roos complex.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-scalar-tensor-level-reduction",
+  "lem-pur-integral-tensor-transition-compatibility",
+  "lem-pur-normalized-scalar-tensor-transitions",
+  "def-pur-integral-finite-tensor-tower"
+ ],
+ "proof": [
+  {
+   "text": "On a finite tensor level, precompose the proposed equality with the inverse scalar associator. Its pure-tensor formula inserts two unit coefficients. Apply the scalar-extension adjunction and the finite tensor generator extensionality proved in IntegralScalarTensorLevelReduction. In each bidegree, naturality of ordinary scalar tensor sections and the two normalized scalarTensorLevel equations compute the left composite. The total tensor map acts on both input generators, and finite reduction sends 1 tensor x to 1 tensor f(x). The associator hom multiplies the two unit coefficients, giving exactly the direct comparison normalization. This proves scalar_tensor_level_tower as an equality of chain maps.",
+   "uses": [
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-integral-scalar-tensor-level-reduction",
+    "lem-pur-integral-tensor-transition-compatibility",
+    "lem-pur-normalized-scalar-tensor-transitions",
+    "def-pur-integral-finite-tensor-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-scalar-tensor-level-reduction",
+  "lem-pur-integral-tensor-transition-compatibility",
+  "lem-pur-normalized-scalar-tensor-transitions",
+  "def-pur-integral-finite-tensor-tower"
+ ],
+ "proof_origin": {
+  "by": "V1",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC.",
+  "note": "Fully proved lemma separated for compile-time control; no sorry added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension natural transformations tensor products commute with composition of scalar extension and Roos inverse limits",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_id_comp_assoc, AdicCompletion.ofTensorProduct_naturality, ModuleCat.extendScalarsComp, ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-27",
+   "verdict": "Use the listed general tools; none is the specialized normalized coherence equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.mapHomologicalComplex",
+   "results": "loogle: unknown identifier 'NatIso.mapHomologicalComplex'",
+   "date": "2026-10-27",
+   "verdict": "Use the listed general tools; none is the specialized normalized coherence equation."
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|map_natTrans",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean, Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean",
+   "date": "2026-10-27",
+   "verdict": "Use the listed general tools; none is the specialized normalized coherence equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarTensorChainTower",
+  "group": "V1",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-scalar-tensor-chain-tower",
+   "place": "Tensor reassociation, evaluation and coefficient comparisons; scalar-comparison proof step 9 of lem-pur-integral-operations-scalar-extension; Stacks 03EL, 07A4, 08J9 and 08TC.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorLevelTower",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorLevelTower.lean",
+  "declaration": "WeilConjectures.integralScalarTensorLevelTower",
+  "statement": "theorem integralScalarTensorLevelTower (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ)\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) :\n    ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (.up ℤ)).map\n        ((scalarTensorLevel l E L ι W n).app (P, Q)) ≫\n      (scalarTensorLevel l L F j W n).app\n        ((((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P),\n          (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q)) ≫\n      (integralOperationsTensorLevel l F W n).map (CategoryTheory.Prod.mkHom\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n          (.up ℤ)).hom.app P)\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n          (.up ℤ)).hom.app Q)) =\n    (NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)\n      (.up ℤ)).hom.app ((integralOperationsTensorLevel l E W n).obj (P, Q)) ≫\n        (scalarTensorLevel l E F (j.comp ι) W n).app (P, Q)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T180842-L-3909118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T180842-L-3909118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

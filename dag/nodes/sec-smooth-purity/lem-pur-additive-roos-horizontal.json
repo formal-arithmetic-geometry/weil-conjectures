@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-additive-roos-horizontal",
+ "kind": "statement",
+ "title": "Horizontal coherence of additive Roos comparisons",
+ "statement": "Let A,B,D be abelian categories with countable products; let F:A to B, G:B to D, H:A to D be additive functors, and eta:F;G isomorphic to H a natural isomorphism. Let C,Cprime,Cdoubleprime be inverse sequences of cochain complexes over A,B,D and a:C;Fcomplex to Cprime, b:Cprime;Gcomplex to Cdoubleprime, c:C;Hcomplex to Cdoubleprime tower maps. If whiskerRight(a,Gcomplex);b = whiskerLeft(C,(etaComplex).hom);c, then Gcomplex(scalarRoosMap(F,C);RoosMap(a));scalarRoosMap(G,Cprime);RoosMap(b) = (etaComplex).hom(Roos(C));scalarRoosMap(H,C);RoosMap(c), for the canonical maps of [def-sf-additive-roos-map]. No preservation of countable products is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Homotopy limits, Tag 08TC; naturality of product comparisons."
+ },
+ "stmt_deps": [
+  "def-sf-additive-roos-map"
+ ],
+ "proof": [
+  {
+   "text": "Project the composite of canonical product comparisons onto each factor. The equation is precisely naturality of eta at that projection. For the first and shifted second mapping cocone coordinates, use the normalized scalarRoosCoordinates and scalarRoosTowerCoordinates formulas. Naturality of eta at those coordinates yields both equations. The mapping cocone identity decomposition proves joint detection of chain maps degreewise. This establishes horizontal coherence. Apply scalarRoosNaturality and RoosMap functoriality to a,b,c; substitute their compatibility equation and horizontal coherence to obtain the asserted composite equation.",
+   "uses": [
+    "def-sf-additive-roos-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-additive-roos-map"
+ ],
+ "proof_origin": {
+  "by": "V1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Homotopy limits, Tag 08TC; naturality of product comparisons.",
+  "note": "Fully proved lemma separated for compile-time control; no sorry added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical additive functor comparison with mapping cone inverse limit respects composition and natural transformations",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.map_inr, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq",
+   "date": "2026-10-27",
+   "verdict": "Use the listed general tools; none is the specialized normalized coherence equation."
+  },
+  {
+   "tool": "grep",
+   "query": "piComparison_comp|mappingCocone.*map.*comp",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Use the listed general tools; none is the specialized normalized coherence equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Pi.hom_ext",
+   "results": "1 hits: CategoryTheory.Limits.Pi.hom_ext",
+   "date": "2026-10-27",
+   "verdict": "Use the listed general tools; none is the specialized normalized coherence equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarTensorChainTower",
+  "group": "V1",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-scalar-tensor-chain-tower",
+   "place": "Homotopy limits, Tag 08TC; naturality of product comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdditiveRoosHorizontal",
+  "file": "lean/Sheaf/Paper/AdditiveRoosHorizontal.lean",
+  "declaration": "WeilConjectures.additiveRoosComposite",
+  "statement": "theorem additiveRoosComposite\n    (F : A ⥤ B) [F.Additive] (G : B ⥤ D) [G.Additive]\n    (H : A ⥤ D) [H.Additive] (η : F ⋙ G ≅ H)\n    (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) (C' : ℕᵒᵖ ⥤ CochainComplex B ℤ)\n    (C'' : ℕᵒᵖ ⥤ CochainComplex D ℤ)\n    (a : C ⋙ F.mapHomologicalComplex (.up ℤ) ⟶ C')\n    (b : C' ⋙ G.mapHomologicalComplex (.up ℤ) ⟶ C'')\n    (c : C ⋙ H.mapHomologicalComplex (.up ℤ) ⟶ C'')\n    (h : Functor.whiskerRight a (G.mapHomologicalComplex (.up ℤ)) ≫ b =\n      Functor.whiskerLeft C (NatIso.mapHomologicalComplex η (.up ℤ)).hom ≫ c) :\n    (G.mapHomologicalComplex (.up ℤ)).map\n        (scalarRoosMap F C ≫ integralOperationsRoosMap a) ≫\n      scalarRoosMap G C' ≫ integralOperationsRoosMap b =\n    (NatIso.mapHomologicalComplex η (.up ℤ)).hom.app (integralOperationsRoos C) ≫\n      scalarRoosMap H C ≫ integralOperationsRoosMap c",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T180842-L-3909118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T180842-L-3909118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
