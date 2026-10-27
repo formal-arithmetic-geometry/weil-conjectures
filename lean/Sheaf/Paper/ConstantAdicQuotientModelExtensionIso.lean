@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
 public import Sheaf.Paper.ConstantRealizationDerivedScalarExtension
+import Sheaf.Paper.ConstantAdicQuotientModelRealizationExtensionIso
+import Sheaf.Paper.ConstantAdicQuotientRealizationReflectsIso
 
 /-! # Algebraic extension isomorphism for consecutive constant quotient models
 
@@ -56,6 +58,13 @@ theorem constantAdicQuotient_model_extension_iso
         (Ideal.pow_le_pow_right (I := d.ideal.map
           (algebraMap A (AdicCompletion d.ideal A)))
           (Nat.le_succ (n + 1))))).obj E' ≅ E) := by
-  sorry
+  let q := Ideal.Quotient.factor
+    (Ideal.pow_le_pow_right (I := d.ideal.map
+      (algebraMap A (AdicCompletion d.ideal A))) (Nat.le_succ (n + 1)))
+  have hreal := constantAdicQuotient_model_realization_extension_iso
+    X Y g d M n W _w E' E e' e
+  exact constantAdicQuotientRealization_reflects_iso X Y g d n W _w
+    ((CategoryTheory.ConstantScalarRealization.moduleDerivedExtension q).obj E') E
+    hreal
 
 end AlgebraicGeometry.Scheme
