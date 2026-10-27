@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisseCore
 
 /-!
 
