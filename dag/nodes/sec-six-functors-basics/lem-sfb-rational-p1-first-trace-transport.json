@@ -23,51 +23,39 @@
  },
  "proof": [
   {
-   "text": "Open the normalized counit hypothesis hε and replace epsilon by the specified counitComponent, using its proof-only inverse-projection witness hq. Expand only the twisted projection and counit of [def-sfb-projective-ambient-unit-counit-composites]; no unit component occurs in this statement. Under [lem-pd-module-ringed-topos-derived-comparison], the maps are the original pullback/direct-image adjunction mates of [def-sfb-module-derived-pushpull-adjunction], with their tensor and composition comparisons. Cancel native tensorShiftIso and its inverse. Properness of q,p1,p2 from [lemma-nagata-projective-space-base-change-proper] and [det-thm-sf-pf-field-localizing] invert the remaining projections on localizing factors. The supplied witnesses hb,hp and the witness hq obtained from hε are proof-irrelevant and refer to these fixed maps.",
+   "text": "Use localizingPreservationChecks, line_localizing_of_preservation, and the preservation fields to prove that the shifted diagonal line lies in the localizing constructible closure on diagonalSurface Y.",
    "uses": [
-    "def-sfb-projective-ambient-unit-counit-composites",
-    "lem-pd-module-ringed-topos-derived-comparison",
-    "def-sfb-module-derived-pushpull-adjunction",
-    "lemma-nagata-projective-space-base-change-proper",
-    "det-thm-sf-pf-field-localizing"
+    "lem-sfb-rational-p1-localizing-preservation",
+    "lem-sfb-rational-p1-line-from-preservation"
    ],
    "elementary": false
   },
   {
-   "text": "Use [lem-sfb-ringed-kunneth-factorizations] at M and T_P. Its first presentation contains R(b_M); substitute its second presentation, using the direct-image comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The comparison is conjugate to the same composite pullback isomorphism, so both presentations have the same transpose. This rewrites the terminal functional before any class arrow is inserted as the inverse p1 projection followed by identity tensor the base-changed q trace. Cancel the invertible projections and exchange to obtain the equality of terminal functionals, whose source is Rq_*Rp2*(p1*M tensor T_W).",
+   "text": "Apply projectionMap_isIso_localizing to firstProjection Y with hM and the shifted-line closure, after installing the geometric and properness instances supplied by the preservation checks. This gives the existential witness h₁.",
    "uses": [
-    "lem-sfb-ringed-kunneth-factorizations",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-sfb-rational-p1-localizing-projection",
+    "lem-sfb-rational-p1-localizing-preservation"
    ],
    "elementary": false
   },
   {
-   "text": "For the trace square, pull back the normalized unit/Chern splitting defining the completed trace. The canonical base-change mate preserves its unit by the adjunction triangle, and preserves the positive Chern summand by pullback of the Cartier/Kummer class. Thus its inverse followed by the constant summand projection is the trace for the first projective-line model. The full universal-unit squares of [def-sfb-diagonal-coefficient-reference] identify this trace with family.zl.trace1 and traceq. The coefficient/base-change compatibility of [det-prop-diagonal-tower-coefficients], via the fixed scalar squares of Family, transports the equation to c. Hence trace_p1 after the opposite exchange is q*trace_q. The exchange/tensor coherence of [lem-weil-pbc-ringed-exchange-tensor-coherence] makes this precisely the trace appearing in the preceding factorization. No property of delta as a limit or any integration equation enters. The conjugate of this same pullback comparison is firstPathComparison. The localizing projection formula provides the existential invertibility proof h1 for the first projection. No diagonal class is inserted anywhere in this equation.",
+   "text": "Apply the strict core equality with this h₁ and package the witness with the equality.",
    "uses": [
-    "def-sfb-diagonal-coefficient-reference",
-    "det-prop-diagonal-tower-coefficients",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "det-thm-sf-pf-field-localizing"
+    "lem-sfb-rational-p1-first-trace-transport-core"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-projective-ambient-unit-counit-composites",
-  "lem-pd-module-ringed-topos-derived-comparison",
-  "def-sfb-module-derived-pushpull-adjunction",
-  "lemma-nagata-projective-space-base-change-proper",
-  "det-thm-sf-pf-field-localizing",
-  "lem-sfb-ringed-kunneth-factorizations",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-sfb-diagonal-coefficient-reference",
-  "det-prop-diagonal-tower-coefficients",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+  "lem-sfb-rational-p1-localizing-preservation",
+  "lem-sfb-rational-p1-line-from-preservation",
+  "lem-sfb-rational-p1-localizing-projection",
+  "lem-sfb-rational-p1-first-trace-transport-core"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "First identity: Kunneth factorization and transport of the completed trace to the first projection, before inserting any diagonal class."
+  "place": "First identity: localizing closure supplies the first-projection witness, then the core equality supplies the terminal trace transport."
  },
  "mathlib_searches": [
   {
@@ -146,9 +134,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G9",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261027T034653-L-3672781",
+  "landing": "20261027T194431-L-829839",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

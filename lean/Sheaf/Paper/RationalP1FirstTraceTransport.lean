@@ -6,9 +6,14 @@ Authors: SHEAF group G9
 module
 
 public import Sheaf.Paper.RationalP1SectionEvaluation
+import Sheaf.Paper.RationalP1LocalizingProjection
+import Sheaf.Paper.RationalP1LocalizingPreservation
+import Sheaf.Paper.RationalP1LineFromPreservation
 public import Sheaf.Paper.RationalTatePullback
 public import Sheaf.Paper.LocalizingClosure
 public import Sheaf.Paper.DiagonalCoefficientReference
+
+import Sheaf.Paper.RationalP1FirstTraceTransportCore
 
 /-! # Transporting the terminal first projective-line trace
 
@@ -23,6 +28,7 @@ set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -127,6 +133,41 @@ theorem rationalP1_first_trace_transport
       (((DerivedCategory.singleFunctor
           (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
             (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-      (diagram l c Y family).trace₁ h₁ := by sorry
+      (diagram l c Y family).trace₁ h₁ := by
+  have hc := localizingPreservationChecks l c k p hpl Y
+  let hP : (ProjectiveLine Y).Over (Spec (.of k)) :=
+    ⟨(ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
+  let hW : (diagonalSurface Y).Over (Spec (.of k)) :=
+    ⟨firstProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
+  letI : (ProjectiveLine Y).Over (Spec (.of k)) := hP
+  letI : (diagonalSurface Y).Over (Spec (.of k)) := hW
+  letI : LocallyOfFiniteType (ProjectiveLine Y ↘ Spec (.of k)) :=
+    hc.geometry.standingP.2.1
+  letI : QuasiCompact (ProjectiveLine Y ↘ Spec (.of k)) :=
+    hc.geometry.standingP.2.2
+  letI : IsSeparated (ProjectiveLine Y ↘ Spec (.of k)) := hc.geometry.standingP.1
+  letI : LocallyOfFiniteType (diagonalSurface Y ↘ Spec (.of k)) :=
+    hc.geometry.standingW.2.1
+  letI : QuasiCompact (diagonalSurface Y ↘ Spec (.of k)) :=
+    hc.geometry.standingW.2.2
+  letI : IsSeparated (diagonalSurface Y ↘ Spec (.of k)) := hc.geometry.standingW.1
+  letI : (firstProjection Y).IsOver (Spec (.of k)) := ⟨rfl⟩
+  letI : IsProper (firstProjection Y) := hc.geometry.properFirst
+  have hline : CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X (diagonalSurface Y))
+      (((DerivedCategory.singleFunctor
+        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) := by
+    apply line_localizing_of_preservation (coefficient l c).X
+      (f := firstProjection Y) (L := line l c (diagonalSurface Y))
+    intro K hK
+    exact hc.objectsW.twist.preserves _ (hc.pullFirst.preserves K hK)
+  have h₁ : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M
+      (((DerivedCategory.singleFunctor
+        (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)) :=
+    projectionMap_isIso_localizing l c k p hpl (firstProjection Y) M _ hM hline
+  exact ⟨h₁, rationalP1_first_trace_transport_core l c k p hpl Y δ family reference M hM ε
+    hε hb hp h₁⟩
 
 end AlgebraicGeometry.ProEtale.RationalP1
