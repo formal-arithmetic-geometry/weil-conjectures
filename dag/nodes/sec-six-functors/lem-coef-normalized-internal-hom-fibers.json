@@ -1,0 +1,236 @@
+{
+ "id": "lem-coef-normalized-internal-hom-fibers",
+ "kind": "statement",
+ "title": "Normalized internal-Hom fibers and composition before sections",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and a scheme $W$ [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Work on its small pro-etale site with independent object, arrow and coefficient universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $A$ be the completed integral coefficient sheaf and $B_n=(\\mathcal O_E/\\varpi^{n+1})_W$, so index zero is a positive quotient [def-weil-completed-integral-coefficients]. Use ordinary unbounded derived categories [def-weil-abstract-derived-category] of the actual coefficient sequence-site modules, their exact evaluations $e_n$, scalar restrictions and the specified total inverse limit $L$ [def-coef-ringed-sequence-site]. Fix reduction data $R$ [def-coef-derived-system-calculus-data]. Assume its tensor models retain the ordinary associator, unit and symmetry formulas, expressed by CoefficientDerivedSystemTensorCoherence [lem-coef-normalized-reduction-models]. Assume the reduction, finite and evaluation tensor representative normalizations and choose normalized finite quotient calculus $Q$. There exist CoefficientNormalizedInternalHomFibers: (1) the evaluation-defined reduction and finite scalar internal-Hom comparisons preserve internal composition; (2) for normalized systems $M,N$ there are isomorphisms $e_n R\\mathcal Hom(M,N)\\cong R\\mathcal Hom(e_nM,e_nN)$ carrying evaluated system evaluation to finite closed evaluation; (3) their actual horizontal transition adjuncts are the finite quotient internal-Hom comparisons followed by internal Hom of the inverse normalized source transition and the normalized target transition, exactly CoefficientFiberTransition with $Q$. No global sections, limit comparison, fiber naturality, beta-evaluation equation or conservativity assertion is included: the latter three are proved by the consuming resolution-model module.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-normalized-reduction-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 0A95 (lemma-RHom-well-defined), 0941 (lemma-derived-limit-is-ok); original resolution-model proof step 3, semilinear finite-prefix calculus and pullback-Hom composition. The comparison of the fixed normalizations is agent-formulated."
+ },
+ "proof": [
+  {
+   "text": "Apply the semilinear derived-system calculus. Normalize its scalar adjunctions by the ordinary quotient units and localized counits in Q. Their left-adjoint comparison identifies its cartesian reductions with the recorded normalized coefficient reductions. Finite-prefix left extension and its tensor projection formula give the internal-Hom evaluation isomorphisms.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the fiber isomorphisms by their inverse closed transposes: tensor-model uncurrying gives the same ordinary evaluation on simultaneous K-flat and K-injective representatives. The semilinear HomReductionFormula, with Q.tensor_model identifying the reduced evaluation word, then gives the actual fiber transition formula.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ringed pullback-Hom composition to reduction and finite scalar extension. The representative tensor normalizations identify their tensor maps; the supplied ordinary associator models identify the monoidal constraints. Thus the equations are precisely CoefficientInternalHomComposition for the given R.",
+   "uses": [
+    "lem-coef-ringed-pullback-hom-evaluation-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-ringed-pullback-hom-evaluation-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-level-left-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 0A95 (lemma-RHom-well-defined), 0941 (lemma-derived-limit-is-ok); original resolution-model proof step 3, semilinear finite-prefix calculus and pullback-Hom composition. The comparison of the fixed normalizations is agent-formulated."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient systems normalized reduction fibers global sections inverse limit comparison",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InverseSystem.globalEquiv_compatibility",
+     "InverseSystem.globalEquiv_naturality",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+     "SheafOfModules.Presentation.map_π_eq",
+     "InverseSystem.invLimEquiv_apply_coe"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(Iso|iso)|rightDerivedFunctor.*iso",
+   "results": {
+    "n_hits": 22,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*(eval|Eval)|evaluation.*(tensor|Tensor)|rightDerived.*[Nn]at[Ii]so",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Coevaluation.lean",
+     "Mathlib/LinearAlgebra/Coevaluation.lean",
+     "Mathlib/LinearAlgebra/Coevaluation.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coefficient systems internal Hom fibers normalized cartesian derived category finite prefix evaluation",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.exp.ev",
+     "CategoryTheory.ihom.ev",
+     "CategoryTheory.internalHom",
+     "CategoryTheory.Pi.closedCounit",
+     "CategoryTheory.MonoidalClosed.internalHom",
+     "CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_app",
+     "HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits",
+     "smoothSheaf.evalHom"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized derived scalar extension adjunction tensor comparison K-flat coefficient tower",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.tensorH1Cotangent",
+     "comonadicExtendScalars",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.of_flat_tensorProduct"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent total right derived inverse limit global sections K injective comparison natural isomorphism",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+     "CategoryTheory.Sheaf.ΓNatIsoLim",
+     "CategoryTheory.Functor.ranCompLimIso",
+     "CategoryTheory.Limits.Types.limNatIsoSectionsFunctor",
+     "CategoryTheory.Functor.rightDerivedNatIso_inv",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSystemResolutionModels",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 0A95 (lemma-RHom-well-defined), 0941 (lemma-derived-limit-is-ok); original resolution-model proof step 3, semilinear finite-prefix calculus and pullback-Hom composition. The comparison of the fixed normalizations is agent-formulated.",
+   "via": [
+    "lem-coef-derived-system-resolution-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedInternalHomFibers",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedInternalHomFibers.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedInternalHomFibers",
+  "declarations": [
+   "WeilConjectures.CoefficientInternalHomComposition",
+   "WeilConjectures.CoefficientNormalizedInternalHomFibers",
+   "WeilConjectures.coefficientNormalizedInternalHomFibers"
+  ],
+  "statement": "theorem coefficientNormalizedInternalHomFibers\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hT : CoefficientDerivedSystemTensorCoherence l E W R.toCoefficientDerivedSystemTensors)\n    (hR : CoefficientReductionTensorNormalization l E W R)\n    (hF : CoefficientFiniteTensorNormalization l E W R)\n    (hE : CoefficientEvaluationTensorNormalization l E W R)\n    (Q : CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors) :\n    Nonempty (CoefficientNormalizedInternalHomFibers l E W R Q)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T210244-L-1680192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T210244-L-1680192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

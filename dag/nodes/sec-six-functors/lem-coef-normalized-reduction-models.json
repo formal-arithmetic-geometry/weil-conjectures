@@ -1,0 +1,247 @@
+{
+ "id": "lem-coef-normalized-reduction-models",
+ "kind": "statement",
+ "title": "Normalized reduction and quotient tensor models before internal Hom",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and a scheme $W$ [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Work on its small pro-etale site with independent object, arrow and coefficient universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $A$ be the completed integral coefficient sheaf and $B_n=(\\mathcal O_E/\\varpi^{n+1})_W$, so index zero is a positive quotient [def-weil-completed-integral-coefficients]. Use ordinary unbounded derived categories [def-weil-abstract-derived-category] of the actual coefficient sequence-site modules, their exact evaluations $e_n$, scalar restrictions and the specified total inverse limit $L$ [def-coef-ringed-sequence-site]. Let $T$ be integral, sequence-site and finite closed tensor structures with their natural K-flat total-tensor comparisons and ordinary uncurrying equations [def-coef-ringed-tensor-hom-model, def-coef-derived-system-calculus-data]. There exists reduction data $R$ (CoefficientDerivedSystemReduction) whose tensor subrecord is exactly $T$. Its reduction is left adjoint to the prescribed $L$, evaluates to the prescribed finite derived scalar extension, has the simultaneous strict K-flat reduction model, and every reduced object is normalized. Its unit and counit have the actual finite projection formulas. The reduction, finite-scalar and evaluation tensor comparisons have their stated ordinary pure-tensor representative normalizations, and the reduction tensor comparison evaluates to the finite scalar tensor comparison. There is finite quotient calculus $Q$ with the actual ordinary and derived quotient adjunctions, preservation of K-flat complexes, normalized unit $1\\otimes x$, localized unit square and the K-flat pure-tensor comparison. No internal-Hom fiber, sections functor, or sections/limit comparison is asserted. The accompanying support predicate CoefficientDerivedSystemTensorCoherence means that the integral, sequence and finite tensor models also admit the ordinary associator, unit and Koszul-symmetry witnesses of [lem-sf-ringed-derived-closed-symmetric-monoidal]; it is not an extra hypothesis of this reduction-existence statement.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-derived-system-calculus-data",
+  "def-weil-integral-reduction-tower",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok); original resolution-model proof steps 1-2. The specialization to the fixed coefficient functors is agent-formulated."
+ },
+ "proof": [
+  {
+   "text": "Apply the sequence projection adjunction to A and its actual quotient tower. Identify strict systems with sequence-site modules. The pushforward/limit comparison identifies its right adjoint with the prescribed L, preserving the actual projections. Transport the adjunction and its unit/counit equations; the one-flat-term-K-flat comparison gives the strict reduction presentation and its finite evaluations.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Canonical tensor pullback gives the reduction tensor comparison. The prescribed scalar-derived pair gives the finite comparisons. Vertical evaluation gives the evaluation comparison. On simultaneous K-flats the ordinary maps send pure tensors to the same pure tensors, so uniqueness identifies the recorded scalar and evaluation maps and proves their normalization squares, including the reduction/evaluation square.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-prescribed-scalar-tensor-comparison",
+    "lem-coef-actual-scalar-derived-pair",
+    "lem-coef-actual-total-tensor-evaluation",
+    "lem-pur-system-evaluation-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same normalized scalar pair to every B_m to B_n. Keep its ordinary unit, its derived counit comparison and its tensor model to form Q. Reassociation of successive extensions identifies the strict reduction transition adjunct with an isomorphism, proving normalization of every reduction.",
+   "uses": [
+    "lem-coef-prescribed-scalar-tensor-comparison",
+    "lem-coef-actual-scalar-derived-pair",
+    "lem-coef-sequence-projection-derived-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-actual-scalar-derived-pair",
+  "lem-coef-actual-total-tensor-evaluation",
+  "lem-coef-prescribed-scalar-tensor-comparison",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok); original resolution-model proof steps 1-2. The specialization to the fixed coefficient functors is agent-formulated."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient systems normalized reduction fibers global sections inverse limit comparison",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InverseSystem.globalEquiv_compatibility",
+     "InverseSystem.globalEquiv_naturality",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+     "SheafOfModules.Presentation.map_π_eq",
+     "InverseSystem.invLimEquiv_apply_coe"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(Iso|iso)|rightDerivedFunctor.*iso",
+   "results": {
+    "n_hits": 22,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*(eval|Eval)|evaluation.*(tensor|Tensor)|rightDerived.*[Nn]at[Ii]so",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Coevaluation.lean",
+     "Mathlib/LinearAlgebra/Coevaluation.lean",
+     "Mathlib/LinearAlgebra/Coevaluation.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+     "Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean",
+     "Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coefficient systems internal Hom fibers normalized cartesian derived category finite prefix evaluation",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.exp.ev",
+     "CategoryTheory.ihom.ev",
+     "CategoryTheory.internalHom",
+     "CategoryTheory.Pi.closedCounit",
+     "CategoryTheory.MonoidalClosed.internalHom",
+     "CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_app",
+     "HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits",
+     "smoothSheaf.evalHom"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized derived scalar extension adjunction tensor comparison K-flat coefficient tower",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Extension.tensorH1Cotangent",
+     "comonadicExtendScalars",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.of_flat_tensorProduct"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent total right derived inverse limit global sections K injective comparison natural isomorphism",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+     "CategoryTheory.Sheaf.ΓNatIsoLim",
+     "CategoryTheory.Functor.ranCompLimIso",
+     "CategoryTheory.Limits.Types.limNatIsoSectionsFunctor",
+     "CategoryTheory.Functor.rightDerivedNatIso_inv",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give general tensor, evaluation, sections or derived-functor tools, but not the normalized varying-coefficient construction with these specified coefficient functors and representative equations. The recorded project declarations supply the planned construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSystemResolutionModels",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0941 (lemma-derived-limit-is-ok); original resolution-model proof steps 1-2. The specialization to the fixed coefficient functors is agent-formulated.",
+   "via": [
+    "lem-coef-derived-system-resolution-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedReductionModels",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedReductionModels.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedReductionModels",
+  "declarations": [
+   "WeilConjectures.CoefficientDerivedSystemTensorCoherence",
+   "WeilConjectures.coefficientNormalizedReductionModels"
+  ],
+  "statement": "theorem coefficientNormalizedReductionModels (T : CoefficientDerivedSystemTensors l E W) :\n    ∃ R : CoefficientDerivedSystemReduction l E W,\n      R.toCoefficientDerivedSystemTensors = T ∧\n      CoefficientReductionTensorNormalization l E W R ∧\n      CoefficientFiniteTensorNormalization l E W R ∧\n      CoefficientEvaluationTensorNormalization l E W R ∧\n      CoefficientReductionTensorEvaluation l E W R ∧\n      Nonempty (CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T210244-L-1680192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T210244-L-1680192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

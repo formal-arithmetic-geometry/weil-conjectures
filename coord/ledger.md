@@ -20089,3 +20089,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:02 L: merged deliver/T3/Sheaf.Paper.P1KummerChernScalar (stage 3; reviewer PASS; first push; landing 20261027T210240-L-1679426 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:02 L: merged deliver/T4/Sheaf.Paper.CoefficientDerivedSystemProjectionFormulas (stage 3; reviewer PASS; first push; landing 20261027T210241-L-1679632 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:02 L: merged deliver/T4/Sheaf.Paper.SmoothClopenComponentInverse (stage 3; reviewer PASS; first push; landing 20261027T210242-L-1679930 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 21:02 L: merged deliver/U1/Sheaf.Paper.CoefficientDerivedSystemResolutionModels (stage 3; reviewer PASS; first push; landing 20261027T210244-L-1680192 (interface); batch 20261027T205736; modules 4; new nodes 3)
