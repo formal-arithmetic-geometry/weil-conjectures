@@ -91,7 +91,7 @@ theorem exists_ordered_twist_comparison (S : Scheme.{u}) (E : S.Modules)
           Scheme.Modules.pullbackObjUnitIso (eRel ≪≫ θ).hom).inv ≫
         (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).map
           (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (r + 1))) S i) ≫ t.hom := by
-  obtain ⟨t, _⟩ := exists_ordered_twist_line S E D r b eRel hRel hAffine θ hθ hθAffine
-  exact ⟨t, ordered_twist_coordinate_compatibility S E D r b eRel hRel hAffine θ hθ hθAffine t⟩
+  obtain ⟨t, ht⟩ := exists_ordered_twist_line S E D r b eRel hRel hAffine θ hθ hθAffine
+  exact ⟨t, ordered_twist_coordinate_compatibility S E D r b eRel θ t ht⟩
 
 end AlgebraicGeometry.SymmetricProjTautologicalCharts

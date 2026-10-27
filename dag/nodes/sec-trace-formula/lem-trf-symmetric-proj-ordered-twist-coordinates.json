@@ -2,7 +2,7 @@
  "id": "lem-trf-symmetric-proj-ordered-twist-coordinates",
  "kind": "statement",
  "title": "Coordinate compatibility for the ordered twist line",
- "statement": "Identify each basis quotient with the pulled standard coordinate section on standard affine charts, then descend equality globally.",
+ "statement": "Let S be a scheme, E a quasi-coherent module, and D a normalized TautologicalQuotient for its canonical symmetric relative Proj P, with projection p. Fix an ordered basis b of rank r+1, scheme comparisons eRel and theta with standard projective space, and a line isomorphism t from the pulled standard O(1) to D.line. Suppose that, for every affine open V of S and ordered coordinate i, restricting to p^{-1}(V) identifies the basis quotient p^*(iota_i followed by b) followed by D.quotient with the coordinateSection pulled through eRel followed by theta and t, using the canonical unit pullback comparisons. Then these coordinate morphisms agree globally. No geometric normalization hypotheses on eRel or theta are needed for this local-to-global implication.",
  "source": {
   "document": "literature/stacks-project/constructions.tex",
   "place": "Tags 01OE, 01OB, 01MS and 01NR."
@@ -20,31 +20,24 @@
   "def-pc-fibre-product",
   "def-nagata-relative-projective-space",
   "def-pc-projective-space-twist",
-  "lem-trf-free-projective-bundle-base-change-space",
   "def-sfb-projective-coordinate-section"
  ],
  "proof": [
   {
-   "text": "On each standard chart the normalized generator equation identifies the basis quotient with the pulled coordinate section; equality of maps from the unit sheaf is local and descends.",
-   "uses": [
-    "def-per-projective-bundle-quotient-data",
-    "lem-trf-free-projective-bundle-base-change-space"
-   ],
-   "elementary": false,
+   "text": "Inverse images of affine base opens cover P. The assumed equalities after restriction give equal composites into pushforward restrictions by naturality of the restriction adjunction unit. Sheaf separatedness (the proved source-library hom_ext_of_restrictAdjunction_unit) gives equality of the coordinate maps globally. The private helper proves this for arbitrary module morphisms and arbitrary p; in particular it covers empty schemes and r=0.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01OE, 01OB, 01MS and 01NR."
+    "place": "Tags 01OE, 01OB, 01MS and 01NR; normalization of the gluing comparison and sheaf separatedness."
    }
   }
  ],
- "proof_deps": [
-  "def-per-projective-bundle-quotient-data",
-  "lem-trf-free-projective-bundle-base-change-space"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01OE (lemma-projective-space-bundle), 01OB (definition-projective-bundle), 01MS (lemma-when-invertible), and 01NR (lemma-glue-relative-proj-twists)."
+  "place": "Tags 01OE, 01OB, 01MS and 01NR; normalization of the gluing comparison and sheaf separatedness."
  },
  "mathlib_searches": [
   {
@@ -116,7 +109,7 @@
   "module": "Sheaf.AlgebraicGeometry.SymmetricProjOrderedTwistCoordinates",
   "file": "lean/Sheaf/AlgebraicGeometry/SymmetricProjOrderedTwistCoordinates.lean",
   "declaration": "AlgebraicGeometry.SymmetricProjTautologicalCharts.ordered_twist_coordinate_compatibility",
-  "statement": "theorem ordered_twist_coordinate_compatibility (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)\n    (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)\n    (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅\n      RelativeProjectiveSpace.scheme S r)\n    (hRel : eRel.hom ≫ RelativeProjectiveSpace.π S r =\n      (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)\n    (hAffine : ∀ V : S.affineOpens,\n      ProjectiveBundleQuotientGeometry.AffineFreeComparison r b eRel V)\n    (θ : RelativeProjectiveSpace.scheme S r ≅ ℙ(ULift.{u} (Fin (r + 1)); S))\n    (hθ : θ.hom ≫ (ℙ(ULift.{u} (Fin (r + 1)); S) ↘ S) =\n      RelativeProjectiveSpace.π S r)\n    (hθAffine : ∀ V : S.affineOpens, RelativeProjectiveSpace.IsIntegralProjComparison\n      S r V (RelativeProjectiveSpace.affineToIntegral S r θ V))\n    (t : (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).obj\n        (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) S 1) ≅ D.line) :\n    ∀ i : ULift.{u} (Fin (r + 1)),\n      (Scheme.Modules.tensorPullback\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).map\n        (SheafOfModules.ιFree (R := S.ringCatSheaf) i ≫ b.hom) ≫ D.quotient =\n      ((Scheme.Modules.boundaryPullbackComparison\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).app\n            (Scheme.Modules.unit S) ≪≫\n        Scheme.Modules.pullbackObjUnitIso\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).hom ≫\n      ((Scheme.Modules.boundaryPullbackComparison (eRel ≪≫ θ).hom).app\n          (Scheme.Modules.unit _) ≪≫\n        Scheme.Modules.pullbackObjUnitIso (eRel ≪≫ θ).hom).inv ≫\n      (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).map\n        (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (r + 1))) S i) ≫ t.hom",
+  "statement": "theorem ordered_twist_coordinate_compatibility (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)\n    (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)\n    (eRel : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj ≅\n      RelativeProjectiveSpace.scheme S r)\n    (θ : RelativeProjectiveSpace.scheme S r ≅ ℙ(ULift.{u} (Fin (r + 1)); S))\n    (t : (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).obj\n        (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) S 1) ≅ D.line)\n    (hNormalized :\n      ∀ V : S.affineOpens, ∀ i : ULift.{u} (Fin (r + 1)),\n      (Scheme.Modules.restrictFunctor\n          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ V.1).ι).map\n        ((Scheme.Modules.tensorPullback\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).map\n        (SheafOfModules.ιFree (R := S.ringCatSheaf) i ≫ b.hom) ≫ D.quotient) =\n      (Scheme.Modules.restrictFunctor\n          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ V.1).ι).map\n        (((Scheme.Modules.boundaryPullbackComparison\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).app\n            (Scheme.Modules.unit S) ≪≫\n        Scheme.Modules.pullbackObjUnitIso\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).hom ≫\n      ((Scheme.Modules.boundaryPullbackComparison (eRel ≪≫ θ).hom).app\n          (Scheme.Modules.unit _) ≪≫\n        Scheme.Modules.pullbackObjUnitIso (eRel ≪≫ θ).hom).inv ≫\n      (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).map\n        (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (r + 1))) S i) ≫ t.hom)) :\n    ∀ i : ULift.{u} (Fin (r + 1)),\n      (Scheme.Modules.tensorPullback\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).map\n        (SheafOfModules.ιFree (R := S.ringCatSheaf) i ≫ b.hom) ≫ D.quotient =\n      ((Scheme.Modules.boundaryPullbackComparison\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).app\n            (Scheme.Modules.unit S) ≪≫\n        Scheme.Modules.pullbackObjUnitIso\n          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).hom ≫\n      ((Scheme.Modules.boundaryPullbackComparison (eRel ≪≫ θ).hom).app\n          (Scheme.Modules.unit _) ≪≫\n        Scheme.Modules.pullbackObjUnitIso (eRel ≪≫ θ).hom).inv ≫\n      (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).map\n        (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (r + 1))) S i) ≫ t.hom",
   "branch": "sheaf-dag",
   "by": "S4",
   "date": "2026-10-27"
@@ -134,11 +127,62 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S4",
-  "result": "pass",
-  "landing": "20261027T123536-L-2318895",
+  "reviewer": "C-03914",
+  "group": "Q5",
+  "result": "fix",
+  "landing": "20261027T210206-L-1669461",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: corrected Coordinates/Line statements and Gluing adaptation against their DAG nodes, the change record, the published node files and upstream hom_ext_of_restrictAdjunction_unit"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "Q5 stage 2",
+  "old_statement": "Identify each basis quotient with the pulled standard coordinate section on standard affine charts, then descend equality globally.",
+  "what": "STATEMENT-DISPUTED (old statement): t was arbitrary. Over Spec Q with r=0, the normalized quotient is a nonzero map of line sheaves; replacing a compatible t by -t changes the right coordinate map, while every listed hypothesis remains unchanged. Add the missing affine restriction normalization, retain it in the line-existence lemma, and adapt the only caller. No proof of the old false statement is claimed. Remove the four unused scheme normalization hypotheses: they are needed for existence, not for descent of an already normalized comparison.",
+  "source": {
+   "document": "literature/stacks-project/constructions.tex",
+   "place": "Tags 01OE, 01OB, 01MS and 01NR; normalization of the gluing comparison and sheaf separatedness."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-symmetric-proj-ordered-twist-gluing",
+    "holds": true,
+    "note": "The unchanged global comparison follows from the strengthened local-normalized line existence and the repaired local-to-global coordinate lemma; the caller is adapted in this delivery."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "pqf-def-coherent",
+   "def-trf-canonical-symmetric-graded-algebra",
+   "def-nagata-relative-proj",
+   "def-sc-invertible-module",
+   "def-pc-module-pullback",
+   "def-per-projective-bundle-quotient-data",
+   "def-nagata-homogeneous-localization-degree-zero",
+   "def-weil-pbc-proj-twisting-sheaf",
+   "def-pc-fibre-product",
+   "def-nagata-relative-projective-space",
+   "def-pc-projective-space-twist",
+   "lem-trf-free-projective-bundle-base-change-space",
+   "def-sfb-projective-coordinate-section"
+  ],
+  "old_proof": [
+   {
+    "text": "On each standard chart the normalized generator equation identifies the basis quotient with the pulled coordinate section; equality of maps from the unit sheaf is local and descends.",
+    "uses": [
+     "def-per-projective-bundle-quotient-data",
+     "lem-trf-free-projective-bundle-base-change-space"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/constructions.tex",
+     "place": "Tags 01OE, 01OB, 01MS and 01NR."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-per-projective-bundle-quotient-data",
+   "lem-trf-free-projective-bundle-base-change-space"
+  ]
  }
 }

@@ -8,6 +8,10 @@ public import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientData
 public import Sheaf.AlgebraicGeometry.FreeProjectiveBundleBaseChangeSpace
 import Sheaf.AlgebraicGeometry.SymmetricProjOrderedTwistAffineFrames
 import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.Modules.HomSection
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSectionChart
 
 /-! # Existence of the ordered global twist line
 
@@ -27,6 +31,15 @@ open scoped AlgebraicGeometry
 
 namespace AlgebraicGeometry.SymmetricProjTautologicalCharts
 
+/-- The chosen boundary adjunction is the section-normalized tensor adjunction. -/
+private theorem boundary_adjunction_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g) =
+      Scheme.Modules.tensorPullbackSectionAdjunction g :=
+  (Scheme.Modules.existsUnique_tensorPullbackSectionAdjunction g).unique
+    (fun M U m ↦ Classical.choose_spec (Scheme.Modules.exists_tensorPullbackAdjunction g)
+      M (op U) m)
+    (Classical.choose_spec (Scheme.Modules.existsUnique_tensorPullbackSectionAdjunction g)).1
+
 set_option linter.unusedVariables false in
 /-- The local normalized affine comparisons glue to a global line isomorphism.
 
@@ -38,7 +51,8 @@ Proj comparison to identify the standard degree-one frame with the chart frame
 of the tautological quotient.  The ratio on overlaps is the ratio of the same
 homogeneous generators, so the local isomorphisms satisfy the cocycle condition.
 Glue them, together with their local inverses, by the sheaf gluing theorem.
-The resulting global map is an isomorphism.  The argument also covers the
+The resulting global map is an isomorphism, and its restrictions retain the
+normalized coordinate equations used to glue it.  The argument also covers the
 zero-dimensional and empty-chart cases.
 -/
 theorem exists_ordered_twist_line (S : Scheme.{u}) (E : S.Modules)
@@ -56,7 +70,25 @@ theorem exists_ordered_twist_line (S : Scheme.{u}) (E : S.Modules)
     (hθAffine : ∀ V : S.affineOpens, RelativeProjectiveSpace.IsIntegralProjComparison
       S r V (RelativeProjectiveSpace.affineToIntegral S r θ V)) :
     ∃ t : (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).obj
-        (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) S 1) ≅ D.line, True := by
+        (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) S 1) ≅ D.line,
+    ∀ V : S.affineOpens, ∀ i : ULift.{u} (Fin (r + 1)),
+      (Scheme.Modules.restrictFunctor
+          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ V.1).ι).map
+        ((Scheme.Modules.tensorPullback
+          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).map
+        (SheafOfModules.ιFree (R := S.ringCatSheaf) i ≫ b.hom) ≫ D.quotient) =
+      (Scheme.Modules.restrictFunctor
+          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ V.1).ι).map
+        (((Scheme.Modules.boundaryPullbackComparison
+          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).app
+            (Scheme.Modules.unit S) ≪≫
+        Scheme.Modules.pullbackObjUnitIso
+          (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).hom ≫
+      ((Scheme.Modules.boundaryPullbackComparison (eRel ≪≫ θ).hom).app
+          (Scheme.Modules.unit _) ≪≫
+        Scheme.Modules.pullbackObjUnitIso (eRel ≪≫ θ).hom).inv ≫
+      (Scheme.Modules.tensorPullback (eRel ≪≫ θ).hom).map
+        (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (r + 1))) S i) ≫ t.hom) := by
   classical
   let X := (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj
   let p := (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom
@@ -125,7 +157,60 @@ theorem exists_ordered_twist_line (S : Scheme.{u}) (E : S.Modules)
     simp only [Scheme.Modules.presheaf_map_homOfLE_map_homOfLE] at hsj
     have heq := hsj.smul_left_injective hac
     rw [hdQ', smul_smul, heq]
-  let t := Scheme.Modules.isoOfIsFreeGenerator hU hs hq hc
-  exact ⟨(Scheme.Modules.boundaryPullbackComparison f).app _ ≪≫ t, trivial⟩
+  let T := Scheme.Modules.isoOfIsFreeGenerator hU hs hq hc
+  have key (k : ULift.{u} (Fin (r + 1))) : T.hom.app ⊤ (s k) = q k := by
+    refine (Scheme.Modules.isGlueValue_glueHom_app hU hs hc (s k)).unique hU hs ?_
+    intro j W hW hWj a ha
+    obtain ⟨c, hcP, hcQ⟩ := ratios (j.1, k) j
+    have hcP' := Scheme.Modules.presheaf_map_homOfLE_eq_smul _ hWj hcP
+    have hcQ' := Scheme.Modules.presheaf_map_homOfLE_eq_smul _ hWj hcQ
+    simp only [Scheme.Modules.presheaf_map_homOfLE_map_homOfLE] at ha hcP' hcQ' ⊢
+    rw [hcP'] at ha
+    have hsj := (hs j).map hWj
+    simp only [Scheme.Modules.presheaf_map_homOfLE_map_homOfLE] at hsj
+    rw [hcQ', hsj.smul_left_injective ha]
+  let adj := Scheme.Modules.tensorPullbackSectionAdjunction p
+  let u := (adj.unit.app (Scheme.Modules.unit S)).app ⊤ (1 : Γ(S, ⊤))
+  have hbd : Scheme.Modules.boundaryPullbackComparison p =
+      adj.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction p) := by
+    rw [Scheme.Modules.boundaryPullbackComparison, boundary_adjunction_eq]
+  have hu : ((Scheme.Modules.boundaryPullbackComparison p).app (Scheme.Modules.unit S) ≪≫
+      Scheme.Modules.pullbackObjUnitIso p).hom.app ⊤ u = (1 : Γ(X, ⊤)) := by
+    have hb := congrArg (fun φ ↦ φ.app ⊤ (1 : Γ(S, ⊤)))
+      (Adjunction.unit_leftAdjointUniq_hom_app adj
+        (Scheme.Modules.pullbackPushforwardAdjunction p) (Scheme.Modules.unit S))
+    simp only [Scheme.Modules.Hom.comp_app, Scheme.Modules.pushforward_map_app,
+      ConcreteCategory.comp_apply] at hb
+    have h2 := Scheme.Modules.pullbackObjUnitIso_hom_app_pullbackSection p (U := ⊤)
+      (1 : Γ(S, ⊤))
+    refine Eq.trans ?_ (h2.trans ?_)
+    · simp only [Iso.trans_hom, Iso.app_hom, Scheme.Modules.Hom.comp_app,
+        ConcreteCategory.comp_apply, hbd]
+      exact congrArg _ hb
+    · exact map_one (p.app ⊤).hom
+  let t := (Scheme.Modules.boundaryPullbackComparison f).app _ ≪≫ T
+  refine ⟨t, fun V i ↦ congrArg _ ?_⟩
+  rw [← Iso.inv_comp_eq]
+  apply Scheme.Modules.unit_hom_ext
+  refine (?_ : _ = q i).trans ?_
+  · rw [← hu, ← ConcreteCategory.comp_apply, ← Scheme.Modules.Hom.comp_app,
+      Iso.hom_inv_id_assoc, Scheme.Modules.Hom.comp_app, ConcreteCategory.comp_apply]
+    have hnat := congrArg (fun ψ ↦ ψ.app ⊤ (1 : Γ(S, ⊤)))
+      (adj.unit.naturality (SheafOfModules.ιFree (R := S.ringCatSheaf) i ≫ b.hom))
+    simp only [Functor.id_map, Functor.comp_map, Scheme.Modules.Hom.comp_app,
+      Scheme.Modules.pushforward_map_app, ConcreteCategory.comp_apply] at hnat
+    simp only [q, σ, Adjunction.homEquiv_unit, Scheme.Modules.Hom.comp_app,
+      Scheme.Modules.pushforward_map_app, ConcreteCategory.comp_apply]
+    exact congrArg _ hnat.symm
+  · rw [← key i]
+    rw [show t.hom = (Scheme.Modules.boundaryPullbackComparison f).hom.app _ ≫ T.hom from rfl]
+    simp only [Iso.trans_inv, Iso.app_inv, Category.assoc]
+    rw [(Scheme.Modules.boundaryPullbackComparison f).hom.naturality_assoc,
+      Iso.inv_hom_id_app_assoc, ← Category.assoc, Scheme.Modules.Hom.comp_app _ T.hom,
+      ConcreteCategory.comp_apply]
+    congr 1
+    exact (congrArg (Scheme.Modules.pullbackSection f)
+      (ProjectiveSpace.coordinateSection_app_top_one _ S i).symm).trans
+      (Scheme.Modules.pullbackSection_app_one f _)
 
 end AlgebraicGeometry.SymmetricProjTautologicalCharts
