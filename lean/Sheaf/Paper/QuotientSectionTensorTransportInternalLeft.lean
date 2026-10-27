@@ -5,7 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.QuotientSectionTensorTransportInternalData
-import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientSectionTensorTransportFormulas
+import Sheaf.Paper.QuotientSectionTensorTransportInternalLeftCore
+import Sheaf.CategoryTheory.InternalSectionModuleFlat
 
 /-! # Derived-side scalar tensor evaluation -/
 
@@ -13,7 +15,7 @@ import Sheaf.Paper.IntegralResidueDerivedMonoidal
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
-universe u
+universe u u₁ v₁
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Obj ChangeOfRings
 
@@ -49,6 +51,24 @@ scalarTensorSectionPath; the remaining factors are the localized total section
 comparison and the two ordinary scalar comparisons. This proves the displayed
 evaluation. No assertion about the section ordinary tensor map e occurs here.
 The zero pair gives zero maps on both sides; no coefficient flatness is used. -/
+private theorem kflat_from_acyclic_test_local
+    {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{v₁} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    (P : CochainComplex C ℤ)
+    (hP : ∀ A : CochainComplex C ℤ, A.Acyclic →
+      (CochainComplex.mapBifunctor A P (curriedTensor C)).Acyclic) :
+    (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P := by
+  rw [← HomotopyCategory.kFlat_quotient_obj_iff, HomotopyCategory.kFlat_iff_preserves_acyclic]
+  intro A hA
+  obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
+  rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hA
+  have h := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2
+    (hP A hA)
+  exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) h, h⟩
+
+set_option maxHeartbeats 800000 in
+-- The derived-category equivalence and tensor comparison require a large elaboration budget.
 theorem section_tensor_transport_internal_left (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)
@@ -71,6 +91,32 @@ theorem section_tensor_transport_internal_left (T : Scheme.{u})
             ((c.model.E.mapHomologicalComplex (.up ℤ)).obj EP,
               (c.model.E.mapHomologicalComplex (.up ℤ)).obj EQ) =
         scalarTensorSectionPath a T c P Q := by
-  sorry
+  intro P Q
+  dsimp only
+  intro hP hQ hfP hfQ
+  let E := (equivalence Λ T).functor
+  let EP := (E.mapHomologicalComplex (.up ℤ)).obj P
+  let EQ := (E.mapHomologicalComplex (.up ℤ)).obj Q
+  have hcmp := (InternalAbelianSheafModule.internal_section_tensor_comparison
+    (Scheme.ProEt.topology T) (condensedRingObj Λ T)).2.choose_spec.choose_spec.2.2.2.2.2.2.2.2.2.2
+  have htestP : ∀ A : CochainComplex (internalModules Λ T) ℤ, A.Acyclic →
+      (CochainComplex.mapBifunctor A P (curriedTensor _)).Acyclic :=
+    hcmp P |>.mpr hP
+  have htestQ : ∀ A : CochainComplex (internalModules Λ T) ℤ, A.Acyclic →
+      (CochainComplex.mapBifunctor A Q (curriedTensor _)).Acyclic :=
+    hcmp Q |>.mpr hQ
+  have hKP := kflat_from_acyclic_test_local P htestP
+  have hKQ := kflat_from_acyclic_test_local Q htestQ
+  have hflatP : ∀ i : ℤ, ObjectProperty.flat (P.X i) := fun i ↦
+    (CategoryTheory.InternalAbelianSheafModule.flat_iff_sectionModule
+      (Scheme.ProEt.topology T) (condensedRingObj Λ T) (P.X i)).2 (hfP i)
+  have hflatQ : ∀ i : ℤ, ObjectProperty.flat (Q.X i) := fun i ↦
+    (CategoryTheory.InternalAbelianSheafModule.flat_iff_sectionModule
+      (Scheme.ProEt.topology T) (condensedRingObj Λ T) (Q.X i)).2 (hfQ i)
+  have hbn := hb P Q hKP hKQ hflatP hflatQ
+  have hcn := section_scalar_normalization a T c hc (P ⊗ Q)
+  have hqnorm := (section_derived_tensor_normalization
+    (Λ := Λ) (X := T) (Y := T) (f := 𝟙 T)).1 T |>.1 P Q
+  exact section_tensor_transport_internal_left_core a T c hc b hb barB hbarB P Q hbn hcn hqnorm
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

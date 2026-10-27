@@ -1,0 +1,86 @@
+{
+ "id": "lem-sfb-quotient-section-tensor-transport-internal-left-core",
+ "kind": "statement",
+ "title": "Categorical paste for internal-left scalar tensor transport",
+ "statement": "Given the normalized tensor, scalar counit, and qTensor equations for P and Q, the derived-side scalar tensor input followed by barB, the two output counits, and qTensor equals scalarTensorSectionPath.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4, categorical reassociation in the tensor localization proof."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-quotient-section-tensor-transport-internal-data"
+ ],
+ "proof": [
+  {
+   "text": "Reassociate the displayed composites, use naturality of barB, substitute the three supplied normalization equations, and cancel the comparison isomorphisms.",
+   "uses": [
+    "def-sfb-quotient-section-tensor-data",
+    "def-sfb-quotient-section-tensor-transport-internal-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-quotient-section-tensor-transport-internal-data"
+ ],
+ "proof_origin": {
+  "by": "T3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4, categorical reassociation in the tensor localization proof."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportInternalLeft",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-internal-left",
+   "place": "Tags 06YY and 07A4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTransportInternalLeftCore",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTransportInternalLeftCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_internal_left_core",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_internal_left_core"
+  ],
+  "statement": "theorem section_tensor_transport_internal_left_core (T : Scheme.{u}) (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c) (b : TensorIso a T) (hb : TensorNormalized a T b) (barB : tensor Λ T ⋙ c.model.T ≅ (c.model.T.prod c.model.T) ⋙ tensor Λ' T) (hbarB : TensorSectionCondition a T c b barB) (P Q : CochainComplex (Modules Λ T) ℤ) (hbn : b.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫ (compute a T P ⊗ₘ compute a T Q) ≫ Functor.LaxMonoidal.μ DerivedCategory.Q (((QuotientChange.extension a T).mapHomologicalComplex (.up ℤ)).obj P) (((QuotientChange.extension a T).mapHomologicalComplex (.up ℤ)).obj Q) = (D a T).map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫ compute a T (P ⊗ Q) ≫ DerivedCategory.Q.map (totalScalar a T P Q)) (hcn : c.derived.hom.app (DerivedCategory.Q.obj (P ⊗ Q)) ≫ c.model.T.map (sectionLocalizationComparison Λ T (P ⊗ Q)).hom ≫ c.model.ε.app (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q)) = (derivedFunctor Λ' T).map (compute a T (P ⊗ Q)) ≫ (sectionLocalizationComparison Λ' T (((QuotientChange.extension a T).mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q))).hom ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c.ordinary (.up ℤ)).hom.app (P ⊗ Q))) (hqnorm : (qTensor Λ T).app (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P, ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q) = (tensor Λ T).map (Prod.mkHom (sectionLocalizationComparison Λ T P).inv (sectionLocalizationComparison Λ T Q).inv) ≫ (tensorComparison Λ T).inv.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫ (derivedEquivalence Λ T).functor.map ((internalLocalizationTensorMap Λ T).app (P, Q)) ≫ localizedTotalComparison Λ T P Q) : scalarTensorSectionInput a T c P Q ≫ barB.hom.app (DerivedCategory.Q.obj (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P), DerivedCategory.Q.obj (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) ≫ (tensor Λ' T).map (Prod.mkHom (c.model.ε.app (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P)) (c.model.ε.app (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q))) ≫ (qTensor Λ' T).app ((c.model.E.mapHomologicalComplex (.up ℤ)).obj (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P), (c.model.E.mapHomologicalComplex (.up ℤ)).obj (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) = scalarTensorSectionPath a T c P Q",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261027T234322-L-98245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261027T234322-L-98245",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
