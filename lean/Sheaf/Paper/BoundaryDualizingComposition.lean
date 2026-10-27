@@ -22,7 +22,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
