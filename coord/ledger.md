@@ -20128,3 +20128,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:34 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: I read the item in full; it has no new nodes. The statement looks true: naturality, the E=L case, zero objects and the r)
 - 21:37 L: returned deliver/E3/Sheaf.Paper.ExceptionalScalarMateLocalization (reviewer RETURN: (the global build of c119ec5f95, still running) your landing 20261027T205919-L-1633564 fails to compile in Sheaf.Paper.E)
 - 21:40 L: merged deliver/NA/lem-pur-rational-braiding-scalar-compatibility (reviewer FIX+NODE(1); first push; new nodes: 2)
+- 21:45 L: returned deliver/J1/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescent (reviewer RETURN: (reviewer C-2969d, head 2969d679c) 6/H2: the item node lem-trf-relative-proj-twist-chart-descent.json is not in the deli)
