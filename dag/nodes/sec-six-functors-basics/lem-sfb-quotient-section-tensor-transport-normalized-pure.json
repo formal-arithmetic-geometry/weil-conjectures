@@ -1,0 +1,103 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportNormalized",
+  "date": "2026-10-27",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-normalized",
+   "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "section_tensor_transport_normalized",
+   "results": "No existing specialized theorem; this is a quotient-specific split obligation.",
+   "date": "2026-10-27",
+   "verdict": "Use the project interfaces and prove this split statement."
+  }
+ ],
+ "id": "lem-sfb-quotient-section-tensor-transport-normalized-pure",
+ "title": "Ordinary normalization of the quotient section tensor comparison",
+ "statement": "The underlying quotient section comparison admits a natural map satisfying the prescribed pure-tensor formula.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5."
+ },
+ "proof": [
+  {
+   "text": "Define the local pure-tensor formula using the scalar unit, verify balancing and restriction compatibility, and descend it through sheafification.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "A5",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent proof steps 1--5, split into a strictly simpler obligation."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTransportNormalizedPure",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTransportNormalizedPure.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_normalized_pure",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_normalized_pure"
+  ],
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-27",
+  "statement": "theorem section_tensor_transport_normalized_pure (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (b : TensorIso a T) (hb : TensorNormalized a T b)\n    (barB : tensor Λ T ⋙ c.model.T ≅\n      (c.model.T.prod c.model.T) ⋙ tensor Λ' T) :\n    ∃ e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶\n        (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj\n          (curriedTensor (modules Λ' T)),\n      ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W) (n : N.val.obj W)\n        (s : (ring Λ' T).obj.obj W),\n        (((e.app M).app N).val.app W)\n            (sectionScalarElement a T c (M ⊗ N) W\n              (sectionPureTensor Λ T M N W m n) s) =\n          sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W\n            (sectionScalarElement a T c M W m 1)\n            (sectionScalarElement a T c N W n s)"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T180450-L-3863257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T180450-L-3863257",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

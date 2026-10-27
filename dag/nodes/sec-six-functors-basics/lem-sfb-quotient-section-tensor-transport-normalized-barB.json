@@ -1,0 +1,105 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportNormalized",
+  "date": "2026-10-27",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-normalized",
+   "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "section_tensor_transport_normalized",
+   "results": "No existing specialized theorem; this is a quotient-specific split obligation.",
+   "date": "2026-10-27",
+   "verdict": "Use the project interfaces and prove this split statement."
+  }
+ ],
+ "id": "lem-sfb-quotient-section-tensor-transport-normalized-barB",
+ "title": "Underlying quotient section tensor comparison",
+ "statement": "For fixed normalized scalar section data and normalized tensor data, the underlying quotient section tensor comparison is nonempty before its normalization equations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5."
+ },
+ "proof": [
+  {
+   "text": "Construct the sectionwise balancing comparison and descend it through sheafification and the resolving-class equivalence. The signed total and tensor counits produce the comparison isomorphism.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pd-section-derived-tensor-normalization",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "A5",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent proof steps 1--5, split into a strictly simpler obligation."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTransportNormalizedBarB",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTransportNormalizedBarB.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_normalized_barB_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_normalized_barB_exists"
+  ],
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-27",
+  "statement": "theorem section_tensor_transport_normalized_barB_exists (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (b : TensorIso a T) (hb : TensorNormalized a T b) :\n    Nonempty (tensor Λ T ⋙ c.model.T ≅\n        (c.model.T.prod c.model.T) ⋙ tensor Λ' T)"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T180450-L-3863257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T180450-L-3863257",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

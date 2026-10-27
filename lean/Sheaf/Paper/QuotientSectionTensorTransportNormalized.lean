@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientSectionTensorTransportNormalizedBarB
+import Sheaf.Paper.QuotientSectionTensorTransportNormalizedPure
+import Sheaf.Paper.QuotientSectionTensorTransportNormalizedTotal
 
 /-! # Normalized section tensor comparison for quotient coefficients -/
 
@@ -64,6 +67,9 @@ theorem section_tensor_transport_normalized (T : Scheme.{u})
     ∃ barB : tensor Λ T ⋙ c.model.T ≅
         (c.model.T.prod c.model.T) ⋙ tensor Λ' T,
       SectionTensorNormalized a T c barB := by
-  sorry
+  obtain ⟨barB⟩ := section_tensor_transport_normalized_barB_exists a T c hc b hb
+  obtain ⟨e, he⟩ := section_tensor_transport_normalized_pure a T c hc b hb barB
+  have htotal := section_tensor_transport_normalized_total a T c hc b hb barB e he
+  exact ⟨barB, ⟨e, he, htotal⟩⟩
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
