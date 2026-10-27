@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.FiniteProjectionFixedCoordinates
 import Sheaf.Paper.ConstructibleProjectionMates
+import Sheaf.Paper.FiniteProperProjectionFixedRealizationNormalization
 
 /-! # Expanded proper projection realization step -/
 
@@ -47,6 +48,47 @@ theorem properComponent_fixed_realization_expanded (S : SixFunctorFiniteOperatio
           f.hom.left).app
             ((coordinates (C := C) (E := E) (n := n) (hn := hn) X).obj K)).app
               ((realization (C := C) (E := E) (n := n) (hn := hn) Y).inverse.obj L.obj) := by
-  sorry
+  let _ := Padic.finite_coefficientExtensionRing C.l E n hn
+  let JX := coordinates (C := C) (E := E) (n := n) (hn := hn) X
+  let JY := coordinates (C := C) (E := E) (n := n) (hn := hn) Y
+  let P := fixedDerivedPull (C := C) (E := E) (n := n) f
+  let Q := fixedDirect (C := C) (E := E) (n := n) f
+  let adj := fixedAdjunction (C := C) (E := E) (n := n) f
+  let TX := fixedTensor (C := C) (E := E) (n := n) X
+  let N := (realization (C := C) (E := E) (n := n) (hn := hn) Y).inverse.obj L.obj
+  let phi := AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison
+    (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))
+    f.hom.left
+  let pi := AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap
+    (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))
+    f.hom.left
+  let pc :=
+    ((partialTensor S Y).map ((S.finite.properIdentity f).inv.app K)).app L ≫
+      component S f (.ofIsProper f.hom.left) K L ≫
+      (S.finite.properIdentity f).hom.app
+        (((partialTensor S X).obj K).obj ((torPull S f).obj L))
+  let a := directTensorCoordinates S f K L
+  have hnorm := properComponent_fixed_realization_normalization S f K L
+  apply (adj.homEquiv _ _).symm.injective
+  rw [hnorm]
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have hpi := AlgebraicGeometry.ProEtale.map_rightDerivedLowerStarProjectionMap_comp_counit
+    (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))
+    f.hom.left (JX.obj K) N
+  have hpi' :
+      P.map ((pi.app (JX.obj K)).app N) ≫ adj.counit.app
+          ((TX.obj (JX.obj K)).obj (P.obj N)) =
+        (phi.app (Q.obj (JX.obj K))).app N ≫
+          (TX.map (adj.counit.app (JX.obj K))).app (P.obj N) := by
+    change P.map ((pi.app (JX.obj K)).app N) ≫ adj.counit.app
+          ((TX.obj (JX.obj K)).obj (P.obj N)) =
+        (phi.app (Q.obj (JX.obj K))).app N ≫
+          (TX.map (adj.counit.app (JX.obj K))).app (P.obj N) at hpi
+    exact hpi
+  have h := congrArg (fun t ↦ P.map (directTensorCoordinates S f K L).hom ≫ t) hpi'
+  simpa only [P, TX, Q, phi, pi, adj, fixedAdjunction, fixedDerivedPull, fixedTensor, fixedDirect,
+    AlgebraicGeometry.ProEtale.derivedTensorRightDerivedLowerStar_obj_obj,
+    AlgebraicGeometry.ProEtale.rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar_obj_obj,
+    Functor.map_comp, Category.assoc] using h.symm
 
 end WeilConjectures.CompactSupportFiniteProjection
