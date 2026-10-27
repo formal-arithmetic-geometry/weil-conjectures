@@ -20237,3 +20237,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:38 L: merged deliver/D6/Sheaf.SecSmoothPurity.ClosedUnitAllStages (stage 3; reviewer PASS; first push; landing 20261027T233859-L-4130346 (proof); batch 20261027T233735; modules 1; new nodes 2)
 - 23:39 L: merged deliver/D7/Sheaf.Paper.CanonicalSectionProjectionCore (stage 3; reviewer PASS; first push; landing 20261027T233900-L-4130801 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/D7/Sheaf.SixFunctors.OpenScalarAdjunctionCounit (stage 3; reviewer PASS; first push; landing 20261027T233901-L-4131080 (interface); batch 20261027T233735; modules 2; new nodes 2; change records: coord/changes/D7-open-scalar-adjunction-counit-aux.md)
+- 23:39 L: merged deliver/D8/Sheaf.Paper.CompactSupportTargetRationalComparison (stage 3; reviewer PASS; first push; landing 20261027T233902-L-4131535 (interface); batch 20261027T233735; modules 3; new nodes 2)

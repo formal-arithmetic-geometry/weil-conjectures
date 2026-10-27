@@ -1,0 +1,94 @@
+{
+ "kind": "lemma",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence: stagewise rational comparison and scalar transition coherence."
+ },
+ "stmt_deps": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pod-common-stage-pullback-normalized-descent"
+ ],
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compact_support_target_rational_comparison",
+   "results": "No earlier declaration provides either isolated stagewise family or its transition coherence.",
+   "date": "2026-10-28",
+   "verdict": "Use the two new strictly smaller statements."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportTargetRationalComparison",
+  "date": "2026-10-28",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-compact-support-target-rational-comparison",
+   "place": "Expansion of the integral localization and transition-square steps"
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-compact-support-target-rational-iso-family",
+ "title": "Stagewise rational compact-support target comparison",
+ "statement": "The integral proper/open comparison and its normalized localization produce the family of rational stage isomorphisms; transition compatibility is intentionally left to the second split statement.",
+ "proof": [
+  {
+   "text": "The integral proper/open comparison and its normalized localization produce the family of rational stage isomorphisms; transition compatibility is intentionally left to the second split statement.",
+   "uses": [
+    "lem-sf-compact-support-target-rational-iso-family",
+    "lem-sf-compact-support-target-rational-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-compact-support-target-rational-iso-family",
+  "lem-sf-compact-support-target-rational-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Stagewise rationalization and scalar compatibility."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportTargetRationalIsoFamily",
+  "file": "lean/Sheaf/Paper/CompactSupportTargetRationalIsoFamily.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.compact_support_target_rational_iso_family",
+  "statement": "theorem compact_support_target_rational_iso_family (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p) {X Y Z : Scheme.{max u v}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [∀ y : Y, Invertible (l : Y.residueField y)] [∀ z : Z, Invertible (l : Z.residueField z)] (f : X ⟶ Y) (g : X ⟶ Z) (e : Y ≅ Z) (h : f ≫ e.hom = g) [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (R : RingSystem.{u, v} l Ω D hl (f := f)) (F : FieldSystem.{u, v} l Ω D hl R) (c : Compactification f) (R' : RingSystem.{u, v} l Ω D hl (f := g)) (F' : FieldSystem.{u, v} l Ω D hl R') (c' : Compactification g) : ∃ a : ∀ i : AlgebraicallyClosedCoefficients.Index l Ω, (R.operation c (.rational (commonField.{u, v} l Ω i))).F ≅ (R'.operation c' (.rational (commonField.{u, v} l Ω i))).F ⋙ rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{max u v} l Ω i) e.hom, True",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T233902-L-4131535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T233902-L-4131535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

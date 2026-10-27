@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData
 public import Sheaf.Paper.CommonStagePullbackNormalizedDescent
+import Sheaf.Paper.CompactSupportTargetRationalIsoFamily
+import Sheaf.Paper.CompactSupportTargetRationalCoherence
 import all Sheaf.Paper.GeneralAlgebraicallyClosedCoefficientStages
 import all Mathlib.Logic.Small.Defs
 import all Mathlib.Algebra.Field.Shrink
@@ -125,6 +127,13 @@ theorem compact_support_target_rational_comparison
                 ((rationalOperationTransition l Ω D hl R' F' c' hij).hom.app K) =
           (rationalOperationTransition l Ω D hl R F c hij).hom.app K ≫
             (a j).hom.app (((stageSystem l Ω X).T hij).obj K) := by
-  sorry
+  obtain ⟨a, _⟩ := compact_support_target_rational_iso_family
+    l Ω D hl f g e h R F c R' F' c'
+  refine ⟨a, ?_⟩
+  intro i j hij K
+  exact compact_support_target_rational_coherence l Ω D hl f g e h R F c R' F' c' a
+    (fun hij ↦ rationalOperationTransition l Ω D hl R F c hij)
+    (fun hij ↦ rationalOperationTransition l Ω D hl R' F' c' hij)
+    (fun {i j} hij ↦ rfl) (fun {i j} hij ↦ rfl) hij K
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
