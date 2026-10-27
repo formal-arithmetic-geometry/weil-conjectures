@@ -1,0 +1,85 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, naturality and composition calculation."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-partial-tensor-identity-composition",
+   "place": "Naturality/component decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePartialTensorIdentityComposition",
+  "date": "2026-10-28",
+  "group": "C4"
+ },
+ "id": "lem-sf-finite-partial-tensor-identity-component",
+ "title": "Identity-composition component equation for finite partial tensor comparison",
+ "statement": "The explicit finite partial tensor pullback comparison satisfies the supplied identity-composition component equation.",
+ "stmt_deps": [
+  "def-sf-finite-partial-pullback-tensor",
+  "def-fix-six-functor-datum"
+ ],
+ "proof": [
+  {
+   "text": "Expand the explicit fixed-scalar realization formula and use naturality or composition coherence of the canonical pullback/tensor comparison, then cancel inverse equivalence units.",
+   "uses": [
+    "def-sf-finite-partial-pullback-tensor",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-partial-pullback-tensor",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePartialTensorIdentityComponent",
+  "file": "lean/Sheaf/Paper/FinitePartialTensorIdentityComponent.lean",
+  "declaration": "WeilConjectures.finitePartialTensor_identityComponent",
+  "declarations": [
+   "WeilConjectures.finitePartialTensor_identityComponent"
+  ],
+  "statement": "theorem finitePartialTensor_identityComponent\n    (S : SixFunctorFiniteOperations D C E n hn) (X : SixFunctorSpace D) :\n    let U := S.finite.pull (𝟙 X)\n    let V := CompactSupportFiniteProjection.torPull S (𝟙 X)\n    let T := Functor.uncurry.obj (CompactSupportFiniteProjection.partialTensor S X)\n    let c : ∀ M, U.obj M ≅ U.obj (U.obj M) := fun M ↦\n      eqToIso (congrArg (fun f ↦ (S.finite.pull f).obj M)\n        (Category.id_comp (𝟙 X)).symm) ≪≫\n        (S.finite.pullComposition (𝟙 X) (𝟙 X)).app M\n    let d : ∀ L, V.obj L ≅ V.obj (V.obj L) := fun L ↦\n      eqToIso (congrArg (fun f ↦ (CompactSupportFiniteProjection.torPull S f).obj L)\n        (Category.id_comp (𝟙 X)).symm) ≪≫\n        CompactSupportFiniteProjection.torPullComposition S (𝟙 X) (𝟙 X) L\n    ∀ M L,\n      (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom ≫\n          T.map (Prod.mkHom (c M).hom (d L).hom) =\n        (c (T.obj (M, L))).hom ≫\n          U.map ((CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom) ≫\n          (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X)\n            (U.obj M) (V.obj L)).hom",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-28"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, naturality and composition calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T180509-L-3867486",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T180509-L-3867486",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
