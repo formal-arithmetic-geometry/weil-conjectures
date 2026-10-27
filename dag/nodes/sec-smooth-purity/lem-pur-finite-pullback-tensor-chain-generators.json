@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-chain-generators",
+ "kind": "statement",
+ "title": "The explicit intrinsic chain comparison on unit generators",
+ "status": "split",
+ "statement": "For any finite-level coefficient cochain complexes P,Q, conjugating the inverse ordinary signed-total tensor pullback isomorphism by the prescribed degreewise finite realization gives a chain isomorphism from the intrinsic pullback of their total tensor to the total tensor of their intrinsic pullbacks. This isomorphism sends each inverse-image unit of a homogeneous pure generator to the pure generator of the two inverse-image units. No K-flatness or invertibility condition is required.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-construction",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, proof of lemma-pullback-tensor-product; Tag 06YS for K-flat resolutions; ordinary sheaf tensor pullback in modules on sites, Tag 03EL."
+ },
+ "proof": [
+  {
+   "text": "Conjugate the inverse ordinary signed-total tensor comparison by the prescribed degreewise finite realization to construct the chain isomorphism.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse realization sends an intrinsic adjunction unit to the ordinary adjunction unit. Apply the ordinary total generator equation, the total-map generator equation, and the forward realization unit equation in both factors.",
+   "uses": [
+    "lem-pur-proetale-total-tensor-pullback-generators",
+    "lem-pur-coefficient-total-tensor-map-generators",
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-pullback-tensor-construction",
+  "lem-pur-proetale-total-tensor-pullback-generators",
+  "lem-pur-coefficient-total-tensor-map-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit homogeneous-generator and flat-resolution calculations from the proof of Tag 07A4."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total tensor complex functor maps homogeneous pure tensor generators to pure tensors of component maps",
+   "results": "8 generic homological tensor declarations, including HomologicalComplex.tensorHom and ιTensorObj. No sheafified coefficient generator or prescribed finite representative formula.",
+   "date": "2026-10-27",
+   "verdict": "Use total-summand formulas and prove the sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 generic naturality and diagram hits. Naturality is used for the K-flat resolution transport, but gives no specialized normalization.",
+   "date": "2026-10-27",
+   "verdict": "Generic API reused; no exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorMap|tensorHom_tmul|mapBifunctor.*ι",
+   "results": "25 hits, including Mathlib total-bifunctor summand formulas and ModuleCat tensorHom_tmul. These give the component calculations; sheafification and the specified realization still require proof.",
+   "date": "2026-10-27",
+   "verdict": "Reuse component APIs; no duplicate specialized theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorKFlatNormalization",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-kflat-normalization",
+   "place": "Proved supporting calculation for the generator equation and K-flat representative square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorChainGenerators",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorChainGenerators.lean",
+  "declaration": "WeilConjectures.finitePullbackTensorChain_generators",
+  "statement": "theorem finitePullbackTensorChain_generators {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) :\n    ∀ (p q i : ℤ) (hpq : p + q = i) (U : Y.ProEt)\n    (x : (P.X p).val.obj (op U)) (y : (Q.X q).val.obj (op U)),\n    ((finitePullbackTensorChainIso l E f n P Q).hom.f i).val.app (op ((proEtaleBaseChange f).obj U))\n      (((sfIntrinsicConstantModuleAdjunction f\n        (finiteCoefficientRing l E (n + 1))).unit.app\n          (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)\n            (integralCoefficientCommRingSheaf l E Y n)).obj (P, Q)).X i)).val.app (op U)\n        (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)\n          (integralCoefficientCommRingSheaf l E Y n) P Q p q i hpq (op U) x y)) =\n    coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X)\n      (integralCoefficientCommRingSheaf l E X n)\n      (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n        (.up ℤ)).obj P)\n      (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n        (.up ℤ)).obj Q) p q i hpq\n      (op ((proEtaleBaseChange f).obj U))\n      (((sfIntrinsicConstantModuleAdjunction f\n        (finiteCoefficientRing l E (n + 1))).unit.app (P.X p)).val.app (op U) x)\n      (((sfIntrinsicConstantModuleAdjunction f\n        (finiteCoefficientRing l E (n + 1))).unit.app (Q.X q)).val.app (op U) y)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finitePullbackTensorChainIso",
+   "WeilConjectures.finitePullbackTensorChain_generators"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

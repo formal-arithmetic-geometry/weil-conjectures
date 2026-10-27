@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-kflat-diagrams",
+ "kind": "statement",
+ "title": "Naturality of both K-flat tensor comparison composites",
+ "status": "split",
+ "statement": "Let PR be any property of finite-level complexes on Y such that its objects and their ordinary termwise pullbacks along f:X→Y are K-flat. Both composites in the finite ordinary representative square extend to natural transformations on pairs in the full subcategory PR: one uses the source tensor model, the derived tensor comparison, and the two factors; the other uses the factor on the total tensor, the inverse ordinary total comparison, and the target tensor model. Their components are exactly those composites.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-representative-data",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, proof of lemma-pullback-tensor-product; Tag 06YS for K-flat resolutions; ordinary sheaf tensor pullback in modules on sites, Tag 03EL."
+ },
+ "proof": [
+  {
+   "text": "Restrict the prescribed natural tensor-model isomorphism along the lift of a K-flat family to the full subcategory of K-flat complexes. Its component is the given finite tensor-model isomorphism.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing natural ordinary total comparison, whose inverse components are prescribed pointwise. Compose the source model with the natural derived construction and factors for the first transformation, and the factors, ordinary comparison, and target model for the second. Their component formulas follow by whiskering.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-descent-data",
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "def-pur-finite-pullback-tensor-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit homogeneous-generator and flat-resolution calculations from the proof of Tag 07A4."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total tensor complex functor maps homogeneous pure tensor generators to pure tensors of component maps",
+   "results": "8 generic homological tensor declarations, including HomologicalComplex.tensorHom and ιTensorObj. No sheafified coefficient generator or prescribed finite representative formula.",
+   "date": "2026-10-27",
+   "verdict": "Use total-summand formulas and prove the sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 generic naturality and diagram hits. Naturality is used for the K-flat resolution transport, but gives no specialized normalization.",
+   "date": "2026-10-27",
+   "verdict": "Generic API reused; no exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorMap|tensorHom_tmul|mapBifunctor.*ι",
+   "results": "25 hits, including Mathlib total-bifunctor summand formulas and ModuleCat tensorHom_tmul. These give the component calculations; sheafification and the specified realization still require proof.",
+   "date": "2026-10-27",
+   "verdict": "Reuse component APIs; no duplicate specialized theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorKFlatNormalization",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-kflat-normalization",
+   "place": "Proved supporting calculation for the generator equation and K-flat representative square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorKFlatDiagrams",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorKFlatDiagrams.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_kflat_diagrams",
+  "statement": "theorem finitePullbackTensor_kflat_diagrams {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    (PR : ObjectProperty (CochainComplex (normalizedDVRModules l E Y n) ℤ))\n    (hy : ∀ K, PR K → CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E Y n) K)\n    (hx : ∀ K, PR K → CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E X n)\n      ((FinitePullbackTensorRep.pull l E f n).obj K)) :\n    ∃ a b :\n        (PR.ι.prod PR.ι ⋙ FinitePullbackTensorRep.totalTensor l E Y n ⋙\n          DerivedCategory.Q ⋙ finiteDerivedPullback l E n f) ⟶\n        ((PR.ι ⋙ FinitePullbackTensorRep.pull l E f n ⋙ DerivedCategory.Q).prod\n          (PR.ι ⋙ FinitePullbackTensorRep.pull l E f n ⋙ DerivedCategory.Q)) ⋙\n            finiteIntrinsicDerivedTensor l E X n,\n      (∀ A B : PR.FullSubcategory, a.app (A, B) =\n        (finiteDerivedPullback l E n f).map\n          ((finiteIntrinsicTensorModels l E Y n).iso (ProEt.topology Y)\n            (integralCoefficientCommRingSheaf l E Y n) (finiteIntrinsicClosed l E Y n)\n            A.obj B.obj (hy A.obj A.property) (hy B.obj B.property)).hom ≫\n        (finitePullbackTensorConstruction l E f n (DerivedCategory.Q.obj A.obj)\n          (DerivedCategory.Q.obj B.obj)).hom ≫\n        (finiteIntrinsicDerivedTensor l E X n).map\n          (Prod.mkHom ((FinitePullbackTensorRep.factors l E f n).hom.app A.obj)\n            ((FinitePullbackTensorRep.factors l E f n).hom.app B.obj))) ∧\n      (∀ A B : PR.FullSubcategory, b.app (A, B) =\n        (FinitePullbackTensorRep.factors l E f n).hom.app\n          (FinitePullbackTensorRep.tensor l E Y n A.obj B.obj) ≫\n        DerivedCategory.Q.map (FinitePullbackTensorRep.comparison l E f n A.obj B.obj) ≫\n        ((finiteIntrinsicTensorModels l E X n).iso (ProEt.topology X)\n          (integralCoefficientCommRingSheaf l E X n) (finiteIntrinsicClosed l E X n)\n          ((FinitePullbackTensorRep.pull l E f n).obj A.obj)\n          ((FinitePullbackTensorRep.pull l E f n).obj B.obj)\n          (hx A.obj A.property) (hx B.obj B.property)).hom)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteTensorModelOnKFlatFamily",
+   "WeilConjectures.finitePullbackTensor_kflat_diagrams"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

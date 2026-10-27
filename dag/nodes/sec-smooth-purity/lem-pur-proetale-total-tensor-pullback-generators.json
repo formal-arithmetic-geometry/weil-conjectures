@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-proetale-total-tensor-pullback-generators",
+ "kind": "statement",
+ "title": "Unit generators under the ordinary total pullback tensor comparison",
+ "status": "split",
+ "statement": "For a scheme map f:X→Y, identified commutative coefficient sheaves R,S, arbitrary unbounded coefficient cochain complexes P,Q on Y, p+q=i, and sections x,y over U, the inverse of proEtaleTensorPullbackTotalIso sends the ordinary pullback adjunction unit of the homogeneous total generator x,y to the homogeneous total generator of the two ordinary pullback adjunction units over baseChange_f(U).",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, proof of lemma-pullback-tensor-product; Tag 06YS for K-flat resolutions; ordinary sheaf tensor pullback in modules on sites, Tag 03EL."
+ },
+ "proof": [
+  {
+   "text": "Naturality of the ordinary pullback adjunction unit moves the source total-summand inclusion past the unit.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The defining summand equation for the inverse total comparison reduces the section equation to the prescribed unit-generator equation of the ordinary tensor pullback comparison. Apply that equation and the target summand inclusion.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit homogeneous-generator and flat-resolution calculations from the proof of Tag 07A4."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total tensor complex functor maps homogeneous pure tensor generators to pure tensors of component maps",
+   "results": "8 generic homological tensor declarations, including HomologicalComplex.tensorHom and ιTensorObj. No sheafified coefficient generator or prescribed finite representative formula.",
+   "date": "2026-10-27",
+   "verdict": "Use total-summand formulas and prove the sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 generic naturality and diagram hits. Naturality is used for the K-flat resolution transport, but gives no specialized normalization.",
+   "date": "2026-10-27",
+   "verdict": "Generic API reused; no exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorMap|tensorHom_tmul|mapBifunctor.*ι",
+   "results": "25 hits, including Mathlib total-bifunctor summand formulas and ModuleCat tensorHom_tmul. These give the component calculations; sheafification and the specified realization still require proof.",
+   "date": "2026-10-27",
+   "verdict": "Reuse component APIs; no duplicate specialized theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorKFlatNormalization",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-kflat-normalization",
+   "place": "Proved supporting calculation for the generator equation and K-flat representative square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleTotalTensorPullbackGenerators",
+  "file": "lean/Sheaf/Paper/ProEtaleTotalTensorPullbackGenerators.lean",
+  "declaration": "WeilConjectures.proEtaleTensorPullbackTotal_generators",
+  "statement": "theorem proEtaleTensorPullbackTotal_generators {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)\n    (p q i : ℤ) (h : p + q = i) (U : Y.ProEt)\n    (x : (P.X p).val.obj (op U)) (y : (Q.X q).val.obj (op U)) :\n    ((proEtaleTensorPullbackTotalIso f R S c P Q).inv.f i).val.app\n      (op ((proEtaleBaseChange f).obj U))\n      (((proEtaleRingModuleAdjunction f R S c).unit.app\n        (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y) R).obj (P, Q)).X i)).val.app\n          (op U) (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y) R\n            P Q p q i h (op U) x y)) =\n    coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology X) S\n      (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P)\n      (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj Q)\n      p q i h (op ((proEtaleBaseChange f).obj U))\n      (((proEtaleRingModuleAdjunction f R S c).unit.app (P.X p)).val.app (op U) x)\n      (((proEtaleRingModuleAdjunction f R S c).unit.app (Q.X q)).val.app (op U) y)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

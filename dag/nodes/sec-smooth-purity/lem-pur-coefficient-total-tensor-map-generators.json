@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-coefficient-total-tensor-map-generators",
+ "kind": "statement",
+ "title": "Homogeneous generators under maps of coefficient total tensors",
+ "status": "split",
+ "statement": "For a scheme W, a sheaf R of commutative rings, maps a:P→P′ and b:Q→Q′ of arbitrary unbounded coefficient cochain complexes, and p+q=i, the degree i map of the ordinary signed total tensor sends the homogeneous sheafified generator of x,y in bidegree p,q to the homogeneous generator of a_p(x),b_q(y). This holds at every site object, without flatness or boundedness.",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, proof of lemma-pullback-tensor-product; Tag 06YS for K-flat resolutions; ordinary sheaf tensor pullback in modules on sites, Tag 03EL."
+ },
+ "proof": [
+  {
+   "text": "On each bidegree, the defining map of the total tensor commutes with the summand inclusion and is tensorHom of the two component maps.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of tensor sheafification sends pure tensors to pure tensors of images. Apply the target summand inclusion.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit homogeneous-generator and flat-resolution calculations from the proof of Tag 07A4."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total tensor complex functor maps homogeneous pure tensor generators to pure tensors of component maps",
+   "results": "8 generic homological tensor declarations, including HomologicalComplex.tensorHom and ιTensorObj. No sheafified coefficient generator or prescribed finite representative formula.",
+   "date": "2026-10-27",
+   "verdict": "Use total-summand formulas and prove the sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 generic naturality and diagram hits. Naturality is used for the K-flat resolution transport, but gives no specialized normalization.",
+   "date": "2026-10-27",
+   "verdict": "Generic API reused; no exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorMap|tensorHom_tmul|mapBifunctor.*ι",
+   "results": "25 hits, including Mathlib total-bifunctor summand formulas and ModuleCat tensorHom_tmul. These give the component calculations; sheafification and the specified realization still require proof.",
+   "date": "2026-10-27",
+   "verdict": "Reuse component APIs; no duplicate specialized theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorKFlatNormalization",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-kflat-normalization",
+   "place": "Proved supporting calculation for the generator equation and K-flat representative square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientTotalTensorMapGenerators",
+  "file": "lean/Sheaf/Paper/CoefficientTotalTensorMapGenerators.lean",
+  "declaration": "WeilConjectures.coefficientTotalTensor_map_generator",
+  "statement": "theorem coefficientTotalTensor_map_generator (W : Scheme.{u})\n    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})\n    {P Q P' Q' : CochainComplex (proEtaleRingModules W R) ℤ}\n    (a : P ⟶ P') (b : Q ⟶ Q') (p q i : ℤ) (h : p + q = i) (V : W.ProEtᵒᵖ)\n    (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :\n    (((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W) R).map\n      (Prod.mkHom a b)).f i).val.app V\n        (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W) R P Q p q i h V x y) =\n      coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology W) R P' Q' p q i h V\n        ((a.f p).val.app V x) ((b.f q).val.app V y)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

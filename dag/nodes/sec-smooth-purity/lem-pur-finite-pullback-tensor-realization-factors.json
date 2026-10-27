@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-realization-factors",
+ "kind": "statement",
+ "title": "Derived factors of the finite realization",
+ "status": "split",
+ "statement": "For every finite coefficient complex P, the ordinary-coordinate factor followed by localization of the degreewise finite realization is the intrinsic exact-derived pullback factor. No K-flatness is required.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-representative-data",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, proof of lemma-pullback-tensor-product; Tag 06YS for K-flat resolutions; ordinary sheaf tensor pullback in modules on sites, Tag 03EL."
+ },
+ "proof": [
+  {
+   "text": "Expand the ordinary-coordinate factor as inverse derived realization followed by the ordinary factor. Naturality of the derived realization with its factorization maps identifies the latter factor followed by localized realization with derived realization followed by intrinsic factor. Cancel the inverse derived realization.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-representative-data",
+    "def-pur-finite-pullback-tensor-construction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-pullback-tensor-representative-data",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit homogeneous-generator and flat-resolution calculations from the proof of Tag 07A4."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total tensor complex functor maps homogeneous pure tensor generators to pure tensors of component maps",
+   "results": "8 generic homological tensor declarations, including HomologicalComplex.tensorHom and ιTensorObj. No sheafified coefficient generator or prescribed finite representative formula.",
+   "date": "2026-10-27",
+   "verdict": "Use total-summand formulas and prove the sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 generic naturality and diagram hits. Naturality is used for the K-flat resolution transport, but gives no specialized normalization.",
+   "date": "2026-10-27",
+   "verdict": "Generic API reused; no exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ι_mapBifunctorMap|tensorHom_tmul|mapBifunctor.*ι",
+   "results": "25 hits, including Mathlib total-bifunctor summand formulas and ModuleCat tensorHom_tmul. These give the component calculations; sheafification and the specified realization still require proof.",
+   "date": "2026-10-27",
+   "verdict": "Reuse component APIs; no duplicate specialized theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorKFlatNormalization",
+  "date": "2026-10-27",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-kflat-normalization",
+   "place": "Proved supporting calculation for the generator equation and K-flat representative square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorRealizationFactors",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorRealizationFactors.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_realization_factors",
+  "statement": "theorem finitePullbackTensor_realization_factors {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P : CochainComplex (normalizedDVRModules l E Y n) ℤ) :\n    letI : (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).Additive :=\n      sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f\n    (FinitePullbackTensorRep.factors l E f n).hom.app P ≫\n      DerivedCategory.Q.map\n        ((NatIso.mapHomologicalComplex (pullbackTensorFiniteRealization l E f n)\n          (.up ℤ)).hom.app P) =\n    (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app\n      P",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T180832-L-3907578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

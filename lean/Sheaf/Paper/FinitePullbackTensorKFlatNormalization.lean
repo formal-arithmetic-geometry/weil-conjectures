@@ -6,6 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.Paper.CompletedPullbackTowerCore
+import Sheaf.Paper.FinitePullbackTensorChainGenerators
+import Sheaf.Paper.FinitePullbackTensorKFlatTransport
 
 /-! # Intrinsic pullback tensor normalization on K-flat complexes
 
@@ -23,16 +25,22 @@ set_option synthInstance.maxSize 2048
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 universe u
-open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
+open CategoryTheory CategoryTheory.Functor AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
+open MonoidalCategory TensorProduct
 namespace WeilConjectures
 attribute [local irreducible] Scheme.residueField HasDerivedCategory.standard
   Functor.mapDerivedCategory finitePullbackTensorConstruction
   coefficientFiniteQuotientDerived coefficientFiniteQuotientModel
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
+  CategoryTheory.Functor.map₂HomologicalComplex
+attribute [local irreducible] SheafOfModules.monoidalCategory
+  proEtaleTensorPullbackTotalIso CategoryTheory.Functor.mapBifunctorHomologicalComplex
+  HomologicalComplex₂.total
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 attribute [local instance] sfIntrinsicPullback_additive
-  coefficientFiniteQuotientExtensionAdditive
+  coefficientFiniteQuotientExtensionAdditive pullbackTensorCoefficientFinite
+  SheafOfModules.monoidalCategory
 
 /-- The total pullback tensor comparison sends inverse-image unit generators to tensors
 of inverse-image unit generators. Source: Stacks 03EL and 07A4
@@ -128,6 +136,9 @@ theorem finitePullbackTensor_kflat_normalization {X Y : Scheme.{u}} (f : X ⟶ Y
         DerivedCategory.Q.map k.hom ≫
         (coefficientFiniteTensorModelIso l E X
           (pullbackTensorCalculus l E X).toCoefficientDerivedSystemTensors
-          n _ _ hFP hFQ).hom := by sorry
+          n _ _ hFP hFQ).hom := by
+  refine ⟨finitePullbackTensorChainIso l E f n P Q,
+    finitePullbackTensorChain_generators l E f n P Q, ?_⟩
+  exact finitePullbackTensor_intrinsic_kflat_square l E f n P Q hP hQ hFP hFQ
 
 end WeilConjectures
