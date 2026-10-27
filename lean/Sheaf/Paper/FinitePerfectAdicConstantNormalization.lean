@@ -6,6 +6,8 @@ Authors: SHEAF group S7
 module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantCohomology
+import Sheaf.Paper.FinitePerfectAdicConstantUniversal
+import Sheaf.Paper.FinitePerfectAdicConstantCoherence
 
 /-! # Universal normalization of the explicit constant quotient diagram
 
@@ -45,6 +47,11 @@ theorem finitePerfectAdicEtaleConstant_normalization (Y : Scheme.{t})
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :
     EtaleUniversalNormalization Y
       (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
-      (finitePerfectAdicEtaleConstantTransition Y T n) := by sorry
+      (finitePerfectAdicEtaleConstantTransition Y T n) := by
+  refine ⟨?_, ?_⟩
+  · intro U
+    exact finitePerfectAdicEtaleConstant_universal Y T n U
+  · intro U V f
+    exact finitePerfectAdicEtaleConstant_coherence Y T n f
 
 end AlgebraicGeometry.Scheme

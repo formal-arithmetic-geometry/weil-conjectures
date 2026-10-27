@@ -1,0 +1,105 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6 normalized finite quotient diagram"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-perfect-adic-constant-normalization-coherence",
+ "title": "Restriction coherence of the constant finite perfect transition",
+ "statement": "theorem finitePerfectAdicEtaleConstant_coherence (Y : Scheme.{t})\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    ∀ {U V : Y.Etale} (f : U ⟶ V),\n      (localIsomorphismRestrictionComp Y\n          (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1))) f).inv.app\n          (finitePerfectAdicEtaleConstant Y T (n + 1)) ≫\n        etaleIsomorphismNormalizationArrow Y\n          (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))\n          (finitePerfectAdicEtaleConstantTransition Y T n) U =\n      (Etale.upperStar (ModuleCat.{t + 1}\n          (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) f.left).mapDerivedCategory.map\n          (etaleIsomorphismNormalizationArrow Y\n            (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))\n            (finitePerfectAdicEtaleConstantTransition Y T n) V) ≫\n        (etaleNormalizationCoefficients f.left\n          (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).hom.app\n          ((localIsomorphismRestriction Y\n            (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))) V).obj\n            (finitePerfectAdicEtaleConstant Y T n)) ≫\n        (normalizationRestrict U.left.smallEtaleTopology\n          (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).map\n          ((localIsomorphismRestrictionComp Y\n            (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))) f).inv.app\n            (finitePerfectAdicEtaleConstant Y T n))",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-etale-universal-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Expand both sides using the canonical etale inverse-image coefficient mate. Naturality of that mate and functoriality of etale inverse image give the same composite before derived localization.",
+   "uses": [
+    "def-weil-pbc-derived-normalization-arrows",
+    "lem-weil-pbc-derived-scalar-extension-local-systems"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-normalization-arrows",
+  "lem-weil-pbc-derived-scalar-extension-local-systems"
+ ],
+ "proof_origin": {
+  "by": "J8 stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6 normalized finite quotient diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite perfect etale normalization universal arrow",
+   "results": "No exact match; project APIs reused.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite perfect etale normalization",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePerfectAdic.*normalization",
+   "results": "Project constant normalization APIs found.",
+   "date": "2026-10-27",
+   "verdict": "reuse project APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicConstantNormalization",
+  "date": "2026-10-27",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-constant-normalization",
+   "place": "Tag 09C6 normalized finite quotient diagram",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicConstantCoherence",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicConstantCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicEtaleConstant_coherence",
+  "statement": "theorem finitePerfectAdicEtaleConstant_coherence (Y : Scheme.{t})\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    ∀ {U V : Y.Etale} (f : U ⟶ V),\n      (localIsomorphismRestrictionComp Y\n          (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1))) f).inv.app\n          (finitePerfectAdicEtaleConstant Y T (n + 1)) ≫\n        etaleIsomorphismNormalizationArrow Y\n          (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))\n          (finitePerfectAdicEtaleConstantTransition Y T n) U =\n      (Etale.upperStar (ModuleCat.{t + 1}\n          (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) f.left).mapDerivedCategory.map\n          (etaleIsomorphismNormalizationArrow Y\n            (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))\n            (finitePerfectAdicEtaleConstantTransition Y T n) V) ≫\n        (etaleNormalizationCoefficients f.left\n          (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).hom.app\n          ((localIsomorphismRestriction Y\n            (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))) V).obj\n            (finitePerfectAdicEtaleConstant Y T n)) ≫\n        (normalizationRestrict U.left.smallEtaleTopology\n          (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).map\n          ((localIsomorphismRestrictionComp Y\n            (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))) f).inv.app\n            (finitePerfectAdicEtaleConstant Y T n))",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T180656-L-3889595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T180656-L-3889595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
