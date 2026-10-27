@@ -6,6 +6,7 @@ Authors: SHEAF group P6
 module
 
 public import Sheaf.Paper.FiniteProjectionFixedCoordinates
+import Sheaf.Paper.FiniteProperProjectionFixedRealizationExpanded
 
 /-! # Proper projection in fixed coefficients
 
@@ -52,7 +53,8 @@ theorem properComponent_fixed_realization_core (S : SixFunctorFiniteOperations D
           f.hom.left).app
             ((coordinates (C := C) (E := E) (n := n) (hn := hn) X).obj K)).app
               ((realization (C := C) (E := E) (n := n) (hn := hn) Y).inverse.obj L.obj) := by
-  sorry
+  simpa only [properComponent, Functor.comp_obj, Functor.comp_map, Category.assoc]
+    using properComponent_fixed_realization_expanded S f K L
 
 /-- The proper specialization realizes the fixed direct-image projection itself.
 No supplied constructible adjunction or transpose occurs in this equation.
