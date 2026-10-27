@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.Covers
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 /-!
@@ -38,12 +39,6 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.ProEt
 
 variable {S : Scheme.{u}} {U : S.Opens} (hU : IsAffineOpen U)
-
-/-- `Spec D ⟶ Spec R` is weakly étale for a weakly étale `R`-algebra `D`. -/
-instance weaklyEtale_SpecMap_algebraMap (R D : Type u) [CommRing R] [CommRing D] [Algebra R D]
-    [Algebra.WeaklyEtale R D] : WeaklyEtale (Spec.map (CommRingCat.ofHom (algebraMap R D))) := by
-  rw [WeaklyEtale.Spec_iff]
-  exact RingHom.weaklyEtale_algebraMap_iff.mpr ‹_›
 
 /-- The affine model `Spec D ⟶ Spec Γ(S, U) ≅ U ⊆ S` of a weakly étale `Γ(S, U)`-algebra `D`,
 as an object of the small pro-étale site of `S`. -/

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvaria
 public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.AffineModelCover
 public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance.Covers
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleUniversalHomeomorphism
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
 
 /-!
 # Topological invariance of the small pro-étale site
@@ -115,13 +116,6 @@ instance isCoverDense_overPullback :
 section LocallyFull
 
 omit [IsUniversalHomeomorphism r] in
-lemma generate_singleton_le {C : Type*} [Category C] {Z W : C} {f : Z ⟶ W} {S : Sieve W}
-    (h : S f) : Sieve.generate (Presieve.singleton f) ≤ S := by
-  rw [Sieve.generate_le_iff]
-  rintro _ _ ⟨⟩
-  exact h
-
-omit [IsUniversalHomeomorphism r] in
 /-- The sieve on `W : S.ProEt` of the morphisms factoring through the affine model of an
 ind-étale algebra over an affine open of `S`. -/
 def indEtaleModelSieve {S : Scheme.{u}} (W : S.ProEt) : Sieve W where
@@ -195,7 +189,7 @@ lemma imageSieve_mem_topology_of_indEtale (T₁ : Type u) [CommRing T₁] [Algeb
     obtain ⟨x, rfl⟩ := r.surjective y
     exact hle hy
   obtain ⟨D, _, _, _, c, hc⟩ := exists_overPullback_cover r hU'' B
-  refine (topology X).superset_covering (generate_singleton_le ?_) hc
+  refine (topology X).superset_covering (Sieve.generate_singleton_le ?_) hc
   -- `c ≫ f ≫ h` and `c ≫ f ≫ k'` are base changes of morphisms of affine models
   obtain ⟨z, hz⟩ : ∃ z : ofAlgebra hU'' D ⟶ ofAlgebra hU T₁,
       (MorphismProperty.Over.pullback @WeaklyEtale ⊤ r).map z = c ≫ f ≫ h := by

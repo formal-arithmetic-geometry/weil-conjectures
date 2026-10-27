@@ -19,11 +19,8 @@ which is bijective on stalks, and let `P` be any `R`-algebra which is bijective 
 The proof is the same as the one of `Algebra.BijectiveOnStalks.indZariski_of_isWLocal`, where
 the ring `PullbackProfinite R T i` is replaced by `P`.
 
-We also show that ind-Zariski ring maps are stable under base change.
-
 ## Main results
 
-- `RingHom.IndZariski.isStableUnderBaseChange`: ind-Zariski maps are stable under base change.
 - `Algebra.BijectiveOnStalks.nonempty_algEquiv_of_isPullback`: the variant of Stacks 097F.
 -/
 
@@ -32,15 +29,6 @@ We also show that ind-Zariski ring maps are stable under base change.
 universe u
 
 open CategoryTheory TopCat PrimeSpectrum
-
-/-- Ind-Zariski ring homomorphisms are stable under base change. -/
-lemma RingHom.IndZariski.isStableUnderBaseChange :
-    RingHom.IsStableUnderBaseChange RingHom.IndZariski := by
-  intro R S R' S' _ _ _ _ _ _ _ _ _ _ _ hpush hRS
-  rw [iff_ind_isLocalIso] at hRS ⊢
-  rw [← CommRingCat.isPushout_iff_isPushout] at hpush
-  exact (inferInstance : (MorphismProperty.ind
-    (RingHom.toMorphismProperty RingHom.IsLocalIso)).IsStableUnderCobaseChange).1 hpush.flip hRS
 
 variable {R S P : Type u} [CommRing R] [CommRing S] [CommRing P]
 
