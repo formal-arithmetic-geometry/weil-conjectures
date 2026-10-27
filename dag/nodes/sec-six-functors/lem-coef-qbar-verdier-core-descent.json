@@ -8,74 +8,53 @@
   "place": "Final coefficient-transport paragraph (thm-coef-qbar-verdier); formal expansion of retained proof steps 1--4 and the formal restriction equations in step 10; detailed retained argument: dag/nodes/sec-six-functors/thm-coef-qbar-verdier.json, original proof steps"
  },
  "stmt_deps": [
-  "def-sf-common-stage-verdier-data"
+  "def-sf-common-stage-verdier-data",
+  "lem-coef-qbar-verdier-retract-completion"
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal C_E(W)=D^b_c(W,E)$ for the rationalized stages used in the statement and $T_{M/E}$ for their scalar extension. Form the pair category from these stages exactly as in [def-weil-algebraically-closed-coefficients]. We construct the contravariant functor directly on its representatives. By [thm-coef-rational-verdier], $D_E=D_{W,E}$ is a contravariant exact $E$-linear equivalence, with coherent isomorphisms $b_{M/E,K}:T_{M/E}D_EK\\to D_M(T_{M/E}K)$. Define $D(E,K)=(E,D_EK)$ and, for $u:T_{M/E}K\\to T_{M/F}L$, put\n$$d_M(u)=b_{M/E,K}^{-1}\\circ D_M(u)\\circ b_{M/F,L}:\nT_{M/F}D_FL\\longrightarrow T_{M/E}D_EK.$$\nThis has exactly the source and target required for a representative of $D(F,L)\\to D(E,K)$.",
+   "text": "Obtain simultaneous finite data by rational Verdier duality and finite Hom identifications. Apply finite_coherent to its normalized scalar comparisons.",
    "uses": [
-    "thm-coef-rational-verdier",
-    "def-weil-algebraically-closed-coefficients"
+    "lem-coef-qbar-verdier-finite-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "Choose the finite rational internal-Hom identifications and use the normalized simultaneous scalar comparisons. Their integral unit and tower formulas fix the same finite beta maps, including repeated coefficient fields.",
+   "text": "Use the explicitly constructed descendedDual and identity-component finite comparisons. Apply descended_duality_exists to this fixed functor for exactness, intrinsic scalar normalization, linearity, its scalar square and descended biduality. Build its opposite quasi-inverse from delta by Functor.IsEquivalence.mk', then obtain additivity from preservation of binary products and zero morphisms.",
    "uses": [
-    "lem-coef-rational-operations",
-    "lem-coef-integral-finite-extension",
-    "lem-weil-scalar-extension-composition"
+    "lem-coef-qbar-verdier-representative-functor",
+    "lem-coef-qbar-verdier-biduality-equations"
    ],
    "elementary": false
   },
   {
-   "text": "Use the opposite-stage equivalence and coherent pair-functor descent to descend the contravariant representative formula. The resulting object formula retains the literal stage and gives identity inclusion comparisons.",
+   "text": "Use the explicit base-field omega and evaluation constructions. Their finite evaluation equation is proved by comparison cancellation, and descendedEvaluation_equations supplies the omega square and naturality. Assemble DualityData with intrinsicQbarLinear and these fixed constructions and copy the eleven resulting equations.",
    "uses": [
-    "lem-coef-qbar-opposite-stage-pairs",
-    "lem-sbc-coherent-pair-functor-descent"
+    "lem-coef-qbar-verdier-evaluation-equations",
+    "def-weil-pbc-qbar-category"
    ],
    "elementary": false
   },
   {
-   "text": "Use intrinsicQbarLinear on the already specified common-stage category. Its finite-representative scalar formula gives the coefficient embedding normalization; at a common extension containing the scalar, finite linearity gives Omega-linearity of the dual. Represent a distinguished triangle at a finite stage; the evaluation-defined finite shift comparisons commute with scalar extension by uniqueness of their tensor-Hom transposes. They descend and carry the triangle to the distinguished finite dual triangle.",
+   "text": "The unchanged formal completion in its separate equations module derives the three retract identities from naturality.",
    "uses": [
-    "def-weil-pbc-qbar-category",
-    "thm-coef-rational-verdier",
-    "lem-coef-rational-operations",
-    "def-weil-algebraically-closed-coefficients"
+    "lem-coef-qbar-verdier-retract-completion"
    ],
    "elementary": false
-  },
-  {
-   "text": "Represent omega at the base coefficient stage. The finite canonical u maps identify this with every finite omega. Descend finite evaluation and biduality using their scalar squares and the actual common-stage tensor object formula. The finite inverse biduality map descends too and proves invertibility and the anti-equivalence. Their finite equations give all scalar, omega and evaluation normalizations and evaluation naturality.",
-   "uses": [
-    "lem-coef-integral-finite-extension",
-    "thm-coef-rational-verdier",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a split pair i:P to K and p:K to P, factor tensor(i,Dp) as tensor(i,1) followed by tensor(1,Dp), and use evaluation naturality for p. Functoriality and i followed by p equal identity give evaluation at P. Naturality of the bidual isomorphism and its inverse gives the other two retract equations. Thus the core completes to the full unchanged DualityProperties.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-coef-rational-verdier",
-  "lem-coef-rational-operations",
-  "lem-coef-integral-finite-extension",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-qbar-verdier-finite-coherence",
+  "lem-coef-qbar-verdier-representative-functor",
+  "lem-coef-qbar-verdier-biduality-equations",
+  "lem-coef-qbar-verdier-evaluation-equations",
   "def-weil-pbc-qbar-category",
-  "lem-sbc-coherent-pair-functor-descent",
-  "lem-coef-qbar-opposite-stage-pairs",
-  "lem-weil-scalar-extension-composition"
+  "lem-coef-qbar-verdier-retract-completion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
-  "place": "Formal categorical expansion of the retained common-stage argument, retained proof steps 1--4 and the formal restriction equations in step 10"
+  "place": "U4: explicit representative functor and evaluation, with three strictly smaller finite-coherence, fixed-functor biduality and fixed-evaluation equations obligations"
  },
  "mathlib_searches": [
   {
@@ -133,13 +112,10 @@
   "declaration": "WeilConjectures.CoefQbarVerdier.core_descent",
   "statement": "theorem core_descent :\n    ∃ B : DualityData D l hl Ω X, CoreProperties D l hl Ω X B",
   "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-25",
+  "by": "U4",
+  "date": "2026-10-28",
   "declarations": [
-   "WeilConjectures.CoefQbarVerdier.CoreProperties",
    "WeilConjectures.CoefQbarVerdier.core_descent",
-   "WeilConjectures.CoefQbarVerdier.core_complete",
-   "WeilConjectures.CoefQbarVerdier.completeCore",
    "WeilConjectures.CoefQbarVerdier.finite_data_exists"
   ]
  },
@@ -154,13 +130,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-07b3e",
-  "group": "V1",
+  "reviewer": "C-fe296",
+  "group": "U4",
   "result": "fix",
-  "landing": "20261025T203436-L-2817454",
+  "landing": "20261027T210253-L-1681976",
   "kind": "interface",
-  "note": "independent cc review: delivered CoefQbarVerdier/Data/Core/InternalHom/Exceptional/Dualizing + StageSystemOpposite/Adjunction and 8 node files against the published CoefQbarVerdier.lean (diff: data block verbatim except subtype wrappers and 4 dropped private imports), the RationalOperations identification theorems, and the six direct importers compiled against the delivered oleans"
+  "note": "independent cc review: fe2967529cdd delivered Lean vs 73b3 delivery (byte-identical, coord text only differs); node JSONs vs 73b3 fixes (stmt_deps dropped again); delivered set + 2 direct importers compiled vs current build bd441cc55e6 (all OK)"
  }
 }

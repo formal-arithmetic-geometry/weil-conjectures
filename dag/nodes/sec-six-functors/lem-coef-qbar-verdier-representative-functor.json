@@ -1,0 +1,131 @@
+{
+ "id": "lem-coef-qbar-verdier-representative-functor",
+ "kind": "lemma",
+ "title": "Explicit contravariant Verdier functor on common-stage representatives",
+ "statement": "Fix a finite-field datum D with field k and characteristic p, a prime l different from p, an algebraic closure Omega of Q_l in an independent universe, and a separated finite-type scheme X over k. Use the actual raw rational finite stages, scalar extensions, tensor comparisons and common-stage pair category of [def-sf-common-stage-verdier-data]. For Finite F satisfying FiniteCoherent, the explicit descendedDual sends a finite object (E,K) to (E,D_E K). There is a natural inclusion comparison descendedComparison whose components are heterogeneously equal to identity maps. All functors are actual quotient constructions, with no existence-chosen functor data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph; core descent retained steps 1--5 and formal retract restriction step 10"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-qbar-opposite-stage-pairs"
+ ],
+ "proof": [
+  {
+   "text": "Build a StageSystem morphism from the opposite stages with finite functors D_E and beta. The tower equation is the morphism coherence axiom after canceling the inverse opposite associator.",
+   "uses": [
+    "lem-coef-qbar-opposite-stage-pairs"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The published stage system equals the literal transition system by its uniqueness characterization. Transport the morphism along this equality and compose its quotient functor with reversal of representatives. The inclusion comparison is the identity on components and is natural by functor_map_ι.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pur-associative-stage-family-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-qbar-opposite-stage-pairs",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-associative-stage-family-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal expansion of the corresponding steps of lem-coef-qbar-verdier-core-descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent scalar extension comparisons for finite Verdier duality descend biduality and natural evaluation to a filtered pair category",
+   "results": "8 hits; condensed profinite solid counit and exact-functor Ext maps, no common-stage Verdier result",
+   "date": "2026-10-28",
+   "verdict": "No matching result; use the project stage-system construction and finite rational Verdier interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "0 hits; identifier not in Mathlib",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project Morphism API."
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*(coheren|bidual|evaluation)",
+   "results": "0 hits",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib theorem for these finite coefficient normalization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierCore",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "finite common-stage duality, evaluation and formal retract restriction",
+   "via": [
+    "lem-coef-qbar-verdier-core-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierFunctor",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierFunctor.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.descendedDual",
+  "statement": "def descendedDual (F : Finite D l hl Ω X) (hF : FiniteCoherent D l hl Ω X F) :\n    (generalAlgebraicallyClosedConstructibleCategory l Ω X)ᵒᵖ ⥤\n      generalAlgebraicallyClosedConstructibleCategory l Ω X",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.literalSystem",
+   "WeilConjectures.CoefQbarVerdier.stageSystem_eq_literalSystem",
+   "WeilConjectures.CoefQbarVerdier.finiteMorphism",
+   "WeilConjectures.CoefQbarVerdier.finiteMorphism_phi",
+   "WeilConjectures.CoefQbarVerdier.descendedDual",
+   "WeilConjectures.CoefQbarVerdier.descendedDual_obj",
+   "WeilConjectures.CoefQbarVerdier.descendedComparison",
+   "WeilConjectures.CoefQbarVerdier.descendedComparison_hom",
+   "CategoryTheory.StageSystem.contravariantMorphism",
+   "CategoryTheory.StageSystem.transportContravariantMorphism",
+   "CategoryTheory.StageSystem.contravariantComparison",
+   "CategoryTheory.StageSystem.contravariantComparison_hom",
+   "CategoryTheory.StageSystem.contravariantComparison_transport_hom"
+  ],
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fe296",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261027T210253-L-1681976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fe296",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261027T210253-L-1681976",
+  "kind": "interface",
+  "note": "independent cc review: fe2967529cdd delivered Lean vs 73b3 delivery (byte-identical, coord text only differs); node JSONs vs 73b3 fixes (stmt_deps dropped again); delivered set + 2 direct importers compiled vs current build bd441cc55e6 (all OK)"
+ }
+}

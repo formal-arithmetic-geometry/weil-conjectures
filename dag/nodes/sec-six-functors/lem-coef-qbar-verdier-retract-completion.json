@@ -1,0 +1,110 @@
+{
+ "id": "lem-coef-qbar-verdier-retract-completion",
+ "kind": "lemma",
+ "title": "Formal completion of the core by split-retract equations",
+ "statement": "Fix a finite-field datum D with field k and characteristic p, a prime l different from p, an algebraic closure Omega of Q_l in an independent universe, and a separated finite-type scheme X over k. Use the actual raw rational finite stages, scalar extensions, tensor comparisons and common-stage pair category of [def-sf-common-stage-verdier-data]. For DualityData B satisfying CoreProperties: finite beta coherence, additivity, finite coefficient normalization and Omega-linearity, literal finite objects and identity comparisons, scalar and biduality compatibility, coherent omega comparisons, included finite evaluation and evaluation naturality, evaluation naturality and biduality naturality imply the three split-retract equations of DualityProperties. Thus completeCore constructs a Duality with the same data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph; core descent retained steps 1--5 and formal retract restriction step 10"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data"
+ ],
+ "proof": [
+  {
+   "text": "Copy the eleven core equations. Factor tensor(i,Dp) as tensor(i,1) followed by tensor(1,Dp); evaluation naturality for p and the split equation cancel this expression to evaluation at the retract.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of biduality and its inverse, followed by the same split equation, proves the two remaining equations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal expansion of the corresponding steps of lem-coef-qbar-verdier-core-descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent scalar extension comparisons for finite Verdier duality descend biduality and natural evaluation to a filtered pair category",
+   "results": "8 hits; condensed profinite solid counit and exact-functor Ext maps, no common-stage Verdier result",
+   "date": "2026-10-28",
+   "verdict": "No matching result; use the project stage-system construction and finite rational Verdier interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "0 hits; identifier not in Mathlib",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project Morphism API."
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*(coheren|bidual|evaluation)",
+   "results": "0 hits",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib theorem for these finite coefficient normalization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierCore",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "finite common-stage duality, evaluation and formal retract restriction",
+   "via": [
+    "lem-coef-qbar-verdier-core-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierCoreEquations",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierCoreEquations.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.core_complete",
+  "statement": "theorem core_complete (B : DualityData D l hl Ω X)\n    (hB : CoreProperties D l hl Ω X B) : DualityProperties D l hl Ω X B",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.CoreProperties",
+   "WeilConjectures.CoefQbarVerdier.core_complete",
+   "WeilConjectures.CoefQbarVerdier.completeCore"
+  ],
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fe296",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261027T210253-L-1681976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fe296",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261027T210253-L-1681976",
+  "kind": "interface",
+  "note": "independent cc review: fe2967529cdd delivered Lean vs 73b3 delivery (byte-identical, coord text only differs); node JSONs vs 73b3 fixes (stmt_deps dropped again); delivered set + 2 direct importers compiled vs current build bd441cc55e6 (all OK)"
+ }
+}

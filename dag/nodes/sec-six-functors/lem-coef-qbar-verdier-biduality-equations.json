@@ -1,0 +1,132 @@
+{
+ "id": "lem-coef-qbar-verdier-biduality-equations",
+ "kind": "lemma",
+ "title": "Exact linear biduality for the explicit descended dual",
+ "statement": "Fix a finite-field datum D with field k and characteristic p, a prime l different from p, an algebraic closure Omega of Q_l in an independent universe, and a separated finite-type scheme X over k. Use the actual raw rational finite stages, scalar extensions, tensor comparisons and common-stage pair category of [def-sf-common-stage-verdier-data]. Given Finite F and FiniteCoherent, the fixed functor of [lem-coef-qbar-verdier-representative-functor] is exact for the prescribed triangles, and Omega-linear for intrinsicQbarLinear. Finite included maps have the prescribed scalar action, the canonical finite comparisons obey the scalar square, and the specified finite biduality descends to a natural isomorphism delta with SfClassEvaluationCompatible at every finite inclusion. No dual functor, evaluation or dualizing object is chosen in this statement. Its biduality yields anti-equivalence formally in the consumer, without a separate full-faithfulness assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph; core descent retained steps 1--5 and formal retract restriction step 10"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "lem-coef-qbar-verdier-representative-functor",
+  "def-weil-pbc-qbar-category",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "At a field containing a representative and the scalar, finite linearity and beta naturality give the scalar formula. The intrinsic quotient scalar formula gives Omega-linearity and its finite coefficient normalization. The representative map formula also gives the inclusion-transition square.",
+   "uses": [
+    "thm-coef-rational-verdier",
+    "def-weil-pbc-qbar-category",
+    "lem-coef-qbar-verdier-representative-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Include the finite biduality components and transport through the canonical finite comparisons twice. Their scalar squares make them natural on common-stage representatives. Including the finite inverse gives inverse components, hence a natural isomorphism with exactly the finite compatibility asserted.",
+   "uses": [
+    "thm-coef-rational-verdier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend finite shift comparisons using uniqueness of their evaluation transposes. Every distinguished triangle has a finite representative, where exactness follows from rational duality. The consumer obtains anti-equivalence directly from delta and its opposite using the Mathlib quasi-inverse constructor, so no inverse-Hom-set descent is an obligation here.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-coef-rational-operations",
+    "thm-coef-rational-verdier"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-coef-rational-verdier",
+  "def-weil-pbc-qbar-category",
+  "lem-coef-qbar-verdier-representative-functor",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-rational-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal expansion of the corresponding steps of lem-coef-qbar-verdier-core-descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent scalar extension comparisons for finite Verdier duality descend biduality and natural evaluation to a filtered pair category",
+   "results": "8 hits; condensed profinite solid counit and exact-functor Ext maps, no common-stage Verdier result",
+   "date": "2026-10-28",
+   "verdict": "No matching result; use the project stage-system construction and finite rational Verdier interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "0 hits; identifier not in Mathlib",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project Morphism API."
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*(coheren|bidual|evaluation)",
+   "results": "0 hits",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib theorem for these finite coefficient normalization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierCore",
+  "date": "2026-10-28",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "finite common-stage duality, evaluation and formal retract restriction",
+   "via": [
+    "lem-coef-qbar-verdier-core-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierBidualityDescent",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierBidualityDescent.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.descended_duality_exists",
+  "statement": "theorem descended_duality_exists (F : Finite D l hl Ω X)\n    (hF : FiniteCoherent D l hl Ω X F) :\n    ∃ δ : 𝟭 (generalAlgebraicallyClosedConstructibleCategory l Ω X) ≅\n        (descendedDual D l hl Ω X F hF).rightOp ⋙ descendedDual D l hl Ω X F hF,\n    (∃ s : (descendedDual D l hl Ω X F hF).CommShift ℤ,\n      ∀ T : Triangle (generalAlgebraicallyClosedConstructibleCategory l Ω X)ᵒᵖ,\n        T ∈ distTriang (generalAlgebraicallyClosedConstructibleCategory l Ω X)ᵒᵖ →\n        Triangle.mk ((descendedDual D l hl Ω X F hF).map T.mor₁)\n          ((descendedDual D l hl Ω X F hF).map T.mor₂)\n          ((descendedDual D l hl Ω X F hF).map T.mor₃ ≫\n            (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈\n          distTriang (generalAlgebraicallyClosedConstructibleCategory l Ω X)) ∧\n    (∀ (K M : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n        (f : K ⟶ M) (c : Ω),\n      (descendedDual D l hl Ω X F hF).map (c • f).op =\n        c • (descendedDual D l hl Ω X F hF).map f.op) ∧\n    (∀ (E : Index l Ω)\n        (K M : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) X)\n        (f : K ⟶ M) (c : Coefficient.{u} l Ω E),\n      (inclusion (Y := X) E).map\n        ((sfRationalCoefficientEquiv l (Coefficient.{u} l Ω E)).symm c •\n          (f : (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) X) ⟶ M)) =\n        ((Shrink.algEquiv (Padic l) E.val c : E.val) : Ω) • (inclusion E).map f) ∧\n    (∀ (E L : Index l Ω) (h : E ≤ L) (K : Stage l Ω X E),\n      (inclusion L).map ((F.beta E L h).hom.app (op K)) ≫\n        (descendedComparison D l hl Ω X F hF L).hom.app\n          (op ((transition l Ω X E L h).obj K)) ≫\n        (descendedDual D l hl Ω X F hF).map\n          ((inclusionTransition l Ω X E L h).inv.app K).op =\n      (inclusionTransition l Ω X E L h).hom.app ((F.datum E).dual.obj (op K)) ≫\n        (descendedComparison D l hl Ω X F hF E).hom.app (op K)) ∧\n    (∀ E : Index l Ω,\n      SfClassEvaluationCompatible (inclusion (Y := X) E) (F.datum E).dual\n        (descendedDual D l hl Ω X F hF) (F.datum E).bidual.hom δ.hom\n        (descendedComparison D l hl Ω X F hF E))",
+  "declarations": [
+   "WeilConjectures.CoefQbarVerdier.descended_duality_exists"
+  ],
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fe296",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261027T210253-L-1681976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-fe296",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261027T210253-L-1681976",
+  "kind": "interface",
+  "note": "independent cc review: fe2967529cdd delivered Lean vs 73b3 delivery (byte-identical, coord text only differs); node JSONs vs 73b3 fixes (stmt_deps dropped again); delivered set + 2 direct importers compiled vs current build bd441cc55e6 (all OK)"
+ }
+}
