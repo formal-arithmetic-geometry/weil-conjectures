@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-finite-tate-scalar-line-normalization-of-balancing",
+ "kind": "statement",
+ "title": "Line normalization from finite Tate balancing",
+ "statement": "",
+ "stmt_deps": [
+  "def-pur-finite-tate-scalar-source-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, ordinary Tate coefficient reduction"
+ },
+ "proof": [
+  {
+   "text": "Use flatness of every finite Tate line to compute the actual scalar/single comparison by its degree-zero representative. The rank-one coefficient balancing is invertible, tensor powers and even shifts preserve this, and the degree-zero formula is the specified scalar unit and zero-line comparison.",
+   "uses": [
+    "lem-pur-finite-tate-scalar-balancing-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2, ordinary Tate coefficient reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-tate-scalar-balancing-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, ordinary Tate coefficient reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite Tate scalar balancing family and normalized source compatibility",
+   "results": "RootPairing.instIsBalanced and unrelated finite/class-group declarations; no project-specific Tate comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiniteTateScalarBalancing",
+   "results": "unknown identifier; no match.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_tate_scalar_balancing_exists|IsFiniteTateScalarBalancing",
+   "results": "0 hits before this delivery.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTateScalarSourceExistence",
+  "date": "2026-10-28",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-tate-scalar-source-existence",
+   "place": "paragraph 2, ordinary Tate coefficient reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTateScalarLineNormalizationOfBalancing",
+  "file": "lean/Sheaf/Paper/FiniteTateScalarLineNormalizationOfBalancing.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finite_tate_scalar_line_normalization_of_balancing",
+  "statement": "theorem finite_tate_scalar_line_normalization_of_balancing [Finite A] [Finite B]\n    (φ : A →+* B) (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (hB : (N : B) = 0)\n    (X : Scheme.{u}) (hX : ∀ x : X, IsUnit (N : X.presheaf.stalk x))\n    (β : ∀ r : ℕ,\n      (Etale.purityScalarSheaf φ X).obj (Scheme.finiteEtaleTateTwist X N A hA r) ≅\n        Scheme.finiteEtaleTateTwist X N B hB r)\n    (hβ : IsFiniteTateScalarBalancing φ N hA hB X β) :\n    IsFiniteTateScalarLineNormalized φ N hA hB X β",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T210229-L-1675691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T210229-L-1675691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

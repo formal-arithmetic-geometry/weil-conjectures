@@ -6,6 +6,9 @@ Authors: SHEAF group G3
 module
 
 public import Sheaf.Paper.FiniteTateScalarSourceData
+import Sheaf.Paper.FiniteTateScalarBalancingExistence
+import Sheaf.Paper.FiniteTateScalarLineNormalizationOfBalancing
+import Sheaf.Paper.FiniteTateScalarSourceCompatibilitiesOfBalancing
 
 /-! # Existence of normalized finite Tate scalar balancing families -/
 
@@ -63,6 +66,11 @@ theorem finite_tate_scalar_source_normalization_exists [Finite A] [Finite B]
       IsFiniteTateScalarSourceInvertible φ N hA hB X β ∧
       IsFiniteTateScalarSourceUnitNormalized φ N hA hB X β ∧
       IsFiniteTateScalarSourceZeroNormalized φ N hA hB X β  := by
-  sorry
+  obtain ⟨β, hβ⟩ := finite_tate_scalar_balancing_exists φ N hN hA hB X hX
+  have hline := finite_tate_scalar_line_normalization_of_balancing
+    φ N hN hA hB X hX β hβ
+  have hsource := finite_tate_scalar_source_compatibilities_of_balancing
+    φ N hN hA hB X hX β hβ hline
+  exact ⟨β, hβ, hline, hsource.1, hsource.2.1, hsource.2.2⟩
 
 end WeilConjectures.PurityFiniteSetting
