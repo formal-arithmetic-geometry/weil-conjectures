@@ -13,30 +13,45 @@
  ],
  "proof": [
   {
-   "text": "The scalar-reduction adjunction identifies its functor with the sheafified change-of-rings tensor, with unit x ↦ 1 tensor x. On the actual open slice, the sectionwise tensor presheaves have the same sections and balancing relations. Slice sheafification and the localized tensor comparison give inverse maps keeping each pure tensor.",
+   "text": "Since j is a monomorphism, the actual pro-etale open object is subterminal. At each object of its slice, the extension-by-zero presheaf has a single summand. The summand injection and component projection are inverse, naturally in the slice object. The slice presheaf is therefore already a sheaf. Mathlib Over.forget.pushforwardContinuousSheafificationCompatibility and its unit equation show that the restriction of the global sheafification unit is invertible. The normalized localized adjunction unit is exactly the summand injection followed by this restricted unit, so it is invertible. Compose with the integral and finite coefficient-equivalence adjunctions; their units are isomorphisms as well.",
    "uses": [
-    "lem-sfb-localized-site-tensor-restriction",
+    "def-sf-integral-open-operations",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let epsilon be the ordinary integral counit at N. The right triangle identity and invertibility of the integral unit imply that restriction(epsilon) is invertible. The inverse integral coefficient equivalence is fully faithful, hence reflects isomorphisms, so epsilon.over(openObject j) is invertible. For any scalar-change presheaf, the restricted map at a slice object is ordinary extension of scalars of the corresponding section map of epsilon. Each such section map is an isomorphism, so the restricted scalar-change presheaf map is an isomorphism. Apply slice sheafification and transfer invertibility through Mathlib pushforwardContinuousSheafificationCompatibility, using NatIso.isIso_map_iff. The module-to-abelian-sheaf functor reflects isomorphisms. Finally transport through the object equalities and conjugation formula that specify scalarReductionExtension. This proves that the finite ordinary restriction of scalarReductionExtension(epsilon) is invertible.",
+   "uses": [
+    "def-sf-integral-open-operations",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
     "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Transport through o.integral and o.finite; their specified pushforward descriptions and projection square identify the scalar actions. Transpose the comparison under the finite-open adjunction. On every extension summand and scalar-unit generator, tensor.generators identifies it with inverse tensor comparison followed by the integral counit. Linearity, the tensor universal property, and the sheafification universal property extend the equality to all sections. The triangular identities identify the transpose as finiteRestrictionMate, so its components are isomorphisms.",
+   "text": "Expand finiteRestrictionMate_app. The finite open unit is invertible by Step 1; finite restriction of inverse tensor.ordinary is invertible because functors preserve isomorphisms; the last factor is invertible by Step 2. Their composite is invertible. NatIso.isIso_of_isIso_app assembles this componentwise result. No generator-normalization equation, projection square, finite-system assembly, or transition equation is needed for this invertibility assertion.",
    "uses": [
     "def-sf-integral-open-operations"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-localized-site-tensor-restriction",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "def-sf-integral-open-operations"
+  "def-sf-integral-open-operations",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Ordinary finite slice tensor restriction and its normalized adjunction transpose, original item proof steps 1 and 3; no strict-system transition step remains in this node."
+  "place": "Tags 03DI and 03DJ, the subterminal slice extension/restriction adjunction; shorter proof using its right triangle identity and Mathlib cocontinuous slice sheafification. The tensor isomorphism supplied in the statement is used directly, without a new normalized tensor construction."
  },
  "mathlib_searches": [
   {
@@ -128,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-0d913",
-  "group": "S8",
+  "reviewer": "COMPILER",
+  "group": "T8",
   "result": "pass",
-  "landing": "20261027T135439-L-3708468",
+  "landing": "20261027T151743-L-1203373",
   "kind": "interface",
-  "note": "independent cc review: item proof vs node lem-sf-open-restriction-ordinary-quotient; OpenSystems.restrictionSections vs change record + def-coef-semilinear-derived-calculus statement_change; finiteRestrictionMate_isIso vs its node (true, generator-pinned); 8 NOT RUN importers compiled OK against delivered SDC"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
