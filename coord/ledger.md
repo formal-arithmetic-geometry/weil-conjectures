@@ -20326,3 +20326,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:40 L: merged deliver/M1/Sheaf.Paper.EtaleNormalizationArrowUniversal (stage 3; reviewer PASS; first push; landing 20261027T234051-L-4180410 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:40 L: merged deliver/M1/Sheaf.Paper.NativeCompletedCoefficientChangeData (stage 3; reviewer PASS; first push; landing 20261027T234053-L-4181127 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:40 L: merged deliver/M2/Sheaf.Paper.AdicAmbientHomEvaluationComparison (stage 3; reviewer PASS; first push; landing 20261027T234054-L-4181869 (proof); batch 20261027T233735; modules 1; new nodes 2)
+- 23:40 L: merged deliver/M2/Sheaf.Paper.AdicReindexingComposition (stage 3; reviewer PASS; first push; landing 20261027T234055-L-4182783 (interface); batch 20261027T233735; modules 2; new nodes 1)
