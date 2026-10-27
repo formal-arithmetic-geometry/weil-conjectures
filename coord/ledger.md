@@ -20169,3 +20169,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:15 L: merged deliver/A4/Sheaf.Paper.ExceptionalFiniteSupportRealization (stage 3; reviewer PASS; first push; landing 20261027T231521-L-3768754 (interface); batch 20261027T231519; modules 2; new nodes 1)
 - 23:24 L: merged deliver/NA/lem-route-twist-scalar-maps-exists-unique (reviewer FIX; after a return; new nodes: 0)
 - 23:25 L: merged deliver/NG/lem-pur-system-scalar-associator-coherence (reviewer FIX; first push; new nodes: 0)
+- 23:28 L: merged deliver/NE/lem-pur-integral-scalar-reduction-intertwining (reviewer FIX; after a return; new nodes: 1)

@@ -8,6 +8,7 @@
   "place": "Coefficient-extension reduction model and normalized primitive scalar model: same-index coherent counit and tower identification"
  },
  "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
   "lem-trf-primitive-quotient-scalar-model-existence",
   "lem-pur-coefficient-extension-reduction-model",
   "def-pur-scalar-extension-tower-data",
@@ -16,11 +17,77 @@
   "def-weil-integral-reduction-tower",
   "def-coef-normalized-dvr-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the normalized primitive scalar model S_Y and a flat-term K-flat representative P -> A. The effective comparison-model statement supplies the scalar realization with the representative normalization and a canonical coherent quotient presentation for every such P; its statement also says that the counit on the normalized scalar-change system of a constructible derived-complete input is an isomorphism. Applying the coherent reduction functor R_L to the realization isomorphism therefore gives an isomorphism, and composing with that coherent counit gives the invertible scalarReduction_{S_Y}(A). The target is the normalized system C(P) whose terms are the derived tensors with B_{n+1}, so the effectivity counit here is the counit for this same target system, rather than an unrelated finite evaluation.",
+   "uses": [
+    "lem-trf-effective-comparison-realization-models",
+    "def-trf-integral-comparison-realization-models",
+    "lem-pur-coefficient-extension-reduction-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "The normalized tower reconstruction gives the scalar-extension object, and the comparison is obtained from coherent maps of towers; the argument uses coherent towers rather than only termwise isomorphism classes."
+   }
+  },
+  {
+   "text": "For this P, the association maps a_m:(P tensor A_{E,m}) tensor_{A_{E,m}} B_m -> P tensor B_m, together with the actual quotient transitions, satisfy the coefficient-reduction-presentation equations. The transpose-normalization node identifies the composite of the arbitrary normalized realization with the reduction/realization counit with the canonical coefficient-extension comparison: both have the same double transpose, namely the localized strict tensor-unit map determined by the a_m, and the two adjunction transpose bijections are injective. Thus scalarReduction_{S_Y}(A) equals the canonical coherent counit comparison as an entire quotient-system morphism before evaluating any level.",
+   "uses": [
+    "lem-pur-scalar-reduction-transpose-normalization",
+    "def-pur-coefficient-reduction-presentation",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Existence and uniqueness: the comparison is the unique transpose under the relevant adjunction; naturality and equality follow by uniqueness of transposes."
+   }
+  },
+  {
+   "text": "The canonical coefficient-extension comparison is the coherent counit followed by the inverse of the simultaneous scalar-association map, so at level n it is (P tensor A_{E,n+1}) tensor_{A_{E,n+1}} B_{n+1} -> P tensor B_{n+1}, sending (x tensor a) tensor b to x tensor ab. The scalar-extension definition gives the actual maps A_{E,n+1} -> B_{n+1} and their commuting transitions, while the reduction-tower definition gives the actual quotient transitions. Consequently both source and target use B_{n+1} at the same index n; ramification changes the quotient homomorphism and does not introduce e(L/E)n reindexing.",
+   "uses": [
+    "lem-pur-coefficient-extension-reduction-model",
+    "def-weil-integral-scalar-extension",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "The scalar-extension comparison is the transpose of scalar-extended evaluation, and the scalar associator is the displayed map; the comparison is compatible with finite quotients and coherent towers."
+   }
+  },
+  {
+   "text": "The tower-data definition names the scalar reduction comparison by applying coherent reduction to the realization and then its counit. Under the tower-data identification in the item, this canonical whole-system comparison is gamma_A. Step 2 identifies the arbitrary normalized-model composite with the same canonical comparison, so scalarReduction_{S_Y}(A)=gamma_A as coherent morphisms, including every transition; the explicit component from step 3 is therefore the n-th component of gamma_A.",
+   "uses": [
+    "def-pur-scalar-extension-tower-data",
+    "lem-pur-scalar-reduction-transpose-normalization",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "The natural comparison is defined as the transpose under the pullback/direct-image adjunction; the same transpose argument identifies the named comparison at the level of the whole derived system."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coefficient-reduction-presentation",
+  "def-pur-scalar-extension-tower-data",
+  "def-trf-integral-comparison-realization-models",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-pur-scalar-reduction-transpose-normalization",
+  "lem-trf-effective-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Scalar-extension comparisons are transposes of scalar-extended evaluation; the tensor associator gives the same transpose, and uniqueness identifies the arbitrary normalized model with the canonical coherent counit."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-rational-tensor-associator-scalar-square",
@@ -32,30 +99,58 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "scalarReduction isomorphism for every normalized primitive coefficient scalar model and same-index quotient counit",
-   "results": "Ideal.quotientEquivDirectSum Mathlib.Tactic.Module.reduceCoefficientwise Submodule.quotientEquivDirectSum Ideal.quotientEquivPiSpan Mathlib.Tactic.Module.qNF.onScalar Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner_naturality Rep.counitIso Submodule.quotOfListConsSMulTopEquivQuotSMulTopOuter",
-   "date": "2026-10-27",
+   "query": "same-index coherent scalar reduction comparison for normalized primitive scalar model",
+   "results": "Mathlib.Tactic.Module.reduceCoefficientwise; Mathlib.Tactic.Linarith.Comp.scale; Mathlib.Tactic.Module.NF.smul_eq_eval; Mathlib.Tactic.Module.qNF.onScalar; Mathlib.Tactic.Linarith.PComp.scale; Mathlib.Tactic.Module.tacticMatch_scalars; Mathlib.Tactic.Linarith.CompSource.scale.inj; Mathlib.Tactic.FieldSimp.NF.eval_cons_eq_eval_of_eq_of_eq",
+   "date": "2026-10-28",
+   "verdict": "no exact project-specific match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived quotient scalar extension counit isomorphism coherent tower",
+   "results": "CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derived'_counit; DerivedCategory.quotientCompQhIso; CategoryTheory.Adjunction.derivedε_fac_app; ModuleCat.ExtendRestrictScalarsAdj.counit_app; CategoryTheory.Adjunction.derivedε; CategoryTheory.Functor.totalLeftDerivedCounit; ModuleCat.extendScalars_comp_id",
+   "date": "2026-10-28",
    "verdict": "no exact project-specific match"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.NatTrans, CategoryTheory.Iso, TensorProduct",
-   "results": "",
-   "date": "2026-10-27",
-   "verdict": "no exact project-specific match"
+   "results": "none",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Limit, ModuleCat",
+   "results": "none; query error: unknown identifier CategoryTheory.Limit",
+   "date": "2026-10-28",
+   "verdict": "query error (unavailable)"
   },
   {
    "tool": "grep",
-   "query": "scalarReduction.*counit|coefficientExtensionReduction|quotient.*scalar",
-   "results": "Mathlib/NumberTheory/RamificationInertia/Inertia.lean Mathlib/Topology/Algebra/ConstMulAction.lean Mathlib/RingTheory/Derivation/ToSquareZero.lean Mathlib/RingTheory/Derivation/ToSquareZero.lean Mathlib/RingTheory/Derivation/ToSquareZero.lean Mathlib/RingTheory/Derivation/ToSquareZero.lean Mathlib/RingTheory/Derivation/ToSquareZero.lean Mathlib/FieldTheory/Galois/IsGaloisGroup.lean",
-   "date": "2026-10-27",
-   "verdict": "no exact project-specific match"
+   "query": "scalarReduction.*counit|coefficientExtensionReduction|quotient.*scalar [Mathlib]",
+   "results": "none",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedCategory.*scalar|TensorProduct.*quotient|IsIso.*counit [Mathlib]",
+   "results": "none",
+   "date": "2026-10-28",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "same-index coherent scalar reduction counit for completed scalar extension at finite quotient levels",
-   "results": "ModuleCat.RestrictionCoextensionAdj.counit' Condensed.profiniteSolidCounit Pi.counit_coe_dFinsupp Pi.counit_comp_single CoalgebraStruct.counit DFinsupp.counit_single ModuleCat.ExtendRestrictScalarsAdj.Counit.map Rep.coindResAdjunction_counit_app",
-   "date": "2026-10-27",
+   "results": "ModuleCat.RestrictionCoextensionAdj.counit'; Condensed.profiniteSolidCounit; Pi.counit_coe_dFinsupp; Pi.counit_comp_single; CoalgebraStruct.counit; DFinsupp.counit_single; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; Rep.coindResAdjunction_counit_app",
+   "date": "2026-10-28",
+   "verdict": "no exact project-specific match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized scalar model realization and derived reduction quotient counit",
+   "results": "CoalgebraStruct.counit; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.ExtendRestrictScalarsAdj.counit; Rep.coindResAdjunction_counit_app; NormalizationMonoid.normUnit; Associates.normalize_out; instNonUnitalNormedRingRestrictScalars",
+   "date": "2026-10-28",
    "verdict": "no exact project-specific match"
   }
  ],
@@ -67,5 +162,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-integral-scalar-reduction-intertwining",
+  "worker": "stage1",
+  "summary": "Repair adds one supporting node for the missing identification: a coherent coefficient-reduction presentation whose double transpose is the strict tensor-unit map, so uniqueness of transposes identifies every normalized primitive scalar model with the canonical coefficient-extension counit. The item proof now separates effectivity, whole-system identification, the explicit same-index component, and the tower-data name gamma.",
+  "blueprint": "Uses the blueprint finite-extension proof for scalar-association transposes and uniqueness, together with the reduction exceptional/direct-image transpose pattern, to prove the normalized whole-system comparison before finite evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-effective-comparison-realization-models",
+    "why": "Provides the complete normalized scalar realization, whole-system counit effectivity, and canonical coherent quotient presentation used to identify S_Y with the canonical model."
+   },
+   {
+    "node": "def-trf-integral-comparison-realization-models",
+    "why": "Defines the double-transpose normalization that determines the whole derived scalar comparison from strict tensor generators."
+   },
+   {
+    "node": "def-weil-integral-scalar-extension",
+    "why": "Supplies the actual coefficient quotient maps and their transition compatibility needed for the same-index component."
+   },
+   {
+    "node": "def-weil-integral-reduction-tower",
+    "why": "Supplies the actual reduction-tower transitions retained by the coherent comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-effective-comparison-realization-models",
+  "def-trf-integral-comparison-realization-models",
+  "def-weil-integral-scalar-extension",
+  "def-weil-integral-reduction-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NE-f4b0ce586",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-f4b0ce586 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-pur-scalar-reduction-transpose-normalization, the full statements of all cited nodes (including def-trf-integral-comparison-realization-models and lem-trf-effective-comparison-realization-models with their proof steps) and the three blueprint proofs cited per step. The item statement is unchanged, and the delivery closes the gap from the 7a8acb9c RETURN. The new node identifies e∘R_L(u_{S_Y}) with the comparison of lem-pur-coefficient-extension-reduction-model. Both are pinned by the same double transpose under reduction/total-limit and constant-tower/total-limit, and that transpose is the localized strict tensor-unit map given by the association maps a_m. Uniqueness of transposes then gives equality. I checked the model's double transpose by hand and found it plausible. The node is not a duplicate of lem-trf-primitive-quotient-realizations-unique, which compares two scalar models; the model comparison is not presented as one. It is not a duplicate of lem-trf-coherent-primitive-reduction-presentation either, which is a presentation over E. It is also not a restatement of the item: the item's proof is now a 4-step assembly. Step 1: lem-trf-effective-comparison-realization-models states verbatim that the whole-system counit is an isomorphism on S_{L/E}R_E K for constructible derived-complete K. Step 3: the level-n formula is verbatim in lem-pur-coefficient-extension-reduction-model, with m≥1 there matching n+1 here. Step 4: γ_A is scalarReduction by the tower-data definition. Source places: exceptional.proof uniqueness of transposes; finite-extension proof coherent towers and associator; direct-image place loosely paraphrased. Small cases: E=L gives the reduction counit. A=0 is trivial. For ramified Q_l(√l) at n=0,1 the indices agree, since ϖ_E^m O_L ⊂ ϖ_L^m O_L. Batch-5: the item and the new node cite lem-trf-effective-comparison-realization-models. I accept it as generic: its closure of 13465 nodes contains 81 trf/pd nodes, all coefficient-model, Roos, mate or localization helpers, with no thm-trf or Poincaré-duality theorem. The same node was accepted as generic at its Q23 creation. The new node also cites lem-pur-coefficient-extension-reduction-model, whose path reaches lem-trf-completion-unit-ordinary-adjunction. The item already cited that model on the base, and the model's closure has 8 generic trf/pod nodes. I accept lem-trf-effective-comparison-realization-models as a tool use (it is off the route of sk-def-purity-conv). Fixes: (1) removed lem-trf-effective-comparison-realization-models from the item's stmt_deps, because the statement does not use it; it stays in proof_deps. (2) B2 on the new node: it now introduces O_E, O_L, ϖ, A_{E,m}, B_m, R_E, A and the flat-term K-flat P, and adds stmt_deps def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients and def-a1-flat-term-kflat-complex. Advisory: lem-trf-primitive-quotient-scalar-model-existence has a truncated statement, and the item's top-level source fix-prop-coherence.proof.md lacks the place.; 2 file(s) fixed by the reviewer"
  }
 }
