@@ -29,9 +29,13 @@ public import Sheaf.Paper.ProjectiveDiagonalComposition
 public import Sheaf.Paper.ProjectiveDiagonalPullback
 public import Sheaf.Paper.ProEtaleProjectionExchangeMaps
 
-import Sheaf.Paper.RationalP1TensorShiftNaturality
-import Sheaf.Paper.RationalP1ProjectionNaturality
-import Sheaf.Paper.RationalP1LocalizingProjection
+import Sheaf.Paper.RationalP1LocalizingPreservation
+import all Sheaf.Paper.ProjectiveNormalizedUnitCounitRestriction
+import all Sheaf.Paper.RationalP1LocalizingProjection
+import Sheaf.Paper.UnboundedBaseChangeExtension
+import Sheaf.Paper.ProperBaseChangeAdmissibleGenerators
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.LocalizingClosureExistence
 import Sheaf.Paper.RationalP1LineFromPreservation
 
 /-! # The specified rational projective-line unit and counit
@@ -59,303 +63,138 @@ attribute [local irreducible] tensorShiftIso twist rationalTwistFunctor projecti
   AlgebraicGeometry.ProEtale.RationalP1.projectionMap
   pushSectionIso supportedUnitIso singleUnitIso trace
 
-section Naturality
+section InversionHelpers
+
+attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
+  CategoryTheory.Functor.leftDerivedFunctor CategoryTheory.Functor.rightDerivedFunctor
+  CondensedRing.upperStar CondensedRing.lowerStar
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-private theorem compose_square {D : Type*} [Category* D]
-    {A A' B B' C C' : D}
-    {a : A ⟶ A'} {b : B ⟶ B'} {c : C ⟶ C'}
-    {p : A ⟶ B} {p' : A' ⟶ B'} {q : B ⟶ C} {q' : B' ⟶ C'}
-    (hp : a ≫ p' = p ≫ b) (hq : b ≫ q' = q ≫ c) :
-    a ≫ (p' ≫ q') = (p ≫ q) ≫ c := by
-  rw [← Category.assoc, hp, Category.assoc, hq, Category.assoc]
+/-- Cache the canonical exchange proposition before coefficient specialization. -/
+@[irreducible] private def unitExchangeInversion (Y : Scheme.{u})
+    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) : Prop :=
+  IsIso ((condensedAmbientExchange Λ (square Y)).app M)
 
-private theorem map_square {C D : Type*} [Category* C] [Category* D]
-    (G : C ⥤ D) {A A' B B' : C}
-    {a : A ⟶ A'} {b : B ⟶ B'} {q : A ⟶ B} {q' : A' ⟶ B'}
-    (h : a ≫ q' = q ≫ b) :
-    G.map a ≫ G.map q' = G.map q ≫ G.map b := by
-  rw [← G.map_comp, h, G.map_comp]
-
-private theorem inverse_square {D : Type*} [Category* D]
-    {A A' B B' : D} {a : A ⟶ A'} {b : B ⟶ B'}
-    {q : A ⟶ B} {q' : A' ⟶ B'} [IsIso q] [IsIso q']
-    (h : a ≫ q' = q ≫ b) : b ≫ inv q' = inv q ≫ a := by
-  apply (cancel_epi q).1
-  rw [← Category.assoc, ← h, Category.assoc, IsIso.hom_inv_id,
-    Category.comp_id, IsIso.hom_inv_id_assoc]
-
-private theorem inverse_iso_square {D : Type*} [Category* D]
-    {A A' B B' : D} (q : A ≅ B) (q' : A' ≅ B')
-    {a : A ⟶ A'} {b : B ⟶ B'} (h : a ≫ q'.hom = q.hom ≫ b) :
-    b ≫ q'.inv = q.inv ≫ a := by
-  apply (cancel_epi q.hom).1
-  rw [← Category.assoc, ← h, Category.assoc, Iso.hom_inv_id,
-    Category.comp_id, Iso.hom_inv_id_assoc]
-
-private theorem tensor_square {D : Type*} [Category* D] [MonoidalCategory D]
-    {A A' B B' : D} (f : A ⟶ A') (g : B ⟶ B') :
-    tensorHom f (𝟙 B) ≫ (A' ◁ g) = (A ◁ g) ≫ tensorHom f (𝟙 B') := by
-  simp only [← id_tensorHom, tensorHom_comp_tensorHom, Category.comp_id,
-    Category.id_comp]
-
-private def ProjectionMateNatural (a : ProjectionMateFamily Λ) : Prop :=
-  ∀ {X S : Scheme.{u}} (g : X ⟶ S)
-    {A A' : DerivedCategory (Modules Λ X)} (f : A ⟶ A')
-    (B : DerivedCategory (Modules Λ S)),
-    tensorHom ((moduleObjectDerivedPushforward Λ g).map f) (𝟙 B) ≫ a g A' B =
-      a g A B ≫ (moduleObjectDerivedPushforward Λ g).map
-        (tensorHom f (𝟙 ((moduleObjectDerivedPullback Λ g).obj B)))
-
-attribute [-instance] internalMonoidal internalTensorCommShift in
-private theorem normalized_mate_naturality
-    (a : ProjectionMateFamily Λ) (ha : ProjectionMateNormalized Λ a) :
-    ProjectionMateNatural Λ a := by
-  unfold ProjectionMateNatural ProjectionMateNormalized ProjectionMateFamily internalMonoidal
-    internalTensorBundle nativeTensorBundle at *
-  intro X S g A A' f B
-  rw [eq_of_heq (ha g A' B), eq_of_heq (ha g A B)]
-  have hm := congr_app
-    (((CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).rightAdjointProjectionMap
-      (moduleObjectDerivedTensorComparison Λ g)).naturality f) B
-  change ((moduleObjectDerivedPushforward Λ g).map f ▷ B) ≫
-      moduleObjectProjectionMate Λ g A' B =
-    moduleObjectProjectionMate Λ g A B ≫ (moduleObjectDerivedPushforward Λ g).map
-      (f ▷ (moduleObjectDerivedPullback Λ g).obj B) at hm
-  simpa only [tensorHom_id] using hm
-
-private theorem projectionMateMap_naturality {X S : Scheme.{u}} (g : X ⟶ S)
-    {A A' : DerivedCategory (Modules Λ X)} (f : A ⟶ A')
-    (B : DerivedCategory (Modules Λ S)) :
-    tensorHom ((moduleObjectDerivedPushforward Λ g).map f) (𝟙 B) ≫
-        projectionMateMap Λ g A' B =
-      projectionMateMap Λ g A B ≫ (moduleObjectDerivedPushforward Λ g).map
-        (tensorHom f (𝟙 ((moduleObjectDerivedPullback Λ g).obj B))) :=
-by
-  unfold projectionMateMap
-  exact normalized_mate_naturality Λ (projectionMate_existsUnique Λ).exists.choose
-    (projectionMate_existsUnique Λ).exists.choose_spec g f B
-
-private theorem twistProjectionMap_naturality {X S : Scheme.{u}} (g : X ⟶ S)
-    (LS : Modules Λ S) (LX : Modules Λ X)
-    (e : (moduleObjectDerivedPullback Λ g).obj
-      (((DerivedCategory.singleFunctor (Modules Λ S) 0).obj LS) ⟦(2 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj LX) ⟦(2 : ℤ)⟧)
-    {A B : DerivedCategory (Modules Λ X)} (f : A ⟶ B) :
-    (twist Λ S LS).map ((moduleObjectDerivedPushforward Λ g).map f) ≫
-        twistProjectionMap Λ g LS LX e B =
-      twistProjectionMap Λ g LS LX e A ≫ (moduleObjectDerivedPushforward Λ g).map
-        ((twist Λ X LX).map f) := by
-  have h₁ := inverse_iso_square
-    (tensorShiftIso Λ S LS ((moduleObjectDerivedPushforward Λ g).obj A))
-    (tensorShiftIso Λ S LS ((moduleObjectDerivedPushforward Λ g).obj B))
-    (tensorShiftIso_naturality Λ S LS ((moduleObjectDerivedPushforward Λ g).map f))
-  have h₂ := projectionMateMap_naturality Λ g f
-    (((DerivedCategory.singleFunctor (Modules Λ S) 0).obj LS) ⟦(2 : ℤ)⟧)
-  have h₃ := map_square (moduleObjectDerivedPushforward Λ g)
-    (compose_square (tensor_square f e.hom) (tensorShiftIso_naturality Λ X LX f))
-  unfold twistProjectionMap
-  exact compose_square h₁ (compose_square h₂ h₃)
-
-private theorem diagonalClassMap_naturality (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
-    {M N : DerivedCategory (Modules Λ (ProjectiveLine Y))} (f : M ⟶ N) :
-    (moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).map f ≫
-        diagonalClassMap Λ Y L d N =
-      diagonalClassMap Λ Y L d M ≫
-        (twist Λ (diagonalSurface Y) (L (diagonalSurface Y))).map
-          ((moduleObjectDerivedPullback Λ (firstProjection Y)).map f) := by
-  exact compose_square (diagonalTensorIso_naturality Λ Y f)
-    (compose_square (tensor_square
-      ((moduleObjectDerivedPullback Λ (firstProjection Y)).map f)
-      ((supportedUnitIso Λ Y).hom ≫ d.delta))
-      (tensorShiftIso_naturality Λ _ _ _))
-
-
-private theorem unitComponent_naturality (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
-    (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
-      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
-        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj
-        (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-    {M N : DerivedCategory (Modules Λ (ProjectiveLine Y))} (f : M ⟶ N)
-    (hM : IsIso ((condensedAmbientExchange Λ (square Y)).app M) ∧
-      IsIso (twistProjectionMap Λ (secondProjection Y)
-        (L (ProjectiveLine Y)) (L (diagonalSurface Y)) e
-        ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M)))
-    (hN : IsIso ((condensedAmbientExchange Λ (square Y)).app N) ∧
-      IsIso (twistProjectionMap Λ (secondProjection Y)
-        (L (ProjectiveLine Y)) (L (diagonalSurface Y)) e
-        ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj N))) :
-    f ≫ unitComponent Λ Y L d e N hN.1 hN.2 =
-      unitComponent Λ Y L d e M hM.1 hM.2 ≫
-        (twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).map
-          ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).map
-            ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).map f)) := by
-  have := hM.1
-  have := hM.2
-  have := hN.1
-  have := hN.2
-  have h₁ := (pushSectionIso Λ Y).hom.naturality f
-  have h₂ := map_square (moduleObjectDerivedPushforward Λ (secondProjection Y))
-    (diagonalClassMap_naturality Λ Y L d f)
-  have h₃ := inverse_square (twistProjectionMap_naturality Λ (secondProjection Y)
-    (L (ProjectiveLine Y)) (L (diagonalSurface Y)) e
-    ((moduleObjectDerivedPullback Λ (firstProjection Y)).map f))
-  have h₄ := map_square (twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y)))
-    (inverse_square ((condensedAmbientExchange Λ (square Y)).naturality f))
-  unfold unitComponent
-  exact compose_square h₁ (compose_square h₂ (compose_square h₃ h₄))
-
-
-private theorem counitComponent_naturality (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
-    {K K' : DerivedCategory (Modules Λ Y)} (f : K ⟶ K')
-    (hK : IsIso (projectionMap Λ (ProjectiveLine Y ↘ Y) K
-      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
-        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)))
-    (hK' : IsIso (projectionMap Λ (ProjectiveLine Y ↘ Y) K'
-      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
-        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧))) :
-    (moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).map
-        ((twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).map
-          ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).map f)) ≫
-        counitComponent Λ Y L d K' hK' = counitComponent Λ Y L d K hK ≫ f := by
-  have := hK
-  have := hK'
-  have h₁ := map_square (moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y))
-    (inverse_iso_square
-      (tensorShiftIso Λ (ProjectiveLine Y) (L (ProjectiveLine Y))
-        ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj K))
-      (tensorShiftIso Λ (ProjectiveLine Y) (L (ProjectiveLine Y))
-        ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj K'))
-      (tensorShiftIso_naturality Λ (ProjectiveLine Y) (L (ProjectiveLine Y))
-        ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).map f)))
-  have h₂ := inverse_square (projectionMap_naturality Λ (ProjectiveLine Y ↘ Y) f
+/-- Cache the native right projection proposition before coefficient specialization. -/
+@[irreducible] private def unitNativeMateInversion (Y : Scheme.{u})
+    (L : ∀ Z : Scheme.{u}, Modules Λ Z)
+    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) : Prop :=
+  IsIso (moduleObjectProjectionMate Λ (secondProjection Y)
+    ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M)
     (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
       (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧))
-  have h₃ := tensor_square f (trace Λ Y L d)
-  have h₄ := tensor_square f (singleUnitIso Λ Y).hom
-  have h₅ : tensorHom f (𝟙 _) ≫ (ρ_ K').hom = (ρ_ K).hom ≫ f := by
-    simpa only [tensorHom_id] using rightUnitor_naturality f
-  unfold counitComponent
-  exact compose_square h₁ (compose_square h₂ (compose_square h₃ (compose_square h₄ h₅)))
 
+attribute [-instance] internalMonoidal internalTensorCommShift in
+private theorem normalized_mate_isIso
+    (a : ProjectionMateFamily Λ) (ha : ProjectionMateNormalized Λ a)
+    {X S : Scheme.{u}} (f : X ⟶ S)
+    (A : DerivedCategory (Modules Λ X)) (B : DerivedCategory (Modules Λ S))
+    (h : IsIso (moduleObjectProjectionMate Λ f A B)) : IsIso (a f A B) := by
+  unfold ProjectionMateNormalized ProjectionMateFamily internalMonoidal
+    internalTensorBundle nativeTensorBundle at *
+  dsimp only at ha
+  rw [eq_of_heq (ha f A B)]
+  exact h
 
--- Restrict the ambient paste before specializing any coefficient or line data.
-private theorem restrictedUnit_exists (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
-    (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
-      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
-        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj
-        (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-    (P : ObjectProperty (DerivedCategory (Modules Λ (ProjectiveLine Y))))
-    (Q : ObjectProperty (DerivedCategory (Modules Λ Y)))
-    (hF : ∀ M : P.FullSubcategory,
-      Q ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj M.obj))
-    (hG : ∀ K : Q.FullSubcategory,
-      P ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
-        twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).obj K.obj))
-    (hI : ∀ M : P.FullSubcategory, UnitInversionCondition Λ Y L e M.obj) :
-    let F := Q.lift (P.ι ⋙ moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)) hF
-    let G := P.lift (Q.ι ⋙ moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
-      twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))) hG
-    ∃ η : 𝟭 _ ⟶ F ⋙ G, ∀ M : P.FullSubcategory,
-      UnitComponentNormalized Λ Y L d e M.obj (η.app M).hom := by
-  let F := Q.lift (P.ι ⋙ moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)) hF
-  let G := P.lift (Q.ι ⋙ moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
-    twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))) hG
-  let η : 𝟭 _ ⟶ F ⋙ G :=
-    { app M := ObjectProperty.homMk (unitComponent Λ Y L d e M.obj (hI M).1 (hI M).2)
-      naturality M N f := by
-        apply ObjectProperty.hom_ext
-        exact unitComponent_naturality Λ Y L d e f.hom (hI M) (hI N) }
-  refine ⟨η, ?_⟩
-  intro M
-  exact ⟨(hI M).1, (hI M).2, HEq.rfl⟩
+private theorem selected_mate_isIso {X S : Scheme.{u}} (f : X ⟶ S)
+    (A : DerivedCategory (Modules Λ X)) (B : DerivedCategory (Modules Λ S))
+    (h : IsIso (moduleObjectProjectionMate Λ f A B)) :
+    IsIso (projectionMateMap Λ f A B) := by
+  unfold projectionMateMap
+  exact normalized_mate_isIso Λ (projectionMate_existsUnique Λ).exists.choose
+    (projectionMate_existsUnique Λ).exists.choose_spec f A B h
 
--- The inversion witnesses are proofs; their choices do not change the fixed formula.
-private theorem unit_normalization_unique (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
-    (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
-      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
-        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj
-        (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) {α : Type (u + 1)}
-    (f g : α) (hf : UnitComponentNormalized Λ Y L d e M f)
-    (hg : UnitComponentNormalized Λ Y L d e M g) : f = g := by
-  obtain ⟨hb, hp, h⟩ := hf
-  obtain ⟨hb', hp', h'⟩ := hg
-  exact eq_of_heq (h.trans h'.symm)
+private theorem unit_condition_of_native (Y : Scheme.{u})
+    (L : ∀ Z : Scheme.{u}, Modules Λ Z)
+    (M : DerivedCategory (Modules Λ (ProjectiveLine Y)))
+    (hb : unitExchangeInversion Λ Y M) (hp : unitNativeMateInversion Λ Y L M) :
+    ∀ e, UnitInversionCondition Λ Y L e M := by
+  intro e
+  unfold unitExchangeInversion at hb
+  unfold unitNativeMateInversion at hp
+  have := selected_mate_isIso Λ (secondProjection Y)
+    ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M) _ hp
+  refine ⟨hb, ?_⟩
+  unfold twistProjectionMap
+  infer_instance
 
-private theorem counit_normalization_unique (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
-    (K : DerivedCategory (Modules Λ Y)) {α : Type (u + 1)}
-    (f g : α) (hf : CounitComponentNormalized Λ Y L d K f)
-    (hg : CounitComponentNormalized Λ Y L d K g) : f = g := by
-  obtain ⟨hp, h⟩ := hf
-  obtain ⟨hp', h'⟩ := hg
-  exact eq_of_heq (h.trans h'.symm)
+private theorem termwise_exchange_isIso_iff
+    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
+    (A : DerivedCategory (Modules Λ X)) :
+    IsIso ((termwiseCondensedAmbientExchange Λ sq).app A) ↔
+      IsIso ((condensedAmbientExchange Λ sq).app A) := by
+  simp only [termwiseCondensedAmbientExchange, NatTrans.comp_app,
+    isIso_comp_left_iff, isIso_comp_right_iff]
 
--- Keeping the entire construction parametric also keeps kernel checking small.
-private theorem restrictedUnitCounit_existsUnique (Y : Scheme.{u})
-    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
-    (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj
-      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
-        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj
-        (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-    (P : ObjectProperty (DerivedCategory (Modules Λ (ProjectiveLine Y))))
-    (Q : ObjectProperty (DerivedCategory (Modules Λ Y)))
-    (hF : ∀ M : P.FullSubcategory,
-      Q ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj M.obj))
-    (hG : ∀ K : Q.FullSubcategory,
-      P ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
-        twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).obj K.obj))
-    (hI : ∀ M : P.FullSubcategory, UnitInversionCondition Λ Y L e M.obj)
-    (hJ : ∀ K : Q.FullSubcategory, CounitInversionCondition Λ Y L K.obj)
-    (F : P.FullSubcategory ⥤ Q.FullSubcategory)
-    (G : Q.FullSubcategory ⥤ P.FullSubcategory)
-    (hF_eq : F = Q.lift (P.ι ⋙ moduleObjectDerivedPushforward Λ
-      (ProjectiveLine Y ↘ Y)) hF)
-    (hG_eq : G = P.lift (Q.ι ⋙ moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
-      twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))) hG) :
-    ∃! a : (𝟭 P.FullSubcategory ⟶ F ⋙ G) × (G ⋙ F ⟶ 𝟭 Q.FullSubcategory),
-      (∀ M : P.FullSubcategory, UnitComponentNormalized Λ Y L d e M.obj (a.1.app M).hom) ∧
-      (∀ K : Q.FullSubcategory, CounitComponentNormalized Λ Y L d K.obj (a.2.app K).hom) := by
-  subst F
-  subst G
-  let F := Q.lift (P.ι ⋙ moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)) hF
-  let G := P.lift (Q.ι ⋙ moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y) ⋙
-    twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))) hG
-  obtain ⟨η, hη⟩ := restrictedUnit_exists Λ Y L d e P Q hF hG hI
-  let ε : G ⋙ F ⟶ 𝟭 _ :=
-    { app K := ObjectProperty.homMk (counitComponent Λ Y L d K.obj (hJ K))
-      naturality K K' f := by
-        apply ObjectProperty.hom_ext
-        exact counitComponent_naturality Λ Y L d f.hom (hJ K) (hJ K') }
-  have hε : ∀ K : Q.FullSubcategory,
-      CounitComponentNormalized Λ Y L d K.obj (ε.app K).hom := by
-    intro K
-    exact ⟨hJ K, HEq.rfl⟩
-  refine ⟨(η, ε), ⟨hη, hε⟩, ?_⟩
-  intro a ha
-  apply Prod.ext
-  · apply NatTrans.ext
-    funext M
-    apply ObjectProperty.hom_ext
-    exact unit_normalization_unique Λ Y L d e M.obj _ _ (ha.1 M) (hη M)
-  · apply NatTrans.ext
-    funext K
-    apply ObjectProperty.hom_ext
-    exact counit_normalization_unique Λ Y L d K.obj _ _ (ha.2 K) (hε K)
+private theorem exchange_isIso_of_extension
+    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
+    (he : UnboundedBaseChangeExtension Λ sq)
+    (hgen : ∀ A, (constantModelBoundedConstructible Λ X A ∧
+      DerivedCategory.finiteTorAmplitude _ A) →
+        IsIso ((condensedAmbientExchange Λ sq).app A))
+    (A : DerivedCategory (Modules Λ X)) (hA : localizingClosureProEtale Λ X A) :
+    IsIso ((condensedAmbientExchange Λ sq).app A) := by
+  exact (termwise_exchange_isIso_iff Λ sq A).1
+    (he (fun B hB ↦ (termwise_exchange_isIso_iff Λ sq B).2 (hgen B hB)) A hA)
 
-end Naturality
+private theorem coefficient_admissible
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) :
+    IsLocalizingAdmissibleCoefficient l (coefficient l c).X := by
+  cases c with
+  | none =>
+    unfold coefficient
+    exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
+  | some E =>
+    unfold coefficient
+    exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)))
+
+private theorem rational_coefficient_closure_eq
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (Z : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z] :
+    localizingClosureProEtale (coefficient l c).X Z =
+      CategoryTheory.localizingClosure
+        (constantModelBoundedConstructible (coefficient l c).X Z) := by
+  apply (localizingClosure_ctf_equals_bc l Z (coefficient l c).X ?_).1.2.2.2.1
+  cases c with
+  | none =>
+    unfold coefficient
+    exact Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))
+  | some E =>
+    unfold coefficient
+    exact Or.inr (Or.inr (Or.inl ⟨E, Or.inr ⟨Iso.refl _⟩⟩))
+
+private theorem coefficient_extension
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
+    {X' X Y' Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X' ↘ Spec (.of k))] [QuasiCompact (X' ↘ Spec (.of k))]
+    [IsSeparated (X' ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]
+    [IsSeparated (Y' ↘ Spec (.of k))]
+    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
+    [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
+    [IsProper f] (sq : ChosenCartesianSquare g' f' f g) :
+    UnboundedBaseChangeExtension (coefficient l c).X sq := by
+  cases c with
+  | none =>
+    unfold coefficient
+    exact (unboundedBaseChangeExtension l k sq).2.2.2.2
+  | some E =>
+    unfold coefficient
+    exact ((unboundedBaseChangeExtension l k sq).2.2.2.1 E).2
+
+end InversionHelpers
 
 attribute [local irreducible] UnitComponentNormalized CounitComponentNormalized
 
@@ -386,7 +225,8 @@ theorem localizingPreservation :
         (constantModelBoundedConstructible (coefficient l c).X (ProjectiveLine Y))
         ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y) ⋙
           twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj K)) := by
-  sorry
+  have h := localizingPreservationChecks l c k p hpl Y
+  exact ⟨h.pushQ.preserves, h.twistedPullQ.preserves⟩
 
 set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
@@ -413,9 +253,6 @@ def exceptional : rationalLocalizingCategory (coefficient l c).X Y ⥤
         twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y)))
     (fun K ↦ (localizingPreservation l c k p hpl Y).2 K.obj K.property)
 
-
-
-
 set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The type of the two natural transformations, before asserting any triangles.
@@ -424,6 +261,98 @@ Source: blueprint unit/counit clauses 2--3
 def UnitCounitType : Type (u + 2) :=
   (𝟭 _ ⟶ push l c k p hpl Y ⋙ exceptional l c k p hpl Y) ×
     (exceptional l c k p hpl Y ⋙ push l c k p hpl Y ⟶ 𝟭 _)
+
+include k p hpl in
+private theorem unit_exchange_isIso
+    (M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y)) :
+    unitExchangeInversion (coefficient l c).X Y M.obj := by
+  unfold unitExchangeInversion
+  have : Fact (ringChar k).Prime := ⟨by rw [ringChar.eq k p]; exact Fact.out⟩
+  have : Fact (ringChar k ≠ l) := ⟨by rw [ringChar.eq k p]; exact hpl⟩
+  have h := localizingPreservationChecks l c k p hpl Y
+  have := h.geometry.qcqsY.1
+  have := h.geometry.qcqsY.2
+  have := h.geometry.qcqsP.1
+  have := h.geometry.qcqsP.2
+  have := h.geometry.qcqsW.1
+  have := h.geometry.qcqsW.2
+  have := h.geometry.properSecond
+  let : (ProjectiveLine Y).Over (Spec (.of k)) :=
+    ⟨(ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
+  let : (diagonalSurface Y).Over (Spec (.of k)) :=
+    ⟨firstProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
+  have : LocallyOfFiniteType (ProjectiveLine Y ↘ Spec (.of k)) := h.geometry.standingP.2.1
+  have : QuasiCompact (ProjectiveLine Y ↘ Spec (.of k)) := h.geometry.standingP.2.2
+  have : IsSeparated (ProjectiveLine Y ↘ Spec (.of k)) := h.geometry.standingP.1
+  have : LocallyOfFiniteType (diagonalSurface Y ↘ Spec (.of k)) := h.geometry.standingW.2.1
+  have : QuasiCompact (diagonalSurface Y ↘ Spec (.of k)) := h.geometry.standingW.2.2
+  have : IsSeparated (diagonalSurface Y ↘ Spec (.of k)) := h.geometry.standingW.1
+  have : (ProjectiveLine Y ↘ Y).IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : (firstProjection Y).IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : (secondProjection Y).IsOver (Spec (.of k)) := by
+    constructor
+    change secondProjection Y ≫ ((ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) =
+      firstProjection Y ≫ ((ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k)))
+    unfold firstProjection secondProjection
+    simpa only [Category.assoc] using
+      congrArg (fun f : diagonalSurface Y ⟶ Y ↦ f ≫ (Y ↘ Spec (.of k)))
+        (pullback.condition (f := ProjectiveLine Y ↘ Y) (g := ProjectiveLine Y ↘ Y)).symm
+  have hc := coefficient_admissible l c
+  have hExt := coefficient_extension l c k (square Y)
+  have hclosure := rational_coefficient_closure_eq l c (ProjectiveLine Y)
+  have hb : IsIso ((condensedAmbientExchange (coefficient l c).X (square Y)).app M.obj) := by
+    apply exchange_isIso_of_extension (coefficient l c).X (square Y) hExt
+    · intro A hA
+      exact properBaseChange_admissible_generators l (coefficient l c).X hc k
+        (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) (square Y) A hA
+    · rw [hclosure]
+      exact M.property
+  exact hb
+
+include k p hpl in
+private theorem unit_mate_isIso
+    (M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y)) :
+    unitNativeMateInversion (coefficient l c).X Y (line l c) M.obj := by
+  unfold unitNativeMateInversion
+  have : Fact (ringChar k).Prime := ⟨by rw [ringChar.eq k p]; exact Fact.out⟩
+  have : Fact (ringChar k ≠ l) := ⟨by rw [ringChar.eq k p]; exact hpl⟩
+  have h := localizingPreservationChecks l c k p hpl Y
+  have := h.geometry.qcqsY.1
+  have := h.geometry.qcqsY.2
+  have := h.geometry.qcqsP.1
+  have := h.geometry.qcqsP.2
+  have := h.geometry.qcqsW.1
+  have := h.geometry.qcqsW.2
+  have := h.geometry.properSecond
+  let : (ProjectiveLine Y).Over (Spec (.of k)) :=
+    ⟨(ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
+  let : (diagonalSurface Y).Over (Spec (.of k)) :=
+    ⟨firstProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
+  have : LocallyOfFiniteType (ProjectiveLine Y ↘ Spec (.of k)) := h.geometry.standingP.2.1
+  have : QuasiCompact (ProjectiveLine Y ↘ Spec (.of k)) := h.geometry.standingP.2.2
+  have : IsSeparated (ProjectiveLine Y ↘ Spec (.of k)) := h.geometry.standingP.1
+  have : LocallyOfFiniteType (diagonalSurface Y ↘ Spec (.of k)) := h.geometry.standingW.2.1
+  have : QuasiCompact (diagonalSurface Y ↘ Spec (.of k)) := h.geometry.standingW.2.2
+  have : IsSeparated (diagonalSurface Y ↘ Spec (.of k)) := h.geometry.standingW.1
+  have : (ProjectiveLine Y ↘ Y).IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : (firstProjection Y).IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : (secondProjection Y).IsOver (Spec (.of k)) := by
+    constructor
+    change secondProjection Y ≫ ((ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) =
+      firstProjection Y ≫ ((ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k)))
+    unfold firstProjection secondProjection
+    simpa only [Category.assoc] using
+      congrArg (fun f : diagonalSurface Y ⟶ Y ↦ f ≫ (Y ↘ Spec (.of k)))
+        (pullback.condition (f := ProjectiveLine Y ↘ Y) (g := ProjectiveLine Y ↘ Y)).symm
+  have hloc := (localizingClosure_exists (coefficient l c).X (ProjectiveLine Y)
+    (constantModelBoundedConstructible (coefficient l c).X (ProjectiveLine Y))).2.2.2
+  have := hloc.1.1
+  have hline := ObjectProperty.le_shift
+    (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X (ProjectiveLine Y))) (2 : ℤ) _
+    (hloc.2.1 _ h.objectsP.positiveLine)
+  exact selected_projection_isIso l c k p hpl (secondProjection Y) _ _
+    (h.pullFirst.preserves M.obj M.property) hline
 
 set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
@@ -437,7 +366,9 @@ projection invertible. These results hold for all objects of Loc(Dbc), unbounded
 theorem unitInversions (M : rationalLocalizingCategory (coefficient l c).X (ProjectiveLine Y)) :
     UnitInversionCondition (coefficient l c).X Y (line l c)
       (secondLineComparison l c k p hpl Y) M.obj := by
-  sorry
+  exact unit_condition_of_native (coefficient l c).X Y (line l c) M.obj
+    (unit_exchange_isIso l c k p hpl Y M) (unit_mate_isIso l c k p hpl Y M)
+    (secondLineComparison l c k p hpl Y)
 
 set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.

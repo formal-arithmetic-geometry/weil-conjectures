@@ -118,98 +118,83 @@
  },
  "proof": [
   {
-   "text": "Apply [lem-sfb-rational-p1-localizing-preservation]. Thus $Y,P,W$ are qcqs standing schemes, $q,p_2$ are proper, $p_1^*M\\in\\mathcal L_W$, and $L_P\\in\\Dbc(P,\\Lambda)\\subseteq\\mathcal L_P$. These are precisely the geometric and domain hypotheses needed below; in particular no properness of $Y$ over $k$ is required.",
+   "text": "Apply [lem-sfb-rational-p1-localizing-preservation] to get the standing geometry, qcqs hypotheses and properness of the second projection, as well as preservation by the first pullback. Use the actual structure maps q followed by the structure map of Y and p1 followed by q followed by that map for P and W. The Cartesian square equation makes p2 a k-morphism. The characteristic is p, so its prime and inequality facts are exactly the standing facts.",
    "uses": [
     "lem-sfb-rational-p1-localizing-preservation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
-    "place": "Well-definedness (2): proper projections and localizing domains"
+    "place": "Well-definedness (1)--(2): geometry and localizing preservation"
    }
   },
   {
-   "text": "For $K\\in\\Dbc(P,\\Lambda)$ in the constant-model sense of [sk-def-sfb-constructible], keep its finite cohomological bounds and the finite stratification for each cohomology module. On each stratum its finite constant local models are locally finitely presented by [det-def-sfb-constructible-local-model]. The same stratifications and bounds therefore satisfy the general ring-object bounded-constructibility definition [sk-def-sfb-bounded-constructible]. Only this inclusion is needed, not its converse.",
+   "text": "The chosen rational coefficient is admissible: it is literally the finite-extension representative or the finite-subextension-valued algebraic-closure representative. Apply [lem-sfb-proper-base-change-admissible-generators] to the fixed self-square to obtain invertibility of the actual condensedAmbientExchange on every constant-model bounded constructible finite-Tor generator. This existing canonical-map statement avoids the separate comparison between the bounded restricted exchange and its ambient presentation.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "det-def-sfb-constructible-local-model",
-    "sk-def-sfb-bounded-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
-    "place": "Final inclusion of finite constant local models into locally finitely presented modules"
-   }
-  },
-  {
-   "text": "Use the self-cartesian square with $(X,Y,X',Y')=(P,Y,W,P)$ and $(f,f',g,g')=(q,p_2,q,p_1)$. Clause (3) of [det-thm-sfb-proper-base-change-rational] applies to the bounded objects from Step 2. Its canonical base-change map is $\\beta_K$: unfolding [def-weil-pbc-ambient-ringed-exchange] gives the unit of $p_2^*\\dashv Rp_{2*}$, the composition identification $p_2^*q^*\\simeq p_1^*q^*$, and the image under $Rp_{2*}p_1^*$ of the counit of $q^*\\dashv Rq_*$. Hence this specified map is invertible on every constant-model bounded constructible $K$.",
-   "uses": [
-    "det-thm-sfb-proper-base-change-rational",
+    "lem-sfb-proper-base-change-admissible-generators",
+    "sk-def-localizing-closure",
     "def-weil-pbc-ambient-ringed-exchange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
-    "place": "Well-definedness (2): canonical proper base change, first on bounded generators"
+    "place": "Well-definedness (2): proper base change on the bounded generators"
    }
   },
   {
-   "text": "By [det-def-localizing-closure-ctf-equals-bc], on the qcqs scheme $P$ the constant-model categories satisfy $\\Dctf(P,\\Lambda)=\\Dbc(P,\\Lambda)$ and their localizing closures agree. Step 3 consequently proves the generator hypothesis of [det-proper-base-change-unbounded-extension]. Its displayed unit--composition--counit formula is the formula just identified for $\\beta$, with $p=q$, $p'=p_2$, $g=q$, $g'=p_1$. Applying that extension proves $\\beta_M$ invertible for every $M\\in\\mathcal L_P$, including unbounded $M$.",
+   "text": "Specialize [det-proper-base-change-unbounded-extension] to the finite extension or finite-subextension-valued algebraic closure. Its termwise exchange is the ambient exchange conjugated by the canonical exact-pullback isomorphisms, so its component is invertible if and only if the ambient component is. Apply this equivalence to the generator assertion of Step 2 and to the extension conclusion. The closure equality of [det-def-localizing-closure-ctf-equals-bc] changes the input localizing membership into the membership of M. This proves invertibility of the actual exchange at M.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc",
-    "det-proper-base-change-unbounded-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-extension.md",
-    "place": "Extension of the specified exchange from Dctf to its localizing closure"
-   }
-  },
-  {
-   "text": "Put $A=p_1^*M$ and $B=L_P[2]$. By Step 1 and the triangulated closure in [sk-def-localizing-closure], $A\\in\\mathcal L_W$ and $B\\in\\mathcal L_P$. Apply [det-thm-sf-pf-field-localizing] to $p_2,A,B$: its canonical projection mate $\\pi_{A,B}$ is invertible. The given $e:p_2^*B\\simeq L_W[2]$ is exactly the normalized comparison of [def-sfb-rational-tate-pullback-comparison]. By [def-sfb-tate-twisted-projection-comparison], $\\Pi_{p_2,e,A}$ is, in order, the inverse tensor--shift comparison, $\\pi_{A,B}$, $Rp_{2*}(1_A\\otimes e)$, and the tensor--shift comparison on $W$ inside $Rp_{2*}$. Every factor is invertible: the middle projection by the theorem, and the others because tensor and pushforward carry the specified isomorphisms to isomorphisms. Their composite is the fixed $\\Pi_{p_2,e,p_1^*M}$, so it is invertible.",
-   "uses": [
-    "sk-def-localizing-closure",
-    "det-thm-sf-pf-field-localizing",
-    "def-sfb-rational-tate-pullback-comparison",
-    "def-sfb-tate-twisted-projection-comparison"
+    "det-proper-base-change-unbounded-extension",
+    "det-def-localizing-closure-ctf-equals-bc"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
-    "place": "Well-definedness (2)--(3): proper projection formula with the actual shifted Tate line"
+    "place": "Well-definedness (2): extension of proper base change to the localizing closure"
    }
   },
   {
-   "text": "Steps 4 and 5 give the two conjuncts of [def-sfb-rational-p1-unit-inversion-condition] for the actual exchange and twisted projection maps in the statement. This is $\\mathrm{UnitInversionCondition}(\\Lambda,Y,L,e,M)$.",
+   "text": "The preservation package puts A=p1* M in the localizing category of W and the positive line in the bounded generators on P. The localizing-closure existence assertion includes those generators and supplies shift stability, hence B=L_P[2] is in the localizing category of P. Reuse the proved native right-factor helper selected_projection_isIso from Step 1 of [lem-sfb-rational-p1-localizing-projection] at p2, A and B. This gives invertibility of precisely moduleObjectProjectionMate; the public left-factor theorem is obtained from this same helper by braiding, and no such detour is needed here.",
    "uses": [
+    "lem-sfb-rational-p1-localizing-preservation",
+    "det-def-localizing-closure-existence",
+    "lem-sfb-rational-p1-localizing-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (2): the projection formula with the shifted positive line"
+   }
+  },
+  {
+   "text": "ProjectionMateNormalized identifies the selected projectionMateMap with the native mate by heterogeneous equality after reducing the shared tensor bundle. Thus that map is invertible. In the definition of twistProjectionMap the other factors are the inverse tensor-shift comparison and the pushforward of tensoring the prescribed shifted-line isomorphism followed by the tensor-shift comparison. Each is invertible by functoriality. Composition gives the second conjunct of UnitInversionCondition. Pair it with the first conjunct from Step 3.",
+   "uses": [
+    "def-sfb-tate-twisted-projection-comparison",
     "def-sfb-rational-p1-unit-inversion-condition"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
-    "place": "Well-definedness (2): package precisely the two inversion witnesses"
+    "place": "Well-definedness (2): the normalized twisted projection comparison"
    }
   }
  ],
  "proof_deps": [
   "lem-sfb-rational-p1-localizing-preservation",
-  "sk-def-sfb-constructible",
-  "det-def-sfb-constructible-local-model",
-  "sk-def-sfb-bounded-constructible",
-  "det-thm-sfb-proper-base-change-rational",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "det-def-localizing-closure-ctf-equals-bc",
-  "det-proper-base-change-unbounded-extension",
+  "lem-sfb-proper-base-change-admissible-generators",
   "sk-def-localizing-closure",
-  "det-thm-sf-pf-field-localizing",
-  "def-sfb-rational-tate-pullback-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "det-proper-base-change-unbounded-extension",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-def-localizing-closure-existence",
+  "lem-sfb-rational-p1-localizing-projection",
   "def-sfb-tate-twisted-projection-comparison",
   "def-sfb-rational-p1-unit-inversion-condition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
-  "place": "Well-definedness (2)--(3), expanded using the existing bounded, unbounded-extension and localizing-projection statements"
+  "place": "Well-definedness (2): the specified exchange and twisted projection; M1 uses the existing canonical admissible-generator exchange statement and the recorded unbounded extension."
  },
  "split_report": {
   "date": "2026-10-27",
@@ -243,5 +228,15 @@
   "group": "NB",
   "result": "pass",
   "note": "existing:true attach of Sheaf.Paper.RationalP1UnitCounit unitInversions (l.437, sorry); only the lean field changed vs live; statement verbatim. Clauses checked: primes/char p/p≠l, separated finite-type Y over k with no stronger assumption, both coefficient cases (some E / none = padicAlgClRingObj), M over the full Loc(constant-model Dbc) subcategory, e = secondLineComparison (root-normalized, invertibility of l from p≠l), conclusion UnitInversionCondition = IsIso(condensedAmbientExchange (square Y)).app M ∧ IsIso(twistProjectionMap p2 e (p1^*M)), exchange direction q^*Rq_* → Rp2_*p1^* checked from ChosenCartesianSquare g' f' f g. Edge cases Y empty, M=0, unbounded M, l=2 covered. Advisories: parent det-prop still lists the declaration (dual owner); docstring cites the parent's blueprint tag; rationalLocalizingCategory abbrev owner def-sfb-rational-localizing-twist uncited (unfolds to cited notions); Second-reading section is the dispatcher placeholder. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T194456-L-852530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
