@@ -19718,3 +19718,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:05 L: merged deliver/F1/Sheaf.SecSmoothPurity.FiniteGeneralRingOrientation (stage 3; reviewer PASS; first push; landing 20261027T180556-L-3877961 (interface); batch 20261027T180444; modules 9; new nodes 10)
 - 18:05 L: merged deliver/F2/Sheaf.Paper.IntrinsicDirectCompositorCoordinates (stage 3; reviewer PASS; first push; landing 20261027T180557-L-3878208 (interface); batch 20261027T180444; modules 2; new nodes 1)
 - 18:05 L: merged deliver/F2/Sheaf.SixFunctors.CanonicalReductionPullTensor (stage 3; reviewer PASS; first push; landing 20261027T180559-L-3878393 (proof); batch 20261027T180444; modules 1; new nodes 0)
+- 18:06 L: merged deliver/F3/Sheaf.Paper.OrdinaryPullbackCompositionEvaluation (stage 3; reviewer PASS; first push; landing 20261027T180600-L-3878592 (interface); batch 20261027T180444; modules 2; new nodes 1)

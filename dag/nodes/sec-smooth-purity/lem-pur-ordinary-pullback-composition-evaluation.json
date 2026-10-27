@@ -14,7 +14,27 @@
  ],
  "proof": [
   {
-   "text": "Transpose the two sides under the finite module pullback/direct-image adjunctions. Use the unit characterization of each inverseEvaluation and the mate characterizations of integralComparisonSequenceComposition and coefficientModulePullbackComposition. The resulting maps on evaluated direct images agree on sections: both restrict along the canonical fibre-product isomorphism Z x_X (X x_Y U) -> Z x_Y U. The coefficient actions agree by the constant-section maps. Extensionality on sections gives the equality of the right-adjoint maps. Injectivity of the composite adjunction Hom equivalences proves the asserted equality. This argument is independent of the transition maps of M and includes n=0.",
+   "text": "Obtain the direct-image mates d and delta of the system and finite compositors from their existing unique-existence statements. Retain the stated section formulas and conjugateIsoEquiv equalities. The unit normalization of inverseEvaluation supplies the ordinary evaluation unit equation for each of f, h and h composed with f.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-proetale-module-pullback-composition",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-ordinary-pullback-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved direct-evaluation section API identifies every component of its eqToIso comparison with the identity on sections, by equality elimination and congr_heq. Thus evaluating d and then comparing direct images agrees with comparing the two direct images and applying delta: both section formulas restrict along the same fibre-product-pasting isomorphism. This holds for every system, without conditions on its transitions.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-proetale-module-pullback-composition",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-ordinary-pullback-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the abstract evaluated-transpose identity from homEquiv_unit, naturality of the direct evaluation square and its unit normalization. Prove that horizontal composition of two such squares satisfies the composite unit equation using comp_unit_app and naturality. Transpose the evaluated system compositor through the finite adjunction, use unit_conjugateEquiv for the two compositor mates, the direct-image square equality of the preceding step, and the composite unit equation. Injectivity of homEquiv gives equality after the forward evaluation comparisons. Cancel these isomorphisms to obtain exactly the displayed inverse-evaluation formula.",
    "uses": [
     "lem-pur-completed-primitive-counit-comparison",
     "lem-pur-proetale-module-pullback-composition",
@@ -26,12 +46,13 @@
  "proof_deps": [
   "lem-pur-completed-primitive-counit-comparison",
   "lem-pur-proetale-module-pullback-composition",
-  "def-trf-integral-comparison-sequence-systems"
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-ordinary-pullback-evaluation-calculus"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03D8; the unit-normalized evaluation calculation from parent proof steps 1 and 3"
+  "place": "Tag 03D8, lemma-push-pull-composition-modules; F3 explicit unit/mate and sectionwise evaluation calculation, 2026-10-28. The fully proved private abstract calculations follow the existing private evaluatedTranspose, evaluatedConjugate, compositeEvaluationUnit and conjugateUnit proofs in FiniteSystemPullbackCoherence; that module is not imported."
  },
  "mathlib_searches": [
   {
@@ -118,13 +139,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-5c779",
-  "group": "U4",
+  "reviewer": "COMPILER",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261025T204936-L-3059420",
+  "landing": "20261027T180600-L-3878592",
   "kind": "interface",
-  "note": "independent cc review: delivered item module + new OrdinaryPullbackCompositionEvaluation module + 2 node files + change record vs clone sheaf-dag; mapDerivedCategorySquareIso/TriangleIso abbrevs vs old evaluation/finiteComposition bodies; ordinaryCompositionEvaluation vs the ∃!-pinned inverseEvaluation, integralComparisonSequenceComposition and coefficientModulePullbackComposition"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
