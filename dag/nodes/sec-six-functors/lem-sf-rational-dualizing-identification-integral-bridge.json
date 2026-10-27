@@ -15,26 +15,76 @@
  ],
  "proof": [
   {
-   "text": "Apply the normalized integral exceptional adjunction at the structure morphism to the completed constant coefficient object. The integral exceptional comparison identifies the resulting value of the recorded operation with the coherent integral dualizing object w.omega. Transport this comparison across the supplied ambient isomorphism hU from U to the constant coefficient object; naturality of the operation preserves the isomorphism and yields the stated ambient comparison.",
+   "text": "Let V be the integral exceptional value of U in S. It belongs to the integral finite-Tor category by the domain of the recorded operation. The equality of the integral constructible and finite-Tor predicates identifies V with an intrinsic constructible integral object; w.omega is already such an object.",
    "uses": [
-    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-integral-residue-tor",
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
     "def-sf-coherent-integral-dualizing-datum"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 1: integral exceptional-unit comparison"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "First paragraph: exceptional coefficient comparison and reconstruction from finite reductions."
+   }
+  },
+  {
+   "text": "At exponent n+1, compose the canonical derived-reduction comparison, the inverse realization of S.ring.scalar at X, the right coefficient comparison b of S, and S.ring.finiteRight. On the coefficient point, realize its scalar functor, apply finiteReductionIso, reduce the supplied ambient isomorphism hU, and use the invertible constantCoefficientReductionMap. The resulting isomorphism identifies r_n(V) with integralDualizingFiniteTerm. Compose with the inverse of w.reduction n to obtain a nonempty set of isomorphisms r_n(V) to r_n(w.omega). These independently chosen isomorphisms are not asserted to satisfy transition coherence.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-sf-coherent-integral-dualizing-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "First paragraph: exceptional coefficient comparison and reconstruction from finite reductions."
+   }
+  },
+  {
+   "text": "For two intrinsic constructible integral objects K and M, use the normalized reduction adjunctions and the restriction-composition isomorphism to identify Hom(r_n K,P) with Hom(r_(n+1) K,Res P). This equivalence is f mapped to t_K followed by Res(f). Transpose an isomorphism r_(n+1)K to r_(n+1)M followed by t_M, and transpose its inverse similarly. Injectivity of the same Hom equivalence proves the two transposes are inverse. Thus there is a successor descent map on the sets of finite-level isomorphisms, compatible with the actual normalized transitions. This is elementary adjunction calculus, implemented by reductionHomEquiv, descendIso and descendIso_fac.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply integral residue Tor to the uniformly bounded reductions of K and M. The proved intrinsic_hom_finite helper of CompactSupportTermHomFinite then makes each finite-level Hom set finite; the isomorphism set injects into it. Form the inverse sequence of these finite nonempty isomorphism sets using the successor descent maps. Apply Mathlib nonempty_sections_of_finite_cofiltered_system to obtain a compatible family. Surjectivity of the transition maps is not needed.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-compact-support-term-hom-finite",
+    "lem-trf-cofiltered-finite-sets-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved Roos/Milnor reconstruction machinery in IntegralConstructibleReductionHom with successor compatibility (the only compatibility used by its existing proof). The private successorReductionHom repeats that proof: the intrinsic reduction cone is a homotopy limit, shifted finite Hom groups kill lim-one, and adjunction unit naturality identifies reductions of the unique lift. Lift the compatible isomorphism family and its inverse. Their composites reduce to identities at every level, so uniqueness of the reconstructed identity maps proves both inverse equations. This constructs an actual ambient isomorphism V to w.omega. Empty schemes and zero objects are included, and at n=0 the exponent is one.",
+   "uses": [
+    "lem-sf-integral-constructible-reduction-hom",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "First paragraph: exceptional coefficient comparison and reconstruction from finite reductions."
    }
   }
  ],
  "proof_deps": [
-  "prop-coef-integral-exceptional-adjoint",
-  "def-sf-coherent-integral-dualizing-datum"
+  "lem-coef-integral-residue-tor",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-sf-coherent-integral-dualizing-datum",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-sf-compact-support-term-hom-finite",
+  "lem-trf-cofiltered-finite-sets-section",
+  "lem-sf-integral-constructible-reduction-hom"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-  "place": "Proof paragraph 1, isolated as the strictly simpler integral comparison needed by rationalDualizing_identification."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "First paragraph, implemented by G5 using finite exceptional comparisons, the existing intrinsic Roos/Milnor reconstruction proof, and finite-isomorphism-set compactness. The theorem asserts only Nonempty of an isomorphism, so canonical coherence of the initially constructed finite comparisons is unnecessary."
  },
  "mathlib_searches": [
   {
@@ -105,9 +155,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "G5",
   "result": "pass",
-  "landing": "20261027T180845-L-3909548",
+  "landing": "20261027T210013-L-1644247",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
