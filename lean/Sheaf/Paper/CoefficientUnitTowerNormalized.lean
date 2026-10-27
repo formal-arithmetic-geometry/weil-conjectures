@@ -27,7 +27,9 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 namespace AlgebraicGeometry.ProEtale.SpFiniteOrientation
 
+-- Unfold the diagram to compare its levels with B, but keep the shared leaves closed.
 attribute [local irreducible] spCoefficientRings
+  CategoryTheory.constantSheaf Padic Padic.coefficientExtensionIntegers
 -- Use the canonical ring instance throughout the section calculations.
 attribute [local instance 20000] CommRing.toRing
 
