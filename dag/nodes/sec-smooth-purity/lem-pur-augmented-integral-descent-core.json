@@ -1,0 +1,267 @@
+{
+ "id": "lem-pur-augmented-integral-descent-core",
+ "kind": "statement",
+ "title": "Augmented integral quotient comparisons and normalized Roos support",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ [def-pur-conventions]. Let $X$ be a finite-type $k$-scheme [def-weil-finite-type-morphism] and let $j_i:X_i\\hookrightarrow X$, $i\\in I$, be a finite pairwise disjoint open and closed cover [def-weil-open-immersion, def-weil-closed-immersion]. Use the small pro-etale sites [def-weil-pbc-proetale-site], put $R=\\widehat{\\mathcal O}_{E,X}$ and $R_i=\\widehat{\\mathcal O}_{E,X_i}$ [def-weil-completed-integral-coefficients], and write $r_i$ for ordinary restriction on module sheaves, complexes and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].\n\nLet $K\\in D(R)$ and choose a quasi-isomorphism $q:P\\to K$ with $P$ K-flat and with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. In the reduction tower [def-weil-integral-reduction-tower] set $P_n=P\\otimes_R(A_{E,n})_X$, read as an $R$-complex by the quotient projection, $\\gamma_n(p)=p\\otimes1$, and $\\tau_n(p\\otimes a)=p\\otimes\\rho_n(a)$ for the coefficient reduction $\\rho_n:A_{E,n+1}\\to A_{E,n}$. Restriction sends $q$ to an admissible K-flat flat-term resolution and gives chain isomorphisms\n$$r_iP_n\\cong r_iP\\otimes_{R_i}(A_{E,n})_{X_i},\\qquad p\\otimes a\\longmapsto r_ip\\otimes r_ia,$$\ncommuting with $\\gamma_n$ and $\\tau_n$. Consequently the derived reduction isomorphism $r_i(K\\otimes^L_{\\mathcal O_E}A_{E,n})\\cong (r_iK)\\otimes^L_{\\mathcal O_E}A_{E,n}$ [def-weil-integral-derived-reduction], also after restricting scalars, identifies the actual maps $c_n=[\\gamma_n][q]^{-1}$ and $t_n=[\\tau_n]$ with the component reduction maps. These comparisons are natural on derived objects and morphisms.\n\nWriting $K_n=\\operatorname{Res}_n(K\\otimes^L_{\\mathcal O_E}A_{E,n})$ and $c=(c_n)_n$, the derived categories admit countable products. Product and shift comparisons give a bijection between morphisms $\\delta:\\prod_nK_n\\to K[1]$ and tuples $\\delta_i:\\prod_n(r_iK)_n\\to(r_iK)[1]$; the triangle with arrows $c,1-s,\\delta$ is distinguished exactly when each component triangle with its actual first map $(c_{i,n})_n$ is distinguished. The normalization is the canonical projection comparison, and the calculation applies to empty components and an empty partition.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1(1) and Definition 3.5.2, p. 24. Agent finite-clopen augmented reduction and uniform-bound application, returned proof steps 5-7. Existing reduction and Roos portion, extracted without changing any statement or data."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Use the extracted, completely proved integral Roos calculation for the tuple derived equivalence, canonical countable-product comparisons and reflection of the actual limit triangles. The original private integralRoosCalculus signature is preserved by applying this result.",
+   "uses": [
+    "lem-pur-integral-clopen-roos-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-clopen-ringed-module-gluing] to $R$: its coefficient identifications preserve $\\pi_n$, $\\rho_n$ and $1$. By [lem-pur-finite-product-derived-tensor-calculus], restriction is exact, preserves quasi-isomorphisms, and preserves flatness and K-flatness. Thus $r_iq:r_iP\\to r_iK$ is an admissible flat-term K-flat resolution. The same tensor comparison, with second factor $(A_{E,n})_X$ in degree zero, gives the asserted chain isomorphism $\\beta_{i,n}:r_iP_n\\to r_iP\\otimes_{R_i}(A_{E,n})_{X_i}$ with the specified pure-tensor formula.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2, p. 24; agent finite-clopen application using the explicit reduction tower."
+   }
+  },
+  {
+   "text": "The coefficient identifications give $\\beta_{i,n}r_i\\gamma_n(p)=r_ip\\otimes1=\\gamma_{i,n}(r_ip)$ and $\\beta_{i,n}r_i\\tau_n(p\\otimes a)=r_ip\\otimes\\rho_{i,n}(r_ia)=\\tau_{i,n}\\beta_{i,n+1}(p\\otimes a)$. These identities on local pure tensors determine the sheaf maps. Scalar restriction merely forgets part of the action, so preserves these equalities. Localize and compose the first identity with $[r_iq]^{-1}$: the maps $c_n$ and $t_n$ of [def-weil-integral-reduction-tower] become precisely $c_{i,n}$ and $t_{i,n}$. The derived scalar comparisons of [lem-pur-clopen-derived-scalar-compositor] are natural for all derived morphisms and have exactly these chain representatives. Independence of the augmented tower from $q$ is [lem-weil-integral-reduction-tower-well-defined], which preserves both $c_n$ and $t_n$. Thus the calculation identifies the actual augmented towers, not only their level objects.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-pur-clopen-derived-scalar-compositor",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2, p. 24; agent finite-clopen application using the explicit reduction tower."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-clopen-strict-tower-roos-equivalence] to $C_n=P_n$ and $t_n=\\tau_n$. It identifies products, their projections and $1-s$ with their component versions, and detects distinguishedness for the specified Roos triangle. By the fully faithful derived equivalence of [lem-pur-clopen-unbounded-derived-localization], a map $\\delta:B\\to K[1]$, $B=\\prod_nK_n$, is equivalent to its tuple of component maps. Explicitly, if $\\alpha_i:r_iB\\cong B_i$ and $\\sigma_i:r_i(K[1])\\cong(r_iK)[1]$, the tuple is $\\delta_i=\\sigma_i r_i(\\delta)\\alpha_i^{-1}$. Conversely fullness gives a map from any such tuple, and faithfulness makes it unique. The product projections and Step 2 identify $r_i(c)$ with the actual component augmentation, so the distinguishedness assertion retains all three specified arrows.",
+   "uses": [
+    "lem-pur-clopen-strict-tower-roos-equivalence",
+    "lem-pur-clopen-unbounded-derived-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2, p. 24; agent finite-clopen application using the explicit reduction tower."
+   }
+  },
+  {
+   "text": "The extracted private completeness helper identifies intrinsic sf-completeness with the legacy completed-integral predicate by the existing legacy comparison, in both directions and independently of the chosen finite-field presentation. This is the same already complete helper used by the membership facade; its exact statement and proof are preserved in the support module.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-clopen-roos-calculus",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-finite-product-derived-tensor-calculus",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-clopen-derived-scalar-compositor",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-pur-clopen-strict-tower-roos-equivalence",
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-sf-derived-complete-legacy-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/AugmentedIntegralDescentCore.lean",
+  "place": "Q136/J3 existing exactness and normalized Roos proofs and original augmented comparison statement, extracted by X6 after profiling. The one existing hole keeps the same qualified declaration name and exact statement. No new theorem hole is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived integral quotient augmentation and transition maps commute with clopen restriction and derived completeness and uniform constructible Tor bounds are detected on a finite partition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BoxIntegral.IntegrationParams.MemBaseSet.exists_common_compl\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter\", \"type\": \"∀ {ι : Type u_1} [inst : Fintype ι] {I : BoxIntegral.Box ι} {c₁ c₂ : NNReal} {l : BoxIntegral.IntegrationParams}\\n  {r₁ r₂ : (ι → ℝ) → ↑(Set.Ioi 0)} {π₁ π₂ : BoxIntegral.TaggedPrepartition I},\\n  l.MemBaseSet I c₁ r₁ π₁ →\\n    l.MemBaseSet I c₂ r₂ π₂ →\\n      π₁.iUnion = π₂.iUnion →\\n        ∃ π,\\n       \", \"doc\": \"Given a box $I$ and integration parameters $l$, if two prepartitions $\\\\pi_1$ and $\\\\pi_2$ satisfy the base set condition with parameters $c_1, r_1$ and $c_2, r_2$ respectively, and their subbox unions \"}\n  {\"name\": \"BoxIntegral.IntegrationParams.exists_memBaseSet_le_iUnion_eq\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter\", \"type\": \"∀ {ι : Type u_1} [inst : Fintype ι] {I : BoxIntegral.Box ι} {c : NNReal} (l : BoxIntegral.IntegrationParams)\\n  (π₀ : BoxIntegral.Prepartition I),\\n  π₀.distortion ≤ c →\\n    π₀.compl.distortion ≤ c →\\n      ∀ (r : (ι → ℝ) → ↑(Set.Ioi 0)), ∃ π, l.MemBaseSet I c r π ∧ π.toPrepartition ≤ π₀ ∧ π.iUnion = π\", \"doc\": \"Given integration parameters $ l $, a prepartition $ \\\\pi_0 $ of a box $ I $ with distortion bounds $ \\\\pi_0.distortion \\\\leq c $ and $ \\\\pi_0.compl.distortion \\\\leq c $, and a gauge function $ r $ mapping\"}\n  {\"name\": \"exists_clopen_partition_of_clopen_cover\", \"module\": \"Mathlib/Topology/Separation/Profinite\", \"type\": \"∀ {X : Type u_4} {I : Type u_5} [inst : TopologicalSpace X] [CompactSpace X] [T2Space X] [TotallyDisconnectedSpace X]\\n  [Finite I] {Z D : I → Set X},\\n  (∀ (i : I), IsClosed (Z i)) →\\n    (∀ (i : I), IsClopen (D i)) →\\n      (∀ (i : I), Z i ⊆ D i) →\\n        Set.univ.PairwiseDisjoint Z →\\n          ∃ C,\\n\", \"doc\": \"In a compact Hausdorff totally disconnected topological space $X$, given a finite index set $I$, closed sets $Z_i$ contained in clopen sets $D_i$ with pairwise disjoint $Z_i$, there exist clopen sets \"}\n  {\"name\": \"BoxIntegral.IntegrationParams.MemBaseSet.exists_compl\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter\", \"type\": \"∀ {ι : Type u_1} [inst : Fintype ι] {l : BoxIntegral.IntegrationParams} {I : BoxIntegral.Box ι} {c : NNReal}\\n  {r : (ι → ℝ) → ↑(Set.Ioi 0)} {π : BoxIntegral.TaggedPrepartition I},\\n  l.MemBaseSet I c r π → l.bDistortion = true → ∃ π', π'.iUnion = ↑I \\\\ π.iUnion ∧ π'.distortion ≤ c\", \"doc\": \"Given a tagged prepartition $\\\\pi$ of a box $I$ satisfying the base set condition with respect to integration parameters $l$, a non-negative real number $c$, and a gauge function $r$, and assuming $l$ \"}\n  {\"name\": \"OrderedFinpartition.applyOrderedFinpartition\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {F : Type u_3} →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace 𝕜 F] →\\n                {n : ℕ} →\\n    \", \"doc\": \"For an ordered finite partition $c$ of $n$, this function takes a family $p$ of continuous multilinear maps $p_m : E^{k_m} \\\\to F$ (where $k_m = \\\\text{partSize} \\\\, m$) and a vector $v : \\\\text{Fin} \\\\, n\"}\n  {\"name\": \"BoxIntegral.IntegrationParams.MemBaseSet.unionComplToSubordinate\", \"module\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter\", \"type\": \"∀ {ι : Type u_1} [inst : Fintype ι] {I : BoxIntegral.Box ι} {c : NNReal} {l : BoxIntegral.IntegrationParams}\\n  {r₁ r₂ : (ι → ℝ) → ↑(Set.Ioi 0)} {π₁ : BoxIntegral.TaggedPrepartition I},\\n  l.MemBaseSet I c r₁ π₁ →\\n    (∀ x ∈ BoxIntegral.Box.Icc I, r₂ x ≤ r₁ x) →\\n      ∀ {π₂ : BoxIntegral.Prepartition \", \"doc\": \"Given a tagged prepartition $\\\\pi_1$ of a box $I$ satisfying the base set condition with parameters $c$ and gauge $r_1$, a prepartition $\\\\pi_2$ whose union equals the complement of $\\\\pi_1$'s union with\"}\n  {\"name\": \"OrderedFinpartition.applyOrderedFinpartition_apply\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ}\\n  (c : OrderedFinpartition n) (p : (i : Fin c.length) → ContinuousMultilinearMap 𝕜 (fun i \", \"doc\": \"For an ordered finite partition $c$ of $n$, the application of a family $p$ of continuous multilinear maps $p_m : E^{k_m} \\\\to F$ (where $k_m = \\\\text{partSize}\\\\, m$) to a vector $v : \\\\text{Fin}\\\\, n \\\\to\"}\n  {\"name\": \"OrderedFinpartition.compAlongOrderedFinpartitionₗ\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {F : Type u_3} →\\n            [inst_3 : NormedAddCommGroup F] →\\n              [inst_4 : NormedSpace 𝕜 F] →\\n                {G : Type u_4}\", \"doc\": \"Given an ordered finite partition $ c $ of $ n $, this constructs a linear map from $ F $ to $ G $ that transforms into a multilinear map over a field $ \\\\mathbb{K} $. Specifically, for each partition \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen partitions and bounded derived representatives do not give the actual integral quotient augmentations, bidirectional completeness, and bounds uniform over all positive levels."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsComplete\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen partitions and bounded derived representatives do not give the actual integral quotient augmentations, bidirectional completeness, and bounds uniform over all positive levels."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|partition).*(derivedComplete|completion|reduction)|IsComplete.*(restrict|clopen)|integral.*(clopen|partition)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/ZLattice/Covolume.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.UnitPartition\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/SubboxInduction.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.Partition.Tagged\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/SubboxInduction.lean\", \"line\": \"15\", \"text\": \"`BoxIntegral.Box.exists_taggedPartition_isHenstock_isSubordinate_homothetic`) that for every box `I`\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/SubboxInduction.lean\", \"line\": \"82\", \"text\": \"`BoxIntegral.Box.splitCenterBox` instead of `BoxIntegral.Prepartition.splitCenter`. -/\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.Partition.SubboxInduction\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.Partition.Split\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter.lean\", \"line\": \"16\", \"text\": \"well-known definitions of integrals based on partitions of a rectangular box into subboxes (Riemann\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter.lean\", \"line\": \"97\", \"text\": \"  (π : BoxIntegral.TaggedPrepartition I) : Prop where\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Filter.lean\", \"line\": \"117\", \"text\": \"Then we define four filters on `BoxIntegral.TaggedPrepartition I`.\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Split.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.Partition.Basic\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Split.lean\", \"line\": \"23\", \"text\": \"* `BoxIntegral.Prepartition.split I i a` is the partition of `I` made of these two boxes (or of one\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Split.lean\", \"line\": \"25\", \"text\": \"* `BoxIntegral.Prepartition.splitMany I s`, where `s : Finset (ι × ℝ)` is a finite set of\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Split.lean\", \"line\": \"31\", \"text\": \"The main result `BoxIntegral.Prepartition.exists_iUnion_eq_sdiff` says that any prepartition `π` of\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Split.lean\", \"line\": \"33\", \"text\": \"is available as `BoxIntegral.Prepartition.compl`.\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Box/SubboxInduction.lean\", \"line\": \"46\", \"text\": \"`BoxIntegral.Partition.splitCenter` for the corresponding `BoxIntegral.Partition`. -/\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Box/SubboxInduction.lean\", \"line\": \"110\", \"text\": \"`BoxIntegral.Prepartition.splitCenter` instead of `BoxIntegral.Box.splitCenterBox`.\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Measure.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.Partition.Additive\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Box/Basic.lean\", \"line\": \"28\", \"text\": \"We use the same structure `BoxIntegral.Box` both for ambient boxes and for elements of a partition.\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/DivergenceTheorem.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.Partition.Additive\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Integrability.lean\", \"line\": \"241\", \"text\": \"    the integral sum of `f` over any tagged prepartition is `δᵢ`-close to the sum of integrals\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Tagged.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.BoxIntegral.Partition.Basic\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Tagged.lean\", \"line\": \"14\", \"text\": \"`π`. For simplicity we require that the function `BoxIntegral.TaggedPrepartition.tag` is defined\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Tagged.lean\", \"line\": \"16\", \"text\": \"`π : BoxIntegral.TaggedPrepartition I`, we require that each `BoxIntegral.TaggedPrepartition π J`\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Tagged.lean\", \"line\": \"19\", \"text\": \"(pre)partition because McShane integral is defined as a limit along tagged partitions without this\"}\n  {\"file\": \"Mathlib/Analysis/BoxIntegral/Partition/Tagged.lean\", \"line\": \"111\", \"text\": \"/-- Given a partition `π` of `I : BoxIntegral.Box ι` and a collection of tagged partitions\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen partitions and bounded derived representatives do not give the actual integral quotient augmentations, bidirectional completeness, and bounds uniform over all positive levels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic reduction of K flat complexes preserves the canonical unit x tensor one under restriction to disjoint components and detects uniform integral constructibility",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite disjoint union detects adically complete constructible complexes with a single cohomological interval and Tor amplitude interval for all quotient levels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ) [K.IsStrictlyGE n],\\n  (CochainComplex.cm5b.I K).IsStrictlyGE n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$ with enough injectives, this constructs a cochain complex $I K$ where each object $X^n$ is the injective replacement of $K.X^n$ from the original complex $K$, and \"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"CochainComplex.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n : ℤ), K.IsLE n ↔ ∀ (i : ℤ), n < i → HomologicalComplex.ExactAt K i\", \"doc\": \"For a cochain complex $ K $ and integer $ n $, the predicate $ K $ is supported under the embedding from the downward complex shape on natural numbers to the upward complex shape on integers at positi\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (L : CochainComplex C ℤ) (d : ℤ) [L.IsStrictlyGE d] [∀ (n : ℤ), CategoryTheory.Injective (L.X n)], L.IsKInjective\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, if a cochain complex $L$ is strictly supported in degrees $\\\\geq d$ and each object $L^n$ in the complex is injective, then $L$ is a K-injective cochain complex. T\"}\n  {\"name\": \"CochainComplex.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n : ℤ), K.IsGE n ↔ ∀ i < n, HomologicalComplex.ExactAt K i\", \"doc\": \"For a cochain complex $ K $, the condition $ K.\\\\text{IsGE}(n) $ holds if and only if $ K $ is exact at every integer index $ i $ satisfying $ i < n $. Exactness means the image of the differential $ d\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen partitions and bounded derived representatives do not give the actual integral quotient augmentations, bidirectional completeness, and bounds uniform over all positive levels."
+  },
+  {
+   "tool": "grep",
+   "query": "(derivedComplete|IsDerivedComplete|adic).*(restrict|clopen|partition)|clopen.*(reduction|complete)",
+   "results": "[grep] OK 0 hit(s); CategoryTheory subdirectory",
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen partitions and bounded derived representatives do not give the actual integral quotient augmentations, bidirectional completeness, and bounds uniform over all positive levels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a finite disjoint clopen cover commutes with augmented derived quotient towers and detects derived completeness and uniform cohomological and Tor bounds",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Profinite.NobelingProof.CC_exact, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module completion, bounded representatives, or condensed/profinite objects; none states augmented integral reduction descent on a clopen pro-etale cover."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|Clopen).*(complete|Complete|reduction)|derivedComplete.*restrict",
+   "results": "1 hits: Mathlib/ModelTheory/Types.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module completion, bounded representatives, or condensed/profinite objects; none states augmented integral reduction descent on a clopen pro-etale cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completeness and a uniform Tor amplitude interval are local for a finite clopen partition",
+   "results": "8 hits: IsAdicComplete.bot, AdicCompletion, IsAdicComplete, AdicCompletion.instCommRing, IsAdicComplete.toIsHausdorff, IsAdicComplete.of_subsingleton, IsAdic.isPrecomplete_iff, IsAdic.isAdicComplete_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module completion, bounded representatives, or condensed/profinite objects; none states augmented integral reduction descent on a clopen pro-etale cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsComplete\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module completion, bounded representatives, or condensed/profinite objects; none states augmented integral reduction descent on a clopen pro-etale cover."
+  },
+  {
+   "tool": "grep",
+   "query": "(derivedComplete|IsDerivedComplete|adic).*(restrict|clopen|partition)|clopen.*(reduction|complete)",
+   "results": "0 hits: none (subdirectory CategoryTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module completion, bounded representatives, or condensed/profinite objects; none states augmented integral reduction descent on a clopen pro-etale cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact product decomposition of sheaf module categories preserves quotient units and detects the Roos triangle of derived adic completion",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, AdicCompletion.map_exact, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, CondensedMod.ofSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module completion, bounded representatives, or condensed/profinite objects; none states augmented integral reduction descent on a clopen pro-etale cover."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_exact|class IsAdicComplete|def AdicCompletion|exists_iso_Q_obj_of_isGE_of_isLE|instAB4StarCondensedMod|succ_exact",
+   "results": "16 hits: Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean, Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module completion, bounded representatives, or condensed/profinite objects; none states augmented integral reduction descent on a clopen pro-etale cover."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "date": "2026-10-27",
+  "group": "X6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-augmented-integral-descent",
+   "place": "Augmented comparisons and the normalized Roos support used in the membership theorem.",
+   "via": [
+    "lem-pur-clopen-augmented-integral-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-augmented-integral-descent",
+  "worker": "stage1",
+  "summary": "Reused the existing clopen coefficient, tensor, scalar, Roos and finite-level bound nodes; calculated augmentation/transition compatibility and assembled bidirectional completeness and uniform integral bounds. No new nodes or statement changes.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant: the finite-clopen integral passage, via lem-pur-finite-clopen-derived-decomposition and lem-pur-clopen-roos-integral-descent, specifically augmented reductions and common cohomological/Tor intervals."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AugmentedIntegralDescentCore",
+  "declaration": "WeilConjectures.PurityFiniteSetting.augmentedIntegralReductionComparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestriction",
+   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestriction_exact",
+   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestrictionAdditive",
+   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestrictionLimits",
+   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestrictionColimits",
+   "WeilConjectures.PurityFiniteSetting.augmentedFiniteDerivedRestriction",
+   "WeilConjectures.PurityFiniteSetting.augmentedIntegralReductionComparison",
+   "WeilConjectures.PurityFiniteSetting.augmentedIntegralRoosDescent"
+  ],
+  "file": "lean/Sheaf/Paper/AugmentedIntegralDescentCore.lean",
+  "statement": "theorem augmentedIntegralReductionComparison (i : I) :\n    (∀ (T L : CochainComplex (scalarReductionSource P.coefficients.l\n        P.extension X.left) ℤ) (q : T ⟶ L)\n      (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients\n        (J := ProEt.topology X.left)\n        (R := completedIntegralCommRingSheafUnrestricted P.coefficients.l P.extension X.left) q)\n      (_hflat : ∀ m : ℤ, SheafOfModules.IsFlatOnSite\n        (J := ProEt.topology X.left)\n        (R := completedIntegralCommRingSheafUnrestricted P.coefficients.l P.extension X.left)\n        (T.X m)),\n      ∃ (hqr : CochainComplex.IsKFlatResolutionIndependentCoefficients\n          (J := ProEt.topology (Xi i).left)\n          (R := completedIntegralCommRingSheafUnrestricted\n            P.coefficients.l P.extension (Xi i).left)\n          ((clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).map q))\n        (β : ∀ n : ℕ,\n          (clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).obj\n              (unrestrictedTowerComplex P.coefficients.l P.extension X.left n T) ≅\n            unrestrictedTowerComplex P.coefficients.l P.extension (Xi i).left n\n              ((clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).obj T))\n        (d : canonicalIntegralReductionTower P.coefficients.l P.extension X.left T ⋙\n            clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left ≅\n          canonicalIntegralReductionTower P.coefficients.l P.extension (Xi i).left\n            ((clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).obj T)),\n        (∀ m : ℤ, SheafOfModules.IsFlatOnSite\n          (J := ProEt.topology (Xi i).left)\n          (R := completedIntegralCommRingSheafUnrestricted\n            P.coefficients.l P.extension (Xi i).left)\n          (((clopenIntegralComplexRestriction P.coefficients.l P.extension\n            (j i).left).obj T).X m)) ∧\n        (∀ (n : ℕ) (m : ℤ) (U : (Xi i).left.ProEtᵒᵖ)\n          (s : (integralCoefficientCommRingSheaf P.coefficients.l P.extension\n            (Xi i).left n).obj.obj U)\n          (x : (T.X m).val.obj ((clopenSiteInclusion (j i).left).op.obj U)),\n          (((β n).hom.f m).val.app U)\n            (unrestrictedTowerTensorSection P.coefficients.l P.extension X.left n\n              (T.X m) ((clopenSiteInclusion (j i).left).op.obj U)\n              ((clopenConstantMap (j i).left (CommRingCat.of\n                (ULift.{u + 1} (Padic.coefficientExtensionRing P.coefficients.l\n                  P.extension (n + 1))))).hom.app U s) x) =\n          unrestrictedTowerTensorSection P.coefficients.l P.extension (Xi i).left n\n            ((clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left).obj (T.X m))\n            U s x) ∧\n        (∀ n : ℕ,\n          (clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).map\n              (unrestrictedTowerUnit P.coefficients.l P.extension X.left T n) ≫\n            (β n).hom =\n          unrestrictedTowerUnit P.coefficients.l P.extension (Xi i).left\n            ((clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).obj T)\n            n) ∧\n        (∀ n : ℕ,\n          (clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).map\n              (unrestrictedTowerTransition P.coefficients.l P.extension X.left T n) ≫\n            (β n).hom =\n          (β (n + 1)).hom ≫ unrestrictedTowerTransition P.coefficients.l P.extension\n            (Xi i).left\n            ((clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).obj T) n) ∧\n        (∀ n : ℕ,\n          d.hom.app (op n) =\n            (clopenIntegralModuleRestriction P.coefficients.l P.extension\n              (j i).left).mapDerivedCategoryFactors.hom.app\n                (unrestrictedTowerComplex P.coefficients.l P.extension X.left n T) ≫\n              DerivedCategory.Q.map ((β n).hom)) ∧\n        (∀ n : ℕ,\n          (clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).map\n              (canonicalIntegralReductionTowerMap P.coefficients.l P.extension X.left q hq n) ≫\n            d.hom.app (op n) =\n          (clopenIntegralModuleRestriction P.coefficients.l P.extension\n            (j i).left).mapDerivedCategoryFactors.hom.app L ≫\n              canonicalIntegralReductionTowerMap P.coefficients.l P.extension (Xi i).left\n                ((clopenIntegralComplexRestriction P.coefficients.l P.extension\n                  (j i).left).map q) hqr n)) ∧\n    (∃ β : clopenDerivedReductionFunctor P.coefficients.l P.extension X.left ⋙\n          (Functor.whiskeringRight ℕᵒᵖ _ _).obj\n            (clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left) ≅\n        clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left ⋙\n          clopenDerivedReductionFunctor P.coefficients.l P.extension (Xi i).left,\n      ∀ (K : DerivedCategory (scalarReductionSource P.coefficients.l P.extension X.left))\n        (n : ℕ),\n        (clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).map\n            ((sfDerivedReductionUnit P.coefficients.l P.extension X.left n).app K) ≫\n          (β.hom.app K).app (op n) =\n        (sfDerivedReductionUnit P.coefficients.l P.extension (Xi i).left n).app\n          ((clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left).obj K)) ∧\n    (∀ n : ℕ, ∃\n      (α : (scalarReductionExtension P.coefficients.l P.extension X.left n).mapHomologicalComplex\n              (.up ℤ) ⋙\n            (augmentedFiniteRestriction P.coefficients.l P.extension\n              (j i).left n).mapHomologicalComplex (.up ℤ) ≅\n          clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left ⋙\n            (scalarReductionExtension P.coefficients.l P.extension\n              (Xi i).left n).mapHomologicalComplex (.up ℤ))\n      (δ : scalarReductionDerivedExtension P.coefficients.l P.extension X.left n ⋙\n            augmentedFiniteDerivedRestriction P.coefficients.l P.extension (j i).left n ≅\n          clopenIntegralDerivedRestriction P.coefficients.l P.extension (j i).left ⋙\n            scalarReductionDerivedExtension P.coefficients.l P.extension (Xi i).left n),\n      (∀ (T : CochainComplex (scalarReductionSource P.coefficients.l P.extension X.left) ℤ)\n        (m : ℤ) (U : (Xi i).left.ProEtᵒᵖ)\n        (s : (integralCoefficientCommRingSheaf P.coefficients.l P.extension\n          (Xi i).left n).obj.obj U)\n        (x : (T.X m).val.obj ((clopenSiteInclusion (j i).left).op.obj U)),\n        (((α.hom.app T).f m).val.app U)\n          (unrestrictedTowerTensorSection P.coefficients.l P.extension X.left n\n            (T.X m) ((clopenSiteInclusion (j i).left).op.obj U)\n            ((clopenConstantMap (j i).left (CommRingCat.of\n              (ULift.{u + 1} (Padic.coefficientExtensionRing P.coefficients.l\n                P.extension (n + 1))))).hom.app U s) x) =\n        unrestrictedTowerTensorSection P.coefficients.l P.extension (Xi i).left n\n          ((clopenIntegralModuleRestriction P.coefficients.l P.extension (j i).left).obj (T.X m))\n          U s x) ∧\n      ∀ (T L : CochainComplex (scalarReductionSource P.coefficients.l P.extension X.left) ℤ)\n        (q : T ⟶ L)\n        (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients\n          (J := ProEt.topology X.left)\n          (R := completedIntegralCommRingSheafUnrestricted\n            P.coefficients.l P.extension X.left) q)\n        (_hflat : ∀ m : ℤ, SheafOfModules.IsFlatOnSite\n          (J := ProEt.topology X.left)\n          (R := completedIntegralCommRingSheafUnrestricted\n            P.coefficients.l P.extension X.left) (T.X m))\n        (hqr : CochainComplex.IsKFlatResolutionIndependentCoefficients\n          (J := ProEt.topology (Xi i).left)\n          (R := completedIntegralCommRingSheafUnrestricted\n            P.coefficients.l P.extension (Xi i).left)\n          ((clopenIntegralComplexRestriction P.coefficients.l P.extension (j i).left).map q)),\n        (augmentedFiniteDerivedRestriction P.coefficients.l P.extension (j i).left n).map\n            (unrestrictedTowerResolutionIso P.coefficients.l P.extension X.left n q hq).hom ≫\n          (augmentedFiniteRestriction P.coefficients.l P.extension\n            (j i).left n).mapDerivedCategoryFactors.hom.app\n              (unrestrictedTowerFiniteComplex P.coefficients.l P.extension X.left n T) ≫\n          DerivedCategory.Q.map (α.hom.app T) =\n        δ.hom.app (DerivedCategory.Q.obj L) ≫\n          (scalarReductionDerivedExtension P.coefficients.l P.extension (Xi i).left n).map\n            ((clopenIntegralModuleRestriction P.coefficients.l P.extension\n              (j i).left).mapDerivedCategoryFactors.hom.app L) ≫\n          (unrestrictedTowerResolutionIso P.coefficients.l P.extension (Xi i).left n\n            ((clopenIntegralComplexRestriction P.coefficients.l P.extension\n              (j i).left).map q) hqr).hom)",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Eight existing public declarations move here with identical names, signatures, attributes and data. The sole original augmentedIntegralReductionComparison hole is retained; every other proof is complete. Historical Mathlib searches are reused from the parent record, not claimed as new searches."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08e358442",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Read item node, all 16 stmt_dep records, the full module, the report and the source (BS 3.5.1(1)/3.5.2), plus the live parent ClopenRoosIntegralDescent and DerivedCompleteOnSlices. Hypotheses: LFT+QC, Finite I, open+closed immersions, disjoint, cover, completed ring R, unbounded K, K-flat resolution with flat terms; none stronger. Comparison: restricted q is K-flat with flat terms; chain isos beta_n pinned on pure tensors, commute with gamma_n and tau_n; derived tower iso d = factors >> Q.map beta_n with the actual c_n; finite alpha/delta pinned by tensor formula and K-flat square; functor-level beta unit-normalised. Roos: alpha pinned by projections; Hom bijection delta -> (alpha_i^-1 >> r_i delta >> commShift) well-typed and true; IsDerivedLimitTriangle iff keeps the actual Pi.lift units. Membership: IsComplete/sfIntegralConstructible/finiteTorConstructibleIntegral iff componentwise; fixed support/Tor intervals for all n>=1; attained min/max for nonempty I plus any larger interval; empty components zero; empty I gives X empty, all memberships, [0,0]. lean.statement verbatim; 9 declarations present with source+blueprint docstrings; all proofs sorry; finite helper is real data; report has both sections. Advisory: parent-module import closes a stage-3 cycle (parent proof_deps cite item; reverse import omitted and listed) -> maintainer should split clopen restriction helpers into a def-node module; unrestrictedTowerResolutionIso/scalarReduction* owners not in stmt_deps; functor-level beta unit-normalised only, as in the landed parent. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
+ }
+}

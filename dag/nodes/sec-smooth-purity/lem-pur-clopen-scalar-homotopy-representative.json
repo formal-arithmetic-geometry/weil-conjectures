@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-clopen-scalar-homotopy-representative",
+ "kind": "statement",
+ "title": "Translate the clopen scalar representative square to homotopy quotients",
+ "statement": "Let $j:Y\\hookrightarrow X$ be an open immersion of schemes [def-pc-scheme, def-weil-open-immersion], with small pro-etale module categories [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Let $p,q$ be families of presentations of the existing universal left derived coefficient extension on $X,Y$ [def-pur-clopen-derived-scalar-comparison-data]. Let $d$ be an ordinary, chain and derived restriction comparison for these families. Assume its chain comparison is degreewise the ordinary comparison, and its cochain representative square holds for flat-term K-flat complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Then its homotopy representative square holds on every such complex: restrict the universal homotopy counit, apply the exact-functor homotopy quotient comparison, and then the homotopy lift of the ordinary comparison; this is equal to first applying the derived comparison on $Q_h[P]$, then the derived extension of the exact-functor homotopy quotient comparison, then the target universal homotopy counit. All functors, counits and quotient comparisons are those of the given presentations and the canonical exact restriction. This asserts only the conversion of the representative formula, without constructing a comparison or asserting section or compositor normalization.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, left derived functor computed by K-flat resolutions; the canonical cochain/homotopy quotient comparison and counit formulas."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-clopen-derived-scalar-comparison-data",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use equality of every degree component to identify the chain comparison with the degreewise lift of the ordinary comparison. Its image under the homotopy quotient is the homotopy lift appearing in the claimed square.",
+   "uses": [
+    "def-pur-clopen-derived-scalar-comparison-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the exact-functor homotopy factorization comparison as the cochain factorization conjugated by the canonical quotient comparison. Expand each computation counit by its definition. Precompose by the restricted derived image of the inverse source quotient comparison and postcompose by the target quotient comparison. Naturality and the inverse identities reduce precisely to the given cochain representative square, in the reverse orientation. Cancel these two isomorphisms.",
+   "uses": [
+    "def-pur-clopen-derived-scalar-comparison-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "X6: explicit canonical quotient and counit calculation for Tag 06YY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Convert a scalar extension representative square from cochain complexes to homotopy complexes using quotient factorization isomorphisms",
+   "results": "OK 8 hits: homotopy and mapping-cone constructors, no scalar comparison conversion.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; use the canonical component formulas and prove the conversion by cancellation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryFactorsh_hom_app",
+   "results": "OK 0 hits: loogle unknown identifier; local Mathlib ExactFunctor.lean provides the namespaced formula.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; use the canonical component formulas and prove the conversion by cancellation."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientCompQhIso_hom_naturality|mapDerivedCategoryFactorsh_hom_app",
+   "results": "OK 3 hits: Mathlib ExactFunctor.lean lines 66, 101 and DerivedCategory/Basic.lean line 120. These give the component and naturality formulas, not the complete conversion theorem.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; use the canonical component formulas and prove the conversion by cancellation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "date": "2026-10-27",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: convert the normalized finite-clopen scalar extension square between cochain and homotopy representatives.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenScalarHomotopyRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenScalarHomotopyRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_scalar_homotopy_representative",
+  "statement": "theorem clopen_scalar_homotopy_representative\n    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    (p : Presentations.{t, u} X) (q : Presentations.{t, u} Y)\n    (d : Comparison.{t, u} j p q) (hd : d.degree) (hr : d.representative)\n    {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S)\n        (P : CochainComplex (Mods.{t, u} R) ℤ)\n        (hP : CochainComplex.IsKFlatIndependentCoefficients (J := topology X) (R := R) P)\n        (hf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := topology X) (R := R) (P.X n)) :\n        (resD.{t, u} j S).map\n            ((p a).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫\n          (res.{t, u} j S).mapDerivedCategoryFactorsh.hom.app\n            (((p a).ordinary.mapHomotopyCategory (.up ℤ)).obj\n              ((HomotopyCategory.quotient _ _).obj P)) ≫\n          DerivedCategory.Qh.map\n            ((Functor.mapHomotopyCategoryCompIso (d.ordinary a) (.up ℤ) ≪≫\n            (Functor.mapHomotopyCategoryCompIso (Iso.refl _) (.up ℤ)).symm).hom.app\n              ((HomotopyCategory.quotient _ _).obj P)) =\n        (d.derived a).hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) ≫\n          (q ((rings.{t, u} j).map a)).derived.map\n            ((res.{t, u} j R).mapDerivedCategoryFactorsh.hom.app\n              ((HomotopyCategory.quotient _ _).obj P)) ≫\n          (q ((rings.{t, u} j).map a)).counit.app\n            (((res.{t, u} j R).mapHomotopyCategory (.up ℤ)).obj\n              ((HomotopyCategory.quotient _ _).obj P))",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
+ }
+}

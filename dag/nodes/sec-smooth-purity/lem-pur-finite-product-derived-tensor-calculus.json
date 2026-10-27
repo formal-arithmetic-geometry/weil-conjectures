@@ -24,29 +24,9 @@
  ],
  "proof": [
   {
-   "text": "For restriction_exact, use the existing exact restriction theorem of ClopenLocalization with the fixed coefficient universe. Reindex the recorded clopen module-gluing equivalence through Fin n to handle any finite index type.",
+   "text": "Import the extracted, already proved finite-clopen derived calculus, together with its canonical restriction and tensor data. Its public theorem and definition names retain the original signatures. Keep compatibility wrappers for the private generic and module-gluing helper interfaces used by import-all consumers.",
    "uses": [
-    "lem-pur-clopen-unbounded-derived-localization",
-    "lem-pur-clopen-ringed-module-gluing"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For finite_clopen_derived_calculus, apply the exact restrictions degreewise and build the inverse complex degreewise from the module equivalence. Cohomology and joint detection identify the quasi-isomorphisms. Localize this equivalence using the product localization and Localization.isEquivalence. The exact-functor API supplies triangulatedness, cohomology comparisons, and joint zero/isomorphism detection.",
-   "uses": [
-    "lem-pur-clopen-ringed-module-gluing",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-sfb-product-localization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Insert an object in one coordinate and the zero object in all others, then compose with the inverse derived equivalence. The counit gives the diagonal and off-diagonal identities. The sum of the coordinate projection-inclusion composites is the identity; transport this bicone through the additive inverse equivalence to obtain both displayed bilimits. For an empty scheme, empty-index module gluing makes every module, hence every derived object, zero. An empty partition forces X empty by its covering hypothesis.",
-   "uses": [
-    "lem-pur-clopen-ringed-module-gluing",
-    "def-weil-abstract-derived-category"
+    "lem-pur-finite-clopen-derived-calculus"
    ],
    "elementary": false
   },
@@ -62,9 +42,9 @@
    }
   },
   {
-   "text": "Equip the equivalence of step 1 with the derived comparisons of [lem-pur-clopen-kflat-monoidal-descent]. The representative normalization there uses exactly the total-tensor comparison of step 2, so it equips this equivalence with the required symmetric monoidal structure for the prescribed K-flat derived tensors. The comparison is natural on all derived morphisms.",
+   "text": "Apply the normalized finite-clopen tensor-model witnesses. This supplies the ordinary braided structure and pure-tensor formula, the total comparison and generator formula, and the derived braided structure with its model square for all K-flat pairs. This is the tensor-witness part of the assertion; the two detection equivalences are supplied separately by tensor detection.",
    "uses": [
-    "lem-pur-clopen-kflat-monoidal-descent"
+    "lem-pur-finite-clopen-normalized-tensor-models"
    ],
    "elementary": false,
    "source": {
@@ -73,12 +53,10 @@
    }
   },
   {
-   "text": "For arbitrary coefficient-extension presentations and their normalizations, apply clopen_scalar_comparison_descent. Its ordinary and chain comparison give the section formula and the degreewise comparison. Convert its representative equation from cochain localization to the homotopy quotient using the canonical quotientCompQhIso and exact-functor factorization identities. The model-properties theorem supplies computed and extended clauses required by coherence; unit normalization supplies the identity comparisons. Apply clopen_scalar_comparison_coherence, and expand scalarComposite to obtain the displayed composite square. All statements already include empty components and zero coefficient sheaves.",
+   "text": "For arbitrary prescribed coefficient presentations, apply the proved normalized scalar-witness assembly. Keep its ordinary and derived comparison, section formula and degree formula. Convert the cochain representative square to the homotopy quotient square using the proved canonical quotient conversion. Its coherence field supplies the composition square after expanding scalarComposite. No coefficient flatness, nonzero or nonempty assumptions occur.",
    "uses": [
-    "lem-pur-clopen-scalar-comparison-descent",
-    "lem-pur-clopen-scalar-model-properties",
-    "lem-pur-clopen-scalar-unit-normalization",
-    "lem-pur-clopen-scalar-comparison-coherence"
+    "lem-pur-clopen-arbitrary-scalar-normalized-witnesses",
+    "lem-pur-clopen-scalar-homotopy-representative"
    ],
    "elementary": false,
    "source": {
@@ -88,24 +66,16 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-clopen-unbounded-derived-localization",
-  "lem-pur-clopen-ringed-module-gluing",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-sfb-product-localization",
-  "lem-weil-pbc-localization-universal-property",
-  "def-weil-abstract-derived-category",
+  "lem-pur-finite-clopen-derived-calculus",
   "lem-pur-clopen-total-tensor-kflat-detection",
-  "lem-pur-clopen-kflat-monoidal-descent",
-  "lem-pur-clopen-scalar-comparison-descent",
-  "lem-pur-clopen-scalar-model-properties",
-  "lem-pur-clopen-scalar-unit-normalization",
-  "lem-pur-clopen-scalar-comparison-coherence"
+  "lem-pur-finite-clopen-normalized-tensor-models",
+  "lem-pur-clopen-arbitrary-scalar-normalized-witnesses",
+  "lem-pur-clopen-scalar-homotopy-representative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "G5: the scalar comparison is proved for arbitrary existing presentations from normalized scalar descent, model properties, units and coherence. Explicit quotient-factor identities convert the representative normalization to the statement's homotopy-category convention. The earlier derived-product proof is retained; the tensor declaration remains the original unfinished theorem with its original route."
+  "place": "X6: retain the proved finite-product derived equivalence; assemble ordinary and total comparisons from tensor detection, extend the normalized braided comparison to all K-flat pairs by flat-term resolution and cancellation, and assemble arbitrary scalar presentations from normalized descent, model properties, units and coherence. Canonical quotient comparisons convert the scalar cochain square into the stated homotopy square. Tags 015F, 06YS, 06YT, 06YY and 0D6D."
  },
  "mathlib_searches": [
   {
@@ -266,23 +236,8 @@
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
-  "declaration": "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_derived_calculus",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_tensor_calculus",
   "declarations": [
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.Modules",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.rings",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restriction",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restriction_exact",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionLimits",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionColimits",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionAdditive",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedRestriction",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedMonoidal",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedSymmetric",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.pure",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.tensorComparison",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedTensorComparison",
-   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_derived_calculus",
    "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_tensor_calculus",
    "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.Presentations",
    "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.scalarComposite",
@@ -290,12 +245,12 @@
    "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_scalar_calculus"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteClopenTensorCalculus.lean",
-  "statement": "theorem finite_clopen_derived_calculus (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t}) (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)] (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k)))) (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i)) (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) : ∃ E : DerivedCategory (Modules.{t, u} R) ≌ (∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R))), E.functor = Functor.pi' (fun i ↦ derivedRestriction (j i) R) ∧ (∀ i, (derivedRestriction.{t, u} (j i) R).IsTriangulated) ∧ (∀ i (m : ℤ), Nonempty (derivedRestriction (j i) R ⋙ DerivedCategory.homologyFunctor _ m ≅ DerivedCategory.homologyFunctor _ m ⋙ restriction (j i) R)) ∧ (∀ K : DerivedCategory (Modules.{t, u} R), IsZero K ↔ ∀ i, IsZero ((derivedRestriction.{t, u} (j i) R).obj K)) ∧ (∀ (K L : DerivedCategory (Modules.{t, u} R)) (f : K ⟶ L), IsIso f ↔ ∀ i, IsIso ((derivedRestriction.{t, u} (j i) R).map f)) ∧ (∃ e : ∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ⥤ DerivedCategory (Modules.{t, u} R), (∀ i, Nonempty (e i ⋙ derivedRestriction (j i) R ≅ 𝟭 _)) ∧ (∀ i k, i ≠ k → ∀ K, IsZero ((e k ⋙ derivedRestriction (j i) R).obj K)) ∧ (∃ s : ∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ⥤ (∀ k, DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))), ∀ i, e i = s i ⋙ E.inverse ∧ Nonempty (s i ⋙ Pi.eval (fun k ↦ DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))) i ≅ 𝟭 _) ∧ (∀ k, k ≠ i → ∀ K, IsZero ((s i).obj K k))) ∧ (∃ b : Bicone (fun i ↦ derivedRestriction (j i) R ⋙ e i), b.pt = 𝟭 _ ∧ Nonempty b.IsBilimit) ∧ (∃ b : Bicone (fun i ↦ Pi.eval (fun k ↦ DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))) i ⋙ e i), b.pt = E.inverse ∧ Nonempty b.IsBilimit)) ∧ (∀ i, IsEmpty (Y i) → Nonempty (DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ≌ Discrete PUnit)) ∧ (IsEmpty I → IsEmpty X ∧ Nonempty (DerivedCategory (Modules.{t, u} R) ≌ Discrete PUnit))",
+  "statement": "theorem finite_clopen_tensor_calculus\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :\n    (∀ F : Modules.{t, u} R,\n      SheafOfModules.IsFlatOnSite (J := topology X) (R := R) F ↔\n        ∀ i, SheafOfModules.IsFlatOnSite (J := topology (Y i))\n          (R := (rings.{t, u} (j i)).obj R)\n          ((restriction.{t, u} (j i) R).obj F)) ∧\n    (∀ P : CochainComplex (Modules.{t, u} R) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients (J := topology X) (R := R) P ↔\n        ∀ i, CochainComplex.IsKFlatIndependentCoefficients (J := topology (Y i))\n          (R := (rings.{t, u} (j i)).obj R)\n          (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).obj P)) ∧\n    ∀ i, ∃ (h : (restriction.{t, u} (j i) R).Braided)\n      (c : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙\n          (restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ) ≅\n        (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).prod\n          ((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ))) ⋙\n            coefficientTotalTensor.{u, t + 1, t} (topology (Y i)) ((rings.{t, u} (j i)).obj R))\n      (d : (derivedRestriction.{t, u} (j i) R).Braided),\n      (∀ (F H : Modules.{t, u} R) (U : (Y i).ProEt) (x : F.val.obj\n          (op ((MorphismProperty.Over.map ⊤\n            (inferInstance : WeaklyEtale (j i))).obj U)))\n        (y : H.val.obj (op ((MorphismProperty.Over.map ⊤\n          (inferInstance : WeaklyEtale (j i))).obj U))),\n        ((tensorComparison (j i) R h F H).hom.val.app (op U))\n          (pure R F H _ x y) =\n        pure ((rings.{t, u} (j i)).obj R) ((restriction.{t, u} (j i) R).obj F)\n          ((restriction.{t, u} (j i) R).obj H) (op U) x y) ∧\n      (∀ (P Q : CochainComplex (Modules.{t, u} R) ℤ) (p q n : ℤ) (hpq : p + q = n)\n        (U : (Y i).ProEt)\n        (x : (P.X p).val.obj (op ((MorphismProperty.Over.map ⊤\n          (inferInstance : WeaklyEtale (j i))).obj U)))\n        (y : (Q.X q).val.obj (op ((MorphismProperty.Over.map ⊤\n          (inferInstance : WeaklyEtale (j i))).obj U))),\n        (((c.hom.app (P, Q)).f n).val.app (op U))\n          (coefficientTensorGenerator.{u, t + 1, t} (topology X) R P Q p q n hpq _ x y) =\n        coefficientTensorGenerator.{u, t + 1, t} (topology (Y i)) ((rings.{t, u} (j i)).obj R)\n          (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).obj P)\n          (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).obj Q)\n          p q n hpq (op U) x y) ∧\n      (∀ (P Q : CochainComplex (Modules.{t, u} R) ℤ)\n        (hP : CochainComplex.IsKFlatIndependentCoefficients (J := topology X) (R := R) P)\n        (_hQ : CochainComplex.IsKFlatIndependentCoefficients (J := topology X) (R := R) Q)\n        (hiP : CochainComplex.IsKFlatIndependentCoefficients (J := topology (Y i))\n          (R := (rings.{t, u} (j i)).obj R)\n          (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).obj P))\n        (_hiQ : CochainComplex.IsKFlatIndependentCoefficients (J := topology (Y i))\n          (R := (rings.{t, u} (j i)).obj R)\n          (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).obj Q)),\n        (derivedRestriction.{t, u} (j i) R).map\n            (RingedDerivedNative.tensorIso.{t + 1, t, u} (topology X) R P Q\n              (Or.inl hP)).hom ≫\n          (derivedTensorComparison (j i) R d (DerivedCategory.Q.obj P)\n            (DerivedCategory.Q.obj Q)).hom ≫\n          ((restriction.{t, u} (j i) R).mapDerivedCategoryFactors.hom.app P ⊗ₘ\n            (restriction.{t, u} (j i) R).mapDerivedCategoryFactors.hom.app Q) =\n        (restriction.{t, u} (j i) R).mapDerivedCategoryFactors.hom.app\n            ((coefficientTotalTensor.{u, t + 1, t} (topology X) R).obj (P, Q)) ≫\n          DerivedCategory.Q.map (c.hom.app (P, Q)) ≫\n          (RingedDerivedNative.tensorIso.{t + 1, t, u} (topology (Y i))\n            ((rings.{t, u} (j i)).obj R)\n            (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).obj P)\n            (((restriction.{t, u} (j i) R).mapHomologicalComplex (.up ℤ)).obj Q)\n            (Or.inl hiP)).hom)",
   "branch": "sheaf-dag",
-  "by": "N8",
-  "date": "2026-10-21",
+  "by": "X6",
+  "date": "2026-10-27",
   "existing": false,
-  "note": "The node is stated jointly by finite_clopen_derived_calculus, finite_clopen_tensor_calculus and finite_clopen_scalar_calculus. Other declarations transparently specialize the recorded restriction, localization, tensorator and universal coefficient-presentation interfaces; restriction_exact supplies the exactness proof needed by their definitions. The comparisons are normalized on pure tensors, total-complex generators and K-flat universal counits, with arbitrary coefficient maps and their existing normalized compositors."
+  "note": "The derived-calculus theorem and canonical data are publicly imported from the extracted proved module; the item declares the tensor and scalar calculus with their original signatures. Existing private consumer interfaces have wrapper proofs."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -318,13 +273,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G5",
+  "reviewer": "C-3e547",
+  "group": "X6",
   "result": "pass",
-  "landing": "20261025T041206-L-1069977",
+  "landing": "20261027T151749-L-1204492",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
  }
 }

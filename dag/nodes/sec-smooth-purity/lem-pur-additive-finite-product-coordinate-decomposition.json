@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-additive-finite-product-coordinate-decomposition",
+ "kind": "statement",
+ "title": "Coordinate decompositions for an additive finite-product equivalence",
+ "statement": "Let $C$ and $D_i$ be preadditive categories [def-nagata-category, def-weil-preadditive-category], indexed by a finite type $I$, and suppose each $D_i$ has a zero object. Give the product its pointwise preadditive structure. Let $E:C\\simeq\\prod_i D_i$ be an equivalence whose inverse is additive. There are functors $e_i:D_i\\to C$ and coordinate insertions $s_i:D_i\\to\\prod_kD_k$ with $e_i=s_iE^{-1}$. Their own coordinate restriction is naturally the identity, and each other coordinate object is zero. Moreover, there is a bilimit bicone with point $\\operatorname{Id}_C$ for the functors $E\\operatorname{pr}_i e_i$, and a bilimit bicone with point $E^{-1}$ for the functors $\\operatorname{pr}_i e_i$ on the product. The statement includes the empty index type. No choice of biproduct data in $C$ is required; the two bicones are constructed from coordinate insertions and the equivalence.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F and 05RU; explicit finite-product calculation already proved in the finite-clopen tensor-calculus module, extracted unchanged apart from a local sum simplification for compilation."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-preadditive-category"
+ ],
+ "proof": [
+  {
+   "text": "Define insertion at coordinate i using the given object at i and the chosen zero object elsewhere. Define projection and inclusion natural transformations for each coordinate. Their pairwise composites are the identity on the diagonal and zero otherwise; their diagonal sum is the identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the coordinate bicone through the additive inverse equivalence. On the product side its point is the inverse functor; on the source side conjugate by the unit isomorphism to make the point exactly the identity. Additivity preserves the total sum identity, so isBilimitOfTotal proves both bilimits. The counit supplies the diagonal and off-diagonal comparison formulas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "N8 existing complete proof, extracted by X6 to satisfy the per-file compile limit. No new hole or mathematical route change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence with a finite product of categories with zero objects gives coordinate insertions and biproduct decompositions of the identity and inverse functor",
+   "results": "OK 8 hits: HomOrthogonal matrix decomposition, Mat biproduct embedding and additive functor formulas; no exact coordinate insertion and two-bicone statement.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.isBilimitOfTotal",
+   "results": "OK 1 hit: CategoryTheory.Limits.isBilimitOfTotal. Used in the existing proof.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateInsertion|equivalenceCoordinateDecomposition|isBilimitOfTotal",
+   "results": "OK 7 hits: generic isBilimitOfTotal applications and definition; no full coordinate theorem.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "date": "2026-10-27",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: generic finite-product machinery used by the finite-clopen unbounded derived decomposition.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AdditiveFiniteProductCoordinates",
+  "file": "lean/Sheaf/CategoryTheory/AdditiveFiniteProductCoordinates.lean",
+  "declaration": "CategoryTheory.FiniteProductCoordinates.equivalenceCoordinateDecomposition",
+  "statement": "theorem equivalenceCoordinateDecomposition\n    {C : Type*} [Category C] [Preadditive C] {J : Type*} [Finite J]\n    (D : J → Type*) [∀ i, Category (D i)] [∀ i, Preadditive (D i)]\n    [∀ i, HasZeroObject (D i)] (E : C ≌ ∀ i, D i) [E.inverse.Additive] :\n    ∃ e : ∀ i, D i ⥤ C,\n      (∀ i, Nonempty (e i ⋙ (E.functor ⋙ Pi.eval D i) ≅ 𝟭 _)) ∧\n      (∀ i k, i ≠ k → ∀ M, IsZero ((e k ⋙ (E.functor ⋙ Pi.eval D i)).obj M)) ∧\n      (∃ s : ∀ i, D i ⥤ ∀ k, D k,\n        ∀ i, e i = s i ⋙ E.inverse ∧\n          Nonempty (s i ⋙ Pi.eval D i ≅ 𝟭 _) ∧\n          (∀ k, k ≠ i → ∀ M, IsZero ((s i).obj M k))) ∧\n      (∃ b : Bicone (fun i ↦ (E.functor ⋙ Pi.eval D i) ⋙ e i),\n        b.pt = 𝟭 _ ∧ Nonempty b.IsBilimit) ∧\n      (∃ b : Bicone (fun i ↦ Pi.eval D i ⋙ e i),\n        b.pt = E.inverse ∧ Nonempty b.IsBilimit)",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-27",
+  "declarations": [
+   "CategoryTheory.FiniteProductCoordinates.piPreadditive",
+   "CategoryTheory.FiniteProductCoordinates.equivalenceCoordinateDecomposition"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
+ }
+}

@@ -39,6 +39,9 @@ It does not complete an arbitrary unbounded complex after restricting it.
 -/
 
 @[expose] public noncomputable section
+-- Retain the fixed completed-coefficient abelian structure.
+attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.modulesAbelian
+  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
 set_option autoImplicit false
 set_option Elab.async false
 set_option linter.unusedSectionVars false

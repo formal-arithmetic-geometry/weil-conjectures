@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-clopen-arbitrary-scalar-normalized-witnesses",
+ "kind": "statement",
+ "title": "Normalized clopen scalar witnesses for arbitrary prescribed presentations",
+ "statement": "Let $X$ be a scheme and $j_i:Y_i\\hookrightarrow X$ a finite pairwise disjoint open and closed cover [def-pc-scheme, def-weil-open-immersion, def-weil-closed-immersion], with small pro-etale module categories [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Prescribe arbitrary families $p,q_i$ of presentations of the existing universal left derived scalar extension functors, with normalizations $N,N_i$ [def-pur-clopen-derived-scalar-comparison-data]. Then there are normalized unit comparison structures $U,V_i$ for these same prescribed presentations and a scalar/restriction comparison $d_i$ for each component. Each $d_i$ has the section formula, the degreewise chain formula, the cochain K-flat representative formula, and the full compositor and identity coherence of the comparison-data definition. The underlying ordinary and derived extension functors are those of $p,q_i$. This statement assembles witnesses in the cochain localization model and does not assert the conversion to homotopy representatives.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0D6D, normalized finite-clopen scalar comparison for prescribed universal presentations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-clopen-derived-scalar-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply scalar comparison descent to the prescribed presentations and normalizations, obtaining sections, degree, representative and uniqueness. Apply the scalar model-properties theorem for the computed and extended clauses needed by coherence.",
+   "uses": [
+    "lem-pur-clopen-scalar-comparison-descent",
+    "lem-pur-clopen-scalar-model-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose normalized identity-unit structures for the prescribed families, and apply scalar comparison coherence to these and the six normalized comparison clauses. Retain sections, degree, representative and coherence with these unit structures.",
+   "uses": [
+    "lem-pur-clopen-scalar-unit-normalization",
+    "lem-pur-clopen-scalar-comparison-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-scalar-comparison-descent",
+  "lem-pur-clopen-scalar-model-properties",
+  "lem-pur-clopen-scalar-unit-normalization",
+  "lem-pur-clopen-scalar-comparison-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "X6: extract the proved arbitrary-presentation witness assembly to keep the item file below the compile limit; the homotopy representative conversion remains separate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Assemble a clopen scalar comparison for arbitrary prescribed universal derived coefficient presentations with sections degree normalization and compositor coherence",
+   "results": "OK 8 hits: ordinary algebra and quasicoherent sheaf presentations; no clopen derived comparison.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; assemble the existing normalized sheaf scalar declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LeftDerived",
+   "results": "OK 0 hits: unknown identifier.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; assemble the existing normalized sheaf scalar declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen_scalar|scalar_comparison_coherence",
+   "results": "OK 0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; assemble the existing normalized sheaf scalar declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "date": "2026-10-27",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: assemble the normalized scalar/restriction comparison for the prescribed coefficient extension presentations.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenArbitraryScalarNormalizedWitnesses",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenArbitraryScalarNormalizedWitnesses.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenScalar.clopen_arbitrary_scalar_normalized_witnesses",
+  "statement": "theorem clopen_arbitrary_scalar_normalized_witnesses\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (p : Presentations.{t, u} X) (N : Normalization (J := topology X) p)\n    (q : ∀ i, Presentations.{t, u} (Y i))\n    (Ni : ∀ i, Normalization (J := topology (Y i)) (q i)) :\n    ∃ (U : Units p) (V : ∀ i, Units (q i))\n      (d : ∀ i, Comparison (j i) p (q i)),\n      ∀ i, (d i).sections ∧ (d i).degree ∧ (d i).representative ∧\n        Coherence (j i) N (Ni i) U (V i) (d i)",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
+ }
+}

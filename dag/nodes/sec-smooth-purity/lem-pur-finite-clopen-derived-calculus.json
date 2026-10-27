@@ -1,0 +1,168 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, derived-lemma-right-derived-exact-functor; Tag 05RU, derived-definition-unbounded-derived-category; sites-modules.tex Tag 0GMW, sites-modules-lemma-sheafification-tensor; sites-cohomology.tex Tags 06YS/0G7D/06YU, lemma-K-flat-resolution/lemma-factor-through-K-flat/definition-derived-tor. Agent finite-product application, old item steps 4-6."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: the unbounded derived decomposition and canonical restriction/tensor data of its finite-clopen calculation.",
+   "via": [
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "id": "lem-pur-finite-clopen-derived-calculus",
+ "title": "Unbounded derived decomposition for a finite clopen partition",
+ "statement": "Let $X$ be a scheme and $j_i:Y_i\\hookrightarrow X$ a finite pairwise disjoint open and closed cover [def-pc-scheme, def-weil-open-immersion, def-weil-closed-immersion]. Use the small pro-etale sites and existing module restrictions and product gluing [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category, lem-pur-clopen-ringed-module-gluing]. Fix the canonical standard unbounded derived categories [def-weil-abstract-derived-category]. The tuple of canonical derived restrictions gives a triangulated equivalence $D(R)\\simeq\\prod_iD(R_i)$ whose forward functor is exactly the tuple of those restrictions. It commutes naturally with all cohomology functors; the restrictions jointly detect zero objects and isomorphisms. There are coordinate insertion functors obtained by ordinary coordinate zero insertion followed by the inverse equivalence, with diagonal identity and off-diagonal zero comparisons, and bilimit bicones expressing the identity and inverse functors as the finite sum of these insertion-restriction functors. An empty component has derived category equivalent to the one-object zero category; an empty partition forces $X$ empty and its derived category zero. The same module also records the actual module category, sectionwise ring and module restrictions, their exactness, the prescribed standard localization, native monoidal and symmetry structures, and the canonical pure tensor and inverse tensorator definitions used by the later tensor theorem [lem-sf-ringed-derived-native-tensor, def-pur-clopen-monoidal-normalization].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-abstract-derived-category",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pur-clopen-monoidal-normalization"
+ ],
+ "proof": [
+  {
+   "text": "For restriction_exact, apply the existing exact restriction instances from the canonical scalar restriction interface. Reindex the recorded clopen module-gluing equivalence through Fin n to handle any finite index type.",
+   "uses": [
+    "lem-pur-clopen-unbounded-derived-localization",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the extracted exact finite-product derived-equivalence calculation to the module-gluing equivalence. Its proof still uses the canonical exact derived factorization and product localization. The exact-functor API gives triangulatedness, homology comparison and joint zero/isomorphism detection.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-exact-finite-product-derived-equivalence",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert an object in one coordinate and the zero object in all others, then compose with the inverse derived equivalence. The counit gives the diagonal and off-diagonal identities. The sum of the coordinate projection-inclusion composites is the identity; transport this bicone through the additive inverse equivalence to obtain both displayed bilimits. For an empty scheme, empty-index module gluing makes every module, hence every derived object, zero. An empty partition forces X empty by its covering hypothesis. The generic coordinate-bicone argument is now the extracted proved finite-product coordinate-decomposition theorem.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-abstract-derived-category",
+    "lem-pur-additive-finite-product-coordinate-decomposition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-exact-finite-product-derived-equivalence",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-pur-additive-finite-product-coordinate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "N8 existing proved derived calculus, extracted by X6 solely to satisfy the per-file compile limit. Public names and theorem signature remain identical; generic coordinate and localization proofs are imported through their proved extractions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence between an abelian category and a finite product of abelian categories induces an equivalence on unbounded derived categories with fixed exact coordinate functors",
+   "results": "OK 8 hits: mapDerivedCategory, mapDerivedCategoryFactors and related generic exact-derived APIs; no complete finite-product equivalence.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.isEquivalence",
+   "results": "OK 1 hit: CategoryTheory.Localization.isEquivalence. Used by the existing proof.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "jointlyReflectIsomorphisms_mapDerivedCategory|Localization.isEquivalence",
+   "results": "OK 2 hits: Localization/Equivalence.lean; the stronger joint-reflection API is in the source library.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "date": "2026-10-27",
+  "group": "X6"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenDerivedCalculus",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteClopenDerivedCalculus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_derived_calculus",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.Modules",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.rings",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restriction",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restriction_exact",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionLimits",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionColimits",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.restrictionAdditive",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedMonoidal",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedSymmetric",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.pure",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.tensorComparison",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedTensorComparison",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.finite_clopen_derived_calculus",
+   "AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.moduleGluingCore"
+  ],
+  "statement": "theorem finite_clopen_derived_calculus\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :\n    ∃ E : DerivedCategory (Modules.{t, u} R) ≌\n        (∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R))),\n      E.functor = Functor.pi' (fun i ↦ derivedRestriction (j i) R) ∧\n      (∀ i, (derivedRestriction.{t, u} (j i) R).IsTriangulated) ∧\n      (∀ i (m : ℤ), Nonempty\n        (derivedRestriction (j i) R ⋙ DerivedCategory.homologyFunctor _ m ≅\n          DerivedCategory.homologyFunctor _ m ⋙ restriction (j i) R)) ∧\n      (∀ K : DerivedCategory (Modules.{t, u} R),\n        IsZero K ↔ ∀ i, IsZero ((derivedRestriction.{t, u} (j i) R).obj K)) ∧\n      (∀ (K L : DerivedCategory (Modules.{t, u} R)) (f : K ⟶ L),\n        IsIso f ↔ ∀ i, IsIso ((derivedRestriction.{t, u} (j i) R).map f)) ∧\n      (∃ e : ∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ⥤\n          DerivedCategory (Modules.{t, u} R),\n        (∀ i, Nonempty (e i ⋙ derivedRestriction (j i) R ≅ 𝟭 _)) ∧\n        (∀ i k, i ≠ k → ∀ K, IsZero ((e k ⋙ derivedRestriction (j i) R).obj K)) ∧\n        (∃ s : ∀ i, DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ⥤\n            (∀ k, DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))),\n          ∀ i, e i = s i ⋙ E.inverse ∧\n            Nonempty (s i ⋙ Pi.eval\n              (fun k ↦ DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))) i ≅ 𝟭 _) ∧\n            (∀ k, k ≠ i → ∀ K, IsZero ((s i).obj K k))) ∧\n        (∃ b : Bicone (fun i ↦ derivedRestriction (j i) R ⋙ e i),\n          b.pt = 𝟭 _ ∧ Nonempty b.IsBilimit) ∧\n        (∃ b : Bicone (fun i ↦ Pi.eval\n            (fun k ↦ DerivedCategory (Modules.{t, u} ((rings (j k)).obj R))) i ⋙ e i),\n          b.pt = E.inverse ∧ Nonempty b.IsBilimit)) ∧\n      (∀ i, IsEmpty (Y i) → Nonempty\n        (DerivedCategory (Modules.{t, u} ((rings.{t, u} (j i)).obj R)) ≌ Discrete PUnit)) ∧\n      (IsEmpty I → IsEmpty X ∧ Nonempty\n        (DerivedCategory (Modules.{t, u} R) ≌ Discrete PUnit))",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Existing exact-derived API used by the original proved finite-clopen decomposition; extraction does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Existing exact-derived API used by the original proved finite-clopen decomposition; extraction does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
+ }
+}

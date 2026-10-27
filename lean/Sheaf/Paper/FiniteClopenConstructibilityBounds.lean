@@ -48,6 +48,17 @@ attribute [-instance] AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDeriv
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
 
+-- Keep the published fixed-coefficient instances when importing the canonical clopen API.
+attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.modulesAbelian
+  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.hasDerived
+  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.monoidal
+  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.symmetric
+  AlgebraicGeometry.Scheme.ProEt.ClopenScalar.derived
+  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
+  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.hasDerived
+  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.sheafify
+  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.locallyBijective
+
 universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped ZeroObject

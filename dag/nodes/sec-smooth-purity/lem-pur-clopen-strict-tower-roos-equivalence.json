@@ -21,6 +21,13 @@
  ],
  "proof": [
   {
+   "text": "Import the extracted exact restriction data and proved product, normalized module-gluing and generic Roos support lemmas [lem-pur-clopen-strict-tower-roos-core]. Public data retain their original names and definitions. Private compatibility wrappers retain the original signatures used here and by import-all consumers. The remaining strict-tower and derived-triangle proofs are unchanged. This is a compilation split after profiling and definition/interface simplification, not a change of the mathematical route.",
+   "uses": [
+    "lem-pur-clopen-strict-tower-roos-core"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Apply [lem-pur-clopen-ringed-module-gluing] degreewise and at each tower level. For a tuple of towers, define $G$ on differentials, transitions and morphisms by its componentwise module formula. Functoriality gives $d^2=0$, $dt=td$ and the strict-map equations in [def-weil-inverse-system]. Naturality of the gluing unit and counit applied to each differential and transition makes them isomorphisms of strict towers. Their degreewise inverses also commute with these maps. Thus they exhibit the asserted equivalence, with exactly the displayed section formula and unit/counit. No replacement of a tower by an objectwise isomorphic diagram is needed.",
    "uses": [
     "lem-pur-clopen-ringed-module-gluing",
@@ -111,24 +118,25 @@
   }
  ],
  "proof_deps": [
+  "lem-pur-clopen-strict-tower-roos-core",
   "lem-pur-clopen-ringed-module-gluing",
   "def-weil-inverse-system",
   "def-weil-category-product",
   "def-weil-tower-transition-endomorphism",
   "lem-pur-roos-comparison-horizontal-coherence",
   "def-weil-strict-roos-model",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-finite-product-derived-tensor-calculus",
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
   "lem-weil-derived-countable-products-core",
   "def-weil-derived-limit",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-triangulated-category",
-  "lem-pur-finite-product-derived-tensor-calculus"
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
-  "by": "C4",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 07KC, 08TC, 015F, 014E and 05RU; degreewise clopen module gluing, the proved generic Roos comparison, direct localization of the complex equivalence, exact countable products and fully faithful triangle reflection by TR1. Reuses the existing generic private FiniteClopenTensor.derivedPi_isEquivalence instead of duplicating its proof."
+  "place": "Tags 07KC, 08TC, 015F, 014E and 05RU; degreewise clopen module gluing, the proved generic Roos comparison, direct localization of the complex equivalence, exact countable products and fully faithful triangle reflection by TR1. Reuses the existing generic private FiniteClopenTensor.derivedPi_isEquivalence instead of duplicating its proof. X6: move the already proved support section and public restriction data to ClopenStrictTowerRoosCore to keep every file below the compile limit; preserve all original public statements and private helper interfaces."
  },
  "mathlib_searches": [
   {
@@ -273,21 +281,6 @@
   "module": "Sheaf.AlgebraicGeometry.ClopenStrictTowerRoosEquivalence",
   "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.strict_tower_equivalence",
   "declarations": [
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.Modules",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.modulesAbelian",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.Towers",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictedRing",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restriction",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictionAdditive",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.complexRestriction",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.towerRestriction",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.boundary",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restriction_exact",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictionLimits",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictionColimits",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.productComparison",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.derivedRestriction",
-   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.localization",
    "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.strict_tower_equivalence",
    "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.strict_roos_comparison",
    "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.gluingProductReindex",
@@ -298,10 +291,10 @@
   "file": "lean/Sheaf/AlgebraicGeometry/ClopenStrictTowerRoosEquivalence.lean",
   "statement": "theorem strict_tower_equivalence : ∃ (G : (∀ i, Towers.{t, u, v} (Y i) (restrictedRing (j i) R)) ⥤ Towers.{t, u, v} X R) (η : 𝟭 _ ≅ Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R) ⋙ G) (ε : G ⋙ Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R) ≅ 𝟭 _), (∀ C, (Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R)).map (η.hom.app C) ≫ ε.hom.app ((Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R)).obj C) = 𝟙 _) ∧ (∀ F, η.hom.app (G.obj F) ≫ G.map (ε.hom.app F) = 𝟙 _) ∧ ∃ σ : ∀ F (p : ℤ) (n : ℕᵒᵖ) (U : X.ProEt), (((G.obj F).X p).obj n).val.obj (op U) ≃+ (∀ i, (((F i).X p).obj n).val.obj (op (clopenTestPiece (j i) U))), (∀ F p n U (a : R.obj.obj (op U)) x i, σ F p n U (a • x) i = R.obj.map (clopenTestInclusion (j i) U).op a • σ F p n U x i) ∧ (∀ F p n (U V : X.ProEt) (f : V ⟶ U) x i, σ F p n V ((((G.obj F).X p).obj n).val.map f.op x) i = (((F i).X p).obj n).val.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (j i)).map f).op (σ F p n U x i)) ∧ (∀ F p n m (f : n ⟶ m) U x i, σ F p m U ((((G.obj F).X p).map f).val.app (op U) x) i = (((F i).X p).map f).val.app (op (clopenTestPiece (j i) U)) (σ F p n U x i)) ∧ (∀ F p q n U x i, σ F q n U ((((G.obj F).d p q).app n).val.app (op U) x) i = (((F i).d p q).app n).val.app (op (clopenTestPiece (j i) U)) (σ F p n U x i)) ∧ (∀ F H (f : F ⟶ H) p n U x i, σ H p n U ((((G.map f).f p).app n).val.app (op U) x) i = (((f i).f p).app n).val.app (op (clopenTestPiece (j i) U)) (σ F p n U x i)) ∧ (∀ C p n U x i, σ ((Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R)).obj C) p n U ((((η.hom.app C).f p).app n).val.app (op U) x) i = ((C.X p).obj n).val.map (clopenTestInclusion (j i) U).op x) ∧ (∀ F i p n (W : (Y i).ProEt) x, ((((ε.hom.app F) i).f p).app n).val.app (op W) x = (((F i).X p).obj n).val.map (clopenDiagonal (j i) W).op (σ F p n ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (j i))).obj W) x i)) ∧ ∃ τ : ∀ F (p : ℤ) (U : X.ProEt), ((roosP (G.obj F)).X p).val.obj (op U) ≃+ (∀ i, ((roosP (F i)).X p).val.obj (op (clopenTestPiece (j i) U))), ∀ F p U x i (n : ℕ), ((Pi.π (fun n : ℕ ↦ (F i).asFunctor.obj (op n)) n).f p).val.app (op (clopenTestPiece (j i) U)) (τ F p U x i) = σ F p (op n) U (((Pi.π (fun n : ℕ ↦ (G.obj F).asFunctor.obj (op n)) n).f p).val.app (op U) x) i",
   "branch": "sheaf-dag",
-  "by": "Q99",
-  "date": "2026-10-22",
+  "by": "X6",
+  "date": "2026-10-27",
   "existing": false,
-  "note": "Joint statement: strict_tower_equivalence, strict_roos_comparison, derived_products, derived_triangle_descent and empty_partition. Other declarations transparently specialize the recorded restrictions, module categories, strict Roos model and localization; restriction_exact supplies the exactness interface for the canonical derived restriction. Second reader (maintainer review): the gluing-side product comparison clause is stated as τ in strict_tower_equivalence; gluingProductReindex is its coordinate reindexing.",
+  "note": "Joint statement: strict_tower_equivalence, strict_roos_comparison, derived_products, derived_triangle_descent and empty_partition. Other declarations transparently specialize the recorded restrictions, module categories, strict Roos model and localization; restriction_exact supplies the exactness interface for the canonical derived restriction. Second reader (maintainer review): the gluing-side product comparison clause is stated as τ in strict_tower_equivalence; gluingProductReindex is its coordinate reindexing. X6 compilation split: the first fifteen public data/exactness declarations are re-exported unchanged from ClopenStrictTowerRoosCore; the six tower and derived declarations remain here.",
   "fixed_by": "NT-stage2-cc-c47d3af8f"
  },
  "reviewed_lean": {
@@ -313,13 +306,13 @@
   "note": "H3: the node's gluing-side reindexing clause was only a standalone Equiv.piComm def (gluingProductReindex), not linked to G or sigma. FIX adds inside strict_tower_equivalence: exists tau : sections of roosP(G F) ≃+ forall i, sections of roosP(F i) on U ×_X X_i, with pi_n(tau x i) = sigma (op n)(pi_n x) i. Docstring extended; lean-record.json carries the verbatim new statement (refit_record: no refusals). nt_compile --json clean 9.2 s; a control with op (n+1) fails to compile, so the clause is checked. Accepted: hypotheses and universes (max v (t+1), independent ring and index universes, hcomm); the 7 sigma clauses with unit/counit and triangle identities; alpha = piComparison (iso, projections, conjugates roosU); beta pinned via roosChi on both summands (sign (-dy-vx,dx) recomputed); roosProj/roosEval clauses; boundary = -inr then shift iso = (-z,0); localized identities; derived_products limit cones; derived_triangle_descent for arbitrary K (true generalization); empty_partition; docstrings; no hollow defs; all theorems sorry. Advisory: clopen* abbrevs owned by proof_dep theorem lem-pur-clopen-ringed-module-gluing (not in stmt_deps); restriction_exact is a sorry helper whose content is in the gluing node; lem-pur-clopen-unbounded-derived-localization has no Lean record, so Mathlib mapDerivedCategory is used."
  },
  "reviewed_proof": {
-  "date": "2026-10-24",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "C-3e547",
+  "group": "X6",
   "result": "pass",
-  "landing": "20261024T184725-L-3140892",
+  "landing": "20261027T151749-L-1204492",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
  }
 }

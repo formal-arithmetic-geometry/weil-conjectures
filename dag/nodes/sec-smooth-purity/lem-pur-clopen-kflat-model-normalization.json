@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-clopen-kflat-model-normalization",
+ "kind": "statement",
+ "title": "Extend clopen tensor model normalization to every K-flat pair",
+ "statement": "Let $j:Y\\hookrightarrow X$ be an open immersion of schemes [def-pc-scheme, def-weil-open-immersion]. Work on their small pro-etale sites with module sheaves [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Let $R$ be a sheaf of commutative rings on $X$, let $R_Y$ be its sectionwise restriction, and let $r$ and $r_D$ be the existing exact module and derived restrictions [lem-pur-clopen-ringed-module-gluing, lem-pur-clopen-unbounded-derived-localization]. Suppose degreewise restriction sends K-flat complexes to K-flat complexes [def-pc-kflat-complex]. Let $T_X,T_Y$ be the existing total tensor bifunctors, and let $b:T_Xr\\simeq(r\\times r)T_Y$ be a natural total comparison [def-pc-tensor-complex-sheaves]. Let $c:r_D(-\\otimes_R^{\\mathbf L}-)\\simeq r_D(-)\\otimes_{R_Y}^{\\mathbf L}r_D(-)$ be any natural isomorphism for the prescribed native derived tensors [lem-sf-ringed-derived-native-tensor]. Write $\\kappa_P:r_DQ_XP\\simeq Q_YrP$ for the canonical exact-functor localization comparison and $t_{P,Q}:Q_XT_X(P,Q)\\simeq Q_XP\\otimes_R^{\\mathbf L}Q_XQ$ for the native K-flat computation comparison. Assume the model normalization [def-pur-clopen-monoidal-normalization]: for every flat-term [def-pc-flat-sheaf-modules] K-flat pair $P,Q$, one has $r_D(t_{P,Q})c_{Q_XP,Q_XQ}(\\kappa_P\\otimes\\kappa_Q)=\\kappa_{T_X(P,Q)}Q_Y(b_{P,Q})t_{rP,rQ}$. Then the same equality holds for every K-flat pair $P,Q$, without any termwise flatness assumption. The result includes empty schemes and zero coefficient sheaves.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; Tag 06YT, sites-cohomology-lemma-derived-tor-quasi-isomorphism. Naturality and cancellation application to the normalized clopen tensor square."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-clopen-unbounded-derived-localization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pur-clopen-monoidal-normalization"
+ ],
+ "proof": [
+  {
+   "text": "On the full subcategory of K-flat complexes, compose the native simultaneous comparison with c and the tensor of localization factors to form the first natural isomorphism. Compose the localization factor of the total tensor, b, and the native simultaneous comparison after restricted K-flat inclusion to form the second. Their components are precisely the two sides of the asserted equation.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pur-clopen-monoidal-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any K-flat pair choose flat-term K-flat resolutions V to P and W to Q. The native comparison identifies the image of their total tensor map under localization with the tensor of their localized augmentation maps. These are isomorphisms, hence so is its restricted image. The resolution theorem states term flatness as exactness of monoidal right tensoring; transport this through the canonical site/sheaf tensor presentation isomorphism to obtain IsFlatOnSite.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the desired component equality with this isomorphism. Naturality of both comparisons reduces the equality to the resolving pair. Apply the given flat-term normalization and cancel. No nonempty hypothesis occurs, and the same resolution and cancellation argument covers zero categories.",
+   "uses": [
+    "def-pur-clopen-monoidal-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pur-clopen-monoidal-normalization",
+  "lem-pc-kflat-resolution",
+  "def-pur-site-sheaf-tensor-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "X6: explicit natural-isomorphism comparison on the K-flat full subcategory, followed by flat-term resolution and cancellation. Tags 06YS and 06YT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two natural tensor comparisons which agree on flat term K flat resolutions agree on every K flat complex",
+   "results": "OK 8 hits: LinearMap.tensorKerEquiv_apply, Module.Flat.rTensor_exact, Module.Flat.iff_flat_tensorProduct, Module.Flat.instTensorProduct, Module.Flat.lTensor_shortComplex_exact, LinearMap.tensorEqLocusEquiv_apply, LinearMap.tensorKerEquiv, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier",
+   "date": "2026-10-27",
+   "verdict": "No complete match. The natural-isomorphism transport API is used in the proof; it does not itself assert the normalized sheaf tensor square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.isIso_map_iff",
+   "results": "OK 1 hits: CategoryTheory.NatIso.isIso_map_iff",
+   "date": "2026-10-27",
+   "verdict": "No complete match. The natural-isomorphism transport API is used in the proof; it does not itself assert the normalized sheaf tensor square."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorIso_naturality|exists_isKFlatResolutionIndependentCoefficients|ModelNormalization",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No complete match. The natural-isomorphism transport API is used in the proof; it does not itself assert the normalized sheaf tensor square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "date": "2026-10-27",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: the finite-clopen K-flat tensor calculation, extending its normalization from flat-term models to all K-flat representatives.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenKFlatModelNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenKFlatModelNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.clopen_kflat_model_normalization",
+  "statement": "theorem clopen_kflat_model_normalization\n    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})\n    (hk : ∀ P : CochainComplex (clopenTensorModules.{t, u} R) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients (R := R) P →\n      CochainComplex.IsKFlatIndependentCoefficients\n        (R := (clopenTensorRings.{t, u} j).obj R)\n        ((clopenTensorComplexRestriction.{t, u} j R).obj P))\n    (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙\n        clopenTensorComplexRestriction.{t, u} j R ≅\n      ((clopenTensorComplexRestriction.{t, u} j R).prod\n        (clopenTensorComplexRestriction.{t, u} j R)) ⋙\n          coefficientTotalTensor.{u, t + 1, t} (topology Y)\n            ((clopenTensorRings.{t, u} j).obj R))\n    (c : Comparison.{t, u} j R) (h : ModelNormalization.{t, u} j R b c)\n    (P Q : CochainComplex (clopenTensorModules.{t, u} R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q)\n    (hiP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := (clopenTensorRings.{t, u} j).obj R)\n      ((clopenTensorComplexRestriction.{t, u} j R).obj P)) :\n    (derivedRestriction.{t, u} j R).map\n        (RingedDerivedNative.tensorIso.{t + 1, t, u} (topology X) R P Q (Or.inl hP)).hom ≫\n      c.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n      tensorHom ((factors.{t, u} j R).hom.app P) ((factors.{t, u} j R).hom.app Q) =\n    (factors.{t, u} j R).hom.app\n        ((coefficientTotalTensor.{u, t + 1, t} (topology X) R).obj (P, Q)) ≫\n      DerivedCategory.Q.map (b.hom.app (P, Q)) ≫\n      (RingedDerivedNative.tensorIso.{t + 1, t, u} (topology Y)\n        ((clopenTensorRings.{t, u} j).obj R)\n        ((clopenTensorComplexRestriction.{t, u} j R).obj P)\n        ((clopenTensorComplexRestriction.{t, u} j R).obj Q) (Or.inl hiP)).hom",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Use the existing generic flat-term K-flat resolution theorem as a black box to test two natural tensor comparisons on resolving pairs. This does not replace any step of the purity unit route; the same generic resolution tool is already approved on the parent tensor-calculus node."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
+ }
+}

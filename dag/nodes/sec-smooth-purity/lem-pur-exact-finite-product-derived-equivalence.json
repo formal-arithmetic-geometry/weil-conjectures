@@ -1,0 +1,145 @@
+{
+ "id": "lem-pur-exact-finite-product-derived-equivalence",
+ "kind": "statement",
+ "title": "Derived equivalence from an exact finite-product decomposition",
+ "statement": "Let $A$ and $B_i$ be abelian categories [def-sp-abelian] with fixed unbounded derived categories [def-weil-abstract-derived-category], indexed by a finite type $I$. Let $r_i:A\\to B_i$ be additive functors preserving finite limits and finite colimits. Suppose there are a functor $G:\\prod_i B_i\\to A$ sending the all-zero tuple morphism to zero, and natural isomorphisms $\\operatorname{Id}_A\\simeq(r_i)_iG$ and $G(r_i)_i\\simeq\\operatorname{Id}_{\\prod_iB_i}$. Suppose the family $r_i$ jointly reflects isomorphisms. Then the tuple of the canonical exact derived functors $(r_{i,D})_i:D(A)\\to\\prod_iD(B_i)$ is an equivalence. These are the exact-derived functors and factorization comparisons of [lem-weil-pbc-exact-functor-derived-factorization]. No boundedness restriction or additional choice of derived categories is imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F and 05RU; explicit finite-product calculation already proved in the finite-clopen tensor-calculus module, extracted unchanged apart from a local sum simplification for compilation."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Apply G degreewise to a tuple of complexes. Its zero-preservation and functoriality give the complex identities. Apply the supplied unit and counit degreewise to construct an inverse equivalence to the tuple of exact complex functors.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact derived factorization and joint isomorphism reflection identify quasi-isomorphisms with the coordinate quasi-isomorphisms. The inverse complex equivalence therefore inverts the coordinate quasi-isomorphisms after source localization.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the product localization and lift the inverse through it. Whisker the complex unit and counit by the localization comparisons to obtain the hypotheses of Localization.isEquivalence, proving that the specified tuple derived functor is an equivalence.",
+   "uses": [
+    "lem-sfb-product-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-product-localization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "N8 existing complete proof, extracted by X6 to satisfy the per-file compile limit. No new hole or mathematical route change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence between an abelian category and a finite product of abelian categories induces an equivalence on unbounded derived categories with fixed exact coordinate functors",
+   "results": "OK 8 hits: mapDerivedCategory, mapDerivedCategoryFactors and related generic exact-derived APIs; no complete finite-product equivalence.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.isEquivalence",
+   "results": "OK 1 hit: CategoryTheory.Localization.isEquivalence. Used by the existing proof.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "jointlyReflectIsomorphisms_mapDerivedCategory|Localization.isEquivalence",
+   "results": "OK 2 hits: Localization/Equivalence.lean; the stronger joint-reflection API is in the source library.",
+   "date": "2026-10-27",
+   "verdict": "No full match; preserve the existing complete proof, using the indicated generic APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus",
+  "date": "2026-10-27",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: generic finite-product machinery used by the finite-clopen unbounded derived decomposition.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteProductDerivedLocalization",
+  "file": "lean/Sheaf/CategoryTheory/FiniteProductDerivedLocalization.lean",
+  "declaration": "CategoryTheory.FiniteProductDerived.derivedPi_isEquivalence",
+  "statement": "theorem derivedPi_isEquivalence\n    (hr : JointlyReflectIsomorphisms r) :\n    (Functor.pi' (fun i ↦ (r i).mapDerivedCategory)).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Existing generic localization API, already used and approved in the parent proof. Extraction preserves that proof and the purity unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Existing generic localization API, already used and approved in the parent proof. Extraction preserves that proof and the purity unit route."
+   },
+   {
+    "node": "lem-sfb-product-localization",
+    "why": "Existing generic localization API, already used and approved in the parent proof. Extraction preserves that proof and the purity unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Existing generic localization API, already used and approved in the parent proof. Extraction preserves that proof and the purity unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3e547",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261027T151749-L-1204492",
+  "kind": "interface",
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
+ }
+}

@@ -27,6 +27,20 @@
  ],
  "proof": [
   {
+   "text": "Use the publicly re-exported ordinary finite restriction, exactness, augmented comparison and proved Roos descent from the compilation support module. These eight existing declarations keep their exact names, statements and data; the existing augmented comparison hole remains there unchanged.",
+   "uses": [
+    "lem-pur-augmented-integral-descent-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the extracted, completely proved integral Roos calculation for the tuple derived equivalence, canonical countable-product comparisons and reflection of the actual limit triangles. The original private integralRoosCalculus signature is preserved by applying this result.",
+   "uses": [
+    "lem-pur-integral-clopen-roos-calculus"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Apply [lem-pur-clopen-ringed-module-gluing] to $R$: its coefficient identifications preserve $\\pi_n$, $\\rho_n$ and $1$. By [lem-pur-finite-product-derived-tensor-calculus], restriction is exact, preserves quasi-isomorphisms, and preserves flatness and K-flatness. Thus $r_iq:r_iP\\to r_iK$ is an admissible flat-term K-flat resolution. The same tensor comparison, with second factor $(A_{E,n})_X$ in degree zero, gives the asserted chain isomorphism $\\beta_{i,n}:r_iP_n\\to r_iP\\otimes_{R_i}(A_{E,n})_{X_i}$ with the specified pure-tensor formula.",
    "uses": [
     "lem-pur-clopen-ringed-module-gluing",
@@ -124,12 +138,14 @@
   "lem-pur-integral-reduction-finite-clopen-bounds",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-tor-amplitude",
-  "lem-pur-clopen-finite-constructibility-bounds"
+  "lem-pur-clopen-finite-constructibility-bounds",
+  "lem-pur-integral-clopen-roos-calculus",
+  "lem-pur-augmented-integral-descent-core"
  ],
  "proof_origin": {
   "by": "J3",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "The existing exactness, normalized Roos descent and augmented comparison plan are retained. Membership is assembled from the Roos Hom-bijection, the intrinsic/legacy completeness comparison, one positive quotient at a time, and finite minima/maxima. The one-quotient comparison is the only new unproved step; the strengthened augmented comparison remains open."
+  "place": "The existing exactness, normalized Roos descent and augmented comparison plan are retained. Membership is assembled from the Roos Hom-bijection, the intrinsic/legacy completeness comparison, one positive quotient at a time, and finite minima/maxima. The one-quotient comparison is the only new unproved step; the strengthened augmented comparison remains open. X6 extracts the existing complete private integral Roos helper into a proved support module and preserves its private signature by a wrapper, solely for the per-file compile limit. After the private-helper split still left this file above 60 seconds, X6 extracts the existing prefix into AugmentedIntegralDescentCore and keeps the membership declaration and its proof unchanged in this facade. All original public imports remain."
  },
  "mathlib_searches": [
   {
@@ -265,14 +281,6 @@
   "module": "Sheaf.Paper.AugmentedIntegralDescent",
   "declaration": "WeilConjectures.PurityFiniteSetting.augmentedIntegralMembershipBounds",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestriction",
-   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestriction_exact",
-   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestrictionAdditive",
-   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestrictionLimits",
-   "WeilConjectures.PurityFiniteSetting.augmentedFiniteRestrictionColimits",
-   "WeilConjectures.PurityFiniteSetting.augmentedFiniteDerivedRestriction",
-   "WeilConjectures.PurityFiniteSetting.augmentedIntegralReductionComparison",
-   "WeilConjectures.PurityFiniteSetting.augmentedIntegralRoosDescent",
    "WeilConjectures.PurityFiniteSetting.augmentedIntegralMembershipBounds"
   ],
   "file": "lean/Sheaf/Paper/AugmentedIntegralDescent.lean",
@@ -292,13 +300,13 @@
   "note": "Read item node, all 16 stmt_dep records, the full module, the report and the source (BS 3.5.1(1)/3.5.2), plus the live parent ClopenRoosIntegralDescent and DerivedCompleteOnSlices. Hypotheses: LFT+QC, Finite I, open+closed immersions, disjoint, cover, completed ring R, unbounded K, K-flat resolution with flat terms; none stronger. Comparison: restricted q is K-flat with flat terms; chain isos beta_n pinned on pure tensors, commute with gamma_n and tau_n; derived tower iso d = factors >> Q.map beta_n with the actual c_n; finite alpha/delta pinned by tensor formula and K-flat square; functor-level beta unit-normalised. Roos: alpha pinned by projections; Hom bijection delta -> (alpha_i^-1 >> r_i delta >> commShift) well-typed and true; IsDerivedLimitTriangle iff keeps the actual Pi.lift units. Membership: IsComplete/sfIntegralConstructible/finiteTorConstructibleIntegral iff componentwise; fixed support/Tor intervals for all n>=1; attained min/max for nonempty I plus any larger interval; empty components zero; empty I gives X empty, all memberships, [0,0]. lean.statement verbatim; 9 declarations present with source+blueprint docstrings; all proofs sorry; finite helper is real data; report has both sections. Advisory: parent-module import closes a stage-3 cycle (parent proof_deps cite item; reverse import omitted and listed) -> maintainer should split clopen restriction helpers into a def-node module; unrestrictedTowerResolutionIso/scalarReduction* owners not in stmt_deps; functor-level beta unit-normalised only, as in the landed parent. No compile (no file changed)."
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "C-3e547",
+  "group": "X6",
   "result": "pass",
-  "landing": "20261025T210741-L-3581578",
+  "landing": "20261027T151749-L-1204492",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
  }
 }

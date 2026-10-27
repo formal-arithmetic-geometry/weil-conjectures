@@ -30,6 +30,13 @@
  ],
  "proof": [
   {
+   "text": "Use the unchanged canonical coefficient data and proved support calculations from the extracted finite-clopen decomposition core. This compilation split preserves the complete original argument below and the current finite restriction identification proof.",
+   "uses": [
+    "lem-pur-finite-clopen-decomposition-core"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Apply the normalized module gluing theorem, package its unit and counit as an equivalence, and retain its explicit sectionwise product, scalar, restriction and morphism formulas. The field coefficient map to each stalk preserves the unit witnessing invertibility of the coefficient prime. The covering equality handles the empty case.",
    "uses": [
     "lem-pur-clopen-ringed-module-gluing",
@@ -95,12 +102,13 @@
   "lem-pur-finite-product-field-coefficient-descent",
   "lem-pur-integral-operations-scalar-extension",
   "lem-weil-normalized-scalar-completion",
-  "lem-pur-derived-pullback-tensor-iso"
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-finite-clopen-decomposition-core"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-  "place": "J5 stage-3 partial proof: normalized gluing, direct K-flat tensor comparison, scalar and unit comparisons, and normalized completed restriction. Two original theorem holes retain their planned dependencies; the unit route and public statements are unchanged. R7, 2026-10-27: finite restriction identification assembled from normalized finite localization, ordinary scalar restriction equivalence, and exact-derived composition/localization APIs; the original constructible-equivalences hole remains."
+  "place": "J5 stage-3 partial proof: normalized gluing, direct K-flat tensor comparison, scalar and unit comparisons, and normalized completed restriction. Two original theorem holes retain their planned dependencies; the unit route and public statements are unchanged. R7, 2026-10-27: finite restriction identification assembled from normalized finite localization, ordinary scalar restriction equivalence, and exact-derived composition/localization APIs; the original constructible-equivalences hole remains. X6, 2026-10-27: proved support section extracted into FiniteClopenDecompositionCore after profiling; no mathematical route, public statement or current proof is removed."
  },
  "mathlib_searches": [
   {
@@ -260,30 +268,6 @@
   "module": "Sheaf.Paper.FiniteClopenDerivedDecomposition",
   "declaration": "WeilConjectures.PurityFiniteSetting.finiteClopen_constructible_equivalences",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.clopenRing",
-   "WeilConjectures.PurityFiniteSetting.clopenSiteInclusion",
-   "WeilConjectures.PurityFiniteSetting.clopenSiteInclusionContinuous",
-   "WeilConjectures.PurityFiniteSetting.clopenRingRestriction",
-   "WeilConjectures.PurityFiniteSetting.clopenModules",
-   "WeilConjectures.PurityFiniteSetting.clopenRestriction",
-   "WeilConjectures.PurityFiniteSetting.clopenRestriction_exact",
-   "WeilConjectures.PurityFiniteSetting.clopenRestrictionAdditive",
-   "WeilConjectures.PurityFiniteSetting.clopenRestrictionLimits",
-   "WeilConjectures.PurityFiniteSetting.clopenRestrictionColimits",
-   "WeilConjectures.PurityFiniteSetting.clopenHasDerived",
-   "WeilConjectures.PurityFiniteSetting.clopenDerivedRestriction",
-   "WeilConjectures.PurityFiniteSetting.clopenResidue_isUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralPullback",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalPullback",
-   "WeilConjectures.PurityFiniteSetting.clopenCommonStagePullback",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralTensor",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalTensor",
-   "WeilConjectures.PurityFiniteSetting.clopenCommonStageTensor",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenCommonStageUnit",
-   "WeilConjectures.PurityFiniteSetting.clopenIntegralScalarComparison",
-   "WeilConjectures.PurityFiniteSetting.clopenRationalScalarComparison",
    "WeilConjectures.PurityFiniteSetting.finiteClopen_module_equivalence",
    "WeilConjectures.PurityFiniteSetting.finiteClopen_unbounded_decomposition",
    "WeilConjectures.PurityFiniteSetting.finiteClopen_strict_roos",
@@ -308,7 +292,7 @@
   "by": "Q80",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The module states all clauses through named theorem declarations: explicit sectionwise exact module gluing; unbounded derived, cohomology, tensor and strict Roos comparisons; finite and integral constructible/finite-Tor equivalences and common bounds; rational/common-stage equivalences, units and scalar transport. Helpers are actual canonical functors or full-subcategory lifts, not arbitrary data. Positive level n is represented by n+1. All theorem proofs are sorry."
+  "note": "The public coefficient data and fully proved support section now live in FiniteClopenDecompositionCore, publicly imported here. All decomposition conclusions remain here; their statements, current proofs and the one constructible-equivalences hole are unchanged."
  },
  "lean_audit": {
   "master": {
@@ -325,11 +309,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R7",
+  "reviewer": "C-3e547",
+  "group": "X6",
   "result": "pass",
-  "landing": "20261027T112423-L-1582253",
+  "landing": "20261027T151749-L-1204492",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item + 7 adapted modules vs clones/live (header/decl script); old FiniteClopenTensor defs vs new aliases (10 rfl checks compiled against published build); 3b importers (4 OK); 15 node JSONs vs clone (uses==proof_deps, only proof/proof_deps/proof_origin/lean changed, no orphaned declarations)"
  }
 }
