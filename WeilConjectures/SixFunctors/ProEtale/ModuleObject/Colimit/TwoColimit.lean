@@ -27,8 +27,8 @@ derived extensions of scalars
 ```
 T^X_{E,F} = F_X ⊗ᴸ_{E_X} - ,   T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} -
 ```
-of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` are
-*assumed* to preserve bounded constructibility
+of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars` are
+shown to preserve bounded constructibility
 (`ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj`,
 `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj`), and hence restrict to
 functors
@@ -64,30 +64,25 @@ are *not* formal consequences of the identification `ℚ̄_ℓ,X ≃ colim_E E_X
 categories; see the module docstring of `WeilConjectures.CategoryTheory.FilteredTwoColimit` for
 the ordinary-category model of the 2-colimit that they describe.
 
-## Sorried input
+## Proofs
 
 * `ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj` and
-  `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj`: extension of scalars
-  along `E_X ⟶ F_X` and `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes. The extension
-  of scalars is exact
-  (`ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap`), so it
-  is computed termwise and preserves boundedness, and it sends a locally finitely
-  presented module on a stratum to a locally finitely presented one, the presentation being
-  tensored up.
-* **(Obj)** `ProEtale.constructibleCocone_essSurjObj`: constructible descent. A bounded
-  constructible `ℚ̄_ℓ,X`-complex has finitely many constructible cohomology sheaves; each is
-  locally, on the strata of a stratification, finitely presented, and a finite presentation
-  involves finitely many sections of `ℚ̄_ℓ,X`, which are defined over a finite subextension since
-  `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.isColimitPadicAlgClRingObjCocone`). A finite Postnikov
-  induction on the length of the complex then descends the complex itself, the gluing data being
-  morphisms which descend by (Hom).
-* **(Hom)** `ProEtale.constructibleCocone_homSurj` and `ProEtale.constructibleCocone_homInj`:
-  continuity of the derived hom. For a bounded constructible first argument `K_E` and a
-  bounded below second argument, `Hom_{D(Mod_{ℚ̄_ℓ,X})}(T_{E,Ω} K_E, T_{E,Ω} L_E)` is the filtered
-  colimit over `H ⊇ E` of the `Hom_{D(Mod_{H_X})}(T_{E,H} K_E, T_{E,H} L_E)`: `K_E` is a finite
-  extension of shifts of locally finitely presented modules, for which the derived hom into a
-  filtered colimit of uniformly bounded below complexes is the filtered colimit of the derived
-  homs, and `ℚ̄_ℓ,X = colim_H H_X`.
+  `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj`: the extension of scalars
+  is exact, so it commutes with the cohomology sheaves, and it preserves constructibility
+  (`ProEtale.CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj`).
+* **(Obj)** `ProEtale.constructibleCocone_essSurjObj`: dévissage along the generation of
+  `Dᵇc(X, ℚ̄_ℓ)` by extensions by zero of lisse sheaves, the cone step using (Hom), and lisse
+  descent (`ProEtale.exists_iso_derivedExtendScalarsToPadicAlgCl_obj`).
+* **(Hom)** `ProEtale.constructibleCocone_homSurj`: the continuity of `Hom` out of a bounded
+  constructible complex and `ℚ̄_ℓ,X ⊗ Y = colim_H H_X ⊗ Y`
+  (`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq`);
+  `ProEtale.constructibleCocone_homInj`: the extension of scalars to `ℚ̄_ℓ` is faithful, `E_X` being
+  an `E_X`-linear direct summand of `ℚ̄_ℓ,X` (`ProEtale.faithful_derivedExtendScalarsToPadicAlgCl`).
+
+The remaining sorried inputs are the blueprint nodes `sk-lem-constructible-ext-continuity` (1)
+(`ProEtale.CondensedRing.constructibleExtContinuity_continuousMapRingObj`) and
+`det-cor-coefficient-heart-ii-generation` of other subsections, and lisse descent
+`det-lem-coefficient-finite-descent-lisse` (`ProEtale.exists_isLocallyFree_extendScalars_iso`).
 
 This is the input needed to transport base change theorems from finite to `ℚ̄_ℓ`-coefficients:
 by (Obj) every constructible `K` is `T^X_{E,Ω} K_E`, and the compatibility of the base change
@@ -235,6 +230,7 @@ theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj := by
   simp only [ObjectProperty.FullSubcategory.comp_hom, hiso, hiso', hΦ]
   rfl
 
+omit [TopologicalSpace.NoetherianSpace X] in
 /-- **(Hom), injectivity**: two morphisms of bounded constructible `H_X`-complexes with the same
 extension of scalars to `ℚ̄_ℓ,X` have the same extension of scalars to `H'_X` for some finite
 subextension `H' ⊇ H`. See the module docstring. -/

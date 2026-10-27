@@ -215,7 +215,7 @@ underlying diagram of `subfieldExtendScalarsDiagram` in degree `n`. -/
 noncomputable def subfieldExtendScalarsDiagramForgetIso (n : ℤ) :
     Mod.extendScalarsColimitDiagram (padicSubfieldAboveRingObjFunctor ℓ G X)
       (fun k ↦ padicSubfieldRingObjMap X ℓ (hF.trans k.property))
-      (fun g ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n) ≅
+      (fun _ ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n) ≅
     (subfieldExtendScalarsDiagram X ℓ hE hF Y ⋙ HomologicalComplex.eval _ _ n) ⋙ Mod.forget _ :=
   NatIso.ofComponents (fun k ↦ Iso.refl _) fun g ↦ by
     simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
@@ -230,7 +230,7 @@ cheap.) -/
 noncomputable def subfieldExtendScalarsCoconeForgetPtIso (n : ℤ) :
     (Mod.extendScalarsColimitCocone (padicSubfieldAboveRingObjFunctor ℓ G X)
     (fun k ↦ padicSubfieldRingObjMap X ℓ (hF.trans k.property))
-    (fun g ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n)
+    (fun _ ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n)
     (fun k ↦ padicSubfieldRingObjToPadicAlgCl X ℓ k.obj)
     (fun g ↦ padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ (leOfHom ((ObjectProperty.ι _).map g)))
     (padicSubfieldRingObjToPadicAlgCl X ℓ F)
@@ -251,7 +251,7 @@ noncomputable def subfieldExtendScalarsCoconeForgetIso (n : ℤ) :
     (Cocone.precompose (subfieldExtendScalarsDiagramForgetIso X ℓ hE hF Y n).inv).obj
       (Mod.extendScalarsColimitCocone (padicSubfieldAboveRingObjFunctor ℓ G X)
     (fun k ↦ padicSubfieldRingObjMap X ℓ (hF.trans k.property))
-    (fun g ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n)
+    (fun _ ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n)
     (fun k ↦ padicSubfieldRingObjToPadicAlgCl X ℓ k.obj)
     (fun g ↦ padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ (leOfHom ((ObjectProperty.ι _).map g)))
     (padicSubfieldRingObjToPadicAlgCl X ℓ F)
@@ -259,9 +259,9 @@ noncomputable def subfieldExtendScalarsCoconeForgetIso (n : ℤ) :
     ((Mod.forget _).mapCocone ((HomologicalComplex.eval _ _ n).mapCocone
       (subfieldExtendScalarsCocone X ℓ hE hF Y))) :=
   Cocone.ext (subfieldExtendScalarsCoconeForgetPtIso X ℓ hE hF Y n) fun k ↦ by
-    simp only [subfieldExtendScalarsCoconeForgetPtIso_hom, Category.comp_id,
+    simp only [subfieldExtendScalarsCoconeForgetPtIso_hom,
       Cocone.precompose_obj_ι, NatTrans.comp_app, subfieldExtendScalarsDiagramForgetIso,
-      NatIso.ofComponents_inv_app, Iso.refl_inv, Category.id_comp,
+      NatIso.ofComponents_inv_app, Iso.refl_inv,
       Mod.extendScalarsColimitCocone_ι_app, Functor.mapCocone_ι_app, HomologicalComplex.eval_map,
       Mod.forget_map, subfieldExtendScalarsCocone_ι_app_f,
       subfieldExtendScalarsTransferToPadicAlgCl_app_hom]
