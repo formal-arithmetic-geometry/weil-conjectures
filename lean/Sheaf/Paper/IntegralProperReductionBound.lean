@@ -111,7 +111,6 @@ private theorem integralLevel_isLE (l : ℕ) [Fact l.Prime] (E : Type u) [Field 
   let G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (AdicCompletion.finiteRing l E X n) ⥤ AdicCompletion.Modules l E X := Mod.comap q
   let adj := Mod.derivedExtendMapDerivedCategoryAdjunction q
-  have : (Mod.extendScalars q).leftDerivedFunctor.Additive := adj.left_adjoint_additive
   have hred : (F.obj K).IsLE b := by
     change DerivedCategory.TStructure.t.IsLE (F.obj K) b
     rw [DerivedCategory.TStructure.t.isLE_iff_orthogonal b (b + 1) rfl]
@@ -121,8 +120,10 @@ private theorem integralLevel_isLE (l : ℕ) [Fact l.Prime] (E : Type u) [Field 
       G.isGE_mapDerivedCategory_obj Z (b + 1)
     have hz : adj.homEquiv K Z f = 0 :=
       DerivedCategory.TStructure.t.zero _ b (b + 1) (by omega)
-    exact (adj.homEquiv K Z).injective
-      (hz.trans (adj.homAddEquiv_zero K Z).symm)
+    have hz0 : adj.homEquiv K Z 0 = 0 := by
+      rw [Adjunction.homEquiv_unit]
+      simp only [Functor.map_zero, comp_zero]
+    exact (adj.homEquiv K Z).injective (hz.trans hz0.symm)
   exact G.isLE_mapDerivedCategory_obj (F.obj K) b
 
 /-- The finite-reduction bound for proper integral direct image over a Noetherian source.
