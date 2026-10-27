@@ -19695,3 +19695,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:05 L: merged deliver/D5/Sheaf.SixFunctors.IntegralDualizingMappingLimit (stage 3; reviewer PASS; first push; landing 20261027T180524-L-3870689 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:05 L: merged deliver/D6/Sheaf.SixFunctors.IntegralDualizingRoosModel (stage 3; reviewer PASS; first push; landing 20261027T180525-L-3870827 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:05 L: merged deliver/D7/Sheaf.Paper.CoefFiniteHomSiteDescent (stage 3; reviewer PASS; first push; landing 20261027T180526-L-3870987 (proof); batch 20261027T180444; modules 1; new nodes 2)
+- 18:05 L: merged deliver/D7/Sheaf.Paper.FiniteScalarTensorRealizationCoefficientsEquality (stage 3; reviewer PASS; first push; landing 20261027T180527-L-3871243 (proof); batch 20261027T180444; modules 1; new nodes 0)

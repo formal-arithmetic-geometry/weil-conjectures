@@ -71,6 +71,8 @@ theorem finiteScalarTensorRealizationForCoefficients_eq_representatives
     finiteScalarTensorRealizationForCoefficients B T q' F LF eps P hP S hF ff t' T' r' b =
       finiteScalarTensorRealizationOfRepresentatives DerivedCategory.Q q' F LF eps P S hF ff
         _ t' (ProEtale.derivedTensor B T) T'
-        (finiteScalarFixedTensorRepresentativeForCoefficients B T P hP) r' b := by sorry
+        (finiteScalarFixedTensorRepresentativeForCoefficients B T P hP) r' b := by
+  delta finiteScalarTensorRealizationForCoefficients
+  rfl
 
 end WeilConjectures
