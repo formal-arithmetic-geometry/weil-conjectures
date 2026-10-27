@@ -6,6 +6,8 @@ Authors: SHEAF group Y9
 module
 
 public import Sheaf.Paper.ExceptionalIntegralScalarMates
+import Sheaf.Paper.ExceptionalRingTransportCore
+import Sheaf.Paper.ExceptionalRingOperationsExistence
 
 /-! # A coherent ring family before scalar comparisons -/
 
@@ -60,6 +62,10 @@ theorem exists_exceptional_ring_transport_family
     (c : Compactification f) :
     ∃ operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l),
       ∃ left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s),
-        Nonempty (ExceptionalIntegralScalar.Transported l Ω D hl c operation left) := by sorry
+        Nonempty (ExceptionalIntegralScalar.Transported l Ω D hl c operation left) := by
+  obtain ⟨operation, left, _⟩ := exists_exceptional_ring_operations l Ω D hl f c
+  obtain ⟨transport⟩ := exists_exceptional_transport_for_operations
+    l Ω D hl f c operation left
+  exact ⟨operation, left, ⟨transport⟩⟩
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
