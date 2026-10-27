@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.Paper.ExceptionalFiniteRealization
+public import Sheaf.Paper.ExceptionalFiniteSupportProperComparison
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # Compact-support realization of the actual finite adjunction
@@ -17,6 +18,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry SheafOfModules
+attribute [local instance 5000] strictEtaleLevelDerived strictEtaleSystemDerived
 private theorem supportTransposeMate
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
@@ -102,11 +104,6 @@ private theorem supportLocalizationComparison
   exact (cancel_mono (a.hom.app J)).mp ((he' J).trans (he J).symm)
 
 namespace WeilConjectures
-
--- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
--- keep the ones this module was written against.
-attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
-  AlgebraicGeometry.strictEtaleLevelDerived
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{u}} (g : X ⟶ Y)
@@ -270,8 +267,9 @@ def integralExceptionalEtaleSupportComparison (n : ℕ) :
           (ModuleCat.{u + 1} (ULift.{u + 1}
             (Padic.coefficientExtensionRing l E (n + 1)))) c :=
   Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (integralExceptionalEtaleDerivedRight l E c.g S.properImage n
-      (S.properDerived.level n)) ≪≫
+    Functor.isoWhiskerLeft _
+      (WeilConjectures.integralExceptionalEtaleProperDerivedRight_exists
+        l E g c S n).choose ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (integralExceptionalEtaleDerivedOpen l E g c S n) _ ≪≫
     Functor.associator _ _ _
