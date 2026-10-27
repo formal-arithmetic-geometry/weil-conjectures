@@ -6,6 +6,9 @@ Authors: SHEAF group T8
 module
 
 public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
+import Sheaf.Paper.RefinementOpenRestrictionData
+import Sheaf.Paper.RefinementOpenRestrictionIsIso
+import Sheaf.Paper.RefinementOpenRestrictionShift
 import Sheaf.CategoryTheory.CanonicalRightDerivedAdjunctionShift
 import Sheaf.CategoryTheory.ExactDerivedAdjunctionUnitShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
@@ -93,7 +96,10 @@ theorem exists_refinementRestriction :
     ∃ θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶
         (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i,
       (∀ M, θ.app M = refinementRestriction R r hi M) ∧
-        IsIso θ ∧ θ.CommShift ℤ := by sorry
+        IsIso θ ∧ θ.CommShift ℤ := by
+  obtain ⟨θ, hθ⟩ := refinementRestriction_data R r hi
+  exact ⟨θ, hθ, refinementRestriction_data_isIso R r hi θ hθ,
+    refinementRestriction_data_shift R r hi θ hθ⟩
 
 /-- Naturality of the specified restriction components.
 Source: the normalized restriction calculation, Stacks 0F7B

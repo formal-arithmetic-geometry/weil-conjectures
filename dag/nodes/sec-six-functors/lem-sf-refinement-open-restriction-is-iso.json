@@ -1,0 +1,118 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7I, the restriction-to-open and proper-base-change calculation."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7I; strict decomposition of the refinement restriction construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open restriction direct image extension by zero clopen section counit isomorphism",
+   "results": "Scheme.Modules.restrictFunctorAdjCounitIso and restrictAdjunction counit results for Zariski module sheaves; no pro-etale derived refinement statement.",
+   "date": "2026-10-27",
+   "verdict": "Different site and functors. Use project ringed restriction and clopen calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates: conjugateEquiv, conjugateIsoEquiv, conjugateEquiv_iso, conjugateEquiv_of_iso and their inverse variants.",
+   "date": "2026-10-27",
+   "verdict": "Useful for shifts and compositors; no geometric invertibility result."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementRestriction|properOpenRefinementWord",
+   "results": "The logged Mathlib grep search returned zero hits. Separate project rg found IntegralCompactSupportCoefficientComparison.refinementProperOpen_existsUnique (extra absolute separatedness assumptions) and fixed-scalar ProperOpenCoefficientRefinement APIs.",
+   "date": "2026-10-27",
+   "verdict": "The hypotheses and encoding do not supply the desired steps directly."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-refinement-open-restriction",
+   "place": "Strict decomposition of the component, invertibility, and shift parts of the proof.",
+   "via": [
+    "lem-sf-refinement-open-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RefinementOpenRestriction",
+  "group": "S8",
+  "date": "2026-10-28"
+ },
+ "id": "lem-sf-refinement-open-restriction-is-iso",
+ "title": "Invertibility of the specified refinement-restriction transformation",
+ "statement": "∀ (θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶\n        (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i),\n      (∀ M, θ.app M = refinementRestriction R r hi M) → IsIso θ",
+ "proof": [
+  {
+   "text": "Use the clopen section over the refinement fibre product. Extension by zero on that clopen section is exact and its proper direct image restricts to the identity; the component restriction maps therefore have inverses. A natural transformation with these components is equal by extensionality to the canonical one, hence is invertible.",
+   "uses": [
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-sf-proetale-open-pullback-preserves-kinjective",
+    "lem-sfb-proetale-identified-open-closed",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-exact-adjunction-unit-shift-descent",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-sf-proetale-open-pullback-preserves-kinjective",
+  "lem-sfb-proetale-identified-open-closed",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-exact-adjunction-unit-shift-descent",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RefinementOpenRestrictionIsIso",
+  "file": "lean/Sheaf/Paper/RefinementOpenRestrictionIsIso.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.refinementRestriction_data_isIso",
+  "statement": "theorem refinementRestriction_data_isIso (θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶ (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i) (hθ : ∀ M, θ.app M = refinementRestriction R r hi M) : IsIso θ",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T180812-L-3903387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T180812-L-3903387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
