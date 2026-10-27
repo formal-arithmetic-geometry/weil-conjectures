@@ -1,0 +1,105 @@
+{
+ "id": "lem-coef-locally-closed-pairing-equation-expansion",
+ "kind": "statement",
+ "title": "Expansion of the locally closed pairing equation",
+ "statement": "For finite commutative rings A,B, an open j followed by a closed g, objects L,M, and an isomorphism b between the scalar extension of the exceptional object and the exceptional scalar extension, any PairingChangeEquation expands to the explicit categorical equality consisting of ordinaryComparison, the mapped evaluation and b.hom, internalAdjunction, and the mapped compactComparison, equal to scalar extension of internalAdjunction followed by evaluationComparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof paragraph 4, expansion and reassociation of PairingChangeEquation"
+ },
+ "stmt_deps": [
+  "def-coef-internal-adjunction-comparison-maps"
+ ],
+ "proof": [
+  {
+   "text": "Unfold PairingChangeEquation. The defining equality is the displayed composite with the map of the composite evaluation and exceptional comparison. Reassociate the composite and use functoriality of the star functor to write the map of the composite as the displayed categorical word.",
+   "uses": [
+    "def-coef-internal-adjunction-comparison-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-internal-adjunction-comparison-maps"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof paragraph 4, expansion and reassociation of PairingChangeEquation",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PairingChangeEquation",
+   "results": "The definition is local; no existing expansion theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp Category.assoc",
+   "results": "Generic functoriality and associativity lemmas only.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "expand a categorical pairing equation into a composite word",
+   "results": "No geometric match.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyClosedPairingCancellation",
+  "date": "2026-10-28",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-locally-closed-pairing-cancellation",
+   "place": "proof expansion step",
+   "via": [
+    "thm-coef-finite-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyClosedPairingEquationExpansion",
+  "file": "lean/Sheaf/Paper/LocallyClosedPairingEquationExpansion.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoefficientPairingChange.pairingEquation_expanded",
+  "statement": "theorem pairingEquation_expanded\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    {S Z X : Scheme.{u}} (φ : A →+* B) (g : Z ⟶ X) [IsClosedImmersion g]\n    (j : S ⟶ Z) [IsOpenImmersion j]\n    (L : DerivedCategoryModule A S) (M : DerivedCategoryModule A X)\n    (b : (scalarExtension φ S).obj ((exceptional A g j).obj M) ≅\n      (exceptional B g j).obj ((scalarExtension φ X).obj M))\n    (hp : PairingChangeEquation φ g j L M b) :\n    ordinaryComparison φ g j\n        (((derivedHom (ModuleCat A) S).obj (op L)).obj ((exceptional A g j).obj M)) ≫\n      (star B g j).map\n        (evaluationComparison φ S L ((exceptional A g j).obj M) ≫\n          ((derivedHom (ModuleCat B) S).obj\n            (op ((scalarExtension φ S).obj L))).map b.hom) ≫\n      internalAdjunction B g j ((scalarExtension φ S).obj L) ((scalarExtension φ X).obj M) ≫\n      ((derivedHom (ModuleCat B) X).map (compactComparison φ g j L).op).app\n        ((scalarExtension φ X).obj M) =\n    (scalarExtension φ X).map (internalAdjunction A g j L M) ≫\n      evaluationComparison φ X ((shriek A g j).obj L) M",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T205741-L-1609628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T205741-L-1609628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

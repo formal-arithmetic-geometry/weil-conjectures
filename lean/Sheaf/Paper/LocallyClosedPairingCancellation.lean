@@ -7,6 +7,7 @@ module
 public import Sheaf.Paper.InternalAdjunctionPairingChange
 public import Sheaf.Paper.EtaleLocallyClosedShriek
 public import Sheaf.Paper.NormalizedComparisonWord
+import Sheaf.Paper.LocallyClosedPairingEquationExpansion
 /-! # Cancellation of the locally closed pairing equation
 
 Source: thm-coef-finite-hom, proof paragraph 4.
@@ -47,6 +48,21 @@ theorem pairingCancellation
       (etaleShriekLocallyClosedCoefficientMap φ g j M))
     (compactComparison φ g j L) ((scalarExtension φ X).obj M)
     (internalAdjunction B g j ((scalarExtension φ S).obj L) ((scalarExtension φ X).obj M))
-    (evaluationComparison φ X ((shriek A g j).obj L) M) := by
-  sorry
+    (evaluationComparison φ X ((shriek A g j).obj L) M)   := by
+  unfold MappedComparisonEquation
+  apply CategoryTheory.cancelMappedPairing
+    (scalarExtension φ X) (star B g j)
+    (internalAdjunction A g j L M)
+    (ordinaryComparison φ g j
+      (((derivedHom (ModuleCat A) S).obj (op L)).obj ((exceptional A g j).obj M)))
+    (evaluationComparison φ S L ((exceptional A g j).obj M))
+    (((derivedHom (ModuleCat B) S).obj (op ((scalarExtension φ S).obj L))).map
+      (etaleShriekLocallyClosedCoefficientMap φ g j M))
+    (internalAdjunction B g j ((scalarExtension φ S).obj L) ((scalarExtension φ X).obj M))
+    (((derivedHom (ModuleCat B) X).map (compactComparison φ g j L).op).app
+      ((scalarExtension φ X).obj M))
+    (evaluationComparison φ X ((shriek A g j).obj L) M)
+  exact pairingEquation_expanded φ g j L M (asIso
+    (etaleShriekLocallyClosedCoefficientMap φ g j M)) hp
+
 end AlgebraicGeometry.Etale.CoefficientPairingChange
