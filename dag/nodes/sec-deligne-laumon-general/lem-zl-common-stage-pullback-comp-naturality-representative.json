@@ -1,0 +1,86 @@
+{
+ "id": "lem-zl-common-stage-pullback-comp-naturality-representative",
+ "kind": "statement",
+ "title": "Naturality of the normalized common-stage compositor on one representative",
+ "statement": "For a prime ℓ and an algebraic closure Ω, the normalized common-stage pullback composition component is natural on every explicitly represented arrow of a common coefficient stage L.",
+ "stmt_deps": [
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10, after choosing one common coefficient stage."
+ },
+ "proof": [
+  {
+   "text": "Expand the three common-stage pullback maps at the chosen representative stage L. Use the normalized scalar-extension tower equation to transport the integral compositor from the endpoint stages to L. Apply naturality of the selected integral pullback composition isomorphism, then cancel the invertible comparison factors and transport back to the literal pair objects.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "lem-pod-pullback-identities-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-pullback-identities-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-composition-weight-bound.proof.md",
+  "place": "Residue-compatible pullback proof, Step 10."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonStagePullbackCompNaturality",
+  "date": "2026-10-28",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-common-stage-pullback-comp-naturality",
+   "place": "Representative-stage substep of the naturality proof.",
+   "via": [
+    "lem-pod-integral-pullback-composition"
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackCompNaturality",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackCompNaturality.lean",
+  "declaration": "WeilConjectures.commonStagePullbackCompComponent_naturality_ofHom",
+  "statement": "theorem commonStagePullbackCompComponent_naturality_ofHom {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    [∀ z : Z, Invertible (l : Z.residueField z)]\n    {P Q : generalAlgebraicallyClosedConstructibleCategory l Ω Z}\n    (L : AlgebraicallyClosedCoefficients.Index l Ω)\n    (hP : P.stage ≤ L) (hQ : Q.stage ≤ L)\n    (r : P.toStage hP ⟶ Q.toStage hQ) :\n    (commonStageDerivedPullback l Ω (f ≫ g)).map\n        (GeneralAlgebraicallyClosedCoefficients.ofHom P Q L hP hQ r) ≫\n        (commonStagePullbackCompComponent l Ω f g Q).hom =\n      (commonStagePullbackCompComponent l Ω f g P).hom ≫\n        (commonStageDerivedPullback l Ω f).map\n          ((commonStageDerivedPullback l Ω g).map\n            (GeneralAlgebraicallyClosedCoefficients.ofHom P Q L hP hQ r))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T234050-L-4179754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T234050-L-4179754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

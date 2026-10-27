@@ -25,6 +25,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
+
 /-- The prescribed pullback object on an arbitrary literal common-stage pair.
 Source: blueprint common-stage pullback convention
 (blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
@@ -65,6 +66,9 @@ def commonStagePullbackCompComponent {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
             ((sfRationalConstructibleLocalization l _ Y).obj
               ((constructibleIntegralPullback l _ g).obj P.obj.obj)))))).symm
 
+attribute [local irreducible] commonStagePullbackCompComponent
+  commonStageDerivedPullback constructibleIntegralPullback
+
 /-- The component arrow is exactly the localized integral compositor up to object equality.
 Source: blueprint normalized composition convention
 (blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
@@ -79,6 +83,7 @@ theorem commonStagePullbackCompComponent_heq {X Y Z : Scheme.{u}} (f : X ⟶ Y) 
           (((integralPullbackComposition l
             (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω P.stage)).choose f g).hom.app
               P.obj.obj))) := by
+  unfold commonStagePullbackCompComponent
   apply (conj_eqToHom_iff_heq _ _ (commonStagePullbackIntegralObject l Ω (f ≫ g) P)
     ((congrArg (commonStageDerivedPullback l Ω f).obj
       (commonStagePullbackIntegralObject l Ω g P)).trans
@@ -86,7 +91,35 @@ theorem commonStagePullbackCompComponent_heq {X Y Z : Scheme.{u}} (f : X ⟶ Y) 
           ((GeneralAlgebraicallyClosedCoefficients.inclusion P.stage).obj
             ((sfRationalConstructibleLocalization l _ Y).obj
               ((constructibleIntegralPullback l _ g).obj P.obj.obj)))))).1
+  simp only [Iso.trans_hom, eqToIso.hom]
   rfl
+
+/-- Naturality for one explicit common-stage representative.
+The representative formula is expanded at a common coefficient stage.  One first
+uses the scalar-extension tower coherence to transport the integral compositor to
+that stage, then applies the naturality square of the integral pullback compositor
+and cancels the comparison isomorphisms.  The proof is the finite-stage core of
+`commonStagePullbackCompComponent_naturality`.
+Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible
+pullback, Step 10.
+(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative). -/
+theorem commonStagePullbackCompComponent_naturality_ofHom {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    [∀ z : Z, Invertible (l : Z.residueField z)]
+    {P Q : generalAlgebraicallyClosedConstructibleCategory l Ω Z}
+    (L : AlgebraicallyClosedCoefficients.Index l Ω)
+    (hP : P.stage ≤ L) (hQ : Q.stage ≤ L)
+    (r : P.toStage hP ⟶ Q.toStage hQ) :
+    (commonStageDerivedPullback l Ω (f ≫ g)).map
+        (GeneralAlgebraicallyClosedCoefficients.ofHom P Q L hP hQ r) ≫
+        (commonStagePullbackCompComponent l Ω f g Q).hom =
+      (commonStagePullbackCompComponent l Ω f g P).hom ≫
+        (commonStageDerivedPullback l Ω f).map
+          ((commonStageDerivedPullback l Ω g).map
+            (GeneralAlgebraicallyClosedCoefficients.ofHom P Q L hP hQ r)) := by
+  sorry
 
 /-- The normalized integral components descend naturally to common-stage morphisms.
 Source: Stacks 099N(5); blueprint composition proof, first paragraph, and the
@@ -112,6 +145,9 @@ theorem commonStagePullbackCompComponent_naturality {X Y Z : Scheme.{u}}
         (commonStagePullbackCompComponent l Ω f g Q).hom =
       (commonStagePullbackCompComponent l Ω f g P).hom ≫
         (commonStageDerivedPullback l Ω f).map ((commonStageDerivedPullback l Ω g).map a) := by
-  sorry
+  induction a using StageSystem.PairCategory.hom_induction with
+  | h L hP hQ r =>
+    exact commonStagePullbackCompComponent_naturality_ofHom l Ω f g L hP hQ r
+
 
 end WeilConjectures
