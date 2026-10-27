@@ -59,7 +59,8 @@ finiteRootMap_existsUnique identifies it with finiteRootMap. Substitution gives
 the displayed boundary equality, with HEq witnesses for the two endpoint
 transports. This argument works for every integral arrow f, independently of
 its construction or any Kummer normalization. Empty schemes, zero coefficient
-rings, and f equal to zero satisfy exactly the same formulas. -/
+rings, and f equal to zero satisfy exactly the same formulas. The remaining
+composition identity is isolated in the proof plan for subsequent completion. -/
 theorem scalarFiniteBoundary (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)
