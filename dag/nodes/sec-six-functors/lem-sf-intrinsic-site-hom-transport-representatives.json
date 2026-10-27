@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-intrinsic-site-hom-transport-representatives",
+ "kind": "lemma",
+ "title": "Representative-level intrinsic site Hom transport",
+ "statement": "Let X be a scheme and A a finite commutative ring. Let R be the exact constant-scalar associated-module-sheaf realization. For cochain complexes L_c and I_c of fixed-scalar pro-etale module sheaves, with I_c K-injective, the realization of the fixed-scalar derived internal Hom of Q(L_c) and Q(I_c) is isomorphic to the intrinsic constant-ring derived internal Hom of their realized derived objects.",
+ "stmt_deps": [
+  "def-sp-finite-coefficient-intrinsic-derived-comparison",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "section-internal-hom, lemma-RHom-well-defined (Tag 0A95), and lemma-sheafification-presheaf-modules; coefficient-presentation transport in Step 2 of lem-sf-tensor-exchange-ctf-domains"
+ },
+ "proof": [
+  {
+   "text": "Apply the exact associated-module-sheaf realization to the Hom object computed on the chosen representatives. The sheaf-Hom and tensor adjunctions identify the result with the intrinsic constant-ring Hom complex, and exactness preserves the K-injective computation.",
+   "uses": [
+    "def-sp-finite-coefficient-intrinsic-derived-comparison",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sp-finite-coefficient-intrinsic-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "representative-level form of Step 2 of lem-sf-tensor-exchange-ctf-domains"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact equivalence derived internal Hom on K-injective representatives",
+   "results": "No exact theorem for this coefficient realization; generic monoidal closed equivalence APIs found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "representative-level coefficient realization derived internal Hom",
+   "results": "Generic derived Hom and K-injective representative APIs found; no intrinsic coefficient comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory Q homComplex KInjective",
+   "results": "Generic K-injective derived Hom object comparisons only; no coefficient realization theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHomOfUniverses_obj_iso|finiteCoefficientIntrinsicRealization",
+   "results": "Found the generic representative comparison and the exact intrinsic realization, but no bridge between them.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntrinsicSiteHomTransport",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-intrinsic-site-hom-transport",
+   "place": "Proof Step 2; representative-level coefficient-presentation Hom transport",
+   "via": [
+    "lem-sf-intrinsic-site-hom-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntrinsicSiteHomTransportRepresentatives",
+  "file": "lean/Sheaf/Paper/IntrinsicSiteHomTransportRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsicSiteHom_transport_representatives",
+  "statement": "theorem intrinsicSiteHom_transport_representatives (X : Scheme.{u}) (A : Type u)\n    [CommRing A] [Finite A]\n    (Lc Ic : CochainComplex\n      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ℤ)\n    [Ic.IsKInjective] :\n    Nonempty\n      ((finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj\n          (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj\n            (op (DerivedCategory.Q.obj Lc))).obj (DerivedCategory.Q.obj Ic)) ≅\n        (derivedInternalHomOfUniverses.{u + 1, u, u} (ProEt.topology X)\n          (proEtaleConstantRing X A)).obj\n          (op ((finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj\n            (DerivedCategory.Q.obj Lc)),\n            (finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj\n              (DerivedCategory.Q.obj Ic)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T234019-L-4161730",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T234019-L-4161730",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

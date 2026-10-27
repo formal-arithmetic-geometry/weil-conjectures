@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.Paper.IntrinsicSiteHomTransportRepresentatives
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 
 /-! # Internal Hom in the intrinsic finite-coefficient presentation
@@ -17,6 +18,7 @@ transport in Step 2 of lem-sf-tensor-exchange-ctf-domains.
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
@@ -52,7 +54,27 @@ theorem intrinsicSiteHom_transport (X : Scheme.{u}) (A : Type u)
         (derivedInternalHomOfUniverses.{u + 1, u, u} (ProEt.topology X)
           (proEtaleConstantRing X A)).obj
           (op ((finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj K),
-            (finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj L)) := by
-  sorry
+            (finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj L))  := by
+  let C := Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+  let F := finiteCoefficientIntrinsicRealization X A
+  let Q : CochainComplex C ℤ ⥤ DerivedCategory C := DerivedCategory.Q
+  let Lc := DerivedCategory.Q.objPreimage K
+  let Mc := DerivedCategory.Q.objPreimage L
+  obtain ⟨Ic, hIc, j, _, hj⟩ :=
+    Abelian.HasKInjectiveResolutions.exists_isKInjective Mc
+  letI := hIc
+  letI := hj
+  let eK : DerivedCategory.Q.obj Lc ≅ K := DerivedCategory.Q.objObjPreimageIso K
+  let eL : DerivedCategory.Q.obj Ic ≅ L :=
+    (asIso (DerivedCategory.Q.map j)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso L
+  obtain ⟨e⟩ := intrinsicSiteHom_transport_representatives X A Lc Ic
+  let eK' := F.mapDerivedCategory.mapIso eK
+  let eL' := F.mapDerivedCategory.mapIso eL
+  let a := (derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapIso eK.op
+  let b := ((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj
+    (op (DerivedCategory.Q.obj Lc))).mapIso eL.symm
+  exact ⟨F.mapDerivedCategory.mapIso (a.app L ≪≫ b) ≪≫ e ≪≫
+    (derivedInternalHomOfUniverses.{u + 1, u, u} (ProEt.topology X)
+      (proEtaleConstantRing X A)).mapIso (eK'.symm.op.prod eL')⟩
 
 end AlgebraicGeometry.ProEtale
