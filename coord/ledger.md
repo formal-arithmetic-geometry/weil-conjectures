@@ -20131,3 +20131,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:52 L: merged deliver/NC/lem-pur-integral-braiding-naturality (reviewer FIX; first push; new nodes: 0)
 
 - 05:53 L: batch 20261027T205736 dependency take-out
+- 22:00 L: merged deliver/ND/lem-pur-integral-braiding-scalar-extension-square (reviewer FIX; first push; new nodes: 0)

@@ -26,9 +26,78 @@
   "def-weil-integral-scalar-extension",
   "lem-pur-integral-operations-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose quasi-isomorphisms $P\\to M$ and $Q\\to N$ from K-flat complexes of $\\widehat{\\mathcal O}_{E,W}$-modules with flat terms [lem-pc-kflat-resolution]. Put $A_m=(\\mathcal O_E/\\varpi_E^m)_W$, $B_m=(\\mathcal O_L/\\varpi_L^m)_W$, $P_m=P\\otimes A_m$, $Q_m=Q\\otimes A_m$. By [lem-pur-coefficient-extension-reduction-model] the coherent reduction $\\mathcal R_L(M_L)$ is identified, naturally in $M$ and compatibly with every transition $B_m\\to B_n$, with the normalized system $C_{E,L}(M)_m=P_m\\otimes_{A_m}B_m$, by the coherent counit followed by the inverse scalar association $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$; likewise for $N$. By [lem-weil-integral-scalar-extension-constructible] $M_L,N_L$ and $(T^{\\mathrm{int}}_E(M,N))_L$ lie in $D^b_c(W,\\mathcal O_L)$; so do $T^{\\mathrm{int}}_L(M_L,N_L)$ and $T^{\\mathrm{int}}_L(N_L,M_L)$, these being the tensor of [def-pod-integral-tensor-constraints] on that category. Both composites of the asserted square are therefore morphisms of $D^b_c(W,\\mathcal O_L)$ from $(T^{\\mathrm{int}}_E(M,N))_L$ to $T^{\\mathrm{int}}_L(N_L,M_L)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-weil-integral-scalar-extension-constructible",
+    "def-pod-integral-tensor-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution); agent-written use of the recorded coefficient-extension reduction model"
+   }
+  },
+  {
+   "text": "Strict level. At each $m$ apply [lem-pur-cochain-pullback-tensor-coherence] to the identity topos with coefficient map $u:A_m\\to B_m$; then $u^*K=B_m\\otimes_{A_m}K$ and $c_{u;P_m,Q_m}:u^*\\operatorname{Tot}(P_m\\otimes Q_m)\\to\\operatorname{Tot}(u^*P_m\\otimes u^*Q_m)$, $s\\otimes(x\\otimes y)\\mapsto(s\\otimes x)\\otimes(1\\otimes y)$, respects the signed symmetry: $c_{u;Q_m,P_m}\\circ u^*(\\chi_{P_m,Q_m})=\\chi_{u^*P_m,u^*Q_m}\\circ c_{u;P_m,Q_m}$ (on a generator of bidegree $(p,q)$ both give $(-1)^{pq}(s\\otimes y)\\otimes(1\\otimes x)=(-1)^{pq}(1\\otimes y)\\otimes(s\\otimes x)$; the scalar has degree $0$). The second equation of that lemma, applied to $A_m\\to A_n$, $B_m\\to B_n$, makes these comparisons commute with all quotient transitions. Thus, as whole systems, the balanced comparison carries the signed swap $a^E$ of $T(\\mathcal R_EM,\\mathcal R_EN)$ to the signed swap $a^L$ of the extended systems; this is the scalar-extension clause for the symmetry route in [lem-pur-normalized-tensor-constraint-transport]. Localizing, with $\\sigma^D$ the derived-system tensor scalar comparison of [lem-pur-normalized-scalar-comparison-realization] (on flat-term K-flat representatives it is the localization of this $c_u$), one gets $\\sigma^D_{\\mathcal R_EN,\\mathcal R_EM}\\circ S(a^E)=a^L\\circ\\sigma^D_{\\mathcal R_EM,\\mathcal R_EN}$ in the derived category of $B_\\bullet$-systems.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-normalized-tensor-constraint-transport",
+    "lem-pur-normalized-scalar-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), signed symmetry on homogeneous generators; agent-written two-coefficient specialization"
+   }
+  },
+  {
+   "text": "Reductions of the two composites. By [lem-pur-normalized-scalar-comparison-realization], $T_L(r_S,r_S)\\,r_{T,L}\\,\\mathcal R_L(\\lambda^{\\mathrm{int}}_{M,N})=\\sigma^D_{\\mathcal R_EM,\\mathcal R_EN}\\,S(r_{T,E})\\,r_S$, and the same with $M,N$ exchanged; here $\\lambda^{\\mathrm{int}}$ is the tensor comparison $a_T$ of [lem-pur-integral-operations-scalar-extension] and $r_S:\\mathcal R_L(-)_L\\to S\\mathcal R_E$ is natural. By [def-pod-integral-tensor-constraints] $\\beta^E$ is the unique isomorphism whose coherent reduction is the strict signed swap conjugated by the specified reduction/tensor comparison, and by [lem-pur-normalized-tensor-constraint-transport] the canonical completed signed symmetry has exactly this property, $\\gamma\\,\\mathcal R_E(\\widehat a)=a^E\\gamma$, with $\\gamma_{T(A,N)}=e\\,\\mathcal R(\\beta_T)$; by [lem-pur-completed-primitive-counit-comparison] $\\beta_T=\\mathcal L T(e,e)\\circ r_T$, so this conjugating comparison is the same $r_T$ as above, composed with counits that are invertible on normalized systems. Hence $r_{T,E}\\,\\mathcal R_E(\\beta^E_{M,N})=a^E\\,r_{T,E}$, and likewise over $L$. Naturality of $r_S$ gives $r_S\\,\\mathcal R_L((\\beta^E_{M,N})_L)=S(\\mathcal R_E\\beta^E_{M,N})\\,r_S$. Composing, after the common isomorphisms $S(r_{T,E})r_S$ on the source and $T_L(r_S,r_S)r_{T,L}$ on the target, $\\mathcal R_L$ of the left composite is $\\sigma^D_{N,M}S(a^E)$ and $\\mathcal R_L$ of the right composite is $a^L\\sigma^D_{M,N}$ (inputs $\\mathcal R_EM,\\mathcal R_EN$). These agree by Step 2.",
+   "uses": [
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-pod-integral-tensor-constraints",
+    "lem-pur-normalized-tensor-constraint-transport",
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (1)-(2), reduction pi^* K = {K (x) R/m^n} of complete objects, with Stacks Tag 0941 (sites-cohomology lemma-derived-limit-is-ok); agent-written assembly of the recorded normalizations"
+   }
+  },
+  {
+   "text": "Both composites are morphisms of $D^b_c(W,\\mathcal O_L)$ (Step 1) with equal coherent reductions (Step 3). Coherent reduction is fully faithful on the derived-complete bounded constructible integral category [lem-pod-integral-system-reduction-fully-faithful], hence $\\lambda^{\\mathrm{int}}_{N,M}\\circ(\\beta^E_{M,N})_L=\\beta^L_{M_L,N_L}\\circ\\lambda^{\\mathrm{int}}_{M,N}$. Nothing used depends on $e(L/E)$ or on $L\\ne E$: the cited reduction model and comparison realization allow ramified and identity extensions, and the strict computation of Step 2 is a ring-map statement with no flatness of $A_m\\to B_m$.",
+   "uses": [
+    "lem-pod-integral-system-reduction-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (2), pullback to the coefficient system is fully faithful on derived complete objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-weil-integral-scalar-extension-constructible",
+  "def-pod-integral-tensor-constraints",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-normalized-tensor-constraint-transport",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-pod-integral-system-reduction-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ, signed total symmetry; agent-written assembly over the recorded coherent-reduction normalizations of the purity conventions unit"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-rational-braiding-scalar-compatibility",
@@ -70,5 +139,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-integral-braiding-scalar-extension-square",
+  "worker": "stage1",
+  "summary": "No finished Lean declaration or archived attempt exists. I split the proof at the strict finite-stage chain level: a new statement-only node records that the balanced scalar-tensor map commutes with the signed total swap on every homogeneous generator and along quotient transitions. The item then chooses flat-term K-flat representatives, applies that square levelwise, assembles the compatible tower maps, and lifts equality through fully faithful coherent reduction; the normalization clauses identify the lift with the prescribed integral braidings and tensor scalar comparisons. Identity and ramified extensions are included explicitly. Maintainer reader (2026-10-28): the delivered child lem-pur-integral-signed-scalar-tensor-square was the special case u=identity topos of the existing lem-pur-cochain-pullback-tensor-coherence and was dropped; steps rewritten to cite the existing reduction model, scalar-comparison realization, tensor-constraint transport and primitive counit comparison, which carry the identifications the delivered steps 1 and 3 had taken from statements that do not contain them.",
+  "blueprint": "The item realizes the normalized common-stage tensor paragraph of def-weil-derived-pullback-tensor-hom (independence of representatives needs the scalar-extension tensor comparison to carry the signed swap over O_E to the one over O_L); Step 2 is its pre-completion signed-swap calculation, Steps 3-4 its coherent-reduction lift.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "generic existence of flat-term K-flat resolutions on a ringed site; no node of the purity conventions route states it"
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "supplies the prescribed integral tensor scalar comparison lambda^int named in the statement; only its object is used"
+   },
+   {
+    "node": "lem-pod-integral-system-reduction-fully-faithful",
+    "why": "generic full faithfulness of coherent reduction on derived-complete bounded constructible integral objects, used to lift an equality of reductions; no node of the unit's route gives it"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pod-integral-system-reduction-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-ND-cf42a0655",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-cf42a0655 (reviewer sub-agent of L); spot-checked: The item statement is unchanged, true and not weakened. I checked M=0, O_E[0], O_E[1] (sign -1), L=E and ramified E⊂L. Its parent, lem-pur-rational-braiding-scalar-compatibility step 3, uses exactly this square. Faults found and fixed: (1) C5/C1: the new node lem-pur-integral-signed-scalar-tensor-square is the special case u = identity topos with A_m->B_m of the existing lem-pur-cochain-pullback-tensor-coherence, which already says c_u respects the signed symmetry and commutes with the quotient transitions. The new node also had B3/C4 faults: the def-pc-* nodes and def-weil-integral-scalar-extension are cited in its text but missing from stmt_deps, and kappa is cited to def-pur-completed-coefficient-tensor-transport-models, which defines the restriction balancing, not scalar extension. I dropped it. (2) C4/E5: step 1 took the finite-level representation of lambda^int from lem-pur-integral-operations-scalar-extension, whose statement only asserts that the isomorphisms exist. Step 3 replaced the reduction computation with 'by the defining normalizations', and it cited Tag 099N, which is the wrong lemma. The proof now has four steps that cite lem-pur-coefficient-extension-reduction-model, lem-pur-cochain-pullback-tensor-coherence, lem-pur-normalized-tensor-constraint-transport, lem-pur-normalized-scalar-comparison-realization and lem-pur-completed-primitive-counit-comparison (all on route in sk-def-purity-conv), plus lem-weil-integral-scalar-extension-constructible, and lift the equality by BS Lemma 3.5.7(2). (3) The off-route tools were not declared. I added split_report.tool_uses for lem-pc-kflat-resolution, lem-pur-integral-operations-scalar-extension and lem-pod-integral-system-reduction-fully-faithful. Batch-5 check: lem-pod-integral-system-reduction-fully-faithful is a generic fact (coherent reduction is fully faithful on complete constructible objects, BS 3.5.7) and no step of the trace formula or Poincare duality. Its closure contains no thm/prop of those chapters and no nt-assume leaf, so I accepted it. def-pur-ringed-site-signed-tensor-models is a general definition, and the question is moot because the node citing it is dropped. Uses equal the in-text citations in every step, and there is no cycle.; 1 file(s) fixed by the reviewer"
  }
 }
