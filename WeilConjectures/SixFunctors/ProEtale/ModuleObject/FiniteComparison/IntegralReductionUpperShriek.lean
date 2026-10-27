@@ -134,6 +134,8 @@ lemma boundedConstructibleUnitCompatible (hη : IntegersModPowPullUnitCompatible
   have h := hη M.obj
   exact h
 
+set_option maxHeartbeats 400000 in
+-- the final `exact` unifies the shift isomorphisms of large derived-category composites
 /-- **The connecting morphisms commute with the pullback on bounded constructible complexes**,
 given that they do on the full derived categories. -/
 lemma boundedConstructibleδCompatible (hδ : IntegersModPowPullδCompatible ℓ E n p.left)
