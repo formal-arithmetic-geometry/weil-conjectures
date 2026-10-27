@@ -389,17 +389,29 @@ theorem isIso_lowerStarKunnethMap'_of_isPullback_point {X Y : Over (Spec (.of k)
     (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (lowerStarKunnethMap' (Profinite.padicAlgClRingObj ℓ) sq₁ sq₂ A.obj B.obj) := by
-  rw [lowerStarKunnethMap'_eq_hom ℓ w₁ w₂ sq₁ sq₂ A B]
-  have := isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_of_isPullback ℓ h w₁ w₂ A B
-  exact (ObjectProperty.isIso_hom_iff _).mpr this
+  have hD := isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_of_isPullback ℓ h w₁ w₂ A B
+  have hB' := Adjunction.ι_map_homEquiv_δ_tensorHom_restrictFullyFaithful
+    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) q.left)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ q K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ q K)
+    (prodUpperStarCounit ℓ w₁ A) (prodUpperStarCounit ℓ w₂ B)
+  have hι : IsIso ((boundedConstructible _).ι.map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv _ _
+        (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar _ ℓ q) _ _ ≫
+          (prodUpperStarCounit ℓ w₁ A ⊗ₘ prodUpperStarCounit ℓ w₂ B)))) :=
+    inferInstance
+  erw [hB'] at hι
+  simp only [ObjectProperty.ι_map] at hι
+  simp only [← map_baseChangeMap_app_comp_counit ℓ w₁ sq₁ A,
+    ← map_baseChangeMap_app_comp_counit ℓ w₂ sq₂ B] at hι
+  rw [lowerStarKunnethMap'_eq_homEquiv_padicAlgCl]
+  convert hι using 4
+  all_goals rfl
 
 end BridgeKunneth
 
 
 section Final
-
-set_option allowUnsafeReducibility true in
-attribute [local reducible] Over.mk Over.homMk CostructuredArrow.mk CostructuredArrow.homMk
 
 variable {K : Type u} [Field K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ ℓ)]
   {X Y P : Over (Spec (.of K))}
@@ -428,6 +440,7 @@ theorem isIso_lowerStarKunnethMap'_of_isPullback (p₁ : P.left ⟶ X.left)
     (a := (Over.homMk X.hom (Category.comp_id _) : X ⟶ point K))
     (b := (Over.homMk Y.hom (Category.comp_id _) : Y ⟶ point K))
     (Over.OverMorphism.ext w₁.symm) (Over.OverMorphism.ext w₂.symm) ⟨w₁⟩ ⟨w₂⟩ ⟨A, hA⟩ ⟨B, hB⟩
+
 end Final
 
 end AlgebraicGeometry.ProEtale.CondensedRing
