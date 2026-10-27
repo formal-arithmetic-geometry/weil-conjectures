@@ -26,6 +26,8 @@ import all Sheaf.Paper.IntegralOperationsWellDefined
 import all Sheaf.Paper.FiniteFreeCompletedScalarComparison
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 import Sheaf.Paper.CompletedScalarIdentityUnit
+import Sheaf.Paper.DerivedCompleteUnrestrictedIso
+import Sheaf.CategoryTheory.ScalarLocalizationComponentIso
 import Sheaf.Paper.ExactTensorCoefficientLinear
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorCancellation
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SignedLineEvaluation
@@ -47,6 +49,8 @@ Proposition 3.5.1; blueprint sk-def-sp-tate-twist-locally-free, Proof (3).
 @[expose] public noncomputable section
 set_option Elab.async false
 attribute [local instance 5000] CategoryTheory.HasSheafify.isRightAdjoint
+attribute [local instance 5000] Algebra.toModule
+attribute [local irreducible] Padic
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -501,19 +505,7 @@ private theorem complete_of_iso
     {K M : DerivedCategory (integralTowerModules l E X)} (e : K ≅ M)
     (hK : IsDerivedCompleteUnrestricted l E X K) :
     IsDerivedCompleteUnrestricted l E X M := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-    obtain ⟨D, hlD, P, G, q, hq, a, hprod, δ, hδ⟩ := hK
-    let := hprod
-    refine ⟨D, hlD, P, G, q, hq, a ≪≫ e, hprod,
-      δ ≫ (shiftFunctor _ (1 : ℤ)).map e.hom, ?_⟩
-    apply Pretriangulated.isomorphic_distinguished _ hδ _
-    refine Pretriangulated.Triangle.isoMk _ _ e.symm (Iso.refl _) (Iso.refl _) ?_ ?_ ?_
-    · apply Pi.hom_ext
-      intro n
-      simp [Category.assoc]
-    · simp
-    · simp [Category.assoc, ← Functor.map_comp]
+  exact isDerivedCompleteUnrestricted_of_iso l E X e hK
 
 /-- Completed extension preserves completeness on complete inputs.
 Source: Bhatt--Scholze, Proposition 3.5.1
@@ -700,6 +692,20 @@ attribute [local irreducible] unit ordinaryUnit
 
 attribute [local semireducible] unit ordinaryUnit chi
 
+private theorem line_unit_conjugation
+    {C : Type*} [Category C] {A B A' B' K M : C}
+    (cK : A ≅ B) (cM : A' ≅ B') (uK : A ⟶ K) (uM : A' ⟶ M)
+    (f : A ⟶ A') (g : B ⟶ B') (k : K ⟶ M)
+    (hc : f ≫ cM.hom = cK.hom ≫ g) (hu : f ≫ uM = uK ≫ k) :
+    g ≫ (cM.inv ≫ uM) = (cK.inv ≫ uK) ≫ k := by
+  have hc' : g ≫ cM.inv = cK.inv ≫ f := by
+    apply (cK.eq_inv_comp).mpr
+    rw [← Category.assoc, ← hc, Category.assoc, cM.hom_inv_id, Category.comp_id]
+  calc
+    g ≫ (cM.inv ≫ uM) = (g ≫ cM.inv) ≫ uM := (Category.assoc _ _ _).symm
+    _ = (cK.inv ≫ f) ≫ uM := congrArg (fun z ↦ z ≫ uM) hc'
+    _ = (cK.inv ≫ uK) ≫ k := by rw [Category.assoc, hu, Category.assoc]
+
 /-- The inverse completed unit is exactly the natural completeness map, including
 its zero shifted-product component, and is natural on complete inputs.
 Source: Bhatt--Scholze, Definition 3.5.2; blueprint Proof (3)
@@ -739,24 +745,16 @@ theorem unit_normalization :
         rw [hμ, Category.assoc]
         exact hχ
       erw [hχ']
-      simp
+      simp only [Iso.inv_hom_id_app_assoc]
     · intro K M hK hM f
-      apply (cancel_epi (chi l E X E (AlgHom.id ℚ_[l] E) K hK).hom).1
-      change (chi l E X E (AlgHom.id ℚ_[l] E) K hK).hom ≫
-          ((integralScalarExtensionOfUniverses l E E (AlgHom.id ℚ_[l] E) X).map f ≫
-            (chi l E X E (AlgHom.id ℚ_[l] E) M hM).inv ≫
-              (ordinaryUnit l E X).hom.app M) =
-        (chi l E X E (AlgHom.id ℚ_[l] E) K hK).hom ≫
-          ((chi l E X E (AlgHom.id ℚ_[l] E) K hK).inv ≫
-            (ordinaryUnit l E X).hom.app K) ≫ f
-      have hχ := (completedScalarComparison l E E (AlgHom.id ℚ_[l] E) X).naturality f
-      change (completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X).map f ≫
-          (chi l E X E (AlgHom.id ℚ_[l] E) M hM).hom =
-        (chi l E X E (AlgHom.id ℚ_[l] E) K hK).hom ≫
-          (integralScalarExtensionOfUniverses l E E (AlgHom.id ℚ_[l] E) X).map f at hχ
-      rw [← Category.assoc, ← hχ]
-      simp only [Category.assoc, Iso.hom_inv_id_assoc]
-      exact (ordinaryUnit l E X).hom.naturality f
+      exact line_unit_conjugation
+        (chi l E X E (AlgHom.id ℚ_[l] E) K hK)
+        (chi l E X E (AlgHom.id ℚ_[l] E) M hM)
+        ((ordinaryUnit l E X).hom.app K) ((ordinaryUnit l E X).hom.app M)
+        ((completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X).map f)
+        ((integralScalarExtensionOfUniverses l E E (AlgHom.id ℚ_[l] E) X).map f) f
+        ((completedScalarComparison l E E (AlgHom.id ℚ_[l] E) X).naturality f)
+        ((ordinaryUnit l E X).hom.naturality f)
 
 /-- Both unit laws and the scalar associativity pentagon on derived-complete inputs.
 Source: Stacks 06YY, 07A4; blueprint Proof (3)
@@ -897,51 +895,8 @@ private theorem line_localizedIso
           ⟨G₀.obj K'⟩)) :
     ∃! a : F ≅ G, ∀ K, HEq (a.hom.app K)
       ((ScalarLocalization.localization S D v).map (e.hom.app K.obj)) := by
-  set_option backward.isDefEq.respectTransparency false in
-  set_option backward.isDefEq.respectTransparency.types false in
-    let c (K : ScalarLocalization R C t) : F.obj K ≅ G.obj K :=
-      eqToIso (hF K) ≪≫ (ScalarLocalization.localization S D v).mapIso (e.app K.obj) ≪≫
-        (eqToIso (hG K)).symm
-    have hc (K) : HEq (c K).hom
-        ((ScalarLocalization.localization S D v).map (e.hom.app K.obj)) := by
-      simp [c]
-    have hn {K K' : ScalarLocalization R C t} (f : K ⟶ K') :
-        F.map f ≫ (c K').hom = (c K).hom ≫ G.map f := by
-      obtain ⟨K⟩ := K
-      obtain ⟨K'⟩ := K'
-      induction f using TensorProduct.induction_on with
-      | zero => simp
-      | add f g hf hg =>
-        rw [F.map_add, G.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
-      | tmul a f =>
-        rw [(conj_eqToHom_iff_heq _ _ (hF ⟨K⟩) (hF ⟨K'⟩)).mpr (mF K K' f a),
-          (conj_eqToHom_iff_heq _ _ (hG ⟨K⟩) (hG ⟨K'⟩)).mpr (mG K K' f a)]
-        dsimp [c]
-        simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-        have he : ScalarLocalization.composition S D v _ _ _
-              ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K') (ψ a ⊗ₜ[S] F₀.map f) =
-            ScalarLocalization.composition S D v _ _ _
-              (ψ a ⊗ₜ[S] G₀.map f) ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K) := by
-          simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
-          rw [e.hom.naturality f]
-        have he' :
-            @CategoryStruct.comp (ScalarLocalization S D v) _
-              ⟨F₀.obj K⟩ ⟨F₀.obj K'⟩ ⟨G₀.obj K'⟩
-              (ψ a ⊗ₜ[S] F₀.map f) ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K') =
-            @CategoryStruct.comp (ScalarLocalization S D v) _
-              ⟨F₀.obj K⟩ ⟨G₀.obj K⟩ ⟨G₀.obj K'⟩
-              ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K) (ψ a ⊗ₜ[S] G₀.map f) := he
-        simpa only [ScalarLocalization.localization, Category.assoc] using
-          congrArg (fun z :
-            (⟨F₀.obj K⟩ : ScalarLocalization S D v) ⟶ ⟨G₀.obj K'⟩ ↦
-              eqToHom (hF ⟨K⟩) ≫ z ≫ eqToHom (hG ⟨K'⟩).symm) he'
-    let a : F ≅ G := NatIso.ofComponents c (fun f ↦ hn f)
-    refine ⟨a, hc, ?_⟩
-    intro a' ha'
-    apply Iso.ext
-    apply NatTrans.ext
-    funext K
-    exact eq_of_heq ((ha' K).trans (hc K).symm)
+  exact ScalarLocalization.existsUnique_iso_of_component_formulas
+    t v ψ F₀ G₀ e F G hF hG mF mG
 
 private theorem line_app_heq {C D : Type*} [Category C] [Category D]
     {F G : C ⥤ D} (α : F ⟶ G) {X X' : C} (h : X = X') :
@@ -1654,6 +1609,29 @@ theorem rational_repeated (L : integralTowerModules l E Y) [L.IsFiniteLocallyFre
       simpa only [Functor.map_comp, Functor.mapIso_inv, Iso.app_inv,
         Functor.mapLinearMap] using congrArg Q.map hi))
 
+private theorem line_diagonal_of_tower
+    {C : Type*} [Category C] (T U : C ⥤ C) (u : U ≅ 𝟭 C)
+    (b : T ⋙ U ≅ U ⋙ T)
+    (h : ∀ K, U.map (b.hom.app K) ≫ b.hom.app (U.obj K) ≫
+      T.map (u.hom.app (U.obj K)) = u.hom.app (U.obj (T.obj K)) ≫ b.hom.app K)
+    (K : C) :
+    u.inv.app (T.obj K) ≫ b.hom.app K ≫ T.map (u.hom.app K) = 𝟙 (T.obj K) := by
+  have hu (M : C) : U.map (u.hom.app M) = u.hom.app (U.obj M) := by
+    apply (cancel_mono (u.hom.app M)).mp
+    exact u.hom.naturality (u.hom.app M)
+  have hfaith : U.Faithful := Functor.Faithful.of_iso u.symm
+  let := hfaith
+  have hn := b.hom.naturality (u.hom.app K)
+  change U.map (T.map (u.hom.app K)) ≫ b.hom.app K =
+    b.hom.app (U.obj K) ≫ T.map (U.map (u.hom.app K)) at hn
+  have he : U.map (b.hom.app K ≫ T.map (u.hom.app K)) ≫ b.hom.app K =
+      U.map (u.hom.app (T.obj K)) ≫ b.hom.app K := by
+    rw [U.map_comp, Category.assoc, hn]
+    simpa only [hu] using h K
+  have he' := U.map_injective ((cancel_mono (b.hom.app K)).mp he)
+  rw [he', u.inv_hom_id_app]
+  rfl
+
 /-- Diagonal line data are multiplication, so unit-normalized rational beta is identity.
 Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
 Proof: the signed-power extensions of multiplication are the normalized multiplication
@@ -1674,7 +1652,31 @@ theorem rational_diagonal (L : integralTowerModules l E Y) [L.IsFiniteLocallyFre
         (rationalBeta l E E (AlgHom.id ℚ_[l] E) Y p hl L hL L hL b m).hom.app K ≫
         (rationalTwist l E Y L hL m).map ((sfRationalScalarUnit l E Y p hl).hom.app K) =
       𝟙 ((rationalTwist l E Y L hL m).obj K) := by
-  sorry
+  have hb' : ∀ (U : Y.ProEtᵒᵖ)
+      (s t : (completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U)
+      (x : L.val.obj U),
+      b.hom.val.app U (SheafOfModules.scalarExtensionSection
+        (completedCoefficientMap l E E (AlgHom.id ℚ_[l] E) Y) L U t
+        (b.hom.val.app U (SheafOfModules.scalarExtensionSection
+          (completedCoefficientMap l E E (AlgHom.id ℚ_[l] E) Y) L U s x))) =
+      b.hom.val.app U (SheafOfModules.scalarExtensionSection
+        (completedCoefficientMap l E E (AlgHom.id ℚ_[l] E) Y) L U
+        (t * (completedCoefficientMap l E E (AlgHom.id ℚ_[l] E) Y).hom.app U s) x) := by
+    intro U s t x
+    rw [hb, hb, hb]
+    rw [WeilConjectures.completedCoefficientMap_id l E Y]
+    unfold smul
+    exact ((L.val.obj U).isModule.toSemigroupAction.mul_smul t s x).symm
+  apply line_diagonal_of_tower (rationalTwist l E Y L hL m)
+    (sfRationalScalarExtension l E Y p hl E (AlgHom.id ℚ_[l] E))
+    (sfRationalScalarUnit l E Y p hl)
+    (rationalBeta l E E (AlgHom.id ℚ_[l] E) Y p hl L hL L hL b m)
+  intro J
+  have ht := rational_tower l E E (AlgHom.id ℚ_[l] E)
+    E (AlgHom.id ℚ_[l] E) Y p hl L hL L hL L hL b b b hb' m J
+  simpa only [AlgHom.comp_id,
+    (sfRationalScalar_coherence l E E (AlgHom.id ℚ_[l] E) Y p hl
+      E (AlgHom.id ℚ_[l] E)).2.1] using ht
 
 end Rational
 end CompletedLineTensor

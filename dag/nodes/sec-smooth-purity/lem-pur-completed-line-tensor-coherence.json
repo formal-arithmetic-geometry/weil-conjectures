@@ -135,6 +135,30 @@
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 06YY; localization of the chain multiplication comparison, expanded in the existing ordinaryUnit_existsUnique docstring."
    }
+  },
+  {
+   "text": "For rational_diagonal specialize rational_tower to three copies of the same field, the identity embeddings, and three copies of the multiplication line isomorphism b. The hypothesis on b gives b(t tensor b(s tensor x)) = t*(s*x) = (t*s)*x, while completedCoefficientMap for the identity embedding is the identity. Thus the required compatibility hypothesis holds. The target-unit equation of sfRationalScalar_coherence identifies both scalar associators with the scalar unit at the extended object. Naturality of rationalBeta at the unit map, and naturality of that unit at its own components, turn the tower equality into U.map(B_K followed by T(u_K)) followed by B_K = U.map(u_TK) followed by B_K. Cancel B_K and use faithfulness of U, which is isomorphic to the identity, to obtain B_K followed by T(u_K) = u_TK. Precompose by the inverse unit to get precisely the asserted identity. This works for every signed power, the zero object and the empty scheme, and adds no assumption on the line or its constructible preservation.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse-pair and coefficient conventions: diagonal multiplication is the unit case of tower coherence."
+   }
+  },
+  {
+   "text": "Use the extracted isomorphism-invariance API for unrestricted completeness in extension_complete and the extracted localized-component natural-isomorphism API for rationalEpsilon_existsUnique and rationalBeta_existsUnique. These are the original proved private arguments, now compiled separately; no new proof obligation is introduced. Unit normalization uses a private categorical conjugation lemma and the specific inverse-unit cancellation identity; this changes only its proof term.",
+   "uses": [
+    "lem-pur-unrestricted-completeness-iso",
+    "lem-pur-scalar-localization-component-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3): completed tensor and passage to rationalized constructible categories."
+   }
   }
  ],
  "proof_deps": [
@@ -157,12 +181,14 @@
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-integral-line-tensor-completeness",
   "lem-weil-integral-scalar-extension-constructible",
-  "lem-weil-scalar-extension-composition"
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-unrestricted-completeness-iso",
+  "lem-pur-scalar-localization-component-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-  "place": "Proof (3), final inverse tensor pair and integral/rational scalar conventions; Q61 finer split of all original steps following the maintainer re-split note of 2026-10-22. Non-elementary ordinary and categorical transport arguments are assigned to three statement-only nodes. T5 (2026-10-25): ordinary identity unitor proved directly by Mathlib localization and the existing good-complex localization; other open declarations retain their planned steps. H1 (2026-10-27): evaluation_existsUnique is proved from actual Hom evaluation, ordinary/site tensor comparison, and trilinear uniqueness. integralTwist_linear is proved through the fully proved exactTensorCoefficientLinear auxiliary theorem. Other open clauses retain their existing proof plan."
+  "place": "Proof (3), final inverse tensor pair and integral/rational scalar conventions; Q61 finer split of all original steps following the maintainer re-split note of 2026-10-22. Non-elementary ordinary and categorical transport arguments are assigned to three statement-only nodes. T5 (2026-10-25): ordinary identity unitor proved directly by Mathlib localization and the existing good-complex localization; other open declarations retain their planned steps. H1 (2026-10-27): evaluation_existsUnique is proved from actual Hom evaluation, ordinary/site tensor comparison, and trilinear uniqueness. integralTwist_linear is proved through the fully proved exactTensorCoefficientLinear auxiliary theorem. Other open clauses retain their existing proof plan. A4: rational_diagonal specializes the rational tower to multiplication and uses the actual scalar unit, naturality and cancellation. The existing completeness transport and generic scalar-localized isomorphism proofs are extracted into proved APIs; unit normalization uses categorical conjugation. Local Padic irreducibility and priority for the canonical algebra module instance optimize coefficient-instance synthesis without exporting a setting or changing a construction."
  },
  "mathlib_searches": [
   {
@@ -605,11 +631,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-0ee8b",
-  "group": "H1",
-  "result": "fix",
-  "landing": "20261027T151710-L-1194234",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T180449-L-3862599",
   "kind": "interface",
-  "note": "independent cc review: delivered item, 4 new aux modules, verbatim PointEvaluationCompletion split, and 7 node files checked against the clone (published lines 1-520 diffed against Models), node statements and the lean records; sandbox compiles of the delivered set, the fixed set, unsplit/published originals and CompletedHomScalarTranspose; #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-unrestricted-completeness-iso",
+ "kind": "statement",
+ "title": "Unrestricted completeness is invariant under derived isomorphism",
+ "statement": "For every prime l, finite-dimensional extension E of Q_l, independently sized scheme X, derived objects K and M in integralTowerModules l E X, and isomorphism e : K ≅ M, IsDerivedCompleteUnrestricted l E X K implies IsDerivedCompleteUnrestricted l E X M. The existing predicate is the augmented reduction-tower Roos triangle condition; the finite-field witness is retained.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3): completed tensor and passage to rationalized constructible categories."
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Keep the same finite-field datum, K-flat resolution, quotient tower and product. Replace the representative isomorphism a by a followed by e and the connecting arrow by its composite with the shifted e.hom.",
+   "uses": [
+    "def-weil-derived-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3): completed tensor and passage to rationalized constructible categories."
+   }
+  },
+  {
+   "text": "The resulting Roos triangle is isomorphic to the original one, with e.symm on the first object and identities on both products. Check the first square on every product projection using inverse cancellation; the remaining squares are identity and shifted inverse cancellation. Apply Pretriangulated.isomorphic_distinguished.",
+   "uses": [
+    "def-weil-derived-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3): completed tensor and passage to rationalized constructible categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/CompletedLineTensorCoherence.lean",
+  "place": "A4 extracts the existing proved private helper into a proof-only API module; the construction and argument are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete.*[Ii]so|[Ii]so.*IsDerivedComplete|[Ll]ocalized.*[Ii]so|[Ii]so.*[Ll]ocalized",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/FractionalIdeal.lean; Mathlib/LinearAlgebra/Dimension/Localization.lean; Mathlib/LinearAlgebra/Dimension/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/Algebra/Module/LocalizedModule/Basic.lean; Mathlib/Algebra/Module/LocalizedModule/Basic.lean; Mathlib/Algebra/Module/LocalizedModule/Basic.lean; Mathlib/Algebra/Module/LocalizedModule/Basic.lean",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies the triangle/isomorphism and naturality primitives; no exact theorem for the project predicates or raw scalar-localization component specifications. Extract the existing fully proved private helper, without a new obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isomorphic_distinguished",
+   "results": "9 hits: CategoryTheory.Pretriangulated.isomorphic_distinguished; CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso; CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso_hom_τ₁; CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso_hom_τ₂; CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso_hom_τ₃; CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso_inv_τ₁; CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso_inv_τ₂; CategoryTheory.Pretriangulated.shortComplexOfDistTriangleIsoOfIso_inv_τ₃",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies the triangle/isomorphism and naturality primitives; no exact theorem for the project predicates or raw scalar-localization component specifications. Extract the existing fully proved private helper, without a new obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits: CategoryTheory.NatIso.ofComponents; CategoryTheory.NatIso.ofComponents.app; CategoryTheory.NatIso.ofComponents_hom_app; CategoryTheory.NatIso.ofComponents_inv_app; CategoryTheory.opOpEquivalence_counitIso; CategoryTheory.opOpEquivalence_unitIso; CategoryTheory.Functor.opUnopEquiv_unitIso; CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies the triangle/isomorphism and naturality primitives; no exact theorem for the project predicates or raw scalar-localization component specifications. Extract the existing fully proved private helper, without a new obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "date": "2026-10-27",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-line-tensor-coherence",
+   "place": "Proof (3): completed tensor and passage to rationalized constructible categories.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedCompleteUnrestrictedIso",
+  "file": "lean/Sheaf/Paper/DerivedCompleteUnrestrictedIso.lean",
+  "declaration": "WeilConjectures.isDerivedCompleteUnrestricted_of_iso",
+  "statement": "theorem isDerivedCompleteUnrestricted_of_iso\n  {K M : DerivedCategory (integralTowerModules l E X)} (e : K ≅ M)\n  (hK : IsDerivedCompleteUnrestricted l E X K) :\n  IsDerivedCompleteUnrestricted l E X M",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T180449-L-3862599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T180449-L-3862599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
