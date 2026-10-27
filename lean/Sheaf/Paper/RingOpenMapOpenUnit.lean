@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 
+import Sheaf.AlgebraicGeometry.ProEtaleOpenSlicePresentation
+import all Sheaf.Paper.OpenImmersionTensorPiece
+
 /-! # Invertibility of the derived open-extension unit -/
 
 @[expose] public noncomputable section
@@ -16,6 +19,8 @@ namespace WeilConjectures.PurCompactSupport
 
 universe u
 
+attribute [-instance] WeilConjectures.integralOperationsSiteSmall
+  WeilConjectures.integralReductionSiteEssentiallySmall in
 /-- The derived open-extension unit is invertible.
 
 Source: Stacks Tags 03DI and 08BS; the slice-presentation and subterminality
@@ -31,6 +36,18 @@ theorem openDerivedAdjunction_unit_isIso
     (R : Coefficients.{u}) {U V : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j] :
     IsIso (openDerivedAdjunction R j).unit := by
-  sorry
+  obtain ⟨e, ⟨he⟩⟩ := proEtaleOpen_slicePresentation j (R.ring V) (R.ring U) (R.pull j)
+  have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
+  have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  let he' := Functor.mapDerivedCategoryNatIso he ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  let L := (SheafOfModules.localizedModuleExtension.{u} (R.ring V)
+    (ProEt.mk j)).mapDerivedCategory
+  let adjL := SheafOfModules.localizedModuleDerivedAdjunction.{u} (R.ring V) (ProEt.mk j)
+  have : IsIso adjL.unit := SheafOfModules.localizedDerivedUnit_isIso j (R.ring V)
+  have : L.Full := adjL.fullyFaithfulLOfIsIsoUnit.full
+  have : L.Faithful := adjL.fullyFaithfulLOfIsIsoUnit.faithful
+  have : (openExtension R j).mapDerivedCategory.Full := Functor.Full.of_iso he'.symm
+  have : (openExtension R j).mapDerivedCategory.Faithful := Functor.Faithful.of_iso he'.symm
+  exact (openDerivedAdjunction R j).unit_isIso_of_L_fully_faithful
 
 end WeilConjectures.PurCompactSupport

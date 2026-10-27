@@ -19935,3 +19935,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/C5/Sheaf.Paper.FinitePartialTensorIdentityNaturality (stage 3; reviewer PASS; first push; landing 20261027T205846-L-1624703 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:58 L: merged deliver/C6/Sheaf.Paper.IntegralPullbackReductionAugmentation (stage 3; reviewer PASS; first push; landing 20261027T205848-L-1625313 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:58 L: merged deliver/C6/Sheaf.Paper.RingOpenMapNormalizedRefinement (stage 3; reviewer PASS; first push; landing 20261027T205849-L-1625493 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:58 L: merged deliver/C7/Sheaf.Paper.RingOpenMapOpenUnit (stage 3; reviewer PASS; first push; landing 20261027T205851-L-1625761 (interface); batch 20261027T205736; modules 1; new nodes 0)
