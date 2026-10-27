@@ -46,6 +46,11 @@ universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures.PurityFiniteSetting
 
+-- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module was written against.
+attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+  AlgebraicGeometry.strictEtaleLevelDerived
+
 /-- Reuse a recorded geometric comparison in the existing finite-realization interface.
 Source: Zheng 4.10 (blueprint: def-pur-clopen-canonical-finite-evaluation). -/
 def clopenRealizationComparison (P : PurityFiniteSetting.{u}) (W : Scheme.{u})
