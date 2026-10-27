@@ -19876,3 +19876,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:44 L: merged deliver/B4/Sheaf.Paper.IntegralDirectImageTowerData (stage 3; reviewer PASS; first push; landing 20261027T194426-L-824169 (interface); batch 20261027T194418; modules 1; new nodes 0; change records: coord/changes/B4-integral-derived-evaluation-local-instance.md)
 - 19:44 L: merged deliver/F2/Sheaf.Paper.RationalP1FirstTraceTransport (stage 3; reviewer PASS; first push; landing 20261027T194431-L-829839 (interface); batch 20261027T194418; modules 2; new nodes 1)
 - 19:44 L: merged deliver/J3/Sheaf.Paper.DiagonalUniformizerLocalChern (stage 3; reviewer PASS; first push; landing 20261027T194436-L-834186 (proof); batch 20261027T194418; modules 1; new nodes 2)
+- 19:44 L: merged deliver/K2/Sheaf.Paper.ProjectiveSupportedSectionProjection (stage 3; reviewer PASS; first push; landing 20261027T194441-L-838767 (interface); batch 20261027T194418; modules 3; new nodes 2)

@@ -6,6 +6,8 @@ Authors: SHEAF group B8
 module
 
 public import Sheaf.Paper.RationalP1SecondPullComparison
+import Sheaf.Paper.ProjectiveCanonicalSectionProjection
+import Sheaf.Paper.ProjectiveSupportedSourceNormalization
 
 /-! # Projection coherence on the supported diagonal source -/
 
@@ -74,6 +76,8 @@ theorem supported_section_projection
             (pullSectionIso Λ Y (secondProjection Y)
               (by unfold secondProjection; exact pullback.diagonal_snd _))
             (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M) =
-      (pushSectionIso Λ Y).hom.app M := by sorry
+      (pushSectionIso Λ Y).hom.app M := by
+  rw [supported_source_normalization Λ Y L d M]
+  exact canonical_section_projection Λ Y M
 
 end AlgebraicGeometry.ProEtale.RationalP1
