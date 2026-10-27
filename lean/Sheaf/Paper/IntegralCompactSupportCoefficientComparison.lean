@@ -6,6 +6,7 @@ Authors: SHEAF group Q14
 module
 
 public import Sheaf.Paper.IntegralCompactSupportCoefficientData
+public import Sheaf.Paper.IntegralCompactSupportScalarTensor
 
 public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
 public import Sheaf.Paper.IntegralRationalQbarCompactSupport
@@ -40,16 +41,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import all Sheaf.Algebra.Homology.ScalarHomOrdinaryTensorComparison
-import all Sheaf.Paper.AdicCoefficientDatum
 import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Sheaf.Paper.IntegralOperationsScalarComparisons
+import Sheaf.SixFunctors.ExactLocalizationInverseMate
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Mathlib.Algebra.CharP.CharAndCard
 import Mathlib.Algebra.CharP.Algebra
 import all WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
-import Sheaf.Algebra.Homology.RingedDerivedTensorNative
 import all Sheaf.Paper.WfConstructibleTensorKoszulUnit
 import Sheaf.Paper.ProjectionTensorCoefficientComparison
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
@@ -78,7 +77,6 @@ Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option Elab.async false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -102,41 +100,8 @@ attribute [local irreducible] CategoryTheory.presheafToSheaf CategoryTheory.Func
   HasDerivedCategory.standard CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.rightDerivedFunctor
 
--- Use the canonical concrete site instances throughout this proof context.
-/-- Canonical smallness of the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
-theorem coefficientSiteSmall (W : Scheme.{u}) :
-    EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
-
-attribute [local instance 100000] coefficientSiteSmall
-
-/-- Canonical ring sheafification on the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
-theorem coefficientRingSheafify (W : Scheme.{u}) :
-    HasSheafify (ProEt.topology W) CommRingCat.{u + 1} :=
-  WeilConjectures.integralCoefficientRingSheafify.{u, 0} W
-
-attribute [local instance 100000] coefficientRingSheafify
-
-/-- Canonical abelian sheafification on the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
-theorem coefficientAbSheafify (W : Scheme.{u}) :
-    HasSheafify (ProEt.topology W) AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbSheafify.{u, 0} W
-
-attribute [local instance 100000] coefficientAbSheafify
-
-/-- Canonical local bijectivity criterion on the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
-theorem coefficientAbLocallyBijective (W : Scheme.{u}) :
-    (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} W
-
-attribute [local instance 100000] coefficientAbLocallyBijective
+attribute [local instance 100000] coefficientSiteSmall coefficientRingSheafify
+  coefficientAbSheafify coefficientAbLocallyBijective
 
 private theorem scalarKanCommShift_ext
     {C : Type*} [Category* C] [HasShift C ℤ]
@@ -321,233 +286,7 @@ theorem comparison_identity {R : Coefficients.{u}} (a : Change R R)
         tensorIdentity (R.ring Y)).hom.app ((image R c).obj M) := by
   sorry
 
-/-- Every coefficient sheaf has a model of its actual derived tensor.
-Source: Stacks Tag 07A4
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-Proof: choose flat K-flat resolutions of both variables and use the signed direct-sum
-total tensor. Quasi-isomorphisms between these representatives are inverted by tensor.
-Localization in both variables descends this functor and gives its representative
-isomorphism. This is precisely the published ProEtaleTensorModel interface. -/
-theorem tensorModel_exists (W : Scheme.{u})
-    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) :
-    Nonempty (ProEtaleTensorModel W R) := by
-  refine ⟨{ tensor := ?_, representative := ?_ }⟩
-  · exact @MonoidalCategory.tensor _ _
-      (RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} (ProEt.topology W) R)
-  · exact NatIso.ofComponents
-      (fun P ↦ RingedDerivedNative.tensorIso.{u + 1, u, 0, u + 2}
-        (ProEt.topology W) R P.1.obj P.2.obj (Or.inl P.1.property.1))
-      (fun f ↦ RingedDerivedNative.tensorIso_naturality.{u + 1, u, 0, u + 2}
-        (ProEt.topology W) R _ _ _ _ _ _ f.1.hom f.2.hom)
-
-private theorem tensorPair_eq_pure {W : Scheme.{u}}
-    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
-    (M N : pbcModules W R) (U : W.ProEtᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
-    proEtaleTensorPair W R M N U x y =
-      SheafOfModules.ScalarHomOrdinary.pure.{u + 1, u, u + 1} R M N U x y := by
-  rfl
-
-private theorem tensorPair_map {W : Scheme.{u}}
-    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
-    {M M' N N' : pbcModules W R} (v : M ⟶ M') (z : N ⟶ N')
-    (U : W.ProEtᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
-    ((((proEtaleOrdinaryTensor W R).map v).app N ≫
-        ((proEtaleOrdinaryTensor W R).obj M').map z).val.app U)
-        (proEtaleTensorPair W R M N U x y) =
-      proEtaleTensorPair W R M' N' U (v.val.app U x) (z.val.app U y) := by
-  simpa only [proEtaleOrdinaryTensor, MonoidalCategory.curriedTensor,
-    MonoidalCategory.tensorHom_def, ← tensorPair_eq_pure] using
-      SheafOfModules.ScalarHomOrdinary.pure_map.{u + 1, u, u + 1} R v z U x y
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-private theorem tensorPair_ext {W : Scheme.{u}}
-    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
-    (M N H : pbcModules W R)
-    {v z : ((proEtaleOrdinaryTensor W R).obj M).obj N ⟶ H}
-    (h : ∀ U x y, v.val.app U (proEtaleTensorPair W R M N U x y) =
-      z.val.app U (proEtaleTensorPair W R M N U x y)) : v = z := by
-  apply SheafOfModules.ScalarHomOrdinary.pure_hom_ext.{u + 1, u, u + 1} R M N H
-  intro U x y
-  simpa only [tensorPair_eq_pure] using h U x y
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-private theorem scalarTensorPair_ext {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
-    (M N : pbcModules W R) (H : pbcModules W S)
-    {v z : (pbcExtend a).obj (((proEtaleOrdinaryTensor W R).obj M).obj N) ⟶ H}
-    (h : ∀ U x y, v.val.app U
-        (pbcTensorSection a _ U 1 (proEtaleTensorPair W R M N U x y)) =
-      z.val.app U (pbcTensorSection a _ U 1 (proEtaleTensorPair W R M N U x y))) :
-    v = z := by
-  apply ((pbcScalarAdjunction a).homEquiv _ H).injective
-  apply tensorPair_ext R M N ((pbcRestrict a).obj H)
-  intro U x y
-  change v.val.app U (((pbcScalarAdjunction a).unit.app _).val.app U _) =
-    z.val.app U (((pbcScalarAdjunction a).unit.app _).val.app U _)
-  have hη (P : pbcModules W R) (V : W.ProEtᵒᵖ) (t : P.val.obj V) :
-      ((pbcScalarAdjunction a).unit.app P).val.app V t =
-        pbcTensorSection a P V 1 t :=
-    (pbcScalarAdjunction_exists a).exists.choose_spec P V t
-  erw [hη]
-  exact h U x y
-
-/-- The ordinary scalar/tensor comparison is fixed on sheafified pure tensors.
-Source: Stacks Tags 03EL, 06YY
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-Proof: send s tensor (m tensor n) to (s tensor m) tensor (1 tensor n).
-Balancing makes this a sheafified linear map. Its inverse multiplies the two
-S coefficients. These formulas are inverse on tensor generators, commute with
-restriction and module maps, and determine the comparison uniquely. -/
-theorem scalarOrdinaryTensor_existsUnique {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) :
-    ∃! μ : ∀ M N : pbcModules W R,
-        (pbcExtend a).obj (((proEtaleOrdinaryTensor W R).obj M).obj N) ≅
-          ((proEtaleOrdinaryTensor W S).obj ((pbcExtend a).obj M)).obj ((pbcExtend a).obj N),
-      ∀ (M N : pbcModules W R) (U : W.ProEtᵒᵖ)
-        (s : S.obj.obj U) (m : M.val.obj U) (n : N.val.obj U),
-        (μ M N).hom.val.app U
-            (pbcTensorSection a _ U s (proEtaleTensorPair W R M N U m n)) =
-          proEtaleTensorPair W S _ _ U
-            (pbcTensorSection a M U s m) (pbcTensorSection a N U 1 n) := by
-  sorry
-
-/-- The unique ordinary balancing isomorphism, independently of any integral basis.
-Source: Stacks Tags 03EL, 06YY
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
-def scalarOrdinaryTensor {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) :
-    ∀ M N : pbcModules W R,
-      (pbcExtend a).obj (((proEtaleOrdinaryTensor W R).obj M).obj N) ≅
-        ((proEtaleOrdinaryTensor W S).obj ((pbcExtend a).obj M)).obj
-          ((pbcExtend a).obj N) :=
-  (scalarOrdinaryTensor_existsUnique a).exists.choose
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-/-- Naturality of ordinary scalar balancing.
-Source: Stacks Tag 03EL
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-Proof: both routes send s tensor (m tensor n) to (s tensor v(m)) tensor
-(1 tensor z(n)); these sections generate after sheafification. -/
-theorem scalarOrdinaryTensor_naturality {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
-    {M M' N N' : pbcModules W R} (v : M ⟶ M') (z : N ⟶ N') :
-    (pbcExtend a).map (((proEtaleOrdinaryTensor W R).map v).app N ≫
-        ((proEtaleOrdinaryTensor W R).obj M').map z) ≫
-        (scalarOrdinaryTensor a M' N').hom =
-      (scalarOrdinaryTensor a M N).hom ≫
-        ((proEtaleOrdinaryTensor W S).map ((pbcExtend a).map v)).app
-          ((pbcExtend a).obj N) ≫
-        ((proEtaleOrdinaryTensor W S).obj ((pbcExtend a).obj M')).map
-          ((pbcExtend a).map z) := by
-  have hu (P Q : pbcModules W R) (w : P ⟶ Q) (U : W.ProEtᵒᵖ)
-      (x : P.val.obj U) :
-      ((pbcExtend a).map w).val.app U (pbcTensorSection a P U 1 x) =
-        pbcTensorSection a Q U 1 (w.val.app U x) := by
-    exact reductionTensor_map W a w U 1 x
-  have hμ (P Q : pbcModules W R) (U : W.ProEtᵒᵖ)
-      (s : S.obj.obj U) (x : P.val.obj U) (y : Q.val.obj U) :
-      (scalarOrdinaryTensor a P Q).hom.val.app U
-          (pbcTensorSection a _ U s (proEtaleTensorPair W R P Q U x y)) =
-        proEtaleTensorPair W S _ _ U
-          (pbcTensorSection a P U s x) (pbcTensorSection a Q U 1 y) :=
-    (scalarOrdinaryTensor_existsUnique a).exists.choose_spec P Q U s x y
-  apply scalarTensorPair_ext a M N
-  intro U x y
-  change (scalarOrdinaryTensor a M' N').hom.val.app U
-      (((pbcExtend a).map _).val.app U
-        (pbcTensorSection a _ U 1 (proEtaleTensorPair W R M N U x y))) =
-    ((((proEtaleOrdinaryTensor W S).map ((pbcExtend a).map v)).app
-      ((pbcExtend a).obj N) ≫
-      ((proEtaleOrdinaryTensor W S).obj ((pbcExtend a).obj M')).map
-        ((pbcExtend a).map z)).val.app U)
-      ((scalarOrdinaryTensor a M N).hom.val.app U
-        (pbcTensorSection a _ U 1 (proEtaleTensorPair W R M N U x y)))
-  rw [hu, tensorPair_map, hμ, hμ, tensorPair_map, hu, hu]
-
-attribute [local irreducible] scalarOrdinaryTensor tensorPullbackTotal
-  tensorPullbackTotalComponent
-
-/-- Signed total of the inverse ordinary tensor-balancing maps.
-Source: Stacks Tag 07A4
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
-def scalarTensorTotal {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
-    (P Q : CochainComplex (pbcModules W R) ℤ) :
-    CochainComplex.mapBifunctor
-      (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj P)
-      (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj Q) (proEtaleOrdinaryTensor W S) ⟶
-        ((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj
-          (CochainComplex.mapBifunctor P Q (proEtaleOrdinaryTensor W R)) :=
-  letI := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} R
-  letI := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} S
-  letI := proEtaleTensorPreadditive W R
-  letI := proEtaleTensorPreadditive W S
-  tensorPullbackTotal (pbcExtend a) (scalarOrdinaryTensor a)
-    (fun {_ _ _ _} v z ↦ by
-      simpa only [proEtaleOrdinaryTensor, MonoidalCategory.curriedTensor,
-        MonoidalCategory.tensorHom_def, Category.assoc] using
-          scalarOrdinaryTensor_naturality a v z) P Q
-
-/-- The total map is invertible, since scalar extension is a left adjoint.
-Source: Stacks Tag 07A4
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-Proof: tensorPullbackTotal_isIso applies to the scalar adjunction. Each summand
-is invertible and the left adjoint preserves the direct sums defining the total. -/
-theorem scalarTensorTotal_isIso {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
-    (P Q : CochainComplex (pbcModules W R) ℤ) : IsIso (scalarTensorTotal a P Q) := by
-  let := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} R
-  let := SheafOfModules.monoidalCategory.{u, u + 1, u + 1} S
-  let := proEtaleTensorPreadditive W R
-  let := proEtaleTensorPreadditive W S
-  exact tensorPullbackTotal_isIso (pbcExtend a) (scalarOrdinaryTensor a)
-    (fun {_ _ _ _} v z ↦ by
-      simpa only [proEtaleOrdinaryTensor, MonoidalCategory.curriedTensor,
-        MonoidalCategory.tensorHom_def, Category.assoc] using
-          scalarOrdinaryTensor_naturality a v z)
-    (pbcRestrict a) (pbcScalarAdjunction a) P Q
-
-attribute [local irreducible] scalarTensorTotal
-
-/-- Tensor balancing on derived categories is uniquely fixed on flat K-flat pairs.
-Source: Stacks Tags 06YY, 07A4
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-Proof: base change preserves flat terms and K-flat complexes. On these pairs use
-ordinary signed total balancing and the universal derived counits. Tensor descent
-extends the map naturally. Every derived pair admits these representatives, and the
-counits there are invertible, proving uniqueness and the inverse identities. -/
-theorem scalarTensor_existsUnique {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
-    (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :
-    ∃! μ : r.tensor ⋙ pbcDerivedExtend a ≅
-        ((pbcDerivedExtend a).prod (pbcDerivedExtend a)) ⋙ s.tensor,
-      ∀ (P Q : CochainComplex (pbcModules W R) ℤ)
-        (hp : proEtaleFlatRepresentatives W R P) (hq : proEtaleFlatRepresentatives W R Q),
-        ∃ (hp' : proEtaleFlatRepresentatives W S
-              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj P))
-          (hq' : proEtaleFlatRepresentatives W S
-              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj Q)),
-          (pbcDerivedExtend a).map (r.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
-              μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-              s.tensor.map (Prod.mkHom (pbcComplexCounit a P) (pbcComplexCounit a Q)) =
-            pbcComplexCounit a (CochainComplex.mapBifunctor P Q (proEtaleOrdinaryTensor W R)) ≫
-              DerivedCategory.Q.map
-                (@inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q)) ≫
-              s.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩) := by
-  sorry
-
-/-- The specified ordinary derived scalar/tensor comparison.
-Source: Stacks Tags 06YY, 07A4
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
-def scalarTensor {W : Scheme.{u}}
-    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
-    (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :
-    r.tensor ⋙ pbcDerivedExtend a ≅
-      ((pbcDerivedExtend a).prod (pbcDerivedExtend a)) ⋙ s.tensor :=
-  (scalarTensor_existsUnique a r s).exists.choose
+attribute [local irreducible] scalarTensor
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -677,20 +416,57 @@ def openComparison {R S : Coefficients.{u}} (a : Change R S)
     (pbcDerivedScalarAdjunction (a.map V))).symm
       (TwoSquare.mk _ _ _ _ (openRestriction a j).hom)).natTrans
 
+private theorem doubleInverseMate_isIso
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {LA : C ⥤ D} {JA : D ⥤ C} {LB : E ⥤ F} {JB : F ⥤ E}
+    {SX : D ⥤ F} {RX : F ⥤ D} {SU : C ⥤ E} {RU : E ⥤ C}
+    (a : LA ⊣ JA) (b : LB ⊣ JB) (x : SX ⊣ RX) (u : SU ⊣ RU)
+    (q : JB ⋙ RU ≅ RX ⋙ JA) :
+    IsIso ((mateEquiv a b).symm
+      ((mateEquiv x u).symm (TwoSquare.mk _ _ _ _ q.inv))).natTrans := by
+  have h := congrArg TwoSquare.natTrans
+    (iterated_mateEquiv_conjugateEquiv_symm a b u x (TwoSquare.mk _ _ _ _ q.inv))
+  rw [h]
+  change IsIso ((conjugateEquiv (a.comp x) (u.comp b)).symm q.inv)
+  infer_instance
+
 /-- The canonical open coefficient arrow is an identification, without a flatness
 hypothesis on the coefficient map.
 Source: Stacks Tag 0E8I
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-Proof: choose flat K-flat resolutions before extending by zero. Exact open extension
-preserves these resolutions because its restriction to the open is identity and its
-restriction outside is zero. The ordinary open tensor map is sectionwise identity
-on the open and zero off it, hence invertible. Its localization is the mate above
-by the open unit normalization and the scalar adjunction triangle identities. -/
+Proof: the exact-localization mate theorem identifies the specified open restriction
+square with the inverse mate of the canonical pullback/restriction isomorphism.
+The scalar inverse mate defining openComparison is consequently a double inverse
+mate. The iterated-mate identity identifies it with conjugation under the composite
+scalar/open adjunctions. Conjugation preserves isomorphisms, as do evaluation functors. -/
 theorem openComparison_isIso {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j]
     (M : DerivedCategory (pbcModules U (R.ring U))) :
     IsIso ((openComparison a j).app M) := by
-  sorry
+  let φ := proEtaleRingRestrictionPullbackInv
+    j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+      (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)
+  have : IsIso φ := proEtaleRingRestrictionPullbackInv_isIso
+    j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+      (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)
+  let q := (asIso φ).symm
+  have : IsIso ((mateEquiv (openAdjunction S j) (openAdjunction R j)).symm
+      (TwoSquare.mk _ _ _ _ q.hom)).natTrans := by
+    change IsIso (openRestrictionMap a j)
+    infer_instance
+  have h := (exact_localization_inverse_mate
+    (openAdjunction S j) (openAdjunction R j) q).2.1
+  have h' : ((mateEquiv (openDerivedAdjunction S j) (openDerivedAdjunction R j)).symm
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).hom)).natTrans =
+        (openRestriction a j).hom := h
+  unfold openComparison
+  rw [← h']
+  have hi := doubleInverseMate_isIso
+    (pbcDerivedScalarAdjunction (a.map U)) (pbcDerivedScalarAdjunction (a.map V))
+    (openDerivedAdjunction S j) (openDerivedAdjunction R j)
+    (Functor.mapDerivedCategorySquareIso q).symm
+  exact @NatIso.isIso_app_of_isIso _ _ _ _ _ _ _ hi M
+
 
 /-- The ordered proper/open factorization holds before any inverse limit is taken.
 It is applied below to each ramified finite quotient.
@@ -731,6 +507,8 @@ theorem comparison_factorization {R S : Coefficients.{u}} (a : Change R S)
     TwoSquare.natTrans, NatTrans.comp_app, Functor.associator_inv_app,
     Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Category.id_comp, Category.comp_id] using h'.symm
+
+attribute [local irreducible] properComparison openComparison
 
 /-- The ramification hypothesis identifies ideals, and does not equate the chosen
 uniformizers. Source: Bhatt--Scholze, Lemma 6.8.2(1)

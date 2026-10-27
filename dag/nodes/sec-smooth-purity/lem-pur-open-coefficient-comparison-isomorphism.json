@@ -1,153 +1,146 @@
 {
-  "id": "lem-pur-open-coefficient-comparison-isomorphism",
-  "kind": "statement",
-  "title": "The actual open coefficient mate is invertible",
-  "statement": "Let R,S be coefficient families and a:R→S a compatible coefficient change [def-pur-integral-compact-support-coefficient-data]. For an open immersion j:U→V of schemes and any ambient derived R_U-module M, the actual scalar-adjunction mate openComparison(a,j)_M of [def-sp-coefficient-mate-comparisons] is an isomorphism. The specified open unit and restriction normalization are those of [def-sp-open-coefficient-adjunction-data]. No flatness of a or constructibility of M is assumed.",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-pur-rational-and-qbar-purity",
-      "place": "The normalized open coefficient mate needed by the finite comparison in the scalar projection realization.",
-      "via": [
-        "lem-pur-compact-support-scalar-projection-identification",
-        "lem-pur-compact-support-integral-coefficient-comparison",
-        "lem-pur-adic-purity-scalar-naturality"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pur-open-coefficient-comparison-isomorphism",
+ "kind": "statement",
+ "title": "The actual open coefficient mate is invertible",
+ "statement": "Let R,S be coefficient families and a:R→S a compatible coefficient change [def-pur-integral-compact-support-coefficient-data]. For an open immersion j:U→V of schemes and any ambient derived R_U-module M, the actual scalar-adjunction mate openComparison(a,j)_M of [def-sp-coefficient-mate-comparisons] is an isomorphism. The specified open unit and restriction normalization are those of [def-sp-open-coefficient-adjunction-data]. No flatness of a or constructibility of M is assumed.",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "The normalized open coefficient mate needed by the finite comparison in the scalar projection realization.",
+   "via": [
+    "lem-pur-compact-support-scalar-projection-identification",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
   },
-  "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I; the existing openComparison_isIso declaration and its unit-normalized mate, IntegralCompactSupportCoefficientComparison.lean."
-  },
-  "stmt_deps": [
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I; the existing openComparison_isIso declaration and its unit-normalized mate, IntegralCompactSupportCoefficientComparison.lean."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sp-coefficient-mate-comparisons",
+  "def-sp-open-coefficient-adjunction-data"
+ ],
+ "proof": [
+  {
+   "text": "Let phi be the canonical ordinary scalar-restriction/pullback isomorphism for the coefficient square. By definition openRestrictionMap is its inverse mate under the two ordinary open adjunctions. The existing openRestrictionMap_isIso gives invertibility of that actual normalized mate.",
+   "uses": [
     "def-pur-integral-compact-support-coefficient-data",
-    "def-sp-coefficient-mate-comparisons",
-    "def-sp-open-coefficient-adjunction-data"
-  ],
-  "proof": [
-    {
-      "text": "For the identity morphism of the underlying scheme with coefficient map a.map, apply the normalized open base-change isomorphism of [lem-sf-open-tensor-normalization]. Its inverse is specified as the open adjunct of the scalar pullback of the actual open unit. This gives the geometric isomorphism without a flatness hypothesis on the coefficient map.",
-      "uses": [
-        "lem-sf-open-tensor-normalization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 0E8I; the existing openComparison_isIso declaration and its unit-normalized mate, IntegralCompactSupportCoefficientComparison.lean."
-      }
-    },
-    {
-      "text": "Transport the scalar pullback presentation to the actual scalar extension pbcDerivedExtend used in [def-sp-coefficient-mate-comparisons]. Both scalar functors are left adjoints to the same exact restriction. The unit equation for uniqueness of left adjoints identifies their adjunction transposes. The coefficient change square identifies the open restrictions, and the open unit normalization identifies the ordinary restriction comparison.",
-      "uses": [
-        "def-sp-coefficient-mate-comparisons",
-        "def-sp-open-coefficient-adjunction-data",
-        "def-weil-pbc-adjunction-mate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 0E8I; the existing openComparison_isIso declaration and its unit-normalized mate, IntegralCompactSupportCoefficientComparison.lean."
-      }
-    },
-    {
-      "text": "Under these transports, the inverse of the normalized geometric isomorphism and the inverse scalar-adjunction mate defining openComparison have the same adjunct. Injectivity of the adjunction Hom equivalence identifies the arrows. Isomorphism is preserved under these presentation identifications, proving IsIso for the specified openComparison at every ambient derived input. In particular this argument supplies the exact existing helper used by QcqsCompactSupportFiniteMates; it uses no full integral compact-support comparison or projection theorem.",
-      "uses": [
-        "lem-sf-open-tensor-normalization",
-        "def-sp-coefficient-mate-comparisons",
-        "def-weil-pbc-adjunction-mate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 0E8I; the existing openComparison_isIso declaration and its unit-normalized mate, IntegralCompactSupportCoefficientComparison.lean."
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-sf-open-tensor-normalization",
-    "def-sp-coefficient-mate-comparisons",
     "def-sp-open-coefficient-adjunction-data",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact_localization_inverse_mate to the ordinary open adjunctions and the inverse of phi. The exact localized adjunctions are definitionally the specified openDerivedAdjunctions. Its mate equality identifies openRestriction.hom with the inverse mate of the derived pullback/restriction square, including the standard exact-composition identifications.",
+   "uses": [
+    "lem-sf-exact-localization-inverse-mate",
+    "def-sp-open-coefficient-adjunction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute that equality in the definition of openComparison. Mathlib iterated_mateEquiv_conjugateEquiv_symm identifies the resulting two inverse mates with the inverse conjugate under the composite scalar/open adjunctions. Conjugation preserves isomorphisms, so the natural transformation, and hence every component, is invertible. The argument works for every coefficient map and every ambient derived input; no flatness or constructibility is added.",
+   "uses": [
+    "def-sp-coefficient-mate-comparisons",
     "def-weil-pbc-adjunction-mate"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0E8I; the existing openComparison_isIso declaration and its unit-normalized mate, IntegralCompactSupportCoefficientComparison.lean.",
-    "note": "Existing named theorem attachment, separated from the bundled integral comparison to make the actual acyclic prerequisite of finite mates explicit. The normalized geometric open comparison is transported to the specific scalar-adjunction presentation; no Lean declaration or theorem hole is added."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Extension by zero along an open immersion commutes with derived change of coefficients without flatness",
-      "results": "Function.ExtendByZero.linearMap, HomologicalComplex.extendMap_f_eq_zero, and Scheme.Modules.instIsLeftAdjointRestrictFunctor; no derived coefficient/open mate statement.",
-      "date": "2026-10-27",
-      "verdict": "no exact Mathlib match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The derived scalar extension mate for open extension by zero is an isomorphism",
-      "results": "ModuleCat.extendScalarsId and the ordinary extension/restriction scalar adjunction Hom equivalences. No pro-etale derived open coefficient theorem.",
-      "date": "2026-10-27",
-      "verdict": "no exact Mathlib match"
-    },
-    {
-      "tool": "grep",
-      "query": "openComparison_isIso|extension.*zero.*scalar|scalar.*extension.*zero in Mathlib/Algebra/Category and Mathlib/CategoryTheory; project declaration/node search",
-      "results": "No Mathlib hit. The project already declares openComparison_isIso; its only exact attachment was bundled into the full integral comparison node. lem-sf-open-tensor-normalization supplies the normalized geometric comparison, with the actual scalar-adjunction presentation transport explained here.",
-      "date": "2026-10-27",
-      "verdict": "attach the existing named helper with the precise prerequisite"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
-    "date": "2026-10-27",
-    "group": "B3"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-sf-compatibility",
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "lean": {
-    "existing": true,
-    "module": "Sheaf.Paper.IntegralCompactSupportCoefficientComparison",
-    "declaration": "WeilConjectures.PurCompactSupport.openComparison_isIso",
-    "declarations": [
-      "WeilConjectures.PurCompactSupport.openComparison_isIso"
-    ],
-    "statement": "theorem openComparison_isIso {R S : Coefficients.{u}} (a : Change R S)\n    {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j]\n    (M : DerivedCategory (pbcModules U (R.ring U))) :\n    IsIso ((openComparison a j).app M)",
-    "branch": "sheaf-dag",
-    "by": "B3",
-    "date": "2026-10-27",
-    "note": "Attaches the existing declaration, unchanged, including its existing sorry. This delivery adds no Lean file for it and adds no theorem hole."
-  },
-  "reviewed": {
-    "date": "2026-10-27",
-    "by": "L",
-    "reviewer": "C-704ba",
-    "group": "B3",
-    "result": "fix",
-    "landing": "20261027T012808-L-2331698",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-27",
-    "by": "L",
-    "reviewer": "C-704ba",
-    "group": "B3",
-    "result": "fix",
-    "landing": "20261027T012808-L-2331698",
-    "kind": "interface",
-    "note": "independent cc review: moved realization_existsUnique/realization/gamma_identification signatures vs item original (verbatim, same variable block); item node decls/deps vs Lean; new-node stmt/proof deps vs declarations used in the three new modules; finite-mates dep swap vs its Lean (uses only openComparison_isIso, comparison_factorization)"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sp-open-coefficient-adjunction-data",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-exact-localization-inverse-mate",
+  "def-sp-coefficient-mate-comparisons",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I; exact localization of the ordinary normalized open mate, followed by the double-mate/conjugacy identity.",
+  "note": "Complete Lean proof of the existing theorem. Uses the already proved ordinary openRestrictionMap_isIso and exact_localization_inverse_mate; no new statement or assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion commutes with derived change of coefficients without flatness",
+   "results": "Function.ExtendByZero.linearMap, HomologicalComplex.extendMap_f_eq_zero, and Scheme.Modules.instIsLeftAdjointRestrictFunctor; no derived coefficient/open mate statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived scalar extension mate for open extension by zero is an isomorphism",
+   "results": "ModuleCat.extendScalarsId and the ordinary extension/restriction scalar adjunction Hom equivalences. No pro-etale derived open coefficient theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "openComparison_isIso|extension.*zero.*scalar|scalar.*extension.*zero in Mathlib/Algebra/Category and Mathlib/CategoryTheory; project declaration/node search",
+   "results": "No Mathlib hit. The project already declares openComparison_isIso; its only exact attachment was bundled into the full integral comparison node. lem-sf-open-tensor-normalization supplies the normalized geometric comparison, with the actual scalar-adjunction presentation transport explained here.",
+   "date": "2026-10-27",
+   "verdict": "attach the existing named helper with the precise prerequisite"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.IntegralCompactSupportCoefficientComparison",
+  "declaration": "WeilConjectures.PurCompactSupport.openComparison_isIso",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.openComparison_isIso"
+  ],
+  "statement": "theorem openComparison_isIso {R S : Coefficients.{u}} (a : Change R S)\n    {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j]\n    (M : DerivedCategory (pbcModules U (R.ring U))) :\n    IsIso ((openComparison a j).app M)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "note": "Attaches the existing declaration, unchanged, including its existing sorry. This delivery adds no Lean file for it and adds no theorem hole."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-704ba",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261027T012808-L-2331698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7028d",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261027T210217-L-1671473",
+  "kind": "interface",
+  "note": "independent cc review: moved scalar-tensor block vs published item (text diff + elaborated type/value hashes equal); openComparison_isIso / scalarOrdinaryTensor_existsUnique proofs vs their nodes; 5 SLOW direct importers timed against published originals at the same time"
+ }
 }

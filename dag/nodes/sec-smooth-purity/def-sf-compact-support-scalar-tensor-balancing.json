@@ -1,0 +1,180 @@
+{
+ "id": "def-sf-compact-support-scalar-tensor-balancing",
+ "kind": "definition",
+ "title": "Normalized ordinary and derived scalar tensor balancing",
+ "statement": "Let $W$ be a scheme and $a:R\\to S$ a morphism of commutative ring sheaves on its small pro-etale site [def-weil-pbc-proetale-site]. Use the actual universal derived scalar extension [def-weil-pbc-bounded-constructible-tower] and chosen tensor models with their flat-term K-flat representative identifications [def-weil-derived-pullback-tensor-hom]. The ordinary scalar/tensor isomorphism sends $s\\otimes(m\\otimes n)$ to $(s\\otimes m)\\otimes(1\\otimes n)$, naturally in both modules. Define scalarTensorTotal to be the signed total comparison from the tensor of the two extended complexes to the extension of their tensor total; it is invertible. Define scalarTensor to be the unique natural derived balancing isomorphism from scalar extension after the source tensor to target tensor after the two scalar extensions. On every pair of flat-term K-flat complexes, its composite with the two universal scalar counits, after the source representative identification, equals the tensor-complex scalar counit followed by the localization of the inverse scalarTensorTotal and then the target representative identification. No flatness of $a$ is assumed. The canonical coefficient-site smallness and sheafification instances and the actual tensor-model existence theorem are included in this construction.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; sites-modules.tex Tags 03EL and 06YY. Relocation of the tensor part of def-sf-compact-support-scalar-tensor-identification without changing definitions or signatures."
+ },
+ "proof": [
+  {
+   "text": "Use the native derived monoidal tensor and its flat K-flat representative comparison to construct a ProEtaleTensorModel. The canonical site instances specialize the existing integral coefficient instances.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing ordinary scalar/tensor comparison for a scalar adjunction. Transport it along the unit-normalized uniqueness isomorphism to the concrete pbcExtend adjunction. On coefficient-one pure tensors the unit equations identify the comparison; linearity supplies arbitrary coefficients. Pure tensor extensionality proves uniqueness and naturality.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "def-sfb-sheaf-tensor-pure-section",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the signed total of the inverse ordinary comparisons. It is invertible since scalar extension is a left adjoint and hence preserves the direct sums in the total. The already stated scalarTensor_existsUnique obligation descends the total comparison to derived categories, normalized on flat K-flat pairs. scalarTensor selects this uniquely specified isomorphism.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "R4",
+  "date": "2026-10-28",
+  "note": "Ordinary comparison proved; existing derived descent obligation relocated unchanged. No new hole."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived scalar tensor balancing comparison and finite reduction normalized compact support identification",
+   "results": {
+    "t": "2026-10-24T23:22:53Z",
+    "tool": "leanfinder",
+    "query": "Canonical derived scalar tensor balancing comparison and finite reduction normalized compact support identification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContDiffMapSupportedIn.structureMapLM_eq_of_scalars",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM_eq_of_scalars",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars",
+     "ContDiffBump.hasCompactSupport_normed",
+     "ExistsContDiffBumpBase.w_compact_support",
+     "ContDiffBump.tsupport_normed_eq",
+     "HasCompactMulSupport.exists_pos_le_norm",
+     "ContDiffBump.support_normed_eq"
+    ],
+    "digest": "93152c34783114a9"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib declaration; reuse the named published project construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "scalarTensor, recordedIdentification",
+   "results": {
+    "t": "2026-10-24T23:22:53Z",
+    "tool": "loogle",
+    "query": "scalarTensor, recordedIdentification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'scalarTensor'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib declaration; reuse the named published project construction."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorTotal|recordedIdentification",
+   "results": {
+    "t": "2026-10-24T23:22:53Z",
+    "tool": "grep",
+    "query": "scalarTensorTotal|recordedIdentification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib declaration; reuse the named published project construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompactSupportCoefficientComparison",
+  "date": "2026-10-28",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-integral-coefficient-comparison",
+   "place": "Normalized scalar tensor construction used in coefficient projection compatibility."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCompactSupportScalarTensor",
+  "file": "lean/Sheaf/Paper/IntegralCompactSupportScalarTensor.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.scalarTensor",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.coefficientSiteSmall",
+   "WeilConjectures.PurCompactSupport.coefficientRingSheafify",
+   "WeilConjectures.PurCompactSupport.coefficientAbSheafify",
+   "WeilConjectures.PurCompactSupport.coefficientAbLocallyBijective",
+   "WeilConjectures.PurCompactSupport.tensorModel_exists",
+   "WeilConjectures.PurCompactSupport.scalarOrdinaryTensor_existsUnique",
+   "WeilConjectures.PurCompactSupport.scalarOrdinaryTensor",
+   "WeilConjectures.PurCompactSupport.scalarOrdinaryTensor_naturality",
+   "WeilConjectures.PurCompactSupport.scalarTensorTotal",
+   "WeilConjectures.PurCompactSupport.scalarTensorTotal_isIso",
+   "WeilConjectures.PurCompactSupport.scalarTensor_existsUnique",
+   "WeilConjectures.PurCompactSupport.scalarTensor"
+  ],
+  "statement": "def scalarTensor {W : Scheme.{u}}\n    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)\n    (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :\n    r.tensor ⋙ pbcDerivedExtend a ≅\n      ((pbcDerivedExtend a).prod (pbcDerivedExtend a)) ⋙ s.tensor",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-28",
+  "existing": false,
+  "note": "Declarations relocated from the item, preserving their names, signatures and definition bodies. scalarTensor_existsUnique is the pre-existing obligation, not a new split."
+ },
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sfb-sheaf-tensor-pure-section",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-scalar-ordinary-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7028d",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261027T210217-L-1671473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7028d",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261027T210217-L-1671473",
+  "kind": "interface",
+  "note": "independent cc review: moved scalar-tensor block vs published item (text diff + elaborated type/value hashes equal); openComparison_isIso / scalarOrdinaryTensor_existsUnique proofs vs their nodes; 5 SLOW direct importers timed against published originals at the same time"
+ }
+}

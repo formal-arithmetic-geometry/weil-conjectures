@@ -35,7 +35,8 @@
   "def-weil-compactifications-refinements",
   "def-weil-extension-by-zero",
   "def-weil-derived-direct-image",
-  "def-weil-compact-support-finite-action"
+  "def-weil-compact-support-finite-action",
+  "def-sf-compact-support-scalar-tensor-balancing"
  ],
  "proof": [
   {
@@ -123,11 +124,9 @@
    }
   },
   {
-   "text": "Ordinary scalar tensor naturality: transpose through the scalar adjunction, whose unit is the tensor section with coefficient one. Pure-tensor extensionality reduces both routes to the same pair of mapped sections. The canonical site instance aliases specialize existing proved instances.",
+   "text": "Use the normalized ordinary and derived tensor construction from its self-contained dependency module. Its ordinary comparison and naturality are now proved by adjunction transport and pure tensor extensionality; its derived descent remains the existing named obligation.",
    "uses": [
-    "lem-sfb-scalar-ordinary-tensor-comparison",
-    "def-sfb-sheaf-tensor-pure-section",
-    "def-weil-pbc-adic-coefficient-datum"
+    "def-sf-compact-support-scalar-tensor-balancing"
    ],
    "elementary": false
   },
@@ -156,28 +155,26 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-compact-support-coefficient-models",
-  "lem-pur-compact-support-strict-scalar-mate",
-  "lem-pur-compact-support-scalar-limit-reduction",
-  "lem-pur-compact-support-strict-scalar-refinement",
-  "lem-pur-compact-support-scalar-projection-identification",
-  "lem-pur-compact-support-strict-scalar-composition",
-  "lem-pur-compact-support-scalar-shift-normalization",
-  "lem-sfb-scalar-ordinary-tensor-comparison",
-  "def-sfb-sheaf-tensor-pure-section",
-  "def-weil-pbc-adic-coefficient-datum",
   "def-pur-integral-compact-support-coefficient-data",
-  "lem-wf-constructible-tensor-koszul-unit",
+  "def-sf-compact-support-scalar-tensor-balancing",
   "def-sf-projection-tensor-coefficient-comparison",
+  "lem-pur-compact-support-coefficient-models",
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-compact-support-scalar-projection-identification",
+  "lem-pur-compact-support-scalar-shift-normalization",
+  "lem-pur-compact-support-strict-scalar-composition",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-compact-support-strict-scalar-refinement",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-weil-integral-constructible-triangulated",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "lem-weil-pbc-uniform-complete-triangulated",
-  "lem-tw-ordinary-completed-integral-pullback",
-  "lem-weil-integral-constructible-triangulated"
+  "lem-wf-constructible-tensor-koszul-unit"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-  "place": "Original route retained for the fifteen unfinished assertions. Existing ordinary tensor naturality and ramified quotient proofs are preserved. A6 proves projectionDomain_complete by representative-normalized coefficient tensor transport, ordinary pullback adjoint/derived uniqueness and existing constructibility theorems; no new statement is assumed."
+  "by": "R4",
+  "date": "2026-10-28",
+  "note": "Partial proof delivery: ordinary tensor and open comparison closed; tensor construction relocated to keep individual files within the time limit. Other proof steps retained."
  },
  "mathlib_searches": [
   {
@@ -453,14 +450,6 @@
    "WeilConjectures.PurCompactSupport.restrictIdentity_existsUnique",
    "WeilConjectures.PurCompactSupport.tensorIdentity",
    "WeilConjectures.PurCompactSupport.comparison_identity",
-   "WeilConjectures.PurCompactSupport.tensorModel_exists",
-   "WeilConjectures.PurCompactSupport.scalarOrdinaryTensor_existsUnique",
-   "WeilConjectures.PurCompactSupport.scalarOrdinaryTensor",
-   "WeilConjectures.PurCompactSupport.scalarOrdinaryTensor_naturality",
-   "WeilConjectures.PurCompactSupport.scalarTensorTotal",
-   "WeilConjectures.PurCompactSupport.scalarTensorTotal_isIso",
-   "WeilConjectures.PurCompactSupport.scalarTensor_existsUnique",
-   "WeilConjectures.PurCompactSupport.scalarTensor",
    "WeilConjectures.PurCompactSupport.geometricPushComposition",
    "WeilConjectures.PurCompactSupport.refinementPull",
    "WeilConjectures.PurCompactSupport.refinementRestriction",
@@ -517,11 +506,7 @@
    "WeilConjectures.PurCompactSupport.identityReductionMap",
    "WeilConjectures.PurCompactSupport.comparison_strict_towers",
    "WeilConjectures.PurCompactSupport.comparison_projection",
-   "WeilConjectures.PurCompactSupport.projectionDomain_complete",
-   "WeilConjectures.PurCompactSupport.coefficientSiteSmall",
-   "WeilConjectures.PurCompactSupport.coefficientRingSheafify",
-   "WeilConjectures.PurCompactSupport.coefficientAbSheafify",
-   "WeilConjectures.PurCompactSupport.coefficientAbLocallyBijective"
+   "WeilConjectures.PurCompactSupport.projectionDomain_complete"
   ],
   "file": "lean/Sheaf/Paper/IntegralCompactSupportCoefficientComparison.lean",
   "statement": "theorem integralCoefficientComparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (M : DerivedCategory (scalarReductionSource l E X)) (hM : finiteTorConstructibleIntegral l E X M) : finiteTorConstructibleIntegral l F X ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M) ∧ sfIntegralConstructible l E Y ((image (completed l E) c).obj M) ∧ sfIntegralConstructible l F Y ((image (completed l F) c).obj ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) ∧ IsIso ((comparison (completedChange l E F i) c).app M) ∧ Nonempty ((image (completed l E) c).obj M ≅ (sfIntegralCompactSupportValue l E D.k (coefficientPrimeUnit l D hl) c ⟨M, hM.1⟩).obj)",
@@ -535,11 +520,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P9",
-  "result": "pass",
-  "landing": "20261027T034724-L-3679198",
+  "reviewer": "C-7028d",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261027T210217-L-1671473",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: moved scalar-tensor block vs published item (text diff + elaborated type/value hashes equal); openComparison_isIso / scalarOrdinaryTensor_existsUnique proofs vs their nodes; 5 SLOW direct importers timed against published originals at the same time"
  }
 }
