@@ -69,6 +69,13 @@ theorem reductionPairing_transition
       a.tensor.map (Prod.mkHom (𝟙 K) (finiteTransition l E X D hl m ω r K (h K) n)) ≫
         finiteEvaluation l E X D hl m K n =
       finiteEvaluation l E X D hl m K (n + 1) ≫ dualizingTransition l E X D ω r n) := by
+  intro K n
+  have hcSucc : IsIso ((restrictedComparison l E X D hl m ω r K (h K) (n + 1)).hom) := by
+    dsimp [restrictedComparison]
+    infer_instance
+  have hcNow : IsIso ((restrictedComparison l E X D hl m ω r K (h K) n).hom) := by
+    dsimp [restrictedComparison]
+    infer_instance
   sorry
 
 end WeilConjectures.IntegralVerdier
