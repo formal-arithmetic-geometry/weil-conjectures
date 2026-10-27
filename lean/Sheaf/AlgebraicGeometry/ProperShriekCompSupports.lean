@@ -46,7 +46,7 @@ Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
 theorem properRouteCompIso_refl {W X S : Scheme.{u}} (p : W ⟶ X) (f : X ⟶ S)
     [IsProper p] [IsProper f] :
     properRouteCompIso A p f (p ≫ f) rfl = rightDerivedLowerShriekCompIso A p f := by
-  sorry
+  exact route_refl A p f
 
 /-- The specified compact-support compositor transports to the ordinary compositor.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
