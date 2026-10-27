@@ -8,7 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
 
 /-!
 # Tensor products with locally free module objects
@@ -31,7 +33,7 @@ This file does not import
 latter can use these statements.
 -/
 
-@[expose] public section
+public section
 
 universe u
 
