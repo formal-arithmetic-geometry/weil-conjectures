@@ -20153,3 +20153,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: E2/E4: the new node lem-pur-integral-scalar-associator-square says the component of gamma_A: R_L(B A) -> S_{L/E}(R_E A) )
 - 22:09 L: merged deliver/A2/Sheaf.Paper.ConstructibleRingLeftRefinement (stage 3; reviewer PASS; after a return; landing 20261027T220953-L-2626919 (proof); batch 20261027T220948; modules 1; new nodes 0)
 - 22:20 L: returned deliver/C2/Sheaf.Paper.CompletedPullbackTowerRealizations (reviewer RETURN: (reviewer C-e7cfd, head e7cfd3162) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedPullb)
+- 22:22 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: I read the item, all four new nodes, every cited statement, def-sf-finite-rational-derived-operations, def-weil-rational)
