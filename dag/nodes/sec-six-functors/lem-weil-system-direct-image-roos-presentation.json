@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-system-direct-image-roos-presentation",
+ "kind": "statement",
+ "title": "Projection-compatible Roos presentation of system direct image",
+ "statement": "Fix a prime ell and a finite extension E/Q_ell. Let f:X→Y be an arbitrary morphism of schemes, with the actual additive sectionwise quotient-system direct image and K-injective resolutions for the source system category [def-trf-integral-comparison-sequence-systems, def-coef-ringed-sequence-site]. Let S be a normalized CoefficientDerivedSystemCalculus on X [lem-coef-derived-system-evaluation-calculus], and let K be any object of the ordinary unbounded derived category over the completed integral coefficients on X. Put N=Rf_system(S.reduction(K)). There exist the product of the finite direct-image terms, a Roos presentation L:SfIntegralDirectImage(f,K) [def-weil-derived-direct-image], an isomorphism e:coefficientSequenceLimit(N) ≅ L.obj, and isomorphisms a_n:e_n(N) ≅ sfFiniteDerivedDirectImage(f,K,n), such that for every n≥0, the actual limit projection of N followed by completed-scalar restriction of (a_n).hom equals e.hom followed by the nth projection of L. No completeness, boundedness, constructibility, finite-type or invertibility-on-schemes assumption is imposed, and no reconstruction counit is asserted invertible.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941. Projection-compatible model comparison in steps 1--2 of lem-weil-system-direct-image-effectivity."
+ },
+ "proof": [
+  {
+   "text": "Choose one K-injective representative of S.reduction(K) on the actual ringed sequence site. The section-normalized derived direct-image evaluation comparison, followed by finite direct image of S.reductionEvaluation, gives isomorphisms a_n:e_n(Rf_system S.reduction(K)) ≅ Rf_n(K tensor^L A_(n+1)). This construction uses one system representative, not independent choices of finite derived objects.",
+   "uses": [
+    "lem-trf-compact-support-direct-image-evaluation",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941. Projection-compatible model comparison in steps 1--2 of lem-weil-system-direct-image-effectivity."
+   }
+  },
+  {
+   "text": "Use the resolution-normalized direct-image restriction-transition equation (with the identity open immersion) and the strict quotient transition clause of S.reductionModel. After restriction to completed coefficients, the resulting transition under the a_n is sfDirectImageTransition: both are obtained by transporting the source reduction transition through the canonical restriction/direct-image comparison. The ordinary comparison is identity on sections; localization on a simultaneous K-injective resolution fixes the derived square. Thus this is equality of the actual restricted tower arrows, not reconstruction of a derived morphism from finite components.",
+   "uses": [
+    "lem-trf-direct-image-restriction-transition",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941. Projection-compatible model comparison in steps 1--2 of lem-weil-system-direct-image-effectivity."
+   }
+  },
+  {
+   "text": "The projection-normalized constant-tower Roos comparison computes the specified total limit. Transport its product terms by restriction of the a_n. The previous transition equality intertwines the endomorphisms 1-shift, so the transported distinguished triangle defines SfIntegralDirectImage L. Taking its first-vertex comparison e gives e.hom followed by the nth Roos projection equal to the actual total-limit projection followed by restriction of (a_n).hom. Products exist for these pro-etale completed-module towers. This proves the assertion without any completeness or constructibility assumption.",
+   "uses": [
+    "stage3-pur-canonical-tower-roos-comparison",
+    "def-coef-ringed-sequence-site",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941. Projection-compatible model comparison in steps 1--2 of lem-weil-system-direct-image-effectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-derived-direct-image",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-compact-support-direct-image-evaluation",
+  "lem-trf-direct-image-restriction-transition",
+  "stage3-pur-canonical-tower-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941. Projection-compatible model comparison in steps 1--2 of lem-weil-system-direct-image-effectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of a quotient coefficient system commutes with finite evaluation and its inverse limit has the corresponding Roos triangle",
+   "results": "{\"t\": \"2026-10-27T13:59:42Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image of a quotient coefficient system commutes with finite evaluation and its inverse limit has the corresponding Roos triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.evaluationPreservesLimit\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"ModuleCat.directLimitIsColimit\", \"PresheafOfModules.evaluation_preservesFiniteLimits\", \"SheafOfModules.evaluationPreservesLimitsOfShape\", \"ModuleCat.directLimitIsColimit_desc\", \"PresheafOfModules.Finite.evaluation_preservesFiniteColimits\", \"ModuleCat.directLimitCocone_pt_isAddCommGroup\"], \"digest\": \"b50d41d3981c7cad\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching projection-compatible system-direct-image/Roos comparison in Mathlib. Reuse the project finite-evaluation, restriction-transition and normalized Roos comparison declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total inverse limit of the derived direct image of a coherent quotient coefficient system has a Roos triangle of the finite derived direct images, preserving every canonical projection",
+   "results": "{\"t\": \"2026-10-27T14:00:59Z\", \"tool\": \"leanfinder\", \"query\": \"The total inverse limit of the derived direct image of a coherent quotient coefficient system has a Roos triangle of the finite derived direct images, preserving every canonical projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"localCohomology.ofDiagram\", \"localCohomology\", \"CochainComplex.homologySequenceδ_quotient_mapTriangle_obj\", \"LightCondensed.epi_π_app_zero_of_epi\", \"DerivedCategory.triangleOfSESIso\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"dbac5ce82cd3dba6\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching projection-compatible system-direct-image/Roos comparison in Mathlib. Reuse the project finite-evaluation, restriction-transition and normalized Roos comparison declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|Derived.*[Ll]imit",
+   "results": "{\"t\": \"2026-10-27T14:00:57Z\", \"tool\": \"grep\", \"query\": \"Roos|roos|Derived.*[Ll]imit\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching projection-compatible system-direct-image/Roos comparison in Mathlib. Reuse the project finite-evaluation, restriction-transition and normalized Roos comparison declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemDirectImageEffectivity",
+  "date": "2026-10-27",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-system-operation-exchange-realization",
+   "place": "Direct-image Roos presentation, isolated as the projection-compatible model comparison used in steps 1--2 of lem-weil-system-direct-image-effectivity.",
+   "via": [
+    "lem-weil-system-direct-image-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemDirectImageRoosPresentation",
+  "file": "lean/Sheaf/Paper/SystemDirectImageRoosPresentation.lean",
+  "declaration": "WeilConjectures.systemDirectImage_roosPresentation",
+  "statement": "theorem systemDirectImage_roosPresentation\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [(integralComparisonSequenceDirectImage l E f).Additive]\n    [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)]\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (K : DerivedCategory (scalarReductionSource l E X)) :\n    let N := (integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj\n      (S.reduction.obj K)\n    ∃ hprod : HasProduct (sfDirectImageTerm l E f K),\n      ∃ L : @SfIntegralDirectImage l _ E _ _ _ X Y f K hprod,\n        ∃ e : (coefficientSequenceLimit l E Y).obj N ≅ L.obj,\n          ∃ a : ∀ n : ℕ, (coefficientSequenceDerivedEvaluation l E Y n).obj N ≅\n            sfFiniteDerivedDirectImage l E f K n,\n            ∀ n : ℕ, (coefficientSequenceProjection l E Y n).app N ≫\n                (coefficientFiniteDerivedRestriction l E Y n).map (a n).hom =\n              e.hom ≫ L.projection ≫ Pi.π (sfDirectImageTerm l E f K) n",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T151648-L-1188654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261027T151648-L-1188654",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
