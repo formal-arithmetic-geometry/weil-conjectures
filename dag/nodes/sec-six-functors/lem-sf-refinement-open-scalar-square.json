@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-refinement-open-scalar-square",
+ "kind": "statement",
+ "title": "Scalar naturality of the canonical inner open-refinement map",
+ "statement": "Let R,S and a:R→S be compatible pro-etale ring-sheaf coefficients [def-pur-integral-compact-support-coefficient-data, def-sp-coefficient-mate-comparisons]. For compactifications c,d of f:X→Y, a refinement r:c→d [def-weil-compactifications-refinements], and canonical open-triangle coefficient composition equalities hR,hS, let alphaR,alphaS be the canonical refinementOpenMap transformations [lem-sf-refinement-open-restriction]. For every unbounded derived R_X-module M, T_dZ(alphaR(M)) followed by properComparison(a,r) at j_c,! over R of M followed by Rr_* over S of openComparison(a,c.i) at M equals openComparison(a,d.i) at M followed by alphaS(T_X M). This is the inner forward refinement square, without an outer proper map, a proper compositor, inverse refinement arrows or a changed input vertex.",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sp-coefficient-mate-comparisons",
+  "def-weil-compactifications-refinements",
+  "lem-sf-refinement-open-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 0D6D and 07A6: inverse image, change of coefficients and adjunction mates; Zheng Section 5, 5.13--5.15."
+ },
+ "proof": [
+  {
+   "text": "Extend the expression refinementRestriction to a natural transformation on all derived modules on c.Z, by the refinement pullback compositor followed by pullback of the proper counit. Its restriction to the image of j_c,! is the specified refinementRestriction.",
+   "uses": [
+    "def-sf-integral-refinement-normalization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert scalarPull_geometric_composition and eliminate the open triangle equality to get coherence for refinementPull. Use properComparison_mate_square and mateEquiv_counit to obtain the proper scalar counit equation. Naturality of refinementPull and scalarPull, together with this counit equation, proves coefficient naturality of the restriction transformation.",
+   "uses": [
+    "lem-sf-scalar-geometric-pull-composition",
+    "lem-sf-proper-scalar-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic coefficientOpen_unit gives the open scalar unit equation. OpenComparison is invertible, so append its inverse to obtain the inverse unit equation. At j_c,! of T_X M the restriction transformation is invertible by exists_refinementRestriction. Apply the generic coefficient_refinement_of_restriction: transpose under the S-open adjunction, postcompose with that invertible restriction, use its coefficient naturality, and the two refinementOpenMap normalizations. Cancel the restriction and use injectivity of the Hom equivalence.",
+   "uses": [
+    "lem-sf-integral-open-scalar-unit-square",
+    "lem-pur-open-coefficient-comparison-isomorphism",
+    "lem-sf-refinement-open-restriction",
+    "lem-sf-proper-open-coefficient-refinement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-refinement-normalization-data",
+  "lem-sf-scalar-geometric-pull-composition",
+  "lem-sf-proper-scalar-composition",
+  "lem-sf-integral-open-scalar-unit-square",
+  "lem-pur-open-coefficient-comparison-isomorphism",
+  "lem-sf-refinement-open-restriction",
+  "lem-sf-proper-open-coefficient-refinement"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "F4",
+  "date": "2026-10-28",
+  "note": "Ordinary derived-category mate calculation, with no coefficient-system realization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with the normalized proper open compactification refinement comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization, AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical mate API; no existing theorem states this derived ring-sheaf formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical mate API; no existing theorem states this derived ring-sheaf formula."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementOpenMap|refinement.*scalar",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical mate API; no existing theorem states this derived ring-sheaf formula."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingRefinementScalarWord",
+  "date": "2026-10-28",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ring-refinement-scalar-word",
+   "place": "Scalar naturality of the canonical inner open-refinement map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RefinementOpenScalarSquare",
+  "file": "lean/Sheaf/Paper/RefinementOpenScalarSquare.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.refinementOpenMap_scalar",
+  "statement": "theorem refinementOpenMap_scalar\n    {R S : Coefficients.{u}} (a : Change R S)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)\n    (hR : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom\n      (R.ring d.Z) (R.ring c.Z) (R.ring X) (R.pull r.hom) (R.pull c.i))\n    (hS : S.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom\n      (S.ring d.Z) (S.ring c.Z) (S.ring X) (S.pull r.hom) (S.pull c.i))\n    (M : DerivedCategory (pbcModules X (R.ring X))) :\n    (pbcDerivedExtend (a.map d.Z)).map ((refinementOpenMap R r hR).app M) ≫\n        (properComparison a r.hom).app ((openExtension R c.i).mapDerivedCategory.obj M) ≫\n        (push S r.hom).map ((openComparison a c.i).app M) =\n      (openComparison a d.i).app M ≫\n        (refinementOpenMap S r hS).app ((pbcDerivedExtend (a.map X)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261027T233931-L-4138335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261027T233931-L-4138335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

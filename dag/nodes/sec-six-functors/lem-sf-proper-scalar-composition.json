@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-proper-scalar-composition",
+ "kind": "statement",
+ "title": "Proper scalar comparisons commute with inverse proper composition",
+ "statement": "Let R,S be compatible pro-etale ring-sheaf coefficient systems and a:R→S a change [def-pur-integral-compact-support-coefficient-data, def-sp-coefficient-mate-comparisons]. For scheme maps h:U→V, k:V→W, g:U→W with w:h≫k=g and the canonical composite-coefficient equalities hR,hS, define qR = geometricPushComposition R h k hR followed by equality transport along w, and similarly qS [def-sf-integral-refinement-normalization-data]. For every unbounded derived R_U-module M, T_W(qR inverse at M) followed by properComparison(a,k) at Rh_*M followed by Rk_* over S of properComparison(a,h) at M equals properComparison(a,g) at M followed by qS inverse at T_U M. No properness, noetherianity, absolute separatedness or boundedness hypothesis is required.",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sp-coefficient-mate-comparisons",
+  "def-sf-integral-refinement-normalization-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 0D6D and 07A6: inverse image, change of coefficients and adjunction mates; Zheng Section 5, 5.13--5.15."
+ },
+ "proof": [
+  {
+   "text": "Eliminate w. Invert the component isomorphism equation scalarPull_geometric_composition; this gives the compatibility square for inverse scalarPull and the forward pullback compositors.",
+   "uses": [
+    "lem-sf-scalar-geometric-pull-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved generic geometric_scalar_mate identifies the geometric mate of scalarPull inverse with properComparison, by injectivity of the geometric Hom adjunction and its counit equation. Apply mateEquiv_whiskerTop_conjugateEquiv to the square, and mateEquiv_hcomp to its pasted side. The conjugates are geometricPushComposition by definition. Evaluate at M and cancel the two proper compositors to obtain their inverse formula.",
+   "uses": [
+    "lem-sf-integral-finite-proper-mate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-scalar-geometric-pull-composition",
+  "lem-sf-integral-finite-proper-mate",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "F4",
+  "date": "2026-10-28",
+  "note": "Ordinary derived-category mate calculation, with no coefficient-system realization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Taking adjunction mates transports scalar extension compatibility with pullback composition to compatibility with inverse pushforward composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullback_id_comp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical mate API; no existing theorem states this derived ring-sheaf formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical mate API; no existing theorem states this derived ring-sheaf formula."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementOpenMap|refinement.*scalar",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "Use the generic categorical mate API; no existing theorem states this derived ring-sheaf formula."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingRefinementScalarWord",
+  "date": "2026-10-28",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ring-refinement-scalar-word",
+   "place": "Proper scalar comparisons commute with inverse proper composition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperScalarComposition",
+  "file": "lean/Sheaf/Paper/ProperScalarComposition.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.properComparison_inverse_composition",
+  "statement": "theorem properComparison_inverse_composition\n    {R S : Coefficients.{u}} (a : Change R S)\n    {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W) (g : U ⟶ W)\n    (w : h ≫ k = g)\n    (hR : R.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k\n      (R.ring W) (R.ring V) (R.ring U) (R.pull k) (R.pull h))\n    (hS : S.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k\n      (S.ring W) (S.ring V) (S.ring U) (S.pull k) (S.pull h))\n    (M : DerivedCategory (pbcModules U (R.ring U))) :\n    let qR : push R h ⋙ push R k ≅ push R g :=\n      geometricPushComposition R h k hR ≪≫\n      eqToIso (congrArg (fun v ↦ push R v) w)\n    let qS : push S h ⋙ push S k ≅ push S g :=\n      geometricPushComposition S h k hS ≪≫\n      eqToIso (congrArg (fun v ↦ push S v) w)\n    (pbcDerivedExtend (a.map W)).map (qR.inv.app M) ≫\n        (properComparison a k).app ((push R h).obj M) ≫\n        (push S k).map ((properComparison a h).app M) =\n      (properComparison a g).app M ≫\n        qS.inv.app ((pbcDerivedExtend (a.map U)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261027T233931-L-4138335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261027T233931-L-4138335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

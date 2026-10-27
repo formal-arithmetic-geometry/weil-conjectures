@@ -20260,3 +20260,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/F3/Sheaf.SixFunctors.OpenTensorProjectionMateCanonical (stage 3; reviewer PASS; first push; landing 20261027T233927-L-4137869 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:39 L: merged deliver/F4/Sheaf.Paper.CoefficientDerivedSystemGammaProjectionTransport (stage 3; reviewer PASS; first push; landing 20261027T233928-L-4138009 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/F4/Sheaf.Paper.IntegralHomEvaluationNaturality (stage 3; reviewer PASS; first push; landing 20261027T233929-L-4138166 (interface); batch 20261027T233735; modules 2; new nodes 2)
+- 23:39 L: merged deliver/F4/Sheaf.Paper.RingRefinementScalarWord (stage 3; reviewer PASS; first push; landing 20261027T233931-L-4138335 (interface); batch 20261027T233735; modules 3; new nodes 2)
