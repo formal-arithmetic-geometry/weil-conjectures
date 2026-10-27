@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Paper.RefinementOpenRestrictionData
+import Sheaf.Paper.RefinementOpenRestrictionComponentIsIso
 
 /-! Invertibility of the specified refinement-restriction transformation. -/
 
@@ -33,6 +34,9 @@ theorem refinementRestriction_data_isIso
         (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i)
     (hθ : ∀ M, θ.app M = refinementRestriction R r hi M) :
     IsIso θ := by
-  sorry
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  rw [hθ M]
+  exact refinementRestriction_component_isIso R r hi M
 
 end WeilConjectures.PurCompactSupport
