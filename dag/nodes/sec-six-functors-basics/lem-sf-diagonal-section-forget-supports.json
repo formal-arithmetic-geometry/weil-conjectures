@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-diagonal-section-forget-supports",
+ "kind": "statement",
+ "title": "Proper forget-supports normalizes the diagonal section on one scheme",
+ "statement": "Let $A$ be a finite commutative ring, $f:X\\to S$ proper, and $p=p_a:X\\times_S X\\to X$ either projection. Let $d:X\\to X\\times_S X$ be the diagonal and use the data of [def-sf-p1-integral-transport-data]. Write $U_X$ for the derived tensor unit, $C_X=A_X[0]$, $c:C_X\\cong U_X$ for constantUnit, and $s_a:U_X\\to Rp_!Rd_!U_X$ for diagonalUnit. Let $\\phi_h:Rh_!\\cong Rh_*$ be proper forget-supports [def-sp-unbounded-proper-shriek-star-comparison], and $\\eta_h$ the constant-object unit of [def-asd-ordinary-supported-kummer-system]. For every $K\\in D(X_{et},A)$ and $\\theta:U_X\\to K$, one has $s_a;Rp_!(\\phi_{d,U_X}.\\mathrm{hom};Rd_*(\\theta));\\phi_{p,Rd_*K}.\\mathrm{hom}=c^{-1};\\eta_p;Rp_*(\\eta_d);Rp_*Rd_*(c.\\mathrm{hom};\\theta)$. This is a normalization on one self-product, natural in the coefficient map, with no projective-line isomorphism or exchange map. The proper forget-supports isomorphisms are expressed by ordinaryProperForgetComparison [def-sf-ordinary-proper-forget-comparison], which is the same canonical construction with recorded ordinary endpoints.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-sp-unbounded-proper-shriek-star-comparison",
+  "def-sf-ordinary-proper-forget-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the coefficient-free unit normalization to the tensor unit, then use naturality of both proper forget-supports comparisons and functoriality of ordinary direct image to transport the identity coefficient to an arbitrary map θ. The constantUnit inverse and hom cancel, leaving θ intact.",
+   "uses": [
+    "lem-sf-diagonal-section-forget-supports-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-diagonal-section-forget-supports-unit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Coefficient-free diagonal section normalization followed by naturality in the coefficient map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived base change map compatible adjunction unit constant sheaves",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, derivedη and derivedη.congr_simp; constantPresheafAdj_unit_app; condensed-category units and a sheaf-of-modules pushforward unit formula.",
+   "date": "2026-10-26",
+   "verdict": "Generic derived-unit ingredients, no etale constant-object exchange or proper-support normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change transports unit for section proper compat forgetsupports composition",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, unitToPushforwardObjUnit and their adjunction formulas; Scheme.Modules.pushforwardComp; stability under base change.",
+   "date": "2026-10-26",
+   "verdict": "Underived module-sheaf unit/composition statements, no comparison for these unbounded etale derived functors or compact supports."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMap.*unit|LowerShriek.*comp.*LowerStar",
+   "results": "msearch Mathlib grep returned 0 hits. Local searches additionally read upperStarConstantSheafIso_comp, leftDerivedUpperStar_map_singleFunctor_comp, unit_mateEquiv and rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar.",
+   "date": "2026-10-26",
+   "verdict": "Use the proved source-library constant-object composition lemmas and generic mate-unit law; isolate the proper-support normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1IntegralSectionComparison",
+  "group": "R8",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image.",
+   "via": [
+    "lem-sf-p1-integral-section-comparison",
+    "lem-sf-p1-integral-transport",
+    "lem-sf-p1-coordinate-integrals",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfDiagonalSectionForgetSupports",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfDiagonalSectionForgetSupports.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.diagonalSection_forgetSupports",
+  "statement": "theorem diagonalSection_forgetSupports\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] (a : Bool)\n    (K : DerivedCategoryModule A X)\n    (θ : derivedTensorUnit (ModuleCat.{u + 1} A) X ⟶ K) :\n    diagonalUnit A f a ≫\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (projection f a)).map\n          ((ordinaryProperForgetComparison A\n              (TraceDiagonalDatum.diagonal f)).hom.app\n                (derivedTensorUnit (ModuleCat.{u + 1} A) X) ≫\n            (ordinaryFinitePushforward A (TraceDiagonalDatum.diagonal f)).map θ) ≫\n        (ordinaryProperForgetComparison A\n          (projection f a)).hom.app\n            ((ordinaryFinitePushforward A (TraceDiagonalDatum.diagonal f)).obj K) =\n      (constantUnit A X).inv ≫ supportedDerivedUnit A (projection f a) ≫\n        (ordinaryFinitePushforward A (projection f a)).map\n          (supportedDerivedUnit A (TraceDiagonalDatum.diagonal f)) ≫\n        (ordinaryFinitePushforward A (projection f a)).map\n          ((ordinaryFinitePushforward A (TraceDiagonalDatum.diagonal f)).map\n            ((constantUnit A X).hom ≫ θ))",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T180756-L-3900471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T180756-L-3900471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
