@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-canonical-rational-pullback-tensor-naturality",
+ "kind": "statement",
+ "title": "Naturality of the canonical rational pullback tensor comparison",
+ "status": "split",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a scheme map f:X→Y with l invertible in all residue fields. For the prescribed rational pullback and tensor functors [def-weil-derived-pullback-tensor-hom] and the localized canonical comparison of [def-pur-completed-pullback-tensor-construction], its components mu(M,N) are natural in both inputs: for arrows a:M→M′ and b:N→N′, pullback(tensor(a,b)) followed by mu(M′,N′) equals mu(M,N) followed by tensor(pullback(a),pullback(b)).",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-construction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; naturality of the canonical comparison, followed by scalar localization."
+ },
+ "proof": [
+  {
+   "text": "Whisker the integral pullback and tensor realization isomorphisms with the constructible inclusions. The coherent reduction/limit counit is a natural transformation. On the normalized tensor inputs and pulled-back inputs the existing counit theorem makes its components invertible; ofComponents therefore gives natural counit isomorphisms. Compose these isomorphisms with the coherent pullback/tensor comparison and restrict to the full constructible subcategory. Expanding the component maps identifies the resulting natural isomorphism with canonicalIntegralPullbackTensor.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply bilinearComparison_existsUnique to this integral natural isomorphism and the prescribed rational pullback/tensor functors, using their existing integral object and pure-tensor map specifications. Its normalized components equal canonicalRationalPullbackTensor by the defining heterogeneous equality of homs and Iso.ext. The naturality equation of the localized natural isomorphism is the desired equation.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-construction",
+    "lem-sf-localized-bilinear-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tensor-construction",
+  "lem-sf-localized-bilinear-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Naturality of the coherent counit construction and scalar localization of bilinear comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible isomorphisms at finite coefficient stages give a unique isomorphism in the filtered colimit category",
+   "results": "Generic filtered-colimit and extension results; no normalized comparison match. Local search found restrictionTensorRepresentativeTransport.",
+   "date": "2026-10-27",
+   "verdict": "Reuse existing representative-enlargement theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.ext",
+   "results": "The isomorphism extensionality theorem applies to uniqueness.",
+   "date": "2026-10-27",
+   "verdict": "Use Iso.ext."
+  },
+  {
+   "tool": "grep",
+   "query": "ofHom.*(comp|id|transition)",
+   "results": "Generic identities, no exact comparison. Project searches found bilinearComparison_existsUnique and the fixed integral realization maps.",
+   "date": "2026-10-27",
+   "verdict": "Reuse existing localization and coherent constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between bilinear functors descends through scalar localization",
+   "results": "Localization.lift₂NatIso and Localization.liftNatIso are generic tools; no exact normalized scalar-localization component theorem. The project bilinearComparison_existsUnique supplies the needed component interface.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project localization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-completed-pullback-tensor-comparison",
+   "place": "Integral/rational construction and common-stage coefficient paragraph"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorNaturality",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorNaturality.lean",
+  "declaration": "WeilConjectures.canonicalRationalPullbackTensor_naturality",
+  "statement": "theorem canonicalRationalPullbackTensor_naturality\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    {M M' N N' : sfRationalConstructibleCategory l E Y} (a : M ⟶ M') (b : N ⟶ N') :\n    (rationalDerivedPullback l E f).map\n        ((rationalDerivedTensor l E Y).map (Prod.mkHom a b)) ≫\n      (canonicalRationalPullbackTensor l E f M' N').hom =\n    (canonicalRationalPullbackTensor l E f M N).hom ≫\n      (rationalDerivedTensor l E X).map\n        (Prod.mkHom ((rationalDerivedPullback l E f).map a)\n          ((rationalDerivedPullback l E f).map b))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-70a42",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T180501-L-3865412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-70a42",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T180501-L-3865412",
+  "kind": "interface",
+  "note": "independent cc review: delivered Construction module against the clone's CompletedPullbackTensorComparison (verbatim move, re-exported); item proof and Naturality against nodes and deps; all 10 direct importers compiled against the delivered modules (all OK)"
+ }
+}
