@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-affine-space-iso-trace-invariance",
+ "kind": "statement",
+ "title": "Arbitrary automorphisms of an affine coordinate tower preserve its top trace",
+ "statement": "Let N>0 and let A be a finite commutative ring killed by N. Let t be the normalized ordinary finite Tate transport, and let D be a normalized projective-line datum over each Noetherian scheme on which N is invertible. Let S be such a scheme and d a nonnegative integer. For any scheme automorphism e of the fixed coordinate tower representing affine d-space over S whose hom lies over id_S, the actual pullback action affineLinearTraceAction [def-amb-affine-linear-trace-action], formed from identity pullback, compact-support exchange, canonical coefficient descent and the tower comparison, followed by the ordered affineTraceCounit [lem-amb-affine-space-top-trace], equals the same counit. Despite the historical name of the action constructor, e is arbitrary and need not be linear or fix the origin. The assertion includes d=0, the empty base and the zero ring; it has no locally free modules, bundle presentation isomorphisms, frame cover, or gluing conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, descent of scalar integrations; original lem-pur-vector-integration-presentation-iso proof step 1, restricted to the single affine coordinate model"
+ },
+ "stmt_deps": [
+  "def-amb-affine-linear-trace-action",
+  "lem-amb-affine-space-top-trace"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized projective-line Kummer class and degree-one counit to identify the compact-support class of every rational point of affine one-space over an algebraically closed field with the generator sent to one. The open-closed sequence for the infinity complement gives the compact-support comparison. Iterate the ordered coordinate tower: the point with d coordinates is the exterior product of these d point classes, and the composite counit sends that product to one. The top-trace isomorphism identifies the top group with the rank-one coefficient module, so these classes generate. For d=0 this is the unit and the trace is identity.",
+   "uses": [
+    "lem-amb-affine-space-top-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An isomorphism of affine d-spaces pulls back a rational point to its unique rational inverse image. The corresponding reduced closed subscheme is carried isomorphically to the original one, so the local cycle multiplicity is one. Pullback naturality of the point class and canonical Tate comparison therefore show that the action sends a normalized generator to a normalized generator and preserves the top-cohomology degree map. No extension to a projective automorphism, linearity, or origin condition is used.",
+   "uses": [
+    "def-amb-affine-linear-trace-action",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use compact-support base change to identify the geometric stalk of the specified exchange/coefficient action with this action on the geometric fibre. On a separably closed fibre pass to its algebraic closure; the purely inseparable extension induces the same etale site. The source of the trace and its target are degree-zero objects, by the top-trace isomorphism, so the faithful single-degree embedding reduces equality to equality of sheaf maps. Conservative geometric stalks then give the desired derived equation. For an empty base or zero coefficient ring the maps are unique.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker B5",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2; extracted affine-coordinate part of fixed-base trace invariance, with complete bundle frame descent left in the parent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The top compact support cohomology trace of affine space is invariant under nonlinear automorphisms over the base",
+   "results": "Eight hits on affine-space coordinate isomorphisms and real affine equivalences; no etale compact-support trace theorem.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"Faithful\"",
+   "results": "DerivedCategory.instFaithfulSingleFunctor and CochainComplex.instFaithfulIntSingleFunctor; these support descent but do not identify a nonlinear affine trace action.",
+   "date": "2026-10-28",
+   "verdict": "Only the degree-zero faithfulness tool."
+  },
+  {
+   "tool": "grep",
+   "query": "(compact.support|affineSpace).*(trace|counit)",
+   "results": "No Mathlib AlgebraicGeometry hits. Project affineSpaceLinearTraceInvariance covers matrices, ambientAffineTranslationTrace covers translations; neither states arbitrary affine-space automorphism invariance.",
+   "date": "2026-10-28",
+   "verdict": "No independent matching theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationPresentationIso",
+  "date": "2026-10-28",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraph 2, affine-coordinate substep of fixed-base presentation invariance",
+   "via": [
+    "lem-pur-vector-integration-presentation-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpaceIsoTraceInvariance",
+  "file": "lean/Sheaf/Paper/AffineSpaceIsoTraceInvariance.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineSpaceIsoTraceInvariance",
+  "statement": "theorem affineSpaceIsoTraceInvariance (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (e : affineTraceTower S d ≅ affineTraceTower S d)\n    (sq : IsPullback e.hom (affineTraceProjection S d)\n      (affineTraceProjection S d) (𝟙 S)) :\n    affineLinearTraceAction N hN A hA t S hS d e.hom sq ≫\n        affineTraceCounit A N hA t D S hS d =\n      affineTraceCounit A N hA t D S hS d",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "def-amb-affine-linear-trace-action",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T233806-L-4115297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T233806-L-4115297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
