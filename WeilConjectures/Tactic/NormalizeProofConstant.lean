@@ -93,10 +93,11 @@ end NormalizeProofConstant
 namespace NormalizeProofConstant
 open Lean Meta Elab Tactic
 
-partial def diffs (a b : Expr) (acc : Array (Expr × Expr)) : MetaM (Array (Expr × Expr)) := do
+partial def diffs (a b : Expr) (acc : Array (Expr × Expr)) (path : List Name := []) :
+    MetaM (Array (Expr × Expr)) := do
   let a := a.consumeMData.headBeta
   let b := b.consumeMData.headBeta
-  if a == b || acc.size > 5 then return acc
+  if a == b || acc.size > 200 then return acc
   match a, b with
   | .app .., .app .. =>
     let as := a.getAppArgs
@@ -104,7 +105,10 @@ partial def diffs (a b : Expr) (acc : Array (Expr × Expr)) : MetaM (Array (Expr
     if as.size != bs.size || a.getAppFn != b.getAppFn then return acc.push (a, b)
     let mut acc := acc
     for i in [:as.size] do
-      acc ← diffs as[i]! bs[i]! acc
+      let n := acc.size
+      acc ← diffs as[i]! bs[i]! acc ((a.getAppFn.constName?.getD `_) :: path)
+      if acc.size > n && as[i]!.isFVar && bs[i]!.isFVar then
+        logInfo m!"PATH {path.reverse} {a.getAppFn} arg {i}"
     return acc
   | .lam _ ta ba _, .lam _ tb bb _ => diffs ba bb (← diffs ta tb acc)
   | _, _ => return acc.push (a, b)
@@ -113,8 +117,11 @@ elab "diff_with " h:term : tactic => withMainContext do
   let e ← elabTerm h none
   let t ← instantiateMVars (← inferType e)
   let g ← instantiateMVars (← (← getMainGoal).getType)
+  let mut seen : Array (Expr × Expr) := #[]
   for (a, b) in ← diffs t g #[] do
-    logInfo m!"DIFF{indentExpr a}\nvs{indentExpr b}"
+    unless seen.contains (a, b) do
+      seen := seen.push (a, b)
+      logInfo m!"DIFF{indentExpr a}\nvs{indentExpr b}"
 end NormalizeProofConstant
 
 namespace NormalizeProofConstant
@@ -138,5 +145,110 @@ def toProofConstant (c d : Name) : TacticM Unit := withMainContext do
 proof of the type of the auxiliary proof constant `c` by `c`. -/
 elab "to_proof_constant " c:ident " from " d:ident : tactic => withMainContext do
   toProofConstant (← realizeGlobalConstNoOverload c) (← realizeGlobalConstNoOverload d)
+
+end NormalizeProofConstant
+
+namespace NormalizeProofConstant
+open Lean Meta Elab Tactic
+
+/-- `whnfR_apps d at h` replaces, in the type of `h`, every application of the constant `d`, and
+every projection out of one, by its weak head normal form (for reducible, resp. default,
+transparency). -/
+elab "whnfR_apps " d:ident " at " h:ident : tactic => withMainContext do
+  let dn ← realizeGlobalConstNoOverload d
+  let fv ← getFVarId h
+  let g ← getMainGoal
+  let t ← instantiateMVars (← fv.getType)
+  let t' ← Meta.transform t (pre := fun e => do
+    if e.hasLooseBVars then return .continue
+    match e with
+    | .proj _ _ s =>
+      if s.getAppFn.isConstOf dn then
+        let e' ← whnf e
+        if e' != e then return .done e'
+      return .continue
+    | _ =>
+      if let .const f _ := e.getAppFn then
+        if (← getEnv).isProjectionFn f && e.getAppNumArgs > 0 &&
+            e.appArg!.getAppFn.isConstOf dn then
+          let e' ← whnf e
+          if e' != e then return .done e'
+      if e.getAppFn.isConstOf dn then
+        let e' ← whnfR e
+        if e' != e then return .done e'
+      return .continue)
+  replaceMainGoal [← g.replaceLocalDeclDefEq fv t']
+
+end NormalizeProofConstant
+
+namespace NormalizeProofConstant
+open Lean Meta Elab Tactic
+
+/-- `replace_defeq a with b at h` replaces every occurrence of the term `a` in the type of `h` by
+the definitionally equal term `b`. -/
+elab "replace_defeq " a:term " with " b:term " at " h:ident : tactic => withMainContext do
+  let a ← instantiateMVars (← elabTerm a none)
+  let b ← instantiateMVars (← elabTerm b none)
+  unless ← isDefEq a b do throwError "replace_defeq: the terms are not definitionally equal"
+  let fv ← getFVarId h
+  let g ← getMainGoal
+  let t ← instantiateMVars (← fv.getType)
+  let t' := t.replace fun e => if e == a then some b else none
+  replaceMainGoal [← g.replaceLocalDeclDefEq fv t']
+
+end NormalizeProofConstant
+
+namespace NormalizeProofConstant
+open Lean Meta Elab Tactic
+
+/-- `exact_kernel h` closes the goal with `h` without checking that the type of `h` and the
+goal agree: the definitional equality is left to the kernel. Use only when the elaborator's
+check is known to unfold large definitions while the kernel's is cheap. -/
+elab "exact_kernel " h:term : tactic => withMainContext do
+  let g ← getMainGoal
+  g.assign (← elabTerm h none)
+  replaceMainGoal []
+
+end NormalizeProofConstant
+
+namespace NormalizeProofConstant
+open Lean Meta Elab Tactic
+
+/-- The closed proofs occurring in `e` (outermost ones), with their types. -/
+partial def closedProofs (e : Expr) (acc : Std.HashMap Expr Expr) :
+    MetaM (Std.HashMap Expr Expr) := do
+  if !e.hasLooseBVars && (← (try isProof e catch _ => pure false)) then
+    let T ← instantiateMVars (← inferType e)
+    if acc.contains T then return acc else return acc.insert T e
+  match e with
+  | .app f a => closedProofs a (← closedProofs f acc)
+  | .lam _ t b _ | .forallE _ t b _ => closedProofs b (← closedProofs t acc)
+  | .mdata _ b => closedProofs b acc
+  | .proj _ _ b => closedProofs b acc
+  | _ => return acc
+
+/-- Replace every closed proof in `e` whose type is a key of `rep` by the representative. -/
+def replaceProofs (rep : Std.HashMap Expr Expr) (e : Expr) : MetaM Expr :=
+  Meta.transform e (pre := fun t => do
+    if t.hasLooseBVars then return .continue
+    if (← (try isProof t catch _ => pure false)) then
+      let T ← instantiateMVars (← inferType t)
+      if let some r := rep[T]? then return .done r
+      return .done t
+    return .continue)
+
+/-- `unify_proofs_with h` replaces, in the goal and in the type of `h`, every closed proof by the
+first closed proof of the same proposition occurring in the goal. -/
+elab "unify_proofs_with " h:ident : tactic => withMainContext do
+  let fv ← getFVarId h
+  let g ← getMainGoal
+  let G ← instantiateMVars (← g.getType)
+  let H ← instantiateMVars (← fv.getType)
+  let rep ← closedProofs H (← closedProofs G {})
+  let G' ← replaceProofs rep G
+  let H' ← replaceProofs rep H
+  let g ← g.replaceTargetDefEq G'
+  let g ← g.replaceLocalDeclDefEq fv H'
+  replaceMainGoal [g]
 
 end NormalizeProofConstant
