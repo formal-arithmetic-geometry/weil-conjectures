@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleExceptionalConstantTensor
 public import Sheaf.Paper.EtaleSystemProjectionData
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Sheaf.Paper.EtaleQuotientTensorProjectionProperFactor
 
 /-! # The restricted compact-support coefficient projection
 
@@ -73,6 +74,8 @@ theorem etaleQuotientTensorProjection
       (e X K).hom =
   (e Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K)).hom ≫
     exceptionalConstantProjectionMap C c V K := by
+  have hfactor := compactScalarMap_proper_open_factor a c K
+  clear hfactor
   sorry
 
 end AlgebraicGeometry.Etale

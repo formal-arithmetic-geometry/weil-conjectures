@@ -1,0 +1,79 @@
+{
+ "id": "lem-pur-etale-quotient-tensor-projection-proper-factor",
+ "kind": "statement",
+ "title": "Proper and open factorization of the compact scalar map",
+ "statement": "For a ring map a:C→D, a compactification c=(j,p) and K on X, the component of compactScalarMap(a,c) is the proper scalar mate at j_!K followed by Rp_* of the open coefficient comparison.",
+ "stmt_deps": [
+  "def-sf-etale-compact-scalar-map"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 2.26 and the proper/open factorization preceding Proposition 2.29(2), pp. 15–16"
+ },
+ "proof": [
+  {
+   "text": "Unfold compactScalarMap and ExceptionalCoefficients.compactSupportMap. The component is definitionally the displayed composite.",
+   "uses": [
+    "def-sf-etale-compact-scalar-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-etale-compact-scalar-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 2.26"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleQuotientTensorProjection",
+  "date": "2026-10-28",
+  "group": "K5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-quotient-tensor-projection",
+   "place": "First proof step: expand compactScalarMap as proper scalar mate followed by open balancing."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleQuotientTensorProjectionProperFactor",
+  "file": "lean/Sheaf/Paper/EtaleQuotientTensorProjectionProperFactor.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactScalarMap_proper_open_factor",
+  "statement": "theorem compactScalarMap_proper_open_factor\n    {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (K : DerivedCategoryModule C X) :\n    (compactScalarMap a c).app K =\n      (scalarMate a c.g).app\n          ((openImmersionLowerShriek (ModuleCat.{u + 1} C) c.i).mapDerivedCategory.obj K) ≫\n        (lowerStar (ModuleCat.{u + 1} D) c.g).rightDerivedFunctor.map\n          ((ExceptionalCoefficients.openIso a c.i).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T180701-L-3890999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T180701-L-3890999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
