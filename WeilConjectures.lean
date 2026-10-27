@@ -7566,6 +7566,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Filtration
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import WeilConjectures.CategoryTheory.Abelian.Flat.SeparatorResolution
 public import WeilConjectures.CategoryTheory.Abelian.HomologyFilteredColimit
 public import WeilConjectures.CategoryTheory.Abelian.HorseshoeComparisonBoundary
 public import WeilConjectures.CategoryTheory.Abelian.HorseshoeDefectFactorization
@@ -7886,6 +7887,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparato
 public import WeilConjectures.CategoryTheory.DerivedCategory.IsZeroOfIsIsoZSMul
 public import WeilConjectures.CategoryTheory.DerivedCategory.IsoOfSyzygies
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatOfTensorSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatShortExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization
@@ -8288,6 +8290,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComa
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedMap
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.FreeCokernelPowTower
+public import WeilConjectures.CategoryTheory.ModuleObjects.FreeFlat
 public import WeilConjectures.CategoryTheory.ModuleObjects.FreeMapMod
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
@@ -8404,6 +8407,7 @@ public import WeilConjectures.CategoryTheory.Preadditive.CoyonedaSectionsExtendS
 public import WeilConjectures.CategoryTheory.Preadditive.EndModule
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerPivot
+public import WeilConjectures.CategoryTheory.Preadditive.FullOnBiproducts
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.CategoryTheory.Preadditive.NatTransIsIso
 public import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
@@ -9730,6 +9734,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Galois.IsFundamentalgroup
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.PointedGaloisSmall
 public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.Abelian
+public import WeilConjectures.Mathlib.CategoryTheory.Generator.SheafFreeYonedaPullback
 public import WeilConjectures.Mathlib.CategoryTheory.Generator.StrongGenerator
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FunctorExtension
@@ -13110,6 +13115,15 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.LiftedPresentation
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.Main
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.MapModTransfer
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.Presentation
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.PulledBackModules
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.Reduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.TensorSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.UpperStarFull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.WeaklyEtaleRestriction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
@@ -13183,6 +13197,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.D
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.DisjointUnion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.FiniteEtaleStalk
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.KFlatResolution
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.SectionCounit
