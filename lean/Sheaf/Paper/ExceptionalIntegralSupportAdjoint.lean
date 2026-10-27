@@ -6,6 +6,8 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData
+import Sheaf.Paper.IntegralSupportPreservation
+import Sheaf.Paper.IntegralSupportAdjointOfPreservation
 
 /-! # A right adjoint to the restricted integral compact-support functor -/
 
@@ -52,6 +54,9 @@ theorem exists_integral_support_adjoint (D : FiniteFieldDatum.{u}) (_hl : l ≠ 
     ((finiteTorConstructibleIntegral l E.carrier Y).lift
       ((finiteTorConstructibleIntegral l E.carrier X).ι ⋙
         PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c)
-      hpres).IsLeftAdjoint := by sorry
+      hpres).IsLeftAdjoint  := by
+  exact ⟨integral_support_preservation l D _hl f c E,
+    integral_support_adjoint_of_preservation l D _hl f c E
+      (integral_support_preservation l D _hl f c E)⟩
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
