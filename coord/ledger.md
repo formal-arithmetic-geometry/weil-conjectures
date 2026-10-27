@@ -19627,3 +19627,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/X6/Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus (stage 3; reviewer PASS; first push; landing 20261027T151749-L-1204492 (interface); batch 20261027T151642; modules 20; new nodes 11; change records: coord/changes/X6-finite-clopen-canonical-aliases.md)
 - 15:17 L: merged deliver/Y2/Sheaf.WeilSheaf.NativeExceptionalLeftModels (stage 3; reviewer PASS; first push; landing 20261027T151750-L-1204791 (interface); batch 20261027T151642; modules 2; new nodes 1)
 - 15:17 L: merged deliver/Y3/Sheaf.WeilSheaf.NativeExceptionalStructuralTransport (stage 3; reviewer PASS; first push; landing 20261027T151752-L-1205031 (interface); batch 20261027T151642; modules 2; new nodes 1)
+- 15:29 L: merged deliver/NA/lem-sf-native-ordinary-chain-currying (reviewer PASS; first push; new nodes: 0)

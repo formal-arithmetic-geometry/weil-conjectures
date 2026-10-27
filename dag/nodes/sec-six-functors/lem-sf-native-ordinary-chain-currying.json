@@ -11,9 +11,70 @@
   "def-sf-native-weil-closed-models",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_{P,Q,J}:\\operatorname{Hom}(Q\\otimes P,J)\\simeq\\operatorname{Hom}(Q,\\mathcal Hom(P,J))$ for the ordinary adjunction assumed in the statement. It is natural in all three arguments. Its additivity also follows directly: for fixed $P$, $c(h)=\\eta_Q;\\mathcal Hom(P,h)$, where $\\eta$ is the adjunction unit; postcomposition in sheaf-Hom sends $h+h'$ to the sum of postcompositions, so bilinearity gives $c(h+h')=c(h)+c(h')$ and $c(-h)=-c(h)$. Here the ordinary Hom maps are precomposition and postcomposition, as specified in [def-sf-native-weil-closed-models], and the bilinearity is [def-weil-preadditive-category]. These are identities of module-sheaf morphisms, not assertions about global sections.",
+   "uses": [
+    "def-sf-native-weil-closed-models",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90, lemma-compose (proof omitted there); explicit agent calculation in the native row-sign convention, checked against NativeOrdinaryRepresentativeCurrying.lean:240-267 and BifunctorHomComplex.lean:146-151."
+   }
+  },
+  {
+   "text": "Set $f_{p,q}=\\iota_{p,q};f^{p+q}$ and $b_{p,q}=c_{P^p,Q^q,I^{p+q}}(f_{p,q})$. By the defining universal property of the given product $B(P,I)^q$, the family $(b_{p,q})_{p\\in\\mathbf Z}$ determines a morphism $\\phi^q:Q^q\\to B(P,I)^q$ with $\\phi^q;\\pi_{q,p}=b_{p,q}$. There is no sum in this construction and no finite-support condition on the family. The inverse identity for the same ordinary adjunction already gives $\\operatorname{uncurry}(\\phi^q;\\pi_{q,p})=f_{p,q}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90, lemma-compose (proof omitted there); explicit agent calculation in the native row-sign convention, checked against NativeOrdinaryRepresentativeCurrying.lean:240-267 and BifunctorHomComplex.lean:146-151."
+   }
+  },
+  {
+   "text": "Put $A_{p,q}=\\mathrm{id}_{Q^q}\\otimes d_P^p$ and $D_{p,q}=d_Q^q\\otimes\\mathrm{id}_{P^p}$. The stated total differential means exactly $\\iota_{p,q};d_T^{p+q}=A_{p,q};\\iota_{p+1,q}+(-1)^pD_{p,q};\\iota_{p,q+1}$. Restrict the chain-map equation $f^{p+q};d_I^{p+q}=d_T^{p+q};f^{p+q+1}$ along $\\iota_{p,q}$ and distribute composition. Thus\n$$f_{p,q};d_I^{p+q}=A_{p,q};f_{p+1,q}+(-1)^pD_{p,q};f_{p,q+1}.$$\nThis uses just the definition of a morphism of complexes in [def-weil-abstract-derived-category] and the displayed differential in the item; in particular the sign is indexed by $p$, despite the reversed order of the tensor factors.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90, lemma-compose (proof omitted there); explicit agent calculation in the native row-sign convention, checked against NativeOrdinaryRepresentativeCurrying.lean:240-267 and BifunctorHomComplex.lean:146-151."
+   }
+  },
+  {
+   "text": "Apply $c$ to the last equality. Its three naturality identities respectively give\n$$b_{p,q};\\mathcal Hom(P^p,d_I^{p+q})=b_{p+1,q};\\mathcal Hom(d_P^p,I^{p+q+1})+(-1)^p d_Q^q;b_{p,q+1}.$$\nIndeed the first term uses naturality in the output, the second precomposition in the $P$ parameter, and the last precomposition in the $Q$ variable; the additivity verified in step 1 moves the sum and its sign through $c$. Subtract the first term on the right and multiply by $(-1)^p$. Since $((-1)^p)^2=1$ for every integer $p$, this gives\n$$(-1)^p\\bigl(b_{p,q};\\mathcal Hom(P^p,d_I^{p+q})-b_{p+1,q};\\mathcal Hom(d_P^p,I^{p+q+1})\\bigr)=d_Q^q;b_{p,q+1}.$$\nNo comparison of derived objects or homotopy classes occurs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90, lemma-compose (proof omitted there); explicit agent calculation in the native row-sign convention, checked against NativeOrdinaryRepresentativeCurrying.lean:240-267 and BifunctorHomComplex.lean:146-151."
+   }
+  },
+  {
+   "text": "By the specified row differential, the left side of step 4 is $(\\phi^q;d_B^q);\\pi_{q+1,p}$; by the product-lift equations of step 2 the right side is $(d_Q^q;\\phi^{q+1});\\pi_{q+1,p}$. Equality for every $p$ implies $\\phi^q;d_B^q=d_Q^q;\\phi^{q+1}$ by the defining uniqueness property of the product. Hence the family $\\phi^q$ is a chain map [def-weil-abstract-derived-category]. The uncurry equation in step 2 is exactly the requested equation on the actual inclusions and projections, without a sign. All degrees are arbitrary integers, so this proves the assertion for unbounded complexes as well.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90, lemma-compose (proof omitted there); explicit agent calculation in the native row-sign convention, checked against NativeOrdinaryRepresentativeCurrying.lean:240-267 and BifunctorHomComplex.lean:146-151."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-weil-preadditive-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90, lemma-compose (proof omitted there); explicit agent calculation in the native row-sign convention, checked against NativeOrdinaryRepresentativeCurrying.lean:240-267 and BifunctorHomComplex.lean:146-151."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -109,10 +170,179 @@
    "date": "2026-10-27",
    "verdict": "no match: returned total-tensor constructions, degreewise adjunctions or ordinary module currying; none states strict currying for this native reversed total and row-sign product Hom.",
    "sub": "Algebra/Homology/Monoidal.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unsigned currying of chain maps from reversed tensor total to a complex gives a chain map into row sign product Hom complex",
+   "sub": "",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "HomologicalComplex.tensorHom",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex₂.ιTotal",
+     "HomologicalComplex₂.totalDesc",
+     "HomologicalComplex₂.total.map",
+     "HomologicalComplex.mapBifunctor₁₂.ι",
+     "HomologicalComplex.ιMapBifunctor",
+     "HomologicalComplex₂.ι_totalDesc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homAddEquiv\"",
+   "sub": "",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "Pi.addMonoidHomAddEquiv",
+     "CategoryTheory.InducedCategory.homAddEquiv",
+     "CategoryTheory.InducedCategory.homAddEquiv_apply",
+     "CategoryTheory.InducedCategory.homAddEquiv_symm_apply_hom",
+     "AddCommGrpCat.homAddEquiv",
+     "AddCommGrpCat.homAddEquiv_apply",
+     "AddCommGrpCat.homAddEquiv_symm_apply_hom",
+     "SemimoduleCat.homAddEquiv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHomObj|internalHomEquiv|bifunctorHomπ|curry.*[Cc]ochain",
+   "sub": "Algebra/Homology",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor Hom adjunction induces currying of morphisms of unbounded cochain complexes",
+   "sub": "",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.MonoidalClosed.homEquiv_apply_eq",
+     "TensorProduct.AlgebraTensorModule.lcurry",
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.MonoidalClosed.curry",
+     "TensorProduct.curry",
+     "ModuleCat.monoidalClosedHomEquiv",
+     "CategoryTheory.MonoidalClosed.curryHomEquiv'",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.adj"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between additive functors gives an additive equivalence of morphism groups natural in both arguments",
+   "sub": "",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.homAddEquiv",
+     "CategoryTheory.Adjunction.homAddEquiv_apply",
+     "CategoryTheory.Adjunction.homAddEquiv_add",
+     "CategoryTheory.Adjunction.homAddEquiv_symm_apply",
+     "CategoryTheory.Adjunction.homAddEquiv_symm_add",
+     "CategoryTheory.Adjunction.homAddEquiv_sub",
+     "CategoryTheory.Adjunction.right_adjoint_additive",
+     "CategoryTheory.Adjunction.homAddEquiv_symm_sub"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "homAddEquiv|homEquiv_naturality_(one|two|three)",
+   "sub": "CategoryTheory/Adjunction",
+   "results": {
+    "n_hits": 11,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean",
+     "Mathlib/CategoryTheory/Adjunction/Additive.lean",
+     "Mathlib/CategoryTheory/Adjunction/Additive.lean",
+     "Mathlib/CategoryTheory/Adjunction/Additive.lean",
+     "Mathlib/CategoryTheory/Adjunction/Additive.lean",
+     "Mathlib/CategoryTheory/Adjunction/Additive.lean",
+     "Mathlib/CategoryTheory/Adjunction/Parametrized.lean",
+     "Mathlib/CategoryTheory/Adjunction/Parametrized.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ParametrizedAdjunction.homEquiv_naturality\"",
+   "sub": "",
+   "results": {
+    "n_hits": 6,
+    "top": [
+     "CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two",
+     "CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_three",
+     "CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_two_assoc",
+     "CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_three_assoc",
+     "CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one",
+     "CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Aa]djunction|[Aa]djunction.*tensor|internalHomEquiv|curry",
+   "sub": "Algebra/Homology/Monoidal.lean",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor Hom adjunction between additive bifunctors on an abelian category extends to a strict adjunction between sum total tensor and product total Hom complexes",
+   "sub": "",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "HomologicalComplex.tensorHom",
+     "CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.tensorObj",
+     "CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: supporting underived adjunction identities or total-tensor constructions only; none states the native row-sign chain-map assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-native-ordinary-model-uniqueness",
@@ -133,5 +363,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-ordinary-chain-currying",
+  "worker": "stage1",
+  "summary": "Unsigned degreewise currying is lifted through the actual products. Restricting the chain-map equation to each tensor summand and applying additive naturality yields exactly the row-sign differential. Every calculation is written out; no new node is needed for these elementary steps. The statement and its lack of K-flatness/K-injectivity hypotheses are preserved.",
+  "blueprint": "The internal-Hom comparison/evaluation/transposition paragraph of current cor-coef-verdier-weil-equivariance.proof.md is served by this native chain-level refinement. ancestor returns None; the inherited null ancestor and via list are retained. Whole-blueprint searches for currying, row-sign, additive adjunction and strict currying gave no matching statement."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-5ded331cb",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-5ded331cb (reviewer sub-agent of L); spot-checked: I read the item, the report, the cited node statements, Stacks 0A90 and the Lean conventions. The proof is correct and needs no fixes. 0 new nodes; proof_deps equal the union of the step uses; blueprint from/via/same_as filled. Conventions match the statement: ordinaryTensorTotal is CochainComplex.mapBifunctor P Q (NativeWeilClosedModels.lean:101-105), so its differential is d_P+(-1)^p d_Q, and the row differential matches bifunctorHomObj_d_π (BifunctorHomComplex.lean:146-151), (-1)^p(π_p;d_I - π_{p+1};d_P). Stacks 0A90 (sites-cohomology-lemma-compose) gives only 'Proof. Omitted', so writing out the details is the split (D5); the sign convention is correctly marked as agent-formulated. Steps 1-5 check: additivity of c(h)=η;Hom(P,h) follows from bilinearity, cited to the preadditive def; φ^q is the product lift of b_{p,q}; restricting the chain-map equation to each summand gives correct indices, (p+1,q) for the A-term and (p,q+1) for the D-term; the three naturalities plus additivity give the step-4 identity, which I recomputed; product uniqueness then gives the chain-map identity, and the requested equation is step 2's inverse identity. Small cases: in an odd-row example (P=R in degree 1, Q and I identity cones) f^2=-f^1 and d_Bφ^0=-x=φ^1d_Q, so the row sign is essential and correctly paired; degree-0 and zero-complex cases are trivial. No K-flatness or K-injectivity is introduced. Not a duplicate of representative-currying (converse direction, derived), chain-uncurry-forget (comparison under U), kflat-bifunctor-tensor-hom (derived bijection) or model-uniqueness (the citer; no cycle). The matching Lean lemma internalHomEquiv_f_π is private and generic, so there is nothing to attach. Both off-unit cited defs have status mathlib, so no tool_uses are needed."
  }
 }
