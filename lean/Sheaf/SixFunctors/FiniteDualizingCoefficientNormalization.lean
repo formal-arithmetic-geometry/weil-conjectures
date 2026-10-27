@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.SixFunctors.FiniteDualizingData
+import Sheaf.SixFunctors.FiniteDualizingCompactSupportIdentity
+import Sheaf.SixFunctors.FiniteDualizingQuotientNormalization
 
 /-! # Coefficient normalization before taking exceptional mates -/
 
