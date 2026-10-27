@@ -96,6 +96,15 @@ theorem exchange_app_eq_of_fixedSquare_aux (Ψ : CP ⥤ CP')
   simp only [Functor.map_comp, Category.assoc] at hn ⊢
   rw [reassoc_of% hn]
 
+/-- Gluing an identity `c ≫ L(s ≫ q) ≫ r = w ≫ v` to `w ≫ v ≫ ν = Z`: the composite
+`c ≫ L(s) ≫ (L(q) ≫ r) ≫ ν` is `Z`. -/
+lemma comp_map_comp_comp_eq_of_eq' {𝒞 𝒟 : Type*} [Category 𝒞] [Category 𝒟] {L : 𝒞 ⥤ 𝒟}
+    {u A₁ A₂ B₀ : 𝒟} {U₁ U₂ U₃ : 𝒞} (c : u ⟶ L.obj U₁) (s : U₁ ⟶ U₂) (q : U₂ ⟶ U₃)
+    (r : L.obj U₃ ⟶ A₁) (w : u ⟶ A₂) (v : A₂ ⟶ A₁) (ν : A₁ ⟶ B₀) (Z : u ⟶ B₀)
+    (h : c ≫ L.map (s ≫ q) ≫ r = w ≫ v) (h' : w ≫ v ≫ ν = Z) :
+    c ≫ L.map s ≫ (L.map q ≫ r) ≫ ν = Z := by
+  rw [← h', ← reassoc_of% h, L.map_comp]; simp only [Category.assoc]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing

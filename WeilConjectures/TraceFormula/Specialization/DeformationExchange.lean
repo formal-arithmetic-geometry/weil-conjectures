@@ -13,6 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 public import WeilConjectures.TraceFormula.Specialization.MatchTactic
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
 
 /-!
 
@@ -60,8 +61,11 @@ private lemma isProper_left_of_isProper_hom {B Y : Over (Spec (.of k))} [IsPrope
   have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact IsProper.of_comp _ Y.hom
 
+set_option Elab.async false in
 set_option maxHeartbeats 2000000 in
--- instantiating fact (III) and the reduction at the concrete data is slow
+-- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
+-- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
+-- (`Elab.async false`), which keeps the memory below 4 GB
 /-- **The compact-support exchanges of the deformation specialize the class of `B`** (blueprint
 `det-tf-sp-theta-proper-constant`, `det-tf-sp-theta-open-constant`, with
 `det-tf-fixed-deformation-points`; Varshavsky, *Lefschetz–Verdier trace formula and a
@@ -220,24 +224,35 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
       (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
       (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
-        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as _hSI
-  -- Facts (I) and (III) and the unit class identity of `ν_B` are `hI`, `h3` and `hD`; the
-  -- cancellation is `TraceSpecialization.specializesComponentClass_of_eq`, and `glue_unit_class`
-  -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`. Its
-  -- route: `fixedLocusToPointCompactSupportExchange_app_comp_eq_of_eq` for `_hSI` and
-  -- `pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm`, then
-  -- `CategoryTheory.exchange_app_eq_of_fixedSquare_aux` with the coherences of
-  -- `ComponentExchangeAssembly`. The elaborator side of this route goes through (in about 80 s,
-  -- by syntactic matching), but the kernel check of the resulting term does not finish: the
-  -- hypotheses spell the same objects differently (`(specialCorrespondence k' hc).C` and
-  -- `deformationSpecialFibre c.C _ k'`, `x.obj` and `ι.obj x`, different `Precoherent` proofs
-  -- inside the `MonObj` instances), and the kernel unfolds the enclosing composites. Note that
-  -- a declaration with `sorry` is not kernel-checked: the steps above (`_hSI`, `glue_unit_class`)
-  -- have so far only been checked by the elaborator.
-  refine TraceSpecialization.specializesComponentClass_of_eq _ _ _ j hI
-    (W := _) ?φ ((deformationCompactSupportExchange B b.left.ker k').app (𝟙_ _)) ?h1 ?h2
-  case h2 => glue_unit_class h3 hD
-  all_goals sorry
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as hSI
+  -- fact (II): the factorization of `ν_F` on `j_! ℚ̄_ℓ`
+  have : IsProper (deformationSpecialFibreMap (j ≫ F.d)
+      (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k').left := by
+    rw [← hfsp]; infer_instance
+  have hNF := pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm (ℓ := ℓ)
+    (y ≫ c.c₁) k' (j ≫ F.d) (component_comp_d_eq j hb)
+  instantiate_by_match TraceSpecialization.fixedLocusToPointCompactSupportExchange_app_comp_eq_of_eq
+    [h := hSI, hX := hNF] as hFPE
+  have hS3 := lowerShriekCompOfEq_hom_app_comp_hom_app_comp_map_inv_comp_inv ℓ j F.d
+    (toPoint X) (comp_toPoint j) (comp_toPoint F.d) (comp_toPoint (j ≫ F.d))
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+  have hS4 := lowerShriekCompOfEq_hom_app_comp_map_comp_inv_eq ℓ
+    (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').d hfsp (toPoint _)
+    (comp_toPoint (hc.componentSpecialLift k' j hb)) (comp_toPoint (hc.specialFixedLocus k').d)
+    (comp_toPoint (deformationSpecialFibreMap (j ≫ F.d)
+      (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k'))
+    ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))
+    (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
+  have hac := boundedConstructibleLowerStarCompOfEq_hom_app_rfl ℓ j F.ι
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+  instantiate_by_match CategoryTheory.exchange_app_eq_of_fixedSquare_aux
+    [h := hFPE, hS3 := hS3, hS4 := hS4, hac := hac] as h1
+  -- fact (III) glued to the unit class identity of `ν_B`
+  instantiate_by_match CategoryTheory.comp_map_comp_comp_eq_of_eq' [h := h3, h' := hD] as h2
+  -- the cancellation
+  apply_by_match TraceSpecialization.specializesComponentClass_of_eq [j := j, hI := hI,
+    h₁ := h1, h₂ := h2]
 
 end IsContractingAt
 
