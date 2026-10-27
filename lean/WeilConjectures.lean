@@ -12770,3 +12770,5 @@ public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
 public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.PoincareDuality.Poincare
+public import WeilConjectures.TraceFormula.Dualizing
