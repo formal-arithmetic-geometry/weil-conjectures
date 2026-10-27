@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-lisse-finite-quotient-etale-origin-transport-map",
+ "kind": "statement",
+ "title": "Monic and epic comparison morphism for finite quotient origin transport",
+ "statement": "For core origin data C, an étale chart Z, a supplied constant model E on Z, and a pro-étale refinement W, the comparison construction from the constant realization of E to the pulled-back complex K admits a morphism that is both monic and epic.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, comparison construction and local finite-model detection"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-lisse-finite-quotient-etale-origin-core",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the core comparison to Z, compose with the supplied constant-model isomorphism, and pull the resulting morphism to W. The comparison-pullback coherence and the canonical finite-coefficient scalar comparison identify its source with constantAdicQuotientRealization and its target with the displayed pullback of K.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local finite lisse models supplied by C.refinementLisse detect monomorphisms and epimorphisms after a covering restriction. Exactness of restriction and the sheaf epimorphism/monomorphism criteria descend these two properties to the global comparison morphism.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker M1",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, local comparison and finite-model detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "balanced category morphism monic epic derived category isomorphism",
+   "results": "Mathlib provides isIso_of_mono_of_epi for balanced categories; no theorem constructs this geometric comparison.",
+   "date": "2026-10-28",
+   "verdict": "generic final criterion only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Mono f Epi f IsIso",
+   "results": "Found CategoryTheory.isIso_of_mono_of_epi and isIso_iff_mono_and_epi; no finite quotient origin transport theorem.",
+   "date": "2026-10-28",
+   "verdict": "generic final criterion only"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse_finite_quotient_etale_origin_transport_map",
+   "results": "No prior declaration; the new module is the first declaration with this interface.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteQuotientEtaleOriginTransport",
+  "date": "2026-10-28",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-finite-quotient-etale-origin",
+   "place": "Tags 09AL, 09B1 and 09C6"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteQuotientEtaleOriginTransportMap",
+  "file": "lean/Sheaf/Paper/LisseFiniteQuotientEtaleOriginTransportMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin_transport_map",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin_transport_map"
+  ],
+  "statement": "theorem lisse_finite_quotient_etale_origin_transport_map\n    {X Y : Scheme.{u}} {g : Y ⟶ X}\n    {A : Type (u + 1)} [CommRing A] {d : AdicCoefficientDatum A} {n : ℕ}\n    {K : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n)))}\n    {V : Y.Etale}\n    (C : LisseFiniteQuotientEtaleOriginCore X Y g d n K V)\n    (Z : V.left.Etale)\n    (E : DerivedCategory (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸\n      (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))))\n    (hE : Nonempty ((AlgebraicGeometry.Etale.upperStar _ Z.hom).mapDerivedCategory.obj\n        C.level ≅ (constantSheaf Z.left.smallEtaleTopology _).mapDerivedCategory.obj E))\n    (W : Y.ProEt) (_w : W ⟶ (toProEt Y).obj (Etale.mk (Z.hom ≫ V.hom))) :\n    ∃ f : (constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ⟶\n      (adicTowerPullback (W.hom ≫ g)\n        ((pbcAdicRings X d).obj (op n))).obj K,\n      Mono f ∧ Epi f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T210132-L-1661897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T210132-L-1661897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

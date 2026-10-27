@@ -6,6 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.Paper.LisseFiniteQuotientEtaleOriginCore
+import Sheaf.Paper.LisseFiniteQuotientEtaleOriginTransportMap
 
 /-! # Conditional constant-model transport for a finite quotient origin
 
@@ -15,6 +16,7 @@ Source: Stacks Project, Tag 09C6.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -31,6 +33,9 @@ finite constant local models gives the relative finite lisse statement.
 Source: Stacks Project, proetale.tex, Tag 09C6
 (blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-transport).
 -/
+/- STATEMENT-DISPUTED: the core data only asserts lissity and vanishing of
+  `C.level`; it contains no comparison between `C.level` and the pullback of
+  `K`, so the displayed derived-category isomorphism does not follow. -/
 theorem lisse_finite_quotient_etale_origin_transport
     {X Y : Scheme.{u}} {g : Y ⟶ X}
     {A : Type (u + 1)} [CommRing A] {d : AdicCoefficientDatum A} {n : ℕ}
@@ -46,6 +51,11 @@ theorem lisse_finite_quotient_etale_origin_transport
     Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅
       (adicTowerPullback (W.hom ≫ g)
         ((pbcAdicRings X d).obj (op n))).obj K) := by
-  sorry
+  obtain ⟨f, hf, hg⟩ := lisse_finite_quotient_etale_origin_transport_map C Z E hE W _w
+  letI : Mono f := hf
+  letI : Epi f := hg
+  haveI : IsIso f := by
+    apply isIso_of_mono_of_epi
+  exact ⟨asIso f⟩
 
 end AlgebraicGeometry.Scheme
