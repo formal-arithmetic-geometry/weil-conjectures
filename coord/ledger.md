@@ -19633,3 +19633,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:25 L: returned deliver/J4/Sheaf.Paper.CompletedPullbackTowerCore (reviewer RETURN: (reviewer C-c4b79, head c4b79b335) Stage3 §4 / roles/worker.md 3: unforced timing split. The merged CompletedPullbackTow)
 - 16:41 L: returned deliver/A6/Sheaf.Paper.QcqsCompactSupportNativeTowerComparison (reviewer RETURN: (reviewer C-7dc70, head 7dc706716) H10/2b: the added IsNativeCompactSupportTowerPresentation conjunct breaks the unadapt)
 - 17:32 L: returned deliver/C6/Sheaf.Paper.RationalP1SectionEvaluation (reviewer RETURN: (reviewer C-54a7f, head 54a7f8031) E2: rationalP1_section_evaluation_core is false: X₀, a, b are arbitrary and appear on)
+- 17:43 L: returned deliver/U4/Sheaf.SixFunctors.CoefQbarVerdierCore (reviewer RETURN: (reviewer C-73b31, head 73b31bacd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.CoefQbar)
