@@ -1,0 +1,113 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation preserves lower bounds in derived coefficient systems",
+   "results": "No existing project declaration matches the fixed evaluation lower-bound statement.",
+   "date": "2026-10-28",
+   "verdict": "Split as a source-level boundedness lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.TStructure.isGE_of_iso",
+   "results": "Generic isGE transport across isomorphisms only.",
+   "date": "2026-10-28",
+   "verdict": "Used the generic transport lemma in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptionalSiteOriginComparison.*bound",
+   "results": "No prior declaration.",
+   "date": "2026-10-28",
+   "verdict": "New project theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalSiteOriginComparison",
+  "date": "2026-10-28",
+  "group": "V5"
+ },
+ "id": "lem-sf-exceptional-site-origin-comparison-core",
+ "title": "Core site comparison construction",
+ "statement": "For finite quotients and a fixed strict-etale evaluation package, there is a comparison C with ExceptionalSystemSiteEquivalence, bounded-below unit, origin counit, and inverse-origin assertions.",
+ "stmt_deps": [
+  "def-pur-exceptional-system-transport-interfaces",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary and derived site comparison, apply finite quotient comparison levelwise, and transport the unit, counit, normalization, and inverse-origin properties through evaluation and the mate identities.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-exact-derived-adjunction-bounds",
+    "lem-pur-system-derived-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-system-derived-comparison",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pur-system-derived-evaluation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Separated boundedness/construction step from Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1.",
+  "group": "V5",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-site-origin-comparison",
+   "place": "Separated boundedness/construction step",
+   "via": [
+    "lem-sf-exceptional-site-origin-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalSiteOriginComparisonCore",
+  "file": "lean/Sheaf/Paper/ExceptionalSiteOriginComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.exceptionalSiteOriginComparison_core",
+  "statement": "theorem exceptionalSiteOriginComparison_core\n    (O : Type (u + 1)) [CommRing O] (ell : O)\n    [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]\n    (T : Scheme.{u}) (PE : StrictEtaleEvaluation T O ell) :\n    ∃ C : ExceptionalSystemSiteComparison O ell T PE,\n      ExceptionalSystemSiteEquivalence C ∧\n      (∀ n M, (∃ a : ℤ, M.IsGE a) →\n        IsIso ((C.image.level n).adjunction.unit.app M)) ∧\n      (∀ n M, C.levelOrigin n M →\n        IsIso ((C.image.level n).adjunction.counit.app M)) ∧\n      (∀ n M, (∃ a : ℤ, M.IsGE a) →\n        C.levelOrigin n ((C.image.level n).inverse.obj M))",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261027T180927-L-3913880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261027T180927-L-3913880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
