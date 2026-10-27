@@ -1,10 +1,7 @@
 module
 
 public import Sheaf.Paper.RefinementOpenRestrictionData
-import Sheaf.CategoryTheory.CanonicalRightDerivedAdjunctionShift
-import Sheaf.CategoryTheory.ExactDerivedAdjunctionUnitShift
-import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
+import Sheaf.Paper.RefinementRestrictionComponentShift
 
 /-! Shift compatibility of the specified refinement-restriction transformation. -/
 
@@ -38,6 +35,12 @@ theorem refinementRestriction_data_shift
         (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i)
     (hθ : ∀ M, θ.app M = refinementRestriction R r hi M) :
     θ.CommShift ℤ := by
-  sorry
+  apply NatTrans.CommShift.of_core
+  intro n
+  constructor
+  ext M
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  rw [hθ M, hθ ((shiftFunctor _ n).obj M)]
+  exact refinementRestriction_component_shift R r hi n M
 
 end WeilConjectures.PurCompactSupport

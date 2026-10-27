@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-refinement-restriction-component-shift",
+ "kind": "statement",
+ "title": "Pointwise shift compatibility of the refinement-restriction map",
+ "statement": "For every integer n and M : DerivedCategory (pbcModules X (R.ring X)),\n(((((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i).commShiftIso n).hom.app M ≫\n  (refinementRestriction R r hi M)⟦n⟧') =\n  refinementRestriction R r hi ((shiftFunctor _ n).obj M) ≫\n    (((openExtension R c.i).mapDerivedCategory ⋙ pull R c.i).commShiftIso n).hom.app M.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7I; exact pullback compositor and proper counit commute with cochain shifts."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7I; componentwise shift calculation for the normalized restriction composite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "component map of a derived pullback compositor followed by an adjunction counit commutes with integer shifts",
+   "results": "No single project declaration gives this geometric component equation; the exact shift equation is isolated as this lower statement.",
+   "date": "2026-10-28",
+   "verdict": "Use the exact pullback-compositor and derived-adjunction shift APIs listed in the parent node."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShiftCore shift_app_comm",
+   "results": "NatTrans.CommShiftCore.shift_app_comm gives the pointwise form used to combine this component equation into the parent transformation theorem.",
+   "date": "2026-10-28",
+   "verdict": "Match for the categorical assembly, not for the geometric component calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementRestriction.*shift",
+   "results": "No existing component theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "This is a new lower statement."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-refinement-open-restriction-shift",
+   "place": "The component calculation substep of the shift proof.",
+   "via": [
+    "lem-sf-refinement-open-restriction-shift"
+   ]
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RefinementOpenRestrictionShift",
+  "group": "S2",
+  "date": "2026-10-28"
+ },
+ "proof": [
+  {
+   "text": "Expand refinementRestriction as the normalized refinement pullback compositor followed by the derived proper adjunction counit. The compositor is the exact pullback composition isomorphism and the counit is the canonical right-derived adjunction counit; the corresponding shift squares commute, and their composite is the displayed pointwise equation.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-exact-adjunction-unit-shift-descent",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-exact-adjunction-unit-shift-descent",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RefinementRestrictionComponentShift",
+  "file": "lean/Sheaf/Paper/RefinementRestrictionComponentShift.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.refinementRestriction_component_shift",
+  "statement": "theorem refinementRestriction_component_shift\n    (n : ℤ) (M : DerivedCategory (pbcModules X (R.ring X))) :\n    (( ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙\n      pull R d.i).commShiftIso n).hom.app M ≫\n      (refinementRestriction R r hi M)⟦n⟧' =\n    refinementRestriction R r hi ((shiftFunctor _ n).obj M) ≫\n      (((openExtension R c.i).mapDerivedCategory ⋙ pull R c.i).commShiftIso n).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T234304-L-89105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T234304-L-89105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
