@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-integral-scalar-pullback-mate-normalization",
+ "kind": "statement",
+ "title": "Localization normalization of the scalar pullback mate",
+ "statement": "For a prime l, finite extension E of Q_l, every scheme map f:X→Y and n≥0, let r0 be an ordinary restriction/direct-image comparison heterogeneously equal to the inverse canonical identity-on-sections comparison, and r the corresponding fixed derived comparison, heterogeneously equal to sfDerivedImageRestriction. For every cochain complex P of level-n normalized DVR modules on Y, the inverse derived mate of r.inv at Q(P), followed by the restricted low-level pullback localization factor and the restriction factor, equals the high-level pullback of the restriction localization factor, followed by its pullback localization factor and Q of the ordinary inverse mate of r0.inv at P. There is no coefficient system, evaluation functor or quotient-system transition in this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E (lemma-derived-pushforward-composition) and 0D6J (lemma-modules-abelian-unbounded), together with the canonical derived adjunction unit formula. Agent-written specialization to the finite scalar comparison."
+ },
+ "stmt_deps": [
+  "def-strict-coefficient-system-operation-data",
+  "def-weil-pbc-adjunction-mate",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use derivedη_fac_app at the homotopy quotient to compute the transpose of a localized cochain map under the canonical derived adjunction. After cancelling the quotient identity factors it is Q of the ordinary transpose followed by the all-complex right-derived unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the high-level derived adjunction Hom bijection to the proposed mate equation. Compute the ordinary inverse-mate transpose and the derived inverse-mate transpose using unit_mateEquiv_symm. Move the localization factor across the specified derived comparison by naturality. Substitute compactSupportScalarDirectNormalization, then use naturality of the exact restriction localization factor. Injectivity proves equality; transport both ordinary restriction functors with their additive/exactness instances to the equal adjacent-quotient presentations. No preservation of K-injectives by restriction is asserted.",
+   "uses": [
+    "lem-weil-compact-support-scalar-direct-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-compact-support-scalar-direct-normalization",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, with canonical mate and localization-factor calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact localization preserves inverse adjunction mates of a scalar restriction direct image square",
+   "results": "Eight hits, including Adjunction.localization, localization_unit_app, localization_counit_app, derived, derived′, derived′_unit and derived′_counit. None states the fixed geometric quotient or its canonical derived scalar comparison normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the unit/mate API in the categorical argument; no duplicate statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact pullback of sheaves on an inverse sequence site commutes with evaluation and quotient transitions, where scalar restriction pullback comparison is the mate of derived direct image scalar restriction",
+   "results": "Eight hits: SheafOfModules.pullbackComp, conjugateEquiv_pullbackComp_inv, pullback_assoc and free-module pullback formulas; no fixed sequence-site quotient square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "One hit: the component unit identity for inverse mates, in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-28",
+   "verdict": "Used for the categorical mate calculation; does not state the geometric coefficient square."
+  },
+  {
+   "tool": "grep",
+   "query": "unitNormalized|derived_mate_factors|ordinaryPullTransition",
+   "results": "Mathlib search has no hits. Local searches found compactSupportScalarDirectNormalization and the exact-functor localization factor API, which supply the derived part.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing normalization; isolate only the ordinary cochain geometric calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralPullEvaluationQuotientSquare",
+  "date": "2026-10-28",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient comparisons preserve evaluation and adjunction units/counits: normalization of the derived scalar inverse mate",
+   "via": [
+    "lem-sf-integral-pull-evaluation-quotient-square",
+    "lem-sf-integral-system-direct-evaluation",
+    "lem-sf-integral-system-operation-models",
+    "lem-sf-integral-canonical-system-coherence",
+    "lem-sf-integral-canonical-ambient-models",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralScalarPullbackMateNormalization",
+  "file": "lean/Sheaf/SixFunctors/IntegralScalarPullbackMateNormalization.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralScalarPullback_mateNormalization",
+  "statement": "theorem integralScalarPullback_mateNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n        proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅\n      proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙\n        normalizedDVRModuleRes l E Y (Nat.le_succ n))\n    (hr₀ : HEq r₀ (proEtaleCoefficientDirectImageComparison f\n      (Padic.coefficientExtensionTransition l E (n + 1))).symm)\n    (r : normalizedDVRRes l E X (Nat.le_succ n) ⋙\n        proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅\n      proEtaleConstantDerivedDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙\n        normalizedDVRRes l E Y (Nat.le_succ n))\n    (hr : HEq r\n      (sfDerivedImageRestriction f (Padic.coefficientExtensionTransition l E (n + 1))))\n    (P : CochainComplex (normalizedDVRModules l E Y n) ℤ) :\n    ((mateEquiv (finiteAdj l E f n) (finiteAdj l E f (n + 1))).symm\n        (TwoSquare.mk _ _ _ _ r.inv)).natTrans.app (DerivedCategory.Q.obj P) ≫\n      (normalizedDVRRes l E X (Nat.le_succ n)).map\n        ((Functor.mapDerivedCategoryFactors\n          (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)).hom.app P) ≫\n      (normalizedDVRModuleRes l E X (Nat.le_succ n)).mapDerivedCategoryFactors.hom.app\n        (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n          (.up ℤ)).obj P) =\n    (finiteDerivedPullback l E (n + 1) f).map\n        ((normalizedDVRModuleRes l E Y (Nat.le_succ n)).mapDerivedCategoryFactors.hom.app P) ≫\n      (sfIntrinsicPullback (finiteCoefficientRing l E (n + 2)) f).mapDerivedCategoryFactors.hom.app\n        (((normalizedDVRModuleRes l E Y (Nat.le_succ n)).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      DerivedCategory.Q.map\n        ((NatTrans.mapHomologicalComplex\n          ((mateEquiv\n            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))\n            (sfIntrinsicConstantModuleAdjunction f\n              (finiteCoefficientRing l E (n + 2)))).symm\n          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app P)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T210025-L-1648221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T210025-L-1648221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

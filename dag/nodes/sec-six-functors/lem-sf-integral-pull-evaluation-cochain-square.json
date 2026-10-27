@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-integral-pull-evaluation-cochain-square",
+ "kind": "statement",
+ "title": "Ordinary cochain pullback evaluation respects quotient restriction",
+ "statement": "For a prime l, a finite extension E of Q_l, every scheme map f:X→Y, n≥0, strict coefficient-system cochain complex P on Y, and ordinary scalar/direct-image comparison r0 heterogeneously equal to the inverse canonical identity-on-sections comparison, the actual horizontal transition on the inverse-image complex followed by restriction of its level-n evaluation comparison equals its level-(n+1) evaluation comparison followed by finite intrinsic pullback of the transition and the ordinary inverse adjunction mate of r0.inv. The comparison is integralPullEvaluationComplex, explicitly the inverse of pullbackTensorInverseEvaluationComplex followed by the cochain image of pullbackTensorLevelIntrinsic. No localization, derived direct image, K-injective condition or input normalization occurs.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, and the paragraph preceding Lemma 4.10, printed p. 23. Canonical map identifications are the agent-written specialization of this argument to the fixed sequence-site interfaces."
+ },
+ "stmt_deps": [
+  "def-strict-coefficient-system-operation-data",
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-weil-pbc-adjunction-mate",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "In the abelian module categories, transpose the sectionwise direct-image/evaluation identity. The unit normalization of the intrinsic finite comparison identifies the resulting inverse-image comparison. Quotient restriction and direct image are the identity on underlying sections, so naturality in the horizontal sequence arrow gives the equality of the two pullback composites. The universal property of inverse image and sheafification determines the maps from this unit equation. This works also for n=0 and zero systems.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-pur-completed-pullback-tensor-construction",
+    "def-coef-ringed-sequence-site",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary identity to P.X i in every degree. The cochain comparison integralPullEvaluationComplex is exactly the mapped ordinary comparison with the canonical composition reordering maps. HomologicalComplex.hom_ext identifies the resulting cochain maps; all differentials commute by naturality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, with canonical mate and localization-factor calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact localization preserves inverse adjunction mates of a scalar restriction direct image square",
+   "results": "Eight hits, including Adjunction.localization, localization_unit_app, localization_counit_app, derived, derived′, derived′_unit and derived′_counit. None states the fixed geometric quotient or its canonical derived scalar comparison normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the unit/mate API in the categorical argument; no duplicate statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact pullback of sheaves on an inverse sequence site commutes with evaluation and quotient transitions, where scalar restriction pullback comparison is the mate of derived direct image scalar restriction",
+   "results": "Eight hits: SheafOfModules.pullbackComp, conjugateEquiv_pullbackComp_inv, pullback_assoc and free-module pullback formulas; no fixed sequence-site quotient square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "One hit: the component unit identity for inverse mates, in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-28",
+   "verdict": "Used for the categorical mate calculation; does not state the geometric coefficient square."
+  },
+  {
+   "tool": "grep",
+   "query": "unitNormalized|derived_mate_factors|ordinaryPullTransition",
+   "results": "Mathlib search has no hits. Local searches found compactSupportScalarDirectNormalization and the exact-functor localization factor API, which supply the derived part.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing normalization; isolate only the ordinary cochain geometric calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralPullEvaluationQuotientSquare",
+  "date": "2026-10-28",
+  "group": "H4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient comparisons preserve evaluation and adjunction units/counits: ordinary quotient pullback square",
+   "via": [
+    "lem-sf-integral-pull-evaluation-quotient-square",
+    "lem-sf-integral-system-direct-evaluation",
+    "lem-sf-integral-system-operation-models",
+    "lem-sf-integral-canonical-system-coherence",
+    "lem-sf-integral-canonical-ambient-models",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralPullEvaluationCochainSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralPullEvaluationCochainSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralPullEvaluation_cochainSquare",
+  "statement": "theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n        proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅\n      proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙\n        normalizedDVRModuleRes l E Y (Nat.le_succ n))\n    (hr₀ : HEq r₀ (proEtaleCoefficientDirectImageComparison f\n      (Padic.coefficientExtensionTransition l E (n + 1))).symm)\n    (P : CochainComplex (coefficientSequenceModules l E Y) ℤ) :\n    (NatTrans.mapHomologicalComplex\n        (coefficientSequenceTransition l E X (Nat.le_succ n)) (.up ℤ)).app\n        (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      ((normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ)).map\n        ((integralPullEvaluationComplex l E f n).hom.app P) =\n    (integralPullEvaluationComplex l E f (n + 1)).hom.app P ≫\n      ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 2)) f).mapHomologicalComplex\n        (.up ℤ)).map\n        ((NatTrans.mapHomologicalComplex\n          (coefficientSequenceTransition l E Y (Nat.le_succ n)) (.up ℤ)).app P) ≫\n      (NatTrans.mapHomologicalComplex\n        ((mateEquiv\n            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))\n            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm\n          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app\n        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.integralPullEvaluationComplex",
+   "WeilConjectures.IntegralSystemRealization.integralPullEvaluation_cochainSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T210025-L-1648221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261027T210025-L-1648221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
