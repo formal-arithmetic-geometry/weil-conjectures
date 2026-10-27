@@ -13719,6 +13719,7 @@ public import WeilConjectures.TraceFormula.Specialization.ProperUnitClass
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.SpecialFixedLocus
+public import WeilConjectures.TraceFormula.Specialization.StructuralProduct
 public import WeilConjectures.TraceFormula.Specialization.SupportClosureProper
 public import WeilConjectures.TraceFormula.Specialization.SupportCompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.SupportExchange
