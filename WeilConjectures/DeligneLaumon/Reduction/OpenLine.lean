@@ -21,7 +21,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 For a nonempty open `C` of the projective line over `k₀` and a lisse Weil sheaf `F` punctually
 pure of weight `w`, the compactly supported cohomology `H_c^r(C, F)` has weights at most `w + r`,
-with no ramification condition at infinity (blueprint: `sk-l-dl-general-open-line`). It is the
+with no ramification condition at infinity (blueprint: `det-l-dl-general-open-line`). It is the
 case `j = 𝟙` of the compact-support upper bound for a middle extension on a smooth geometrically
 connected curve (blueprint: `prop-a1-middle-extension-curve-upper`), the middle extension
 `(𝟙)_* F` being `F` itself.
@@ -31,7 +31,7 @@ connected curve (blueprint: `prop-a1-middle-extension-curve-upper`), the middle 
 - `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve`: blueprint
   `thm-a1-curve-upper`.
 - `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine`:
-  blueprint `sk-l-dl-general-open-line`.
+  blueprint `det-l-dl-general-open-line`.
 
 ## References
 
@@ -194,7 +194,7 @@ C --- c ---> ℙ¹_{k₀}
 ```
 
 has weights at most `w + r`, with no ramification restriction at the point at infinity
-(blueprint: `sk-l-dl-general-open-line`). -/
+(blueprint: `det-l-dl-general-open-line`). -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine {C : Scheme.{u}}
     [Nonempty C] [C.Over (Spec (CommRingCat.of k₀))]
     (c : C ⟶ ℙ(ULift.{u} (Fin 2); Spec (CommRingCat.of k₀))) [IsOpenImmersion c]

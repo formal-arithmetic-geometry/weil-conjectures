@@ -61,7 +61,7 @@ they are local since a germ of `𝒪_X[ε]` is a unit as soon as its constant pa
 
 ## Blueprint
 
-- `sk-d-tangent`: points with values in the dual numbers as tangent vectors.
+- `def-wf-lie-algebra-derivation`: points with values in the dual numbers as tangent vectors.
 -/
 
 @[expose] public section
@@ -455,7 +455,7 @@ variable (X : Scheme.{u})
 
 /-- The dual-number thickening `X[ε]` of a scheme `X`: the same underlying space with structure
 sheaf `𝒪_X[ε] = 𝒪_X ⊕ ε𝒪_X`, the relative spectrum of the sheaf of algebras `𝒪_X[ε]`.
-(blueprint: `sk-d-tangent`) -/
+(blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def dualNumbers : Scheme.{u} where
   __ := X.toLocallyRingedSpace.dualNumbers
   local_affine x := by

@@ -273,7 +273,7 @@ instance Etale.faithful_boundedConstructibleIntegral_ι_comp_rightDerivedLowerSt
         i).rightDerivedFunctor).Faithful :=
   inferInstance
 
-/-- Blueprint `def-weil-rationalization-karoubi`: Rationalization (scalar localization), the
+/-- Blueprint `def-sfb-rationalization-quotient`: Rationalization (scalar localization), the
 category `Dᵇc(Y, E) = Dᵇc(Y, 𝒪_E)[1/ϖ_E]` (as its full subcategory, with no Karoubi completion).
 
 The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
@@ -289,8 +289,8 @@ def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
     Nonempty ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L ≅ K)
 
 /-- The Karoubi envelope of the rational stage `Dᵇc(X, E)` of blueprint
-`def-weil-rationalization-karoubi` (which takes no Karoubi completion; the canonical functor into
-the envelope is an equivalence by `lem-weil-rationalization-idempotent-complete`): the Karoubi
+`def-sfb-rationalization-quotient` (which takes no Karoubi completion; the canonical functor into
+the envelope is an equivalence, the rationalization being idempotent complete): the Karoubi
 envelope of the rationalization of `Dᵇc(X, 𝒪_E)`. -/
 abbrev Etale.DerivedCategoryBoundedConstructibleRational (X : Scheme.{u}) :=
   Idempotents.Karoubi (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory
@@ -358,13 +358,12 @@ instance ProEtale.full_adicLowerStar : (ProEtale.adicLowerStar l i).Full :=
 instance ProEtale.faithful_adicLowerStar : (ProEtale.adicLowerStar l i).Faithful :=
   (ProEtale.adicUpperStarLowerStarAdjunction l i).fullyFaithfulROfIsIsoCounit.faithful
 
-/-- Blueprint `def-weil-algebraically-closed-coefficients`: Algebraically closed coefficient
-category
+/-- Algebraically closed coefficient category.
 
 The stage `ℚ̄_ℓ` of `Dᵇc(X, ℚ̄_ℓ)`: bounded complexes of sheaves of modules over the
 constant `ℓ`-adic sheaf `ℚ̄_ℓ,X` with constructible cohomology sheaves
-(`AlgebraicGeometry.ProEtale.adicConstructibleSheaf`), the `2`-colimit over finite `E ⊆ ℚ̄_ℓ` of
-blueprint `def-weil-algebraically-closed-coefficients` realised in the Bhatt–Scholze model. -/
+(`AlgebraicGeometry.ProEtale.adicConstructibleSheaf`), the `2`-colimit over finite `E ⊆ ℚ̄_ℓ`
+realised in the Bhatt–Scholze model. -/
 abbrev ProEtale.DerivedCategory.boundedConstructibleAdic (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory (ProEtale.AdicSheaf l X)) :=
   DerivedCategory.TStructure.t.bounded ⊓

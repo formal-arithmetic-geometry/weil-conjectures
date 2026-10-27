@@ -198,7 +198,7 @@ theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [
 field `k`, given by its structure morphism `f : X ⟶ Spec k`. Then the image in `X` of the set
 `X(k)` of `k`-rational points is Zariski dense.
 
-(blueprint: `sk-prop-picard-dense-points`, `lem-pc-rational-points-dense`) -/
+(blueprint: `det-prop-picard-dense-points`, `lem-pc-rational-points-dense`) -/
 theorem Hom.denseRange_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smooth f] :
     DenseRange fun p : f.fieldPoints k ↦ (p.1.base default : X) := by
   refine f.dense_setOf_isClosed_finite_isSeparable.mono fun x hx ↦ ?_
@@ -326,7 +326,7 @@ is a closed point, so if there were only finitely many of them, their union woul
 by `AlgebraicGeometry.Scheme.Hom.denseRange_fieldPoints`, equal to `X`; then `X` would be a
 finite discrete space, of dimension zero, whereas the curve `X` has dimension one.
 
-(blueprint: `sk-prop-picard-dense-points`, `cor-pc-dense-points-curves-sections`, part (3)) -/
+(blueprint: `det-prop-picard-dense-points`, `cor-pc-dense-points-curves-sections`, part (3)) -/
 theorem Hom.infinite_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k)))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
     Infinite (f.fieldPoints k) := by

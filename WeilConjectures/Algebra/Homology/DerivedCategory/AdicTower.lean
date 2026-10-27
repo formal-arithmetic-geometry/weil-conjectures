@@ -192,7 +192,7 @@ include hT in
 /-- If `T₁` is exact in degree `i + 1`, the transition `T_{n+1} ⟶ Tₙ` is an epimorphism on
 `Hⁱ`: it factors as `T_{n+1} ⟶ coker(ϖⁿ) ⟶ Tₙ`, the second map being a quasi-isomorphism, and
 the kernel `ϖⁿ T_{n+1} ≅ coker(ϖ on T_{n+1})` of the first one is quasi-isomorphic to `T₁`
-(blueprint: `sk-prop-trace-adic`, right exactness in the top degree). -/
+(right exactness in the top degree). -/
 lemma epi_homologyMap_map (i : ℤ) (h₁ : (T.obj (op 1)).ExactAt (i + 1)) (n : ℕ) :
     Epi (HomologicalComplex.homologyMap (T.map (homOfLE n.le_succ).op) i) := by
   let X := T.obj (op (n + 1))

@@ -18,24 +18,23 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tri
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ` with ring of integers `𝒪_E`. The integral stage
 `D_comp(X_proét, 𝒪_E)` consists of the derived complete objects of `D(X_proét, 𝒪_E)`
 (`DerivedCategoryDerivedCompleteIntegral`), and the rational stage `D_comp(X_proét, E)` is its
-rationalization (`DerivedCategoryDerivedCompleteRational`), the category of
-`def-weil-pbc-rational-category`. Following the blueprint, the operations of the rational stage
-are obtained by transport from the integral stage (`prop-weil-pbc-rational-transport`,
-`CategoryTheory.Rationalization.map`): the integral operations, `K ↦ (F K)^` for the plain
+rationalization (`DerivedCategoryDerivedCompleteRational`). Following the blueprint, the
+operations of the rational stage are obtained by transport from the integral stage
+(`CategoryTheory.Rationalization.map`): the integral operations, `K ↦ (F K)^` for the plain
 operation `F`, are `𝒪_E`-linear triangulated functors between the integral stages.
 
 * `AlgebraicGeometry.ProEtale.integralRightDerivedLowerShriek`: the integral compact-support
   direct image `K ↦ (Rf_! K)^`, and `rationalRightDerivedLowerShriek` its transport to the rational
-  stages (`def-weil-integral-rational-qbar-compact-support`).
+  stages.
 * `AlgebraicGeometry.ProEtale.rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap`:
   the rational compact-support exchange map, the transport of the completed one.
 
 ## Main statements
 
-- `isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`
-  (`thm-cbc-finite-extension`).
-- `AlgebraicGeometry.ProEtale.nonempty_iso_fromIntegral_integralRightDerivedLowerShriek`
-  (`lem-weil-compact-support-representative-independence`).
+- `isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`: compact-support
+  base change over a finite extension `E` of `ℚ_ℓ`.
+- `AlgebraicGeometry.ProEtale.nonempty_iso_fromIntegral_integralRightDerivedLowerShriek`: the
+  rational compact-support direct image does not depend on the integral representative.
 -/
 
 @[expose] public section
@@ -128,22 +127,19 @@ instance linear_integralOperation [F.Linear 𝐎] : (integralOperation l E F).Li
 end
 
 /-- The integral compact-support direct image `K ↦ (Rf_!(c) K)^ = R lim_n Rf_!(c) K_n` of a
-compactification `c` of `f` (blueprint `def-weil-integral-rational-qbar-compact-support`, at the
-integral stage). -/
+compactification `c` of `f`. -/
 noncomputable abbrev integralRightDerivedLowerShriek {f : X ⟶ Y} (c : Compactification f) :
     𝐃𝐜(X) ⥤ 𝐃𝐜(Y) :=
   integralOperation l E Rf_!(c)[ModuleCat.{u + 1} 𝐎]
 
-/-- Blueprint `def-weil-integral-rational-qbar-compact-support`, at the rational stage `E`: the
-compact-support direct image `D_comp(X_proét, E) ⥤ D_comp(Y_proét, E)` of a compactification `c`
-of `f`, the transport to the rationalizations of the integral compact-support direct image
-(`CategoryTheory.Rationalization.map`). -/
+/-- The compact-support direct image `D_comp(X_proét, E) ⥤ D_comp(Y_proét, E)` at the rational
+stage `E` of a compactification `c` of `f`, the transport to the rationalizations of the
+integral compact-support direct image (`CategoryTheory.Rationalization.map`). -/
 noncomputable abbrev rationalRightDerivedLowerShriek {f : X ⟶ Y} (c : Compactification f) :
     𝐃𝐐(X) ⥤ 𝐃𝐐(Y) :=
   Rationalization.map 𝐌 (integralRightDerivedLowerShriek l E c)
 
-/-- Blueprint `lem-weil-compact-support-representative-independence`: Independence of the integral
-representative.
+/-- Independence of the integral representative.
 
 Let `K, K' ∈ D_comp(X_proét, 𝒪_E)` be integral complexes representing the same object of the
 rationalized category `D_comp(X_proét, E)`. Then the rationalizations `(Rf_! K) ⊗ E` and
@@ -197,8 +193,7 @@ lemma integralRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
 /-- The rational compact-support exchange map `Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` on the rational
 stage `D_comp(X_proét, E)`, the transport to the rationalizations
 (`CategoryTheory.Rationalization.mapNatTrans`) of the integral exchange map
-`AlgebraicGeometry.ProEtale.integralRightDerivedLowerShriekOfCompactificationBaseChangeMap`
-(blueprint `prop-weil-pbc-rational-transport`). -/
+`AlgebraicGeometry.ProEtale.integralRightDerivedLowerShriekOfCompactificationBaseChangeMap`. -/
 noncomputable def rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rationalization.map 𝐌
@@ -208,21 +203,21 @@ noncomputable def rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap
   Rationalization.mapNatTrans 𝐌
     (integralRightDerivedLowerShriekOfCompactificationBaseChangeMap l E sq c)
 
-/-- Blueprint `thm-cbc-finite-extension`: Compact-support base change over a finite extension.
+/-- Compact-support base change over a finite extension.
 
 For a finite extension `E/ℚ_ℓ`, a cartesian square `g' ≫ f = f' ≫ g` with `g` arbitrary and a
 compactification `c` of `f` (`def-cbc-compact-support-square`), and an object of the rational
-stage `D_comp(X_proét, E)` (`def-weil-pbc-rational-category`) given by an integral lattice
-`K ∈ D_comp(X_proét, 𝒪_E)` whose reductions `K_n = K ⊗ᴸ 𝒪_E/𝔪_Eⁿ` carry étale-origin witnesses,
-the rational compact-support exchange map `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` is an isomorphism in
-`D_comp(Y'_proét, E)`. It is natural, being a component of a natural transformation, and it
-does not depend on the lattice: it is the component at the rationalization of `K` of a natural
-transformation of functors on the rational stage
+stage `D_comp(X_proét, E)` given by an integral lattice `K ∈ D_comp(X_proét, 𝒪_E)` whose
+reductions `K_n = K ⊗ᴸ 𝒪_E/𝔪_Eⁿ` carry étale-origin witnesses, the rational compact-support
+exchange map `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` is an isomorphism in `D_comp(Y'_proét, E)`. It is
+natural, being a component of a natural transformation, and it does not depend on the lattice:
+it is the component at the rationalization of `K` of a natural transformation of functors on the
+rational stage
 (`AlgebraicGeometry.ProEtale.rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap`).
 
 The isomorphism is transported from the integral one, `thm-cbc-complete-proetale`
-(`isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`),
-along the rationalization (`prop-weil-pbc-rational-transport`). -/
+(`isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`), along the
+rationalization. -/
 theorem isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃𝐜(X))
     (Kn : ∀ n : ℕ, _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X)

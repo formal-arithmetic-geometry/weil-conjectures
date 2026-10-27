@@ -19,7 +19,7 @@ Let `I` be a directed preorder (in the application, the finite subextensions `E 
 cocycle condition (`CategoryTheory.StageSystem`). In the application `C E = D^b_c(T, E)` and
 `T_{F/E} = F ⊗ᴸ_E -` is the derived extension of scalars.
 
-The *pair category* `S.PairCategory` (blueprint `def-weil-pbc-finite-stage-pair-category`) has
+The *pair category* `S.PairCategory` has
 as objects the pairs `(i, x)` with `x : C i`, and as morphisms `(i, x) ⟶ (j, y)` the filtered
 colimit
 ```
@@ -45,8 +45,7 @@ this construction: only the cocycle condition of the associators is used.
 ## Main statements
 
 - `CategoryTheory.StageSystem.PairCategory.mkHom_eq_mkHom_iff`: two morphisms represented at a
-  stage `n` are equal if and only if they become equal at some further stage
-  (blueprint `prop-weil-pbc-common-stage-calculus`).
+  stage `n` are equal if and only if they become equal at some further stage.
 - `CategoryTheory.StageSystem.PairCategory.exists_mkHom_eq`: every morphism is represented at
   every sufficiently large stage.
 -/
@@ -65,7 +64,7 @@ variable {I : Type w} [Preorder I] (C : I → Type u) [∀ i, Category.{v} (C i)
 `T h : C i ⥤ C j` for `h : i ≤ j` together with associators `T h ⋙ T h' ≅ T (h.trans h')` which
 satisfy the cocycle condition (the associativity constraint of a pseudofunctor). In the
 application these are the derived extensions of scalars `T_{F/E} = F ⊗ᴸ_E -` between the
-finite coefficient stages, with the associators of blueprint `prop-weil-pbc-scalar-extension`. -/
+finite coefficient stages, with their associators. -/
 structure StageSystem where
   /-- The transition functors. -/
   T : ∀ {i j : I}, i ≤ j → (C i ⥤ C j)
@@ -89,8 +88,7 @@ lemma cocycle_inv {i j k m : I} (hij : i ≤ j) (hjk : j ≤ k) (hkm : k ≤ m) 
   conv_rhs => rw [S.cocycle]
   simp [← Functor.map_comp]
 
-/-- The transport `u ↦ u_p = a⁻¹ ≫ T u ≫ a` of a morphism at the stage `n` to a stage `p ≥ n`
-(blueprint `def-weil-pbc-finite-stage-pair-category`). -/
+/-- The transport `u ↦ u_p = a⁻¹ ≫ T u ≫ a` of a morphism at the stage `n` to a stage `p ≥ n`. -/
 def tr {i j n p : I} {hi : i ≤ n} {hj : j ≤ n} (h : n ≤ p) {x : C i} {y : C j}
     (f : (S.T hi).obj x ⟶ (S.T hj).obj y) :
     (S.T (hi.trans h)).obj x ⟶ (S.T (hj.trans h)).obj y :=
@@ -111,7 +109,7 @@ lemma tr_comp {i j k n p : I} {hi : i ≤ n} {hj : j ≤ n} {hk : k ≤ n} (h : 
   simp [tr]
 
 /-- Transport along `n ≤ p ≤ q` is the transport along `n ≤ q`: this is where the cocycle
-condition is used (blueprint `prop-weil-pbc-common-stage-calculus`, `(u_N)_P = u_P`). -/
+condition is used (`(u_N)_P = u_P`). -/
 @[simp]
 lemma tr_tr {i j n p q : I} {hi : i ≤ n} {hj : j ≤ n} (h : n ≤ p) (h' : p ≤ q) {x : C i}
     {y : C j} (f : (S.T hi).obj x ⟶ (S.T hj).obj y) :
@@ -147,7 +145,7 @@ lemma tr_injective {i j n p : I} {hi : i ≤ n} {hj : j ≤ n} (h : n ≤ p) {x 
 
 variable (S)
 
-/-- The *pair category* of a stage system (blueprint `def-weil-pbc-finite-stage-pair-category`):
+/-- The *pair category* of a stage system:
 an object is a pair `(i, x)` of a stage `i` and an object `x : C i`. -/
 @[ext, nolint unusedArguments]
 structure PairCategory (S : StageSystem C) where
@@ -269,7 +267,7 @@ lemma mkHom_tr {X Y : S.PairCategory} {n p : I} {hX : X.stage ≤ n} {hY : Y.sta
   (mkHom_eq_mkHom_iff' _ _).2 ⟨p, le_rfl, h, by simp⟩
 
 /-- Two morphisms represented at the same stage `n` are equal if and only if they become equal
-at some stage `p ≥ n` (blueprint `prop-weil-pbc-common-stage-calculus`). -/
+at some stage `p ≥ n`. -/
 lemma mkHom_eq_mkHom_iff {X Y : S.PairCategory} {n : I} {hX : X.stage ≤ n} {hY : Y.stage ≤ n}
     (u u' : X.toStage hX ⟶ Y.toStage hY) :
     mkHom n hX hY u = mkHom n hX hY u' ↔
@@ -325,8 +323,7 @@ open PairCategory
 
 variable [IsDirectedOrder I]
 
-/-- The pair category is a category (blueprint `def-weil-pbc-finite-stage-pair-category` and
-`prop-weil-pbc-common-stage-calculus`). -/
+/-- The pair category is a category. -/
 noncomputable instance : Category.{max w v} S.PairCategory where
   toCategoryStruct := categoryStruct S
   id_comp f := by
@@ -435,8 +432,7 @@ lemma ι_map_eq_isoToStage {X Y : S.PairCategory} {n : I} (hX : X.stage ≤ n)
   simp [mkHom_eq_isoToStage hX hY u]
 
 variable (S) in
-/-- The identification `j_j ∘ T_{j/i} ≅ j_i` (blueprint `def-weil-pbc-finite-stage-pair-category`,
-the isomorphisms `(E, K) ≅ (F, T_{F/E} K)`). -/
+/-- The identification `j_j ∘ T_{j/i} ≅ j_i` (the isomorphisms `(E, K) ≅ (F, T_{F/E} K)`). -/
 noncomputable def transIso {i j : I} (h : i ≤ j) : S.T h ⋙ S.ι j ≅ S.ι i :=
   NatIso.ofComponents (fun x ↦ (S.isoToStage ⟨i, x⟩ h).symm) (fun {x y} f ↦ by
     dsimp [isoToStage]
@@ -473,7 +469,7 @@ lemma transIso_hom_app_mkHom_transIso_inv_app {n p : I} (h : n ≤ p) {x y : C n
   exact Category.comp_id _
 
 variable (S) in
-/-- Blueprint `sk-prop-trace-adic` (iii), the stage `ℚ̄_ℓ`: in the filtered 2-colimit of a stage
+/-- The stage `ℚ̄_ℓ`: in the filtered 2-colimit of a stage
 system (in the application, `Dᵇc(X, ℚ̄_ℓ)` as the colimit of the categories `Dᵇc(X, E)` over the
 finite extensions `E/ℚ_ℓ`) every object and every morphism is represented at a finite stage, and
 two representatives at a stage define the same morphism if and only if they agree after a further

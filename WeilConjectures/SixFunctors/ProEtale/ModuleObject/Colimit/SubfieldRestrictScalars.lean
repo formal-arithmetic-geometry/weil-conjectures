@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIso
 public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
 public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComapFiniteFree
@@ -103,27 +104,6 @@ lemma pushHomOfComapIso_restrictFullyFaithful_app_hom
   simp [pushHomOfComapIso, mateEquiv, hu, hc, he'']
 end CategoryTheory.Adjunction
 
-namespace CategoryTheory.Functor
-
-variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D] [HasDerivedCategory C]
-  [HasDerivedCategory D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
-  [PreservesFiniteColimits F]
-
-/-- An exact functor between abelian categories which reflects isomorphisms induces a functor on
-the derived categories which reflects isomorphisms: a morphism is an isomorphism iff it is one on
-all cohomology objects, and `F.mapDerivedCategory` commutes with cohomology. -/
-lemma reflectsIsomorphisms_mapDerivedCategory_of_reflectsIsomorphisms [F.ReflectsIsomorphisms] :
-    F.mapDerivedCategory.ReflectsIsomorphisms where
-  reflects f _ := by
-    rw [DerivedCategory.isIso_iff]
-    intro n
-    have : IsIso (F.map ((DerivedCategory.homologyFunctor C n).map f)) :=
-      (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso n) f).2
-        (by rw [Functor.comp_map]; infer_instance)
-    exact isIso_of_reflects_iso _ F
-
-end CategoryTheory.Functor
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
@@ -217,7 +197,7 @@ instance reflectsIsomorphisms_mapDerivedCategory_comap_padicSubfieldRingObjMap :
       Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F) ⥤
         Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)
       ).mapDerivedCategory.ReflectsIsomorphisms :=
-  Functor.reflectsIsomorphisms_mapDerivedCategory_of_reflectsIsomorphisms _
+  Functor.reflectsIsomorphisms_mapDerivedCategory_of_faithful _
 
 /-- The restriction of scalars on bounded constructible complexes reflects isomorphisms, as the
 restriction of scalars on the derived categories does. -/

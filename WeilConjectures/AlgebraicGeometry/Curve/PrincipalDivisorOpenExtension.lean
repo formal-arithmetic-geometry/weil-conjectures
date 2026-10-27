@@ -75,7 +75,7 @@ private theorem ring_ordFrac_equiv {R S K L : Type u}
 namespace AlgebraicGeometry
 
 /-- Order is invariant under compatible isomorphisms of local rings and function fields.
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine, first paragraph,
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph,
 restriction and boundary divisors.
 
 Proof: if the common coheight is not one, both orders are zero by definition. Otherwise
@@ -113,7 +113,7 @@ private theorem ord_eq_of_stalk_equiv
 
 
 /-- A principal divisor on the open curve has a principal extension with identical orders.
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine, first paragraph,
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph,
 restriction and boundary divisors
 (blueprint: lem-sc-principal-divisor-open-extension).
 

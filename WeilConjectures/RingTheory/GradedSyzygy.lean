@@ -20,7 +20,7 @@ import WeilConjectures.RingTheory.SecondSyzygyTorVanishes
 /-!
 # Graded syzygies over the two-variable polynomial ring
 
-Source: Weil conjectures blueprint, `sec-picard-framework/sk-thm-picard-duality`,
+Source: Weil conjectures blueprint, `sec-picard-framework/det-thm-picard-duality`,
 `lem-sc-p1-graded-resolution`, proof, first sentence (blueprint: lem-sc-p1-graded-syzygy).
 -/
 

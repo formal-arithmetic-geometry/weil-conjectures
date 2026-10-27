@@ -26,7 +26,7 @@ and the comparison of the pullbacks is compatible with the square isomorphisms o
 
 This is the underived input of the compatibility of the derived base change of the extension by
 zero with the coefficient comparisons, used for the compatible systems of Frobenius coefficient
-morphisms (blueprint `prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+morphisms.
 -/
 
 @[expose] public section

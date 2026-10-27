@@ -44,7 +44,7 @@ have, alongside `Representation.tprod` and `Representation.dual`:
 ## Blueprint
 
 `Representation.detCharacter` implements part of `sk-d-weights`. `Representation.exteriorPower`
-is the exterior power `⋀^s V` of `sk-d-linear`, and `⋀^r V` for `r = dim V` its determinant
+is the exterior power `⋀^s V` of `det-d-linear`, and `⋀^r V` for `r = dim V` its determinant
 representation.
 -/
 
@@ -91,7 +91,7 @@ end Equiv
 
 /-- The representation induced on the `s`-th exterior power `⋀^s V`, by functoriality of the
 exterior power. The name shadows the root namespace `exteriorPower`, whose declarations are
-therefore spelled `_root_.exteriorPower.*` below. (blueprint: `sk-d-linear`) -/
+therefore spelled `_root_.exteriorPower.*` below. (blueprint: `det-d-linear`) -/
 noncomputable def exteriorPower (ρ : Representation k W V) (s : ℕ) :
     Representation k W ↥(⋀[k]^s V) where
   toFun w := _root_.exteriorPower.map s (ρ w)
@@ -244,7 +244,7 @@ theorem hasEigenvalue_inv {g : G} {α : k} (h : Module.End.HasEigenvalue (ρ g) 
       rw [← hgv, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
 
 /-- The eigenvalues of `g` on the dual representation are those of `g⁻¹` on `V`
-(`sk-p-linear-spectra`). -/
+(`p-linear-spectra`). -/
 theorem hasEigenvalue_dual_iff [FiniteDimensional k V] {g : G} {α : k} :
     Module.End.HasEigenvalue (ρ.dual g) α ↔ Module.End.HasEigenvalue (ρ g⁻¹) α := by
   have h : ρ.dual g = (ρ g⁻¹).dualMap := by

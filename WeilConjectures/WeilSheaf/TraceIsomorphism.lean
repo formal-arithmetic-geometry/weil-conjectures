@@ -340,7 +340,7 @@ theorem traceIsomorphism_adicConstant :
   exact ⟨exists_linearEquiv_cohomology_zero_adicConstant k₀ l X, htw, htop,
     fun h ↦ (hprop h).2⟩
 
-/-- Blueprint `thm-pod-qbar-coefficient-pairing`: Poincaré duality over `ℚ̄_ℓ`, for the constant
+/-- Blueprint `thm-pod-derived-poincare-duality`: Poincaré duality over `ℚ̄_ℓ`, for the constant
 sheaf. Let `X₀` be smooth, separated, of finite type and geometrically connected of pure
 dimension `d` over `k₀ = 𝔽_q`, and `F` the geometric Frobenius. Over `ℚ̄_ℓ`:
 

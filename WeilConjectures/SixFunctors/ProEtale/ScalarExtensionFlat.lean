@@ -102,7 +102,7 @@ theorem isIso_biproductDesc_sheafExtendScalarsAdjunction_unit [Module.Finite R S
     intro U
     have : IsIso (biproduct.desc fun i ↦ ((CategoryTheory.evaluation _ _).obj U).map (ψ i)) :=
       hU U
-    exact Functor.isIso_map_biproductDesc ((CategoryTheory.evaluation _ _).obj U) ψ
+    exact (Functor.isIso_map_biproductDesc ((CategoryTheory.evaluation _ _).obj U) ψ).2 this
   have he : (biproduct.desc fun i ↦ (sheafToPresheaf _ _).map
       ((sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app F ≫
         (sheafCompose (Scheme.ProEt.topology X)
@@ -127,10 +127,11 @@ theorem isIso_biproductDesc_sheafExtendScalarsAdjunction_unit [Module.Finite R S
           (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map ((b i : S) • 𝟙 _))) := by
     have : IsIso (biproduct.desc ψ ≫ t) := inferInstance
     rwa [← he] at this
-  have := Functor.isIso_map_biproductDesc (sheafToPresheaf _ _) (φ := fun i ↦
+  have := Functor.isIso_map_biproductDesc (sheafToPresheaf _ _) (g := fun i ↦
       (sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app F ≫
         (sheafCompose (Scheme.ProEt.topology X)
           (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map ((b i : S) • 𝟙 _))
+    |>.2 inferInstance
   exact isIso_of_reflects_iso _ (sheafToPresheaf _ _)
 
 end AlgebraicGeometry.ProEtale

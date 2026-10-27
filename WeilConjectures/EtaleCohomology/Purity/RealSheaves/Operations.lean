@@ -19,10 +19,10 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 /-!
 # Linear-algebra operations on lisse Weil sheaves
 
-The operations of `sk-d-real-operations` and `sk-r-real-linear` on lisse Weil representations:
-subquotients, finite direct sums, exterior powers and the determinant line of a lisse Weil
-representation are again lisse, and an exterior power of a Weil representation whose local
-characteristic polynomials are those of an `ι`-real one is again `ι`-real.
+The operations of `def-real-weil-representation-operations` and `sk-r-real-linear` on lisse Weil
+representations: subquotients, finite direct sums, exterior powers and the determinant line of a
+lisse Weil representation are again lisse, and an exterior power of a Weil representation whose
+local characteristic polynomials are those of an `ι`-real one is again `ι`-real.
 
 Lisseness is checked on the coefficients `g ↦ φ (ρ g v)` of the geometric part
 (`AlgebraicGeometry.WeilGroup.IsLisse.continuous_apply` and
@@ -334,7 +334,7 @@ theorem IsReal.exteriorPower_of_charpoly_eq {σ : Representation (PadicAlgCl l) 
 /-- Blueprint `lem-tw-dual-negation`: Weight of the linear dual.
 
 The dual of a sheaf punctually pure of weight `w` is punctually pure of weight `-w`: the
-local eigenvalues of the dual are the inverses of those of `ρ` (`sk-p-linear-spectra`), and
+local eigenvalues of the dual are the inverses of those of `ρ` (`p-linear-spectra`), and
 inverses have the negative weight (`lem-tw-multiplicativity`). -/
 theorem IsPunctuallyPure.dual {w : ℝ} (h : W.IsPunctuallyPure l ρ ι w) :
     W.IsPunctuallyPure l ρ.dual ι (-w) := by

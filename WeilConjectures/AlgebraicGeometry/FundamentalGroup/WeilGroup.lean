@@ -53,7 +53,7 @@ Frobenius (`AlgebraicGeometry.Scheme.FiniteEtale.mem_weilGroup_iff`).
 
 `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` and
 `AlgebraicGeometry.Scheme.FiniteEtale.weilGroupDeg` implement `def-wf-weil-group`
-(subsection `sk-d-geometry`). The exactness of `1 → ker → W(X₀, s) → ℤ → 0`
+(subsection `det-d-geometry`). The exactness of `1 → ker → W(X₀, s) → ℤ → 0`
 (`lem-wf-weil-group-exact-sequence`) is `MonoidHom.exact_weilGroupDeg`.
 -/
 

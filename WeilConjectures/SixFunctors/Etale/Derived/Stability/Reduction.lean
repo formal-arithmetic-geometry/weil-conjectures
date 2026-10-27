@@ -47,7 +47,7 @@ evaluation, units and counits asserted by the blueprint are not recorded.
 
 The integral and rational parts of clause (vii) are the results of the coefficient chapter:
 `AlgebraicGeometry.Etale.preservationMatrix_integral` (`cor-coef-integral-internal-hom`,
-`lem-coef-integral-hom-reduction`, `prop-coef-integral-exceptional-adjoint`); the integral category
+`lem-coef-integral-hom-reduction`, and the integral exceptional adjoint); the integral category
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral` is defined with a uniform
 Tor bound on the reductions, so `Dᵇc(X, 𝒪_E) = Dctf(X, 𝒪_E)` holds by definition there.
 -/

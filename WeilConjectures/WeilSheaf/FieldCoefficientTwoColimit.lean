@@ -15,9 +15,8 @@ Blueprint `def-weil-weil-sheaf-complex` defines
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`
 
-over the directed set of the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, along the extensions of
-scalars `F ⊗_E -`, with the common-stage construction of blueprint
-`def-weil-algebraically-closed-coefficients`: objects are pairs `(E, K)` and morphisms are
+over the directed set of the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, along the extensions of scalars
+`F ⊗_E -`, with the common-stage construction: objects are pairs `(E, K)` and morphisms are
 represented at a common finite stage. This file makes this a genuine definition:
 
 - the extensions of scalars `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, F)` form a stage system
@@ -211,14 +210,13 @@ noncomputable def FieldWeilComplex.stageSystem :
 /-- Blueprint `def-weil-weil-sheaf-complex`: Weil sheaf and Weil complex, the stage `ℚ̄_ℓ`.
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`, the `2`-colimit over the finite extensions
-`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the categories of `E`-Weil complexes
-(`AlgebraicGeometry.FieldWeilComplex`) along the extensions of scalars `F ⊗_E -`, with the
-common-stage construction of blueprint `def-weil-algebraically-closed-coefficients`: the pair
-category of the stage system `AlgebraicGeometry.FieldWeilComplex.stageSystem`, whose objects are
-the pairs `(E, K)` of a finite stage `E` and an `E`-Weil complex `K`, and whose morphisms
-`(E, K) ⟶ (E', K')` form the filtered colimit over the common finite stages `F ⊇ E, E'` of the
-morphisms `F ⊗_E K ⟶ F ⊗_{E'} K'` (`CategoryTheory.StageSystem.PairCategory`). It maps to the
-`ℚ̄_ℓ`-stage `AlgebraicGeometry.WeilComplex` of `WeilConjectures.WeilSheaf.Category` by
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the categories of `E`-Weil complexes (`AlgebraicGeometry.FieldWeilComplex`)
+along the extensions of scalars `F ⊗_E -`, with the common-stage construction: the pair category of
+the stage system `AlgebraicGeometry.FieldWeilComplex.stageSystem`, whose objects are the pairs
+`(E, K)` of a finite stage `E` and an `E`-Weil complex `K`, and whose morphisms `(E, K) ⟶ (E', K')`
+form the filtered colimit over the common finite stages `F ⊇ E, E'` of the morphisms
+`F ⊗_E K ⟶ F ⊗_{E'} K'` (`CategoryTheory.StageSystem.PairCategory`). It maps to the `ℚ̄_ℓ`-stage
+`AlgebraicGeometry.WeilComplex` of `WeilConjectures.WeilSheaf.Category` by
 `AlgebraicGeometry.WeilComplexTwoColimit.toWeilComplex`. -/
 abbrev WeilComplexTwoColimit (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=

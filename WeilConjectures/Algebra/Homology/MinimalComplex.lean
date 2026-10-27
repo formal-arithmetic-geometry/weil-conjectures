@@ -29,8 +29,7 @@ Let `A` be a commutative local ring with maximal ideal `𝔪`. A cochain complex
 - `CochainComplex.isIso_of_quasiIso_of_isMinimal`: a quasi-isomorphism between bounded above
   minimal complexes of finite free `A`-modules is an isomorphism.
 
-These are the minimal models used in blueprint `prop-trf-adic-coefficient-morphism-systems`
-(minimal models).
+These are the minimal models of perfect complexes over a local ring.
 
 ## Implementation notes
 
@@ -320,7 +319,7 @@ variable [IsLocalRing A]
 
 /-- A cochain complex of modules over a local ring `A` is *minimal* if all its differentials
 take values in `𝔪 • ⊤`, where `𝔪` is the maximal ideal of `A`, i.e. the differentials vanish
-modulo `𝔪`. See blueprint `prop-trf-adic-coefficient-morphism-systems` (minimal models). -/
+modulo `𝔪`. -/
 def IsMinimal (M : CochainComplex (ModuleCat.{v} A) ℤ) : Prop :=
   ∀ (i j : ℤ) (x : M.X i),
     (M.d i j).hom x ∈ IsLocalRing.maximalIdeal A • (⊤ : Submodule A (M.X j))
@@ -352,8 +351,7 @@ lemma IsMinimal.bijective_of_homotopyEquiv {M N : CochainComplex (ModuleCat.{v} 
   exact ⟨h₁.1.of_comp, h₂.2.of_comp⟩
 
 /-- A quasi-isomorphism between bounded above minimal complexes of finite free modules over a
-local ring is an isomorphism of complexes. See blueprint
-`prop-trf-adic-coefficient-morphism-systems` (minimal models). -/
+local ring is an isomorphism of complexes. -/
 theorem isIso_of_quasiIso_of_isMinimal {M M' : CochainComplex (ModuleCat.{v} A) ℤ}
     (α : M ⟶ M') [QuasiIso α] (b b' : ℤ) [M.IsStrictlyLE b] [M'.IsStrictlyLE b']
     [∀ i, Module.Free A (M.X i)] [∀ i, Module.Finite A (M.X i)]
@@ -423,8 +421,7 @@ lemma finrank_kerSubcomplex_X_lt {P : M ⟶ M} (hP : P ≫ P = P) {k : ℤ}
 end KerSubcomplexRank
 
 /-- A strictly bounded complex of finite free modules over a local ring is homotopy equivalent
-to a minimal complex with the same bounds, whose terms are again finite free. See blueprint
-`prop-trf-adic-coefficient-morphism-systems` (minimal models). -/
+to a minimal complex with the same bounds, whose terms are again finite free. -/
 theorem exists_homotopyEquiv_isMinimal (M : CochainComplex (ModuleCat.{v} A) ℤ) (a b : ℤ)
     [M.IsStrictlyGE a] [M.IsStrictlyLE b] [∀ i, Module.Free A (M.X i)]
     [∀ i, Module.Finite A (M.X i)] :

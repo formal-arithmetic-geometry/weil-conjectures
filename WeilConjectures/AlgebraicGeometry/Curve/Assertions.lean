@@ -55,7 +55,7 @@ Spec k' -ι-> Spec k
 The constructibility hypothesis of `C₄` and `C₅` (blueprint: `def-weil-pbc-constructible-torsion`)
 is `AlgebraicGeometry.Scheme.IsConstructibleSheaf`: a finite stratification of `X` by locally
 closed constructible subschemes on each of which `F` is locally constant with finite stalks.
-The pullback map of `C₆` and `C₇` (blueprint: `def-weil-pbc-extension-pullback`) is
+The pullback map of `C₆` and `C₇` (blueprint: `def-weil-pbc-C7`) is
 `AlgebraicGeometry.Etale.cohomologyMap`.
 
 ## Main statements
@@ -123,7 +123,7 @@ def FiniteOfIsProper : Prop :=
 /-- **Assertion `C₆`**: if the torsion of `F` is prime to `char k`, then for every
 algebraically closed extension `k'/k`, given by a cartesian square
 `X' ⟶ X, X' ⟶ Spec k', Spec k' ⟶ Spec k` over `f`, the pullback map
-`Hᵠ(X, F) ⟶ Hᵠ(X', F|_{X'})` (blueprint: `def-weil-pbc-extension-pullback`) is bijective for
+`Hᵠ(X, F) ⟶ Hᵠ(X', F|_{X'})` (blueprint: `def-weil-pbc-C7`) is bijective for
 every `q`. (blueprint: `def-weil-pbc-C6`) -/
 def BaseChangeOfInvertibleOrder : Prop :=
   ∀ [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F]
@@ -134,7 +134,7 @@ def BaseChangeOfInvertibleOrder : Prop :=
 
 /-- **Assertion `C₇`**: if `f : X ⟶ Spec k` is proper, then for every algebraically closed
 extension `k'/k`, given by a cartesian square over `f`, the pullback map
-`Hᵠ(X, F) ⟶ Hᵠ(X', F|_{X'})` (blueprint: `def-weil-pbc-extension-pullback`) is bijective for
+`Hᵠ(X, F) ⟶ Hᵠ(X', F|_{X'})` (blueprint: `def-weil-pbc-C7`) is bijective for
 every `q`, without a restriction on the torsion of `F`. (blueprint: `def-weil-pbc-C7`) -/
 def BaseChangeOfIsProper : Prop :=
   ∀ [IsProper f]

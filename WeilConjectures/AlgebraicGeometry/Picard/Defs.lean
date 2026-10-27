@@ -68,7 +68,7 @@ difference being expressed with the tensor product of modules. The group-theoret
 - `AlgebraicGeometry.picardFunctorNormalized_eq_of_iso_tensorObj`: two `σ`-normalized classes
   which differ by a module pulled back from the base are equal.
 - `AlgebraicGeometry.isSheaf_picardFunctorNormalized`: the `σ`-normalized relative Picard
-  functor is an fppf sheaf (blueprint `sk-cor-picard-pic-sheaf`), hence a Zariski sheaf
+  functor is an fppf sheaf (blueprint `det-cor-picard-pic-sheaf`), hence a Zariski sheaf
   (`AlgebraicGeometry.isSheaf_zariski_picardFunctorNormalized`).
 - `AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`: the relative Picard functor is
   compatible with base change (blueprint `lem-pd-picard-base-change`).
@@ -884,7 +884,7 @@ the corollary carries content. Namely, if `f` has a section `σ` and the canonic
 (`AlgebraicGeometry.isSheaf_fpqc_picardFunctorNormalized`), and every fppf covering is an fpqc
 covering.
 
-(blueprint: `sk-cor-picard-pic-sheaf`, `lem-pc-k-sheaf`) -/
+(blueprint: `det-cor-picard-pic-sheaf`, `lem-pc-k-sheaf`) -/
 theorem isSheaf_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S)
     (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :
     Presheaf.IsSheaf (Scheme.fppfTopology.over S)
