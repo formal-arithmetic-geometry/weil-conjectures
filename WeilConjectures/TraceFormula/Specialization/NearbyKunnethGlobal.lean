@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
+public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobalSections
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.Tactic.ExactModProofs
 
@@ -68,41 +69,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-! ### The ordinary Künneth formula over a separably closed field -/
-
-section OrdinaryKunneth
-
-variable {ℓ : ℕ} [Fact ℓ.Prime] {K : Type u} [Field K] [IsSepClosed K]
-  [Fact (ringChar K).Prime]
-  [Fact (ringChar K ≠ ℓ)] {X Y P : Over (Spec (.of K))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-
-/-- **The ordinary Künneth formula over a separably closed field** (blueprint
-`sk-lem-sf-kunneth-star`, for `f_i : X_i ⟶ Y_i = Spec K`; SGA 4½, [Th. finitude], Cor. 1.11;
-for the `ℓ`-adic coefficient rings by passage to the limit, Bhatt–Scholze §6.8): for
-separated `K`-schemes of finite type `X`, `Y` with product `P = X ×_K Y` and bounded
-constructible `A`, `B`, the Künneth map `RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(X ×_K Y, A ⊠ B)`
-(`ProEtale.CondensedRing.lowerStarKunnethMap'` of the two squares over `Spec K`) is an
-isomorphism. The blueprint node is stated over `k = 𝔽̄_q`; over a separably closed field it
-applies since passing to an algebraic closure does not change the étale topoi (blueprint
-`sk-prop-tf-nearby-external-kunneth`). -/
-theorem isIso_lowerStarKunnethMap'_of_isPullback (p₁ : P.left ⟶ X.left) (p₂ : P.left ⟶ Y.left)
-    (w₁ : p₁ ≫ X.hom = P.hom ≫ 𝟙 _) (w₂ : p₂ ≫ Y.hom = P.hom ≫ 𝟙 _)
-    (h : IsPullback p₁ p₂ X.hom Y.hom)
-    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) A)
-    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)))
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left) B) :
-    IsIso (lowerStarKunnethMap' (Profinite.padicAlgClRingObj ℓ)
-      (⟨w₁⟩ : CommSq p₁ P.hom X.hom (𝟙 _)) (⟨w₂⟩ : CommSq p₂ P.hom Y.hom (𝟙 _)) A B) :=
-  sorry
-
-end OrdinaryKunneth
 
 namespace NearbyCyclesModel
 

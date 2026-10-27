@@ -14,7 +14,6 @@ public import WeilConjectures.TraceFormula.FieldDualizable
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
-public import WeilConjectures.Tactic.NormalizeProofConstant
 public import WeilConjectures.Tactic.ExactModProofs
 
 @[expose] public section
@@ -38,19 +37,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 
 
-
-/-- The transposes along the restricted adjunction `Lf^* ⊣ Rf_*` on `Dᵇc` are those of the ambient
-adjunction. -/
-lemma homEquiv_hom_boundedConstructibleUpperStarLowerStarAdjunction {Y : Over (Spec (.of k))}
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y)
-    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (φ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K ⟶ L) :
-    ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f).homEquiv K L φ).hom =
-      (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).homEquiv
-        K.obj L.obj φ.hom := by
-  rw [boundedConstructibleUpperStarLowerStarAdjunction, Adjunction.restrictFullyFaithful_homEquiv_apply]
-  simp [boundedConstructibleUpperStarCompatibility, boundedConstructibleLowerStarCompatibility,
-    ObjectProperty.liftCompιIso, Adjunction.homEquiv_unit]
 
 /-- The counits of the restricted adjunction `Lf^* ⊣ Rf_*` on `Dᵇc` are those of the ambient
 adjunction. -/
@@ -169,42 +155,6 @@ lemma map_baseChangeMap_app_comp_counit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' �
       counit_app_hom_boundedConstructibleUpperStarLowerStarAdjunction, Category.assoc]
     rfl
   exact H.trans H2.symm
-
-section Bridge
-
-variable {Q X₁ X₂ Y₁ Y₂ : Over (Spec (.of k))}
-  [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] [IsSeparated Q.hom]
-  [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
-  [LocallyOfFiniteType X₂.hom] [QuasiCompact X₂.hom] [IsSeparated X₂.hom]
-  [LocallyOfFiniteType Y₁.hom] [QuasiCompact Y₁.hom] [IsSeparated Y₁.hom]
-  [LocallyOfFiniteType Y₂.hom] [QuasiCompact Y₂.hom] [IsSeparated Y₂.hom]
-
-/-- The oplax structure of the pullback on `Dᵇc` is that of the ambient pullback. -/
-lemma δ_hom_boundedConstructibleUpperStar (q : P ⟶ Q)
-    (A B : Dᵇc(Q.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q)
-      A B).hom = Functor.OplaxMonoidal.δ L((q.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) A.obj B.obj := by
-  normalize_proof_constant AlgebraicGeometry.ProEtale.pointLowerStar._proof_1
-  rfl
-
-/-- The tensor product of objects of `Dᵇc` is the ambient one. -/
-lemma tensorObj_obj_boundedConstructible (A B : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (A ⊗ B).obj = A.obj ⊗ B.obj :=
-  rfl
-
-/-- The direct image on `Dᵇc` is the ambient one on objects. -/
-lemma boundedConstructibleLowerStar_obj_obj' (q : P ⟶ Q)
-    (A : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((boundedConstructibleLowerStar ℓ q).obj A).obj =
-      R((q.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj :=
-  rfl
-
-/-- The tensor product of morphisms of `Dᵇc` is the ambient one. -/
-lemma tensorHom_hom_boundedConstructible {A A' B B' : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
-    (f : A ⟶ A') (g : B ⟶ B') : (f ⊗ₘ g).hom = f.hom ⊗ₘ g.hom :=
-  rfl
-
-end Bridge
 
 /-! ### The Künneth formula on `Dᵇc` -/
 
@@ -360,22 +310,6 @@ lemma lowerStarKunnethMap'_eq_homEquiv_padicAlgCl {X X₁ Y Y₁ Z Z₁ : Scheme
               (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) k).counit.app _))) := by
   exact_mod_proofs lowerStarKunnethMap'_eq_homEquiv (Profinite.padicAlgClRingObj ℓ) sq₁ sq₂ A B
 
-/-- **The ordinary Künneth map on `Dᵇc`**: the ordinary Künneth map of bounded constructible
-complexes (`lowerStarKunnethMap'`) is the underlying morphism of the transpose along
-`Lq^* ⊣ Rq_*` on `Dᵇc` of the oplax structure of `Lq^*` followed by the transported counits
-(`prodUpperStarCounit`). -/
-lemma lowerStarKunnethMap'_eq_hom {q : P ⟶ Q} {p₁ : P ⟶ X₁} {p₂ : P ⟶ X₂} {π₁ : Q ⟶ Y₁}
-    {π₂ : Q ⟶ Y₂} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} (w₁ : q ≫ π₁ = p₁ ≫ f₁)
-    (w₂ : q ≫ π₂ = p₂ ≫ f₂) (sq₁ : CommSq p₁.left q.left f₁.left π₁.left)
-    (sq₂ : CommSq p₂.left q.left f₂.left π₂.left)
-    (B₁ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (B₂ : Dᵇc(X₂.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    lowerStarKunnethMap' (Profinite.padicAlgClRingObj ℓ) sq₁ sq₂ B₁.obj B₂.obj =
-      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ q).homEquiv _ _
-        (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ q)
-          _ _ ≫ (prodUpperStarCounit ℓ w₁ B₁ ⊗ₘ prodUpperStarCounit ℓ w₂ B₂))).hom := by
-  sorry
-
 /-- **The ordinary Künneth formula for global sections**, for squares of morphisms over the base
 point, on bounded constructible complexes. -/
 theorem isIso_lowerStarKunnethMap'_of_isPullback_point {X Y : Over (Spec (.of k))}
@@ -410,37 +344,5 @@ theorem isIso_lowerStarKunnethMap'_of_isPullback_point {X Y : Over (Spec (.of k)
 
 end BridgeKunneth
 
-
-section Final
-
-variable {K : Type u} [Field K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ ℓ)]
-  {X Y P : Over (Spec (.of K))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- **The ordinary Künneth formula over a field**, for global sections. -/
-theorem isIso_lowerStarKunnethMap'_of_isPullback (p₁ : P.left ⟶ X.left)
-    (p₂ : P.left ⟶ Y.left)
-    (w₁ : p₁ ≫ X.hom = P.hom ≫ 𝟙 _) (w₂ : p₂ ≫ Y.hom = P.hom ≫ 𝟙 _)
-    (h : IsPullback p₁ p₂ X.hom Y.hom)
-    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)))
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) A)
-    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)))
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left) B) :
-    IsIso (lowerStarKunnethMap' (Profinite.padicAlgClRingObj ℓ)
-      (⟨w₁⟩ : CommSq p₁ P.hom X.hom (𝟙 _)) (⟨w₂⟩ : CommSq p₂ P.hom Y.hom (𝟙 _)) A B) := by
-  exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback_point ℓ
-    (p₁ := (Over.homMk p₁ (w₁.trans (Category.comp_id _)) : P ⟶ X))
-    (p₂ := (Over.homMk p₂ (w₂.trans (Category.comp_id _)) : P ⟶ Y)) h
-    (q := (Over.homMk P.hom (Category.comp_id _) : P ⟶ point K))
-    (a := (Over.homMk X.hom (Category.comp_id _) : X ⟶ point K))
-    (b := (Over.homMk Y.hom (Category.comp_id _) : Y ⟶ point K))
-    (Over.OverMorphism.ext w₁.symm) (Over.OverMorphism.ext w₂.symm) ⟨w₁⟩ ⟨w₂⟩ ⟨A, hA⟩ ⟨B, hB⟩
-
-end Final
 
 end AlgebraicGeometry.ProEtale.CondensedRing
