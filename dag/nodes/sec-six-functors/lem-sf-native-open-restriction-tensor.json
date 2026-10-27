@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-native-open-restriction-tensor",
+ "kind": "statement",
+ "title": "Normalized native restriction and sheaf tensor",
+ "statement": "Let k₀ be a finite field and let ℓ be a prime different from its characteristic. Let j:U→Z be an open immersion of k₀-schemes. Use the actual native Weil sheaves and pullback of [def-sf-native-weil-derived-framework] and the actual native sheaf tensor of [def-sf-derived-weil-category-and-operations]. For each pair M,N there is an isomorphism j*(M⊗N) ≅ j*M⊗j*N whose underlying forward map is exactly the existing ordinary balanced comparison adicUpperStarTensorLeftIso evaluated at N.carrier and M.carrier. This is an assertion only about sheaves and includes no complex or K-flatness conclusion.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 0E8I (lemma-j-shriek-and-tensor); native open tensor parent step 2"
+ },
+ "proof": [
+  {
+   "text": "Use the actual ordinary balanced coefficient pullback tensor comparison. On a pure tensor, composing restriction and Frobenius in either order pulls back the same two sections and applies their Weil structure maps, since j is over k₀. Balancing and sheafification descend this equality.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-sf-derived-weil-category-and-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
+   }
+  },
+  {
+   "text": "Lift that comparison and its inverse to invertible Frobenius algebras. Faithful forgetting proves naturality and the two inverse identities, and the construction retains exactly the stipulated underlying map.",
+   "uses": [
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-fixed-pair-created-abelian-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Equivariant refinement of the parent step 2; complete proof in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero and pullback tensor projection formula for sheaves of modules with Frobenius action",
+   "results": "8 hits, including SheafOfModules.pullback and Scheme.Modules.pullback. No equivariant tensor normalization.",
+   "date": "2026-10-28",
+   "verdict": "The ordinary pullback does not supply the required Frobenius commuting square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of Frobenius equivariant module sheaves preserves balanced tensor products naturally",
+   "results": "8 hits, including SheafOfModules.pullbackObjFreeIso_hom_naturality and PresheafOfModules.Monoidal.tensorObjMap. No native Weil tensor comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact result; ordinary balanced maps still have to be lifted equivariantly."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero",
+   "results": "msearch Mathlib grep: 0 hits. Project search finds native open data records and lisse Hom comparisons, but no general normalized equivariant sheaf tensor projection theorem.",
+   "date": "2026-10-28",
+   "verdict": "The ordinary site tensor-generator theorem is available, but its native equivariant lift is a genuine remaining step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenSheafTensorExistence",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: the native open factor; parent step 2, sheaves only",
+   "via": [
+    "lem-sf-native-open-sheaf-tensor-existence",
+    "lem-sf-native-open-derived-tensor",
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenRestrictionTensor",
+  "file": "lean/Sheaf/Paper/NativeOpenRestrictionTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_restriction_tensor",
+  "statement": "theorem native_open_restriction_tensor :\n    ∃ rho : ∀ M N : ProEtaleWeilSheaf k₀ l Z,\n      (upperStar k₀ l j).obj (tensor k₀ l Z N M) ≅\n        tensor k₀ l U ((upperStar k₀ l j).obj N) ((upperStar k₀ l j).obj M),\n      ∀ M N, HEq ((rho M N).hom.hom.f)\n        ((ProEtale.adicUpperStarTensorLeftIso l\n          (Scheme.Hom.geometricFiberMap j (comp_over j _)) N.carrier).hom.app M.carrier)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-sf-native-open-sheaf-tensor-existence",
+  "worker": "N4 stage3",
+  "summary": "A strict sheaf-only part of the parent step 2. No adjunction-existence or complex/K-flatness conclusion is restated.",
+  "blueprint": "Retains the native open factor of the unit route; the new nodes are substeps of parent step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "The parent already uses this generic sheaf/site tool for its native open calculation. This split retains that same use to prove only the sheaf step; no unit route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T180716-L-3893173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T180716-L-3893173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,70 +14,65 @@
  },
  "proof": [
   {
-   "text": "Use the actual module operations of [def-sf-native-weil-derived-framework]. The open is Frobenius-stable because it is defined over $k_0$. By [lem-weil-proetale-weakly-etale-localization] its geometric pro-etale site is the slice at $U$; the localized coefficient sheaf is $B_U=j^{-1}B_Z$, since both assign the same locally finite functions to every slice object. [lem-pur-site-restriction-module-adjunction-exact] gives exact restriction and exact extension, with their specified adjunction. The ordinary open unit is invertible by [lem-sf-native-adic-open-restrictions]; reflection of this property is reserved for the assembling theorem. These maps lift to Weil sheaves: restriction sends a section to itself, the open unit sends $x$ to $[x]$, and the counit sends $[x]$ to $x$ on a factoring object. Frobenius reindexes the factoring object and applies its structure map to $x$, so these formulas commute with it. Thus the underlying adjunction bijection and its inverse restrict to commuting morphisms. [lem-sf-fixed-pair-created-abelian-structure] makes forgetting faithful, exact and conservative, so the lifted operations are exact ; the assembling theorem reflects the invertibility of the ordinary unit. This also shows that $j_{0!}$ reflects acyclicity: apply $j_0^*$ and its unit.",
+   "text": "Construct the actual lifted open adjunction using IsoAlgebra.mapOfNatIsoLeftAdjunction, the existing ordinary open adjunctions, their Frobenius mate equation, and j!→j*. Its unit and counit have the required underlying components by reduction. Forgetting reflects invertibility of its unit because the ordinary open unit is invertible; full faithfulness follows.",
    "uses": [
     "def-sf-native-weil-derived-framework",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-native-adic-open-restrictions",
-    "lem-sf-fixed-pair-created-abelian-structure"
+    "lem-sf-native-adic-open-restrictions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
    }
   },
   {
-   "text": "Apply [lem-sf-ringed-slice-tensor-generators] with $O=B_Z$. For Weil module sheaves $P,T$ the underlying forward map is $[x]_f\\otimes y\\mapsto[x\\otimes y|_U]_f$ and its inverse is $[x\\otimes z]_f\\mapsto[x]_f\\otimes z$. Here the inverse formula is interpreted locally on the slice, exactly as the cited sheaf-map assertion. These maps commute with the Weil structures specified in [def-sf-derived-weil-category-and-operations]: on a pulled-back generator the two orders both give $[\\phi_P(F_U^*x)\\otimes j^*\\phi_T(F_Z^*y)]_{F(f)}$. The coefficient action commutes because restriction and Frobenius both act on functions by precomposition and $jF_U=F_Zj$. Faithfulness of forgetting from step 1 turns this equality on the defining generators into equality of Weil-sheaf maps. The two underlying inverse identities therefore give inverse Weil maps. The same formulas prove naturality in both module morphisms.",
+   "text": "Obtain the pointwise normalized sheaf restriction comparison and normalized pointwise sheaf projection comparison, together with natural sheaf projection comparisons in both tensor orders. The natural comparisons are used only for the chain argument and need not be identified with the pointwise normalized witnesses.",
    "uses": [
-    "lem-sf-ringed-slice-tensor-generators",
+    "lem-sf-native-open-restriction-tensor",
+    "lem-sf-native-open-sheaf-projection-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
+   }
+  },
+  {
+   "text": "Apply the already proved generic comparisonPrecomposeIso machinery in the ringed-open total-tensor module to the inverse sheaf projection maps, once for H and once for H.flip. Extension is a left adjoint, hence preserves the countable coproducts of totalization. The generic natural chain maps retain the signed differential. The canonical mapBifunctorFlipIso relates the two variable orders, including the Koszul signs.",
+   "uses": [
+    "lem-sf-ringed-open-total-tensor-kflat",
     "def-sf-derived-weil-category-and-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
    }
   },
   {
-   "text": "Apply the maps of step 2 in every bidegree and take direct sums. [lem-sf-ringed-open-total-tensor-kflat] supplies the underlying natural chain isomorphism with precisely this direct-sum convention. Coproducts in the Weil category have their underlying coproducts by [lem-sf-fixed-pair-created-abelian-structure]. Therefore the bidegree maps of step 2 assemble to a Weil chain isomorphism $\\Gamma_{P,T}:\\operatorname{Tot}(j_{0!}P\\otimes T)\\cong j_{0!}\\operatorname{Tot}(P\\otimes j_0^*T)$. Explicitly, the two composites with the differential send $[x]_f\\otimes y$ in bidegree $(p,q)$ to $[d_Px\\otimes y|_U]_f+(-1)^p[x\\otimes(d_Ty)|_U]_f$. The inverse has the same bidegrees and signs. Naturality is inherited on every summand, so holds for arbitrary unbounded complexes.",
-   "uses": [
-    "lem-sf-ringed-open-total-tensor-kflat",
-    "lem-sf-fixed-pair-created-abelian-structure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
-   }
-  },
-  {
-   "text": "Check categorical K-flatness directly using the definition in [def-sf-derived-weil-category-and-operations]. If $P$ is K-flat on $U$ and $a:T\\to T'$ is a quasi-isomorphism on $Z$, then $j_0^*a$ is a quasi-isomorphism by step 1. Step 3 identifies $\\operatorname{Tot}(j_{0!}P\\otimes a)$ with $j_{0!}\\operatorname{Tot}(P\\otimes j_0^*a)$, hence it is a quasi-isomorphism. Conversely let $T$ be K-flat on $Z$ and $b:P\\to P'$ a quasi-isomorphism on $U$. Step 3 identifies $j_{0!}\\operatorname{Tot}(b\\otimes j_0^*T)$ with $\\operatorname{Tot}(j_{0!}b\\otimes T)$, which is a quasi-isomorphism. Reflection of acyclicity by $j_{0!}$ from step 1 proves the same for $\\operatorname{Tot}(b\\otimes j_0^*T)$. Symmetry gives the other tensor variable. These arguments concern arbitrary categorical K-flat complexes, without a flat-term restriction.",
+   "text": "For K-flat P on U, exact restriction maps any quasi-isomorphism on Z to one on U, P tensors it to a quasi-isomorphism, and exact extension preserves that property. Chain projection naturality conjugates it to the requested tensor with j!P. For K-flat T on Z, exact extension first maps a quasi-isomorphism on U to one on Z; T tensors it to a quasi-isomorphism. Chain projection naturality identifies this with extension of its tensor with j*T; extension reflects quasi-isomorphisms because it is exact and fully faithful. Repeat for flipped sheaf tensor and use the natural total flip isomorphism to recover the two recorded tests. Assemble these conclusions with the unit, counit and the two sheaf normalizations.",
    "uses": [
     "def-sf-derived-weil-category-and-operations"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
    }
   }
  ],
  "proof_deps": [
   "def-sf-derived-weil-category-and-operations",
   "def-sf-native-weil-derived-framework",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-fixed-pair-created-abelian-structure",
   "lem-sf-native-adic-open-restrictions",
-  "lem-sf-ringed-open-total-tensor-kflat",
-  "lem-sf-ringed-slice-tensor-generators",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-sf-native-open-restriction-tensor",
+  "lem-sf-native-open-sheaf-projection-tensor",
+  "lem-sf-ringed-open-total-tensor-kflat"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Native equivariant refinement of Stacks 0GL1/0E8I; parent argument steps 1, 2, 3, 4; full proof in Lean docstring."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "N4: lifted open adjunction and generic totalization/K-flat transfer proved in Lean; two strict sheaf-only tensor steps remain. Tags 0E8I, 03DJ and 03D8; same native open factor of the unit route."
  },
  "mathlib_searches": [
   {
@@ -185,11 +180,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-90a6f",
-  "group": "G7",
+  "reviewer": "COMPILER",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261027T131454-L-2940282",
+  "landing": "20261027T180716-L-3893173",
   "kind": "interface",
-  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

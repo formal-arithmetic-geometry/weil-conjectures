@@ -1,0 +1,178 @@
+{
+ "id": "lem-sf-native-open-sheaf-projection-tensor",
+ "kind": "statement",
+ "title": "Normalized native sheaf projection formula in both orders",
+ "statement": "Let k₀, ℓ and j:U→Z be as in [def-sf-native-weil-derived-framework]. Use the actual sheaf tensor bifunctors of [def-sf-native-open-tensor-operations]. Fix an extension/restriction adjunction whose unit and counit forget to the ordinary specified open unit and counit, and fix pointwise normalized restriction/tensor comparisons as in [lem-sf-native-open-restriction-tensor]. For each M on U and N on Z there is an isomorphism Γ(M,N):(j!M)⊗N ≅ j!(M⊗j*N) whose inverse, under this adjunction, is tensoring its unit with j*N followed by inverse restriction/tensor comparison. There also exist natural isomorphisms (M,N)↦(j!M)⊗N ≅ (M,N)↦j!(M⊗j*N), and (N,M)↦N⊗(j!M) ≅ (N,M)↦j!(j*N⊗M). The natural isomorphisms are not required to be identified with Γ. All three comparisons are on the sheaf categories alone. No complex, totalization or K-flatness statement is included.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-native-open-tensor-operations",
+  "lem-sf-native-open-restriction-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 0E8I (lemma-j-shriek-and-tensor); native open tensor parent step 2"
+ },
+ "proof": [
+  {
+   "text": "Identify the geometric open site with the localized site. Its coefficient sheaf is restriction of the same locally finite coefficient functions. The normalized slice tensor generator theorem gives [x]⊗y↦[x⊗y|U], its inverse, and naturality.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sf-ringed-slice-tensor-generators",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
+   }
+  },
+  {
+   "text": "Frobenius reindexes the same factoring objects on both sides of the generator formula, hence these maps commute with the Weil structures. Faithful forgetting lifts their inverse identities. Transpose the inverse through the normalized adjunction; the generator formula for the unit and the normalized restriction comparison give the specified equality.",
+   "uses": [
+    "lem-sf-fixed-pair-created-abelian-structure",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-native-open-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
+   }
+  },
+  {
+   "text": "Exchange the two tensor variables using balanced tensor symmetry. This yields the second orientation, natural in both inputs, with no use of K-flatness or totalization.",
+   "uses": [
+    "def-sf-derived-weil-category-and-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL and 0E8I, with the native Frobenius refinement of the parent step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-derived-weil-category-and-operations",
+  "def-sf-native-weil-derived-framework",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sf-native-open-restriction-tensor",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Equivariant refinement of the parent step 2; complete proof in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero and pullback tensor projection formula for sheaves of modules with Frobenius action",
+   "results": "8 hits, including SheafOfModules.pullback and Scheme.Modules.pullback. No equivariant tensor normalization.",
+   "date": "2026-10-28",
+   "verdict": "The ordinary pullback does not supply the required Frobenius commuting square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of Frobenius equivariant module sheaves preserves balanced tensor products naturally",
+   "results": "8 hits, including SheafOfModules.pullbackObjFreeIso_hom_naturality and PresheafOfModules.Monoidal.tensorObjMap. No native Weil tensor comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact result; ordinary balanced maps still have to be lifted equivariantly."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero",
+   "results": "msearch Mathlib grep: 0 hits. Project search finds native open data records and lisse Hom comparisons, but no general normalized equivariant sheaf tensor projection theorem.",
+   "date": "2026-10-28",
+   "verdict": "The ordinary site tensor-generator theorem is available, but its native equivariant lift is a genuine remaining step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenSheafTensorExistence",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: the native open factor; parent step 2, sheaves only",
+   "via": [
+    "lem-sf-native-open-sheaf-tensor-existence",
+    "lem-sf-native-open-derived-tensor",
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenSheafProjectionTensor",
+  "file": "lean/Sheaf/Paper/NativeOpenSheafProjectionTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_sheaf_projection_tensor",
+  "statement": "theorem native_open_sheaf_projection_tensor\n    (adj : extensionByZero k₀ l j ⊣ upperStar k₀ l j)\n    (hu : ∀ M, (adj.unit.app M).hom.f =\n      (ProEtale.adicOpenImmersionLowerShriekAdjunction l\n        (Scheme.Hom.geometricFiberMap j (comp_over j _))).unit.app M.carrier)\n    (hc : ∀ N, (adj.counit.app N).hom.f =\n      (ProEtale.adicOpenImmersionLowerShriekAdjunction l\n        (Scheme.Hom.geometricFiberMap j (comp_over j _))).counit.app N.carrier)\n    (rho : ∀ M N : ProEtaleWeilSheaf k₀ l Z,\n      (upperStar k₀ l j).obj (tensor k₀ l Z N M) ≅\n        tensor k₀ l U ((upperStar k₀ l j).obj N) ((upperStar k₀ l j).obj M))\n    (hrho : ∀ M N, HEq ((rho M N).hom.hom.f)\n      ((ProEtale.adicUpperStarTensorLeftIso l\n        (Scheme.Hom.geometricFiberMap j (comp_over j _)) N.carrier).hom.app M.carrier)) :\n    ∃ gamma : ∀ (M : ProEtaleWeilSheaf k₀ l U) (N : ProEtaleWeilSheaf k₀ l Z),\n      tensor k₀ l Z N ((extensionByZero k₀ l j).obj M) ≅\n        (extensionByZero k₀ l j).obj (tensor k₀ l U ((upperStar k₀ l j).obj N) M),\n      (∀ M N, HEq (adj.homEquiv _ _ ((gamma M N).inv))\n        ((tensorFunctor k₀ l U ((upperStar k₀ l j).obj N)).map (adj.unit.app M) ≫\n          (rho ((extensionByZero k₀ l j).obj M) N).inv)) ∧\n      Nonempty (nativeOpenSheafLeft k₀ l j ≅ nativeOpenSheafRight k₀ l j) ∧\n      Nonempty ((𝟭 (ProEtaleWeilSheaf k₀ l Z)).prod (extensionByZero k₀ l j) ⋙\n          nativeOpenSheafTensor k₀ l Z ≅\n        (upperStar k₀ l j).prod (𝟭 (ProEtaleWeilSheaf k₀ l U)) ⋙ nativeOpenSheafTensor k₀ l U ⋙\n          extensionByZero k₀ l j)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-sf-native-open-sheaf-tensor-existence",
+  "worker": "N4 stage3",
+  "summary": "A strict sheaf-only part of the parent step 2. No adjunction-existence or complex/K-flatness conclusion is restated.",
+  "blueprint": "Retains the native open factor of the unit route; the new nodes are substeps of parent step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "The parent already uses this generic sheaf/site tool for its native open calculation. This split retains that same use to prove only the sheaf step; no unit route is replaced."
+   },
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "The parent already uses this generic sheaf/site tool for its native open calculation. This split retains that same use to prove only the sheaf step; no unit route is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "The parent already uses this generic sheaf/site tool for its native open calculation. This split retains that same use to prove only the sheaf step; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "The parent already uses this generic sheaf/site tool for its native open calculation. This split retains that same use to prove only the sheaf step; no unit route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T180716-L-3893173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T180716-L-3893173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
