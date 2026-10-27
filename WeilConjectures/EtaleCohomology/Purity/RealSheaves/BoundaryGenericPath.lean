@@ -29,7 +29,7 @@ the universal cover `Ỹ_t` defines a path `F_t ≅ F_η`
   for `σ` acting on `k̄` as `Φⁿ`, pushes down to the image of `σ` in `π₁(U₀)`
   (`AlgebraicGeometry.WeilGroup.BasePointData.downAut_ofLift`).
 
-This identifies the inertia groups and residue Frobenius lifts of `sk-d-real-boundary` with
+This identifies the inertia groups and residue Frobenius lifts of `d-real-boundary` with
 transports of lisse sheaves along lifts of the generic geometric point, as needed for blueprint
 `lem-wf-boundary-stalk-invariants`.
 -/

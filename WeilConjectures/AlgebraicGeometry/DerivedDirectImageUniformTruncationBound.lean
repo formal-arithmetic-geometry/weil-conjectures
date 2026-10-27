@@ -42,7 +42,7 @@ Proof:
    images of quasi-coherent modules, valid after base change, and enlarge it to a
    positive integer N. In particular it applies over every affine open U of S.
 2. The higher direct images over U are quasi-coherent and vanish in degrees at least
-   N. By `lem-pc-affine-vanishing` and `lem-pc-leray-degenerate-sections`, the higher
+   N. By `pqf-lem-affine-vanishing` and `lem-pc-leray-degenerate-sections`, the higher
    derived functors of sections over f⁻¹(U) vanish in those degrees on quasi-coherent
    modules. These are cohomology by `pqf-def-cohomology`. Sections commute with
    countable products by the universal property of products, since sections are

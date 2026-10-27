@@ -13,8 +13,8 @@ public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
 
 Let `t` be a t-structure on a pretriangulated category `C`. The closures under retracts of the
 images of `t.le n` and `t.ge n` form a t-structure `t.karoubi` on the Karoubi envelope
-`Karoubi C` (blueprint `lem-weil-envelope-tstructure`); the truncation triangle of `(K, e)` is
-the image of the idempotent endomorphism of the truncation triangle of `K` induced by `e`.
+`Karoubi C`; the truncation triangle of `(K, e)` is the image of the idempotent endomorphism of
+the truncation triangle of `K` induced by `e`.
 
 ## Main definitions
 
@@ -37,13 +37,6 @@ definitions and instances:
   derived category of a category of sheaves of modules, the standard t-structure being
   `DerivedCategory.TStructure.t`; this standard t-structure on the derived category of an
   abelian category is blueprint `def-sbc-standard-tstructure-derived-category`.
-- `lem-weil-karoubi-envelope-fully-faithful` (the canonical functor `C ⥤ Karoubi C` is fully
-  faithful) is `CategoryTheory.Idempotents.fullyFaithfulToKaroubi`.
-- `lem-weil-karoubi-envelope-idempotent-complete` (the Karoubi envelope is idempotent complete) is
-  the instance `CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi`.
-- The pointer remarks `rem-ptr-weil-karoubi-envelope-6` and `rem-ptr-weil-karoubi-envelope-7`
-  record exactly these two facts, the inputs of `thm-weil-karoubian-bounded-t`
-  (`CategoryTheory.Triangulated.TStructure.isEquivalence_toKaroubi_and_isTriangulated_of_bounded`).
 -/
 
 @[expose] public section
@@ -90,9 +83,8 @@ lemma karoubi_zero {A B : Karoubi C} (f : A ⟶ B) (n : ℤ) (hA : karoubiProp (
   calc f = rA.i ≫ (rA.r ≫ f ≫ rB.i) ≫ rB.r := by simp
     _ = 0 := by rw [h, zero_comp, comp_zero]
 
-/-- Blueprint `lem-weil-envelope-tstructure`: the t-structure on the Karoubi envelope whose
-subcategories `≤ n` and `≥ n` are the closures under retracts of the images of `t.le n` and
-`t.ge n`. -/
+/-- The t-structure on the Karoubi envelope whose subcategories `≤ n` and `≥ n` are the
+closures under retracts of the images of `t.le n` and `t.ge n`. -/
 noncomputable def karoubi : TStructure (Karoubi C) where
   le n := karoubiProp (t.le n)
   ge n := karoubiProp (t.ge n)
@@ -202,8 +194,8 @@ instance : (t.heartToKaroubi).EssSurj where
     exact ⟨A, ⟨t.karoubi.heart.fullyFaithfulι.preimageIso
       ((eP ≪≫ asIso (Karoubi.triangleOfIdem T E hE).mor₂ ≪≫ eA).symm)⟩⟩
 
-/-- Blueprint `lem-weil-envelope-tstructure`: the canonical equivalence between the heart of the
-t-structure on the Karoubi envelope and the Karoubi envelope of the heart. It is the inverse of
+/-- The canonical equivalence between the heart of the t-structure on the Karoubi envelope and
+the Karoubi envelope of the heart. It is the inverse of
 the equivalence `t.heartToKaroubi` from the heart of `C` (idempotent complete, since it is
 abelian) followed by the equivalence of the heart with its Karoubi envelope. -/
 noncomputable def karoubiHeartEquivalence :
@@ -215,8 +207,8 @@ noncomputable def karoubiHeartEquivalence :
 
 end Heart
 
-/-- Blueprint `thm-weil-karoubian-bounded-t`: for a triangulated category with a bounded
-t-structure, the canonical functor into the Karoubi envelope is an exact equivalence. -/
+/-- For a triangulated category with a bounded t-structure, the canonical functor into the
+Karoubi envelope is an exact equivalence. -/
 theorem isEquivalence_toKaroubi_and_isTriangulated_of_bounded [IsTriangulated C]
     (ht : ∀ X : C, t.bounded X) :
     (toKaroubi C).IsEquivalence ∧ (toKaroubi C).IsTriangulated :=

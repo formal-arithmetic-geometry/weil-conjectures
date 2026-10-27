@@ -47,7 +47,7 @@ Then for every `q ≥ 0` the pullback map along the first projection
 
 is bijective. Its target is the cohomology of the pullback of the constant sheaf `ℤ/n`. This is
 `AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap`.
-(blueprint: `sk-prop-ext-invariance`) -/
+(blueprint: `sbc-thm-algebraically-closed-invariance`) -/
 theorem bijective_cohomologyMap_constantZMod {k : Type u} [Field k] [IsAlgClosed k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [Smooth f]
     {k' : Type u} [Field k'] [IsAlgClosed k'] [Algebra k k'] (n : ℕ) (hn : (n : k) ≠ 0)
@@ -64,7 +64,7 @@ let `d ≥ 1` be prime to `char k`. For every `q ≥ 0` the pullback map
 `H^q(C_ét, ℤ/d) ⟶ H^q((C_{k'})_ét, ℤ/d)` along the projection `C_{k'} ⟶ C` is bijective.
 
 This is the case of a curve of `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`
-(blueprint `sk-prop-ext-invariance`). -/
+(blueprint `sbc-thm-algebraically-closed-invariance`). -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension {k : Type u}
     [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

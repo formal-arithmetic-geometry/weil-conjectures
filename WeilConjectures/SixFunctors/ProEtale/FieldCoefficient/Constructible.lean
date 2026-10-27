@@ -23,7 +23,7 @@ with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
 `WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
 
 Let `X` be a scheme. Following Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8) and
-the blueprint (`def-weil-constructible-heart`, `def-weil-finite-torsion-constructibility`), a
+the blueprint (`def-weil-finite-torsion-constructibility`), a
 sheaf `F` of `Λ`-modules on the small pro-étale site of `X` is
 
 - *lisse* (`AlgebraicGeometry.ProEtale.IsFieldLisseSheaf`) if it is pro-étale locally a finite
@@ -37,7 +37,7 @@ sheaf `F` of `Λ`-modules on the small pro-étale site of `X` is
 A lisse sheaf on a connected `X` is the same as a continuous finite-dimensional representation
 of `π₁(X)` with coefficients in `Λ`: the trivialising pro-étale cover may be taken to be a
 pro-finite étale Galois cover, whose group acts continuously on the fibre `Λⁿ`. For `Λ = E`
-these are the lisse `E`-sheaves of blueprint `def-weil-constructible-heart`.
+these are the lisse `E`-sheaves of the blueprint.
 
 The strata are only required to be locally closed: on the noetherian schemes of the blueprint
 every locally closed subset is constructible, and with this convention pullback along an
@@ -65,9 +65,7 @@ this is the same as a global finite stratification.
 - The constructible sheaves contain `0` and are closed under isomorphisms and finite products.
   On a locally Noetherian scheme they are also closed under kernels and cokernels
   (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Abelian`), and they are closed under
-  extensions
-  (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Extension`), the blueprint
-  `def-weil-constructible-heart`.
+  extensions (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Extension`).
 -/
 
 @[expose] public section

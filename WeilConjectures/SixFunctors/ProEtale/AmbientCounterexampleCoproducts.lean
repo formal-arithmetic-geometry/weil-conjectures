@@ -102,10 +102,9 @@ theorem exists_forall_hom_ne_zero_rightDerivedLowerStar (hE : 0 < IsAbelianVarie
 set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `HasSheafCompose` and `PreservesSheafification` on the small pro-étale site
 -- take long to synthesize
-/-- Blueprint `sk-rem-sf-fullcd-scope` (ii), `open-sf-ambient-adjoint-input`: for the structure
-morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
-over an algebraically closed field, `Ra_{E*}` does not preserve countable coproducts on
-`D(E_proét, Λ)`.
+/-- Blueprint `sk-rem-sf-fullcd-scope` (ii): for the structure morphism `a_E` of an elliptic
+curve (more generally an abelian variety of positive dimension) over an algebraically closed
+field, `Ra_{E*}` does not preserve countable coproducts on `D(E_proét, Λ)`.
 
 With `F` the sheaf of
 `AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar` and
@@ -144,13 +143,12 @@ theorem not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety
     fun h ↦ hφ ?_⟩
   exact (cancel_mono _).1 (h.trans zero_comp.symm)
 
-/-- Blueprint `sk-rem-sf-fullcd-scope` (ii), `open-sf-ambient-adjoint-input`: for the structure
-morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
-over an algebraically closed field, `Ra_{E!}` has no right adjoint on `D(E_proét, Λ)`. Indeed
-`Ra_{E!} ≅ Ra_{E*}` (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoOfIsProper`) does not
-preserve countable coproducts
-(`not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety`),
-whereas left adjoints preserve all colimits. -/
+/-- Blueprint `sk-rem-sf-fullcd-scope` (ii): for the structure morphism `a_E` of an elliptic
+curve (more generally an abelian variety of positive dimension) over an algebraically closed
+field, `Ra_{E!}` has no right adjoint on `D(E_proét, Λ)`. Indeed `Ra_{E!} ≅ Ra_{E*}`
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoOfIsProper`) does not preserve countable
+coproducts (`not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety`), whereas
+left adjoints preserve all colimits. -/
 theorem not_isLeftAdjoint_rightDerivedLowerShriek_of_isAbelianVariety
     (hE : 0 < IsAbelianVariety.dim E) :
     ¬ (R(E.hom)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint := fun _ ↦

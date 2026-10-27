@@ -27,7 +27,7 @@ multiplicative: `t_{[G^∨, F]} = t_G t_F`
 
 These are the stalk computations behind "the trace of a tensor product is the product of the
 traces" in the proof of the Fourier trace formula (sketch blueprint
-`sk-thm-fourier-trace-formula`).
+`thm-fd-fourier-trace`).
 -/
 
 @[expose] public section

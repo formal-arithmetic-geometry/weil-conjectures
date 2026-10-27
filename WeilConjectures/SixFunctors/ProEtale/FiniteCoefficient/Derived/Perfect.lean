@@ -689,7 +689,7 @@ exponent is invertible on `X`. The coefficient dual `K^∨ = RHom(K, Λ_X)` of a
 `K ∈ Dctf(X, Λ)` of pro-étale `Λ`-sheaves lies in `Dctf(X, Λ)`.
 
 As `K` is of étale origin, `K ≅ ν^* K'` with `K' ∈ Dctf(X_ét, Λ)`
-(`lem-sf-comparison-tor-amplitude`), and `K^∨ ≅ RHom(ν^* K', ν^* Λ) ≅ ν^* RHom(K', Λ)`
+(`lem-exc-comparison-tor-interval`), and `K^∨ ≅ RHom(ν^* K', ν^* Λ) ≅ ν^* RHom(K', Λ)`
 (`thm-sf-hom-comparison-constructible`) is of étale origin, `RHom(K', Λ)` being bounded
 constructible on `X_ét` (`sk-thm-sf-hom-ctf`). As `K` is perfect, `K^∨` is its dual, whose Tor
 amplitude is that of `K` reflected

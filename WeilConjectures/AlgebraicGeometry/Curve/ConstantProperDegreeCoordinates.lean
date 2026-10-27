@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 /-!
 # Degree-normalized proper cohomology coordinates
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 proof of thm-sc-constant-invariance, proper case in degree two
 (blueprint: lem-sc-constant-proper-degree-coordinates).
 -/
@@ -159,7 +159,7 @@ private theorem proper_kummer_degree_coordinates_aux
   rw [AddEquiv.symm_apply_apply]
   rfl
 
-/-- Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 proof of thm-sc-constant-invariance, proper case in degree two
 (blueprint: lem-sc-constant-proper-degree-coordinates).
 

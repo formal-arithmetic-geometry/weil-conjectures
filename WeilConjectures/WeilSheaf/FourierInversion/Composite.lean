@@ -111,9 +111,8 @@ theorem WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_sub
     (isLisse_artinSchreierOf ψ _)
   exact ⟨Functor.isoWhiskerRight eT₁ _ ≪≫ Functor.isoWhiskerLeft _ eT₂ ≪≫ eT₁₂ ≪≫ eT⟩
 
-/-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`,
-`sk-lem-kernel-composition`, without forming the convolution kernel). On `𝔸³` with points
-`(x, ξ, y)`,
+/-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`, without
+forming the convolution kernel). On `𝔸³` with points `(x, ξ, y)`,
 
 `FT_{ψ⁻¹} FT_ψ (K) ≅ Rr₃₀!(ℒ_ψ((x - y) ξ) ⊗ r₁^* K)[1][1]`
 

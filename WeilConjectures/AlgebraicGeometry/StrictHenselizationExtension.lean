@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Strict henselization from affine pointed neighbourhoods
 
-Source: Weil conjectures blueprint, `sec-curve-estimates/sk-prop-h2`, definition
+Source: Weil conjectures blueprint, `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition
 `def-weil-pbc-strict-henselization-limit` (blueprint: def-weil-pbc-strict-henselization-limit).
 -/
 
@@ -75,8 +75,8 @@ noncomputable def isColimitSmallStrictHenselizationCocone
 
 /-- The canonical cone has vertex the strict henselization scheme; its legs are
 `Spec.map` of the coordinate-ring colimit coprojections.
-Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henselization
-(blueprint: def-weil-pbc-strict-henselization-limit). -/
+Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict
+henselization (blueprint: def-weil-pbc-strict-henselization-limit). -/
 noncomputable def strictHenselizationAffineCone
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -84,8 +84,8 @@ noncomputable def strictHenselizationAffineCone
   Scheme.Spec.mapCone (smallStrictHenselizationCocone s).op
 
 /-- Cofilteredness and the inverse-limit interpretation of the canonical cone.
-Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henselization
-(blueprint: def-weil-pbc-strict-henselization-limit).
+Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict
+henselization (blueprint: def-weil-pbc-strict-henselization-limit).
 
 Proof: the affine pointed category is equivalent to the full affine subcategory of
 pointed neighbourhoods, using the affine scheme--ring anti-equivalence. That full
@@ -130,8 +130,8 @@ theorem strictHenselizationAffineProperties
 /-- Independence of the representative category, via the canonical colimit map.
 Here `e` describes a replacement of the chosen representative category and `w`
 identifies its coordinate-ring diagram with the transported chosen diagram.
-Source: blueprint `sec-curve-estimates/sk-prop-h2`, definition of strict henselization
-(blueprint: def-weil-pbc-strict-henselization-limit).
+Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict
+henselization (blueprint: def-weil-pbc-strict-henselization-limit).
 The equivalence-colimit isomorphism has coprojection formula
 `ι k ≫ iso.hom = D.map (e.unit.app k) ≫ w.inv.app _ ≫ ι _`
 (`HasColimit.ι_isoOfEquivalence_hom`), so this is the canonical comparison.

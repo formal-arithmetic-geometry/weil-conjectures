@@ -31,7 +31,7 @@ compactly supported ones.
 ## Implementation notes
 
 The exceptional inverse image `Ra^!` is the constructible one of blueprint
-`sk-def-sf-operations` (vi), `ν_X^* ∘ a^× ∘ Rν_{Y,*}` (see
+`det-def-sf-operations` (vi), `ν_X^* ∘ a^× ∘ Rν_{Y,*}` (see
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek`), which needs no
 hypothesis on `a` beyond a compactification: the ambient right adjoint of the pro-étale `Ra_!` does
 not exist in general.

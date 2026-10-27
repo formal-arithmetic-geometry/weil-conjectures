@@ -15,7 +15,7 @@ Two of the compatibilities of blueprint `prop-weil-operations` ("composition, ba
 projection, purity and duality isomorphisms are morphisms of Weil complexes"), for the direct
 image with compact support `Rf₀!` of Weil complexes
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), and the Grothendieck–Lefschetz trace
-formula for Weil complexes (blueprint `thm-trf-grothendieck-lefschetz-qbar`). They belong to
+formula for Weil complexes (blueprint `det-thm-tf-uniform-formula-weil`). They belong to
 other blueprint sections and are recorded here as inputs of the Fourier trace formula. The two
 compatibilities of `Rf₀!` are deduced from their statements in
 `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` (clauses 3 and 4 of blueprint
@@ -62,8 +62,8 @@ theorem nonempty_iso_derivedLowerShriek_comp {X Y Z : Scheme.{u}}
   nonempty_derivedLowerShriek_comp_iso f g
 
 /-- Blueprint `prop-weil-operations`: Six operations on Weil complexes (the base change
-isomorphism; blueprint `thm-cbc-qbar` for the underlying complexes). For a cartesian square of
-`k₀`-schemes
+isomorphism; compactly supported base change for the underlying complexes). For a cartesian
+square of `k₀`-schemes
 
 ```
   X' ──g'──▶ X
@@ -92,7 +92,7 @@ theorem nonempty_iso_derivedLowerShriek_upperStar {X Y X' Y' : Scheme.{u}}
       upperStar g' ⋙ derivedLowerShriek k₀ l f') :=
   nonempty_upperStar_derivedLowerShriek_iso h
 
-/-- Blueprint `thm-trf-grothendieck-lefschetz-qbar`: the Grothendieck–Lefschetz formula over
+/-- Blueprint `det-thm-tf-uniform-formula-weil`: the Grothendieck–Lefschetz formula over
 `ℚ̄_ℓ`. For a separated `k₀`-scheme `X₀` of finite type, a Weil complex `K` on `X₀` and
 `m ≥ 1`,
 

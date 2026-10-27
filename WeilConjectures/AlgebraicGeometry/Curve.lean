@@ -66,7 +66,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Blueprint `sk-def-curve`: Curves and genus
+/-- Blueprint `def-sc-curves`: Curves and genus
 
 Let `K` be a field (in the blueprint, algebraically closed). A *curve* over `K` is a separated
 scheme of finite type over `K` of dimension at most one. Smoothness and properness of a curve
@@ -82,7 +82,7 @@ class IsCurve (f : C ⟶ Spec (.of K)) : Prop
   /-- The underlying space of a curve has dimension at most one. -/
   krullDim_le_one : topologicalKrullDim C ≤ 1
 
-/-- Blueprint `sk-def-curve`: Curves and genus
+/-- Blueprint `def-sc-curves`: Curves and genus
 
 A *connected curve* over `K` is a curve over `K` that is connected (hence nonempty) and of
 dimension exactly one. The last condition excludes points such as `Spec K`, for which the curve
@@ -120,7 +120,7 @@ def SmoothConnectedCurve : Type (u + 1) :=
 noncomputable instance : Category (SmoothConnectedCurve K) :=
   inferInstanceAs (Category (ObjectProperty.FullSubcategory _))
 
-/-- Blueprint `sk-def-curve`: Curves and genus
+/-- Blueprint `def-sc-curves`: Curves and genus
 
 The *genus* of a smooth proper connected curve `C` over `K` is
 `g = dim_K H⁰(C, Ω¹_{C/K})`, the `K`-dimension of the space of global sections of the sheaf of
@@ -153,7 +153,7 @@ theorem Scheme.Hom.genus_eq_finrankH_zero [C.Over (Spec (.of K))] :
   exact (LinearEquiv.finrank_eq (R := K)
     { e with map_smul' := fun c x ↦ e.map_smul (globalSectionsRingHom K c) x }).symm
 
-/-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
+/-- Blueprint `def-sc-picard-group`: Pic, degree, Pic⁰
 
 The degree `deg L = χ(L) - χ(𝒪_C)` of the class `L` of an invertible module on a curve `C`
 over `K` (Stacks 0AYQ), where `χ` is the Euler characteristic
@@ -182,7 +182,7 @@ lemma Scheme.Hom.picDegree_mk (f : C ⟶ Spec (.of K)) (M : C.Modules)
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree_congr K (fromSkeletonToSkeletonIso M)
 
-/-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
+/-- Blueprint `def-sc-picard-group`: Pic, degree, Pic⁰
 
 Let `C` be a smooth projective geometrically integral curve over a field `K`. Its Picard group
 `Pic(C) = H¹(C_ét, 𝔾ₘ)` is the group of invertible `𝒪_C`-modules up to isomorphism; it is

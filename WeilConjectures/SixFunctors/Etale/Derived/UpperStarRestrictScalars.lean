@@ -24,8 +24,7 @@ where it is compatible with the corresponding isomorphisms of derived pullbacks.
 
 This is the compatibility of pullback with the change of the finite coefficients, used to make
 the systems of derived pullbacks of the `ℓ`-adic coefficient stages into morphisms of adic
-systems, for the compatible systems of Frobenius coefficient morphisms (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`). It is the étale
+systems, for the compatible systems of Frobenius coefficient morphisms. It is the étale
 counterpart of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars`,
 whose general pasting lemmas on derived categories it reuses.
 
@@ -199,8 +198,7 @@ morphism of schemes `g : Y ⟶ Z`, the canonical isomorphism `Lg^* (Res K) ≅ R
 in the derived category of étale sheaves of `Λ'`-modules on `Z`. Both derived pullbacks are
 computed levelwise (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`), and
 the isomorphism is induced by `AlgebraicGeometry.Etale.upperStarRestrictScalarsIso`. It is used
-for the compatible systems of Frobenius coefficient morphisms (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`). -/
+for the compatible systems of Frobenius coefficient morphisms. -/
 noncomputable def leftDerivedUpperStarRestrictScalarsIso :
     Sheaf.derivedRestrictScalars Z.smallEtaleTopology ρ ⋙
         L((g)^*[ModuleCat.{u + 1} Λ]) ≅

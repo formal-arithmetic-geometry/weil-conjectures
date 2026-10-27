@@ -13,27 +13,24 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 
 The `ℚ̄_ℓ`-stage `D_comp(X_proét, ℚ̄_ℓ)` is the common-stage (pair) category of the rational stages
 `D_comp(X_proét, E)` over the finite extensions `E/ℚ_ℓ` inside `ℚ̄_ℓ`, with the scalar extensions
-`T_{F/E} = F ⊗ᴸ_E -` as transition functors (blueprint `def-weil-pbc-qbar-category`,
-`def-weil-algebraically-closed-coefficients`; `CategoryTheory.StageSystem.PairCategory`). The
+`T_{F/E} = F ⊗ᴸ_E -` as transition functors (`CategoryTheory.StageSystem.PairCategory`). The
 operations of the `ℚ̄_ℓ`-stage are descended from the finite stages: a family of functors `Φ_E`
 together with compatibilities `β_{F/E} : T_{F/E} ∘ Φ_E ≅ Φ_F ∘ T_{F/E}` with the scalar extensions
 is a morphism of stage systems, which induces a functor on the pair categories, and compatible
-families of natural transformations descend to natural transformations (blueprint
-`prop-weil-pbc-descent-functors`, `CategoryTheory.StageSystem.Morphism`).
+families of natural transformations descend to natural transformations
+(`CategoryTheory.StageSystem.Morphism`).
 
 This file proves the two statements of the `ℚ̄_ℓ`-stage which concern the compact-support direct
 image, for any such stage-system structure on the rational stages and any descent data of the
 finite-stage functors (the scalar-extension compatibilities of `Rf_!` and `Lg^*`, blueprint
-`prop-weil-pbc-scalar-extension`, `lem-cbc-extension-zero-projection-formula`, which are taken as
-data here):
+`lem-cbc-extension-zero-projection-formula`, which are taken as data here):
 
-- `AlgebraicGeometry.ProEtale.nonempty_iso_ι_obj_rationalRightDerivedLowerShriek`
-  (`lem-weil-compact-support-finite-field-independence`): the value of the descended
-  compact-support direct image on an object of the `ℚ̄_ℓ`-stage may be computed at any finite
-  stage at which the object is represented;
-- `AlgebraicGeometry.ProEtale.isIso_descNatTrans_app_rationalExchange` (`thm-cbc-qbar`): the
-  descended compact-support exchange transformation is an isomorphism at every object represented
-  at a finite stage by an integral lattice whose reductions are of étale origin.
+- `AlgebraicGeometry.ProEtale.nonempty_iso_ι_obj_rationalRightDerivedLowerShriek`: the value of
+  the descended compact-support direct image on an object of the `ℚ̄_ℓ`-stage may be computed at
+  any finite stage at which the object is represented;
+- `AlgebraicGeometry.ProEtale.isIso_descNatTrans_app_rationalExchange`: the descended
+  compact-support exchange transformation is an isomorphism at every object represented at a
+  finite stage by an integral lattice whose reductions are of étale origin.
 -/
 
 @[expose] public section
@@ -63,8 +60,7 @@ section Independence
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
   {S : StageSystem fun i ↦ 𝐃𝐐[i](X)} {S' : StageSystem fun i ↦ 𝐃𝐐[i](Y)}
 
-/-- Blueprint `lem-weil-compact-support-finite-field-independence`: Independence of the finite
-coefficient field.
+/-- Independence of the finite coefficient field.
 
 Let `F` be a descent datum for the rational compact-support direct images
 `Rf_{!,E} : D_comp(X_proét, E) ⥤ D_comp(Y_proét, E)` along a stage-system structure on the
@@ -88,7 +84,7 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
   (sq : IsPullback g' f' f g) (c : Compactification f)
   {S : StageSystem fun i ↦ 𝐃𝐐[i](X)} {S' : StageSystem fun i ↦ 𝐃𝐐[i](Y')}
 
-/-- Blueprint `thm-cbc-qbar`: `ℚ̄_ℓ` compact-support base change.
+/-- `ℚ̄_ℓ` compact-support base change.
 
 Let `F` and `G` be descent data, along stage-system structures on the rational stages, for the
 rational functors `Lg^* Rf_!(c)` and `Rf'_!(c') Lg'^*` (whose values at the finite stage `E_i`
@@ -98,7 +94,7 @@ family whose component at every finite stage is the rational compact-support exc
 the descended exchange transformation `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` on the `ℚ̄_ℓ`-stage is an
 isomorphism at every object `K` represented at a finite stage `E_i` by (the rationalization of)
 an integral lattice `K_i ∈ D_comp(X_proét, 𝒪_{E_i})` whose reductions are of étale origin: there
-it is represented by the `E_i`-coefficient isomorphism of `thm-cbc-finite-extension`
+it is represented by the `E_i`-coefficient compact-support base change isomorphism
 (`isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`).
 It is independent of the finite stage and of the representative, being the component of a
 natural transformation of functors on the pair category. -/

@@ -17,13 +17,14 @@ Each remark with mathematical content is a theorem bundling the statements it po
 
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_leftDerivedUpperStar_of_derivedComplete`
   (`rem-sf-tor-toolbox-stages`): the integral form of clause (i);
-- `AlgebraicGeometry.Etale.reductionModIdeal_constantComplex_and_exists_normalizedTower`
-  (`rem-sf-constant-tower-trivial-model`): the constant coefficient tower;
+- `AlgebraicGeometry.Etale.reductionModIdeal_constantComplex_and_exists_normalizedTower`: the
+  constant coefficient tower;
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar_proofStatus`
   (`rem-sf-direct-image-proof-status`): the two sites of clause (iii);
-- `AlgebraicGeometry.Etale.coefficientTransport_status` (`rem-sf-clause-vii-status`);
-- `AlgebraicGeometry.Etale.NormalizedTower.reconstruction_and_integral_comparisons`
-  (`rem-sf-finite-level-comparison-ingredient`);
+- `AlgebraicGeometry.Etale.coefficientTransport_status`: the proved coefficient transport and its
+  domains;
+- `AlgebraicGeometry.Etale.NormalizedTower.reconstruction_and_integral_comparisons`: the
+  normalized DVR reconstruction and the integral comparisons;
 - `AlgebraicGeometry.Etale.exceptionalInverseImage_coefficientStages`
   (`rem-ptr-weil-exceptional-inverse-image-16`),
   `AlgebraicGeometry.Etale.exceptionalAdjoint_admissibility_constructible`
@@ -35,10 +36,10 @@ Each remark with mathematical content is a theorem bundling the statements it po
 - `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_scope` (`open-sf-preservation-gaps`): the
   sharp internal-Hom bound holds for a site-perfect first variable and fails in general.
 
-The remark `rem-sf-tower-shapes-occurring` is
+The tower shapes that occur are described by
 `AlgebraicGeometry.Etale.exists_normalizedTower_and_boundedConstructibleIntegral_iff`.
 
-## Where this feeds (`rem-sf-feeds`, `sk-rem-sf-feeds`)
+## Where this feeds (`sk-rem-sf-feeds`)
 
 The package `prop-functor-package` is consumed as follows. The smooth-purity chapter needs
 clause (7), the relative product theorem, as the relative input for its affine-line orientation
@@ -53,12 +54,11 @@ their supported pairing and local-term nodes rest. This remark is editorial and 
 counterpart.
 
 ## Implementation notes
-
 The coefficient stages `E` and `ℚ̄_ℓ`, and the finite-stage comparisons
 `lem-coef-finite-direct-image`, `thm-coef-finite-hom`, `cor-coef-finite-verdier`,
-`lem-coef-finite-exceptional` (beyond the formula `Rf^! = 𝔻_X f^* 𝔻_Y`),
-`thm-coef-rational-verdier`, `lem-coef-rational-operations` and `thm-coef-qbar-verdier` are not
-formalised; the remarks are stated with the finite and integral stages that are.
+`lem-coef-finite-exceptional` (beyond the formula `Rf^! = 𝔻_X f^* 𝔻_Y`), `thm-coef-rational-verdier`
+and `det-pd-biduality-coefficients` are not formalised; the remarks are stated with the finite and
+integral stages that are.
 -/
 
 @[expose] public section
@@ -120,7 +120,7 @@ theorem boundedConstructibleIntegral_leftDerivedUpperStar_of_derivedComplete {X 
         (torAmplitudeIn_leftDerivedUpperStar _ f a b (hK n).2)⟩
   exact ⟨h, fun hc ↦ ⟨hc, a, b, h⟩⟩
 
-/-- Blueprint `rem-sf-constant-tower-trivial-model`: The trivial coefficient case, in one line.
+/-- The trivial coefficient case, in one line.
 
 The constant local system is its own reduction tower: the reduction `Λ_X ⊗ᴸ (Λ ⧸ J)_X` of the
 constant complex `Λ_X` is the constant sheaf `(Λ ⧸ J)_X` placed in degree `0`, for every ideal
@@ -157,7 +157,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
 include hϖ hI hf in
-/-- Blueprint `rem-sf-clause-vii-status`: Proved coefficient transport and its domains.
+/-- Proved coefficient transport and its domains.
 
 At the integral stage (`Λ` a Noetherian domain complete for `I = (ϖ)`, `Λ ⧸ I` finite of
 exponent invertible on `k`), for a separated finite-type `f : X ⟶ Y` of separated finite-type
@@ -170,7 +170,7 @@ exponent invertible on `k`), for a separated finite-type `f : X ⟶ Y` of separa
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal`);
 * with the internal Hom, for arbitrary first variables, with the finite internal Hom of the
   reductions (`lem-coef-integral-hom-reduction`);
-* with the exceptional inverse image (`prop-coef-integral-exceptional-adjoint`);
+* with the exceptional inverse image;
 
 and a normalized DVR tower reconstructs with its stated reductions
 (`lem-coef-normalized-dvr-effectivity`). -/
@@ -215,8 +215,7 @@ theorem coefficientTransport_status :
   exact ⟨e.symm⟩
 
 include hϖ hI hf in
-/-- Blueprint `rem-sf-finite-level-comparison-ingredient`: The local-model proof and normalized
-DVR reconstruction.
+/-- The local-model proof and normalized DVR reconstruction.
 
 Every normalized DVR tower `M_n` reconstructs, with no common stratification or lisse local
 model: the canonical maps from its derived limit `R lim_n Res M_n` exhibit each `M_n` as the
@@ -224,8 +223,7 @@ reduction of the limit, which is derived complete (`lem-coef-normalized-dvr-effe
 Independently, the integral internal Hom has the finite internal Homs of the reductions as its
 reductions (`lem-coef-integral-hom-reduction`), and the integral exceptional adjoint `G_f L`
 (the derived limit of the finite exceptional inverse images) is an object of `Dᵇc(X, Λ)`
-identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`
-(`prop-coef-integral-exceptional-adjoint`). -/
+identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`. -/
 theorem NormalizedTower.reconstruction_and_integral_comparisons :
     (∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
       (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
@@ -255,10 +253,10 @@ include hϖ hI hf in
 constructible domains.
 
 On the integral constructible categories the exceptional adjoint is transported along the
-coefficient reductions (`prop-coef-integral-exceptional-adjoint`): for `L ∈ Dᵇc(Y, Λ)` the
-derived limit `G_f L` of the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)` lies in `Dᵇc(X, Λ)`, is `Rf^! L`, and has the
-`Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)` as reductions; the reconstruction used for integral coefficients is the
-normalized DVR theorem (`lem-coef-normalized-dvr-effectivity`). -/
+coefficient reductions: for `L ∈ Dᵇc(Y, Λ)` the derived limit `G_f L` of the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`
+lies in `Dᵇc(X, Λ)`, is `Rf^! L`, and has the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)` as reductions; the reconstruction
+used for integral coefficients is the normalized DVR theorem
+(`lem-coef-normalized-dvr-effectivity`). -/
 theorem exceptionalAdjoint_admissibility_constructible :
     (∀ L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       DerivedCategory.boundedConstructibleIntegral I Y L →
@@ -284,9 +282,8 @@ The coefficient comparisons used by the trace admissibility hypothesis on the in
 constructible categories: the compactly supported direct image commutes with the reductions
 `K ↦ K ⊗ᴸ Λ ⧸ Iⁿ`, and the integral exceptional adjoint `G_f L` of `L ∈ Dᵇc(Y, Λ)` lies in
 `Dᵇc(X, Λ)`, is identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`
-(so that the units and counits of `Rf_! ⊣ Rf^!` are transported), and has these as reductions
-(`prop-coef-integral-exceptional-adjoint`). Geometric base-change assertions keep the scope of
-their own theorems. -/
+(so that the units and counits of `Rf_! ⊣ Rf^!` are transported), and has these as reductions.
+Geometric base-change assertions keep the scope of their own theorems. -/
 theorem exceptionalAdjoint_traceAdmissibility_coefficients :
     (∀ n : ℕ, Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y (I ^ n) ≅
       reductionModIdeal Λ X (I ^ n) ⋙ R(f)_![ModuleCat.{u + 1} Λ])) ∧
@@ -364,8 +361,7 @@ carries `Dctf(Y, Λ)` into `Dctf(X, Λ)`, it is `Rf^! ≅ 𝔻_X f^* 𝔻_Y` the
 finite-Tor categories
 (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). The
 integral construction and adjunction are
-`AlgebraicGeometry.Etale.exceptionalAdjoint_admissibility_constructible`
-(`prop-coef-integral-exceptional-adjoint`). -/
+`AlgebraicGeometry.Etale.exceptionalAdjoint_admissibility_constructible`. -/
 theorem exceptionalInverseImage_coefficientStages [IsAlgClosed k] [IsSeparated aX]
     [HasCompactification aX] [IsSeparated aY] [HasCompactification aY]
     [HasInvertibleExponent Λ Y] [QuasiCompact f] [HasCompactification f] :

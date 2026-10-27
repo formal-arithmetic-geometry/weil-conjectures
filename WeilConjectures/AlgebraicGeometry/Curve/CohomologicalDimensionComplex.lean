@@ -107,7 +107,7 @@ The proof is by induction on the amplitude of `K`, using the truncation triangle
 `τ_{< b} K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶` of the canonical t-structure and the sheaf case
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`; this replaces the
 hypercohomology spectral sequence of the blueprint proof.
-(blueprint: `sk-prop-cd`) -/
+(blueprint: `lem-sc-arbitrary-curve-cd`) -/
 theorem IsCurve.subsingleton_shiftedHom_of_isGE_of_isLE (f : C ⟶ Spec (.of k)) [IsCurve f]
     [HasDerivedCategory.{w} (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (K : DerivedCategory (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})) (a b : ℤ)

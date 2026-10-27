@@ -45,11 +45,11 @@ The six-functor input — composition, base change and the open–closed triangl
 
 - `AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`:
   blueprint `lem-zl-sheaves-to-complexes`.
-- `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `sk-l-dl-general-composition`,
+- `AlgebraicGeometry.HasDirectImageWeightBound.comp`: blueprint `det-l-dl-general-composition`,
   through its form `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp` for
   a single sheaf (`lem-zl-composition-weight-bound`).
 - `AlgebraicGeometry.HasDirectImageWeightBound.of_openClosed`: blueprint
-  `sk-l-dl-general-excision`.
+  `det-l-dl-general-excision`.
 - `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.of_openClosed`: blueprint
   `lem-zl-open-closed-weight`.
 - `AlgebraicGeometry.HasDirectImageComplexWeightBound.of_openClosed`,
@@ -231,7 +231,7 @@ X --- f ---> Z --- g ---> Y
   `-------- f ≫ g --------'
 ```
 
-(blueprint: `sk-l-dl-general-composition`, proved as `lem-zl-composition-weight-bound`). -/
+(blueprint: `det-l-dl-general-composition`, proved as `lem-zl-composition-weight-bound`). -/
 theorem HasDirectImageWeightBound.comp (hf : HasDirectImageWeightBound k₀ ι f)
     (hg : HasDirectImageWeightBound k₀ ι g) : HasDirectImageWeightBound k₀ ι (f ≫ g) :=
   fun w F hF ↦ WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_comp (hf w F hF) hg
@@ -475,7 +475,7 @@ U --- j ---> X <--- i --- Z
         `--> Y <--'
 ```
 
-(blueprint: `sk-l-dl-general-excision`; this is part 1 of
+(blueprint: `det-l-dl-general-excision`; this is part 1 of
 `lem-zl-morphism-open-closed-reduction`, sheaf form). -/
 theorem HasDirectImageWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]

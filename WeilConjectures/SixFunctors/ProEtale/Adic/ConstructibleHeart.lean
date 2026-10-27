@@ -41,7 +41,7 @@ namespace AlgebraicGeometry.ProEtale.DerivedCategory
 
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
-/-- Blueprint `def-weil-constructible-heart`: Constructible heart.
+/-- Constructible heart.
 
 The heart `D^{≤ 0}_c(X, ℚ̄_ℓ) ∩ D^{≥ 0}_c(X, ℚ̄_ℓ)` of the standard `t`-structure on the
 bounded constructible derived category `D^b_c(X, ℚ̄_ℓ)`, as an object property of

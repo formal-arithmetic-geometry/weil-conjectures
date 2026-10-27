@@ -81,10 +81,9 @@ Proof (the twelve steps of the blueprint node):
     the conormal map of B'_N -> B_N a split injection.
 11. Artin-Rees (lem-weil-pbc-artin-rees) supplies c >= 1 such that m^N intersect J is
     contained in m^(N-c) J. Put k = N-c >= 1. Tensor step 10 with A_q/q^k. The modular law
-    identifies its source with (J/J squared)/q^k. Apply the differential power-ideal lemma
-    (lem-weil-pbc-kahler-differentials-mod-power-ideal) first to C and J with n = 1, then
-    to C/J squared and its maximal ideal with n = N-1. This identifies the target with
-    (A_q tensor Omega C/R)/q^k. Both maps send x to dx, so the localized conormal map
+    identifies its source with (J/J squared)/q^k. Apply the differential power-ideal lemma first to
+    C and J with n = 1, then to C/J squared and its maximal ideal with n = N-1. This identifies the
+    target with (A_q tensor Omega C/R)/q^k. Both maps send x to dx, so the localized conormal map
     modulo q^k is split for every k >= 1; tensoring preserves the given left inverse.
 12. The source and target of the localized conormal map are finitely generated over the
     Noetherian local ring A_q. Its maximal ideal is its Jacobson radical. Apply

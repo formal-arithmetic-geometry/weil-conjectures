@@ -114,7 +114,7 @@ noncomputable def Scheme.Hom.hilbertFunction (f : X ⟶ Spec (.of K)) (M : X.Mod
   fun m ↦ Scheme.Modules.eulerChar K (M.tensorPow m)
 
 open scoped fwdDiff in
-/-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
+/-- Blueprint `def-sc-ample`: Ample modules and the Hilbert degree.
 
 The degree of a `K`-scheme `X` of dimension `g` with respect to an `𝒪_X`-module `M`: the `g`-th
 forward difference at `0` of the Hilbert function `m ↦ χ(X, M^{⊗ m})`. When the Hilbert
@@ -201,7 +201,7 @@ theorem Scheme.Hom.degree_eq_factorial_mul_coeff (f : X ⟶ Spec (.of K)) (M : X
   · rw [Polynomial.fwdDiff_iter_degree_eq_factorial]
     simp [mul_comm]
 
-/-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
+/-- Blueprint `def-sc-ample`: Ample modules and the Hilbert degree.
 
 Let `X` be a proper scheme of dimension `g` over a field `K` and `M` an ample invertible
 `𝒪_X`-module. Then `m ↦ χ(X, M^{⊗ m})` is given by a polynomial `P` of degree at most `g`, and
@@ -289,7 +289,7 @@ for the cohomology of coherent modules on proper schemes (EGA III, 3.2.1),
 is locally free of rank one, hence of finite presentation.
 
 For `M = 𝒪_X` on a curve, this is the finiteness of the genus `dim_k H¹(X, 𝒪_X)`
-(blueprint `lem-pc-genus-well-defined`). This is used in the proof of blueprint
+(blueprint `lem-pc-euler-characteristic-well-defined`). This is used in the proof of blueprint
 `lem-sc-ample-positive-degree`. -/
 instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.IsInvertible]
     (q : ℕ) : FiniteDimensional K (M.H q) :=
@@ -553,7 +553,7 @@ theorem Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace [IsAlgClosed K]
   have _ := hdim
   exact f.degree_pos_of_isAmple_of_nonempty L hample
 
-/-- Blueprint `sk-prop-av-ample-positive`: Ample modules on proper curves have positive degree.
+/-- Blueprint `lem-sc-ample-positive-degree`: Ample modules on proper curves have positive degree.
 
 Let `K` be algebraically closed, `C` a proper curve over `K` of dimension one (possibly
 disconnected) and `L` an ample invertible `𝒪_C`-module. Then `deg L > 0`.
@@ -806,7 +806,7 @@ theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
     ring
   exact_mod_cast this
 
-/-- Blueprint `sk-prop-av-deg-pullback`: Degree of a pullback under a finite morphism.
+/-- Blueprint `lem-sc-deg-pullback-finite`: Degree of a pullback under a finite morphism.
 
 Let `g : X ⟶ Y` be a finite surjective morphism of proper `K`-varieties of the same dimension,
 let `M` be an ample invertible `𝒪_Y`-module and let `d = [k(X) : k(Y)]` be the degree of `g`.

@@ -37,7 +37,7 @@ with the internal hom of bounded constructible complexes at a finite coefficient
   (`lem-exc-comparison-tor-interval`): an étale complex has Tor amplitude in `[a, b]` if and only
   if its pullback to the pro-étale site has.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory`
-  (`lem-sf-comparison-tor-amplitude` (ii)): an étale complex whose pullback to the pro-étale
+  (`lem-exc-comparison-tor-interval` (ii)): an étale complex whose pullback to the pro-étale
   site has Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`
   (`thm-sf-hom-comparison-constructible`): `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)` for `K` in
@@ -81,7 +81,7 @@ noncomputable def mapDerivedCategoryComparisonUpperStarUnitIso (X : Scheme.{u}) 
     _root_.DerivedCategory.singleFunctorObjUnitIso _
 
 omit [Finite Λ] in
-/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
 comparison, clause (i).
 
 If a complex `K'` of étale `Λ`-sheaves has Tor amplitude in `[a, b]`, then `ν^* K'` has Tor
@@ -97,7 +97,7 @@ theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}}
   _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj _ hKt
 
 omit [Finite Λ] in
-/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
 comparison, clause (i).
 
 The derived comparison pullback `ν^*` carries `Dctf(X_ét, Λ)` into `Dctf(X_proét, Λ)`. -/
@@ -127,7 +127,7 @@ theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} (a b : ℤ)
   _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff _ a b K
 
 omit [Finite Λ] in
-/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+/-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
 comparison, clause (ii).
 
 Let `K'` be a complex of étale `Λ`-sheaves. If `ν^* K'` has Tor amplitude in `[a, b]` on

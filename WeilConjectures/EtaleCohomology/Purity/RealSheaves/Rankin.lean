@@ -107,7 +107,7 @@ theorem IsLisse.tprod (hρ : W.IsLisse l ρ) (hσ : W.IsLisse l σ) : W.IsLisse 
         ((hρ.continuous_apply _ _).mul (hσ.continuous_apply _ _)).mul continuous_const
     | add x y hx hy => exact (hx.add hy).congr fun g ↦ by simp
 
-/-- Blueprint `sk-p-linear-spectra`: the local eigenvalues of a tensor product are the
+/-- Blueprint `p-linear-spectra`: the local eigenvalues of a tensor product are the
 pairwise products of the local eigenvalues of the factors. -/
 theorem localEigenvalues_tprod (x : C.finitePoints) :
     W.localEigenvalues l (ρ.tprod σ) x =
@@ -329,7 +329,7 @@ variable (W l) in
 For a lisse Weil sheaf `ℱ` on a smooth geometrically connected affine curve `U₀` with local
 generic fibre `V`, there is a canonical Frobenius-equivariant isomorphism
 `H_c² (U, ℱ) ≅ V_{π₁(U)} (-1)`, by global Verdier duality on a smooth compactification and the
-description of global sections as invariants (`sk-p-real-sections`).
+description of global sections as invariants (`p-real-sections`).
 
 Compactly supported cohomology of a Weil representation is not available, so the right-hand
 side is used as the model of `H_c² (U, ℱ)`: this is the geometric Frobenius acting on it, `q`

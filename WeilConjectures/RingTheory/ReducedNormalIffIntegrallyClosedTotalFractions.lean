@@ -79,8 +79,7 @@ Source: Stacks Project, Algebra, Lemma Tag 030C
 
 Proof (the five steps of the node):
 1. The nonzerodivisors are the complement of the union of the minimal primes by
-   `lem-weil-pbc-reduced-zerodivisors-union-minimal-primes`. Localization-prime
-   correspondence (`lem-weil-pbc-localization-prime-residue-field-iso`) and
+   `lem-weil-pbc-reduced-zerodivisors-union-minimal-primes`. Localization-prime correspondence and
    `lem-weil-pbc-prime-avoidance` identify the primes of Q(R) with these minimal primes.
    Their localizations are fields by `lem-weil-pbc-minimal-prime-reduced-localization-field`.
    The total fraction ring is reduced: clearing a nonzerodivisor denominator in a nilpotent

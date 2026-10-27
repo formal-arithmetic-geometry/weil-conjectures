@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
 
 /-! # Étale cohomology in dimension zero
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md
 (blueprint: lem-weil-pbc-zero-dimensional-cohomology).
 -/
@@ -36,7 +36,7 @@ namespace AlgebraicGeometry
 /-- The underlying point type of a separated finite-type zero-dimensional scheme
 over an algebraically closed field is finite.
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, finiteness clause;
 Stacks Project, Tag 00KH (blueprint: zero-dimensional-etale-finite).
 
