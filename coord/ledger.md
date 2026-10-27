@@ -20208,3 +20208,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:38 L: merged deliver/C3/Sheaf.CategoryTheory.GeometricRingInverseImage (stage 3; reviewer PASS; first push; landing 20261027T233822-L-4119896 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:38 L: merged deliver/C3/Sheaf.CategoryTheory.NativeDerivedHomSignedExact (stage 3; reviewer FIX; first push; landing 20261027T233823-L-4120299 (interface); batch 20261027T233735; modules 3; new nodes 2; change records: coord/changes/C3-native-hom-signed-assembly.md)
 - 23:38 L: merged deliver/C3/Sheaf.Paper.FiniteClosedShriek (stage 3; reviewer PASS; first push; landing 20261027T233825-L-4120516 (interface); batch 20261027T233735; modules 3; new nodes 2)
+- 23:38 L: merged deliver/C3/Sheaf.Paper.PullbackTensorCommonStageCompositionCoherence (stage 3; reviewer PASS; first push; landing 20261027T233826-L-4120706 (interface); batch 20261027T233735; modules 2; new nodes 1)

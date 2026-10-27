@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
 import Sheaf.CategoryTheory.BilinearCoefficientDescent
 import Sheaf.Paper.PullbackTensorRationalCompositionCoherence
+import Sheaf.Paper.PullbackTensorCommonStageCompositionFiniteRepresentative
 
 /-! Common-stage coefficient component of pullback/tensor composition coherence.
 
@@ -47,6 +48,10 @@ theorem pullbackTensorCommonStageCompositionCoherence {X Y Z : Scheme.{u}}
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
     [hZ : ∀ z : Z, Invertible (l : Z.residueField z)] :
     ∀ M N : generalAlgebraicallyClosedConstructibleCategory l Ω Y,
-      canonicalCommonStagePullbackTensor_composition l Ω f h M N := by sorry
+      canonicalCommonStagePullbackTensor_composition l Ω f h M N := by
+  intro M N
+  obtain ⟨L, hA, hB, r, hl, hr⟩ :=
+    commonStageCompositionFiniteRepresentative l Ω f h M N
+  exact eq_of_heq (hl.trans hr.symm)
 
 end WeilConjectures

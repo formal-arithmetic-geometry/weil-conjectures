@@ -1,0 +1,86 @@
+{
+ "id": "lem-pur-pullback-tensor-common-stage-composition-finite-representative",
+ "kind": "statement",
+ "title": "Finite-stage representative calculation for common-stage pullback tensor composition",
+ "statement": "theorem commonStageCompositionFiniteRepresentative {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (h : Z ⟶ X)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]\n    (M N : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :\n    ∃ (L : AlgebraicallyClosedCoefficients.Index l Ω)\n      (hA : ((commonStageDerivedPullback l Ω (h ≫ f)).obj\n        ((commonStageDerivedTensor l Ω Y).obj (M, N))).stage ≤ L)\n      (hB : ((commonStageDerivedTensor l Ω Z).obj\n        ((commonStageDerivedPullback l Ω h).obj\n          ((commonStageDerivedPullback l Ω f).obj M),\n          (commonStageDerivedPullback l Ω h).obj\n            ((commonStageDerivedPullback l Ω f).obj N))).stage ≤ L),\n      ∃ r : ((commonStageDerivedPullback l Ω (h ≫ f)).obj\n        ((commonStageDerivedTensor l Ω Y).obj (M, N))).toStage hA ⟶\n        ((commonStageDerivedTensor l Ω Z).obj\n          ((commonStageDerivedPullback l Ω h).obj\n            ((commonStageDerivedPullback l Ω f).obj M),\n            (commonStageDerivedPullback l Ω h).obj\n              ((commonStageDerivedPullback l Ω f).obj N))).toStage hB,\n        HEq\n          (((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ Z Y (h ≫ f) hZ hY) M N).hom ≫\n            ((@commonStageDerivedTensor l _ Ω _ _ _ Z hZ)).map (Prod.mkHom\n              (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ) M).hom)\n              (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ) N).hom)))\n          (GeneralAlgebraicallyClosedCoefficients.ofHom _ _ L hA hB r) ∧\n        HEq\n          (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ)\n              (((@commonStageDerivedTensor l _ Ω _ _ _ Y hY)).obj (M, N))).hom ≫\n            ((@commonStageDerivedPullback l _ Ω _ _ _ Z X h hZ hX)).map\n              ((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ X Y f hX hY) M N).hom ≫\n            ((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ Z X h hZ hX)\n              (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj M)\n              (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)).hom)\n          (GeneralAlgebraicallyClosedCoefficients.ofHom _ _ L hA hB r)",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pod-rational-common-pullback-composition",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product; finite coefficient representative calculation"
+ },
+ "proof": [
+  {
+   "text": "Choose a finite coefficient field containing all object stages. Expand the prescribed common-stage pullback, tensor, comparison, and composition maps by their representative formulas. The two resulting rational composites agree by the rational pullback-tensor composition equation, and directedness transports both to one common stage.",
+   "uses": [
+    "lem-pur-bilinear-comparison-coefficient-descent",
+    "lem-pur-pullback-tensor-rational-composition-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-bilinear-comparison-coefficient-descent",
+  "lem-pur-pullback-tensor-rational-composition-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 and 0941; finite-stage representative descent"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PullbackTensorCommonStageCompositionCoherence",
+  "date": "2026-10-28",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-pullback-tensor-composition-coherence",
+   "place": "finite-stage representative subargument",
+   "via": [
+    "lem-pur-pullback-tensor-composition-coherence"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PullbackTensorCommonStageCompositionFiniteRepresentative",
+  "file": "lean/Sheaf/Paper/PullbackTensorCommonStageCompositionFiniteRepresentative.lean",
+  "declaration": "WeilConjectures.commonStageCompositionFiniteRepresentative",
+  "statement": "theorem commonStageCompositionFiniteRepresentative {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (h : Z ⟶ X)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]\n    (M N : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :\n    ∃ (L : AlgebraicallyClosedCoefficients.Index l Ω)\n      (hA : ((commonStageDerivedPullback l Ω (h ≫ f)).obj\n        ((commonStageDerivedTensor l Ω Y).obj (M, N))).stage ≤ L)\n      (hB : ((commonStageDerivedTensor l Ω Z).obj\n        ((commonStageDerivedPullback l Ω h).obj\n          ((commonStageDerivedPullback l Ω f).obj M),\n          (commonStageDerivedPullback l Ω h).obj\n            ((commonStageDerivedPullback l Ω f).obj N))).stage ≤ L),\n      ∃ r : ((commonStageDerivedPullback l Ω (h ≫ f)).obj\n        ((commonStageDerivedTensor l Ω Y).obj (M, N))).toStage hA ⟶\n        ((commonStageDerivedTensor l Ω Z).obj\n          ((commonStageDerivedPullback l Ω h).obj\n            ((commonStageDerivedPullback l Ω f).obj M),\n            (commonStageDerivedPullback l Ω h).obj\n              ((commonStageDerivedPullback l Ω f).obj N))).toStage hB,\n        HEq\n          (((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ Z Y (h ≫ f) hZ hY) M N).hom ≫\n            ((@commonStageDerivedTensor l _ Ω _ _ _ Z hZ)).map (Prod.mkHom\n              (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ) M).hom)\n              (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ) N).hom)))\n          (GeneralAlgebraicallyClosedCoefficients.ofHom _ _ L hA hB r) ∧\n        HEq\n          (((@pullbackTensorCommonComposition l _ Ω _ _ _ X Y Z f h hX hY hZ)\n              (((@commonStageDerivedTensor l _ Ω _ _ _ Y hY)).obj (M, N))).hom ≫\n            ((@commonStageDerivedPullback l _ Ω _ _ _ Z X h hZ hX)).map\n              ((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ X Y f hX hY) M N).hom ≫\n            ((@canonicalCommonStagePullbackTensor l _ Ω _ _ _ Z X h hZ hX)\n              (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj M)\n              (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)).hom)\n          (GeneralAlgebraicallyClosedCoefficients.ofHom _ _ L hA hB r)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T233826-L-4120706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T233826-L-4120706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
