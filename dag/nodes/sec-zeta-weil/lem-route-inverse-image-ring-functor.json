@@ -13,9 +13,63 @@
   "lem-weil-pbc-sheaf-algebraic-structures-objects",
   "lem-weil-pbc-adjunction-lifts-group-ring-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write A = Sh(C,J,Set) and B = Sh(C',J',Set). The existing sheaf algebraic-structures equivalence identifies sheaves of commutative rings on each site with commutative ring objects in A and B, and its composites with the internal-object forgetful functors are the ordinary underlying-sheaf functors. Thus it is legitimate to construct the lift on internal commutative ring objects and transport it back to ring sheaves.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, functoriality of algebraic structures"
+   }
+  },
+  {
+   "text": "Apply the adjunction-lifts-group-ring-objects theorem to L ⊣ V. Its finite-product hypothesis is exactly the assumed preservation of finite limits, so finite products and the terminal object are preserved. The theorem supplies lifted functors on commutative ring objects, a lifted adjunction, the underlying functor equalities, and the operation-transport equations for addition, zero, negation, multiplication and one.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, construction of algebraic structures under a finite-limit-preserving inverse image"
+   }
+  },
+  {
+   "text": "Transport the lifted functors and their adjunction across the two sheaf/ring-object isomorphisms from Step 1. Call the transported functors rings and V_rings. The underlying functor equality for the lifted left functor gives, at each source ring sheaf R, an isomorphism e_R : L(|R|) ≅ |rings.obj(R)|. Because it is the component of a functor equality, e_R is natural in every ring morphism. The operation-transport equations from Step 2, transported through the sheaf/ring-object isomorphisms, say exactly that e_R identifies addition, multiplication, zero and one (and the additive inverse) with the canonical finite-product and terminal-object comparisons for L.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi): the discussion before it (structure maps transported through f^{-1}, which commutes with finite limits) and the proof of (2), rings as sextuples"
+   }
+  },
+  {
+   "text": "The lifted adjunction hom-equivalence in Step 2 transports across the same isomorphisms, so rings ⊣ V_rings. Under the underlying-sheaf identifications and e_R, its hom bijection is the original L ⊣ V hom bijection. Naturality of e and the transported operation equations give the stated ring naturality and operation clauses, while the transported unit and counit are the units and counits of the ring adjunction. This proves every clause of the assertion.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), proof of (2): adjointness from adjointness of the set-based functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi) and the discussion preceding it"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +98,38 @@
    "results": "SheafOfModules.pullback and pullbackPushforwardAdjunction; no coherent ring-object lift",
    "date": "2026-10-27",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite-limit-preserving left adjoint lifts commutative ring sheaves",
+   "results": "CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; no general commutative-ring-sheaf lift",
+   "date": "2026-10-28",
+   "verdict": "no match: only sheafification/module pullback APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CommRingObjCat, Sheaf",
+   "results": "0 hits; unknown identifier CommRingObjCat in Loogle query",
+   "date": "2026-10-28",
+   "verdict": "unavailable/no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite-limit-preserving|CommRingObjCat|ring sheaf Mathlib/CategoryTheory",
+   "results": "Mathlib/CategoryTheory/Monoidal/Ring.lean:21,196,201,203,209; Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean:70,72,83; no sheaf-level lift",
+   "date": "2026-10-28",
+   "verdict": "no match: internal ring-object pieces only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves ring module operations",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; no coherent ring-object lift",
+   "date": "2026-10-28",
+   "verdict": "no match: module pullback only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-route-inverse-image-data-exists",
@@ -70,5 +152,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-route-inverse-image-ring-functor",
+  "worker": "stage1",
+  "summary": "Completed the one-level proof split without new nodes. The existing sheaf algebraic-structures equivalence converts ring sheaves to internal commutative ring objects; the existing finite-product adjunction lift supplies the left/right ring-object functors, operation transport, natural underlying comparisons, and lifted adjunction. Transporting these data back gives rings, V_rings, the natural family e_R, the operation clauses, and the original underlying hom-equivalence. Ran and recorded fresh LeanFinder, Loogle, grep, and LeanSearch searches; no Mathlib theorem states the whole lift.",
+  "blueprint": "Realizes the construction sentence of sk-thm-rationality: transport algebraic operations through finite products preserved by L, yielding a functor on commutative ring sheaves and its underlying-sheaf comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "why": "The item route needs the generic identification of sheaves of commutative rings with internal ring objects."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "The item route needs the generic lifted adjunction and operation/naturality equations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NE-4b6d9958d",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-4b6d9958d (reviewer sub-agent of L); spot-checked: Read the whole item, both cited nodes and Stacks sites.tex 00YV (the discussion before it and the proof of (2)). The four steps are correct. Step 1 identifies ring sheaves with internal ring objects using lem-weil-pbc-sheaf-algebraic-structures-objects; this is an isomorphism of categories that commutes strictly with forgetting to Sh(C). Step 2 applies lem-weil-pbc-adjunction-lifts-group-ring-objects to L ⊣ V. Its finite-product hypothesis follows from finite-limit preservation, and Sh(C) has finite products sectionwise. Step 3 conjugates by the two isomorphisms. Then |rings R| = L|R|, e_R is the identity, its naturality is the morphism part of the functor equality, and the operations are L(op)∘λ^{-1}, which is the item's clause word for word. Step 4: the hom-bijection is the restriction of the one for L ⊣ V, as part (2) of the cited lift states. I checked the empty site, the identity adjunction and the zero ring sheaf. The statement is unchanged and not weakened, and there are no new nodes. The nearest existing node, det-pe-topos-functoriality-inverse-image (pro-étale case only), is not a duplicate. Both declared tool_uses are accepted: they are generic black-box tools from sec-proper-base-change that no node of sk-thm-rationality gives. The fix is to the sources only: steps 3 and 4 and proof_origin cited 'Tags 00YV and 03D2' in sites.tex. 03D2 is sites-modules-lemma-pullback-module (modules, in sites-modules.tex), so they now point at the exact places in 00YV. Advisory: the item-level source.place, set when NB created the node, also names 03D2.; 1 file(s) fixed by the reviewer"
  }
 }
