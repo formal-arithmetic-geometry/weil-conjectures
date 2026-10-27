@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed finite-level evaluation of the pulled reduction tower: ordinary scalar insertion has invertible finite reductions before passage to K-flat representatives.",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary finite reduction of the specified constant-completion pullback comparison",
+ "statement": "Let C and C' be small sites with topologies J and J'. Let L:Sh(J)→Sh(J') have right adjoint V and preserve finite limits. Give a functor F.rings on commutative ring sheaves, algebraic inverse-image lifts F.algebra R whose underlying sheaves are L of the underlying sheaves, natural in ring-sheaf maps, and a natural constant-ring isomorphism F.constants:constant_J followed by F.rings ≅ constant_J'. These lifts have the transported ring and module operations of [def-weil-pbc-algebraic-inverse-image]. Let A be a commutative Noetherian ring, I an ideal and n a natural number. Write R=constant_J A, S_n=constant_J(A/I^(n+1)), B=lim_m S_m, with coefficient map phi:R→B and projections p_n:B→S_n as in [def-sfb-constant-completion-coefficient-data], and use primes for the analogous sheaves on J'. Let q_n:R→S_n and q'_n:R'→S'_n be the quotient maps. Define c:F.rings(B)→B' by its projection components F.rings(p_m) followed by F.constants at A/I^(m+1). For a coefficient map a:F.rings(O)→T write pull_a=(F.algebra O).modules followed by ordinary sheafified scalar extension along a. Put k=F.constants at A. Restriction is [def-pc-sheaf-restrict-scalars]. Let delta:Res(phi) followed by pull_k → pull_c followed by Res(phi') be the ordinary scalar comparison characterized by pullInsertion_k followed by the underlying map of delta equalling pullInsertion_c. Here pullInsertion_a is the inverse of the algebraic lift's underlying-sheaf isomorphism followed by the scalar-extension unit m↦1 tensor m. Then ordinary scalar extension along q'_n sends delta to a natural isomorphism of S'_n-module sheaves. No cochain complex or derived functor is used in this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL (lemma-tensor-product-pullback), 093M (lemma-completion-flat); the ordinary coefficient argument underlying sites-cohomology.tex Tag 06YY (lemma-derived-base-change)."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-completion-coefficient-data",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-noetherian-ring",
+  "def-pur-constant-coefficient-inverse-image-data",
+  "def-pur-strict-quotient-completion-data"
+ ],
+ "proof": [
+  {
+   "text": "The Noetherian constant-coefficient section and adic-limit results identify R/I^(n+1)R and B/I^(n+1)B with S_n on both sites. In particular these give the common-quotient pushout squares. Inverse image transports the source quotient square; the constant isomorphisms identify its finite quotient with Sprime_n and its constant ring with Rprime. The projection equation for c gives the compatibility of the B-projections.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-sectionwise-adic-algebra-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL (lemma-tensor-product-pullback), 093M (lemma-completion-flat); the ordinary coefficient argument underlying sites-cohomology.tex Tag 06YY (lemma-derived-base-change)."
+   }
+  },
+  {
+   "text": "Choose the normalized scalar-extension presentations and module adjunctions induced by the supplied algebraic inverse images. The ordinary geometric module transport supplies the adjunctions; transport normalized presentations to the prescribed change functors using their object and map equations. The natural constant-ring isomorphisms transport the inverse-image R and S_n actions to the project constant actions.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL (lemma-tensor-product-pullback), 093M (lemma-completion-flat); the ordinary coefficient argument underlying sites-cohomology.tex Tag 06YY (lemma-derived-base-change)."
+   }
+  },
+  {
+   "text": "Apply ordinary_insertion_reduction_isIso with these common quotients. Its insertion hypothesis is the defining pullInsertion equation of ordinaryPullComparison, after the inverse-image moduleUnderlying identifications and scalar-extension unit adjunction. Transport the resulting natural isomorphism through the constant-ring and scalar-presentation isomorphisms from step 2. Equivalently, the source and target both identify with inverse image over B followed by change along c followed by pprime_n; their insertion units agree, so adjunction gives equality with reduced delta. Isomorphism is invariant under these conjugations.",
+   "uses": [
+    "lem-weil-pbc-common-quotient-ordinary-insertion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL (lemma-tensor-product-pullback), 093M (lemma-completion-flat); the ordinary coefficient argument underlying sites-cohomology.tex Tag 06YY (lemma-derived-base-change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-sectionwise-adic-algebra-limit",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-weil-pbc-common-quotient-ordinary-insertion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL (lemma-tensor-product-pullback), 093M (lemma-completion-flat); the ordinary coefficient argument underlying sites-cohomology.tex Tag 06YY (lemma-derived-base-change).",
+  "note": "Specialization and presentation transport of the existing common-quotient ordinary insertion theorem; this is the remaining ordinary step, not the derived assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of an ordinary ringed topos pullback scalar insertion along a common finite quotient is an isomorphism",
+   "results": "ModuleCat.ExtendScalars.obj', ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, PresheafOfModules.pullback, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, RingCon.comapQuotientEquivOfSurj, Algebra.IsPushout.cancelBaseChangeAux, ModuleCat.extendScalars_id_comp, PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not identify scalar insertion between the chosen ordinary ringed-topos functors after a common quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of an ordinary ringed topos pullback scalar insertion along a common finite quotient is an isomorphism",
+   "results": "SheafOfModules.pullbackObjFreeIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not identify scalar insertion between the chosen ordinary ringed-topos functors after a common quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"changeOfRings\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not identify scalar insertion between the chosen ordinary ringed-topos functors after a common quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Ii]so|[Ii]so.*changeOfRings",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "no match: the hits do not identify scalar insertion between the chosen ordinary ringed-topos functors after a common quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletionCompletedFinitePull",
+  "date": "2026-10-27",
+  "group": "F1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCompletionOrdinaryReducedPull",
+  "file": "lean/Sheaf/Paper/ConstantCompletionOrdinaryReducedPull.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.ordinaryReducedPull_isIso",
+  "statement": "theorem ordinaryReducedPull_isIso\n    (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)\n    [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (n : ℕ) :\n    IsIso (Functor.whiskerRight (ordinaryPullComparison F A I)\n      (change (quotient J' A I n)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-01e89",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T180552-L-3877425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-01e89",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T180552-L-3877425",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new hole ordinaryReducedPull_isIso against nodes lem-weil-pbc-constant-completion-equivalence / -ordinary-reduced-pull, unit sk-thm-properbasechange realized/uses closure, importer ConstantCompletionEquivalence compiled"
+ }
+}
