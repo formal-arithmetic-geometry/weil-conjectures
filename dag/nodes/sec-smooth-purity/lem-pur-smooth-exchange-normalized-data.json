@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-smooth-exchange-normalized-data",
+ "kind": "statement",
+ "title": "Normalized endpoint and middle data for smooth exchange scalar compatibility",
+ "statement": "For the Cartesian square and every pair of constructible exceptional coefficient systems S for f and S' for f', there exist simultaneous adic purity data and normalized localized families at f and f', endpoint equations identifying the scalar comparisons, canonical gamma identifications, and a natural isomorphism m between the twisted-pullback endpoints. The components of m are the canonical `middle` comparison, and m satisfies the scalar square and shift compatibility needed to paste the exchange.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+  "place": "returned parent proof step 4: normalization of the supplied exceptional systems and the middle shifted pullback comparison"
+ },
+ "stmt_deps": [
+  "lem-pur-rational-purity-exchange-endpoints",
+  "lem-pur-twisted-pullback-square-scalars",
+  "def-pur-rational-scalar-comparison-data",
+  "def-pur-smooth-exchange-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Construct the simultaneous adic purity data for the supplied exceptional systems, with the normalized finite-right realization and compatible source and target shifts.",
+   "uses": [
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the rational endpoint theorem to obtain localized families, endpoint equations, and the canonical rational purity identifications.",
+   "uses": [
+    "lem-pur-rational-purity-exchange-endpoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical tensor, pullback, shifted root-line, and twisted square comparisons to define m. Naturality, scalar coherence, and shift coherence give the displayed component, scalar, and shift equations.",
+   "uses": [
+    "lem-pur-twisted-pullback-square-scalars",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-adic-purity-scalar-naturality",
+  "lem-pur-rational-purity-exchange-endpoints",
+  "lem-pur-twisted-pullback-square-scalars",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "B3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
+  "place": "normalization and middle-comparison portion of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized purity endpoint families and scalar-compatible twisted pullback middle comparison",
+   "results": "No exact Mathlib theorem; use the cited project declarations.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Generic naturality only.",
+   "date": "2026-10-28",
+   "verdict": "No specialized match."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedExchangeData|purity.*middle.*scalar",
+   "results": "No existing declaration; this split theorem is required by the parent proof.",
+   "date": "2026-10-28",
+   "verdict": "New project statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothExchangeScalarCompatibility",
+  "date": "2026-10-28",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-smooth-exchange-scalar-compatibility",
+   "place": "normalization of endpoint and middle data",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothExchangeScalarCompatibility",
+  "file": "lean/Sheaf/Paper/SmoothExchangeScalarCompatibility.lean",
+  "declaration": "WeilConjectures.SmoothExchangeScalarCompatibility.normalizedExchangeData",
+  "statement": "theorem normalizedExchangeData (sq : u ≫ f = f' ≫ v) [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f'] [SmoothOfRelativeDimension d f'] (S : ConstructibleExceptionalCoefficients.System C.l C.Qbar D C.different (f := f)) (S' : ConstructibleExceptionalCoefficients.System C.l C.Qbar D C.different (f := f')) : ∃ (I : AdicPurityScalarNaturality.Data D C f d S) (I' : AdicPurityScalarNaturality.Data D C f' d S') (R : RationalPurityExchangeEndpoints.LocalizedFamily D C f d S I) (R' : RationalPurityExchangeEndpoints.LocalizedFamily D C f' d S' I') (hEnds : RationalPurityExchangeEndpoints.EndpointEquations D C u f f' v d S S' I I' R R') (hCanonical : ∀ (E : AdicPurityScalarNaturality.Field D C) (K : RCat D C E Y), (R.gamma E).app K = gamma D C f S d E K) (hCanonical' : ∀ (E : AdicPurityScalarNaturality.Field D C) (K : RCat D C E Y'), (R'.gamma E).app K = gamma D C f' S' d E K) (m : ∀ E : AdicPurityScalarNaturality.Field D C, RationalPurityExchangeEndpoints.endpointA D C u f d S E false ≅ RationalPurityExchangeEndpoints.endpointB D C f' v d S' E false) , (∀ (E : AdicPurityScalarNaturality.Field D C) (K : RCat D C E Y), (m E).app K = middle D C u f f' v sq d E K) ∧ (∀ (E L : AdicPurityScalarNaturality.Field D C) (h : E ≤ L), whiskerRight (m E).hom (T D C E L h X') ≫ (RationalPurityExchangeEndpoints.comparisonB D C f' v d S' I' R' E L h false).hom = (RationalPurityExchangeEndpoints.comparisonA D C u f d S I R E L h false).hom ≫ whiskerLeft (T D C E L h Y) (m L).hom) ∧ (∀ E : AdicPurityScalarNaturality.Field D C, ShiftCompatibility (RationalPurityExchangeEndpoints.endpointA D C u f d S E false) (RationalPurityExchangeEndpoints.endpointB D C f' v d S' E false) (RationalPurityExchangeEndpoints.shiftA D C u f d S I R E false) (RationalPurityExchangeEndpoints.shiftB D C f' v d S' I' R' E false) (m E))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205800-L-1615867",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205800-L-1615867",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

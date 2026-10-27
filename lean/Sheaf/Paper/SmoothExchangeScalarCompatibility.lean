@@ -9,7 +9,9 @@ public import Sheaf.Paper.RationalSmoothPurityCanonical
 public import Sheaf.Paper.RationalScalarComparisonData
 public import Sheaf.Paper.TwistedPullbackSquareMaps
 public import Sheaf.Paper.TwistedPullbackSquareScalars
-import Sheaf.Paper.RationalPurityExchangeEndpoints
+public import Sheaf.Paper.RationalPurityExchangeEndpoints
+public import Sheaf.Paper.RationalPurityLocalizedFamilyData
+public import Sheaf.Paper.RationalPurityExchangeEndpointData
 import Sheaf.Paper.DerivedPullbackTensorIso
 
 /-! # Scalar compatibility of the actual smooth purity exchange
@@ -613,6 +615,57 @@ def Conclusion (sq : u ≫ f = f' ≫ v) (g : TwistedPullbackScalars.Geometry D 
         (composeShift _ _ (tShift D C E L h Y) (bShift D C f' v S' L))
         (betaB D C f' v S' E L h))
 
+/--
+The normalization data needed by `assembleExchange` for a fixed pair of exceptional
+systems. This is the coefficient-change and base-change coherence step: it supplies
+the normalized integral purity families, identifies their rational purity maps with
+`gamma`, and identifies the canonical shifted middle comparison with `middle`.
+Its source is the smooth-purity transport proof, Steps 1--3.
+(blueprint: lem-pur-smooth-exchange-scalar-compatibility)
+-/
+theorem normalizedExchangeData
+    (sq : u ≫ f = f' ≫ v)
+    [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f']
+    [SmoothOfRelativeDimension d f']
+    (S : ConstructibleExceptionalCoefficients.System C.l C.Qbar D C.different (f := f))
+    (S' : ConstructibleExceptionalCoefficients.System C.l C.Qbar D C.different (f := f')) :
+    ∃ (I : AdicPurityScalarNaturality.Data D C f d S)
+      (I' : AdicPurityScalarNaturality.Data D C f' d S')
+      (R : RationalPurityExchangeEndpoints.LocalizedFamily D C f d S I)
+      (R' : RationalPurityExchangeEndpoints.LocalizedFamily D C f' d S' I')
+      (hEnds : RationalPurityExchangeEndpoints.EndpointEquations
+        D C u f f' v d S S' I I' R R')
+      (hCanonical : ∀ (E : AdicPurityScalarNaturality.Field D C)
+        (K : RCat D C E Y),
+        (R.gamma E).app K = gamma D C f S d E K)
+      (hCanonical' : ∀ (E : AdicPurityScalarNaturality.Field D C)
+        (K : RCat D C E Y'),
+        (R'.gamma E).app K = gamma D C f' S' d E K)
+      (m : ∀ E : AdicPurityScalarNaturality.Field D C,
+        RationalPurityExchangeEndpoints.endpointA D C u f d S E false ≅
+          RationalPurityExchangeEndpoints.endpointB D C f' v d S' E false)
+      ,
+      (∀ (E : AdicPurityScalarNaturality.Field D C)
+        (K : RCat D C E Y),
+        (m E).app K = middle D C u f f' v sq d E K)
+      ∧ (∀ (E L : AdicPurityScalarNaturality.Field D C) (h : E ≤ L),
+        whiskerRight (m E).hom (T D C E L h X') ≫
+            (RationalPurityExchangeEndpoints.comparisonB
+              D C f' v d S' I' R' E L h false).hom =
+          (RationalPurityExchangeEndpoints.comparisonA
+            D C u f d S I R E L h false).hom ≫
+            whiskerLeft (T D C E L h Y) (m L).hom)
+      ∧ (∀ E : AdicPurityScalarNaturality.Field D C,
+        ShiftCompatibility
+          (RationalPurityExchangeEndpoints.endpointA D C u f d S E false)
+          (RationalPurityExchangeEndpoints.endpointB D C f' v d S' E false)
+          (RationalPurityExchangeEndpoints.shiftA D C u f d S I R E false)
+          (RationalPurityExchangeEndpoints.shiftB D C f' v d S' I' R' E false)
+          (m E)) := by
+  sorry
+
+set_option linter.style.haveILetI false in
 /-- The actual rational smooth exchange commutes with coefficient extension.
 Source: current blueprint smooth-purity transport, coefficient-change and base-change
 coherence (blueprint: lem-pur-smooth-exchange-scalar-compatibility).
@@ -644,7 +697,35 @@ normalization in the middle square precludes any additional sign. -/
 theorem smoothExchangeScalarCompatibility (cartesian : IsPullback u f' f v) :
     ∃ g : TwistedPullbackScalars.Geometry D C f f' d,
       Conclusion D C u f f' v d cartesian.w g := by
-  sorry
+  obtain ⟨g, _⟩ := TwistedPullbackScalars.twistedPullbackSquareScalars
+    (B := D) (C := C) (u := u) (f := f) (f' := f') (v := v) (d := d) cartesian
+  refine ⟨g, ?_⟩
+  dsimp only [Conclusion]
+  intro S S'
+  letI := g.finiteF
+  letI := g.compactF
+  letI := g.noethX
+  letI := g.noethX'
+  letI := g.noethY
+  letI := g.noethY'
+  letI := g.dimX
+  letI := g.dimX'
+  letI := g.dimY
+  letI := g.dimY'
+  letI := g.invX
+  letI := g.invX'
+  letI := g.invY
+  letI := g.invY'
+  letI := g.finiteF
+  letI := g.compactF
+  letI := g.separatedF'
+  letI := g.finiteF'
+  letI := g.compactF'
+  letI := g.smoothF'
+  obtain ⟨I, I', R, R', hEnds, hCanonical, hCanonical', m, hm, hScalar, hShift⟩ :=
+    normalizedExchangeData D C u f f' v (d := d) cartesian.w S S'
+  exact assembleExchange D C u f f' v S S' cartesian.w d I I' R R' hEnds
+    hCanonical hCanonical' m hm hScalar hShift
 
 end Statement
 end WeilConjectures.SmoothExchangeScalarCompatibility
