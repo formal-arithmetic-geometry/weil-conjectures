@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "on presheaves send s tensor (m tensor n) to\n(1 tensor m) tensor (s tensor n). The inverse multiplies the two scalars.\nBalancing, restriction compatibility and naturality let these inverse maps sheafify.\nScalar extension along the identity topos preserves flat-term K-flat representatives\nand countable coproducts. Totalize the map; its bidegree (i,j) component preserves\nthe degrees, hence both differentials have the identical Koszul sign. The coproduct\ninclusions give the summand equation in SectionTensorNormalized. Resolving-class\ndescent gives the section derived isomorphism and its stated counit square.\nConjugate the given internal tensorator through the scalar and tensor comparisons.\nTheir generator normalizations identify its value on each flat-term K-flat pair\nwith the map just totalized. The exact section equivalence preserves and reflects\nthese representatives. Descent and naturality give the conjugation equation on all\nderived pairs. This argument also applies to zero objects and nonflat ring maps.",
+   "text": "Construct the normalized section tensor comparison and its ordinary pure-tensor and signed-total counit equations by the presheaf balancing, sheafification, K-flat totalization and resolving-class descent argument.",
    "uses": [
     "lem-pe-internal-section-tensor-comparison",
     "lem-pd-section-derived-tensor-normalization",
@@ -20,24 +20,47 @@
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-pur-kflat-total-tensor-model",
     "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-sfb-quotient-section-tensor-transport-normalized"
    ],
    "elementary": false
+  },
+  {
+   "text": "Conjugate the supplied internal tensorator through the fixed scalar and tensor comparisons. Its value on flat-term K-flat generators is the totalized balancing map by the normalized section computation, and exactness and essential surjectivity extend the equality to every derived pair.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-quotient-section-tensor-transport-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two preceding independent components to the same barB and package their conclusions as the required conjunction.",
+   "uses": [
+    "lem-sfb-quotient-section-tensor-transport-normalized",
+    "lem-sfb-quotient-section-tensor-transport-condition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-pd-section-derived-tensor-normalization",
   "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pd-section-derived-tensor-normalization",
+  "lem-pe-internal-section-tensor-comparison",
   "lem-pur-kflat-total-tensor-model",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+  "lem-sfb-quotient-section-tensor-transport-condition",
+  "lem-sfb-quotient-section-tensor-transport-normalized",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "The parent proof steps, specialized to the actual condensed coefficient map and fixed internal/section comparisons."
+  "place": "Tags 03EK, 03EL, 06YY, 07A4, 07A6; split into the normalized section construction and the final conjugation step, then assembled by direct Lean application."
  },
  "mathlib_searches": [
   {
@@ -122,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-75592",
-  "group": "T3",
-  "result": "fix",
-  "landing": "20261027T135442-L-3709173",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261027T151736-L-1201956",
   "kind": "interface",
-  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

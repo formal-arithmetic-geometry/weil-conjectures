@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-quotient-section-tensor-transport-normalized",
+ "kind": "statement",
+ "title": "Existence of a normalized quotient section tensor comparison",
+ "statement": "For every morphism a of commutative condensed rings and scheme T, fixed ScalarSectionData c satisfying ScalarSectionNormalized and TensorIso b satisfying TensorNormalized admit a section derived tensor isomorphism barB satisfying SectionTensorNormalized.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary balancing map on local pure tensors and its inverse, descend through sheafification, and totalize on flat-term K-flat representatives. The signed bidegree calculation and coproduct inclusions give the summand and universal-counit equations in SectionTensorNormalized.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pd-section-derived-tensor-normalization",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized derived tensor comparison on section modules",
+   "results": "No exact specialized theorem; existing generic derived tensor and section comparison APIs are lower-level.",
+   "date": "2026-10-27",
+   "verdict": "Use the stated project comparison interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "SectionTensorNormalized TensorSectionCondition",
+   "results": "No match in Mathlib; these are project predicates.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "SectionTensorNormalized|TensorSectionCondition",
+   "results": "Only the quotient section tensor data predicates and this split theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the quotient-specific definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransport",
+  "date": "2026-10-27",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport",
+   "place": "Tags 03EK, 03EL, 06YS, 07A4 and 0G7D; parent proof steps 1--5.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTransportNormalized",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTransportNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_normalized",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_normalized"
+  ],
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-27",
+  "statement": "theorem section_tensor_transport_normalized (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (b : TensorIso a T) (hb : TensorNormalized a T b) :\n    ∃ barB : tensor Λ T ⋙ c.model.T ≅\n        (c.model.T.prod c.model.T) ⋙ tensor Λ' T,\n      SectionTensorNormalized a T c barB"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261027T151736-L-1201956",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261027T151736-L-1201956",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
