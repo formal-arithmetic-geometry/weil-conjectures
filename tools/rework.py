@@ -867,6 +867,70 @@ def _failing_of(rid: str) -> set:
     return set(re.findall(r"[A-Z][\w.]+", r.split("failed in", 1)[1])) if "failed in" in r else set()
 
 
+def _mark_failed_texts(rows: dict, tried: dict) -> int:
+    """2026-10-28: a quarantined module whose quarantined text is exactly the text a global build failed on is an error
+    root confirmed unfixed, whatever its row says. coord/build-errors/<module>.txt names that build's commit in its first
+    line; the text is compared with lean/<module>.lean at that commit. Without this, a module that failed in its own
+    right after the merge queue had dropped its restore landing (not this function's PENDING record, e.g. the restore of
+    another process, or a red handled while no settle ran) kept its old `imports X` cause, the next cluster restore put
+    it back unchanged and the next build failed on it again (SfQbarLocalizationCommonStage: red 16:13Z, back 16:25Z).
+    Only an error of the module's own text counts (not a failure on its imports), in a build not older than the row.
+    Marks rows (cause error:) and `tried`;
+    returns how many. A text changed since (a fix in quarantine/) is not marked; the recheck loop (autorestore
+    --recheck-errors) compiles a marked one again once per published build, as every error root."""
+    import hashlib, subprocess
+    errdir = ROOT / "coord" / "build-errors"
+    cand: dict[str, tuple] = {}
+    for m, r in rows.items():
+        if landed(m):
+            continue
+        try:
+            with (errdir / f"{m}.txt").open(errors="ignore") as fh:
+                head = fh.readline()
+                body = fh.read(20000)
+        except OSError:
+            continue
+        mm = re.match(r"# global build (\S+) of ([0-9a-f]{7,40}): (\S+) failed", head)
+        q = ROOT / (r.get("quarantine") or qpath(m))
+        # only an error of the module's own text: a failure on its imports (bad import, missing .olean, an infrastructure
+        # failure of the build tree) says nothing about the text
+        own = [x for x in body.splitlines() if x.startswith("error:") and not re.search(
+            r"bad import|unknown module|object file .* does not exist|file not found|no such file|Lean exited with code|"
+            r"build failed|unknown package", x, re.I)]
+        # and only a failure of this rework episode: the row (opened at `time`) is closed once a build verifies the
+        # module, so a failure from before the row may since have been cured by its imports
+        # (IntegralProperReductionBound failed 14:11Z with the text it compiled with at 16:16Z)
+        if mm and mm.group(3) == m and own and q.is_file() and mm.group(1) >= (r.get("time") or "~"):
+            cand[m] = (mm.group(1), mm.group(2), q)
+    if not cand:
+        return 0
+    ms = sorted(cand)
+    try:
+        res = subprocess.run(["git", "-C", str(ROOT), "cat-file", "--batch-check=%(objectname)"],
+                             input="".join(f"{cand[m][1]}:{opath(m)}\n" for m in ms), capture_output=True, text=True,
+                             timeout=120)
+    except (OSError, subprocess.SubprocessError):
+        return 0
+    oids = res.stdout.splitlines()
+    if res.returncode != 0 or len(oids) != len(ms):
+        return 0
+    n = 0
+    for m, oid in zip(ms, oids):
+        data = cand[m][2].read_bytes()
+        if oid.strip() != hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest():
+            continue
+        b = hashlib.sha1(data).hexdigest()
+        cause = rows[m].get("cause") or ""
+        if tried.get(m) == b and cause.startswith("error:"):
+            continue
+        tried[m] = b
+        if not cause.startswith("error:"):
+            rows[m]["cause"] = (f"error: failed in the global build {cand[m][0]} with this text "
+                                f"(coord/build-errors/{m}.txt)")[:300]
+        n += 1
+    return n
+
+
 def settle_restores() -> None:
     """Restored modules whose landing the merge queue reverted (file gone again from lean/) are put back in quarantine:
     their quarantined text is marked tried (so the next cluster restore does not put them back unchanged; the level-wise
@@ -897,11 +961,15 @@ def settle_restores() -> None:
             tried[m] = hashlib.sha1(q.read_bytes()).hexdigest(); back += 1
             if m in rows:
                 rows[m]["cause"] = "error: failed in the global build after a cluster restore (see the build log)"
-    if back:
+    failed = _mark_failed_texts(rows, tried)
+    if back or failed:
         save(rows)
     TRIED.write_text(json.dumps(tried)); PENDING.write_text(json.dumps(keep))
     if back:
         print(f"{time.strftime('%F %T')} cluster restore settle: {back} reverted module(s) back in quarantine (marked tried)", flush=True)
+    if failed:
+        print(f"{time.strftime('%F %T')} cluster restore settle: {failed} quarantined module(s) hold the text a global "
+              "build failed on (coord/build-errors/): error roots (marked tried)", flush=True)
 
 
 def cluster_restore(rounds: int = 8, dry: bool = False, wait: bool = False) -> int:
