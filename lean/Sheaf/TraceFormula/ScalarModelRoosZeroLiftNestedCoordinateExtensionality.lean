@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftNestedCoordinateComponentExtensionality
 
 /-! # Nested tensor-coordinate extensionality for scalar Roos maps
 
@@ -25,6 +26,16 @@ attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures
+
+private theorem scalarModel_complexProduct_hom_ext
+    {D : Type*} [Category* D] [Preadditive D] [HasCountableProducts D]
+    (X : ℕ → CochainComplex D ℤ) (i : ℤ) {M : D}
+    (f g : M ⟶ (∏ᶜ X).X i)
+    (h : ∀ n, f ≫ (Pi.π X n).f i = g ≫ (Pi.π X n).f i) : f = g := by
+  apply (isLimitOfPreserves (HomologicalComplex.eval D (.up ℤ) i)
+    (limit.isLimit (Discrete.functor X))).hom_ext
+  intro n
+  exact h n.as
 
 attribute [local irreducible] HasDerivedCategory.standard
   integralComparisonSequenceScalarModel coefficientSequenceRestriction coefficientSequenceLimit
@@ -91,7 +102,12 @@ theorem scalarModelRoosZeroLift_nestedCoordinate_extensionality
       (CochainComplex.mappingCocone.fst (scalarRoosBoundary
         (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
           (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
-            (.up ℤ)).obj D)).asFunctor)).f i := by
-  sorry
+        (.up ℤ)).obj D)).asFunctor)).f i := by
+  intro i
+  apply scalarModel_complexProduct_hom_ext
+  intro n
+  apply completedNestedScalarTensor_ext
+  intro U s t x
+  exact hcoord n i U s t x
 
 end WeilConjectures

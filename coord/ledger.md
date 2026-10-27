@@ -20290,3 +20290,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:40 L: merged deliver/H5/Sheaf.SixFunctors.PublishedSystemTensorRepresentativeNormalization (stage 3; reviewer PASS; first push; landing 20261027T234004-L-4156605 (proof); batch 20261027T233735; modules 1; new nodes 2)
 - 23:40 L: merged deliver/H5/Sheaf.TraceFormula.ScalarModelRoosZeroLiftCore (stage 3; reviewer PASS; first push; landing 20261027T234005-L-4157430 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:40 L: merged deliver/H7/Sheaf.TraceFormula.ScalarModelRoosZeroLiftFactorization (stage 3; reviewer PASS; first push; landing 20261027T234006-L-4158107 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:40 L: merged deliver/H8/Sheaf.TraceFormula.ScalarModelRoosZeroLiftNestedCoordinateExtensionality (stage 3; reviewer PASS; first push; landing 20261027T234007-L-4158619 (interface); batch 20261027T233735; modules 2; new nodes 1)

@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-scalar-model-roos-zero-lift-nested-coordinate-component-extensionality",
+ "kind": "statement",
+ "title": "Nested scalar tensor generators determine one module morphism",
+ "statement": "For completed scalar extensions E to L to F on one integral tower module, equality of two module morphisms on all nested completed scalar tensor sections implies equality of the morphisms.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Stacks 0941; tensor-balancing and sheafification step"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply the sheafification adjunction and the module tensor universal property first to the inner E-to-L extension and then to the outer L-to-F extension. Tensor induction and sheaf separatedness extend equality from the nested pure tensors to every section.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Stacks 0941; tensor-balancing and sheafification step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nested scalar tensor generator extensionality",
+   "results": "No exact existing declaration; this is the module-level component of the parent Roos extensionality step.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "tensor generator extensionality sheafification",
+   "results": "Only generic tensor extensionality results; no nested completed scalar statement.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nested completed scalar tensor section morphism equality",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftNestedCoordinateExtensionality",
+  "date": "2026-10-28",
+  "group": "H8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-scalar-model-roos-zero-lift-nested-coordinate-extensionality",
+   "place": "Module-level nested tensor-balancing substep",
+   "via": [
+    "lem-trf-scalar-model-roos-zero-lift-nested-coordinate-extensionality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftNestedCoordinateComponentExtensionality",
+  "file": "lean/Sheaf/TraceFormula/ScalarModelRoosZeroLiftNestedCoordinateComponentExtensionality.lean",
+  "declaration": "WeilConjectures.completedNestedScalarTensor_ext",
+  "statement": "theorem completedNestedScalarTensor_ext (M : integralTowerModules l E X) (Q : integralTowerModules l F X) (f g : (completedOrdinaryScalarExtension l L F j X).obj ((completedOrdinaryScalarExtension l E L ι X).obj M) ⟶ Q) (h : ∀ (U : X.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U) (x : M.val.obj U), f.val.app U (completedScalarTensorSection l L F j X ((completedOrdinaryScalarExtension l E L ι X).obj M) U s (completedScalarTensorSection l E L ι X M U t x)) = g.val.app U (completedScalarTensorSection l L F j X ((completedOrdinaryScalarExtension l E L ι X).obj M) U s (completedScalarTensorSection l E L ι X M U t x))) : f = g",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T234007-L-4158619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T234007-L-4158619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
