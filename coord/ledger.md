@@ -20144,3 +20144,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:02 L: returned deliver/U1/Sheaf.Paper.CoefficientPresentationIntegralMapIndependence (reviewer RETURN: (the landing tools, head db999235d) the delivery did not land: missing import source modules: Sheaf.Paper.CoefficientPre)
 - 22:02 L: returned deliver/U2/Sheaf.Paper.NativeCompletedCoefficientChangeData (reviewer RETURN: (the landing tools, head ef118d2d7) the delivery did not land: missing import source modules: Sheaf.Paper.CoefficientPre)
 - 22:02 L: returned deliver/U4/Sheaf.SixFunctors.CoefQbarFiniteExceptionalFormula (reviewer RETURN: (the landing tools, head 93859ca39) the delivery did not land: missing import source modules: Sheaf.SixFunctors.CoefQbar)
+- 22:02 L: returned deliver/V1/Sheaf.SixFunctors.CoefQbarVerdierBidualityDescent (reviewer RETURN: (the landing tools, head f52e8d2d5) the delivery did not land: missing import source modules: Sheaf.SixFunctors.CoefQbar)
