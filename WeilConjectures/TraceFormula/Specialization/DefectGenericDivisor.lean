@@ -91,12 +91,43 @@ theorem isZero_restrict_specializationDefect_of_isZero
   exact isZero_obj_of_iso_shift_aux _
     (nonempty_specializationDefect_iso_shift X I k' Λ L hL).some hW
 
+/-- The defect of a zero complex vanishes: its zero-section map is a morphism between zero
+objects. -/
+theorem isZero_specializationDefect_of_isZero
+    {L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left))} (hL : IsZero L) :
+    IsZero (specializationDefect X I k' Λ L) := by
+  rw [isZero_specializationDefect_iff]
+  have hs := (L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Λ⟧)).map_isZero
+    (NearbyCyclesModel.isZero_nearbyCycles_obj Λ (deformationModel X I k') hL)
+  have ht := NearbyCyclesModel.isZero_nearbyCycles_obj Λ (deformationModel (centre X I) ⊥ k')
+    ((L(((centreι X I).left)^*⟦Λ⟧)).map_isZero hL)
+  exact ⟨⟨0, hs.eq_of_src _ _, ht.eq_of_src _ _⟩⟩
+
 end Shift
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+
+/-- **The defect vanishes near a point where `L` vanishes**: if `L` restricts to zero on an open
+neighbourhood `U` in `X` of a point `ζ` of the centre, then `C_{X,Z}(L)` vanishes near `ζ`. Indeed
+`C_{U, Z ∩ U}(L|_U) = 0`, and vanishing near a point is local on `X`
+(`defectVanishesNear_of_isOpenImmersion`). -/
+theorem defectVanishesNear_of_isZero_restrict {I : X.left.IdealSheafData}
+    (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (ζ : (centre X I).left) (U : X.left.Opens)
+    (hU : I.subschemeι ζ ∈ U)
+    (hLU : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (overRestrictι X U)).obj L)) :
+    defectVanishesNear X I k' (Profinite.padicAlgClRingObj ℓ) L.obj ζ := by
+  have hζ : ζ ∈ Set.range (centreMap (overRestrictι X U) I).left := by
+    rw [range_centreMap, Set.mem_preimage, range_overRestrictι]
+    exact hU
+  obtain ⟨ζ', rfl⟩ := hζ
+  exact defectVanishesNear_of_isOpenImmersion I k' (overRestrictι X U) L ζ'
+    ⟨⊤, trivial, Functor.map_isZero _ (isZero_specializationDefect_of_isZero _ _ k' _
+      ((boundedConstructible _).ι.map_isZero hLU))⟩
 
 /-- **Vanishing of the restricted specialization near a generic point of a principal divisor**
 (the local computation of the proof of blueprint `det-sp-generic-divisor`): let `X` be normal,
@@ -110,7 +141,10 @@ theorem exists_isZero_upperStar_nearbyCycles_of_isGeneric (hX : IsNormalScheme X
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hL : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (centreι X I)).obj L))
-    (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left) :
+    (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
+    (hsupp : ∀ U : X.left.Opens, I.subschemeι ζ ∈ U →
+      ¬ IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (overRestrictι X U)).obj L)) :
     ∃ U : (centre X I).left.Opens, ζ ∈ U ∧
       IsZero ((L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦
         Profinite.padicAlgClRingObj ℓ⟧)).obj
@@ -141,7 +175,14 @@ theorem exists_dense_isZero_specializationDefect (hX : IsNormalScheme X.left)
     (((boundedConstructible _).ι.map_isZero hL).of_iso
       ((boundedConstructibleUpperStarCompatibility _ ℓ (centreι X I)).symm.app _))
   refine genericallyVanishingDefect_of_forall_defectVanishesNear X I k' _ L.obj fun ζ hζ ↦ ?_
-  obtain ⟨U, hζU, hU⟩ := exists_isZero_upperStar_nearbyCycles_of_isGeneric k' hX hh hI L hL ζ hζ
+  by_cases hsupp : ∃ U : X.left.Opens, I.subschemeι ζ ∈ U ∧
+      IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        (overRestrictι X U)).obj L)
+  · obtain ⟨U, hU, hLU⟩ := hsupp
+    exact defectVanishesNear_of_isZero_restrict k' L ζ U hU hLU
+  push Not at hsupp
+  obtain ⟨U, hζU, hU⟩ :=
+    exists_isZero_upperStar_nearbyCycles_of_isGeneric k' hX hh hI L hL ζ hζ hsupp
   exact ⟨U, hζU, isZero_restrict_specializationDefect_of_isZero X I k' _ _ L.obj hΨ hU⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
