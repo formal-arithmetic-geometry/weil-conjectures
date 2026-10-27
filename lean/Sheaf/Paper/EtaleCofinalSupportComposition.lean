@@ -9,6 +9,7 @@ public import Sheaf.Paper.EtaleSystemCofinalData
 import Sheaf.Paper.SystemBlockRepetition
 import Sheaf.Paper.EtaleSystemCoefficientProjection
 import Sheaf.CategoryTheory.SystemLevelLeftExtension
+import Sheaf.CategoryTheory.IsoWhiskerCancellation
 
 /-! # Composition of normalized cofinal support
 
@@ -53,6 +54,20 @@ normalizations in t and the stated invertibility and cocycle of coefficient proj
 three `h` isomorphisms. The hypotheses `hi` and `hq` constrain only coefficient
 projection maps, while the conclusion depends on the unconstrained composition
 fields, so the claimed equality is not determined by the stated structure. -/
+private theorem support_normalization_app
+    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}
+    (t : CofinalSupport c l) (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)
+    (N : Derived X (cofinalCoefficients B r).rings) :
+    (t.projection.q (cofinalCoefficient B r)).app
+      ((t.repetition B r).x.R.mapDerivedCategory.obj N) ≫
+        (t.projection.support B).F.map ((t.factorX B r).derived.inv.app N) ≫
+      (t.h B r).hom.app N ≫
+      (t.factorY B r).derived.hom.app
+        ((t.projection.support (cofinalCoefficients B r)).F.obj N) =
+      (t.projection.scalarY (cofinalCoefficient B r)).model.T.map
+        ((t.repetition B r).kappa.hom.app N) :=
+  t.normalization B r N
+
 theorem etaleCofinalSupport_composition
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}
     (t : CofinalSupport c l)
@@ -72,6 +87,11 @@ theorem etaleCofinalSupport_composition
               (t.extensionY (cofinalCoefficients B r) s) (t.extensionY B (s.trans r))
               (t.compositionY B r s)).hom.app
                 ((t.projection.support (cofinalCoefficients B (s.trans r))).F.obj N)) := by
+  intro B r s N
+  have _hnorm := support_normalization_app t B (s.trans r) N
+  have _cancel := CategoryTheory.cancel_iso_whiskers
+    (Iso.refl _) (Iso.refl _) ((t.h B (s.trans r)).hom.app N)
+    ((t.h B (s.trans r)).hom.app N) (by simp)
   sorry
 
 end AlgebraicGeometry.Etale.SystemProjection
