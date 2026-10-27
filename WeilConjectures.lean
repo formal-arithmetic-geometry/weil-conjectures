@@ -8037,6 +8037,7 @@ public import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Basic
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Coherence
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Composition
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.CompositionCoherence
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Cube
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Identity
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Pasting
