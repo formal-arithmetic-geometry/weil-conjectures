@@ -1,0 +1,84 @@
+{
+ "id": "lem-trf-canonical-relative-proj-proper-local",
+ "kind": "statement",
+ "title": "Affine-local properness of finite type relative Proj",
+ "statement": "Let S be a scheme, E a quasi-coherent finite-type O_S-module, and U an affine open of S. The restriction to U of the structural morphism of the canonical relative Proj of Sym(E) is proper.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-weil-proper-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemmas 01WB and 01WC, affine-local comparison"
+ },
+ "proof": [
+  {
+   "text": "Choose the affine finite-generator presentation of E over U. Its closed immersion into finite projective space makes the local relative Proj H-projective and therefore proper. The normalized symmetric-algebra pullback comparison identifies this local relative Proj map with the restriction of the global canonical relative Proj; transport properness across the induced arrow isomorphism.",
+   "uses": [
+    "lem-trf-projective-bundle-affine-presentations",
+    "lem-kun-projective-implies-proper",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-affine-presentations",
+  "lem-kun-projective-implies-proper",
+  "lem-trf-projective-bundle-quotient-geometry"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemmas 01WB and 01WC"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-canonical-relative-proj-proper",
+   "place": "local affine restriction step"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CanonicalRelativeProjProperLocal",
+  "declaration": "AlgebraicGeometry.canonicalRelativeProj_restrict_proper",
+  "file": "lean/Sheaf/TraceFormula/CanonicalRelativeProjProperLocal.lean",
+  "statement": "theorem canonicalRelativeProj_restrict_proper {S : Scheme.{u}} (E : S.Modules) (hE : E.IsQuasiCoherentFiniteType) (U : S.Opens) (hU : IsAffineOpen U) : IsProper ((@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CanonicalRelativeProjProper",
+  "date": "2026-10-28",
+  "group": "M5"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T234108-L-4190028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T234108-L-4190028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

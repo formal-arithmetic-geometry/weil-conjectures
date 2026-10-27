@@ -5,8 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
+import Sheaf.AlgebraicGeometry.ProjectiveBundleAffinePresentations
 public import Sheaf.AlgebraicGeometry.CoherentFiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.TraceFormula.CanonicalRelativeProjProperLocal
 
 /-! # Properness of finite type relative Proj
 
@@ -40,7 +42,11 @@ hence proper by `hProjective_properness`.  The affine opens cover the target, so
 theorem canonicalRelativeProj_proper {S : Scheme.{u}} (E : S.Modules)
     (hE : E.IsQuasiCoherentFiniteType) :
     IsProper (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom := by
-  sorry
+  obtain ⟨I, U, _n, hU, _hlocal⟩ :=
+    exists_affine_projectiveBundle_presentations S E hE
+  apply IsZariskiLocalAtTarget.of_iSup_eq_top U hU
+  intro i
+  exact canonicalRelativeProj_restrict_proper E hE (U i) (_hlocal i).1
 
 end AlgebraicGeometry
 

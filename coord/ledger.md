@@ -20337,3 +20337,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:41 L: merged deliver/M4/Sheaf.Paper.RationalP1SecondPullSection (stage 3; reviewer PASS; first push; landing 20261027T234105-L-4188207 (interface); batch 20261027T233735; modules 7; new nodes 8)
 - 23:41 L: merged deliver/M4/Sheaf.SixFunctors.CoefIntegralFiniteExtensionComposition (stage 3; reviewer PASS; first push; landing 20261027T234106-L-4188878 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:41 L: merged deliver/M4/Sheaf.SixFunctors.IntegralVerdierReductionPairingDelta (stage 3; reviewer PASS; first push; landing 20261027T234107-L-4189508 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:41 L: merged deliver/M5/Sheaf.TraceFormula.CanonicalRelativeProjProper (stage 3; reviewer PASS; first push; landing 20261027T234108-L-4190028 (interface); batch 20261027T233735; modules 2; new nodes 1)
