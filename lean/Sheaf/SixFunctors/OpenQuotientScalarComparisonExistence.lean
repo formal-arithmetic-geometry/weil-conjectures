@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorQuotientData
+import Sheaf.SixFunctors.OpenQuotientScalarComparisonAssembly
 
 /-! # Existence of the strict scalar comparison for an open quotient
 
@@ -38,6 +39,7 @@ theorem openQuotientScalarComparisonExistence
     (tc : IntegralOpenReduction.TensorComparison l E j o)
     (sc : ScalarCompatibility l E j o) :
     Nonempty (ScalarComparison l E j o sc tc) := by
-  sorry
+  obtain ⟨d⟩ := openQuotientScalarComparisonLevelData l E j o tc sc
+  exact openQuotientScalarComparisonAssembly l E j o tc sc d
 
 end WeilConjectures.OpenTensorQuotient
