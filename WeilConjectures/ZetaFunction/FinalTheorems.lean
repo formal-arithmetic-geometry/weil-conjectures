@@ -16,17 +16,17 @@ public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 # The Weil conjectures for a smooth proper variety: the five assembled theorems
 
 This file states the five Weil conjectures for a variety over the finite field `k₀ = 𝔽_q` in the
-form of the blueprint (subsections `sk-thm-weil1` to `sk-thm-weil5`, nodes
+form of the blueprint (subsections `det-thm-weil1` to `thm-weil-final-functional-equation`, nodes
 `thm-weil-final-rationality`, `thm-weil-final-integrality`, `thm-weil-final-rh`,
 `thm-weil-final-betti`, `thm-weil-final-functional-equation`), and the Riemann hypothesis in
-its arithmetic form (`sk-thm-rh`, `prop-arithmetic-roots`).
+its arithmetic form (`thm-weil-final-rh`, `prop-arithmetic-roots`).
 
 The inputs are the trace formula, Poincaré duality and the weight estimate; their output is
 `AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`. The coefficients of the
 zeta series are integral by the Euler product (`AlgebraicGeometry.Scheme.Hom.zetaSeries_eq_tprod`,
 `AlgebraicGeometry.Scheme.Hom.exists_int_zetaSeries`) while the factorization is `ℓ`-adic by
 construction; the two meet in the rationality descent and in the realization independence of the
-integral factors (blueprint remarks `rem-zeta-where-this-feeds` and
+integral factors (blueprint remarks `sk-the-five-assembled-theorems--remark-1` and
 `sk-the-five-assembled-theorems--remark-1`, and
 `rationality-the-criterion-and-the-descent--remark-1` and
 `sk-rationality-the-criterion-and-the-descent--remark-1`: the trace-to-determinant identity is
@@ -44,14 +44,14 @@ integrality of the factors (`AlgebraicGeometry.Scheme.realization_independence`)
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`: `sk-def-zeta`.
-- `AlgebraicGeometry.Scheme.Hom.euler_product`: `sk-prop-euler`, `prop-euler-product`.
-- `AlgebraicGeometry.Scheme.Hom.weil_rationality`: `sk-thm-weil1`, `thm-weil-final-rationality`.
-- `AlgebraicGeometry.Scheme.weil_integral_factors`: `sk-thm-weil2`, `thm-weil-final-integrality`.
-- `AlgebraicGeometry.Scheme.riemann_hypothesis`: `sk-thm-rh`, `prop-arithmetic-roots`,
-  `sk-thm-weil3`, `thm-weil-final-rh`.
-- `AlgebraicGeometry.Scheme.weil_betti`: `sk-thm-weil4`, `thm-weil-final-betti`.
-- `AlgebraicGeometry.Scheme.weil_functional_equation`: `sk-thm-weil5`,
+- `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`: `det-def-zeta`.
+- `AlgebraicGeometry.Scheme.Hom.euler_product`: `det-prop-euler`, `prop-euler-product`.
+- `AlgebraicGeometry.Scheme.Hom.weil_rationality`: `det-thm-weil1`, `thm-weil-final-rationality`.
+- `AlgebraicGeometry.Scheme.weil_integral_factors`: `thm-weil-final-integrality`, `thm-weil-final-integrality`.
+- `AlgebraicGeometry.Scheme.riemann_hypothesis`: `thm-weil-final-rh`, `prop-arithmetic-roots`,
+  `thm-weil-final-rh`, `thm-weil-final-rh`.
+- `AlgebraicGeometry.Scheme.weil_betti`: `thm-weil-final-betti`, `thm-weil-final-betti`.
+- `AlgebraicGeometry.Scheme.weil_functional_equation`: `thm-weil-final-functional-equation`,
   `thm-weil-final-functional-equation`.
 -/
 
@@ -65,7 +65,7 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- Blueprint `sk-def-zeta` (the point-count zeta series): for a scheme `X₀` over a field `k`,
+/-- Blueprint `det-def-zeta` (the point-count zeta series): for a scheme `X₀` over a field `k`,
 the zeta series `Z(X₀, T) = exp(∑_{n ≥ 1} Nₙ Tⁿ / n)` (`AlgebraicGeometry.Scheme.Hom.zetaSeries`,
 with `Nₙ = #X₀(𝔽_{qⁿ})` the point counts `AlgebraicGeometry.Scheme.Hom.pointCount`) lies in
 `1 + T ℚ⟦T⟧`, and the point counts are recovered from it by the logarithmic derivative
@@ -78,7 +78,7 @@ theorem Hom.constantCoeff_zetaSeries_and_X_mul_derivative {k : Type u} [Field k]
   ⟨f.constantCoeff_zetaSeries, f.X_mul_derivative_zetaSeries⟩
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `sk-prop-euler` and `prop-euler-product` (closed-point Euler product and
+/-- Blueprint `det-prop-euler` and `prop-euler-product` (closed-point Euler product and
 integrality): for a scheme `Y₀` of finite type over a finite field `k`, with `c_r` the number of
 closed points of degree `r`,
 
@@ -124,7 +124,7 @@ theorem Hom.euler_product {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
     smul_eq_mul, mul_comm]
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `sk-thm-weil1` and `thm-weil-final-rationality` (Weil conjectures I: rationality
+/-- Blueprint `det-thm-weil1` and `thm-weil-final-rationality` (Weil conjectures I: rationality
 and Euler product): for a scheme `X₀` of finite type over a finite field `k`,
 
 * there are `A, B ∈ ℤ[T]` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`;
@@ -149,7 +149,7 @@ variable (k₀) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (d : ℕ)
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `sk-thm-weil2` and `thm-weil-final-integrality` (Weil conjectures II: integral
+/-- Blueprint `thm-weil-final-integrality` and `thm-weil-final-integrality` (Weil conjectures II: integral
 Frobenius factors): for `X₀` smooth, proper and geometrically connected of pure dimension `d`,
 for every `0 ≤ i ≤ 2d` there is a unique `Pᵢ ∈ ℤ[T]` with `Pᵢ(0) = 1` and
 `Pᵢ^{(ℓ)} = det(1 - T F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` for every prime `ℓ ≠ p`, and these satisfy
@@ -164,7 +164,7 @@ theorem weil_integral_factors :
   exact ⟨P, fun i ↦ ⟨hfact.coeff_zero_eq_one i, hP i⟩, fun i Q _ hQ ↦ hQ.unique k₀ X (hP i),
     hfact⟩
 
-/-- Blueprint `sk-thm-rh`, `prop-arithmetic-roots`, `sk-thm-weil3` and `thm-weil-final-rh`
+/-- Blueprint `thm-weil-final-rh`, `prop-arithmetic-roots`, `thm-weil-final-rh` and `thm-weil-final-rh`
 (the Riemann hypothesis): for `X₀` smooth, proper and geometrically connected of pure
 dimension `d` and an integral Frobenius factor `P` in degree `i ≤ 2d`:
 
@@ -216,7 +216,7 @@ theorem riemann_hypothesis {i : ℕ} (hi : i ≤ 2 * d) {P : Polynomial ℤ}
         (LinearEquiv.isUnit_det' ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobenius)).1] at hα
     exact (Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2 (Polynomial.isRoot_of_mem_roots hα)
 
-/-- Blueprint `sk-thm-weil4` and `thm-weil-final-betti` (Weil conjectures IV: Betti
+/-- Blueprint `thm-weil-final-betti` and `thm-weil-final-betti` (Weil conjectures IV: Betti
 symmetry): the integral Frobenius factors `Pᵢ` of `X₀` have degrees
 `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`, `bᵢ = b_{2d-i}`, `b₀ = b_{2d} = 1`,
 `P₀ = 1 - T`, `P_{2d} = 1 - qᵈ T`, and the rational function
@@ -247,7 +247,7 @@ theorem weil_betti :
   obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8⟩ := betti_symmetry k₀ X d hP
   exact ⟨P, hP, hfact, h1, h2, h3, h4, h5, h6, h7, h8⟩
 
-/-- Blueprint `sk-thm-weil5` and `thm-weil-final-functional-equation` (Weil conjectures V:
+/-- Blueprint `thm-weil-final-functional-equation` and `thm-weil-final-functional-equation` (Weil conjectures V:
 functional equation): for the integral Frobenius factors `Pᵢ` of `X₀`, with
 `χ = ∑ᵢ (-1)ⁱ deg Pᵢ` and the determinant constants `Dᵢ = (-1)^{bᵢ} [T^{bᵢ}] Pᵢ`, the factors
 satisfy the degreewise reciprocity `P_{2d-i}(q^{-d} t⁻¹) = (-1)^{bᵢ} t^{-bᵢ} Dᵢ⁻¹ Pᵢ(t)` at every

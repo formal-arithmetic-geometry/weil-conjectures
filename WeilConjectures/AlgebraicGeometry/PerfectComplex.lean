@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Perfect complexes on schemes
 
-Source: literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/
+Source: literature/blueprint/master/blueprint/sec-picard-framework/det-thm-picard-semicon/
 def-pc-perfect-complex.md, node def-pc-perfect-complex, order 664; Stacks Project,
 Cohomology of Sheaves, Definitions 08C4 and 08CM, Tag 0BDH (blueprint: def-pc-perfect-complex).
 

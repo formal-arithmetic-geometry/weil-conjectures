@@ -41,7 +41,7 @@ product, and stability of the small categories.
 
 ## Implementation notes
 
-The package is stated in the setting of `sk-def-sf-setting`: the coefficients are
+The package is stated in the setting of `def-sf-setting`: the coefficients are
 `ModuleCat Λ` for a finite ring `Λ` (with a normalized Tate twist datum, for the orientation
 clause) whose exponent is invertible on the base field `k`, and `Y` is separated of finite
 type over `k`. For a general coefficient category the clauses are false: for `Λ = 𝔽_p` over
@@ -88,7 +88,7 @@ statements and carry no mathematical content beyond the results they cite:
   finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
   Weil-equivariant form is `AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`, and
   the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`
-  (`thm-coef-qbar-verdier`).
+  (`det-pd-biduality-coefficients`).
 - `rem-sf-finite-level-comparison-ingredient`: the reconstruction of normalized towers is
   `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.
 

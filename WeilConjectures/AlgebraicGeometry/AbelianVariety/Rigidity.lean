@@ -166,7 +166,7 @@ theorem isClosed_setOf_subsingleton_range_fiberMap {A B Y : Scheme.{u}} (a : A �
         simp [hA, π, pullback.condition]
       rw [← Scheme.Hom.comp_apply, this, Scheme.Hom.comp_apply, hp]
 
-/-- Blueprint `sk-prop-av-const-locus`: The locus of constant fibres is closed
+/-- Blueprint `lem-sc-constant-locus-closed`: The locus of constant fibres is closed
 
 Let `X` be a `K`-scheme proper over `K`, let `Z` be separated over `K`, let `Y` be any
 `K`-scheme and let `g : X ×_K Y ⟶ Z` be a morphism of `K`-schemes. For `y : Y` let

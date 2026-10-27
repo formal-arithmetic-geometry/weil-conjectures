@@ -59,7 +59,7 @@ for these groups are in
 
 ## Blueprint
 
-- `sk-d-tangent`: the Lie algebra of an algebraic group as its tangent space at the identity.
+- `def-wf-lie-algebra-derivation`: the Lie algebra of an algebraic group as its tangent space at the identity.
 - `sk-i-cartier`: the Lie algebra clauses of Cartier's theorem.
 - `sk-i-restriction`: pairs `V(J) ⊆ V(I)` with `⁅V(I), V(I)⁆ ⊆ V(J)`.
 - `sk-p-product`: the multiplication morphism `Z(G°)° × H° ⟶ G°`.
@@ -84,7 +84,7 @@ variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
   {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
 /-- The differential `Lie(V(J)) → Lie(V(I))` of the closed immersion `V(J) ⟶ V(I)`, an injective
-homomorphism of Lie algebras. (blueprint: `sk-d-tangent`) -/
+homomorphism of Lie algebras. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable abbrev lieAlgebraMap (h : I ≤ J) :
     GrpObj.Lie (subgroupScheme J) →ₗ⁅k⁆ GrpObj.Lie (subgroupScheme I) :=
   GrpObj.differential (subgroupSchemeHom h)
@@ -435,7 +435,7 @@ theorem lie_mem_range_lieAlgebraMap_identityComponent [IsAlgClosed k] [CharZero 
 
 /-- The standard representation of the `k`-points of `V(I)` on `kⁿ`: a point `Spec k ⟶ V(I)` acts
 through its image in `GL_n(k)` under the closed immersion `V(I) ⟶ GL_n`: the algebraic-group
-module of `V(I) ⟶ GL_n`. (blueprint: `sk-d-monodromy`, `def-wf-algebraic-representations`) -/
+module of `V(I) ⟶ GL_n`. (blueprint: `d-monodromy`, `def-wf-algebraic-representations`) -/
 noncomputable def standardRepresentation (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Representation k (points (subgroupScheme I) k) (n → k) :=
   RationalHom.representation (subgroupSchemeι I)

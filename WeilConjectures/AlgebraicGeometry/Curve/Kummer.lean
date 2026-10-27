@@ -54,7 +54,7 @@ The ring `𝒪(C)` is a finite `k`-algebra
 powers (`IsAlgClosed.exists_pow_eq_of_finite`) and the first term `𝒪(C)ˣ/n` of the short exact
 sequence of
 `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one` vanishes.
-(blueprint: `sk-prop-h1`) -/
+(blueprint: `det-prop-h1`) -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper [IsAlgClosed k]
     (f : C ⟶ Spec (.of k)) [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 1 ≃+
@@ -126,7 +126,7 @@ Brauer group `H²(C, 𝔾ₘ)`, which vanishes for smooth curves
 `sk-thm-br`),
 so `H²(C, μₙ)` is the cokernel of multiplication by `n` on `Pic(C) = H¹(C, 𝔾ₘ)`. The blueprint
 states this for smooth proper curves; properness is not needed.
-(blueprint: `sk-prop-h2`) -/
+(blueprint: `lem-sc-second-kummer-divisors`) -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth [IsAlgClosed k]
     (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+
@@ -145,12 +145,12 @@ theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth [IsAlgClosed k]
 
 `H²(C, μₙ) ≅ Pic(C)/n·Pic(C)`.
 
-This is the remark of blueprint `sk-prop-h2` that the identity holds for every curve, since
+This is the remark of blueprint `lem-sc-second-kummer-divisors` that the identity holds for every curve, since
 the Brauer group of every curve vanishes
 (`AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup`, blueprint
 `lem-sc-brauer-zero-all-curves`); for smooth curves see
 `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`.
-(blueprint: `sk-prop-h2`) -/
+(blueprint: `lem-sc-second-kummer-divisors`) -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two [IsAlgClosed k] (f : C ⟶ Spec (.of k))
     [IsCurve f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+

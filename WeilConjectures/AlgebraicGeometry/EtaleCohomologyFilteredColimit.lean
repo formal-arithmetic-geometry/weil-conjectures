@@ -17,7 +17,7 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.FilteredColimitSucces
 /-!
 # Filtered colimits of etale cohomology
 
-Source: Stacks Project, Tags 03Q5, 0739 and 03FD; blueprint `sec-curve-estimates/sk-prop-h2`
+Source: Stacks Project, Tags 03Q5, 0739 and 03FD; blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`
 (blueprint: lem-weil-pbc-cohomology-filtered-colimit).
 
 The image cocone has legs induced by the original coprojections. Its colimit property

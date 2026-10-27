@@ -149,7 +149,7 @@ theorem hasDirectImageComplexWeightBound_affineLine :
 variable (S) in
 /-- The direct-image weight assertion holds for the projection of the `r`-fold relative affine line
 over a separated `k₀`-scheme of finite type, the composition of `r` affine-line projections
-(blueprint: `thm-zl-relative-line-step` and `sk-l-dl-general-composition`). -/
+(blueprint: `thm-zl-relative-line-step` and `det-l-dl-general-composition`). -/
 theorem hasDirectImageWeightBound_iteratedAffineLineProj :
     ∀ (r : ℕ) [(iteratedAffineLine S r).Over (Spec (CommRingCat.of k₀))]
       [(iteratedAffineLineProj S r).IsOver (Spec (CommRingCat.of k₀))],

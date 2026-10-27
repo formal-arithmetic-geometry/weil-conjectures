@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-! # Basic consequences of properness
 
-Source: literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/
+Source: literature/blueprint/master/blueprint/sec-abelian-varieties/cor-pqf-proper-quasifinite-finite/
 pqf-lem-proper-basic.md,
 node pqf-lem-proper-basic, order 528 (blueprint: pqf-lem-proper-basic).
 -/

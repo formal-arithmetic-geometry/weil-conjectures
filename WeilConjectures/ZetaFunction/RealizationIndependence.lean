@@ -190,7 +190,7 @@ weight `i` (`Polynomial.weilStratumPoly`). Then
 * `A^{(ℓ)} = N_ℓ` and `B^{(ℓ)} = D_ℓ`.
 
 By `prop-integral-recovery`, `A` and `B` are the parity products of the integral Frobenius factors
-`Pⱼ`, whose reciprocal roots are `q`-Weil numbers of weight `j` (`sk-thm-rh`); so the weight-`i`
+`Pⱼ`, whose reciprocal roots are `q`-Weil numbers of weight `j` (`thm-weil-final-rh`); so the weight-`i`
 stratum of `A` or `B` is the reciprocal-root multiset of `Pᵢ` (`Polynomial.weilStratum_prod`),
 and `Qᵢ = Pᵢ`. -/
 theorem realization_independence {A B : Polynomial ℤ}

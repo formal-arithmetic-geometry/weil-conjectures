@@ -16,7 +16,7 @@ Let `j : U₀ ⟶ C₀` be a nonempty open immersion of curves over a finite fie
 `R : AlgebraicGeometry.WeilGroup.Restriction j W(U₀) W(C₀)` a restriction of Weil groups. Pulling
 a Weil representation `ρ` of `W(C₀)` back along `R.restrict` is the restriction `j^* ℱ` of the
 corresponding lisse Weil sheaf. This file records how the notions of `sk-d-real-weights` and
-`sk-d-real-operations` behave under this operation: lisse sheaves restrict to lisse sheaves, the
+`def-real-weil-representation-operations` behave under this operation: lisse sheaves restrict to lisse sheaves, the
 local eigenvalues at a closed point of `U₀` are those at its image, so reality, determinant
 weights and punctual purity are inherited, and since `R.restrict` is surjective, constituents
 restrict to constituents (`sk-i-real-boundary`).

@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 /-!
 # Transport of infinitesimal points to tangent vectors at the identity
 
-Source: blueprint `sk-d-tangent` and the identity tangent-space argument of
+Source: blueprint `def-wf-lie-algebra-derivation` and the identity tangent-space argument of
 `lem-wf-same-lie-closed-subgroup`.
 
 ## Main definitions
@@ -139,7 +139,7 @@ theorem identityTangentTransport_aux
 transport both coefficients of the dual numbers by the structural residue map `k → κ(e)`.
 This is only an equivalence of types; compatibility with the operations is
 `identity_tangent_transport_operations`.
-Source: blueprint `sk-d-tangent`, and `lem-wf-same-lie-closed-subgroup`, Dimension paragraph. -/
+Source: blueprint `def-wf-lie-algebra-derivation`, and `lem-wf-same-lie-closed-subgroup`, Dimension paragraph. -/
 def identityTangentTransport {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     infPoints G ≃ schemeTangentSpace k G.left G.hom (unitSection G (IsLocalRing.closedPoint k)) :=
   (infPointsEquivTangentGroup G).toEquiv.trans

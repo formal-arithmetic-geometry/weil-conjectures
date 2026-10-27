@@ -81,7 +81,7 @@ lemma Scheme.nonempty_addEquiv_sheafH_constantZMod_rootsOfUnitySheaf (f : C ⟶ 
 `H¹(C_ét, ℤ/n) ≅ (ℤ/n)^{2g}`.
 
 The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the blueprint
-(`sk-def-curve`). For a smooth proper curve it agrees, by Serre duality, with the arithmetic genus
+(`def-sc-curves`). For a smooth proper curve it agrees, by Serre duality, with the arithmetic genus
 `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the Riemann–Roch block
 (`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), which is the dimension of the Jacobian.
 
@@ -138,8 +138,8 @@ genus `g` over an algebraically closed field `k` and let `n ≥ 1` be prime to `
 
 The proof is the one of the remark closing the curve estimates: degree zero is `μₙ(k) = ℤ/n`,
 degree one is `Pic(C)[n] = J(C)[n]`, degree two is `Pic(C)/n = ℤ/n` via the Kummer sequence and
-`H²(C, μₙ) ≅ Pic(C)/n` (blueprint `sk-prop-h2`), and the vanishing above two is the bound on the
-cohomological dimension (blueprint `sk-prop-cd`).
+`H²(C, μₙ) ≅ Pic(C)/n` (blueprint `lem-sc-second-kummer-divisors`), and the vanishing above two is the bound on the
+cohomological dimension (blueprint `lem-sc-arbitrary-curve-cd`).
 (blueprint: `thm-sc-proper-cohomology`, `sk-thm-curveestimate`,
 `sk-the-final-theorem-the-curve-estimate--remark-1`,
 `the-final-theorem-the-curve-estimate--remark-1`) -/

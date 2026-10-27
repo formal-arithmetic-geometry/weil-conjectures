@@ -85,7 +85,7 @@ is not enough when `Λ` is not a domain
 
 Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `sk-prop-convolution-kernel`) -/
+(sketch blueprint: `lem-fd-convolution-kernel`) -/
 theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : IsUnit (Ψ 1 - 1)) :

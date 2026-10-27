@@ -56,7 +56,7 @@ The statements of this section are the ones of `sk-thm-sf-direct-image-tor-ampli
 `sk-thm-sf-hom-ctf`, `sk-prop-sf-rf-shriek-preservation` (ii)–(iv) and
 `sk-thm-sf-ctf-stability` (iii), (v), (vi) whose content is a bound on étale cohomological
 dimension, a constructibility theorem for direct images or purity. They are made in the setting
-of `sk-def-sf-setting`: the coefficients are a finite ring `Λ` whose exponent is invertible on
+of `def-sf-setting`: the coefficients are a finite ring `Λ` whose exponent is invertible on
 the schemes in sight, and the schemes are of finite type over a field `k`. Neither hypothesis
 can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier),
 so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and over a

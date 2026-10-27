@@ -335,7 +335,7 @@ Cohomology of the quasi-compact quasi-separated scheme `C` commutes with filtere
 since `π_*` is exact, a dimension shift reduces the claim to `F = ℤ/n`. Passing to the reduced
 connected components and then to the normalization, which changes `F` only by a sheaf supported
 on finitely many closed points, reduces it to smooth affine connected `C`.
-(blueprint: `sk-prop-cd-affine`, the reduction step) -/
+(blueprint: `lem-sc-arbitrary-curve-cd`, the reduction step) -/
 theorem subsingleton_sheafH_two_of_isAffine_of_forall (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsAffine C] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)
     (H : ∀ (C' : Scheme.{u}) (f' : C' ⟶ Spec (.of k)), IsConnectedCurve f' → Smooth f' →
@@ -402,14 +402,14 @@ sharper bound for affine `C` is
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`.
 
 The proof reduces to integral curves
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`, blueprint `sk-prop-cd`,
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`, blueprint `lem-sc-arbitrary-curve-cd`,
 Step 1): the units `F ⟶ cₚ_* cₚ^* F` for the irreducible components `cₚ : Zₚ ⟶ C` with their
 reduced structure assemble to a map `F ⟶ ⨁ₚ cₚ_* cₚ^* F` which is an isomorphism away from
 finitely many closed points, hence bijective on `Hᵠ` for `q ≥ 2`. On an integral curve the
 vanishing is the generic-point argument of
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral`: `Hᵠ(C, F)` agrees
 with `Hᵠ(C, η_* η^* F)` for the generic point `η`, and the function field has cohomological
-dimension at most one. (blueprint: `sk-prop-cd`) -/
+dimension at most one. (blueprint: `lem-sc-arbitrary-curve-cd`) -/
 @[stacks 03SC "(1)"]
 theorem subsingleton_sheafH_of_three_le (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
@@ -454,7 +454,7 @@ Degrees `q ≥ 3` are `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le
 reduces (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_two_of_isAffine_of_forall`) to smooth
 affine connected curves, where it is
 `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_of_two_le_of_isAffine_of_smooth`.
-(blueprint: `sk-prop-cd-affine`) -/
+(blueprint: `lem-sc-arbitrary-curve-cd`) -/
 @[stacks 03SC "(2)"]
 theorem subsingleton_sheafH_of_two_le_of_isAffine (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsAffine C] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)
@@ -491,7 +491,7 @@ Then `H^q(C_ét, ℤ/d) = 0` for `q > 1`, and `H^0(C_ét, ℤ/d) = ℤ/d` when `
 
 The vanishing is the case of the torsion sheaf `ℤ/d` of
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine` (blueprint
-`sk-prop-cd-affine`), which does not need `d` to be prime to the characteristic; the degree
+`lem-sc-arbitrary-curve-cd`), which does not need `d` to be prime to the characteristic; the degree
 zero statement is `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`. -/
 @[stacks 03SC "(2)"]
 theorem subsingleton_sheafH_constantZMod_and_nonempty_addEquiv_sheafH_zero

@@ -336,7 +336,7 @@ invertible, the evaluation `M ⊗ Mᵛ ⟶ 𝒪_X` is an isomorphism, and `M ≅
 assertions are `IsInvertible.dual` and `nonempty_tensorObj_dual_iso_unit`, and the biduality
 is `nonempty_iso_dual_dual`.
 
-(blueprint: `lem-sc-invertible-dual`) -/
+(blueprint: `lem-pc-tensor-dual-invertible`) -/
 theorem isInvertible_dual_and_nonempty_iso (M : X.Modules) [M.IsInvertible] :
     Mᵛ.IsInvertible ∧ Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) ∧ Nonempty (M ≅ Mᵛᵛ) :=
   ⟨inferInstance, nonempty_tensorObj_dual_iso_unit M, nonempty_iso_dual_dual M⟩

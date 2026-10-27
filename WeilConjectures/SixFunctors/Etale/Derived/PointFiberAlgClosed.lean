@@ -255,7 +255,7 @@ lemma integralStageTransition_map_smul (r : StageInt.{u} l E) {X Y} (f : X ⟶ Y
   ObjectProperty.hom_ext _ (derivedBaseChange_map_smul _ _ _ r f.hom)
 
 /-- The scalar extension `- ⊗_E F : Dᵇc(s, E) ⥤ Dᵇc(s, F)` of blueprint
-`def-weil-rationalization-karoubi` over `s = Spec k`: the functor induced on the
+`def-sfb-rationalization-quotient` over `s = Spec k`: the functor induced on the
 rationalizations by the derived base change along `𝒪_E ⟶ 𝒪_F`. -/
 noncomputable def rationalStageTransition : RationalPointStage l k E ⥤ RationalPointStage l k F :=
   Rationalization.mapOfRingHom (R := StageInt.{u} l E) (R' := StageInt.{u} l F)

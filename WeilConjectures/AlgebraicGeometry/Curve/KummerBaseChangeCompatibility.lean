@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 /-!
 # Kummer compatibility under algebraically closed base change
 
-Source: Weil conjectures blueprint, sec-curve-estimates/sk-prop-ext-invariance,
+Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 proper-case Kummer naturality sentence and affine-case Picard-torsion paragraph
 (blueprint: lem-sc-kummer-base-change-compatibility).
 -/
@@ -155,7 +155,7 @@ cohomology long exact sequence gives the ladder; degree zero is pullback of unit
 is pullback of invertible modules; in the affine case the Jacobian quotient and the abelian-variety
 estimate give the isomorphism on `n`-torsion.
 
-Source: Weil conjectures blueprint, sec-curve-estimates/sk-prop-ext-invariance, proper-case
+Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper-case
 Kummer naturality sentence and affine-case Picard-torsion paragraph
 (blueprint: lem-sc-kummer-base-change-compatibility).
 

@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.Picard
 /-!
 # Powers in the kernel of the boundary divisor map
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance,
 affine-case proof, divisor kernel and constants paragraph.
 -/
 
@@ -29,7 +29,7 @@ namespace AlgebraicGeometry
 
 /-- A unit with zero boundary divisor is an nth power.
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance,
 affine-case proof, divisor kernel and constants paragraph
 (blueprint: lem-sc-boundary-divisor-kernel-powers).
 

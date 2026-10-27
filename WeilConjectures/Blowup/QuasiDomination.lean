@@ -52,7 +52,7 @@ namespace AlgebraicGeometry
 
 variable {S X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-nagata-sketch-quasidomination`, `def-nagata-conrad-quasi-domination`:
+/-- Blueprint `def-nagata-conrad-quasi-domination`, `def-nagata-conrad-quasi-domination`:
 Quasi-domination.
 
 A quasi-domination of `x : X ⟶ S` over a separated `y : Y ⟶ S` is a morphism `hom : U ⟶ Y`

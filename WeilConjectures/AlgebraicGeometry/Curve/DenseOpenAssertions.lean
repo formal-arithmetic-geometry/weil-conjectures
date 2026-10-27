@@ -161,7 +161,7 @@ H^1(X,F)\to0$ and isomorphisms $H^q(X,j_!j^{-1}F)\to H^q(X,F)$ for $q>1$'). Appl
 [lem-weil-pbc-pullback-cohomology-long-exact-ladder] to the sequence of step 3, once with
 $u=\pi_{k'}:X_{k'}\to X$ for an algebraically closed $k'/k$ (the pullback maps $u^*$ of
 [def-weil-pbc-cohomology-pullback] are then the maps $\rho^q_{k'/k}$ of
-[def-weil-pbc-extension-pullback]) and once with $u=a:U\hookrightarrow X$ an open immersion: the
+[def-weil-pbc-C7]) and once with $u=a:U\hookrightarrow X$ an open immersion: the
 pulled-back sequences $0\to u^{-1}F'\to u^{-1}F\to u^{-1}G\to0$ are exact, and the long exact
 cohomology sequences on $X$ and on $X_{k'}$ (resp. $U$) are connected by a morphism of long exact
 sequences given by $\rho$ (resp. $a^*$). With step 4 ($H^q(X,G)=0$ for $q\ge1$) the sequence on
@@ -169,7 +169,7 @@ $X$ yields: (i) $H^q(X,F')\to H^q(X,F)$ is an isomorphism for $q\ge2$; (ii) $0\t
 H^0(X,F)\to H^0(X,G)\to H^1(X,F')\to H^1(X,F)\to0$ is exact. With step 5 ($H^1(U,a^{-1}G)=0$) the
 sequence on $U$ yields: (iii) $H^2(U,a^{-1}F')\to H^2(U,a^{-1}F)$ is injective. Dependencies:
 lem-weil-pbc-pullback-cohomology-long-exact-ladder, def-weil-pbc-cohomology-pullback,
-def-weil-pbc-extension-pullback, def-weil-pbc-etale-cohomology.
+def-weil-pbc-C7, def-weil-pbc-etale-cohomology.
 
 8. Part 1: $\mathcal C(X,F')\Rightarrow\mathcal C(X,F)$ (Stacks writes 'at this point it is easy
 to deduce each of (1)-(8) holds for $F$ if and only if it holds for $j_!j^{-1}F$'; this direction

@@ -17,7 +17,7 @@ Let `X₀` be a smooth, proper, geometrically connected scheme of pure dimension
 `k₀ = 𝔽_q`, with integral Frobenius factors `P₀, …, P_{2d}` and Betti numbers `bᵢ = deg Pᵢ`.
 Then `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`, `bᵢ = b_{2d-i}`, `b₀ = b_{2d} = 1`,
 `P₀ = 1 - T` and `P_{2d} = 1 - qᵈ T`; consequently `Z(X₀, T)` has a pole of order exactly one at
-`T = 1` and, for `d ≥ 1`, at `T = q^{-d}` (blueprint `sk-thm-betti`).
+`T = 1` and, for `d ≥ 1`, at `T = q^{-d}` (blueprint `thm-weil-final-betti`).
 
 ## Main statements
 
@@ -25,7 +25,7 @@ Then `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`, `bᵢ = b
   `deg Pᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`prop-weil-realization-independent-degrees`).
 - `AlgebraicGeometry.Scheme.weilBettiNumber_eq_finrank`: `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for all
   `i ∈ ℤ` (`prop-weil-betti-comparison`).
-- `AlgebraicGeometry.Scheme.betti_symmetry`: blueprint `sk-thm-betti`.
+- `AlgebraicGeometry.Scheme.betti_symmetry`: blueprint `thm-weil-final-betti`.
 -/
 
 @[expose] public section
@@ -216,7 +216,7 @@ theorem endpoints_of_isIntegralFrobeniusFactor {P : Fin (2 * d + 1) → Polynomi
       Nat.cast_mul,
       Nat.cast_two, e.finrank_eq, Module.finrank_self]
 
-/-- Blueprint `sk-thm-betti` (Betti symmetry and the endpoint factors): for `X₀` smooth, proper
+/-- Blueprint `thm-weil-final-betti` (Betti symmetry and the endpoint factors): for `X₀` smooth, proper
 and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, with integral Frobenius
 factors `Pᵢ` and Betti numbers `bᵢ = deg Pᵢ`:
 

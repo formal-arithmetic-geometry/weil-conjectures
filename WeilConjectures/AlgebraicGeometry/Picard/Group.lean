@@ -134,7 +134,7 @@ tensor products and duals of invertible modules are invertible by
 `AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorObj` and
 `AlgebraicGeometry.Scheme.Modules.IsInvertible.dual`.
 
-(blueprint: `lem-sc-pic-group`, `def-sc-picard-group`) -/
+(blueprint: `def-sc-picard-group`, `def-sc-picard-group`) -/
 noncomputable instance instCommGroup : CommGroup Y.Pic where
   mul_assoc L L' L'' := by
     refine eq_iff_nonempty_iso.2 ⟨mulIso _ _ ≪≫ whiskerRightIso (mulIso _ _) _ ≪≫ α_ _ _ _ ≪≫

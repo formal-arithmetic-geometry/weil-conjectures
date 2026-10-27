@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.BoundaryDivisorKernelPowers
 /-!
 # Units modulo powers under algebraically closed base change
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance,
 affine-case proof, unit quotient paragraph (blueprint: lem-sc-units-quotient-base-change).
 -/
 
@@ -84,7 +84,7 @@ private theorem quotient_powers_equiv
 /-- Pullback identifies units modulo `n`-th powers after extending algebraically closed fields.
 The equation on representatives specifies that the isomorphism is induced by pullback.
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance,
 affine-case proof, unit quotient paragraph (blueprint: lem-sc-units-quotient-base-change).
 
 Proof:

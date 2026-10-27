@@ -73,7 +73,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 field `k`, the function field `k(C)` is quasi-algebraically closed: every homogeneous form of
 degree `d` in `N > d` variables over `k(C)` has a nontrivial zero. Neither smoothness nor
 properness of `C` is assumed.
-(blueprint: `sk-prop-tsen`) -/
+(blueprint: `lem-sc-tsen`) -/
 theorem isQuasiAlgClosed_functionField (f : C ⟶ Spec (.of k)) [IsCurve f] [IsIntegral C] :
     IsQuasiAlgClosed C.functionField := by
   -- `k(C)` is the fraction field of `A = Γ(C, U)` for a nonempty affine open `U`, a finitely
@@ -121,7 +121,7 @@ theorem isQuasiAlgClosed_functionField (f : C ⟶ Spec (.of k)) [IsCurve f] [IsI
 
 /-- The Brauer group of the function field of an integral curve over an algebraically closed
 field vanishes, `Br(k(C)) = H²(k(C), 𝔾ₘ) = 0`.
-(blueprint: `sk-prop-tsen`) -/
+(blueprint: `lem-sc-tsen`) -/
 theorem subsingleton_cohomologicalBrauerGroup_functionField (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsIntegral C] : Subsingleton (Spec C.functionField).CohomologicalBrauerGroup :=
   have := isQuasiAlgClosed_functionField f

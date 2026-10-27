@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 # Derivation coefficients on the dual-number diagonal
 
 Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, the square-zero
-pushout calculation; blueprint `sk-d-tangent`, the dual-number description.
+pushout calculation; blueprint `def-wf-lie-algebra-derivation`, the dual-number description.
 -/
 
 @[expose] public section

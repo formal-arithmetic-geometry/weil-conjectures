@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 /-!
 # Degree-zero Picard points under algebraically closed field extension
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance, proper case and the
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case and the
 Jacobian point comparison in the affine case (blueprint: lem-sc-piczero-torsion-base-change).
 -/
 
@@ -32,7 +32,7 @@ set_option autoImplicit false
 /-- The canonical comparison on degree-zero Picard groups is injective and every
 prime-to-characteristic torsion point after extension lifts to a torsion point before extension.
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance, proper degree-one comparison
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper degree-one comparison
 and affine Jacobian correction (blueprint: lem-sc-piczero-torsion-base-change).
 
 Proof: a proper smooth connected curve over an algebraically closed field is geometrically

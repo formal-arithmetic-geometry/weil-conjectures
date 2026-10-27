@@ -32,7 +32,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec
 
 /-- Degree-two vanishing for the constant sheaf with arbitrary coefficients `Λ/pΛ`.
 Source: blueprint `sec-proper-base-change/sk-thm-p1/lem-sc-c3`, via
-`sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension` and the filtered-colimit
+`sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension` and the filtered-colimit
 extension of constant coefficients (Stacks Project, Tags 0A3N, 03Q5 and 0739).
 (blueprint: lem-sc-c3-degree-two)
 

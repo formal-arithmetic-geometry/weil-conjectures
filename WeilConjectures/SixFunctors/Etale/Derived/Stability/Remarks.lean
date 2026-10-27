@@ -38,7 +38,7 @@ Each remark with mathematical content is a theorem bundling the statements it po
 The remark `rem-sf-tower-shapes-occurring` is
 `AlgebraicGeometry.Etale.exists_normalizedTower_and_boundedConstructibleIntegral_iff`.
 
-## Where this feeds (`rem-sf-feeds`, `sk-rem-sf-feeds`)
+## Where this feeds (`sk-rem-sf-feeds`, `sk-rem-sf-feeds`)
 
 The package `prop-functor-package` is consumed as follows. The smooth-purity chapter needs
 clause (7), the relative product theorem, as the relative input for its affine-line orientation
@@ -57,7 +57,7 @@ counterpart.
 The coefficient stages `E` and `ℚ̄_ℓ`, and the finite-stage comparisons
 `lem-coef-finite-direct-image`, `thm-coef-finite-hom`, `cor-coef-finite-verdier`,
 `lem-coef-finite-exceptional` (beyond the formula `Rf^! = 𝔻_X f^* 𝔻_Y`),
-`thm-coef-rational-verdier`, `lem-coef-rational-operations` and `thm-coef-qbar-verdier` are not
+`thm-coef-rational-verdier`, `lem-coef-rational-operations` and `det-pd-biduality-coefficients` are not
 formalised; the remarks are stated with the finite and integral stages that are.
 -/
 

@@ -43,7 +43,7 @@ ring of `A` is `K`, and `A` is étale.
 ## Blueprint
 
 `HopfAlgebra.etale_of_not_dvd_finrank` is the algebraic content of `lem-sc-fg-order-prime-etale`
-and `sk-prop-av-prime-p-etale`.
+and `lem-sc-fg-order-prime-etale`.
 -/
 
 @[expose] public section

@@ -104,7 +104,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 ```
 
 whose successive quotients `coker φᵢ` are punctually `ι`-pure of some weight at most `w`
-(blueprint: `sk-d-dl-general-weights`, `def-weil-punctual-weights`). -/
+(blueprint: `sk-d-real-weights`, `def-weil-punctual-weights`). -/
 def WeilSheaf.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) :
     Prop :=
   ∃ (n : ℕ) (G : Fin (n + 1) → WeilSheaf k₀ l X)
@@ -114,7 +114,7 @@ def WeilSheaf.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (F : WeilShea
 
 /-- `F` is `ι`-*mixed* if it is mixed of weights at most `w` for some `w`, that is, if it admits
 a finite filtration with punctually `ι`-pure quotients
-(blueprint: `sk-d-dl-general-weights`). -/
+(blueprint: `sk-d-real-weights`). -/
 def WeilSheaf.IsMixed (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
   ∃ w : ℝ, F.IsMixedOfWeightsAtMost ι w
 
@@ -125,7 +125,7 @@ variable {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X} {w w' : ℝ}
 theorem IsMixedOfWeightsAtMost.isMixed (h : F.IsMixedOfWeightsAtMost ι w) : F.IsMixed ι :=
   ⟨w, h⟩
 
-/-- Mixed upper bounds are monotone in the bound (blueprint: `sk-d-dl-general-weights`). -/
+/-- Mixed upper bounds are monotone in the bound (blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.mono_weight (h : F.IsMixedOfWeightsAtMost ι w) (hw : w ≤ w') :
     F.IsMixedOfWeightsAtMost ι w' := by
   obtain ⟨n, G, φ, h0, hlast, hmono, hpure⟩ := h
@@ -134,7 +134,7 @@ theorem IsMixedOfWeightsAtMost.mono_weight (h : F.IsMixedOfWeightsAtMost ι w) (
   exact ⟨v, hv.trans hw, hvpure⟩
 
 /-- A zero sheaf is mixed of weights at most `w`, for every `w`: the filtration of length zero
-exhibits it (blueprint: `sk-d-dl-general-weights`). -/
+exhibits it (blueprint: `sk-d-real-weights`). -/
 theorem isMixedOfWeightsAtMost_of_isZero (hF : IsZero F) (w : ℝ) :
     F.IsMixedOfWeightsAtMost ι w :=
   ⟨0, fun _ ↦ F, fun i ↦ i.elim0, hF, ⟨Iso.refl F⟩, fun i ↦ i.elim0, fun i ↦ i.elim0⟩
@@ -166,21 +166,21 @@ theorem isMixedOfWeightsAtMost_iff_filtrationClosure :
   rfl
 
 /-- A subobject of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: intersect
-the filtration (blueprint: `sk-d-dl-general-weights`). -/
+the filtration (blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_mono (i : G ⟶ F) [Mono i] (h : F.IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w := by
   rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
   exact ObjectProperty.prop_of_mono _ i h
 
 /-- A quotient of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: take the
-images of the filtration (blueprint: `sk-d-dl-general-weights`). -/
+images of the filtration (blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_epi (p : F ⟶ G) [Epi p] (h : F.IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w := by
   rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
   exact ObjectProperty.prop_of_epi _ p h
 
 /-- An extension of a sheaf mixed of weights at most `w` by another one is mixed of weights at
-most `w`: splice the two filtrations (blueprint: `sk-d-dl-general-weights`). -/
+most `w`: splice the two filtrations (blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_mono_cokernel (i : G ⟶ F) [Mono i]
     (hG : G.IsMixedOfWeightsAtMost ι w) (hQ : (cokernel i).IsMixedOfWeightsAtMost ι w) :
     F.IsMixedOfWeightsAtMost ι w := by
@@ -189,7 +189,7 @@ theorem IsMixedOfWeightsAtMost.of_mono_cokernel (i : G ⟶ F) [Mono i]
     (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel i) inferInstance inferInstance)
     hG hQ
 
-/-- Mixed upper bounds are invariant under isomorphism (blueprint: `sk-d-dl-general-weights`). -/
+/-- Mixed upper bounds are invariant under isomorphism (blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_iso (e : F ≅ G) (h : F.IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w := by
   obtain ⟨n, H, φ, h0, ⟨e'⟩, hmono, hpure⟩ := h
@@ -348,13 +348,13 @@ end Map
 
 /-- A bounded constructible Weil complex `K` is `ι`-*mixed of weights at most* `w` if its `b`-th
 cohomology sheaf `𝓗ᵇK` is mixed of weights at most `w + b`, for every `b`; equivalently, the
-bound in total degree `n` is `w + n` (blueprint: `sk-d-dl-general-weights`). -/
+bound in total degree `n` is `w + n` (blueprint: `sk-d-real-weights`). -/
 def WeilComplex.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     (w : ℝ) : Prop :=
   ∀ b : ℤ, ((WeilComplex.homologySheaf b).obj K).IsMixedOfWeightsAtMost ι (w + (b : ℝ))
 
 /-- Mixed upper bounds of Weil complexes are invariant under isomorphism
-(blueprint: `sk-d-dl-general-weights`). -/
+(blueprint: `sk-d-real-weights`). -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ}
     {K L : WeilComplex k₀ l X} {w : ℝ} (e : K ≅ L) (h : K.IsMixedOfWeightsAtMost ι w) :
     L.IsMixedOfWeightsAtMost ι w :=
@@ -365,7 +365,7 @@ namespace WeilComplex
 variable {ι : PadicAlgCl l →+* ℂ} {K L : WeilComplex k₀ l X} {w : ℝ}
 
 /-- Mixed upper bounds of Weil complexes are monotone in the bound
-(blueprint: `sk-d-dl-general-weights`). -/
+(blueprint: `sk-d-real-weights`). -/
 theorem IsMixedOfWeightsAtMost.mono_weight {w' : ℝ} (h : K.IsMixedOfWeightsAtMost ι w)
     (hw : w ≤ w') : K.IsMixedOfWeightsAtMost ι w' :=
   fun b ↦ (h b).mono_weight (by linarith)

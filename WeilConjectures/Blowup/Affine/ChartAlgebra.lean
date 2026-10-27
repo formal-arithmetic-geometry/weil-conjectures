@@ -193,14 +193,14 @@ theorem mem_chartRing_iff {z : Localization.Away a} :
 /-- The homogeneous-localization chart map
 `θ_a : Away (reesGrading I) (a·X) →+* A[I/a]`, `x·Xⁿ / (a·X)ⁿ ↦ x / aⁿ`. It is a well-defined
 ring homomorphism by construction.
-(blueprint: `def-nagata-homogeneous-away-to-chart`, `lemma-nagata-homogeneous-away-to-chart`) -/
+(blueprint: `def-nagata-homogeneous-away-to-chart`, `def-nagata-homogeneous-away-to-chart`) -/
 noncomputable def homogeneousAwayToChart :
     HomogeneousLocalization.Away (reesGrading I) (reesX I a ha) →+* chartRing I a :=
   (homogeneousAwayToLocalization I ha).codRestrict (chartRing I a)
     (homogeneousAwayToLocalization_mem_chartRing I ha)
 
 /-- The defining formula of `θ_a` on homogeneous fractions: `θ_a(x·Xⁿ / (a·X)ⁿ) = x / aⁿ`.
-(blueprint: `def-nagata-homogeneous-away-to-chart`, `lemma-nagata-homogeneous-away-to-chart`) -/
+(blueprint: `def-nagata-homogeneous-away-to-chart`, `def-nagata-homogeneous-away-to-chart`) -/
 @[simp]
 lemma coe_homogeneousAwayToChart_mk {n : ℕ} (x : A) (hx : x ∈ I ^ n)
     (h : reesMonomial I x hx ∈ reesGrading I (n • 1)) :

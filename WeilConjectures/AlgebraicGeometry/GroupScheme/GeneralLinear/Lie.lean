@@ -58,7 +58,7 @@ even when it is only a commutative ring.
 
 ## Blueprint
 
-- `sk-d-tangent`: the Lie algebra of `GL_n` as its tangent space at the identity, rational
+- `def-wf-lie-algebra-derivation`: the Lie algebra of `GL_n` as its tangent space at the identity, rational
   representations and their differentials.
 - `sk-p-comparison`: subspaces stable under the group are stable under its Lie algebra.
 -/
@@ -82,7 +82,7 @@ variable (n : Type u) [Fintype n] [DecidableEq n] (k : Type u) [CommRing k]
 
 /-- The invertible matrix `1 + εX` over the dual numbers `k[ε]`, with inverse `1 - εX`: the point
 of `GL_n` with values in `k[ε]` corresponding to the tangent vector `X ∈ gl_n`.
-(blueprint: `sk-d-tangent`) -/
+(blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
     (X : Matrix n n k) : GL n (DualNumber k) :=
   ⟨1 + X.map inr, 1 - X.map inr,
@@ -299,7 +299,7 @@ theorem bijective_toMatrixLieHom : Function.Bijective (toMatrixLieHom n k) := by
 
 /-- The Lie algebra of the general linear group is `gl_n`, the matrices with the commutator
 bracket: the tangent vector `1 + εX` corresponds to `X`.
-(blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
+(blueprint: `def-wf-lie-algebra-derivation`, `def-wf-lie-algebra-derivation`) -/
 noncomputable def lieAlgebraEquivMatrix : GrpObj.Lie 𝔾𝕃(n; k) ≃ₗ⁅k⁆ Matrix n n k :=
   LieEquiv.ofBijective _ (bijective_toMatrixLieHom n k)
 
@@ -332,7 +332,7 @@ variable {k : Type u} [CommRing k] (G : Over (Spec (.of k))) [GrpObj G]
 
 /-- A rational representation of a group scheme `G` over `k` on `k^m`: a morphism of schemes
 `G ⟶ GL_m` over `k`, required to be a homomorphism of group schemes through an `IsMonHom`
-instance. (blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
+instance. (blueprint: `def-wf-lie-algebra-derivation`, `def-wf-lie-algebra-derivation`) -/
 abbrev RationalHom :=
   G ⟶ 𝔾𝕃(m; k)
 
@@ -341,7 +341,7 @@ variable {G m}
 namespace RationalHom
 
 /-- A rational representation of `G` on `R`-points: the group homomorphism `G(R) → GL m R` given
-by composing points `Spec R ⟶ G` with `r`. (blueprint: `sk-d-tangent`) -/
+by composing points `Spec R ⟶ G` with `r`. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def points (r : RationalHom G m) [IsMonHom r] (R : Type u) [CommRing R]
     [Algebra k R] : AlgebraicGeometry.points G R →* GL m R :=
   (homMulEquiv m k R).toMonoidHom.comp (IsMonHom.monoidHom r _)
@@ -418,7 +418,7 @@ namespace RationalHom
 
 /-- The differential `dr : Lie(G) → gl_m` of a rational representation `r`: the differential of
 the homomorphism of group schemes `G ⟶ GL_m`, read in `gl_m` through `Lie(GL_m) = gl_m`. It is a
-homomorphism of Lie algebras. (blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
+homomorphism of Lie algebras. (blueprint: `def-wf-lie-algebra-derivation`, `def-wf-lie-algebra-derivation`) -/
 noncomputable def differential (r : RationalHom G m) [IsMonHom r] :
     GrpObj.Lie G →ₗ⁅k⁆ Matrix m m k :=
   (lieAlgebraEquivMatrix m k).toLieHom.comp (GrpObj.differential r)

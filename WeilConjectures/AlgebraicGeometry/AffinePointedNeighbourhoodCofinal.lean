@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Cofinality of affine pointed étale neighbourhoods
 
-Source: Weil conjectures blueprint, chapter `sec-curve-estimates`, unit `sk-prop-h2`
+Source: Weil conjectures blueprint, chapter `sec-curve-estimates`, unit `lem-sc-second-kummer-divisors`
 (blueprint: lemma-weil-pbc-affine-neighbourhood-cofinal); Stacks Project, Tags 04HX and 0BUC.
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The full subcategory of affine pointed étale neighbourhoods of a geometric point is
 initial; its opposite inclusion is final, so computes the same opposite-indexed stalk colimit.
-Source: blueprint `sk-prop-h2` (blueprint: lemma-weil-pbc-affine-neighbourhood-cofinal),
+Source: blueprint `lem-sc-second-kummer-divisors` (blueprint: lemma-weil-pbc-affine-neighbourhood-cofinal),
 Stacks Project, proof of Tag 04HX and the dual of Tag 0BUC, with Tag 04E7.
 
 Proof:

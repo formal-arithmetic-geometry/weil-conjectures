@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 # Quasi-finite morphisms are locally quasi-finite and quasi-compact
 
 Source: literature/blueprint/master/blueprint/sec-nagata-compactification/
-sk-prop-nagata-sketch-zmt/pqf-lem-qf-locqf-qc.md, node pqf-lem-qf-locqf-qc,
+lemma-nagata-zmt-open-immersion-affine-factorization/pqf-lem-qf-locqf-qc.md, node pqf-lem-qf-locqf-qc,
 order 200 (blueprint: pqf-lem-qf-locqf-qc).
 -/
 

@@ -37,7 +37,7 @@ As at the integral stage of the étale model
 (`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`), the operations on
 derived complete objects are the derived limits of their finite reductions, that is, the derived
 completions (`DerivedCategory.derivedCompletion`) of the plain operations of `D(X_proét, Λ)`: the
-completed pullback is `Lg^*_comp K = (Lg^* K)^` (blueprint `def-weil-pbc-completed-pullback`: "the
+completed pullback is `Lg^*_comp K = (Lg^* K)^` (blueprint `lemma-weil-pbc-completed-pullback-reduction`: "the
 comparison from ordinary pullback is the completion map of `Lg^*K`"), and the completed exchange
 map is the derived completion of the plain compact-support exchange map `Ex_!(c)`
 (`AlgebraicGeometry.ProEtale.completedRightDerivedLowerShriekOfCompactificationBaseChangeMap`,

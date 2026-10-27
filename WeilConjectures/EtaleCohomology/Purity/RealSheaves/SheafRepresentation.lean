@@ -111,7 +111,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `prop-wf-weil-sheaf-representation-equivalence`):
 The lisse sheaf–representation equivalence.
 
 The functor `ℱ ↦ (V, ρ) = (ℱ_η̄, ρ_ℱ)`, sending a lisse Weil sheaf on the curve `C₀` to its Weil
@@ -256,7 +256,7 @@ theorem exists_equivalence_isLisse_of_lisseMonodromy
       .mk (f _) fun g ↦ LinearMap.ext (hf _ g)
     exact ⟨(fT.trans b).trans (Representation.Equiv.tprodCongr fF.symm fG.symm)⟩
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `prop-wf-weil-sheaf-representation-equivalence`):
 The lisse sheaf–representation equivalence, for some monodromy of lisse sheaves on the geometric
 curve and some base point data; see
 `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy` for the properties. -/

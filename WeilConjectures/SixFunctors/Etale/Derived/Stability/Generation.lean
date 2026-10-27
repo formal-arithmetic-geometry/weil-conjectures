@@ -247,7 +247,7 @@ theorem prop_rightDerivedLowerStar_of_flat (X : Scheme.{u}) [IsNoetherian X]
         (Functor.PreservesFlat.flat_obj (F := (V.closedComplement)^*[_]) hF))
 
 /-- Blueprint `sk-lem-sf-flat-model`: Flat models and generators, the complement (generation
-over a Noetherian base; formerly `sk-lem-sf-ctf-generation`).
+over a Noetherian base; formerly `sk-lem-sf-flat-model`).
 
 Let `X` be a Noetherian scheme and `Λ` a finite ring. Then `Dctf(X, Λ)` is generated as a
 thick subcategory by the objects `Rg_* Rj_! L`, where `U` is a stratum of a stratification of

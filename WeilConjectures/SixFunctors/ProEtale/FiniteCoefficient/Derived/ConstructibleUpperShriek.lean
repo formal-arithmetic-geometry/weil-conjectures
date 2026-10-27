@@ -19,7 +19,7 @@ The pro-étale derived lower shriek `Rf_!` is in general *not* a left adjoint, n
 for the structure morphism of an elliptic curve over `𝔽̄_p` and `𝔽_r`-module coefficients with
 `r ≠ p`, `Rf_! = Rf_*` does not preserve coproducts (blueprint `sk-rem-sf-fullcd-scope`; see
 `WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint`). So the exceptional inverse image is
-not defined as a right adjoint. Following blueprint `sk-def-sf-operations` (vi), it is the
+not defined as a right adjoint. Following blueprint `det-def-sf-operations` (vi), it is the
 *constructible* exceptional inverse image, the étale right adjoint transported along the
 comparison:
 
@@ -93,7 +93,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 section Definition
 
-/-- Blueprint `sk-def-sf-operations` (vi) and blueprint `def-weil-exceptional-inverse-image`:
+/-- Blueprint `det-def-sf-operations` (vi) and blueprint `def-weil-exceptional-inverse-image`:
 (at a finite stage `A = A_{E,n}`) the exceptional inverse image
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, where `f^×` is the étale exceptional inverse image

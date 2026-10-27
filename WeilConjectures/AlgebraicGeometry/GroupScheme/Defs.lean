@@ -18,7 +18,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 # Torsion subgroup schemes and isogenies
 
 Following Mathlib, a group scheme over a field `K` (blueprint `def-sc-group-scheme`,
-`sk-def-av-group-scheme`) is an object `G` of `Over (Spec (.of K))` equipped with
+`def-sc-group-scheme`) is an object `G` of `Over (Spec (.of K))` equipped with
 `CategoryTheory.GrpObj G`; it is commutative if `CategoryTheory.IsCommMonObj G`, a homomorphism
 is a morphism `f` with `CategoryTheory.IsMonHom f`, and the kernel of `f` is
 `CategoryTheory.GrpObj.ker f`. The group scheme `G` is finite if `AlgebraicGeometry.IsFinite G.hom`,
@@ -59,7 +59,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `sk-prop-av-mult-hom`: The `n`-fold sum is a homomorphism.
+/-- Blueprint `lem-sc-mult-n-homomorphism`: The `n`-fold sum is a homomorphism.
 
 Let `G` be a commutative group scheme over `K`. Then the `n`-fold sum map `[n] : G ⟶ G` is a
 homomorphism of group schemes: it is the `n`-th power of the homomorphism `𝟙 G` in the
@@ -135,7 +135,7 @@ instance isNormalSubgroupScheme_kerι : IsNormalSubgroupScheme (GrpObj.kerι f) 
     rw [GrpObj.range_monoidHom_kerι]
     infer_instance
 
-/-- Blueprint `lem-sc-kernel-subgroup` (and `sk-def-av-group-scheme`): Kernels are closed
+/-- Blueprint `lem-sc-kernel-subgroup` (and `def-sc-group-scheme`): Kernels are closed
 subgroup schemes.
 
 For a homomorphism `f : A ⟶ B` of group schemes over `K`, `kerι f : ker f ⟶ A` is a closed
@@ -178,7 +178,7 @@ theorem Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite {X : Scheme.{u}}
 
 end Etale
 
-/-- Blueprint `sk-def-av-mult-n`: Multiplication by `n` and `n`-torsion.
+/-- Blueprint `def-sc-mult-n`: Multiplication by `n` and `n`-torsion.
 
 This is also blueprint `def-sc-mult-n`.
 
@@ -279,7 +279,7 @@ theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : 
       torsionSubgroupScheme.ι G m ^ k :=
   GrpObj.kerLift_kerι _ _ _
 
-/-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
+/-- Blueprint `def-sc-isogeny`: Isogenies and their degree.
 
 This is also blueprint `def-sc-isogeny`.
 
@@ -295,7 +295,7 @@ class IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) 
 
 attribute [instance] IsIsogeny.isFinite_ker
 
-/-- Blueprint `sk-def-av-isogeny` (also `def-sc-isogeny`): the degree of an isogeny
+/-- Blueprint `def-sc-isogeny` (also `def-sc-isogeny`): the degree of an isogeny
 `f : A ⟶ B`, the order of its kernel.
 
 This is only the degree of `f` as a finite flat morphism when `f` is an isogeny of abelian

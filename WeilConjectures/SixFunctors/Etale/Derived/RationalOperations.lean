@@ -14,7 +14,7 @@ Let `Λ` be a Noetherian domain, complete for a principal ideal `I = (ϖ)` with 
 exponent invertible on a field `k` (the integral stage `Λ = 𝒪_E`, `I = 𝔪_E`), and `M` a submonoid
 of `Λ` (the nonzero elements, or the powers of `ϖ`), so that the rational stage is
 `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]` (`CategoryTheory.Rationalization`, blueprint
-`def-weil-rationalization-karoubi`). For a separated finite-type morphism `f : X ⟶ Y` of
+`def-sfb-rationalization-quotient`). For a separated finite-type morphism `f : X ⟶ Y` of
 separated finite-type `k`-schemes this file constructs the compact-support direct image and the
 exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`
 (blueprint `lem-coef-rational-operations`):

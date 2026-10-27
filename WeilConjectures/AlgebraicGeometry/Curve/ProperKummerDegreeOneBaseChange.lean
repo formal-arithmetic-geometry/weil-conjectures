@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 /-!
 # Proper Kummer degree-one base change
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance, proper case in degree one
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree one
 (blueprint: lem-sc-proper-kummer-degree-one-base-change).
 -/
 
@@ -41,7 +41,7 @@ private theorem proper_units_divisible {k : Type u} [Field k] [IsAlgClosed k]
   have : Module.Finite k Γ(C, ⊤) := Scheme.finite_globalSectionsRingHom_of_isProper
   exact IsAlgClosed.exists_pow_eq_of_finite hn
 
-/-- Source: blueprint sec-curve-estimates/sk-prop-ext-invariance, proper case in degree one
+/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree one
 (blueprint: lem-sc-proper-kummer-degree-one-base-change).
 
 Proof: Global units of a proper curve over an algebraically closed field are n-divisible.

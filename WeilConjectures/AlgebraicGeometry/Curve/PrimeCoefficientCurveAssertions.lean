@@ -159,7 +159,7 @@ dense, its image is the whole inverse image. A surjective open immersion is an i
 proving the cartesian assertion without identifying schemes merely by their underlying sets.
 
 Dependency nodes: thm-pqf-zmt-factorization, etale-proposition-etale-reduced,
-def-nagata-scheme-theoretic-closure, def-weil-pbc-scheme-reduction,
+def-nagata-scheme-theoretic-image, def-weil-pbc-scheme-reduction,
 lem-weil-pbc-closed-immersion-finite, lem-weil-pbc-finite-composition,
 lem-weil-pbc-finite-over-separated-finite-type, lem-weil-pbc-integral-incomparability,
 lem-weil-pbc-finite-permanence-over-separated, lem-weil-pbc-finite-closed-map-finite-fibres,

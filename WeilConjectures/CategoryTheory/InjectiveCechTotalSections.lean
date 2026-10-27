@@ -17,7 +17,7 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 /-!
 # Total Čech cohomology of a complex of injective sheaves
 
-Source: blueprint sk-thm-picard-cech, Step 3; Stacks Project Tags 03AW and 03F6.
+Source: blueprint det-thm-picard-cech, Step 3; Stacks Project Tags 03AW and 03F6.
 -/
 
 @[expose] public section
@@ -158,7 +158,7 @@ theorem injective_cech_total_sections_nat
 This is a statement about any nonnegative complex of injective sheaves, with no
 resolution, Ext, or sheaf-cohomology hypothesis.
 
-Source: blueprint sk-thm-picard-cech, Step 3; lem-sc-cech-resolution-total, Steps 1--2;
+Source: blueprint det-thm-picard-cech, Step 3; lem-sc-cech-resolution-total, Steps 1--2;
 Stacks Project Tags 03AW and 03F6.
 (blueprint: lem-sc-injective-cech-total-sections)
 

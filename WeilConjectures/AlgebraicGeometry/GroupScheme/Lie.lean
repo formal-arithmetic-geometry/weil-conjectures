@@ -108,7 +108,7 @@ over an affine base is written `R`; `k` is reserved for a field.
 
 ## Blueprint
 
-- `sk-d-tangent`: the Lie algebra of an algebraic group as its tangent space at the identity.
+- `def-wf-lie-algebra-derivation`: the Lie algebra of an algebraic group as its tangent space at the identity.
 - `sk-i-cartier`: the Lie algebra clauses of Cartier's theorem.
 - `sk-p-comparison`: the Lie algebra of a central subgroup scheme.
 -/

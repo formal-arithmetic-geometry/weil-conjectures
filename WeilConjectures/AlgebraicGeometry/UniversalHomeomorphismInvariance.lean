@@ -19,7 +19,7 @@ set_option linter.style.haveILetI false
 /-!
 # Universal-homeomorphism invariance, with functorial compatibility
 
-Source: Stacks Project, Tags 04DZ and 03SI; blueprint `sec-curve-estimates/sk-prop-cd`
+Source: Stacks Project, Tags 04DZ and 03SI; blueprint `sec-curve-estimates/lem-sc-arbitrary-curve-cd`
 (blueprint: thm-weil-pbc-universal-homeomorphism-invariance).
 -/
 
@@ -33,7 +33,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Universal-homeomorphism invariance of the small etale sites, topoi and cohomology,
 including identity, composition and base-change compatibility. Source: Stacks Project,
-Tags 04DZ and 03SI; blueprint `sec-curve-estimates/sk-prop-cd`
+Tags 04DZ and 03SI; blueprint `sec-curve-estimates/lem-sc-arbitrary-curve-cd`
 (blueprint: thm-weil-pbc-universal-homeomorphism-invariance).
 
 Proof: (1) `lemma-weil-pbc-universal-homeomorphism-site-equivalence` (04DZ) makes

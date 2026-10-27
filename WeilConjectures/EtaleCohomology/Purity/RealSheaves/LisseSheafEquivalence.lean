@@ -16,10 +16,10 @@ The two subsection statements of the real-sheaves chapter about the lisse sheaf�
 equivalence on a smooth geometrically connected curve `C₀` over a finite field:
 
 - `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_shortExact` (blueprint
-  `sk-i-real-sheaves`): `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence between lisse Weil
+  `prop-wf-weil-sheaf-representation-equivalence`): `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence between lisse Weil
   sheaves on `C₀` and lisse representations of `W(C₀)`;
 - `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_globalSections_upperStar` (blueprint
-  `sk-p-real-sections`): for a nonempty open `U₀ ⊆ C₀`, `H⁰(U, ℱ|_U) = V ^ {π₁(U)}`,
+  `p-real-sections`): for a nonempty open `U₀ ⊆ C₀`, `H⁰(U, ℱ|_U) = V ^ {π₁(U)}`,
   compatibly with the Frobenius.
 -/
 
@@ -36,7 +36,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-/-- Blueprint `sk-i-real-sheaves`: lisse Weil sheaves are lisse representations of the Weil
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: lisse Weil sheaves are lisse representations of the Weil
 group.
 
 The functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence between lisse Weil sheaves on `C₀`
@@ -72,7 +72,7 @@ theorem exists_equivalence_isLisse_tensor_shortExact :
   obtain ⟨M, B, e, η, τ, hτ, h1⟩ := W.exists_equivalence_isLisse_tensor l
   exact ⟨M, B, e, η, τ, hτ, h1, isLisse_shortExact_iff (e := e)⟩
 
-/-- Blueprint `sk-p-real-sections`: global sections over an open subcurve are invariants.
+/-- Blueprint `p-real-sections`: global sections over an open subcurve are invariants.
 
 There is an equivalence `e` between lisse Weil sheaves on `C₀` and lisse representations of
 `W(C₀)`, identifying the stalk of `ℱ` at every closed point `x` with `V = e ℱ`, Frobenius `F_x`

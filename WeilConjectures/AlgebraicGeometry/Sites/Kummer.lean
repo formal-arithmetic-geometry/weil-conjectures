@@ -147,7 +147,7 @@ noncomputable def rootsOfUnitySheaf : Sheaf X.smallEtaleTopology AddCommGrpCat.{
 on `X`, the second map being `ω ↦ ωⁿ` and `μₙ = ker(n)` the sheaf of `n`-th roots of unity.
 Its exactness is `AlgebraicGeometry.Scheme.kummerSequence_shortExact` and is *not* part of
 the definition.
-(blueprint: `sk-def-kummer`, `def-sc-kummer-sequence`) -/
+(blueprint: `def-sc-kummer-sequence`, `def-sc-kummer-sequence`) -/
 noncomputable def kummerSequence :
     ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   ShortComplex.mk (kernel.ι (n • 𝟙 X.gmSheaf)) (n • 𝟙 X.gmSheaf) (kernel.condition _)
@@ -296,7 +296,7 @@ connecting homomorphism `AlgebraicGeometry.Scheme.kummerδ₀` and `β` is induc
 
 Exactness at `H⁰(X, 𝔾ₘ)` gives `ker α`, exactness at `H¹(X, μₙ)` gives `ker β = im α`, and
 exactness at `H¹(X, 𝔾ₘ)`, where the next map is multiplication by `n`, gives `im β`.
-(blueprint: `sk-prop-h1`) -/
+(blueprint: `det-prop-h1`) -/
 theorem exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     (X.kummerδ₀ n hn).ker = (zsmulAddGroupHom (α := Additive Γ(X, ⊤)ˣ) (n : ℤ)).range ∧
       Function.Exact (X.kummerδ₀ n hn) (Sheaf.H.map (kernel.ι (n • 𝟙 X.gmSheaf)) 1) ∧
@@ -307,7 +307,7 @@ theorem exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
 
 /-- The short exact sequence `0 → Γ(X, 𝒪)ˣ/n → H¹(X, μₙ) → H¹(X, 𝔾ₘ)[n] → 0` of
 `AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_one`, with the maps forgotten.
-(blueprint: `sk-prop-h1`) -/
+(blueprint: `det-prop-h1`) -/
 theorem exists_exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤))) :
     ∃ (α : Additive Γ(X, ⊤)ˣ →+ Sheaf.H (X.rootsOfUnitySheaf n) 1)
       (β : Sheaf.H (X.rootsOfUnitySheaf n) 1 →+ X.CohomologicalPicardGroup),
@@ -318,7 +318,7 @@ theorem exists_exact_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤)))
 /-- **`H¹(X, μₙ) = H¹(X, 𝔾ₘ)[n]`.** If `n` is invertible on `X` and every unit on `X` is an
 `n`-th power, then `H¹(X, μₙ) ≅ H¹(X, 𝔾ₘ)[n]`: the first term `Γ(X, 𝒪)ˣ/n` of the short exact
 sequence `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one` vanishes.
-(blueprint: `sk-prop-h1`) -/
+(blueprint: `det-prop-h1`) -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one (hn : IsUnit (n : Γ(X, ⊤)))
     (hdiv : ∀ u : Γ(X, ⊤)ˣ, ∃ v : Γ(X, ⊤)ˣ, v ^ n = u) :
     Nonempty (Sheaf.H (X.rootsOfUnitySheaf n) 1 ≃+
@@ -347,7 +347,7 @@ connecting homomorphism `AlgebraicGeometry.Scheme.kummerδ₁` and `β` is induc
 `μₙ ⟶ 𝔾ₘ`: the statement is `ker α = n · H¹(X, 𝔾ₘ)`, `ker β = im α` and
 `im β = H²(X, 𝔾ₘ)[n]`. This is the middle part of the long exact cohomology sequence of the
 Kummer sequence.
-(blueprint: `sk-prop-h2`) -/
+(blueprint: `lem-sc-second-kummer-divisors`) -/
 theorem exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤))) :
     (X.kummerδ₁ n hn).ker = (zsmulAddGroupHom (α := X.CohomologicalPicardGroup) (n : ℤ)).range ∧
       Function.Exact (X.kummerδ₁ n hn) (Sheaf.H.map (kernel.ι (n • 𝟙 X.gmSheaf)) 2) ∧
@@ -369,7 +369,7 @@ theorem exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤))) :
 
 /-- The short exact sequence `0 → H¹(X, 𝔾ₘ)/n → H²(X, μₙ) → H²(X, 𝔾ₘ)[n] → 0` of
 `AlgebraicGeometry.Scheme.exact_sheafH_rootsOfUnitySheaf_two`, with the maps forgotten.
-(blueprint: `sk-prop-h2`) -/
+(blueprint: `lem-sc-second-kummer-divisors`) -/
 theorem exists_exact_sheafH_rootsOfUnitySheaf_two (hn : IsUnit (n : Γ(X, ⊤))) :
     ∃ (α : X.CohomologicalPicardGroup →+ Sheaf.H (X.rootsOfUnitySheaf n) 2)
       (β : Sheaf.H (X.rootsOfUnitySheaf n) 2 →+ X.CohomologicalBrauerGroup),

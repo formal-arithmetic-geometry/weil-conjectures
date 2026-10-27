@@ -105,7 +105,7 @@ then specialised to the coordinate ring of `GL_n`: elaborating them directly at 
 
 ## Blueprint
 
-- `sk-d-geometry`: matrix algebraic groups as reduced closed subgroups of `GL(V)`, their identity
+- `det-d-geometry`: matrix algebraic groups as reduced closed subgroups of `GL(V)`, their identity
   component and centre.
 - `def-wf-algebraic-components`: the identity component `identityComponent`, with its `k`-points
   `identityComponentSubgroup`.
@@ -169,7 +169,7 @@ theorem evalAlgHom_eq_zero_of_mem_inv (I : Ideal (CoordinateRing n k)) [I.IsHopf
 
 /-- The `R`-points of the closed subgroup scheme `V(I)` of `GL_n` cut out by a Hopf ideal `I`: the
 invertible matrices over `R` on which every equation in `I` vanishes.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 noncomputable def zeroLocus (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] (R : Type*)
     [CommRing R] [Algebra k R] : Subgroup (GL n R) where
   carrier := {g | ∀ a ∈ I, evalAlgHom g a = 0}
@@ -684,14 +684,14 @@ theorem vanishingIdeal_setOf_le_radical [IsAlgClosed k] (J : Ideal (CoordinateRi
   exact mem_vanishingIdeal.1 ha g fun b hb ↦ hJm hb
 
 /-- The Nullstellensatz for closed subgroup schemes of `GL_n`: the ideal of the `k`-points of
-`V(I)` is the radical of `I`. (blueprint: `sk-d-geometry`) -/
+`V(I)` is the radical of `I`. (blueprint: `det-d-geometry`) -/
 theorem vanishingIdeal_zeroLocus_eq_radical [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
     [I.IsHopfIdeal k] : vanishingIdeal (zeroLocus I k : Set (GL n k)) = I.radical :=
   le_antisymm (vanishingIdeal_setOf_le_radical I)
     ((isRadical_vanishingIdeal _).radical_le_iff.2 (le_vanishingIdeal_zeroLocus I))
 
 /-- Over an algebraically closed field, a radical Hopf ideal is the ideal of its `k`-points.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 theorem vanishingIdeal_zeroLocus_le_of_isRadical [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
     [I.IsHopfIdeal k] (hI : I.IsRadical) : vanishingIdeal (zeroLocus I k : Set (GL n k)) ≤ I :=
   ((vanishingIdeal_zeroLocus_eq_radical I).trans hI.radical).le
@@ -720,7 +720,7 @@ theorem toPrimeSpectrum_injective :
 /-- The ideal of the reduced identity component `G°` of the closed subscheme `V(I)` of `GL_n`: the
 functions vanishing on the connected component of `V(I)` containing the identity matrix. The set
 `π₀(G)` of connected components is Mathlib's `ConnectedComponents` of the underlying space.
-(blueprint: `sk-d-geometry`, `def-wf-algebraic-components`) -/
+(blueprint: `det-d-geometry`, `def-wf-algebraic-components`) -/
 noncomputable def identityComponent (I : Ideal (CoordinateRing n k)) :
     Ideal (CoordinateRing n k) :=
   PrimeSpectrum.vanishingIdeal
@@ -1014,7 +1014,7 @@ theorem one_mem_zeroLocus_identityComponent [IsAlgClosed k] (I : Ideal (Coordina
 
 /-- The matrices of `G(k)` commuting with all of `G(k)`, for `G = V(I)`: the `k`-points of the
 centre `Z(G)` when `k` is algebraically closed, and in general the subgroup `Z(G)(k) ⊆ G(k)` of
-`k`-points of the centre that are central in `G(k)`. (blueprint: `sk-d-geometry`) -/
+`k`-points of the centre that are central in `G(k)`. (blueprint: `det-d-geometry`) -/
 noncomputable def centerPoints (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Subgroup (GL n k) :=
   zeroLocus I k ⊓ Subgroup.centralizer (zeroLocus I k : Set (GL n k))
@@ -1029,7 +1029,7 @@ theorem mem_centerPoints_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] 
 `G(k)`. Over an algebraically closed field the `k`-points are dense in the reduced centre, so this
 is its ideal; over a general field the closure of `centerPoints I` can be strictly smaller (for
 `k = 𝔽_q` and `G = GL_n` it is finite), which is why `k` is assumed algebraically closed.
-(blueprint: `sk-d-geometry`) -/
+(blueprint: `det-d-geometry`) -/
 noncomputable def center [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Ideal (CoordinateRing n k) :=
   vanishingIdeal (centerPoints I : Set (GL n k))
@@ -1044,7 +1044,7 @@ theorem le_center [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdea
   (le_vanishingIdeal_zeroLocus I).trans (vanishingIdeal_anti fun _ hg ↦ hg.1)
 
 /-- The `k`-points of the centre of `G = V(I)` are the matrices of `G(k)` commuting with all of
-`G(k)`. (blueprint: `sk-d-geometry`) -/
+`G(k)`. (blueprint: `det-d-geometry`) -/
 theorem mem_zeroLocus_center_iff [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
     [I.IsHopfIdeal k] {g : GL n k} :
     g ∈ zeroLocus (center I) k ↔ g ∈ zeroLocus I k ∧ ∀ h ∈ zeroLocus I k, g * h = h * g := by

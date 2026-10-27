@@ -273,7 +273,7 @@ instance Etale.faithful_boundedConstructibleIntegral_ι_comp_rightDerivedLowerSt
         i).rightDerivedFunctor).Faithful :=
   inferInstance
 
-/-- Blueprint `def-weil-rationalization-karoubi`: Rationalization (scalar localization), the
+/-- Blueprint `def-sfb-rationalization-quotient`: Rationalization (scalar localization), the
 category `Dᵇc(Y, E) = Dᵇc(Y, 𝒪_E)[1/ϖ_E]` (as its full subcategory, with no Karoubi completion).
 
 The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
@@ -289,7 +289,7 @@ def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
     Nonempty ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L ≅ K)
 
 /-- The Karoubi envelope of the rational stage `Dᵇc(X, E)` of blueprint
-`def-weil-rationalization-karoubi` (which takes no Karoubi completion; the canonical functor into
+`def-sfb-rationalization-quotient` (which takes no Karoubi completion; the canonical functor into
 the envelope is an equivalence by `lem-weil-rationalization-idempotent-complete`): the Karoubi
 envelope of the rationalization of `Dᵇc(X, 𝒪_E)`. -/
 abbrev Etale.DerivedCategoryBoundedConstructibleRational (X : Scheme.{u}) :=

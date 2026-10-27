@@ -139,7 +139,7 @@ instance RatFunc.isQuasiAlgClosed (k : Type*) [Field k] [IsAlgClosed k] :
 /-- **Tsen's theorem.** A field `K` of transcendence degree at most one over an algebraically
 closed field `k` is quasi-algebraically closed. This covers the function field of a curve over
 `k` and all its algebraic extensions.
-(blueprint: `lem-sc-tsen`, `sk-prop-tsen`) -/
+(blueprint: `lem-sc-tsen`, `lem-sc-tsen`) -/
 @[stacks 03RD]
 theorem IsQuasiAlgClosed.of_trdeg_le_one {K : Type*} [Field K] (k : Type*) [Field k]
     [IsAlgClosed k] [Algebra k K] (h : Algebra.trdeg k K ≤ 1) : IsQuasiAlgClosed K := by

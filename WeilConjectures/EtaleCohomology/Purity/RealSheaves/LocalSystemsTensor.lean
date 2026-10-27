@@ -38,7 +38,7 @@ the terminal sheaf of sets (`AlgebraicGeometry.Scheme.unitSection`).
 ## Main results
 
 - `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`: the Galois
-  correspondence (`sk-i-real-galois`) as a tensor equivalence.
+  correspondence (`cor-galois-lisse-representations`) as a tensor equivalence.
 -/
 
 @[expose] public noncomputable section
@@ -468,7 +468,7 @@ lemma Scheme.galoisRepFunctorUnitIso_hom_hom_apply
 end Unit
 
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems, with its
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems, with its
 tensor structure.
 
 Let `Y` be a connected scheme, `s` a geometric point, `Λ` a finite ring and `G = π₁(Y, s)` a
@@ -511,7 +511,7 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFunda
   ext w
   rfl
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems, as an exact
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems, as an exact
 *tensor* equivalence.
 
 For a connected scheme `Y`, a geometric point `s` and a finite ring `Λ`, there is a profinite

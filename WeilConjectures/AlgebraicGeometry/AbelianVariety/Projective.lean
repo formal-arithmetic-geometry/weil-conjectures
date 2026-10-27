@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 # Abelian varieties are projective
 
 An abelian variety admits a closed immersion into a projective space over the base field, hence
-carries an ample invertible module (blueprint `sk-prop-av-projective`, Stacks 0BFA), and the
+carries an ample invertible module (blueprint `lem-sc-abelian-variety-projective`, Stacks 0BFA), and the
 symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
 
@@ -65,7 +65,7 @@ noncomputable def Scheme.Modules.symmetrisation {A : Over (Spec (.of K))} [GrpOb
     (L : A.left.Modules) : A.left.Modules :=
   tensorObj L (overPullback ι[A] L)
 
-/-- Blueprint `sk-prop-av-projective` (also `lem-sc-abelian-variety-projective`): Abelian
+/-- Blueprint `lem-sc-abelian-variety-projective` (also `lem-sc-abelian-variety-projective`): Abelian
 varieties are projective.
 
 Every abelian variety `A` over a field `K` admits a closed immersion into a projective space
@@ -85,7 +85,7 @@ theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spe
   have : IsProper (j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K)) := hjA ▸ inferInstance
   exact IsClosedImmersion.of_comp_of_isSeparated j (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
 
-/-- Blueprint `sk-prop-av-projective` (also `lem-sc-abelian-variety-projective`): Abelian
+/-- Blueprint `lem-sc-abelian-variety-projective` (also `lem-sc-abelian-variety-projective`): Abelian
 varieties are projective.
 
 Being projective, an abelian variety carries an ample invertible `𝒪_A`-module, namely the
@@ -103,7 +103,7 @@ theorem IsAbelianVariety.exists_isAmple (A : Over (Spec (.of K))) [GrpObj A]
   rw [tensorPow_succ, tensorPow_zero]
   exact (ρ_ _).symm
 
-/-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module (also
+/-- Blueprint `lem-sc-ample-tensor`: A symmetric ample module (also
 `lem-sc-ample-tensor`).
 
 Let `A` be an abelian variety over `K` and let `L` be an ample invertible `𝒪_A`-module. Then the
@@ -119,7 +119,7 @@ theorem IsAbelianVariety.isAmple_symmetrisation (A : Over (Spec (.of K))) [GrpOb
   rw [Over.w ι[A]] at h
   exact hample.tensorObj h
 
-/-- Blueprint `sk-prop-av-symmetric-ample`: A symmetric ample module (also
+/-- Blueprint `lem-sc-ample-tensor`: A symmetric ample module (also
 `lem-sc-ample-tensor`).
 
 The symmetrisation `N = L ⊗ [-1]^* L` of an invertible module on an abelian variety is

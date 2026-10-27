@@ -307,7 +307,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
 `𝔽_ℓ`-modules on `X`, the restriction `I₀` is `Γ(X₀, -)`-acyclic: `Hᵠ(X₀, I₀) = 0` for all
 `q > 0`. In Lean this is the same statement as
 `AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective`.
-(blueprint: `lemma-weil-pbc-p1-injective-acyclic`) -/
+(blueprint: `prop-weil-pbc-p1-acyclicity`) -/
 alias Etale.subsingleton_H_projectiveLine_residueField_of_injective :=
   Etale.subsingleton_H_projectiveLine_closedFibre_of_injective
 

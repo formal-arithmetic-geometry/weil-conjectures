@@ -89,7 +89,7 @@ theorem toLie_bijective : Function.Bijective (toLie G) := by
         exact heq_of_eq (zero_add _)), hD,
       Iso.inv_hom_id_app_assoc]
 
-/-- The infinitesimal points of `G` are its Lie algebra. (blueprint: `sk-d-tangent`) -/
+/-- The infinitesimal points of `G` are its Lie algebra. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def lieEquiv : infPoints G ≃ Lie G :=
   Equiv.ofBijective _ (toLie_bijective G)
 
