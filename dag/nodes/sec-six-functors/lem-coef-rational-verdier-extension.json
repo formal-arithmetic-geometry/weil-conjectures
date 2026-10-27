@@ -28,14 +28,47 @@
  ],
  "proof": [
   {
-   "text": "For $E\\subset L$ let $S=\\mathcal O_L$ and $T=T_{S/R}$. The exact functor $T$, the dualizing comparison $u:T\\omega_{X,R}\\xrightarrow{\\sim}\\omega_{X,S}$ and the natural duality comparison $\\beta_K:TD_RK\\xrightarrow{\\sim}D_STK$, with their inverses, are supplied by [lem-coef-integral-finite-extension]. Define the rational comparison to be $Q_S(\\beta_K)$. Its source and target are exactly those stated: [def-weil-rationalization-karoubi] defines $-\\otimes_E L$ by $K\\mapsto TK$ and $f\\otimes a\\mapsto T(f)\\otimes a$, $a\\in E\\subset L$, and step 2 defines $D_E,D_L$ on the same representatives. For $f:K\\to M$ integral naturality reads $D_S(Tf)\\beta_M=\\beta_KT(D_Rf)$; its image multiplied by $a$ is the equation for $f\\otimes a$, and additivity gives rational naturality. The localized inverse remains inverse. That lemma's evaluation compatibility uses ordinary tensors and the strong comparison $c^\\circ_{A,B}:TA\\otimes^L_{\\widehat S_X}TB\\xrightarrow{\\sim}T(A\\otimes^L_{\\widehat R_X}B)$; put $c_{A,B}=T(\\chi_{A,B})\\,c^\\circ_{A,B}\\,\\chi_{TA,TB}^{-1}$ with $\\chi$ of [lem-fix-constructible-tensor-completion] over $R$ and $S$. With $\\mathrm{ev}$ as in step 5, naturality of $\\chi$ turns the two supplied compatibilities into\n$$\\mathrm{ev}_{S,TK}\\circ(\\beta_K\\widehat\\otimes1_{TK})=u\\circ T(\\mathrm{ev}_{R,K})\\circ c_{D_RK,K},$$\n$$\\beta_{D_RK}\\circ T(\\delta_{R,K})=D_S(\\beta_K)\\circ\\delta_{S,TK},$$\nfrom $TD_RK\\widehat\\otimes_S^LTK$ to $\\omega_{X,S}$ and from $TK$ to $D_STD_RK$. For the rational scalar extension $\\overline T$ write $\\overline u,\\overline c,\\overline\\beta$ for the images. Applying $Q_S$ gives, with the tensor and evaluation convention of [def-weil-derived-pullback-tensor-hom],\n$$\\mathrm{ev}_{L,\\overline TK}\\circ(\\overline\\beta_K\\otimes1_{\\overline TK})=\\overline u\\circ\\overline T(\\mathrm{ev}_{E,K})\\circ\\overline c_{D_EK,K},$$\n$$\\overline\\beta_{D_EK}\\circ\\overline T(\\delta_{E,K})=D_L(\\overline\\beta_K)\\circ\\delta_{L,\\overline TK},$$\nthe required rational evaluation and biduality compatibilities, since $Q_S$ preserves composites and $\\overline TQ_R=Q_ST$ on these integral arrows.",
+   "text": "Apply comparison_invertibility to A.ordinary and B.ordinary. The fixed u is invertible. The fixed v(K,omega_E) is invertible, as is internal Hom of u; hence their defining composite beta_K is invertible. Reflect these isomorphisms into the full constructible subcategories.",
    "uses": [
-    "lem-coef-integral-finite-extension",
-    "def-weil-rationalization-karoubi",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-fix-constructible-tensor-completion"
+    "lem-sf-integral-finite-extension-invertibility",
+    "def-sf-integral-finite-extension-core"
    ],
-   "elementary": false,
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+   }
+  },
+  {
+   "text": "Apply Q_L.mapIso to the integral u and beta_K isomorphisms. Identify their endpoints by A.objects, B.objects and sfRationalScalarExtension_obj, and transport by eqToIso. The hom maps are heterogeneously equal to Q_L(u) and Q_L(beta_K), by conj_eqToHom_iff_heq and eqToHom_comp_heq. Thus both integral-origin normalization clauses are proved directly; no existence witness is selected from a new theorem.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-sf-rational-verdier-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+   }
+  },
+  {
+   "text": "Apply localizedBeta_naturality to the constructed family of component homs and their proved normalization. NatIso.ofComponents then assembles the explicitly localized isomorphisms into the required natural comparison. Together with the constructed omega this gives an Extension.",
+   "uses": [
+    "lem-coef-rational-verdier-comparison-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+   }
+  },
+  {
+   "text": "Apply normalizedExtension_evaluation to the constructed Extension and its proved u and beta normalizations. Apply evaluation_implies_biduality to that evaluation square and the given naturality hypotheses hA,hB. Package the four clauses into ExtensionProperties.",
+   "uses": [
+    "lem-coef-rational-verdier-comparison-evaluation",
+    "lem-coef-rational-verdier-comparison-biduality"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
     "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
@@ -43,15 +76,20 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-integral-finite-extension",
+  "lem-sf-integral-finite-extension-invertibility",
+  "def-sf-integral-finite-extension-core",
   "def-weil-rationalization-karoubi",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-fix-constructible-tensor-completion"
+  "def-sf-rational-verdier-data",
+  "lem-coef-rational-verdier-comparison-naturality",
+  "lem-coef-rational-verdier-comparison-evaluation",
+  "lem-coef-rational-verdier-comparison-biduality"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "C6",
+  "date": "2026-10-27",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6; proof written by B6 from the recorded integral rationalization plan."
+  "place": "Paragraph 3. Explicit Lean construction of localized isomorphisms; three strictly separate compatibility calculations remain as named statements."
  },
  "mathlib_searches": [
   {
@@ -115,13 +153,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-06a6b",
-  "group": "B6",
-  "result": "fix",
-  "landing": "20261025T122531-L-1781499",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T180515-L-3868300",
   "kind": "interface",
-  "note": "independent cc review: delivered RationalVerdierModels vs clone RationalVerdier.lean (identical except irreducible completionChain via third_exists_first, change-recorded); four split statements vs Conclusion and IntegralVerdier.SignedSymmetry/delta definitions; 12 direct importers compiled against sandboxed delivery (11 ok, VerdierCoefficientRealization pre-existing missing olean)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

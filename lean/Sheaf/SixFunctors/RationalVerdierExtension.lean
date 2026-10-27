@@ -6,6 +6,10 @@ Authors: SHEAF group B6
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionInvertibility
+import Sheaf.SixFunctors.RationalVerdierComparisonNaturality
+import Sheaf.SixFunctors.RationalVerdierComparisonEvaluation
+import Sheaf.SixFunctors.RationalVerdierComparisonBiduality
 
 /-! # Canonical rational comparison for one finite coefficient extension
 
@@ -75,6 +79,64 @@ theorem extension_exists
       B.ordinary.tensor.map (Prod.mkHom f g) ≫ (B.symmetry.swap K' M').hom =
         (B.symmetry.swap K M).hom ≫ B.ordinary.tensor.map (Prod.mkHom g f)) :
     ∃ e : Extension D l hl X E L i wE wL A B,
-      ExtensionProperties D l hl X E L i wE wL A B e := by sorry
+      ExtensionProperties D l hl X E L i wE wL A B e := by
+  let T := integralScalar l X E L i
+  let Q := sfRationalConstructibleLocalization l L X
+  let R := scalar l X E L i
+  let DE := IntegralVerdier.restrictedDual l E X wE.omega.obj A.preserves
+  let DL := IntegralVerdier.restrictedDual l L X wL.omega.obj B.preserves
+  obtain ⟨_, hu, hv⟩ := IntegralFiniteExtension.comparison_invertibility
+    l E L i X D hl wE wL A.ordinary B.ordinary
+  have := hu
+  let u : T.obj wE.omega ⟶ wL.omega := ObjectProperty.homMk
+    (IntegralFiniteExtension.u l E L i X D hl wE wL)
+  have : IsIso u := (ObjectProperty.isIso_hom_iff u).mp hu
+  have hR (K : sfRationalConstructibleCategory l E X) :
+      R.obj K = Q.obj (T.obj K.obj) :=
+    sfRationalScalarExtension_obj l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L i K
+  let omega := eqToIso (hR ⟨wE.omega⟩) ≪≫ Q.mapIso (asIso u)
+  have huQ : HEq omega.hom (Q.map u) :=
+    eqToHom_comp_heq (Q.map u) (hR ⟨wE.omega⟩)
+  have hsource (K : sfRationalConstructibleCategory l E X) :
+      R.obj (A.dual.obj (op K)) = Q.obj (T.obj (DE.obj (op K.obj))) := by
+    rw [A.objects K]
+    exact hR _
+  have htarget (K : sfRationalConstructibleCategory l E X) :
+      B.dual.obj (op (R.obj K)) = Q.obj (DL.obj (op (T.obj K.obj))) := by
+    rw [hR K]
+    exact B.objects _
+  let beta (K : sfIntegralConstructibleCategory l E X) :
+      T.obj (DE.obj (op K)) ⟶ DL.obj (op (T.obj K)) :=
+    ObjectProperty.homMk
+      (IntegralFiniteExtension.beta l E L i X D hl wE wL A.ordinary B.ordinary
+        K.obj K.property.1)
+  have hbeta (K : sfIntegralConstructibleCategory l E X) : IsIso (beta K) := by
+    have hvK : IsIso (IntegralFiniteExtension.v l E L i X A.ordinary B.ordinary
+        K.obj wE.omega.obj K.property.1 wE.omega.property.1) := hv K wE.omega
+    apply (ObjectProperty.isIso_hom_iff (beta K)).mp
+    change IsIso (IntegralFiniteExtension.beta l E L i X D hl wE wL
+      A.ordinary B.ordinary K.obj K.property.1)
+    unfold IntegralFiniteExtension.beta
+    exact IsIso.comp_isIso' hvK
+      ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheafUnrestricted l L X)).mapIso
+        (Iso.prod (Iso.refl _)
+          (@asIso _ _ _ _ (IntegralFiniteExtension.u l E L i X D hl wE wL) hu))).isIso_hom
+  let c (K : sfRationalConstructibleCategory l E X) :
+      R.obj (A.dual.obj (op K)) ≅ B.dual.obj (op (R.obj K)) :=
+    eqToIso (hsource K) ≪≫ Q.mapIso (@asIso _ _ _ _ (beta K.obj) (hbeta K.obj)) ≪≫
+      (eqToIso (htarget K)).symm
+  have hc (K : sfIntegralConstructibleCategory l E X) :
+      HEq ((c ((sfRationalConstructibleLocalization l E X).obj K)).hom) (Q.map (beta K)) := by
+    apply (conj_eqToHom_iff_heq _ _ (hsource ⟨K⟩) (htarget ⟨K⟩)).mp
+    rfl
+  have hn (K M : sfRationalConstructibleCategory l E X) (f : K ⟶ M) :
+      (A.dual ⋙ R).map f.op ≫ (c K).hom =
+        (c M).hom ≫ (R.op ⋙ B.dual).map f.op :=
+    localizedBeta_naturality D l hl X E L i wE wL A B (fun K ↦ (c K).hom) hc K M f
+  let e : Extension D l hl X E L i wE wL A B :=
+    ⟨omega, NatIso.ofComponents (fun K ↦ c K.unop) (fun f ↦ hn _ _ f.unop)⟩
+  have heval := normalizedExtension_evaluation D l hl X E L i wE wL A B e huQ hc
+  exact ⟨e, huQ, hc, heval,
+    evaluation_implies_biduality D l hl X E L i wE wL A B hA hB e heval⟩
 
 end WeilConjectures.RationalVerdier

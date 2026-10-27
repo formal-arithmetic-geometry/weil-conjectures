@@ -1,0 +1,160 @@
+{
+ "id": "lem-coef-rational-verdier-comparison-biduality",
+ "kind": "statement",
+ "title": "Biduality compatibility from the scalar evaluation square",
+ "statement": "Fix a finite-field datum $D$ [def-weil-finite-field-fiber], a prime $\\ell\\ne D.p$, and a separated finite-type $D.k$-scheme $X$ [def-weil-finite-type-morphism, def-weil-proper-morphism]. Let $E,L$ be finite extensions of $\\mathbf Q_\\ell$ and $i:E\\to L$ a $\\mathbf Q_\\ell$-algebra embedding. Let $w_E,w_L$ be coherent integral dualizing data [def-sf-coherent-integral-dualizing-datum], and $A,B$ supplied normalized rational Verdier data [def-sf-rational-verdier-data]. Write $Q_E,Q_L$ for the raw rational localizations, $T$ for integral scalar extension, and $\\bar T$ for its rational scalar extension [def-weil-rationalization-karoubi]. Write $D_E=A.\\mathrm{dual}$ and $D_L=B.\\mathrm{dual}$, and $\\beta_K$ for the actual evaluation-transpose integral comparison in the presentations $A.\\mathrm{ordinary},B.\\mathrm{ordinary}$ [def-sf-integral-finite-extension-core]. Assume additionally that $A.\\mathrm{symmetry}$ and $B.\\mathrm{symmetry}$ are natural in both ambient derived variables. Let $e$ be any Extension from $A$ to $B$ [def-sf-rational-verdier-data] for which the completed rational evaluation square holds: $$\\otimes_L(1,e.\\mathrm{comparison}_K);\\mathrm{ev}_{B,\\bar TK}=\\bar c^{-1}_{K,D_EK};\\bar T(\\mathrm{ev}_{A,K});e.\\omega.$$ Then its actual bidual maps satisfy $$\\bar T(\\delta_{A,K});e.\\mathrm{comparison}_{D_EK}=\\delta_{B,\\bar TK};D_L(e.\\mathrm{comparison}_K)$$ for every rational $K$. Here $\\delta_A,\\delta_B$ are the bidual maps in the supplied Datum, hence the localized evaluation transposes [def-sf-integral-verdier-models]; no comparison existence or evaluation conclusion is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-rational-verdier-data",
+  "def-weil-rationalization-karoubi",
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-verdier-models"
+ ],
+ "proof": [
+  {
+   "text": "Naturality makes each supplied signed symmetry uniquely determined by its Koszul model: choose K-flat representatives for both objects and conjugate by the tensor images of the representing isomorphisms. Thus the source and target symmetries commute with the normalized scalar tensorator. On the K-flat models the two maps have identical coefficient multiplication and Koszul sign, since coefficients are in degree zero; model rigidity and completion naturality give the equality on the derived objects.",
+   "uses": [
+    "def-sf-integral-verdier-models",
+    "lem-pc-kflat-resolution",
+    "lem-sf-cochain-tensor-model-rigidity",
+    "lem-fix-constructible-tensor-completion",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+   }
+  },
+  {
+   "text": "Fix an integral representative K and transpose the given evaluation square in the dual input. The defining formula for delta is precisely evaluation after the signed swap transposed by that adjunction. The symmetry compatibility from the preceding step and naturality of the supplied comparison identify the two transposes with the two displayed composites. The fixed-input tensor-Hom bijection, localized on the scalar Hom groups, is injective, so the composites agree.",
+   "uses": [
+    "def-sf-integral-verdier-models",
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-rational-verdier-data",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+   }
+  },
+  {
+   "text": "Substitute A.bidual_integral and B.bidual_integral. These are the specified bidual maps, not an independently chosen anti-equivalence unit. Since every raw rational object has its integral object as representative, the resulting equality proves the claim for every K, including zero objects, identity embeddings and empty X.",
+   "uses": [
+    "def-sf-rational-verdier-data",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-verdier-models",
+  "lem-pc-kflat-resolution",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-fix-constructible-tensor-completion",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-rational-verdier-data",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C6",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Paragraph 3, evaluation-transpose scalar comparison; agent-expanded step of lem-coef-rational-verdier-extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of internal Hom scalar comparison and compatibility of Verdier double dual with scalar extended evaluation",
+   "results": "CategoryTheory.ihom.ev_naturality; Module.Dual.eval_naturality; NatTrans.app_smul and generic DayConvolution evaluation. None identifies the specified completed integral beta, rational tensorator, or the prescribed bidual maps.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between localized functors from isomorphic integral components satisfying naturality",
+   "results": "Localization.liftNatIso, liftNatIso_hom, isoUniqFunctor and lift2NatIso. These assemble already natural transformations, and do not supply normalized completed evaluation or signed biduality. Loogle NatIso.ofComponents found the constructor used for assembly.",
+   "date": "2026-10-27",
+   "verdict": "use NatIso.ofComponents for assembly; compatibility is additional"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|ScalarLocalization|bidual; project beta, evaluation_naturality and normalized rational comparisons; blueprint evaluation and double-dual",
+   "results": "Mathlib msearch returned generic Verdier-category and vector bidual references. Project search found IntegralHom.evaluation_naturality, comparison_invertibility, and the existing RationalVerdierModels definitions. RationalVerdierEvaluationAdjoints and rational Hom scalar transpose import RationalVerdier and would form an import cycle. Blueprint search and DAG scan found no standalone statement of this component calculation for arbitrary supplied Datum A,B.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate of this normalized scalar compatibility step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierExtension",
+  "date": "2026-10-27",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "Paragraph 3: normalized scalar comparison, evaluation and transposition to biduality",
+   "via": [
+    "lem-coef-rational-verdier-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierComparisonBiduality",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierComparisonBiduality.lean",
+  "declaration": "WeilConjectures.RationalVerdier.evaluation_implies_biduality",
+  "statement": "theorem evaluation_implies_biduality\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (i : E →ₐ[Padic l] L)\n    (wE : IntegralFiniteExtension.DualizingDatum l X D hl E)\n    (wL : IntegralFiniteExtension.DualizingDatum l X D hl L)\n    (A : Datum D l hl X E wE) (B : Datum D l hl X L wL)\n    (hA : ∀ (K M K' M' : IntegralHom.Derived.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l E X))\n      (f : K ⟶ K') (g : M ⟶ M'),\n      A.ordinary.tensor.map (Prod.mkHom f g) ≫ (A.symmetry.swap K' M').hom =\n        (A.symmetry.swap K M).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f))\n    (hB : ∀ (K M K' M' : IntegralHom.Derived.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l L X))\n      (f : K ⟶ K') (g : M ⟶ M'),\n      B.ordinary.tensor.map (Prod.mkHom f g) ≫ (B.symmetry.swap K' M').hom =\n        (B.symmetry.swap K M).hom ≫ B.ordinary.tensor.map (Prod.mkHom g f))\n    (e : Extension D l hl X E L i wE wL A B)\n    (heval : (∀ K : sfRationalConstructibleCategory l E X,\n    (tensor D l hl X L).map\n        (Prod.mkHom (𝟙 ((scalar l X E L i).obj K)) (e.comparison.hom.app (op K))) ≫\n      B.evaluation ((scalar l X E L i).obj K) =\n    (@rationalTensorScalarComparison l _ E _ _ _ L _ _ _ i X (units D l hl X)).inv.app\n        (K, A.dual.obj (op K)) ≫\n      (scalar l X E L i).map (A.evaluation K) ≫ e.omega.hom)) :\n    (∀ K : sfRationalConstructibleCategory l E X,\n    (scalar l X E L i).map (A.bidual.hom.app K) ≫\n      e.comparison.hom.app (op (A.dual.obj (op K))) =\n    B.bidual.hom.app ((scalar l X E L i).obj K) ≫\n      B.dual.map (e.comparison.hom.app (op K)).op)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T180515-L-3868300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T180515-L-3868300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
