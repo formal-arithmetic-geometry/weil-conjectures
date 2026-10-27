@@ -181,5 +181,30 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-4b6d9958d (reviewer sub-agent of L); spot-checked: Read the whole item, both cited nodes and Stacks sites.tex 00YV (the discussion before it and the proof of (2)). The four steps are correct. Step 1 identifies ring sheaves with internal ring objects using lem-weil-pbc-sheaf-algebraic-structures-objects; this is an isomorphism of categories that commutes strictly with forgetting to Sh(C). Step 2 applies lem-weil-pbc-adjunction-lifts-group-ring-objects to L ⊣ V. Its finite-product hypothesis follows from finite-limit preservation, and Sh(C) has finite products sectionwise. Step 3 conjugates by the two isomorphisms. Then |rings R| = L|R|, e_R is the identity, its naturality is the morphism part of the functor equality, and the operations are L(op)∘λ^{-1}, which is the item's clause word for word. Step 4: the hom-bijection is the restriction of the one for L ⊣ V, as part (2) of the cited lift states. I checked the empty site, the identity adjunction and the zero ring sheaf. The statement is unchanged and not weakened, and there are no new nodes. The nearest existing node, det-pe-topos-functoriality-inverse-image (pro-étale case only), is not a duplicate. Both declared tool_uses are accepted: they are generic black-box tools from sec-proper-base-change that no node of sk-thm-rationality gives. The fix is to the sources only: steps 3 and 4 and proof_origin cited 'Tags 00YV and 03D2' in sites.tex. 03D2 is sites-modules-lemma-pullback-module (modules, in sites-modules.tex), so they now point at the exact places in 00YV. Advisory: the item-level source.place, set when NB created the node, also names 03D2.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InverseImageRingFunctor",
+  "declaration": "CategoryTheory.inverseImage_ring_functor",
+  "declarations": [
+   "CategoryTheory.ringSheafAdd",
+   "CategoryTheory.ringSheafMul",
+   "CategoryTheory.ringSheafZero",
+   "CategoryTheory.ringSheafOne",
+   "CategoryTheory.inverseImage_ring_functor"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InverseImageRingFunctor.lean",
+  "statement": "theorem inverseImage_ring_functor {C D : Type u} [Category.{u} C] [Category.{u} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)} {V : Sheaf K (Type u) ⥤ Sheaf J (Type u)} (adj : L ⊣ V) [PreservesFiniteLimits L] : ∃ (rings : Sheaf J CommRingCat.{u} ⥤ Sheaf K CommRingCat.{u}) (Vrings : Sheaf K CommRingCat.{u} ⥤ Sheaf J CommRingCat.{u}) (a : rings ⊣ Vrings) (e : sheafCompose J (forget CommRingCat.{u}) ⋙ L ≅ rings ⋙ sheafCompose K (forget CommRingCat.{u})) (v : Vrings ⋙ sheafCompose J (forget CommRingCat.{u}) ≅ sheafCompose K (forget CommRingCat.{u}) ⋙ V), (∀ R : Sheaf J CommRingCat.{u}, L.map (ringSheafAdd R) ≫ (e.app R).hom = (prodComparisonIso L _ _).hom ≫ ((e.app R).hom ⊗ₘ (e.app R).hom) ≫ ringSheafAdd (rings.obj R) ∧ L.map (ringSheafMul R) ≫ (e.app R).hom = (prodComparisonIso L _ _).hom ≫ ((e.app R).hom ⊗ₘ (e.app R).hom) ≫ ringSheafMul (rings.obj R) ∧ L.map (ringSheafZero R) ≫ (e.app R).hom = (preservesTerminalIso L).hom ≫ ringSheafZero (rings.obj R) ∧ L.map (ringSheafOne R) ≫ (e.app R).hom = (preservesTerminalIso L).hom ≫ ringSheafOne (rings.obj R)) ∧ (∀ (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u}) (f : rings.obj R ⟶ S), (sheafCompose J (forget CommRingCat.{u})).map (a.homEquiv R S f) ≫ (v.app S).hom = adj.homEquiv ((sheafCompose J (forget CommRingCat.{u})).obj R) ((sheafCompose K (forget CommRingCat.{u})).obj S) ((e.app R).hom ≫ (sheafCompose K (forget CommRingCat.{u})).map f))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-718289c9c",
+  "group": "NC",
+  "result": "pass",
+  "note": "Matched every node clause to the Lean: small sites in a common universe; L ⊣ V with PreservesFiniteLimits; rings ⊣ Vrings; natural iso e whose naturality is the displayed φ-equation; four add/mul/zero/one equations through the Mathlib cartesian prodComparisonIso/preservesTerminalIso, consistent with liftsGroupRingObjects (e = eL⁻¹); hom-equivalence clause with explicit v, which the counit case fixes in terms of e and a. Helpers ringSheafAdd/Mul/Zero/One have real sectionwise data, are listed and docstringed, and have no public duplicate. lean.statement matches the file verbatim; node changes only in lean; universes match citer lem-route-inverse-image-data-exists; proof is sorry only; theorem docstring carries all 4 steps. Edge cases: empty site, identity adjunction, zero ring. Not recompiled (2026-10-21 rule). Advisory: item source.place still mentions 03D2 (stage-1 metadata)."
  }
 }
