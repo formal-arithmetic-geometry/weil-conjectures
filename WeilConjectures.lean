@@ -8452,6 +8452,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.BraidingShiftAux
 public import WeilConjectures.CategoryTheory.Monoidal.ClassTransport
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.DualFullyFaithful
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalDual
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
