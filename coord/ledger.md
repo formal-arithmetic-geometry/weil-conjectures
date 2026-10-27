@@ -20167,3 +20167,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:11 L: returned deliver/NE/lem-pur-integral-scalar-reduction-intertwining (reviewer RETURN: I read the item in full; the delivery adds no new nodes. I read the full statements of all 7 cited nodes plus lem-coef-n)
 - 23:14 L: merged deliver/NF/lem-pur-integral-tensor-associator-naturality (reviewer FIX; first push; new nodes: 0)
 - 23:15 L: merged deliver/A4/Sheaf.Paper.ExceptionalFiniteSupportRealization (stage 3; reviewer PASS; first push; landing 20261027T231521-L-3768754 (interface); batch 20261027T231519; modules 2; new nodes 1)
+- 23:24 L: merged deliver/NA/lem-route-twist-scalar-maps-exists-unique (reviewer FIX; after a return; new nodes: 0)
