@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-rational-dualizing-identification-integral-bridge",
+ "kind": "statement",
+ "title": "Integral exceptional value of the canonical coefficient unit",
+ "statement": "Fix the finite-field datum D, a prime l different from its characteristic, a separated finite-type D.k-scheme X, an algebraic closure Ω of Q_l, and a normalized structure system S. For a finite coefficient field F and a coherent integral dualizing datum w, let U be an integral coefficient object on Spec(D.k) whose ambient inclusion is isomorphic to the completed constant coefficient object. Then the ambient inclusion of the value of the integral exceptional operation of S at U is isomorphic to w.omega. This is the integral exceptional-unit comparison used before rationalization.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+  "place": "Proof paragraph 1: normalized integral exceptional adjunction identifies the exceptional value of the coefficient unit with the coherent integral dualizing object"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-rational-verdier-data",
+  "prop-coef-integral-exceptional-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized integral exceptional adjunction at the structure morphism to the completed constant coefficient object. The integral exceptional comparison identifies the resulting value of the recorded operation with the coherent integral dualizing object w.omega. Transport this comparison across the supplied ambient isomorphism hU from U to the constant coefficient object; naturality of the operation preserves the isomorphism and yields the stated ambient comparison.",
+   "uses": [
+    "prop-coef-integral-exceptional-adjoint",
+    "def-sf-coherent-integral-dualizing-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+    "place": "Proof paragraph 1: integral exceptional-unit comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-coef-integral-exceptional-adjoint",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+  "place": "Proof paragraph 1, isolated as the strictly simpler integral comparison needed by rationalDualizing_identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exceptional inverse image of the constant coefficient unit is an integral dualizing object",
+   "results": "No exact project-specific exceptional-unit comparison; only generic adjunction and isomorphism transport lemmas.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralDualizing_exceptional_unit_bridge|exceptional.*dualizing.*unit",
+   "results": "No existing theorem with this interface; the bridge is introduced to avoid importing the cyclic IntegralDualizingExceptionalUnit module.",
+   "date": "2026-10-28",
+   "verdict": "new project statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalDualizingIdentification",
+  "date": "2026-10-28",
+  "group": "V2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-rational-dualizing-identification",
+   "place": "Proof step 1, integral exceptional-unit comparison",
+   "via": [
+    "lem-coef-rational-operations"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingExceptionalUnitBridge",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingExceptionalUnitBridge.lean",
+  "declaration": "WeilConjectures.RationalOperations.integralDualizing_exceptional_unit_bridge",
+  "statement": "theorem integralDualizing_exceptional_unit_bridge\n    (S : structureSystem l X D hl Ω) (F : FieldStage.{u} l)\n    (w : IntegralFiniteExtension.DualizingDatum l X D hl F.carrier)\n    (U : C l Ω (Spec (.of D.k)) (.integral F))\n    (hU : Nonempty ((RingStage.inclusion l Ω (Spec (.of D.k)) (.integral F)).obj U ≅\n      integralConstantCoefficientObject l F.carrier (Spec (.of D.k)))) :\n    Nonempty ((RingStage.inclusion l Ω X (.integral F)).obj\n      ((S.ring.operation (integralDualizingCompactification D X)\n        (.integral F)).G.obj U) ≅ w.omega.obj)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T180845-L-3909548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T180845-L-3909548",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

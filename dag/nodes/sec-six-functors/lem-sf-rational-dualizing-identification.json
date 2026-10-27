@@ -17,32 +17,30 @@
  ],
  "proof": [
   {
-   "text": "The left adjoint $A_E$ of Step 10 is the rational compact-support functor: its integral representative and strict finite-reduction tower are exactly the ones in the definition of rational compact support. Likewise $G_E$ is the rationalized finite-stage exceptional inverse image specified in the exceptional-inverse-image definition. Localizing the integral formula, using the already identified pullback and duality functors, gives $Rf_E^!M\\cong D_{X,E}f^*D_{Y,E}M$. If either operation is instead characterized by the adjunction, its comparison is forced by the counit: the unique map between right adjoints whose transpose is the other counit is inverse to the reverse comparison, since both composites transpose to the original counit. This proves preservation of the units and counits too. For $f=a_X$, the integral theorem identifies $G_R(R)$ with $\\omega_{X,R}$, so rationalizing gives $Ra_{X,E}^!E=\\omega_{X,E}$.",
+   "text": "At the integral stage, choose the coefficient object U whose ambient inclusion is identified with the completed constant coefficient object. The integral exceptional adjunction and the coherent integral dualizing datum identify the exceptional value of the normalized operation at U with w.omega. This is the integral comparison supplied by the bridge theorem. Localize this isomorphism along the rational compact-support functor and compose with the right component of the normalized rationalization comparison. The resulting isomorphism has source the rationalization of w.omega and target the recorded exceptional value on coefficientUnit; the defining equality of coefficientUnit and rationalization on U closes the identification.",
    "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-rational-dualizing-identification-integral-bridge",
     "prop-coef-integral-exceptional-adjoint",
-    "thm-coef-rational-verdier"
+    "def-sf-coherent-integral-dualizing-datum",
+    "def-sf-rational-verdier-identifications"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 7: identify the prescribed operations, formula and structure-morphism value"
+    "place": "Proof, paragraph 7: identify the integral exceptional value and localize it to the rational coefficient unit"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-rational-dualizing-identification-integral-bridge",
   "prop-coef-integral-exceptional-adjoint",
-  "thm-coef-rational-verdier"
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-rational-verdier-identifications"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-  "place": "Formal interface for the cited steps; complete representative and comparison argument retained in the theorem docstring."
+  "place": "Integral bridge followed by rationalization and the right comparison component; implemented in the item proof."
  },
  "mathlib_searches": [
   {
@@ -114,13 +112,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-849a5",
-  "group": "D2",
-  "result": "fix",
-  "landing": "20261025T100911-L-3636679",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T180845-L-3909548",
   "kind": "interface",
-  "note": "independent cc review: delivered RationalOperationsData vs published RationalOperations prefix (verbatim, imports only differ); item proof vs exists_system/coef_rational_verdier/dualizingDatum_nonempty + 3 new sorry statements read against RationalVerdier.Datum/TensorPresentation/DualizingDatum pinning; nodes vs Lean; 11 direct importers compiled against sandbox build"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
