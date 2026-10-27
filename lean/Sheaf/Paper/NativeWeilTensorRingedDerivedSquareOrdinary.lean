@@ -6,6 +6,8 @@ Authors: SHEAF group X6
 module
 
 public import Sheaf.Paper.NativeWeilClosedModels
+import Sheaf.Paper.NativeOrdinaryTensorModelNaturality
+import Sheaf.Paper.NativeOrdinaryTensorModelResolutionExtension
 
 /-! # Ordinary model part of the native ringed derived square
 
@@ -25,13 +27,14 @@ naturality are the ordinary part of the derived-square construction.
 Source: Stacks 06YU, 0FPT; blueprint:
 `lem-sf-native-weil-tensor-ringed-derived-square`.
 
-Proof: transport the ordinary derived tensor and its K-injective Hom representatives
-through the additive ringed presentation.  The K-flat replacement theorem extends the
-componentwise tensor-Hom adjunction from two K-flat complexes to an arbitrary second
-input.  The resulting maps are natural in both representative complexes, and their
-componentwise uncurrying is the required NativeAdjunctionNormalization.  The signed
-swap is used only for the later coherence step and is therefore not part of this
-intermediate assertion. -/
+Proof: extract the normalized ordinary model supplied by `NativeOrdinaryTensorModels`.
+By `native_ordinary_tensor_model_naturality_kflat`, the normalization (componentwise
+uncurrying against K-injective targets) forces naturality when both second inputs are
+K-flat.  By `native_ordinary_tensor_model_resolution_extension`, the K-flat replacement
+theorem then yields a new model, equal to the given one on K-flat second inputs (hence
+still normalized) and natural in both representative complexes for arbitrary second
+inputs.  The signed swap is used only for the later coherence step and is therefore not
+part of this intermediate assertion. -/
 theorem native_weil_tensor_ringed_derived_square_ordinary_data
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})
@@ -39,7 +42,7 @@ theorem native_weil_tensor_ringed_derived_square_ordinary_data
     (M : NativeClosedHomModels k₀ l X)
     (S : CoefficientClosedStructure M.ordinaryHom)
     (β : @SymmetricCategory _ _ S.monoidal)
-    (_hS : NativeOrdinaryTensorModels l
+    (hS : NativeOrdinaryTensorModels l
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber M.ordinaryHom
       M.ordinaryRepresentatives S β) :
     ∃ ordinaryModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l
@@ -67,6 +70,12 @@ theorem native_weil_tensor_ringed_derived_square_ordinary_data
             (HomologicalComplex.mapBifunctorMap f g
               (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
               (.up ℤ))) := by
-  sorry
+  obtain ⟨ordinaryModel, ⟨_hswap, hordinary, _hsigned, _hbraiding⟩⟩ := hS
+  have hkflat := native_ordinary_tensor_model_naturality_kflat
+    l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber M.ordinaryHom
+    M.ordinaryRepresentatives S ordinaryModel hordinary
+  exact native_ordinary_tensor_model_resolution_extension
+    l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber M.ordinaryHom
+    M.ordinaryRepresentatives S ordinaryModel hordinary hkflat
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

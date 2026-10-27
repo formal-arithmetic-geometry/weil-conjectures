@@ -12,11 +12,20 @@
  },
  "proof": [
   {
-   "text": "Construct the ordinary derived tensor comparison on K-flat representatives using the ordinary closed Hom model and the componentwise Mod tensor-Hom adjunction. Use K-flat replacement in the second variable to extend from two K-flat inputs to an arbitrary second input; the replacement uniqueness gives the displayed normalization and naturality.",
+   "text": "Extract the supplied normalized model. Apply the K-flat-input naturality lemma: the normalization forces naturality when both second inputs are K-flat.",
    "uses": [
-    "def-sf-native-weil-closed-models",
-    "lem-sf-kinjective-hom-comparison-descent",
-    "lem-pc-kflat-resolution"
+    "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor transport, geometric tensor part of step 1"
+   }
+  },
+  {
+   "text": "Apply the K-flat-resolution extension to obtain a new ordinaryModel with the same normalization and naturality for arbitrary second inputs.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension"
    ],
    "elementary": false,
    "source": {
@@ -26,14 +35,15 @@
   }
  ],
  "proof_deps": [
-  "def-sf-native-weil-closed-models",
-  "lem-sf-kinjective-hom-comparison-descent",
-  "lem-pc-kflat-resolution"
+  "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-naturality",
+  "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension"
  ],
  "proof_origin": {
-  "by": "worker X6",
+  "by": "worker",
+  "group": "E7",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Strict decomposition of the assigned derived-square proof into its ordinary and native components."
+  "place": "K-flat naturality followed by extension through K-flat resolutions."
  },
  "mathlib_searches": [
   {
@@ -82,10 +92,10 @@
   "module": "Sheaf.Paper.NativeWeilTensorRingedDerivedSquareOrdinary",
   "file": "lean/Sheaf/Paper/NativeWeilTensorRingedDerivedSquareOrdinary.lean",
   "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_derived_square_ordinary_data",
-  "statement": "theorem native_weil_tensor_ringed_derived_square_ordinary_data (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (M : NativeClosedHomModels k₀ l X) (S : CoefficientClosedStructure M.ordinaryHom) (β : @SymmetricCategory _ _ S.monoidal) (_hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber M.ordinaryHom M.ordinaryRepresentatives S β) : ∃ ordinaryModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) (_ : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P), S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj (ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P Q), NativeAdjunctionNormalization (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (fun P ↦ Mod.ihomAdjunction P) M.ordinaryHom M.ordinaryRepresentatives S (NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ordinaryModel ∧ (∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) (hP : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P) (hP' : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P') (f : P ⟶ P') (g : Q ⟶ Q'), S.tensor.map (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P)) (Y := (DerivedCategory.Q.obj Q', DerivedCategory.Q.obj P')) (Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f)) ≫ (ordinaryModel P' Q' hP').hom = (ordinaryModel P Q hP).hom ≫ DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (.up ℤ)))",
+  "statement": "theorem native_weil_tensor_ringed_derived_square_ordinary_data\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})\n    [X.Over (Spec (CommRingCat.of k₀))]\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (hS : NativeOrdinaryTensorModels l\n      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber M.ordinaryHom\n      M.ordinaryRepresentatives S β) :\n    ∃ ordinaryModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l\n        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)\n        (_ : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P),\n          S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅\n            DerivedCategory.Q.obj\n              (ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P Q),\n      NativeAdjunctionNormalization\n        (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n        (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n        (fun P ↦ Mod.ihomAdjunction P) M.ordinaryHom M.ordinaryRepresentatives S\n        (NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ordinaryModel ∧\n      (∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l\n          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)\n          (hP : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P)\n          (hP' : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P')\n          (f : P ⟶ P') (g : Q ⟶ Q'),\n        S.tensor.map\n            (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))\n            (Y := (DerivedCategory.Q.obj Q', DerivedCategory.Q.obj P'))\n            (Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f)) ≫\n            (ordinaryModel P' Q' hP').hom =\n          (ordinaryModel P Q hP).hom ≫ DerivedCategory.Q.map\n            (HomologicalComplex.mapBifunctorMap f g\n              (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n              (.up ℤ)))",
   "branch": "sheaf-dag",
-  "by": "X6",
-  "date": "2026-10-27"
+  "by": "E7",
+  "date": "2026-10-28"
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -100,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X6",
-  "result": "pass",
-  "landing": "20261027T181009-L-3920553",
+  "reviewer": "C-a5338",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261027T205930-L-1635358",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered split (kflat naturality + resolution extension) against the 401551ed return and NativeWeilClosedModels definitions (NativeAdjunctionNormalization, NativeHomRepresentatives, CoefficientClosedStructure); nodes against the Lean"
  }
 }

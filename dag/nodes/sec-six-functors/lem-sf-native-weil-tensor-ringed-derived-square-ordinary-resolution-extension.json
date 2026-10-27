@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension",
+ "kind": "statement",
+ "title": "Extension of ordinary tensor models through K-flat resolutions",
+ "statement": "A normalized ordinary tensor model with K-flat-input naturality extends through K-flat resolutions to a model natural in an arbitrary second input.",
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor transport, geometric tensor part of step 1; K-flat replacement extension."
+ },
+ "proof": [
+  {
+   "text": "For every second complex choose a degreewise-epimorphic K-flat resolution from lem-pc-kflat-resolution (keeping the given model on K-flat second inputs). Transport the given model along its derived quasi-isomorphism, using the K-flat naturality hypothesis (the statement of lem-sf-native-weil-tensor-ringed-derived-square-ordinary-naturality, taken as a hypothesis) to show independence of the chosen resolution.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor transport, geometric tensor part of step 1"
+   }
+  },
+  {
+   "text": "The transported comparison preserves the componentwise uncurrying equation, hence NativeAdjunctionNormalization, and its resolution comparisons compose to give naturality for arbitrary maps of the second input.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor transport, geometric tensor part of step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E7",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "K-flat replacement extension of the ordinary tensor model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K-flat resolution transports a normalized derived tensor model to arbitrary second complexes",
+   "results": "No exact theorem for the specified ordinary sheaf tensor and normalization.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_isKFlatResolutionIndependentCoefficients tensor model naturality",
+   "results": "The K-flat resolution theorem exists, but no theorem assembles this normalized representative extension.",
+   "date": "2026-10-28",
+   "verdict": "Use the declared K-flat resolution dependency."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isKFlatResolutionIndependentCoefficients.*NativeOrdinary",
+   "results": "The resolution API is available; the ordinary representative extension is new.",
+   "date": "2026-10-28",
+   "verdict": "New strict intermediate statement required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedDerivedSquareOrdinary",
+  "date": "2026-10-28",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-data",
+   "place": "Strict extension component of the ordinary derived-square assertion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryTensorModelResolutionExtension",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryTensorModelResolutionExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_ordinary_tensor_model_resolution_extension",
+  "statement": "theorem native_ordinary_tensor_model_resolution_extension\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×\n      DerivedCategory (ProEtale.AdicSheaf l Y) ⥤\n      DerivedCategory (ProEtale.AdicSheaf l Y))\n    (R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)\n    (S : CoefficientClosedStructure H)\n    (model : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n      (_ : NativeOrdinaryKFlat l Y P),\n      S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅\n        DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q))\n    (hnormalization : NativeAdjunctionNormalization\n      (ordinaryIhomBifunctor l Y) (ordinaryTensorBifunctor l Y)\n      (fun P ↦ Mod.ihomAdjunction P) H R S\n      (NativeOrdinaryKFlat l Y) model)\n    (hkflat : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n      (hP : NativeOrdinaryKFlat l Y P)\n      (hP' : NativeOrdinaryKFlat l Y P')\n      (hQ : NativeOrdinaryKFlat l Y Q)\n      (hQ' : NativeOrdinaryKFlat l Y Q')\n      (f : P ⟶ P') (g : Q ⟶ Q'),\n      S.tensor.map\n          (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))\n          (Y := (DerivedCategory.Q.obj Q', DerivedCategory.Q.obj P'))\n          (Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f)) ≫\n          (model P' Q' hP').hom =\n        (model P Q hP).hom ≫ DerivedCategory.Q.map\n          (HomologicalComplex.mapBifunctorMap f g\n            (ordinaryTensorBifunctor l Y) (.up ℤ))) :\n    ∃ extendedModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n      (_ : NativeOrdinaryKFlat l Y P),\n      S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅\n        DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q),\n      NativeAdjunctionNormalization\n        (ordinaryIhomBifunctor l Y) (ordinaryTensorBifunctor l Y)\n        (fun P ↦ Mod.ihomAdjunction P) H R S\n        (NativeOrdinaryKFlat l Y) extendedModel ∧\n      (∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (hP : NativeOrdinaryKFlat l Y P)\n        (hP' : NativeOrdinaryKFlat l Y P')\n        (f : P ⟶ P') (g : Q ⟶ Q'),\n        S.tensor.map\n            (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))\n            (Y := (DerivedCategory.Q.obj Q', DerivedCategory.Q.obj P'))\n            (Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f)) ≫\n            (extendedModel P' Q' hP').hom =\n          (extendedModel P Q hP).hom ≫ DerivedCategory.Q.map\n            (HomologicalComplex.mapBifunctorMap f g\n              (ordinaryTensorBifunctor l Y) (.up ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a5338",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261027T205930-L-1635358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a5338",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261027T205930-L-1635358",
+  "kind": "interface",
+  "note": "independent cc review: delivered split (kflat naturality + resolution extension) against the 401551ed return and NativeWeilClosedModels definitions (NativeAdjunctionNormalization, NativeHomRepresentatives, CoefficientClosedStructure); nodes against the Lean"
+ }
+}
