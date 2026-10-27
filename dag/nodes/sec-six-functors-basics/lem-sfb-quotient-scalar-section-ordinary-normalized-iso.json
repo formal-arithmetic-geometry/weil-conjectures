@@ -1,0 +1,92 @@
+{
+ "id": "lem-sfb-quotient-scalar-section-ordinary-normalized-iso",
+ "kind": "statement",
+ "title": "Invertibility of the normalized sectionwise scalar map",
+ "statement": "For every scheme T, fixed model m, and normalized natural transformation o as above, each component o.app M is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03EK and 06YY, scalar-extension generators detect isomorphisms"
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "lem-sfb-quotient-scalar-section-ordinary-normalized-map"
+ ],
+ "proof": [
+  {
+   "text": "The sheafified pure tensors 1 tensor m generate change of rings; the normalized formula identifies the map with the canonical extension map, whose inverse is induced by restriction of scalars.",
+   "uses": [
+    "lem-sfb-quotient-scalar-section-ordinary-normalized-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-scalar-section-ordinary-normalized-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03EK and 06YY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "change of rings generator detects isomorphism",
+   "results": "No existing declaration gives this normalized componentwise isomorphism.",
+   "date": "2026-10-28",
+   "verdict": "New strict substatement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientScalarSectionOrdinaryComparisonExistence",
+  "date": "2026-10-28",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-scalar-section-ordinary-comparison-existence",
+   "place": "invertibility of the ordinary comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientScalarSectionOrdinaryNormalizedIso",
+  "file": "lean/Sheaf/Paper/QuotientScalarSectionOrdinaryNormalizedIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalar_section_ordinary_normalized_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalar_section_ordinary_normalized_isIso"
+  ],
+  "statement": "theorem scalar_section_ordinary_normalized_isIso (T : Scheme.{u})\n    (model : SectionModel a T)\n    (ordinary : QuotientChange.extension a T ⋙\n        (equivalence Λ' T).functor ⟶\n      (equivalence Λ T).functor ⋙ model.E)\n    (hordinary : ∀ (M : Modules Λ T) (W : T.ProEtᵒᵖ) (m : M.X.obj.obj W),\n      (((ordinary.app M) ≫ eqToHom (model.obj_eq _)).val.app W)\n          (((Mod.extendUnit (ProEtale.coefficientMap a T) M).hom.hom.app W) m) =\n        (toSheafify (Scheme.ProEt.topology T)\n          (SheafOfModules.changeOfRingsPresheaf (sectionQuotient a T)\n            ((equivalence Λ T).functor.obj M)).presheaf).app W\n              ((1 : (ring Λ' T).obj.obj W)\n                ⊗ₜ[(ring Λ T).obj.obj W,((sectionQuotient a T).hom.app W).hom] m)) :\n    ∀ M : Modules Λ T, IsIso (ordinary.app M)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T210307-L-1684758",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T210307-L-1684758",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -5,12 +5,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.QuotientSectionTensorData
+import Sheaf.Paper.QuotientScalarSectionOrdinaryNormalizedMap
+import Sheaf.Paper.QuotientScalarSectionOrdinaryNormalizedIso
 
 /-! Ordinary generator normalization for a fixed sectionwise scalar model. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
+set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -52,6 +55,21 @@ theorem scalar_section_ordinary_comparison_exists (T : Scheme.{u})
                 ((1 : (ring Λ' T).obj.obj W)
                   ⊗ₜ[(ring Λ T).obj.obj W,
                     ((sectionQuotient a T).hom.app W).hom] m) := by
-  sorry
+  obtain ⟨ordinary, hordinary⟩ := scalar_section_ordinary_normalized_map a T model
+  have hIso : ∀ M : Modules Λ T, IsIso (ordinary.app M) :=
+    scalar_section_ordinary_normalized_isIso a T model ordinary hordinary
+  let comparison : QuotientChange.extension a T ⋙
+      (equivalence Λ' T).functor ≅
+      (equivalence Λ T).functor ⋙ model.E :=
+    NatIso.ofComponents (fun M => by
+      letI := hIso M
+      exact asIso (ordinary.app M)) (by
+      intro M N f
+      letI := hIso M
+      letI := hIso N
+      exact (ordinary.naturality f).trans (by simp))
+  refine ⟨comparison, ?_⟩
+  intro M W m
+  simpa [comparison] using hordinary M W m
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
