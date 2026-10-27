@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 public import Sheaf.Paper.FiniteRingCompactSupportProjectionMap
+import Sheaf.Paper.IntegralOrdinaryProjectionEndpointCompatibility
 
 /-! # Finite scalar comparison of the ordinary projection arrow
 
@@ -16,6 +17,7 @@ def-exchange-projection, proper/open composite.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
@@ -110,7 +112,12 @@ theorem integralOrdinaryProjection_endpointComparisons
         ((scalarReductionDerivedExtension l E Y n).map
       (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY
         (PurCompactSupport.completedPull_comp l E c.i c.g)).app K).app L)) ≫ t.hom
-    := by sorry
+    := by
+  letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+    Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  obtain ⟨d⟩ := integralOrdinaryProjection_endpointIsoData l E c aX aZ aY K L n
+  refine ⟨d.s, d.t, ?_⟩
+  exact integralOrdinaryProjection_endpointCompatibility l E c aX aZ aY K L n d
 
 theorem integralOrdinaryProjection_reduction_arrowComparison
     (l : ℕ) [Fact l.Prime]

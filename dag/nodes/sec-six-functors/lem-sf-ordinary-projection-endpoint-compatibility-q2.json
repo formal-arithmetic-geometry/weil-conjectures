@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-ordinary-projection-endpoint-compatibility-q2",
+ "kind": "statement",
+ "title": "Pasted compatibility of ordinary projection endpoint comparisons",
+ "statement": "For endpoint comparison data at the finite level, the source and target isomorphisms satisfy the commutative projection square equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+  "place": "Proper projection paragraph: reduction of the actual canonical projection is the torsion projection map; pasted with the open projection of def-exchange-projection."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-integral-derived-reduction",
+  "def-exchange-projection",
+  "def-sp-finite-ring-compact-support-projection-map",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding endpoint construction/pasting step from the ordinary projection reduction proof, retained as an independently provable statement for arbitrary inputs.",
+   "uses": [
+    "lem-pbc-completed-scalar-projection-perfect-iso",
+    "def-pur-integral-compact-support-coefficient-data",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sf-open-projection-factor-coefficient-change",
+    "lem-sf-projection-scalar-square",
+    "lem-sf-finite-scalar-proper-projection-presentation",
+    "def-sp-finite-ring-compact-support-projection-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic.proof.md",
+  "place": "Endpoint comparison decomposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo a finite quotient of the derived proper projection formula map over completed integral coefficient sheaves is invertible",
+   "results": "8 hits: BDeRhamPlus, BDeRham, PreTilt.mk_comp_untilt_eq_coeff_zero, PreTilt.exists_smodEq_untiltAux, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, WittVector.factorPowSucc_comp_fontaineThetaModPPow, AdicCompletion.factorₐ_evalₐ_one. None concerns this sheaf-derived projection arrow.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"IsIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*[Pp]rojection|[Pp]rojection.*[Rr]eduction",
+   "results": "Search tool 0 hits; repository rg found IntegralProjectionReductionNormalization for supplied completed operation domains, with different maps, and existing separate scalar/open normalization APIs. None identifies this ordinary unbounded completed-coefficient arrow with the fixed-scalar finite arrow.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOrdinaryProjectionArrowComparison",
+  "date": "2026-10-28",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ordinary-projection-endpoint-comparisons",
+   "place": "Strict decomposition of endpoint construction and pasting."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-pf-proetale",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrdinaryProjectionEndpointCompatibility",
+  "file": "lean/Sheaf/Paper/IntegralOrdinaryProjectionEndpointCompatibility.lean",
+  "declaration": "WeilConjectures.integralOrdinaryProjection_endpointCompatibility",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-28",
+  "statement": "theorem integralOrdinaryProjection_endpointCompatibility\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (aX : ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X))\n    (aZ : ProEtaleTensorModel c.Z ((PurCompactSupport.completed l E).ring c.Z))\n    (aY : ProEtaleTensorModel Y ((PurCompactSupport.completed l E).ring Y))\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (L : DerivedCategory (scalarReductionSource l E Y)) (n : ℕ)\n    (d : IntegralOrdinaryProjectionEndpointData l E c aX aZ aY K L n) :\n    let A := Padic.coefficientExtensionRing l E (n + 1)\n    letI : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)\n    d.s.hom ≫ ((sfIntrinsicDerivedEquivalence Y A).functor.map\n        (((ProEtale.projectionMapOfCompactification\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).app\n            ((sfIntrinsicDerivedEquivalence X A).inverse.obj\n              ((scalarReductionDerivedExtension l E X n).obj K))).app\n            ((sfIntrinsicDerivedEquivalence Y A).inverse.obj\n              ((scalarReductionDerivedExtension l E Y n).obj L)))) =\n      ((scalarReductionDerivedExtension l E Y n).map\n      (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY\n        (PurCompactSupport.completedPull_comp l E c.i c.g)).app K).app L)) ≫ d.t.hom"
+ },
+ "proof_deps": [
+  "lem-pbc-completed-scalar-projection-perfect-iso",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-open-projection-factor-coefficient-change",
+  "lem-sf-projection-scalar-square",
+  "lem-sf-finite-scalar-proper-projection-presentation",
+  "def-sp-finite-ring-compact-support-projection-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T210201-L-1668698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T210201-L-1668698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
