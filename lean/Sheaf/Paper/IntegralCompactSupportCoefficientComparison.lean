@@ -56,6 +56,8 @@ import Sheaf.Paper.PbcUniformCompleteTriangulated
 import Sheaf.Paper.OrdinaryCompletedIntegralPullback
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import WeilConjectures.AlgebraicGeometry.DimensionFiniteTypeField
+import Sheaf.Paper.IntegralCompactSupportRestrictionShift
+import Sheaf.Paper.FiniteProperComparisonIso
 
 /-! # Integral compact-support coefficient comparison
 
@@ -77,6 +79,7 @@ Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -144,6 +147,27 @@ private theorem scalarRightKanShift_unique
     simpa only [Category.assoc] using (square s hs n X).trans (square t ht n X).symm
   exact scalarKanCommShift_ext s t he
 
+private theorem inverse_mate_shift
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ] [HasShift F ℤ]
+    {G : C ⥤ D} {H : E ⥤ F} {L₁ : C ⥤ E} {R₁ : E ⥤ C}
+    {L₂ : D ⥤ F} {R₂ : F ⥤ D}
+    [G.CommShift ℤ] [H.CommShift ℤ] [L₁.CommShift ℤ] [R₁.CommShift ℤ]
+    [L₂.CommShift ℤ] [R₂.CommShift ℤ]
+    (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) [a.CommShift ℤ] [b.CommShift ℤ]
+    (t : TwoSquare R₁ H G R₂) [NatTrans.CommShift t.natTrans ℤ] :
+    NatTrans.CommShift ((mateEquiv a b).symm t).natTrans ℤ := by
+  change NatTrans.CommShift
+    ((Functor.leftUnitor _).inv ≫
+      Functor.whiskerRight a.unit (G ⋙ L₂) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (Functor.associator _ _ _).hom _ ≫
+      Functor.whiskerRight (Functor.whiskerLeft L₁ t.natTrans) L₂ ≫
+      Functor.whiskerRight (Functor.associator _ _ _).inv _ ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (L₁ ⋙ H) b.counit ≫
+      (Functor.rightUnitor _).hom) ℤ
+  infer_instance
 
 /-- Normalization of a shift structure by the actual universal scalar counit.
 Source: Stacks Tag 06YY
@@ -201,7 +225,6 @@ theorem comparison_commShift {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (comparison a c).CommShift ℤ := by
   sorry
-
 /-- Ordinary tensor associativity, fixed by the two tensor-unit normalized adjunctions.
 Source: Stacks Tag 06YY
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
@@ -1116,7 +1139,16 @@ theorem finiteComparison_isIso (e : ℕ) (he : Ramification l E F i e) (hepos : 
     (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategory (pbcModules X ((finite l E n hn).ring X))) :
     IsIso ((comparison (finiteChange l E F i e he hepos n hn) c).app K) := by
-  sorry
+  have hp := finiteProperComparison_isIso
+    (finiteChange l E F i e he hepos n hn) c.g
+    ((openExtension (finite l E n hn) c.i).mapDerivedCategory.obj K)
+  letI : IsIso ((properComparison (finiteChange l E F i e he hepos n hn) c.g).app
+      ((openExtension (finite l E n hn) c.i).mapDerivedCategory.obj K)) := by
+    simpa [properComparison, finiteProperComparison] using hp
+  have ho := openComparison_isIso (finiteChange l E F i e he hepos n hn) c.i K
+  letI := ho
+  rw [comparison_factorization]
+  infer_instance
 
 /-- The coefficient prime is a unit in the geometric base field.
 Source: blueprint def-pur-conventions

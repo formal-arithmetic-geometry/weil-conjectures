@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-compact-support-finite-proper-comparison-iso",
+ "kind": "statement",
+ "title": "Finite proper coefficient comparison is invertible",
+ "statement": "For a finite coefficient change and a proper morphism, the proper scalar mate is an isomorphism on every derived coefficient module.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0GL5 and 0GL6",
+  "note": "Lower proper factor isolated from finiteComparison_isIso."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Finite freeness identifies the proper restriction square with a finite biproduct comparison. Additive proper direct image preserves it, and the scalar adjunction mate preserves invertibility.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0GL5 and 0GL6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProperComparisonIso",
+  "declaration": "WeilConjectures.PurCompactSupport.finiteProperComparison_isIso",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.finiteProperComparison",
+   "WeilConjectures.PurCompactSupport.finiteProperComparison_isIso"
+  ],
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-28",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/FiniteProperComparisonIso.lean",
+  "statement": "theorem finiteProperComparison_isIso {R S : Coefficients.{u}} (a : Change R S)\n    {U V : Scheme.{u}} (g : U ⟶ V)\n    (K : DerivedCategory (pbcModules U (R.ring U))) :\n    IsIso ((finiteProperComparison a g).app K) "
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompactSupportCoefficientComparison",
+  "date": "2026-10-28",
+  "group": "J4"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0GL5 and 0GL6 lower mate calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "mate isomorphism under adjunction",
+   "results": "generic adjunction mate lemmas inspected; finite proper coefficient specialization remains project-specific.",
+   "date": "2026-10-28",
+   "verdict": "Use the project lower statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso mateEquiv",
+   "results": "generic mate isomorphism results inspected.",
+   "date": "2026-10-28",
+   "verdict": "No direct specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift mate comparison",
+   "results": "existing shift and mate declarations inspected.",
+   "date": "2026-10-28",
+   "verdict": "No direct theorem."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-integral-coefficient-comparison",
+   "place": "Lower proof step isolated during stage-3 proving.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T234021-L-4161912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T234021-L-4161912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
