@@ -19595,3 +19595,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/G3/Sheaf.Paper.QuotientScalarSectionExistence (stage 3; reviewer PASS; first push; landing 20261027T151708-L-1193899 (interface); batch 20261027T151642; modules 3; new nodes 2)
 - 15:17 L: merged deliver/H1/Sheaf.Paper.CompletedLineTensorCoherence (stage 3; reviewer FIX; first push; landing 20261027T151710-L-1194234 (interface); batch 20261027T151642; modules 8; new nodes 5; change records: coord/changes/completed-line-comparison-complex-elaboration.md)
 - 15:17 L: merged deliver/H2/Sheaf.Paper.AdicReindexingHom (stage 3; reviewer PASS; first push; landing 20261027T151711-L-1194603 (proof); batch 20261027T151642; modules 1; new nodes 0)
+- 15:17 L: merged deliver/H5/Sheaf.Algebra.Homology.RingedForgetTensorUnitLeftRepresentatives (stage 3; reviewer PASS; first push; landing 20261027T151712-L-1194910 (interface); batch 20261027T151642; modules 1; new nodes 0)
