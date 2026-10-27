@@ -17,36 +17,44 @@
  ],
  "proof": [
   {
-   "text": "on simultaneous flat-term K-flat P,Q, use the quotient maps in D and the sectionwise balanced tensor comparison to relabel every (p,q) summand. The two orders of applying a quotient transition agree on x tensor y, so these maps assemble into an isomorphism of strict towers. The inverse relabels in reverse. Both differentials send a generator to dx tensor y + (-1)^p x tensor dy, proving that these are chain maps. Their naturality follows on the same generators. Reindexing preserves the common cohomological interval and constructibility of every finite reduction. The Roos comparison in D and its limit model transport derived completeness, so it preserves the complete constructible domain. Apply D.roos followed by the tower isomorphism, and descend along the two K-flat localizations to define the tensor isomorphism. This gives Model and Naturality. The finite generator formula is the canonical finite pullback/tensor map. D.Unit and D.Counit compare its whole-system realization with the specified completed pullback comparison, proving Canonical before finite evaluation. These constructions also apply to zero complexes and empty schemes. .",
+   "text": "The completeness clause of D makes its ordinary-to-completed comparison invertible on each constructible input. Transport constructibility back along this isomorphism from the existing constructible completed pullback.",
    "uses": [
-    "lem-pod-reindexing-hom-resolution-model",
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-integral-operations-well-defined",
-    "def-pur-completed-pullback-tensor-comparison",
-    "def-pur-finite-pullback-tensor-comparison"
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-integral-constructible-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-    "place": "Steps 1 and 5, expanded in parent node proof: Completed tensor extension of a normalized completion comparison."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use the strict-tower construction for the tower component. Conjugate the existing natural canonical completed pullback/tensor isomorphism by the ordinary-to-completed isomorphism on the tensor and both factors. This constructs the derived tensor component, proves its naturality, and proves Canonical by the inverse identity in the product category.",
+   "uses": [
+    "lem-pod-reindexing-strict-tensor-towers",
+    "lem-pur-canonical-rational-pullback-tensor-naturality",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse tower map to the forward generator identity and use hom_inv_id to prove InverseGenerators. The normalized Roos comparison lemma gives Model. Assemble these results with forward generators, tower naturality, derived naturality and Canonical into Laws.",
+   "uses": [
+    "lem-pod-reindexing-tensor-roos-normalization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pod-reindexing-hom-resolution-model",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-integral-operations-well-defined",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pod-reindexing-strict-tensor-towers",
+  "lem-pur-canonical-rational-pullback-tensor-naturality",
   "def-pur-completed-pullback-tensor-comparison",
-  "def-pur-finite-pullback-tensor-comparison"
+  "lem-pod-reindexing-tensor-roos-normalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 5; strictly partial reduction of lem-pod-reindexing-completion-unit-tensor"
+  "place": "Steps 1 and 5; Q1 canonical conjugation and strict-tower/Roos decomposition"
  },
  "mathlib_searches": [
   {
@@ -140,12 +148,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261025T123949-L-1921632",
+  "landing": "20261027T234145-L-16762",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

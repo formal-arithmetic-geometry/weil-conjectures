@@ -1,0 +1,209 @@
+{
+ "id": "lem-pod-reindexing-tensor-roos-normalization",
+ "kind": "statement",
+ "title": "Canonical completed tensor comparison has the strict Roos model",
+ "statement": "Fix the same coefficient and scheme data and normalized completion reindexing D as in [def-pod-completion-reindex-models]. For any PodCompletedTensorReindex T of [def-pod-completion-tensor-reindex-models], suppose its forward generator law, strict-tower naturality, and Canonical equation of [def-pod-completion-tensor-normalization] hold. Then its Model equation holds: on every pair of complete constructible good representatives, T.tensor realizes D.roos followed by the Roos image of T.tower, conjugated by the specified localization and completed tensor comparisons. No existence of T or of its strict towers is asserted here.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, expanded in parent node proof: Completed tensor extension of a normalized completion comparison."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "On good P,Q, the forward generator law identifies the entire strict-tower map with the quotient-level ordinary tensor/pullback map, using the two quotient comparisons of D. Check transitions before localization, so this is an identity of coherent systems rather than a conclusion from finite-evaluation faithfulness.",
+   "uses": [
+    "lem-pod-reindexing-hom-resolution-model",
+    "lem-pur-kflat-total-tensor-model",
+    "def-pur-finite-pullback-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5, expanded in parent node proof: Completed tensor extension of a normalized completion comparison."
+   }
+  },
+  {
+   "text": "Apply the specified Roos realization. The two cone coordinates in D fix the map as D.roos followed by Roos(T.tower). The finite and limit model laws identify the localized endpoints with the recorded completed operations.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5, expanded in parent node proof: Completed tensor extension of a normalized completion comparison."
+   }
+  },
+  {
+   "text": "The whole-system unit and counit identities and pullback normalization of D identify this with the actual canonical completed pullback/tensor map. Cancel the ordinary-to-completed isomorphisms on the complete constructible inputs in the assumed Canonical equation. This yields precisely Model, including zero inputs and empty schemes.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5, expanded in parent node proof: Completed tensor extension of a normalized completion comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-finite-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; explicit subargument of lem-pod-reindexing-tensor-construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(reindex|equiv)|reindex.*tensor",
+   "results": [
+    "Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean",
+    "Mathlib/Algebra/Azumaya/Basic.lean",
+    "Mathlib/Algebra/Azumaya/Basic.lean",
+    "Mathlib/Algebra/Azumaya/Basic.lean",
+    "Mathlib/Algebra/Azumaya/Matrix.lean",
+    "Mathlib/Algebra/Module/SpanRankOperations.lean",
+    "Mathlib/Algebra/Module/CharacterModule.lean",
+    "Mathlib/Algebra/Module/CharacterModule.lean"
+   ],
+   "date": "2026-10-27",
+   "verdict": "The returned declarations do not give the normalized strict quotient-tensor tower or its specified two-coordinate derived Roos realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, Functor",
+   "results": [],
+   "date": "2026-10-27",
+   "verdict": "The returned declarations do not give the normalized strict quotient-tensor tower or its specified two-coordinate derived Roos realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence commutes with derived completed tensor products",
+   "results": [
+    "AdicCompletion.tensor_map_id_left_eq_map",
+    "rTensor.inverse_comp_rTensor",
+    "AdicCompletion.ofTensorProduct_naturality",
+    "rTensor.inverse_of_rightInverse_comp_rTensor",
+    "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+    "rTensor_exact",
+    "Module.Invertible.rTensorEquiv",
+    "lTensor.inverse_comp_lTensor"
+   ],
+   "date": "2026-10-27",
+   "verdict": "The returned declarations do not give the normalized strict quotient-tensor tower or its specified two-coordinate derived Roos realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image of module sheaves commutes with the strict tower of total tensor complexes and its derived Roos limit",
+   "results": [
+    "TensorProduct.directLimitLeft_symm_of_tmul",
+    "SheafOfModules.pushforwardNatIso_inv",
+    "SheafOfModules.pullbackIso",
+    "SheafOfModules.sheafificationCompPullback",
+    "ModuleCat.tildeInModuleCat",
+    "SheafOfModules.pullbackObjFreeIso",
+    "ModuleCat.Tilde.stalkIso_inv",
+    "SheafOfModules.fullyFaithfulForget_preimage_val"
+   ],
+   "date": "2026-10-27",
+   "verdict": "The returned declarations do not give the normalized strict quotient-tensor tower or its specified two-coordinate derived Roos realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized chain map of inverse systems realizes the canonical derived completed tensor pullback comparison in the Roos complex",
+   "results": [
+    "HomologicalComplex.ιTensorObj",
+    "HomologicalComplex.HasGoodTensor₁₂",
+    "AdicCompletion.tensor_map_id_left_eq_map",
+    "AdicCompletion.ofTensorProduct_naturality",
+    "CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f",
+    "AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty",
+    "AlgebraicTopology.DoldKan.natTransPInfty_f",
+    "AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀"
+   ],
+   "date": "2026-10-27",
+   "verdict": "The returned declarations do not give the normalized strict quotient-tensor tower or its specified two-coordinate derived Roos realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image equivalence induces a natural isomorphism on strict towers of total tensor complexes with quotient coefficients",
+   "results": [
+    "HomologicalComplex₂.XXIsoOfEq_inv_ιTotal",
+    "rTensor.inverse_of_rightInverse_apply",
+    "rTensor.inverse_apply",
+    "lTensor.inverse_of_rightInverse",
+    "lTensor.inverse_of_rightInverse_apply",
+    "lTensor.inverse_apply",
+    "rTensor.inverse_comp_rTensor",
+    "lTensor.inverse_comp_lTensor"
+   ],
+   "date": "2026-10-27",
+   "verdict": "The returned declarations do not give the normalized strict quotient-tensor tower or its specified two-coordinate derived Roos realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorConstruction",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-construction",
+   "place": "Canonical completed tensor comparison has the strict Roos model"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorRoosNormalization",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorRoosNormalization.lean",
+  "declaration": "WeilConjectures.podReindexingTensorRoosNormalization",
+  "statement": "theorem podReindexingTensorRoosNormalization\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hgen : PodCompletedTensorReindex.Generators l E g D T)\n    (hnat : PodCompletedTensorReindex.TowerNaturality l E g D T)\n    (hcanonical : PodCompletedTensorReindex.Canonical l E g D T) :\n    PodCompletedTensorReindex.Model l E g D T",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T234145-L-16762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T234145-L-16762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
