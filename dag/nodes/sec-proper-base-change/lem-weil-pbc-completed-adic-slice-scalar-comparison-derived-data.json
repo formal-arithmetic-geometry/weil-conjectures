@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-completed-adic-slice-scalar-comparison-derived-data",
+ "kind": "statement",
+ "title": "Derived slice composites are left derived functors of the ordinary composites",
+ "statement": "For X, U and f as in the completed adic slice scalar comparison, write A for the R-modules on X. The composite of exact derived slice restriction [def-weil-pbc-ringed-derived-restriction] with the derived slice scalar extension [def-weil-pbc-completed-adic-slice-scalar-extension], and the composite of the derived scalar extension along f [lem-pur-derived-change-of-rings] with exact derived slice restriction, each admit a natural transformation from their composite with the localization K(A) -> D(A) [def-weil-abstract-derived-category] to the localized ordinary composite (slice restriction followed by slice scalar extension, respectively scalar extension followed by slice restriction, applied termwise to complexes), exhibiting it as a left derived functor of that ordinary composite along the quasi-isomorphisms.",
+ "stmt_deps": [
+  "def-weil-pbc-completed-adic-slice-scalar-extension",
+  "def-weil-pbc-completed-adic-slice-scalar-extension-additive",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 0D6D: K-flat resolution, pullback preservation, and universal counits"
+ },
+ "proof": [
+  {
+   "text": "Resolve every complex of R-modules by a flat-term K-flat complex; slice restriction is exact and carries it to a flat-term K-flat complex on the slice, being the pullback along the localization morphism of ringed topoi.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal counits of both derived scalar extensions are invertible on K-flat complexes, and the ordinary extensions send quasi-isomorphisms between K-flat complexes to quasi-isomorphisms. Hence both ordinary composites invert quasi-isomorphisms between K-flat complexes and the induced counits of both derived composites are isomorphisms on K-flat complexes.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A functor on the derived category with a counit that is invertible on a resolving class whose quasi-isomorphisms the ordinary functor inverts is a left derived functor, by the universal property of the localization restricted to that class; apply this to both composites.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0G7E and 0D6D, specialized to the completed adic coefficient witnesses"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso mapDerivedCategoryFactorsh",
+   "results": "Existing Mathlib universal-property API used by the parent proof.",
+   "date": "2026-10-28",
+   "verdict": "The final uniqueness step is proved directly in the item module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAdicSliceScalarComparison",
+  "date": "2026-10-28",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-adic-slice-scalar-comparison",
+   "place": "Proof steps 1 and 3"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAdicSliceScalarComparisonData",
+  "file": "lean/Sheaf/Paper/CompletedAdicSliceScalarComparisonData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedAdic_slice_scalarComparison_derived_data",
+  "statement": "theorem completedAdic_slice_scalarComparison_derived_data (X : Scheme.{t}) (U : X.ProEt) {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) : let O_R := (sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R let O_S := (sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S let A := SheafOfModules O_R letI : (SheafOfModules.overFunctor O_R U).Additive := by exact (ringedOverFunctor_exactGeneral O_R U).1 letI : (SheafOfModules.overFunctor O_S U).Additive := by exact (ringedOverFunctor_exactGeneral O_S U).1 letI : (completedAdicChange X f).Additive := completedAdicChange_additive X f letI : (completedAdicSliceChange X U f).Additive := completedAdicSliceChange_additive X U f letI : HasDerivedCategory A := HasDerivedCategory.standard _ letI : HasDerivedCategory (SheafOfModules O_S) := HasDerivedCategory.standard _ letI : HasDerivedCategory (SheafOfModules (O_R.over U)) := HasDerivedCategory.standard _ letI : HasDerivedCategory (SheafOfModules (O_S.over U)) := HasDerivedCategory.standard _ letI : HasDerivedCategory (SheafOfModules.{t + 1} (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t} ((ProEt.topology X).over U) (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj S))) := HasDerivedCategory.standard _ let Q_A := DerivedCategory.Qh (C := A) let F := completedAdicDerivedChange X f let F_U := completedAdicSliceDerivedChange X U f let L_U := ringedDerivedRestrictionGeneral O_R U ⋙ F_U let L := F ⋙ ringedDerivedRestrictionGeneral O_S U let G_U := ((SheafOfModules.overFunctor O_R U ⋙ completedAdicSliceChange X U f).mapHomotopyCategory (.up ℤ)) ⋙ DerivedCategory.Qh let G := ((completedAdicChange X f ⋙ SheafOfModules.overFunctor O_S U).mapHomotopyCategory (.up ℤ)) ⋙ DerivedCategory.Qh ∃ (α : Q_A ⋙ L_U ⟶ G_U) (α' : Q_A ⋙ L ⟶ G), L_U.IsLeftDerivedFunctor α (HomotopyCategory.quasiIso A (.up ℤ)) ∧ L.IsLeftDerivedFunctor α' (HomotopyCategory.quasiIso A (.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b0fb0",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T180829-L-3906877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b0fb0",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T180829-L-3906877",
+  "kind": "interface",
+  "note": "independent cc review: item proof (leftDerivedNatIso from underived + derived_data) against node lem-weil-pbc-completed-adic-slice-scalar-comparison and Stacks 06YY/0G7E; moved defs vs published module; importer FiniteQuotientModelResidueComparison compiled OK"
+ }
+}

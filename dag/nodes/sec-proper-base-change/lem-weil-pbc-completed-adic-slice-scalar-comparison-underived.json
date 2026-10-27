@@ -1,0 +1,99 @@
+{
+ "id": "lem-weil-pbc-completed-adic-slice-scalar-comparison-underived",
+ "kind": "statement",
+ "title": "Ordinary scalar extension commutes with pro-etale slice restriction",
+ "statement": "For a scheme X, a pro-etale object U, and a map f:R -> S of sheaves of commutative rings, the ordinary scalar-extension functor on the slice obtained from the universal witness completedAdicSliceChange is naturally isomorphic to the composite of completedAdicChange with the exact slice restriction functor on S-modules.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-pbc-completed-adic-slice-scalar-extension",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-base-change (06YY), ordinary tensor and sheafification portion"
+ },
+ "proof": [
+  {
+   "text": "Evaluate both composites on a module and on an object V -> U of the slice. The two presheaf constructions are the same tensor S(V) tensor over R(V) with the module sections, and the comparison commutes with restriction maps.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the universal property of module sheafification to descend the presheaf comparison to a natural isomorphism of sheaves of modules.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, ordinary tensor compatibility under localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "module sheafification tensor restriction slice",
+   "results": "No direct theorem found; use the stated sheafification interface.",
+   "date": "2026-10-27",
+   "verdict": "The ordinary comparison is the missing interface needed by the parent derived theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAdicSliceScalarComparison",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-adic-slice-scalar-comparison",
+   "place": "Proof step 2: ordinary extension/restriction tensor and sheafification"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAdicSliceScalarComparisonData",
+  "file": "lean/Sheaf/Paper/CompletedAdicSliceScalarComparisonData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedAdic_slice_scalarComparison_underived",
+  "statement": "theorem completedAdic_slice_scalarComparison_underived (X : Scheme.{t}) (U : X.ProEt) {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) : Nonempty ((SheafOfModules.overFunctor ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R) U ⋙ completedAdicSliceChange X U f) ≅ (completedAdicChange X f ⋙ SheafOfModules.overFunctor ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S) U))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b0fb0",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T180829-L-3906877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b0fb0",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T180829-L-3906877",
+  "kind": "interface",
+  "note": "independent cc review: item proof (leftDerivedNatIso from underived + derived_data) against node lem-weil-pbc-completed-adic-slice-scalar-comparison and Stacks 06YY/0G7E; moved defs vs published module; importer FiniteQuotientModelResidueComparison compiled OK"
+ }
+}

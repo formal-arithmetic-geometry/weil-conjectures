@@ -12,49 +12,43 @@
   "def-weil-pbc-ringed-derived-restriction",
   "def-pur-localized-ringed-site",
   "lem-pur-derived-change-of-rings",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-completed-adic-slice-scalar-extension"
  ],
  "proof": [
   {
-   "text": "Resolve an arbitrary complex of R-modules by a flat-term K-flat complex. Its restriction to the localization site is again flat-term K-flat: localization is a morphism of ringed topoi and the coefficient map is the identity of the restricted ring.",
+   "text": "Ordinary extension along f followed by slice restriction agrees with slice restriction followed by extension along f|U. Applied termwise to complexes, passed to homotopy categories and localized, this identifies the two localized ordinary composites K(R-modules) -> D(S|U-modules).",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-completed-adic-slice-scalar-comparison-underived",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "Ordinary extension along f followed by restriction to U agrees with restriction followed by extension along f|U. On V -> U the presheaf tensor is S(V) tensor over R(V) with the module sections. Module sheafification commutes with localization: the covering sieves of V -> U are precisely the covering sieves of V. The sheafification universal property identifies the two functors and all their maps.",
+   "text": "Each derived composite, restriction followed by slice extension and extension followed by restriction, is with its counit a left derived functor of its ordinary composite along the quasi-isomorphisms (K-flat resolutions, restriction preserves K-flatness, invertible universal counits on K-flat complexes).",
    "uses": [
-    "lem-pc-sites-module-sheafification-interface",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-completed-adic-slice-scalar-comparison-derived-data"
    ],
    "elementary": false
   },
   {
-   "text": "The universal counits of the supplied derived-change data are invertible on these K-flat representatives. Exact derived slice restriction agrees with localization of termwise restriction. Compose these comparisons and descend their naturality through the K-flat representative localization to obtain the natural isomorphism.",
+   "text": "Left derived functors of isomorphic functors along the same localization are isomorphic, by the universal property of the localization (Functor.leftDerivedNatIso); this gives the natural isomorphism.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-weil-pbc-ringed-derived-restriction",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "def-pur-localized-ringed-site",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-completed-adic-slice-scalar-comparison-underived",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-completed-adic-slice-scalar-comparison-derived-data",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY, 0G7E and 0D6D, specialized to localization of a ringed site; explicit coefficient-universe and localization-representative transport by K6"
+  "place": "Tags 06YY, 0G7E and 0D6D; ordinary tensor/sheafification step split to the underived comparison node."
  },
  "mathlib_searches": [
   {
@@ -113,8 +107,6 @@
   "by": "K6",
   "date": "2026-10-27",
   "declarations": [
-   "AlgebraicGeometry.Scheme.completedAdicSliceChangeData",
-   "AlgebraicGeometry.Scheme.completedAdicSliceDerivedChange",
    "AlgebraicGeometry.Scheme.completedAdic_slice_scalarComparison"
   ]
  },
@@ -131,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K6",
-  "result": "pass",
-  "landing": "20261027T112406-L-1578342",
+  "reviewer": "C-b0fb0",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T180829-L-3906877",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof (leftDerivedNatIso from underived + derived_data) against node lem-weil-pbc-completed-adic-slice-scalar-comparison and Stacks 06YY/0G7E; moved defs vs published module; importer FiniteQuotientModelResidueComparison compiled OK"
  }
 }
