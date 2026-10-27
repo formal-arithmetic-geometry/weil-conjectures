@@ -320,5 +320,41 @@
   "landing": "20261024T223329-L-1585087",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
+  "statement": "For a quasi-compact open immersion $j:U\\hookrightarrow X$,\n$Rj_*\\colon D(U_{\\mathrm{proét}},\\mathcal O_E)\\to D(X_{\\mathrm{proét}},\\mathcal O_E)$\nmaps $\\Dctf(U,\\mathcal O_E)$ into $\\Dctf(X,\\mathcal O_E)$. Proper base change\nand the proper projection formula, with the tensor product\n$\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}$, hold on $\\Loc(\\Dctf(-,\\mathcal O_E))$:\nthe base change and projection formula maps are isomorphisms in\n$\\Loc(\\Dctf(Y',\\mathcal O_E))$, respectively $\\Loc(\\Dctf(Y,\\mathcal O_E))$.",
+  "proof": [
+   {
+    "text": "Use [sk-prop-open-coefficients] and [sk-prop-proper-base-change-unbounded], and extend the\nprojection formula from $\\Dbc$ ([sk-thm-sfb-proper-base-change]) by [sk-lem-sf-determination] in\neach variable.",
+    "uses": [
+     "sk-lem-sf-determination"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "In detail, the first assertion is the integral case of [sk-prop-open-coefficients]: $Rj_*K$ is\nderived complete, since $Rj_*$ commutes with $\\operatorname{R\\lim}$ (Stacks, Tag 099L) and with\ncones, and\n\n$$\n(Rj_*K)\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}\\mathbf F_{E,X}\n\\simeq Rj_*(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,U}}\\mathbf F_{E,U})\n$$\n\nin $D(X_{\\mathrm{proét}},\\mathcal O_E)$, where $\\mathbf F_E=\\mathcal O_E/\\pi_E$ is the residue\nfield, because reduction is a cone. The right side is bounded constructible by\n[sk-cor-geo-open-finiteness], which applies to $\\mathbf F_E$ since it is a finite free extension of\n$\\mathbf F_\\ell$, and the integral criterion [sk-prop-integral-criterion] gives\n$Rj_*K\\in\\Dbc(X,\\mathcal O_E)$ ([det-thm-sf-pf-adic-open]).",
+    "uses": [
+     "det-thm-sf-pf-adic-open"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Proper base change on $\\Loc(\\Dctf(-,\\mathcal O_E))$ is the integral case of\n[sk-prop-proper-base-change-unbounded], using the estimates of [sk-prop-int-compactness]\n([det-thm-sf-pf-adic-base-change]). For the projection formula, let $p$ be proper,\n$K\\in\\Dbc(X,\\mathcal O_E)$ and $L\\in\\Dbc(Y,\\mathcal O_E)$. The map\n\n$$\nRp_*K\\otimes^{\\mathbf L}L\\longrightarrow Rp_*(K\\otimes^{\\mathbf L}p^*L)\n\\quad\\text{in }D(Y_{\\mathrm{proét}},\\mathcal O_E)\n$$\n\nis an isomorphism by the integral case of [sk-thm-sfb-proper-base-change]: both sides are\nderived complete, by [sk-lem-int-tensor] and proper finiteness, its reduction modulo $\\pi_E$ is\nthe torsion projection formula map in $D(Y_{\\mathrm{proét}},\\mathbf F_E)$, an isomorphism by\nStacks, Tag 0F0G, and derived Nakayama ([sk-lem-pe-derived-nakayama]) concludes. The categories\n$\\Loc(\\Dbc(-,\\mathcal O_E))$ are closed under $\\otimes^{\\mathbf L}$ by [sk-lem-int-tensor] and the\ntwo-variable localizing argument, and $Rp_*$ preserves direct sums there, so\n[sk-lem-sf-determination], applied in each variable as in [sk-thm-sf-pf-field], extends the\nprojection formula to all of $\\Loc(\\Dbc(-,\\mathcal O_E))$ ([det-thm-sf-pf-adic-projection]).",
+    "uses": [
+     "det-thm-sf-pf-adic-base-change",
+     "sk-lem-int-tensor",
+     "sk-lem-pe-derived-nakayama",
+     "sk-lem-sf-determination",
+     "det-thm-sf-pf-adic-projection"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,35 @@
+{
+ "id": "sk-lem-integral-finite-levels",
+ "kind": "unit",
+ "chapter": "sec-proetale-coefficients",
+ "title": "Bounds for the finite reductions",
+ "lean": [],
+ "uses": [
+  "sk-def-pe-derived-completion",
+  "sk-thm-pe-constructible-comparison",
+  "sk-cor-pe-finite-tor-comparison",
+  "sk-prop-pe-milnor"
+ ],
+ "statement": "Constructibility over $\\cO_E$ is defined by local models, but in practice we know a complex\n$K\\in D(X_{\\mathrm{proét}},\\cO_E)$ through its reductions\n$K_n=K\\otimes^{\\mathbf L}_{\\cO_{E,X}}(\\cO_E/\\pi_E^n)_X$ of [sk-def-pe-derived-completion]. The\ncriterion below says that $K$ is constructible exactly when it is derived complete and $K_1$\nis constructible. Write $\\mathbf F_E=\\cO_E/\\pi_E$ for the residue field, so that\n$K_1\\in D(X_{\\mathrm{proét}},\\mathbf F_E)$.\n\nTo prove the criterion we must produce, on each stratum, one complex of finite free\n$\\cO_E$-modules that is locally a model for all the $K_n$ at once. Each $K_n$ separately is\neasy to control: its bounds and its stratification are inherited from $K_1$ by dévissage along\nthe powers of $\\pi_E$, and on a stratum it is locally isomorphic to a constant perfect complex.\nThe difficulty is that these local isomorphisms are chosen independently at each level, and\nthey have to be made compatible before we pass to the limit. On a weakly contractible cover\nthis is a Mittag–Leffler argument, and the uniform rate it needs comes from the fact that a\nbounded complex of finite free modules over the discrete valuation ring $\\cO_E$ has finitely\ngenerated cohomology, whose torsion is killed by a fixed power of $\\pi_E$. We use the étale\nsite only at the finite levels, through [sk-thm-pe-constructible-comparison].\n\nLet $X$ be Noetherian and let $K\\in D(X_{\\mathrm{proét}},\\cO_E)$ be derived complete with\n$K_1\\in\\Dbc(X,\\mathbf F_E)$. Choose $[a,b]$ containing the cohomology of $K_1$. Then every\n$K_n$ lies in $\\Dbc(X,\\cO_E/\\pi_E^n)$ and has Tor amplitude in $[a,b]$, and $K$ has cohomology\nonly in $[a,b]$. If the cohomology sheaves of $K_1$ are locally constant on a stratum, then so\nare those of every $K_n$.",
+ "steps": [
+  {
+   "text": "The filtration of $\\cO_E/\\pi_E^n$ by the powers of $\\pi_E$ has graded pieces $\\mathbf F_E$.\nTensoring its short exact sequences with $K$ over $\\cO_{E,X}$, we get triangles\n$K_1\\to K_n\\to K_{n-1}$, up to the identification $\\pi_E^{n-1}\\cO_E/\\pi_E^n\\simeq\\mathbf F_E$.\nComplexes with constructible cohomology in $[a,b]$ are closed under extensions in triangles,\nby the long exact cohomology sequence and because constructible sheaves form a weak Serre\nsubcategory, so induction on $n$ shows that $K_n$ is bounded in $[a,b]$ with constructible\ncohomology. Locally constant finite sheaves of modules also form a weak Serre subcategory, so\nthe same induction works on a fixed stratum, and a single stratification works for all $n$. By\nthe comparison theorem for constructible sheaves ([sk-thm-pe-constructible-comparison]), these\nfinite sheaves and complexes are classical, that is, pulled back from the étale site."
+  },
+  {
+   "text": "For the Tor bound we use $K_n\\otimes^{\\mathbf L}_{\\cO_E/\\pi_E^n}\\mathbf F_E\\simeq K_1$. At an\nétale geometric point $\\bar x$, take a bounded above resolution of the stalk of $K_n$ by finite\nfree modules over the Artinian local ring $\\cO_E/\\pi_E^n$. Cancelling a two-term identity\nsummand whenever a differential matrix has a unit entry, we obtain a minimal resolution, whose\ndifferentials have entries in $(\\pi_E)$ and hence vanish after tensoring with $\\mathbf F_E$.\nSince stalks commute with derived tensor products, the minimal resolution tensored with\n$\\mathbf F_E$ computes the stalk of $K_1$ at $\\bar x$, and it has zero differential. Hence its\nrank in degree $q$ is $\\dim_{\\mathbf F_E}H^q(K_1)_{\\bar x}$. This vanishes outside $[a,b]$, and\nso the stalk has a bounded finite free resolution in $[a,b]$. This bound on stalks implies the\nsame Tor bound on the étale site, and by [sk-cor-pe-finite-tor-comparison] the bound holds on\nthe pro-étale site, for Tor against arbitrary sheaves of modules there."
+  },
+  {
+   "text": "Finally, $K=R\\varprojlim K_n$ by completeness. The Milnor sequence of [sk-prop-pe-milnor]\nimplies the lower bound and the vanishing above $b+1$. In the top degree we have\n$H^b(K_n)=H^b(K_{n+1})\\otimes_{\\cO_E/\\pi_E^{n+1}}\\cO_E/\\pi_E^n$, and hence the transition maps\nare epimorphisms. By the last assertion of [sk-prop-pe-milnor] their $R^1\\varprojlim$\nvanishes, so $H^{b+1}(K)=0$."
+  }
+ ],
+ "source": "literature/blueprint/main-20261028/blueprint/sec-proetale-coefficients/sk-lem-integral-finite-levels/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

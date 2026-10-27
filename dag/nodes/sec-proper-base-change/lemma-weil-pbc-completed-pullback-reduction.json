@@ -395,30 +395,38 @@
   "note": "Checked immutable statement, dependencies, sources, canonical constructions, all conclusion clauses, edge cases, universes, docstrings and records. Per-file scompile reproduction passed without diagnostics. No delivery errors found; no repository or branch head changed."
  },
  "blueprint_update": {
-  "snapshot": "main-20261023-1620",
-  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
   "changed": [
    "statement",
    "proof"
   ],
-  "statement": "In the notation of [det-pbc-complete-derived-completion], let $g:T'\\to T$ be a\nmorphism of schemes. The *completed inverse image* of $M\\in D(T)$ is the derived\ncompletion of the derived inverse image,\n\n$$\ng^*_{\\mathrm{comp}}M=\\widehat{g^*M}\\simeq R\\varprojlim_n\\bigl(g^*M\\otimes^{\\mathbf L}_RR/I^n\\bigr)\n\\in D(T'),\n$$\n\na functor from $D(T)$ to the derived complete objects of $D(T')$. Then:\n\n1. $g^*_{\\mathrm{comp}}M$ is derived complete, and for every $n$ there is an\n   isomorphism $(g^*_{\\mathrm{comp}}M)\\otimes^{\\mathbf L}_RR/I^n\\simeq g^*(M_n)$,\n   functorial in $M$ and compatible with the transition maps;\n2. the completion map $\\kappa_{g^*M}\\colon g^*M\\to g^*_{\\mathrm{comp}}M$ is an\n   isomorphism if and only if $g^*M$ is derived complete.",
+  "statement": "Let $g\\colon T'\\to T$ be a morphism of schemes and\n$M\\in D(T_{\\mathrm{proét}},\\mathcal O_E)$. The *completed inverse image* is\n\n$$\ng^*_{\\mathrm{comp}}M=R\\varprojlim\\bigl(g^*_{\\operatorname{Tow}}\\operatorname{red}(M)\\bigr)\n=R\\varprojlim_ng^*\\bigl(M\\otimes^{\\mathbf L}_{\\mathcal O_{E,T}}(\\mathcal O_E/\\pi_E^n)_T\\bigr)\n\\in D(T'_{\\mathrm{proét}},\\mathcal O_E),\n$$\n\nin the notation of [det-pbc-complete-derived-completion]. Then:\n\n1. there is a canonical isomorphism\n   $g^*_{\\operatorname{Tow}}\\operatorname{red}(M)\\simeq\\operatorname{red}(g^*M)$ in\n   $D(\\operatorname{Tow}(T'))$, natural in $M$, whose level $n$ is\n   $g^*(M_n)\\simeq(g^*M)_n$; hence $g^*_{\\mathrm{comp}}M\\simeq\\widehat{g^*M}$ is the\n   derived completion of $g^*M$;\n2. $g^*_{\\mathrm{comp}}M$ is derived $\\pi_E$-complete, and for every $n$ there is\n   an isomorphism $(g^*_{\\mathrm{comp}}M)\\otimes^{\\mathbf L}_{\\mathcal O_{E,T'}}\n   (\\mathcal O_E/\\pi_E^n)_{T'}\\simeq g^*M_n$, functorial in $M$ and compatible\n   with the transition maps;\n3. the completion map $\\kappa_{g^*M}\\colon g^*M\\to g^*_{\\mathrm{comp}}M$ is an\n   isomorphism if and only if $g^*M$ is derived $\\pi_E$-complete\n   ([def-pe-derived-complete]).",
   "proof": [
    {
-    "text": "(1) Derived completeness of $\\widehat{g^*M}$ and the isomorphisms\n$\\widehat{g^*M}\\otimes^{\\mathbf L}R/I^n\\simeq(g^*M)\\otimes^{\\mathbf L}R/I^n$ are\n[det-pbc-complete-derived-completion], applied to $g^*M$ on $T'$. The derived\ninverse image is $R$-linear and strong monoidal, and $g^*$ of the constant\ncoefficient ring is the constant coefficient ring, so\n$(g^*M)\\otimes^{\\mathbf L}R/I^n\\simeq g^*(M\\otimes^{\\mathbf L}R/I^n)=g^*(M_n)$,\nnaturally in $M$ and compatibly with the transitions.",
+    "text": "(1) The module pullback $g^*$ is exact ([det-prop-sfb-module-pullback-exact-main]) and\nstrong monoidal, and $g^*\\mathcal O_{E,T}=\\mathcal O_{E,T'}$ because both rings\nare pulled back from the point. Applied termwise to the cone\n$\\operatorname{red}(M)_n=M\\otimes[\\mathcal O_{E,T}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,T}]$\nit gives $g^*M\\otimes[\\mathcal O_{E,T'}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,T'}]=\n\\operatorname{red}(g^*M)_n$, compatibly with the transitions; this is an\nisomorphism of complexes of towers, natural in $M$\n([det-pbc-complete-derived-completion], notation 3; [det-pe-derived-nakayama-resolution]).\nApply $R\\varprojlim$.",
+    "uses": [
+     "det-pbc-complete-derived-completion",
+     "det-pe-derived-nakayama-resolution"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(2) By (1) and [det-pbc-complete-derived-completion] (6), applied to $g^*M$ on\n$T'$, the object $g^*_{\\mathrm{comp}}M=\\widehat{g^*M}$ is derived complete and its\nreductions are those of $g^*M$, which are $g^*M_n$ by (1), compatibly with the\ntransitions.",
     "uses": [
      "det-pbc-complete-derived-completion"
     ],
     "elementary": false
    },
    {
-    "text": "(2) This is the last assertion of [det-pbc-complete-derived-completion] for $g^*M$.",
+    "text": "(3) By (1), the map is the completion map of $g^*M$, which is an isomorphism\nexactly when $g^*M$ is derived complete ([def-pe-derived-complete]).",
     "uses": [
-     "det-pbc-complete-derived-completion"
+     "def-pe-derived-complete"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
   "date": "2026-10-26",

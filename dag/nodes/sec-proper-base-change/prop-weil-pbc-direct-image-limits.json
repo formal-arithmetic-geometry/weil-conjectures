@@ -274,23 +274,40 @@
   "note": "Section 1(B): the current CompletedTowerDirectImage exports the actual completed-coefficient direct images and their derived comparisons, but not the strict normalized tower adjunction and reduction/pullback mate used by completed exchange. Supply that equivalent normalized ringed-adjunction interface, including the evaluation equation on K-injectives, the constant/pullback conjugate limit comparison, strict projection and its quotient/completion-unit compatibility. Reuse the existing coefficient objects and universal derived pairs."
  },
  "blueprint_update": {
-  "snapshot": "main-20261023-1620",
-  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
   "changed": [
    "statement",
    "proof"
   ],
-  "statement": "In the notation of [det-pbc-complete-derived-completion], let $f:X\\to Y$ be a\nmorphism of schemes. If $K\\in D(X)$ is derived complete, then so is\n$Rf_*K\\in D(Y)$.",
+  "statement": "Let $f\\colon X\\to Y$ be a morphism of schemes, and use the tower categories,\nreduction towers and completion maps of [det-pbc-complete-derived-completion] over\n$\\mathcal O_{E,X}$ and $\\mathcal O_{E,Y}$, with $Rf_*$ the derived direct image of\n[def-weil-derived-direct-image].\n\n1. For every $M_\\bullet\\in D(\\operatorname{Tow}(X))$ the canonical map\n   $$\n    Rf_*R\\varprojlim M_\\bullet\\xrightarrow{\\sim}R\\varprojlim\\bigl(Rf_*^{\\operatorname{Tow}}M_\\bullet\\bigr)\n   $$\n   is an isomorphism, with $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\simeq Rf_*M_n$.\n   Under the Milnor cones (derived limits in the sense of [def-weil-derived-limit])\n   it is induced by $Rf_*\\prod_nM_n\\simeq\\prod_nRf_*M_n$ and its commutation with $1-T$.\n2. For every $K\\in D(X_{\\mathrm{proét}},\\mathcal O_E)$ there is a canonical\n   isomorphism\n   $$\n    \\operatorname{red}(Rf_*K)\\xrightarrow{\\sim}Rf_*^{\\operatorname{Tow}}\\operatorname{red}(K)\n   $$\n   in $D(\\operatorname{Tow}(Y))$, natural in $K$. Its level $n$ is the\n   projection-formula isomorphism\n   $(Rf_*K)\\otimes^{\\mathbf L}_{\\mathcal O_{E,Y}}(\\mathcal O_E/\\pi_E^n)_Y\\xrightarrow{\\sim}\n   Rf_*K_n$ of [def-weil-pbc-projection-formula-map], so these isomorphisms commute\n   with the reductions $(\\mathcal O_E/\\pi_E^{n+1})\\to(\\mathcal O_E/\\pi_E^n)$.\n3. Under (1) and (2), the completion map of $Rf_*K$ is\n   $$\n    Rf_*K\\xrightarrow{Rf_*\\kappa_K}Rf_*R\\varprojlim\\operatorname{red}(K)\n    \\xrightarrow{\\sim}R\\varprojlim Rf_*^{\\operatorname{Tow}}\\operatorname{red}(K)\n    \\simeq R\\varprojlim\\operatorname{red}(Rf_*K).\n   $$\n   In particular, if $K$ is derived $\\pi_E$-complete ([def-pe-derived-complete]),\n   then so is $Rf_*K$, and $Rf_*K\\simeq R\\varprojlim_nRf_*K_n$.",
   "proof": [
    {
-    "text": "We use the characterization of derived completeness by right orthogonality in\n[det-pbc-complete-derived-completion]. Let $Z\\in D(Y)$ be an object on which\n$\\varpi$ acts invertibly and $u:Z\\to Rf_*K$ a morphism. Under the adjunction\n$f^*\\dashv Rf_*$ between the derived inverse and direct images, $u$ corresponds\nto $u^\\flat:f^*Z\\to K$. The functor $f^*$ is $R$-linear, so $\\varpi$ acts\ninvertibly on $f^*Z$, and $u^\\flat=0$ because $K$ is derived complete. Hence\n$u=0$, and $Rf_*K$ is derived complete.",
+    "text": "(1) This is [det-pbc-complete-derived-completion] (3) and (4). For the description\nby Milnor cones: $Rf_*$ is a right adjoint, so it commutes with the products\n$\\prod_nM_n$ (computed termwise, [det-pe-products-exact]); it is exact, so it\ncarries the Milnor cone of $1-T$ to the Milnor cone of $1-T$ for the tower\n$(Rf_*M_n)_n$.",
+    "uses": [
+     "det-pbc-complete-derived-completion",
+     "det-pe-products-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(2) Choose a K-injective resolution $K\\to I$ by $\\mathcal O_{E,X}$-modules.\nThen $f_*I$ computes $Rf_*K$, and since $f_*$ is additive and applied\ntermwise, $\\operatorname{red}(f_*I)=f_*^{\\operatorname{Tow}}\\operatorname{red}(I)$\nas complexes of towers ([det-pbc-complete-derived-completion], notation 3). Compose with the\ncanonical map\n$f_*^{\\operatorname{Tow}}\\operatorname{red}(I)\\to Rf_*^{\\operatorname{Tow}}\\operatorname{red}(I)$.\nAt level $n$ this is $f_*\\operatorname{Cone}(\\pi_E^n\\colon I\\to I)\\to\nRf_*\\operatorname{Cone}(\\pi_E^n\\colon I\\to I)$\n([det-pbc-complete-derived-completion] (3)), an isomorphism because a cone of\nK-injective complexes is K-injective. By\n[det-pbc-complete-derived-completion] (2) the composite is an isomorphism in\n$D(\\operatorname{Tow}(Y))$. Its level $n$ is the map\n$f_*I\\otimes[\\mathcal O_{E,Y}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,Y}]\\to\nf_*(I\\otimes[\\mathcal O_{E,X}\\xrightarrow{\\pi_E^n}\\mathcal O_{E,X}])$, which is the\nprojection-formula map $\\pi_{f,K,P}$ of [def-weil-pbc-projection-formula-map] for\n$P=(\\mathcal O_E/\\pi_E^n)_Y$ computed with the two-term free resolution\n([det-pe-derived-nakayama-resolution]): for the finite free terms of that resolution\nthe map is the identity $f_*I\\otimes\\mathcal O_{E,Y}^{\\oplus r}=f_*(I\\otimes\\mathcal O_{E,X}^{\\oplus r})$\ntermwise, and the differentials $\\pi_E^n$ correspond.\nNaturality in $K$ follows from functoriality of K-injective resolutions.",
+    "uses": [
+     "det-pbc-complete-derived-completion",
+     "def-weil-pbc-projection-formula-map",
+     "det-pe-derived-nakayama-resolution"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(3) The completion map is induced by the morphism of towers\n$c(N)\\to\\operatorname{red}(N)$ ([det-pbc-complete-derived-completion], notation 4). For\n$N=f_*I$ this morphism is $f_*^{\\operatorname{Tow}}$ applied to $c(I)\\to\\operatorname{red}(I)$,\nand $f_*^{\\operatorname{Tow}}c(I)=c(f_*I)$. Applying $R\\varprojlim$ and (1), (2)\ngives the displayed factorization. If $\\kappa_K$ is an isomorphism, every arrow\nis an isomorphism, so $\\kappa_{Rf_*K}$ is one; and then\n$Rf_*K\\simeq R\\varprojlim\\operatorname{red}(Rf_*K)\\simeq R\\varprojlim_nRf_*K_n$.",
     "uses": [
      "det-pbc-complete-derived-completion"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; a worker who touches the node follows it"
  },
  "tool_uses": [
   "lem-weil-proetale-countable-products-exact",

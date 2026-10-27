@@ -291,5 +291,39 @@
   "landing": "20261024T214903-L-727387",
   "kind": "interface",
   "note": "independent cc review: delivered item proof, new residue lemma statement, namespace repair and its forced CFME adaptation against the clone, unit record, finite theorem and node records; sandbox compile of all delivered modules + 10 of 11 direct importers + axiom probe"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $E/\\mathbf Q_\\ell$ be finite and $p\\colon X\\to Y$ proper between standing schemes.\n\n1. For $K\\in\\Dbc(X,\\cO_E)$, $Rp_*K$ is derived $\\pi_E$-complete, and\n   $(Rp_*K)\\otimes^{\\mathbf L}\\cO_{E,Y}/\\pi_E\\simeq Rp_*(K\\otimes^{\\mathbf L}\\cO_{E,X}/\\pi_E)$;\n   hence $Rp_*K\\in\\Dbc(Y,\\cO_E)$.\n2. (Derived Nakayama.) A derived $\\pi_E$-complete $C$ with $C\\otimes^{\\mathbf L}\\cO_E/\\pi_E=0$ is\n   zero.\n3. The proper base change map and the projection formula map are isomorphisms for\n   $K\\in\\Dbc(X,\\cO_E)$, $M\\in\\Dbc(Y,\\cO_E)$.",
+  "proof": [
+   {
+    "text": "(1) $K$ is derived complete if and only if\n$\\operatorname{R\\lim}(\\cdots\\xrightarrow{\\pi_E}K\\xrightarrow{\\pi_E}K)=0$. The functor $Rp_*$ is\na right adjoint, so it commutes with $\\operatorname{R\\lim}$, and it is $\\cO_E$-linear, so it\ncarries this tower to the tower of multiplication by $\\pi_E$ on $Rp_*K$; hence $Rp_*K$ is\nderived complete. Reduction: $K\\otimes^{\\mathbf L}\\cO_{E,X}/\\pi_E=\\operatorname{cone}(K\\xrightarrow{\\pi_E}K)$\nsince $\\cO_{E,X}$ is $\\pi_E$-torsion free, and the exact functor $Rp_*$ preserves cones and is\n$\\cO_E$-linear. The reduction $\\bar K$ has torsion coefficients and is classical\n(\\stacks{09B1}), so $Rp_*\\bar K$ is $\\nu^*$ of the étale direct image (\\stacks{09A6}), which is\nbounded constructible by [det-thm-sfb-proper-base-change-finite] (1) with $A=\\cO_E/\\pi_E$. By\n[sk-prop-integral-criterion] (equivalently [sk-lem-integral-models] (2)),\n$Rp_*K\\in\\Dbc(Y,\\cO_E)$.",
+    "uses": [
+     "det-thm-sfb-proper-base-change-finite",
+     "sk-lem-integral-models"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(2) This is [sk-lem-pe-derived-nakayama]. Directly: the exact sequences\n$0\\to\\cO/\\pi_E^{n-1}\\to\\cO/\\pi_E^n\\to\\cO/\\pi_E\\to0$ give triangles showing by induction that\n$C\\otimes^{\\mathbf L}\\cO/\\pi_E^n=0$ for all $n$; then $C\\simeq\\operatorname{R\\lim}_nC\\otimes^{\\mathbf L}\\cO/\\pi_E^n=0$.",
+    "uses": [
+     "sk-lem-pe-derived-nakayama"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(3) The base change map $g^*Rp_*K\\to Rp'_*g'^*K$ has derived complete source and target: $Rp_*K$\nand $Rp'_*g'^*K$ are in $\\Dbc$ by (1) and [sk-lem-integral-models] (3), and $g^*$ preserves\n$\\Dbc(-,\\cO_E)$ by [sk-lem-integral-models] (3). Similarly for the projection formula map, using\nthat $\\otimes^{\\mathbf L}$ and $p^*$ preserve $\\Dbc(-,\\cO_E)$. All functors involved are exact\nand $\\cO_E$-linear, so they commute with reduction modulo $\\pi_E$ (the cone of $\\pi_E$), and\nthe reduction of each canonical map is the corresponding canonical map for the torsion\nreductions, which is an isomorphism by [det-thm-sfb-proper-base-change-finite] (2), (3) with\n$A=\\cO_E/\\pi_E$. So the cone of each map is derived complete (cones of maps between complete\nobjects are complete) with zero reduction, hence zero by (2).",
+    "uses": [
+     "sk-lem-integral-models",
+     "det-thm-sfb-proper-base-change-finite"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; a worker who touches the node follows it"
  }
 }

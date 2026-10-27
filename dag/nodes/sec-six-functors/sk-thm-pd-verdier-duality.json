@@ -124,5 +124,85 @@
   "same_as": null
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-pd-verdier-duality"
+ "unit": "sk-thm-pd-verdier-duality",
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Here $\\mathbb D_X$ and $\\delta_K$ are the Verdier dual and the double-dual morphism of\n[sk-def-ops].\n\nFor every admissible coefficient ring $\\Lambda$ and every scheme $X$,\n\n$$\n \\delta_K:K\\xrightarrow{\\sim}\\mathbb D_X\\mathbb D_XK\n \\qquad(K\\in\\Dctf(X,\\Lambda)).\n$$\n\nThus $\\mathbb D_X$ is an exact anti-equivalence of\n$\\Dctf(X,\\Lambda)$ with itself.",
+  "proof": [
+   {
+    "text": "The key case is finite $A$ over an algebraically closed field; the\nother coefficient rings and the finite base field follow by formal\nreductions at the end. In the key case induct on $d=\\dim X$,\nsimultaneously over all algebraically closed fields of characteristic\ndifferent from $\\ell$, since the induction step passes to a\ngeometric generic fibre over $\\overline{k(t)}$. In dimension\nzero, nilpotent invariance reduces to finitely many geometric points;\n[sk-lem-finite] proves the result.",
+    "uses": [
+     "sk-lem-finite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The double-dual morphism commutes with restriction to opens: restriction of\ninternal Hom to an open slice and restriction of the exceptional\nadjunction identify all its evaluation maps. Choose a compactification\n$j:X\\hookrightarrow\\overline X$, replace the target by the closure\nof $X$, and extend $K$ by zero. The target has dimension\n$d$, and $j_!K$ is in $\\Dctf(\\overline X,A)$.\nRestriction of its double-dual morphism is $\\delta_K$. It\ntherefore suffices to treat proper $X$ of dimension $d$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $\\Delta=\\operatorname{Cone}(\\delta_K)$. It is bounded\nconstructible by [sk-lem-pd-preservation]. If $x$ is a\nnonclosed point of $X$, choose an affine neighbourhood and an\nalgebra generator $t$ whose image in $\\kappa(x)$ is\ntranscendental over $k$. Such a generator exists since a\nnonclosed point has positive transcendence degree. The induced map\nto $\\mathbf A^1_k$ sends $x$ to its generic point. Every\ncomponent meeting that generic fibre loses one dimension, so the\ngeometric generic fibre has dimension at most $d-1$.\n[sk-lem-pd-generic-restriction] and induction over\n$\\overline{k(t)}$ show that $\\Delta$ has zero geometric\nstalk above $x$. Every nonclosed point is treated this way.",
+    "uses": [
+     "sk-lem-pd-preservation",
+     "sk-lem-pd-generic-restriction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A constructible subset of a finite-type Noetherian scheme containing\nonly closed points is finite: each positive-dimensional locally\nclosed piece would contain a nonclosed generic point. The finitely\nmany cohomology sheaves of $\\Delta$ therefore have support in\none finite set of closed points. These two paragraphs are\n[det-pd-biduality-finite-support].",
+    "uses": [
+     "det-pd-biduality-finite-support"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Proper exchange in [sk-thm-sf-tensor-hom], applied to\n$a_X$, identifies $R\\Gamma(X,\\delta_K)$ with the double-dual\nmorphism of the perfect complex $R\\Gamma(X,K)$, an isomorphism by\n[sk-lem-finite]. Hence\n$R\\Gamma(X,\\Delta)=0$. A finite-support sheaf over an\nalgebraically closed field has exact global sections, equal to the\nfinite sum of its stalks. The bounded cohomology spectral sequence\nthus gives\n\n$$\n 0=H^mR\\Gamma(X,\\Delta)\n   =\\bigoplus_x\\mathcal H^m(\\Delta)_{\\bar x}.\n$$",
+    "uses": [
+     "sk-thm-sf-tensor-hom",
+     "sk-lem-finite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "All these stalks vanish, proving the finite-coefficient result\n([det-pd-biduality-finite-algclosed]).",
+    "uses": [
+     "det-pd-biduality-finite-algclosed"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a finite base field, extend to its algebraic closure. This\nextension is a filtered limit of finite étale extensions; the\nsame continuity and evaluation calculation as in\n[sk-lem-pd-generic-restriction] commutes duality with that\npullback. It is conservative on constructible classical complexes,\nso the finite result descends.",
+    "uses": [
+     "sk-lem-pd-generic-restriction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The double-dual map $\\delta:\\mathrm{id}\\to\\mathbb D_X\\mathbb D_X$ is a natural transformation of\nexact functors, built from $a_X^!$, internal Hom and evaluation, and [sk-prop-scalar-six]\nidentifies its extensions of scalars. [sk-prop-reduction-to-finite] therefore extends the finite\ncase to every admissible $\\Lambda$. In detail:",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For $\\mathcal O_E$, [sk-prop-scalar-six] identifies\nthe reduction of $\\delta_K$ modulo a uniformizer with the\nfinite-coefficient double-dual morphism, because it identifies\n$a_X^!$, internal Hom and their evaluations. Its cone belongs\nto the derived-complete constructible category and has zero residue\nreduction. Derived Nakayama, [sk-lem-pe-derived-nakayama], makes\nthe cone zero. Taking $E=\\Ql$ includes $\\Zl$.",
+    "uses": [
+     "sk-lem-pe-derived-nakayama"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For $E$, [sk-lem-integral-models](4) builds every object\nof $\\Dbc(X,E)$ by finitely many cones and shifts from objects\n$(a_!L_0)[1/\\ell]$ with $a_!L_0$ integral. Together with\n[sk-prop-scalar-six], this reduces the claim for $\\delta$\nto the integral result. The assertion is stable under finite cones, shifts\nand retracts, since the double-dual functor is exact.\nFinally $K$, its duality maps and their identities descend to a\ncommon finite coefficient field by [sk-thm-sfb-qlbar-two-colimit];\nextension of scalars proves the $\\overline{\\mathbf Q}_\\ell$-case.\nThe coefficient reductions are [det-pd-biduality-coefficients].",
+    "uses": [
+     "sk-lem-integral-models",
+     "sk-thm-sfb-qlbar-two-colimit"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; a worker who touches the node follows it"
+ }
 }

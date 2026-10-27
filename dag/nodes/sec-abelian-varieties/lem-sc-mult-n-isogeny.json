@@ -184,5 +184,31 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mni1857 (reviewer sub-agent of L); spot-checked: Read whole packet. Step 1 = statement of lem-sc-mult-n-finite-kernel exactly (finite [n], finite A[n]). Step 2: hypotheses of lem-sc-image-subgroup (A proper, A separated finite type), finite factorization A->H on affines, lem-sc-finite-surjective-dimension hypotheses (nonempty finite type), chain-extension strict drop, reducedness kills full-support ideal: correct. No class (b)/cycle: lem-sc-mult-n-finite-flat and lem-sc-isogeny-facts both cite lem-sc-mult-n-isogeny in their proofs, so the item is their input, not a restatement; neither is cited here; lem-sc-image-subgroup and lem-sc-mult-n-finite-kernel do not depend on the item. New node lem-sc-finite-surjective-dimension: true, real lemma (global version of 00OK plus finiteness via 00OY), not a one-step special case of lem-weil-pbc-integral-injective-dimension-equal. My search: {tool: leanfinder, query: 'finite surjective morphism of schemes topological Krull dimension equal', verdict: no match (only ringKrullDim_le_of_surjective, Order.krullDim_le_of_strictComono_and_surj)}. Second reading by J1: no missed fault found."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $A$ be an abelian variety\nover a field $k$, and let $n\\geq1$. Then the map $[n]$ of\n[def-sc-mult-n] is a surjective homomorphism of\ngroup schemes, and its kernel\n$A[n]$ is a finite group scheme over $k$; in particular $\\dim A[n]=0$.",
+  "proof": [
+   {
+    "text": "*Reference: Stacks Project, Groupoid Schemes, Proposition\n39.9.11 (3) and (5), [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP), whose proof is Lemma 39.9.8,\n[Tag 0BFG](https://stacks.math.columbia.edu/tag/0BFG).*\nBy [lem-sc-mult-n-finite-kernel], $[n]$ is a finite homomorphism of group\nschemes and its kernel $A[n]$ is a finite group scheme over $k$.",
+    "uses": [
+     "lem-sc-mult-n-finite-kernel"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Surjectivity.* The image $H:=[n](A)\\subseteq A$ is a\nclosed subgroup scheme of $A$ by [lem-sc-image-subgroup] (the\nsource $A$ is proper over $k$ and the target $A$ is separated of\nfinite type over $k$), applied to the homomorphism $[n]$ of\n[lem-sc-mult-n-homomorphism]. Since $[n]$ is finite, its fibres\nhave dimension zero, and the dimension formula for the surjective\nmorphism $A\\to H$ gives\n$\\dim H=\\dim A-\\dim A[n]=\\dim A$. Thus $H\\subseteq A$ is a\nclosed subscheme of the irreducible scheme $A$ with\n$\\dim H=\\dim A$; the reduced subscheme\n$H_{\\mathrm{red}}\\subseteq A$ is then a closed subscheme of the\nreduced irreducible scheme $A$ of the same dimension, hence\n$H_{\\mathrm{red}}=A$, and therefore $H=A$. So\n$[n]:A\\to A$ is surjective.",
+    "uses": [
+     "lem-sc-image-subgroup",
+     "lem-sc-mult-n-homomorphism"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; the node is proved in Lean: recorded 2026-10-28, not reopened"
  }
 }

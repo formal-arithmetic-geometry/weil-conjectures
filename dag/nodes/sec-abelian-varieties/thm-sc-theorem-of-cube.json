@@ -127,5 +127,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-toc2456 (reviewer sub-agent of L); spot-checked: Item statement = Stacks 0BFE exactly (C4 ok). Step 1 follows 0BFE's route: M alternating product, three unit slices cancel (checked; e^*L trivial on the point). Hypotheses of 0BF4 over S=Spec k checked: X=Y=A proper, geometrically integral via lem-sc-abelian-variety-characterization, x=y=e unit section, Z=A connected, z=e. No seesaw/cube node existed (grep dag/nodes), no restatement. FIX more, RETURN less: (1) C1: the general theorem of the cube (Tag 0BF4), the step's only non-elementary input, was cited by Stacks tag only; added statement-only node lem-sc-general-theorem-of-cube (0BF4 with S=Spec k, unsplit, Mathlib grep recorded: no match) and cited it in step 1 uses/proof_deps; the M1 report's claim that it restates a clause of the item is wrong (it is the general theorem, the item is its application). (2) step 1 said 'A is connected, so it has a k-point (the unit)'; the k-point is the unit section of the group scheme, connectedness is hypothesis (4) on Z; text corrected, flat/fp clause dropped as the new node is over a field.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $A$ be an abelian variety\nover a field $k$, and let $\\mathcal L$ be an\ninvertible $\\mathcal O_A$-module. For $1\\leq i_1<\\cdots<i_t\\leq3$ let\n$m_{i_1,\\dots,i_t}:A\\times_kA\\times_kA\\to A$ be the partial sum\nmap $(x_1,x_2,x_3)\\mapsto x_{i_1}+\\cdots+x_{i_t}$. Then\n\n$$\nm_{123}^*\\mathcal L\\otimes m_1^*\\mathcal L\\otimes m_2^*\\mathcal L\n\\otimes m_3^*\\mathcal L\n\\cong m_{12}^*\\mathcal L\\otimes m_{13}^*\\mathcal L\\otimes\nm_{23}^*\\mathcal L\n$$\n\non $A\\times_kA\\times_kA$.",
+  "proof": [
+   {
+    "text": "*Reference: Stacks Project, Groupoid Schemes, Lemma 39.9.6,\n[Tag 0BFE](https://stacks.math.columbia.edu/tag/0BFE).* Apply\nthe general theorem of the cube ([thm-av-cube-general]; More on Morphisms, Theorem\n37.33.8, [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4)) to the difference\n\n$$\n\\mathcal M=m_{123}^*\\mathcal L\\otimes m_1^*\\mathcal L\\otimes\nm_2^*\\mathcal L\\otimes m_3^*\\mathcal L\\otimes\nm_{12}^*\\mathcal L^{-1}\\otimes m_{13}^*\\mathcal L^{-1}\\otimes\nm_{23}^*\\mathcal L^{-1}\n$$\n\nwith $X=Y=Z=A$ over $S=\\operatorname{Spec}k$ and the unit\nsections $x=y=e$. The hypotheses of [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4) hold:\n$A\\to\\operatorname{Spec}k$ is flat, proper and of finite\npresentation with geometrically integral fibres ($A$ is smooth,\nproper and connected, hence geometrically integral by [lem-sc-abelian-variety-characterization] and Groupoid\nSchemes, Remark 39.9.12,\n[Tag 0H2U](https://stacks.math.columbia.edu/tag/0H2U)), and\n$A$ is connected, so it has a $k$-point (the unit). On\n$A\\times A\\times e$ the restriction of $\\mathcal M$ is\n\n$$\nn_{12}^*\\mathcal L\\otimes n_1^*\\mathcal L\\otimes n_2^*\\mathcal\nL\\otimes e^*\\mathcal L\\otimes n_{12}^*\\mathcal L^{-1}\\otimes\nn_1^*\\mathcal L^{-1}\\otimes n_2^*\\mathcal L^{-1}\\cong\\mathcal O,\n$$\n\nwhere $n_{i_1,\\dots,i_t}(x_1,x_2)=x_{i_1}+\\cdots+x_{i_t}$ and\n$e^*\\mathcal L\\cong\\mathcal O$ (an invertible module on the\npoint); the same computation on $A\\times e\\times A$ and\n$e\\times A\\times A$ shows $\\mathcal M$ trivial on the slices\nrequired by [Tag 0BF4](https://stacks.math.columbia.edu/tag/0BF4), and $\\mathcal M$ is trivial on the fibre\n$A\\times A\\times e$. Hence $\\mathcal M\\cong\\mathcal O$, which\nis the displayed relation.",
+    "uses": [
+     "thm-av-cube-general",
+     "lem-sc-abelian-variety-characterization"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; the node is proved in Lean: recorded 2026-10-28, not reopened"
  }
 }

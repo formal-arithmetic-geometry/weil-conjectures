@@ -425,5 +425,41 @@
   "landing": "20261027T094521-L-238190",
   "kind": "interface",
   "note": "independent cc review: item proof vs det-lem-int-ext-bound node and blueprint para (2); two new sorry statements vs their nodes and source; importer IntegralConstructibleExt compiled against the delivered modules"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $a=i\\circ u:S\\hookrightarrow X$ and $L$ be as in\n[det-lem-int-ext-formula], and let $j$ be the open immersion complementary to\n$i$. Then\n\n$$\n\\Ext^q_X(a_!L,N)=0\\qquad\\text{for }q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+3\n\\text{ and all }N\\in\\Cons(X,\\mathcal O_E).\n$$\n\nConsequently every $C\\in\\Cons(X,\\mathcal O_E)$ has an integer $d_C$ with\n$\\Ext^q(C,N)=0$ for $q>d_C$ and all $N\\in\\Cons(X,\\mathcal O_E)$.",
+  "proof": [
+   {
+    "text": "Write $N_n=N\\otimes^{\\mathbf L}\\mathcal O_{E,X}/\\pi_E^n$. By the length one\nresolution of $\\mathcal O_E/\\pi_E^n$, $N_n$ is the cone of $\\pi_E^n$ on $N$, a\nconstructible torsion complex in degrees $[-1,0]$, and\n$N\\simeq R\\varprojlim_nN_n$, since $N$ is derived complete\n([sk-prop-integral-criterion]). The\ncohomological dimensions $\\operatorname{cd}_\\ell(j)$ and\n$\\operatorname{cd}_\\ell(S)$ of [sk-def-cd] are finite and depend only on $j$\nand $S$. Apply the formula of [det-lem-int-ext-formula](2) to $N_n$:",
+    "uses": [
+     "sk-def-cd",
+     "det-lem-int-ext-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "- $R\\underline\\Gamma_ZN_n$ is $i^*$ of the fibre of $N_n\\to Rj_*j^*N_n$;\n  since $Rj_*$ of a torsion complex in degrees $[-1,0]$ has cohomology in\n  degrees $\\le\\operatorname{cd}_\\ell(j)$, the fibre has cohomology in degrees\n  $\\le\\operatorname{cd}_\\ell(j)+1$;\n- tensoring with $L^\\vee$, of Tor amplitude $[0,1]$, raises the upper bound\n  by at most one, and $u^*$ is exact;\n- $R\\Gamma(S,-)$ raises it by at most $\\operatorname{cd}_\\ell(S)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "So $R\\operatorname{Hom}_X(a_!L,N_n)$ has cohomology in degrees\n$\\le\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$. All functors\ninvolved ($R\\underline\\Gamma_Z$, i.e. $Rj_*$, $j^*$ and closed inverse image\n(Stacks, Tag 09AA), open restriction, derived sections, and tensoring with the\ndualizable $L^\\vee$) commute with derived inverse limits, so\n$R\\operatorname{Hom}_X(a_!L,N)\\simeq R\\varprojlim_nR\\operatorname{Hom}_X(a_!L,N_n)$.\nThe derived limit of a countable tower raises the upper bound by at most one\n(Milnor sequence, Stacks, Tag 08TB); this applies because the complexes and\ntransition maps can be taken in the abelian category of inverse systems\nbefore deriving. Hence the vanishing for\n$q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+3$; the bound depends only\non $a$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For general $C\\in\\Cons(X,\\mathcal O_E)$, filter $C$ as in\n[det-lem-int-ext-formula](1) by finitely many pieces $a_!L$ in degree $0$.\nThe long exact Ext sequences show that $d_C$, the maximum of the bounds of\nthe pieces, works.",
+    "uses": [
+     "det-lem-int-ext-formula"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,48 @@
+{
+ "id": "sk-prop-integral-local-structure",
+ "kind": "unit",
+ "chapter": "sec-proetale-coefficients",
+ "title": "Integral local models",
+ "lean": [],
+ "uses": [
+  "sk-lem-integral-finite-levels",
+  "sk-lem-integral-scalar-towers",
+  "sk-prop-sf-open-closed-triangle",
+  "sk-prop-pe-milnor",
+  "sk-lem-pe-derived-nakayama"
+ ],
+ "statement": "Let $X$ be Noetherian and let $K\\in D(X_{\\mathrm{proét}},\\cO_E)$ be derived complete with\n$K_1\\in\\Dbc(X,\\mathbf F_E)$. Then there is a finite stratification of $X$ such that on each\nstratum $S$, pro-étale locally,\n\n$$\nK|_S\\simeq\\cO_{E,S}\\otimes_{\\cO_E}P^\\bullet\n$$\n\nfor a bounded complex $P^\\bullet$ of finite free $\\cO_E$-modules.",
+ "steps": [
+  {
+   "text": "We first find local models for each $K_n$ separately and then make them compatible. Choose a\nfinite stratification on which all cohomology sheaves of $K_1$ are locally constant, and refine\nit by connected components. There are finitely many of these, since the strata are Noetherian.\nRestriction to an open subscheme preserves limits, and so does restriction to a closed\nsubscheme on the pro-étale site ([sk-prop-sf-open-closed-triangle]), and both are exact and\ncommute with the two-term cones defining the reductions. Hence for every stratum $S$ the\nrestriction $K|_S$ is again derived complete with constructible first reduction. Fix a\nconnected stratum $S$."
+  },
+  {
+   "text": "*Local models at each finite level.* By [sk-lem-integral-finite-levels] each $K_n|_S$ is\nclassical, of finite Tor amplitude, with locally constant finite cohomology. We work on\n$S_{\\mathrm{ét}}$ and fix a geometric point $\\bar s$. The stalk complex at $\\bar s$ has a\nminimal finite free model $M_n$ in the common interval $[a,b]$. A finite free model of the\nstalk at any geometric point $\\bar t$ extends to an étale neighbourhood of $\\bar t$. Indeed,\nthe stalk isomorphism is a section at $\\bar t$ of the zeroth cohomology sheaf of the derived\ninternal Hom out of the constant finite free complex, and we may extend this section and lift\nit locally to a derived map. The cone has bounded locally constant finite cohomology and zero\nstalk at $\\bar t$, so its finitely many cohomology sheaves vanish after shrinking the\nneighbourhood. Thus $K_n$ is locally isomorphic to a constant perfect complex. For each\nisomorphism class of such complexes, the union of the neighbourhoods on which $K_n$ has that\nmodel is open, and different classes give disjoint open sets, since different classes cannot\noccur at the same point. As $S$ is connected, $K_n|_S$ is everywhere locally isomorphic to the\nconstant complex $(M_n)_S$; compare (Stacks Project, Tag 09BI)."
+  },
+  {
+   "text": "On stalks at $\\bar s$, the reduction maps $K_{n+1}\\to K_n$ induce maps $M_{n+1}\\to M_n$\nsatisfying the derived reduction identities, because the étale stalk functor is exact and\nsymmetric monoidal. By [sk-lem-integral-scalar-towers] (1) there is a bounded finite free\ncomplex $P^\\bullet$ with $P^\\bullet/\\pi_E^n\\simeq M_n$. Back on $S_{\\mathrm{proét}}$, we get for\neach $n$ local isomorphisms $(P^\\bullet/\\pi_E^n)_S\\simeq K_n|_S$ in\n$D(S_{\\mathrm{proét}},\\cO_E/\\pi_E^n)$. They are chosen separately for each $n$, and we now make\nthem compatible."
+  },
+  {
+   "text": "*Compatible isomorphisms on a weakly contractible cover.* Choose an affine weakly contractible\ncover $W\\to S$. For each $n$, the local isomorphism becomes an isomorphism\n$(P^\\bullet/\\pi_E^n)_W\\simeq K_n|_W$ on all of $W$, since by weak contractibility a covering by\ntrivializing charts splits. Consider the tower of complexes\n\n$$\n\\cHom_{(\\cO_E/\\pi_E^n)_W}\\bigl((P^\\bullet/\\pi_E^n)_W,K_n|_W\\bigr)\n\\in D(W_{\\mathrm{proét}},\\cO_E/\\pi_E^n),\n$$\n\nwith transition maps induced by the derived reduction maps of $K$, and the tower of groups\n$\\operatorname{Hom}_{D(W_{\\mathrm{proét}},\\cO_E/\\pi_E^n)}\\bigl((P^\\bullet/\\pi_E^n)_W,K_n|_W\\bigr)$\nobtained by applying $H^0R\\Gamma(W,-)$. Since $P^\\bullet$ is finite free, the first tower is\nthe reduction tower of\n$(\\cO_{E,W}\\otimes_{\\cO_E}(P^\\bullet)^\\vee)\\otimes^{\\mathbf L}_{\\cO_{E,W}}K|_W$."
+  },
+  {
+   "text": "These Hom groups can be infinite, so the Mittag–Leffler condition has to come from a uniform\nbound. Let $Q^\\bullet=(P^\\bullet)^\\vee\\otimes_{\\cO_E}P^\\bullet$ and choose $e$ such that\n$\\pi_E^e$ kills the torsion of $H^1(Q^\\bullet)$. Let $N\\ge m\\ge n+e$ and choose one isomorphism\n$(P^\\bullet/\\pi_E^N)_W\\simeq K_N|_W$. Its reductions to levels $m$ and $n$ identify the three\ninternal Hom complexes at levels $N\\to m\\to n$ with the constant complexes\n$Q^\\bullet/\\pi_E^N\\to Q^\\bullet/\\pi_E^m\\to Q^\\bullet/\\pi_E^n$. Their zeroth cohomology sheaves\nare therefore the constant sheaves on the groups\n$H^0(Q^\\bullet/\\pi_E^N)\\to H^0(Q^\\bullet/\\pi_E^m)\\to H^0(Q^\\bullet/\\pi_E^n)$, and by\n[sk-lem-integral-scalar-towers] (2) the images from levels $N$ and $m$ at level $n$ agree, as\nsubsheaves. Since $W$ is weakly contractible, taking sections over $W$ is exact. Hence it\ncommutes with taking cohomology and images, and the images in the Hom group at level $n$ from\nlevels $N$ and $m$ coincide as well. Since $e$ does not depend on $n$, $m$ or $N$, this is the\nMittag–Leffler condition: for every $n$ the images at level $n$ are constant from level $n+e$\non."
+  },
+  {
+   "text": "*The integral isomorphism.* Each Hom group contains an isomorphism, and the reduction of an\nisomorphism to level $1$ is again an isomorphism. The stable image at level $1$ is the image\nfrom level $1+e$, so it contains an invertible class, and by the Mittag–Leffler property it\nlifts to a compatible family $(\\varphi_n)_n$ in the inverse limit of the Hom groups. The\nMilnor sequence gives a surjection\n\n$$\n\\begin{aligned}\n&H^0R\\varprojlim_nR\\Gamma\\bigl(W,\\cHom_{(\\cO_E/\\pi_E^n)_W}((P^\\bullet/\\pi_E^n)_W,K_n|_W)\\bigr)\\\\\n&\\qquad\\longrightarrow\n\\varprojlim_n\\operatorname{Hom}_{D(W_{\\mathrm{proét}},\\cO_E/\\pi_E^n)}\\bigl((P^\\bullet/\\pi_E^n)_W,K_n|_W\\bigr),\n\\end{aligned}\n$$\n\nwhose source is\n$\\operatorname{Hom}_{D(W_{\\mathrm{proét}},\\cO_E)}(\\cO_{E,W}\\otimes_{\\cO_E}P^\\bullet,K|_W)$. This\nholds because derived sections commute with inverse limits, $K|_W$ is complete, and tensoring\nwith the finite free dual of $P^\\bullet$ commutes with inverse limits. Consequently\n$(\\varphi_n)$ lifts to a morphism $\\cO_{E,W}\\otimes_{\\cO_E}P^\\bullet\\to K|_W$ whose first\nreduction is an isomorphism. Both objects are complete. For the source this follows termwise\nfrom $\\cO_{E,W}=\\varprojlim(\\cO_E/\\pi_E^n)_W$, since the transition maps are epimorphisms and so\nthis limit agrees with the derived limit by [sk-prop-pe-milnor]. By derived Nakayama\n([sk-lem-pe-derived-nakayama]), the morphism is an isomorphism."
+  }
+ ],
+ "source": "literature/blueprint/main-20261028/blueprint/sec-proetale-coefficients/sk-prop-integral-local-structure/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

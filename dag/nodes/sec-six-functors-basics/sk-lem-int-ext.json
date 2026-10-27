@@ -201,5 +201,59 @@
   "landing": "20261019T005308-L-2749693",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
+  "statement": "1. For $C\\in\\Dbc(X,\\mathcal O_E)$, the functors\n   $\\Hom_{D(X_{\\mathrm{proét}},\\mathcal O_E)}(C,-[q])$ commute with filtered\n   colimits of complexes with a common lower bound.\n2. For each $C\\in\\Cons(X,\\mathcal O_E)$ there is an integer $d_C$ such that\n   $$\n   \\Ext^q_{\\mathcal O_{E,X}}(C,N)=0\n   \\qquad\\text{for all }q>d_C\\text{ and all }N\\in\\Cons(X,\\mathcal O_E).\n   $$",
+  "proof": [
+   {
+    "text": "Both statements reduce, by the long exact Ext sequences of a finite\nfiltration of $C$, to $C=a_!L$, where $a=i\\circ u:S\\hookrightarrow X$ is the\ninclusion of a stratum, with $u:S\\hookrightarrow Z$ open and\n$i:Z\\hookrightarrow X$ closed, and $L$ is locally the completion of a finitely\ngenerated $\\mathcal O_E$-module. Let $j$ be the open immersion complementary to\n$i$. [sk-lem-formal-closed-support] holds for $\\mathcal O_{E,X}$-modules with\nthe same proof. Tensor–Hom adjunction and the adjunction between $i_*$ and\n$R\\underline\\Gamma_Z$ give\n\n$$\nR\\operatorname{Hom}_X(a_!L,K)\n=R\\Gamma\\bigl(S,\\cHom_{\\mathcal O_{E,S}}(L,\\mathcal O_{E,S})\n\\otimes^{\\mathbf L}_{\\mathcal O_{E,S}}u^*R\\underline\\Gamma_ZK\\bigr).\n$$",
+    "uses": [
+     "sk-lem-formal-closed-support"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [sk-lem-int-integral-heart](3), tensoring with the dual\n$\\cHom_{\\mathcal O_{E,S}}(L,\\mathcal O_{E,S})$ has Tor amplitude $[0,1]$ and\ncommutes with filtered colimits.",
+    "uses": [
+     "sk-lem-int-integral-heart"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(1) The proof of [sk-cor-pe-bounded-continuity] works for any sheaf of rings.\nApply it to the two terms of the fibre sequence defining\n$R\\underline\\Gamma_Z$ (as in the proof of\n[sk-lem-constructible-ext-continuity]) and use that tensoring with the dual\nhas finite Tor amplitude. This gives continuity for $C=a_!L$, and in\nparticular for $\\Hom$ and $\\Ext^1$ between constructible sheaves.",
+    "uses": [
+     "sk-lem-constructible-ext-continuity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(2) Let $N\\in\\Cons(X,\\mathcal O_E)$. Its reductions\n$N\\otimes^{\\mathbf L}\\mathcal O_{E,X}/\\pi_E^n$ are constructible torsion\ncomplexes in degrees $[-1,0]$, by the length one resolution, and\n$N\\simeq R\\varprojlim_n(N\\otimes^{\\mathbf L}\\mathcal O_{E,X}/\\pi_E^n)$, since $N$\nis derived complete ([sk-prop-integral-criterion]). The cohomological dimensions\n$\\operatorname{cd}_\\ell(j)$ and $\\operatorname{cd}_\\ell(S)$ of [sk-def-cd] are\nfinite and depend only on $j$ and $S$. We bound the degrees of the formula\nabove, applied to each reduction of $N$:",
+    "uses": [
+     "sk-def-cd"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "- $R\\underline\\Gamma_Z$ of a torsion complex in degrees $[-1,0]$ has\n  cohomology in degrees $\\le\\operatorname{cd}_\\ell(j)+1$, by its fibre\n  description;\n- tensoring with the dual of $L$ raises the upper bound by at most one;\n- $R\\Gamma(S,-)$ raises it by at most $\\operatorname{cd}_\\ell(S)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Each reduction therefore contributes only in degrees\n$\\le\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$. All the functors\ninvolved ($R\\underline\\Gamma_Z$, open restriction, derived sections, closed\ninverse image by Stacks, Tag 09AA, and tensoring with the dualizable dual of\n$L$) commute with derived inverse limits. The derived inverse limit of a\ncountable tower raises the upper bound by at most one (Milnor sequence,\nStacks, Tag 08TB); this applies because the complexes and transition maps can\nbe taken in the abelian category of inverse systems before deriving. Hence\n\n$$\n\\Ext^q_X(a_!L,N)=0\\qquad(q>\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+3).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The bound depends only on $a$. For general $C$, take the maximum over the\nfinitely many pieces $a_!L$ of a filtration of $C$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; a worker who touches the node follows it"
  }
 }

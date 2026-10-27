@@ -121,7 +121,11 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-rigidity",
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $k$ be a field and $X,Y,Z$ schemes over $k$ with $X$ proper,\ngeometrically connected and geometrically reduced over $k$, $Y$\nconnected, and $Z$ separated over $k$.\nLet $f:X\\times_kY\\to Z$ be a morphism of $k$-schemes such that, for\nsome point $y_0\\in Y$, the image under $f$ of the fibre\n$\\operatorname{pr}_2^{-1}(y_0)=X\\times_k\\Spec\\kappa(y_0)$ is a single\npoint. Then $f$ factors through the projection\n$X\\times_kY\\to Y$: there is a morphism $g:Y\\to Z$ with\n$f=g\\circ\\operatorname{pr}_2$.",
   "proof": [
    {
@@ -130,16 +134,12 @@
     "elementary": null
    },
    {
-    "text": "*Notation.* For $y\\in Y$ let $f_{\\bar y}:X_{\\overline{\\kappa(y)}}\\to\nZ_{\\overline{\\kappa(y)}}$ be the base change of\n$(f,\\operatorname{pr}_2):X\\times_kY\\to Z\\times_kY$ along a geometric point\n$\\bar y:\\Spec\\overline{\\kappa(y)}\\to Y$ over $y$, as in\n[lem-sc-constant-locus-closed]. Note $X\\ne\\emptyset$ (connected spaces\nare nonempty), and $\\Gamma(X,\\mathcal O_X)=k$ by Stacks Project,\nVarieties, Lemma 33.9.3\n([Tag 0BUG](https://stacks.math.columbia.edu/tag/0BUG)), since $X$ is\nproper, geometrically connected and geometrically reduced over $k$.",
+    "text": "*Notation.* For $y\\in Y$ let $f_{\\bar y}:X_{\\overline{\\kappa(y)}}\\to\nZ_{\\overline{\\kappa(y)}}$ be the base change of\n$(f,\\operatorname{pr}_2):X\\times_kY\\to Z\\times_kY$ along a geometric point\n$\\bar y:\\Spec\\overline{\\kappa(y)}\\to Y$ over $y$, as in\n[lem-sc-constant-locus-closed]. Note $X\\ne\\emptyset$ (connected spaces\nare nonempty), and $\\Gamma(X,\\mathcal O_X)=k$ by Stacks Project,\nVarieties, Lemma 33.9.3\n([Tag 0BUG](https://stacks.math.columbia.edu/tag/0BUG)), since $X$ is\nproper, geometrically connected and geometrically reduced over $k$.\n\n*Step 1: local factorization* ([lem-av-rigidity-local]). Let $y\\in Y$ be a point such that\n$f(\\operatorname{pr}_2^{-1}(y))$ is contained in an affine open\n$V\\subseteq Z$; this holds in particular when\n$f(\\operatorname{pr}_2^{-1}(y))$ is a single point. We show that there\nare an affine open $U\\ni y$ of $Y$ and a $k$-morphism $g_U:U\\to Z$ with\n$f|_{X\\times_kU}=g_U\\circ\\operatorname{pr}_2$. The projection\n$\\operatorname{pr}_2:X\\times_kY\\to Y$ is proper, hence closed, so\n$Y\\smallsetminus\\operatorname{pr}_2\\bigl(f^{-1}(Z\\smallsetminus V)\\bigr)$\nis open; it contains $y$ because $f(\\operatorname{pr}_2^{-1}(y))\\subseteq V$.\nChoose an affine open $U\\ni y$ inside it; then\n$f(X\\times_kU)\\subseteq V$. By flat base change along the flat map\n$k\\to\\mathcal O(U)$ ($X$ is quasi-compact and separated),\n\n$$\n\\Gamma(X\\times_kU,\\mathcal O)=\\Gamma(X,\\mathcal O_X)\\otimes_k\\mathcal O(U)=\\mathcal O(U),\n$$\n\nthe identification being $\\operatorname{pr}_2^\\#$. Since $V$ is affine,\n$f|_{X\\times_kU}:X\\times_kU\\to V$ corresponds to a $k$-algebra map\n$\\mathcal O(V)\\to\\Gamma(X\\times_kU,\\mathcal O)=\\mathcal O(U)$, i.e.\n$f|_{X\\times_kU}=g_U\\circ\\operatorname{pr}_2$ for the morphism\n$g_U:U\\to V\\subseteq Z$ given by this ring map.",
     "uses": [
-     "lem-sc-constant-locus-closed"
+     "lem-sc-constant-locus-closed",
+     "lem-av-rigidity-local"
     ],
     "elementary": false
-   },
-   {
-    "text": "*Step 1: local factorization.* Let $y\\in Y$ be a point such that\n$f(\\operatorname{pr}_2^{-1}(y))$ is contained in an affine open\n$V\\subseteq Z$; this holds in particular when\n$f(\\operatorname{pr}_2^{-1}(y))$ is a single point. We show that there\nare an affine open $U\\ni y$ of $Y$ and a $k$-morphism $g_U:U\\to Z$ with\n$f|_{X\\times_kU}=g_U\\circ\\operatorname{pr}_2$. The projection\n$\\operatorname{pr}_2:X\\times_kY\\to Y$ is proper, hence closed, so\n$Y\\smallsetminus\\operatorname{pr}_2\\bigl(f^{-1}(Z\\smallsetminus V)\\bigr)$\nis open; it contains $y$ because $f(\\operatorname{pr}_2^{-1}(y))\\subseteq V$.\nChoose an affine open $U\\ni y$ inside it; then\n$f(X\\times_kU)\\subseteq V$. By flat base change along the flat map\n$k\\to\\mathcal O(U)$ ($X$ is quasi-compact and separated),\n\n$$\n\\Gamma(X\\times_kU,\\mathcal O)=\\Gamma(X,\\mathcal O_X)\\otimes_k\\mathcal O(U)=\\mathcal O(U),\n$$\n\nthe identification being $\\operatorname{pr}_2^\\#$. Since $V$ is affine,\n$f|_{X\\times_kU}:X\\times_kU\\to V$ corresponds to a $k$-algebra map\n$\\mathcal O(V)\\to\\Gamma(X\\times_kU,\\mathcal O)=\\mathcal O(U)$, i.e.\n$f|_{X\\times_kU}=g_U\\circ\\operatorname{pr}_2$ for the morphism\n$g_U:U\\to V\\subseteq Z$ given by this ring map.",
-    "uses": [],
-    "elementary": null
    },
    {
     "text": "*Step 2: the factorization locus.* Put\n\n$$\nL:=\\{y\\in Y:\\ \\text{there are an open }U\\ni y\\text{ and }g_U:U\\to Z\n\\text{ with }f|_{X\\times_kU}=g_U\\circ\\operatorname{pr}_2\\}.\n$$\n\nBy definition $L$ is open, and $y_0\\in L$ by Step 1, since\n$f(\\operatorname{pr}_2^{-1}(y_0))$ is a single point by hypothesis.",
@@ -159,6 +159,6 @@
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; the node is proved in Lean: recorded 2026-10-28, not reopened"
  }
 }

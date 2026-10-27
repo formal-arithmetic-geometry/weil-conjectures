@@ -224,5 +224,38 @@
   "landing": "20261023T103128-L-3057658",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261028",
+  "commit": "87d5b10fe66fc72cf6df2905d0a2449d5dc59c8c",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $k$ be algebraically closed and let $C/k$ be a smooth proper connected\ncurve of genus $g$, with Jacobian $J(C)$.\n\n1. For every $n\\ge1$, multiplication by $n$ on $J(C)(k)$ is surjective.\n2. Let $n>0$. The inclusion $J(C)(k)=\\operatorname{Pic}^0(C)\\subset\\operatorname{Pic}(C)$\n   restricts to an equality\n   $$\n   J(C)[n](k)=J(C)(k)[n]=\\operatorname{Pic}(C)[n],\n   $$\n   and the degree map induces an isomorphism\n   $$\n   \\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\xrightarrow[\\ \\deg\\ ]{\\sim}\\Z/n\\Z.\n   $$",
+  "proof": [
+   {
+    "text": "Write $J=J(C)$; it is an abelian variety over $k$ by [sk-thm-picard-main].",
+    "uses": [
+     "sk-thm-picard-main"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(1)* By [lem-sc-mult-n-isogeny] and [sk-prop-av-isogeny],\n$[n]\\colon J\\to J$ is finite and surjective. Let $y\\in J(k)$, viewed as a\nclosed point $y\\colon\\Spec k\\to J$. The fibre\n$F=J\\times_{[n],J,y}\\Spec k$ is finite over $\\Spec k$ because $[n]$ is\nfinite, and nonempty because $[n]$ is surjective on underlying points and\n$y$ lies in the image. So $F=\\Spec B$ with $B$ a nonzero finite\n$k$-algebra. For a maximal ideal $\\mathfrak m\\subset B$, the field\n$B/\\mathfrak m$ is a finite extension of $k$, hence equal to $k$ since $k$\nis algebraically closed. The resulting $k$-point of $F$ is a point\n$x\\in J(k)$ with $[n](x)=y$, that is $nx=y$ in the group $J(k)$. Thus $J(k)$\nis divisible ([lem-sc-isogeny-surjective]).",
+    "uses": [
+     "lem-sc-mult-n-isogeny",
+     "lem-sc-isogeny-surjective"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(2)* The identity $J[n](k)=J(k)[n]$ holds because $J[n](k)$ is the kernel\nof $[n]$ on $J(k)$ (universal property of the kernel). By\n[sk-thm-picard-main], $J(k)=\\operatorname{Pic}^0(C)$ as groups, and by\n[sk-cor-picard-degree] there is an exact sequence of abelian groups\n$$\n0\\longrightarrow J(k)\\longrightarrow\\operatorname{Pic}(C)\\xrightarrow{\\ \\deg\\ }\\Z\\longrightarrow0.\n$$\nApply the snake lemma to the endomorphism \"multiplication by $n$\" of this\nsequence. It gives an exact sequence\n$$\n0\\to J(k)[n]\\to\\operatorname{Pic}(C)[n]\\to\\Z[n]\\to J(k)/nJ(k)\\to\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\xrightarrow{\\deg}\\Z/n\\Z\\to0 .\n$$\nHere $\\Z[n]=0$ since $\\Z$ is torsion free, and $J(k)/nJ(k)=0$ by (1).\nHence $J(k)[n]\\to\\operatorname{Pic}(C)[n]$ is an isomorphism, i.e. every\n$n$-torsion class in $\\operatorname{Pic}(C)$ has degree $0$ and lies in\n$J(k)[n]$; and $\\deg$ induces an isomorphism\n$\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\simeq\\Z/n\\Z$.",
+    "uses": [
+     "sk-thm-picard-main"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261028, weil-conjectures-blueprint 87d5b10fe6) states or proves this differently; the node is proved in Lean: recorded 2026-10-28, not reopened"
  }
 }
