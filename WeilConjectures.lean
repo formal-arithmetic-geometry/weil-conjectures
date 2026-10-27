@@ -13102,6 +13102,7 @@ public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.Tactic.FirstOrderApply
 public import WeilConjectures.Tactic.MatchTactic
+public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
@@ -13527,6 +13528,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibr
 public import WeilConjectures.TraceFormula.Specialization.DeformationSupport
 public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
 public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
+public import WeilConjectures.TraceFormula.Specialization.DiagExternalProduct
 public import WeilConjectures.TraceFormula.Specialization.ExceptionalTensor
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
@@ -13608,6 +13610,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGeneric
 public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
+public import WeilConjectures.TraceFormula.Specialization.UniversalKernelDiagonal
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine

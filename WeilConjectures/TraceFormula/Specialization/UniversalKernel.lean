@@ -24,14 +24,30 @@ generic fibre and `K' = S_X K`. With the external product comparison
 
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`,
 
-for the evaluation kernels `e_K : K ⊠ D K ⟶ RΔ_* ω_X`. This file proves it for abstract
-adjunctions and monoidal closed categories:
+for the evaluation kernels `e_K : K ⊠ D K ⟶ RΔ_* ω_X`, and the first one is
+
+`𝔥 S(λ_K) = λ_{K'} ρ`,
+
+for the external-duality maps `λ_K : K ⊠ D K ⟶ RHom(p_2^* K, p_1^! K)` and the exchange
+`𝔥 : S RHom(p_2^* K, p_1^! K) ⟶ RHom(p_{2s}^* K', p_{1s}^! K')`. This file proves both for
+abstract adjunctions and monoidal closed categories:
 
 * `CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange`: both sides are the adjoints of
   the same map, given the mate property of `χ_Δ` and the restriction of `ρ` to the diagonal;
 * `CategoryTheory.map_comp_ev_eq_of_kunneth`: the restriction of `ρ` to the diagonal is the
   pairing `θ ∘ S(ev) ∘ μ` defining `δ_K`, given that `Δ_s^* Π` is the lax tensor map `μ_X` (the
-  composition law and monoidality of the pullback exchanges, with `p_i ∘ Δ = 1`).
+  composition law and monoidality of the pullback exchanges, with `p_i ∘ Δ = 1`);
+* `CategoryTheory.map_comp_eq_comp_of_pairing` and `CategoryTheory.pairing_specialization_eq`: the
+  first identity reduces to the adjoint pairings, and these agree given the definition of `δ_K`,
+  the monoidality of `α_{p_2}`, the compatibility of the exceptional Künneth map with the
+  exchanges and the symmetry of the lax tensor maps.
+
+It also defines `ρ` for the specialization to the normal cone
+(`ProEtale.CondensedRing.universalKernelSpecialization`) and proves the ambient form of
+`Δ_s^* Π = μ_X`
+(`ProEtale.CondensedRing.NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange_of_retraction`);
+the second identity for the specialization is in
+`WeilConjectures.TraceFormula.Specialization.UniversalKernelDiagonal`.
 
 -/
 
@@ -385,88 +401,5 @@ noncomputable def universalKernelSpecialization
         (verdierDual ℓ ((specialization k' x).obj K)) :=
   inv (specializationKunnethMap k' x K (verdierDual ℓ K)) ≫
     _ ◁ (boundedConstructibleUpperStar _ ℓ _).map (specializationDualityMap k' x D K)
-
-/-- The restriction of the Künneth map `Π_{K,L}` to the diagonal is the lax tensor map `μ_X` of
-the specialization, through the pullback exchange `α_Δ` and the identifications
-`LΔ^*(M ⊠ N) ≅ M ⊗ N` (the composition law and monoidality of the pullback exchanges, with
-`p_i ∘ Δ = 1`). -/
-lemma map_specializationKunnethMap_comp_pullbackExchange
-    (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleUpperStar _ ℓ (diag (deformationSpecialFibre X x.left.ker k'))).map
-        (specializationKunnethMap k' x K L) ≫
-      ((deformationDiagModelHom X x.left.ker k').boundedConstructiblePullbackExchange ℓ
-        ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
-          (isTraitModel_deformationModel X x.left.ker k')
-          (deformationModel_exists_comp_ε X x.left.ker k'))
-        (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
-          (deformationProdModel X x.left.ker X x.left.ker k')
-          (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k')
-          (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k'))).app
-        (externalProduct ℓ K L) ≫
-      (specialization k' x).map (diagUpperStarExternalProductIso ℓ K L).hom =
-    (diagUpperStarExternalProductIso ℓ _ _).hom ≫
-      NearbyCyclesModel.boundedConstructibleTensorMap
-        ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
-          (isTraitModel_deformationModel X x.left.ker k')
-          (deformationModel_exists_comp_ε X x.left.ker k')) K L := by
-  -- The ambient content of this identity is
-  -- `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange_of_retraction`, at the projections
-  -- and the diagonal of the deformation models. What is missing is its transport to bounded
-  -- constructible complexes: after `ObjectProperty.hom_ext` and the ambient forms of the
-  -- comparison isomorphisms, the two sides differ only in the spelling of objects (e.g.
-  -- `(externalProduct ℓ K L).obj` and `Lp₁^* K.obj ⊗ Lp₂^* L.obj`), but neither the unifier nor
-  -- the kernel identifies them within the heartbeat budget.
-  sorry
-
-set_option maxHeartbeats 1000000 in
--- matching the abstract statements against the concrete functors
-/-- **Nearby cycles of the universal kernel**, second identity (blueprint
-`det-tf-sp-universal-kernel`): for `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
-`e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`, with `K' = Sp_{X,x}(K)`. -/
-theorem universalKernelSpecialization_comp_evaluationKernel
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    universalKernelSpecialization k' x D K ≫ evaluationKernel ℓ ((specialization k' x).obj K) =
-      (specializationProd k' x).map (evaluationKernel ℓ K) ≫
-        (Correspondence.IsContractingAt.diagPushforwardExchange ℓ X k' x).app
-          (dualizingComplex' ℓ X) ≫
-        (boundedConstructibleLowerStar ℓ (diag (deformationSpecialFibre X x.left.ker k'))).map
-          (D.θ (isTraitModelOfBase_deformationModel k' x)) := by
-  have hρ := CategoryTheory.map_comp_ev_eq_of_kunneth
-    ((deformationDiagModelHom X x.left.ker k').boundedConstructiblePullbackExchange ℓ
-      ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
-        (isTraitModel_deformationModel X x.left.ker k')
-        (deformationModel_exists_comp_ε X x.left.ker k'))
-      (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
-        (deformationProdModel X x.left.ker X x.left.ker k')
-        (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k')
-        (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k')))
-    (diagUpperStarExternalProductIso ℓ K (verdierDual ℓ K))
-    (diagUpperStarExternalProductIso ℓ ((specialization k' x).obj K)
-      ((specialization k' x).obj (verdierDual ℓ K)))
-    (diagUpperStarExternalProductIso ℓ ((specialization k' x).obj K)
-      (verdierDual ℓ ((specialization k' x).obj K)))
-    (NearbyCyclesModel.boundedConstructibleTensorMap
-        ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
-          (isTraitModel_deformationModel X x.left.ker k')
-          (deformationModel_exists_comp_ε X x.left.ker k')) K (verdierDual ℓ K))
-    ((ihom.ev K).app (dualizingComplex' ℓ X)) (D.θ (isTraitModelOfBase_deformationModel k' x))
-    (specializationDualityMap k' x D K)
-    (Verdier.whiskerLeft_nearbyDualityMap_comp_ev _ _ K)
-    (specializationKunnethMap k' x K (verdierDual ℓ K))
-    (map_specializationKunnethMap_comp_pullbackExchange k' x K (verdierDual ℓ K))
-    (_ ◁ (boundedConstructibleUpperStar _ ℓ _).map (specializationDualityMap k' x D K))
-    (diagUpperStarExternalProductIso_hom_naturality_right ℓ _ (specializationDualityMap k' x D K))
-  have hχ :=
-    NearbyCyclesModel.Hom.map_boundedConstructiblePushforwardExchange_app_comp_counit_app (ℓ := ℓ)
-    (deformationDiagModelHom X x.left.ker k')
-    ((deformationModel X x.left.ker k').preservesBoundedConstructible_of_isTraitModel
-      (isTraitModel_deformationModel X x.left.ker k')
-      (deformationModel_exists_comp_ε X x.left.ker k'))
-    (NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel
-      (deformationProdModel X x.left.ker X x.left.ker k')
-      (isTraitModel_deformationProdModel X x.left.ker X x.left.ker k')
-      (deformationProdModel_exists_comp_ε X x.left.ker X x.left.ker k'))
-  unfold universalKernelSpecialization evaluationKernel
-  apply_by_match CategoryTheory.comp_homEquiv_eq_map_homEquiv_comp_exchange [hχ := hχ, hρ := hρ]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
