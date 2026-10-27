@@ -1,6 +1,8 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.PairwiseLaurentUnitExpansion
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.PairwiseCocycleNormalization
 
 @[expose] public section
 
@@ -47,7 +49,9 @@ theorem exists_standardUnitCocycle_normalization_offDiagonal (k : Type u) [Field
           (transitionUnit _ (Spec (.of k)) d i j).val *
             (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map
               (homOfLE inf_le_right).op (a j).val := by
-  sorry
+  obtain ⟨e, c, hpair⟩ := exists_pairwise_laurent_unit_expansion k r hr t
+  exact exists_standardUnitCocycle_normalization_of_pairwise_laurent
+    k r hr t ht e c hpair
 
 end AlgebraicGeometry.ProjectiveSpace
 

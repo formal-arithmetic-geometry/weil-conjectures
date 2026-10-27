@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double-overlap Laurent calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-projective-space-twist"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleOffDiagonal",
+  "date": "2026-10-28",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-standard-unit-cocycle-off-diagonal",
+   "place": "Pairwise Laurent-unit calculation used by the off-diagonal normalization.",
+   "via": [
+    "lem-sfb-projective-standard-unit-cocycle-off-diagonal"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "new-sfb-projective-pairwise-laurent-unit-expansion",
+ "title": "Pairwise Laurent unit expansion on projective-space overlaps",
+ "statement": "Let k be a field and r>=3. Every family of units on standard projective-space chart overlaps admits, on each pair of distinct indices, a scalar unit on the first chart and an integer Laurent exponent expressing the overlap unit as the scalar restriction times the standard transition unit.",
+ "proof": [
+  {
+   "text": "Identify each distinct double-overlap ring with a polynomial ring in the remaining affine coordinates and one invertible ratio. Degree comparison forces a unit to have degree zero in the remaining variables. Extremal Laurent exponents add under multiplication, so the unit is a scalar times one Laurent monomial; the scalar is nonzero.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double-overlap Laurent calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, double-overlap Laurent calculation."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.PairwiseLaurentUnitExpansion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/PairwiseLaurentUnitExpansion.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_pairwise_laurent_unit_expansion",
+  "branch": "sheaf-dag",
+  "by": "X9",
+  "date": "2026-10-28",
+  "statement": "theorem exists_pairwise_laurent_unit_expansion (k : Type u) [Field k] (r : ℕ) (hr : 3 ≤ r) (t : ∀ i j : ULift.{u} (Fin r), Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)), standardOpen _ (Spec (.of k)) i ⊓ standardOpen _ (Spec (.of k)) j)ˣ) : ∃ e : ∀ i j : ULift.{u} (Fin r), ℤ, ∃ c : ∀ i j : ULift.{u} (Fin r), kˣ, ∀ i j : ULift.{u} (Fin r), i ≠ j → (t i j).val = (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE inf_le_left).op (standardOpenConstUnit k r i (c i j)).val * (transitionUnit _ (Spec (.of k)) (e i j) i j).val"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit cocycle normalization on distinct standard projective-space chart overlaps",
+   "results": "No projective-space normalization theorem found.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Laurent polynomial units on projective-space overlaps and cocycle exponents",
+   "results": "Only generic Laurent-unit and cocycle results; no matching theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "projective standard overlap unit cocycle Laurent exponent",
+   "results": "Repository contains only the projective-line Laurent calculation and transition cocycle.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T181012-L-3921196",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T181012-L-3921196",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
