@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-finite-intrinsic-tensor-symmetry",
+ "kind": "statement",
+ "title": "The constructed scalar tensor comparison preserves the signed interchange",
+ "statement": "Let X be a scheme, B a finite commutative ring, F the canonical constant-scalar derived equivalence, a an intrinsic tensor-Hom presentation [def-sf-integral-hom-reduction-models], and s its signed representative symmetry [def-sf-integral-verdier-models]. Assume naturality of s.swap in both variables, with the equation of the Lean statement. Let b be a natural isomorphism from the native fixed-scalar curried tensor to its flip, whose components have the HEq normalization by DerivedMonoidal.braiding' used in [lem-weil-duality-pairing]. For the constructed mu of [def-sf-finite-intrinsic-tensor-realization], mu(K,L) followed by F(b(L,K) inverse) equals s.swap(FK,FL) followed by mu(L,K), for every pair K,L. There are no internal-Hom, evaluation, dualizing-object, constructibility or biduality assumptions or conclusions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0FPT; sites.tex Tag 00YV. The second paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md, identifying the finite evaluation transpose."
+ },
+ "stmt_deps": [
+  "def-sf-finite-intrinsic-tensor-realization",
+  "def-sf-integral-verdier-models",
+  "lem-weil-duality-pairing"
+ ],
+ "proof": [
+  {
+   "text": "Use finiteScalarTensorRepresentativeData_normalization for the restricted intrinsic tensor model. It identifies the constructed mu on termwise flat K-flat representatives with the inverse of finiteScalarTotalTensorIso, conjugated by the exact-functor localization factors and the specified tensor representatives.",
+   "uses": [
+    "def-sf-finite-intrinsic-tensor-realization",
+    "lem-sf-finite-scalar-tensor-representative-data-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary scalar tensor comparison is normalized on scalar-unit pure sections. Both total-complex interchanges reverse a homogeneous pair (p,q) with coefficient (-1)^(pq). Pure-tensor generation and sheafification adjunction imply equality of chain maps. The representative formula of s and the normalization of b identify their derived images with these signed swaps. Involutivity identifies the inverse b(L,K) with the same interchange in the required direction.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "def-sf-integral-verdier-models",
+    "lem-weil-duality-pairing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of mu, the assumed naturality hs of s, and naturality of b express both sides as natural transformations of derived bifunctors. Apply finiteScalarRepresentativesFullyFaithful to the equality on the resolving class. This proves equality on every derived pair, including zero objects and the zero-ring or empty-site cases.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-intrinsic-tensor-realization",
+  "lem-sf-finite-scalar-tensor-representative-data-normalization",
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "def-sf-integral-verdier-models",
+  "lem-weil-duality-pairing",
+  "lem-sf-finite-scalar-tensor-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0FPT, restricted to the normalized constant-coefficient realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural tensor comparison for an exact equivalence of module sheaves after derived localization preserves the Koszul symmetry",
+   "results": "8 hits: IsLocalizedModule.rTensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.tensorProduct_isLocalizedModule, IsLocalizedModule.of_linearEquiv_right, IsLocalization.moduleTensorEquiv, IsLocalizedModule.mapEquiv, IsLocalizedModule.of_linearEquiv, IsLocalization.Away.tensorRightEquiv.congr_simp.",
+   "date": "2026-10-28",
+   "verdict": "No comparison for the two specified derived coefficient presentations. Reuse the existing scalar tensor realization; a signed compatibility statement is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"mapDerivedCategory\"",
+   "results": "0 hits: .",
+   "date": "2026-10-28",
+   "verdict": "No comparison for the two specified derived coefficient presentations. Reuse the existing scalar tensor realization; a signed compatibility statement is still needed."
+  },
+  {
+   "tool": "grep",
+   "query": "braided.*[Ee]quiv|[Ee]quiv.*braided",
+   "results": "5 hits: Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean, Mathlib/CategoryTheory/Monoidal/CommMon_.lean.",
+   "date": "2026-10-28",
+   "verdict": "No comparison for the two specified derived coefficient presentations. Reuse the existing scalar tensor realization; a signed compatibility statement is still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteIntrinsicBidualComparison",
+  "date": "2026-10-28",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-integral-verdier",
+   "place": "Second proof paragraph: identify the finite evaluation transpose; signed tensor part of the constant-ring realization comparison.",
+   "via": [
+    "lem-sf-finite-intrinsic-bidual-comparison",
+    "lem-sf-finite-intrinsic-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteIntrinsicTensorSymmetry",
+  "file": "lean/Sheaf/SixFunctors/FiniteIntrinsicTensorSymmetry.lean",
+  "declaration": "WeilConjectures.IntegralVerdier.finiteIntrinsicTensorSymmetry",
+  "statement": "theorem finiteIntrinsicTensorSymmetry\n    (X : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]\n    (a : IntegralHom.TensorPresentation.{u, u} X (proEtaleConstantRing X B))\n    (s : SignedSymmetry X (proEtaleConstantRing X B) a)\n    (hs : ∀ (K L K' L' : proEtaleDerivedCategory X B)\n      (f : K ⟶ K') (g : L ⟶ L'),\n      a.tensor.map (Prod.mkHom f g) ≫ (s.swap K' L').hom =\n        (s.swap K L).hom ≫ a.tensor.map (Prod.mkHom g f))\n    (b : CategoryTheory.MonoidalCategory.curriedTensor\n        (DerivedCategory (Sheaf (ProEt.topology X)\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))) ≅\n      (CategoryTheory.MonoidalCategory.curriedTensor\n        (DerivedCategory (Sheaf (ProEt.topology X)\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} B))))).flip)\n    (hb : ∀ K L, HEq ((b.hom.app K).app L)\n      (DerivedMonoidal.braiding'\n        (DerivedCategory.Qh (C := Sheaf (ProEt.topology X)\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} B))))\n        (HomotopyCategory.quasiIso (Sheaf (ProEt.topology X)\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) (.up ℤ)) K L).hom) :\n    ∀ K L,\n      (finiteIntrinsicTensorRealization X B a).hom.app (K, L) ≫\n          (sfIntrinsicDerivedEquivalence X B).functor.map ((b.inv.app L).app K) =\n        (s.swap ((sfIntrinsicDerivedEquivalence X B).functor.obj K)\n          ((sfIntrinsicDerivedEquivalence X B).functor.obj L)).hom ≫\n            (finiteIntrinsicTensorRealization X B a).hom.app (L, K)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T234332-L-104169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T234332-L-104169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
