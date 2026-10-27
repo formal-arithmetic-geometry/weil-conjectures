@@ -8,6 +8,14 @@ module
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
+import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import all Sheaf.Paper.PbcFinitePullbackConstructibility
+import all Sheaf.Paper.ConstantAdicQuotientScalarComparison
+import all Sheaf.Paper.FiniteCoefficientDerivedOriginPresentation
+import Sheaf.Paper.ProEtaleFiniteLocalConstancyReflection
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-! # Core data for a single finite quotient étale origin
 
@@ -21,6 +29,119 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
+
+namespace FiniteQuotientOriginProof
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private theorem inverseImage_additive {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
+    (proEtaleModuleInverseImage g R).Additive :=
+  (proEtaleModuleInverseImageAdjunction g R).left_adjoint_additive
+
+private theorem inverseImage_limits {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
+    PreservesFiniteLimits (proEtaleModuleInverseImage g R) :=
+  proEtaleModuleInverseImage_preservesFiniteLimits g R
+
+private theorem inverseImage_colimits {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
+    PreservesFiniteColimits (proEtaleModuleInverseImage g R) := by
+  have : PreservesColimitsOfSize.{0, 0} (proEtaleModuleInverseImage g R) :=
+    (proEtaleModuleInverseImageAdjunction g R).leftAdjoint_preservesColimits
+  infer_instance
+
+attribute [local instance] inverseImage_additive inverseImage_limits inverseImage_colimits
+
+private theorem scalar_additive (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] :
+    (scalarRestriction X B).Additive where
+  map_add := by intros; ext U x; rfl
+
+private theorem relative_additive {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (B : Type (u + 1)) [CommRing B] : (relativeRestriction g B).Additive where
+  map_add := by intros; ext U x; rfl
+
+private theorem scalar_equivalence (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] :
+    (scalarRestriction X B).IsEquivalence := scalarRestriction_equivalence X B
+
+private theorem relative_equivalence {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (B : Type (u + 1)) [CommRing B] : (relativeRestriction g B).IsEquivalence := by
+  let E := proEtaleScalarEquivalence Y ((adicLisseForget Y).mapIso (constantCoefficients g B))
+  change (E.inverse ⋙ scalarRestriction Y B).IsEquivalence
+  have := scalar_equivalence Y B
+  infer_instance
+
+attribute [local instance] scalar_additive relative_additive scalar_equivalence relative_equivalence
+
+private def fixedPullbackIso {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (B : Type (u + 1)) [CommRing B]
+    (N : DerivedCategory (pbcModules X (adicLisseConstantRing X B))) :
+    (relativeRestriction g B).mapDerivedCategory.obj
+        ((adicTowerPullback g (adicLisseConstantRing X B)).obj N) ≅
+      (ProEtale.upperStar (ModuleCat.{u + 1} B) g).mapDerivedCategory.obj
+        ((scalarRestriction X B).mapDerivedCategory.obj N) := by
+  let P := proEtaleModuleInverseImage g (adicLisseConstantRing X B)
+  let e := (proEtaleModuleInverseImageAdjunction g (adicLisseConstantRing X B)).leftAdjointUniq
+    (proEtaleRingModuleAdjunction g (adicLisseConstantRing X B)
+      ((adicTowerInverseImage g).obj (adicLisseConstantRing X B)) (Iso.refl _))
+  exact (relativeRestriction g B).mapDerivedCategory.mapIso
+      ((Functor.mapDerivedCategoryNatIso e).app N).symm ≪≫
+    ((Functor.mapDerivedCategoryCompIso P (relativeRestriction g B)).app N).symm ≪≫
+    (Functor.mapDerivedCategoryNatIso (relativeEncoding g B)).app N ≪≫
+    (Functor.mapDerivedCategoryCompIso (scalarRestriction X B)
+      (ProEtale.upperStar (ModuleCat.{u + 1} B) g)).app N
+
+private def fixedHomologyIso {X Y : Scheme.{u}} (g : Y ⟶ X)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)
+    (K : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n)))) (q : ℤ) :
+    (relativeRestriction g (A ⧸ d.ideal ^ (n + 1))).obj
+        ((pbcRestrict ((adicTowerInverseImage g).map
+          (pbcLevelConstantComparison X d n).hom)).obj
+            ((DerivedCategory.homologyFunctor _ q).obj
+              ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj K))) ≅
+      (DerivedCategory.homologyFunctor _ q).obj
+        ((ProEtale.upperStar (ModuleCat.{u + 1} (A ⧸ d.ideal ^ (n + 1))) g).mapDerivedCategory.obj
+          ((scalarRestriction X (A ⧸ d.ideal ^ (n + 1))).mapDerivedCategory.obj ((pbcDerivedRestrict
+              (pbcLevelConstantComparison X d n).hom).obj K))) := by
+  let B := A ⧸ d.ideal ^ (n + 1)
+  let N := (pbcDerivedRestrict (pbcLevelConstantComparison X d n).hom).obj K
+  let e := pbcLevelConstantComparison X d n
+  let c := proEtaleRingRestrictionDerivedPullback g _ _
+    ((adicTowerInverseImage g).obj _) ((adicTowerInverseImage g).obj _)
+    e.hom ((adicTowerInverseImage g).map e.hom) (Iso.refl _) (Iso.refl _) (by simp)
+  let eH := (DerivedCategory.homologyFunctor _ q).mapIso (c.app K).symm ≪≫
+    (((pbcRestrict ((adicTowerInverseImage g).map e.hom)).mapDerivedCategoryHomologyFunctorIso
+      q).app ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj K)).symm
+  exact (relativeRestriction g B).mapIso eH.symm ≪≫
+    ((relativeRestriction g B).mapDerivedCategoryHomologyFunctorIso q).app
+      ((adicTowerPullback g (adicLisseConstantRing X B)).obj N) ≪≫
+    (DerivedCategory.homologyFunctor _ q).mapIso (fixedPullbackIso g B N)
+
+private theorem scalar_lisse {X : Scheme.{u}}
+    {B C : Type (u + 1)} [CommRing B] [CommRing C] [Finite B] [Finite C]
+    (r : C →+* B) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))
+    (hF : IsFiniteLocallyConstantSheaf F) :
+    IsFiniteLocallyConstantSheaf ((Sheaf.restrictScalars X.smallEtaleTopology r).obj F) := by
+  obtain ⟨d, hd⟩ := (finite_locally_constant_module_values_iff F).1.mpr hF
+  let T := Sheaf.restrictScalars X.smallEtaleTopology r
+  let d' : LocallyConstantDatum (T.obj F) :=
+    { cover := d.cover
+      isConstant i := by
+        change ((Sheaf.restrictScalars
+          (X.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i)) r).obj
+            (F.over (d.cover.etalePrecoverageToEtale i))).IsConstant _
+        have := d.isConstant i
+        infer_instance }
+  apply (finite_locally_constant_module_values_iff (T.obj F)).1.mp
+  refine ⟨d', fun i ↦ ?_⟩
+  obtain ⟨M, hM, ⟨e⟩⟩ := hd i
+  have : Finite M := hM
+  let J := X.smallEtaleTopology.over (d.cover.etalePrecoverageToEtale i)
+  exact ⟨(ModuleCat.restrictScalars r).obj M, hM,
+    ⟨(Sheaf.restrictScalars J r).mapIso e ≪≫
+      (constantCommuteCompose J (ModuleCat.restrictScalars r)).app M⟩⟩
+
+end FiniteQuotientOriginProof
 
 /-- The descended level and its local finiteness data, before conditional transport.
 
@@ -48,6 +169,11 @@ structure LisseFiniteQuotientEtaleOriginCore
             ((adicTowerPullback (W.hom ≫ g)
               ((pbcAdicRings X d).obj (op n))).obj K)))
 
+attribute [local instance] FiniteQuotientOriginProof.scalar_additive
+  FiniteQuotientOriginProof.relative_additive FiniteQuotientOriginProof.scalar_equivalence
+  FiniteQuotientOriginProof.relative_equivalence
+
+open FiniteQuotientOriginProof in
 /-- Descend the level, vanishing and finite lisse data of one quotient.
 
 Proof: apply exact inverse image, constant coefficient comparison and the finite
@@ -74,6 +200,105 @@ theorem lisse_finite_quotient_etale_origin_core
               ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj K))))
     (V : Y.Etale) :
     Nonempty (LisseFiniteQuotientEtaleOriginCore X Y g d n K V) := by
-  sorry
+  let B := A ⧸ d.ideal ^ (n + 1)
+  let C := AdicCompletion d.ideal A ⧸
+    (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)
+  have : Finite B := d.quotientFinite n
+  let eBC : B ≃+* C := RingEquiv.ofBijective (constantAdicQuotientMap d.ideal n)
+    (quotient_map_bijective d.ideal d.finitelyGenerated n)
+  have : Finite C := Finite.of_surjective eBC eBC.surjective
+  let R := pbcRestrict (pbcLevelConstantComparison X d n).hom
+  let S := scalarRestriction X B
+  let N := R.mapDerivedCategory.obj K
+  let J := S.mapDerivedCategory.obj N
+  let P := (ProEtale.upperStar (ModuleCat.{u + 1} B) g).mapDerivedCategory.obj J
+  have hP (q : ℤ) : ProEtale.IsFiniteLocallyConstant B
+      ((DerivedCategory.homologyFunctor _ q).obj P) := by
+    exact ProEtale.isFiniteLocallyConstant_of_iso
+      (FiniteQuotientOriginProof.fixedHomologyIso g d n K q)
+      ((fixedFiniteModels_iff Y B _).mp ((relativeFinite_iff g B _).mp (hlisse q)))
+  have hz (q : ℤ) (hq : IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj P) :=
+    (ProEtale.upperStar (ModuleCat.{u + 1} B) g).isZero_homologyFunctor_mapDerivedCategory_obj
+        (S.isZero_homologyFunctor_mapDerivedCategory_obj
+          (R.isZero_homologyFunctor_mapDerivedCategory_obj hq))
+  have hPb : DerivedCategory.TStructure.t.bounded P := by
+    obtain ⟨a, b, hb⟩ := hbounded
+    exact ⟨⟨a, (DerivedCategory.isGE_iff P a).mpr (fun q hq ↦ hz q (hb q (.inl hq)))⟩,
+      ⟨b, (DerivedCategory.isLE_iff P b).mpr (fun q hq ↦ hz q (hb q (.inr hq)))⟩⟩
+  have hPc (q : ℤ) : ProEtale.IsConstructible B
+      ((DerivedCategory.homologyFunctor _ q).obj P) := by
+    refine ⟨identityStratification Y, fun i ↦ ?_⟩
+    exact ProEtale.isFiniteLocallyConstant_of_iso
+      ((ProEtale.upperStarId (ModuleCat.{u + 1} B) Y).app _).symm (hP q)
+  obtain ⟨L, _, ⟨eL⟩⟩ := origin_boundedConstructible_of_homology B hPb
+    (fun q ↦ ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj B (hPc q))
+  let F := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) Y
+  have hLH (q : ℤ) : F.obj ((DerivedCategory.homologyFunctor _ q).obj L) ≅
+      (DerivedCategory.homologyFunctor _ q).obj P :=
+    (F.mapDerivedCategoryHomologyFunctorIso q).app L ≪≫
+      (DerivedCategory.homologyFunctor _ q).mapIso eL
+  have hLl (q : ℤ) : IsFiniteLocallyConstantSheaf
+      ((DerivedCategory.homologyFunctor _ q).obj L) :=
+    ProEtale.isFiniteLocallyConstantSheaf_of_comparison_finite_models B _
+      (ProEtale.isFiniteLocallyConstant_of_iso (hLH q).symm (hP q))
+  have hLz (q : ℤ) (hq : IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj L) :=
+    F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+      ((hz q hq).of_iso ((DerivedCategory.homologyFunctor _ q).mapIso eL))
+  let T := Sheaf.restrictScalars Y.smallEtaleTopology eBC.symm.toRingHom
+  let U := AlgebraicGeometry.Etale.upperStar (ModuleCat.{u + 1} C) V.hom
+  let level := U.mapDerivedCategory.obj (T.mapDerivedCategory.obj L)
+  refine ⟨{ level := level, lisse := ?_, vanishing := ?_, refinementLisse := ?_ }⟩
+  · intro q
+    have hs : IsFiniteLocallyConstantSheaf
+        (T.obj ((DerivedCategory.homologyFunctor _ q).obj L)) :=
+      FiniteQuotientOriginProof.scalar_lisse eBC.symm.toRingHom _ (hLl q)
+    have hT : IsFiniteLocallyConstantSheaf
+        ((DerivedCategory.homologyFunctor _ q).obj (T.mapDerivedCategory.obj L)) :=
+      IsFiniteLocallyConstantSheaf.of_iso
+        (F := T.obj ((DerivedCategory.homologyFunctor _ q).obj L))
+        ((T.mapDerivedCategoryHomologyFunctorIso q).app L)
+    have := hT
+    have hu : IsFiniteLocallyConstantSheaf
+        (U.obj ((DerivedCategory.homologyFunctor _ q).obj (T.mapDerivedCategory.obj L))) :=
+      IsFiniteLocallyConstantSheaf.upperStar (X := Y) (Y := V.left) V.hom
+        ((DerivedCategory.homologyFunctor _ q).obj (T.mapDerivedCategory.obj L))
+    exact IsFiniteLocallyConstantSheaf.of_iso
+      (F := U.obj ((DerivedCategory.homologyFunctor _ q).obj (T.mapDerivedCategory.obj L)))
+      ((U.mapDerivedCategoryHomologyFunctorIso q).app (T.mapDerivedCategory.obj L))
+  · intro q hq
+    exact U.isZero_homologyFunctor_mapDerivedCategory_obj
+      (T.isZero_homologyFunctor_mapDerivedCategory_obj (hLz q hq))
+  · intro W _w q
+    apply (relativeFinite_iff (W.hom ≫ g) B _).mpr
+    apply (fixedFiniteModels_iff W.left B _).mpr
+    apply ProEtale.isFiniteLocallyConstant_of_iso
+      (FiniteQuotientOriginProof.fixedHomologyIso (W.hom ≫ g) d n K q).symm
+    let H := ProEtale.upperStar (ModuleCat.{u + 1} B) W.hom
+    let c := (Functor.mapDerivedCategoryNatIso
+      (ProEtale.upperStarComp (ModuleCat.{u + 1} B) W.hom g)).app J ≪≫
+        (Functor.mapDerivedCategoryCompIso
+          (ProEtale.upperStar (ModuleCat.{u + 1} B) g) H).app J
+    have := hLl q
+    let E : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} B) :=
+      AlgebraicGeometry.Etale.upperStar (ModuleCat.{u + 1} B) W.hom
+    have : IsFiniteLocallyConstantSheaf
+        (E.obj ((DerivedCategory.homologyFunctor _ q).obj L)) :=
+      IsFiniteLocallyConstantSheaf.upperStar (X := Y) (Y := W.left) W.hom
+        ((DerivedCategory.homologyFunctor _ q).obj L)
+    have hW : ProEtale.IsFiniteLocallyConstant B
+        (H.obj ((DerivedCategory.homologyFunctor _ q).obj P)) :=
+      ProEtale.isFiniteLocallyConstant_of_iso
+        (((ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B)
+          (X := Y) (Y := W.left) W.hom).app
+            ((DerivedCategory.homologyFunctor _ q).obj L)).symm ≪≫
+            H.mapIso (hLH q))
+        (ProEtale.isFiniteLocallyConstant_comparisonUpperStar_obj
+          (X := W.left) (E.obj ((DerivedCategory.homologyFunctor _ q).obj L)))
+    exact ProEtale.isFiniteLocallyConstant_of_iso
+      ((H.mapDerivedCategoryHomologyFunctorIso q).app P ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso c.symm) hW
 
 end AlgebraicGeometry.Scheme

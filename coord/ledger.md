@@ -20029,3 +20029,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:01 L: merged deliver/K3/Sheaf.Paper.DiagonalOrdinaryReesNormalization (stage 3; reviewer PASS; first push; landing 20261027T210122-L-1659305 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:01 L: merged deliver/K3/Sheaf.Paper.LisseFiniteLevelEtaleDescent (stage 3; reviewer PASS; first push; landing 20261027T210123-L-1659679 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:01 L: merged deliver/K4/Sheaf.Paper.EtaleOrderedOpenProjectionScalar (stage 3; reviewer PASS; first push; landing 20261027T210124-L-1659963 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 21:01 L: merged deliver/K4/Sheaf.Paper.LisseFiniteQuotientEtaleOriginCore (stage 3; reviewer PASS; first push; landing 20261027T210125-L-1660232 (interface); batch 20261027T205736; modules 1; new nodes 0)

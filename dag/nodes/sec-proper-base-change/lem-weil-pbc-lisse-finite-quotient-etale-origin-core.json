@@ -15,26 +15,69 @@
  ],
  "proof": [
   {
-   "text": "Apply inverse image and constant coefficient comparison, descend the bounded constructible finite-coefficient complex, transfer it across the completion quotient isomorphism, and pull its finite local models back to every refinement.",
+   "text": "Put B=A/I^(n+1). Use the coefficient-restriction/pullback square, the constant-ring module equivalence and exact derived homology comparison to identify the given relative lisse cohomology with the cohomology of P=g* of the fixed-B-coefficient realization of K. The local fixedPullbackIso and fixedHomologyIso are constructed by uniqueness of left adjoints and derived functor composition. Exactness carries every cohomology vanishing of K to P, so P is bounded. The finite local models make every H^q(P) constructible using the identity stratification.",
    "uses": [
-    "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-adic-completion-mod-ideal"
+    "lem-weil-pbc-finite-pullback-constructibility",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each q, descend the constructible sheaf H^q(P) by the fixed-module constructible-origin theorem. Apply the already proved private origin_boundedConstructible_of_homology helper of FiniteCoefficientDerivedOriginPresentation: its finite truncation and triangulated essential-image argument produces an etale complex L with nu* L isomorphic to P. This uses that existing proved helper directly, without constructing an additional finite-coefficient presentation.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-finite-coefficient-derived-origin-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The homology comparison identifies nu* H^q(L) with H^q(P). Reflect finite local constancy with isFiniteLocallyConstantSheaf_of_comparison_finite_models. Faithful exact comparison reflects the zero homology obtained from each zero H^q(K), proving the required degreewise vanishing for L.",
+   "uses": [
+    "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved quotient_map_bijective helper of ConstantAdicQuotientScalarComparison to construct the ring equivalence B with the completion quotient C. Restrict scalars along its inverse and pull L back along V to define level. The scalar_lisse helper keeps a finite-value trivializing cover and restricts each finite model along this ring map; finite_locally_constant_module_values_iff proves finite local constancy. Etale pullback preserves it. Exactness preserves the previously obtained degreewise vanishing.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every refinement W, pull each finite locally constant H^q(L) along W.hom on the etale site, then apply comparison. The comparison/pullback isomorphism and L realization isomorphism give finite local models for W.hom* H^q(P). Exact homology comparison and pullback composition identify these with the fixed-coefficient realization of the original pullback of K along W.hom followed by g. The same fixedHomologyIso and relative/fixed finite-model equivalences give precisely refinementLisse. This argument does not require the arrow from W to V beyond its supplied type.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite",
+    "lem-weil-pbc-finite-pullback-constructibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-pullback-constructibility",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-fixed-module-constructible-origin",
   "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-adic-completion-mod-ideal"
+  "lem-weil-pbc-comparison-finite-local-constancy-reflection",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-pullback-finite",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof_origin": {
-  "by": "worker Q3",
+  "by": "worker K4",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AL and 09B1"
+  "place": "Tags 09AL and 09B1; bounded constructible descent and exact coefficient/pullback comparisons",
+  "date": "2026-10-28",
+  "note": "Lean proof reuses the already proved origin_boundedConstructible_of_homology and quotient_map_bijective helpers with proof-only import all. Private local helpers supply the derived comparison square and finite-model scalar restriction. No statement, structure field or public import changes."
  },
  "mathlib_searches": [
   {
@@ -105,9 +148,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261027T180740-L-3897595",
+  "landing": "20261027T210125-L-1660232",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
