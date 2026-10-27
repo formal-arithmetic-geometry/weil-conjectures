@@ -16,7 +16,7 @@
  "unit": "sk-prop-sf-pf-coherence",
  "kind": "definition",
  "title": "Strict quotient tower and open tensor comparison interfaces",
- "statement": "For the completed coefficient categories, unbounded cochain complexes and strict positive quotient towers on schemes [def-weil-completed-integral-coefficients, def-weil-integral-reduction-tower], define the strict open quotient tensor interfaces formerly declared in OpenTensorQuotientAugmentation. Towers and transpose retain every transition; Balanced retains its coefficient formula; Augmentation its homogeneous scalar-unit formula; ScalarCompatibility and ScalarComparison their actual coefficient-level normalizations. StrictSquare records balanced comparisons, finite coefficient-linear comparisons, their reduction equations, strict augmentation square and localized equality. RoosNormalization pins the augmentation to the first normalized tensor-completion coordinate. FiniteGeometry, FiniteExtensionModel, RestrictionPartitions and IntegralGeometry state the exact geometric properties. Comparison packages these with compatible ordinary and complete open comparisons. All are unchanged definitions or structures, with no existence assertion [def-sf-integral-open-operations, def-sf-integral-open-reduction-comparison-data, def-sf-open-semilinear-tensor-model-data, def-sf-tensor-completion-comparison]. ScalarComponents names exactly the original degreewise ScalarComparison.components proposition, without altering its meaning.",
+ "statement": "For the completed coefficient categories, unbounded cochain complexes and strict positive quotient towers on schemes [def-weil-completed-integral-coefficients, def-weil-integral-reduction-tower], define the strict open quotient tensor interfaces formerly declared in OpenTensorQuotientAugmentation. Towers and transpose retain every transition; Balanced retains its coefficient formula; Augmentation its homogeneous scalar-unit formula; ScalarCompatibility and ScalarComparison their actual coefficient-level normalizations. StrictSquare records balanced comparisons, finite coefficient-linear comparisons, their reduction equations, strict augmentation square and localized equality. RoosNormalization pins the augmentation to the first normalized tensor-completion coordinate. FiniteGeometry, FiniteExtensionModel, RestrictionPartitions and IntegralGeometry state the exact geometric properties. Comparison packages these with compatible ordinary and complete open comparisons. These are definitions or structures, with no existence assertion [def-sf-integral-open-operations, def-sf-integral-open-reduction-comparison-data, def-sf-open-semilinear-tensor-model-data, def-sf-tensor-completion-comparison]. ScalarComponents names exactly the original degreewise ScalarComparison.components proposition, without altering its meaning. In ScalarCompatibility, sections explicitly requires finite scalar restriction to carry every finite extension-by-zero summand to the identical completed-scalar extension summand. This normalization is necessary: finite and systems isomorphisms with only their evaluation equation permit a simultaneous sign twist, which does not preserve scalar-adjunction units.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I; Bhatt–Scholze Lemma 6.5.8(2),(3). Agent-formulated strict-system specialization."
@@ -112,7 +112,8 @@
    "WeilConjectures.OpenTensorQuotient.IntegralGeometry",
    "WeilConjectures.OpenTensorQuotient.Comparison",
    "WeilConjectures.OpenTensorQuotient.ScalarComponents"
-  ]
+  ],
+  "note": "Q3 repair: ScalarCompatibility.sections records the identity on every finite extension summand; all other definitions and projections are retained."
  },
  "reviewed": {
   "date": "2026-10-25",
@@ -125,13 +126,70 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-2391b",
-  "group": "E4",
-  "result": "fix",
-  "landing": "20261025T122806-L-1807639",
+  "reviewer": "C-dc2bf",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T210203-L-1668970",
   "kind": "interface",
-  "note": "independent cc review: item theorem (unchanged signature) against node lem-sf-open-tensor-quotient-augmentation and the context lemma completedOpenTensorRepresentatives; moved block line-diffed against the clone; the 2 new sorried statements read against their nodes and the pinned Operations/TensorComparison/TotalComparison; 3 direct importers compiled against the delivered and the fixed modules"
+  "note": "independent cc review: openQuotientScalarUnitEquation proof and the new ScalarCompatibility.sections field against nodes lem-sf-open-quotient-scalar-unit-equation / def-sf-open-tensor-quotient-data, the change record and 3b importers (8 OK)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "Q3 stage 2",
+  "old_statement": "For the completed coefficient categories, unbounded cochain complexes and strict positive quotient towers on schemes [def-weil-completed-integral-coefficients, def-weil-integral-reduction-tower], define the strict open quotient tensor interfaces formerly declared in OpenTensorQuotientAugmentation. Towers and transpose retain every transition; Balanced retains its coefficient formula; Augmentation its homogeneous scalar-unit formula; ScalarCompatibility and ScalarComparison their actual coefficient-level normalizations. StrictSquare records balanced comparisons, finite coefficient-linear comparisons, their reduction equations, strict augmentation square and localized equality. RoosNormalization pins the augmentation to the first normalized tensor-completion coordinate. FiniteGeometry, FiniteExtensionModel, RestrictionPartitions and IntegralGeometry state the exact geometric properties. Comparison packages these with compatible ordinary and complete open comparisons. All are unchanged definitions or structures, with no existence assertion [def-sf-integral-open-operations, def-sf-integral-open-reduction-comparison-data, def-sf-open-semilinear-tensor-model-data, def-sf-tensor-completion-comparison]. ScalarComponents names exactly the original degreewise ScalarComparison.components proposition, without altering its meaning.",
+  "what": "Repair the missing identity-on-extension-summands normalization of ScalarCompatibility. Without it, replacing both finite and systems by their negatives (and r by its negative) preserves every recorded field but reverses the asserted unit composite; for the identity open over a point with residue characteristic 3 and a nonzero degree-zero module the unit is not its negative. The new sections field records precisely the canonical identity formula promised by the source and the existing existence theorem; it does not assume any tower-unit equation.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tags 03DI and 03DA, direct-sum extension and sheafification; Tag 0E8I, normalized open/scalar comparison."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-open-quotient-coefficient-comparisons",
+    "holds": true,
+    "note": "Only finite, systems and comparison fields are projected. The balancing and fully faithful lifting proof is unchanged."
+   },
+   {
+    "id": "lem-sf-open-quotient-model-geometry",
+    "holds": true,
+    "note": "The geometric predicates do not use scalar comparison fields and their meaning is unchanged."
+   },
+   {
+    "id": "lem-sf-open-quotient-normalized-cochains",
+    "holds": true,
+    "note": "Its proof obtains normalized sc from the scalar-unit compatibility theorem and passes it along; it constructs no ScalarCompatibility record."
+   },
+   {
+    "id": "lem-sf-open-quotient-roos-normalization",
+    "holds": true,
+    "note": "The statement concerns Augmentation and RoosNormalization only; neither definition changes."
+   },
+   {
+    "id": "lem-sf-open-quotient-scalar-comparison-existence",
+    "holds": true,
+    "note": "The construction can still compose finite comparisons degreewise; the new finite normalization gives additional available information and changes no component equation."
+   },
+   {
+    "id": "lem-sf-open-quotient-scalar-compatibility-data",
+    "holds": true,
+    "note": "Its statement and proof in words already promise construction by identity on extension summands; the repaired structure now retains that formula. Its existing sorry remains and is strengthened, not closed."
+   },
+   {
+    "id": "lem-sf-open-quotient-scalar-unit-compatibility",
+    "holds": true,
+    "note": "The existential statement is retained, with genuinely normalized scalar compatibility obtained from the existing normalized-data existence theorem."
+   },
+   {
+    "id": "lem-sf-open-quotient-scalar-unit-equation",
+    "holds": true,
+    "note": "The promised normalized scalar comparison now includes its missing generator formula; the previously false arbitrary-comparison equation has a complete generator proof in this delivery."
+   },
+   {
+    "id": "lem-sf-open-tensor-quotient-augmentation",
+    "holds": true,
+    "note": "The assembled Comparison retains its existing normalized scalar data; no construction of a ScalarCompatibility record is present."
+   }
+  ]
  }
 }

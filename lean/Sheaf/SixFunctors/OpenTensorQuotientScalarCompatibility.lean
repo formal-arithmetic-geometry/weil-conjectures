@@ -8,6 +8,8 @@ module
 public import Sheaf.SixFunctors.OpenTensorQuotientData
 import Sheaf.SixFunctors.OpenQuotientScalarCompatibilityData
 import Sheaf.SixFunctors.OpenQuotientScalarComparisonExistence
+import all Sheaf.SixFunctors.OpenScalarTransitionCompatibility
+import all Sheaf.SixFunctors.OpenFiniteScalarComparison
 
 /-! # Scalar units and open restriction of strict quotient towers
 
@@ -80,6 +82,9 @@ theorem scalarUnitTower_natural (W : Scheme.{u})
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
+attribute [local irreducible] scalarReductionExistence scalarReductionExtension
+  completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
+
 /-- For fixed normalized scalar data and a strict scalar comparison, the scalar-adjunction
 unit agrees with extension by zero. The proof is the generator calculation: both maps
 send each extension summand to the same unit generator, and extensionality of
@@ -97,7 +102,40 @@ theorem openQuotientScalarUnitEquation
           r.iso.hom.app P =
         (Functor.constComp ℕᵒᵖ P (OpenSemilinearTensor.extensionComplex l E j o)).inv ≫
           Functor.whiskerRight (scalarUnitTower l E U P)
-            (OpenSemilinearTensor.extensionComplex l E j o) := by sorry
+            (OpenSemilinearTensor.extensionComplex l E j o) := by
+  intro P
+  apply NatTrans.ext
+  funext n
+  apply HomologicalComplex.hom_ext
+  intro i
+  change (scalarReductionExtension_adjunction l E X n.unop).choose.unit.app
+      ((IntegralOpenReduction.extension l E j o).obj (P.X i)) ≫
+        ((r.iso.hom.app P).app n).f i =
+    (IntegralOpenReduction.extension l E j o).map
+      ((scalarReductionExtension_adjunction l E U n.unop).choose.unit.app (P.X i))
+  have hr := r.components P n.unop i
+  refine (congrArg
+    ((scalarReductionExtension_adjunction l E X n.unop).choose.unit.app
+      ((IntegralOpenReduction.extension l E j o).obj (P.X i)) ≫ ·) hr).trans ?_
+  apply OpenSemilinearTensor.extensionSection_ext l E j o (P.X i) _
+  intro V a x
+  change ((sc.finite n.unop).hom.app
+      ((scalarReductionExtension l E U n.unop).obj (P.X i))).val.app (op V)
+    (((tc.ordinary n.unop).hom.app (P.X i)).val.app (op V)
+      (((scalarReductionExtension_adjunction l E X n.unop).choose.unit.app
+        ((IntegralOpenReduction.extension l E j o).obj (P.X i))).val.app (op V)
+          (IntegralOpenReduction.extensionSection l E j o (P.X i) V a x))) = _
+  have ht := congrArg
+    (fun z ↦ ((sc.finite n.unop).hom.app
+      ((scalarReductionExtension l E U n.unop).obj (P.X i))).val.app (op V) z)
+    (tc.generators n.unop (P.X i) V a x)
+  have hs := sc.sections n.unop
+    ((scalarReductionExtension l E U n.unop).obj (P.X i)) V a
+    (coefficientIntegralScalarUnitSection l E U n.unop (P.X i)
+      (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) x)
+  have hm := OpenSemilinearTensor.extensionSection_map l E j o
+    ((scalarReductionExtension_adjunction l E U n.unop).choose.unit.app (P.X i)) V a x
+  exact ht.trans (hs.trans hm.symm)
 
 /-- Scalar restriction of the fixed open operations admits a strict comparison which
 intertwines the actual scalar-adjunction units on every complex. This is only the

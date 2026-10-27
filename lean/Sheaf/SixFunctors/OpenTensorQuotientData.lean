@@ -164,6 +164,13 @@ structure ScalarCompatibility where
   finite : ∀ n : ℕ,
     IntegralOpenReduction.finiteExtension l E j o n ⋙ scalarReductionRestriction l E X n ≅
       scalarReductionRestriction l E U n ⋙ IntegralOpenReduction.extension l E j o
+  sections : ∀ (n : ℕ) (M : normalizedDVRModules l E U n) (V : X.ProEt)
+    (a : V ⟶ IntegralOpenReduction.openObject j)
+    (x : M.val.obj (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a)))),
+    ((finite n).hom.app M).val.app (op V)
+      (IntegralOpenReduction.finiteExtensionSection l E j o n M V a x) =
+    IntegralOpenReduction.extensionSection l E j o
+      ((scalarReductionRestriction l E U n).obj M) V a x
   systems : (IntegralOpenReduction.systemExtension l E j o).mapHomologicalComplex (.up ℤ) ⋙
       forgetSystems l E X ≅ forgetSystems l E U ⋙ extendTower l E j o
   evaluation : ∀ (C : CochainComplex (coefficientSequenceModules l E U) ℤ)
