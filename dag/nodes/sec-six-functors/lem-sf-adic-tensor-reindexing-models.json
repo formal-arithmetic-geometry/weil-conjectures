@@ -14,23 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Sectionwise inverse image is an exact equivalence. Compose its tensor identification with transport of scalars by B to obtain the exact monoidal equivalence of ordinary module sheaves. On pure sections its tensorator sends the same two sections to their tensor at the reindexed object. Use inverse reindexing to invert it; the unit map is the coefficient map B.",
+   "text": "Use the proved homogeneous-section-normalized cochain tensor comparison. Construct an equivalence on ordinary modules from the sectionwise site equivalence and the inverse scalar isomorphism; its induced cochain functor is an equivalence.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-pur-isomorphism-inverse-image-tensor-hom"
+    "lem-sf-adic-cochain-tensor-reindexing",
+    "lem-weil-proetale-isomorphism-inverse-image"
    ],
    "elementary": false
   },
   {
-   "text": "Extend the tensorator through the direct sums in total degree. Check the two differential summands on each homogeneous pure tensor: additivity preserves the first term and the second term retains its sign (-1)^p. The inverse tensorator inverts the chain map. Exact monoidal equivalence preserves acyclic tensor tests, hence preserves K-flatness.",
+   "text": "For any acyclic test complex N on X, take a preimage Nprime under the cochain equivalence. Faithful exact module reindexing reflects acyclicity, hence Nprime is acyclic. The K-flat hypothesis on P makes totalTensor(Nprime,P) acyclic; exact reindexing preserves that acyclicity. Transport along the cochain tensor comparison and the preimage isomorphism to totalTensor(N,F(P)). This proves every K-flat test.",
    "uses": [
-    "lem-sfb-exact-monoidal-equivalence-total-kflat",
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "lem-sf-adic-cochain-tensor-reindexing",
+    "lem-weil-proetale-isomorphism-inverse-image"
    ],
    "elementary": false
   },
   {
-   "text": "Descend this cochain comparison through the supplied total K-flat model functors A.models and C.models. The exact-derived factorization and their counits give the ReindexTensor representative equation. Apply the coefficient-unit comparison in degree zero; its sections equation is exactly B.functions. No constructible tensor-completion theorem is needed because the ambient model presentations are supplied in At.",
+   "text": "Use the existing independent-coefficient K-flat resolutions to make restriction to K-flat representatives fully faithful on the product derived category. Apply tensorComparisonDescent to the supplied model comparisons C.models and A.models and the exact-derived factorization. Its representative-square conclusion is definitionally the required reindexTensorRepresentative equation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "def-sf-native-adic-tensor-reindexing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical unitToPushforwardObjUnit map is invertible: forget to sheaves of additive groups and check the inverse scalar isomorphism componentwise. Invert it, then apply the degree-zero single-complex comparison. The hom-inverse identities compute its sections as B.iso.hom. The single-complex evaluation isomorphisms give precisely reindexUnitSections. Assemble all seven fields of ReindexTensor.",
    "uses": [
     "def-sf-native-adic-tensor-reindexing"
    ],
@@ -38,16 +48,19 @@
   }
  ],
  "proof_deps": [
+  "lem-sf-adic-cochain-tensor-reindexing",
   "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "lem-sfb-exact-monoidal-equivalence-total-kflat",
-  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
   "def-sf-native-adic-tensor-reindexing"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-28",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "C4, 2026-10-28: explicit native ordinary tensor reindexing on k-flat models subargument of lem-sf-adic-reindexing-core."
+  "place": "BS Remark 6.8.15; native normalized cochain comparison, transport of acyclic tests through the exact equivalence, representative descent, and direct coefficient-unit construction."
  },
  "mathlib_searches": [
   {
@@ -119,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-4bf2f",
-  "group": "C4",
-  "result": "fix",
-  "landing": "20261027T205827-L-1622128",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T234359-L-120248",
   "kind": "interface",
-  "note": "independent cc review: AdicReindexingCore assembly vs FamilyCore fields/item node; 3 new sorry statements vs RingReindex/IntegralReindex/ReindexTensor/compositor specs; FamilyData adaptation vs published original timing (52 s CPU) and compile of all delivered modules plus importer AdicRealizationIsomorphismNormalization against the published FamilyData"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

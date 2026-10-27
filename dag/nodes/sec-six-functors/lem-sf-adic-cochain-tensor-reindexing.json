@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-adic-cochain-tensor-reindexing",
+ "title": "Homogeneous section-normalized cochain tensor reindexing",
+ "statement": "Fix a prime l, schemes X,Y, a scheme isomorphism g:X≅Y, native locally finite adic realizations R,S, and B:RingReindex(l,X,g,R,S) [def-sf-native-adic-reindexing-data]. There exists a natural isomorphism from totalTensor_Y followed by the cochain functor induced by modulePull to the product of that cochain functor followed by totalTensor_X. Its map on every homogeneous pure tensor section is the same pair of sections at the reindexed pro-etale object, namely reindexTensorPure [def-sf-native-adic-tensor-reindexing]. This asserts neither a derived comparison nor K-flat preservation nor a unit comparison.",
+ "stmt_deps": [
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the ordinary natural tensor comparison with its normalized pure-section formula. Use the proved cochainModulesPreadditive theorem for bilinearity of the ordinary sheaf tensor.",
+   "uses": [
+    "lem-sf-sectionwise-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorPullbackTotal to the inverse ordinary comparison. Its naturality checks the total differential, including the integer sign. The ordinary comparison is invertible and module restriction is a left adjoint along this site equivalence; tensorPullbackTotal_isIso therefore makes the total chain map invertible. Naturality in both complexes gives a natural isomorphism; take its inverse.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ι_mapBifunctorDesc equation computes the chain map on each total summand. Cancel its inverse to obtain the forward comparison on the reindexed summand. Evaluate on a pure sheaf section and apply the ordinary normalized formula. This is exactly coefficientTensorGenerator and reindexTensorPure.",
+   "uses": [
+    "def-sf-native-adic-tensor-reindexing",
+    "lem-sf-sectionwise-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; Stacks Project Tags 03EK, 06YN; explicit ordinary/cochain subargument of lem-sf-adic-tensor-reindexing-models."
+ },
+ "proof_deps": [
+  "lem-sf-sectionwise-tensor-comparison",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-28",
+  "note": "Proved section-normalized comparison using existing scalar restriction, sheafification and total-complex APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence of sheaves of modules preserves total tensor products of complexes and K-flat complexes",
+   "results": "8 hits including Module.Flat.iff_rTensor_preserves_shortComplex_exact and Module.Flat.iff_lTensor_preserves_shortComplex_exact; no native normalized reindexing comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the existing sheafification and total-complex APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits including NatIso.ofComponents and its app/hom_app/inv_app equations.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic natural-isomorphism constructor."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|IsKFlatIndependentCoefficients",
+   "results": "10 hits including the exact-derived factorization and the existing independent-coefficient K-flat tests.",
+   "date": "2026-10-28",
+   "verdict": "Reuse these existing definitions; no native normalized comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicTensorReindexingModels",
+  "date": "2026-10-28",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-tensor-reindexing-models",
+   "place": "Ordinary and cochain portions of proof steps 1 and 2.",
+   "via": [
+    "lem-sf-adic-reindexing-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCochainTensorReindexing",
+  "file": "lean/Sheaf/Paper/AdicCochainTensorReindexing.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_cochain_tensor_reindexing",
+  "statement": "theorem exists_cochain_tensor_reindexing {X Y : Scheme.{u}} (g : X ≅ Y)\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    (S : LocallyFiniteAdicRealization.Realization l Y) (B : RingReindex l X g.hom R S) :\n    ∃ chain : coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology Y) (ring l Y S) ⋙\n        (modulePull l X g.hom B).mapHomologicalComplex (.up ℤ) ≅\n      (((modulePull l X g.hom B).mapHomologicalComplex (.up ℤ)).prod\n        ((modulePull l X g.hom B).mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) (ring l X R),\n      reindexTensorPure l X g.hom B chain",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T234359-L-120248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T234359-L-120248",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
