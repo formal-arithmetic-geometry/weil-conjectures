@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.TraceFormula.ScalarModelRoosZeroLiftNestedCoordinateExtensionality
 
 /-! # Uniqueness of a zero-shifted scalar Roos lift
 
@@ -27,14 +28,38 @@ namespace WeilConjectures
 
 attribute [local irreducible] HasDerivedCategory.standard
   integralComparisonSequenceScalarModel coefficientSequenceRestriction coefficientSequenceLimit
-  integralScalarExtensionOfUniverses completedDerivedScalarExtension
-  completedOrdinaryScalarExtension completedScalarCounit
+  integralScalarExtensionOfUniverses completedDerivedScalarExtension completedScalarCounit
 
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})
+
+private theorem scalarModel_cocone_degree_ext
+    {A : Type*} [Category* A] [Preadditive A] [HasBinaryBiproducts A]
+    {K L₀ P : CochainComplex A ℤ} (φ : K ⟶ L₀)
+    (f g : P ⟶ CochainComplex.mappingCocone φ) (i : ℤ)
+    (hf : f.f i ≫ (CochainComplex.mappingCocone.fst φ).f i =
+      g.f i ≫ (CochainComplex.mappingCocone.fst φ).f i)
+    (hs : f.f i ≫ (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) =
+      g.f i ≫ (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega)) :
+    f.f i = g.f i := by
+  have hi := CochainComplex.mappingCocone.id_X φ i (i - 1) (by omega)
+  calc
+    f.f i = f.f i ≫ 𝟙 _ := (Category.comp_id _).symm
+    _ = f.f i ≫ ((CochainComplex.mappingCocone.fst φ).f i ≫
+        (CochainComplex.mappingCocone.inl φ).v i i (by omega) +
+        (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) ≫
+          (CochainComplex.mappingCocone.inr φ).1.v (i - 1) i (by omega)) :=
+      congrArg (f.f i ≫ ·) hi.symm
+    _ = g.f i ≫ ((CochainComplex.mappingCocone.fst φ).f i ≫
+        (CochainComplex.mappingCocone.inl φ).v i i (by omega) +
+        (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) ≫
+          (CochainComplex.mappingCocone.inr φ).1.v (i - 1) i (by omega)) := by
+      rw [Preadditive.comp_add, Preadditive.comp_add, reassoc_of% hf,
+        reassoc_of% hs]
+    _ = g.f i := by rw [hi, Category.comp_id]
 
 /-- A zero-shifted strict Roos map is determined after localization by its unshifted
 coordinates on nested scalar tensors.
@@ -92,6 +117,18 @@ theorem scalarModelRoosZeroLift_uniqueness
           (((completedOrdinaryScalarComplex l E L ι X).obj P.obj).X i) U s
           (completedScalarTensorSection l E L ι X (P.obj.X i) U t x))) :
     DerivedCategory.Q.map h = DerivedCategory.Q.map g := by
-  sorry
+  have hfirst := scalarModelRoosZeroLift_nestedCoordinate_extensionality
+    l E L F ι j X P D h g hcoord
+  have hstrict : h = g := by
+    apply HomologicalComplex.Hom.ext
+    funext i
+    apply scalarModel_cocone_degree_ext
+      (scalarRoosBoundary
+        (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
+          (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
+            (.up ℤ)).obj D)).asFunctor)
+    · exact hfirst i
+    · rw [hh i, hg i]
+  exact congrArg DerivedCategory.Q.map hstrict
 
 end WeilConjectures

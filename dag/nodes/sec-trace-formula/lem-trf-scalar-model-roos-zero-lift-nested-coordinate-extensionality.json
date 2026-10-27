@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-scalar-model-roos-zero-lift-nested-coordinate-extensionality",
+ "kind": "statement",
+ "title": "Nested tensor-coordinate extensionality for a scalar Roos map",
+ "statement": "For the nested completed scalar extension in the scalar Roos construction, equality of the strict unshifted coordinates on all nested scalar tensor generators implies equality of those unshifted coordinate morphisms in every degree.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Stacks 0941; tensor-balancing and sheafification step"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the two ordinary scalar extensions through their change-of-rings witnesses. Apply the sheafification adjunction and the module tensor universal property first to the inner E-to-L extension and then to the outer L-to-F extension. Tensor induction handles sums and balancing, and sheaf separatedness descends the equality from local generators to every section.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1 and Stacks 0941; tensor-balancing and sheafification step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nested scalar tensor generator extensionality Roos coordinate",
+   "results": "No direct project declaration; the split module supplies this missing strict step.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "tensor generator extensionality sheafification Roos coordinate",
+   "results": "Only generic tensor and sheafification extensionality results; no nested completed scalar Roos statement.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nested completed scalar tensor generator equality determines Roos map coordinate",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftUniqueness",
+  "date": "2026-10-28",
+  "group": "V1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-scalar-model-roos-zero-lift-uniqueness",
+   "place": "Strict tensor-balancing and sheafification substep of the uniqueness proof",
+   "via": [
+    "lem-trf-scalar-model-roos-zero-lift-uniqueness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftNestedCoordinateExtensionality",
+  "file": "lean/Sheaf/TraceFormula/ScalarModelRoosZeroLiftNestedCoordinateExtensionality.lean",
+  "declaration": "WeilConjectures.scalarModelRoosZeroLift_nestedCoordinate_extensionality",
+  "statement": "theorem scalarModelRoosZeroLift_nestedCoordinate_extensionality (P : (integralOperationsGoodComplex l E X).FullSubcategory) (D : CochainComplex (coefficientSequenceModules l L X) ℤ) (h g : (completedOrdinaryScalarComplex l L F j X).obj ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ⟶ integralOperationsRoos (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor) (hcoord : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U) (x : (P.obj.X i).val.obj U), ((h.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor)).f i ≫ (Pi.π (fun m : ℕ ↦ (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i).val.app U) (completedScalarTensorSection l L F j X (((completedOrdinaryScalarComplex l E L ι X).obj P.obj).X i) U s (completedScalarTensorSection l E L ι X (P.obj.X i) U t x)) = ((g.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor)).f i ≫ (Pi.π (fun m : ℕ ↦ (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i).val.app U) (completedScalarTensorSection l L F j X (((completedOrdinaryScalarComplex l E L ι X).obj P.obj).X i) U s (completedScalarTensorSection l E L ι X (P.obj.X i) U t x))) : ∀ i : ℤ, h.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor)).f i = g.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor)).f i",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T210256-L-1682723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T210256-L-1682723",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
