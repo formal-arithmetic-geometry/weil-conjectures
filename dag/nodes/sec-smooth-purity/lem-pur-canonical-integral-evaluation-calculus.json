@@ -14,53 +14,44 @@
  ],
  "proof": [
   {
-   "text": "Take the coherent coefficient calculus, retaining its reduction/limit adjunction, actual evaluations, strict quotient representatives, fiber Hom and global-section data. Fix the integral closed model to IntegralOnSlice.duality. Fix normalized duality models on the sequence and finite sites as well. Compare old and new tensors as left adjoints to their common internal Hom, and use uncurrying into the fixed K-injective representative to identify the comparison with the identity on actual total-tensor representatives.",
+   "text": "Choose the existing coherent coefficient calculus. Construct its normalized tensors, representative models, reduction and quotient maps by explicit conjugation. The integral closed field is assigned IntegralOnSlice.duality.closed; no equality of isomorphic presentations is inferred.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-closed-tensor-comparison",
-    "lem-sfb-ringed-site-duality-maps"
+    "def-pur-canonical-coefficient-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 07A4, 08JD (lemma-dual), 0A98 (lemma-internal-hom-composition), 0941; presentation-normalization refinement of the coherent coefficient calculus and step 1 of lem-pur-completed-open-tensor-context."
-   }
+   "elementary": false
   },
   {
-   "text": "Replace the closed fields by the fixed structures and the tensor-model fields by their normalized models. For any old-to-new tensor comparisons a and b, replace a tensor comparison mu for F by F(a inverse);mu;b. Do this also for finite quotient tensor comparisons. Naturality and cancellation prove the finite, evaluation and simultaneous strict-system representative equations using exactly the original chain maps and augmentations. No equality of arbitrary derived system maps is inferred from finite evaluations.",
+   "text": "Apply the proved representativeLaws. Retain all non-tensor fiber data. The baseChange_eq and fiberEvaluation calculations transport fiber evaluation, quotient transitions and beta evaluation. Naturality and transposition follow from the old equations and canonical adjoint comparison. Supply only the two internal-composition families from compositionLaws. This constructs the new fiber calculus explicitly.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
+    "def-pur-canonical-coefficient-reduction",
+    "lem-pur-canonical-coefficient-representative-laws",
+    "lem-pur-canonical-coefficient-composition-laws",
     "lem-coef-closed-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 07A4, 08JD (lemma-dual), 0A98 (lemma-internal-hom-composition), 0941; presentation-normalization refinement of the coherent coefficient calculus and step 1 of lem-pur-completed-open-tensor-context."
-   }
+   "elementary": false
   },
   {
-   "text": "The evaluation and transpose identities show that the resulting base-change map equals the old one; thus its naturality, fiber formula and enriched invertibility, and the gamma/projection/H-zero identities, remain valid. For internal composition use the new normalized associators: on three K-flat representatives both composites reassociate the same pure tensors and evaluate phi(psi(x)); localization gives the composition equation. This uses the actual associator normalization, rather than asserting monoidality of an arbitrary adjoint comparison. The mapping-composition equation follows by adjunction naturality. Retain the remaining scalar, resolution and global-limit fields. The integral closed field was assigned the fixed value, so its equality is reflexivity. Zero objects, empty schemes and unbounded representatives are included.",
+   "text": "Retain the old globalLimit and resolution coherence. The proved enriched_eq makes the new gamma.hom equal the old one, so gamma projection, naturality and degree-zero Hom projection transfer verbatim. Enriched invertibility follows from coefficientClosedEnriched_isIso. Prove mapping composition directly by adjunction naturality and tensor-comparison naturality, as in the existing calculus assembly. Assemble the coherence record; the required integralClosed equality is reflexivity.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-closed-tensor-comparison",
-    "lem-sfb-ringed-site-duality-maps"
+    "def-pur-canonical-coefficient-reduction",
+    "lem-coef-derived-system-evaluation-calculus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 07A4, 08JD (lemma-dual), 0A98 (lemma-internal-hom-composition), 0941; presentation-normalization refinement of the coherent coefficient calculus and step 1 of lem-pur-completed-open-tensor-context."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pur-canonical-coefficient-reduction",
   "lem-coef-closed-tensor-comparison",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-sfb-ringed-site-duality-maps"
+  "lem-pur-canonical-coefficient-composition-laws",
+  "lem-pur-canonical-coefficient-representative-laws"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 07A4, 08JD (lemma-dual), 0A98 (lemma-internal-hom-composition), 0941; presentation-normalization refinement of the coherent coefficient calculus and step 1 of lem-pur-completed-open-tensor-context."
+  "place": "Tags 07A4, 08JD (lemma-dual), 0A98 (lemma-internal-hom-composition), 0941; canonical integral calculus, presentation-normalization steps 1--3.",
+  "note": "Explicit presentation transport and assembly. Sole new residual obligation: two internal-composition families, not existence of a canonical calculus."
  },
  "mathlib_searches": [
   {
@@ -141,9 +132,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261027T180659-L-3890449",
+  "landing": "20261027T234402-L-121324",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
