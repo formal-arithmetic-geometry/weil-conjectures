@@ -10,24 +10,51 @@
  },
  "proof": [
   {
-   "text": "Restrict fixed-scalar charts to each etale object and use finite presentation of modules over the finite coefficient ring. Apply coefficientFpLocalSystem_etaleCover, then transport each chart through the normalized constant-module and ringed-slice comparisons to obtain the displayed completed-adic model on an etale covering sieve.",
+   "text": "Transport the fixedModels hypothesis to the AsSmall site with ProFiniteModels.fixedModels_asSmall. Over the Noetherian lifted finite ring, finite modules are finitely presented. Apply coefficientFpLocalSystem_etaleCover. The proved comparison_coversTop_reflect helper reflects its cover to the etale model site, and continuous AsSmall.down transports that cover to concrete etale objects. Undo the slice equivalence on each chart and apply the proved fixedModelSchemeIso helper to obtain a constant model on its scheme.",
    "uses": [
+    "lem-sfb-proetale-fp-local-models-comparison",
     "lem-pe-coefficient-fp-local-system-etale-cover",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-sfb-site-derived-constant-module-functor"
+    "lem-pe-coefficient-comparison-finite-reflection",
+    "lem-sfb-proetale-fp-local-models-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite module M over ULift B, restrict along the inverse lifted-ring equivalence. Module.Finite.of_surjective transfers finite generation. Module.Finite.small supplies a carrier in universe t; Shrink.linearEquiv and ULift give an explicit linear isomorphism from the required lifted small B-module to M. This is the fully proved private small_finite_module lemma; no witness is chosen from an unproved existence statement.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved sliceCoordinates equivalence and sliceCoordinatesSquare from the slice-model transport module. The unit of pbcScalarAdjunction is invertible since scalar restriction along phi is an equivalence. Compose its inverse with koszulConstantScalarIso and constantLocalizationIso to identify the fixed coordinates of the actual completedAdicChange constant model with the constant lifted module. Transport the small-model linear isomorphism through constantSheaf and reflect the resulting isomorphism through the fully faithful sliceCoordinates functor. This proves the private ringed_model_of_fixed lemma, without a derived-category argument.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-slice-model-transport",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose each etale chart over V.left with V.hom, giving an X-etale object and an arrow to V. The etale covering criterion follows from joint surjectivity of the original family. Generate its sieve and pull back along any g:W to V. Every member factors through one original chart. The proved fixedRestrictionComp and fixedConstantPullbackIso helpers restrict its constant model to that member. Apply ringed_model_of_fixed to obtain the displayed small finite completed-adic model. All constructions work also for the empty cover and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-slice-model-transport",
+    "lem-sfb-proetale-fp-local-models-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sfb-proetale-fp-local-models-comparison",
   "lem-pe-coefficient-fp-local-system-etale-cover",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-sfb-site-derived-constant-module-functor"
+  "lem-pe-coefficient-comparison-finite-reflection",
+  "lem-sfb-proetale-fp-local-models-pullback",
+  "lem-weil-pbc-finite-coefficient-slice-model-transport",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099Y"
+  "place": "Tag 099Y, lemma-compare-locally-constant; ordinary scalar and slice comparison in sites-modules.tex, Tags 03CY and 04IX. Implemented by E6 using the existing proved private comparison helpers and three fully proved private local lemmas."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -91,9 +118,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "E6",
   "result": "pass",
-  "landing": "20261027T123526-L-2316468",
+  "landing": "20261027T180547-L-3875902",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
