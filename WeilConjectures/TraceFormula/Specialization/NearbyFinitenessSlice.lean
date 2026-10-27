@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
+public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 
 /-!
 
@@ -20,9 +21,11 @@ dimension (SGA 4½, [Th. finitude], proof of Thm. 3.2), using the coordinate gen
 special fibres `hᵢ,ₛ : 𝔸ⁿ_K ⟶ 𝔸ⁿ⁺¹_{k'}` (`AlgebraicGeometry.affineSpaceSliceSpecial`), the
 geometric generic fibres of the coordinate projections of the special fibre. The two steps are:
 
-* **slices** (`NearbyCyclesModel.nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice`):
-  `Lhᵢ,ₛ^* Ψ B` is a retract of the nearby cycles `Ψ_K (Lhᵢ^* B)` of the slice over the trait
-  `Spec K⟦t⟧`. The slice `Spec K⟦t⟧ ⟶ 𝔸¹_S` is (up to a purely inseparable extension of the
+* **slices** (`NearbyCyclesModel.isSplitMono_pullbackExchange_app_affineSpaceSliceHom`):
+  the pullback exchange `α : Lhᵢ,ₛ^* Ψ B ⟶ Ψ_K (Lhᵢ^* B)` of the morphism of geometric models
+  over the slice (`NearbyCyclesModel.affineSpaceSliceHom`) is a split monomorphism, so `Lhᵢ,ₛ^* Ψ B`
+  is a retract of the nearby cycles over the trait `Spec K⟦t⟧`
+  (`NearbyCyclesModel.nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice`). The slice `Spec K⟦t⟧ ⟶ 𝔸¹_S` is (up to a purely inseparable extension of the
   residue field) the completion of the strict localization `S'` of `𝔸¹_S` at the generic point of
   its special fibre. The nearby cycles over `S` of the base change to `S'` are the invariants
   `(Ψ_{S'})^P` of the nearby cycles over `S'` under the kernel `P` of the surjection of inertia
@@ -92,14 +95,57 @@ noncomputable def affineSpaceSliceSpecialFibre (n : ℕ) (i : Fin (n + 1)) :
       (traitStdSpecialFibre (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k')).left :=
   affineSpaceSliceSpecial n i (coordinateSliceElement k')
 
+variable (k') in
+/-- The coordinate generic slice of the geometric generic fibres
+`𝔸ⁿ_{K⟦t⟧} ×_{K⟦t⟧} Spec Ω_K ⟶ 𝔸ⁿ⁺¹_S ×_S Spec Ω`, induced by `hᵢ` and the embedding
+`Ω ⟶ Ω_K` of the fields of the geometric generic points
+(`AlgebraicGeometry.traitGenericFieldMap`). -/
+noncomputable def affineSpaceSliceGeneric (n : ℕ) (i : Fin (n + 1)) :
+    (affineSpaceModel (coordinateSliceField k') n).generic ⟶
+      (affineSpaceModel k' (n + 1)).generic :=
+  pullback.lift (pullback.fst _ _ ≫ affineSpaceSliceTotal k' n i)
+    (pullback.snd _ _ ≫ traitGenericPointMap k' (coordinateSliceField k')) (by
+      rw [Category.assoc, affineSpaceSliceTotal, affineSpaceSlice_over, pullback.condition_assoc,
+        Category.assoc, traitGenericPoint_traitMap])
+
+variable (k') in
+/-- The **morphism of geometric models over the coordinate generic slice** `hᵢ`: from the standard
+model of `𝔸ⁿ_{K⟦t⟧}` over `Spec K⟦t⟧` to the standard model of `𝔸ⁿ⁺¹_S` over `S`, with the slices
+`hᵢ` of the total spaces, `hᵢ,ₛ` of the special fibres, and of the geometric generic fibres. -/
+@[simps]
+noncomputable def affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1)) :
+    (affineSpaceModel (coordinateSliceField k') n).geometric.Hom
+      (affineSpaceModel k' (n + 1)).geometric (affineSpaceSliceTotal k' n i)
+      (affineSpaceSliceSpecialFibre k' n i) where
+  total := affineSpaceSliceTotal k' n i
+  generic := affineSpaceSliceGeneric k' n i
+  comm_j := pullback.lift_fst _ _ _
+  comm_i := affineSpaceSliceSpecial_fst _ _ _
+  comm_ε := pullback.lift_fst _ _ _
+
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 /-- **Nearby cycles on the coordinate generic slices** (SGA 4½, [Th. finitude], Lemme 3.3 and
-3.7): for a bounded constructible complex `B` on `𝔸ⁿ⁺¹_S` and a coordinate `i`, the restriction
-`Lhᵢ,ₛ^* Ψ B` of its nearby cycles to the geometric generic fibre `𝔸ⁿ_K` of the `i`-th coordinate
-projection of the special fibre is a retract of the nearby cycles `Ψ_K (Lhᵢ^* B)` of its
-pullback to the slice `𝔸ⁿ_{K⟦t⟧}`: it is their invariants under a pro-`p` group (`p ≠ ℓ`). See
-the module docstring; `sorry`ed. -/
+3.7): for a bounded constructible complex `B` on `𝔸ⁿ⁺¹_S` and a coordinate `i`, the pullback
+exchange `α : Lhᵢ,ₛ^* Ψ B ⟶ Ψ_K (Lhᵢ^* B)` of the morphism of models over the slice
+(`NearbyCyclesModel.affineSpaceSliceHom`) is a split monomorphism: it is the inclusion of the
+invariants of `Ψ_K (Lhᵢ^* B)` under a pro-`p` group `P` (`p ≠ ℓ`), split by averaging over `P`.
+See the module docstring; `sorry`ed. -/
+theorem isSplitMono_pullbackExchange_app_affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1))
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
+      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        (affineSpaceModel k' (n + 1)).total))}
+    (hB : boundedConstructible _ B) :
+    IsSplitMono (((affineSpaceSliceHom k' n i).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)).app B) :=
+  sorry
+
+/-- **Nearby cycles on the coordinate generic slices are retracts**: for a bounded constructible
+complex `B` on `𝔸ⁿ⁺¹_S` and a coordinate `i`, the restriction `Lhᵢ,ₛ^* Ψ B` of its nearby cycles
+to the geometric generic fibre `𝔸ⁿ_K` of the `i`-th coordinate projection of the special fibre is
+a retract of the nearby cycles `Ψ_K (Lhᵢ^* B)` of its pullback to the slice `𝔸ⁿ_{K⟦t⟧}`, through
+the pullback exchange
+(`NearbyCyclesModel.isSplitMono_pullbackExchange_app_affineSpaceSliceHom`). -/
 theorem nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice (n : ℕ) (i : Fin (n + 1))
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
@@ -112,7 +158,9 @@ theorem nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice (n : ℕ) (i : 
       (((affineSpaceModel (coordinateSliceField k') n).geometric.nearbyCycles
         (Profinite.padicAlgClRingObj ℓ)).obj
           ((L((affineSpaceSliceTotal k' n i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj B))) :=
-  sorry
+  have := isSplitMono_pullbackExchange_app_affineSpaceSliceHom n i hB
+  ⟨⟨_, retraction (((affineSpaceSliceHom k' n i).pullbackExchange
+    (Profinite.padicAlgClRingObj ℓ)).app B), IsSplitMono.id _⟩⟩
 
 /-- **Deligne's criterion on the coordinate slices** (SGA 4½, [Th. finitude], proof of Thm. 3.2):
 if for every coordinate `i` and every bounded constructible complex `B` on `𝔸ⁿ⁺¹_S`, the
