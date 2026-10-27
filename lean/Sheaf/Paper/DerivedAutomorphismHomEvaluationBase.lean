@@ -11,29 +11,16 @@ public import Sheaf.Paper.DerivedPullbackTensorIso
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 
-import Mathlib.CategoryTheory.Adjunction.Additive
-import all Sheaf.Paper.IsomorphismReductionTower
-import Sheaf.Paper.PurInverseImageTensorHom
+import Mathlib.CategoryTheory.Yoneda
+import Mathlib.CategoryTheory.HomCongr
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
 public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.PodReindexingHomCoefficientDescent
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
-import Sheaf.Paper.CompletedOperationTowerSubstitution
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.WeilCompletedTensorReflector
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import all Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
-import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -76,7 +63,6 @@ namespace WeilConjectures
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
   HasDerivedCategory.standard
-attribute [-instance] isoReductionAbSheafify isoReductionAbBijective isoReductionSiteSmall
 
 /-- Partial closed data on precisely the pairs for which internal Hom is permitted.
 Source: Stacks 08J9 and the integral qualification in the node
@@ -153,6 +139,189 @@ structure PodPartialHomCompatibility {C : Type a} {D : Type c}
     SD.transpose _ _ ((μ L P.obj.1.unop).inv ≫ F.map f) =
       F.map (SC.transpose L P f) ≫ podPartialHomComparison SC SD F h μ P
 
+-- Closed-adjunction calculations are independent of sites and coefficient models.
+section ClosedComparisonCalculus
+universe w z
+variable {C : Type u} {D : Type v} [Category.{w} C] [Category.{z} D]
+  {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}
+  (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)
+  (F : C ⥤ D) (μ : SC.tensor ⋙ F ≅ F.prod F ⋙ SD.tensor)
+
+private theorem uncurry_eq (L M N : C) (f : L ⟶ HC.obj (op M, N)) :
+    (SC.transpose L M N).symm f =
+      SC.tensor.map (Prod.mkHom f (𝟙 M)) ≫ SC.evaluation M N := by
+  let := SC.monoidal
+  simpa only [CoefficientClosedStructure.transpose, CoefficientClosedStructure.evaluation,
+    CoefficientClosedStructure.tensor, MonoidalCategory.tensorRight,
+    MonoidalCategory.tensorLeft, MonoidalCategory.curriedTensor, Functor.flip,
+    Functor.comp_map, Functor.id_map, Prod.sectR, MonoidalCategory.tensor_obj, Functor.comp_obj,
+    MonoidalCategory.tensor_map,
+    MonoidalCategory.tensorHom_id, MonoidalCategory.id_tensorHom] using
+    (SC.adjunction M).homEquiv_symm_apply L N f
+
+private theorem eval_map (M M' N N' : C) (a : M' ⟶ M) (b : N ⟶ N') :
+    SC.tensor.map (Prod.mkHom (HC.map (Prod.mkHom a.op b)) (𝟙 M')) ≫
+      SC.evaluation M' N' =
+    SC.tensor.map (Prod.mkHom (𝟙 _) a) ≫ SC.evaluation M N ≫ b := by
+  let := SC.monoidal
+  have hb := (SC.adjunction M').counit.naturality b
+  have hb' : SC.tensor.map (Prod.mkHom (HC.map (Prod.mkHom (𝟙 (op M')) b))
+      (𝟙 M')) ≫ SC.evaluation M' N' = SC.evaluation M' N ≫ b := by
+    simpa only [CoefficientClosedStructure.transpose, CoefficientClosedStructure.evaluation,
+      CoefficientClosedStructure.tensor, MonoidalCategory.tensorRight,
+      MonoidalCategory.tensorLeft, MonoidalCategory.curriedTensor, Functor.flip,
+      Functor.comp_map, Functor.id_map, Prod.sectR, MonoidalCategory.tensor_obj, Functor.comp_obj,
+      MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id,
+      MonoidalCategory.id_tensorHom] using
+      hb
+  have ha := SC.evaluation_naturality M M' N a
+  have ha' : SC.tensor.map (Prod.mkHom (HC.map (Prod.mkHom a.op (𝟙 N))) (𝟙 M')) ≫
+      SC.evaluation M' N = SC.tensor.map (Prod.mkHom (𝟙 _) a) ≫
+        SC.evaluation M N := by
+    simpa only [CoefficientClosedStructure.evaluation, CoefficientClosedStructure.tensor,
+      MonoidalCategory.tensorRight, MonoidalCategory.tensorLeft,
+      MonoidalCategory.curriedTensor, Functor.flip, MonoidalCategory.tensor_obj, Functor.comp_obj,
+      MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id,
+      MonoidalCategory.id_tensorHom] using
+      ha
+  have hp : Prod.mkHom a.op b =
+      Prod.mkHom a.op (𝟙 N) ≫ Prod.mkHom (𝟙 (op M')) b := by simp
+  rw [hp, HC.map_comp]
+  have ht : Prod.mkHom
+      (HC.map (Prod.mkHom a.op (𝟙 N)) ≫ HC.map (Prod.mkHom (𝟙 (op M')) b))
+      (𝟙 M') = Prod.mkHom (HC.map (Prod.mkHom a.op (𝟙 N))) (𝟙 M') ≫
+        Prod.mkHom (HC.map (Prod.mkHom (𝟙 (op M')) b)) (𝟙 M') := by simp
+  rw [ht, SC.tensor.map_comp, Category.assoc, hb', ← Category.assoc, ha', Category.assoc]
+
+private theorem transpose_transport (L M N : C)
+    (b : SC.tensor.obj (L, M) ⟶ N) :
+    SD.transpose _ _ _ (μ.inv.app (L, M) ≫ F.map b) =
+      F.map (SC.transpose L M N b) ≫
+        SD.transpose _ _ _ (μ.inv.app (HC.obj (op M, N), M) ≫
+          F.map (SC.evaluation M N)) := by
+  let := SD.monoidal
+  let t := SC.transpose L M N b
+  have ht : SC.tensor.map (Prod.mkHom t (𝟙 M)) ≫ SC.evaluation M N = b := by
+    rw [← uncurry_eq]
+    exact (SC.transpose L M N).symm_apply_apply b
+  have hn := μ.inv.naturality (Prod.mkHom t (𝟙 M))
+  change SD.tensor.map (Prod.mkHom (F.map t) (F.map (𝟙 M))) ≫
+      μ.inv.app (HC.obj (op M, N), M) =
+    μ.inv.app (L, M) ≫ F.map (SC.tensor.map (Prod.mkHom t (𝟙 M))) at hn
+  rw [F.map_id] at hn
+  have h := (SD.adjunction (F.obj M)).homEquiv_naturality_left (F.map t)
+    (μ.inv.app (HC.obj (op M, N), M) ≫ F.map (SC.evaluation M N))
+  have h' : SD.transpose _ _ _
+      (SD.tensor.map (Prod.mkHom (F.map t) (𝟙 (F.obj M))) ≫
+        (μ.inv.app (HC.obj (op M, N), M) ≫ F.map (SC.evaluation M N))) =
+      F.map t ≫ SD.transpose _ _ _
+        (μ.inv.app (HC.obj (op M, N), M) ≫ F.map (SC.evaluation M N)) := by
+    simpa only [CoefficientClosedStructure.transpose, CoefficientClosedStructure.evaluation,
+      CoefficientClosedStructure.tensor, MonoidalCategory.tensorRight,
+      MonoidalCategory.tensorLeft, MonoidalCategory.curriedTensor, Functor.flip,
+      Functor.comp_map, Functor.id_map, Prod.sectR, MonoidalCategory.tensor_obj, Functor.comp_obj,
+      MonoidalCategory.tensor_map, MonoidalCategory.tensorHom_id,
+      MonoidalCategory.id_tensorHom] using
+      h
+  rw [← Category.assoc, hn, Category.assoc, ← F.map_comp, ht] at h'
+  exact h'
+
+private theorem uncurry_comp (L L' M N : C) (f : L' ⟶ L)
+    (h : L ⟶ HC.obj (op M, N)) :
+    (SC.transpose L' M N).symm (f ≫ h) =
+      SC.tensor.map (Prod.mkHom f (𝟙 M)) ≫ (SC.transpose L M N).symm h := by
+  rw [uncurry_eq, uncurry_eq]
+  have hp : Prod.mkHom (f ≫ h) (𝟙 M) =
+      Prod.mkHom f (𝟙 M) ≫ Prod.mkHom h (𝟙 M) := by simp
+  rw [hp, SC.tensor.map_comp, Category.assoc]
+
+private theorem uncurry_hom_map (L M M' N N' : C)
+    (h : L ⟶ HC.obj (op M, N)) (a : M' ⟶ M) (b : N ⟶ N') :
+    (SC.transpose L M' N').symm (h ≫ HC.map (Prod.mkHom a.op b)) =
+      SC.tensor.map (Prod.mkHom (𝟙 L) a) ≫ (SC.transpose L M N).symm h ≫ b := by
+  rw [uncurry_comp, uncurry_eq, eval_map, uncurry_eq]
+  simp only [← Category.assoc, ← SC.tensor.map_comp]
+  congr 2
+  congr 1
+  apply Prod.hom_ext <;> simp
+
+private def closedComparison (M N : C) :
+    F.obj (HC.obj (op M, N)) ⟶ HD.obj (op (F.obj M), F.obj N) :=
+  SD.transpose _ _ _ (μ.inv.app (HC.obj (op M, N), M) ≫ F.map (SC.evaluation M N))
+
+private theorem comparison_naturality (M M' N N' : C) (a : M' ⟶ M) (b : N ⟶ N') :
+    F.map (HC.map (Prod.mkHom a.op b)) ≫ closedComparison SC SD F μ M' N' =
+      closedComparison SC SD F μ M N ≫ HD.map (Prod.mkHom (F.map a).op (F.map b)) := by
+  apply (SD.transpose _ (F.obj M') (F.obj N')).symm.injective
+  rw [uncurry_comp, uncurry_hom_map]
+  simp only [closedComparison, Equiv.symm_apply_apply]
+  have hn₁ := μ.inv.naturality
+    (Prod.mkHom (HC.map (Prod.mkHom a.op b)) (𝟙 M'))
+  have hn₂ := μ.inv.naturality (Prod.mkHom (𝟙 (HC.obj (op M, N))) a)
+  dsimp only [Functor.comp_map, Functor.prod_map] at hn₁ hn₂
+  rw [F.map_id] at hn₁ hn₂
+  rw [← Category.assoc, hn₁, Category.assoc, ← F.map_comp, eval_map,
+    F.map_comp, F.map_comp, ← Category.assoc, ← Category.assoc, ← hn₂]
+  simp only [Category.assoc]
+
+private theorem comparison_evaluation (M N : C) :
+    μ.hom.app (HC.obj (op M, N), M) ≫
+      SD.tensor.map (Prod.mkHom (closedComparison SC SD F μ M N) (𝟙 (F.obj M))) ≫
+        SD.evaluation (F.obj M) (F.obj N) = F.map (SC.evaluation M N) := by
+  rw [← uncurry_eq]
+  simp only [closedComparison, Equiv.symm_apply_apply, Iso.hom_inv_id_app_assoc]
+
+private theorem comparison_isIso [F.IsEquivalence] (M N : C) :
+    IsIso (closedComparison SC SD F μ M N) := by
+  -- On objects in the essential image, postcomposition is the closed Hom bijection.
+  have hL (L : C) : Function.Bijective
+      (fun x : F.obj L ⟶ F.obj (HC.obj (op M, N)) ↦
+        x ≫ closedComparison SC SD F μ M N) := by
+    let e : (L ⟶ HC.obj (op M, N)) ≃
+        (F.obj L ⟶ HD.obj (op (F.obj M), F.obj N)) :=
+      (SC.transpose L M N).symm.trans
+        ((Functor.FullyFaithful.ofFullyFaithful F).homEquiv.trans
+          ((Iso.homCongr (μ.app (L, M)) (Iso.refl (F.obj N))).trans
+            (SD.transpose _ _ _)))
+    have he (x : L ⟶ HC.obj (op M, N)) :
+        e x = F.map x ≫ closedComparison SC SD F μ M N := by
+      dsimp only [e, Equiv.trans_apply, Iso.homCongr, Equiv.coe_fn_mk,
+        Functor.FullyFaithful.homEquiv, Iso.refl_hom]
+      rw [Category.comp_id]
+      change SD.transpose _ _ _ (μ.inv.app (L, M) ≫
+        F.map ((SC.transpose L M N).symm x)) = _
+      rw [transpose_transport, Equiv.apply_symm_apply]
+      rfl
+    have hbij : Function.Bijective
+        (fun x : L ⟶ HC.obj (op M, N) ↦
+          F.map x ≫ closedComparison SC SD F μ M N) := by
+      simpa only [← he] using e.bijective
+    constructor
+    · intro x y hxy
+      obtain ⟨x₀, rfl⟩ := F.map_surjective x
+      obtain ⟨y₀, rfl⟩ := F.map_surjective y
+      exact congrArg F.map (hbij.1 hxy)
+    · intro y
+      obtain ⟨x, hx⟩ := hbij.2 y
+      exact ⟨F.map x, hx⟩
+  -- Transfer the bijection to arbitrary test objects using essential surjectivity.
+  apply isIso_of_yoneda_map_bijective
+  intro T
+  let e := F.objObjPreimageIso T
+  constructor
+  · intro x y hxy
+    apply (cancel_epi e.hom).mp
+    apply (hL (F.objPreimage T)).1
+    simpa only [Category.assoc] using congrArg (fun z ↦ e.hom ≫ z) hxy
+  · intro y
+    obtain ⟨x, hx⟩ := (hL (F.objPreimage T)).2 (e.hom ≫ y)
+    refine ⟨e.inv ≫ x, ?_⟩
+    change (e.inv ≫ x) ≫ closedComparison SC SD F μ M N = y
+    change x ≫ closedComparison SC SD F μ M N = e.hom ≫ y at hx
+    rw [Category.assoc, hx, Iso.inv_hom_id_assoc]
+
+end ClosedComparisonCalculus
+
 section Finite
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -175,6 +344,22 @@ def podFiniteHomComparison (n : ℕ)
       ((finiteIntrinsicDerivedInternalHom l E Y n).obj (op M, N)) M).inv ≫
       (finiteDerivedPullback l E n g).map (finiteIntrinsicEvaluation l E Y n M N))
 
+private def finiteComparisonTensor (n : ℕ) :
+    finiteIntrinsicDerivedTensor l E Y n ⋙ finiteDerivedPullback l E n g ≅
+      (finiteDerivedPullback l E n g).prod (finiteDerivedPullback l E n g) ⋙
+        finiteIntrinsicDerivedTensor l E X n :=
+  finitePullbackTensorConstructionIso l E g n
+
+omit [IsIso g] in
+private theorem finiteComparison_eq (n : ℕ)
+    (M N : proEtaleDerivedCategory Y (finiteCoefficientRing l E (n + 1))) :
+    closedComparison (finiteIntrinsicClosed l E Y n) (finiteIntrinsicClosed l E X n)
+      (finiteDerivedPullback l E n g) (finiteComparisonTensor l E g n) M N =
+        podFiniteHomComparison l E g n M N := by
+  rfl
+
+-- Preserve the published isomorphism-instance binder, although naturality needs no equivalence.
+set_option linter.unusedSectionVars false in
 /-- Naturality of the finite comparison in both inputs: the naturality clause of
 `podFiniteHomComparison_laws`.
 Source: Stacks 0GMX; node lem-pod-derived-automorphism-hom-evaluation, steps 1--2.
@@ -196,17 +381,20 @@ theorem podFiniteHomComparison_naturality (n : ℕ)
       (finiteIntrinsicDerivedInternalHom l E X n).map
         (Prod.mkHom ((finiteDerivedPullback l E n g).map a).op
           ((finiteDerivedPullback l E n g).map b)) := by
-  sorry
+  simpa only [finiteComparison_eq] using
+    comparison_naturality (finiteIntrinsicClosed l E Y n) (finiteIntrinsicClosed l E X n)
+      (finiteDerivedPullback l E n g) (finiteComparisonTensor l E g n) M M' N N' a b
 
 /-- The finite comparison's invertibility, evaluation equation and transpose
 equation: the clauses of `podFiniteHomComparison_laws` other than naturality.
 Source: Stacks 0GMX; node lem-pod-derived-automorphism-hom-evaluation, steps 1--2.
-Proof: reindexing along the isomorphism of sites is an exact equivalence that
-preserves K-flat and K-injective complexes, products and total tensor; its
-product-Hom comparison `c⁰` is an isomorphism for arbitrary unbounded inputs
-(lem-pod-reindexing-hom-resolution-model), and the evaluation calculus
-identifies `c⁰` with the evaluation-defined comparison
-(lem-pod-reindexing-evaluation-shift-composition); hence `c` is invertible.
+Proof: finite pullback is an equivalence: transport the fixed-coefficient
+inverse-image equivalence through the intrinsic module realizations and then
+pass to the ordinary unbounded derived category. For any test object in its
+essential image, closed transposition, full faithfulness, and the canonical
+tensor comparison identify postcomposition with `c` with a composite of Hom
+bijections. Essential surjectivity gives this for every test object, so Yoneda
+makes `c` invertible. No resolution comparison or boundedness is needed.
 The evaluation equation is the counit identity of the transpose defining `c`,
 precomposed with `μ`. For the transpose equation, transpose both sides: by
 parameter naturality and naturality of `μ` the right side becomes
@@ -228,7 +416,25 @@ theorem podFiniteHomComparison_laws_remaining (n : ℕ) :
           (finiteDerivedPullback l E n g).map b) =
       (finiteDerivedPullback l E n g).map (finiteIntrinsicTranspose l E Y n L M N b) ≫
         podFiniteHomComparison l E g n M N) := by
-  sorry
+  have : (finiteDerivedPullback l E n g).IsEquivalence := by
+    let A := finiteCoefficientRing l E (n + 1)
+    let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+    change (sfIntrinsicPullback A g).mapDerivedCategory.IsEquivalence
+    have : (sfIntrinsicPullback A g).IsEquivalence := by
+      unfold sfIntrinsicPullback sfIntrinsicTransport
+      infer_instance
+    infer_instance
+  refine ⟨?_, ?_, ?_⟩
+  · intro M N
+    rw [← finiteComparison_eq]
+    exact comparison_isIso (finiteIntrinsicClosed l E Y n) (finiteIntrinsicClosed l E X n)
+      (finiteDerivedPullback l E n g) (finiteComparisonTensor l E g n) M N
+  · intro M N
+    exact comparison_evaluation (finiteIntrinsicClosed l E Y n) (finiteIntrinsicClosed l E X n)
+      (finiteDerivedPullback l E n g) (finiteComparisonTensor l E g n) M N
+  · intro L M N b
+    exact transpose_transport (finiteIntrinsicClosed l E Y n) (finiteIntrinsicClosed l E X n)
+      (finiteDerivedPullback l E n g) (finiteComparisonTensor l E g n) L M N b
 
 /-- Finite unbounded internal Hom is preserved, naturally and with its actual evaluation
 and transposition. Source: Stacks 0GMX, node proof steps 1--5.

@@ -6,7 +6,7 @@
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 0GMX (pullback and internal Hom), comparison isomorphism, evaluation and transposition"
  },
- "proof_origin": "Stage-3 decomposition of podFiniteHomComparison_laws (lem-pod-derived-automorphism-hom-evaluation, steps 1--2): the clauses other than naturality.",
+ "proof_origin": "A2, 2026-10-28: complete closed-adjunction calculation in private helpers, specialized to the unchanged evaluation-defined comparison and canonical tensor comparison. Invertibility uses the proved fixed-coefficient inverse-image equivalence and Hom bijections instead of the resolution-comparison plan.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -58,37 +58,51 @@
  ],
  "proof": [
   {
-   "text": "(i) Reindexing along the isomorphism of sites is an exact equivalence preserving K-flat and K-injective complexes, products and total tensor; its product-Hom comparison $c^0$ is an isomorphism for arbitrary unbounded inputs [lem-pod-reindexing-hom-resolution-model]. The evaluation calculus identifies $c^0$ with the evaluation-defined comparison $c_{M,N}$ [lem-pod-reindexing-evaluation-shift-composition, def-pod-system-hom-reindexing-maps]; hence $c_{M,N}$ is invertible.",
+   "text": "Transport the existing fixed-coefficient upperStar equivalence for the scheme isomorphism g through sfIntrinsicModuleEquivalence on Y and X. The source-library isEquivalence_mapDerivedCategory instance makes the exact termwise unbounded derived functor, hence finiteDerivedPullback, an equivalence.",
    "uses": [
-    "lem-pod-reindexing-hom-resolution-model",
-    "lem-pod-reindexing-evaluation-shift-composition",
-    "def-pod-system-hom-reindexing-maps"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(ii) $c_{M,N}$ is the transpose of $F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}$ [def-pod-system-hom-reindexing-maps]; the counit identity of the closed adjunction [def-sf-finite-rational-derived-operations] gives $\\mathrm{ev}\\circ T(c_{M,N},1)=F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}$, and precomposing with $\\mu$ gives (ii).",
-   "uses": [
-    "def-pod-system-hom-reindexing-maps",
-    "def-sf-finite-rational-derived-operations"
+    "def-sf-finite-rational-derived-operations",
+    "lem-weil-proetale-isomorphism-inverse-image"
    ],
    "elementary": true
   },
   {
-   "text": "(iii) Transpose both sides. By parameter naturality of transposition and (ii), the right side transposes to $F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}_{H(M,N),M}\\circ T(F(b^\\sharp),1)$; naturality of $\\mu$ [def-pur-finite-pullback-tensor-comparison] makes this $F(\\mathrm{ev}_{M,N}\\circ T(b^\\sharp,1))\\circ\\mu^{-1}_{L,M}=F(b)\\circ\\mu^{-1}_{L,M}$, the transpose of the left side.",
+   "text": "For any L,M,N, naturality in the tensor parameter of the target closed transpose and naturality of the inverse tensor comparison prove transpose(mu.inv followed by F b) = F(transpose b) followed by c. Explicitly uncurry the source transpose t of b; T(t,1) ev = b. Move F t through mu.inv and combine F of this equation.",
    "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-finite-pullback-tensor-construction",
     "def-pur-finite-pullback-tensor-comparison",
-    "def-sf-finite-rational-derived-operations"
+    "def-pod-system-hom-reindexing-maps"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For each L, the composite of inverse source transposition, the fully faithful Hom bijection of F, precomposition with mu.inv, and target transposition is a bijection Hom(L,H(M,N)) to Hom(FL,H(FM,FN)). The preceding transpose identity identifies it with x mapped to F x followed by c. Full faithfulness therefore makes postcomposition with c bijective on maps out of FL. For an arbitrary test object T, conjugate by F.objObjPreimageIso T to obtain the same bijection. Apply Mathlib isIso_of_yoneda_map_bijective to prove IsIso c.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The counit identity says that T(c,1) ev is mu.inv followed by F ev. Precompose with mu.hom and cancel the two inverse tensor-comparison arrows to obtain the displayed evaluation law. The transpose law is the identity proved in Step 2. Package these three proved clauses as the required conjunction.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "def-coef-ringed-tensor-hom-model",
+    "def-pur-finite-pullback-tensor-construction",
+    "def-pur-finite-pullback-tensor-comparison",
+    "def-pod-system-hom-reindexing-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
   "def-pod-system-hom-reindexing-maps",
   "def-pur-finite-pullback-tensor-comparison",
+  "def-pur-finite-pullback-tensor-construction",
   "def-sf-finite-rational-derived-operations",
-  "lem-pod-reindexing-evaluation-shift-composition",
-  "lem-pod-reindexing-hom-resolution-model"
+  "lem-weil-proetale-isomorphism-inverse-image"
  ],
  "lean": {
   "existing": false,
@@ -113,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-8f3bd",
-  "group": "F8",
-  "result": "fix",
-  "landing": "20261027T151705-L-1193309",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T233737-L-4107726",
   "kind": "interface",
-  "note": "independent cc review: verbatim 4-way split of DerivedAutomorphismHomEvaluation (orig 61-74 s CPU, forced) vs clone module; laws decomposition vs original conjunction; 4 new nodes vs Lean signatures; 8 direct importers compiled against corrected set"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
