@@ -57,7 +57,8 @@
   "def-sfb-cartier-reduction-data",
   "def-sfb-diagonal-system-interface",
   "def-sfb-geo-cartier-interface",
-  "lem-sfb-canonical-sheaf-ext"
+  "lem-sfb-canonical-sheaf-ext",
+  "def-sfb-kummer-strict-adjunct-data"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
@@ -65,59 +66,47 @@
  },
  "proof": [
   {
-   "text": "Use canonical sheaf abelian structures and the already fixed small Ext witnesses throughout.",
+   "text": "Obtain the quotient-normalized natural unit for each evaluated reduction. This step is independent of units sheaves and Kummer theory.",
    "uses": [
-    "lem-sfb-canonical-sheaf-ext",
-    "def-sfb-geo-cartier-interface"
+    "lem-sfb-diagonal-evaluation-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain one strict roots system, its normalized shifted Kummer comparison and the roots-to-line comparisons. Its only derived unit equation is at shifted comparison units, with no arbitrary source or extension.",
+   "uses": [
+    "lem-sfb-strict-kummer-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the proved arbitrary-arrow unit-naturality lemma. The single equation of the evaluated unit gives the source normalization. The strict Kummer unit theorem gives the target normalization. The identity-on-underlying-sheaves finite forgetting comparison transports the given HEq for g to the ordinary equality required by the lemma. Its conclusion is exactly the required negative Ext product.",
+   "uses": [
+    "lem-sfb-kummer-adjunct-from-unit",
+    "lem-sfb-diagonal-evaluation-unit",
+    "def-sfb-diagonal-system-interface"
    ],
    "elementary": true
   },
   {
-   "text": "Compute simultaneous reduction of comparison units on a common K-flat resolution. The constant prime-power two-term resolution, Kummer exactness and exact site comparison identify its only cohomology with the actual roots kernel in degree minus one.",
+   "text": "Use the unchanged coefficient compatibility proposition and named positive Kummer class from their standalone data module.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-constant-two-term-resolution",
-    "lem-amb-kummer-any-base",
-    "lem-sp-cartier-reduction-site-comparison",
-    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+    "def-sfb-kummer-strict-adjunct-data"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Multiplication by the prime in degree minus one and identity in degree zero give the coefficient-resolution transitions. The induced kernel transition is the prime-power roots map. Good truncation in the strict system category gives H, roots and b; choose the negative normalized Kummer comparison. The canonical roots-to-line maps give t and the full underlying-map equation.",
-   "uses": [
-    "def-pur-roots-of-unity-sheaf",
-    "def-kun-truncations",
-    "def-sfb-diagonal-system-interface"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compare evaluation with residue scalar extension on the same resolution, then forget scalars. The source counit and ordinary quotient adjunction identify the unit with g; the target normalization gives minus the compared positive Kummer unit. Naturality for f computes the scalar adjunct of its evaluated arrow. For any supplied e whose restriction is that arrow, exact-functor composition identifies its adjunct with this computation. No claim of fullness on derived morphisms is made.",
-   "uses": [
-    "lem-sfb-divisible-extension-derived-reduction",
-    "def-sfb-diagonal-system-interface"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-canonical-sheaf-ext",
-  "def-sfb-geo-cartier-interface",
-  "lem-pc-kflat-resolution",
-  "lem-pur-constant-two-term-resolution",
-  "lem-amb-kummer-any-base",
-  "lem-sp-cartier-reduction-site-comparison",
-  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
-  "def-pur-roots-of-unity-sheaf",
-  "def-kun-truncations",
+  "lem-sfb-diagonal-evaluation-unit",
+  "lem-sfb-strict-kummer-unit-normalization",
+  "lem-sfb-kummer-adjunct-from-unit",
   "def-sfb-diagonal-system-interface",
-  "lem-sfb-divisible-extension-derived-reduction"
+  "def-sfb-kummer-strict-adjunct-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
-  "place": "Step (3), target paragraph, and step (4), derived-adjunction naturality. This separates the Kummer computation of the adjunct from the independent existence of a residue-linear lift."
+  "place": "Step (4): separate quotient-unit existence and unit normalization, then prove the arbitrary-arrow formula by naturality and exact Ext functoriality."
  },
  "blueprint": {
   "is": null,
@@ -140,11 +129,7 @@
   "by": "B6",
   "date": "2026-10-27",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.KummerTargetAdjunctCompatibility",
-   "AlgebraicGeometry.ProEtale.kummerStrictAdjunctCompatibilityStatement",
-   "AlgebraicGeometry.ProEtale.kummer_strict_adjunct_compatibility",
-   "AlgebraicGeometry.ProEtale.kummerComparedUnit",
-   "AlgebraicGeometry.ProEtale.kummerRootNormalization"
+   "AlgebraicGeometry.ProEtale.kummer_strict_adjunct_compatibility"
   ]
  },
  "reviewed": {
@@ -160,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-37cf9",
-  "group": "B6",
+  "reviewer": "C-55c6b",
+  "group": "F5",
   "result": "fix",
-  "landing": "20261027T112320-L-1570535",
+  "landing": "20261027T180605-L-3879427",
   "kind": "interface",
-  "note": "independent cc review: item proof vs the two new sorry statements; moved defs vs published item (verbatim); new nodes vs Lean; 4 direct importers compiled against delivered files (all OK)"
+  "note": "independent cc review: moved defs vs published item module (verbatim except blueprint labels); new sorry statements vs nodes/source (both true, strictly smaller); item proof vs axioms (sorryAx only via the two new holes); node stmt_deps vs owners of declarations used; direct importer KummerStrictTargetTransport compiled vs delivered files (46.8 s; published 43.8 s at the same time)"
  }
 }

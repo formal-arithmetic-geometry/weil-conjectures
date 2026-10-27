@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-diagonal-evaluation-unit",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "The quotient-normalized underlying unit of evaluated reduction",
+ "statement": "Let $\\ell$ be prime, $W$ a scheme, and $D$ a simultaneous derived reduction of extension from abelian sheaves to constant $\\mathbf Z_\\ell$-module sheaves [def-sfb-diagonal-system-interface], using the canonical abelian structures [lem-sfb-canonical-sheaf-ext]. Fix $n\\geq0$, put $G_n=\\mathrm{ev}_n\\circ U$ (evaluation followed by forgetting scalars), and write $q_n:\\mathrm{id}\\to E\\circ G_n$ for the ordinary quotient unit $\\eta^L_S;U(\\pi_{n,S})$. There is a natural transformation $\\eta_n:\\mathrm{id}_{D(\\mathcal A)}\\to T\\circ D(G_n)$ such that, for every complex $K$, $\\eta_{n,QK};D(G_n)(\\epsilon_K);c_{G_n,EK}=Q(q_{n,K})$, including the identity-complex comparison in the termwise map $q_{n,K}$. On a sheaf $S$, this gives $\\eta_{n,S[0]};D(G_n)(\\mathrm{singleCounit}_{D,S});c_{G_n,ES}=q_{n,S}[0]$. Here $c_{G_n}$ denotes the canonical exact-functor comparison with complexes or with degree-zero single objects, as appropriate. The structure DiagonalEvaluationUnit records precisely the natural transformation and these two equations. No roots system, Kummer comparison or extension class is a parameter or conclusion. The identity-on-underlying-sheaves comparison $V_n\\simeq F_n\\circ U$ is constructed explicitly; its inverse turns the original heterogeneous underlying-map equality into the corresponding equality after transport.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-canonical-sheaf-ext",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (4): the underlying quotient unit of evaluated simultaneous reduction."
+ },
+ "proof": [
+  {
+   "text": "Resolve each complex by a termwise flat K-flat complex. On that complex evaluated reduction is tensor with the positive prime-power residue ring, and the ordinary quotient map defines its underlying unit. Use the inverse derived counit on the resolution.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-constant-two-term-resolution",
+    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison of resolutions commutes with the quotient map. Descend the maps to a natural transformation; naturality of the universal counit gives its complexes equation. Specializing to a single complex gives the displayed single equation.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite restriction and forgetting functors have identical underlying abelian sheaves and section maps. Construct their natural isomorphism by identity components; after unfolding only this comparison, its inverse transports the heterogeneous equality by identity composition.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-constant-two-term-resolution",
+  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "def-sfb-diagonal-system-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (2) and (4): the underlying quotient unit of evaluated simultaneous reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Left derived functor of composition with an exact functor and natural transformations of derived functors",
+   "results": "8 hits; CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general derived-functor or Ext APIs, or unrelated Kummer field theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedLift\"",
+   "results": "2 hits; CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general derived-functor or Ext APIs, or unrelated Kummer field theory."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedLift|kummer.*unit|unit.*kummer",
+   "results": "6 hits; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact match: constructing the normalized unit needs a comparison with the derived residue model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KummerStrictAdjunctCompatibility",
+  "group": "F5",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Steps (2) and (4): the underlying quotient unit of evaluated simultaneous reduction.",
+   "via": [
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalEvaluationUnit",
+  "file": "lean/Sheaf/Paper/DiagonalEvaluationUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_evaluation_unit_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalEvaluationForget",
+   "AlgebraicGeometry.ProEtale.diagonalEvaluationQuotient",
+   "AlgebraicGeometry.ProEtale.DiagonalEvaluationUnit",
+   "AlgebraicGeometry.ProEtale.diagonal_evaluation_unit_exists",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteForgetIso",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteForgetIso_transport"
+  ],
+  "statement": "theorem diagonal_evaluation_unit_exists (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W)) (n : ℕ) :\n    Nonempty (DiagonalEvaluationUnit (diagonalForget ℓ W)\n      (diagonalScalarAdjunction ℓ W) D n)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-55c6b",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T180605-L-3879427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-55c6b",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T180605-L-3879427",
+  "kind": "interface",
+  "note": "independent cc review: moved defs vs published item module (verbatim except blueprint labels); new sorry statements vs nodes/source (both true, strictly smaller); item proof vs axioms (sorryAx only via the two new holes); node stmt_deps vs owners of declarations used; direct importer KummerStrictTargetTransport compiled vs delivered files (46.8 s; published 43.8 s at the same time)"
+ }
+}

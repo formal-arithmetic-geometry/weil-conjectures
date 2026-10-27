@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-kummer-adjunct-from-unit",
+ "kind": "statement",
+ "title": "Arbitrary-arrow scalar adjunct from normalized natural units",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C,\\mathcal J$ be abelian categories with small Ext [def-pc-ext], and choose derived categories of $\\mathcal A$ and $\\mathcal J$ [def-weil-abstract-derived-category]. Let $T:D(\\mathcal A)\\to D(\\mathcal J)$ be a functor. Let $E:\\mathcal J\\to\\mathcal B$, $U:\\mathcal B\\to\\mathcal A$, $F:\\mathcal C\\to\\mathcal B$ and $V:\\mathcal C\\to\\mathcal A$ be additive exact functors, and supply $\\sigma:V\\simeq F\\circ U$ (composition is read in diagrammatic order). Supply a natural transformation $\\eta:\\mathrm{id}\\to T\\circ D(E\\circ U)$. Let $S,M\\in\\mathcal A$, $X,H\\in\\mathcal J$ and $Q,P\\in\\mathcal C$, with $a:T(S[0])\\simeq X[0]$, $b:T(M[1])\\simeq H[2]$, $s:E(X)\\simeq F(Q)$, $t:E(H)\\simeq F(P)$, $q:S\\to U(E(X))$, $g:S\\to V(Q)$ and $\\kappa\\in\\mathrm{Ext}^1(M,V(P))$. Assume the unit followed by $D(EU)(a)$ and its single comparison equals $q[0]$. Assume the unit at $M[1]$ followed by $D(EU)(b)$, its shift and single comparisons, and $(U(t)\\sigma_P^{-1})[2]$, equals $-\\kappa[1]$ followed by inverse shift addition. Assume $q;U(s);\\sigma_Q^{-1}=g$. For $f\\in\\mathrm{Ext}^1(S,M)$ and $e\\in\\mathrm{Ext}^2(Q,P)$, if $F(e)$ equals evaluation by $E$ of $a^{-1}T(f)b$ transported by $s^{-1}$ and $t$, then $g;V(e)=-f\\kappa$. No assumption that F is full on Ext is made.",
+ "stmt_deps": [
+  "def-pc-ext",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (4): arbitrary-arrow naturality, separated from construction of the normalized target."
+ },
+ "proof": [
+  {
+   "text": "Under Ext.homEquiv, precomposition by the source quotient unit cancels the single-object comparison. Functoriality cancels the mapped a.hom and a.inv. Naturality of eta on f.hom and the negative target normalization give the negative shifted composite representing the Yoneda product.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exact U to the supplied residue-lift equation. The proved exact-functor composition comparison identifies iterated maps and the comparison sigma. Precompose by g, whose normalization cancels sigma with its inverse and s with its inverse. Associativity combines the remaining target maps with t and sigma inverse. Insert the Ext identity from the preceding step.",
+   "uses": [
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (4), expanded as naturality and exact Ext functoriality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Left derived functor of composition with an exact functor and natural transformations of derived functors",
+   "results": "8 hits; CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp",
+   "date": "2026-10-27",
+   "verdict": "General naturality and Ext functoriality APIs are reused; no single theorem combines these endpoint normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits; CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-27",
+   "verdict": "General naturality and Ext functoriality APIs are reused; no single theorem combines these endpoint normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor.*comp|mapExactFunctor.*mk₀|kummerReductionUnit",
+   "results": "6 hits; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-27",
+   "verdict": "General naturality and Ext functoriality APIs are reused; no single theorem combines these endpoint normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KummerStrictAdjunctCompatibility",
+  "group": "F5",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (4): naturality for the extension arrow and transport of a supplied residue lift.",
+   "via": [
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerAdjunctFromUnit",
+  "file": "lean/Sheaf/Paper/KummerAdjunctFromUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummer_adjunct_from_unit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.kummer_adjunct_from_unit"
+  ],
+  "statement": "theorem kummer_adjunct_from_unit\n    {A B C J : Type*}\n    [Category A] [Abelian A] [HasExt.{w} A]\n    [Category B] [Abelian B] [HasExt.{w} B]\n    [Category C] [Abelian C] [HasExt.{w} C]\n    [Category J] [Abelian J] [HasExt.{w} J]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} J]\n    (T : DerivedCategory A ⥤ DerivedCategory J)\n    (E : J ⥤ B) [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E]\n    (U : B ⥤ A) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]\n    (F : C ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (V : C ⥤ A) [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (σ : V ≅ F ⋙ U)\n    (η : 𝟭 (DerivedCategory A) ⟶ T ⋙ (E ⋙ U).mapDerivedCategory)\n    {S M : A} {X H : J} {Q P : C}\n    (a : T.obj ((DerivedCategory.singleFunctor A 0).obj S) ≅\n      (DerivedCategory.singleFunctor J 0).obj X)\n    (b : T.obj (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧) ≅\n      ((DerivedCategory.singleFunctor J 0).obj H)⟦(2 : ℤ)⟧)\n    (s : E.obj X ≅ F.obj Q) (t : E.obj H ≅ F.obj P)\n    (q : S ⟶ U.obj (E.obj X)) (g : S ⟶ V.obj Q) (κ : Ext M (V.obj P) 1)\n    (hq : η.app ((DerivedCategory.singleFunctor A 0).obj S) ≫\n      (E ⋙ U).mapDerivedCategory.map a.hom ≫\n      ((E ⋙ U).mapDerivedCategorySingleFunctor 0).hom.app X =\n      (DerivedCategory.singleFunctor A 0).map q)\n    (hκ : η.app (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧) ≫\n      (E ⋙ U).mapDerivedCategory.map b.hom ≫\n      ((E ⋙ U).mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app\n        ((DerivedCategory.singleFunctor J 0).obj H) ≫\n      (((E ⋙ U).mapDerivedCategorySingleFunctor 0).hom.app H)⟦(2 : ℤ)⟧' ≫\n      ((DerivedCategory.singleFunctor A 0).map (U.map t.hom ≫ σ.inv.app P))⟦(2 : ℤ)⟧' =\n      -(κ.hom⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd (DerivedCategory A) (1 : ℤ) 1).inv.app\n        ((DerivedCategory.singleFunctor A 0).obj (V.obj P))))\n    (hg : q ≫ U.map s.hom ≫ σ.inv.app Q = g)\n    (f : Ext S M 1) (e : Ext Q P 2)\n    (he : e.mapExactFunctor F = (Ext.mk₀ s.inv).comp\n      (((Ext.homEquiv.symm (a.inv ≫ T.map f.hom ≫ b.hom)).mapExactFunctor E).comp\n        (Ext.mk₀ t.hom) (add_zero 2)) (zero_add 2)) :\n    (Ext.mk₀ g).comp (e.mapExactFunctor V) (zero_add 2) = -(f.comp κ rfl)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-55c6b",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T180605-L-3879427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-55c6b",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T180605-L-3879427",
+  "kind": "interface",
+  "note": "independent cc review: moved defs vs published item module (verbatim except blueprint labels); new sorry statements vs nodes/source (both true, strictly smaller); item proof vs axioms (sorryAx only via the two new holes); node stmt_deps vs owners of declarations used; direct importer KummerStrictTargetTransport compiled vs delivered files (46.8 s; published 43.8 s at the same time)"
+ }
+}

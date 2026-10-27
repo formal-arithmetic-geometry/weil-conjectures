@@ -6,6 +6,9 @@ Authors: SHEAF group B6
 module
 
 public import Sheaf.Paper.CanonicalSheafExt
+public import Sheaf.Paper.KummerStrictAdjunctData
+import Sheaf.Paper.StrictKummerUnitNormalization
+import Sheaf.Paper.KummerAdjunctFromUnit
 
 /-! # Strict Kummer comparison and adjunct compatibility
 
@@ -30,116 +33,48 @@ attribute [local irreducible] DerivedCategory.singleFunctors
   cartierEtaleKummerUnit cartierProKummerUnit cartierProIntegralGenerator cartierProRootMap
   cartierReducedEtale cartierReducedPro CartierEtaleReductionSpec CartierProReductionSpec
   cartierResidueReducedPro diagonalFiniteToPadic diagonalForget diagonalScalarExtension
-  diagonalScalarAdjunction diagonalIntegralBoundary
+  diagonalScalarAdjunction diagonalIntegralBoundary geoCartierLine
+  Ext.homEquiv Ext.mapExactFunctor Functor.mapDerivedCategory
+  Functor.mapDerivedCategorySingleFunctor
 
-/-- Conditional scalar-adjunct computation for a strict target, with coefficient
-categories and functors shared parameters. The definition produces no object and
-asserts no existence of residue lifts.
-Source: diagonal tower system proof, steps (3) and (4)
-(blueprint: lem-sfb-kummer-strict-adjunct-compatibility). -/
-@[irreducible] def KummerTargetAdjunctCompatibility
-    (ℓ : ℕ) {A : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
-    {B : Type*} [Category B] [abB : Abelian B] [hB : HasExt.{w} B]
+/-- Assemble the target comparison before specializing to concrete coefficient sheaves. -/
+private theorem compatibility_from_normalized_target
+    {A B : Type*} [Category A] [Abelian A] [HasExt.{w} A]
+    [Category B] [Abelian B] [HasExt.{w} B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
     [HasExt.{w} (ℕᵒᵖ ⥤ B)]
-    (L : A ⥤ B) (U : B ⥤ A) (ad : L ⊣ U) (D : DiagonalDerivedReduction ℓ L)
-    (C : ℕ → Type*) [catC : ∀ n, Category (C n)] [abC : ∀ n, Abelian (C n)]
-    [hC : ∀ n, HasExt.{w} (C n)]
-    (F : ∀ n, C n ⥤ B) [Fadd : ∀ n, (F n).Additive]
-    [Flim : ∀ n, PreservesFiniteLimits (F n)]
-    [Fcolim : ∀ n, PreservesFiniteColimits (F n)]
-    (V : ∀ n, C n ⥤ A) [Vadd : ∀ n, (V n).Additive]
-    [Vlim : ∀ n, PreservesFiniteLimits (V n)]
-    [Vcolim : ∀ n, PreservesFiniteColimits (V n)]
-    (M : A) (rootsTower : ℕᵒᵖ ⥤ A) (P : ∀ n, C n)
-    (κ : ∀ n, Ext M ((V n).obj (P n)) 1)
-    (rootNorm : ∀ H : ℕᵒᵖ ⥤ B, (H ⋙ U ≅ rootsTower) →
-      ∀ n, (H.obj (op n) ≅ (F n).obj (P n)) → Prop) : Prop :=
-  ∃ (H : ℕᵒᵖ ⥤ B) (roots : H ⋙ U ≅ rootsTower)
-    (b : D.T.obj (((DerivedCategory.singleFunctor _ 0).obj M)⟦(1 : ℤ)⟧) ≅
-      ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)
-    (t : ∀ n, H.obj (op n) ≅ (F n).obj (P n)),
-    (∀ n, rootNorm H roots n (t n)) ∧
-    ∀ (n : ℕ) (S : A)
-      (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj S) ≅
-        (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj S)),
-      a.hom = diagonalDerivedSingleCounit ℓ L D S →
-      ∀ (Q : C n) (s : (D.ordinary.E.obj S).obj (op n) ≅ (F n).obj Q)
-        (g : S ⟶ (V n).obj Q),
-        HEq (ad.unit.app S ≫ U.map ((D.ordinary.π n).app S ≫ s.hom)) g →
-        ∀ (f : Ext S M 1) (e : Ext Q (P n) 2),
-          exactFunctorExtImage (F n) e =
-            (Ext.mk₀ s.inv).comp
-              (((Ext.homEquiv.symm (a.inv ≫ D.T.map f.hom ≫ b.hom)).mapExactFunctor
-                ((evaluation ℕᵒᵖ B).obj (op n))).comp
-                (Ext.mk₀ (t n).hom) (add_zero 2)) (zero_add 2) →
-          (Ext.mk₀ g).comp (e.mapExactFunctor (V n)) (zero_add 2) = -(f.comp (κ n) rfl)
-
-/-- The positive Kummer unit after the comparison isomorphism on units.
-This is the actual Ext composite, named to share its coefficient constructions
-rather than checking the concrete sheaf abelian structures at each occurrence.
-Source: the units-comparison composite in the diagonal tower proof, step (4)
-(blueprint: lem-sfb-kummer-strict-target-transport). -/
-@[irreducible] def kummerComparedUnit (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
-    (hW : IsUnit (ℓ : Γ(W, ⊤))) (n : ℕ) :
-    Ext.{u + 1} ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf)
-      ((cartierForget (diagonalResidue.{u} ℓ n) W).obj
-        (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-          (cartierResidue_cast ℓ (n + 1)) W)) 1 :=
-  (Ext.mk₀ (cartierUnitsComparison W)).comp
-    (cartierProKummerUnit (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-      (cartierResidue_cast ℓ (n + 1)) W (pow_pos (Fact.out : ℓ.Prime).pos _)
-      (by simpa using hW.pow (n + 1))) (zero_add 1)
-
-/-- The actual roots comparison equation, named before derived specialization.
-Source: diagonal tower system proof, step (3), target normalization
-(blueprint: lem-sfb-kummer-strict-target-transport).
-This is precisely the canonical underlying-map equation, with no chosen data. -/
-def kummerRootNormalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
-    (hW : IsUnit (ℓ : Γ(W, ⊤))) (H : DiagonalSystems ℓ W)
-    (roots : H ⋙ diagonalForget ℓ W ≅
-      Scheme.proEtaleRootsOfUnityTower W ℓ (Fact.out : ℓ.Prime))
-    (n : ℕ) (t : H.obj (op n) ≅ (diagonalFiniteToPadic ℓ n W).obj
-      (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-        (cartierResidue_cast ℓ (n + 1)) W)) : Prop :=
-  HEq ((diagonalForget ℓ W).map t.hom)
-    (roots.hom.app (op n) ≫ cartierProRootMap (diagonalResidue.{u} ℓ n)
-      (ℓ ^ (n + 1)) (cartierResidue_cast ℓ (n + 1)) W
-      (pow_pos (Fact.out : ℓ.Prime).pos _) (by simpa using hW.pow (n + 1)))
-
-/-- The concrete compatibility formula, with its coefficient expressions shared.
-This is a real proposition definition and chooses no data.
-(blueprint: lem-sfb-kummer-strict-adjunct-compatibility). -/
-@[irreducible] def kummerStrictAdjunctCompatibilityStatement (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
-    (hW : IsUnit (ℓ : Γ(W, ⊤)))
-    [HasDerivedCategory.{u + 1} (DiagonalAb W)]
-    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]
-    [HasExt.{u + 1} (DiagonalSystems ℓ W)]
-    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W)) : Prop :=
-  KummerTargetAdjunctCompatibility
-    (A := DiagonalAb W) (B := DiagonalMod ℓ W)
-    (abA := diagonalAbSheafAbelian W) (abB := diagonalModuleSheafAbelian _ W)
-    (hA := kummerAbHasExt W) (hB := kummerModuleHasExt _ W)
-    (abC := fun n => diagonalModuleSheafAbelian (diagonalResidue.{u} ℓ n) W)
-    (hC := fun n => kummerModuleHasExt (diagonalResidue.{u} ℓ n) W)
-    (Fadd := fun n => diagonalFiniteToPadicAdditive ℓ n W)
-    (Flim := fun n => diagonalFiniteToPadicLimits ℓ n W)
-    (Fcolim := fun n => diagonalFiniteToPadicColimits ℓ n W)
-    (Vadd := fun n => cartierForgetAdditive (diagonalResidue.{u} ℓ n) W)
-    (Vlim := fun n => cartierForgetLimits (diagonalResidue.{u} ℓ n) W)
-    (Vcolim := fun n => cartierForgetColimits (diagonalResidue.{u} ℓ n) W)
-    ℓ (diagonalScalarExtension ℓ W) (diagonalForget ℓ W)
-    (diagonalScalarAdjunction ℓ W) D
-    (fun n => Sheaf (Scheme.ProEt.topology W)
-      (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))
-    (fun n => diagonalFiniteToPadic ℓ n W)
-    (fun n => cartierForget (diagonalResidue.{u} ℓ n) W)
-    ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf)
-    (Scheme.proEtaleRootsOfUnityTower W ℓ (Fact.out : ℓ.Prime))
-    (fun n => geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-      (cartierResidue_cast ℓ (n + 1)) W)
-    (fun n => kummerComparedUnit ℓ W hW n)
-    (kummerRootNormalization ℓ W hW)
+    {ℓ : ℕ} {L : A ⥤ B} {U : B ⥤ A} {ad : L ⊣ U}
+    [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    {D : DiagonalDerivedReduction ℓ L}
+    {C : ℕ → Type*} [∀ n, Category (C n)] [∀ n, Abelian (C n)]
+    [∀ n, HasExt.{w} (C n)]
+    {F : ∀ n, C n ⥤ B} [∀ n, (F n).Additive]
+    [∀ n, PreservesFiniteLimits (F n)] [∀ n, PreservesFiniteColimits (F n)]
+    {V : ∀ n, C n ⥤ A} [∀ n, (V n).Additive]
+    [∀ n, PreservesFiniteLimits (V n)] [∀ n, PreservesFiniteColimits (V n)]
+    {M : A} {rootsTower : ℕᵒᵖ ⥤ A} {P : ∀ n, C n}
+    {κ : ∀ n, Ext M ((V n).obj (P n)) 1}
+    {rootNorm : ∀ H : ℕᵒᵖ ⥤ B, (H ⋙ U ≅ rootsTower) →
+      ∀ n, (H.obj (op n) ≅ (F n).obj (P n)) → Prop}
+    (σ : ∀ n, V n ≅ F n ⋙ U) (η : ∀ n, DiagonalEvaluationUnit U ad D n)
+    (hσ : ∀ n (S : A) (Q : C n) (q : S ⟶ U.obj ((F n).obj Q))
+      (g : S ⟶ (V n).obj Q), HEq q g → q ≫ (σ n).inv.app Q = g)
+    (target : KummerUnitNormalizedTarget ℓ L U ad D C F V M rootsTower P κ
+      rootNorm σ η) :
+    KummerTargetAdjunctCompatibility ℓ L U ad D C F V M rootsTower P κ rootNorm := by
+  unfold KummerUnitNormalizedTarget at target
+  obtain ⟨H, roots, b, t, ht, hb⟩ := target
+  unfold KummerTargetAdjunctCompatibility
+  refine ⟨H, roots, b, t, ht, ?_⟩
+  intro n S a ha Q s g hg f e he
+  let E := (evaluation ℕᵒᵖ B).obj (op n)
+  let q := ad.unit.app S ≫ U.map ((D.ordinary.π n).app S)
+  refine kummer_adjunct_from_unit D.T E U (F n) (V n) (σ n)
+    (η n).unit a b s (t n) q g (κ n) ?_ (hb n) ?_ f e he
+  · rw [ha]
+    exact (η n).single S
+  · simpa only [q, Functor.map_comp, Category.assoc] using
+      hσ n S Q (ad.unit.app S ≫ U.map ((D.ordinary.π n).app S ≫ s.hom)) g hg
 
 /-- A strict Kummer comparison computes the adjunct of every residue lift.
 
@@ -172,6 +107,13 @@ theorem kummer_strict_adjunct_compatibility (ℓ : ℕ) [Fact ℓ.Prime] (W : Sc
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]
     [HasExt.{u + 1} (DiagonalSystems ℓ W)]
     (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W)) :
-    kummerStrictAdjunctCompatibilityStatement ℓ W hW D := by sorry
+    kummerStrictAdjunctCompatibilityStatement ℓ W hW D := by
+  classical
+  let η := fun n ↦ (diagonal_evaluation_unit_exists ℓ W D n).some
+  unfold kummerStrictAdjunctCompatibilityStatement
+  refine compatibility_from_normalized_target
+    (fun n ↦ diagonalFiniteForgetIso ℓ n W) η ?_ ?_
+  · exact fun n S Q q g h ↦ diagonalFiniteForgetIso_transport ℓ n W S Q q g h
+  · exact strict_kummer_unit_normalization ℓ W hW D η
 
 end AlgebraicGeometry.ProEtale

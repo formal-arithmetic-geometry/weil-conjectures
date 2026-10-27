@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-strict-kummer-unit-normalization",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "Strict Kummer target normalized only on its evaluated units",
+ "statement": "Let $\\ell$ be prime and invertible on a scheme $W$. Let $D$ be simultaneous derived reduction of extension to constant $\\mathbf Z_\\ell$-module sheaves [def-sfb-diagonal-system-interface], with canonical small Ext [lem-sfb-canonical-sheaf-ext]. For every $n\\geq0$ supply a quotient-normalized evaluated unit $\\eta_n$ [lem-sfb-diagonal-evaluation-unit]. Put $M=G_m^{comp}$, let $P_n=(\\mathbf Z/\\ell^{n+1})(1)$ [def-sfb-geo-cartier-interface], and let $\\kappa_n$ be the positive pro-etale Kummer Ext class preceded by the units comparison [def-sfb-cartier-reduction-data]. There exist a strict constant-p-adic system $H$, $roots:H\\circ U\\simeq(\\mu_{\\ell^{n+1}})_n$ [def-pur-roots-of-unity-sheaf], $b:T(M[1])\\simeq H[2]$, and $t_n:H_n\\simeq F_nP_n$. They satisfy $U(t_n)=roots_n$ followed by the canonical roots-to-line map. After evaluation and forgetting, the composite of $\\eta_{n,M[1]}$ with $b$, the exact-functor shift and single-object comparisons, and the inverse finite-forgetting comparison after $U(t_n)$, shifted by two, is $-\\kappa_n[1]$ followed by the inverse shift-addition comparison. This statement normalizes only the unit at $M[1]$: it quantifies over no arbitrary source, Ext-one arrow or residue lift.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-canonical-sheaf-ext",
+  "lem-sfb-diagonal-evaluation-unit",
+  "def-pur-roots-of-unity-sheaf",
+  "def-sfb-geo-cartier-interface",
+  "def-sfb-cartier-reduction-data",
+  "def-sfb-kummer-strict-adjunct-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), target paragraph, and step (4), normalization of the unit at shifted comparison units."
+ },
+ "proof": [
+  {
+   "text": "On a common K-flat resolution compare each positive prime-power reduction with its two-term coefficient resolution. Kummer exactness and exact site comparison identify the only cohomology with roots in degree minus one.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-constant-two-term-resolution",
+    "lem-amb-kummer-any-base",
+    "lem-sp-cartier-reduction-site-comparison",
+    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resolution transition is multiplication by the prime in degree minus one and identity in degree zero. Its kernel map is the actual roots transition. Truncate in the strict-system category, shift once and choose the negative normalized comparison b. The roots-to-line maps give t and their underlying-map equation.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-kun-truncations",
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the complexes equation of the supplied evaluated unit on the common resolution. The positive Kummer normalization identifies its unshifted unit with the compared Kummer class. Shift once, using the inverse shift-addition comparison, and negate b. This gives the asserted equation at shifted units, without using any arbitrary extension or residue lift.",
+   "uses": [
+    "lem-sfb-diagonal-evaluation-unit",
+    "lem-sfb-divisible-extension-derived-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-constant-two-term-resolution",
+  "lem-amb-kummer-any-base",
+  "lem-sp-cartier-reduction-site-comparison",
+  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "def-pur-roots-of-unity-sheaf",
+  "def-kun-truncations",
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-diagonal-evaluation-unit",
+  "lem-sfb-divisible-extension-derived-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), target paragraph, and step (4), normalization of the unit at shifted comparison units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedLift|kummer.*unit|unit.*kummer",
+   "results": "6 hits; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general derived-functor or Ext APIs, or unrelated Kummer field theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits; CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general derived-functor or Ext APIs, or unrelated Kummer field theory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer exact sequence identifies derived reduction of the multiplicative group with roots of unity and normalizes the scalar adjunction unit",
+   "results": "8 hits; autAdjoinRootXPowSubCEquiv_symm_smul, KummerExtension.termK[_√_], MulChar.apply_mem_rootsOfUnity, mem_rootsOfUnity', autAdjoinRootXPowSubCEquiv.congr_simp, rootsOfUnity, rootsOfUnityUnitsMulEquiv, NumberField.Units.rootsOfUnity_eq_torsion",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general derived-functor or Ext APIs, or unrelated Kummer field theory."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.KummerStrictAdjunctCompatibility",
+  "group": "F5",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), target paragraph, and step (4), normalization of the unit at shifted comparison units.",
+   "via": [
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictKummerUnitNormalization",
+  "file": "lean/Sheaf/Paper/StrictKummerUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.strict_kummer_unit_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.KummerUnitNormalizedTarget",
+   "AlgebraicGeometry.ProEtale.strict_kummer_unit_normalization"
+  ],
+  "statement": "theorem strict_kummer_unit_normalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasExt.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (η : ∀ n, DiagonalEvaluationUnit (diagonalForget ℓ W)\n      (diagonalScalarAdjunction ℓ W) D n) :\n  KummerUnitNormalizedTarget\n    (A := DiagonalAb W) (B := DiagonalMod ℓ W)\n    (abA := diagonalAbSheafAbelian W) (abB := diagonalModuleSheafAbelian _ W)\n    (hA := kummerAbHasExt W)\n    ℓ (diagonalScalarExtension ℓ W) (diagonalForget ℓ W)\n    (diagonalScalarAdjunction ℓ W) D\n    (fun n => Sheaf (Scheme.ProEt.topology W)\n      (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))\n    (fun n => diagonalFiniteToPadic ℓ n W)\n    (fun n => cartierForget (diagonalResidue.{u} ℓ n) W)\n    ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf)\n    (Scheme.proEtaleRootsOfUnityTower W ℓ (Fact.out : ℓ.Prime))\n    (fun n => geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))\n      (cartierResidue_cast ℓ (n + 1)) W)\n    (fun n => kummerComparedUnit ℓ W hW n)\n    (kummerRootNormalization ℓ W hW)\n    (fun n ↦ diagonalFiniteForgetIso ℓ n W) η",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-55c6b",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T180605-L-3879427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-55c6b",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261027T180605-L-3879427",
+  "kind": "interface",
+  "note": "independent cc review: moved defs vs published item module (verbatim except blueprint labels); new sorry statements vs nodes/source (both true, strictly smaller); item proof vs axioms (sorryAx only via the two new holes); node stmt_deps vs owners of declarations used; direct importer KummerStrictTargetTransport compiled vs delivered files (46.8 s; published 43.8 s at the same time)"
+ }
+}
