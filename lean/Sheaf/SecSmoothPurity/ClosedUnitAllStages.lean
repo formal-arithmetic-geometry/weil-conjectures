@@ -164,6 +164,84 @@ structure ClosedDirectImageStages
             K)
 
 
+/--
+The finite, integral, rational, and algebraically closed restriction data exist.
+
+The construction follows the six-step proof of the parent proposition: closed support,
+finite-level recollement, completed coefficient comparison, scalar localization, and
+coherent common-stage descent.  The same construction supplies all comparison squares.
+Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-closed-unit,
+prop-sf-closed-unit-all-stages, order 1861.
+(blueprint: prop-sf-closed-unit-all-stages).
+-/
+theorem closedUnitAllStages_exists
+    (k : Type u) [Field k]
+    (l : ℕ) [Fact l.Prime] (hℓ : IsUnit (l : k))
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {Z X : Scheme.{u}} [Z.Over (Spec (.of k))] [X.Over (Spec (.of k))]
+    [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))]
+    [QuasiCompact (Z ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))]
+    (i : Z ⟶ X) [i.IsOver (Spec (.of k))] [IsClosedImmersion i] :
+    Nonempty (ClosedDirectImageStages l Ω i) := by
+  sorry
+
+/--
+Every presented system of closed direct-image restrictions is fully faithful at all
+coefficient stages, and every available right-adjoint unit is invertible.
+
+The proof is the Hom argument in the parent proposition: recollement gives finite
+full faithfulness, Roos comparison gives integral full faithfulness, scalar localization
+and common-stage coherence give the remaining stages, and Yoneda turns full faithfulness
+into invertibility of each adjunction unit.  The finite ambient right adjoint comes from
+closed support.  This is a strict component of the parent conclusion.
+Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-closed-unit,
+prop-sf-closed-unit-all-stages, order 1861.
+(blueprint: prop-sf-closed-unit-all-stages).
+-/
+theorem closedUnitAllStages_properties
+    (k : Type u) [Field k]
+    (l : ℕ) [Fact l.Prime] (hℓ : IsUnit (l : k))
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {Z X : Scheme.{u}} [Z.Over (Spec (.of k))] [X.Over (Spec (.of k))]
+    [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))]
+    [QuasiCompact (Z ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))]
+    (i : Z ⟶ X) [i.IsOver (Spec (.of k))] [IsClosedImmersion i]
+    (S : ClosedDirectImageStages l Ω i) :
+      (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E],
+        (∀ (n : ℕ) (hn : 1 ≤ n),
+          ((S.coefficient E).finiteStar n hn).Full ∧
+            ((S.coefficient E).finiteStar n hn).Faithful) ∧
+        ((S.coefficient E).integralStar.Full ∧
+          (S.coefficient E).integralStar.Faithful) ∧
+        ((S.coefficient E).rationalStar.Full ∧
+          (S.coefficient E).rationalStar.Faithful) ∧
+        (∀ (n : ℕ) (hn : 1 ≤ n)
+          (G : (Scheme.intrinsicFiniteTorsionConstructible l E n hn X).FullSubcategory ⥤
+            (Scheme.intrinsicFiniteTorsionConstructible l E n hn Z).FullSubcategory)
+          (adj : (S.coefficient E).finiteStar n hn ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) ∧
+        (∀ (G : sfIntegralConstructibleCategory l E X ⥤
+            sfIntegralConstructibleCategory l E Z)
+          (adj : (S.coefficient E).integralStar ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) ∧
+        (∀ (G : sfRationalConstructibleCategory l E X ⥤
+            sfRationalConstructibleCategory l E Z)
+          (adj : (S.coefficient E).rationalStar ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) ∧
+        (∀ (n : ℕ) (_hn : 1 ≤ n),
+          ∃ G : Scheme.proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n) ⥤
+              Scheme.proEtaleDerivedCategory Z (Padic.coefficientExtensionRing l E n),
+          ∃ adj : Scheme.proEtaleConstantDerivedDirectImage i
+              (Padic.coefficientExtensionRing l E n) ⊣ G,
+            ∀ Q, IsIso (adj.unit.app Q))) ∧
+      (S.algebraicallyClosedStar.Full ∧ S.algebraicallyClosedStar.Faithful) ∧
+      (∀ (G : generalAlgebraicallyClosedConstructibleCategory l Ω X ⥤
+          generalAlgebraicallyClosedConstructibleCategory l Ω Z)
+        (adj : S.algebraicallyClosedStar ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) := by
+  sorry
+
+
 /-- The actual closed direct images admit fully faithful restrictions at all four
 stages. Existence of the comparison squares includes preservation of the relevant
 constructible categories. At the algebraically closed stage the comparison is a
@@ -248,6 +326,8 @@ theorem closedUnitAllStages
       (∀ (G : generalAlgebraicallyClosedConstructibleCategory l Ω X ⥤
           generalAlgebraicallyClosedConstructibleCategory l Ω Z)
         (adj : S.algebraicallyClosedStar ⊣ G), ∀ Q, IsIso (adj.unit.app Q)) := by
-  sorry
+  refine ⟨closedUnitAllStages_exists k l hℓ Ω i, ?_⟩
+  intro S
+  exact closedUnitAllStages_properties k l hℓ Ω i S
 
 end WeilConjectures
