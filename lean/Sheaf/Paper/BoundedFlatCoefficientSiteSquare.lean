@@ -16,14 +16,17 @@ public import Sheaf.Paper.ComparisonPullbackExact
 public import Sheaf.CategoryTheory.ConstantCoefficientScalarExtensionPresentations
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitudePresentations
 public import Sheaf.Paper.WitnessCompatibility
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
-import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
-import Sheaf.Paper.RingedTopoiDerivedPullbackIndependent
-import Sheaf.Paper.KFlatScalarComparisonNormalization
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteOneSidedTensorNormalization
+
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalarsFlat
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+import all Sheaf.Paper.EtaleDerivedScalarTensor
+import all Sheaf.Paper.WitnessCompatibility
+import Sheaf.CategoryTheory.ExactRightDerivedAdjointKFlatRepresentative
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The bounded-flat coefficient/site square
 
@@ -36,6 +39,7 @@ comparison below is the published adjunction comparison, including its chain mod
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
@@ -86,6 +90,311 @@ def chainComparison {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (Iso.refl (comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} A) X ⋙ sheafExtendScalars φ X))
         (.up ℤ)
 
+
+private theorem flat_of_exact_tensorRight {C : Type*} [Category C]
+    [MonoidalCategory C] [BraidedCategory C] (M : C)
+    (h : exactFunctor C C (tensorRight M)) : ObjectProperty.flat M :=
+  ⟨(exactFunctor C C).prop_of_iso
+    (BraidedCategory.tensorLeftIsoTensorRight M).symm h, h⟩
+
+private theorem model_of_flat_bounded
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) (A : Type (u + 1)) [CommRing A] (a b : ℤ)
+    (P : CochainComplex (Sheaf J (ModuleCat.{u + 1} A)) ℤ)
+    (hf : ∀ q, ObjectProperty.flat (P.X q))
+    (hb : ∀ q, q < a ∨ b < q → IsZero (P.X q)) :
+    modelProperties J A a b P := by
+  have : P.IsStrictlyGE a := (P.isStrictlyGE_iff a).2 (fun q hq ↦ hb q (.inl hq))
+  have : P.IsStrictlyLE b := (P.isStrictlyLE_iff b).2 (fun q hq ↦ hb q (.inr hq))
+  exact ⟨fun q ↦ (hf q).2, hb, CochainComplex.kFlat_of_bounded_of_flat P a b hf⟩
+
+private theorem tor_of_flat_bounded
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) (A : Type (u + 1)) [CommRing A] (a b : ℤ)
+    (P : CochainComplex (Sheaf J (ModuleCat.{u + 1} A)) ℤ)
+    (hf : ∀ q, ObjectProperty.flat (P.X q))
+    (hb : ∀ q, q < a ∨ b < q → IsZero (P.X q)) :
+    _root_.DerivedCategory.torAmplitudeIn _ a b (_root_.DerivedCategory.Q.obj P) := by
+  have : P.IsStrictlyGE a := (P.isStrictlyGE_iff a).2 (fun q hq ↦ hb q (.inl hq))
+  have : P.IsStrictlyLE b := (P.isStrictlyLE_iff b).2 (fun q hq ↦ hb q (.inr hq))
+  exact _root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat P a b hf
+
+private theorem cochain_square_normalization
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F₁ : A ⥤ B} {F₂ : B ⥤ D} {G₁ : A ⥤ C} {G₂ : C ⥤ D}
+    [F₁.Additive] [F₂.Additive] [G₁.Additive] [G₂.Additive]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+    [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+    (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) (P : CochainComplex A ℤ) :
+    F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
+      F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      _root_.DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) =
+    (Functor.mapDerivedCategorySquareIso e).hom.app (_root_.DerivedCategory.Q.obj P) ≫
+      G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app P) ≫
+      G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj P) := by
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app
+    (_root_.DerivedCategory.Q.obj P))).1
+  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc,
+    Functor.mapDerivedCategoryCompIso_hom_app_factors,
+    Functor.mapDerivedCategoryNatIso_fac]
+
+private theorem ordinary_mate
+    (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) :
+    ((mateEquiv (etaleSheafExtendScalarsAdjunction φ X)
+      (sheafExtendScalarsAdjunction φ X)).symm
+      (TwoSquare.mk _ _ _ _ (pbcComparisonRestrict X φ).inv)).natTrans =
+      (etaleSheafExtendScalarsCompComparisonUpperStarIso φ X).inv := by
+  let a := etaleSheafExtendScalarsAdjunction φ X
+  let b := sheafExtendScalarsAdjunction φ X
+  let c := comparisonAdjunction (ModuleCat.{u + 1} A) X
+  let d := comparisonAdjunction (ModuleCat.{u + 1} B) X
+  let δ := ((mateEquiv a b).symm
+    (TwoSquare.mk _ _ _ _ (pbcComparisonRestrict X φ).inv))
+  have h := iterated_mateEquiv_conjugateEquiv a b c d δ
+  rw [Equiv.apply_symm_apply] at h
+  rw [comparison_restrict_mate] at h
+  apply (conjugateEquiv (a.comp d) (c.comp b)).injective
+  change (conjugateEquiv (a.comp d) (c.comp b)) δ.natTrans = _
+  rw [← h]
+  change 𝟙 _ = (conjugateEquiv (a.comp d) (c.comp b))
+    ((conjugateEquiv (a.comp d) (c.comp b)).symm (𝟙 _))
+  exact (Equiv.apply_symm_apply _ _).symm
+
+private theorem cochain_unit_formula
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    {E : C ⥤ D} {U : D ⥤ C} [E.Additive] [U.Additive] (a : E ⊣ U)
+    (P : CochainComplex C ℤ) :
+    (a.mapHomologicalComplex (.up ℤ)).unit.app P =
+      (Functor.mapHomologicalComplexIdIso _ (.up ℤ)).inv.app P ≫
+        (NatTrans.mapHomologicalComplex a.unit (.up ℤ)).app P ≫
+          (Functor.mapHomologicalComplexCompIso (Iso.refl (E ⋙ U)) (.up ℤ)).inv.app P := by
+  ext i
+  simp only [Functor.id_obj, Functor.comp_obj, Adjunction.mapHomologicalComplex_unit_app_f,
+    HomologicalComplex.comp_f, Functor.mapHomologicalComplexIdIso_inv_app_f,
+    NatTrans.mapHomologicalComplex_app_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
+    Iso.refl_inv, NatTrans.id_app, Category.id_comp]
+  exact (Category.comp_id _).symm
+
+section Representative
+universe u₁ u₂ v₁ v₂ w₁ w₂
+variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+  [Abelian C] [Abelian D] [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]
+  (E : C ⥤ D) (U : D ⥤ C) [E.Additive] [U.Additive]
+  [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+  (a : E ⊣ U) {L : _root_.DerivedCategory C ⥤ _root_.DerivedCategory D}
+  (d : L ⊣ U.mapDerivedCategory)
+
+private def representative :
+    _root_.DerivedCategory.Q ⋙ L ⟶ E.mapHomologicalComplex (.up ℤ) ⋙
+      _root_.DerivedCategory.Q :=
+  let η : _root_.DerivedCategory.Q ⟶
+      (E.mapHomologicalComplex (.up ℤ) ⋙ _root_.DerivedCategory.Q) ⋙ U.mapDerivedCategory :=
+    { app P := _root_.DerivedCategory.Q.map
+          ((Functor.mapHomologicalComplexIdIso _ (.up ℤ)).inv.app P ≫
+            (NatTrans.mapHomologicalComplex a.unit (.up ℤ)).app P ≫
+            (Functor.mapHomologicalComplexCompIso (Iso.refl (E ⋙ U)) (.up ℤ)).inv.app P) ≫
+        U.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj P)
+      naturality P R f := by
+        simp only [← cochain_unit_formula]
+        have hn := (a.mapHomologicalComplex (.up ℤ)).unit.naturality f
+        change f ≫ _ = _ at hn
+        rw [← _root_.DerivedCategory.Q.map_comp_assoc, hn]
+        rw [_root_.DerivedCategory.Q.map_comp, Category.assoc]
+        simpa only [Functor.comp_map, Category.assoc] using congrArg
+          (fun b ↦ _root_.DerivedCategory.Q.map
+            ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫ b)
+          (U.mapDerivedCategoryFactors.inv.naturality
+            ((E.mapHomologicalComplex (.up ℤ)).map f)) }
+  { app P := (d.homEquiv _ _).symm (η.app P)
+    naturality P R f := d.homEquiv_naturality_right_square
+      (_root_.DerivedCategory.Q.map f) (η.app R) (η.app P)
+      (_root_.DerivedCategory.Q.map ((E.mapHomologicalComplex (.up ℤ)).map f))
+      (η.naturality f) }
+
+private theorem representative_unit (P : CochainComplex C ℤ) :
+    d.unit.app (_root_.DerivedCategory.Q.obj P) ≫
+      U.mapDerivedCategory.map ((representative E U a d).app P) ≫
+        U.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj P) =
+      _root_.DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) := by
+  have h : d.unit.app (_root_.DerivedCategory.Q.obj P) ≫
+      U.mapDerivedCategory.map ((representative E U a d).app P) =
+      _root_.DerivedCategory.Q.map
+          ((Functor.mapHomologicalComplexIdIso _ (.up ℤ)).inv.app P ≫
+            (NatTrans.mapHomologicalComplex a.unit (.up ℤ)).app P ≫
+            (Functor.mapHomologicalComplexCompIso (Iso.refl (E ⋙ U)) (.up ℤ)).inv.app P) ≫
+        U.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj P) :=
+    (d.homEquiv _ _).apply_symm_apply _
+  rw [← Category.assoc, h]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  rw [← cochain_unit_formula]
+
+end Representative
+
+private theorem cochain_left_mate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Preadditive A] [Preadditive B] [Preadditive C] [Preadditive D]
+    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
+    [E₁.Additive] [U₁.Additive] [E₂.Additive] [U₂.Additive]
+    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
+    {F : A ⥤ C} {G : B ⥤ D} [F.Additive] [G.Additive]
+    (τ : U₁ ⋙ F ⟶ G ⋙ U₂) (P : CochainComplex A ℤ) :
+    ((mateEquiv (G := F.mapHomologicalComplex (.up ℤ))
+      (H := G.mapHomologicalComplex (.up ℤ)) (a₁.mapHomologicalComplex (.up ℤ))
+      (a₂.mapHomologicalComplex (.up ℤ))).symm
+      (TwoSquare.mk _ _ _ _ (NatTrans.mapHomologicalComplex τ (.up ℤ)))).natTrans.app P =
+    (NatTrans.mapHomologicalComplex
+      (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans) (.up ℤ)).app P := by
+  rw [left_mate_app]
+  ext i
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    NatTrans.mapHomologicalComplex_app_f, Adjunction.mapHomologicalComplex_unit_app_f,
+    Adjunction.mapHomologicalComplex_counit_app_f]
+  exact (left_mate_app a₁ a₂ τ (P.X i)).symm
+
+private theorem cochain_scalar_mate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
+    [E₁.Additive] [U₁.Additive] [E₂.Additive] [U₂.Additive]
+    [PreservesFiniteLimits U₁] [PreservesFiniteColimits U₁]
+    [PreservesFiniteLimits U₂] [PreservesFiniteColimits U₂]
+    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
+    {L₁ : _root_.DerivedCategory A ⥤ _root_.DerivedCategory B}
+    {L₂ : _root_.DerivedCategory C ⥤ _root_.DerivedCategory D}
+    (d₁ : L₁ ⊣ U₁.mapDerivedCategory) (d₂ : L₂ ⊣ U₂.mapDerivedCategory)
+    (N : A ⥤ C) (N' : B ⥤ D) [N.Additive] [N'.Additive]
+    [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    [PreservesFiniteLimits N'] [PreservesFiniteColimits N']
+    (e : N' ⋙ U₂ ≅ U₁ ⋙ N) (P : CochainComplex A ℤ) :
+    ((mateEquiv d₁ d₂).symm
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).inv)).natTrans.app
+        (_root_.DerivedCategory.Q.obj P) ≫
+      N'.mapDerivedCategory.map ((representative E₁ U₁ a₁ d₁).app P) ≫
+      N'.mapDerivedCategoryFactors.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj P) =
+    L₂.map (N.mapDerivedCategoryFactors.hom.app P) ≫
+      (representative E₂ U₂ a₂ d₂).app ((N.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      _root_.DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ e.inv)).natTrans) (.up ℤ)).app P) := by
+  have h := left_mate_normalization
+    (a₁.mapHomologicalComplex (.up ℤ)) (a₂.mapHomologicalComplex (.up ℤ)) d₁ d₂
+    _root_.DerivedCategory.Q _root_.DerivedCategory.Q
+    _root_.DerivedCategory.Q _root_.DerivedCategory.Q
+    (representative E₁ U₁ a₁ d₁) (representative E₂ U₂ a₂ d₂)
+    U₁.mapDerivedCategoryFactors U₂.mapDerivedCategoryFactors
+    N.mapDerivedCategoryFactors N'.mapDerivedCategoryFactors
+    (NatTrans.mapHomologicalComplex e.inv (.up ℤ))
+    (Functor.mapDerivedCategorySquareIso e).inv
+    (representative_unit E₁ U₁ a₁ d₁) (representative_unit E₂ U₂ a₂ d₂)
+    (by
+      intro R
+      simpa only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.trans_inv,
+        Iso.symm_hom, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm,
+        NatTrans.comp_app, Category.assoc] using cochain_square_normalization e.symm R) P
+  have hc := cochain_left_mate (F := N) (G := N') a₁ a₂ e.inv P
+  rw [hc] at h
+  exact h
+
+private theorem cochain_scalar_mate_iso
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
+    [E₁.Additive] [U₁.Additive] [E₂.Additive] [U₂.Additive]
+    [PreservesFiniteLimits U₁] [PreservesFiniteColimits U₁]
+    [PreservesFiniteLimits U₂] [PreservesFiniteColimits U₂]
+    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
+    {L₁ : _root_.DerivedCategory A ⥤ _root_.DerivedCategory B}
+    {L₂ : _root_.DerivedCategory C ⥤ _root_.DerivedCategory D}
+    (d₁ : L₁ ⊣ U₁.mapDerivedCategory) (d₂ : L₂ ⊣ U₂.mapDerivedCategory)
+    (N : A ⥤ C) (N' : B ⥤ D) [N.Additive] [N'.Additive]
+    [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    [PreservesFiniteLimits N'] [PreservesFiniteColimits N']
+    (e : N' ⋙ U₂ ≅ U₁ ⋙ N) (s : E₁ ⋙ N' ≅ N ⋙ E₂)
+    (δ : N.mapDerivedCategory ⋙ L₂ ≅ L₁ ⋙ N'.mapDerivedCategory)
+    (hδ : δ.hom = ((mateEquiv d₁ d₂).symm
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).inv)).natTrans)
+    (hs : ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ e.inv)).natTrans = s.inv)
+    (P : CochainComplex A ℤ) :
+    N'.mapDerivedCategory.map ((representative E₁ U₁ a₁ d₁).app P) ≫
+      N'.mapDerivedCategoryFactors.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      _root_.DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex s.hom (.up ℤ)).app P) =
+    δ.inv.app (_root_.DerivedCategory.Q.obj P) ≫
+      L₂.map (N.mapDerivedCategoryFactors.hom.app P) ≫
+      (representative E₂ U₂ a₂ d₂).app ((N.mapHomologicalComplex (.up ℤ)).obj P) := by
+  have h := cochain_scalar_mate a₁ a₂ d₁ d₂ N N' e P
+  rw [← hδ, hs] at h
+  apply (cancel_epi (δ.hom.app (_root_.DerivedCategory.Q.obj P))).1
+  rw [Iso.hom_inv_id_app_assoc]
+  calc
+    _ = (_ ≫ _ ≫ _root_.DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex s.inv (.up ℤ)).app P)) ≫
+        _root_.DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex s.hom (.up ℤ)).app P) := by
+      simpa only [Category.assoc] using congrArg
+        (fun f ↦ f ≫ _root_.DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex s.hom (.up ℤ)).app P)) h
+    _ = _ := by
+      have hi := (NatIso.mapHomologicalComplex s (.up ℤ)).inv_hom_id_app P
+      dsimp only [NatIso.mapHomologicalComplex] at hi
+      rw [Category.assoc, Category.assoc, ← _root_.DerivedCategory.Q.map_comp, hi]
+      rw [CategoryTheory.Functor.map_id, Category.comp_id]
+
+private theorem chainComparison_hom_app
+    (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B)
+    (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
+    (chainComparison φ X).hom.app P =
+      (NatTrans.mapHomologicalComplex
+        (etaleSheafExtendScalarsCompComparisonUpperStarIso φ X).hom (.up ℤ)).app P := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  simp only [chainComparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    HomologicalComplex.comp_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
+    Functor.mapHomologicalComplexCompIso_hom_app_f, Iso.refl_inv, Iso.refl_hom,
+    NatTrans.id_app, NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex_app_f]
+  erw [Category.id_comp, Category.comp_id]
+
+attribute [local irreducible] Functor.leftAdjoint Adjunction.ofIsRightAdjoint in
+private theorem comparison_normalization
+    (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    [Finite A] [Finite B] (φ : A →+* B)
+    (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
+    (comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} B) X).mapDerivedCategory.map
+        (Etale.scalarExtensionRepresentative φ X P) ≫
+      (comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} B) X).mapDerivedCategoryFactors.hom.app
+        (((etaleSheafExtendScalars φ X).mapHomologicalComplex (.up ℤ)).obj P) ≫
+      _root_.DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (etaleSheafExtendScalarsCompComparisonUpperStarIso φ X).hom (.up ℤ)).app P) =
+    (pbcComparisonReduction X φ).inv.app (_root_.DerivedCategory.Q.obj P) ≫
+      (SheafOfModules.constantCoefficientProEtaleScalarExtension φ X).map
+        ((comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} A) X).mapDerivedCategoryFactors.hom.app
+          P) ≫
+      SupportedEtaleTensorOrigin.proScalarExtensionRepresentative φ X
+        (((comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} A) X).mapHomologicalComplex
+          (.up ℤ)).obj P) := by
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  exact cochain_scalar_mate_iso
+    (etaleSheafExtendScalarsAdjunction φ X) (sheafExtendScalarsAdjunction φ X)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ))
+    (comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} A) X)
+    (comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} B) X)
+    (pbcComparisonRestrict X φ) (etaleSheafExtendScalarsCompComparisonUpperStarIso φ X)
+    (pbcComparisonReduction X φ) rfl (ordinary_mate X φ) P
+
 /-- Bounded flat representatives simultaneously compute change of coefficients and
 exact etale/pro-etale inverse image, including the canonical B-linear derived square.
 
@@ -93,33 +402,22 @@ Source: Stacks 06YQ, 0G7E, 06YY, 07A4, 08G1 and 03EL
 (blueprint: lem-sp-bounded-flat-coefficient-site-square).
 
 Proof:
-1. lem-sf-comparison-pullback-exact identifies inverse-image constant coefficients
-and gives exactness. The exact-functor localization factor gives Q(N_A P) = N_A Q(P).
-2. lem-weil-pbc-ringed-topos-flat-module-pullback preserves flat terms for both scalar
-extensions and both site inverse images. Additivity preserves zero terms, so all
-five complexes remain supported in [a,b].
-3. lem-weil-pbc-independent-bounded-flat-kflat gives K-flatness of every complex,
-against arbitrary acyclic complexes. No boundedness is imposed on a test complex.
-4. lem-weil-pbc-ringed-topoi-derived-pullback computes scalar extension on P and
-N_A P. Its counits, transposed through the scalar adjunction, are precisely the
-representative arrows below. They are invertible and natural in chain maps.
-5. lem-sfb-kflat-scalar-comparison-normalization gives the canonical ordinary
-comparison of 03EL, with its target B-action. Applying it in every degree gives
-chainComparison. The natural isomorphism already contains naturality in all
-chain maps. Its normalization identifies the localized comparison with the
-inverse of pbcComparisonReduction, the scalar-adjunction mate recorded in
-def-weil-pbc-witness-compatibility.
-6. To identify this mate with the canonical tensor/site comparison of
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback, resolve B[0] using
-lem-pc-kflat-resolution. Apply lem-trf-site-one-sided-tensor-normalization to
-P and N_A P. Naturality in the coefficient resolution gives a commuting tensor
-square whose vertical maps are isomorphisms. Cancellation identifies its bottom
-map with the localized ordinary comparison, including the target-ring action.
-7. For each of the five representatives C and every module sheaf M in degree
-zero, the same one-sided tensor normalization computes QC tensor M by C tensor
-M[0]. Its q-th term is C^q tensor M, zero outside [a,b]. Its cohomology vanishes
-there, proving the universal Tor test. Neither flatness nor finite projective
-dimension of B over A, constructibility of P, nor Noetherianity of X is used. -/
+1. Braiding identifies right-tensor exactness with flatness. Ordinary scalar
+extension and comparison inverse image preserve flat terms. All these additive
+functors preserve zero terms, so the five complexes retain support in [a,b].
+2. The source bounded-flat K-flatness and Tor-amplitude theorems apply to each
+complex. The recorded etale and pro-etale Tor predicates give the required bounds.
+3. Scalar extension preserves K-flat quasi-isomorphisms. The K-flat computation
+for an adjunction with exact right adjoint makes both specified scalar-unit
+transposes invertible.
+4. The iterated mate identity identifies the ordinary scalar/site comparison
+with the scalar mate of the restriction square. Taking degree components proves
+the corresponding identity for cochain adjunctions.
+5. Transpose the cochain scalar units to obtain natural representative maps.
+Exact localization factors normalize the restriction square. The existing
+left-mate normalization identity then identifies its derived scalar mate with
+the localized ordinary comparison, with precisely the published representative
+arrows. Cancel the comparison isomorphisms to obtain the displayed equality. -/
 theorem boundedFlatCoefficientSiteSquare
     (X : Scheme.{u}) {A B : Type (u + 1)} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B) (a b : ℤ) (_hab : a ≤ b)
@@ -156,7 +454,63 @@ theorem boundedFlatCoefficientSiteSquare
       SupportedEtaleTensorOrigin.proScalarExtensionRepresentative.{u} φ X
         (((comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} A) X).mapHomologicalComplex (.up
         ℤ)).obj P)) := by
-  sorry
+  have hf : ∀ q, ObjectProperty.flat (P.X q) :=
+    fun q ↦ flat_of_exact_tensorRight _ (_hflat q)
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let E := etaleSheafExtendScalars φ X
+  let N := comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} A) X
+  let N' := comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} B) X
+  let F := sheafExtendScalars φ X
+  let PE := (E.mapHomologicalComplex (.up ℤ)).obj P
+  let PN := (N.mapHomologicalComplex (.up ℤ)).obj P
+  let PNF := (F.mapHomologicalComplex (.up ℤ)).obj PN
+  let PEN := (N'.mapHomologicalComplex (.up ℤ)).obj PE
+  have hfe : ∀ q, ObjectProperty.flat (PE.X q) :=
+    fun q ↦ Sheaf.flat_extendScalars_obj X.smallEtaleTopology φ (hf q)
+  have hfn : ∀ q, ObjectProperty.flat (PN.X q) :=
+    fun q ↦ flat_comparisonUpperStar_obj (hf q)
+  have hfnf : ∀ q, ObjectProperty.flat (PNF.X q) :=
+    fun q ↦ Sheaf.flat_extendScalars_obj (Scheme.ProEt.topology X) φ (hfn q)
+  have hfen : ∀ q, ObjectProperty.flat (PEN.X q) :=
+    fun q ↦ flat_comparisonUpperStar_obj (hfe q)
+  have hbe : ∀ q, q < a ∨ b < q → IsZero (PE.X q) :=
+    fun q hq ↦ E.map_isZero (_hbounded q hq)
+  have hbn : ∀ q, q < a ∨ b < q → IsZero (PN.X q) :=
+    fun q hq ↦ N.map_isZero (_hbounded q hq)
+  have hbnf : ∀ q, q < a ∨ b < q → IsZero (PNF.X q) :=
+    fun q hq ↦ F.map_isZero (hbn q hq)
+  have hben : ∀ q, q < a ∨ b < q → IsZero (PEN.X q) :=
+    fun q hq ↦ N'.map_isZero (hbe q hq)
+  have hm := model_of_flat_bounded X.smallEtaleTopology A a b P hf _hbounded
+  have hme := model_of_flat_bounded X.smallEtaleTopology B a b PE hfe hbe
+  have hmn := model_of_flat_bounded (Scheme.ProEt.topology X) A a b PN hfn hbn
+  have hmnf := model_of_flat_bounded (Scheme.ProEt.topology X) B a b PNF hfnf hbnf
+  have hmen := model_of_flat_bounded (Scheme.ProEt.topology X) B a b PEN hfen hben
+  have ht := tor_of_flat_bounded X.smallEtaleTopology A a b P hf _hbounded
+  have hte := tor_of_flat_bounded X.smallEtaleTopology B a b PE hfe hbe
+  have htn := tor_of_flat_bounded (Scheme.ProEt.topology X) A a b PN hfn hbn
+  have htnf := tor_of_flat_bounded (Scheme.ProEt.topology X) B a b PNF hfnf hbnf
+  have hten := tor_of_flat_bounded (Scheme.ProEt.topology X) B a b PEN hfen hben
+  refine ⟨⟨hm, Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2 ht⟩,
+    ⟨hme, Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2 hte⟩,
+    ⟨hmn, _hab, htn⟩, ⟨hmnf, _hab, htnf⟩, ⟨hmen, _hab, hten⟩, ?_, ?_, ?_⟩
+  · have : E.PreservesKFlatQuasiIso :=
+      Etale.scalarExtension_preservesKFlatQuasiIso φ X
+    exact Adjunction.isIso_cochainTranspose_of_kFlat E
+      (Sheaf.restrictScalars X.smallEtaleTopology φ)
+      (etaleSheafExtendScalarsAdjunction φ X)
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ))
+      P hm.2.2
+  · let := φ.toAlgebra
+    have : F.PreservesKFlatQuasiIso :=
+      inferInstanceAs ((sheafExtendScalars (algebraMap A B) X).PreservesKFlatQuasiIso)
+    exact Adjunction.isIso_cochainTranspose_of_kFlat F
+      (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ)
+      (sheafExtendScalarsAdjunction φ X)
+      (Adjunction.ofIsRightAdjoint
+        (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ)) PN hmn.2.2
+  · rw [chainComparison_hom_app]
+    exact comparison_normalization X φ P
 
 end BoundedFlatCoefficientSiteSquare
 end AlgebraicGeometry.ProEtale
