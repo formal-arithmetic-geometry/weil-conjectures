@@ -12,29 +12,37 @@
  ],
  "proof": [
   {
-   "text": "Compose both normalized presentation maps with every finite quotient projection and use joint monicity of the completed inverse limit.",
+   "text": "For every finite level n, apply Mathlib sheafify_hom_ext to the two finite comparison maps. On a constant section, finite_constants gives the same constant-valued function for both presentations. ContinuousMap.ext proves equality of these functions, so the finite comparison morphisms agree.",
    "uses": [
-    "def-sf-locally-finite-adic-compact-support-data",
-    "def-sf-locally-finite-adic-realization-data",
-    "def-pur-integral-compact-support-coefficient-data"
+    "def-sf-locally-finite-adic-realization-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2 and Section 6.8; original finite-comparison plan, step 2"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Compare the two integral isomorphism homomorphisms after each completed finite projection. Postcompose by the finite comparison isomorphism, which is monic. The preceding equality identifies the two finite comparisons; integral_residues then makes both resulting sections the same pointwise quotient of the original integral function. Forget commutativity and apply limit.hom_ext to the actual inverse limit of ring sheaves, then use faithfulness to recover equality of the commutative ring sheaf maps. Cancel the common isomorphism to deduce equality of their inverses.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite integralInclusion followed by rationalInclusion evaluates at each point to the fixed embedding i applied to the value of the integral function: this is exactly integralInclusion_normalized followed by rationalInclusion_normalized. Extensionality of the native locally finite continuous functions gives equality of these composites. Finally substitute this equality and equality of the inverse integral isomorphisms in the definition of integralMap.",
+   "uses": [
+    "def-sf-locally-finite-adic-realization-data",
+    "def-sf-locally-finite-adic-compact-support-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sf-locally-finite-adic-compact-support-data",
   "def-sf-locally-finite-adic-realization-data",
-  "def-pur-integral-compact-support-coefficient-data"
+  "def-sf-locally-finite-adic-compact-support-data"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "D3",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2 and Section 6.8; construction step split from lem-sf-native-completed-coefficient-change",
-  "group": "D9"
+  "place": "Lemma 6.8.2(1), p. 58, inverse-limit identity; Definition 6.8.1 and Lemma 6.8.2(2), pp. 58-59, pointwise integral and field inclusions. Formal uniqueness proof from the published CoefficientPresentation normalization fields, Mathlib sheafify_hom_ext and limit.hom_ext."
  },
  "mathlib_searches": [],
  "status": "split",
@@ -89,10 +97,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D9",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261027T205912-L-1632109",
-  "kind": "interface",
+  "landing": "20261027T233843-L-4123651",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
