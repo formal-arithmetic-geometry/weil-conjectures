@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-common-stage-internal-hom-representative",
+ "kind": "statement",
+ "title": "Normalized internal Hom arrows commute with a further coefficient extension",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and any scheme $W$. Let $P,Q$ be permitted common-stage Hom pairs with literal outputs and comparisons as in [def-weil-common-stage-internal-hom-data]. Let $L$ contain both output composita, and let $a:Q_{1,L}\\to P_{1,L}$ and $b:P_{2,L}\\to Q_{2,L}$ be arrows at $L$. Define $v_L(a,b)=\\theta_{P,L}\\,R\\mathcal Hom_L(a,b)\\,\\theta_{Q,L}^{-1}$, using the prescribed comparisons of that definition. For every finite coefficient inclusion $L\\subseteq M$, the stage-system transport of $v_L(a,b)$ equals $v_M(a_M,b_M)$, where both input arrows are transported by their recorded stage associators. This is equality of arrows at $M$, before passing to any common-stage quotient.",
+ "source": {
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "The existing commonStageDerivedInternalHom_existsUnique proof plan: compatibility of the displayed conjugation with further transport and eventual equality. The new obligation is only its one-extension equation."
+ },
+ "stmt_deps": [
+  "def-weil-common-stage-internal-hom-data",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use scalarHomOrdinary_naturality and the Hom clause of scalarOperationsOrdinary_tower for each input compositum, L and M. Conjugate by scalarCompletion, restrict to constructible objects, and rationalize. The uniqueness specifications of the rational comparisons identify these localized components with the published comparisons. Substitute the stage-system transition and associator clauses and the coefficient-inclusion composition law. The inverse first and forward second input associators cancel through Hom functoriality, giving the stated single-extension equation.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the proved representative-independence corollary, equality of input classes gives eventual equality in each slot. Enlarge to a field above both equality witnesses. Apply the single-extension equation and mkHom_tr to both output representatives, substitute the two transported input equalities, and obtain equality of output classes. This step uses the actual upstream StageSystem quotient, with no faithfulness assumption.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CommonStageInternalHomRepresentative.lean",
+  "place": "The existing commonStageDerivedInternalHom_existsUnique proof plan: compatibility of the displayed conjugation with further transport and eventual equality. The new obligation is only its one-extension equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend a contravariant covariant internal Hom functor from directed stage categories to the common-stage category with a full subcategory of permitted pairs",
+   "results": "Eight hits on locally directed functors, ind objects, coends and filtered categories. None states the prescribed Hom scalar-comparison transport or its restriction to permitted pairs.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ofFullyFaithful",
+   "results": "Zero hits; unknown identifier CategoryTheory.Functor.ofFullyFaithful. Existing project descent and Mathlib functor heterogeneous extensionality were instead read from source.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*[Hh]om|[Hh]om.*descent",
+   "results": "24 Mathlib hits, on descent data, isPrestack and injective resolution homotopies; no common-stage restricted internal Hom. Local rg finds StageSystemFunctorDescent and BilinearCoefficientDescent, whose univariate/covariant-product domains do not directly match the permitted contravariant Hom domain.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor descends from a directed family of categories with coherent coefficient comparisons and prescribed maps on quotient morphisms",
+   "results": "Eight results include CategoryTheory.Quotient.lift, Sigma.desc, ModuleCat.directLimitDiagram and pseudofunctor descent data. Quotient.lift requires an existing functor on a single source category; it does not supply a directed-stage common-stage model, its contravariant permitted-pair arrow formula or the normalized scalar comparisons. The existing project StageSystem and scalar-localization APIs provide those data. No exact replacement of the recorded definitions or scalar-comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "The existing commonStageDerivedInternalHom_existsUnique proof plan: compatibility of the displayed conjugation with further transport and eventual equality. The new obligation is only its one-extension equation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageInternalHomRepresentative",
+  "file": "lean/Sheaf/Paper/CommonStageInternalHomRepresentative.lean",
+  "declaration": "WeilConjectures.CommonStageInternalHom.value_transport",
+  "declarations": [
+   "WeilConjectures.CommonStageInternalHom.input",
+   "WeilConjectures.CommonStageInternalHom.value",
+   "WeilConjectures.CommonStageInternalHom.output",
+   "WeilConjectures.CommonStageInternalHom.value_transport",
+   "WeilConjectures.CommonStageInternalHom.output_eq_of_input_eq"
+  ],
+  "statement": "theorem value_transport (M : Index l Ω) (k : L ≤ M) :\n    (stageSystem l Ω W).tr k (value l Ω W P Q L h h' a b) =\n      value l Ω W P Q M (h.trans k) (h'.trans k)\n        ((stageSystem l Ω W).tr k a) ((stageSystem l Ω W).tr k b)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 7 new modules vs clone item (verbatim move: 13 blocks byte-identical, descent_from_data signature kept; pp.all #print same except _proof_N names); new value_transport vs scalarOperationsOrdinary_tower/rationalHomScalarComparison spec; 100 direct importers compiled in sandbox (96 OK, 1 infra, 3 slow pre-existing vs published); nodes vs Lean and check_statement_change"
+ }
+}

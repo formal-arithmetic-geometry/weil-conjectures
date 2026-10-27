@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pair-descent-prescribed-components",
+ "kind": "statement",
+ "title": "Prescribed components of normalized coefficient-pair descent",
+ "statement": "Let $I$ be a directed preordered type, $C_i,D_i$ categories, and $S,T$ their stage systems, meaning transition functors with coherent associators on common-stage quotients as in [lem-sbc-coherent-pair-functor-descent]. Let $\\phi_i:C_i\\to D_i$ be functors with coherent comparisons $b_h:\\phi_i T_h\\cong S_h\\phi_j$ in diagrammatic functor order. For each pair object $P$ and stage $M$ above its stage, suppose an isomorphism $c_{P,M}$ from the extended literal output pair to $\\phi_M(P_M)$ has hom and inverse components heterogeneously equal to those of $b_h$ at $P$. Then there is exactly one descended functor with literal object $(i,\\phi_i X)$ and representative arrow $[M,c_{P,M}\\phi_M(a)c_{Q,M}^{-1}]$. This is only a conversion of the existing coefficient-pair functor specification to given equal components.",
+ "source": {
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "pairDescent_with_components: its complete existing generic proof, separated for compile time while retaining the original private wrapper."
+ },
+ "stmt_deps": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Apply coefficientPairFunctor_exists. Its generic output equals the literal stagewise output pair. Destruct the two input pairs, turn the supplied component heterogeneous equalities into equalities, and rewrite the representative prescription in each direction. existsUnique_congr transfers the whole characterization and uniqueness.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/CategoryTheory/PairDescentPrescribedComponents.lean",
+  "place": "pairDescent_with_components: its complete existing generic proof, separated for compile time while retaining the original private wrapper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend functors and natural isomorphisms to coefficient pair categories and bilinear scalar localizations with prescribed representative maps",
+   "results": "Eight hits, including Localization.lift₂NatIso, liftNatIso, functor_linear_iff and LocalizerMorphism.liftingLocalizedFunctor. Read Localization/Bifunctor.lean:155-199: lift₂NatIso requires specified categorical-localization lifting data. It does not directly provide either the concrete StageSystem component conversion or the raw bilinear representative statement for an arbitrary function c. The existing complete project proofs are extracted instead.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits. NatIso.ofComponents is the constructor used in the raw bilinear proof, but still requires the naturality argument. None is the representative-normalized comparison statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bilinear.*(NatIso|Iso)|Iso.*bilinear|coefficientPairFunctor",
+   "results": "16 hits, on isometries of bilinear forms, Clifford algebras and Gaussian characteristic functions; no coefficient-pair or raw bilinear scalar comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor descends from a directed family of categories with coherent coefficient comparisons and prescribed maps on quotient morphisms",
+   "results": "Eight results include CategoryTheory.Quotient.lift, Sigma.desc, ModuleCat.directLimitDiagram and pseudofunctor descent data. Quotient.lift requires an existing functor on a single source category; it does not supply a directed-stage common-stage model, its contravariant permitted-pair arrow formula or the normalized scalar comparisons. The existing project StageSystem and scalar-localization APIs provide those data. No exact replacement of the recorded definitions or scalar-comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "pairDescent_with_components: its complete existing generic proof, separated for compile time while retaining the original private wrapper.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.PairDescentPrescribedComponents",
+  "file": "lean/Sheaf/CategoryTheory/PairDescentPrescribedComponents.lean",
+  "declaration": "WeilConjectures.NormalizedPairDescent.existsUnique",
+  "declarations": [
+   "WeilConjectures.NormalizedPairDescent.object",
+   "WeilConjectures.NormalizedPairDescent.existsUnique"
+  ],
+  "statement": "theorem existsUnique\n    (b : ∀ {i j} (h : i ≤ j), φ i ⋙ T.T h ≅ S.T h ⋙ φ j)\n    (hcoh : StageSystem.pairFunctorCoherent S T φ b)\n    (c : ∀ (P : S.PairCategory) (M : I) (h : P.stage ≤ M),\n      (object S T φ P).toStage h ≅ (φ M).obj (P.toStage h))\n    (hc : ∀ (P : S.PairCategory) (M : I) (h : P.stage ≤ M),\n      HEq ((b h).hom.app P.obj) (c P M h).hom ∧\n        HEq ((b h).inv.app P.obj) (c P M h).inv) :\n    ∃! F : S.PairCategory ⥤ T.PairCategory,\n      (∀ P, F.obj P = object S T φ P) ∧\n      (∀ (P Q : S.PairCategory) (M : I) (hP : P.stage ≤ M) (hQ : Q.stage ≤ M)\n        (a : P.toStage hP ⟶ Q.toStage hQ),\n        HEq (F.map (StageSystem.PairCategory.mkHom M hP hQ a))\n          (StageSystem.PairCategory.mkHom\n            (X := object S T φ P) (Y := object S T φ Q)\n            M hP hQ ((c P M hP).hom ≫ (φ M).map a ≫ (c Q M hQ).inv)))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 7 new modules vs clone item (verbatim move: 13 blocks byte-identical, descent_from_data signature kept; pp.all #print same except _proof_N names); new value_transport vs scalarOperationsOrdinary_tower/rationalHomScalarComparison spec; 100 direct importers compiled in sandbox (96 OK, 1 infra, 3 slow pre-existing vs published); nodes vs Lean and check_statement_change"
+ }
+}

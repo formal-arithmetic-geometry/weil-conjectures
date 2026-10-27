@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-raw-bilinear-scalar-comparison",
+ "kind": "statement",
+ "title": "Natural isomorphisms of prescribed raw bilinear scalar extensions",
+ "statement": "Let $R,S$ be commutative rings, $C$ an $R$-linear preadditive category and $D$ an $S$-linear preadditive category. Choose $t\\in R$, $b\\in S$ and any function $c:R[1/t]\\to S[1/b]$. Use raw scalar localization [def-weil-linear-scalar-localization], with scalar-first tensor notation for Hom. Let $U,V:C\\times C\\to D$ be functors and $e:U\\cong V$. Let $F,G:C[1/t]\\times C[1/t]\\to D[1/b]$ have the literal objects $U,V$, respectively. Assume, for every four input objects, that their maps are given by biadditive maps of the two localized Hom groups, whose values on pure tensors are $F(x\\otimes f,y\\otimes g)=c(xy)\\otimes U(f,g)$ and $G(x\\otimes f,y\\otimes g)=c(xy)\\otimes V(f,g)$ under the prescribed object equalities. There is exactly one natural isomorphism $F\\cong G$ whose component is the scalar-localization image of the component of $e$, interpreted through those object equalities. No ring-homomorphism assumption on $c$ is added.",
+ "source": {
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "rawBilinearIso_existsUnique: its complete existing generic proof, separated for compile time while retaining the original private wrapper."
+ },
+ "stmt_deps": [
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the localized integral isomorphism components by the given object equalities. Tensor induction in the first and then the second input arrow reduces naturality to zero, sums and pure tensors. The first two cases follow from additivity. In the pure case the two prescribed formulas and the scalar-localization composition formula reduce the equation to integral naturality, with the common scalar c(xy). Use NatIso.ofComponents. Component extensionality proves uniqueness. This is the existing complete private proof, retained verbatim apart from its public name and namespace.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/CategoryTheory/RawBilinearScalarComparison.lean",
+  "place": "rawBilinearIso_existsUnique: its complete existing generic proof, separated for compile time while retaining the original private wrapper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend functors and natural isomorphisms to coefficient pair categories and bilinear scalar localizations with prescribed representative maps",
+   "results": "Eight hits, including Localization.lift₂NatIso, liftNatIso, functor_linear_iff and LocalizerMorphism.liftingLocalizedFunctor. Read Localization/Bifunctor.lean:155-199: lift₂NatIso requires specified categorical-localization lifting data. It does not directly provide either the concrete StageSystem component conversion or the raw bilinear representative statement for an arbitrary function c. The existing complete project proofs are extracted instead.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits. NatIso.ofComponents is the constructor used in the raw bilinear proof, but still requires the naturality argument. None is the representative-normalized comparison statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bilinear.*(NatIso|Iso)|Iso.*bilinear|coefficientPairFunctor",
+   "results": "16 hits, on isometries of bilinear forms, Clifford algebras and Gaussian characteristic functions; no coefficient-pair or raw bilinear scalar comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor descends from a directed family of categories with coherent coefficient comparisons and prescribed maps on quotient morphisms",
+   "results": "Eight results include CategoryTheory.Quotient.lift, Sigma.desc, ModuleCat.directLimitDiagram and pseudofunctor descent data. Quotient.lift requires an existing functor on a single source category; it does not supply a directed-stage common-stage model, its contravariant permitted-pair arrow formula or the normalized scalar comparisons. The existing project StageSystem and scalar-localization APIs provide those data. No exact replacement of the recorded definitions or scalar-comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "rawBilinearIso_existsUnique: its complete existing generic proof, separated for compile time while retaining the original private wrapper.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RawBilinearScalarComparison",
+  "file": "lean/Sheaf/CategoryTheory/RawBilinearScalarComparison.lean",
+  "declaration": "WeilConjectures.RawBilinearScalarComparison.existsUnique",
+  "declarations": [
+   "WeilConjectures.RawBilinearScalarComparison.existsUnique"
+  ],
+  "statement": "theorem existsUnique\n    {R : Type r} [CommRing R] {S : Type s} [CommRing S]\n    {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]\n    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear S D]\n    (t : R) (b : S) (c : Localization.Away t → Localization.Away b)\n    (U V : C × C ⥤ D) (e : U ≅ V)\n    (F G : ScalarLocalization R C t × ScalarLocalization R C t ⥤\n      ScalarLocalization S D b)\n    (hF : ∀ K, F.obj K = ⟨U.obj (K.1.obj, K.2.obj)⟩)\n    (hG : ∀ K, G.obj K = ⟨V.obj (K.1.obj, K.2.obj)⟩)\n    (mF : ∀ (K K' L L' : ScalarLocalization R C t),\n      ∃ β : (K ⟶ K') →+\n        (L ⟶ L') →+ (F.obj (K, L) ⟶ F.obj (K', L')),\n        (∀ f g, F.map (Prod.mkHom f g) = β f g) ∧\n        ∀ (f : K.obj ⟶ K'.obj) (g : L.obj ⟶ L'.obj) (x y : Localization.Away t),\n          HEq (β (x ⊗ₜ[R] f) (y ⊗ₜ[R] g))\n            (c (x * y) ⊗ₜ[S] U.map (Prod.mkHom f g)))\n    (mG : ∀ (K K' L L' : ScalarLocalization R C t),\n      ∃ β : (K ⟶ K') →+\n        (L ⟶ L') →+ (G.obj (K, L) ⟶ G.obj (K', L')),\n        (∀ f g, G.map (Prod.mkHom f g) = β f g) ∧\n        ∀ (f : K.obj ⟶ K'.obj) (g : L.obj ⟶ L'.obj) (x y : Localization.Away t),\n          HEq (β (x ⊗ₜ[R] f) (y ⊗ₜ[R] g))\n            (c (x * y) ⊗ₜ[S] V.map (Prod.mkHom f g))) :\n    ∃! α : F ≅ G, ∀ K, HEq (α.hom.app K)\n      ((ScalarLocalization.localization S D b).map (e.hom.app (K.1.obj, K.2.obj)))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 7 new modules vs clone item (verbatim move: 13 blocks byte-identical, descent_from_data signature kept; pp.all #print same except _proof_N names); new value_transport vs scalarOperationsOrdinary_tower/rationalHomScalarComparison spec; 100 direct importers compiled in sandbox (96 OK, 1 infra, 3 slow pre-existing vs published); nodes vs Lean and check_statement_change"
+ }
+}

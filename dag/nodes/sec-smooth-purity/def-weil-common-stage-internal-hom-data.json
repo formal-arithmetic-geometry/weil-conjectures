@@ -1,0 +1,139 @@
+{
+ "id": "def-weil-common-stage-internal-hom-data",
+ "kind": "definition",
+ "title": "Literal common-stage internal Hom objects and normalized comparisons",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and any scheme $W$. Use the rational constructible stages of [def-sf-finite-rational-derived-operations] and the common-stage category of [def-weil-algebraically-closed-coefficients]. For a pair $P=((E,K)^{\\mathrm{op}},(F,N))$, put $J=EF$, the finite compositum of [def-weil-finite-subextension-directed-set]. A pair is permitted when its two extensions to $J$ satisfy the integral-Hom constructibility predicate. Its Hom object is the literal pair $(J,R\\mathcal Hom_J(K_J,N_J))$. This pair remains permitted after extension to every finite $L\\supseteq J$. Identify the scalar extension of its output with $R\\mathcal Hom_L(K_L,N_L)$ by the specified rational Hom scalar comparison, with the inverse first-input and forward second-input associators. The recorded transition identification is the equality from the stage-system specification. These are the already existing definitions, moved without changing their expressions.",
+ "source": {
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "The existing commonStageHomPairs through commonStageHomComparison declarations and their permitted-pair proof, extracted for an acyclic proof-obligation module."
+ },
+ "stmt_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof": [
+  {
+   "text": "Retain the literal stage-system transition identification and the compositum Hom-pair, output and comparison definitions. They are the existing expressions, with no new choice or coefficient hypothesis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Scalar extension preserves permitted integral Hom pairs. The two integral scalar associators identify their extended inputs with the inputs extended directly from their initial stages. Apply the integral internal-Hom functor to the inverse first associator and the forward second one. Constructibility is invariant under this isomorphism, so the direct pair at every larger stage is permitted.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CommonStageInternalHomData.lean",
+  "place": "The existing commonStageHomPairs through commonStageHomComparison declarations and their permitted-pair proof, extracted for an acyclic proof-obligation module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend a contravariant covariant internal Hom functor from directed stage categories to the common-stage category with a full subcategory of permitted pairs",
+   "results": "Eight hits on locally directed functors, ind objects, coends and filtered categories. None states the prescribed Hom scalar-comparison transport or its restriction to permitted pairs.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ofFullyFaithful",
+   "results": "Zero hits; unknown identifier CategoryTheory.Functor.ofFullyFaithful. Existing project descent and Mathlib functor heterogeneous extensionality were instead read from source.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*[Hh]om|[Hh]om.*descent",
+   "results": "24 Mathlib hits, on descent data, isPrestack and injective resolution homotopies; no common-stage restricted internal Hom. Local rg finds StageSystemFunctorDescent and BilinearCoefficientDescent, whose univariate/covariant-product domains do not directly match the permitted contravariant Hom domain.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor descends from a directed family of categories with coherent coefficient comparisons and prescribed maps on quotient morphisms",
+   "results": "Eight results include CategoryTheory.Quotient.lift, Sigma.desc, ModuleCat.directLimitDiagram and pseudofunctor descent data. Quotient.lift requires an existing functor on a single source category; it does not supply a directed-stage common-stage model, its contravariant permitted-pair arrow formula or the normalized scalar comparisons. The existing project StageSystem and scalar-localization APIs provide those data. No exact replacement of the recorded definitions or scalar-comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "The existing commonStageHomPairs through commonStageHomComparison declarations and their permitted-pair proof, extracted for an acyclic proof-obligation module.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageInternalHomData",
+  "file": "lean/Sheaf/Paper/CommonStageInternalHomData.lean",
+  "declaration": "WeilConjectures.commonStageHomPairAtStage_permitted",
+  "declarations": [
+   "WeilConjectures.operationStageTransitionIso",
+   "WeilConjectures.commonStageHomPairs",
+   "WeilConjectures.commonStageHomRationalPair",
+   "WeilConjectures.commonStageHomObject",
+   "WeilConjectures.commonStageHomPairAtStage_permitted",
+   "WeilConjectures.commonStageHomPairAtStage",
+   "WeilConjectures.commonStageHomComparison"
+  ],
+  "statement": "theorem commonStageHomPairAtStage_permitted (W : Scheme.{u})\n    (P : (commonStageHomPairs l Ω W).FullSubcategory)\n    (L : Index l Ω) (h : (commonStageHomObject l Ω W P).stage ≤ L) :\n    constructibleRationalHomPairs l (Coefficient.{u} l Ω L) W\n      (op (P.obj.1.unop.toStage\n        (((Padic.finiteCoefficientFields_properties l Ω).1\n          P.obj.1.unop.stage P.obj.2.stage).1.trans h)),\n        P.obj.2.toStage (((Padic.finiteCoefficientFields_properties l Ω).1\n          P.obj.1.unop.stage P.obj.2.stage).2.trans h))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 7 new modules vs clone item (verbatim move: 13 blocks byte-identical, descent_from_data signature kept; pp.all #print same except _proof_N names); new value_transport vs scalarOperationsOrdinary_tower/rationalHomScalarComparison spec; 100 direct importers compiled in sandbox (96 OK, 1 infra, 3 slow pre-existing vs published); nodes vs Lean and check_statement_change"
+ }
+}

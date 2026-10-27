@@ -79,8 +79,39 @@
    "elementary": false
   },
   {
-   "text": "The internal-Hom common-stage existence/uniqueness theorem remains unfinished; its statement and dependencies are unchanged.",
-   "uses": [],
+   "text": "Use the extracted literal Hom data and the proved permitted-pair persistence theorem. The remaining input is the single-extension normalized Hom arrow transport equation. Eventual equality in each input slot, directedness and mkHom_tr turn it into representative independence.",
+   "uses": [
+    "def-weil-common-stage-internal-hom-data",
+    "lem-weil-common-stage-internal-hom-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every arrow of the permitted full subcategory has its two coordinates represented at one stage above both output composita and any prescribed bound. Representative independence gives a unique output arrow for each input arrow; choose only this uniquely determined output.",
+   "uses": [
+    "lem-weil-common-stage-internal-hom-descent-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove identity by the identity representative and the rational Hom functor identity law, cancelling the endpoint comparison. Represent two composable arrows at one stage by transporting the first to a stage for the second. The first coordinates compose in reversed order; rational Hom functoriality and cancellation of the middle comparisons prove composition. These give an actual functor with the literal output objects.",
+   "uses": [
+    "lem-weil-common-stage-internal-hom-descent-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The representative formula is the output-arrow specification. Functor.hext and existence of representatives show that any other functor with the prescribed objects and representative maps equals this functor. Thus the original commonStageDerivedInternalHom_existsUnique statement follows unchanged.",
+   "uses": [
+    "lem-weil-common-stage-internal-hom-descent-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Retain the existing private rawBilinearIso_existsUnique API for import-all consumers. Its unchanged statement is proved by the extracted raw bilinear scalar comparison theorem, whose tensor-induction proof is complete. This proof-support extraction changes no rational operation or public representative formula.",
+   "uses": [
+    "lem-weil-raw-bilinear-scalar-comparison"
+   ],
    "elementary": true
   }
  ],
@@ -90,12 +121,16 @@
   "lem-weil-common-stage-pullback-descent-from-data",
   "lem-weil-rational-tensor-stage-coherence",
   "lem-pur-bilinear-comparison-coefficient-descent",
-  "def-weil-finite-subextension-directed-set"
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-common-stage-internal-hom-data",
+  "lem-weil-common-stage-internal-hom-representative",
+  "lem-weil-common-stage-internal-hom-descent-calculus",
+  "lem-weil-raw-bilinear-scalar-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
-  "place": "C4: tensor quotient existence, representative action and uniqueness reduced to a specific scalar comparison tower law via proved generic bilinear coefficient descent; pullback and internal-Hom holes retained"
+  "place": "E3: actual quotient representative calculus, identity/composition and functor uniqueness; only the normalized one-extension Hom arrow equation is split off. The fully proved arrow calculus is isolated in CommonStageInternalHomDescent after profiling and reducing cached stage-category instances locally, keeping each compile within the file budget."
  },
  "mathlib_searches": [
   {
@@ -217,21 +252,12 @@
   "module": "Sheaf.Paper.DerivedPullbackTensorHom",
   "declaration": "WeilConjectures.commonStageDerivedInternalHom_existsUnique",
   "declarations": [
-   "WeilConjectures.operationStageTransitionIso",
-   "WeilConjectures.commonStagePullbackObject",
-   "WeilConjectures.commonStagePullbackComparison",
    "WeilConjectures.commonStageDerivedPullback_existsUnique",
    "WeilConjectures.commonStageDerivedPullback",
    "WeilConjectures.commonStageTensorObject",
    "WeilConjectures.commonStageTensorComparison",
    "WeilConjectures.commonStageDerivedTensor_existsUnique",
    "WeilConjectures.commonStageDerivedTensor",
-   "WeilConjectures.commonStageHomPairs",
-   "WeilConjectures.commonStageHomRationalPair",
-   "WeilConjectures.commonStageHomObject",
-   "WeilConjectures.commonStageHomPairAtStage_permitted",
-   "WeilConjectures.commonStageHomPairAtStage",
-   "WeilConjectures.commonStageHomComparison",
    "WeilConjectures.commonStageDerivedInternalHom_existsUnique",
    "WeilConjectures.commonStageDerivedInternalHom"
   ],
@@ -241,7 +267,7 @@
   "by": "NY",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Second reading: actual intrinsic finite tensor and recorded Hom, normalized evaluation and quotient transpose; actual integral restrictions, rational linear/bilinear maps, and common-stage compositum objects and canonical conjugated representative maps. Uses the newly landed coefficient evaluation calculus without a dependency cycle. Repairs the scalar-comparison dependency in this delivery; no mathematical statement change. Section 1(B), NY: the published dependency times out at the fixed 60-second limit. Preserve its constructions and statements; make the final ObjectProperty.homMk endpoints explicit and enable the compatibility definitional-equality elaboration options. These are elaboration-only repairs of the same normalized morphism. K2: finite/integral/rational declaration implementations are now in Sheaf.Paper.FiniteRationalDerivedOperations and publicly re-exported unchanged by this item; the common-stage declarations remain here."
+  "note": "Second reading: actual intrinsic finite tensor and recorded Hom, normalized evaluation and quotient transpose; actual integral restrictions, rational linear/bilinear maps, and common-stage compositum objects and canonical conjugated representative maps. Uses the newly landed coefficient evaluation calculus without a dependency cycle. Repairs the scalar-comparison dependency in this delivery; no mathematical statement change. Section 1(B), NY: the published dependency times out at the fixed 60-second limit. Preserve its constructions and statements; make the final ObjectProperty.homMk endpoints explicit and enable the compatibility definitional-equality elaboration options. These are elaboration-only repairs of the same normalized morphism. K2: finite/integral/rational declaration implementations are now in Sheaf.Paper.FiniteRationalDerivedOperations and publicly re-exported unchanged by this item; the common-stage declarations remain here. E3: the literal common-stage Hom data and recorded transition identification are publicly re-exported unchanged from CommonStageInternalHomData; the internal-Hom functor is proved from the single-extension representative transport equation. E3: the two literal pullback definitions are re-exported unchanged from CommonStagePullbackData; the two existing public pullback lemmas retain their exact global names and signatures in the publicly re-exported CommonStagePullbackDescent module."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -264,18 +290,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
-  "result": "pass",
-  "landing": "20261027T112407-L-1578879",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.commonStageDerivedInternalHom_existsUnique",
-   "WeilConjectures.commonStagePullback_comparison_data"
-  ],
-  "sorry_after": [
-   "WeilConjectures.commonStageDerivedInternalHom_existsUnique"
-  ]
+  "note": "independent cc review: delivered item + 7 new modules vs clone item (verbatim move: 13 blocks byte-identical, descent_from_data signature kept; pp.all #print same except _proof_N names); new value_transport vs scalarOperationsOrdinary_tower/rationalHomScalarComparison spec; 100 direct importers compiled in sandbox (96 OK, 1 infra, 3 slow pre-existing vs published); nodes vs Lean and check_statement_change"
  }
 }

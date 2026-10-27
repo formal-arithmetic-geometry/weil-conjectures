@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-common-stage-internal-hom-descent-calculus",
+ "kind": "statement",
+ "title": "The unique common-stage internal Hom arrow and its representative calculus",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a scheme $W$. Use the permitted pairs, literal output objects and normalized comparisons of [def-weil-common-stage-internal-hom-data]. For every arrow between two permitted pairs, all its common finite-stage representatives give exactly one output arrow. The output of an identity representative is the identity, and the output of the composite of two representatives is the composite of their outputs, with the first input coordinate composed in reversed order. These assertions use the single-extension equation of [lem-weil-common-stage-internal-hom-representative] only to establish representative independence; they do not assert the existence or uniqueness of a descended functor.",
+ "source": {
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "The commonStageDerivedInternalHom_existsUnique proof plan: common representatives, unique output arrows, rational Hom identity/composition, and cancellation of the middle comparison."
+ },
+ "stmt_deps": [
+  "def-weil-common-stage-internal-hom-data",
+  "lem-weil-common-stage-internal-hom-representative"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing StageSystem common-stage representative lemma to the reversed first coordinate and the forward second coordinate. Enlarge above both literal output composita and the requested lower bound. Full-subcategory morphism extensionality combines the two representatives.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use representative independence to show that the displayed conjugated output from any one representative is characterized by its value on every representative. Any two arrows with that characterization agree by evaluation on one representative. Choose this uniquely determined arrow, and derive its representative formula.",
+   "uses": [
+    "lem-weil-common-stage-internal-hom-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity representative maps to the identity by rational Hom functoriality and the endpoint inverse law. At one common stage, the first input composes in reverse order and the second in forward order. Rational Hom preserves this product composite, and the middle scalar comparison cancels with its inverse. The StageSystem identity, composition and further-transport representative equations give precisely the stated quotient-arrow formulas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-stage-internal-hom-representative"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CommonStageInternalHomDescent.lean",
+  "place": "The commonStageDerivedInternalHom_existsUnique proof plan: common representatives, unique output arrows, rational Hom identity/composition, and cancellation of the middle comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend a contravariant covariant internal Hom functor from directed stage categories to the common-stage category with a full subcategory of permitted pairs",
+   "results": "Eight hits on locally directed functors, ind objects, coends and filtered categories. None states the prescribed Hom scalar-comparison transport or its restriction to permitted pairs.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ofFullyFaithful",
+   "results": "Zero hits; unknown identifier CategoryTheory.Functor.ofFullyFaithful. Existing project descent and Mathlib functor heterogeneous extensionality were instead read from source.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*[Hh]om|[Hh]om.*descent",
+   "results": "24 Mathlib hits, on descent data, isPrestack and injective resolution homotopies; no common-stage restricted internal Hom. Local rg finds StageSystemFunctorDescent and BilinearCoefficientDescent, whose univariate/covariant-product domains do not directly match the permitted contravariant Hom domain.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor descends from a directed family of categories with coherent coefficient comparisons and prescribed maps on quotient morphisms",
+   "results": "Eight results include CategoryTheory.Quotient.lift, Sigma.desc, ModuleCat.directLimitDiagram and pseudofunctor descent data. Quotient.lift requires an existing functor on a single source category; it does not supply a directed-stage common-stage model, its contravariant permitted-pair arrow formula or the normalized scalar comparisons. The existing project StageSystem and scalar-localization APIs provide those data. No exact replacement of the recorded definitions or scalar-comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "The commonStageDerivedInternalHom_existsUnique proof plan: common representatives, unique output arrows, rational Hom identity/composition, and cancellation of the middle comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageInternalHomDescent",
+  "file": "lean/Sheaf/Paper/CommonStageInternalHomDescent.lean",
+  "declaration": "WeilConjectures.CommonStageInternalHomDescent.homArrow_existsUnique",
+  "declarations": [
+   "WeilConjectures.CommonStageInternalHomDescent.homRepresentative_exists",
+   "WeilConjectures.CommonStageInternalHomDescent.homInput_transport",
+   "WeilConjectures.CommonStageInternalHomDescent.homInput_id",
+   "WeilConjectures.CommonStageInternalHomDescent.homOutput_id",
+   "WeilConjectures.CommonStageInternalHomDescent.homInput_comp",
+   "WeilConjectures.CommonStageInternalHomDescent.homOutput_comp",
+   "WeilConjectures.CommonStageInternalHomDescent.homArrow_existsUnique",
+   "WeilConjectures.CommonStageInternalHomDescent.homArrow",
+   "WeilConjectures.CommonStageInternalHomDescent.homArrow_spec"
+  ],
+  "statement": "theorem homArrow_existsUnique (W : Scheme.{u})\n    (P Q : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory) (f : P ⟶ Q) :\n    ∃! g : commonStageHomObject l Ω W P ⟶ commonStageHomObject l Ω W Q,\n      ∀ (L : Index l Ω)\n        (h : (commonStageHomObject l Ω W P).stage ≤ L)\n        (h' : (commonStageHomObject l Ω W Q).stage ≤ L)\n        (a : (commonStageHomPairAtStage l Ω W Q L h').obj.1.unop ⟶\n          (commonStageHomPairAtStage l Ω W P L h).obj.1.unop)\n        (b : (commonStageHomPairAtStage l Ω W P L h).obj.2 ⟶\n          (commonStageHomPairAtStage l Ω W Q L h').obj.2),\n        f = input l Ω W P Q L h h' a b → g = output l Ω W P Q L h h' a b",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 7 new modules vs clone item (verbatim move: 13 blocks byte-identical, descent_from_data signature kept; pp.all #print same except _proof_N names); new value_transport vs scalarOperationsOrdinary_tower/rationalHomScalarComparison spec; 100 direct importers compiled in sandbox (96 OK, 1 infra, 3 slow pre-existing vs published); nodes vs Lean and check_statement_change"
+ }
+}

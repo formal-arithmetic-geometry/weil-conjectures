@@ -1,0 +1,125 @@
+{
+ "id": "def-weil-common-stage-pullback-data",
+ "kind": "definition",
+ "title": "Literal common-stage pullback objects and normalized comparisons",
+ "statement": "For a scheme morphism f : X → Y with the stated residue-characteristic invertibility assumptions, retain the original common-stage pullback object (E, rationalDerivedPullback_E(f)(P)) at the literal input stage E. For every E ≤ L, retain the specified comparison from its scalar extension to the pullback of the extended input: compose the recorded transition identification, rational pullback scalar comparison, and inverse input transition identification. These are the existing definitions with identical signatures and bodies.",
+ "source": {
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "Existing commonStagePullbackObject and commonStagePullbackComparison definitions, extracted verbatim to isolate the already proved pullback comparison and descent proofs."
+ },
+ "stmt_deps": [
+  "def-weil-common-stage-internal-hom-data",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Retain the literal input coefficient stage and apply the rational pullback object function there. Compose exactly the existing transition identification, rational pullback scalar comparison, and inverse transition identification on the input. No choice, coefficient hypothesis or definition body changes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CommonStagePullbackData.lean",
+  "place": "Existing commonStagePullbackObject and commonStagePullbackComparison definitions, extracted verbatim to isolate the already proved pullback comparison and descent proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descend a contravariant covariant internal Hom functor from directed stage categories to the common-stage category with a full subcategory of permitted pairs",
+   "results": "Eight hits on locally directed functors, ind objects, coends and filtered categories. None states the prescribed Hom scalar-comparison transport or its restriction to permitted pairs.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ofFullyFaithful",
+   "results": "Zero hits; unknown identifier CategoryTheory.Functor.ofFullyFaithful. Existing project descent and Mathlib functor heterogeneous extensionality were instead read from source.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*[Hh]om|[Hh]om.*descent",
+   "results": "24 Mathlib hits, on descent data, isPrestack and injective resolution homotopies; no common-stage restricted internal Hom. Local rg finds StageSystemFunctorDescent and BilinearCoefficientDescent, whose univariate/covariant-product domains do not directly match the permitted contravariant Hom domain.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor descends from a directed family of categories with coherent coefficient comparisons and prescribed maps on quotient morphisms",
+   "results": "Eight results include CategoryTheory.Quotient.lift, Sigma.desc, ModuleCat.directLimitDiagram and pseudofunctor descent data. Quotient.lift requires an existing functor on a single source category; it does not supply a directed-stage common-stage model, its contravariant permitted-pair arrow formula or the normalized scalar comparisons. The existing project StageSystem and scalar-localization APIs provide those data. No exact replacement of the recorded definitions or scalar-comparison equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Existing commonStagePullbackObject and commonStagePullbackComparison definitions, extracted verbatim to isolate the already proved pullback comparison and descent proofs.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackData",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackData.lean",
+  "declaration": "WeilConjectures.commonStagePullbackComparison",
+  "declarations": [
+   "WeilConjectures.commonStagePullbackObject",
+   "WeilConjectures.commonStagePullbackComparison"
+  ],
+  "statement": "def commonStagePullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (P : generalAlgebraicallyClosedConstructibleCategory l Ω Y)\n    (L : Index l Ω) (h : P.stage ≤ L) :\n    (commonStagePullbackObject l Ω f P).toStage h ≅\n      (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).obj (P.toStage h)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-89892",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261027T233908-L-4133266",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 7 new modules vs clone item (verbatim move: 13 blocks byte-identical, descent_from_data signature kept; pp.all #print same except _proof_N names); new value_transport vs scalarOperationsOrdinary_tower/rationalHomScalarComparison spec; 100 direct importers compiled in sandbox (96 OK, 1 infra, 3 slow pre-existing vs published); nodes vs Lean and check_statement_change"
+ }
+}
