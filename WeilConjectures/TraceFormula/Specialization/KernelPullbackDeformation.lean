@@ -29,7 +29,8 @@ of blueprint `det-tf-sp-universal-kernel` and the compatibility of `β_c` with t
 It also identifies the unit of the lax monoidal structure of nearby cycles with the
 specialization unit (`NearbyCyclesModel.nearbyCyclesLaxMonoidal_ε`,
 `IsContractingAt.laxMonoidal_ε_specialization`), the form in which `σ_C` enters the section of the
-specialized coefficient (`curry_comp_eq_of_section`).
+specialized coefficient, proved under the same hypotheses
+(`IsContractingAt.curry_comp_eq_unit_comp_map_comp`).
 
 The special support is written `prod.lift γ₁ γ₂` rather than `(specialCorrespondence k').support`:
 both have the same value, but the second has source `(specialCorrespondence k').C`, and mixing the
@@ -342,6 +343,53 @@ unit `σ_C`. -/
 lemma laxMonoidal_ε_specialization :
     Functor.LaxMonoidal.ε 𝐒 = supportSpecializationUnit (ℓ := ℓ) (y := y) k' :=
   NearbyCyclesModel.boundedConstructibleNearbyCyclesLaxMonoidal_ε _
+
+set_option maxHeartbeats 1000000 in
+-- matching the abstract lemma against the concrete composites
+/-- **The section of the specialized coefficient** (blueprint `det-tf-sp-kernel-pullback`, second
+part): if `u : c^* p₂^* K ⟶ c^! p₁^! K` corresponds to the section `k_u : ℚ̄_ℓ ⟶ c^! (K ⊠ D K)`,
+that is `λ_c ∘ k_u` is the name of `u`, then the specialized coefficient
+`u_s = β_{c₁} ∘ Ψ_C(u) ∘ α_{c₂}` corresponds to `c_s^! ρ ∘ β_c ∘ Ψ_C(k_u) ∘ σ_C`, under the same
+hypotheses as `map_exceptionalHomIso_inv_comp_supportHomSpecialization`. The specialization unit
+`σ_C` appears as the unit `ε` of the lax monoidal structure (`laxMonoidal_ε_specialization`). -/
+theorem curry_comp_eq_unit_comp_map_comp
+    (νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k')
+    (νp : ProdFstCompactSupportExchange (ℓ := ℓ) k' (y ≫ c.c₁))
+    (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
+    (h₁ : 𝐒𝐏.map (kunnethVerdierMap ℓ K K) ≫ homSpecialization νp K =
+      universalKernelSpecialization k' (y ≫ c.c₁) D K ≫ kunnethVerdierMap ℓ 𝐊' 𝐊')
+    (hβ : (hc.supportPullbackExchange k').app 𝐀 ▷ 𝐒.obj (𝐔.obj 𝐇) ≫
+        Functor.LaxMonoidal.μ 𝐒 (𝐋.obj 𝐀) (𝐔.obj 𝐇) ≫
+        𝐒.map (Verdier.exceptionalTensorMap (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+          (boundedConstructibleExceptionalProjection ℓ c.support) 𝐀 𝐇) ≫
+        (𝛃 νc).app (𝐀 ⊗ 𝐇) =
+      𝐋'.obj (𝐒𝐏.obj 𝐀) ◁ (𝛃 νc).app 𝐇 ≫
+        Verdier.exceptionalTensorMap (boundedConstructibleUpperShriekAdjunction ℓ (𝛄))
+          (boundedConstructibleExceptionalProjection ℓ (𝛄)) (𝐒𝐏.obj 𝐀) (𝐒𝐏.obj 𝐇) ≫
+        𝐔'.map (Functor.LaxMonoidal.μ 𝐒𝐏 𝐀 𝐇))
+    (u : 𝐋.obj 𝐀 ⟶ 𝐔.obj 𝐁) (ku : 𝟙_ _ ⟶ 𝐔.obj (externalProduct ℓ K (verdierDual ℓ K)))
+    (hk : ku ≫ 𝐔.map (kunnethVerdierMap ℓ K K) ≫ (c.exceptionalHomIso 𝐀 𝐁).inv =
+      MonoidalClosed.curry ((ρ_ (𝐋.obj 𝐀)).hom ≫ u)) :
+    MonoidalClosed.curry ((ρ_ (𝐋'.obj 𝐀')).hom ≫
+        (𝐋'.map ((prodSndPullbackExchange (ℓ := ℓ) k' (y ≫ c.c₁)).app K) ≫
+          (hc.supportPullbackExchange k').app 𝐀) ≫ 𝐒.map u ≫
+        ((𝛃 νc).app 𝐁 ≫
+          𝐔'.map ((exceptionalExchange ℓ (prod.fst : X ⨯ X ⟶ X) prod.fst νp).app K))) =
+      Functor.LaxMonoidal.ε 𝐒 ≫ 𝐒.map ku ≫ (𝛃 νc).app (externalProduct ℓ K (verdierDual ℓ K)) ≫
+        𝐔'.map (universalKernelSpecialization k' (y ≫ c.c₁) D K) ≫
+        𝐔'.map (kunnethVerdierMap ℓ 𝐊' 𝐊') ≫ specialExceptionalHomInv := by
+  have hX := Verdier.map_inv_exceptionalHomMap_comp_eq
+    (boundedConstructibleUpperShriekAdjunction ℓ c.support)
+    (boundedConstructibleExceptionalProjection ℓ c.support)
+    (boundedConstructibleUpperShriekAdjunction ℓ (𝛄))
+    (boundedConstructibleExceptionalProjection ℓ (𝛄))
+    (SP := 𝐒𝐏) (SC := 𝐒) (hc.supportPullbackExchange k') (𝛃 νc) 𝐀 𝐁 𝐀' 𝐁'
+    ((prodSndPullbackExchange (ℓ := ℓ) k' (y ≫ c.c₁)).app K)
+    ((exceptionalExchange ℓ (prod.fst : X ⨯ X ⟶ X) prod.fst νp).app K) hβ
+  unfold homSpecialization at h₁
+  unfold specialExceptionalHomInv Correspondence.exceptionalHomIso at *
+  fo_apply curry_comp_eq_of_section using _, _, _, _, _, _, _,
+    (by exact MonoidalClosed.uncurry_curry _), hX, _, _, _, h₁, _, _, hk
 
 end Correspondence.IsContractingAt
 
