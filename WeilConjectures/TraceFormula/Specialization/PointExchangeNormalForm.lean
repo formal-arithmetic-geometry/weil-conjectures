@@ -93,7 +93,8 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
   have hχg := NearbyCyclesModel.Hom.ι_map_boundedConstructiblePushforwardExchange_app ℓ
     (pointComponentModelHom k' g hbg) hPB hPX (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
   -- the source route
-  have := isProper_left_of_isProper_of_isSeparated (g ≫ (compactificationOverField (toPoint X)).overI)
+  have :=
+    isProper_left_of_isProper_of_isSeparated (g ≫ (compactificationOverField (toPoint X)).overI)
   have : IsProper (toPoint (compactificationOverField (toPoint X)).overObj).left := by
     rw [toPoint_left]; infer_instance
   have := isProper_left_of_isProper_of_isSeparated
@@ -133,11 +134,13 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
         (x ≫ (compactificationOverField (toPoint X)).overI) k')
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hPB).obj
       (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧))
-  have hχB : Mono (((deformationToTraitModelHom B b.left.ker k').boundedConstructiblePushforwardExchange
+  have hχB : Mono
+      (((deformationToTraitModelHom B b.left.ker k').boundedConstructiblePushforwardExchange
       ℓ hPB hPT).app (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) := by
     have := NearbyCyclesModel.Hom.isIso_boundedConstructiblePushforwardExchange_of_isProper
       (deformationToTraitModelHom B b.left.ker k') hPB hPT
-      (isPullback_deformationSpecialFibre_toPoint B _ k') (isPullback_deformationModel_ε_toPoint B _ k')
+      (isPullback_deformationSpecialFibre_toPoint B _ k')
+      (isPullback_deformationModel_ε_toPoint B _ k')
     infer_instance
   refine CategoryTheory.pointNormalForm_aux' _
     (ObjectProperty.fullyFaithfulι _).faithful _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ hF1

@@ -8,7 +8,6 @@ module
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteCoherence
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
-public import WeilConjectures.Tactic.FirstOrderApply
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 
@@ -45,12 +44,19 @@ variable {Cs Cs' CF CC CC' CF' CX' : Type*} [Category Cs] [Category Cs'] [Catego
 If `ν ≫ Ψ(a) ≫ Ψ(P) = lsc'(L S R N) ≫ L_{X'}(L_{d'}(u') ≫ g') ≫ v₁ ≫ v₂ ≫ ν_B` (the exchange of
 the fixed loci through `ν_X`), `a ≫ P ≫ m = 𝟙` and
 `lsc'(M') ≫ L_{X'}(g') ≫ v₁ ≫ v₂ = L_{F'}(x) ≫ y`, then
-`ν = (L_{F'}(u' ≫ x) ≫ y) ≫ ν_B ≫ Ψ(m)`. -/
+`ν = (L_{F'}(u' ≫ x) ≫ y) ≫ ν_B ≫ Ψ(m)`. In a diagram, with `M = L S R N`:
+```
+L_{F'}(M) ──────────── ν ───────────> Ψ(L_F N) ──Ψ(a ≫ P)──> Ψ(V)
+   │ lsc'                                                      ↑ ν_B
+L_{X'}(L_{d'} M) ──L_{X'}(L_{d'} u' ≫ g')──> L_{X'}(G') ──v₁ ≫ v₂──> W₀
+```
+commutes, `m` is a right inverse of `a ≫ P`, and `L_{X'}(g') ≫ v₁ ≫ v₂` (through `lsc'` at `M'`)
+factors as `L_{F'}(x) ≫ y`. -/
 lemma app_eq_comp_of_comp_map_eq {Ψ : Cs ⥤ Cs'} {R : CF ⥤ CC} {S : CC ⥤ CC'} {L : CC' ⥤ CF'}
     {LF : CF ⥤ Cs} {LF' : CF' ⥤ Cs'}
     {Ld' : CF' ⥤ CX'} {LX' : CX' ⥤ Cs'} (lsc' : LF' ≅ Ld' ⋙ LX') {N : CF} {M' Z : CF'}
     {T V : Cs} {G' : CX'} {W₁ W₀ : Cs'}
-    (ν : @Quiver.Hom Cs' CategoryStruct.toQuiver (((R ⋙ S ⋙ L) ⋙ LF').obj N) ((LF ⋙ Ψ).obj N))
+    (ν : ((R ⋙ S ⋙ L) ⋙ LF').obj N ⟶ (LF ⋙ Ψ).obj N)
     (u' : L.obj (S.obj (R.obj N)) ⟶ M')
     (g' : Ld'.obj M' ⟶ G') (v₁ : LX'.obj G' ⟶ W₁) (v₂ : W₁ ⟶ W₀) (νB : W₀ ⟶ Ψ.obj V)
     (a : LF.obj N ⟶ T) (P : T ⟶ V) (m : V ⟶ LF.obj N) (x : M' ⟶ Z) (y : LF'.obj Z ⟶ W₀)
@@ -182,16 +188,6 @@ lemma boundedConstructibleLowerStarCompOfEq_hom_app_self (f : B ⟶ F) (g : F �
   simp [boundedConstructibleLowerStarCompOfEq]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-/-- `exact_unchecked h` closes the goal with `h`, leaving the comparison of the type of `h` with
-the goal to the kernel. On composites of derived functors the elaborator's unifier compares
-instance and proof arguments by unfolding (see `MatchTactic`); the kernel compares them by proof
-irrelevance once the two sides agree syntactically elsewhere. -/
-elab "exact_unchecked " h:term : tactic => Lean.Elab.Tactic.withMainContext do
-  let g ← Lean.Elab.Tactic.getMainGoal
-  let e ← Lean.Elab.Tactic.elabTerm h none
-  g.assign (← Lean.Meta.mkExpectedTypeHint e (← g.getType))
-  Lean.Elab.Tactic.replaceMainGoal []
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.Correspondence.TraceSpecialization
 

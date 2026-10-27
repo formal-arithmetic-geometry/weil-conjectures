@@ -7,7 +7,6 @@ module
 
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
 public import Mathlib.CategoryTheory.NatIso
-public import WeilConjectures.TraceFormula.Specialization.MatchTactic
 public import Mathlib.CategoryTheory.EqToHom
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
@@ -33,7 +32,19 @@ open CategoryTheory
 
 namespace CategoryTheory
 
-/-- **`ν_X` on a proper component in normal form**, abstractly (see the module docstring). -/
+/-- **`ν_X` on a proper component in normal form**, abstractly. Here `ν : SpA ⋙ LSa' ⟶ LSa ⋙ Ts`
+is the exchange of `X`, `G = g_*` and `G' = g''_*` the pushforwards from `B` and from its
+deformation `B''`, `χgB : G ⋙ SpA ⟶ SB ⋙ G'` the pushforward exchange of `g` and
+`νB : SB ⋙ LSB' ⟶ LSB ⋙ Ts` the exchange of `B`. The conclusion is the square
+```
+LSa'(SpA(G N)) ──────── ν ────────> Ts(LSa(G N))
+     │ LSa'(χgB)                         │ Ts(Φ₁ ≫ Φ₂)
+LSa'(G'(SB N)) ──Φ'₁ ≫ Φ'₂──> LSB'(SB N) ──νB──> Ts(LSB N)
+```
+Its inputs are: `hF1`, the shape of `ν` on `G N` through the compactification; `hS`, `hT`, the
+normal forms of the source and target routes (through the transports `e_s`, `e_t`); `hχg`, `hχ`,
+the exchanges on `Dᵇc` described by the ambient ones; and `hνB`, `νB` as the inverse of the
+monomorphism `χB` read through `is`, `is'`. -/
 theorem pointNormalForm_aux {A A' CX' CP Cs Cs' CB CB' DA DA' DX' DP Ds Ds' DB DB' : Type*}
     [Category A] [Category A'] [Category CX'] [Category CP] [Category Cs]
     [Category Cs'] [Category CB] [Category CB'] [Category DA] [Category DA']
@@ -229,7 +240,14 @@ theorem pointNormalForm_aux' {A A' CX' CP Cs Cs' CB CB' DA DA' DX' DP Ds Ds' DB 
 
 /-- The gluing of the target route: `Rp_* h_!(u_! g_* ≅ R(gu)_*)` read through the compatibility
 isomorphisms `cR`, `cO` (abstractly; `ht1` is the description of the `u`-step, `hA` the
-compactification route of `gu`). -/
+compactification route of `gu`). If the square `ht1`
+```
+Dh(ιX Z) ──x1 ≫ x2 ≫ x3──> A3
+   │ Dh(ιX y)               ‖
+Dh(ιX Z') ───────c───────> A3
+```
+commutes and `hA` identifies the route from `Z'` with `ι(w) ≫ V`, then the route from `Z`
+(through `cR`, `cO` at `Z`) is `ι(LStp(OLS y)) ≫ ι(w) ≫ V`. -/
 theorem targetRoute_glue_aux {CS DS CP DP CX DX : Type*} [Category CS] [Category DS]
     [Category CP] [Category DP] [Category CX] [Category DX] {ι : CS ⥤ DS} {ιP : CP ⥤ DP}
     {ιX : CX ⥤ DX} {LStp : CP ⥤ CS} {Rp : DP ⥤ DS} {OLS : CX ⥤ CP} {Dh : DX ⥤ DP}
@@ -248,53 +266,6 @@ theorem targetRoute_glue_aux {CS DS CP DP CX DX : Type*} [Category CS] [Category
   rw [reassoc_of% ht1, ← reassoc_of% n1, Rp.map_comp_assoc, ← reassoc_of% n2]
   simp only [Functor.map_comp, Category.assoc] at hA ⊢
   rw [reassoc_of% hA]
-
-/-- `exact_kernel h` closes the goal with `h`, leaving the comparison of the type of `h` with the
-goal to the kernel (see `exact_unchecked`). -/
-elab "exact_kernel " h:term : tactic => Lean.Elab.Tactic.withMainContext do
-  let g ← Lean.Elab.Tactic.getMainGoal
-  let e ← Lean.Elab.Tactic.elabTerm h none
-  g.assign (← Lean.Meta.mkExpectedTypeHint e (← g.getType))
-  Lean.Elab.Tactic.replaceMainGoal []
-
-/-- `trans_kernel h₁ h₂` reduces a goal `a = d` to `b = c`, for `h₁ : a = b` and `h₂ : c = d`,
-leaving all comparisons (of `a`, `d` with the goal and of the types of `b`, `c`) to the kernel. -/
-elab "trans_kernel " h₁:term:max h₂:term:max : tactic => Lean.Elab.Tactic.withMainContext do
-  let g ← Lean.Elab.Tactic.getMainGoal
-  let e₁ ← Lean.Elab.Tactic.elabTerm h₁ none
-  let e₂ ← Lean.Elab.Tactic.elabTerm h₂ none
-  let some (α, a, b) := (← Lean.Meta.whnfR (← Lean.Meta.inferType e₁)).eq? | throwError "h₁"
-  let some (_, c, d) := (← Lean.Meta.whnfR (← Lean.Meta.inferType e₂)).eq? | throwError "h₂"
-  let u ← Lean.Meta.getLevel α
-  let mid ← Lean.Meta.mkFreshExprSyntheticOpaqueMVar
-    (Lean.mkApp3 (Lean.mkConst ``Eq [u]) α b c)
-  let p₁ := Lean.mkApp6 (Lean.mkConst ``Eq.trans [u]) α a b c e₁ mid
-  let p := Lean.mkApp6 (Lean.mkConst ``Eq.trans [u]) α a c d p₁ e₂
-  g.assign (← Lean.Meta.mkExpectedTypeHint p (← g.getType))
-  Lean.Elab.Tactic.replaceMainGoal [mid.mvarId!]
-
-/-- `trans_kernel_last h₁ k` is `trans_kernel h₁ (k T' e)`, where `e : _ ⟶ T'` is the last factor
-of the right-hand side of the goal. -/
-elab "trans_kernel_last " h₁:term:max k:term:max : tactic => Lean.Elab.Tactic.withMainContext do
-  let g ← Lean.Elab.Tactic.getMainGoal
-  let e₁ ← Lean.Elab.Tactic.elabTerm h₁ none
-  let ek ← Lean.Elab.Tactic.elabTerm k none
-  let some (_, _, rhs) := (← Lean.Meta.whnfR (← g.getType)).eq? | throwError "goal"
-  let mut last := rhs
-  while last.isAppOfArity ``CategoryStruct.comp 7 do
-    last := last.getArg! 6
-  let some (_, _, _, T') := (← Lean.Meta.whnfR (← Lean.Meta.inferType last)).app4? ``Quiver.Hom
-    | throwError "last factor"
-  let e₂ := Lean.mkApp2 ek T' last
-  let some (α, a, b) := (← Lean.Meta.whnfR (← Lean.Meta.inferType e₁)).eq? | throwError "h₁"
-  let some (_, c, d) := (← Lean.Meta.whnfR (← Lean.Meta.inferType e₂)).eq? | throwError "k"
-  let u ← Lean.Meta.getLevel α
-  let mid ← Lean.Meta.mkFreshExprSyntheticOpaqueMVar
-    (Lean.mkApp3 (Lean.mkConst ``Eq [u]) α b c)
-  let p₁ := Lean.mkApp6 (Lean.mkConst ``Eq.trans [u]) α a b c e₁ mid
-  let p := Lean.mkApp6 (Lean.mkConst ``Eq.trans [u]) α a c d p₁ e₂
-  g.assign (← Lean.Meta.mkExpectedTypeHint p (← g.getType))
-  Lean.Elab.Tactic.replaceMainGoal [mid.mvarId!]
 
 /-- Splitting `ι(a ≫ b ≫ c ≫ d ≫ f ≫ e₁ ≫ e₂)` for the inclusion of a full subcategory. -/
 lemma ObjectProperty.ι_map_comp_aux {C : Type*} [Category C] {P : ObjectProperty C}
@@ -339,39 +310,3 @@ theorem pointNormalForm_hχ_aux {Ds Ds' DB DB' Cs Cs' CB CB' : Type*} [Category 
     Iso.inv_hom_id_app_assoc, ← Ψs.map_comp_assoc, hs]
 
 end CategoryTheory
-
-open Lean Meta Elab Tactic in
-/-- `close_by_match c` closes the goal with the lemma `c`, whose conclusion is matched
-syntactically against the goal (`synMatch`, proof arguments are assigned without type check); the
-comparison is left to the kernel. -/
-elab "close_by_match " c:ident : tactic => withMainContext do
-  let g ← getMainGoal
-  let cst ← realizeGlobalConstNoOverload c
-  let e ← mkConstWithFreshMVarLevels cst
-  let (mvs, _, concl) ← forallMetaTelescope (← inferType e)
-  let tgt ← instantiateMVars (← g.getType)
-  synMatch concl tgt
-  let pf ← instantiateMVars (mkAppN e mvs)
-  if pf.hasExprMVar then throwError "close_by_match: unassigned arguments"
-  g.assign (← mkExpectedTypeHint pf tgt)
-  replaceMainGoal []
-
-open Lean Meta Elab Tactic in
-/-- `close_by_match_lhs c` closes a goal `l = eqToHom r` with the lemma `c : … → l' = eqToHom r'`
-(last argument `r'`), matching `l'` syntactically against `l` and taking `r' := r`; the comparison
-is left to the kernel. -/
-elab "close_by_match_lhs " c:ident : tactic => withMainContext do
-  let g ← getMainGoal
-  let cst ← realizeGlobalConstNoOverload c
-  let e ← mkConstWithFreshMVarLevels cst
-  let (mvs, _, concl) ← forallMetaTelescope (← inferType e)
-  let tgt ← instantiateMVars (← g.getType)
-  let some (_, l, rhs) := (← whnfR tgt).eq? | throwError "not an equation"
-  let some (_, l', _) := (← whnfR concl).eq? | throwError "not an equation"
-  synMatch l' l
-  (mvs[mvs.size - 1]!).mvarId!.assign rhs.consumeMData.appArg!
-  let pf ← instantiateMVars (mkAppN e mvs)
-  if pf.hasExprMVar then throwError "close_by_match_lhs: unassigned arguments"
-  g.assign (← mkExpectedTypeHint pf tgt)
-  replaceMainGoal []
-

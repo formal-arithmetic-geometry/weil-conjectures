@@ -26,7 +26,11 @@ tactics of this file avoid the unifier and leave the identifications to the kern
   unfolded on demand);
 * `glue_unit_class h h'` closes a goal `c ≫ L(s') ≫ ?φ ≫ ν = Z` from
   `h : c ≫ L(s ≫ q) ≫ r = w ≫ v` and `h' : w ≫ v ≫ ν = Z`
-  (`CategoryTheory.comp_map_comp_comp_eq_of_eq`).
+  (`CategoryTheory.comp_map_comp_comp_eq_of_eq`);
+* `trans_kernel_last h₁ k` reduces a goal `a = d` to `b = c` for `h₁ : a = b` and
+  `k T' e : c = d`, where `e : _ ⟶ T'` is the last factor of `d`;
+* `close_by_match_lhs c` closes a goal `l = eqToHom r` with a lemma `c : … → l' = eqToHom r'`
+  whose left-hand side is matched syntactically against `l`.
 
 -/
 
@@ -276,52 +280,45 @@ elab "instantiate_by_match " c:ident " [" args:(ident ":=" term),* "] " "as " h:
   let (_, g') ← (← g.assert h.getId concl pf).intro1P
   replaceMainGoal [g']
 
+/-- `trans_kernel_last h₁ k` is `trans_kernel h₁ (k T' e)`, where `e : _ ⟶ T'` is the last factor
+of the right-hand side of the goal. -/
+elab "trans_kernel_last " h₁:term:max k:term:max : tactic => Lean.Elab.Tactic.withMainContext do
+  let g ← Lean.Elab.Tactic.getMainGoal
+  let e₁ ← Lean.Elab.Tactic.elabTerm h₁ none
+  let ek ← Lean.Elab.Tactic.elabTerm k none
+  let some (_, _, rhs) := (← Lean.Meta.whnfR (← g.getType)).eq? | throwError "goal"
+  let mut last := rhs
+  while last.isAppOfArity ``CategoryStruct.comp 7 do
+    last := last.getArg! 6
+  let some (_, _, _, T') := (← Lean.Meta.whnfR (← Lean.Meta.inferType last)).app4? ``Quiver.Hom
+    | throwError "last factor"
+  let e₂ := Lean.mkApp2 ek T' last
+  let some (α, a, b) := (← Lean.Meta.whnfR (← Lean.Meta.inferType e₁)).eq? | throwError "h₁"
+  let some (_, c, d) := (← Lean.Meta.whnfR (← Lean.Meta.inferType e₂)).eq? | throwError "k"
+  let u ← Lean.Meta.getLevel α
+  let mid ← Lean.Meta.mkFreshExprSyntheticOpaqueMVar
+    (Lean.mkApp3 (Lean.mkConst ``Eq [u]) α b c)
+  let p₁ := Lean.mkApp6 (Lean.mkConst ``Eq.trans [u]) α a b c e₁ mid
+  let p := Lean.mkApp6 (Lean.mkConst ``Eq.trans [u]) α a c d p₁ e₂
+  g.assign (← Lean.Meta.mkExpectedTypeHint p (← g.getType))
+  Lean.Elab.Tactic.replaceMainGoal [mid.mvarId!]
+
 open Lean Meta Elab Tactic in
-/-- `apply_by_match c [x := e, …]`: close the goal by the lemma `c`, matching the types of the
-given arguments syntactically (`synMatch`), then the conclusion of `c` against the goal; the
-remaining instance arguments are synthesized and the remaining other arguments become new goals,
-named after their binders. The comparison of the conclusion with the goal is left to the kernel. -/
-elab "apply_by_match " c:ident " [" args:(ident ":=" term),* "]" : tactic =>
-  withMainContext do
+/-- `close_by_match_lhs c` closes a goal `l = eqToHom r` with the lemma `c : … → l' = eqToHom r'`
+(last argument `r'`), matching `l'` syntactically against `l` and taking `r' := r`; the comparison
+is left to the kernel. -/
+elab "close_by_match_lhs " c:ident : tactic => withMainContext do
   let g ← getMainGoal
   let cst ← realizeGlobalConstNoOverload c
   let e ← mkConstWithFreshMVarLevels cst
-  let ty ← inferType e
-  let mut names : Array Name := #[]
-  let mut t := ty
-  while t.isForall do
-    names := names.push t.bindingName!
-    t := t.bindingBody!
-  let (mvs, bis, concl) ← forallMetaTelescope ty
-  for a in args.getElems do
-    let nm := a.raw[0].getId
-    let some idx := names.findIdx? (· == nm) | throwError m!"no binder {nm}"
-    let ety ← instantiateMVars (← inferType mvs[idx]!)
-    let v ← elabTerm a.raw[2] none
-    Term.synthesizeSyntheticMVarsNoPostponing
-    let v ← instantiateMVars v
-    synMatch ety (← inferType v)
-    (mvs[idx]!).mvarId!.assign v
-  synMatch (← instantiateMVars concl) (← instantiateMVars (← g.getType))
-  let mut newGoals : Array MVarId := #[]
-  for i in [0:mvs.size] do
-    let m := mvs[i]!.mvarId!
-    unless ← m.isAssigned do
-      if bis[i]! == .instImplicit then
-        m.assign (← synthInstance (← instantiateMVars (← inferType mvs[i]!)))
-      else
-        m.setUserName names[i]!
-        m.setKind .syntheticOpaque
-        newGoals := newGoals.push m
-  g.assign (← instantiateMVars (mkAppN e mvs))
-  replaceMainGoal newGoals.toList
-
-open Lean Meta Elab Tactic in
-/-- `match_rfl` closes a goal `a = b` by `rfl` after assigning the metavariables of `b` by
-matching it against `a` (`synMatch`); the comparison is left to the kernel. -/
-elab "match_rfl" : tactic => withMainContext do
-  let g ← getMainGoal
-  let (l, r) ← eqSidesOf (← g.getType)
-  synMatch (← instantiateMVars r) l
-  g.assign (← mkEqRefl l)
+  let (mvs, _, concl) ← forallMetaTelescope (← inferType e)
+  let tgt ← instantiateMVars (← g.getType)
+  let some (_, l, rhs) := (← whnfR tgt).eq? | throwError "not an equation"
+  let some (_, l', _) := (← whnfR concl).eq? | throwError "not an equation"
+  synMatch l' l
+  (mvs[mvs.size - 1]!).mvarId!.assign rhs.consumeMData.appArg!
+  let pf ← instantiateMVars (mkAppN e mvs)
+  if pf.hasExprMVar then throwError "close_by_match_lhs: unassigned arguments"
+  g.assign (← mkExpectedTypeHint pf tgt)
   replaceMainGoal []
+

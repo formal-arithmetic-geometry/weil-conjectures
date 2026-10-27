@@ -11,6 +11,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnComponent
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAbstract
+public import WeilConjectures.Tactic.MatchTactic
 
 /-!
 
@@ -151,7 +152,8 @@ lemma pointRoute_left_eq (g : B ⟶ X) (u : X ⟶ Y) :
   rw [Category.comp_id, ← Over.comp_left, ← Over.comp_left, comp_toPoint]
 
 /-- `pointRoute_source_eq`, with the components at `N.obj`. -/
-private theorem pointRoute_source_eq_aux (g : B ⟶ X) (u : X ⟶ Y) [IsOpenImmersion u.left] [IsProper g.left]
+private theorem pointRoute_source_eq_aux (g : B ⟶ X) (u : X ⟶ Y) [IsOpenImmersion u.left]
+    [IsProper g.left]
     [IsProper (g ≫ u).left] [IsProper (toPoint Y).left] [IsProper ((g ≫ u) ≫ toPoint Y).left]
     [IsProper (g ≫ toPoint X).left] [IsProper (toPoint B).left] (N : Dᵇc(B.left)⟦Λℓ⟧) :
     (boundedConstructible _).ι.map ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
@@ -382,7 +384,8 @@ lemma pointRoute_target_left_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) :
   rw [← Over.comp_left, ← Over.comp_left, ← Over.comp_left, comp_toPoint]
 
 /-- `pointRoute_target_eq`, with the components at `M.obj`. -/
-private theorem pointRoute_target_eq_aux (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenImmersion u.left]
+private theorem pointRoute_target_eq_aux (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P)
+    [IsOpenImmersion u.left]
     [IsOpenImmersion h.left] [IsProper g.left] [IsProper (g ≫ u).left] [IsProper (toPoint P).left]
     [IsProper (toPoint B).left] [IsProper ((g ≫ u) ≫ toPoint Y).left]
     [IsProper ((g ≫ u) ≫ h).left] [IsProper (((g ≫ u) ≫ h) ≫ toPoint P).left]
@@ -577,7 +580,9 @@ variable {B S : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B
 /-- A transport into `Rf_*` followed by the (identity) compatibility isomorphism of `Rf_*`. -/
 lemma eqToHom_comp_lowerStarCompatibility_hom (f : B ⟶ S) {f₁ : B.left ⟶ S.left}
     (hf : f₁ = f.left) (N : Dᵇc(B.left)⟦Λℓ⟧) :
-    (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj (@CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι N) ⟶
+    (eqToHom (by rw [hf]; rfl) :
+      R((f₁)_*⟦Λℓ⟧).obj
+        (@CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι N) ⟶
         (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ f).obj N)) ≫
       (boundedConstructibleLowerStarCompatibility ℓ f).hom.app N = eqToHom (by subst hf; rfl) := by
   subst hf
@@ -587,8 +592,11 @@ lemma eqToHom_comp_lowerStarCompatibility_hom (f : B ⟶ S) {f₁ : B.left ⟶ S
 lemma map_comp_eqToHom_lowerStarCompatibility (f : B ⟶ S) {f₁ : B.left ⟶ S.left}
     (hf : f₁ = f.left) (K : Dᵇc(B.left)⟦Λℓ⟧)
     {E : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology B.left) Ab.{u + 1})
-      (condensedRingObj Λℓ B.left))} (c : E ⟶ @CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι K) :
-    R((f₁)_*⟦Λℓ⟧).map c ≫ (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj (@CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι K) ⟶
+      (condensedRingObj Λℓ B.left))}
+    (c : E ⟶ @CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι K) :
+    R((f₁)_*⟦Λℓ⟧).map c ≫ (eqToHom (by rw [hf]; rfl) :
+      R((f₁)_*⟦Λℓ⟧).obj
+        (@CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι K) ⟶
         (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ f).obj K)) =
       eqToHom (by subst hf; rfl) ≫ R((f.left)_*⟦Λℓ⟧).map c ≫
         (boundedConstructibleLowerStarCompatibility ℓ f).inv.app K := by
@@ -627,8 +635,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
   (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
   (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
-/-- The components of `liftExchange χ` of any `χ : Rf_* ⋙ Ψ_N ⟶ Ψ_M ⋙ Rf'_*` are those of `χ`, through
-the (identity) compatibility isomorphisms; the components of `χ` are taken at `ι K`. -/
+/-- The components of `liftExchange χ` of any `χ : Rf_* ⋙ Ψ_N ⟶ Ψ_M ⋙ Rf'_*` are those of `χ`,
+through the (identity) compatibility isomorphisms; the components of `χ` are taken at `ι K`. -/
 theorem NearbyCyclesModel.ι_map_liftExchange_app
     (χ : R((f.left)_*⟦Λℓ⟧) ⋙ N.nearbyCycles Λℓ ⟶ M.nearbyCycles Λℓ ⋙ R((f'.left)_*⟦Λℓ⟧))
     (K : Dᵇc(X.left)⟦Λℓ⟧) :

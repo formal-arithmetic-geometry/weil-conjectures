@@ -11,7 +11,8 @@ public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnCompo
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
-public import WeilConjectures.TraceFormula.Specialization.MatchTactic
+public import WeilConjectures.Tactic.MatchTactic
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAux
 
 /-!
 
@@ -51,13 +52,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
   {y : RationalPoint c.C} (hc : c.IsContractingAt y) (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
-
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- A morphism from a proper `k`-scheme to a separated one is proper. -/
-private lemma isProper_left_of_isProper_hom {B Y : Over (Spec (.of k))} [IsProper B.hom]
-    [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
-  have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
-  exact IsProper.of_comp _ Y.hom
 
 set_option maxHeartbeats 2000000 in
 -- instantiating fact (III) and the reduction at the concrete data is slow
@@ -129,11 +123,12 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
         (supportClosureMap c ≫ Limits.prod.snd) = c.support by
           rw [prodLift_supportClosureMap, supportClosureι_map],
       Category.assoc, F.isPullback.w, ← Category.assoc]
-  have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_hom _
-  have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left := isProper_left_of_isProper_hom _
+  have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_of_isSeparated _
+  have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left :=
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper (((j ≫ F.ι) ≫ supportClosureι c) ≫ Limits.prod.lift
     (supportClosureMap c ≫ Limits.prod.fst) (supportClosureMap c ≫ Limits.prod.snd)).left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have hF2 := compactificationRoute_ambient_eq_fixedSquareRoute_of_eq ℓ j (rfl : j ≫ F.ι = _)
     F.isPullback.w (supportClosureι c)
     (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
@@ -141,17 +136,20 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
     (by rw [prodLift_supportClosureMap, supportClosureι_map])
     (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (by rw [hphg]; rfl)
   have : IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
-    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := isProper_left_of_isProper_hom _
-  have : IsProper (componentSpecialFibreMap k' j hb).left := isProper_left_of_isProper_hom _
+    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left :=
+      isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (componentSpecialFibreMap k' j hb).left :=
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫
-    (hc.specialCorrespondence k').support).left := isProper_left_of_isProper_hom _
+    (hc.specialCorrespondence k').support).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k').left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
-    supportClosureSpecialMap c y k').left := isProper_left_of_isProper_hom _
-  have : IsProper (hc.componentSpecialLift k' j hb).left := isProper_left_of_isProper_hom _
+    supportClosureSpecialMap c y k').left := isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (hc.componentSpecialLift k' j hb).left :=
+    isProper_left_of_isProper_of_isSeparated _
   have hphg' : ((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
       (supportClosureSpecialMap c y k').left = ((hc.componentSpecialLift k' j hb ≫
         (hc.specialFixedLocus k').d) ≫
@@ -227,8 +225,8 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
   -- identity `_hSI`, the normal form of `ν_X`
   -- (`pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm`)
   -- and the coherences `lowerShriekCompOfEq_hom_app_comp_map_comp_inv_comp_hom`,
-  -- `lowerShriekCompOfEq_hom_app_comp_map_isoLowerStar_comp_inv`; that instance (with
-  -- `apply_by_match`) elaborates in seconds, but the kernel does not finish checking it.
+  -- `lowerShriekCompOfEq_hom_app_comp_map_isoLowerStar_comp_inv`. That instance is still to be
+  -- assembled, as for the normal form, with the hypotheses aligned by `assign_mod_proofs`.
   refine TraceSpecialization.specializesComponentClass_of_eq _ _ _ j hI
     (W := _) ?φ ((deformationCompactSupportExchange B b.left.ker k').app (𝟙_ _)) ?h1 ?h2
   case h2 => glue_unit_class h3 hD
