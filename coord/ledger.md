@@ -20049,3 +20049,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:01 L: merged deliver/N1/Sheaf.Paper.RationalP1SectionEvaluation (stage 3; reviewer PASS; first push; landing 20261027T210146-L-1664541 (proof); batch 20261027T205736; modules 1; new nodes 1)
 - 21:01 L: merged deliver/N2/Sheaf.Paper.RationalP1UnitFactorization (stage 3; reviewer PASS; first push; landing 20261027T210147-L-1664830 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 21:01 L: merged deliver/N3/Sheaf.Paper.FiniteModelCoefficientTransport (stage 3; reviewer PASS; first push; landing 20261027T210149-L-1665216 (proof); batch 20261027T205736; modules 1; new nodes 0)
+- 21:01 L: merged deliver/N3/Sheaf.Paper.FiniteSectionSpecializationScalarCanonical (stage 3; reviewer PASS; first push; landing 20261027T210150-L-1665604 (interface); batch 20261027T205736; modules 2; new nodes 1)
