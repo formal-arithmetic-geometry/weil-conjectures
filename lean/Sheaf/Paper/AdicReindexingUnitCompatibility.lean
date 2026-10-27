@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
+import Sheaf.Paper.AdicReindexingTensorCompatibility
+import Sheaf.Paper.AdicReindexingUnitContraction
 
 /-! # Unit compatibility of a normalized realization comparison
 
@@ -57,7 +59,14 @@ theorem normalized_reindexing_unit_compatibility
       (C.comparison T U g).inv.app (pullbackTensorCommonUnit l (PadicAlgCl l) U.base.left) ≫
       (ordinary l T.base.left (C.data T).realization).map
         (C.unit_spec T U g).exists.choose.hom =
-    (pullUnit l T.base.left g.hom (C.pullTensor T U g)).hom ≫ (C.data T).tensor.unit.hom := by
-  sorry
+      (pullUnit l T.base.left g.hom (C.pullTensor T U g)).hom ≫ (C.data T).tensor.unit.hom := by
+  let := (C.data T).units
+  let := (C.data U).units
+  have h := normalized_reindexing_tensor_compatibility l D C T U g
+    h_integral_normalization
+    (pullbackTensorCommonUnit l (PadicAlgCl l) U.base.left)
+    (pullbackTensorCommonUnit l (PadicAlgCl l) U.base.left)
+  exact reindexing_tensor_unit_contraction l D C T U g
+    h
 
 end WeilConjectures.AdicQbarRealization

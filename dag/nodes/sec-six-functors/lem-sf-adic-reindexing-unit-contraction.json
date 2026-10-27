@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-adic-reindexing-unit-contraction",
+ "kind": "statement",
+ "title": "Unit contraction of the normalized reindexing tensor square",
+ "statement": "Fix l,D,C,T,U,g as in lem-sf-adic-reindexing-unit-compatibility and assume the specialized tensor square at the two coefficient units. Then the unit square displayed in normalized_reindexing_unit_compatibility holds for the chosen canonical unit witness.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, unit calculation after tensor compatibility."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "lem-sf-adic-reindexing-tensor-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Expand the specialized tensor square on the degree-zero coefficient unit complex. Use the left and right unit equations of the realized tensor structures and the two defining equations of the selected canonical pullback tensor unit witness. The representative and unit-section equations of the reindexing tensor carry the unit section to the coefficient-ring map, so both composites have the same degree-zero map. Cancel the invertible tensor and ordinary unitors to obtain the displayed unit equation.",
+   "uses": [
+    "def-sf-adic-realization-isomorphism-data",
+    "lem-sf-adic-reindexing-tensor-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "lem-sf-adic-reindexing-tensor-compatibility"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Unit part of Proposition 6.8.14 and Remark 6.8.15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor unit naturality reindexing unit section",
+   "results": "No exact native adic result; generic monoidal unitors only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory tensor unit naturality",
+   "results": "Generic unit naturality only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized adic reindexing tensor unit square",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingUnitCompatibility",
+  "date": "2026-10-28",
+  "group": "X3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-unit-compatibility",
+   "place": "Unit contraction of its tensor square.",
+   "via": [
+    "lem-sf-adic-reindexing-unit-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingUnitContraction",
+  "file": "lean/Sheaf/Paper/AdicReindexingUnitContraction.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.reindexing_tensor_unit_contraction",
+  "statement": "theorem reindexing_tensor_unit_contraction\n    (C : FamilyCore l D) (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n    (h_tensor : unitTensorSquare l D C T U g) :\n    letI := (C.data T).units\n    letI := (C.data U).units\n    (derivedPull l T.base.left g.hom (C.ring T U g)).map (C.data U).tensor.unit.hom ≫\n      (C.comparison T U g).inv.app (pullbackTensorCommonUnit l (PadicAlgCl l) U.base.left) ≫\n      (ordinary l T.base.left (C.data T).realization).map\n        (C.unit_spec T U g).exists.choose.hom =\n    (pullUnit l T.base.left g.hom (C.pullTensor T U g)).hom ≫\n      (C.data T).tensor.unit.hom",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.unitTensorSquare",
+   "WeilConjectures.AdicQbarRealization.reindexing_tensor_unit_contraction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T234356-L-118880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T234356-L-118880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
