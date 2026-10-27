@@ -1,0 +1,121 @@
+{
+ "id": "lem-per-mixed-integral-coefficient-tower",
+ "kind": "statement",
+ "title": "Strict integral mixed coefficient-tower equation",
+ "statement": "Fix a prime l, finite extensions E, F and G of Q_l, Q_l-algebra embeddings i : E → F and j : F → G, arbitrary schemes X and Y and a morphism g : X → Y. For every K in PbcCompletedDerived Y (pbcIntegralDatum l E), scalar extension from F to G of strict beta for i at K, followed by strict beta for j at scalar extension of K, followed by strict completed pullback of the scalar associator on Y, equals the scalar associator on X at strict completed pullback of K followed by strict beta for j composed with i. These are precisely rationalScalarStrictBeta and pbcAmbientScalarComp, with the quotient-normalized actual strict completed pullback.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, pp. 61–62; the completion-unit and scalar associativity calculation in the parent node, step 6 or 7."
+ },
+ "stmt_deps": [
+  "lem-per-rational-scalar-completion-unit-square"
+ ],
+ "proof": [
+  {
+   "text": "Invert the reflected coefficient-tower equation supplied by rationalScalarCompletionUnitSquare_coefficients. Substitute the definition of strict beta as conjugation by the actual ambient completion comparison. Naturality of that comparison moves it past the coefficient associator. Cancel the middle comparison and its inverse, then use naturality of the scalar associator to move the remaining outer comparison. The resulting equation is the claimed strict tower.",
+   "uses": [
+    "lem-per-rational-scalar-completion-unit-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-scalar-completion-unit-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Fully proved categorical calculation extracted for independent compilation. The coefficient-tower and normalization calculations were already private proved helpers of the parent module; their proofs are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension and completed pullback composition coherence by cancelling completion units",
+   "results": {
+    "hits": 8,
+    "top": [
+     "ModuleCat.extendScalars_assoc'",
+     "ModuleCat.extendScalarsComp",
+     "ModuleCat.homEquiv_extendScalarsComp",
+     "ModuleCat.extendScalars_assoc"
+    ],
+    "note": "Other hits concern uniform-space and adic completion."
+   },
+   "date": "2026-10-28",
+   "verdict": "Ordinary module associators do not state the normalized derived/completed equations here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso_assoc"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Used for derived normalization associativity; the completion equations still require the recorded scalar-unit comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_assoc|mapDerivedCategoryCompNatIso_cocycle|rationalScalarStrictBeta",
+   "results": {
+    "hits": 3,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:200",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:147",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:170"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Confirms the general adjunction associativity API; no Mathlib strict completed scalar comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalScalarMixedUnitCancellation",
+  "date": "2026-10-28",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-scalar-mixed-unit-cancellation",
+   "place": "Integral completion-unit and scalar-normalization calculations, steps 6–7"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.RationalScalarMixedIntegralTower",
+  "file": "lean/Sheaf/Paper/RationalScalarMixedIntegralTower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalMixedIntegralCoefficientTower",
+  "statement": "theorem rationalMixedIntegralCoefficientTower\n    (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) :\n    (pbcEmbeddingAmbientTensor l F G j X).map\n        ((rationalScalarStrictBeta l E F i g).hom.app K) ≫\n      (rationalScalarStrictBeta l F G j g).hom.app\n        ((pbcEmbeddingAmbientTensor l E F i Y).obj K) ≫\n      (pbcActualStrictCompletedPull (pbcIntegralDatum l G) g).map\n        ((pbcAmbientScalarComp l E F G i j Y).hom.app K) =\n    (pbcAmbientScalarComp l E F G i j X).hom.app\n        ((pbcActualStrictCompletedPull (pbcIntegralDatum l E) g).obj K) ≫\n      (rationalScalarStrictBeta l E G (j.comp i) g).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T180818-L-3904100",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T180818-L-3904100",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

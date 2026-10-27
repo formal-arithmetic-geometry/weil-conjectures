@@ -10,8 +10,9 @@ public import Sheaf.Paper.RationalScalarCompletionUnitSquare
 public import Sheaf.Paper.RationalPullbackCompositionCoherence
 public import Sheaf.CategoryTheory.LocalizationInverseImageCoherence
 import all Sheaf.Paper.CompletedAdicCoefficientDatum
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+import all Sheaf.Paper.RationalScalarMixedIntegralGeometric
+import Sheaf.Paper.RationalScalarMixedIntegralTower
+import Sheaf.Paper.RationalScalarMixedNormalizationAssoc
 
 /-! # Cancellation in the specified mixed rational realization square
 
@@ -35,6 +36,10 @@ set_option genInjectivity false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
+
+attribute [local irreducible] Functor.sheafPullbackConstruction.sheafPullback
+  proEtaleRingInverseImageComp LocallyRingedSpace.comp PresheafedSpace.comp
+
 
 variable (l : ℕ) [Fact l.Prime]
 variable (E F : Type u) [Field E] [Field F]
@@ -502,6 +507,16 @@ variable (h : Z ⟶ X) (sZE : RationalModuleRealization l E Z)
   (mh : RationalScalarMixedUnitCancellation l E F i h sZE sXE sZF sXF ahE ahF)
   (mc : RationalScalarMixedUnitCancellation l E F i (h ≫ g) sZE sYE sZF sYF acE acF)
 
+private theorem mixed_replace_square {C D : Type*} [Category C] [Category D]
+    (T : C ⥤ D) {U V : C} {W Z P : D} {a a' : U ⟶ V}
+    {b b' : T.obj V ⟶ W} {c : W ⟶ Z} {d : T.obj U ⟶ P} {e e' : P ⟶ Z}
+    (ha : a = a') (hb : b = b') (he : e = e')
+    (h : T.map a' ≫ b' ≫ c = d ≫ e') : T.map a ≫ b ≫ c = d ≫ e := by
+  subst a'
+  subst b'
+  subst e'
+  exact h
+
 /-- The same zeta comparisons commute with geometric composition.
 Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4
 (blueprint: lem-per-rational-scalar-mixed-unit-cancellation).
@@ -525,18 +540,20 @@ theorem rationalMixedGeometricComposition
           ((pbcDerivedExtend (rationalBalancedCoefficient l E F i Y)).obj K) := by
   sorry
 
+set_option maxHeartbeats 800000 in
+-- The normalized compositor witnesses involve large dependent functor types.
 /-- The actual strict-beta rationalizations obey the same geometric pasting.
 Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4
 (blueprint: lem-per-rational-scalar-mixed-unit-cancellation).
 
-Proof: precompose with scalar extension of the actual completion units. Substitute
-the recorded alpha normalization and rationalScalarCompletionUnitSquare. Adjacent
-inverse-unit/unit factors cancel. On the same flat-term K-flat representative all
-remaining comparisons are the generator-normalized ordinary tensor maps. Geometric
-composition uses the canonical inverse-image compositor and scalar insertion; coefficient
-composition multiplies the scalar factors. Their associative product is independent of
-parentheses. The normalized derived computation counits descend these maps, and the
-annihilating-power fraction criterion extends the equations to raw rational morphisms. -/
+Proof: extract the integral compositors and their completion-unit equations from
+rationalPullbackCompositionCoherence. Precompose the mixed integral square with
+scalar extension of the two completion units. Naturality, the completion-unit
+squares and the inverse of pbcScalarOrdinaryPull_comp identify the two routes;
+cancel the invertible units. Apply rationalization to this integral square.
+The beta normalizations and the raw compositor equations express all maps using
+integral representatives. Naturality of beta moves the initial object transport,
+and adjacent inverse transports cancel. -/
 theorem rationalMixedRawGeometricComposition
     (K : PbcRationalDerivedCategory l E Y Fact.out Fact.out) :
     (pbcRationalScalarExtension l E F i Z Fact.out Fact.out).map
@@ -546,7 +563,88 @@ theorem rationalMixedRawGeometricComposition
       ahF.rawPull.map (mg.beta.hom.app K) ≫
       (rationalMixedRawCompositor l F g sXF sYF aF h sZF ahF acF).hom.app
         ((pbcRationalScalarExtension l E F i Y Fact.out Fact.out).obj K) := by
-  sorry
+  have hcE := rationalPullbackCompositionCoherence l E g h sYE sXE sZE aE ahE acE
+  have hcF := rationalPullbackCompositionCoherence l F g h sYF sXF sZF aF ahF acF
+  unfold HasRationalPullbackCompositionCoherence at hcE hcF
+  let qE := hcE.2.2.2.2.choose_spec.2.choose_spec.2
+  let qF := hcF.2.2.2.2.choose_spec.2.choose_spec.2
+  have he := qE.choose_spec.2.choose_spec.1 K.obj
+  have hf := qF.choose_spec.2.choose_spec.1
+    ((pbcEmbeddingIntegralTensor l E F i Y Fact.out Fact.out).obj K.obj)
+  change (rationalMixedRawCompositor l E g sXE sYE aE h sZE ahE acE).hom.app K = _
+    at he
+  change (rationalMixedRawCompositor l F g sXF sYF aF h sZF ahF acF).hom.app
+    ((pbcRationalScalarExtension l E F i Y Fact.out Fact.out).obj K) = _ at hf
+  have hb := congrArg Iso.hom (mg.beta_normalization K)
+  have hh := congrArg Iso.hom (mh.beta_normalization
+    ((pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).obj
+      ((aE.integral.completedFunctor l E).obj K.obj)))
+  have hc := congrArg Iso.hom (mc.beta_normalization K)
+  change mg.beta.hom.app K = _ at hb
+  change mh.beta.hom.app _ = _ at hh
+  change mc.beta.hom.app K = _ at hc
+  let Q := pbcRationalization Z (pbcIntegralDatum l F) (pbcUniformizer l F)
+  let βg := ObjectProperty.homMk
+    (X := (pbcEmbeddingIntegralTensor l E F i X Fact.out Fact.out).obj
+      ((aE.integral.completedFunctor l E).obj K.obj))
+    (Y := (aF.integral.completedFunctor l F).obj
+      ((pbcEmbeddingIntegralTensor l E F i Y Fact.out Fact.out).obj K.obj))
+    ((rationalScalarStrictBeta l E F i g).hom.app K.obj.obj)
+  let βc := ObjectProperty.homMk
+    (X := (pbcEmbeddingIntegralTensor l E F i Z Fact.out Fact.out).obj
+      ((acE.integral.completedFunctor l E).obj K.obj))
+    (Y := (acF.integral.completedFunctor l F).obj
+      ((pbcEmbeddingIntegralTensor l E F i Y Fact.out Fact.out).obj K.obj))
+    ((rationalScalarStrictBeta l E F i (h ≫ g)).hom.app K.obj.obj)
+  let βh := ObjectProperty.homMk
+    (X := (pbcEmbeddingIntegralTensor l E F i Z Fact.out Fact.out).obj
+      ((ahE.integral.completedFunctor l E).obj
+        ((aE.integral.completedFunctor l E).obj K.obj)))
+    (Y := (ahF.integral.completedFunctor l F).obj
+      ((pbcEmbeddingIntegralTensor l E F i X Fact.out Fact.out).obj
+        ((aE.integral.completedFunctor l E).obj K.obj)))
+    ((rationalScalarStrictBeta l E F i h).hom.app
+      ((aE.integral.completedFunctor l E).obj K.obj).obj)
+  have hi := rationalMixedIntegralGeometricComposition l E F i g sXE sYE sXF sYF aE aF h sZE sZF
+    ahE acE ahF acF qE.choose qF.choose qE.choose_spec.1 qF.choose_spec.1 K.obj
+  have hi' :
+      (pbcEmbeddingIntegralTensor l E F i Z Fact.out Fact.out).map
+          (qE.choose.hom.app K.obj) ≫ βc =
+        βh ≫ (ahF.integral.completedFunctor l F).map βg ≫
+          qF.choose.hom.app
+            ((pbcEmbeddingIntegralTensor l E F i Y Fact.out Fact.out).obj K.obj) := by
+    apply ObjectProperty.hom_ext
+    exact hi
+  have hQ := congrArg Q.map hi'
+  simp only [Functor.map_comp] at hQ
+  have hQ' := (congrArg (fun f ↦ f ≫ Q.map βc)
+    (mixed_scalar_map l E F i (qE.choose.hom.app K.obj))).trans hQ
+  exact mixed_raw_pasting ahE.rawPull ahF.rawPull
+    (pbcRationalScalarExtension l E F i X Fact.out Fact.out)
+    (pbcRationalScalarExtension l E F i Z Fact.out Fact.out) mh.beta
+    (eqToIso (aE.raw_objects K.obj))
+    (eqToIso (aF.raw_objects
+      ((pbcEmbeddingIntegralTensor l E F i Y Fact.out Fact.out).obj K.obj)))
+    (eqToIso (ahE.raw_objects ((aE.integral.completedFunctor l E).obj K.obj)))
+    (eqToIso (acE.raw_objects K.obj))
+    (eqToIso (ahF.raw_objects
+      ((pbcEmbeddingIntegralTensor l E F i X Fact.out Fact.out).obj
+        ((aE.integral.completedFunctor l E).obj K.obj))))
+    (eqToIso (ahF.raw_objects ((aF.integral.completedFunctor l F).obj
+      ((pbcEmbeddingIntegralTensor l E F i Y Fact.out Fact.out).obj K.obj))))
+    (eqToIso (acF.raw_objects
+      ((pbcEmbeddingIntegralTensor l E F i Y Fact.out Fact.out).obj K.obj)))
+    _ _ _ _ _ _ _ _ _ _
+    (by simpa only [eqToIso.hom, eqToIso.inv, eqToHom_map] using he)
+    (by simpa only [eqToIso.hom, eqToIso.inv, eqToHom_map] using hf)
+    (by simpa only [rationalMixedBetaComponent, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.symm_hom, eqToIso.hom, eqToIso.inv, ObjectProperty.isoMk, Iso.app_hom, βg] using hb)
+    (by simpa only [rationalMixedBetaComponent, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.symm_hom, eqToIso.hom, eqToIso.inv, ObjectProperty.isoMk, Iso.app_hom, βc, Q] using hc)
+    (by simpa only [rationalMixedBetaComponent, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.symm_hom, eqToIso.hom, eqToIso.inv, ObjectProperty.isoMk, Iso.app_hom,
+      βh, Q, mixed_localization_obj] using hh)
+    (mixed_raw_map l F h sZF sXF ahF βg) hQ'
 
 end GeometricCoherence
 
@@ -588,77 +686,6 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
   (mFG : RationalScalarMixedUnitCancellation l F G j g sXF sYF sXG sYG aF aG)
   (mEG : RationalScalarMixedUnitCancellation l E G (j.comp i) g
     sXE sYE sXG sYG aE aG)
-
-private theorem mixed_inverse_square {C D : Type*} [Category C] [Category D]
-    (T : C ⥤ D) {A B : C} {U V W : D}
-    (e : A ≅ B) (f : U ≅ T.obj A) (q : V ≅ W)
-    (a : T.obj B ⟶ W) (b : U ⟶ V)
-    (h : f.hom ≫ T.map e.hom ≫ a = b ≫ q.hom) :
-    T.map e.inv ≫ f.inv ≫ b = a ≫ q.inv := by
-  apply (cancel_epi (T.map e.hom)).1
-  apply (cancel_epi f.hom).1
-  have ht := congrArg (fun k ↦ k ≫ q.inv) h
-  simpa only [Category.assoc, ← T.map_comp_assoc, Iso.hom_inv_id,
-    T.map_id, Category.id_comp, Category.comp_id, Iso.hom_inv_id_assoc] using ht.symm
-
-private theorem mixed_strict_coefficient_tower
-    (K : PbcCompletedDerived Y (pbcIntegralDatum l E)) :
-    (pbcEmbeddingAmbientTensor l F G j X).map
-        ((rationalScalarStrictBeta l E F i g).hom.app K) ≫
-      (rationalScalarStrictBeta l F G j g).hom.app
-        ((pbcEmbeddingAmbientTensor l E F i Y).obj K) ≫
-      (pbcActualStrictCompletedPull (pbcIntegralDatum l G) g).map
-        ((pbcAmbientScalarComp l E F G i j Y).hom.app K) =
-    (pbcAmbientScalarComp l E F G i j X).hom.app
-        ((pbcActualStrictCompletedPull (pbcIntegralDatum l E) g).obj K) ≫
-      (rationalScalarStrictBeta l E G (j.comp i) g).hom.app K := by
-  let C := pbcEmbeddingAmbientTensor l F G j X
-  let B := pbcActualCompletedPull g (pbcIntegralDatum l G)
-  let eE := pbcActualAmbientCompletedPullbackIso (pbcIntegralDatum l E) g
-  let eF := pbcActualAmbientCompletedPullbackIso (pbcIntegralDatum l F) g
-  let eG := pbcActualAmbientCompletedPullbackIso (pbcIntegralDatum l G) g
-  let bEF := rationalScalarReflectedBeta l E F i g
-  let bFG := rationalScalarReflectedBeta l F G j g
-  let bEG := rationalScalarReflectedBeta l E G (j.comp i) g
-  let cX := pbcAmbientScalarComp l E F G i j X
-  let cY := pbcAmbientScalarComp l E F G i j Y
-  have hr : C.map (bEF.hom.app K) ≫
-      bFG.hom.app ((pbcEmbeddingAmbientTensor l E F i Y).obj K) ≫
-      B.map (cY.hom.app K) =
-    cX.hom.app ((pbcActualCompletedPull g (pbcIntegralDatum l E)).obj K) ≫
-      bEG.hom.app K := by
-    exact mixed_inverse_square C
-      ((pbcScalarCompletedPullIso l E F i g).app K)
-      ((pbcScalarCompletedPullIso l F G j g).app
-        ((pbcEmbeddingAmbientTensor l E F i Y).obj K))
-      ((pbcScalarCompletedPullIso l E G (j.comp i) g).app K)
-      (cX.hom.app ((pbcActualCompletedPull g (pbcIntegralDatum l E)).obj K))
-      (B.map (cY.hom.app K))
-      (rationalScalarCompletionUnitSquare_coefficients l E F i g G j K)
-  have hn : eG.inv.app ((pbcEmbeddingAmbientTensor l F G j Y).obj
-      ((pbcEmbeddingAmbientTensor l E F i Y).obj K)) ≫
-      (pbcActualStrictCompletedPull (pbcIntegralDatum l G) g).map (cY.hom.app K) =
-    B.map (cY.hom.app K) ≫
-      eG.inv.app ((pbcEmbeddingAmbientTensor l E G (j.comp i) Y).obj K) :=
-    (eG.inv.naturality (cY.hom.app K)).symm
-  have ha : C.map ((pbcEmbeddingAmbientTensor l E F i X).map (eE.hom.app K)) ≫
-      cX.hom.app ((pbcActualCompletedPull g (pbcIntegralDatum l E)).obj K) =
-    cX.hom.app ((pbcActualStrictCompletedPull (pbcIntegralDatum l E) g).obj K) ≫
-      (pbcEmbeddingAmbientTensor l E G (j.comp i) X).map (eE.hom.app K) :=
-    cX.hom.naturality (eE.hom.app K)
-  simp only [rationalScalarStrictBeta, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp,
-    Category.assoc]
-  change C.map ((pbcEmbeddingAmbientTensor l E F i X).map (eE.hom.app K)) ≫
-    C.map (bEF.hom.app K) ≫ C.map (eF.inv.app _) ≫
-    C.map (eF.hom.app _) ≫ bFG.hom.app _ ≫ eG.inv.app _ ≫
-    (pbcActualStrictCompletedPull (pbcIntegralDatum l G) g).map (cY.hom.app K) =
-    cX.hom.app _ ≫ (pbcEmbeddingAmbientTensor l E G (j.comp i) X).map
-      (eE.hom.app K) ≫ bEG.hom.app K ≫ eG.inv.app _
-  erw [(eF.app ((pbcEmbeddingAmbientTensor l E F i Y).obj K)).map_inv_hom_id_assoc C]
-  erw [hn, reassoc_of% hr, reassoc_of% ha]
-  rfl
 
 /-- The same zeta comparisons respect the specified coefficient associators.
 Source: BS 6.8.15, pp. 61--62; Stacks 0G7E, 0D6D and 07A4
@@ -717,7 +744,7 @@ theorem rationalMixedRawCoefficientTower
   change mEF.beta.hom.app K = _ at hbEF
   change mFG.beta.hom.app _ = _ at hbFG
   change mEG.beta.hom.app K = _ at hbEG
-  rw [hbEF, hbFG, hbEG]
+  refine mixed_replace_square _ hbEF hbFG hbEG ?_
   simp only [rationalMixedBetaComponent, Iso.trans_hom, Iso.symm_hom,
     Functor.mapIso_hom, eqToIso.hom, eqToIso.inv, Functor.map_comp, Category.assoc]
   have hn := (pbcRationalScalarComp l E F G i j X Fact.out Fact.out).hom.naturality
@@ -742,77 +769,9 @@ theorem rationalMixedRawCoefficientTower
     Functor.comp_map, ObjectProperty.ι_obj, ObjectProperty.ι_map,
     ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
     Iso.app_hom, Category.assoc] using
-    mixed_strict_coefficient_tower l E F i g G j K.obj.obj
+    rationalMixedIntegralCoefficientTower l E F i g G j K.obj.obj
 
 end CoefficientCoherence
-
-private theorem mixed_normalization_mate {W : Scheme.{u}}
-    {R S T : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
-    (a : R ⟶ S) (b : S ⟶ T) (c : R ⟶ T) (h : a ≫ b = c)
-    (K : DerivedCategory (pbcModules W R)) :
-    (pbcReductionNormalization a b c h K).hom =
-      (Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction a)
-        (pbcDerivedScalarAdjunction b) (pbcDerivedScalarAdjunction c)
-        (pbcDerivedRestrictComp a b c h)).hom.app K := by
-  dsimp [pbcReductionNormalization, pbcReductionNormalizationHom, pbcReductionTransition]
-  simp only [Adjunction.leftAdjointCompIso_hom_app, Adjunction.homEquiv_counit,
-    Functor.map_comp, Category.assoc]
-
-private theorem mixed_normalization_assoc {W : Scheme.{u}}
-    {R S T V : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
-    (a : R ⟶ S) (b : S ⟶ T) (c : T ⟶ V)
-    (ab : R ⟶ T) (bc : S ⟶ V) (abc : R ⟶ V)
-    (hab : a ≫ b = ab) (hbc : b ≫ c = bc)
-    (hl : ab ≫ c = abc) (hr : a ≫ bc = abc)
-    (K : DerivedCategory (pbcModules W R)) :
-    (pbcDerivedExtend c).map ((pbcReductionNormalization a b ab hab K).hom) ≫
-        (pbcReductionNormalization ab c abc hl K).hom =
-      (pbcReductionNormalization b c bc hbc ((pbcDerivedExtend a).obj K)).hom ≫
-        (pbcReductionNormalization a bc abc hr K).hom := by
-  have ho (M : pbcModules W V) :
-      (pbcRestrict a).map ((pbcRestrictComp b c bc hbc).hom.app M) ≫
-          (pbcRestrictComp a bc abc hr).hom.app M =
-        (pbcRestrictComp a b ab hab).hom.app ((pbcRestrict c).obj M) ≫
-          (pbcRestrictComp ab c abc hl).hom.app M := by
-    ext U x
-    change ((pbcRestrictComp a bc abc hr).hom.app M).val.app U
-        (((pbcRestrictComp b c bc hbc).hom.app M).val.app U x) =
-      ((pbcRestrictComp ab c abc hl).hom.app M).val.app U
-        (((pbcRestrictComp a b ab hab).hom.app ((pbcRestrict c).obj M)).val.app U x)
-    simp only [pbcRestrictComp, (pbcRestrictComp_exists a bc abc hr).exists.choose_spec,
-      (pbcRestrictComp_exists b c bc hbc).exists.choose_spec,
-      (pbcRestrictComp_exists ab c abc hl).exists.choose_spec,
-      (pbcRestrictComp_exists a b ab hab).exists.choose_spec]
-  have hd (M : DerivedCategory (pbcModules W V)) :=
-    Functor.mapDerivedCategoryCompNatIso_cocycle
-      (pbcRestrictComp b c bc hbc) (pbcRestrictComp a bc abc hr)
-      (pbcRestrictComp a b ab hab) (pbcRestrictComp ab c abc hl) ho M
-  have hrest :
-      Functor.isoWhiskerLeft (pbcDerivedRestrict c) (pbcDerivedRestrictComp a b ab hab) ≪≫
-          pbcDerivedRestrictComp ab c abc hl =
-        (Functor.associator _ _ _).symm ≪≫
-          Functor.isoWhiskerRight (pbcDerivedRestrictComp b c bc hbc) (pbcDerivedRestrict a) ≪≫
-            pbcDerivedRestrictComp a bc abc hr := by
-    apply Iso.ext
-    apply NatTrans.ext
-    funext M
-    simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-      Functor.whiskerLeft_app, Functor.whiskerRight_app,
-      Functor.associator_inv_app, Category.id_comp, pbcDerivedRestrictComp,
-      pbcDerivedRestrict, Functor.mapDerivedCategoryCompNatIso] using (hd M).symm
-  have he := Adjunction.leftAdjointCompIso_assoc
-    (pbcDerivedScalarAdjunction a) (pbcDerivedScalarAdjunction b)
-    (pbcDerivedScalarAdjunction c) (pbcDerivedScalarAdjunction ab)
-    (pbcDerivedScalarAdjunction bc) (pbcDerivedScalarAdjunction abc)
-    (pbcDerivedRestrictComp a b ab hab) (pbcDerivedRestrictComp b c bc hbc)
-    (pbcDerivedRestrictComp a bc abc hr) (pbcDerivedRestrictComp ab c abc hl) hrest
-  have heK := congrArg (fun e ↦ e.hom.app K) he
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_inv_app, Category.id_comp] at heK
-  simpa only [mixed_normalization_mate] using heK.symm
 
 section Pentagon
 variable (G H : Type u) [Field G] [Field H]
@@ -862,7 +821,7 @@ theorem rationalMixedPentagon
         (rationalBalancedCoefficient_comp l E F i X H (k.comp j))
         ((rationalPullDerived l E g aE.rationalCoefficient).obj K)).hom ≫
       mEH.zeta.hom.app K := by
-  have h := mixed_normalization_assoc
+  have h := rationalMixedReductionNormalizationAssoc
     (rationalBalancedCoefficient l E F i X) (rationalBalancedCoefficient l F G j X)
     (rationalBalancedCoefficient l G H k X)
     (rationalBalancedCoefficient l E G (j.comp i) X)

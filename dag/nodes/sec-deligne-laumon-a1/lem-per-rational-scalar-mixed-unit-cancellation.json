@@ -93,13 +93,14 @@
    }
   },
   {
-   "text": "The completed pasting comparisons have the same normalization: the completed compositor and identity satisfy $\\widehat a\\,\\gamma_h P_h(\\gamma_g)=\\gamma_{g\\circ h}a$ and $\\widehat e\\gamma_{\\rm id}=e$ by the quotient-completed compositor lemma, and for each field the $\\alpha$'s paste along $g\\circ h$ and the identity by the rational pullback composition coherence. In the reflected-adjunction construction the Hom bijection is precomposition with the reflection unit followed by the ordinary adjunct; hence a comparison to a complete target is determined by its composite with that unit. Its stated pasting law therefore identifies the composite pullback comparison with the ordinary one conjugated by the units. On our constructible objects all these units are invertible. Substitute $\\alpha=aR(\\gamma^{-1})$ in a pasted diagram, use $R(\\widehat\\beta)R(C\\gamma_E)=R(\\gamma_L)R(\\beta)$ at each mixed square, and cancel each adjacent $R(\\gamma^{-1})R(\\gamma)$. For two consecutive cells this is the elementary identity $(v_2f_2v_1^{-1})(v_1f_1v_0^{-1})=v_2f_2f_1v_0^{-1}$. Thus the two geometric pastings and the identity diagrams reduce to the ordinary equations of Step 5. The completion-square statement identifies its reflected construction with the actual quotient-normalized scalar comparison and supplies its geometric pasting law, so no newly chosen completed comparison has entered.",
+   "text": "The completed pasting comparisons have the same normalization: the completed compositor and identity satisfy $\\widehat a\\,\\gamma_h P_h(\\gamma_g)=\\gamma_{g\\circ h}a$ and $\\widehat e\\gamma_{\\rm id}=e$ by the quotient-completed compositor lemma, and for each field the $\\alpha$'s paste along $g\\circ h$ and the identity by the rational pullback composition coherence. In the reflected-adjunction construction the Hom bijection is precomposition with the reflection unit followed by the ordinary adjunct; hence a comparison to a complete target is determined by its composite with that unit. Its stated pasting law therefore identifies the composite pullback comparison with the ordinary one conjugated by the units. On our constructible objects all these units are invertible. Substitute $\\alpha=aR(\\gamma^{-1})$ in a pasted diagram, use $R(\\widehat\\beta)R(C\\gamma_E)=R(\\gamma_L)R(\\beta)$ at each mixed square, and cancel each adjacent $R(\\gamma^{-1})R(\\gamma)$. For two consecutive cells this is the elementary identity $(v_2f_2v_1^{-1})(v_1f_1v_0^{-1})=v_2f_2f_1v_0^{-1}$. Thus the two geometric pastings and the identity diagrams reduce to the ordinary equations of Step 5. The completion-square statement identifies its reflected construction with the actual quotient-normalized scalar comparison and supplies its geometric pasting law, so no newly chosen completed comparison has entered. The raw geometric composition companion has a direct proof from the existing ordinary scalar-pullback composition law. Invert that ordinary law. Precompose the strict comparison square with scalar extension of the pullback of gamma_g followed by gamma_h. Both units are invertible on the supplied constructible inputs. The strict-beta unit squares, naturality of ordinary beta at gamma_g, naturality of gamma_h at strict beta_g, and the two selected integral-compositor unit equations reduce both routes to the inverted ordinary composition law followed by gamma_(hg). Cancel the two invertible precompositions. The recorded raw-compositor formula then rationalizes precisely this strict integral equation. Use naturality of beta_h to move the initial raw-object transport; the remaining object transports cancel and the denominator-one scalar and pullback formulas identify every integral map. This proves rationalMixedRawGeometricComposition without assuming full faithfulness of realization or a new coherence witness.",
    "uses": [
     "lem-weil-pbc-reflected-adjunction-coefficient-squares",
     "lem-per-rational-scalar-completion-unit-square",
     "lem-per-rational-realization-pullback-comparison",
     "lem-per-quotient-completed-compositor-unit",
-    "lem-per-rational-pullback-composition-coherence"
+    "lem-per-rational-pullback-composition-coherence",
+    "lem-per-mixed-integral-geometric-composition"
    ],
    "elementary": false,
    "source": {
@@ -112,7 +113,9 @@
    "uses": [
     "lem-per-rational-scalar-balanced-localization",
     "lem-per-rational-scalar-completion-unit-square",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-per-mixed-integral-coefficient-tower",
+    "lem-per-mixed-reduction-normalization-assoc"
    ],
    "elementary": false,
    "source": {
@@ -123,6 +126,9 @@
  ],
  "proof_deps": [
   "lem-per-localized-ordinary-pullback-normalization",
+  "lem-per-mixed-integral-coefficient-tower",
+  "lem-per-mixed-integral-geometric-composition",
+  "lem-per-mixed-reduction-normalization-assoc",
   "lem-per-quotient-completed-compositor-unit",
   "lem-per-rational-module-realization-functor",
   "lem-per-rational-pullback-composition-coherence",
@@ -138,7 +144,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Remark 6.8.15, p. 62; explicit agent expansion of ordinary pullback and rationalization, using the specified completion-unit comparisons; E5 formalizes the section, precomposition, common-tensor and raw-naturality companion consequences categorically from the supplied normalized comparison; the existence and remaining coherence plan are retained; its pentagon companion is formalized by exact-derived restriction cocycles and Mathlib left-adjoint associativity; M6 proves rationalMixedRawCoefficientTower by conjugating the published reflected coefficient-tower equation to strict beta and rationalizing, with every raw-object transport retained"
+  "place": "Remark 6.8.15, p. 62; explicit agent expansion of ordinary pullback and rationalization, using the specified completion-unit comparisons; E5 formalizes the section, precomposition, common-tensor and raw-naturality companion consequences categorically from the supplied normalized comparison; the existence and remaining coherence plan are retained; its pentagon companion is formalized by exact-derived restriction cocycles and Mathlib left-adjoint associativity; M6 proves rationalMixedRawCoefficientTower by conjugating the published reflected coefficient-tower equation to strict beta and rationalizing, with every raw-object transport retained; T2 proves the raw geometric composition companion from ordinary scalar composition, the strict completion-unit square and the selected integral compositor unit equations, then rationalizes with all raw transports; the integral geometric calculation and the existing integral coefficient-tower and derived-normalization calculations are independently compiled in three proved helper modules"
  },
  "mathlib_searches": [
   {
@@ -429,10 +435,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M6",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261027T094449-L-230753",
-  "kind": "proof",
+  "landing": "20261027T180818-L-3904100",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

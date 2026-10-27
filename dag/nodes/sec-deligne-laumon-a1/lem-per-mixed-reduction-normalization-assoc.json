@@ -1,0 +1,121 @@
+{
+ "id": "lem-per-mixed-reduction-normalization-assoc",
+ "kind": "statement",
+ "title": "Associativity of the specified derived reduction normalizations",
+ "statement": "Let W be a scheme, R,S,T,V sheaves of commutative rings on its pro-etale site, and let a : R → S, b : S → T, c : T → V, ab : R → T, bc : S → V and abc : R → V satisfy a followed by b = ab, b followed by c = bc, ab followed by c = abc and a followed by bc = abc. For every K in DerivedCategory (pbcModules W R), derived extension along c of pbcReductionNormalization(a,b,ab) at K, followed by pbcReductionNormalization(ab,c,abc) at K, equals pbcReductionNormalization(b,c,bc) at derived extension along a of K, followed by pbcReductionNormalization(a,bc,abc) at K. This is an equality of the specific hom components of the prescribed normalizations.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15, pp. 61–62; the completion-unit and scalar associativity calculation in the parent node, step 6 or 7."
+ },
+ "stmt_deps": [
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "The restriction comparisons are the identity on sections, hence satisfy their cocycle. Functor.mapDerivedCategoryCompNatIso_cocycle transports it to the derived comparisons. Identify each prescribed reduction normalization with the left-adjoint composition comparison for the derived restriction isomorphism. Apply Mathlib Adjunction.leftAdjointCompIso_assoc and evaluate its hom component at K.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Fully proved categorical calculation extracted for independent compilation. The coefficient-tower and normalization calculations were already private proved helpers of the parent module; their proofs are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension and completed pullback composition coherence by cancelling completion units",
+   "results": {
+    "hits": 8,
+    "top": [
+     "ModuleCat.extendScalars_assoc'",
+     "ModuleCat.extendScalarsComp",
+     "ModuleCat.homEquiv_extendScalarsComp",
+     "ModuleCat.extendScalars_assoc"
+    ],
+    "note": "Other hits concern uniform-space and adic completion."
+   },
+   "date": "2026-10-28",
+   "verdict": "Ordinary module associators do not state the normalized derived/completed equations here."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso_assoc"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Used for derived normalization associativity; the completion equations still require the recorded scalar-unit comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso_assoc|mapDerivedCategoryCompNatIso_cocycle|rationalScalarStrictBeta",
+   "results": {
+    "hits": 3,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:200",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:147",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean:170"
+    ]
+   },
+   "date": "2026-10-28",
+   "verdict": "Confirms the general adjunction associativity API; no Mathlib strict completed scalar comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalScalarMixedUnitCancellation",
+  "date": "2026-10-28",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-scalar-mixed-unit-cancellation",
+   "place": "Integral completion-unit and scalar-normalization calculations, steps 6–7"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.RationalScalarMixedNormalizationAssoc",
+  "file": "lean/Sheaf/Paper/RationalScalarMixedNormalizationAssoc.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalMixedReductionNormalizationAssoc",
+  "statement": "theorem rationalMixedReductionNormalizationAssoc {W : Scheme.{u}}\n    {R S T V : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}\n    (a : R ⟶ S) (b : S ⟶ T) (c : T ⟶ V)\n    (ab : R ⟶ T) (bc : S ⟶ V) (abc : R ⟶ V)\n    (hab : a ≫ b = ab) (hbc : b ≫ c = bc)\n    (hl : ab ≫ c = abc) (hr : a ≫ bc = abc)\n    (K : DerivedCategory (pbcModules W R)) :\n    (pbcDerivedExtend c).map ((pbcReductionNormalization a b ab hab K).hom) ≫\n        (pbcReductionNormalization ab c abc hl K).hom =\n      (pbcReductionNormalization b c bc hbc ((pbcDerivedExtend a).obj K)).hom ≫\n        (pbcReductionNormalization a bc abc hr K).hom",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T180818-L-3904100",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T180818-L-3904100",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
