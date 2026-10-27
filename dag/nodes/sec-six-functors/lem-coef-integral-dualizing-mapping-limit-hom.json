@@ -1,0 +1,100 @@
+{
+ "id": "lem-coef-integral-dualizing-mapping-limit-hom",
+ "kind": "lemma",
+ "title": "Degree-zero mapping adjunction for the prescribed limit",
+ "statement": "For the same normalized DVR tower, coherent finite identifications, and integral limit presentation as lem-coef-integral-dualizing-mapping-limit, every constructible K has the displayed Hom equivalence from `K.obj ⟶ M.obj` to the coefficient-point Hom from the compact-support tower into the coefficient-unit object.",
+ "stmt_deps": [
+  "lem-coef-integral-dualizing-mapping-limit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph; strict conjunct of the mapping-limit conclusion."
+ },
+ "proof": [
+  {
+   "text": "Carry out the displayed mapping-tower comparison: apply the finite mapping adjunctions levelwise, use the coherent counit transitions, identify the Roos limit with the coefficient dual tower, and pass to the derived limit. The degree-zero case additionally applies derived global sections and the coefficient-point equivalence.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph; decomposition of the mapping-limit statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived Hom into inverse limit of finite dualizing complexes",
+   "results": "No exact project-independent match; the project-specific finite tower comparison is required.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "dualizing inverse limit Hom",
+   "results": "0 exact matches.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralDualizing_mapping_limit",
+   "results": "Only the parent declaration and this split declaration.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-mapping-limit",
+   "place": "Strict conjunct decomposition of the mapping-limit proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingMappingLimitHom",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingMappingLimitHom.lean",
+  "declaration": "WeilConjectures.integralDualizing_mapping_limit_hom",
+  "statement": "theorem integralDualizing_mapping_limit_hom (T : NormalizedDVRTower l E X D hl) (e : ∀ n : ℕ, T.M n ≅ integralDualizingFiniteTerm l E D X n) (he : ∀ {m n : ℕ} (h : n ≤ m), T.tau h ≫ (normalizedDVRRes l E X h).map (e n).hom = (e m).hom ≫ (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _ (integralDualizingFiniteComparison l E D X hl h)) (M : sfIntegralConstructibleCategory l E X) (hM : IntegralDualizingLimitPresentation l E D hl X T M.obj) : ∀ K : sfIntegralConstructibleCategory l E X, Nonempty ((K.obj ⟶ M.obj) ≃ ((integralDualizingLimit l E (Spec (.of D.k))).obj ((integralDualizingCompactTower l E D hl X).obj K.obj) ⟶ (DerivedCategory.singleFunctor (scalarReductionSource l E (Spec (.of D.k))) 0).obj (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of D.k))))))",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingLimit",
+  "date": "2026-10-28",
+  "group": "D5"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T180524-L-3870689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T180524-L-3870689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

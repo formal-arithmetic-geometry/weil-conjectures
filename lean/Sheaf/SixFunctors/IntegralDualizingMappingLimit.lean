@@ -6,6 +6,8 @@ Authors: SHEAF group Z6
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingRoosModel
+import Sheaf.SixFunctors.IntegralDualizingMappingLimitGlobal
+import Sheaf.SixFunctors.IntegralDualizingMappingLimitHom
 
 /-! # Mapping complexes into the prescribed dualizing tower limit
 
@@ -74,6 +76,7 @@ theorem integralDualizing_mapping_limit
             (DerivedCategory.singleFunctor (scalarReductionSource l E (Spec (.of D.k))) 0).obj
               (SheafOfModules.unit
                 (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of D.k)))))) := by
-  sorry
+  refine ⟨integralDualizing_mapping_limit_global D l hl E X T e he M hM, ?_⟩
+  exact integralDualizing_mapping_limit_hom D l hl E X T e he M hM
 
 end WeilConjectures
