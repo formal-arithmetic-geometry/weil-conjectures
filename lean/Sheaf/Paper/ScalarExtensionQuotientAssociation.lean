@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.CoefficientExtensionReductionData
 public import Sheaf.Paper.ScalarExtensionTowerComparisonData
 public import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.Paper.ScalarExtensionQuotientAssociationDegreeData
 
 /-! # Association of strict coefficient quotient representatives
 
@@ -75,6 +76,14 @@ theorem quotientAssociation_exists
           ((((d.directEvaluation n).inv.app K).f i).val.app U
             (integralScalarTensorSection.{u, u} l E L ι W n (K.obj.X i) U
               (((integralComparisonSequenceScalarMap.{u, u} l E L ι W).hom.app
-                (op (n, U.unop))) a * b) x)) := by sorry
+                (op (n, U.unop))) a * b) x)) := by
+  obtain ⟨δ, hδd, hδ⟩ := quotientAssociation_degreeData_exists l E L ι W SE SL A A0 d d0 K
+  let e : (scalar l E L ι W).obj (d0.direct.obj K) ≅ d.direct.obj K :=
+    HomologicalComplex.Hom.isoOfComponents δ (by
+      intro i j hrel
+      exact hδd i j)
+  refine ⟨e, ?_⟩
+  intro n i U b a x
+  exact hδ n i U b a x
 
 end WeilConjectures.ScalarExtensionTower

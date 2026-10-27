@@ -1,0 +1,118 @@
+{
+ "id": "stage3-pur-scalar-quotient-association-degree-data",
+ "kind": "statement",
+ "title": "Degreewise normalized strict scalar association data",
+ "statement": "For the fixed quotient representatives d and d0 of stage3-pur-extension-reduction-data and a good complex K, there are isomorphisms in every cochain degree between the scalar extension of d0.direct(K) and d.direct(K), commuting with every cochain differential. After applying the inverse finite evaluation isomorphisms, the component map sends the inverse-evaluation representative of b tensor (a tensor x) to the inverse-evaluation representative of iota(a)*b tensor x. This is only degreewise data; assembly into a whole strict sequence-site complex is handled by the parent node.",
+ "stmt_deps": [
+  "stage3-pur-extension-reduction-data",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md; literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Finite balanced tensor association and its inverse, before assembly on the sequence site."
+ },
+ "proof": [
+  {
+   "text": "At each finite quotient level, compose the identity extension unit, scalar extension evaluation, and the prescribed finite balanced association. The balanced tensor adjunction gives inverse maps, with the displayed multiplication formula on local pure tensors.",
+   "uses": [
+    "stage3-pur-finite-extension-association",
+    "stage3-pur-scalar-cochain-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the evaluation isomorphisms and the direct transition equations identify the successor maps with coefficient reduction. Reduction preserves multiplication and one, so the component maps commute with every transition and with the cochain differentials. The resulting degreewise data has the stated inverse-evaluation formula.",
+   "uses": [
+    "stage3-pur-extension-reduction-data",
+    "lem-coef-system-iso-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "stage3-pur-finite-extension-association",
+  "stage3-pur-scalar-cochain-evaluation",
+  "stage3-pur-extension-reduction-data",
+  "lem-coef-system-iso-assembly"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md; literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Degreewise finite association calculation separated from whole-system assembly."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralComparisonSequenceScalarComposition_existsUnique and scalarTensor_ab_hom_ext",
+   "results": "The library has the ordinary scalar composition and tensor generator extensionality, but no theorem combining the two fixed reduction representatives at the derived-system level.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.isoOfComponents",
+   "results": "Mathlib provides componentwise assembly once differential compatibility is supplied.",
+   "date": "2026-10-27",
+   "verdict": "assembly ingredient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict coefficient quotient scalar tensor association inverse evaluation",
+   "results": "Existing project declarations provide finite scalar composition and system evaluation assembly separately; no exact degreewise theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionQuotientAssociation",
+  "date": "2026-10-27",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-pur-scalar-quotient-association",
+   "place": "Proof steps 1--2, finite association before whole-system assembly.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionQuotientAssociationDegreeData",
+  "file": "lean/Sheaf/Paper/ScalarExtensionQuotientAssociationDegreeData.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.quotientAssociation_degreeData_exists",
+  "statement": "theorem quotientAssociation_degreeData_exists\n    (W : Scheme.{u})\n    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)\n    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)\n    (A : CoefficientExtensionSystems.{u, u} l E L ι W)\n    (A0 : CoefficientExtensionSystems.{u, u} l E E (AlgHom.id ℚ_[l] E) W)\n    (d : CoefficientExtensionReductionData.{u, u} l E L ι W SE SL A)\n    (d0 : CoefficientExtensionReductionData.{u, u} l E E (AlgHom.id ℚ_[l] E) W SE SE A0)\n    (K : (integralOperationsGoodComplex.{u, u} l E W).FullSubcategory) :\n    ∃ (δ : ∀ i : ℤ, ((scalar l E L ι W).obj (d0.direct.obj K)).X i ≅\n        (d.direct.obj K).X i),\n      (∀ (i j : ℤ),\n        (δ i).hom ≫ (d.direct.obj K).d i j =\n          ((scalar l E L ι W).obj (d0.direct.obj K)).d i j ≫ (δ j).hom) ∧\n      ∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ)\n        (b : (coefficientSequenceCommRingSheaf l L W).obj.obj (op (n, U.unop)))\n        (a : (coefficientSequenceCommRingSheaf l E W).obj.obj (op (n, U.unop)))\n        (x : (K.obj.X i).val.obj U),\n        (δ i).hom.val.app (op (n, U.unop))\n          (integralComparisonSequenceTensorSection l E L ι W ((d0.direct.obj K).X i)\n            (op (n, U.unop)) b\n            (integralComparisonSequenceSection.{u, u} l E W ((d0.direct.obj K).X i) n U\n              ((((d0.directEvaluation n).inv.app K).f i).val.app U\n                (integralScalarTensorSection.{u, u} l E E (AlgHom.id ℚ_[l] E) W n\n                  (K.obj.X i) U a x)))) =\n        integralComparisonSequenceSection.{u, u} l L W ((d.direct.obj K).X i) n U\n          ((((d.directEvaluation n).inv.app K).f i).val.app U\n            (integralScalarTensorSection.{u, u} l E L ι W n (K.obj.X i) U\n              (((integralComparisonSequenceScalarMap.{u, u} l E L ι W).hom.app\n                (op (n, U.unop))) a * b) x))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T180458-L-3864692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T180458-L-3864692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
