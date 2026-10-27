@@ -19650,3 +19650,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:04 L: returned deliver/C1/Sheaf.TraceFormula.ProjectiveBundleProper (reviewer RETURN: (the landing tools, head 0395fb4fd) the delivery did not land: lean/Sheaf/TraceFormula/CanonicalRelativeProjProper.lean:)
 - 18:04 L: returned deliver/E6/Sheaf.Paper.DiagonalCyclicUniformizerSquare (reviewer RETURN: (the landing tools, head af138590d) the delivery did not land: lean/Sheaf/Paper/DiagonalCyclicUniformizerSquare.lean was)
 - 18:04 L: returned deliver/E9/Sheaf.Paper.RationalP1ScalarChernBaseChange (reviewer RETURN: (the landing tools, head bf5078faf) the delivery did not land: lean/Sheaf/Paper/RationalP1ScalarChernBaseChange.lean was)
+- 18:04 L: returned deliver/F6/Sheaf.Paper.RationalP1ScalarChernSplittings (reviewer RETURN: (the landing tools, head f7d4af9d8) the delivery did not land: lean/Sheaf/Paper/RationalP1ScalarChernSplittings.lean was)
