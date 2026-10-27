@@ -2,49 +2,81 @@
  "id": "lem-pur-derived-pullback-tensor-constraints-common-associator-existence",
  "kind": "statement",
  "title": "Existence of the normalized common-stage tensor associator satisfying its prescribed finite-stage equations",
- "statement": "Existence of the normalized common-stage tensor associator satisfying its prescribed finite-stage equations [lem-pur-derived-pullback-tensor-constraints].",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a scheme $W$ with $\\ell$ invertible in every residue field. Use the intrinsic rational finite-coefficient stages and their fixed scalar stage system [lem-general-algebraically-closed-coefficient-stages], and its pair category $\\mathcal C_W$ [def-sf-directed-common-stage-data]. Its objects are pairs $(E,K)$ for finite $E\\subset\\Omega$, with arrows the common-stage classes $[L,u]$. Use the actual common-stage tensor of [def-weil-derived-pullback-tensor-hom]: $(E,K)\\otimes(F,H)$ has stage $EF$ and object $K_{EF}\\otimes_{EF}H_{EF}$, with the prescribed scalar/tensor comparison $c_{A,B;L}:(A\\otimes B)_L\\xrightarrow{\\sim}A_L\\otimes_L B_L$ including the input stage associators. Finite coefficient composita are those of [def-weil-finite-subextension-directed-set]. Let $M,N,P\\in\\mathcal C_W$ and put $S=(M\\otimes N)\\otimes P$, $T=M\\otimes(N\\otimes P)$. For every finite coefficient field $L$ containing the stages of both $S$ and $T$, define\n$$\\lambda_L=c_{M\\otimes N,P;L};(c_{M,N;L}\\otimes_L1):S_L\\xrightarrow{\\sim}(M_L\\otimes_LN_L)\\otimes_LP_L,$$\n$$\\rho_L=c_{M,N\\otimes P;L};(1\\otimes_Lc_{N,P;L}):T_L\\xrightarrow{\\sim}M_L\\otimes_L(N_L\\otimes_LP_L).$$\nThus $\\lambda_L$ and $\\rho_L$ are exactly pullbackTensorCommonLeft and pullbackTensorCommonRight. Write $\\alpha^L$ for the rational localization of the coherent-reduction-normalized integral associator [def-pod-integral-tensor-constraints]. There exists an isomorphism $e:S\\xrightarrow{\\sim}T$ such that, for every such $L$,\n$$e^{\\mathrm{hom}}=[L,\\lambda_L;\\alpha^L_{M_L,N_L,P_L};\\rho_L^{-1}].$$\nThe equality is in the actual pair category, equivalently the HEq with ofHom in pullbackTensorCommonAssociator_exists. The assertion is existence with all prescribed representative equations, and does not assert uniqueness.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YS, 07A4 and 0941; existence of the normalized common-stage representative"
  },
  "stmt_deps": [
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-directed-common-stage-data",
   "def-weil-derived-pullback-tensor-hom",
-  "def-pur-completed-pullback-tensor-comparison",
-  "lem-pod-integral-system-reduction-fully-faithful",
-  "lem-pod-integral-pullback-composition"
+  "def-weil-finite-subextension-directed-set",
+  "def-pod-integral-tensor-constraints"
  ],
  "proof": [
   {
-   "text": "Construct the common-stage representative from the displayed normalized pullback tensor comparison and establish its equation at every finite coefficient enlargement. The remaining representative construction is the strictly simpler existence half of the parent uniqueness theorem.",
+   "text": "Choose $L_0$ to be the compositum of the stages of $S$ and $T$. Both stages contain the input fields, so all displayed input extensions and both nested comparisons exist. Put $u_L=\\lambda_L;\\alpha^L;\\rho_L^{-1}$ whenever $L$ contains these stages. The prescribed rational associator is an isomorphism, so $u_L$ is an isomorphism, with inverse $v_L=\\rho_L;(\\alpha^L)^{-1};\\lambda_L^{-1}$. These are maps $S_L\\to T_L$ and $T_L\\to S_L$, respectively. This uses the actual nested comparisons in the statement, not a choice of a tensor structure on the pair category.",
    "uses": [
-    "def-pur-completed-pullback-tensor-comparison",
-    "def-weil-constant-coefficient-objects",
+    "def-weil-finite-subextension-directed-set",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-pod-integral-pullback-composition",
-    "lem-pod-integral-system-reduction-fully-faithful",
-    "lem-pur-normalized-completed-operation-models",
-    "lem-pur-normalized-reconstruction-adjunction-calculus",
-    "lem-sf-derived-complete-legacy-comparison",
-    "lem-weil-proetale-dbc-triangulated"
+    "lem-pur-rational-tensor-associator-scalar-square"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/DerivedPullbackTensorConstraints.lean",
+    "place": "pullbackTensorCommonLeft and pullbackTensorCommonRight, lines 696-722; pullbackTensorCommonAssociator_exists, lines 729-754; explicit agent expansion of the representative construction in the parent docstring, lines 759-764"
+   }
+  },
+  {
+   "text": "For $L\\subseteq H$ write $B=B_{H/L}$ and $\\delta_A:B(A_L)\\xrightarrow{\\sim}A_H$ for the fixed stage associator of any pair $A$. Let $\\beta^{\\mathrm l}:B((M_L\\otimes N_L)\\otimes P_L)\\to(M_H\\otimes N_H)\\otimes P_H$ be $b^{\\mathrm l}$ followed by $((\\delta_M\\otimes\\delta_N)\\otimes\\delta_P)$; define $\\beta^{\\mathrm r}$ using $b^{\\mathrm r}$ followed by $(\\delta_M\\otimes(\\delta_N\\otimes\\delta_P))$. Expand each binary $c_{A,B;L}$: it is the scalar tensor comparison after extending from the compositum, followed by the tensor of the two input stage associators. The FamilyTower equation combines the two successive scalar tensor comparisons into the direct one; the stage cocycle combines each successive input associator into its direct associator. Naturality of the binary comparison moves those input associators past it. Applied to the two binary vertices of each nested expression, these substitutions give\n$$\\delta_S;\\lambda_H=B(\\lambda_L);\\beta^{\\mathrm l},\\qquad \\delta_T;\\rho_H=B(\\rho_L);\\beta^{\\mathrm r}.$$\nOnly expansion of the defined $c$ and the two cited tower equations is involved; no compatibility of $\\alpha$ has been used here.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-directed-common-stage-data",
+    "lem-weil-rational-tensor-stage-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/DerivedPullbackTensorConstraints.lean",
+    "place": "pullbackTensorCommonLeft and pullbackTensorCommonRight, lines 696-722; pullbackTensorCommonAssociator_exists, lines 729-754; explicit agent expansion of the representative construction in the parent docstring, lines 759-764"
+   }
+  },
+  {
+   "text": "The finite-field scalar square gives $B(\\alpha^L);b^{\\mathrm r}=b^{\\mathrm l};\\alpha^H_{BM_L,BN_L,BP_L}$. Naturality of the same associator with respect to $\\delta_M,\\delta_N,\\delta_P$ therefore gives\n$$B(\\alpha^L);\\beta^{\\mathrm r}=\\beta^{\\mathrm l};\\alpha^H_{M_H,N_H,P_H}.$$\nThe prescribed transport of an arrow $S_L\\to T_L$ to $H$ is $\\delta_S^{-1};B(-);\\delta_T$. Substituting the two identities of Step 2 and cancelling inverses now yields\n$$\\delta_S^{-1};B(u_L);\\delta_T=\\lambda_H;\\alpha^H;\\rho_H^{-1}=u_H.$$\nTransport of $v_L=u_L^{-1}$ is $v_H$, since functors preserve the two inverse identities. This establishes the needed compatibility for the actual representatives, including all stage associators.",
+   "uses": [
+    "lem-pur-rational-tensor-associator-scalar-square",
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Paper/DerivedPullbackTensorConstraints.lean",
+    "place": "pullbackTensorCommonLeft and pullbackTensorCommonRight, lines 696-722; pullbackTensorCommonAssociator_exists, lines 729-754; explicit agent expansion of the representative construction in the parent docstring, lines 759-764"
+   }
+  },
+  {
+   "text": "Define $e^{\\mathrm{hom}}=[L_0,u_{L_0}]$ and $e^{\\mathrm{inv}}=[L_0,v_{L_0}]$. Composition in the pair category is composition of representatives over a common stage. Thus the two products are $[L_0,1_{S_{L_0}}]$ and $[L_0,1_{T_{L_0}}]$, which are the identities of $S,T$ (equivalently transport the defining identity representatives to $L_0$). This gives an isomorphism $e:S\\cong T$. Given any other allowed $L$, form the finite compositum $H=LL_0$. Step 3 sends both $u_L$ and $u_{L_0}$ to the identical map $u_H$. Equality after a further common-stage transport is the defining equivalence relation on representatives, so $e^{\\mathrm{hom}}=[L,u_L]$. This is the required equation for every $L$, not merely an equation at the chosen initial field.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/DerivedPullbackTensorConstraints.lean",
+    "place": "pullbackTensorCommonLeft and pullbackTensorCommonRight, lines 696-722; pullbackTensorCommonAssociator_exists, lines 729-754; explicit agent expansion of the representative construction in the parent docstring, lines 759-764"
+   }
   }
  ],
  "proof_deps": [
-  "def-pur-completed-pullback-tensor-comparison",
-  "def-weil-constant-coefficient-objects",
+  "def-sf-directed-common-stage-data",
   "def-weil-derived-pullback-tensor-hom",
-  "lem-pod-integral-pullback-composition",
-  "lem-pod-integral-system-reduction-fully-faithful",
-  "lem-pur-normalized-completed-operation-models",
-  "lem-pur-normalized-reconstruction-adjunction-calculus",
-  "lem-sf-derived-complete-legacy-comparison",
-  "lem-weil-proetale-dbc-triangulated"
+  "def-weil-finite-subextension-directed-set",
+  "lem-pur-rational-tensor-associator-scalar-square",
+  "lem-weil-rational-tensor-stage-coherence"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 07A4 and 0941; normalized common-stage representative construction"
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorConstraints.lean",
+  "place": "pullbackTensorCommonLeft and pullbackTensorCommonRight, lines 696-722; pullbackTensorCommonAssociator_exists, lines 729-754; explicit agent expansion of the representative construction in the parent docstring, lines 759-764"
  },
  "mathlib_searches": [
   {
@@ -67,9 +99,37 @@
    "results": "0 hits: ",
    "date": "2026-10-27",
    "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor associator on a filtered common coefficient stage category represented at every larger finite field",
+   "results": "8 hits: CategoryTheory.MonoidalCategoryStruct.associator, BialgCat.associator_def, ModuleCat.MonoidalCategory.associator_def, TensorProduct.assoc, Coalgebra.TensorProduct.assoc_tmul, TensorProduct.assoc_tensor'', CategoryTheory.GradedObject.Monoidal.associator_naturality, CategoryTheory.Mathlib.Tactic.MonTauto.associator_hom_comp_tensorHom_tensorHom_assoc",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "12 hits: CategoryTheory.Functor.Monoidal.instId, CategoryTheory.Functor.Monoidal, CategoryTheory.Equivalence.instMonoidalFunctorRefl, CategoryTheory.Equivalence.instMonoidalInverseRefl, CategoryTheory.Functor.instMonoidalProdDiag, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.Monoidal.toLaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage.*[Aa]ssociator|pullbackTensorRationalAssociator",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a common stage associator in the filtered category of rational l-adic constructible complexes with its prescribed finite field representatives",
+   "results": "8 hits: CategoryTheory.IsFiltered.sup_exists, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, LightCondensed.instCountableAB4StarLightCondMod, Condensed.profiniteSolid, CategoryTheory.Limits.IsFiltered.sequentialFunctor_final_aux, Profinite.exists_locallyConstant_finite_aux, Condensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.instAB4StarCondensedMod",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
   }
  ],
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.Paper.DerivedPullbackTensorConstraints",
@@ -102,12 +162,10 @@
  "reviewed": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
+  "reviewer": "NT-cc-NA-1b68f7190",
+  "group": "NA",
   "result": "pass",
-  "landing": "20261027T210131-L-1661663",
-  "kind": "proof",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-1b68f7190 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement and the live Lean (DerivedPullbackTensorConstraints.lean:529-614 and 696-754, DerivedPullbackTensorHom.lean:303 and 545-590, GeneralAlgebraicallyClosedCoefficients.lean:392). The item statement matches pullbackTensorCommonAssociator_exists clause by clause: for all L with hS and hT, λ_L and ρ_L are pullbackTensorCommonLeft and pullbackTensorCommonRight, α^L is the rational associator at the toStage inputs, ofHom is the class [L,f], and the claim is existence only. It is not weakened. I recomputed every step. Step 2: δ_S;λ_H = B(λ_L);β^l follows from FamilyTower, the cocycle and naturality of b; operationStageTransitionIso is an eqToIso. Step 3: the transport δ_S⁻¹;B(u_L);δ_T equals u_H, using the new square and naturality of α^H. Step 4 builds the iso at L_0 and compares arbitrary L at L·L_0. New node lem-pur-rational-tensor-associator-scalar-square: statement only and self-contained, with B and b from def-sf-finite-rational-derived-operations and α from def-pod-integral-tensor-constraints. Its square is the monoidal-functor associativity for these specific maps. I accept it as true; checked E=L, ramified, zero objects. It is strictly smaller than the item, no Lean or DAG duplicate was found, and all three search kinds are recorded. Its naturality clause overlaps lem-pur-rational-pullback-tensor-associator-natural (Lean rationalAssociator_natural, sorry-free), but that node cites the parent, which proof-depends on this item, so citing it would close a real cycle. Advisory: repoint that node's deps to def-pod-integral-tensor-constraints. The tool_use lem-weil-rational-tensor-stage-coherence is on route anyway, since sk-def-purity-conv uses sk-def-sf-operations; I accept it. A transitive closure over all dependencies found no cycle. blueprint.from.node is null, consistent with the ancestor tool, because the item's created.item is a module name. No fixes."
  },
  "reviewed_proof": {
   "date": "2026-10-27",
@@ -118,5 +176,22 @@
   "landing": "20261027T210131-L-1661663",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-derived-pullback-tensor-constraints-common-associator-existence",
+  "worker": "stage1",
+  "summary": "Expanded the shorthand to the exact normalized Lean representative equation. Constructed the isomorphism and its inverse at a finite compositum, wrote the nested scalar tower equations and their cancellation, and compared arbitrary allowed fields at a further compositum. Extracted only the finite-field naturality/scalar square, with no common-stage existence conclusion.",
+  "blueprint": "Retains the live inherited coefficient-constraint branch from def-weil-frobenius-coefficient-twists through lem-pur-derived-pullback-tensor-iso. The current blueprint ancestor text is only a coefficient convention, not a proof of this later extracted statement; the actual source here is the fixed live Lean interface and its parent docstring. The four steps make that docstring construction explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-rational-tensor-stage-coherence",
+    "why": "Its precise FamilyTower equation supplies enlargement of the fixed binary tensor comparisons; it is a generic coefficient-stage tool and no node of the item unit supplies that equation."
+   }
+  ]
+ },
+ "mathlib_match": null,
+ "tool_uses": [
+  "lem-weil-rational-tensor-stage-coherence"
+ ]
 }

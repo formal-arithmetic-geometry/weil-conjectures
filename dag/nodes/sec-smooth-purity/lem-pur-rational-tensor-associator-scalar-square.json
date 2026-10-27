@@ -1,0 +1,89 @@
+{
+ "id": "lem-pur-rational-tensor-associator-scalar-square",
+ "kind": "statement",
+ "title": "Scalar coherence and naturality of the prescribed rational tensor associator",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a scheme $W$ on which $\\ell$ is invertible at every residue field. Let $E\\subseteq L\\subset\\Omega$ be finite extensions of $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. Write $C_F=D^b_c(W,F)$ for the intrinsic raw rational constructible category, whose objects are integral derived-complete constructible objects and whose Hom groups are localized at the coefficient uniformizer [def-weil-rationalization-karoubi]. Use exactly the completed integral tensor and its rationalization $\\otimes_F$, the scalar functor $B_{L/E}:C_E\\to C_L$, and its prescribed natural tensor comparison $b_{X,Y}:B_{L/E}(X\\otimes_EY)\\xrightarrow{\\sim}B_{L/E}X\\otimes_LB_{L/E}Y$ of [def-sf-finite-rational-derived-operations]. Let $\\alpha^F_{X,Y,Z}:(X\\otimes_FY)\\otimes_FZ\\xrightarrow{\\sim}X\\otimes_F(Y\\otimes_FZ)$ be exactly the rational localization of the coherent-reduction-normalized integral associator [def-pod-integral-tensor-constraints]; in Lean this is pullbackTensorRationalAssociator, not an arbitrary chosen associator.\n\nThese specified isomorphisms are natural in all three inputs: for $f:X\\to X'$, $g:Y\\to Y'$, $h:Z\\to Z'$ in $C_F$,\n$$((f\\otimes_Fg)\\otimes_Fh);\\alpha^F_{X',Y',Z'}=\\alpha^F_{X,Y,Z};(f\\otimes_F(g\\otimes_Fh)).$$\nHere semicolons compose from left to right. For $X,Y,Z\\in C_E$, put\n$$b^{\\mathrm l}=b_{X\\otimes_EY,Z};(b_{X,Y}\\otimes_L1),\\qquad b^{\\mathrm r}=b_{X,Y\\otimes_EZ};(1\\otimes_Lb_{Y,Z}).$$\nThen the scalar-associator square for these actual maps is\n$$B_{L/E}(\\alpha^E_{X,Y,Z});b^{\\mathrm r}=b^{\\mathrm l};\\alpha^L_{B_{L/E}X,B_{L/E}Y,B_{L/E}Z}.$$\nThis includes $E=L$, ramified extensions, and arbitrary constructible inputs; no finite-Tor or scheme finite-type hypothesis is added.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product, proof by simultaneous flat-term K-flat representatives; agent-formulated completed/rational associator compatibility for the fixed maps in lean/Sheaf/Paper/DerivedPullbackTensorConstraints.lean, pullbackTensorIntegralAssociator and pullbackTensorRationalAssociator (lines 539-630). The tag provides the representative tensor comparison, not this entire completed assertion."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-rationalization-karoubi",
+  "def-sf-finite-rational-derived-operations",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "associator.*(scalar|Scalar)|([sS]calar).*associator",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized rational constructible derived tensor associator is natural and commutes with finite extension of l-adic coefficient fields",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, galRestrict'_comp, AdicCompletion.ofTensorProduct_naturality, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "12 hits: CategoryTheory.Functor.Monoidal.instId, CategoryTheory.Functor.Monoidal, CategoryTheory.Equivalence.instMonoidalFunctorRefl, CategoryTheory.Equivalence.instMonoidalInverseRefl, CategoryTheory.Functor.instMonoidalProdDiag, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.Monoidal.toLaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "grep",
+   "query": "associativity|associator_naturality",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized rational derived tensor associator commutes with scalar extension of finite l-adic coefficient fields",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.distribBaseChange, TensorProduct.AlgebraTensorModule.leftComm, TensorProduct.tensorTensorTensorAssoc, Algebra.TensorProduct.instCompatibleSMulRat, Algebra.TensorProduct.assoc, instSMulCommClassTensorAlgebra, TensorProduct.CompatibleSMul.isScalarTower, LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and scalar extension compatibility of the completed integral tensor associator after rational localization of constructible sheaf derived categories",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, AdicCompletion.ofTensorProduct_naturality, SheafOfModules.ιFree_mapFree_inv_assoc, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  },
+  {
+   "tool": "grep",
+   "query": "associativity",
+   "results": "5 hits: 60, 78, 79, 95, 121",
+   "date": "2026-10-27",
+   "verdict": "no match: generic monoidal or module tensor results do not identify the prescribed completed rational maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-derived-pullback-tensor-constraints-common-associator-existence",
+  "date": "2026-10-28",
+  "group": "NA"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The live item's Lean construction requires the finite-field scalar-associator square before forming the normalized common-stage representative.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

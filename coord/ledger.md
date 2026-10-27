@@ -20121,3 +20121,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:12 L: returned deliver/C2/Sheaf.Paper.CompletedPullbackTowerRealizations (reviewer RETURN: (reviewer C-f3fd5, head f3fd5dfde) D1/G1: the item sorry pullbackTensorTensorTower_existsUnique is unchanged, and the ne)
 - 21:16 L: returned deliver/NC/lem-pur-derived-pullback-tensor-constraints-common-composition-existence (reviewer RETURN: I read the item, the Lean declaration (DerivedPullbackTensorConstraints.lean:230; commonStagePullbackComparison at Deriv)
 - 21:19 L: merged deliver/NB/lem-pur-derived-pullback-tensor-constraints-common-braiding-existence (reviewer FIX; first push; new nodes: 1)
+- 21:21 L: merged deliver/NA/lem-pur-derived-pullback-tensor-constraints-common-associator-existence (reviewer PASS; first push; new nodes: 1)
