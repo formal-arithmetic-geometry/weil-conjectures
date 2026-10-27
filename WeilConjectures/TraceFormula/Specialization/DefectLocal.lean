@@ -37,7 +37,7 @@ For this we show the geometric facts:
   special fibres is an open immersion
   (`ProEtale.CondensedRing.isOpenImmersion_deformationSpecialFibreMap_of_isOpenImmersion`);
 * the restriction `Z ∩ V_a ⟶ Z` of `g_a` to the centre is the base change of `g_a`
-  (`ProEtale.CondensedRing.isPullback_centreMap`).
+  (`ProEtale.CondensedRing.isPullback_centreMap`, in `DefectCentreMap`).
 
 -/
 
@@ -105,13 +105,6 @@ section Centre
 
 variable {k : Type u} [Field k] {X X' : Over (Spec (.of k))} (f : X' ⟶ X)
   (I : X.left.IdealSheafData) (k' : Type u) [Field k'] [Algebra k k']
-
-/-- The restriction `f_Z : Z' = V(f^* I) ⟶ Z = V(I)` of `f` is the base change of `f` along the
-closed immersion `Z ⟶ X`. -/
-lemma isPullback_centreMap :
-    IsPullback (centreMap f I).left (I.comap f.left).subschemeι I.subschemeι f.left := by
-  have := (I.isPullback_comap f.left).flip
-  rwa [IdealSheafData.comapIso_hom_snd] at this
 
 instance [IsOpenImmersion f.left] : IsOpenImmersion (centreMap f I).left :=
   (isPullback_centreMap f I).isOpenImmersion_fst

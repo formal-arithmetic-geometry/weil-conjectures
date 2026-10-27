@@ -147,7 +147,7 @@ omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
 /-- The underived coherence of `comapLowerStarIso` with the composition isomorphisms
 `lowerStarComp` of pushforwards: on underlying sheaves, both sides are the composition
 isomorphism of pushforwards of sheaves. -/
-lemma comapLowerStarIso_hom_app_comp
+lemma comapLowerStarIso_hom_app_lowerStarComp
     (N : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X)) :
     (Mod.comap (coefficientMap a Z)).map ((lowerStarComp Λ' f g).hom.app N) ≫
         (comapLowerStarIso a (f ≫ g)).hom.app N =
@@ -185,7 +185,7 @@ lemma comapLowerStarIso_lowerStarCompHomotopy
   simp only [← Functor.map_comp]
   refine congrArg _ ?_
   ext n : 1
-  exact comapLowerStarIso_hom_app_comp Λ f g a (K.X n)
+  exact comapLowerStarIso_hom_app_lowerStarComp Λ f g a (K.X n)
 
 set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
