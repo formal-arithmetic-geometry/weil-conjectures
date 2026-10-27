@@ -16,28 +16,42 @@
  },
  "proof": [
   {
-   "text": "Evaluate both composites on a module and on an object V -> U of the slice. The two presheaf constructions are the same tensor S(V) tensor over R(V) with the module sections, and the comparison commutes with restriction maps.",
+   "text": "Use the normalized object and morphism equations of the two scalar-extension witnesses to identify each chosen ordinary functor with the sheafification of the explicit sectionwise extension-of-scalars functor. The comparison is eqToIso on each object; the witness morphism equation proves naturality.",
    "uses": [
-    "def-pur-localized-ringed-site"
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-adic-slice-scalar-extension",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the universal property of module sheafification to descend the presheaf comparison to a natural isomorphism of sheaves of modules.",
+   "text": "On an object V -> U, both scalar-extension presheaves have the same tensor module. The identity on pure tensors is compatible with restriction because the characterization of each changeOfRingsMap restricts the scalar and module factors. Tensor induction proves compatibility for all sections, and the component identities are natural in module morphisms.",
    "uses": [
-    "lem-pc-sites-module-sheafification-interface"
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The sheafification adjunction gives the comparison from the sheafification of a restricted module presheaf to the restriction of its sheafification. Its composite with the slice sheafification unit is the restricted original unit. The original unit is locally bijective, and this remains true after restriction to the slice. Cancellation of the locally bijective slice unit shows the comparison is locally bijective, hence an isomorphism of module sheaves. Naturality follows by sheafification extensionality and the naturality of the unit. Compose this with the preceding presheaf and normalization isomorphisms.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-localized-ringed-site"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-adic-slice-scalar-extension",
+  "def-pur-sheaf-tensor-product",
   "def-pur-localized-ringed-site",
   "lem-pc-sites-module-sheafification-interface"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YY, ordinary tensor compatibility under localization"
+  "place": "lemma-derived-base-change (06YY), lemma-restriction-K-flat (0E8K), and module sheafification; Lean assembly by N2, 2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -89,11 +103,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-b0fb0",
-  "group": "U1",
-  "result": "fix",
-  "landing": "20261027T180829-L-3906877",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T234113-L-4192808",
   "kind": "interface",
-  "note": "independent cc review: item proof (leftDerivedNatIso from underived + derived_data) against node lem-weil-pbc-completed-adic-slice-scalar-comparison and Stacks 06YY/0G7E; moved defs vs published module; importer FiniteQuotientModelResidueComparison compiled OK"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
