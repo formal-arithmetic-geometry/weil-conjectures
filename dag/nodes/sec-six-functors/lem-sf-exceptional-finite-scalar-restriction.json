@@ -1,0 +1,94 @@
+{
+ "id": "lem-sf-exceptional-finite-scalar-restriction",
+ "kind": "statement",
+ "title": "Finite scalar restriction package",
+ "statement": "theorem finiteScalar_exists (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L] (n m : ℕ) (a : Padic.coefficientExtensionRing l E (n + 1) →+* Padic.coefficientExtensionRing l L (m + 1)) (T : Scheme.{u}) [T.Over (Spec (.of D.k))] [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] : Nonempty (Scalar l E L n m a T)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/_section.md",
+  "place": "finite scalar mates decomposition"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-finite-tor-amplitude",
+  "def-sf-exceptional-finite-scalar-mates-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the bounded flat model and derived scalar-extension comparison to prove preservation of constructibility and the same Tor interval, then lift the ambient scalar functor to the full finite-Tor subcategory.",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-flat-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-comparison-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "T6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/_section.md",
+  "place": "finite scalar mates decomposition"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalFiniteScalarMates",
+  "date": "2026-10-28",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-finite-scalar-mates",
+   "place": "finite scalar mates proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalFiniteScalar",
+  "declaration": "WeilConjectures.ExceptionalFiniteScalar.finiteScalar_exists",
+  "declarations": [
+   "WeilConjectures.ExceptionalFiniteScalar.finiteScalar_exists"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteScalar.lean",
+  "statement": "theorem finiteScalar_exists (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L] (n m : ℕ) (a : Padic.coefficientExtensionRing l E (n + 1) →+* Padic.coefficientExtensionRing l L (m + 1)) (T : Scheme.{u}) [T.Over (Spec (.of D.k))] [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] : Nonempty (Scalar l E L n m a T)",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5f644",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261027T180826-L-3905752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5f644",
+  "group": "T6",
+  "result": "fix",
+  "landing": "20261027T180826-L-3905752",
+  "kind": "interface",
+  "note": "independent cc review: item exceptionalFiniteScalarMates assembled from 3 new sorry holes + verbatim Data module, against node lem-sf-exceptional-finite-scalar-mates, the clone's original module, cited lemma hypotheses (flat model, etaleCompactScalarCoherence) and importer ExceptionalIntegralScalarMates"
+ }
+}
