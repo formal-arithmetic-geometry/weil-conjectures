@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.AdicCompletedTensorCommonLiftCoherence
+import Sheaf.Paper.AdicCompletedTensorCommonLiftAgreementComponent
 
 /-! # Finite normalization of a common-stage completed tensor lift
 
@@ -48,6 +49,8 @@ theorem completed_tensor_common_lift_agreement
     (C : CompletedTensorCommonLiftCoherence l X R closed symmetry) :
     ∀ E, tensorFiniteAgreement l X R closed C.tensor E
       (N E).completion (N E).ordinary := by
-  sorry
+  intro E K L
+  exact completed_tensor_common_lift_agreement_component l X R closed models symmetry N
+    coherence C E K L
 
 end WeilConjectures.AdicQbarRealization
