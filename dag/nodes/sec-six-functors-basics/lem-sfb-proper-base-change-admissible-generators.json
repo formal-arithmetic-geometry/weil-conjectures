@@ -17,44 +17,67 @@
  ],
  "proof": [
   {
-   "text": "For finite ell-primary rings use finite proper base change. For integer rings use integral proper base change; Dctf is contained in the recorded bounded constructible category. For finite coefficient fields and the finite-subextension algebraic closure use rational proper base change. The ground field and its integers are the degree-one cases.",
+   "text": "Apply condensedAmbientExchange_coefficientIso: scalar extension along an isomorphism preserves the constant-model constructible finite-Tor subcategory, its normalized geometric mates are invertible, and the scalar/geometric rectangle transports the actual ambient exchange. This proved helper has no properness hypothesis.",
+   "uses": [
+    "lem-sfb-condensed-coefficient-iso-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved coefficient-presentation helpers finiteBoundaryCoefficientIso, field_realization, unitBall_realization and integerIso in ProperOpenBoundaryZero. They identify small finite continuous coefficients with the sheafified constant ring of their universe lift, Q_ell with a degree-one finite intermediate coefficient field, Z_ell with its unit ball, and the valuation coefficient ring with DerivedNakayama.integerRing of the universe lift. Only these presentation helpers are used from that module, not its boundary-vanishing theorem.",
+   "uses": [
+    "lem-sfb-proper-open-boundary-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite coefficients transfer to finiteProperCoefficientRing of ULift A. The given exponent kills 1 also after lifting, including for the zero ring. Apply clause (2) of finiteProperBaseChange. The finite_ambient_iso helper identifies its exchange with condensedAmbientExchange, since finitePullbackCongr is equality-to-isomorphism transport. Apply the coefficient-isomorphism argument of step 1.",
    "uses": [
     "det-thm-sfb-proper-base-change-finite",
-    "det-thm-sfb-proper-base-change-integral",
-    "det-thm-sfb-proper-base-change-rational"
+    "lem-sfb-finite-coefficient-proper-formulas"
    ],
    "elementary": false
   },
   {
-   "text": "For the full continuous-map algebraic closure, take the finite stratification and finite Postnikov filtration of K. Descend finite-rank lisse pieces and their profinite monodromy to finite coefficient fields. Proper finiteness supplies finite cochain models on an adapted target stratification. Extending scalars commutes with finite sums, their differentials and the actual counit exchange. Thus the finite-extension proper exchange yields the full-continuous exchange on each piece. Exactness and connecting squares extend invertibility through the two finite filtrations. This never identifies the two algebraic-closure coefficient topologies.",
+   "text": "For integral valuation coefficients apply clause (3) of integralProperDirectImageAndFormulas to the bounded constructible input. The finite Tor property is unused in this representative case. Transfer through integerIso and, for Z_ell, the unit-ball presentation of step 2.",
    "uses": [
-    "det-sf-comp-continuous-algcl-local-free",
-    "lem-real-compact-matrix-coefficient-descent",
-    "det-sf-comp-continuous-algcl-heart-finiteness"
+    "det-thm-sfb-proper-base-change-integral"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction along a coefficient ring-object isomorphism induces exact equivalences on module and derived categories and transports finite constant models and Tor amplitude. The scalar/pullback comparison cube and the proper counit equations give the commuting exchange square by coefficient mate calculus. Its other edges are invertible and the equivalence reflects isomorphisms.",
+   "text": "For a finite intermediate coefficient field or the finite-subextension-valued algebraic closure, the source scheme is Noetherian. The adic constructibility comparison converts the constant-model bounded input to the ordinary bounded constructible subcategory. Equip the chosen Cartesian source A with its k-structure from qprime; the square makes a a k-morphism, and proper base change makes qprime proper, hence A separated of finite type. Bundle the square in Over(Spec k), and apply the already stated rational proper-base-change natural-transformation theorem. The bounded-exchange ambient identification, together with transportedCompositeIso_eq and the definitions of the residue functor wrappers, identifies the component underlying arrow with the exact condensedAmbientExchange in the goal.",
    "uses": [
-    "lem-weil-pbc-coefficient-exchange-mates"
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "nt-target-proetale-e",
+    "nt-target-proetale-qbar",
+    "lem-weil-pbc-bounded-exchange-ambient"
    ],
    "elementary": false
+  },
+  {
+   "text": "Eliminate the six alternatives in IsLocalizingAdmissibleCoefficient. In each alternative compose the supplied coefficient isomorphism with the applicable presentation from step 2 and apply step 1 to the representative result in steps 3-5. The full continuous-map algebraic closure is absent from the current admissibility predicate, so no continuous-algebraic-closure descent branch is required.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sfb-condensed-coefficient-iso-exchange",
+  "lem-sfb-proper-open-boundary-zero",
   "det-thm-sfb-proper-base-change-finite",
+  "lem-sfb-finite-coefficient-proper-formulas",
   "det-thm-sfb-proper-base-change-integral",
-  "det-thm-sfb-proper-base-change-rational",
-  "det-sf-comp-continuous-algcl-local-free",
-  "lem-real-compact-matrix-coefficient-descent",
-  "det-sf-comp-continuous-algcl-heart-finiteness",
-  "lem-weil-pbc-coefficient-exchange-mates"
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "nt-target-proetale-e",
+  "nt-target-proetale-qbar",
+  "lem-weil-pbc-bounded-exchange-ambient"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "B2",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
-  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+  "place": "Proof (2), admissible proper-base-change generators; implemented from existing finite, integral and rational results and scalar/geometric exchange rectangle. Current admissibility excludes the full continuous-map algebraic closure."
  },
  "mathlib_searches": [
   {
@@ -127,13 +150,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-15846",
-  "group": "G1",
-  "result": "fix",
-  "landing": "20261025T060824-L-2375776",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T233756-L-4112459",
   "kind": "interface",
-  "note": "independent cc review: item proof + 2 new sorry statements (generator proper base change; refinement pasting) and moved detSf* defs against node det-sf-comp-composition-base-change, change record, cited owners, and importer IntegralLocalizingCompactSupport (sandbox compile)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
