@@ -60,7 +60,7 @@ namespace AlgebraicGeometry
 constructed from K-flat resolutions.
 
 Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  sk-thm-picard-semicon/def-pc-derived-pullback.md, node def-pc-derived-pullback;
+  det-thm-picard-semicon/def-pc-derived-pullback.md, node def-pc-derived-pullback;
   the functor is `L g^* = L(g^sharp)^* ∘ g⁻¹`, and on a K-flat resolution
   `P ⟶ E` it is represented by `𝒪_T ⊗_{g⁻¹𝒪_S} g⁻¹P`.
 The functor `I` is the exact module inverse image, and `E` is the recorded tensor

@@ -43,7 +43,7 @@ power series, which this repository also does not have.
 
 namespace AlgebraicGeometry
 
-/-- Blueprints `def-weil-betti-numbers` and `sk-def-roots` (Betti numbers): for a family
+/-- Blueprints `def-weil-betti-numbers` and `det-def-roots` (Betti numbers): for a family
 `P₀, …, P_n` of integral
 Frobenius factors, the `i`-th Betti number is `bᵢ = deg Pᵢ` for `0 ≤ i ≤ n`, and `bᵢ = 0` for
 `i < 0` or `i > n`. -/
@@ -59,7 +59,7 @@ theorem weilBettiNumber_eq_zero {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) {
     (hi : i < 0 ∨ (n : ℤ) < i) : weilBettiNumber P i = 0 := by
   rw [weilBettiNumber, dif_neg (by omega)]
 
-/-- Blueprints `def-weil-determinant-constants` and `sk-def-roots` (determinant constants): the
+/-- Blueprints `def-weil-determinant-constants` and `det-def-roots` (determinant constants): the
 determinant constant
 `D = (-1)^b [T^b] P(T)` of an integral Frobenius factor `P` of degree `b`; under
 `P^{(ℓ)} = det(1 - T F | V)` its image in `ℚ̄_ℓ` is `det F`. -/

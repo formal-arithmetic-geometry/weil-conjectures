@@ -34,7 +34,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 /-- The restriction augmentation of one injective sheaf is a quasi-isomorphism.
 The Hom sets, covering index, and abelian group values all have universe v.
 Source: Stacks Project, Cohomology on Sites, Tags 03AW and 03F6; blueprint
-sk-thm-picard-cech, Step 3.
+det-thm-picard-cech, Step 3.
 (blueprint: lem-sc-injective-cech-augmentation-quasi-iso)
 
 Proof: Form the augmented complex of free abelian presheaves represented by the

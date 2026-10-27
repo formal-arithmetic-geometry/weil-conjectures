@@ -87,8 +87,9 @@ instance isLisseRep.isClosedUnderFiniteProducts : (W.isLisseRep l).IsClosedUnder
         (isLisseRep.biprod (hF ⟨.left⟩) (hF ⟨.right⟩)))
   .mk'
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
-exactness of the lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): exactness of the lisse sheaf–representation
+equivalence.
 
 Let `e` be an equivalence between lisse Weil sheaves on `C₀` and lisse Weil representations of
 `W(C₀)`, such as `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`. A short complex

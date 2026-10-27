@@ -171,7 +171,7 @@ the affine line, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}`,
 
 up to the sign coming from the shift `[1]`, the trace function of the transform is the
 classical Fourier transform of the trace function of `K`.
-(sketch blueprint: `sk-thm-fourier-trace-formula`; blueprint: `thm-fd-fourier-trace`) -/
+(sketch blueprint: `thm-fd-fourier-trace`; blueprint: `thm-fd-fourier-trace`) -/
 theorem traceFunction_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
     [Fintype (FiniteField.galoisExtension k₀ n)] (y : FiniteField.galoisExtension k₀ n) :
@@ -217,7 +217,7 @@ complex `K` on the affine line, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}`,
 which is the trace function of the Tate twist `K(-1)` at points of degree `n`. It is the
 Fourier trace formula applied twice, followed by classical Fourier inversion
 (`FiniteField.fourierTransform_inv_fourierTransform`).
-(sketch blueprint: `sk-prop-double-trace`) -/
+(sketch blueprint: `det-prop-double-trace`) -/
 theorem traceFunction_fourierTransform_inv_fourierTransform {ψ : AddChar k₀ (PadicAlgCl l)}
     (hψ : ψ ≠ 1) (K : WeilComplex k₀ l (affineLine k₀)) {n : ℕ} (hn : n ≠ 0)
     (y : FiniteField.galoisExtension k₀ n) :

@@ -43,8 +43,7 @@ morphism. Together they bound the perverse amplitude of the Fourier–Deligne tr
   classes under a lisse tensor (blueprint `lem-per-lisse-tensor-permanence`).
 - `AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_upperStar`,
   `AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_upperStar`: smooth pullback is
-  perverse up to the shift by the relative dimension
-  (blueprint `lem-per-smooth-pullback-t-exact`).
+  perverse up to the shift by the relative dimension.
 - `AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_lowerShriek`,
   `AlgebraicGeometry.Etale.DerivedCategory.isPerverseGE_lowerShriek`: Artin–Gabber, the
   compactly supported pushforward along an affine morphism with fibres of dimension at most `d`
@@ -205,8 +204,7 @@ omit [Finite Λ] [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated aY] [Qua
   [HasCompactification aY] in
 /-- **Smooth pullback is perverse up to the shift**, support side: for a smooth morphism
 `f : X ⟶ Y` of relative dimension `d` between separated schemes of finite type over `k`, the
-pullback carries `ᵖD^{≤n}(Y)` into `ᵖD^{≤n+d}(X)`; that is, `f^*[d]` preserves `ᵖD^{≤n}`.
-(blueprint: `lem-per-smooth-pullback-t-exact`) -/
+pullback carries `ᵖD^{≤n}(Y)` into `ᵖD^{≤n+d}(X)`; that is, `f^*[d]` preserves `ᵖD^{≤n}`. -/
 theorem isPerverseLE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimension d f] {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseLE n K) :
@@ -237,8 +235,7 @@ theorem isPerverseLE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimensio
 relative dimension `d`, the pullback carries `ᵖD^{≥n}(Y)` into `ᵖD^{≥n+d}(X)`. By the exchange
 `𝔻_X f^* ≅ f^! 𝔻_Y` and smooth duality `f^! M ≅ f^* M ⊗ᴸ L[2d]` for a locally constant sheaf
 `L` of free rank-one modules, `𝔻_X(f^* K[n + d]) ≅ (f^* 𝔻_Y(K[n]))[d] ⊗ᴸ L`, and the support
-side applies to `𝔻_Y(K[n])`; the tensor product with the flat `L` preserves supports.
-(blueprint: `lem-per-smooth-pullback-t-exact`) -/
+side applies to `𝔻_Y(K[n])`; the tensor product with the flat `L` preserves supports. -/
 theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimension d f]
     [HasCompactification (f ≫ aY)] {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

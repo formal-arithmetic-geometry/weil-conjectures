@@ -28,7 +28,7 @@ placing sheaves in degree `0`, to the category `Sh_c(X, Λ)` of constructible `�
 (`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeartEquiv`), which is abelian on
 a locally Noetherian scheme.
 
-This is the stage `Λ = E` of blueprint `def-weil-constructible-heart`, in the Bhatt–Scholze
+This is the constructible heart at the stage `Λ = E`, in the Bhatt–Scholze
 model of `D^b_c(X, E)` (*The pro-étale topology for schemes*, §6.8): `E_X`-modules on the
 pro-étale site with constructible cohomology. The stage `ℚ̄_ℓ` is
 `AlgebraicGeometry.ProEtale.DerivedCategory.adicConstructibleHeart`.
@@ -92,7 +92,7 @@ lemma DerivedCategory.boundedFieldConstructible_truncGE
 namespace DerivedCategory
 
 variable (Λ X) in
-/-- Blueprint `def-weil-constructible-heart`: Constructible heart, stage `Λ = E`.
+/-- Constructible heart, stage `Λ = E`.
 
 The heart `D^{≤ 0}_c(X, Λ) ∩ D^{≥ 0}_c(X, Λ)` of the standard `t`-structure on the bounded
 constructible derived category `D^b_c(X, Λ)`, as an object property of `D(X_proét, Λ)`: the

@@ -51,7 +51,7 @@ Proof:
 2. Derive global sections using K-injective resolutions as for
    def-pc-derived-direct-image. The ordinary adjunction induces the derived unit
    and counit; applying exact tilde termwise computes its derived functor.
-3. Affine vanishing (lem-pc-affine-vanishing) supplies the bound `N = 1` in
+3. Affine vanishing (pqf-lem-affine-vanishing) supplies the bound `N = 1` in
    lem-pc-unbounded-derived-functor-cohomological-bound. Apply that bound to the
    negative truncation, then use the truncation triangle and left exactness of Gamma
    on the nonnegative injective resolution to obtain

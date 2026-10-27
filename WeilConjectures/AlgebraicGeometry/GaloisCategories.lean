@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 # Finite étale covers and finite locally constant sheaves
 
 Source: literature/blueprint/master/blueprint/sec-abelian-varieties/
-  sk-prop-av-finite-etale-points/def-galois-categories.md, node def-galois-categories
+  lem-sc-finite-etale-points/def-galois-categories.md, node def-galois-categories
   (blueprint: def-galois-categories).
 
 The category of finite étale covers is `Scheme.FiniteEtale`, supplied by the

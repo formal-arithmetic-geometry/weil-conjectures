@@ -327,7 +327,7 @@ theorem exists_distTriang_derivedLowerShriek_openClosed (j : U ⟶ X) [IsOpenImm
       (ci.app _).symm⟩⟩
 
 /-- **Base change for the direct image with compact support** (blueprint: `prop-functor-package`,
-clause 4, `g^*Rf_! ≃ Rf'_!g'^*` for arbitrary base change, and `thm-cbc-qbar`): for a cartesian
+clause 4, `g^*Rf_! ≃ Rf'_!g'^*` for arbitrary base change): for a cartesian
 square
 ```
 X' --- g ---> X

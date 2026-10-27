@@ -40,10 +40,10 @@ the unit group `Eˣ` of a field and `χ` is a rank-one character, with finite ge
 ## Blueprint
 
 `SemidirectProduct.inrOfAddOne`, `SemidirectProduct.degreeCharacter` and
-`SemidirectProduct.finitePart` implement `sk-d-ab-rankone`;
+`SemidirectProduct.finitePart` implement `d-ab-rankone`;
 `SemidirectProduct.eq_finitePart_mul_degreeCharacter`,
 `SemidirectProduct.finitePart_inrOfAddOne` and `SemidirectProduct.range_finitePart` implement
-`sk-p-rankone`.
+`det-p-rankone`.
 -/
 
 @[expose] public section
@@ -55,19 +55,19 @@ variable {N : Type*} [Group N] {A : Type*} [CommGroup A] {φ : Multiplicative �
 variable (φ) in
 /-- The degree-one element `γ = (1, 1)` of the split cyclic extension `N ⋊[φ] Multiplicative ℤ`;
 every element of the extension is uniquely of the form `u * γ ^ n` with `u` in the copy of `N`.
-(blueprint: `sk-d-ab-rankone`) -/
+(blueprint: `d-ab-rankone`) -/
 abbrev inrOfAddOne : N ⋊[φ] Multiplicative ℤ := inr (Multiplicative.ofAdd 1)
 
 variable (φ) in
 /-- The character `χ_z` sending an element `w` of the split cyclic extension to `z ^ deg w`, where
 the degree `deg w` is read off by `SemidirectProduct.rightHom`.
-(blueprint: `sk-d-ab-rankone`) -/
+(blueprint: `d-ab-rankone`) -/
 def degreeCharacter (z : A) : (N ⋊[φ] Multiplicative ℤ) →* A :=
   (zpowersHom A z).comp rightHom
 
 /-- The finite part `χ_fin` of a character `χ`, obtained by dividing `χ` by the character `χ_z`
 attached to `z = χ γ`; explicitly `χ_fin w = χ w * z ^ (-deg w)`.
-(blueprint: `sk-d-ab-rankone`) -/
+(blueprint: `d-ab-rankone`) -/
 def finitePart (χ : (N ⋊[φ] Multiplicative ℤ) →* A) : (N ⋊[φ] Multiplicative ℤ) →* A :=
   χ / degreeCharacter φ (χ (inrOfAddOne φ))
 
@@ -89,13 +89,13 @@ theorem finitePart_inl (u : N) : finitePart χ (inl u) = χ (inl u) := by
 
 /-- A character of a split cyclic extension factors as the product of its finite part and the
 degree character attached to `z = χ γ`.
-(blueprint: `sk-p-rankone`) -/
+(blueprint: `det-p-rankone`) -/
 theorem eq_finitePart_mul_degreeCharacter :
     χ = finitePart χ * degreeCharacter φ (χ (inrOfAddOne φ)) :=
   (div_mul_cancel χ _).symm
 
 /-- The finite part of a character is trivial on the degree-one element `γ`.
-(blueprint: `sk-p-rankone`) -/
+(blueprint: `det-p-rankone`) -/
 @[simp]
 theorem finitePart_inrOfAddOne : finitePart χ (inrOfAddOne φ) = 1 := by
   simp [finitePart_apply]
@@ -108,7 +108,7 @@ theorem finitePart_inr (g : Multiplicative ℤ) : finitePart χ (inr g) = 1 := b
   exact DFunLike.congr_fun this g
 
 /-- The image of the finite part of a character is exactly its image on the degree-zero subgroup.
-(blueprint: `sk-p-rankone`) -/
+(blueprint: `det-p-rankone`) -/
 theorem range_finitePart :
     Set.range (finitePart χ) = Set.range (χ.comp (inl : N →* _)) := by
   ext a
@@ -122,7 +122,7 @@ theorem range_finitePart :
 
 /-- A character whose restriction to the degree-zero subgroup has finite image has a finite part
 with finite image.
-(blueprint: `sk-p-rankone`) -/
+(blueprint: `det-p-rankone`) -/
 theorem finite_range_finitePart (hχ : (Set.range (χ.comp (inl : N →* _))).Finite) :
     (Set.range (finitePart χ)).Finite :=
   (range_finitePart χ).symm ▸ hχ

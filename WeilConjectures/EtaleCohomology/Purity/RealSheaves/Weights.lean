@@ -123,12 +123,12 @@ def HasDetWeight (γ : ℝ) : Prop :=
 
 variable {W l ρ}
 
-/-- Blueprint `sk-p-real-operations`: Local Frobenius polynomials.
+/-- Blueprint `p-real-operations`: Local Frobenius polynomials.
 
 The local polynomial at `x` is `det (1 - T ρ g ∣ V)` for *every* member `g` of the
 Frobenius conjugacy class of degree `e_x` supplied by `x`: a characteristic polynomial is
 invariant under conjugation, so the local polynomial of `sk-d-real-weights` is well defined
-and is computed by the representation of `sk-i-real-sheaves`. -/
+and is computed by the representation of `prop-wf-weil-sheaf-representation-equivalence`. -/
 theorem localPolynomial_eq_charpolyRev_of_isConj {x : C.finitePoints} {g : W.carrier}
     (hg : IsConj (W.frobenius x) g) :
     W.localPolynomial l ρ x = (ρ g).charpolyRev :=

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrincipalDivisorOpenExtension
 /-!
 # Principal correction gives a boundary-supported representative
 
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine,
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
 first paragraph, restriction and boundary divisors
 (blueprint: lem-sc-pic-restriction-divisor-correction).
 -/
@@ -30,7 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A divisor whose class restricts trivially has a boundary-supported representative.
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine, first paragraph;
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph;
 restriction and boundary divisors, steps 2--4 of lem-sc-pic-restriction-exact
 (blueprint: lem-sc-pic-restriction-divisor-correction).
 

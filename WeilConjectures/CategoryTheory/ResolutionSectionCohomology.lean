@@ -15,7 +15,7 @@ import Mathlib.Algebra.Category.Grp.Ulift
 /-!
 # Sections of an injective resolution compute object cohomology
 
-Source: blueprint sk-thm-picard-cech, Step 3; Mathlib's computation of Ext.
+Source: blueprint det-thm-picard-cech, Step 3; Mathlib's computation of Ext.
 -/
 
 @[expose] public section
@@ -82,7 +82,7 @@ private noncomputable def sectionComplexIso
 
 /-- The section complex of any specified injective resolution computes object cohomology.
 
-Source: blueprint sk-thm-picard-cech, Step 3; the free-abelian sheafification adjunction
+Source: blueprint det-thm-picard-cech, Step 3; the free-abelian sheafification adjunction
 and Mathlib's injective-resolution computation of Ext.
 (blueprint: lem-sc-resolution-section-cohomology)
 

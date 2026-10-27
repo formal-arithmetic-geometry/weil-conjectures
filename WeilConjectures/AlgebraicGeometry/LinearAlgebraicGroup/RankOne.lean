@@ -17,7 +17,7 @@ Let `(W, deg, γ)` be a degree datum with degree-zero subgroup `P`, and let `χ 
 character with values in a commutative group, such as the unit group `Eˣ` of a field. Put
 `z = χ γ`. The *finite part* `χ_fin : w ↦ χ w * z ^ (-deg w)` of `χ` is again a character, it is
 trivial on `γ`, its image is exactly `χ (P)`, and `χ = χ_fin * χ_z` with `χ_z : w ↦ z ^ deg w`.
-This is the factorization of `sk-p-rankone`, read on the degree datum itself rather than on its
+This is the factorization of `det-p-rankone`, read on the degree datum itself rather than on its
 presentation `P ⋊ ℤ` as a split cyclic extension (`SemidirectProduct.finitePart`).
 
 Applied to the Weil group `W(X₀) = π₁(X₀) ×_{Gal(k / k₀)} ℤ` (`MonoidHom.weilGroup`) with a lift
@@ -54,7 +54,7 @@ characters `χ_z` and `χ_fin` are `DegreeDatum.degreeCharacter` and `DegreeDatu
 in `arithmeticMonodromyExtensionHom_arithmeticMonodromyExtensionEquivProd_symm`, implements
 `lem-wf-rank-one-algebraic-extension`.
 
-The factorization of `sk-p-rankone` itself is `SemidirectProduct.eq_finitePart_mul_degreeCharacter`
+The factorization of `det-p-rankone` itself is `SemidirectProduct.eq_finitePart_mul_degreeCharacter`
 and its companions, stated on the presentation `P ⋊ ℤ`. The `DegreeDatum` versions in this file
 are the same statements for an abstract degree datum, which is the form needed for the Weil
 group; they are proved directly, since `DegreeDatum` is not available in the `Mathlib` mirror

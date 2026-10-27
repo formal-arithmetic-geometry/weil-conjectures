@@ -42,7 +42,7 @@ the degree of divisors, and shows that principal divisors have degree zero.
 - `AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom`:
   `Pic(C) ≅ ℤ × Pic⁰(C)` (blueprint `lem-sc-pic-proper-decomposition`).
 - `AlgebraicGeometry.Scheme.nonempty_equiv_H_one_and_surjective_picDegreeHom`: the blueprint
-  subsection `sk-def-pic`, its facts (P1) and (P2).
+  subsection `det-def-pic`, its facts (P1) and (P2).
 
 ## Implementation notes
 
@@ -74,7 +74,7 @@ section Degree
 variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
 
 variable (k C) in
-/-- Blueprint `sk-def-pic`: Picard group, degree, `Pic⁰`
+/-- Blueprint `det-def-pic`: Picard group, degree, `Pic⁰`
 
 The **degree homomorphism** `deg : Pic(C) → ℤ` of a smooth proper curve `C` over `k`, with
 values in `Multiplicative ℤ` since the group law of `Pic(C)` is written multiplicatively. The
@@ -496,7 +496,7 @@ theorem degree_div_eq_zero (f : Additive C.functionFieldˣ) : Divisor.degree C (
     finsum_mem_def]
   rw [(Set.indicator_eq_self (s := closedPoints C)).2 fun y hy ↦ isClosed_of_ord_ne_zero k hy]
 
-/-- Blueprint `sk-def-pic`: Picard group, degree, `Pic⁰`
+/-- Blueprint `det-def-pic`: Picard group, degree, `Pic⁰`
 
 Let `C` be a smooth proper integral (equivalently, connected) curve over an algebraically closed
 field `k`. Its Picard group `Pic(C)` is the group of invertible `𝒪_C`-modules up to isomorphism,

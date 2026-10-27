@@ -13,7 +13,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-!
 # Lifting closed-point classes across a curve compactification
 
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine,
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
 first paragraph, restriction and boundary divisors
 (blueprint: lem-sc-pic-restriction-point-lift).
 -/
@@ -31,7 +31,7 @@ open scoped AlgebraicGeometry.Scheme.Modules
 namespace AlgebraicGeometry
 
 /-- Closed points lift to the compactification and their point-ideal classes pull back correctly.
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine, first paragraph;
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph;
 restriction and boundary divisors, steps 1 and 4 of lem-sc-pic-restriction-exact
 (blueprint: lem-sc-pic-restriction-point-lift).
 

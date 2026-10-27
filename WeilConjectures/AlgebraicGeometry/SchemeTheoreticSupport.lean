@@ -109,7 +109,7 @@ Proof (the node's seven steps):
    formula (lem-weil-pbc-quasi-coherent-affine-section-base-change), then sheaf locality.
 3. Finite type makes the affine section module finite
    (lem-weil-pbc-quasi-coherent-finite-type-affine). The annihilator localizes
-   (lem-weil-pbc-annihilator-localization-finite, def-weil-pbc-module-localization-away),
+   (def-weil-pbc-module-localization-away),
    so the affine ideals satisfy basic-open compatibility.
 4. The compatible ideals cut out a closed subscheme with the stated quotient charts
    (lem-weil-pbc-affine-ideals-closed-subscheme, def-weil-closed-immersion,

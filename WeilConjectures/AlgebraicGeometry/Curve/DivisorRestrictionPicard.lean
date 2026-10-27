@@ -24,7 +24,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Restricting a divisor retains its coefficients and computes Picard pullback.
-Source: blueprint, sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine, first paragraph,
+Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine, first paragraph,
 restriction and boundary divisors
 (blueprint: lem-sc-divisor-restriction-picard).
 

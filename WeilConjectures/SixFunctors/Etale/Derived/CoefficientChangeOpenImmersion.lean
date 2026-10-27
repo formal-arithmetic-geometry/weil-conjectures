@@ -26,8 +26,7 @@ abstract lemmas: the passage to derived categories through `Functor.mapDerivedCa
 replacement of the functors `D(g^*)` by the derived pullbacks `Lg^*`
 (`AlgebraicGeometry.Etale.pasteTwoSquaresIso_hom_app_comp_map_of_comm_of_iso`).
 
-This is used for the compatible systems of Frobenius coefficient morphisms (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+This is used for the compatible systems of Frobenius coefficient morphisms.
 -/
 
 @[expose] public section
@@ -159,8 +158,7 @@ cartesian square `g' ≫ j = j' ≫ g''` of schemes with `j`, `j'` open immersio
 isomorphism `Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*` is compatible with the coefficient comparisons
 `AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso` and
 `AlgebraicGeometry.Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso`. This is an input
-of the compatible systems of Frobenius coefficient morphisms (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`). -/
+of the compatible systems of Frobenius coefficient morphisms. -/
 lemma derivedOpenImmersionLowerShriekBaseChangeIso_hom_app_restrictScalars
     {U' U X' X : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g'' : X' ⟶ X}
     [IsOpenImmersion j] [IsOpenImmersion j'] (hsq : IsPullback g' j' j g'')
