@@ -14,6 +14,12 @@ import Sheaf.Paper.WeilCompletedTensorReflector
 import Sheaf.Paper.RingedPushforwardCompletion
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
+import Sheaf.Paper.LocalizedOrdinaryCoefficientCoherence
+import Sheaf.Paper.RationalOrdinaryPullbackComposition
+import Sheaf.Paper.RationalOrdinaryPullbackIdentity
+import Sheaf.Paper.RationalCompletedPullbackComposition
+import Sheaf.Paper.RationalCompletedPullbackIdentity
+
 /-! # Composition and identity of normalized rational pullback
 
 Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4 and 099N
@@ -276,7 +282,23 @@ theorem rationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
     (ah : RationalRealizationPullbackComparison l E h sZ sY)
     (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX) :
     (HasRationalPullbackCompositionCoherence l E g h sX sY sZ ag ah ac) := by
-  sorry
+  unfold HasRationalPullbackCompositionCoherence
+  have hc := LocalizedOrdinary.localizedOrdinaryCoefficientCoherence l E g h
+  obtain ⟨hcoefficient, moduleComp, hmodule, ambientComp, hderived⟩ :=
+    rationalOrdinaryPullbackComposition l E g h sX sY sZ ag ah ac
+  refine ⟨hc.finite_comp, hc.completed_comp, ?_, hcoefficient,
+    moduleComp, ?_, ambientComp, hderived, ?_⟩
+  · intro n
+    have hp : completedCoefficientMap (h ≫ g) (pbcIntegralDatum l E) ≫
+        pbcAdicProjection Z (pbcIntegralDatum l E) n =
+          completedCoefficientComponent (h ≫ g) (pbcIntegralDatum l E) n :=
+      limit.lift_π _ (op n)
+    rw [hc.completed_comp] at hp
+    simpa only [Category.assoc] using hp
+  · simpa only [rationalCoherenceUnit, rationalCoherenceScalar, rationalCoherenceSmul]
+      using hmodule
+  · exact rationalCompletedPullbackComposition l E g h sX sY sZ ag ah ac
+      hcoefficient moduleComp hmodule ambientComp hderived
 
 /-- The specified realization comparison agrees with the ambient identity pullback.
 Source: BS Remark 6.8.15, p. 62; Stacks 0D6D and 099N
@@ -294,6 +316,14 @@ theorem rationalPullbackIdentityCoherence
     (sX : RationalModuleRealization l E X)
     (a : RationalRealizationPullbackComparison l E (𝟙 X) sX sX) :
     (HasRationalPullbackIdentityCoherence l E sX a) := by
-  sorry
+  unfold HasRationalPullbackIdentityCoherence
+  have hc := LocalizedOrdinary.localizedOrdinaryCoefficientCoherence l E (𝟙 X) (𝟙 X)
+  obtain ⟨hcoefficient, moduleId, hmodule, ambientId, hderived⟩ :=
+    rationalOrdinaryPullbackIdentity l E sX a
+  refine ⟨hc.finite_id, hc.completed_id, hcoefficient,
+    moduleId, ?_, ambientId, hderived, ?_⟩
+  · simpa only [rationalCoherenceUnit, rationalCoherenceSmul] using hmodule
+  · exact rationalCompletedPullbackIdentity l E sX a
+      hcoefficient moduleId hmodule ambientId hderived
 
 end AlgebraicGeometry.Scheme

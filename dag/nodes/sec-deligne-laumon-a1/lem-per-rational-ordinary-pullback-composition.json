@@ -1,0 +1,142 @@
+{
+ "id": "lem-per-rational-ordinary-pullback-composition",
+ "kind": "statement",
+ "title": "Ordinary rational pullback composition",
+ "statement": "Let l be prime, E/Q_l finite, and let X,Y,Z be noetherian finite-dimensional schemes with l invertible. Use B_W=lim (O_E/m^(n+1))_W and the continuous rational coefficient sheaf E_W. Fix realization data s_W and normalized realization comparisons a_g for g:Y→X, a_h for h:Z→Y, and a_c for h≫g as in [lem-per-rational-realization-pullback-comparison], with the tensor sections of [lem-per-rational-realization-pullback-comparison]. The rational coefficient maps compose under the canonical inverse-image compositor. There exist an ordinary module compositor G_g G_h≅G_(h≫g), sending e″⊗(e′⊗m) to e″d_h(e′)⊗m with the specified fiber-product chart restriction, and a derived compositor with the equation against rationalPullComplexCounit on every cochain complex. No completed-functor or raw-fraction compositor is asserted. The precise section and counit equations are the Lean signature below.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03D2, 03CB, 03EL, 0D6D and 07A4; Bhatt--Scholze Remark 6.8.15, p. 62"
+ },
+ "stmt_deps": [
+  "lem-per-rational-realization-pullback-comparison",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "use the localization inverse-image unit and the coefficient projection equations\nof localizedOrdinaryPullbackNormalization. The supplied rational_normalization fixes\neach rational coefficient map on all inverse-image sections, so its localized\ncomposite is the supplied composite coefficient. Sheafify balanced multiplication\ne'' tensor (e' tensor m) to e'' d_h(e') tensor m, with inverse inserting one,\nincluding the displayed fiber-product restriction. The module unit formulas and\nbalancing determine this map on local generators. On flat-term K-flat resolutions\nthis is a chain isomorphism and gives the ambient derived isomorphism. The\ncomputation counits are the fixed counits of the same composite derived functors;\nnaturality of the derived comparison gives their displayed equation on every\ncomplex. Its construction on resolving complexes determines the derived map;\nno coefficient map is assumed invertible.",
+   "uses": [
+    "lem-per-localized-ordinary-pullback-normalization",
+    "lem-per-rational-realization-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks 03D2, 03CB, 03EL, 0D6D and 07A4; Bhatt--Scholze Remark 6.8.15, p. 62"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-localized-ordinary-pullback-normalization",
+  "lem-per-rational-realization-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03D2, 03CB, 03EL, 0D6D and 07A4; Bhatt--Scholze Remark 6.8.15, p. 62; explicit transport and cancellation argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "date": "2026-10-27",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "verdict": "no exact match: generic module pullback or localization API, without the specified continuous coefficient maps, strict quotient units and raw fraction equations"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization.*(lift|nat|iso)|liftNatIso",
+   "date": "2026-10-27",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "verdict": "no exact match: generic module pullback or localization API, without the specified continuous coefficient maps, strict quotient units and raw fraction equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between scalar localization functors descends from a natural isomorphism on the integral category, preserving composition",
+   "date": "2026-10-27",
+   "results": "8 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.isoUniqFunctor, CategoryTheory.Localization.Lifting.ofIsos, CategoryTheory.Localization.compUniqFunctor, CategoryTheory.Localization.homEquiv_trans, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.Lifting.ofIsos_iso",
+   "verdict": "no exact match: generic module pullback or localization API, without the specified continuous coefficient maps, strict quotient units and raw fraction equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived tensor pullback composition and identity descend through completed pullback units to raw scalar localization",
+   "date": "2026-10-27",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, PresheafOfModules.pullback_id_comp, SheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom, CategoryTheory.MorphismProperty.Over.pullbackComp, CategoryTheory.Adjunction.derived_unit, CategoryTheory.ChosenPullbacksAlong.pullbackComp",
+   "verdict": "no exact match: generic module pullback or localization API, without the specified continuous coefficient maps, strict quotient units and raw fraction equations"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackId|unit.*[Ss]ection|[Ss]ection.*unit",
+   "date": "2026-10-27",
+   "results": "11 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "verdict": "no exact match: generic module pullback or localization API, without the specified continuous coefficient maps, strict quotient units and raw fraction equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor unit section and pulled back scalar on sheafified extension of scalars for module sheaves along a morphism of ringed sites",
+   "date": "2026-10-27",
+   "results": "8 hits: PresheafOfModules.Sheafify.map_smul_eq, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, PresheafOfModules.pullback, ModuleCat.ExtendRestrictScalarsAdj.unit, PresheafOfModules.Sheafify.SMulCandidate.ctorIdx, ModuleCat.ExtendScalars.obj', PresheafOfModules.Sheafify.one_smul, SheafOfModules.unitToPushforwardObjUnit",
+   "verdict": "no exact match: generic module pullback or localization API, without the specified continuous coefficient maps, strict quotient units and raw fraction equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived rational module pullback tensor compositor with counit normalization, and the corresponding identity, for continuous coefficient sheaves",
+   "date": "2026-10-27",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "verdict": "no exact match: generic module pullback or localization API, without the specified continuous coefficient maps, strict quotient units and raw fraction equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalPullbackCompositionCoherence",
+  "date": "2026-10-28",
+  "group": "S3"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Scheme composition coherence of normalized rational pullback. Retained item proof steps 14. Strict substep: Ordinary rational pullback composition",
+   "via": [
+    "lem-per-rational-pullback-composition-coherence",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalOrdinaryPullbackComposition",
+  "file": "lean/Sheaf/Paper/RationalOrdinaryPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalOrdinaryPullbackComposition",
+  "statement": "theorem rationalOrdinaryPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)\n    (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)\n    (sZ : RationalModuleRealization l E Z)\n    (ag : RationalRealizationPullbackComparison l E g sY sX)\n    (ah : RationalRealizationPullbackComparison l E h sZ sY)\n    (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX) :\n    let unitSection {S T : Scheme.{u}} (g : S ⟶ T)\n        (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj\n          (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)\n        (M : pbcModules T (rationalCoefficientSheaf l T E))\n        (V : T.ProEt) (m : M.val.obj (op V)) :\n        ((rationalPullModule l E g c).obj M).val.obj\n          (op ((proEtaleBaseChange g).obj V)) :=\n      pbcTensorSection c\n        ((proEtaleRingModulePullback g (rationalCoefficientSheaf l T E)\n          ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj\n            (rationalCoefficientSheaf l T E)) (Iso.refl _)).obj M)\n        (op ((proEtaleBaseChange g).obj V)) 1\n        (proEtaleRingModuleUnitSection g (rationalCoefficientSheaf l T E)\n          ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj\n            (rationalCoefficientSheaf l T E)) (Iso.refl _) M V m)\n    let scalarSection {S T : Scheme.{u}} (g : S ⟶ T)\n        (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj\n          (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)\n        (V : T.ProEt) (e : (rationalCoefficientSheaf l T E).obj.obj (op V)) :\n        (rationalCoefficientSheaf l S E).obj.obj (op ((proEtaleBaseChange g).obj V)) :=\n      c.hom.app (op ((proEtaleBaseChange g).obj V))\n        (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app\n          (rationalCoefficientSheaf l T E)).hom.app (op V) e)\n    let scalarMul (T : Scheme.{u})\n        (M : pbcModules T (rationalCoefficientSheaf l T E)) (V : T.ProEtᵒᵖ)\n        (e : (rationalCoefficientSheaf l T E).obj.obj V) (m : M.val.obj V) : M.val.obj V :=\n      e • m\n    (ac.rationalCoefficient =\n    (proEtaleRingInverseImageComp h g).hom.app (rationalCoefficientSheaf l X E) ≫\n      (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map ag.rationalCoefficient ≫\n      ah.rationalCoefficient) ∧\n    ∃ (moduleComp : rationalPullModule l E g ag.rationalCoefficient ⋙\n      rationalPullModule l E h ah.rationalCoefficient ≅\n    rationalPullModule l E (h ≫ g) ac.rationalCoefficient),\n    (∀ (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)\n      (m : M.val.obj (op V))\n      (e' : (rationalCoefficientSheaf l Y E).obj.obj (op ((proEtaleBaseChange g).obj V)))\n      (e'' : (rationalCoefficientSheaf l Z E).obj.obj\n        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))),\n    (moduleComp.hom.app M).val.app\n        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))\n      (scalarMul Z\n        ((rationalPullModule l E h ah.rationalCoefficient).obj\n          ((rationalPullModule l E g ag.rationalCoefficient).obj M))\n        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V))) e''\n        (unitSection h ah.rationalCoefficient\n          ((rationalPullModule l E g ag.rationalCoefficient).obj M)\n          ((proEtaleBaseChange g).obj V)\n          (scalarMul Y\n            ((rationalPullModule l E g ag.rationalCoefficient).obj M)\n            (op ((proEtaleBaseChange g).obj V)) e'\n            (unitSection g ag.rationalCoefficient M V m)))) =\n      scalarMul Z\n        ((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M)\n        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))\n        (e'' * scalarSection h ah.rationalCoefficient\n          ((proEtaleBaseChange g).obj V) e')\n        (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.map\n          ((MorphismProperty.Over.pullbackComp h g).inv.app V).op\n            (unitSection (h ≫ g) ac.rationalCoefficient M V m))) ∧\n    ∃ (ambientComp : rationalPullDerived l E g ag.rationalCoefficient ⋙\n      rationalPullDerived l E h ah.rationalCoefficient ≅\n    rationalPullDerived l E (h ≫ g) ac.rationalCoefficient),\n    (∀ P : CochainComplex (pbcModules X (rationalCoefficientSheaf l X E)) ℤ,\n    ambientComp.hom.app (DerivedCategory.Q.obj P) ≫\n        rationalPullComplexCounit l E (h ≫ g) ac.rationalCoefficient P =\n      (rationalPullDerived l E h ah.rationalCoefficient).map\n          (rationalPullComplexCounit l E g ag.rationalCoefficient P) ≫\n        rationalPullComplexCounit l E h ah.rationalCoefficient\n          (((rationalPullModule l E g ag.rationalCoefficient).mapHomologicalComplex\n            (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map\n          ((NatIso.mapHomologicalComplex moduleComp (.up ℤ)).hom.app P))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T180805-L-3902553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T180805-L-3902553",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
