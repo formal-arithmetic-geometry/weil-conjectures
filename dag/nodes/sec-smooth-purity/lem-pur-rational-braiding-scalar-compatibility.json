@@ -13,9 +13,61 @@
   "def-weil-rationalization-karoubi",
   "def-sf-rational-common-tensor-symmetries"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coherently reduction-normalized integral Koszul braiding is natural by [lem-pur-integral-braiding-naturality]. Its proof checks the equality after coherent reduction, where both composites on homogeneous terms $x$ of degree $i$ and $y$ of degree $j$ are the signed exchange $(-1)^{ij}(b(y)\\otimes a(x))$; full faithfulness of coherent reduction then lifts the equality. Thus the integral equation used below has exactly the displayed source and target.",
+   "uses": [
+    "lem-pur-integral-braiding-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), signed total symmetry and its naturality"
+   }
+  },
+  {
+   "text": "For localized arrows $a$ and $b$, write them as finite sums of pure tensors of integral arrows with scalar coefficients. By the rational operation formulas of [def-sf-finite-rational-derived-operations] and the definition of $\\sigma^E$ as the localization of the integral braiding in [def-sf-rational-common-tensor-symmetries], both sides of\n$$\\sigma^E_{A',B'}\\circ T_E(a,b)=T_E(b,a)\\circ\\sigma^E_{A,B}$$\nare the corresponding scalar multiples of the integral equation from Step 1. Additivity and the balancing relation in the raw localization [def-weil-rationalization-karoubi] extend the equality from pure tensors to all localized arrows. This proves the first clause, including identities and zero morphisms.",
+   "uses": [
+    "lem-pur-integral-braiding-naturality",
+    "def-sf-finite-rational-derived-operations",
+    "def-sf-rational-common-tensor-symmetries",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, signed total symmetry; rationalization formulas in def-weil-derived-pullback-tensor-hom"
+   }
+  },
+  {
+   "text": "Let $E\\subset L$ and $A,B\\in C_E$. The objects of $C_E$ are integral objects, $F_{EL}$ is the integral scalar extension $K\\mapsto K_L$ on objects and $f\\otimes c\\mapsto f_L\\otimes c$ on morphisms [def-weil-rationalization-karoubi], and on integral representatives the prescribed comparison $\\lambda_{EL;A,B}$ is the localization $\\lambda^{\\mathrm{int}}_{A,B}\\otimes1$ of the prescribed integral tensor scalar comparison [def-sf-finite-rational-derived-operations]. By [def-sf-rational-common-tensor-symmetries], $\\sigma^E_{A,B}$ and $\\sigma^L_{F_{EL}A,F_{EL}B}$ are the localizations $\\beta^E_{A,B}\\otimes1$ and $\\beta^L_{A_L,B_L}\\otimes1$ of the coherent-reduction-normalized integral braidings [def-pod-integral-tensor-constraints], with the same tensor objects. Hence $F_{EL}(\\sigma^E_{A,B})=(\\beta^E_{A,B})_L\\otimes1$, and since composition in the raw localization is $(u\\otimes c)\\circ(v\\otimes d)=(u\\circ v)\\otimes cd$, the two sides of the asserted square are $(\\lambda^{\\mathrm{int}}_{B,A}\\circ(\\beta^E_{A,B})_L)\\otimes1$ and $(\\beta^L_{A_L,B_L}\\circ\\lambda^{\\mathrm{int}}_{A,B})\\otimes1$. These integral composites are equal by [lem-pur-integral-braiding-scalar-extension-square], for every finite $E\\subset L$, including $L=E$ and ramified extensions. Only object components occur in this square, so no extension over arbitrary localized arrows is needed; no unramifiedness, perfectness or torsion-freeness is used.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-sf-finite-rational-derived-operations",
+    "def-sf-rational-common-tensor-symmetries",
+    "def-pod-integral-tensor-constraints",
+    "lem-pur-integral-braiding-scalar-extension-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ, signed total symmetry; scalar-extension compatibility of the prescribed normalized comparisons in the common-stage tensor paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-integral-tensor-constraints",
+  "def-sf-finite-rational-derived-operations",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-integral-braiding-naturality",
+  "lem-pur-integral-braiding-scalar-extension-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes), with the rational localization and scalar-extension refinement specified by the coefficient-operation definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,7 +127,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-derived-pullback-tensor-constraints-common-braiding-existence",
@@ -94,5 +146,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-rational-braiding-scalar-compatibility",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against its coefficient-operation and braiding owners. Added one strictly smaller statement-only node for naturality of the coherently reduction-normalized integral Koszul braiding. The item proof then lifts that equality through raw rational localization and checks the scalar-extension square on homogeneous pure tensors, extending by bilinearity and localization balancing; all identity and ramified cases remain covered. Maintainer reader FIX (2026-10-28): the third step evaluated the scalar square on 'homogeneous pure tensors' of derived-complete objects, citing only definitions; the integral compatibility of the prescribed scalar-extension tensor comparison with the coherent-reduction-normalized braiding is now the statement-only node lem-pur-integral-braiding-scalar-extension-square, and the step localizes it.",
+  "blueprint": "The three steps realize the normalized common-stage tensor paragraph of def-weil-derived-pullback-tensor-hom: integral signed-swap naturality, rational localization, and compatibility with the prescribed scalar comparison. The current blueprint has no separate node asserting this refinement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NA-4ad73740c",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-4ad73740c (reviewer sub-agent of L); spot-checked: I read the item, the delivered new node and every cited statement in full, plus the parent's use of the item and the Lean that pins each comparison (read only). The item statement is unchanged and correct. It holds in the small cases I tested: identity and zero arrows, E=L (where lambda is the identity), degrees (1,1), ramified extensions and the zero object. Step 2 (rational naturality) is correct: every rational arrow is f⊗c and composition is (uv)⊗cd. This step restates lem-coef-localized-tensor-braiding-naturality, but citing that node would create a cycle: its statement dependency lem-pur-derived-pullback-tensor-iso leads back to the item through lem-pur-derived-pullback-tensor-constraints and common-braiding-existence (checked by reachability). Re-proving it in the step is fine; advisory only. Step 3 had a gap (C1/D3/E5). It checked the scalar square on 'homogeneous pure tensors' of derived-complete objects and cited only definitions. The integral scalar comparison is pinned by a Roos chain map on good K-flat pairs (scalarTensorOrdinaryNormalization), while the integral braiding is pinned by coherent reduction (pullbackTensorIntegralBraiding_existsUnique). Showing that these agree is a real lemma. FIX: I added the statement-only node lem-pur-integral-braiding-scalar-extension-square, stating lambda^int_{N,M}∘(beta^E_{M,N})_L = beta^L_{M_L,N_L}∘lambda^int_{M,N} for every finite E⊂L, including E=L and ramified extensions. It is true (both braidings are the signed swap and the scalar comparison is symmetric monoidal), it is not a duplicate of any existing node, it creates no cycle, Mathlib grep finds no match, and LeanSearch/Loogle are recorded as unavailable. Step 3 now applies this lemma after localization, using lambda = lambda^int⊗1, sigma = beta⊗1 and F(f⊗a) = f_L⊗a; proof_deps updated. The delivered node lem-pur-integral-braiding-naturality is true (the Lean proves it privately twice), self-contained and not a duplicate; its blueprint.from.via is corrected to [item, common-braiding-existence], and from.node null is correct. Unit sk-def-purity-conv has no steps, so there is no route issue and no tool_uses.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
