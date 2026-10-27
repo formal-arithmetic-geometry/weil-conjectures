@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessFinite
+public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessQuasiFinite
 
 /-!
 
@@ -52,12 +52,13 @@ The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally c
 into the generic fibre `𝔸ⁿ_η` of an affine space `𝔸ⁿ_S`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) rests on the
 `sorry`ed `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`
-for `n ≥ 1` when `D` meets the special fibre and `D ⟶ S` is not finite. If `D` misses the
+for `n ≥ 1` when `D` meets the special fibre and `D ⟶ S` is not quasi-finite. If `D` misses the
 special fibre, the nearby cycles vanish by the proper exchange
-(`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`); if `D ⟶ S` is finite, they
-reduce to those of the trait by the proper exchange along `D ⟶ S` and the reflection of
-bounded constructibility along the finite morphism `D_s ⟶ Spec k'`
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_isFinite_comp`).
+(`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`); if `D ⟶ S` is quasi-finite, it
+is open in a scheme finite over `S` (Zariski's main theorem), and the nearby cycles reduce to
+those of the trait by the proper exchange and the reflection of bounded constructibility along
+finite morphisms to `Spec k'`
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_locallyQuasiFinite_comp`).
 For `n = 0` the theorem is proved: `𝔸⁰_S ⟶ S` is an isomorphism, and the nearby cycles of
 the trait itself are computed directly on the pro-étale site
 (`NearbyCyclesModel.preservesBoundedConstructible_traitSelfModel`). For `n ≥ 1` it is
@@ -102,13 +103,14 @@ variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)
 /-- **Deligne's finiteness theorem for nearby cycles, core case** (SGA 4½, [Th. finitude],
 Thm. 3.2; for `ℚ̄_ℓ`-coefficients, Bhatt–Scholze §6.8): the statement of
 `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic` in its open case:
-`n ≥ 1`, the closed subscheme `D` meets the special fibre and `D ⟶ S` is not finite.
+`n ≥ 1`, the closed subscheme `D` meets the special fibre and `D ⟶ S` is not quasi-finite.
 The other cases are proved. No blueprint node states this theorem; it is
 `sorry`ed (see the module docstring). -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core (n : ℕ) (hn : n ≠ 0)
     (D : Scheme.{u}) (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c]
     (hc : ¬ Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' n).i.base))
-    (hcq : ¬ IsFinite (c ≫ (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k'))) (W : D.Opens)
+    (hcq : ¬ LocallyQuasiFinite (c ≫ (𝔸(ULift.{u} (Fin n); trait k') ↘ trait k')))
+    (W : D.Opens)
     (hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' n) (E : Scheme.{u})
     (c' : E ⟶ W) [IsClosedImmersion c'] (hc' : Surjective c')
     (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1})
@@ -138,8 +140,8 @@ fibre `𝔸ⁿ_s`. (When `W` misses the generic fibre, these nearby cycles vanis
 `NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`.) The case `n = 0` is
 `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`, and the case where `D`
 misses the special fibre is `NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`; the
-case where `D ⟶ S` is finite is
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_isFinite_comp`; the
+case where `D ⟶ S` is quasi-finite is
+`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_locallyQuasiFinite_comp`; the
 remaining case is the `sorry`ed
 `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D : Scheme.{u})
@@ -164,8 +166,8 @@ theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ) (D
     by_cases hc : Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' (n + 1)).i.base)
     · exact boundedConstructible_of_isZero _ (isZero_nearbyCycles_affineSpace_of_disjoint _ c hc
         (boundedConstructible_lisseExtension_closed _ D c W E c' L hL))
-    by_cases hcq : IsFinite (c ≫ (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k'))
-    · exact boundedConstructible_nearbyCycles_affineSpace_of_isFinite_comp _ c hcq
+    by_cases hcq : LocallyQuasiFinite (c ≫ (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k'))
+    · exact boundedConstructible_nearbyCycles_affineSpace_of_locallyQuasiFinite_comp _ c hcq
         (boundedConstructible_lisseExtension_closed _ D c W E c' L hL)
     exact boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core _ n.succ_ne_zero D c hc
       hcq W hW E c' hc' L hL
