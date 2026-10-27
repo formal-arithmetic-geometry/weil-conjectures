@@ -61,13 +61,75 @@ The finite Chern specification determines that module-derived arrow by its
 integral adjunct. This argument is entirely on P: there is no direct image,
 completed Chern adjunct c, trace, or degree calculation. Exponent n+1 is positive
 at n=0; no equality of arbitrary arrows is deduced from levelwise equality. -/
+abbrev LocalFiniteArrow (s : UniformizerChernNormalizationData l Y) :=
+  Etale.ordinaryFiniteUnit (ULift.{u + 1} (completedResidue l s.E s.π s.n))
+      (ProjectiveLine Y) ⟶
+    Etale.p1DecompositionTwist (ULift.{u + 1} (completedResidue l s.E s.π s.n))
+      (l ^ (s.n + 1)) s.hA (ProjectiveLine Y) 1 2
+
+abbrev LocalComposite (s : UniformizerChernNormalizationData l Y)
+    (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶
+      (DiagonalTrace.completedLine l (ProjectiveLine Y))⟦(2 : ℤ)⟧) :=
+  (s.localUnitInv l Y ≫ (s.localFunctor l Y).map z) ≫ s.localLine l Y
+
+abbrev FiniteComparison (s : UniformizerChernNormalizationData l Y)
+    (k : LocalFiniteArrow l Y s) :=
+  (geoP1Comparison (ULift.{u + 1} (completedResidue l s.E s.π s.n))
+    (ProjectiveLine Y)).map k
+
+/-- The completed normalized arrow has a finite comparison factor.
+Source: diagonal tower coefficient changes proof (1), reduction of the section class.
+(blueprint: lem-diagonal-uniformizer-local-chern-transport).
+
+The proof uses a common K-flat model and the coefficient and root cone endpoint
+normalizations to construct the finite arrow. The displayed statement is only
+the existence part; identification of the arrow is a separate theorem below. -/
+theorem localChern_transport_exists
+    (s : UniformizerChernNormalizationData l Y)
+    (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶
+      (DiagonalTrace.completedLine l (ProjectiveLine Y))⟦(2 : ℤ)⟧)
+    (hz : s.LocalNormalized l Y
+      (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) s.tq.chernX
+        (SpTowerClasses.hyperplanePic Y)) z) :
+    ∃ k : LocalFiniteArrow l Y s,
+      LocalComposite l Y s z = FiniteComparison l Y s k := by
+  sorry
+
+/-- The finite factor is the positive finite Kummer class.
+Source: diagonal tower coefficient changes proof (1), reduction of the section class.
+(blueprint: lem-diagonal-uniformizer-local-chern-identification).
+
+The coefficient-one and integral-root equations identify the finite factor with
+the Kummer boundary of the hyperplane class. This is a finite-level statement,
+strictly below the completed local Chern equality. -/
+theorem localChern_transport_identification
+    (s : UniformizerChernNormalizationData l Y)
+    (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶
+      (DiagonalTrace.completedLine l (ProjectiveLine Y))⟦(2 : ℤ)⟧)
+    (hz : s.LocalNormalized l Y
+      (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) s.tq.chernX
+        (SpTowerClasses.hyperplanePic Y)) z)
+    {k : LocalFiniteArrow l Y s}
+    (hk : LocalComposite l Y s z = FiniteComparison l Y s k) :
+    FiniteComparison l Y s k =
+      (geoP1Comparison (ULift.{u + 1} (completedResidue l s.E s.π s.n))
+        (ProjectiveLine Y)).map
+        (geoP1EtaleChern (ULift.{u + 1} (completedResidue l s.E s.π s.n))
+          (l ^ (s.n + 1)) (pow_pos (Fact.out : l.Prime).pos _) s.hA Y s.hYpow) := by
+  sorry
+
 theorem localChern
     (s : UniformizerChernNormalizationData l Y)
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶
       (DiagonalTrace.completedLine l (ProjectiveLine Y))⟦(2 : ℤ)⟧)
     (hz : s.LocalNormalized l Y
       (SpTowerClasses.firstChern l (ULift.{u} (Padic l)) s.tq.chernX
-        (SpTowerClasses.hyperplanePic Y)) z) : s.LocalChernNormalized l Y z := by sorry
+        (SpTowerClasses.hyperplanePic Y)) z) : s.LocalChernNormalized l Y z := by
+  obtain ⟨k, hk⟩ := localChern_transport_exists l Y s z hz
+  unfold UniformizerChernNormalizationData.LocalChernNormalized
+  exact hk.trans (localChern_transport_identification l Y s z hz hk)
 
 end UniformizerChernNormalizationData
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
+
+
