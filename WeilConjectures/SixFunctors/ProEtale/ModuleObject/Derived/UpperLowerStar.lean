@@ -15,6 +15,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
+import WeilConjectures.AlgebraicGeometry.ProEtaleInternalPullbackKFlat
+
 /-!
 
 # Derived upper star and lower star on module objects over `Λ`
@@ -84,10 +86,13 @@ The two displayed formulas are theorems about the total derived functors, not de
   `ProEtale.CondensedRing.leftDerivedUpperStarIso`: the computations of `Rf_*` and `Lf^*`
   described above.
 
-## Sorried input
+## K-flatness input
 
 - `ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar`: `mapMod(f^*)` sends
-  K-flat complexes of `Λ_Y`-modules to K-flat complexes of `f^* Λ_Y`-modules. Indeed
+  K-flat complexes of `Λ_Y`-modules to K-flat complexes of `f^* Λ_Y`-modules; this is
+  `ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_proEtale` of
+  `WeilConjectures.AlgebraicGeometry.ProEtaleInternalPullbackKFlat`, proved stalkwise at enough
+  pro-étale points. Indeed
   `f^*` is strong monoidal, exact and commutes with colimits, so it commutes with the relative
   tensor product of complexes of module objects and preserves acyclicity. From it follows that
   the pullback `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` on module objects preserves
@@ -108,6 +113,8 @@ sheaf categories (`AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf`
 
 @[expose] public section
 
+attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
+
 universe u
 
 open scoped CategoryTheory.Obj
@@ -119,6 +126,89 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+attribute [local irreducible] Mod.monoidalClosed Mod.monoidalCategory
+  Mod.monoidalCategoryStruct upperStarFromPoint
+  Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
+
+attribute [local instance 20000] preservesKFlatComplexes_mapMod_proEtale
+
+section CachedInstances
+
+set_option maxSynthPendingDepth 10
+set_option backward.isDefEq.respectTransparency.types false
+
+private noncomputable instance cachedSheafColimits (T : Scheme.{u}) :
+    HasColimitsOfSize.{0, 0} (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) :=
+  ⟨fun _ _ ↦ Sheaf.instHasColimitsOfShape⟩
+
+private noncomputable instance cachedSheafBigColimits (T : Scheme.{u}) :
+    HasColimitsOfSize.{u + 1, u + 1} (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) :=
+  IsGrothendieckAbelian.hasColimits _
+
+private noncomputable instance cachedCoequalizers (T : Scheme.{u}) :
+    HasCoequalizers (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) :=
+  Sheaf.instHasColimitsOfShape
+
+private instance cachedModulePreadditive (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    MonoidalPreadditive (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) := by
+  infer_instance
+
+private instance cachedTensorLeft (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
+  infer_instance
+
+private instance cachedTensorRight (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight M) := by
+  infer_instance
+
+private instance cachedGood12 (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q R₁ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensor₁₂Tensor P Q R₁ := by
+  infer_instance
+
+private instance cachedGood23 (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q R₁ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasGoodTensorTensor₂₃ P Q R₁ := by
+  infer_instance
+
+private instance cachedFour (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (P Q R₁ S₁ : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
+    GradedObject.HasTensor₄ObjExt P Q R₁ S₁ := by
+  infer_instance
+
+private instance cachedModuleFlatResolution (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    Abelian.HasFunctorialFlatResolution
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) := by
+  infer_instance
+
+private instance cachedExactSequential (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
+    HasExactColimitsOfShape ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) := by
+  infer_instance
+
+private instance cachedTensorLeftSequential (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) := by
+  infer_instance
+
+private instance cachedTensorRightSequential (T : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R) :
+    PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) := by
+  infer_instance
+
+end CachedInstances
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -171,11 +261,14 @@ section DerivedUpperStar
 instance preservesHomology_mapMod_upperStar :
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesHomology := {}
 
+set_option maxSynthPendingDepth 10 in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Blueprint `lem-sfb-module-mapmod-pullback-kflat`: the pullback
 `mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to K-flat complexes. See the
 module docstring for the argument. -/
 instance preservesKFlatComplexes_mapMod_upperStar :
-    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes := sorry
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes := by
+  exact preservesKFlatComplexes_mapMod_proEtale f (condensedRingObj Λ Y)
 
 /-- The pullback `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` on module objects over `Λ` preserves
 quasi-isomorphisms between K-flat complexes: `mapMod(f^*)` is exact and preserves K-flat

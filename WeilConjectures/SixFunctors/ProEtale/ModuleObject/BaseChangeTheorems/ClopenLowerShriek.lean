@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionIdIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.RefinementCoherence
 
 /-!
 
@@ -23,11 +24,12 @@ compactification `U ⟶[𝟙] U ⟶[j] X`). This file expresses the composite `j
 through the single refinement `j` of the first compactification by the second
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp`).
 
-## Sorried input
+## Compactification coherence
 
 The clauses of blueprint `prop-compactification-coherence-detailed` (subsection
 `sk-prop-sf-cbc` of the six-functor chapter) used here, for the lower shriek of bounded
-constructible complexes attached to compactifications:
+constructible complexes attached to compactifications (proved in
+`…LowerShriek.RefinementCoherence` through the equalizer of two refinements):
 
 - the comparison of two compactifications through a common refinement does not depend on the
   refinement, so it is the comparison along any given refinement
@@ -83,7 +85,7 @@ theorem boundedConstructibleLowerShriekRefinementIso'_trans {i : X ⟶ Z} {i₁ 
     boundedConstructibleLowerShriekRefinementIso' ℓ sq₁ wp₁ ≪≫
         boundedConstructibleLowerShriekRefinementIso' ℓ sq wp =
       boundedConstructibleLowerShriekRefinementIso' ℓ sq₂ wp₂ :=
-  sorry
+  boundedConstructibleLowerShriekRefinementIso'_trans_eq ℓ sq sq₁ sq₂ _hh wp wp₁ wp₂
 
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
@@ -97,7 +99,7 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂ ≪≫
         boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₂ c₃ =
       boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₃ :=
-  sorry
+  boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans_eq ℓ c₁ c₂ c₃
 
 /-- Blueprint `prop-compactification-coherence-detailed`, refinement clause ("for a refinement
 `u : c₁ → c₂`, the canonical transformation between the compact-support candidates is the
@@ -112,7 +114,7 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq
       r.isPullback
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c =
       boundedConstructibleLowerShriekRefinementIso' ℓ r.isPullback r.hom_overG :=
-  sorry
+  boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_refinementIso ℓ r
 
 end Coherence
 
