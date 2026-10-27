@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.DiagonalTraceSources
 public import Sheaf.Paper.DiagonalTraceFiniteCartierChern
+import Sheaf.Paper.DiagonalTraceFiniteAdjunctionSupportedAdditive
 
 /-! # Supported-arrow half of the finite adjunction factorization
 
@@ -55,7 +56,7 @@ theorem diagonalTrace_finiteAdjunction_supported
         ((diagonalCompletedUnderlying l (ProjectiveLine Y)).obj
           (completedUnit l (ProjectiveLine Y)) ⟶
             evS.obj (VS.obj ((SpTowerShriek.push l E p.base p.model.geometry).obj line))),
-      ∀ γ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y,
+    ∀ γ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y,
         Φ (UX.map
             ((DerivedCategory.singleFunctor (DiagonalCompleted l (diagonalSurface Y)) 0).map
               (completedSupportedUnit l Y) ≫ γ) ≫
@@ -64,6 +65,16 @@ theorem diagonalTrace_finiteAdjunction_supported
           (diagonalCompletedUnderlying l (ProjectiveLine Y)).map
               (a.hom ≫ p.Rc.R.map γ) ≫ p.sourceMap l E ≫
             (p.LS.projection n).app _ ≫ evS.map (p.varying.inv.app _) := by
-  sorry
+  let E := ULift.{u} (Padic l)
+  let UX := diagonalCompletedUnderlying l (diagonalSurface Y)
+  let VX := p.restrictionX.F.mapDerivedCategory
+  let VS := p.restrictionS.F.mapDerivedCategory
+  let evX := ((evaluation ℕᵒᵖ (DiagonalMod l (diagonalSurface Y))).obj
+    (op n)).mapDerivedCategory
+  let evS := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj
+    (op n)).mapDerivedCategory
+  let line := (SpTowerClasses.line l E p.chernX)⟦(2 : ℤ)⟧
+  obtain ⟨Φ, hΦ⟩ := diagonalTrace_finiteAdjunction_supported_additive l Y f p a n
+  exact ⟨fun α => Φ α, hΦ⟩
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
