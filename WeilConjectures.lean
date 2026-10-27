@@ -13713,6 +13713,7 @@ public import WeilConjectures.TraceFormula.Specialization.PointExchangeOpen
 public import WeilConjectures.TraceFormula.Specialization.PointModel
 public import WeilConjectures.TraceFormula.Specialization.PointSupport
 public import WeilConjectures.TraceFormula.Specialization.PointsSupport
+public import WeilConjectures.TraceFormula.Specialization.ProjectionFormulaExchange
 public import WeilConjectures.TraceFormula.Specialization.ProperUnitClass
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SpecialFibre
