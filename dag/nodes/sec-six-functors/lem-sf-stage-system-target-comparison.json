@@ -1,0 +1,108 @@
+{
+ "id": "lem-sf-stage-system-target-comparison",
+ "kind": "statement",
+ "title": "Transition-compatible target comparison from finite-stage inclusion cones",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "statement": "Let I be a directed preorder and SX,SY,SZ stage systems of categories A_i,B_i,C_i with pair categories PX,PY,PZ and inclusions IX_i,IY_i,IZ_i. Let F:PX→PY and G:PX→PZ be functors, P:SZ.Morphism SY a coherent stage morphism, and Ai:A_i→B_i, Bi:A_i→C_i finite families with transition isomorphisms βA:Ai;TY≅TX;Aj and βB:Bi;TZ≅TX;Bj. Suppose inclusion cones a_i:Ai;IY_i≅IX_i;F and b_i:Bi;IZ_i≅IX_i;G satisfy the component equations IY_j(βA);a_j(TX K)=τY(Ai K);a_i(K);F(τX⁻¹(K)) and IZ_j(βB);b_j(TX K)=τZ(Bi K);b_i(K);G(τX⁻¹(K)). If r_i:Ai≅Bi;P_i satisfies TY(r_i);βP(Bi K);P_j(βB)=βA;r_j(TX K), then there exist q_i:IX_i;F≅IX_i;(G;P.functor) satisfying F(τX⁻¹(K));q_j(TX K)=q_i(K);(G;P.functor)(τX⁻¹(K)) for every i≤j and K∈A_i. Here τ are the stage-system transition inclusions, and the native stage-morphism functor and its inclusion comparison are the standard pair-category API underlying lem-sbc-coherent-pair-functor-descent. No faithfulness, exactness, units or additional coherence on Ai and Bi is assumed.",
+ "stmt_deps": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, common-stage coefficient comparison: categorical assembly of the finite and inclusion squares."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, common-stage coefficient comparison: categorical assembly of the finite and inclusion squares."
+ },
+ "proof": [
+  {
+   "text": "Define q_i as the inverse of a_i, followed by the inclusion of r_i, the inverse of P.ιCompFunctorIso, and b_i whiskered by P.functor, with the functor associators retained. This is a literal composite of natural isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compute P.functor applied to the source transition. Represent the transition and its target inclusion at j, use functor_map_mkHom and mkHom_comp_mkHom, and apply P.coh with the second inequality j≤j. Compose with the two associator inverses and the reflexive β inverse. Functoriality and inverse cancellation give IY_j(βP)=τY(P_i K);P.functor(τZ⁻¹(K)). The identities defining ιCompFunctorIso give the corresponding square with inclusion comparison components.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the desired equality by the isomorphism τY(Ai K);a_i(K). The a-cone equation cancels the inverse a_j factor. Move the included scalar square r through IY_j using functoriality. Naturality of the j-th pullback inclusion comparison moves βB past that comparison; apply the pullback square from the previous step. Naturality of τY moves r_i, and the b-cone equation identifies the remaining factors. Inverse cancellation finishes. This proves the family compatibility without any use of quotient faithfulness or coherence on βA,βB.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible natural isomorphisms between functors on directed stage categories give transition compatible comparison maps after inclusion into the pair category",
+   "results": "8 hits in SmallObject.SuccStruct iteration and extension; none supplies this three-system inclusion-cone pasting.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; direct categorical calculation is proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerRight",
+   "results": "12 standard whiskering, associator, and horizontal-composition lemmas. isoWhiskerRight and its component formula are used to construct and simplify q_i.",
+   "date": "2026-10-28",
+   "verdict": "Standard ingredients used; no combined stage-system theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem.*(target|comparison)|comparison.*StageSystem",
+   "results": "0 Mathlib hits. Existing native StageSystem.Morphism supplies the descended functor, its representative map, and its inclusion iso; the target comparison square is proved here.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate combined comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleCompactSupportTargetIsoStage",
+  "date": "2026-10-28",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final exceptional-adjunction sentence, common-stage coefficient comparison: categorical assembly of the finite and inclusion squares.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StageSystemTargetComparison",
+  "file": "lean/Sheaf/CategoryTheory/StageSystemTargetComparison.lean",
+  "declaration": "CategoryTheory.StageSystem.assembleTargetComparison",
+  "statement": "theorem assembleTargetComparison\n    {I : Type*} [Preorder I] [IsDirectedOrder I]\n    {A : I → Type*} [∀ i, Category (A i)]\n    {B : I → Type*} [∀ i, Category (B i)]\n    {C : I → Type*} [∀ i, Category (C i)]\n    (SX : StageSystem A) (SY : StageSystem B) (SZ : StageSystem C)\n    (F : SX.PairCategory ⥤ SY.PairCategory) (G : SX.PairCategory ⥤ SZ.PairCategory)\n    (P : SZ.Morphism SY) (Ai : ∀ i, A i ⥤ B i) (Bi : ∀ i, A i ⥤ C i)\n    (bA : ∀ {i j}, (h : i ≤ j) → Ai i ⋙ SY.T h ≅ SX.T h ⋙ Ai j)\n    (bB : ∀ {i j}, (h : i ≤ j) → Bi i ⋙ SZ.T h ≅ SX.T h ⋙ Bi j)\n    (a : ∀ i, Ai i ⋙ SY.ι i ≅ SX.ι i ⋙ F)\n    (b : ∀ i, Bi i ⋙ SZ.ι i ≅ SX.ι i ⋙ G)\n    (hA : ∀ {i j} (h : i ≤ j) K,\n      (SY.ι j).map ((bA h).hom.app K) ≫ (a j).hom.app ((SX.T h).obj K) =\n        (SY.transIso h).hom.app ((Ai i).obj K) ≫ (a i).hom.app K ≫\n          F.map ((SX.transIso h).inv.app K))\n    (hB : ∀ {i j} (h : i ≤ j) K,\n      (SZ.ι j).map ((bB h).hom.app K) ≫ (b j).hom.app ((SX.T h).obj K) =\n        (SZ.transIso h).hom.app ((Bi i).obj K) ≫ (b i).hom.app K ≫\n          G.map ((SX.transIso h).inv.app K))\n    (r : ∀ i, Ai i ≅ Bi i ⋙ P.Φ i)\n    (hr : ∀ {i j} (h : i ≤ j) K,\n      (SY.T h).map ((r i).hom.app K) ≫ (P.β h).hom.app ((Bi i).obj K) ≫\n        (P.Φ j).map ((bB h).hom.app K) =\n          (bA h).hom.app K ≫ (r j).hom.app ((SX.T h).obj K)) :\n    ∃ q : ∀ i, SX.ι i ⋙ F ≅ SX.ι i ⋙ (G ⋙ P.functor),\n      ∀ {i j} (h : i ≤ j) K,\n        F.map ((SX.transIso h).inv.app K) ≫ (q j).hom.app ((SX.T h).obj K) =\n          (q i).hom.app K ≫ (G ⋙ P.functor).map ((SX.transIso h).inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T205746-L-1611343",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T205746-L-1611343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
