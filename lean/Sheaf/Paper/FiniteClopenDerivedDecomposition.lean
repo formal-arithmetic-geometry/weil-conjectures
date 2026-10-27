@@ -38,6 +38,7 @@ public import Sheaf.Paper.FiniteClopenDecompositionCore
 
 
 import all Sheaf.Paper.FiniteClopenDecompositionCore
+import Sheaf.AlgebraicGeometry.ProEtaleClopenDerivedScalarData
 
 /-! # Finite clopen decomposition of derived coefficient categories
 

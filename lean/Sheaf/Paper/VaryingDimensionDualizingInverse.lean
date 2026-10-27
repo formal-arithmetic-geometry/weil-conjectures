@@ -2,10 +2,11 @@ module
 
 public import Sheaf.Paper.FiniteClopenDerivedDecomposition
 public import Sheaf.Paper.FiniteClopenExceptionalRestriction
-public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.Paper.SmoothFiniteDualizingInverse
+import Sheaf.Paper.FiniteClopenCommonExceptional
+import Sheaf.Paper.SmoothClopenComponentInverse
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 /-! # A smooth dualizing inverse with varying relative dimension
@@ -263,6 +264,34 @@ private theorem finiteGood_iso (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (n
   obtain ⟨eC⟩ := hC
   exact hab.2 C D ⟨eC ≪≫ e.symm⟩ f hf hD M i hi
 
+private theorem integralGood_iso (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
+    {K L : sfIntegralConstructibleCategory P.coefficients.l P.extension T}
+    (e : K ≅ L)
+    (h : finiteTorConstructibleIntegral P.coefficients.l P.extension T K.obj) :
+    finiteTorConstructibleIntegral P.coefficients.l P.extension T L.obj := by
+  obtain ⟨a, b, hab, htor⟩ := h.2
+  refine ⟨L.property, a, b, hab, ?_⟩
+  intro n
+  let en := (scalarReductionDerivedExtension P.coefficients.l P.extension T n).mapIso
+    ((sfIntegralConstructible P.coefficients.l P.extension T).ι.mapIso e)
+  refine ⟨(htor n).1, ?_⟩
+  intro C D hC f hf hD M q hq
+  exact (htor n).2 C D ⟨hC.some ≪≫ en.symm⟩ f hf hD M q hq
+
+private theorem inverse_pair_transport
+    {C : Type c} [Category.{v} C]
+    (tensor : C × C ⥤ C) (unit : C) (good : ObjectProperty C)
+    (hiso : ∀ {K L : C}, (K ≅ L) → good K → good L)
+    {K L : C} (a : K ≅ L)
+    (h : good L ∧ ∃ Q, good Q ∧ Nonempty (tensor.obj (L, Q) ≅ unit) ∧
+      Nonempty (tensor.obj (Q, L) ≅ unit)) :
+    good K ∧ ∃ Q, good Q ∧ Nonempty (tensor.obj (K, Q) ≅ unit) ∧
+      Nonempty (tensor.obj (Q, K) ≅ unit) := by
+  obtain ⟨hL, Q, hQ, ⟨e⟩, ⟨e'⟩⟩ := h
+  exact ⟨hiso a.symm hL, Q, hQ,
+    ⟨tensor.mapIso (a.prod (Iso.refl Q)) ≪≫ e⟩,
+    ⟨tensor.mapIso ((Iso.refl Q).prod a) ≪≫ e'⟩⟩
+
 section Assembly
 variable (P : PurityFiniteSetting.{u})
     (V B : Over (Spec (.of P.field.k)))
@@ -385,6 +414,7 @@ theorem varyingDimension_finite_dualizing_inverse (n : ℕ) :
     have H := P.finiteClopen_finite_bounds V Vi j hdisjoint hcover n K
     exact ⟨H.2.1 a b hab, H.2.2 a b hab⟩
 
+set_option linter.unusedSectionVars false in
 /-- Integral and field coefficients, using coherent actual exceptional systems.
 The identity-component record fixes one global exceptional functor; each component
 record has exactly that global functor. Its integral and finite comparisons commute
@@ -392,21 +422,19 @@ with strict-system evaluation by the coherence equations of the recorded type.
 Consequently its unit comparisons apply to this very global dualizing object.
 Source: blueprint section-invariant, proof steps 3--5 and coefficient transports
 (blueprint: lem-pur-varying-dimension-dualizing-inverse).
-Proof: choose the common strict exceptional system and its clopen restriction
-comparisons using lem-pur-finite-clopen-exceptional-restriction. Evaluating these
-system maps and applying scalar restriction and the derived inverse limit gives
-the integral comparisons. The finite smooth dualizing object on each dimension
-locus is a shifted etale line. Its residue reduction is therefore a shifted line;
-lem-pur-complete-residue-line-inverse supplies the derived-complete inverse and
-both evaluation maps with Tor bounds uniform at every positive level. The clopen
-equivalence glues arbitrary prescribed component inverses and their maps by full
-faithfulness. Rationalize this pair; then take its image at any common finite
-coefficient stage. Common bounds are detected at every reduction by the clopen
-equivalence; the quantified interval is independent of the reduction index.
-The tensor and unit operations are those on the same integral
-representatives, so both inverse identities survive. At the algebraic closure a
-finite compositum contains the finitely many component stages. The empty product
-case gives the unit as its own inverse. No Tate orientation is used. -/
+Proof: finiteClopen_common_exceptional supplies a common global exceptional
+system and the normalized actual-system component comparisons. Each labelled
+dimension locus is smooth of pure relative dimension. Apply
+smooth_clopen_component_inverse to its component record and transport the three
+inverse pairs along that record's unit comparisons. The clopen restriction
+comparisons preserve tensor and unit, so assemble_dualizing_inverse lifts each
+arbitrary prescribed tuple of inverse objects and both evaluation maps. Its
+map_preimage calculation gives the two component equations in the definition of
+DualizingInverseAssembly. Integral finite-Tor membership is detected componentwise
+and preserved under isomorphism; at field coefficients the predicate is top.
+The two uniform interval assertions are finiteClopen_integral_bounds, keeping the
+same interval at every positive reduction. No element of the component index set
+is chosen, so the empty family is included. No Tate orientation is used. -/
 theorem varyingDimension_dualizing_inverse (cpt : Compactification g) :
     ∃ R : ClopenExceptionalAllCoefficients P V B V g cpt (𝟙 V),
       ∃ Ri : ∀ i, ClopenExceptionalAllCoefficients P V B (Vi i) g cpt (j i),
@@ -450,7 +478,88 @@ theorem varyingDimension_dualizing_inverse (cpt : Compactification g) :
               (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))
               ((scalarReductionDerivedExtension P.coefficients.l P.extension (Vi i).left n).obj
                 ((P.clopenIntegralPullback (j i)).obj K).obj) a b) := by
-  sorry
+  classical
+  have : LocallyOfFiniteType V.hom :=
+    inferInstanceAs (LocallyOfFiniteType (V.left ↘ Spec (.of P.field.k)))
+  have : QuasiCompact V.hom :=
+    inferInstanceAs (QuasiCompact (V.left ↘ Spec (.of P.field.k)))
+  obtain ⟨R, Ri, hRi⟩ :=
+    P.finiteClopen_common_exceptional V B g Vi j hdisjoint hcover cpt
+  have hrel (i : I) : SmoothOfRelativeDimension (dimension i) ((j i).left ≫ g) :=
+    smooth_dimension_on_open_immersion (j i).left g (dimension i) (fun x ↦ by
+      have hx : (j i).left x ∈ Set.range (j i).left := Set.mem_range_self x
+      rw [hdimension i] at hx
+      exact hx)
+  have hi (i : I) :=
+    P.smooth_clopen_component_inverse V B g (Vi i) cpt (j i) (Ri i) (dimension i)
+  have hE := P.finiteClopen_constructible_equivalences V Vi j hdisjoint hcover
+  refine ⟨R, Ri, hRi, ?_, ?_, ?_, ?_⟩
+  · have : (Functor.pi' (fun i ↦ P.clopenIntegralPullback (j i))).IsEquivalence := hE.1
+    apply assemble_dualizing_inverse
+      (P.clopenIntegralTensor V) (P.clopenIntegralUnit V.left)
+      (fun K ↦ finiteTorConstructibleIntegral P.coefficients.l P.extension V.left K.obj)
+      (fun i ↦ P.clopenIntegralPullback (j i))
+      (fun i ↦ P.clopenIntegralTensor (Vi i))
+      (fun i ↦ P.clopenIntegralUnit (Vi i).left)
+      (fun i K ↦ finiteTorConstructibleIntegral P.coefficients.l P.extension (Vi i).left K.obj)
+      (R.base.integral.obj (P.clopenIntegralUnit B.left))
+      (fun K ↦ (P.finiteClopen_integral_bounds V Vi j hdisjoint hcover K).1)
+      (fun i _ _ e h ↦ integralGood_iso P (Vi i).left e h)
+      (fun i ↦ (P.finiteClopen_tensor_and_reduction V Vi j hdisjoint hcover i).2.1.some)
+      (fun i ↦ (P.finiteClopen_coefficient_units V Vi j hdisjoint hcover i).2.1.some)
+    intro i
+    let a : (P.clopenIntegralPullback (j i)).obj
+          (R.base.integral.obj (P.clopenIntegralUnit B.left)) ≅
+        (Ri i).base.integralI.obj (P.clopenIntegralUnit B.left) := by
+      simpa only [Functor.comp_obj, clopenIntegralRestriction, clopenIntegralPullback,
+        (hRi i).1] using (Ri i).integralUnitComparison
+    exact inverse_pair_transport _ _ _ (fun e h ↦ integralGood_iso P (Vi i).left e h)
+      a (hi i).1
+  · have : (Functor.pi' (fun i ↦ P.clopenRationalPullback (j i))).IsEquivalence := hE.2.2.1
+    apply assemble_dualizing_inverse
+      (P.clopenRationalTensor V) (P.clopenRationalUnit V.left) ⊤
+      (fun i ↦ P.clopenRationalPullback (j i))
+      (fun i ↦ P.clopenRationalTensor (Vi i))
+      (fun i ↦ P.clopenRationalUnit (Vi i).left) (fun _ ↦ ⊤)
+      (R.base.rational.obj (P.clopenRationalUnit B.left))
+      (fun _ ↦ ⟨fun _ _ ↦ trivial, fun _ ↦ trivial⟩)
+      (fun _ _ _ _ _ ↦ trivial)
+      (fun i ↦ (P.finiteClopen_tensor_and_reduction V Vi j hdisjoint hcover i).2.2.1.some)
+      (fun i ↦ (P.finiteClopen_coefficient_units V Vi j hdisjoint hcover i).2.2.1.some)
+    intro i
+    let a : (P.clopenRationalPullback (j i)).obj
+          (R.base.rational.obj (P.clopenRationalUnit B.left)) ≅
+        (Ri i).base.rationalI.obj (P.clopenRationalUnit B.left) := by
+      simpa only [Functor.comp_obj, clopenRationalRestriction, clopenRationalPullback,
+        (hRi i).2.1] using (Ri i).rationalUnitComparison
+    obtain ⟨Q, e, e'⟩ := (hi i).2.1
+    exact inverse_pair_transport _ _ ⊤ (fun _ _ ↦ trivial) a
+      ⟨trivial, Q, trivial, e, e'⟩
+  · intro A
+    have : (Functor.pi' (fun i ↦ P.clopenCommonStagePullback (j i))).IsEquivalence := hE.2.2.2
+    apply assemble_dualizing_inverse
+      (P.clopenCommonStageTensor V) (P.clopenCommonStageUnit V.left A) ⊤
+      (fun i ↦ P.clopenCommonStagePullback (j i))
+      (fun i ↦ P.clopenCommonStageTensor (Vi i))
+      (fun i ↦ P.clopenCommonStageUnit (Vi i).left A) (fun _ ↦ ⊤)
+      (R.action.functor.obj (P.clopenCommonStageUnit B.left A))
+      (fun _ ↦ ⟨fun _ _ ↦ trivial, fun _ ↦ trivial⟩)
+      (fun _ _ _ _ _ ↦ trivial)
+      (fun i ↦ (P.finiteClopen_tensor_and_reduction V Vi j hdisjoint hcover i).2.2.2.1.some)
+      (fun i ↦ ((P.finiteClopen_coefficient_units V Vi j hdisjoint hcover i).2.2.2 A).some)
+    intro i
+    let a : (P.clopenCommonStagePullback (j i)).obj
+          (R.action.functor.obj (P.clopenCommonStageUnit B.left A)) ≅
+        (Ri i).actionI.functor.obj (P.clopenCommonStageUnit B.left A) := by
+      simpa only [Functor.comp_obj, (hRi i).2.2] using
+        ClopenExceptionalAllCoefficients.commonStageUnitComparison
+          P V B (Vi i) g cpt (j i) (Ri i) A
+    obtain ⟨Q, e, e'⟩ := (hi i).2.2 A
+    exact inverse_pair_transport _ _ ⊤ (fun _ _ ↦ trivial) a
+      ⟨trivial, Q, trivial, e, e'⟩
+  · intro K a b hab
+    have H := P.finiteClopen_integral_bounds V Vi j hdisjoint hcover K
+    exact ⟨H.2.1 a b hab, H.2.2 a b hab⟩
 
 end Assembly
 end WeilConjectures.PurityFiniteSetting

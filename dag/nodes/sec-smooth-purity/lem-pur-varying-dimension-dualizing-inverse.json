@@ -52,9 +52,10 @@
    }
   },
   {
-   "text": "Apply [lem-pur-finite-clopen-exceptional-restriction] to this partition. Its unit case gives $a_d:Lj_d^*\\omega_g\\simeq\\omega_{g_d}$ at every coefficient stage. Its statement supplies these maps on the actual derived strict coefficient systems, with finite evaluations and site comparisons commuting; applying the specified scalar restriction and derived limit gives the integral maps. This is precisely the coherence required in the question, without lifting an arbitrary diagram of levelwise maps.",
+   "text": "Apply lem-pur-finite-clopen-exceptional-restriction at the finite unit for the finite-coefficient theorem. For the integral and field theorem, apply [lem-pur-finite-clopen-common-exceptional] to choose the identity record R and all component records Ri simultaneously. Their global integral, rational and common-stage functors are equal, while each record retains its normalized strict-system and evaluation comparisons. Evaluating the integral, rational and common-stage comparisons on the coefficient units therefore compares the restriction of the very same global dualizing object to its component exceptional image.",
    "uses": [
-    "lem-pur-finite-clopen-exceptional-restriction"
+    "lem-pur-finite-clopen-exceptional-restriction",
+    "lem-pur-finite-clopen-common-exceptional"
    ],
    "elementary": false,
    "source": {
@@ -63,15 +64,10 @@
    }
   },
   {
-   "text": "Fix $d\\in I$. At finite coefficients use [lem-pur-smooth-finite-dualizing-inverse], the pure-dimensional case of this step, to obtain a finite-Tor constructible inverse of the actual intrinsic exceptional image of the coefficient unit. Transport that inverse pair along the finite restriction comparison from Step 3. The new lemma isolates only the shifted-line and intrinsic coefficient-realization calculation, not the clopen gluing or prescribed map equations. Its proof plan applies [lem-pur-finite-setting-comparison-hypotheses], [thm-asd-smooth-tensor], [def-weil-exceptional-inverse-image] and [lem-pur-shifted-line-site-inverse].\n\nAt integral coefficients [def-weil-exceptional-inverse-image] constructs $M=\\omega_{g_d,\\mathcal O_E}$ from its actual normalized strict exceptional system; it is derived complete and its reduction at $n$ is $\\omega_{g_d,A_n}$. In particular its residue reduction is the shifted etale line just obtained at $n=1$. Apply [lem-pur-complete-residue-line-inverse] with $X=V_d$, $m=2d$. This gives $M$ and $M^\\vee$ in $D^b_{ctf}$ and both evaluation maps, with intervals uniform in $n$. At $E$ and $\\overline{\\mathbf Q}_\\ell$, apply the rationalization and common-stage functors of [def-weil-derived-pullback-tensor-hom] to this inverse pair; their tensor products and units are defined on integral representatives, and [def-weil-exceptional-inverse-image] defines the field exceptional objects by the same coefficient operations. The two inverse equations remain inverse equations under these functors.",
+   "text": "The finite theorem uses [lem-pur-smooth-finite-dualizing-inverse] and transports both inverse maps through the finite unit comparison. For the remaining coefficient stages, the proved geometric helper smooth_dimension_on_open_immersion makes each labelled component smooth of pure relative dimension dimension i. Apply [lem-pur-smooth-clopen-component-inverse] to Ri and this pure dimension. It gives inverse pairs for the actual component integralI, rationalI and actionI images of the unit, including integral finite-Tor membership. The proved private helper inverse_pair_transport conjugates these pairs by the corresponding unit comparisons to obtain inverse pairs for the restrictions of the global object; tensor.mapIso supplies both conjugating maps. Integral finite-Tor membership is invariant under these isomorphisms by integralGood_iso, whose proof maps the isomorphism through every scalar reduction and applies the defining Tor test to an isomorphic representative.",
    "uses": [
     "lem-pur-smooth-finite-dualizing-inverse",
-    "lem-pur-finite-setting-comparison-hypotheses",
-    "thm-asd-smooth-tensor",
-    "def-weil-exceptional-inverse-image",
-    "lem-pur-shifted-line-site-inverse",
-    "lem-pur-complete-residue-line-inverse",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-pur-smooth-clopen-component-inverse"
    ],
    "elementary": false,
    "source": {
@@ -80,7 +76,7 @@
    }
   },
   {
-   "text": "Use the tensor-preserving equivalence of [lem-pur-finite-clopen-derived-decomposition]. The tuple $(\\omega_{g_d})_d$ belongs to the product of the component $D^b_{ctf}$ categories. Its inverse image is isomorphic to $\\omega_g$ by the isomorphisms $a_d$ of step 3, so $\\omega_g\\in D^b_{ctf}$. Given any specified component inverse pairs $(P_d,e_d,e'_d)$, take $P$ to be their tuple's inverse image. Define $e,e'$ by full faithfulness: their components, under the tensor/unit comparisons, are $e_d\\circ(a_d\\otimes1)$ and $e'_d\\circ(1\\otimes a_d)$. Lift the component inverse arrows as well. Their composites restrict to identities on every component; faithfulness makes both global composites identities. Hence $e,e'$ are the required isomorphisms with exactly the specified components. The same cited equivalence gives common cohomological and Tor bounds by taking minima of the finitely many lower bounds and maxima of the upper bounds; integral component intervals are uniform in the reduction index, so these common bounds are uniform too. If $V=\\varnothing$, use its empty-product clause: the unique object is the unit and its own inverse, all displayed maps are the unique isomorphism, and $[0,0]$ is an allowable vacuous bound. Every construction used duality and evaluation, with no choice of Tate orientation. In Lean the finite gluing is performed by the proved private categorical helper assemble_dualizing_inverse. It takes the inverse image of a tuple under the product restriction equivalence and applies preimageIso to the tuple of tensor-comparison, component-evaluation and inverse-unit isomorphisms. The map_preimage equation followed by cancellation of the unit comparison proves exactly both prescribed component equations. The ambient finite restriction equivalence is obtained from finiteClopen_unbounded_decomposition and finiteClopen_finite_restriction_identification, and finiteClopen_finiteTor_iff detects the good objects. The support and Tor interval clauses are finiteClopen_finite_bounds. The integral and field proof is still the remaining named theorem varyingDimension_dualizing_inverse, with the original plan above.",
+   "text": "Apply the proved private categorical helper assemble_dualizing_inverse separately at integral, rational and common-stage coefficients. The restriction equivalences and tensor/unit comparisons are supplied by [lem-pur-finite-clopen-derived-decomposition]. For integral coefficients its finiteTor iff supplies hgood; integralGood_iso supplies invariance under isomorphism. At field coefficients good is top. The helper chooses the inverse image of an arbitrary tuple of prescribed component inverse objects. It lifts both evaluation isomorphisms by full faithfulness; map_preimage and the inverse unit comparison give exactly both specified component equations. It also applies this gluing to the component inverse pairs just obtained, establishing existence of a global inverse. The integral common support and Tor interval assertions are exactly the two interval iff statements of finiteClopen_integral_bounds, with the same a and b and with quantification over all reductions retained. No index is chosen from I, so the same proof handles I empty. The already proved finite theorem uses the corresponding finite bounds and the same categorical gluing helper.",
    "uses": [
     "lem-pur-finite-clopen-derived-decomposition"
    ],
@@ -99,19 +95,15 @@
   "lem-sfb-finite-type-composition-base-change",
   "lem-weil-pbc-closed-immersion-base-change",
   "lem-pur-finite-clopen-exceptional-restriction",
+  "lem-pur-finite-clopen-common-exceptional",
   "lem-pur-smooth-finite-dualizing-inverse",
-  "lem-pur-finite-setting-comparison-hypotheses",
-  "thm-asd-smooth-tensor",
-  "def-weil-exceptional-inverse-image",
-  "lem-pur-shifted-line-site-inverse",
-  "lem-pur-complete-residue-line-inverse",
-  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-smooth-clopen-component-inverse",
   "lem-pur-finite-clopen-derived-decomposition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-  "place": "M6, 2026-10-27: complete geometric partition and categorical finite gluing in Lean; pure-dimensional finite inverse isolated as lem-pur-smooth-finite-dualizing-inverse. Integral and field assembly retain the stated proof plan."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "P4, 2026-10-28: completed integral, rational and common-stage categorical assembly and uniform bounds in Lean, from simultaneous normalized records and pure-dimensional component inverse pairs; those two strictly smaller steps are stated in their own modules."
  },
  "mathlib_searches": [
   {
@@ -330,11 +322,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M6",
-  "result": "pass",
-  "landing": "20261027T103449-L-1083839",
+  "reviewer": "C-46a98",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T180726-L-3895569",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item node + 2 new nodes and change records vs delivered Lean, ClopenExceptionalAllCoefficients/CoefficientComparisonData fields in FiniteClopenExceptionalRestriction, Core split history (602f9184/7e93fa29) for the forced import, packet 3b importer OK"
  }
 }
