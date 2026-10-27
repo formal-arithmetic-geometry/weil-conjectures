@@ -1,26 +1,94 @@
-# Stage 1 report: lem-route-inverse-image-constant-comparison
+## Worker report
 
-1. Files written:
+The module `Sheaf.CategoryTheory.RouteInverseImageConstantComparison` adds the
+ring-level compatibility record `CategoryTheory.RingInverseImage` and states
+`CategoryTheory.inverseImageConstantComparison` with a `sorry` proof.  The record
+contains the underlying sheaf isomorphism and the graph equations for addition,
+ multiplication, zero, and one.  The theorem concludes a natural commutative-ring
+constant-sheaf isomorphism and its underlying component formula through the
+canonical constant-set comparison.  The node's statement, source, dependencies,
+status, and proof fields are unchanged; only its `lean` record was added.
 
-- `dag/nodes/sec-zeta-weil/lem-route-inverse-image-constant-comparison.json` — statement, split proof, four Mathlib searches; no new nodes.
-- `citations.json` — verbatim quotations for the three cited DAG statements.
+Hypothesis and clause correspondence:
 
-2. Attachments: none. No sorry-free declaration in the live `WeilConjectures/` source states this abstract item. No prior abandoned directory for this item was present.
+- The two small sites in one universe are `C D : Type u` with
+  `[SmallCategory C] [SmallCategory D]`, and their topologies are `JC` and `JD`.
+  The explicit `HasWeakSheafify` instances are the existence needed by the
+  constant commutative-ring sheaf functors.
+- The set-sheaf inverse image and its right adjoint are `L` and `V`, with
+  `adj : L ⊣ V`; `hL : PreservesFiniteLimits L` is exactly the finite-limit
+  hypothesis.
+- `rings : Sheaf JC CommRingCat.{u} ⥤ Sheaf JD CommRingCat.{u}` is the ring
+  functor in the statement.
+- `e` supplies, for every source ring sheaf `R`, a `RingInverseImage L R
+  (rings.obj R)`.  Its `ringUnderlying` field is the isomorphism
+  `L(|R|) ≅ |rings(R)|`.  The four graph fields render the operation clauses:
+  `ringAdd` and `ringMul` quantify a test sheaf and maps whose sectionwise graph
+  is the relevant operation, then assert the corresponding equation after `L`
+  and `ringUnderlying`; `ringZero` and `ringOne` do the same for the nullary
+  operations.  This is the graph formulation of the canonical finite-product
+  and terminal comparisons and does not add module-operation data.
+- `enat` is the required naturality in a ring-sheaf morphism `φ : R ⟶ S`:
+  `L.map (|φ|) ≫ e_S.hom = e_R.hom ≫ |rings.map φ|`.
+- The conclusion's `constants` is the natural isomorphism
+  `constantSheaf JC CommRingCat ⋙ rings ≅ constantSheaf JD CommRingCat`.
+  The `kappa` is the set-level coproduct comparison, restricted to
+  commutative-ring objects (the only objects needed by the component formula):
+  `(constantSheaf JC CommRingCat ⋙ sheafForget JC ⋙ L) ≅
+  constantSheaf JD CommRingCat ⋙ sheafForget JD`.  For every `A : CommRingCat`,
+  the final equality says that the underlying component of `constants` is
+  `(e (constantSheaf JC A)).ringUnderlying.inv` followed by `kappa.app A`.
+  Naturality of both isomorphisms gives the required naturality in coefficient
+  ring maps.
 
-3. WANTED: none.
+Dependency declarations read and reused:
 
-4. Problems checked and corrected: the imported item had an empty proof and `status: unsplit`. I retained its statement and dependencies, filled the proof origin and blueprint realization, recorded the searches actually run on 2026-10-28, and added the generic left-adjoint-colimits theorem as the one declared off-unit tool use. The item is more general than the existing étale fixed-ring comparison node: it allows arbitrary small sites, an arbitrary ring-sheaf functor, and a whole natural family of coefficient rings, so that node is not a duplicate. The proof does not assume a final object in either site. The coproduct description of a constant sheaf is derived from the sheafification universal property and the constant-sheaf characterization in Tag 0H7J; the empty set is included.
+- `Sheaf.CategoryTheory.SiteCoveringAxioms`, declaration
+  `CategoryTheory.Precoverage.IsSiteForCoverings`, for the recorded small-site
+  convention.
+- `Sheaf.CategoryTheory.RingedSiteModules`, declaration
+  `CategoryTheory.ringedSiteModules`, the project interface for sheaves of
+  modules/rings on a general site (the ring sheaf itself is Mathlib's
+  `Sheaf J CommRingCat`).
+- `Mathlib.CategoryTheory.Sites.ConstantSheaf`, declaration
+  `CategoryTheory.constantSheaf`, used for both constant ring and set sheaves.
+- `Mathlib.CategoryTheory.Sites.Adjunction`, declarations
+  `CategoryTheory.sheafForget` and `CategoryTheory.Adjunction`.
+- `Mathlib.Algebra.Category.Ring.Limits`, the Mathlib finite-limit and
+  commutative-ring sheaf infrastructure.
+- The proof-only leaves recorded by the node were checked: Mathlib's
+  `CategoryTheory.Adjunction.leftAdjoint_preservesColimits`,
+  `CategoryTheory.sheafifyComposeIso`/`sheafComposeIso_hom_fac`, and
+  `CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf`.
+  No duplicate project declaration states this comparison.
 
-## Review by NC
+Edge cases checked before writing include the empty indexing set in the coproduct
+presentation (the initial sheaf), the zero commutative ring, and the identity
+adjunction/functor.  No nonempty site or terminal site object is assumed, and no
+extra finiteness, separatedness, characteristic, or nontriviality hypothesis is
+present.  All variables and universes are explicit (`set_option autoImplicit
+false`); the only proof placeholder is the theorem's expected `sorry`.
 
-I read the live item, the `sk-thm-rationality` unit, the `sec-zeta-weil` chapter record, and the source passages for Stacks Tags 0H7J and 00YV. I also read the statements of `def-weil-pbc-constant-sheaf`, `def-weil-pbc-sheafification`, and `lem-weil-pbc-left-adjoint-preserves-colimits`; the quotations used by the proof are copied verbatim into `citations.json`.
+Searches made:
 
-Step 1 uses the sheafification universal property to identify the constant sheaf on a set E with the coproduct of E copies of the terminal sheaf, by matching maps out of either object with E-indexed families of global sections. The argument is natural in maps of sets and works for E empty. The constant-sheaf and sheafification hypotheses are exactly those in the cited definition nodes.
+- `msearch.py ... leanfinder "natural constant-sheaf comparison under a left
+  adjoint preserving finite limits"`: hits for `constantSheafAdj_counit_w` and
+  `Sheaf.isConstant_iff_isIso_counit_app'`, but no arbitrary inverse-image
+  comparison.
+- `msearch.py ... loogle "CategoryTheory.constantSheaf,
+  CategoryTheory.Sheaf, preserves coproducts"`: no usable hit.
+- `msearch.py ... grep "constantSheaf.*coproduct|coproduct.*constantSheaf"
+  Mathlib/CategoryTheory/Sites`: no declaration matching the node.
+- `msearch.py ... leansearch "left adjoint preserving finite limits sends
+  constant sheaves of commutative rings to constant sheaves"`: only generic
+  constant-sheaf and sheafification results.
+- `rg` over `lean/WeilConjectures`, `lean/Sheaf`, and `dag/nodes` for
+  `inverseImageData_exists`, `InverseImageData`, and the item id found the
+  broader `ConstantCompletion.InverseImageData` structure and unrelated fixed
+  ring/module comparisons, but no declaration of this standalone theorem.
 
-Step 2 applies the cited left-adjoint-colimits statement to this E-indexed coproduct. The item hypothesis that L preserves finite limits supplies the terminal comparison; combining it with the coproduct comparison and the two coprojection characterizations gives the canonical set-sheaf comparison kappa_E. I checked that the stated common-universe condition is enough for the indexed coproduct and that no site terminal object was smuggled in.
+No `STATEMENT-DISPUTED` flag or node fault was found.
 
-Step 3 defines the component for a ring A as e_(underline A) inverse followed by kappa_|A|. I checked addition and multiplication by restricting both composites through every pair of coprojections and using naturality of kappa for A times A to A; zero and one are the singleton cases. The assumed operation equations for e_R then make this a ring-sheaf morphism, and invertibility follows from the two isomorphisms.
+## Second reading by NC
 
-Step 4 checks a ring homomorphism A to B using e-naturality and kappa-naturality for the underlying set map. Thus the components form the required natural ring-sheaf isomorphism, with exactly the underlying formula required in the item. The zero ring and empty-site/empty-set edge cases remain covered by the same universal-property argument.
-
-5. Nothing remains unfinished. The required pre-report server `check_dag` passed before this report was written.
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.

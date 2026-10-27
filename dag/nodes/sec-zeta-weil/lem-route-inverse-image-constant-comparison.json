@@ -150,5 +150,28 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-efe74d1ce (reviewer sub-agent of L); spot-checked: The mathematics of the item is correct, but step 3 had a missing citation; I put a corrected item file in fixes/dag/nodes/sec-zeta-weil/lem-route-inverse-image-constant-comparison.json. Statement: it matches InverseImageData.constants (ConstantCompletionInverseImage.lean:763-771; hypotheses L ⊣ V with PreservesFiniteLimits L, as in inverseImageData_exists). It also adds the formula for the underlying component, which only strengthens it and is the 'canonical map' that the parent lem-route-inverse-image-data-exists step 4 needs. The e_R hypotheses are exactly the clauses of lem-route-inverse-image-ring-functor. Sources: Stacks 0H7J (sites.tex l.2098, Mor(E̲,F)=Mor(E,Γ), with Γ = maps from the terminal sheaf) and 00YV, both read. Small cases checked: E=∅ (initial sheaf), A=0, and L=id. Step 1 is right and needs no final object of the site; I reworded it so the constant sheaf is itself the coproduct rather than presupposing one. Step 2 is right (left-adjoint-colimits Mathlib leaf; terminal object from finite limits); I restated kappa by its equations on coprojections and dropped the q_E notation. Step 3 had the fault (C1/C2): it was marked elementary with uses [], but it silently needs (a) the underlying set sheaf of the constant comm-ring sheaf is the constant set sheaf with the same sections and sheafified operations, and (b) set sheafification preserves finite products, so A̲×A̲=(A×A)̲. Both are existing Mathlib leaves, lem-pc-sites-sheafification-underlying-sets and lem-weil-pbc-sheafification-sets-exact; the sibling lem-sfb-geometric-inverse-image-constant-module step 3 cites the same pair. I rewrote step 3 with them, set elementary to false, and re-checked the argument through naturality of kappa for the projections and for +. Step 4 now also cites the underlying-sets leaf for |f̲| = |f|̲. proof_deps is the union of the uses; all other fields are unchanged; no cycle and no route issue, since both added nodes are Mathlib leaves. There are no new nodes. Duplicate search: lem-pe-constant-left-module-inverse-image covers a single Λ with no naturality; lem-sfb-geometric-inverse-image-constant-module is the module version; neither is the item. I accept the declared tool_use of lem-weil-pbc-left-adjoint-preserves-colimits. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RouteInverseImageConstantComparison",
+  "declaration": "CategoryTheory.inverseImageConstantComparison",
+  "declarations": [
+   "CategoryTheory.RingInverseImage",
+   "CategoryTheory.inverseImageConstantComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RouteInverseImageConstantComparison.lean",
+  "statement": "theorem inverseImageConstantComparison {C D : Type u} [SmallCategory C] [SmallCategory D] (JC : GrothendieckTopology C) (JD : GrothendieckTopology D) [HasWeakSheafify JC CommRingCat.{u}] [HasWeakSheafify JD CommRingCat.{u}] (L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)) (V : Sheaf JD (Type u) ⥤ Sheaf JC (Type u)) (adj : L ⊣ V) (hL : PreservesFiniteLimits L) (rings : Sheaf JC CommRingCat.{u} ⥤ Sheaf JD CommRingCat.{u}) (e : ∀ R : Sheaf JC CommRingCat.{u}, RingInverseImage L R (rings.obj R)) (enat : ∀ {R S : Sheaf JC CommRingCat.{u}} (φ : R ⟶ S), L.map ((sheafCompose JC (forget CommRingCat)).map φ) ≫ (e S).ringUnderlying.hom = (e R).ringUnderlying.hom ≫ (sheafCompose JD (forget CommRingCat)).map (rings.map φ)) : ∃ (constants : constantSheaf JC CommRingCat.{u} ⋙ rings ≅ constantSheaf JD CommRingCat.{u}) (kappa : (constantSheaf JC CommRingCat.{u} ⋙ sheafForget JC ⋙ L) ≅ constantSheaf JD CommRingCat.{u} ⋙ sheafForget JD), ∀ A : CommRingCat.{u}, (sheafCompose JD (forget CommRingCat)).map ((constants.app A).hom) = (e ((constantSheaf JC CommRingCat.{u}).obj A)).ringUnderlying.inv ≫ (kappa.app A).hom ∧ ∀ (a : A) (T : Sheaf JC (Type u)) (s : T ⟶ (sheafCompose JC (forget CommRingCat)).obj ((constantSheaf JC CommRingCat.{u}).obj A)), (∀ (U : Cᵒᵖ) (x : T.obj.obj U), (@id (((constantSheaf JC CommRingCat.{u}).obj A).obj.obj U) (s.hom.app U x)) = (toSheafify JC ((Functor.const Cᵒᵖ).obj A)).app U a) → ∀ (W : Dᵒᵖ) (y : (L.obj T).obj.obj W), (@id (((constantSheaf JD CommRingCat.{u}).obj A).obj.obj W) ((kappa.hom.app A).hom.app W ((L.map s).hom.app W y))) = (toSheafify JD ((Functor.const Dᵒᵖ).obj A)).app W a",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-27",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-919e84a1c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-919e84a1c",
+  "group": "NC",
+  "result": "fix",
+  "note": "Read the node, its 3 stmt_deps, Stacks 0H7J/00YV, the module, the report, and the parent InverseImageData and AlgebraicInverseImage. The hypotheses match: the graph-form ring fields are equivalent to the node's product/terminal-comparison form since L preserves finite products; enat, universes and the HasWeakSheafify Prop instances are fine. Fault (H3): the existential kappa was unconstrained, so the component formula was tautological (kappa := e ≪≫ |constants| always works) and the canonical-comparison clause was lost. FIX: added a conjunct pinning kappa (L of any map whose sections are the toSheafify constant section of a is sent to the toSheafify constant section of a); it holds for the coproduct comparison and determines it. The fixed file compiles clean via nt_compile --json (5.6 s). Advisory: RingInverseImage copies the ring fields of SheafOfModules.AlgebraicInverseImage, acceptable as a ring-only helper. Edge cases empty set, zero ring and L = id checked."
  }
 }
