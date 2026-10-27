@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-etale-brown-level-realization-coherence",
+ "kind": "statement",
+ "title": "Coherence of normalized Brown realization data",
+ "statement": "For any commutative ring O, element t, scheme W, supplied strict coefficient evaluation package P and realization data R, the section, localization and mate equations hold:\n\n```lean\ntheorem etaleBrownLevelRealizationCoherence_exists\n    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})\n    (P : StrictEtaleEvaluation W O t)\n    (R : StrictEtaleBrownRealizationData O t W P) :\n    StrictEtaleBrownRealizationCoherence O t W P R\n```",
+ "stmt_deps": [
+  "def-pur-etale-brown-projection-realization",
+  "lem-pur-etale-brown-level-realization-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Constructions 5.14–5.15; Stacks 03CY, 06YY and 07A4."
+ },
+ "proof": [
+  {
+   "step": 1,
+   "text": "Check the section equation on the constant-ring sheafification unit, the representative equation after exact localization, and the scalar equation by the inverse mate law.",
+   "uses": [
+    "def-pur-etale-brown-projection-realization",
+    "lem-pur-etale-brown-level-realization-data",
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-brown-projection-realization",
+  "lem-pur-etale-brown-level-realization-data",
+  "lem-stage3-inverse-mate-equivalences"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Zheng Construction 4.1 and Stacks 03CY, 06YY and 07A4",
+  "place": "Stage-3 decomposition of the normalized level realization argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StrictEtaleBrownRealizationData construction",
+   "date": "2026-10-28",
+   "results": {
+    "ok": true,
+    "note": "No existing exact theorem."
+   },
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty StrictEtaleBrownRealizationData",
+   "date": "2026-10-28",
+   "results": {
+    "ok": true,
+    "note": "No exact match."
+   },
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized Brown realization data and coherence",
+   "date": "2026-10-28",
+   "results": {
+    "ok": true,
+    "note": "No exact match."
+   },
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownLevelRealization",
+  "date": "2026-10-28",
+  "group": "D6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-brown-level-realization",
+   "place": "Stage-3 decomposition of the realization proof.",
+   "via": [
+    "lem-pur-etale-brown-level-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownLevelRealizationCoherence",
+  "file": "lean/Sheaf/Paper/EtaleBrownLevelRealizationCoherence.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownLevelRealizationCoherence_exists",
+  "statement": "theorem etaleBrownLevelRealizationCoherence_exists\n    (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})\n    (P : StrictEtaleEvaluation W O t)\n    (R : StrictEtaleBrownRealizationData O t W P) :\n    StrictEtaleBrownRealizationCoherence O t W P R",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261027T205904-L-1629634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261027T205904-L-1629634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

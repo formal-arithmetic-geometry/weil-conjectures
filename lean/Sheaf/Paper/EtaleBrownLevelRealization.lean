@@ -6,6 +6,8 @@ Authors: SHEAF group M6
 module
 
 public import Sheaf.Paper.EtaleBrownProjectionRealization
+import Sheaf.Paper.EtaleBrownLevelRealizationData
+import Sheaf.Paper.EtaleBrownLevelRealizationCoherence
 
 /-! # Normalized realization of a single coefficient tower
 
@@ -48,6 +50,8 @@ Only proof data in the supplied scalar adjunctions are used to fix their mates. 
 theorem etaleBrownLevelRealization_exists
     (O : Type (u + 1)) [CommRing O] (t : O) (W : Scheme.{u})
     (P : StrictEtaleEvaluation W O t) :
-    Nonempty (StrictEtaleBrownRealization O t W P) := by sorry
+    Nonempty (StrictEtaleBrownRealization O t W P) := by
+  obtain ⟨R⟩ := etaleBrownLevelRealizationData_exists O t W P
+  exact ⟨⟨R, etaleBrownLevelRealizationCoherence_exists O t W P R⟩⟩
 
 end AlgebraicGeometry
