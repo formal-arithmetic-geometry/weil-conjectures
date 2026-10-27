@@ -42,7 +42,7 @@ namespace CategoryTheory
 /-- A morphism `f : K ⟶ B` such that `f ≫ β ≫ z⁻¹ = g ≫ S ι` for isomorphisms `β : B ≅ P`,
 `z : S ≅ 𝟭` and a morphism `ι : Y ⟶ P` with `w ≫ ι = κ ≫ β` for an isomorphism `w : W ≅ Y`
 factors through `κ : W ⟶ B`. -/
-lemma eq_comp_of_comp_shift_eq {C : Type*} [Category C] (S : C ⥤ C) (z : S ≅ 𝟭 C)
+private lemma eq_comp_of_comp_shift_eq {C : Type*} [Category C] (S : C ⥤ C) (z : S ≅ 𝟭 C)
     {K W B Y P : C} (f : K ⟶ B) (κ : W ⟶ B) (ι : Y ⟶ P) (β : B ≅ P) (w : W ≅ Y)
     (hw : w.hom ≫ ι = κ ≫ β.hom) (g : K ⟶ S.obj Y) (hg : f ≫ β.hom ≫ z.inv.app P = g ≫ S.map ι) :
     f = (g ≫ z.hom.app Y ≫ w.inv) ≫ κ := by
@@ -59,7 +59,7 @@ lemma eq_comp_of_comp_shift_eq {C : Type*} [Category C] (S : C ⥤ C) (z : S ≅
 
 /-- If `f ≫ Ψ' e = x ≫ Φ g ≫ τ'_{L'}` for an isomorphism `e : L ≅ L'` and `τ' : T' ⋙ Φ ≅ Ψ'`,
 then `f = x ≫ Φ (g ≫ T' e⁻¹) ≫ τ'_L`. -/
-lemma Functor.eq_comp_map_comp_hom_app_of_iso {C D E : Type*} [Category C] [Category D]
+private lemma Functor.eq_comp_map_comp_hom_app_of_iso {C D E : Type*} [Category C] [Category D]
     [Category E] {T' : C ⥤ D} {Φ : D ⥤ E} {Ψ' : C ⥤ E} (τ' : T' ⋙ Φ ≅ Ψ') {A : E} {B : D}
     {L L' : C} (e : L ≅ L') (f : A ⟶ Ψ'.obj L) (x : A ⟶ Φ.obj B) (g : B ⟶ T'.obj L')
     (h : f ≫ Ψ'.map e.hom = x ≫ Φ.map g ≫ τ'.hom.app L') :
@@ -70,7 +70,7 @@ lemma Functor.eq_comp_map_comp_hom_app_of_iso {C D E : Type*} [Category C] [Cate
     Category.comp_id]
 
 /-- Pasting an equation `x ≫ y ≫ q = κ ≫ d ≫ e` with a commutative square `q ≫ f = c ≫ i`. -/
-lemma comp_comp_comp_eq_of_eq {C : Type*} [Category C] {A B M N D D' P : C} {Cc : C}
+private lemma comp_comp_comp_eq_of_eq {C : Type*} [Category C] {A B M N D D' P : C} {Cc : C}
     (x : A ⟶ B) (y : B ⟶ Cc) (c : Cc ⟶ D) (i : D ⟶ P) (q : Cc ⟶ D') (f : D' ⟶ P) (κ : A ⟶ M)
     (d : M ⟶ N) (e : N ⟶ D') (h : x ≫ y ≫ q = κ ≫ d ≫ e) (n : q ≫ f = c ≫ i) :
     x ≫ y ≫ c ≫ i = κ ≫ d ≫ e ≫ f := by

@@ -18,8 +18,7 @@ isomorphisms, `F δ` for some `δ : X₃ ⟶ X₁⟦1⟧`, then the cone `X₂` 
 five lemma for triangles.
 
 Auxiliary: `CategoryTheory.Functor.commShiftObjIsoOfIso` transports the commutation with shifts
-along an isomorphism of functors, and `CategoryTheory.Functor.map_comp_hom_eq_of_eq_inv_comp`
-rearranges an equation between composites of isomorphisms into the form needed above.
+along an isomorphism of functors.
 -/
 
 @[expose] public section
@@ -35,17 +34,6 @@ noncomputable def commShiftObjIsoOfIso {A : Type*} [AddMonoid A] {C D : Type*} [
     (a : A) (X : C) : F.obj (X⟦a⟧) ≅ (F.obj X)⟦a⟧ :=
   e.app _ ≪≫ (G.commShiftIso a).app X ≪≫ (shiftFunctor D a).mapIso (e.app X).symm
 
-/-- If `ε ≫ m ≫ θ = β₁⁻¹ ≫ F g ≫ β₂` for isomorphisms `β₁ : F X ≅ A`, `β₂ : F Y ≅ B`,
-`ε : A ≅ P`, `θ : Q ≅ B`, then `F (g ≫ s) = (β₁ ≪≫ ε) ≫ m ≫ (θ ≪≫ β₂⁻¹ ≪≫ F s)` for every
-isomorphism `s : Y ≅ Z`. -/
-lemma map_comp_hom_eq_of_eq_inv_comp {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
-    {X Y Z : C} {A B P Q : D} (g : X ⟶ Y) (s : Y ≅ Z) (β₁ : F.obj X ≅ A) (β₂ : F.obj Y ≅ B)
-    (ε : A ≅ P) (m : P ⟶ Q) (θ : Q ≅ B) (h : ε.hom ≫ m ≫ θ.hom = β₁.inv ≫ F.map g ≫ β₂.hom) :
-    F.map (g ≫ s.hom) = (β₁ ≪≫ ε).hom ≫ m ≫ (θ ≪≫ β₂.symm ≪≫ F.mapIso s).hom := by
-  simp only [Iso.trans_hom, Iso.symm_hom, mapIso_hom, Category.assoc]
-  rw [reassoc_of% h]
-  simp
-
 variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObject D]
   [HasShift C ℤ] [HasShift D ℤ] [Preadditive C] [Preadditive D]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
@@ -54,7 +42,14 @@ variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObj
 /-- Let `F ≅ G` with `G : C ⥤ D` triangulated, `T` a distinguished triangle in `D` and
 `δ : X₃ ⟶ X₁⟦1⟧` a morphism in `C` such that `F δ` is the connecting morphism `T₃ ⟶ T₁⟦1⟧` up to
 isomorphisms `F X₃ ≅ T₃` and `T₁⟦1⟧ ≅ F (X₁⟦1⟧)`. Then `δ` is the third morphism of a
-distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁⟦1⟧` with `F X₂ ≅ T₂`. -/
+distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁⟦1⟧` with `F X₂ ≅ T₂`. The hypothesis `h` is the
+commutativity of
+```
+  F X₃ ──F δ──▶ F (X₁⟦1⟧)
+   │ e₃            ▲ θ
+   ▼               │
+   T₃ ───T.mor₃──▶ T₁⟦1⟧
+``` -/
 lemma exists_distinguished_iso_obj₂_of_iso {F G : C ⥤ D} [G.CommShift ℤ] [G.IsTriangulated]
     (e : F ≅ G) (T : Triangle D) (hT : T ∈ distTriang D) {X₁ X₃ : C} (δ : X₃ ⟶ X₁⟦(1 : ℤ)⟧)
     (e₃ : F.obj X₃ ≅ T.obj₃) (θ : T.obj₁⟦(1 : ℤ)⟧ ≅ F.obj (X₁⟦(1 : ℤ)⟧))

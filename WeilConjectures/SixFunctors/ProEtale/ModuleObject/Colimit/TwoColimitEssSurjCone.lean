@@ -39,6 +39,18 @@ open CategoryTheory Limits Pretriangulated
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+/-- If `ε ≫ m ≫ θ = β₁⁻¹ ≫ F g ≫ β₂` for isomorphisms `β₁ : F X ≅ A`, `β₂ : F Y ≅ B`,
+`ε : A ≅ P`, `θ : Q ≅ B`, then `F (g ≫ s) = (β₁ ≪≫ ε) ≫ m ≫ (θ ≪≫ β₂⁻¹ ≪≫ F s)` for every
+isomorphism `s : Y ≅ Z`. -/
+private lemma CategoryTheory.Functor.map_comp_hom_eq_of_eq_inv_comp {C D : Type*} [Category* C]
+    [Category* D] (F : C ⥤ D) {X Y Z : C} {A B P Q : D} (g : X ⟶ Y) (s : Y ≅ Z)
+    (β₁ : F.obj X ≅ A) (β₂ : F.obj Y ≅ B) (ε : A ≅ P) (m : P ⟶ Q) (θ : Q ≅ B)
+    (h : ε.hom ≫ m ≫ θ.hom = β₁.inv ≫ F.map g ≫ β₂.hom) :
+    F.map (g ≫ s.hom) = (β₁ ≪≫ ε).hom ≫ m ≫ (θ ≪≫ β₂.symm ≪≫ F.mapIso s).hom := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+  rw [reassoc_of% h]
+  simp
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl

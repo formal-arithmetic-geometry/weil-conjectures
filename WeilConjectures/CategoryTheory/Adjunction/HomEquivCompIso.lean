@@ -79,7 +79,14 @@ induced by data `t, t', φ, ψ, ψ', r', r, t ⊣ r', ψ ⊣ r, e, e'` between c
 through functors `QC, QC', QD, QE` and comparison morphisms `cT, cT', cΦ, cΨ, cΨ', fR', fR`,
 compatibly with the units, counits and the isomorphisms `τ, τ'`. Then `compIsoTransfer` at
 `QC' Y` is, modulo the comparison isomorphisms, the image under `QC` of the `compIsoTransfer` of
-the underlying data. -/
+the underlying data: the square
+```
+  R' (T' (QC' Y)) ──compIsoTransfer adj' adj τ τ'──▶ R (Ψ' (QC' Y))
+        │ R' cT' ≫ fR'                                  │ R cΨ' ≫ fR
+        ▼                                                ▼
+  QC (r' (t' Y)) ──QC (compIsoTransfer ad' ad e e')──▶ QC (r (ψ' Y))
+```
+commutes. -/
 lemma compIsoTransfer_comparison {H H' HD HE : Type*} [Category H] [Category H'] [Category HD]
     [Category HE] {t : H ⥤ HD} {t' : H' ⥤ HD} {φ : HD ⥤ HE} {ψ : H ⥤ HE} {ψ' : H' ⥤ HE}
     {r' : HD ⥤ H} {r : HE ⥤ H} (ad' : t ⊣ r') (ad : ψ ⊣ r) (e : t ⋙ φ ≅ ψ) (e' : t' ⋙ φ ≅ ψ')
