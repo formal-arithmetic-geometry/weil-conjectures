@@ -1,0 +1,90 @@
+{
+ "id": "lem-sf-refinement-open-restriction-factorization",
+ "kind": "statement",
+ "title": "Factorization of the specified refinement restriction component",
+ "statement": "For every M : DerivedCategory (pbcModules X (R.ring X)), refinementRestriction R r hi M equals the hom component of refinementPull R r hi at the r.hom-direct-image of the c.i-extension, followed by the pullback along c.i of the proper derived counit for r.hom at that extension.",
+ "source": {
+  "document": "lean/Sheaf/Paper/IntegralCompactSupportCoefficientComparison.lean",
+  "place": "Definition refinementRestriction; Tags 03D8 and 0D6D."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G7",
+  "date": "2026-10-28",
+  "document": "lean/Sheaf/Paper/IntegralCompactSupportCoefficientComparison.lean",
+  "place": "Definition refinementRestriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "refinementRestriction refinementPull counit",
+   "results": "The exact factorization is the defining equation of refinementRestriction; no separate existing theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "Split as a small definitional factorization statement."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-refinement-open-restriction-is-iso-components",
+   "place": "Factorization of the specified component before the clopen counit argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RefinementOpenRestrictionComponentIsIso",
+  "group": "G7",
+  "date": "2026-10-28"
+ },
+ "proof": [
+  {
+   "text": "Unfold the definition of refinementRestriction. It is defined as the component of the refinementPull isomorphism followed by the pullback of the proper derived adjunction counit, so the displayed equality is reflexivity after unfolding.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RefinementProperCounitIsIso",
+  "file": "lean/Sheaf/Paper/RefinementProperCounitIsIso.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.refinementRestriction_factorization",
+  "statement": "theorem refinementRestriction_factorization (M : DerivedCategory (pbcModules X (R.ring X))) : refinementRestriction R r hi M = (refinementPull R r hi).hom.app ((push R r.hom).obj ((openExtension R c.i).mapDerivedCategory.obj M)) ≫ (pull R c.i).map ((proEtaleRingDerivedAdjunction r.hom (R.ring d.Z) (R.ring c.Z) (R.pull r.hom)).counit.app ((openExtension R c.i).mapDerivedCategory.obj M))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T233949-L-4143883",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T233949-L-4143883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
