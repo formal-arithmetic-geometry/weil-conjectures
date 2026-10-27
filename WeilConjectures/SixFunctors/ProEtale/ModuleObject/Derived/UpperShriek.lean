@@ -32,7 +32,8 @@ adjunction `Rf_!(c) ⊣ Rf^!(c)` is the composite of these two adjunctions.
 The only input is that `Rg_*` on bounded constructible complexes is a left adjoint for proper `g`
 (`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
 `isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`,
-`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`, `sorry`ed). As the
+`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`; see
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence`). As the
 pushforward on bounded constructible complexes, everything is stated for each of the `ℓ`-adic
 coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E` (in the namespaces `ProEtale.CondensedRing`,
 `ProEtale.CondensedRing.ContinuousMapRingObj` and `ProEtale.CondensedRing.PadicIntegersRingObj`).
@@ -54,13 +55,16 @@ adjunction `Rf_! ⊣ Rf^!` is the adjunction `Rf_!(c) ⊣ Rf^!(c)`.
   `ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`: the adjunction
   `Rf_! ⊣ Rf^!`.
 
-## Sorried input
+## The input
 
 - `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
   `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj` and
   `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`:
   for `g` proper, `Rg_*` on bounded constructible `ℚ̄_ℓ`-, `E`- and `𝒪_E`-sheaves is a left
-  adjoint.
+  adjoint. For `k` finite or separably closed this is the restriction to `Dᵇc` of the Brown
+  adjoint on the localizing closures (the `_of_finite_or_isSepClosed` theorems of
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence`); for
+  the other fields it is the `_of_not` theorems there.
 
 ## Implementation notes
 
@@ -97,9 +101,6 @@ variable {Z Y : Over (Spec (.of k))}
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (g : Z ⟶ Y)
-
-/- `[IsProper g.left]` is a binder of each instance, not a section variable: an instance proved
-by `sorry` does not use it, so as a section variable it would be silently dropped. -/
 
 /-- Blueprint `sk-def-sfb-dc-upper-shriek` (the constructible adjunction `Rf_! ⊣ Rf^!` at the
 stage `ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`). For a proper morphism

@@ -7605,6 +7605,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
+public import WeilConjectures.CategoryTheory.Adjunction.RestrictEssImage
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations
 public import WeilConjectures.CategoryTheory.Adjunction.RingHomEquivCore
@@ -7913,6 +7914,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleCoy
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationAdjoint
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationLift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
@@ -12949,6 +12951,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence

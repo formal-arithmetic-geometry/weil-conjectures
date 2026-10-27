@@ -34,13 +34,25 @@ restriction theorems (blueprints `sk-thm-restriction` and `sk-thm-int-restrictio
 subcategories `Dᵇc ⊆ Loc(Dᵇc)` (`CategoryTheory.Adjunction.isLeftAdjoint_of_essImage`,
 `isLeftAdjoint_lift_rightDerivedLowerStar_of_localizing`).
 
+## Other fields
+
+For `k` neither finite nor separably closed, `cd_ℓ(k)` may be infinite and the bounded
+constructible complexes need not be compact in `Loc(Dᵇc)`, so Brown representability does not
+apply. The case of `E̲` reduces to that of `𝒪̲_E` by inverting `ℓ`
+(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj`).
+
 ## Sorried input
 
-The restriction theorems, blueprints `sk-thm-restriction` (for `E` and `ℚ̄_ℓ`) and
-`sk-thm-int-restriction` (for `𝒪_E`), are stated here and `sorry`ed:
-`boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj`,
-`boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj` and
-`boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj`.
+- For `k` neither finite nor separably closed:
+  `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not` and
+  `isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not`. Following the
+  blueprint proofs, they need the étale `Rg^!` on the torsion levels and the derived limit of
+  pro-étale `𝒪̲_E`-complexes, respectively the `2`-colimit over the finite extensions `E`.
+- The restriction theorems, blueprints `sk-thm-restriction` (for `E` and `ℚ̄_ℓ`) and
+  `sk-thm-int-restriction` (for `𝒪_E`):
+  `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj`,
+  `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicIntegersRingObj` and
+  `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj`.
 -/
 
 @[expose] public section
