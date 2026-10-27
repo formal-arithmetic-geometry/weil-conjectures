@@ -31,7 +31,7 @@ Proof: each of the three factors in shiftedLine is the image of an isomorphism. 
 theorem completedRealization_shiftedLine_isIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (e : CompletedRealization l X) :
     IsIso (e.shiftedLine l X) := by
-  dsimp only [CompletedRealization.shiftedLine]
+  unfold CompletedRealization.shiftedLine
   infer_instance
 
 attribute [local instance] completedRealization_shiftedLine_isIso
