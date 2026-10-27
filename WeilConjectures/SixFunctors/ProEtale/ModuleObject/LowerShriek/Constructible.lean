@@ -37,7 +37,7 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory.Mod
 
 variable {C : Type w} [Category.{v} C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
-  {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
+  {R : C} [MonObj R] [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)]
 
 /-- A zero module object is finitely presented: it is the cokernel of the zero map between free
 modules of rank zero. -/
