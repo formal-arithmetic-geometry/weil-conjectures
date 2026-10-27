@@ -2,7 +2,7 @@
  "id": "lem-pur-scalar-reduction-transpose-normalization",
  "kind": "statement",
  "title": "Normalized scalar quotient presentation determines the coherent counit by double transpose",
- "status": "unsplit",
+ "status": "split",
  "statement": "Fix a prime $\\ell$, finite extensions $E\\subset L/\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$, uniformizers $\\varpi_E,\\varpi_L$ and an embedding $\\iota:E\\to L$ [def-weil-l-adic-coefficient-extension], and a scheme $W$ on which $\\ell$ is invertible. On $W_{\\mathrm{proet}}$ put $A_{E,m}=(\\mathcal O_E/\\varpi_E^m)_W$, $B_m=(\\mathcal O_L/\\varpi_L^m)_W$ and $R_E=\\varprojlim_mA_{E,m}$ [def-weil-completed-integral-coefficients], with the same-index coefficient maps $A_{E,m}\\to B_m$ and actual quotient transitions of [def-weil-integral-scalar-extension]. Let $S_Y$ be a normalized primitive scalar realization model for $\\iota$ on $W$ in the sense of [def-trf-integral-comparison-realization-models], let $A$ be an object of the derived category of $R_E$-modules, and let $P\\to A$ be a representative by a flat-term K-flat complex $P$ of $R_E$-modules [def-a1-flat-term-kflat-complex]. Let $C(P)$ be the strict $B_\\bullet$-system with term $C(P)_m=(P\\otimes_{R_E}A_{E,m})\\otimes^L_{A_{E,m}}B_m$, let $a_m:C(P)_m\\xrightarrow{\\sim}P\\otimes_{R_E}B_m$ be $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$, and use the actual quotient transitions. The canonical quotient presentation $(P,C(P),e_P,a)$ supplied by the normalized realization/effectivity data satisfies $\\operatorname{CoefficientReductionPresentation}(P,C(P),e_P,a)$ of [def-pur-coefficient-reduction-presentation]. Let $u_{S_Y,P}$ be the scalar realization isomorphism and let $e_{C(P)}$ be the coherent reduction/realization counit. After identifying the target by the $a_m$, the composite $c_{S_Y,P}=e_{C(P)}\\circ\\mathcal R_L(u_{S_Y,P})$ is the unique coherent system morphism whose double transpose under the reduction/total-limit adjunction and the constant-tower/total-limit adjunction is the localization of the strict tensor-unit map determined by the $a_m$. The canonical coherent counit comparison $c^{\\mathrm{can}}_P$ of [lem-pur-coefficient-extension-reduction-model] has the same double transpose; hence uniqueness of transposes gives $c_{S_Y,P}=c^{\\mathrm{can}}_P$ as an entire coherent quotient-system morphism, with all actual transitions retained. This identifies the arbitrary normalized model comparison with the coefficient-extension model comparison before any finite-level evaluation.",
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension",
@@ -21,9 +21,78 @@
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
   "place": "The scalar-extension comparison is the transpose of scalar-extended evaluation; after the tensor associator the nested composites transpose to the same evaluation, so uniqueness of transposes gives equality."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On the flat-term K-flat representative P, the finite-level scalar-association maps a_m are isomorphisms, and the actual quotient maps commute with them. The coherent counit/effectivity theorem for the normalized B-tower therefore supplies e_P and makes (P,C(P),e_P,a) satisfy both equations in CoefficientReductionPresentation: levelwise normalized reduction and every m≥n transition square. This is an assertion about the strict system, so all actual transitions are retained.",
+   "uses": [
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-trf-effective-comparison-realization-models",
+    "def-pur-coefficient-reduction-presentation",
+    "def-weil-integral-scalar-extension",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "The scalar-extension comparison is the transpose of scalar-extended evaluation; the scalar associator is the displayed map and coherent quotient transitions are retained."
+   }
+  },
+  {
+   "text": "The scalar-realization normalization of S_Y says that the reduction isomorphism u_{S_Y,P}, after the reduction/total-limit and constant-tower/total-limit adjunctions, transposes to the localization of the strict tensor-unit map determined by the a_m. By the adjunction R_L ⊣ L_L of the reduction calculus, the transpose of a map h into L_L C(P) is e_{C(P)}∘R_L(h); hence c_{S_Y,P}=e_{C(P)}∘R_L(u_{S_Y,P}) is exactly the reduction/total-limit transpose of u_{S_Y,P}, and by the unit/counit identities its inverse transpose L_L(c_{S_Y,P})∘η is u_{S_Y,P} again. So c_{S_Y,P} has the stated double transpose. The equality is in the whole derived system category, not merely after finite evaluation.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-trf-effective-comparison-realization-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "The map v_{K,M} is the transpose of scalar-extended evaluation; the adjunction identifies the target and the comparison is determined before evaluation."
+   }
+  },
+  {
+   "text": "Write D=(P⊗_{R_E}B_m)_m with its actual quotient transitions; by the definition of the integral scalar extension, S_{E,L}P is the total derived limit L_L D of this strict system, computed on P. The canonical comparison c^{can}_P of the coefficient-extension/reduction model is the coherent counit e_D:R_L L_L D→D followed by a^{-1}:D→C(P), the inverse of the scalar-association maps a_m. Naturality of the counit in the reduction calculus gives a^{-1}∘e_D=e_{C(P)}∘R_L L_L(a^{-1}), so c^{can}_P is the reduction/total-limit transpose of L_L(a^{-1}):L_L D→L_L C(P). Transposing L_L(a^{-1}) under constant-tower/total-limit gives the total-limit projection of D followed by the a_m^{-1}; on P this is x↦x⊗1∈P⊗B_m followed by a_m^{-1}, i.e. x↦(x⊗1)⊗1, and a_m((x⊗a)⊗b)=x⊗ab is the associator through which the two nested composites agree. Hence the double transpose of c^{can}_P is the same localized strict tensor-unit map determined by the a_m. The model's transition compatibility makes this an equality of entire coherent quotient-system morphisms.",
+   "uses": [
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-integral-scalar-extension",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "For nested rings, the associator is U tensor_S (S tensor_R K) ≅ U tensor_R K; both composites transpose to the same evaluation, so they are equal."
+   }
+  },
+  {
+   "text": "The composite of the reduction/total-limit transpose bijection and the constant-tower/total-limit transpose bijection is injective. Since c_{S_Y,P} and c^{can}_P have the same double transpose, uniqueness of transposes gives c_{S_Y,P}=c^{can}_P in the derived category of coherent quotient systems. An equality there implies equality of every evaluated component and of the induced transition squares, so the actual quotient transitions remain part of the conclusion.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "For nested rings, both composites transpose to the same evaluation; hence they are equal by uniqueness of transposes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coefficient-reduction-presentation",
+  "def-trf-integral-comparison-realization-models",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-scalar-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-trf-effective-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "The scalar-extension comparison is the transpose of scalar-extended evaluation; after the tensor associator the nested composites transpose to the same evaluation, and uniqueness of transposes gives equality."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -96,10 +165,59 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Scalar-extension comparisons are transposes of scalar-extended evaluation; the tensor associator makes the nested composites transpose to the same evaluation, and uniqueness of transposes gives equality.",
+   "place": "The scalar-extension comparison is the transpose of scalar-extended evaluation; after the tensor associator the nested composites transpose to the same evaluation, so uniqueness of transposes gives equality.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-scalar-reduction-transpose-normalization",
+  "worker": "stage1",
+  "summary": "The live statement has no finished Lean declaration and no Mathlib theorem matching its project-specific coherent-system assertion. I retained the statement and split its argument into four steps: canonical association/effectivity and the coefficient-reduction-presentation equations; the normalized scalar model's double-transpose characterization; the canonical coefficient-extension comparison's matching transpose via the tensor associator; and injectivity of the two adjunction transpose bijections. The proof stays at the whole coherent quotient-system level and explicitly retains actual transitions.",
+  "blueprint": "Realizes the scalar-extension paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md: scalar-extended evaluation, the tensor associator, and uniqueness of transposes.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-effective-comparison-realization-models",
+    "why": "Provides canonical coherent quotient presentations and the normalized whole-system counit for flat-term K-flat representatives."
+   },
+   {
+    "node": "def-trf-integral-comparison-realization-models",
+    "why": "Defines the double-transpose normalization that determines the entire scalar realization comparison."
+   },
+   {
+    "node": "def-weil-integral-scalar-extension",
+    "why": "Supplies the actual same-index coefficient maps and their transition compatibility."
+   },
+   {
+    "node": "def-weil-integral-reduction-tower",
+    "why": "Supplies the actual coherent reduction-tower transitions retained in the conclusion."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Steps 2-4 take from its statement the reduction/realization adjunction, its counit, naturality and the unit/counit identities on whole derived systems; unit sk-def-purity-conv has no node for this calculus."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Step 1 takes the coherent counit isomorphisms M⊗^L A_n≅M_n for the normalized tower (P⊗B_m)_m; no node of sk-def-purity-conv states effectivity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-effective-comparison-realization-models",
+  "def-trf-integral-comparison-realization-models",
+  "def-weil-integral-scalar-extension",
+  "def-weil-integral-reduction-tower",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NC-e7fc0c06d",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-e7fc0c06d (reviewer sub-agent of L); spot-checked: Read in full: the item's unchanged statement, its 4 new steps, the statements of all 8 cited nodes, and the blueprint source (lem-coef-integral-finite-extension.proof.md, the v_{K,M} transpose/associator paragraph). The statement is true. c_{S_Y,P}=e_C∘R_L(u) is the R_L⊣L_L adjunct of u. c^can=a^{-1}∘e_D, which by naturality of e equals e_C∘R_L L_L(a^{-1}). S_{E,L}P=L_L(P⊗B_m) by the definition in def-weil-integral-scalar-extension. L_L(a^{-1}) transposes to x↦(x⊗1)⊗1, the strict tensor-unit map that def-trf's scalar normalization pins. Edge cases L=E, P=0, empty W and ramified (same-index ρ_m) all check, and no flatness of A_m→B_m is used. No new nodes; no duplicate in the DAG (rg -L found lem-trf-coherent-quotient-model-comparison and lem-pur-adic-roos-realization-reductions, both different); no cycle; no SGA. Fixes, in the item file only: (1) C8: lem-coef-derived-system-evaluation-calculus and lem-coef-normalized-dvr-effectivity are off-unit statements (sk-prop-sf-biduality-general) the worker did not declare; added to split_report.tool_uses. All three off-unit tool uses, including the declared lem-trf-effective-comparison-realization-models, are accepted as generic calculus, matching the sibling lem-pur-coefficient-extension-reduction-model. (2) E5: step 3's 'sends both nested composites through the associator' replaced by the explicit counit-naturality/adjunct/tensor-unit argument, with steps 2's adjunct formula also made explicit. (3) Step 4 claimed derived-category equality 'is' componentwise equality, a false converse; changed to 'implies'. Advisory, not this delivery's fault: e_P is left implicit in the statement, and the single-field presentation predicate is applied to an E→L datum.; 1 file(s) fixed by the reviewer"
  }
 }
