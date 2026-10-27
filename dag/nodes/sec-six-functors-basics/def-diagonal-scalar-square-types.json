@@ -1,0 +1,103 @@
+{
+ "id": "def-diagonal-scalar-square-types",
+ "kind": "definition",
+ "title": "Shared presentation of full scalar restriction squares",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a condensed commutative coefficient ring Lambda and f:X -> S, ScalarRightDerived Lambda f abbreviates the full universal direct-image model DiagonalRightDerived(lowerStar Lambda f) of [lem-diagonal-canonical-right-derived]. For a coefficient map a:Lambda -> Lambda-prime, CanonicalScalarSquare a f R abbreviates exactly the RestrictionSquare of [def-sfb-diagonal-coefficient-scalars] from R to the canonical Lambda-prime model. ScalarMateIsIso a s abbreviates exactly the proposition that for every K in the unbounded derived category of Lambda modules on X, the actual scalar mate of s at K is an isomorphism. These aliases add no data, hypothesis, quotient, or normalization.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-scalars",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1): full universal integral direct-image model, normalized restriction square to the canonical quotient model, and its actual scalar mate on every unbounded complex."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Full universal right derived model, normalized restriction square, and invertibility of the scalar mate",
+   "results": "8 general derived-functor and derived-adjunction matches, including LocalizerMorphism.isIso and Adjunction.derived_eta/epsilon; none names this project-specific full-unit square.",
+   "date": "2026-10-27",
+   "verdict": "Keep the existing project notions and give transparent type aliases only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "12 right-derived universal-property matches, including rightDerivedUnique and rightDerivedNatIso.",
+   "date": "2026-10-27",
+   "verdict": "These supply the underlying theory already used by DiagonalRightDerived; no new notion is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarRightDerived|CanonicalScalarSquare|ScalarMateIsIso",
+   "results": "Mathlib search: 0 hits. Project search: no exact declarations; unrelated purScalarRightDerivedComparison uses a different interface.",
+   "date": "2026-10-27",
+   "verdict": "Add aliases for the existing normalized-square interface to avoid repeated expansion of inferred category instances."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "group": "B5",
+  "item": "Sheaf.Paper.DiagonalUniformizerScalarSquares",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-uniformizer-scalar-squares",
+   "place": "Normalized scalar squares: share their existing types before arithmetic specialization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalScalarSquareTypes",
+  "file": "lean/Sheaf/Paper/DiagonalScalarSquareTypes.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarRightDerived",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarRightDerived",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CanonicalScalarSquare",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarMateIsIso"
+  ],
+  "statement": "abbrev ScalarRightDerived\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]\n    {X S : Scheme.{u}} (f : X ⟶ S)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd286",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210115-L-1656928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd286",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210115-L-1656928",
+  "kind": "interface",
+  "note": "independent cc review: K1 cd28 files vs B5 5f7d / C6 634f deliveries (identical Lean except a docstring paragraph, nodes differ only in group/date) and the prior fixes; fixes re-applied onto K1 files and checked against clone d573f4ab (owners, scalarSixPullbackData_exists, published restriction_square sorry-free); fixed set + importer DiagonalUniformizerScalarFrame compiled OK with #print axioms"
+ }
+}

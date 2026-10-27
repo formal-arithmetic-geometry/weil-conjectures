@@ -1,0 +1,118 @@
+{
+ "id": "lem-diagonal-uniformizer-point-resolution",
+ "kind": "statement",
+ "title": "Rank-one condensed resolution of the actual uniformizer quotient",
+ "statement": "For a prime l, a finite intermediate extension E of Q_l in its algebraic closure, pi generating the maximal ideal of the integer ring O_E, and n natural, there exists a short exact sequence of condensed O_E modules at the profinite point whose first two terms are isomorphic to the regular O_E module and whose third is isomorphic to the regular completedResidue l E pi n module restricted along the actual quotientMap l E pi n. Here the arithmetic coefficient objects and actual quotient map are those of [def-sfb-diagonal-coefficient-diagrams], and PointModules is the internal point-module category of [def-sfb-integral-finite-scalar-model-interfaces].",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-integral-finite-scalar-model-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "The maximal ideal of O_E is nonzero, so its generator pi and its positive power r are nonzero. Form the pointwise condensed module maps multiplication by r and actual quotient reduction; the monoid-hom law makes reduction linear.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quotient ideal is open: the inverse image of the field ball of radius norm(r) around zero lies in (r). Every element in this ball divides by r inside O_E. Thus the quotient topology is discrete. A set-theoretic section of its surjective quotient map is continuous and lifts every continuous profinite section.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Injectivity of multiplication is pointwise cancellation. A continuous section in the kernel of reduction divides continuously by r in the ambient field; membership in the principal ideal ensures the quotient remains in O_E. Therefore the sequence is sectionwise short exact. Reflect this through the faithful forgetful functor to internal module objects. The first two terms and the quotient have the stated regular-module identifications.",
+   "uses": [
+    "lem-pe-internal-module-sectionwise-short-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pe-internal-module-sectionwise-short-exact"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), finite free coefficient argument for the cofinal uniformizer quotients"
+ },
+ "proof_origin": {
+  "by": "C6 stage-3 worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), finite free coefficient argument for the cofinal uniformizer quotients"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite perfect coefficient quotient: normalized scalar/direct-image mate is an isomorphism",
+   "results": "Derived adjunction factorization lemmas; no direct condensed finite-resolution scalar mate theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the stated finite-free derived comparison and projection, with explicit normalization and transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biproductUniqueIso",
+   "results": "biproductUniqueIso, biproductUniqueIso_hom, biproductUniqueIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Identifies the rank-one free module with the Fin 1 biproduct."
+  },
+  {
+   "tool": "grep",
+   "query": "pushHomOfComapIso|scalarDirectImageMate|integralFiniteScalarPerfectModel",
+   "results": "No Mathlib match; project search finds the finite-free comparison and projection APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use project declarations and prove the normalization glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "B5",
+  "item": "Sheaf.Paper.DiagonalUniformizerScalarSquares",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-uniformizer-restriction-mate-isIso",
+   "place": "Point resolution and finite-free projection parts of the mate-invertibility argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalUniformizerPointResolution",
+  "file": "lean/Sheaf/Paper/DiagonalUniformizerPointResolution.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalUniformizer_pointResolution",
+  "statement": "theorem diagonalUniformizer_pointResolution\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ) :\n    ∃ P : ShortComplex (IntegralFiniteScalar.PointModules\n        (CommMon.mk (Profinite.padicIntegersRingObj.{u} l E.1))),\n      P.ShortExact ∧\n      Nonempty (P.X₁ ≅ Mod.regular (Profinite.padicIntegersRingObj.{u} l E.1)) ∧\n      Nonempty (P.X₂ ≅ Mod.regular (Profinite.padicIntegersRingObj.{u} l E.1)) ∧\n      Nonempty (P.X₃ ≅ (Mod.comap (quotientMap l E π n)).obj\n        (Mod.regular (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd286",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210115-L-1656928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd286",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210115-L-1656928",
+  "kind": "interface",
+  "note": "independent cc review: K1 cd28 files vs B5 5f7d / C6 634f deliveries (identical Lean except a docstring paragraph, nodes differ only in group/date) and the prior fixes; fixes re-applied onto K1 files and checked against clone d573f4ab (owners, scalarSixPullbackData_exists, published restriction_square sorry-free); fixed set + importer DiagonalUniformizerScalarFrame compiled OK with #print axioms"
+ }
+}

@@ -8,7 +8,8 @@
   "def-sfb-diagonal-coefficient-endpoints",
   "def-sfb-diagonal-coefficient-scalars",
   "lem-diagonal-canonical-right-derived",
-  "def-sfb-diagonal-coefficient-diagrams"
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-diagonal-scalar-square-types"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
@@ -16,33 +17,24 @@
  },
  "proof": [
   {
-   "text": "Construct the full-unit-normalized restriction/direct-image square for the actual quotient reduction by transporting the two-term finite-free uniformizer resolution through the universal right-derived units.",
+   "text": "Use transparent aliases for the original derived model, normalized square and all-complex mate predicate, to share category instances. Use the rank-one short exact condensed resolution of the actual quotient. The private abstract-coefficient assembly identifies each rank-one regular term with its Fin 1 biproduct, applies the finite-free normalized scalar-squares theorem, and packages the resulting square and its mate invertibility as ScalarSquareIsomorphisms. Specialize this construction to the uniformizer quotient map and R.",
    "uses": [
-    "lem-diagonal-uniformizer-restriction-square"
+    "lem-diagonal-uniformizer-point-resolution",
+    "lem-diagonal-finite-resolution-scalar-mate",
+    "def-diagonal-scalar-square-types"
    ],
    "elementary": false
-  },
-  {
-   "text": "For the constructed square, identify its scalar mate after exact restriction with the projection comparison of the two-term finite-free resolution; the projection comparison is invertible on every complex and restriction reflects isomorphisms.",
-   "uses": [
-    "lem-diagonal-uniformizer-restriction-mate-isIso"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Package the square and its pointwise mate isomorphisms into ScalarSquareIsomorphisms.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-diagonal-uniformizer-restriction-square",
-  "lem-diagonal-uniformizer-restriction-mate-isIso"
+  "lem-diagonal-uniformizer-point-resolution",
+  "lem-diagonal-finite-resolution-scalar-mate",
+  "def-diagonal-scalar-square-types"
  ],
  "proof_origin": {
-  "by": "S2 stage-3 worker",
+  "by": "C6 stage-3 worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
-  "place": "Paragraph (1), decomposed into normalized square existence and mate invertibility"
+  "place": "Paragraph (1), rank-one quotient resolution and the finite free scalar comparison."
  },
  "mathlib_searches": [
   {
@@ -91,7 +83,7 @@
   "module": "Sheaf.Paper.DiagonalUniformizerScalarSquares",
   "file": "lean/Sheaf/Paper/DiagonalUniformizerScalarSquares.lean",
   "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_scalar_squares",
-  "statement": "theorem diagonal_uniformizer_scalar_squares\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (R : DiagonalRightDerived\n      (CondensedRing.lowerStar (Profinite.padicIntegersRingObj.{u} l E.1) f)) :\n    Nonempty (ScalarSquareIsomorphisms (quotientMap l E π n) f R)",
+  "statement": "theorem diagonal_uniformizer_scalar_squares\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (R : ScalarRightDerived (Profinite.padicIntegersRingObj.{u} l E.1) f) :\n    Nonempty (ScalarSquareIsomorphisms (quotientMap l E π n) f R)",
   "branch": "sheaf-dag",
   "by": "K2",
   "date": "2026-10-27",
@@ -100,7 +92,8 @@
    "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_square",
    "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_mate_isIso",
    "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_scalar_squares"
-  ]
+  ],
+  "note": "Transparent ScalarRightDerived, CanonicalScalarSquare, and ScalarMateIsIso aliases preserve the expanded statement definitionally while sharing its category instances."
  },
  "reviewed": {
   "date": "2026-10-26",
@@ -115,18 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
-  "result": "pass",
-  "landing": "20261027T012905-L-2344306",
+  "reviewer": "C-cd286",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210115-L-1656928",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_mate_isIso",
-   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_square"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_uniformizer_restriction_mate_isIso"
-  ]
+  "note": "independent cc review: K1 cd28 files vs B5 5f7d / C6 634f deliveries (identical Lean except a docstring paragraph, nodes differ only in group/date) and the prior fixes; fixes re-applied onto K1 files and checked against clone d573f4ab (owners, scalarSixPullbackData_exists, published restriction_square sorry-free); fixed set + importer DiagonalUniformizerScalarFrame compiled OK with #print axioms"
  }
 }

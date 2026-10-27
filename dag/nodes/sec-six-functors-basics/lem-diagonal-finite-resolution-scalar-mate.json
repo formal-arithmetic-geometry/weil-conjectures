@@ -1,0 +1,139 @@
+{
+ "id": "lem-diagonal-finite-resolution-scalar-mate",
+ "kind": "statement",
+ "title": "Rank-one point resolutions give normalized scalar squares",
+ "statement": "Let a:Lambda -> Lambda-prime be a map of commutative ring objects in condensed abelian groups. Suppose a short exact sequence P of condensed Lambda modules has first two terms isomorphic to the regular Lambda module and cokernel isomorphic to the regular Lambda-prime module restricted along a. For every scheme morphism f:X -> Y and every full universal right-derived model R of Lambda direct image, a full-unit-normalized RestrictionSquare exists to the canonical Lambda-prime direct image. For every such square and every unbounded K in D(Lambda_X), its scalar-adjunction mate at K is an isomorphism. The module categories are those of [def-sfb-diagonal-coefficient-category], the normalized square and actual mate are those of [def-sfb-diagonal-coefficient-scalars], and the full universal models and canonical model are those of [lem-diagonal-canonical-right-derived]. Independently of any resolution, for every such a, f and R a full-unit-normalized RestrictionSquare from R to the canonical Lambda-prime direct image exists.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-scalars",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof": [
+  {
+   "text": "Identify each of the two rank-one regular terms with its Fin 1 biproduct. The specified short exact finite free point resolution gives the augmentation-normalized derived tensor comparison beta, the pullback square, and the equation identifying restricted gamma with the projection of its cone.",
+   "uses": [
+    "lem-sfb-finite-free-scalar-derived-comparison",
+    "def-sfb-integral-finite-scalar-model-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Projection is invertible on this finite free cone for every unbounded K. Cancel beta and the normalized restriction/direct-image isomorphism in the mate equation. Restriction of scalars is conservative on homology, so gamma is invertible.",
+   "uses": [
+    "lem-sfb-finite-free-scalar-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized pullback theta has scalar mate the exact restriction/pullback comparison. Iterating mates identifies its conjugate restrictionPush with the geometric mate of that comparison. The exact derived-adjunction factorization gives the full cochain-unit equation.",
+   "uses": [
+    "lem-sfb-scalar-six-derived-pullback-normalization",
+    "new-comap-upper-star-iso-mate",
+    "lem-diagonal-canonical-right-derived",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The full cochain-unit equation determines a restriction square uniquely: derive the direct image followed by exact restriction using K-injective computation and use rightDerived_ext, cancelling the localization isomorphisms. Transport the canonical integral model to R by its unit-preserving rightDerivedUnique isomorphism. The scalar mate changes by precomposition with the scalar image of that isomorphism, so its invertibility follows from gamma. The existence part uses only the normalized scalar pullback data and this transport, no resolution.",
+   "uses": [
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-free-scalar-derived-comparison",
+  "def-sfb-integral-finite-scalar-model-interfaces",
+  "lem-sfb-finite-free-scalar-projection",
+  "lem-sfb-scalar-six-derived-pullback-normalization",
+  "new-comap-upper-star-iso-mate",
+  "lem-diagonal-canonical-right-derived",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions, and Formal properties: finite free cone projection and normalized mates."
+ },
+ "proof_origin": {
+  "by": "C6 stage-3 worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions, and Formal properties: finite free cone projection and normalized mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite perfect coefficient quotient: normalized scalar/direct-image mate is an isomorphism",
+   "results": "Derived adjunction factorization lemmas; no direct condensed finite-resolution scalar mate theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the stated finite-free derived comparison and projection, with explicit normalization and transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biproductUniqueIso",
+   "results": "biproductUniqueIso, biproductUniqueIso_hom, biproductUniqueIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Identifies the rank-one free module with the Fin 1 biproduct."
+  },
+  {
+   "tool": "grep",
+   "query": "pushHomOfComapIso|scalarDirectImageMate|integralFiniteScalarPerfectModel",
+   "results": "No Mathlib match; project search finds the finite-free comparison and projection APIs.",
+   "date": "2026-10-27",
+   "verdict": "Use project declarations and prove the normalization glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "B5",
+  "item": "Sheaf.Paper.DiagonalUniformizerScalarSquares",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-uniformizer-restriction-mate-isIso",
+   "place": "Point resolution and finite-free projection parts of the mate-invertibility argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalUniformizerMateComparison",
+  "file": "lean/Sheaf/Paper/DiagonalUniformizerMateComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.rankOnePointResolution_scalarSquares",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.rankOnePointResolution_scalarSquares",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.normalizedRestrictionSquare_exists"
+  ],
+  "statement": "theorem rankOnePointResolution_scalarSquares\n    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']\n    (a : Λ ⟶ Λ') [IsMonHom a]\n    (h : ∃ P : ShortComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ),\n      P.ShortExact ∧ Nonempty (P.X₁ ≅ Mod.regular Λ) ∧\n        Nonempty (P.X₂ ≅ Mod.regular Λ) ∧\n        Nonempty (P.X₃ ≅ (Mod.comap a).obj (Mod.regular Λ')))\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (R : DiagonalRightDerived (CondensedRing.lowerStar Λ f)) :\n    Nonempty (RestrictionSquare a f R\n        (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ' f))) ∧\n      ∀ (s : RestrictionSquare a f R\n          (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ' f)))\n        (K : DerivedCategory (Modules Λ X)), IsIso ((s.mate a).app K)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd286",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210115-L-1656928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cd286",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210115-L-1656928",
+  "kind": "interface",
+  "note": "independent cc review: K1 cd28 files vs B5 5f7d / C6 634f deliveries (identical Lean except a docstring paragraph, nodes differ only in group/date) and the prior fixes; fixes re-applied onto K1 files and checked against clone d573f4ab (owners, scalarSixPullbackData_exists, published restriction_square sorry-free); fixed set + importer DiagonalUniformizerScalarFrame compiled OK with #print axioms"
+ }
+}
