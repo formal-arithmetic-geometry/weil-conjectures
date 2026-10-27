@@ -20354,3 +20354,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:41 L: merged deliver/N4/Sheaf.Paper.LisseTowerLocalizedRealization (stage 3; reviewer PASS; first push; landing 20261027T234123-L-4073 (interface); batch 20261027T233735; modules 4; new nodes 3)
 - 23:41 L: merged deliver/N4/Sheaf.Paper.PodReindexingEvaluatedComparison (stage 3; reviewer PASS; first push; landing 20261027T234124-L-4700 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:41 L: merged deliver/N4/Sheaf.SixFunctors.CoefIntegralFiniteExtensionUInvertibility (stage 3; reviewer PASS; first push; landing 20261027T234126-L-5369 (interface); batch 20261027T233735; modules 3; new nodes 2)
+- 23:41 L: merged deliver/P1/Sheaf.Paper.CoefficientNormalizedInternalHomFibers (stage 3; reviewer PASS; first push; landing 20261027T234127-L-6001 (interface); batch 20261027T233735; modules 4; new nodes 3)

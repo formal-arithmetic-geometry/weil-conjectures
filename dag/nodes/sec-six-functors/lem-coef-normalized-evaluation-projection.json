@@ -1,0 +1,195 @@
+{
+ "id": "lem-coef-normalized-evaluation-projection",
+ "kind": "statement",
+ "title": "Finite-prefix tensor projection for a normalized coefficient system",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and a scheme $W$ [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Work on its small pro-etale site with independent object, arrow and coefficient universes [def-weil-pbc-proetale-site, def-weil-size-convention]. Write $A$ for the completed integral coefficient sheaf and $B_n=(\\mathcal O_E/\\varpi^{n+1})_W$ [def-weil-completed-integral-coefficients]. Use ordinary unbounded derived categories [def-weil-abstract-derived-category] of actual coefficient sequence-site modules and finite coefficient modules, with exact evaluation $e_n$ [def-coef-ringed-sequence-site] and their closed tensor structures [def-coef-ringed-tensor-hom-model]. Fix reduction data $R$ [def-coef-derived-system-calculus-data], with representative normalizations as specified in [lem-coef-normalized-reduction-models]. Assume evaluation tensor normalization $h_E$. Let $M$ be a derived coefficient system satisfying $\\mathrm{IsNormalizedCoefficientSequence}$, meaning that its actual horizontal reductions are invertible for every adjunction to the specified coefficient restriction. For each $n$, any $L\\dashv e_n$ with unit $\\eta$, and each finite derived object $P$, the adjunct of $(\\eta_P\\otimes 1_{e_nM})\\,(R.\\mathrm{evaluationTensor}(n))^{-1}_{LP,M}$ is invertible. Equivalently, the unit-defined projection $L(P\\otimes e_nM)\\longrightarrow LP\\otimes M$ is an isomorphism. No internal Hom or normalized second argument is assumed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-normalized-reduction-models"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26; Stacks Tag 07A4. Fixed-model specialization of the projection step in proof step 1 of lem-coef-normalized-internal-hom-fibers."
+ },
+ "proof": [
+  {
+   "text": "Use the derived singleton extension to supply a canonical left adjoint to e_n. Any L is uniquely isomorphic to it by a unit-compatible adjunction comparison. Transport the projection along this comparison.",
+   "uses": [
+    "lem-pur-system-single-derived-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the actual evaluation tensor comparison with the semilinear evaluation comparison on flat-term K-flat representatives. The hE square fixes its ordinary pure-tensor value, so it is the same descended comparison. Compare the scalar adjunctions with those used in semilinear normalized systems by uniqueness of left adjoints to the actual restrictions. The actual definition requires invertibility for every such adjunction, hence supplies the semilinear normalized condition.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-prefix projection calculation: below n it is scalar tensor reassociation followed by the normalized reduction of M, and above n both sides are zero. Normalization makes the below-n components invertible; exact evaluations jointly detect invertibility in the derived system category. This is the semilinear cartesian projection theorem, with the preceding identifications ensuring its unit-defined map is the displayed actual map.",
+   "uses": [
+    "lem-coef-semilinear-cartesian-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport back to L using its unit-compatible comparison. At n=0 the prefix has one level; for zero objects and the empty site the same zero-object equations apply. No flatness of a quotient ring is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-cartesian-projection",
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-pur-system-single-derived-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26; Stacks Tag 07A4. Fixed-model specialization of the projection step in proof step 1 of lem-coef-normalized-internal-hom-fibers."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of normalized inverse systems of modules evaluated at a finite coefficient quotient",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AdicCompletion.eval",
+     "AdicCompletion.coe_eval",
+     "AdicCompletion.eval_of",
+     "AdicCompletion.pi_apply_coe",
+     "AdicCompletion.eval_apply",
+     "AdicCompletion.eval_comp_of",
+     "AdicCompletion.transitionMap_comp_eval",
+     "AdicCompletion.piEquivOfFintype"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give generic monoidal-closed or tensor tools, or unrelated completion and algebra evaluations. None states this fixed-model varying-coefficient tensor assertion. The generic adjunction tools are used in the parent proof; the remaining issue is identifying the specified representative comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"Functor\"",
+   "results": {
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom",
+     "CategoryTheory.FunctorToTypes.monoidalClosed",
+     "CategoryTheory.MonoidalClosedFunctor",
+     "CategoryTheory.MonoidalClosedFunctor.comparison_iso",
+     "CategoryTheory.MonoidalClosedFunctor.mk",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.monoidalClosed",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.closed",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give generic monoidal-closed or tensor tools, or unrelated completion and algebra evaluations. None states this fixed-model varying-coefficient tensor assertion. The generic adjunction tools are used in the parent proof; the remaining issue is identifying the specified representative comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*[Ee]val|[Hh]om.*[Cc]omposition",
+   "results": {
+    "n_hits": 23,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Adjunction/Basic.lean",
+     "Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean",
+     "Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean",
+     "Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean",
+     "Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean",
+     "Mathlib/CategoryTheory/Preadditive/FreydCategory/Homotopy.lean",
+     "Mathlib/CategoryTheory/Preadditive/HomOrthogonal.lean"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give generic monoidal-closed or tensor tools, or unrelated completion and algebra evaluations. None states this fixed-model varying-coefficient tensor assertion. The generic adjunction tools are used in the parent proof; the remaining issue is identifying the specified representative comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived evaluation of normalized coefficient systems tensor projection formula and tensor horizontal transition compatibility",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPolynomial.rTensor_apply_tmul_apply",
+     "OrthonormalBasis.tensorProduct_repr_tmul_apply'",
+     "MvPolynomial.scalarRTensor_apply_tmul_apply",
+     "DFinsupp.comul_comp_lapply",
+     "IsLocalFrameOn.coeff_apply_of_mem",
+     "Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val",
+     "PiTensorProduct.toDualContinuousMultilinearMap_apply_apply",
+     "MvPolynomial.coeff_rTensorAlgHom_tmul"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "The hits give generic monoidal-closed or tensor tools, or unrelated completion and algebra evaluations. None states this fixed-model varying-coefficient tensor assertion. The generic adjunction tools are used in the parent proof; the remaining issue is identifying the specified representative comparisons."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientNormalizedInternalHomFibers",
+  "date": "2026-10-28",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26; Stacks Tag 07A4. Fixed-model specialization of the projection step in proof step 1 of lem-coef-normalized-internal-hom-fibers.",
+   "via": [
+    "lem-coef-normalized-internal-hom-fibers",
+    "lem-coef-derived-system-resolution-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedEvaluationProjection",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedEvaluationProjection.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedEvaluationProjection",
+  "statement": "theorem coefficientNormalizedEvaluationProjection\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hE : CoefficientEvaluationTensorNormalization l E W R)\n    (M : coefficientSequenceDerived l E W)\n    (hM : IsNormalizedCoefficientSequence l E W M) (n : ℕ)\n    (L : normalizedDVRDerived l E W n ⥤ coefficientSequenceDerived l E W)\n    (adj : L ⊣ coefficientSequenceDerivedEvaluation l E W n)\n    (P : normalizedDVRDerived l E W n) :\n    IsIso ((adj.homEquiv _ _).symm\n      ((R.finiteClosed n).tensor.map\n          (Prod.mkHom (adj.unit.app P)\n            (𝟙 ((coefficientSequenceDerivedEvaluation l E W n).obj M))) ≫\n        (R.evaluationTensor n).inv.app (L.obj P, M)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T234127-L-6001",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T234127-L-6001",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -23,38 +23,54 @@
  },
  "proof": [
   {
-   "text": "Apply the semilinear derived-system calculus. Normalize its scalar adjunctions by the ordinary quotient units and localized counits in Q. Their left-adjoint comparison identifies its cartesian reductions with the recorded normalized coefficient reductions. Finite-prefix left extension and its tensor projection formula give the internal-Hom evaluation isomorphisms.",
+   "text": "Uncurry the reduction and finite composition equations. Naturality of evaluation and tensor, together with the inverse-comparison associativity equation, identify both uncurried maps. Injectivity of the closed transpose gives the stated preservation of internal composition.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-pur-system-level-left-extension"
+    "lem-coef-normalized-tensor-associativity"
    ],
    "elementary": false
   },
   {
-   "text": "Compare the fiber isomorphisms by their inverse closed transposes: tensor-model uncurrying gives the same ordinary evaluation on simultaneous K-flat and K-injective representatives. The semilinear HomReductionFormula, with Q.tensor_model identifying the reduced evaluation word, then gives the actual fiber transition formula.",
+   "text": "Construct a left adjoint to actual coefficient evaluation: choose the scalar models and their tensor coherence, take the singleton derived extension, and transport its adjunction across the strict-system equivalence and derived exact evaluation comparison.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-pur-system-level-left-extension"
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-tensor-coherence",
+    "lem-pur-system-single-derived-extension",
+    "def-coef-semilinear-derived-calculus",
+    "lem-pur-system-evaluation-topos",
+    "lem-pur-system-ringed-sequence-site"
    ],
    "elementary": false
   },
   {
-   "text": "Apply ringed pullback-Hom composition to reduction and finite scalar extension. The representative tensor normalizations identify their tensor maps; the supplied ordinary associator models identify the monoidal constraints. Thus the equations are precisely CoefficientInternalHomComposition for the given R.",
+   "text": "Apply the normalized tensor projection theorem. The conjugate mate between the two closed adjunctions is then invertible. Its inverse mate gives a natural fiber isomorphism, and the triangle identities prove exactly the fiber evaluation equation. Only M needs normalization here.",
    "uses": [
-    "lem-coef-ringed-pullback-hom-evaluation-comparison"
+    "lem-coef-normalized-evaluation-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uncurry the required transition equation. Use naturality of the actual horizontal transition and the normalized tensor horizontal equality to rewrite the evaluated system evaluation. Substitute the two fiber evaluation equations. Since the normalized source transition is an isomorphism, cancel its tensor map and transpose back. Naturality in source and target identifies the final factor with internal Hom of the inverse source transition and the target transition.",
+   "uses": [
+    "lem-coef-normalized-tensor-horizontal"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-ringed-pullback-hom-evaluation-comparison",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-system-level-left-extension"
+  "def-coef-semilinear-derived-calculus",
+  "lem-coef-normalized-evaluation-projection",
+  "lem-coef-normalized-tensor-associativity",
+  "lem-coef-normalized-tensor-horizontal",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-system-tensor-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 0A95 (lemma-RHom-well-defined), 0941 (lemma-derived-limit-is-ok); original resolution-model proof step 3, semilinear finite-prefix calculus and pullback-Hom composition. The comparison of the fixed normalizations is agent-formulated."
+  "place": "Tags 07A4, 08J9 and 0A98; P1 tensor-first reduction: inverse-comparison associativity, closed-adjunction mates of the finite-prefix projection, and transposition of the tensor horizontal equation. No separately chosen internal-Hom model comparison is required."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -227,9 +243,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261027T210244-L-1680192",
+  "landing": "20261027T234127-L-6001",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
