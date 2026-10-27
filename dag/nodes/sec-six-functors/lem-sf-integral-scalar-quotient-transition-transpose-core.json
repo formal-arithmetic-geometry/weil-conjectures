@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-integral-scalar-quotient-transition-transpose-core",
+ "kind": "statement",
+ "title": "Residual transpose mate calculation for scalar quotient transition",
+ "statement": "After transporting the level-m scalar quotient comparison through the completion isomorphism, the residual finite reduction and tensor-square composite has the same normalized-adjunction transpose as the L-side unit, restriction-comparison inverse, counit, and level-n residual quotient composite.",
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-models",
+  "def-sf-scalar-reduction-exchange"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4, mate calculation after completion naturality"
+ },
+ "proof": [
+  {
+   "text": "Expand the finite reduction comparison and tensor-square residual, then use the defining mate equation of scalarReductionExchange together with the unit and counit triangle identities. The two resulting coefficient restriction composites agree by the scalar quotient square.",
+   "uses": [
+    "def-sf-integral-finite-extension-models",
+    "def-sf-scalar-reduction-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-models",
+  "def-sf-scalar-reduction-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralScalarQuotientTransitionTranspose",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4, residual mate calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residual mate calculation scalar quotient tensor square",
+   "results": "Only generic mate calculus; no exact project-specific declaration.",
+   "verdict": "no exact match",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv naturality mate",
+   "results": "Generic adjunction naturality declarations.",
+   "verdict": "generic ingredient only",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_reduction_transition_transpose_core",
+   "results": "No duplicate declaration.",
+   "verdict": "no duplicate",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralScalarQuotientTransitionTranspose",
+  "date": "2026-10-28",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-scalar-quotient-transition-transpose",
+   "place": "Proof step 2 residual mate calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefIntegralScalarQuotientTransitionTransposeCore",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralScalarQuotientTransitionTransposeCore.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.quotient_reduction_transition_transpose_core",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.quotientResidual",
+   "WeilConjectures.IntegralFiniteExtension.quotient_reduction_transition_transpose_core"
+  ],
+  "statement": "theorem quotient_reduction_transition_transpose_core (K : IntegralVerdier.Ambient l E X) (hK : IsSfDerivedComplete l E X K) {m n : ℕ} (h : n ≤ m) : (completion l E L ι X K hK).inv ≫ (normalizedDVRIntegralAdjunction l L X m).homEquiv ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K) ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) ⋙ normalizedDVRRes l L X h).obj ((scalarReductionDerivedExtension l E X n).obj K)) ((quotientResidual l E L ι X K m).hom ≫ (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map (normalizedDVRReductionTransition l E X D hl h K) ≫ (scalarReductionExchange l E L ι X h).app ((scalarReductionDerivedExtension l E X n).obj K)) = (normalizedDVRIntegralAdjunction l L X n).unit.app ((integralScalarExtensionOfUniverses l E L ι X).obj K) ≫ (normalizedDVRIntegralAdjunction l L X m).homEquiv ((scalarReductionDerivedExtension l L X n ⋙ scalarReductionDerivedRestriction l L X n).obj ((integralScalarExtensionOfUniverses l E L ι X).obj K)) ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) ⋙ normalizedDVRRes l L X h).obj ((scalarReductionDerivedExtension l E X n).obj K)) ((scalarReductionDerivedExtension l L X m).map ((normalizedDVRResCompletedComp l L X D hl h).inv.app ((scalarReductionDerivedExtension l L X n).obj ((integralScalarExtensionOfUniverses l E L ι X).obj K))) ≫ (normalizedDVRIntegralAdjunction l L X m).counit.app ((normalizedDVRRes l L X h).obj ((scalarReductionDerivedExtension l L X n).obj ((integralScalarExtensionOfUniverses l E L ι X).obj K))) ≫ (normalizedDVRRes l L X h).map ((scalarReductionDerivedExtension l L X n).map (completion l E L ι X K hK).inv ≫ (quotientResidual l E L ι X K n).hom))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T234139-L-13439",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T234139-L-13439",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

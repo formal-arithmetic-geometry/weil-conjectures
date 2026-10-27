@@ -6,6 +6,7 @@ module
 
 public import Sheaf.SixFunctors.CoefScalarReductionExchange
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionModels
+import Sheaf.SixFunctors.CoefIntegralScalarQuotientTransitionTransposeCore
 
 /-! # Transpose calculation for scalar quotient transitions
 
@@ -59,6 +60,15 @@ theorem quotient_reduction_transition_transpose
             ((integralScalarExtensionOfUniverses l E L ι X).obj K) ≫
           (normalizedDVRRes l L X h).map
             (quotient l E L ι X n K hK).hom) := by
-  sorry
+  simp only [normalizedDVRReductionTransition, scalarReductionExchange, quotient,
+    Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [Adjunction.homEquiv_naturality_left]
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom]
+  simp only [Category.assoc]
+  rw [Adjunction.homEquiv_naturality_left]
+  simpa only [normalizedDVRReductionTransition, scalarReductionExchange, quotientResidual,
+    Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom, Functor.comp_obj,
+    Functor.comp_map, Functor.map_comp, Adjunction.homEquiv_counit, Category.assoc] using
+    (quotient_reduction_transition_transpose_core l E L ι X D hl K hK h)
 
 end WeilConjectures.IntegralFiniteExtension

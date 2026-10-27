@@ -20365,3 +20365,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:41 L: merged deliver/P3/Sheaf.SixFunctors.CoefIntegralFiniteExtensionVInvertibility (stage 3; reviewer PASS; first push; landing 20261027T234136-L-11660 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:41 L: merged deliver/P4/Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclic (stage 3; reviewer PASS; first push; landing 20261027T234137-L-12273 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:41 L: merged deliver/P4/Sheaf.Paper.ConstantCompletionFiniteSystemModules (stage 3; reviewer PASS; first push; landing 20261027T234138-L-12835 (proof); batch 20261027T233735; modules 1; new nodes 0)
+- 23:41 L: merged deliver/P4/Sheaf.SixFunctors.CoefIntegralScalarQuotientTransitionTranspose (stage 3; reviewer PASS; first push; landing 20261027T234139-L-13439 (interface); batch 20261027T233735; modules 2; new nodes 1)
