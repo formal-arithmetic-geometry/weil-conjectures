@@ -2,7 +2,7 @@
 
 40 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (1 clusters, 4051 modules)
+## Rework: quarantined by the upstream sync (1 clusters, 3830 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -40,10 +40,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedPullbackTowerRealizations` | 10 | 3 | proof | route |
 | `Sheaf.Paper.FinitePullbackTensorQuotientRepresentatives` | 10 | 1 | proof | route |
 | `Sheaf.Paper.IntegralOperationsScalarComparisons` | 10 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.SfP1IntegralSectionComparison` | 11 | 1 | proof | route |
 | `Sheaf.Paper.AmbientPullbackTensorCoherence` | 11 | 1 | proof | route |
 | `Sheaf.Paper.CompletedPullbackTowerCore` | 11 | 2 | proof | route |
 | `Sheaf.Paper.SfAlgebraicallyClosedCoefficients` | 11 | 2 | proof | route |
-| `Sheaf.AlgebraicGeometry.SfDiagonalSectionForgetSupports` | 12 | 1 | proof | route |
 | `Sheaf.Paper.IntegralPullbackStrictFiniteComponent` | 12 | 1 | proof | route |
 | `Sheaf.Paper.PrimitiveQuotientScalarModelExistence` | 12 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProperShriekCompSupports` | 14 | 1 | proof | route |
