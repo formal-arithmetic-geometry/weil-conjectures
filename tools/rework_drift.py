@@ -604,6 +604,15 @@ def precompile(rows: dict, cands: list[str], g: dict, deadline: float, state_pat
     counts = collections.Counter()
     lock = threading.Lock()
     todo = list(topo(cset, g))
+    # 2026-10-28 (maintainer): the candidates most quarantined modules wait for go first. In plain import order the
+    # roots under Sheaf.SixFunctors/Sheaf.Targets (219 and 213 waiting importers) came after ~200 Sheaf.Paper leaves
+    # and kept the freeze up. A module's weight (its quarantined importers) exceeds each importer's, so the order stays
+    # an import order; ready() still waits for dependencies.
+    wt = collections.Counter()
+    for x in live:
+        for d in (li.closure(x, g, memo) & live) - {x}:
+            wt[d] += 1
+    todo.sort(key=lambda m: -wt[m])
     running: set = set()
     pub = published()
     prev = _jload(state_path).get("results") or {}
