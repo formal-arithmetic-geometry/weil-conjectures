@@ -6,6 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.Paper.FinitePullbackTensorKFlatNormalization
+import Sheaf.Paper.FinitePullbackTensorOrdinaryQuotientSquareComponent
 
 /-! # The ordinary total-tensor quotient and pullback square
 
@@ -114,6 +115,12 @@ theorem finitePullbackTensor_ordinary_quotient_square {X Y : Scheme.{u}} (f : X 
         (coefficientFiniteQuotientUnitSection l E Y h) P Q ay →
       GX.map km.hom ≫ ax.hom ≫ TXn.map
           (Prod.mkHom (cc.hom.app P) (cc.hom.app Q)) =
-        cc.hom.app (TYm.obj (P, Q)) ≫ Fn.map ay.hom ≫ kn.hom := by sorry
+        cc.hom.app (TYm.obj (P, Q)) ≫ Fn.map ay.hom ≫ kn.hom := by
+  dsimp
+  intro km kn ax ay hkm hkn hax hay
+  apply HomologicalComplex.Hom.ext
+  funext i
+  exact finitePullbackTensor_ordinary_quotient_square_component l E f h c hc cc hcc P Q i
+    km kn ax ay hkm hkn hax hay
 
 end WeilConjectures

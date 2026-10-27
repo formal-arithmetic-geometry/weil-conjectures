@@ -20272,3 +20272,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/G1/Sheaf.Paper.IntegralHomModelsExist (stage 3; reviewer PASS; first push; landing 20261027T233941-L-4140222 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:39 L: merged deliver/G1/Sheaf.Paper.RationalP1ScalarChernBaseChangeChern (stage 3; reviewer PASS; first push; landing 20261027T233942-L-4140445 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:39 L: merged deliver/G2/Sheaf.WeilSheaf.NativeOpenProperForgetting (stage 3; reviewer FIX; first push; landing 20261027T233943-L-4140677 (interface); batch 20261027T233735; modules 1; new nodes 0)
+- 23:39 L: merged deliver/G3/Sheaf.Paper.FinitePullbackTensorOrdinaryQuotientSquare (stage 3; reviewer PASS; first push; landing 20261027T233945-L-4141226 (interface); batch 20261027T233735; modules 2; new nodes 1)
