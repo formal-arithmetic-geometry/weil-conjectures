@@ -16,13 +16,12 @@ public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 
 For a trait model `M` over the base, the cone of the duality map `δ_{M,K}` is supported on
 finitely many closed points of the special fibre
-(`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap`), given that `δ` becomes an
-isomorphism on the special fibre of the generic slice of every coordinate of the total space
-(`NearbyCyclesModel.isIso_map_nearbyDualityMap_sliceSpecialMap`, blueprint
-`det-tf-nearby-duality-slice`): around every point of the special fibre, the coordinates of a
-local chart of the total space detect closed points, and the cone vanishes over the generic point
-of each coordinate line
-(`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`).
+(`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap`), provided that `δ` becomes an
+isomorphism on the special fibre of the generic slice of every coordinate of the restrictions of
+the total space to opens (the generic-slice step of blueprint `det-tf-nearby-duality-slice`, taken
+as a hypothesis): around every point of the special fibre, the coordinates of a local chart of the
+total space detect closed points, and the cone vanishes over the generic point of each coordinate
+line (`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`).
 
 -/
 
@@ -99,19 +98,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar 
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
 
-/-- **Nearby duality in a generic slice** (blueprint `det-tf-nearby-duality-slice`, with the
-dimension induction of `sk-prop-tf-nearby-duality-foundation`): for a coordinate
-`b : 𝒳 ⟶ 𝔸¹_S` of the total space of a trait model `M` over the base, the duality map
-`δ_{M,K}` becomes an isomorphism on the special fibre `(𝒳 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic
-slice. -/
-theorem isIso_map_nearbyDualityMap_sliceSpecialMap (D : NearbyDualizingData k k' ℓ)
-    (h : M.IsTraitModelOfBase k q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
-    (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (L((sliceSpecialMap (traitSliceCoord k') h.isTraitModelOver hb)^*⟦
-      Profinite.padicAlgClRingObj ℓ⟧).map (nearbyDualityMap ℓ D h K).hom) :=
-  sorry
-
 section OpenRestriction
 
 variable {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
@@ -162,12 +148,22 @@ end OpenRestriction
 
 set_option maxHeartbeats 1000000 in
 -- the triangles of the duality map live on large derived categories
-/-- **Finite support of the cone of the duality map** (blueprint
-`sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): the duality map `δ_{M,K}` of a
-trait model over the base is an isomorphism away from finitely many closed points of the special
-fibre. -/
+/-- **Finite support of the cone of the duality map, from the generic slices** (blueprint
+`sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if, for every open `V` of the
+total space and every coordinate `b : 𝒳_V ⟶ 𝔸¹_S` of the restriction `M|_V`, the duality map of
+`M|_V` becomes an isomorphism on the special fibre of the generic slice of `b` (`hslice`, the
+generic-slice step of blueprint `det-tf-nearby-duality-slice`), then the duality map `δ_{M,K}` is
+an isomorphism away from finitely many closed points of the special fibre. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData k k' ℓ)
-    (h : M.IsTraitModelOfBase k q g) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (h : M.IsTraitModelOfBase k q g)
+    (hslice : ∀ (V : M.total.Opens) [QuasiCompact V.ι]
+      {b : (M.restrictOpen V).total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
+      (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = V.ι ≫ q)
+      (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧),
+      IsIso (L((sliceSpecialMap (traitSliceCoord k')
+        (h.restrictOpen V).isTraitModelOver hb)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          (nearbyDualityMap ℓ D (h.restrictOpen V) L).hom))
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (S : Finset X'.left) (hS : ∀ x ∈ S, IsClosed {x}),
       IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (opensOverι (finsetComplOpens S hS))).map (nearbyDualityMap ℓ D h K)) := by
@@ -226,7 +222,7 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMap (D : NearbyDualizingData 
     refine ⟨traitSliceField k', inferInstance, traitSlicePoint (traitSliceCoord k'),
       ⟨⊥, Ideal.isPrime_bot⟩, isGenericPoint_traitSlicePoint_traitSliceCoord k' _, ?_⟩
     have : IsOpenImmersion (M.restrictOpenHom V).total := inferInstanceAs (IsOpenImmersion V.ι)
-    have hs := isIso_map_nearbyDualityMap_sliceSpecialMap ℓ D hR (hcoord a)
+    have hs := hslice V (hcoord a)
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).obj K)
     have hs' := (isIso_map_map_nearbyDualityMap_iff_of_isOpenImmersion ℓ (j := 𝟙 X)
       (j' := M.restrictSpecialFibreι V) ((boundedConstructible _).ι ⋙
