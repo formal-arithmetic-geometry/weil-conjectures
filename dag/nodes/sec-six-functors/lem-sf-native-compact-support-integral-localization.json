@@ -1,0 +1,189 @@
+{
+ "id": "lem-sf-native-compact-support-integral-localization",
+ "kind": "statement",
+ "title": "Rational localization of the normalized integral scalar comparison",
+ "statement": "Fix a prime $\\ell$, a finite-field datum $D$ with $\\ell\\ne D.p$, finite-type schemes $X,Y$ over $D.k$, a separated finite-type relative map $f$, compactification $c$, a coefficient construction $P$, NativeGeometry, a StageAction and source/target ordinary realizations [def-sf-locally-finite-adic-compact-support-data, def-sf-constructible-exceptional-coefficient-construction-data, def-sf-locally-finite-adic-realization-data]. Let change_E be completed-to-native coefficient Changes agreeing with every normalized coefficient presentation at every scheme, and fix the invertibility instances for the coefficient prime in residue fields of $X$ [def-pur-integral-compact-support-coefficient-data]. For each finite unlifted coefficient index $E$, there is a natural isomorphism between the source and target finite-stage rational compact-support functors. On every integral finite-Tor representative its component satisfies exactly IntegralComponent, the original six-arrow formula [lem-sf-native-integral-scalar-morphism]. No field-transition or common-field descent assertion is made.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; raw scalar-localization universal property"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "lem-sf-native-integral-scalar-morphism",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Apply the integral natural scalar-morphism theorem at E, using the given coefficient-map equality for the source and target presentations.",
+   "uses": [
+    "lem-sf-native-integral-scalar-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; raw scalar-localization universal property"
+   }
+  },
+  {
+   "text": "At a finite-Tor input its derived section map is b followed by the actual scalar mate followed by d. Both outer maps are isomorphisms; the scalar-mate theorem makes the middle map invertible. Thus the composite is an isomorphism. Native derived sections reflect isomorphisms.",
+   "uses": [
+    "lem-sf-native-compact-support-scalar-mate-invertible",
+    "def-sf-locally-finite-adic-compact-support-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; raw scalar-localization universal property"
+   }
+  },
+  {
+   "text": "The residue-Tor equality of object predicates lets every integral constructible object be regarded as a finite-Tor object without changing its ambient derived object or morphisms. Hence every component of the integral natural morphism is invertible. Form its natural isomorphism using these same component arrows. Their naturality is the original morphism naturality.",
+   "uses": [
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; raw scalar-localization universal property"
+   }
+  },
+  {
+   "text": "Apply ScalarLocalization.naturalIso_of_integral to the integral coefficient ring, the integral constructible triangulated category and the two finite-stage functors. Supply the integral shift-linearity instances explicitly. This gives a rational natural isomorphism whose components at localization objects are exactly those of the integral natural isomorphism. Equality transport gives IntegralComponent on every finite-Tor input.",
+   "uses": [
+    "lem-real-raw-localization-natural-iso",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; raw scalar-localization universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-residue-tor",
+  "lem-real-raw-localization-natural-iso",
+  "lem-sf-native-compact-support-scalar-mate-invertible",
+  "lem-sf-native-integral-scalar-morphism",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; raw scalar-localization universal property; detailed decomposition of the existing finite-comparison plan by N3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with compactly supported derived pushforward for finite adic coefficient fields and locally finite algebraic closure coefficients",
+   "results": "8 hits: CompactlySupportedContinuousMap.compLinearMap, AdicCompletion.tensor_map_id_left_eq_map, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, PresheafOfModules.pushforward_obj_obj, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforward_map_app_apply', SheafOfModules.pushforwardSections_coe. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support.*scalar|scalar.*compact.support",
+   "results": "0 hits: . ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation obtained by extension of scalars commutes with compact support and coefficient field inclusions",
+   "results": "8 hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.extendScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.extendScalars_id_comp, ModuleCat.ExtendRestrictScalarsAdj.Unit.map. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of completed finite p-adic integral coefficient sheaves into locally finite algebraic closure valued functions commutes with inverse image",
+   "results": "8 hits: PadicAlgCl.instCoePadic, CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp, CondensedSet.LocallyConstant.functorFullyFaithful, Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_symm_apply, Padic.adicCompletionEquiv, CategoryTheory.Sheaf.imageι_val. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CommRingCat",
+   "results": "4 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.Modules.sheafComposePushforwardComp, AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "grep",
+   "query": "integralCoefficientSheaf|completedIntegralCommRing|locallyFiniteFunctions",
+   "results": "0 hits: . ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportFiniteComparison",
+  "date": "2026-10-28",
+  "group": "N3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Proposition 6.8.14 and Remark 6.8.15; raw scalar-localization universal property; the native compact-support comparison needed for the coefficient/Weil compatibility passage.",
+   "via": [
+    "lem-sf-native-compact-support-finite-comparison",
+    "lem-sf-locally-finite-adic-compact-support-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompactSupportIntegralLocalization",
+  "file": "lean/Sheaf/Paper/NativeCompactSupportIntegralLocalization.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_integral_localization",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_integral_localization"
+  ],
+  "statement": "theorem native_compact_support_integral_localization [G : NativeGeometry.{u} l]\n    (source : Realization l X) (target : Realization l Y)\n    (stage : StageAction l D hl P c)\n    (change : ∀ E : Index l (PadicAlgCl l),\n      PurCompactSupport.Change (PurCompactSupport.completed l\n        (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (hchange : ∀ (E : Index l (PadicAlgCl l)) (T : Scheme.{u})\n      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E)\n        (embedding l E)), (change E).map T = C.integralMap l T)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (E : Index l (PadicAlgCl l)) :\n    ∃ alpha : finiteSource l D hl P c target stage E ≅ finiteTarget l c source E,\n      ∀ K : finiteTorConstructibleIntegralCategory l\n          (Coefficient.{u} l (PadicAlgCl l) E) X,\n        IntegralComponent l D hl P c source target change E K\n          (alpha.hom.app\n            ((rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj K))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T180714-L-3892967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T180714-L-3892967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

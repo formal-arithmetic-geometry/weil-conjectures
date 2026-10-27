@@ -19773,3 +19773,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:07 L: merged deliver/M8/Sheaf.Paper.EtaleSystemProjectionExistence (stage 3; reviewer PASS; first push; landing 20261027T180710-L-3892409 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:07 L: merged deliver/M9/Sheaf.Paper.ExceptionalRingTransportFamily (stage 3; reviewer PASS; first push; landing 20261027T180712-L-3892609 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:07 L: merged deliver/N2/Sheaf.SixFunctors.EtaleOpenScalarRestrictionTensor (stage 3; reviewer PASS; first push; landing 20261027T180713-L-3892762 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:07 L: merged deliver/N3/Sheaf.Paper.NativeCompactSupportFiniteComparison (stage 3; reviewer PASS; first push; landing 20261027T180714-L-3892967 (interface); batch 20261027T180444; modules 6; new nodes 5)

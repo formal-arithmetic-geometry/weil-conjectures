@@ -1,0 +1,233 @@
+{
+ "id": "lem-sf-native-compact-support-scalar-mate-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the completed-to-native compact-support scalar mate",
+ "statement": "Fix a prime $\\ell$, a finite-field datum $D$ with $\\ell\\ne D.p$, finite-type schemes $X,Y$ over $D.k$, a separated finite-type relative map $f:X\\to Y$ and compactification $c:X\\hookrightarrow Z\\to Y$ [def-weil-finite-field-fiber, def-weil-compactifications-refinements]. Fix NativeGeometry and a finite unlifted coefficient index $E$ [def-sf-locally-finite-adic-compact-support-data, def-weil-algebraically-closed-coefficients]. Let $a$ be a Change from its completed integral coefficient system to native coefficients, with $a.map(T)=C.integralMap$ for every scheme $T$ and normalized coefficient presentation $C$ at $E$ with its canonical embedding [def-pur-integral-compact-support-coefficient-data, def-sf-locally-finite-adic-realization-data]. Then the component of PurCompactSupport.comparison(a,c) at every integral finite-Tor constructible $K$ on $X$ is invertible [def-weil-finite-tor-amplitude]. This is only a statement about the one ambient proper/open scalar mate; it asserts no finite-stage natural comparison or field coherence.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-compactifications-refinements",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "The proper factor makes Z finite type over D.k. Finite-type schemes over a field are Noetherian and finite dimensional; their open immersions are quasi-compact. The different prime is invertible on all schemes. Open reduction and the uniform finite constructibility interval show that L=j_!K is complete constructible. The stratified-perfect characterization makes it bounded below and residue Tor supplies its uniform finite-level Tor bounds.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-open-finite-constructibility-interval",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1"
+   }
+  },
+  {
+   "text": "Use integral compactification-system realization and completed direct-image limits to identify the recorded proper image with actual completed-coefficient direct image, preserving its quotient projections and completion map. Integral direct-image finiteness gives the needed constructibility. The quotient coefficients are perfect over the DVR, using their two-term finite-free resolutions.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-sf-integral-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1"
+   }
+  },
+  {
+   "text": "Factor the normalized completed-to-native map through finite rational coefficients. Localized direct-image comparison is invertible on the bounded-below open object for the proper, hence qcqs, map. The continuous rational realization gives boundedness at E. The bounded proper push comparison for E into the algebraic closure is also invertible. The normalized locally finite coefficient ring realization identifies the target coefficient sheaf and its field inclusions.",
+   "uses": [
+    "lem-sfb-localized-direct-image-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-weil-pbc-condensed-qbar-bounded-push",
+    "lem-sf-locally-finite-coefficient-ring-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1"
+   }
+  },
+  {
+   "text": "Flat K-flat coefficient tensor associativity identifies the two successive scalar extensions with the single one. The ring-sheaf scalar adjunction identifies each direct-image map with the scalar extension of the proper counit. The pasted-mates counit formula identifies their composite with precisely the single proper scalar mate, not an arbitrary isomorphism.",
+   "uses": [
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-pasted-mates-counit-normalization",
+    "def-sfb-derived-push-hom",
+    "def-sfb-mate-push-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1"
+   }
+  },
+  {
+   "text": "On flat-term K-flat resolutions the open scalar mate is the total-tensor isomorphism sending b tensor j_!m to j_!(b restricted tensor m). Localize this map. It is invertible, so is its proper image. Pasting it with the invertible proper scalar mate yields exactly the compact-support scalar mate defined by the specified restriction square, proving the assertion on K.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-open-total-tensor-kflat",
+    "lem-pur-derived-change-of-rings",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sfb-derived-push-hom",
+  "def-sfb-mate-push-hom",
+  "lem-coef-integral-residue-tor",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-kflat-resolution",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1; detailed decomposition of the existing finite-comparison plan by N3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with compactly supported derived pushforward for finite adic coefficient fields and locally finite algebraic closure coefficients",
+   "results": "8 hits: CompactlySupportedContinuousMap.compLinearMap, AdicCompletion.tensor_map_id_left_eq_map, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, PresheafOfModules.pushforward_obj_obj, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforward_map_app_apply', SheafOfModules.pushforwardSections_coe. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support.*scalar|scalar.*compact.support",
+   "results": "0 hits: . ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation obtained by extension of scalars commutes with compact support and coefficient field inclusions",
+   "results": "8 hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.extendScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.extendScalars_id_comp, ModuleCat.ExtendRestrictScalarsAdj.Unit.map. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of completed finite p-adic integral coefficient sheaves into locally finite algebraic closure valued functions commutes with inverse image",
+   "results": "8 hits: PadicAlgCl.instCoePadic, CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val, SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp, CondensedSet.LocallyConstant.functorFullyFaithful, Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_symm_apply, Padic.adicCompletionEquiv, CategoryTheory.Sheaf.imageι_val. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CommRingCat",
+   "results": "4 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.Modules.sheafComposePushforwardComp, AlgebraicGeometry.Scheme.isZero_ellAdicSheaf_of_isEmpty. ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  },
+  {
+   "tool": "grep",
+   "query": "integralCoefficientSheaf|completedIntegralCommRing|locallyFiniteFunctions",
+   "results": "0 hits: . ",
+   "date": "2026-10-27",
+   "verdict": "No direct native compact-support comparison. Use the project coefficient APIs; Mathlib localization APIs supply the formal descent step."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportFiniteComparison",
+  "date": "2026-10-28",
+  "group": "N3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Remark 6.8.15; original finite-comparison steps 3 and 5–7; HRS Lemma 5.3(1); Stacks Tag 0GL1; the native compact-support comparison needed for the coefficient/Weil compatibility passage.",
+   "via": [
+    "lem-sf-native-compact-support-finite-comparison",
+    "lem-sf-locally-finite-adic-compact-support-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompactSupportScalarMateInvertible",
+  "file": "lean/Sheaf/Paper/NativeCompactSupportScalarMateInvertible.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_scalar_mate_invertible",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_scalar_mate_invertible"
+  ],
+  "statement": "theorem native_compact_support_scalar_mate_invertible [G : NativeGeometry.{u} l]\n    (E : Index l (PadicAlgCl l))\n    (a : PurCompactSupport.Change (PurCompactSupport.completed l\n      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (ha : ∀ (T : Scheme.{u})\n      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),\n      a.map T = C.integralMap l T)\n    (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :\n    IsIso ((PurCompactSupport.comparison a c).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T180714-L-3892967",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T180714-L-3892967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

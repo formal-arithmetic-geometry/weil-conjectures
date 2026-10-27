@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Paper.LocallyFiniteAdicCompactSupportData
 
+import Sheaf.Paper.NativeCompletedCoefficientChange
+import Sheaf.Paper.NativeCompactSupportIntegralLocalization
+import Sheaf.Paper.NativeCompactSupportFiniteScalarCoherence
+
 /-! # Finite-stage native compact-support scalar comparisons -/
 
 @[expose] public noncomputable section
@@ -81,6 +85,28 @@ structure FiniteComparison [G : NativeGeometry.{u} l]
     IntegralNormalization l D hl P c F.source F.target stage F.change gamma
 
 
+private theorem integralNormalization_of_components [G : NativeGeometry.{u} l]
+    (F : CoefficientFamily l c) (stage : StageAction l D hl P c)
+    (alpha : ∀ E : Index l (PadicAlgCl l),
+      finiteSource l D hl P c F.target stage E ≅ finiteTarget l c F.source E)
+    (hnormal : ∀ (E : Index l (PadicAlgCl l))
+      (K : finiteTorConstructibleIntegralCategory l
+        (Coefficient.{u} l (PadicAlgCl l) E) X),
+      IntegralComponent l D hl P c F.source F.target F.change E K
+        ((alpha E).hom.app
+          ((rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj K)))
+    (gamma : stage.system.functor ⋙ F.target.J ≅ F.source.J ⋙ actual l c)
+    (hgamma : ∀ A : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X,
+      HEq (gamma.hom.app A) ((alpha A.stage).hom.app A.obj)) :
+    IntegralNormalization l D hl P c F.source F.target stage F.change gamma := by
+  intro E K
+  change IntegralComponent l D hl P c F.source F.target F.change E K _
+  have h := hgamma ((GeneralAlgebraicallyClosedCoefficients.inclusion
+    (l := l) (Ω := PadicAlgCl l) (Y := X) E).obj
+      ((rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l E) X).obj K))
+  have hcomponent : gamma.hom.app _ = (alpha E).hom.app _ := eq_of_heq h
+  exact hcomponent.symm ▸ hnormal E K
+
 /-- The proper/open scalar mate is invertible on finite rational constructible inputs.
 Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15;
 steps 1--10 of the native compact-support realization plan.
@@ -116,6 +142,69 @@ objects. The construction remains at finite stages; descent on arbitrary common-
 Hom classes and native constructibility preservation are separate arguments. -/
 theorem native_compact_support_finite_comparison [G : NativeGeometry.{u} l]
     (stage : StageAction l D hl P c) :
-    ∃ F : CoefficientFamily l c, Nonempty (FiniteComparison l D hl P c stage F) := by sorry
+    ∃ F : CoefficientFamily l c, Nonempty (FiniteComparison l D hl P c stage F) := by
+  classical
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow (by
+    rw [← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq])
+  have hchar : l ≠ ringChar D.k₀ := by
+    simpa only [ringChar.eq D.k₀ D.p] using hl
+  have : LocallyOfFiniteType (Over.mk (X ↘ Spec (.of D.k))).hom := by
+    change LocallyOfFiniteType (X ↘ Spec (.of D.k))
+    infer_instance
+  have : QuasiCompact (Over.mk (X ↘ Spec (.of D.k))).hom := by
+    change QuasiCompact (X ↘ Spec (.of D.k))
+    infer_instance
+  have : LocallyOfFiniteType (Over.mk (Y ↘ Spec (.of D.k))).hom := by
+    change LocallyOfFiniteType (Y ↘ Spec (.of D.k))
+    infer_instance
+  have : QuasiCompact (Over.mk (Y ↘ Spec (.of D.k))).hom := by
+    change QuasiCompact (Y ↘ Spec (.of D.k))
+    infer_instance
+  have : LocallyOfFiniteType (Over.mk (c.g ≫ Y ↘ Spec (.of D.k))).hom := by
+    change LocallyOfFiniteType (c.g ≫ Y ↘ Spec (.of D.k))
+    infer_instance
+  have : QuasiCompact (Over.mk (c.g ≫ Y ↘ Spec (.of D.k))).hom := by
+    change QuasiCompact (c.g ≫ Y ↘ Spec (.of D.k))
+    infer_instance
+  obtain ⟨source⟩ := locally_finite_adic_constructible_realization
+    D.k₀ D.k l hchar (Over.mk (X ↘ Spec (.of D.k)))
+  obtain ⟨target⟩ := locally_finite_adic_constructible_realization
+    D.k₀ D.k l hchar (Over.mk (Y ↘ Spec (.of D.k)))
+  obtain ⟨middle⟩ := locally_finite_adic_constructible_realization
+    D.k₀ D.k l hchar (Over.mk (c.g ≫ Y ↘ Spec (.of D.k)))
+  let change (E : Index l (PadicAlgCl l)) :=
+    (native_completed_coefficient_change l (Coefficient.{u} l (PadicAlgCl l) E)
+      (embedding l E)).choose
+  have hchange (E : Index l (PadicAlgCl l)) (T : Scheme.{u})
+      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E)
+        (embedding l E)) : (change E).map T = C.integralMap l T :=
+    (native_completed_coefficient_change l (Coefficient.{u} l (PadicAlgCl l) E)
+      (embedding l E)).choose_spec T C
+  let F : CoefficientFamily l c :=
+    { source := source
+      target := target
+      middle := middle
+      change := change
+      change_source := fun E ↦ hchange E X (source.coefficient E)
+      change_target := fun E ↦ hchange E Y (target.coefficient E)
+      change_middle := fun E ↦ hchange E c.Z (middle.coefficient E) }
+  have primeUnit : IsUnit (l : Γ(X, ⊤)) := by
+    let ρ := (Scheme.ΓSpecIso (.of D.k)).inv ≫ (X ↘ Spec (.of D.k)).appTop
+    simpa only [map_natCast] using (PurCompactSupport.coefficientPrimeUnit l D hl).map ρ.hom
+  let (x : X) : Invertible (l : X.residueField x) :=
+    (show IsUnit (l : X.residueField x) from by
+      simpa only [map_natCast] using
+        ((primeUnit.map (X.presheaf.germ ⊤ x trivial).hom).map (X.residue x).hom)).invertible
+  have finiteIso (E : Index l (PadicAlgCl l)) :=
+    native_compact_support_integral_localization l D hl P c F.source F.target stage
+      F.change hchange E
+  let alpha (E : Index l (PadicAlgCl l)) := (finiteIso E).choose
+  have halpha (E : Index l (PadicAlgCl l)) := (finiteIso E).choose_spec
+  refine ⟨F, ⟨{ alpha := alpha, transition := ?_, integral := ?_ }⟩⟩
+  · exact native_compact_support_finite_scalar_coherence l D hl P c
+      F.source F.target stage F.change F.change_source F.change_target alpha halpha
+  · exact integralNormalization_of_components l D hl P c F stage alpha halpha
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
