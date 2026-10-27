@@ -3,7 +3,6 @@ module
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import WeilConjectures.CategoryTheory.CompactObject
 public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
-public import Mathlib.CategoryTheory.Idempotents.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.CategoryTheory.Triangulated.Generators
