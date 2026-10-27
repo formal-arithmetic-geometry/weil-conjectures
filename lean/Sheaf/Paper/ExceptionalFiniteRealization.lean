@@ -28,6 +28,12 @@ set_option Elab.async false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry SheafOfModules
 namespace WeilConjectures
+
+-- Since build 2026-10-28 `Scheme.ProjectionRestriction.derived` (with `SemilinearSections.moduleAbelian`) is
+-- also in scope for the strict levels; keep the instances these statements were written against
+-- (those of StrictEtaleSystemInterfaces, which the strict-system fields carry).
+attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+  AlgebraicGeometry.strictEtaleLevelDerived
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
