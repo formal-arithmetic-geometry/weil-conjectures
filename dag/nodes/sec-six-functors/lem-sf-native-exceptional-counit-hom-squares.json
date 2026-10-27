@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-native-exceptional-counit-hom-squares",
+ "kind": "statement",
+ "title": "Normalized exceptional counit lifts and the two cyclic outer Hom squares",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, and a normalized realization family R. Use the model spaces, native Weil categories W(T), common-stage categories C(T), derived forgetting U, realizations rho, ForgetModels and native compact support J of [def-sf-native-exceptional-forgetful-data]. Let X,Y be model spaces, VX,VY any ForgetModels, f0:X.base -> Y.base a separated finite-type model morphism, S any normalized coefficient system and c any compactification of its geometric base change. Write F adjoint G for its specified ordinary adjunction. For T=X,Y let P_T be the exact native Frobenius heart autoequivalence. Give normalized, natural, exact boundary families bX,bY for the cyclic derived Hom sequence of [def-sf-cyclic-derived-hom-data]. Then there is a natural isomorphism a:J;VY -> VX;F with the following property. For each native L in W(Y), there are native H in W(X), e:VX(H) isomorphic to G(VY(L)), and d:J(H)->L such that VY(d)=a_H;F(e);epsilon. For every native K in W(X), there are additive equivalences pMinus from coker(1-T) on ordinary degree -1 Hom(K,H) to coker(1-T) on ordinary degree -1 Hom(J(K),L), and pZero between the corresponding degree 0 kernels. Here T is the actual cyclic action on Hom after derived forgetting. For every coinvariant z one has (J(bX(z));d).hom=bY(pMinus(z)), using the native full-subcategory inclusions on bX(z). For every native v:K->H and every invariant z whose underlying element is cyclicDerivedForget(v.hom), the underlying element of pZero(z) is cyclicDerivedForget((J(v);d).hom). No claim about the middle native Hom map is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, with the native-derived expansion of lem-sf-weil-native-exceptional-forgetful."
+ },
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data",
+  "def-sf-cyclic-derived-hom-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix the given ForgetModels. Native open/proper forgetting identifies the ordinary exact open extension and total right-derived proper image, their Frobenius structures, and their comparison on every derived morphism. Transport these functors through closureMap and the exact coefficient section presentations. The common-stage realizations are fully faithful with bounded constructible essential image, so restrict to that image and lift the scalar-normalized compact-support comparison to a. Compactification refinement identifies the operation with the specified S and c. Different ForgetModels are identified by their realization isomorphisms through the same fully faithful rho; no special choice of models is required.",
+   "uses": [
+    "lem-sf-native-weil-open-proper-forgetting",
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the bounded constructible underlying categories the ordinary F and G, their adjunction, and the invertible Frobenius mate satisfy the hypotheses of cyclicDerived_liftedCounit_represents. Exactness, boundedness, and the native full-subcategory identifications come from native open/proper forgetting and the constructible realization. The mate and invariant counit are the scalar-normalized ones. The normalized cyclic sequence is compatible with the exact open functor followed by right-derived proper image by its finite-composite functoriality theorem; closure and section equivalences preserve those normalized squares. Apply the generic lifted-counit theorem and transport its H, e, d and prescribed underlying counit equation to the native categories and given ForgetModels.",
+   "uses": [
+    "lem-sf-native-weil-open-proper-forgetting",
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-cyclic-derived-lifted-counit-represents",
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same generic theorem supplies additive equivalences on the actual degree-minus-one coinvariants and degree-zero invariants. They are induced by the shifted ordinary adjunction: compose the left comparison with F of the input morphism, the canonical shift comparison and the shifted ordinary counit, using e to identify the ordinary exceptional image. Its equivariance lets it descend to the quotient and restrict to the kernel. The boundary square is the finite-composite square followed by boundary naturality under d, evaluated on quotient representatives. The right square is forgetting naturality with its canonical zero-shift comparison. Transport through the fully faithful native full-subcategory inclusions gives exactly the two equations in the Lean conclusion. Uniqueness of the normalized boundary allows the supplied bX and bY. These statements retain the degree-minus-one term and impose no faithfulness on native derived forgetting.",
+   "uses": [
+    "lem-sf-cyclic-derived-lifted-counit-represents",
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-open-proper-forgetting",
+  "lem-sf-native-weil-scalar-frobenius-counit",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-cyclic-derived-lifted-counit-represents",
+  "lem-sf-cyclic-derived-hom-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "Y2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native-derived expansion of the exceptional-adjunction sentence; left-model argument Steps 1–2, before the short five lemma."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized exceptional adjunction counit for native derived Weil sheaves induces equivalences on Frobenius coinvariants and invariants commuting with cyclic Hom boundary",
+   "results": "Eight hits: sheaf pushforward counit evaluation; Rep.invariantsAdjunction counit; open scheme restriction counit; locally constant condensed adjunction; finite-index Rep coinduction and induction counits; Rep.indResAdjunction counit; finite cyclic group coinvariant tensor resolution. None compares native derived Weil compact support to a normalized common-stage exceptional adjunction.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cyclicDerivedHom\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclicDerivedHom|native_exceptional_counit",
+   "results": "0 hits in Mathlib via msearch. Local searches find CyclicDerivedLiftedCounitRepresents and NativeExceptionalLeftModels; the former is generic and does not assemble the geometric presentations, the latter is the assigned parent.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalLeftModels",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Final exceptional-adjunction sentence: normalized counit and native derived Hom sequence.",
+   "via": [
+    "lem-sf-native-exceptional-left-models",
+    "lem-sf-weil-native-exceptional-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeExceptionalCounitHomSquares",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalCounitHomSquares.lean",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.native_exceptional_counit_hom_squares",
+  "statement": "theorem native_exceptional_counit_hom_squares (R : Family l D)\n    (X Y : Space D) (VX : ForgetModel D l R X) (VY : ForgetModel D l R Y)\n    (f₀ : X.base ⟶ Y.base)\n    [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]\n    (S : CoefficientSystem D l f₀) (c : Compactification (geometricMap D f₀))\n    (bX : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l X.base.left))\n    (bY : CyclicDerivedHomBoundary (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left))\n    (hbX : CyclicDerivedHomBoundaryExact _ bX ∧ CyclicDerivedHomBoundaryNatural _ bX ∧\n      CyclicDerivedHomBoundaryNormalized _ bX)\n    (hbY : CyclicDerivedHomBoundaryExact _ bY ∧ CyclicDerivedHomBoundaryNatural _ bY ∧\n      CyclicDerivedHomBoundaryNormalized _ bY) :\n    ∃ a : nativeShriek D l f₀ ⋙ VY.functor ≅\n        VX.functor ⋙ (S.ring.operation c .closed).F,\n      ∀ L : W D l Y, ∃ (H : W D l X)\n        (e : VX.functor.obj H ≅ (S.ring.operation c .closed).G.obj (VY.functor.obj L))\n        (d : (nativeShriek D l f₀).obj H ⟶ L),\n        VY.functor.map d = a.hom.app H ≫ (S.ring.operation c .closed).F.map e.hom ≫\n          (S.ring.operation c .closed).adjunction.counit.app (VY.functor.obj L) ∧\n        ∀ K : W D l X,\n          ∃ (pMinus : CyclicDerivedHomCoinvariants\n                (WeilSheaf.frobeniusPullback D.k₀ l X.base.left) K.obj H.obj ≃+\n              CyclicDerivedHomCoinvariants\n                (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left)\n                ((nativeShriek D l f₀).obj K).obj L.obj)\n            (pZero : CyclicDerivedHomInvariants\n                (WeilSheaf.frobeniusPullback D.k₀ l X.base.left) K.obj H.obj ≃+\n              CyclicDerivedHomInvariants\n                (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left)\n                ((nativeShriek D l f₀).obj K).obj L.obj),\n            (∀ z,\n              ((nativeShriek D l f₀).map (ObjectProperty.homMk\n                (bX K.obj H.obj K.property.1 H.property.1 z)) ≫ d).hom =\n              bY ((nativeShriek D l f₀).obj K).obj L.obj\n                ((nativeShriek D l f₀).obj K).property.1 L.property.1 (pMinus z)) ∧\n            (∀ (v : K ⟶ H)\n              (z : CyclicDerivedHomInvariants\n                (WeilSheaf.frobeniusPullback D.k₀ l X.base.left) K.obj H.obj),\n              z.val = cyclicDerivedForget _ K.obj H.obj v.hom →\n              (pZero z).val = cyclicDerivedForget _\n                ((nativeShriek D l f₀).obj K).obj L.obj\n                ((nativeShriek D l f₀).map v ≫ d).hom)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T151750-L-1204791",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T151750-L-1204791",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -99,35 +99,41 @@
  ],
  "proof": [
   {
-   "text": "Use exact native forgetting and the coefficient-heart comparison to identify the bounded constructible underlying categories. Closure transport is an exact equivalence; Family full faithfulness and essential image lift U to V on every derived morphism. Compose the native open/proper comparison with inverse scalar normalization and compactification refinement, and lift through rho to obtain a.",
+   "text": "The closureMap is a pullback of the algebraic-closure field equivalence, hence an isomorphism. Exact native forgetting preserves boundedness and its cohomology comparison carries constructible native cohomology to constructible ordinary cohomology. The direct image along closureMap is an exact equivalence and is naturally isomorphic to pullback along its inverse. Derive this isomorphism termwise and compare the total right-derived image with the exact termwise image. Pullback preserves bounded constructibility. Use the inverse-pullback complex as the witness in boundedConstructible, and apply sectionDerived.mapIso to the inverse comparison to identify its realization with U(K). This uses no general direct-image finiteness theorem. Family.data.image and full faithfulness now give a genuine functorial lift: Mathlib Functor.essImage.liftFunctor and liftFunctorCompIso define each ForgetModel on all morphisms. Choose these models simultaneously.",
    "uses": [
-    "lem-sf-native-weil-open-proper-forgetting",
-    "lem-sf-native-weil-scalar-frobenius-counit",
+    "def-sf-native-weil-derived-framework",
+    "def-sfb-exact-derived-cohomology-comparison",
+    "lem-sf-native-adic-constructible-pullback",
     "lem-sf-adic-qbar-constructible-realization"
    ],
    "elementary": false
   },
   {
-   "text": "The scalar-normalized adjunction has an invertible Frobenius mate and invariant counit. Apply the lifted-counit representability theorem on the bounded constructible full subcategories. Exact open extension and total right-derived proper image satisfy its normalized boundary compatibility by finite-composite cyclic Hom functoriality. Transport the representing H,e,d and full Hom bijection back through the closure and realization equivalences. The coinvariant degree -1 term is retained.",
+   "text": "Choose normalized exact natural cyclic boundary families at X and Y using exists_cyclicDerivedHomBoundary. Apply the native normalized counit/Hom-square lemma to the chosen ForgetModels and these families. It gives a, and for every L gives H,e,d with the prescribed underlying counit equation, together with additive equivalences of the actual outer coinvariant and invariant groups and both commuting squares.",
    "uses": [
-    "lem-sf-native-weil-scalar-frobenius-counit",
-    "lem-sf-cyclic-derived-lifted-counit-represents",
-    "lem-sf-cyclic-derived-hom-exact-sequence"
+    "lem-sf-cyclic-derived-hom-exact-sequence",
+    "lem-sf-native-exceptional-counit-hom-squares"
    ],
    "elementary": false
+  },
+  {
+   "text": "For fixed K use exactness to obtain the two rows with middle ambient native derived Hom groups. The additive middle map is u -> (nativeShriek.map (homMk u);d).hom. The left square is supplied by the new lemma; the right square follows after Subtype.ext from its forgetting square and the formulas for the two invariant quotient maps. Prove injectivity by the zero criterion: if the middle map kills m, the invariant equivalence and right square make q(m)=0; exactness writes m=i(v), and injectivity of the target boundary and coinvariant equivalence force v=0. For surjectivity lift the invariant image of a target m through the invariant equivalence and source q; the difference lies in the target boundary image, and correcting the lift by the inverse coinvariant image gives a preimage. Finally the full-subcategory hom inclusion is bijective, so lift the ambient result using homMk and hom_ext. This yields the stated native Hom bijection without discarding extension morphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sf-native-weil-open-proper-forgetting",
-  "lem-sf-native-weil-scalar-frobenius-counit",
+  "def-sf-native-weil-derived-framework",
+  "def-sfb-exact-derived-cohomology-comparison",
+  "lem-sf-native-adic-constructible-pullback",
   "lem-sf-adic-qbar-constructible-realization",
-  "lem-sf-cyclic-derived-lifted-counit-represents",
-  "lem-sf-cyclic-derived-hom-exact-sequence"
+  "lem-sf-cyclic-derived-hom-exact-sequence",
+  "lem-sf-native-exceptional-counit-hom-squares"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Final exceptional-adjunction sentence, with the native-derived expansion of lem-sf-weil-native-exceptional-forgetful."
+  "place": "Native left-model expansion: constructibility and functor factorization; normalized outer Hom squares; explicit short-five diagram chase. Model construction and final chase formalized by Y2."
  },
  "lean": {
   "existing": false,
@@ -150,13 +156,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-a9e6c",
-  "group": "A2",
+  "reviewer": "COMPILER",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261025T122433-L-1771219",
+  "landing": "20261027T151750-L-1204791",
   "kind": "interface",
-  "note": "independent cc review: Data module vs published item block (byte-identical diff); item theorem signature vs published; left-models output vs forgetful_representingPair_rightMate hypotheses; node proof_deps vs Lean proof; 5 delivered modules + 2 direct importers compiled (exit 0)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
