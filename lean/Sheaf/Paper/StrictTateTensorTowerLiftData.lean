@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CondensedTateIntegralTowerData
+import Sheaf.Paper.StrictTateTensorTowerLiftPre
+import Sheaf.Paper.StrictTateTensorTowerLiftCocycle
 
 /-! Data for the strict ordinary Tate quotient tower.
 
@@ -15,6 +17,7 @@ Source: smooth-purity transport, normalized Tate tower, Steps 2--3.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.MonoidalCategory
@@ -44,6 +47,9 @@ theorem strictTateTensorTower_data
         (_root_.DerivedCategory.singleFunctor _ (-(2 * (d : ℤ)))).obj
           (quotientLine T ell n d)),
       M.tower = strictDerivedTower T ell d := by
-  sorry
+  obtain ⟨P, q, h⟩ := strictTateTensorTower_pre T ell hT d
+  let M := P.toAdicTower (strictTateTensorTower_pre_cocycle T (datum.{u} ell) P)
+  refine ⟨M, (fun n => q n), ?_⟩
+  exact h
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower
