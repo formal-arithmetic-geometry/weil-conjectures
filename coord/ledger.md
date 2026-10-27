@@ -20018,3 +20018,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:01 L: merged deliver/J6/Sheaf.Paper.TowerRestrictedScalarAdjunction (stage 3; reviewer PASS; first push; landing 20261027T210100-L-1654251 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 21:01 L: merged deliver/J7/Sheaf.Paper.NativeWeilScalarFrobeniusCounit (stage 3; reviewer PASS; after a return; landing 20261027T210108-L-1655368 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:01 L: merged deliver/J7/Sheaf.SixFunctors.OpenTensorProjectionMateCanonical (stage 3; reviewer PASS; first push; landing 20261027T210109-L-1655701 (proof); batch 20261027T205736; modules 1; new nodes 0)
+- 21:01 L: merged deliver/J8/Sheaf.SixFunctors.ProperOpenLambdaCompletionIso (stage 3; reviewer PASS; first push; landing 20261027T210111-L-1655843 (interface); batch 20261027T205736; modules 1; new nodes 0)

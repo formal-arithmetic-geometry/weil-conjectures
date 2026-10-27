@@ -5,7 +5,8 @@ Authors: SHEAF group Y9
 -/
 module
 
-public import Sheaf.SixFunctors.ProperOpenLambdaOrdinarySquare
+public import Sheaf.SixFunctors.GeneratorReductionData
+import Sheaf.SixFunctors.ShortWordCompletionIsomorphism
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,6 +37,7 @@ theorem properOpenLambdaCompletionIso
       lo hi torLo torHi)
     (hBAdmissible : Word.admissible Cf.l E W location o K lo hi torLo torHi B) :
     IsIso (B.completionMap Cf.l E W location o K) := by
-  sorry
+  exact GeneratorReduction.completionMap_isIso Cf.l E W location o B hB K lo hi torLo torHi
+    hInputs hBAdmissible
 
 end WeilConjectures.OpenInterchangeReduction
