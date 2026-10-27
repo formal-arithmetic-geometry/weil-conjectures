@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-system-compact-exchange-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the specified compact-system exchange",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, schemes $X,Y$, a morphism $f:X\\to Y$ and a compactification $c=(j:X\\hookrightarrow B,p:B\\to Y)$. Let $g_X,g_B,g_Y$ be endomorphisms, $g_Bp=pg_Y$, and let the open square for $j,g_X,g_B$ be Cartesian. Use the actual system and finite operations, their evaluation comparisons and the tensor pullback coordinate changes of [def-weil-system-operation-exchange-realization], with evaluation in the ordinary unbounded strict-system derived category of [lem-coef-semilinear-derived-sections]. At index $n\\in\\mathbf N$, put $A=\\mathcal O_E/\\varpi^{n+1}$ and let $d:e_{Y,n}R p_*j_!\\simeq R p_{A,*}j_{A,!}e_{X,n}$ be the composite of the proper and open operation evaluation isomorphisms. For an arbitrary system object $C$, let $S$ identify evaluation of $g_Y^*Rp_*j_!C$ with tensor pullback of the finite compact image: first inverse pullback evaluation, then pullback of $d_C$, then inverse pullback-model comparison. Let $T$ identify evaluation of $Rp_*j_!g_X^*C$ with the finite compact image of tensor pullback: first $d_{g_X^*C}$, then compact image of inverse pullback evaluation and inverse pullback-model comparison. Then $e_{Y,n}(e^c_C)\\,T_C=S_C\\,\\operatorname{FrEx}^{c}_{A,e_{X,n}C}$ in categorical composition order. Here $e^c$ is the actual proper/open system exchange, and the finite open factor is the canonical inverse open-adjunction mate of [lem-trf-open-square-exchange]. No invertibility of the three endomorphisms, constructibility, boundedness or normalization of $C$ is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; agent-written proper/open mate compatibility calculation extracted from lem-weil-frobenius-system-exchange-inverse, steps 1--2; Deligne, Weil II (1.1.14), p. 153 motivates transport."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "stmt_deps": [
+  "def-weil-system-operation-exchange-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-trf-open-square-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Expand the actual system compact exchange as the proper mate followed by proper image of the canonical open exchange. Apply systemExchange_evaluation to the proper factor, with input j_!C. This identifies that factor using exactly the proper direct-image evaluation and pullback evaluation comparisons.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; agent-written proper/open mate compatibility calculation extracted from lem-weil-frobenius-system-exchange-inverse, steps 1--2; Deligne, Weil II (1.1.14), p. 153 motivates transport."
+   }
+  },
+  {
+   "text": "The inverse open-system exchange is the left mate of the inverse canonical pullback square. Expand this mate into its unit, square and counit. Section-normalized evaluation of these three factors, equivalently the evaluation_mate calculation for the open adjunction, gives the inverse finite open mate. The canonical field of SfOpenSquareExchangeData identifies its inverse with the specified forward open exchange. Naturality transports this equality through the two unit-normalized tensor pullback coordinate changes.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; agent-written proper/open mate compatibility calculation extracted from lem-weil-frobenius-system-exchange-inverse, steps 1--2; Deligne, Weil II (1.1.14), p. 153 motivates transport."
+   }
+  },
+  {
+   "text": "Use naturality of the proper evaluation comparison at the open-system exchange, then paste the two forward equations. Functoriality and associativity move the middle coordinate comparisons next to their inverses, where they cancel. The remaining source and target comparisons are S and T, while the finite proper/open composite is finiteCompact. This is an equality of evaluated constructed morphisms, without detecting equality of system morphisms by evaluation.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1 and Lemma 4.10; agent-written proper/open mate compatibility calculation extracted from lem-weil-frobenius-system-exchange-inverse, steps 1--2; Deligne, Weil II (1.1.14), p. 153 motivates transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-system-operation-exchange-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-trf-open-square-exchange"
+ ],
+ "proof_origin": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; agent-written proper/open mate compatibility calculation extracted from lem-weil-frobenius-system-exchange-inverse, steps 1--2; Deligne, Weil II (1.1.14), p. 153 motivates transport.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a composite natural transformation through natural comparison isomorphisms commutes with taking adjunction mates",
+   "results": "CategoryTheory.mateEquiv_square; CategoryTheory.Bicategory.mateEquiv; CategoryTheory.expComparison_ev; CategoryTheory.mateEquiv; CategoryTheory.Bicategory.toNatTrans_mateEquiv; CategoryTheory.expComparison; CategoryTheory.mateEquiv_apply; CategoryTheory.Adjunction.leftAdjointCompNatTrans",
+   "date": "2026-10-28",
+   "verdict": "no match: generic mate-pasting and sheaf-evaluation results do not identify these specified strict-system, derived-open and tensor-coordinate comparisons in one application."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite evaluation of a proper direct image followed by extension by zero commutes with the specified exchange morphism on derived systems of sheaves",
+   "results": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app; CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map; CategoryTheory.RanIsSheafOfIsCocontinuous.fac'; Condensed.isColimitLocallyConstantPresheaf_desc_apply; CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc",
+   "date": "2026-10-28",
+   "verdict": "no match: generic mate-pasting and sheaf-evaluation results do not identify these specified strict-system, derived-open and tensor-coordinate comparisons in one application."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_(vcomp|hcomp|square)|evaluation.*mate",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-28",
+   "verdict": "no match: generic mate-pasting and sheaf-evaluation results do not identify these specified strict-system, derived-open and tensor-coordinate comparisons in one application."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusSystemExchangeInverse",
+  "date": "2026-10-28",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Forward finite-evaluation compatibility of the proper/open whole-system exchange, extracted from steps 1--2 of lem-weil-frobenius-system-exchange-inverse before the inverse construction.",
+   "via": [
+    "lem-weil-frobenius-system-exchange-inverse",
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemCompactExchangeEvaluation",
+  "file": "lean/Sheaf/Paper/SystemCompactExchangeEvaluation.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.systemCompactExchange_evaluation",
+  "statement": "theorem systemCompactExchange_evaluation\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (gX : X ⟶ X) (gB : c.Z ⟶ c.Z) (gY : Y ⟶ Y)\n    (wp : gB ≫ c.g = c.g ≫ gY) (sj : IsPullback gX c.i c.i gB)\n    (n : ℕ) (C : coefficientSequenceDerived l E X) :\n    let A := Padic.coefficientExtensionRing l E (n + 1)\n    letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)\n    let d := isoWhiskerLeft (systemDerivedOpen l E c.i)\n        (@asIso _ _ _ _ (systemDirectEvaluation l E c.g n)\n          (systemDirectEvaluation_isIso l E c.g n)) ≪≫\n      isoWhiskerRight\n        (@asIso _ _ _ _ (systemOpenEvaluationInv l E c.i n)\n          (systemOpenEvaluationInv_isIso l E c.i n)).symm\n        (proEtaleConstantDerivedDirectImage c.g A)\n    let EX := coefficientSequenceDerivedEvaluation l E X n\n    let EY := coefficientSequenceDerivedEvaluation l E Y n\n    let S := (systemPullEvaluation l E gY n).symm.app\n        ((systemDerivedOpen l E c.i ⋙ systemDirect l E c.g).obj C) ≪≫\n      (sfIntrinsicDerivedPullback A gY).mapIso (d.app C) ≪≫\n      (openSquareDerivedPullbackModel A gY).symm.app\n        ((sfIntrinsicCompactSupport c A).obj (EX.obj C))\n    let T := d.app ((integralComparisonDerivedSequencePullback l E gX).obj C) ≪≫\n      (sfIntrinsicCompactSupport c A).mapIso\n        ((systemPullEvaluation l E gX n).symm.app C ≪≫\n          (openSquareDerivedPullbackModel A gX).symm.app (EX.obj C))\n    EY.map ((systemCompactExchange l E c gX gB gY wp sj).app C) ≫ T.hom =\n      S.hom ≫ (finiteCompact l E (n + 1) (Nat.succ_pos n) c gX gB gY wp sj).app\n        (EX.obj C)",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T234040-L-4173645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T234040-L-4173645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

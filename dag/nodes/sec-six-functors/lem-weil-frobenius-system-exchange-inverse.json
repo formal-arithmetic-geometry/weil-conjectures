@@ -33,11 +33,12 @@
    "elementary": false
   },
   {
-   "text": "For direct evaluation, apply systemExchange_evaluation from def-weil-system-operation-exchange-realization. Conjugate the evaluated system isomorphism by exactly systemPullEvaluation, systemDirectEvaluation and openSquareDerivedPullbackModel in the stated source and target coordinates. Cancel the pullback-model comparisons: the hom is finiteTensorExchange. The inverse of this explicitly constructed composite is target.inv followed by evaluation of the system inverse followed by source.hom. This gives the direct inverse-evaluation clause without faithfulness or joint conservativity. The compact inverse-evaluation clause remains to be formalized: evaluate the specified proper/open composite using the same retained compactification and operation comparisons, then use the same inverse-of-a-composite calculation.",
+   "text": "For direct evaluation, apply systemExchange_evaluation and conjugate by the specified pullback and direct-operation comparisons, cancelling the tensor-coordinate comparisons. For compact evaluation, apply lem-weil-system-compact-exchange-evaluation, which identifies the forward proper/open composite through the specified source S and target T coordinates. In either case construct S^{-1} followed by evaluation of the already established whole-system isomorphism followed by T. The forward compatibility equation gives exactly the specified finite exchange as its hom. The inverse of this constructed composite is T^{-1}, evaluation of the actual system inverse, then S. No faithfulness of evaluation is used.",
    "uses": [
     "def-weil-system-operation-exchange-realization",
     "lem-coef-semilinear-derived-sections",
-    "def-weil-frobenius-square-exchange"
+    "def-weil-frobenius-square-exchange",
+    "lem-weil-system-compact-exchange-evaluation"
    ],
    "elementary": false,
    "source": {
@@ -57,7 +58,7 @@
    }
   },
   {
-   "text": "For $C=\\mathcal R_XK$, [prop-weil-pbc-rlim-functoriality] and the exact scalar restriction in [def-weil-frobenius-square-exchange] give the functor $\\mathcal L_Y=R\\lim U_Y$. It sends $ve=1$ and $ev=1$ to the same identities for $\\mathcal L_Y(v),\\mathcal L_Y(e)$. For either sign, put $t=\\beta\\mathcal L_Y(e)\\alpha$, the specified integral arrow of that definition. Set $s=\\alpha^{-1}\\mathcal L_Y(v)\\beta^{-1}$. Associativity, the inverse identities for $\\alpha,\\beta$, and the two functorial identities give $st=1$ and $ts=1$. Substituting $e=e_f$ and $e=e_f^c$ gives exactly the two claimed inverses. The comparisons are natural isomorphisms on the stated bounded integral domain; the argument uses their specified arrows and the fixed $c$, without selecting an arrow by its finite reductions.",
+   "text": "For the integral arrows, apply the elementary private inverse_realization lemma: if an isomorphism i has hom equal to alpha.hom followed by L.map(e.hom) followed by beta.hom, Iso.ext identifies i with alpha followed by L.mapIso(e) followed by beta. Iso.trans_inv and Functor.mapIso_inv give i.inv = beta.inv followed by L.map(e.inv) followed by alpha.inv. Apply this to the ambient image of each specified integral isomorphism under the full-subcategory inclusion, with L the coefficientSequenceLimit functor and alpha,beta the very comparisons in the definitions. Their defining forward maps agree with the specified alpha-L(e)-beta composites. This proves both literal integral inverse formulas; all categories, inputs and the retained compactification remain unchanged.",
    "uses": [
     "prop-weil-pbc-rlim-functoriality",
     "def-weil-frobenius-square-exchange"
@@ -75,12 +76,13 @@
   "lem-weil-mate-iso-along-equivalences",
   "def-weil-frobenius-square-exchange",
   "lem-coef-semilinear-derived-sections",
+  "lem-weil-system-compact-exchange-evaluation",
   "prop-weil-pbc-rlim-functoriality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-  "place": "(1.1.7)-(1.1.14), pp. 150-153; J7 system-equivalence/mate argument retained. F1 formalizes direct inverse evaluation by explicit conjugation using systemExchange_evaluation. Compact inverse evaluation and integral inverse formulas retain their stated plans."
+  "place": "(1.1.7)-(1.1.14), pp. 150-153; existing system-equivalence/mate and direct finite inverse arguments retained. K6 proves the integral inverse formulas by Iso.ext and reversal of a composite; compact inverse evaluation is reduced to the forward proper/open evaluation identity lem-weil-system-compact-exchange-evaluation."
  },
  "mathlib_searches": [
   {
@@ -244,12 +246,12 @@
   "note": "Lean-only stage-2 delivery, one module, 8 sorry theorems, 25 recorded decls; lean.statement verbatim. System exchanges are abbrevs of the dependency's systemExchange/systemCompactExchange (same Frobenius squares and geometricCompactification as frobeniusDirectFinite/CompactFinite/Integral); IsIso on every unbounded C. Finite inverse-evaluation clauses checked by hand against systemExchange_evaluation: e_n(e_C)=Source.hom≫finiteTensorExchange≫Target.inv with exactly systemPullEvaluation/systemDirectEvaluation/openSquareDerivedPullbackModel; compact comparisons are the compactFiniteEvaluation pieces. Integral: alpha/beta isos have homs equal to sourceComparison/whiskerRight reductionPullbackIso.inv and compactAlpha/compactBeta, the factors of integralExchange/compactIntegralAmbient; inverse = beta⁻¹≫L(e⁻¹ at reduction K)≫alpha⁻¹ on sfIntegralConstructibleCategory. Hypotheses match the node (f0 separated finite type, l≠p, X0/Y0 finite type, no separatedness of X0/Y0); no extra universe restriction; n+1 covers the first quotient. No hollow helpers, docstrings carry source/blueprint and proof steps, no name collisions in the live tree, live node differs only in lean. Not recompiled (no FIX)."
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "K6",
   "result": "pass",
-  "landing": "20261026T065558-L-3095760",
+  "landing": "20261027T234040-L-4173645",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

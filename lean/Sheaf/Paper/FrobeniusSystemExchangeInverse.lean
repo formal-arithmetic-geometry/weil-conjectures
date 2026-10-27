@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.FrobeniusGeometricExchange
 public import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
+import Sheaf.Paper.SystemCompactExchangeEvaluation
 
 /-! # Whole-system Frobenius exchange inverses
 
@@ -124,6 +125,23 @@ private meta def congrProofs
                 functor := value.headBeta
               else break
             else break
+          for _ in [:8] do
+            if functor.isAppOf ``directImageFunctor ||
+                functor.isAppOf ``constructibleIntegralPullback ||
+                functor.isAppOf ``integralDirectImage || functor.isAppOf ``realize ||
+                functor.isAppOf ``coefficientSequenceLimit || functor.isAppOf ``compactImage then
+              if let some value ← Lean.Meta.unfoldDefinition? functor
+                  (ignoreTransparency := true) then
+                functor := value.headBeta
+              else break
+            else break
+          if functor.isAppOf ``ObjectProperty.ι then
+            return ← Lean.Meta.mkAppM ``ObjectProperty.FullSubcategory.obj #[args.back!]
+          if functor.isAppOf ``ObjectProperty.lift then
+            let fs := functor.getAppArgs
+            let obj ← Lean.Meta.mkAppM ``CategoryTheory.Functor.obj #[fs[fs.size - 2]!, args.back!]
+            let prop := Lean.mkApp fs.back! args.back!
+            return ← Lean.Meta.mkAppM ``ObjectProperty.FullSubcategory.mk #[obj, prop]
           let fs := functor.getAppArgs
           if functor.isAppOf ``CategoryTheory.Functor.obj && fs.size ==
               (← Lean.getConstInfo ``CategoryTheory.Functor.obj).type.getNumHeadForalls then
@@ -136,6 +154,35 @@ private meta def congrProofs
             let x ← Lean.Meta.mkAppM ``CategoryTheory.Functor.obj
               #[fs[fs.size - 2]!, args.back!]
             return ← Lean.Meta.mkAppM ``CategoryTheory.Functor.obj #[fs.back!, x]
+        if e.isAppOf ``NatTrans.app && args.size ==
+            (← Lean.getConstInfo ``NatTrans.app).type.getNumHeadForalls then
+          let trans := args[args.size - 2]!
+          let ts := trans.getAppArgs
+          if trans.isAppOf ``whiskerLeft then
+            let x ← Lean.Meta.mkAppM ``CategoryTheory.Functor.obj #[ts[ts.size - 4]!, args.back!]
+            return ← Lean.Meta.mkAppM ``NatTrans.app #[ts.back!, x]
+          if trans.isAppOf ``whiskerRight then
+            let x ← Lean.Meta.mkAppM ``NatTrans.app #[ts[ts.size - 2]!, args.back!]
+            return ← Lean.Meta.mkAppM ``CategoryTheory.Functor.map #[ts.back!, x]
+        if e.isAppOf ``CategoryTheory.Functor.map && args.size ==
+            (← Lean.getConstInfo ``CategoryTheory.Functor.map).type.getNumHeadForalls then
+          let mut functor := args[args.size - 4]!
+          for _ in [:8] do
+            if functor.isAppOf ``coefficientSequenceLimit || functor.isAppOf ``realize then
+              if let some value ← Lean.Meta.unfoldDefinition? functor
+                  (ignoreTransparency := true) then
+                functor := value.headBeta
+              else break
+            else break
+          if functor.isAppOf ``CategoryTheory.Functor.comp then
+            let fs := functor.getAppArgs
+            let x ← Lean.Meta.mkAppM ``CategoryTheory.Functor.map #[fs[fs.size - 2]!, args.back!]
+            return ← Lean.Meta.mkAppM ``CategoryTheory.Functor.map #[fs.back!, x]
+        if e.isAppOf ``ObjectProperty.FullSubcategory.obj then
+          let major := args.back!
+          if major.isAppOf ``ObjectProperty.FullSubcategory.mk then
+            let ms := major.getAppArgs
+            return ms[ms.size - 2]!
         if e.isAppOf ``CategoryTheory.Limits.Cone.pt && args.size ==
             (← Lean.getConstInfo ``CategoryTheory.Limits.Cone.pt).type.getNumHeadForalls then
           let cone := args.back!
@@ -262,6 +309,32 @@ open Lean Elab Tactic in
 local elab "frobenius_repair_exact " h:term : tactic => withMainContext do
   let p ← elabTerm h none
   structuralExact (← repairApplication p)
+
+-- Repair the four final arguments of the inverse calculation. Its category,
+-- functor and object parameters already have the types inferred from the given isomorphisms.
+private meta def repairRealizationApplication (proof : Lean.Expr) : Lean.MetaM Lean.Expr := do
+  let mut index := 0
+  let mut f := proof.getAppFn
+  for arg in proof.getAppArgs do
+    let type ← Lean.Meta.withTransparency .reducible (Lean.Meta.whnf (← Lean.Meta.inferType f))
+    let .forallE _ expected _ _ := type | throwError "expected function type"
+    let actual ← Lean.Meta.inferType arg
+    let mut arg := arg
+    if index + 4 >= proof.getAppArgs.size && expected != actual then
+      let cache ← IO.mkRef ({} : Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr)
+      let h ← try
+        Lean.Meta.withTransparency .reducible (congrProofs cache #[] 300 expected actual)
+      catch err => throwError "repairing argument {index}: {err.toMessageData}"
+      let h ← toEq h
+      arg ← Lean.Meta.mkAppM ``Eq.mpr #[h, arg]
+    f := Lean.mkApp f arg
+    index := index + 1
+  return f
+
+open Lean Elab Tactic in
+local elab "frobenius_realization_exact " h:term : tactic => withMainContext do
+  let p ← elabTerm h none
+  structuralExact (← repairRealizationApplication p)
 
 section IntegralIsoProof
 attribute [local instance] HasDerivedCategory.standard
@@ -704,7 +777,18 @@ theorem frobeniusSystemCompact_inverse_evaluation (c₀ : Compactification f₀.
         (coefficientSequenceDerivedEvaluation l E (D.geometricFiber Y₀).left n).map
           ((frobeniusSystemCompactIso D l E f₀ hl c₀).inv.app C) ≫
         (frobeniusCompactEvaluationSource D l E f₀ c₀ n C).hom := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  have h := systemCompactExchange_evaluation l E (geometricCompactification D f₀ c₀)
+    (galois D X₀) (galois D (zlCompactificationMiddle D f₀ c₀)) (galois D Y₀)
+    (D.frobenius_square_cartesian _ _ (zlCompactificationProper D f₀ c₀)).2.2.2.2.1
+    (D.frobenius_square_cartesian _ _ (zlCompactificationOpen D f₀ c₀)).2.2.2.2.2.1 n C
+  apply evaluated_iso
+    (coefficientSequenceDerivedEvaluation l E (D.geometricFiber Y₀).left n)
+    ((frobeniusSystemCompactIso D l E f₀ hl c₀).app C)
+    (frobeniusCompactEvaluationSource D l E f₀ c₀ n C).symm
+    (frobeniusCompactEvaluationTarget D l E f₀ c₀ n C)
+  frobenius_structural_exact h
 
 include fs fft fqc in
 attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian in
@@ -875,6 +959,18 @@ def frobeniusCompactBetaIso (c₀ : Compactification f₀.left) :=
         (fiberMap D f₀)
         (geometricCompactification D f₀ c₀)).symm
 
+private theorem inverse_realization
+    {V W : Type*} [Category V] [Category W] (F : V ⥤ W)
+    {P : ObjectProperty W} {X Y : V} {A B : P.FullSubcategory}
+    (i : A ≅ B) (a : A.obj ≅ F.obj X) (e : X ≅ Y) (b : F.obj Y ≅ B.obj)
+    (h : i.hom.hom = a.hom ≫ F.map e.hom ≫ b.hom) :
+    i.inv.hom = b.inv ≫ F.map e.inv ≫ a.inv := by
+  change (P.ι.mapIso i).inv = _
+  have hi : P.ι.mapIso i = a ≪≫ F.mapIso e ≪≫ b := Iso.ext h
+  rw [hi]
+  simp only [Iso.trans_inv, Functor.mapIso_inv, Category.assoc]
+
+attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian in
 /-- The inverse of the specified integral direct exchange is alpha-inverse after
 realization of the actual system inverse after beta-inverse (categorical order below).
 Source: Deligne (1.1.7)--(1.1.14); agent-written DAG proof, step 4
@@ -891,8 +987,23 @@ theorem frobeniusDirectIntegral_inverse
           ((frobeniusSystemDirectIso D l E f₀ hl).inv.app
             ((reduction l E (D.geometricFiber X₀).left).obj K.obj)) ≫
         (frobeniusDirectAlphaIso D l E f₀ hl K).inv := by
-  sorry
+  frobenius_realization_exact (inverse_realization
+    (coefficientSequenceLimit l E (D.geometricFiber Y₀).left)
+    ((frobeniusDirectIntegralIso D l E f₀ hl).app K)
+    (frobeniusDirectAlphaIso D l E f₀ hl K)
+    ((frobeniusSystemDirectIso D l E f₀ hl).app
+      ((reduction l E (D.geometricFiber X₀).left).obj K.obj))
+    ((frobeniusDirectBetaIso D l E f₀ hl).app K)
+    (by
+      dsimp only [frobeniusDirectIntegralIso, Iso.app_hom, asIso_hom,
+        frobeniusDirectIntegral, directIntegral, ObjectProperty.homMk_hom,
+        integralExchange, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+        frobeniusDirectAlphaIso, frobeniusDirectBetaIso, frobeniusSystemDirectIso,
+        frobeniusSystemDirect, isoWhiskerRight_hom, Iso.symm_hom,
+        Functor.comp_obj, ObjectProperty.ι_obj]
+      ))
 
+attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian in
 /-- The compact integral inverse is the reverse composite of the same three factors,
 with the same fixed compactification in alpha, the whole-system inverse, and beta.
 Source: Deligne (1.1.7)--(1.1.14); agent-written DAG proof, step 4
@@ -911,5 +1022,6 @@ theorem frobeniusCompactIntegral_inverse (c₀ : Compactification f₀.left)
             ((reduction l E (D.geometricFiber X₀).left).obj K.obj)) ≫
         (frobeniusCompactAlphaIso D l E f₀ hl c₀ K).inv := by
   sorry
+
 
 end WeilConjectures.FrobeniusExchange
