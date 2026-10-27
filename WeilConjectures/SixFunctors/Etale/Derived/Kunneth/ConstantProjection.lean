@@ -45,6 +45,13 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 namespace AlgebraicGeometry.Etale
 
+/-- Replace the natural transformation `σ` in `(σ.app X).app Y` by `τ = σ`, at the level of
+natural transformations: the kernel then compares `σ` and `τ` and not their components. -/
+private lemma app_app_eq_of_eq {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    {F G : C ⥤ D ⥤ E} {τ : F ⟶ G} {X : C} {Y : D} (σ : F ⟶ G) (hσ : σ = τ) :
+    (σ.app X).app Y = (τ.app X).app Y :=
+  hσ ▸ rfl
+
 section Coefficients
 
 -- The coefficients of interest are `ModuleCat.{u + 1} Λ : Type (u + 2)`. For a coefficient type
@@ -54,12 +61,26 @@ variable (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbel
   [Abelian.HasFunctorialFlatResolution A] (W : Scheme.{u})
   [(constantSheaf W.smallEtaleTopology A).PreservesFlat]
 
+/-- The derived tensor comparison of the constant sheaf functor at `M`, `N`. The equation is
+proved at the level of natural transformations: the instance proofs abstracted in
+`AlgebraicGeometry.Etale.leftDerivedConstantSheafTensorComparison` differ from the ones elaborated
+here, and comparing the components directly unfolds the derived tensor comparison. -/
+lemma leftDerivedConstantSheafTensorComparison_eq (M N : DerivedCategory A) :
+    leftDerivedConstantSheafTensorComparison A W M N =
+      ((constantSheaf W.smallEtaleTopology A).leftDerivedTensorComparison.app M).app N :=
+  app_app_eq_of_eq _ rfl
+
 /-- The constant-tensor comparison `RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)` is the projection map of
 the adjunction `c_W ⊣ RΓ_W` (`CategoryTheory.Functor.mapDerivedCategoryProjectionMap`). -/
 lemma derivedConstantSheafProjectionMap_eq (K : DerivedCategory (Sheaf W.smallEtaleTopology A))
     (M : DerivedCategory A) :
     derivedConstantSheafProjectionMap A W K M =
-      (Functor.mapDerivedCategoryProjectionMap (derivedConstantSheafAdjunction A W) K).app M :=
+      (Functor.mapDerivedCategoryProjectionMap (derivedConstantSheafAdjunction A W) K).app M := by
+  rw [Functor.mapDerivedCategoryProjectionMap_app,
+    Functor.mapDerivedCategoryTensorComparison_app_app]
+  unfold derivedConstantSheafProjectionMap derivedConstantSheafHomEquiv
+    derivedConstantSheafProjectionMapTranspose derivedConstantSheafTensorComparison
+  rw [leftDerivedConstantSheafTensorComparison_eq]
   rfl
 
 end Coefficients

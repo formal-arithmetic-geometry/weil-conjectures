@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.InjectiveResolutionCohomologyPresheaf
 /-!
 # Column cohomology of the Čech resolution double complex
 
-Source: blueprint sk-thm-picard-cech, Step 2.
+Source: blueprint det-thm-picard-cech, Step 2.
 -/
 
 @[expose] public section
@@ -33,7 +33,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 /-- The column cohomology, including its horizontal differential, is the Čech
 complex of the cohomology presheaf.
 
-Source: blueprint sk-thm-picard-cech, Step 2, and lem-sc-cech-spectral, Step 1.
+Source: blueprint det-thm-picard-cech, Step 2, and lem-sc-cech-spectral, Step 1.
 Proof: in horizontal degree p the vertical complex is the product, over tuples
 of p+1 covering indices, of the complexes I(V). The sheafification/free-abelian
 Yoneda adjunction identifies Hom from the free abelian sheaf on V with evaluation

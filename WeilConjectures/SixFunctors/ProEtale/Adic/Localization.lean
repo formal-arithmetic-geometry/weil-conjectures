@@ -18,8 +18,8 @@ quasi-compact open immersion. This file proves clauses (1)–(4) of blueprint
 `prop-sf-localization-all-stages` at the coefficient stage `ℚ̄_ℓ`.
 
 As in `WeilConjectures.SixFunctors.ClosedImmersionStages`, the stage `Dᵇc(-, ℚ̄_ℓ)` is realised in
-the Bhatt–Scholze model, rather than as the `2`-colimit over finite extensions `E ⊆ ℚ̄_ℓ` of the
-blueprint (`def-weil-algebraically-closed-coefficients`): it is the full subcategory
+the Bhatt–Scholze model, rather than as the `2`-colimit over finite extensions `E ⊆ ℚ̄_ℓ` used in
+the blueprint: it is the full subcategory
 `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic ℓ X` of the derived category
 of pro-étale sheaves of modules over the constant `ℓ`-adic sheaf `ℚ̄_ℓ,X`, of bounded complexes
 with constructible cohomology sheaves. On it:

@@ -46,8 +46,7 @@ Proof:
 2. By `lem-weil-pbc-finite-type-algebra-noetherian` and
    `lem-weil-pbc-noetherian-finitely-many-minimal-primes`, S has finitely many minimal primes.
    Those q_j below p form a nonempty list by `lem-weil-pbc-prime-contains-minimal-prime`.
-   By `lem-weil-pbc-localization-prime-residue-field-iso`, they correspond to the minimal
-   primes of S_p.
+   By the prime correspondence for localizations, they correspond to the minimal primes of S_p.
 3. Choose maximal chains from each q_j to p, of lengths s(j). By
    `lem-weil-pbc-localization-dimension-chains-below-prime` and the prime correspondence,
    dim S_p = max_j s(j), which is finite.

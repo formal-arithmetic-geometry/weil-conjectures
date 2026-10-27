@@ -433,7 +433,7 @@ exponent is invertible on `X`. Let `K', M' ∈ Dᵇc(X_ét, Λ)` have Tor amplit
 `[c, d]`, with `K'` site-perfect (dualizable). Then `RHom(ν^* K', ν^* M')` is bounded
 constructible with Tor amplitude in `[c - b, d - a]`: it is `ν^* RHom(K', M')`
 (`thm-sf-hom-comparison-constructible`), and `RHom(K', M')` has these properties on the étale
-site (`thm-sf-hom-ctf`), which `ν^*` preserves (`lem-sf-comparison-tor-amplitude`). -/
+site (`thm-sf-hom-ctf`), which `ν^*` preserves (`lem-exc-comparison-tor-interval`). -/
 theorem boundedConstructible_derivedHom_mapDerivedCategory_of_isDualizable {k : Type u}
     [Field k] {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]

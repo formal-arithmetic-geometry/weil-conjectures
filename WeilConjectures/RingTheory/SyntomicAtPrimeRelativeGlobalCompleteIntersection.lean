@@ -177,7 +177,7 @@ from this fibre to `κ(q)`.
 Proof (the node's complete argument):
 1. (Reduction to $S$ finitely presented.) Let $g_0\in S\setminus\mathfrak q$ be as in hypothesis
 (1), $S_1=S_{g_0}$ and $\lambda:S\to S_1$ the localization map [def-weil-ring-localization-away].
-By [lem-weil-pbc-localization-prime-residue-field-iso] (1)-(3) (with $W=\{g_0^N\}$, disjoint from
+By the prime correspondence and residue fields of localizations (with $W=\{g_0^N\}$, disjoint from
 $\mathfrak q$), $\mathfrak q_1=\mathfrak qS_1$ is a prime of $S_1$ with $\lambda^{-1}(\mathfrak
 q_1)=\mathfrak q$ (so its inverse image in $R$ is $\mathfrak p$), $S_{\mathfrak
 q}\to(S_1)_{\mathfrak q_1}$ is an isomorphism of $S$-algebras and $\kappa(\mathfrak
@@ -188,7 +188,7 @@ $T=\{g_0^N\}$, $N=k:=\kappa(\mathfrak p)$) the fibre ring $F_1=S_1\otimes_Rk$ is
 $k$-algebra under $F$, to $F_{\bar g_0}$, $\bar g_0=g_0\otimes1$; $\bar g_0\notin\mathfrak Q$
 since $g_0$ has nonzero image in $\kappa(\mathfrak q)$. The map $F_{\bar g_0}\to\kappa(\mathfrak
 q)$ extending $F\to\kappa(\mathfrak q)$ has a prime kernel whose inverse image in $F$ is
-$\mathfrak Q$, so by [lem-weil-pbc-localization-prime-residue-field-iso] (1) this kernel is
+$\mathfrak Q$, so by the prime correspondence for localizations this kernel is
 $\mathfrak QF_{\bar g_0}$, and it corresponds to the kernel $\mathfrak Q_1$ of
 $F_1\to\kappa(\mathfrak q_1)$. With $h$ from hypothesis (3), $h/1\notin\mathfrak QF_{\bar g_0}$
 (its inverse image is $\mathfrak Q\not\ni h$), and $(F_{\bar g_0})_{h/1}\cong F_{\bar

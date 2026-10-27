@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-!
 # Flatness of the sheafified free presheaf
 
-Source: literature/stacks-project/sites-modules.tex, Lemma 03EV (blueprint:
-lem-weil-pbc-free-sheaf-flat).
+Source: literature/stacks-project/sites-modules.tex, Lemma 03EV.
 
 ## Main statement
 
@@ -45,8 +44,7 @@ left tensoring. This is Lemma 03EV of the Stacks Project, generalized to
 Grothendieck abelian symmetric monoidal closed coefficient categories.
 Source: Stacks Project, Modules on Sites, Lemmas 03EV, 03ES, 03ET and 0GMW;
 the coefficient-category generalization is described in the module docstring of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`
-(blueprint: lem-weil-pbc-free-sheaf-flat).
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`.
 
 Proof:
 1. Put `Q = Presheaf.freeYoneda X P`, and write `a` for sheafification and

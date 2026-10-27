@@ -12,11 +12,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 /-!
 # Bounded constructible derived-complete integral coefficients
 
-Blueprint `def-weil-derived-complete-integral-detailed` defines the integral stage
-`Dᵇc(Y, 𝒪_E)` as the derived complete objects `K` all of whose reductions
-`K ⊗ᴸ_{𝒪_E} A_{E,n}` are bounded constructible, with cohomological supports
-(`DerivedCategory.cohomologicalSupport`, blueprint `def-weil-cohomological-support`) contained
-in one interval `[r, s]` independent of `n`.
+The blueprint defines the integral stage `Dᵇc(Y, 𝒪_E)` as the derived complete objects `K` all of
+whose reductions `K ⊗ᴸ_{𝒪_E} A_{E,n}` are bounded constructible, with cohomological supports
+(`DerivedCategory.cohomologicalSupport`, blueprint `def-weil-cohomological-support`) contained in
+one interval `[r, s]` independent of `n`.
 
 As everywhere in the repository (see
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`), the integral stage is
@@ -67,8 +66,7 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) (X : Scheme.{u})
 
-/-- Blueprint `def-weil-derived-complete-integral-detailed`: Bounded constructible
-derived-complete integral coefficients.
+/-- Bounded constructible derived-complete integral coefficients.
 
 An object `K` of `D(Y, Λ)`, `Λ = 𝒪_E` and `I = 𝔪_E`, lies in `Dᵇc(Y, 𝒪_E)` if it is derived
 complete for `I`, every reduction `K ⊗ᴸ (Λ/Iⁿ⁺¹)_Y` is bounded constructible, and the

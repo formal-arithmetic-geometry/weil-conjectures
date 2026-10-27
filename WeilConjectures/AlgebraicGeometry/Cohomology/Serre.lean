@@ -165,7 +165,7 @@ theorem ProjectiveSpace.nonempty_H_twist_linearEquiv_homology (k : Type u) [Fiel
 /-- **Vanishing of the cohomology of the twisting sheaves in middle degrees.**
 `H^q(ℙᵈ_k, 𝒪(m)) = 0` for every `m` and every `q ∉ {0, d}`.
 
-(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology`) -/
+(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology`) -/
 theorem ProjectiveSpace.subsingleton_H_twist_of_ne (k : Type u) [Field k] [Finite n] (d : ℕ)
     (hn : Nat.card n = d + 1) (q : ℕ) (m : ℤ) (hq0 : q ≠ 0) (hqd : q ≠ d) :
     Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H q) := by
@@ -184,7 +184,7 @@ theorem ProjectiveSpace.subsingleton_H_twist_of_ne (k : Type u) [Field k] [Finit
 `H^d(ℙᵈ_k, 𝒪(m)) = 0` for `m ≥ -d`, when `d ≠ 0`. For `d = 0` the statement is false, since
 `H⁰(Spec k, 𝒪) = k`; that case is `nonempty_H_zero_twist_equiv` with `d = 0`.
 
-(blueprint: `sk-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii)) -/
+(blueprint: `det-thm-picard-pn`, `lem-pc-projective-space-twist-cohomology` (ii)) -/
 theorem ProjectiveSpace.subsingleton_H_twist_top (k : Type u) [Field k] [Finite n] (d : ℕ)
     (hd : d ≠ 0) (hn : Nat.card n = d + 1) (m : ℤ) (hm : -(d : ℤ) ≤ m) :
     Subsingleton ((ProjectiveSpace.twist n (Spec (.of k)) m).H d) := by
@@ -391,7 +391,7 @@ The pushforward `i_* ℱ` is coherent
 so this is Serre vanishing on `ℙᵈ_k`,
 `AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist`, for `i_* ℱ`.
 
-(blueprint: `sk-thm-picard-serre-b`) -/
+(blueprint: `det-thm-picard-serre-b`) -/
 theorem Scheme.Modules.exists_subsingleton_H_tensor_twist [Finite n]
     (i : X ⟶ ℙ(n; Spec (.of k))) [IsClosedImmersion i] (F : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
@@ -436,7 +436,7 @@ sections (`ProjectiveSpace.generatingSectionsTwist`). Finally `𝒢(m) ≅ i_* (
 projection formula, and global generation descends along `i` because `i_*` is faithful
 (`Scheme.Modules.GeneratingSections.ofPushforward`).
 
-(blueprint: `sk-thm-picard-serre-a`, `thm-picard-serre-a`) -/
+(blueprint: `det-thm-picard-serre-a`, `thm-picard-serre-a`) -/
 theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
     (i : X ⟶ ℙ(n; Spec (.of k))) [IsClosedImmersion i] (F : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]

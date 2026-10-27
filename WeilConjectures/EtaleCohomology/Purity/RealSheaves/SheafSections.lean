@@ -121,7 +121,7 @@ theorem Restriction.apply_restrict_frobeniusLift (R : Restriction j WU W) {V : T
 
 variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [j.IsOver (Spec (.of K))]
 
-/-- Blueprint `p-real-sections` (subsection `sk-p-real-sections`): Global sections as invariants.
+/-- Blueprint `p-real-sections` (subsection `p-real-sections`): Global sections as invariants.
 
 Let `e` be an equivalence between lisse Weil sheaves on `C₀` and lisse representations of
 `W(C₀)` which identifies the global sections `H⁰(C̄, F)` with the invariants `V ^ {π₁(C)}`,

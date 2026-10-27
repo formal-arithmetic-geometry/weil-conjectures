@@ -21,7 +21,7 @@ coefficient ring, `AlgebraicGeometry.Etale.IsUniformlyExceptionallyAdmissible` a
 with uniform constants) and observes that it is a theorem, not a restriction
 (`AlgebraicGeometry.Etale.isExceptionallyAdmissible`,
 `AlgebraicGeometry.Etale.isUniformlyExceptionallyAdmissible`): it is satisfied by the
-constructible exceptional inverse image `Rf^!` of `sk-def-sf-operations` (vi).
+constructible exceptional inverse image `Rf^!` of `det-def-sf-operations` (vi).
 
 This is unrelated to the *ambient* admissibility datum of `sk-def-sf-admissible`
 (`AlgebraicGeometry.ProEtale.IsExceptionalAdjointAdmissible`), which fails in general.

@@ -43,10 +43,10 @@ and its variants for complexes supported on closed subschemes, for the external 
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`:
   `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L` for closed immersions `i`, `j`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
-  (`sk-thm-product`): the relative product theorem for complexes supported on closed
+  (`sk-thm-sf-kunneth-relative`): the relative product theorem for complexes supported on closed
   subschemes.
 - `AlgebraicGeometry.Etale.nonempty_iso_compactlySupported_externalProduct_closedImmersion`
-  (`sk-thm-product`): the Künneth formula for `RΓ_c(Z × W, -)` over a field.
+  (`sk-thm-sf-kunneth-relative`): the Künneth formula for `RΓ_c(Z × W, -)` over a field.
 
 See `WeilConjectures.SixFunctors.Etale.Derived.Kunneth` for the implementation notes.
 
@@ -408,7 +408,7 @@ theorem nonempty_iso_externalProduct_closedImmersion [UpperStarPreservesFlat A]
       externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K))
         ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :=
   nonempty_iso_externalProduct_closedImmersion_of_flat A f g i j K L
-/-- Blueprint `sk-thm-product`: Supported product over a relative base.
+/-- Blueprint `sk-thm-sf-kunneth-relative`: Supported product over a relative base.
 
 Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
 `i : Z ⟶ X`, `j : W ⟶ Y` be closed immersions, with product
@@ -450,7 +450,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
   obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct Λ f g hK hL
   exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).mapIso e.symm⟩
 
-/-- Blueprint `sk-thm-product`: Supported product over a relative base.
+/-- Blueprint `sk-thm-sf-kunneth-relative`: Supported product over a relative base.
 
 The Künneth formula with closed supports over a field: for `X`, `Y` separated of finite type
 over a field `k` and closed subschemes `i : Z ⟶ X`, `j : W ⟶ Y`,

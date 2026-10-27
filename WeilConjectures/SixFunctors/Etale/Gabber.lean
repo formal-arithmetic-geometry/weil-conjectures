@@ -159,7 +159,6 @@ The blueprint applies this to the closed fibres `(T_λ)₀` of a system of finit
 presented covers `T_λ ⟶ T` of an affine henselian pair `(T, T₀)` whose limit is an integral
 strictly local cover, and a torsion sheaf; neither the special shape of the system nor the
 torsion hypothesis is used, so they are not assumed here.
-(blueprint: lemma-weil-pbc-finite-stage-killing)
 -/
 theorem exists_cohomologyMap_eq_zero_of_isLimit {J : Type u} [SmallCategory J] [IsCofiltered J]
     {S : Scheme.{u}} (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S)

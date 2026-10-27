@@ -37,8 +37,7 @@ Proof:
    adjoint to inclusion (`def-weil-pbc-sheafification`). The chain of adjunctions identifies
    inverse image (`def-weil-pbc-inverse-image`) with inclusion, presheaf pullback, then
    sheafification, using the restriction formula for `def-weil-pbc-direct-image`.
-2. Inverse image preserves colimits as a left adjoint
-   (`lem-weil-pbc-inverse-image-preserves-colimits`), hence finite colimits and cokernels.
+2. Inverse image preserves colimits as a left adjoint, hence finite colimits and cokernels.
 3. The base-change functor preserves finite limits; its presheaf pullback is a filtered
    colimit and preserves finite limits (`lem-weil-pbc-presheaf-pullback-left-exact`).
 4. Inclusion and sheafification preserve finite limits

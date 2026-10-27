@@ -107,7 +107,7 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 end LowerShriek
 
 /-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
-with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
+with the passage to `ℚ̄_ℓ`-coefficients): for a finite morphism
 `p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
 `r > 0`: the pushforward `p₀*` is exact
 (`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`), hence is

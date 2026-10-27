@@ -811,7 +811,7 @@ lemma affineLine.restriction_map_artinSchreierIdempotent (ψ : AddChar k₀ (Pad
   rw [artinSchreierTranslationSheafHom_hom_app]
   rfl
 
--- TODO(unify): sk-def-as
+-- TODO(unify): def-fd-artin-schreier-sheaf
 /-- The Artin–Schreier sheaf `ℒ_{ψ(a x)}` on the affine line: the pullback along `x ↦ a x` of
 the `ψ`-isotypic component `ℒ_ψ` of the pushforward of the constant sheaf along the
 Artin–Schreier cover `u^q - u = x`, which is Galois over the line with group `k₀`, so that its
@@ -1145,7 +1145,7 @@ noncomputable def affineLine.geometricSMul (a : AlgebraicClosure k₀) :
 
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
--- TODO(unify): sk-d-real-operations
+-- TODO(unify): def-real-weil-representation-operations
 /-- `F.HasLinearArtinSchreierConstituent ψ a j` says that the restriction along `j : U ⟶ 𝔸¹` of
 the geometric linear Artin–Schreier sheaf `ℒ_{ψ(a x)}`, for `a` in the algebraic closure of
 `k₀`, is a constituent of the pullback of `F` to `U ⊗_{k₀} k̄`: a quotient of a lisse subsheaf
@@ -1351,7 +1351,7 @@ Artin–Schreier sheaf. -/
 theorem isLisse_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierKernel ψ).IsLisse :=
   ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_artinSchreier ψ 1)
 
--- TODO(unify): sk-def-ft
+-- TODO(unify): def-fd-transform
 /-- The Fourier–Deligne transform `FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ μ^* ℒ_ψ)[1]` from Weil complexes
 on the affine line to Weil complexes on the dual affine line, with Laumon's shift by the
 relative dimension one. It is a triangulated functor between the triangulated categories of
@@ -1363,18 +1363,18 @@ noncomputable def fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
     WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀) ⋙
     shiftFunctor _ (1 : ℤ)
 
--- TODO(unify): sk-def-ft
+-- TODO(unify): def-fd-transform
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive := by
   unfold fourierTransform
   infer_instance
 
--- TODO(unify): sk-def-ft
+-- TODO(unify): def-fd-transform
 noncomputable instance (ψ : AddChar k₀ (PadicAlgCl l)) :
     (fourierTransform (l := l) ψ).CommShift ℤ := by
   unfold fourierTransform
   infer_instance
 
--- TODO(unify): sk-def-ft
+-- TODO(unify): def-fd-transform
 /-- The Fourier–Deligne transform is a triangulated functor, as a composite of the triangulated
 functors `pr₁^*`, `- ⊗ μ^* ℒ_ψ`, `Rpr₂!` and the shift. -/
 instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsTriangulated := by

@@ -86,7 +86,7 @@ computed with a chosen compactification. The same comparison is why
 morphism `f' = pullback.snd ρ ρ'` to be quasi-compact, because it goes through
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, and `f'` is quasi-compact as a base change
 of `pullback.snd π π'` (`MorphismProperty.of_isPullback`).
-(sketch blueprint: `sk-prop-base-change`) -/
+(sketch blueprint: `lem-fd-base-change`) -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
     [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]

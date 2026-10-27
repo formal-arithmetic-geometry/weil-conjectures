@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 /-- Global sections of abelian étale sheaves on a zero-dimensional finite-type scheme
  over an algebraically closed field preserve finite colimits.
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
 Stacks Project, Tags 00KH, 00FV, 054M, 03SI and 03QO.
 (blueprint: zero-dimensional-global-sections-exact).

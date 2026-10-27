@@ -148,7 +148,18 @@ projection formula for `P`-invariants (blueprint `det-nearby-kunneth-invariants`
 discrete representations in `Representation.invariantsTensorEquiv`) then identifies the
 restriction of `Π_{A,B}` with the `P`-invariants of the Künneth map of the geometric slice.
 Neither the action of inertia on nearby cycles nor the invariance of nearby cycles under change
-of traits is formalised. -/
+of traits is formalised.
+
+Routes that do not avoid these inputs:
+* making the three pullback exchanges along the slice invertible: this is base change of `Rj_*`
+  along `Spec K⟦t⟧ ⟶ S'`, which is neither weakly étale
+  (`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`) nor smooth;
+* taking the generic fibres of the slices over `Spec Ω_K`, as here: the exchanges of `M` and `P`
+  are then the inclusions of the `P`-invariants, which needs the inertia action;
+* running the induction on models with non-geometric generic fibres: the Künneth map is not an
+  isomorphism for them;
+* slicing through the strict localization `S'` itself: it is not of the form `Spec K⟦t⟧`, and the
+  exchanges are still inclusions of invariants. -/
 theorem isIso_map_kunnethMap_of_isIso_sliceFst
     {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

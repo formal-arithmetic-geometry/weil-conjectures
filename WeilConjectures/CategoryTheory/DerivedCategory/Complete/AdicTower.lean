@@ -20,10 +20,10 @@ generating the ideal `I`. For a normalized `ϖ`-adic tower `T` of complexes of s
 compatibly with the reduction maps and with the transitions:
 `DerivedCategory.exists_derivedCompletionDiagram_iso_of_isNormalizedAdicTower`.
 
-The proof follows blueprint `sk-prop-trace-adic` (i): `- ⊗ᴸ R/Iⁿ` is triangulated and commutes
-with countable products, hence with `R lim`; on complexes it is the mapping cone of `ϖⁿ`
-(`DerivedCategory.reductionIso`), and the tower of cones `cone(ϖⁿ on T_{m+n})` has derived limit
-`T_n` (`CochainComplex.IsNormalizedAdicTower.isIso_π_comp`).
+Proof sketch: `- ⊗ᴸ R/Iⁿ` is triangulated and commutes with countable products, hence with
+`R lim`; on complexes it is the mapping cone of `ϖⁿ` (`DerivedCategory.reductionIso`), and the
+tower of cones `cone(ϖⁿ on T_{m+n})` has derived limit `T_n`
+(`CochainComplex.IsNormalizedAdicTower.isIso_π_comp`).
 
 ## Implementation notes
 

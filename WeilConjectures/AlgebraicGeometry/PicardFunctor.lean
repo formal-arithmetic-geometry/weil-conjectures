@@ -161,7 +161,7 @@ of `𝒪_Y`-modules, realized as the invertible classes inside the skeleton of `
 Its group law, induced by the tensor product with the dual as inverse, is
 `AlgebraicGeometry.Scheme.Pic.instCommGroup`.
 
-(blueprint: `def-sc-picard-group`, `sk-def-av-pic`)
+(blueprint: `def-sc-picard-group`)
 
 This lives in `Type (u + 1)` rather than `Type u`; see the implementation notes of this
 module. -/
@@ -336,7 +336,7 @@ sends invertible modules to invertible modules and respects isomorphisms
 (`AlgebraicGeometry.Scheme.Pic.map`), and `(g₁ ∘ g₂)^* = g₂^* g₁^*`, `id^* = id`
 (`AlgebraicGeometry.Scheme.Pic.map_comp`, `AlgebraicGeometry.Scheme.Pic.map_id`).
 
-(blueprint: `def-pc-picard-presheaf`, `lem-pc-pic-presheaf-functorial`,
+(blueprint: `def-pc-picard-presheaf`,
 `rem-ptr-pc-picard-presheaf-6`) -/
 noncomputable def picardPresheaf (f : X ⟶ S) : (Over S)ᵒᵖ ⥤ Type (u + 1) where
   obj T := (Limits.pullback f T.unop.hom).Pic

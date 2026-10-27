@@ -242,8 +242,9 @@ instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).EssSu
 
 instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).IsEquivalence where
 
-/-- **Sheaves and covers** (the first step of `sk-i-real-galois`): finite étale `Y`-schemes are
-equivalent to finite locally constant étale sheaves of sets, by `P ↦ Hom_Y(-, P)`. -/
+/-- **Sheaves and covers** (the first step of `cor-galois-lisse-representations`): finite étale
+`Y`-schemes are equivalent to finite locally constant étale sheaves of sets, by `P ↦ Hom_Y(-, P)`.
+-/
 noncomputable def Scheme.FiniteEtale.equivalenceFiniteLocallyConstant (Y : Scheme.{u}) :
     Y.FiniteEtale ≌ Y.FiniteLocallyConstant :=
   (Scheme.FiniteEtale.toFiniteLocallyConstant Y).asEquivalence
@@ -1286,8 +1287,8 @@ instance : (Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).IsEquivalenc
 
 end GaloisRepEquivalence
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems. Also
-blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems.
+Also blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
 
 The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
 group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
@@ -1316,7 +1317,7 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
   exact ⟨(Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).asEquivalence,
     ⟨Scheme.galoisRepFunctorCompForget₂Iso s G⟩⟩
 
-/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems.
 
 Let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point and `Λ` a finite ring.
 Then there is a profinite group `G` — the étale fundamental group `π₁(Y, s)`, a fundamental
@@ -1363,20 +1364,22 @@ variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.
 
 namespace WeilGroup
 
-/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 The property of an object of `Rep ℚ̄_ℓ W(C₀)` of being a *lisse Weil representation*: the
 underlying `ℚ̄_ℓ`-vector space is finite dimensional and the geometric subgroup `π₁(C)`
 acts continuously (`AlgebraicGeometry.WeilGroup.IsLisse`). Under the equivalence of
-`sk-i-real-sheaves` these are exactly the objects corresponding to lisse Weil sheaves on
-`C₀`. -/
+`prop-wf-weil-sheaf-representation-equivalence` these are exactly the objects corresponding to lisse
+Weil sheaves on `C₀`. -/
 def isLisseRep (W : WeilGroup p) (l : ℕ) [Fact l.Prime] :
     ObjectProperty (Rep.{u} (PadicAlgCl l) W.carrier) :=
   fun X ↦ FiniteDimensional (PadicAlgCl l) X.V ∧ W.IsLisse l X.ρ
 
 variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime]
 
-/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 A subrepresentation of a lisse Weil representation is again lisse: it is finite dimensional,
 and every coefficient `g ↦ φ (ρ g v)` of it is a coefficient of the ambient representation,
@@ -1394,7 +1397,8 @@ instance isLisseRep.isClosedUnderSubobjects :
     have hψ' (x : X.V) : ψ (f.hom x) = x := LinearMap.congr_fun hψ x
     simpa [← Rep.hom_comm_apply, hψ'] using hρ.continuous_apply (φ ∘ₗ ψ) (f.hom v)
 
-/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 A quotient of a lisse Weil representation is again lisse: it is finite dimensional, and every
 coefficient `g ↦ φ (ρ g (f v))` of it is the coefficient `g ↦ (φ ∘ f) (ρ g v)` of the source. -/
@@ -1409,7 +1413,8 @@ instance isLisseRep.isClosedUnderQuotients :
     obtain ⟨v, rfl⟩ := hf w
     simpa [Rep.hom_comm_apply] using hρ.continuous_apply (φ ∘ₗ f.hom.toLinearMap) v
 
-/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 Lisse Weil representations are closed under kernels, so a subobject of a lisse Weil
 representation is again lisse. -/
@@ -1417,7 +1422,8 @@ instance isLisseRep.isClosedUnderKernels :
     ObjectProperty.IsClosedUnderKernels (W.isLisseRep l) :=
   inferInstance
 
-/-- Blueprint `sk-i-real-sheaves`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 Lisse Weil representations are closed under cokernels, so a quotient of a lisse Weil
 representation is again lisse. -/
@@ -1425,13 +1431,14 @@ instance isLisseRep.isClosedUnderCokernels :
     ObjectProperty.IsClosedUnderCokernels (W.isLisseRep l) :=
   inferInstance
 
-/-- Blueprint `sk-i-real-sheaves`, node `prop-wf-weil-sheaf-representation-equivalence`:
-The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`, node
+`prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation equivalence.
 
 A short complex of lisse Weil representations is short exact exactly when its geometric
 generic stalk, i.e. its image under the forgetful functor to `ModuleCat ℚ̄_ℓ`, is short exact.
 This is the form in which the exactness of the geometric-generic-stalk equivalence of
-`sk-i-real-sheaves` is used, lisse `ℚ̄_ℓ`-sheaves themselves being unavailable.
+`prop-wf-weil-sheaf-representation-equivalence` is used, lisse `ℚ̄_ℓ`-sheaves themselves being
+unavailable.
 
 The forgetful functor is faithful and exact, since kernels and cokernels of representations
 are computed on the underlying vector spaces, so it preserves and reflects short exactness;
@@ -1507,7 +1514,7 @@ theorem IsLisse.exists_lattice {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : T
   exact ⟨E, hE, PadicAlgCl.exists_lattice_of_forall_mem l b σ E hσE' C
     fun g i j ↦ hC (i, j) g⟩
 
-/-- Blueprint `sk-p-real-sections`: Global sections as invariants.
+/-- Blueprint `p-real-sections`: Global sections as invariants.
 
 The global sections `H⁰(U, F|_U)` of the lisse sheaf `F` with geometric generic stalk
 `(V, ρ)`, rendered as in the proof sketch: a global section is a morphism from the constant
@@ -1527,7 +1534,7 @@ variable {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V) {j : U ⟶ C}
   [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU} (R : Restriction j WU W)
 
-/-- Blueprint `sk-p-real-sections`: Global sections as invariants.
+/-- Blueprint `p-real-sections`: Global sections as invariants.
 
 The geometric Frobenius `F = ρ (res γ)` preserves the invariants `V ^ (π₁(U))`, because
 `π₁(U)` is normal in `W(U₀)`. -/
@@ -1545,7 +1552,7 @@ theorem frobeniusLift_mem_invariants (v : V)
   conv_rhs => rw [← this]
   simp [← Module.End.mul_apply, ← map_mul]
 
-/-- Blueprint `sk-p-real-sections`: Global sections as invariants.
+/-- Blueprint `p-real-sections`: Global sections as invariants.
 
 The geometric Frobenius `F = ρ (res γ)` acts on global sections by post-composition: `π₁(U)`
 is normal in `W(U₀)`, so post-composing an equivariant map with `F` gives an equivariant
@@ -1559,7 +1566,7 @@ theorem comp_mem_globalSections (f : PadicAlgCl l →ₗ[PadicAlgCl l] V)
   exact frobeniusLift_mem_invariants ρ R (f a)
     (fun g ↦ by simpa using LinearMap.congr_fun (hf g) a) g
 
-/-- Blueprint `sk-p-real-sections`, node `p-real-sections`: Global sections as invariants.
+/-- Blueprint `p-real-sections`, node `p-real-sections`: Global sections as invariants.
 
 For a lisse Weil representation `(V, ρ)` and a restriction `R` of Weil groups along a nonempty
 open `U₀ ⊆ C₀`, the global sections `H⁰(U, F|_U) = Hom_{π₁(U)}(𝟙, V)` are the invariants
