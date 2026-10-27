@@ -366,6 +366,70 @@ theorem scalarTensorTotal_isIso {W : Scheme.{u}}
 
 attribute [local irreducible] scalarTensorTotal
 
+/-- Existence of the normalized derived scalar/tensor comparison.
+Source: Stacks Tags 06YY, 07A4.
+The proof descends the signed total comparison through K-flat representatives and
+localization; the representative normalization is exactly the displayed equation.
+(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+theorem scalarTensor_exists {W : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
+    (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :
+    ∃ μ : r.tensor ⋙ pbcDerivedExtend a ≅
+        ((pbcDerivedExtend a).prod (pbcDerivedExtend a)) ⋙ s.tensor,
+      ∀ (P Q : CochainComplex (pbcModules W R) ℤ)
+        (hp : proEtaleFlatRepresentatives W R P) (hq : proEtaleFlatRepresentatives W R Q),
+        ∃ (hp' : proEtaleFlatRepresentatives W S
+              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj P))
+          (hq' : proEtaleFlatRepresentatives W S
+              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj Q)),
+          (pbcDerivedExtend a).map (r.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
+              μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+              s.tensor.map (Prod.mkHom (pbcComplexCounit a P) (pbcComplexCounit a Q)) =
+            pbcComplexCounit a (CochainComplex.mapBifunctor P Q (proEtaleOrdinaryTensor W R)) ≫
+              DerivedCategory.Q.map
+                (@inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q)) ≫
+              s.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩) := by
+  sorry
+
+/-- Uniqueness of a normalized derived scalar/tensor comparison.
+Source: Stacks Tags 06YY, 07A4.
+The K-flat representative normalization determines each component after localization;
+resolving representatives are jointly conservative, so two normalized isomorphisms
+are equal by extensionality.
+(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+theorem scalarTensor_unique {W : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
+    (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S)
+    (μ ν : r.tensor ⋙ pbcDerivedExtend a ≅
+        ((pbcDerivedExtend a).prod (pbcDerivedExtend a)) ⋙ s.tensor)
+    (hμ : ∀ (P Q : CochainComplex (pbcModules W R) ℤ)
+        (hp : proEtaleFlatRepresentatives W R P) (hq : proEtaleFlatRepresentatives W R Q),
+        ∃ (hp' : proEtaleFlatRepresentatives W S
+              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj P))
+          (hq' : proEtaleFlatRepresentatives W S
+              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj Q)),
+          (pbcDerivedExtend a).map (r.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
+              μ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+              s.tensor.map (Prod.mkHom (pbcComplexCounit a P) (pbcComplexCounit a Q)) =
+            pbcComplexCounit a (CochainComplex.mapBifunctor P Q (proEtaleOrdinaryTensor W R)) ≫
+              DerivedCategory.Q.map
+                (@inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q)) ≫
+              s.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩))
+    (hν : ∀ (P Q : CochainComplex (pbcModules W R) ℤ)
+        (hp : proEtaleFlatRepresentatives W R P) (hq : proEtaleFlatRepresentatives W R Q),
+        ∃ (hp' : proEtaleFlatRepresentatives W S
+              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj P))
+          (hq' : proEtaleFlatRepresentatives W S
+              (((pbcExtend a).mapHomologicalComplex (.up ℤ)).obj Q)),
+          (pbcDerivedExtend a).map (r.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
+              ν.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+              s.tensor.map (Prod.mkHom (pbcComplexCounit a P) (pbcComplexCounit a Q)) =
+            pbcComplexCounit a (CochainComplex.mapBifunctor P Q (proEtaleOrdinaryTensor W R)) ≫
+              DerivedCategory.Q.map
+                (@inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q)) ≫
+              s.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩)) : μ = ν := by
+  sorry
+
 /-- Tensor balancing on derived categories is uniquely fixed on flat K-flat pairs.
 Source: Stacks Tags 06YY, 07A4
 (blueprint: def-sf-compact-support-scalar-tensor-balancing).
@@ -391,7 +455,10 @@ theorem scalarTensor_existsUnique {W : Scheme.{u}}
               DerivedCategory.Q.map
                 (@inv _ _ _ _ (scalarTensorTotal a P Q) (scalarTensorTotal_isIso a P Q)) ≫
               s.representative.hom.app (⟨_, hp'⟩, ⟨_, hq'⟩) := by
-  sorry
+  obtain ⟨μ, hμ⟩ := scalarTensor_exists a r s
+  refine ⟨μ, hμ, ?_⟩
+  intro ν hν
+  exact (scalarTensor_unique a r s μ ν hμ hν).symm
 
 /-- The specified ordinary derived scalar/tensor comparison.
 Source: Stacks Tags 06YY, 07A4

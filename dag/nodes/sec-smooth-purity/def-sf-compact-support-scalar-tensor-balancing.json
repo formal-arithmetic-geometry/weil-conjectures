@@ -14,35 +14,27 @@
  },
  "proof": [
   {
-   "text": "Use the native derived monoidal tensor and its flat K-flat representative comparison to construct a ProEtaleTensorModel. The canonical site instances specialize the existing integral coefficient instances.",
+   "text": "Construct the native tensor model and ordinary scalar comparison, then form the signed total of inverse ordinary comparisons. Descend this comparison through K-flat representatives and derived localization; this supplies an isomorphism satisfying the displayed flat-pair normalization.",
    "uses": [
+    "def-pur-integral-compact-support-coefficient-data",
     "lem-sf-ringed-derived-native-tensor",
-    "def-weil-pbc-adic-coefficient-datum"
+    "lem-sfb-scalar-ordinary-tensor-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the existing ordinary scalar/tensor comparison for a scalar adjunction. Transport it along the unit-normalized uniqueness isomorphism to the concrete pbcExtend adjunction. On coefficient-one pure tensors the unit equations identify the comparison; linearity supplies arbitrary coefficients. Pure tensor extensionality proves uniqueness and naturality.",
+   "text": "Use the separately stated existence and uniqueness parts of the normalized derived descent obligation to assemble the unique comparison and select it as scalarTensor.",
    "uses": [
-    "lem-sfb-scalar-ordinary-tensor-comparison",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "def-sfb-sheaf-tensor-pure-section",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Form the signed total of the inverse ordinary comparisons. It is invertible since scalar extension is a left adjoint and hence preserves the direct sums in the total. The already stated scalarTensor_existsUnique obligation descends the total comparison to derived categories, normalized on flat K-flat pairs. scalarTensor selects this uniquely specified isomorphism.",
-   "uses": [
-    "def-pur-integral-compact-support-coefficient-data"
+    "new-sf-scalar-tensor-existence",
+    "new-sf-scalar-tensor-uniqueness"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
-  "by": "R4",
+  "by": "S4",
   "date": "2026-10-28",
-  "note": "Ordinary comparison proved; existing derived descent obligation relocated unchanged. No new hole."
+  "note": "Ordinary comparison and total isomorphism are proved in the item. The former derived scalarTensor_existsUnique obligation is decomposed into separately named existence and uniqueness statements; scalarTensor combines them by real Lean proof."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -140,7 +132,9 @@
    "WeilConjectures.PurCompactSupport.scalarTensorTotal",
    "WeilConjectures.PurCompactSupport.scalarTensorTotal_isIso",
    "WeilConjectures.PurCompactSupport.scalarTensor_existsUnique",
-   "WeilConjectures.PurCompactSupport.scalarTensor"
+   "WeilConjectures.PurCompactSupport.scalarTensor",
+   "WeilConjectures.PurCompactSupport.scalarTensor_exists",
+   "WeilConjectures.PurCompactSupport.scalarTensor_unique"
   ],
   "statement": "def scalarTensor {W : Scheme.{u}}\n    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)\n    (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :\n    r.tensor ⋙ pbcDerivedExtend a ≅\n      ((pbcDerivedExtend a).prod (pbcDerivedExtend a)) ⋙ s.tensor",
   "branch": "sheaf-dag",
@@ -151,11 +145,10 @@
  },
  "proof_deps": [
   "def-pur-integral-compact-support-coefficient-data",
-  "def-sfb-sheaf-tensor-pure-section",
-  "def-weil-pbc-adic-coefficient-datum",
   "lem-sf-ringed-derived-native-tensor",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-sfb-scalar-ordinary-tensor-comparison"
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "new-sf-scalar-tensor-existence",
+  "new-sf-scalar-tensor-uniqueness"
  ],
  "reviewed": {
   "date": "2026-10-27",
@@ -170,11 +163,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-7028d",
-  "group": "R4",
-  "result": "fix",
-  "landing": "20261027T210217-L-1671473",
-  "kind": "interface",
-  "note": "independent cc review: moved scalar-tensor block vs published item (text diff + elaborated type/value hashes equal); openComparison_isIso / scalarOrdinaryTensor_existsUnique proofs vs their nodes; 5 SLOW direct importers timed against published originals at the same time"
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T234310-L-92082",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
