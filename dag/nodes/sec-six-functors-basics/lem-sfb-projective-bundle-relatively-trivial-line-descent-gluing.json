@@ -1,0 +1,86 @@
+{
+ "id": "lem-sfb-projective-bundle-relatively-trivial-line-descent-gluing",
+ "kind": "statement",
+ "title": "Gluing trivial module lines along a cocycle",
+ "statement": "Let X be a ringed space and U_i an open cover. Given isomorphisms between the restrictions of the unit module on each overlap, satisfying the cocycle equation on every open contained in a triple overlap, there is a sheaf of modules H on X whose restriction to every U_i is isomorphic to the unit module.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 04TN, 00AL and 00AM (glue-maps, glue-sheaves and glue-sheaves-structures)."
+ },
+ "proof": [
+  {
+   "text": "Apply the existing module sheaf gluing theorem to the family of unit modules and the supplied transition isomorphisms. Its cocycle hypothesis is exactly the displayed triple-overlap equality, and its local comparison isomorphisms identify the glued module with each unit module.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 04TN, 00AL and 00AM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J9",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 04TN, 00AL and 00AM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "glue_sheaves_of_modules",
+   "results": "Found AlgebraicGeometry.glue_sheaves_of_modules in WeilConjectures.Topology.GlueSheavesOfModules.",
+   "date": "2026-10-27",
+   "verdict": "Direct existing theorem; no Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleRelativelyTrivialLineDescent",
+  "date": "2026-10-27",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleTrivialLineGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleTrivialLineGluing.lean",
+  "declaration": "AlgebraicGeometry.glue_trivial_module_lines",
+  "statement": "theorem glue_trivial_module_lines\n    (X : RingedSpace.{u, u}) (I : Type w) (U : I → Opens X)\n    (hcover : ⨆ i, U i = ⊤)\n    (φij : ∀ i j : I,\n      (SheafOfModules.overMap (moduleRings X)\n        (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj\n          (SheafOfModules.unit ((moduleRings X).over (U i))) ≅\n      (SheafOfModules.overMap (moduleRings X)\n        (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj\n          (SheafOfModules.unit ((moduleRings X).over (U j))))\n    (hcocycle : ∀ (i j k : I) (W : Opens X)\n      (hi : W ≤ U i) (hj : W ≤ U j) (hk : W ≤ U k),\n      (φij i k).hom.val.app (op (Over.mk (homOfLE (le_inf hi hk)))) =\n        (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) ≫\n          (φij j k).hom.val.app (op (Over.mk (homOfLE (le_inf hj hk))))) :\n    ∃ (H : SheafOfModules (moduleRings X)),\n      ∀ i : I, Nonempty (H.over (U i) ≅\n        SheafOfModules.unit ((moduleRings X).over (U i)))",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261027T151716-L-1196017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261027T151716-L-1196017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
