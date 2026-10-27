@@ -13,36 +13,39 @@
  ],
  "proof": [
   {
-   "text": "Expand the compact-support coefficient comparisons into the open-extension comparison and the section/K-injective-normalized direct-image comparison. Uniqueness of the transported open adjoint identifies the realized identity-open unit with sfIntrinsicOpenId; exact termwise descent preserves that equality.",
+   "text": "For any adjunction and equivalence, calculate the identity left-adjoint comparison using the transported unit. Specializing to extension by zero identifies sfIntrinsicOpenId with transport of openImmersionLowerShriekIdIso. Apply the existing exact-derived identity-square theorem to sfIntrinsicOpenExtensionComparison; naturality of the identity open map and the equivalence triangle give open_identity_square.",
    "uses": [
     "def-sf-operation-stages"
    ],
    "elementary": false
   },
   {
-   "text": "The section-normalized identity direct-image comparison is the right-adjoint comparison for the same transported identity inverse image. Its K-injective-normalized derived comparison is therefore sixFunctorDirectIdentity. Thus the corresponding direct-image identity square commutes.",
-   "uses": [
-    "def-sf-operation-stages"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of the proper direct-image comparison moves the open identity through proper image. Paste the preceding two unit squares. Adjacent realization units cancel; the remaining open and direct-image comparison factors are precisely sfIntrinsicCompactSupportComparison for the actual pair (i,p).",
+   "text": "Calculate the right-adjoint identity map through the transported adjunction and the specified underived direct-image comparison. The fixed-scalar right identity is lowerStarId by its conjugation characterization. Prove that deriving an adjunction with an identified identity left functor gives the right-derived natural identity isomorphism, using the derived counit normalization on the homotopy localization. Finally apply the all-complex inverse direct-image normalization: cancel the exact identity direct-image derived unit and the realization factor, and use the underived square degreewise. This proves direct_identity_square for the specified sixFunctorDirectIdentity.",
    "uses": [
     "def-sf-operation-stages",
-    "lem-sf-identity-factor-fixed-support"
+    "lem-finite-realization-direct-image-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor each compact-support comparison into the exact open realization square followed by the normalized direct-image comparison. The private generic paste_identity_units calculation uses naturality of the proper direct-image comparison and the two identity isomorphisms to paste open_identity_square and direct_identity_square. Expanding only the identity-factor and candidate unit definitions gives exactly identityFactorCoefficientComparison.",
+   "uses": [
+    "def-sf-operation-stages",
+    "lem-sf-identity-factor-fixed-support",
+    "lem-finite-realization-direct-image-unit-normalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sf-operation-stages",
-  "lem-sf-identity-factor-fixed-support"
+  "lem-sf-identity-factor-fixed-support",
+  "lem-finite-realization-direct-image-unit-normalization"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent E2",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-  "place": "Coefficient identity-unit naturality calculation in lem-sf-finite-support-identity-factor-compositor, proof step 2, independently of the compositor evaluation."
+  "place": "The original three-step coefficient identity-unit calculation, proved using generic adjunction transport and the existing all-complex inverse realization/direct-image normalization."
  },
  "mathlib_searches": [
   {
@@ -133,9 +136,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J6",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261027T123458-L-2304837",
+  "landing": "20261027T180536-L-3873089",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
