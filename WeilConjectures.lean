@@ -9056,6 +9056,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.LocallyFree
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.RetractPadicAlgCl
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.ConstructibleSheaf.PuncturedLisse
 public import WeilConjectures.ConstructibleSheaf.RankOne
@@ -13830,6 +13831,7 @@ public import WeilConjectures.TraceFormula.SourceExchangeProjection
 public import WeilConjectures.TraceFormula.SourceExchangeRightTranspose
 public import WeilConjectures.TraceFormula.SourceExchangeTest
 public import WeilConjectures.TraceFormula.SourceExchangeTransport
+public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
@@ -13918,6 +13920,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessFinite
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessQuasiFinite
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessQuasiFiniteClosure
+public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
