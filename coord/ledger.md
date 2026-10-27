@@ -20455,3 +20455,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:44 L: merged deliver/NC/lem-sf-native-proper-projection-realization (stage 2; reviewer FIX; parallel immutable checks); batch 20261027T233735; landing 20261027T234407-NC-124313 (interface)
 - 23:44 L: merged deliver/NA/lem-pur-integral-braiding-scalar-extension-square (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T233735; landing 20261027T234408-NA-124888 (proof)
 - 23:44 L: merged deliver/NB/lem-pur-integral-tensor-associator-naturality (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T233735; landing 20261027T234409-NB-125449 (proof)
+- 23:51 L: returned deliver/NA/lem-pur-system-scalar-associator-coherence (reviewer RETURN: L: independent stage-2 immutable head 582e13ba9830: Two faults. (1) H3: SE/SL.systemClosed.monoidal is a free MonoidalCa)
