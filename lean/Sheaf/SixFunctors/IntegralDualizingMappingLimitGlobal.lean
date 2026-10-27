@@ -6,6 +6,9 @@ Authors: SHEAF group D5
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingRoosModel
+import Sheaf.SixFunctors.IntegralDualizingMappingTowerLimit
+import Sheaf.SixFunctors.IntegralDualizingMappingTowerFiniteComparison
+import Sheaf.SixFunctors.IntegralDualizingCoefficientHomTowerLimit
 
 /-! The global mapping-complex comparison for the prescribed dualizing limit.
 
@@ -51,6 +54,12 @@ theorem integralDualizing_mapping_limit_global
     Nonempty (integralDualizingGlobalHom l E X M.obj ≅
       (integralDualizingCompactSections l E D hl X).op ⋙
         coefficientDerivedDual (integralDualizingCoefficients l E)) := by
-  sorry
+  obtain ⟨a⟩ := integralDualizing_mapping_tower_limit D l hl E X T M hM
+  obtain ⟨b⟩ := integralDualizing_mapping_tower_finite_comparison D l hl E X T e he
+  obtain ⟨c⟩ := integralDualizing_coefficient_hom_tower_limit l E
+  exact ⟨a ≪≫ Functor.isoWhiskerRight b
+    (CoefTower.totalLimit (integralDualizingCoefficients l E)) ≪≫
+      Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft (integralDualizingCompactSections l E D hl X).op c⟩
 
 end WeilConjectures

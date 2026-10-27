@@ -1,0 +1,110 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, the three displayed derived mapping-complex comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom into an inverse limit of finite dualizing complexes is the derived dual of compactly supported sections",
+   "date": "2026-10-28",
+   "results": "8 hits; LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_symm_apply",
+   "verdict": "No exact match for these project-specific strict derived tower functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.PreservesLimits",
+   "date": "2026-10-28",
+   "results": "12 hits; CategoryTheory.Limits.PreservesLimits, CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits, CategoryTheory.Limits.evaluationPreservesLimits, CategoryTheory.Adjunction.lim_preservesLimits, CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget",
+   "verdict": "No exact match for these project-specific strict derived tower functors."
+  },
+  {
+   "tool": "grep",
+   "query": "rhom.*limit|Hom.*[Ii]nverse[Ll]imit|limit.*[Dd]ual",
+   "date": "2026-10-28",
+   "results": "20 hits; Mathlib/CategoryTheory/ObjectProperty/ColimitsClosure.lean, Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean, Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean",
+   "verdict": "No exact match for these project-specific strict derived tower functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom preserves inverse limits of a tower of complexes and the limit of quotient rings is the complete coefficient ring",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomologyOfExact; HomologicalComplex.instHasLimit; CategoryTheory.Functor.mapDerivedCategory; HomologicalComplex.instHasLimitsOfShape; HomologicalComplex.instPreservesFiniteLimitsSingle; AdicCompletion; HomologicalComplex.instPreservesLimitEval; HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits.",
+   "date": "2026-10-28",
+   "verdict": "No exact comparison of these project-specific derived functors; generic complex limit and localization constructions are already used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-dualizing-mapping-limit-global",
+   "place": "Second proof paragraph, the three displayed derived mapping-complex comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralDualizingMappingLimitGlobal",
+  "date": "2026-10-28",
+  "group": "V2"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "group": "V2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Second proof paragraph, the three displayed derived mapping-complex comparisons."
+ },
+ "id": "def-coef-integral-dualizing-mapping-towers",
+ "kind": "definition",
+ "title": "Strict global and coefficient mapping towers",
+ "statement": "Fix a prime l, a finite extension E of Q_l, R=O_E lifted to the common section universe, and a scheme X. For a strict completed-coefficient derived tower Z, define integralDualizingMappingTower l E X Z on the opposite integral constructible category by realizing Z on the constant-ring sequence site, taking derived internal Hom from the constant input, then taking derived sections with values in strict R-module towers. Define integralDualizingCoefficientHomTower l E on all D(R)^op by internal Hom from a constant coefficient complex into the actual positive quotient tower R/(varpi^(n+1))[0]. Compute this closed Hom in the small-Hom tower localization and return to the standard localization by its canonical localization equivalence. Both constructions retain the strict tower index; neither uses a duality theorem or an existence choice for its data.",
+ "stmt_deps": [
+  "lem-coef-integral-dualizing-roos-model",
+  "lem-coef-hom-tower-scalar-model",
+  "def-coef-integral-dualizing-quotient-tower"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralDualizingMappingTower",
+  "file": "lean/Sheaf/SixFunctors/IntegralDualizingMappingTower.lean",
+  "declaration": "WeilConjectures.integralDualizingMappingTower",
+  "statement": "def integralDualizingMappingTower (X : Scheme.{u})\n    (Z : DerivedCategory (ℕᵒᵖ ⥤ scalarReductionSource l E X)) :\n    (sfIntegralConstructibleCategory l E X)ᵒᵖ ⥤ coefPairingDerived l E",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.integralDualizingSmallTower",
+   "WeilConjectures.integralDualizingSmallTowerQ",
+   "WeilConjectures.integralDualizingTowerEquivalence",
+   "WeilConjectures.integralDualizingMappingTower",
+   "WeilConjectures.integralDualizingCoefficientHomTower"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T234335-L-106453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T234335-L-106453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
