@@ -96,7 +96,8 @@ private noncomputable def comparisonConstantIso (X : Scheme.{u}) :
         (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X) ≅
       constantSheaf (ProEt.topology X) (Type (u + 1)) :=
   (((constantSheafAdj X.smallEtaleTopology (Type (u + 1))
-      (etaleIdentityTerminal X)).comp (proEtaleSiteComparison X)).ofNatIsoRight
+      (etaleIdentityTerminal X)).comp
+        (ProEtale.comparisonCoefficientAdjunction (Type (u + 1)) X)).ofNatIsoRight
       (NatIso.ofComponents (fun _ ↦ Iso.refl _))).leftAdjointUniq
     (constantSheafAdj (ProEt.topology X) (Type (u + 1)) (proEtaleIdentityTerminal X))
 
@@ -138,7 +139,8 @@ private theorem etale_cover_sections_of_classical (X : Scheme.{u})
   let L := Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
     (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)
   have hu := proEtaleComparisonUnitSets_isIso X
-  have : L.Faithful := (proEtaleSiteComparison X).faithful_L_of_mono_unit_app
+  have : L.Faithful :=
+    (ProEtale.comparisonCoefficientAdjunction (Type (u + 1)) X).faithful_L_of_mono_unit_app
   let T := Sheaf.terminal X.smallEtaleTopology (Types.isTerminalPUnit :
     IsTerminal PUnit.{u + 2})
   let hT := Sheaf.isTerminalTerminal X.smallEtaleTopology Types.isTerminalPUnit
@@ -174,7 +176,8 @@ private theorem etale_cover_sections_of_classical (X : Scheme.{u})
     exact ⟨⟨V, s⟩, ⟨𝟙 V⟩⟩
   · intro i
     exact ⟨e.inv.hom.app (op ((toProEt X).obj i.1))
-      (((proEtaleSiteComparison X).unit.app G).hom.app (op i.1) i.2)⟩
+      (((ProEtale.comparisonCoefficientAdjunction (Type (u + 1)) X).unit.app G).hom.app
+        (op i.1) i.2)⟩
 
 /-- Local classicality implies classicality, including for locally constant sheaves.
 Local inhabitedness of such a sheaf can be witnessed by an etale cover. There is no
@@ -217,7 +220,8 @@ theorem proEtale_locallyClassical_etaleCover (X : Scheme.{u})
     rintro ⟨I, U, hU, hF⟩
     have hcont := proEtale_locallyClassical_continuity X F I U hU hF
     have := proEtaleComparisonCounitSets_isIso_of_continuous X F hcont
-    exact ⟨_, ⟨(asIso ((proEtaleSiteComparison X).counit.app F)).symm⟩⟩
+    exact ⟨_, ⟨(asIso
+      ((ProEtale.comparisonCoefficientAdjunction (Type (u + 1)) X).counit.app F)).symm⟩⟩
   refine ⟨hclass, ?_, ?_⟩
   · intro h
     have hlocal := locallyConstant_locallyClassical X F h

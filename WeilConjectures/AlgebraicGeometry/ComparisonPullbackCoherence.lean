@@ -147,22 +147,6 @@ noncomputable def proEtaleComparisonSquare {X' X Y' Y : Scheme.{u}}
     eqToIso (congrArg (proEtaleComparisonPullback D) sq.w.symm) ≪≫
       proEtaleComparisonComp D g' f
 
-/-- The comparison inverse image, constructed by left Kan extension and sheafification.
-It is definitionally `comparisonUpperStar` for abelian coefficients and the left adjoint
-of `Scheme.proEtaleSiteComparison` for sets.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 . -/
-noncomputable abbrev comparisonCoefficientPullback (X : Scheme.{u}) :=
-  Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) D
-    X.smallEtaleTopology (Scheme.ProEt.topology X)
-
-/-- The canonical comparison adjunction for the common coefficient category.
-Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
-Stacks, Tags 00WX and 0B65 . -/
-noncomputable abbrev comparisonCoefficientAdjunction (X : Scheme.{u}) :=
-  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Scheme.toProEt X) D
-    X.smallEtaleTopology (Scheme.ProEt.topology X)
-
 /-- The canonical inverse-image comparison, normalized as the conjugate of
 `lowerStarCompComparisonLowerStarIso`, which evaluates on `W` as the identity on
 sections over `W ×[Y] X`. This extends the inverse of

@@ -16,34 +16,50 @@ Source: Stacks Project, Tag 099R, opening paragraph; Sites, Tags 00WX, 00X6 and 
 The inclusion is the existing `Scheme.toProEt`, identity on schemes and arrows.
 Its continuity and finite-limit preservation are the existing instances
 `Scheme.isContinuous_toProEt` and `Scheme.preservesFiniteLimits_toProEt`.
-The set adjunction below uses restriction and the left Kan extension followed by
-sheafification, rather than a chosen abstract left adjoint. The coefficient version uses
-these same constructions in modules over a fixed ring.
+The comparison adjunction below uses restriction and the left Kan extension followed by
+sheafification, rather than a chosen abstract left adjoint, for any coefficient category
+with the needed colimits and sheafification. For abelian coefficients its inverse image is
+definitionally `ProEtale.comparisonUpperStar`; for sets it is the geometric morphism from
+the pro-etale to the etale topos.
 -/
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory CategoryTheory.Limits
 
-namespace AlgebraicGeometry.Scheme
+namespace AlgebraicGeometry.ProEtale
 
-/-- The set-valued comparison adjunction, with inverse image given by left Kan extension
-followed by sheafification and direct image by restriction along `toProEt T`.
-The Kan extension at `W` is the colimit over `CostructuredArrow (toProEt T).op (op W)`,
-which is the opposite of the category of pairs `(U, W ⟶ u(U))` of Tag 00WX.
-Source: Stacks Project, Tags 099R and 00WX. -/
-noncomputable def proEtaleSiteComparison (T : Scheme.{u}) :
-    Functor.sheafPullbackConstruction.sheafPullback (toProEt T)
-      (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) ⊣
-    (toProEt T).sheafPushforwardContinuous
-      (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) :=
-  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (toProEt T)
-    (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)
+section
 
-/-- The inverse image in `proEtaleSiteComparison` preserves finite limits, so this
-adjunction is the geometric morphism from the pro-etale to the etale topos.
+variable (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
+variable [∀ X : Scheme.{u}, HasWeakSheafify X.smallEtaleTopology D]
+variable [∀ X : Scheme.{u}, HasWeakSheafify (Scheme.ProEt.topology X) D]
+
+/-- The comparison inverse image, constructed by left Kan extension along `toProEt X`
+followed by sheafification. The Kan extension at `W` is the colimit over
+`CostructuredArrow (toProEt X).op (op W)`, which is the opposite of the category of pairs
+`(U, W ⟶ u(U))` of Tag 00WX. It is definitionally `comparisonUpperStar` for abelian
+coefficients.
+Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Stacks, Tags 099R, 00WX and 0B65. -/
+noncomputable abbrev comparisonCoefficientPullback (X : Scheme.{u}) :=
+  Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) D
+    X.smallEtaleTopology (Scheme.ProEt.topology X)
+
+/-- The canonical comparison adjunction for the common coefficient category: the inverse
+image `comparisonCoefficientPullback` is left adjoint to restriction along `toProEt X`.
+Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
+Stacks, Tags 099R, 00WX and 0B65. -/
+noncomputable abbrev comparisonCoefficientAdjunction (X : Scheme.{u}) :=
+  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Scheme.toProEt X) D
+    X.smallEtaleTopology (Scheme.ProEt.topology X)
+
+end
+
+/-- For sets, the inverse image `comparisonCoefficientPullback` preserves finite limits, so
+the comparison adjunction is the geometric morphism from the pro-etale to the etale topos.
 Source: Stacks Project, Tags 099R, 00X6 and 00WJ.
 
 Proof: etale morphisms are weakly etale since they and their open diagonals are flat.
@@ -59,37 +75,24 @@ the inclusion (the presheaf-pullback left-exactness lemma). Filtered colimits of
 preserve finite limits, so the Kan extension is left exact. Sheafification is left exact
 by 00WJ, and so is inclusion of sheaves into presheaves. Their composite is left exact.
 All categories and comma colimits are taken in the common larger site universe. -/
-theorem preservesFiniteLimits_proEtaleSiteComparison (T : Scheme.{u}) :
-    PreservesFiniteLimits
-      (Functor.sheafPullbackConstruction.sheafPullback (toProEt T)
-        (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)) := by
+theorem preservesFiniteLimits_comparisonCoefficientPullback_type (T : Scheme.{u}) :
+    PreservesFiniteLimits (comparisonCoefficientPullback (Type (u + 1)) T) := by
   have hlan : PreservesFiniteLimits
-      ((toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
+      ((Scheme.toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
         (T.ProEtᵒᵖ ⥤ Type (u + 1))) := by
     apply preservesFiniteLimits_of_preservesFiniteLimitsOfSize.{u + 1}
     intro J _ _
     apply preservesLimitsOfShape_of_evaluation
-      ((toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
+      ((Scheme.toProEt T).op.lan : (T.Etaleᵒᵖ ⥤ Type (u + 1)) ⥤
         (T.ProEtᵒᵖ ⥤ Type (u + 1))) J
     intro K
-    have : IsFiltered (CostructuredArrow (toProEt T).op K) :=
+    have : IsFiltered (CostructuredArrow (Scheme.toProEt T).op K) :=
       IsFiltered.of_equivalence
-        (structuredArrowOpEquivalence (toProEt T) (Opposite.unop K))
+        (structuredArrowOpEquivalence (Scheme.toProEt T) (Opposite.unop K))
     exact preservesLimitsOfShape_of_natIso
-      (Functor.lanEvaluationIsoColim' (toProEt T).op K).symm
+      (Functor.lanEvaluationIsoColim' (Scheme.toProEt T).op K).symm
   let _ := hlan
   apply Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback
-    (toProEt T) (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)
+    (Scheme.toProEt T) (Type (u + 1)) T.smallEtaleTopology (Scheme.ProEt.topology T)
 
-/-- The same canonical comparison adjunction on sheaves of modules over a finite
-(discrete) ring. The functors act on addition, zero, negation and scalar endomorphisms
-by the module-valued Kan extension and sheafification. In particular this is the fixed
-coefficient encoding of modules over the constant ring sheaf, not a structure-sheaf map.
-Source: Stacks Project, Tag 00YV, module paragraph. -/
-noncomputable def proEtaleSiteComparisonModules (T : Scheme.{u})
-    (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] :
-    ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) T ⊣
-      ProEtale.comparisonLowerStar (ModuleCat.{u + 1} Λ) T :=
-  ProEtale.comparisonAdjunction (ModuleCat.{u + 1} Λ) T
-
-end AlgebraicGeometry.Scheme
+end AlgebraicGeometry.ProEtale
