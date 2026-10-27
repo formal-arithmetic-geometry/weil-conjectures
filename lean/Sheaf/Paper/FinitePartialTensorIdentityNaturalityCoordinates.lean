@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FinitePullbackTensorFixedCoordinates
+import Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinatesExpanded
 
 /-! Coordinate form of naturality for the finite partial tensor comparison.
 (blueprint: lem-sf-finite-partial-tensor-identity-naturality-coordinates) -/
@@ -50,7 +51,13 @@ theorem finitePartialTensor_identityNaturality_coordinates
         (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
           (hn := hn) X).map
           (T.map (Prod.mkHom (U.map f) (V.map g))) ≫
-        (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj M') L').hom := by
-  sorry
+      (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj M') L').hom  := by
+  dsimp
+  intro M M' L L' f g
+  simp only [Functor.map_comp, Category.assoc]
+  rw [CompactSupportFiniteProjection.pullbackTensor_fixed_coordinates]
+  simpa only [Functor.uncurry_obj_map, Functor.uncurry_obj_obj, Functor.prod_map,
+    Functor.prod_obj, Functor.map_comp, Category.assoc] using
+    (finitePartialTensor_identityNaturality_coordinates_expanded S X M M' L L' f g)
 
 end WeilConjectures
