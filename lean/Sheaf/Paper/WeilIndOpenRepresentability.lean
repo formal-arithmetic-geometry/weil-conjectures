@@ -6,6 +6,7 @@ Authors: SHEAF group Q9
 module
 
 public import Sheaf.Paper.WeilIndSheafCategory
+import Sheaf.Paper.WeilIndOpenHeartModel
 
 /-! # Open extension on represented ind-sheaves
 
@@ -18,6 +19,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
+set_option linter.style.haveILetI false
 universe u v
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures
@@ -50,6 +52,12 @@ theorem zlIndWeilOpenShriek_representable {X₀ Y₀ : Over (Spec (.of D.k₀))}
       Nonempty ((zlWeilIndEmbedding D l hl Ω Y₀).obj G ≅
         (zlIndWeilOpenShriek D l hl Ω j₀).obj
           ((zlWeilIndEmbedding D l hl Ω X₀).obj F)) := by
-  sorry
+  obtain ⟨J, ⟨a⟩, hJ⟩ := zlIndWeilOpenShriek_heart_model D l hl Ω j₀
+  letI := zlIndWeilPull_isRightAdjoint D l hl Ω j₀
+  let a₀ := Adjunction.ofIsRightAdjoint (zlIndWeilPull D l hl Ω j₀)
+  let e : J ≅ zlIndWeilOpenShriek D l hl Ω j₀ :=
+    Adjunction.leftAdjointUniq a a₀
+  obtain ⟨G, ⟨hG⟩⟩ := hJ F
+  refine ⟨G, ⟨hG ≪≫ e.app ((zlWeilIndEmbedding D l hl Ω X₀).obj F)⟩⟩
 
 end WeilConjectures

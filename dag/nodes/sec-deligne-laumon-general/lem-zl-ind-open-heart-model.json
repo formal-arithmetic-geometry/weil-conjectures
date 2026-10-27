@@ -1,0 +1,121 @@
+{
+ "id": "lem-zl-ind-open-heart-model",
+ "kind": "statement",
+ "title": "Heart model for represented open extension",
+ "statement": "For a finite-field datum, a prime l distinct from p, an algebraic closure Ω, finite-type quasi-compact schemes X₀ and Y₀ over Spec(k₀), and an open immersion j₀ : X₀ ⟶ Y₀, there are a functor J from the ambient equivariant ind-heart over X₀ to that over Y₀ and an adjunction J ⊣ zlIndWeilPull such that every object represented by a common-stage Weil sheaf F is sent by J to an object represented by some common-stage Weil sheaf G.",
+ "stmt_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "SGA 4, exposé XVII, 5.1; Bhatt–Scholze, The pro-étale topology for schemes, 6.7.6–6.8.11",
+  "place": "Exact extension by zero on the constructible heart and its normalized ind-extension."
+ },
+ "proof": [
+  {
+   "text": "Extension by zero on the geometric constructible heart is exact and left adjoint to inverse image for an open immersion; finite type over the field gives the required noetherian and quasi-compact hypotheses.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the heart functor through AsSmall and extend along the Yoneda Kan extension.  The normalized Frobenius mate and the Kan unit produce a functor J on equivariant ind-objects, an adjunction J ⊣ zlIndWeilPull, and a represented output for each represented input because the Kan unit is invertible on representables.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The construction includes empty and identity opens and the zero object by the same unit and counit formulas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "SGA 4, exposé XVII, 5.1; Bhatt–Scholze, The pro-étale topology for schemes, 6.7.6–6.8.11",
+  "place": "Exact open extension and normalized ind-adjunction."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left adjoint to inverse image open immersion constructible heart represented ind object",
+   "results": "No exact project theorem; generic Kan-extension and adjunction results only.",
+   "date": "2026-10-28",
+   "verdict": "new project statement required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero preserves constructible represented sheaf",
+   "results": "Generic open-immersion restriction and constructibility results; no equivariant ind-heart theorem.",
+   "date": "2026-10-28",
+   "verdict": "new project statement required"
+  },
+  {
+   "tool": "grep",
+   "query": "zlIndWeilOpenShriek.*represent|zlIndMapIso|commonStageOpenHeartAdjunction",
+   "results": "The normalized ind infrastructure is in WeilIndSheafCategory; the required public heart-model theorem is absent.",
+   "date": "2026-10-28",
+   "verdict": "new project statement required"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilIndOpenRepresentability",
+  "date": "2026-10-28",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-ind-open-representability",
+   "place": "Proof step 1--2: exact heart extension and normalized ind-adjunction",
+   "via": [
+    "lem-zl-ind-open-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilIndOpenHeartModel",
+  "file": "lean/Sheaf/Paper/WeilIndOpenHeartModel.lean",
+  "declaration": "WeilConjectures.zlIndWeilOpenShriek_heart_model",
+  "statement": "theorem zlIndWeilOpenShriek_heart_model {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (j₀ : X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] :\n    ∃ J : zlIndWeilHeart D l hl Ω X₀ ⥤ zlIndWeilHeart D l hl Ω Y₀,\n      Nonempty (J ⊣ zlIndWeilPull D l hl Ω j₀) ∧\n        ∀ F : sfCommonStageWeilSheaf D l hl X₀ Ω,\n          ∃ G : sfCommonStageWeilSheaf D l hl Y₀ Ω,\n            Nonempty ((zlWeilIndEmbedding D l hl Ω Y₀).obj G ≅\n              J.obj ((zlWeilIndEmbedding D l hl Ω X₀).obj F))",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T180745-L-3898044",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T180745-L-3898044",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
