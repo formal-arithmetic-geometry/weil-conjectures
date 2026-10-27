@@ -1,0 +1,94 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCoreData",
+  "date": "2026-10-28",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-ring-transport-core-data",
+   "place": "the reconstruction and comparison subarguments of the core transport construction"
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TransportCorePreData TransportCorePostData",
+   "results": "No existing declaration; these are item-specific decomposition packages.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "id": "new-lem-sf-exceptional-ring-transport-post-data",
+ "kind": "statement",
+ "title": "Functor and comparison fields for exceptional transport",
+ "statement": "Once the operation family, left realizations, endpoint reconstructions, integral operations, and integral realizations are fixed, the transported functors, adjunctions, reconstruction comparisons, finite evaluation comparisons, and integral-left comparison can be chosen as a TransportCorePostData package.",
+ "stmt_deps": [
+  "new-lem-sf-exceptional-ring-transport-reconstructions"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
+ },
+ "proof": [
+  {
+   "text": "Transport the strict-system adjunction through the endpoint reconstruction equivalences, identify its finite evaluations, and use the coherent integral compactification realization for the integral-left comparison.",
+   "uses": [
+    "lem-sf-exceptional-system-transport",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-system-transport",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof_origin": {
+  "by": "G6 stage 3 decomposition",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingTransportCorePostData",
+  "file": "lean/Sheaf/Paper/ExceptionalRingTransportCorePostData.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.exists_exceptional_transport_post_data",
+  "statement": "theorem exists_exceptional_transport_post_data\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l,\n      LeftRealization.{u} l Ω c s (operation s))\n    (reconstruction : ∀ E : FieldStage.{u} l, ∀ side : Bool,\n      Reconstruction l E (endpoint X Y side))\n    (operations : ∀ E : FieldStage.{u} l,\n      IntegralSystemRealization.Operations l E.carrier)\n    (realizations : ∀ E : FieldStage.{u} l,\n      IntegralSystemRealization.Realizations l E.carrier D (operations E)) :\n    Nonempty\n      (TransportCorePostData l Ω D hl c operation left reconstruction operations realizations)",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T233948-L-4143113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T233948-L-4143113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

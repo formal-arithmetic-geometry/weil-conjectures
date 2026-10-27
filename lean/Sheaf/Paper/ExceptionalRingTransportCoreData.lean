@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.ExceptionalIntegralScalarMates
+public import Sheaf.Paper.ExceptionalRingTransportCorePostData
 
 /-! # Data fields for exceptional integral transport
 
@@ -93,6 +93,39 @@ theorem exists_exceptional_transport_core_data
     (left : ∀ s : RingStage.{u} l,
       LeftRealization.{u} l Ω c s (operation s)) :
     Nonempty (TransportCoreData l Ω D hl c operation left) := by
-  sorry
+  classical
+  obtain ⟨pre⟩ :=
+    exists_exceptional_transport_reconstructions l Ω D hl f c operation left
+  let leftShift := pre.leftShift
+  let recon := pre.reconstruction
+  let operations : ∀ E : FieldStage.{u} l,
+      IntegralSystemRealization.Operations l E.carrier :=
+    fun E ↦ (IntegralSystemRealization.integralCompactificationSystemRealization
+      l E.carrier D hl).choose
+  have hrealizations : ∀ E : FieldStage.{u} l,
+      Nonempty (IntegralSystemRealization.Realizations l E.carrier D (operations E)) := by
+    intro E
+    exact (IntegralSystemRealization.integralCompactificationSystemRealization
+      l E.carrier D hl).choose_spec
+  let realizations : ∀ E : FieldStage.{u} l,
+      IntegralSystemRealization.Realizations l E.carrier D (operations E) :=
+    fun E ↦ (hrealizations E).some
+  obtain ⟨p⟩ := exists_exceptional_transport_post_data l Ω D hl f c operation left
+    recon operations realizations
+  refine ⟨{
+    leftShift := leftShift,
+    reconstruction := recon,
+    operations := operations,
+    realizations := realizations,
+    F := p.F,
+    G := p.G,
+    adjunction := p.adjunction,
+    realizeF := p.realizeF,
+    realizeG := p.realizeG,
+    reductionF := p.reductionF,
+    reductionG := p.reductionG,
+    evaluationF := p.evaluationF,
+    evaluationG := p.evaluationG,
+    integralLeft := p.integralLeft }⟩
 
 end WeilConjectures.ExceptionalIntegralScalar
