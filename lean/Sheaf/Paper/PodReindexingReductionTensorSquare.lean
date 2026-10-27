@@ -9,6 +9,7 @@ public import Sheaf.Paper.PodCompletionReindexModels
 public import Sheaf.Paper.PodReindexingCoherenceData
 public import Sheaf.Paper.CompletedPullbackTowerRealizations
 import all Sheaf.Paper.CompletedPullbackTowerCore
+import Sheaf.Paper.PodReindexingReductionTensorSquareDescent
 
 /-! # Coherent reduction of the normalized ordinary reindexing tensor comparison
 
@@ -274,6 +275,11 @@ theorem podReindexing_reduction_tensor_square
     (M N : podReindexingDerived l E Y none) :
     let q := podReindexingTensorFrame l E g A hA M N
     let v : q.F.obj q.S ⟶ q.T := podReindexingIntegralTensorHom l E g c h M N
-    q.P.map q.bY ≫ q.w₁ ≫ q.w₂ = q.a ≫ q.LX.map v ≫ q.bX := by sorry
+    q.P.map q.bY ≫ q.w₁ ≫ q.w₂ = q.a ≫ q.LX.map v ≫ q.bX := by
+  dsimp [podReindexingTensorFrame, podReindexingIntegralTensorHom]
+  exact podReindexing_reduction_tensor_square_descent l E g A hA c h
+    (podReindexingSystemTensor l E g)
+    (fun M N ↦ podReindexingIntegralTensorHom l E g c h M N)
+    c.tensorChain_pure M N
 
 end WeilConjectures
