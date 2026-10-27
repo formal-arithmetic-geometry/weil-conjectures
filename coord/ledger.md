@@ -20274,3 +20274,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/G2/Sheaf.WeilSheaf.NativeOpenProperForgetting (stage 3; reviewer FIX; first push; landing 20261027T233943-L-4140677 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:39 L: merged deliver/G3/Sheaf.Paper.FinitePullbackTensorOrdinaryQuotientSquare (stage 3; reviewer PASS; first push; landing 20261027T233945-L-4141226 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/G3/Sheaf.Paper.IntegralHomReductionTowerComponents (stage 3; reviewer PASS; first push; landing 20261027T233946-L-4141762 (interface); batch 20261027T233735; modules 3; new nodes 2)
+- 23:39 L: merged deliver/G4/Sheaf.Paper.FinitePullbackTensorChainComposition (stage 3; reviewer PASS; first push; landing 20261027T233947-L-4142472 (interface); batch 20261027T233735; modules 2; new nodes 1)

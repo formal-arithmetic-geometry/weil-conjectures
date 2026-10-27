@@ -16,23 +16,26 @@
  },
  "proof": [
   {
-   "text": "For sheaves, the chosen ordinary tensor comparison sends the adjunction unit of m tensor n to the tensor of the two adjunction units. The three finite realization maps preserve these same unit sections. The intrinsic compositor inserts the intermediate realization unit and transports fixed-scalar pullback composition. Its adjunction unit formula therefore identifies the composite unit with the two successive units, including the prescribed fibre-product comparison of test objects.",
+   "text": "Use the proved intrinsic unit-section composition formula. Conjugate it by the three unit-normalized finite realization isomorphisms defining moduleComp; naturality moves the inverse realizations past restriction and unit naturality cancels each realization/inverse pair. This gives the corresponding unit-section formula for moduleComp.",
+   "uses": [
+    "lem-pur-finite-intrinsic-pullback-unit-composition",
+    "def-sp-finite-intrinsic-pullback",
+    "def-pur-finite-pullback-tensor-construction",
+    "def-pur-finite-pullback-tensor-representative-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the two candidate ordinary module maps through the composite pullback adjunction. Pure-tensor extensionality reduces equality to sections. The defining tensor pullback unit formula, the moduleComp unit formula, naturality of units and tensor-pair restriction identify both images. Cancel the ordinary tensor comparison isomorphisms to obtain the inverse-oriented module square.",
    "uses": [
     "def-sp-proetale-ordinary-tensor-pullback-total",
-    "def-sp-finite-intrinsic-pullback",
-    "def-pur-finite-pullback-tensor-construction"
+    "def-pur-sheaf-tensor-product",
+    "def-pur-finite-pullback-tensor-representative-data"
    ],
    "elementary": false
   },
   {
-   "text": "Take adjoints of the two maps from composite pullback. On pure tensors their sections agree by the preceding unit calculation. Pure-tensor extensionality before sheafification and the sheafification adjunction show equality of these adjuncts, hence of the module maps.",
-   "uses": [
-    "def-sp-proetale-ordinary-tensor-pullback-total"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For each total degree, precompose with every direct-sum tensor injection in bidegree (i,j). The definitions of the inverse total comparison and termwise compositor turn the desired equality into the module equality already proved. Pullback preserves these coproducts as a left adjoint; coproduct extensionality proves equality of the degree maps. All maps already respect the signed differential, so complex morphism extensionality proves the chain equation.",
+   "text": "Prove the inverse-oriented total square by complex morphism extensionality and direct-sum extensionality on its source tensor total. Each summand is the inverse-oriented module square followed by the image of the source summand inclusion; naturality of moduleComp moves the compositor past that inclusion. Finally cancel the three total tensor comparison isomorphisms to recover the stated chain equation. This orientation avoids extensionality out of a pulled-back coproduct.",
    "uses": [
     "def-sp-proetale-ordinary-tensor-pullback-total",
     "def-pur-finite-pullback-tensor-representative-data"
@@ -41,15 +44,17 @@
   }
  ],
  "proof_deps": [
-  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-pur-finite-intrinsic-pullback-unit-composition",
   "def-sp-finite-intrinsic-pullback",
   "def-pur-finite-pullback-tensor-construction",
-  "def-pur-finite-pullback-tensor-representative-data"
+  "def-pur-finite-pullback-tensor-representative-data",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Explicit normalization and composition calculation in the proof of Tag 07A4, using the existing unit-normalized finite realizations."
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 00YV and 07A4. G4: unit-section normalization, pure-tensor calculation and inverse-oriented total-summand calculation, 2026-10-28."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -120,12 +125,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261026T222735-L-688410",
+  "landing": "20261027T233947-L-4142472",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-finite-intrinsic-pullback-unit-composition",
+ "kind": "statement",
+ "title": "Unit sections of the intrinsic finite pullback compositor",
+ "status": "split",
+ "statement": "Let A be a finite commutative ring, h:Z→X and f:X→Y arbitrary morphisms of schemes, M a sheaf of modules over the intrinsic constant ring A on the small pro-etale site of Y, U an object of that site and m a section of M over U. Use the specified intrinsic pullbacks and their transported adjunctions [def-sp-finite-intrinsic-pullback, def-weil-proetale-inverse-image]. Applying the intrinsic compositor (h f)^* M → h^* f^* M to the single adjunction-unit section of m equals the section obtained by the unit for f followed by the unit for h, restricted along the canonical fibre-product comparison from the single base-change object to the iterated base-change object. No tensor, flatness, boundedness or derived-category hypothesis is involved.",
+ "stmt_deps": [
+  "def-sp-finite-intrinsic-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV; adjunction composition, inverse image, and the canonical fibre-product comparison. The module-sheaf realization uses the existing section-normalized constant-ring equivalence."
+ },
+ "proof": [
+  {
+   "text": "For adjunctions transported through equivalences, write the transported Hom bijection as the original Hom bijection preceded and followed by the equivalence unit and counit. Cancel inverse pairs to normalize its right-adjoint comparison. Compose two such Hom bijections. The definition of the transported pullback compositor inserts exactly the intermediate equivalence unit; the conjugate/Hom identity therefore identifies its right mate with the two right-adjoint realization comparisons and the original right mate.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the transport calculation to the actual constant-coefficient module equivalences and fixed-scalar inverse-image adjunctions. Their original conjugate is the ordinary direct-image composition map. Evaluate this equality through the section realization. The realization is bijective, natural in the module, compatible with restriction and normalized for direct image, so the conjugate of sfIntrinsicPullbackComp acts on sections by restriction along Over.pullbackComp. All these are ordinary calculations; no derived/global-evaluation conclusion is used.",
+   "uses": [
+    "def-sp-finite-intrinsic-pullback",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate Mathlib unit_conjugateEquiv on M, U and m. The unit of the composite adjunction is the first unit followed by the second. Substitute the preceding formula for the conjugate map and reverse the resulting equality. This is precisely the asserted section formula. It also holds for empty test objects and identity scheme maps, since no nonzero section or nonidentity hypothesis was used.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "def-sp-finite-intrinsic-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV. G4, 2026-10-28: ordinary mate/Hom normalization adapted from the proved private transport calculation in AmbientAdjunctionCompositorNormalization, followed by unit_conjugateEquiv. The broad ambient module is not imported."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A transported inverse image composition isomorphism sends an adjunction unit section to the two successive unit sections",
+   "results": "Eight hits including CategoryTheory.unit_conjugateEquiv, unit_conjugateEquiv_symm, Adjunction.comp_unit_app and leftAdjointCompIso_inv_app.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic unit/conjugate identity. It does not evaluate the prescribed intrinsic sheaf compositor on sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "unit_conjugateEquiv",
+   "results": "Zero hits; the server index reported unknown identifier for this unqualified name. The theorem is present in the local Mathlib source and found by the independent grep and LeanFinder searches.",
+   "date": "2026-10-28",
+   "verdict": "No exact specialized intrinsic-section formula."
+  },
+  {
+   "tool": "grep",
+   "query": "intrinsic.*[Uu]nit.*[Cc]omp|unit_conjugateEquiv|tr_comp_mate",
+   "results": "Four Mathlib hits, including unit_conjugateEquiv at Mathlib/CategoryTheory/Adjunction/Mates.lean:300. Project rg finds a proved private tr_comp_mate in AmbientAdjunctionCompositorNormalization and the intrinsic section calculation in OrdinarySystemPullbackCompositorEvaluation; importing the latter would cycle, and importing the former adds unrelated unfinished scalar/proper-open modules.",
+   "date": "2026-10-28",
+   "verdict": "Adapt just the existing proved generic transport calculation and the section evaluation, then derive the ordinary unit formula. No unproved split is required."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorChainComposition",
+  "date": "2026-10-28",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-pullback-tensor-chain-composition",
+   "place": "First proof step: the intrinsic compositor inserts the two successive adjunction-unit sections.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteIntrinsicPullbackUnitComposition",
+  "file": "lean/Sheaf/Paper/FiniteIntrinsicPullbackUnitComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteIntrinsicPullback_unit_comp",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteIntrinsicPullback_unit_comp"
+  ],
+  "statement": "theorem finiteIntrinsicPullback_unit_comp\n    (A : Type u) [CommRing A] [Finite A]\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X)\n    (M : proEtaleRingModules Y (proEtaleConstantRing Y A)) (U : Y.ProEt)\n    (m : M.val.obj (Opposite.op U)) :\n    ((sfIntrinsicPullbackComp A h f).hom.app M).val.app\n        (Opposite.op ((proEtaleBaseChange (h ≫ f)).obj U))\n        (((sfIntrinsicConstantModuleAdjunction (h ≫ f) A).unit.app M).val.app\n          (Opposite.op U) m) =\n      ((sfIntrinsicPullback A h).obj ((sfIntrinsicPullback A f).obj M)).val.map\n        ((MorphismProperty.Over.pullbackComp h f).hom.app U).op\n        (((sfIntrinsicConstantModuleAdjunction h A).unit.app\n          ((sfIntrinsicPullback A f).obj M)).val.app\n            (Opposite.op ((proEtaleBaseChange f).obj U))\n            (((sfIntrinsicConstantModuleAdjunction f A).unit.app M).val.app\n              (Opposite.op U) m))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T233947-L-4142472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T233947-L-4142472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
