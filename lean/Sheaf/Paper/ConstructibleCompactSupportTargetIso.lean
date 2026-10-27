@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData
 public import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.ConstructibleCompactSupportTargetIsoStage
+import Sheaf.Paper.ConstructibleCompactSupportTargetIsoDescent
 
 /-! # Compact support under an isomorphism of the target
 
@@ -70,6 +72,12 @@ theorem constructible_compact_support_target_iso
     (S' : System.{u, v} l Ω D hl (f := g)) (c' : Compactification g) :
     Nonempty ((S.ring.operation c .closed).F ≅
       (S'.ring.operation c' .closed).F ⋙ commonStageDerivedPullback l Ω e.hom) := by
-  sorry
+  obtain ⟨q, hq⟩ := constructible_compact_support_target_stage_comparison
+    l Ω D hl f g e h S c S' c'
+  exact ⟨stageSystem_iso_of_restrictions
+    (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X)
+    (S.ring.operation c .closed).F
+    ((S'.ring.operation c' .closed).F ⋙ commonStageDerivedPullback l Ω e.hom)
+    q (fun hij K ↦ hq hij K)⟩
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

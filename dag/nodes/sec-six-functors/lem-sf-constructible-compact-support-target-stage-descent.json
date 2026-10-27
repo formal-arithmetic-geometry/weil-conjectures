@@ -1,0 +1,95 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; finite/common-stage comparison before pair-category descent."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; finite/common-stage comparison before pair-category descent."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible compact support target isomorphism stage comparison",
+   "results": "No existing declaration found; only compactification refinement and coefficient comparison components.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor iso on every stage of a directed StageSystem",
+   "results": "Generic NatIso.ofComponents and category-theory naturality lemmas.",
+   "date": "2026-10-28",
+   "verdict": "Used only for the separate assembly lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact support under isomorphism of target scheme",
+   "results": "No exact normalized constructible theorem.",
+   "date": "2026-10-28",
+   "verdict": "Geometric comparison remains a split theorem."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-constructible-compact-support-target-iso",
+   "place": "Finite/common-stage part of the target proof."
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleCompactSupportTargetIso",
+  "date": "2026-10-28",
+  "group": "E5"
+ },
+ "id": "lem-sf-constructible-compact-support-target-stage-descent",
+ "kind": "statement",
+ "title": "Directed-stage descent of compact-support comparisons",
+ "statement": "For a directed StageSystem S, functors F and G on its pair category, and a family of stage isomorphisms e_i commuting with transition isomorphisms, there is a natural isomorphism F ≅ G.",
+ "proof": [
+  {
+   "text": "Define the component at a pair (i,K) to be e_i.app K. Every pair-category arrow is represented at a common stage. Naturality follows by inserting the transition compatibility and cancelling the inverse transition isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleCompactSupportTargetIsoDescent",
+  "file": "lean/Sheaf/Paper/ConstructibleCompactSupportTargetIsoDescent.lean",
+  "declaration": "WeilConjectures.stageSystem_iso_of_restrictions",
+  "statement": "def stageSystem_iso_of_restrictions {I : Type*} [Preorder I] [IsDirectedOrder I] {A : I → Type*} [∀ i, Category (A i)] (S : StageSystem A) {B : Type*} [Category B] (F G : S.PairCategory ⥤ B) (e : ∀ i, S.ι i ⋙ F ≅ S.ι i ⋙ G) (he : ∀ {i j} (h : i ≤ j) (K : A i), F.map ((S.transIso h).inv.app K) ≫ (e j).hom.app ((S.T h).obj K) = (e i).hom.app K ≫ G.map ((S.transIso h).inv.app K)) : F ≅ G",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-28"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T180545-L-3875640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T180545-L-3875640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
