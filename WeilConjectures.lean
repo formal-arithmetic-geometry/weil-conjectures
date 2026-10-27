@@ -7663,6 +7663,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.FullyFaithfulCounitLocal
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethMap
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTrans
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTransRestriction
+public import WeilConjectures.CategoryTheory.Adjunction.KunnethTranspose
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommGrpBranch
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
@@ -7688,6 +7689,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismComp
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
@@ -8434,6 +8436,7 @@ public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 public import WeilConjectures.CategoryTheory.NaturalTruncationCouple
 public import WeilConjectures.CategoryTheory.NormalizedGradedFiniteKernel
 public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
+public import WeilConjectures.CategoryTheory.ObjectProperty.FullSubcategoryEqToHom
 public import WeilConjectures.CategoryTheory.ObjectProperty.LiftCommShift
 public import WeilConjectures.CategoryTheory.ObjectProperty.LiftSquareIso
 public import WeilConjectures.CategoryTheory.OpcyclesTorKernelIso
@@ -13593,6 +13596,7 @@ public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.GenericBaseChange
+public import WeilConjectures.TraceFormula.GenericBaseChangePullback
 public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.HomologyUnit
@@ -13629,8 +13633,11 @@ public import WeilConjectures.TraceFormula.OrdinaryKunneth
 public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
 public import WeilConjectures.TraceFormula.OrdinaryKunnethDevissage
 public import WeilConjectures.TraceFormula.OrdinaryKunnethFinite
+public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobal
+public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobalSections
 public import WeilConjectures.TraceFormula.OrdinaryKunnethIntegral
 public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
+public import WeilConjectures.TraceFormula.OrdinaryKunnethProjection
 public import WeilConjectures.TraceFormula.OrdinaryKunnethReduction
 public import WeilConjectures.TraceFormula.PieceAdditivity
 public import WeilConjectures.TraceFormula.PieceVanishing
