@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-completed-scalar-associator-counit",
+ "kind": "statement",
+ "title": "Computation counits for the completed-coefficient ordinary scalar associator",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let $\\ell$ be prime, let $E,L,M$ be finite-dimensional extension fields of $\\mathbf Q_\\ell$, let $i:E\\to L$ and $j:L\\to M$ be $\\mathbf Q_\\ell$-algebra maps, and let $T$ be a scheme. Write $a,b,c$ for the completed coefficient-sheaf maps of $i,j,ji$, $F_a,F_b,F_c$ for their ordinary sheafified scalar extensions, $L_a,L_b,L_c$ for their specified ordinary derived extensions, and $\\varepsilon_a(P):L_aQ(P)\\to Q(F_aP)$ for their cochain computation counits. Let $\\alpha:L_bL_a\\simeq L_c$ be the adjunction-normalized derived scalar associator and $\\bar\\alpha:F_bF_a\\simeq F_c$ the adjunction-normalized ordinary sheaf associator. For every cochain complex $P$ of integral coefficient modules over $E$, $\\alpha_{Q(P)}\\varepsilon_c(P)=L_b(\\varepsilon_a(P))\\varepsilon_b(F_aP)Q(\\bar\\alpha_P)$, with compositions read from left to right and $\\bar\\alpha_P$ the termwise scalar associator.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pur-ordinary-scalar-associator"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; Tag 07A6, lemma-adjoint; explicit counit calculation for their composite scalar extensions."
+ },
+ "proof": [
+  {
+   "text": "Insert the three exact-localization model isomorphisms. The existing composition equation expresses alpha followed by the direct model as the first model extended through L_b, the second model, and the localized ordinary associator.",
+   "uses": [
+    "lem-pur-completed-scalar-associator-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact-functor composition and natural-isomorphism factorization equations express the localized ordinary associator followed by its direct factor map as the successive factor maps and Q of the termwise ordinary associator.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of the second model isomorphism to move the first factor map left, then combine it with the first model inside L_b. Each resulting model followed by its factor map is the specified computation counit.",
+   "uses": [
+    "lem-pur-completed-scalar-model-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-scalar-associator-localization",
+  "lem-pur-completed-scalar-model-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B8",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; Tag 07A6, lemma-adjoint; explicit counit calculation for their composite scalar extensions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary derived tensor associator is determined by its computation counit on complexes",
+   "results": "Eight generic homological-complex associator hits; none compares the prescribed scalar counits.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_hom_app_factors",
+   "results": "No hit: this is an adopted source-library declaration, not a Mathlib identifier.",
+   "date": "2026-10-28",
+   "verdict": "generic ingredient in the adopted library"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(CompIso|NatIso).*fac",
+   "results": "No Mathlib source matches.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedScalarAssociatorIntegralTransportCore",
+  "date": "2026-10-28",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Proof, adjunction-map identification and coefficient-independent tensor comparisons: normalized scalar associator substep of the exceptional-adjunction coefficient construction.",
+   "via": [
+    "lem-sf-normalized-scalar-associator-localization-transport-integral-core",
+    "lem-sf-normalized-scalar-associator-localization-transport-integral",
+    "lem-sf-normalized-scalar-associator-localization-transport",
+    "lem-sf-normalized-scalar-associator-localization",
+    "lem-sf-normalized-rational-left-composition",
+    "lem-sf-normalized-rational-left-laws",
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarTensorAssociatorCounit",
+  "file": "lean/Sheaf/Paper/CompletedScalarTensorAssociatorCounit.lean",
+  "declaration": "WeilConjectures.completedScalarTensorAssociatorCounit",
+  "statement": "theorem completedScalarTensorAssociatorCounit\n    (P : CochainComplex (integralTowerModules l E T) ℤ) :\n    (PurCompactSupport.tensorComposition _ _ _\n      (PurCompactSupport.completedMap_composition l E L i M j T)).hom.app\n        (DerivedCategory.Q.obj P) ≫\n      pbcComplexCounit (completedCoefficientMap l E M (j.comp i) T) P =\n    (pbcDerivedExtend (completedCoefficientMap l L M j T)).map\n      (pbcComplexCounit (completedCoefficientMap l E L i T) P) ≫\n    pbcComplexCounit (completedCoefficientMap l L M j T)\n      (((pbcExtend (completedCoefficientMap l E L i T)).mapHomologicalComplex (.up ℤ)).obj P)\n      ≫ DerivedCategory.Q.map\n        ((Functor.mapHomologicalComplexCompIso\n          (PurStrictScalar.ordinaryScalarAssociator _ _ _\n            (PurCompactSupport.completedMap_composition l E L i M j T)) (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T233813-L-4117010",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T233813-L-4117010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "lem-sf-completed-scalar-associator-ambient-formula",
+ "kind": "statement",
+ "title": "Ambient conjugation formula for canonical completed scalar associativity",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let $\\ell$ be prime, let $E,L,M$ be finite-dimensional extension fields of $\\mathbf Q_\\ell$, let $i:E\\to L$ and $j:L\\to M$ be $\\mathbf Q_\\ell$-algebra maps, and let $T$ be a scheme. Write $I_a,I_b,I_c$ for the completed integral scalar extensions and $L_a,L_b,L_c$ for the ordinary derived extensions along their completed coefficient-sheaf maps. On derived-complete objects write $\\chi_a:L_a\\simeq I_a$ for the specified completed comparison. Let $\\alpha:L_bL_a\\simeq L_c$ be the adjunction-normalized ordinary derived scalar associator. For every intrinsic bounded constructible integral object $K$ over $E$, the ambient image of the canonical intrinsic integral scalar associator (with the auxiliary characteristic parameter $p=0$) equals $\\chi_b(I_aK)^{-1}L_b(\\chi_a(K)^{-1})\\alpha_K\\chi_c(K)$, with compositions read from left to right. The intermediate input $I_aK$ is derived complete, so every displayed inverse is defined.",
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-completed-line-tensor-coherence"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1, p. 24; the normalized scalar associator substep. Cochain computation and localization follow Stacks Tag 06YY (sites-cohomology.tex, lemma-derived-base-change)."
+ },
+ "proof": [
+  {
+   "text": "The two ordinary tensor functors use the same specified scalar-extension witness. Expand the quotient-to-derived comparison in the compact-support cochain counit; its extra maps are identity maps, so that counit equals completedScalarCounit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compare the normalized completed-line sheaf associator with the ordinary scalar associator on successive tensor units. Both send one tensor one tensor x to one tensor x. The two successive scalar adjunction Hom bijections detect equality.",
+   "uses": [
+    "lem-pur-completed-line-tensor-coherence",
+    "lem-pur-constant-completed-ordinary-associativity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a good complex P, the ordinary derived associator has the successive-counit formula proved by the preceding node. Replace its ordinary sheaf associator by the equal completed-line sheaf associator. The normalized associator-data specification is the same formula. The direct counit is invertible by the exact model, so cancel it. Extensionality of natural transformations through the good-complex localization then identifies the two derived associators.",
+   "uses": [
+    "lem-sf-completed-scalar-associator-counit",
+    "lem-pur-completed-scalar-model-counit",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-completed-line-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical-restriction specification identifies the intrinsic associator component with the completed-line associator. The latter is defined as conjugation of its ordinary derived associator by chi. Substitute the derived equality and obtain the formula.",
+   "uses": [
+    "lem-pur-completed-line-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-pur-constant-completed-ordinary-associativity",
+  "lem-sf-completed-scalar-associator-counit",
+  "lem-pur-completed-scalar-model-counit",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B8",
+  "date": "2026-10-28",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 3.5.1, p. 24; the normalized scalar associator substep. Cochain computation and localization follow Stacks Tag 06YY (sites-cohomology.tex, lemma-derived-base-change)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical completed scalar associator is conjugate to the ordinary derived scalar associator by completion comparison isomorphisms",
+   "results": "Eight hits about scalar actions on topological and adic completions; none is the derived-category comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "The localization extensionality lemma is available in Mathlib.CategoryTheory.Localization.Predicate.",
+   "date": "2026-10-28",
+   "verdict": "used as a generic ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalar.*associator|associator.*completedScalar",
+   "results": "No Mathlib source matches.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedScalarAssociatorIntegralTransportCore",
+  "date": "2026-10-28",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Proof, adjunction-map identification and coefficient-independent tensor comparisons: normalized scalar associator substep of the exceptional-adjunction coefficient construction.",
+   "via": [
+    "lem-sf-normalized-scalar-associator-localization-transport-integral-core",
+    "lem-sf-normalized-scalar-associator-localization-transport-integral",
+    "lem-sf-normalized-scalar-associator-localization-transport",
+    "lem-sf-normalized-scalar-associator-localization",
+    "lem-sf-normalized-rational-left-composition",
+    "lem-sf-normalized-rational-left-laws",
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarCanonicalAssociatorFormula",
+  "file": "lean/Sheaf/Paper/CompletedScalarCanonicalAssociatorFormula.lean",
+  "declaration": "WeilConjectures.completedScalarCanonicalAssociatorFormula",
+  "statement": "theorem completedScalarCanonicalAssociatorFormula (K : sfIntegralConstructibleCategory l E T) :\n    ((sfIntegralScalarComp l E L i T 0 (Fact.out : l.Prime).ne_zero M j).hom.app K).hom =\n      (CompletedLineTensor.chi l L T M j _\n        (CompletedLineTensor.extension_complete l E T L i K.obj\n          (CompletedLineTensor.intrinsic_complete l E T K))).inv ≫\n      (pbcDerivedExtend (completedCoefficientMap l L M j T)).map\n        (CompletedLineTensor.chi l E T L i K.obj\n          (CompletedLineTensor.intrinsic_complete l E T K)).inv ≫\n      (PurCompactSupport.tensorComposition _ _ _\n        (PurCompactSupport.completedMap_composition l E L i M j T)).hom.app K.obj ≫\n      (CompletedLineTensor.chi l E T M (j.comp i) K.obj\n        (CompletedLineTensor.intrinsic_complete l E T K)).hom",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T233813-L-4117010",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T233813-L-4117010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
