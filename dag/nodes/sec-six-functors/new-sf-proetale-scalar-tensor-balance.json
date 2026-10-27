@@ -1,0 +1,124 @@
+{
+ "id": "new-sf-proetale-scalar-tensor-balance",
+ "kind": "lemma",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorFiniteModelCore",
+  "date": "2026-10-28",
+  "group": "W3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sf-adic-completed-tensor-finite-model-core",
+   "place": "Proof steps 1--2: normalized ordinary scalar tensor comparison and its signed totalization. This is a proved helper, not a new proof obligation.",
+   "via": [
+    "new-sf-adic-completed-tensor-finite-model-core"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "Normalized total tensor comparison for pro-etale scalar extension",
+ "statement": "For any scheme X, commutative ring sheaves A and B on its pro-etale site in the module coefficient universe, and a morphism φ:A→B, let F be pbcExtend φ applied termwise to cochain complexes [def-weil-pbc-bounded-constructible-tower] and let T_A,T_B be coefficientTotalTensor [def-coef-ringed-tensor-hom-model]. There is a natural isomorphism b:T_A⋙F ≅ (F×F)⋙T_B. For every P,Q, degrees p,q, site object U, scalar s in B(U), x in P^p(U) and y in Q^q(U), its degree p+q component sends pbcTensorSection φ s (the total generator x tensor y) to the total generator (pbcTensorSection φ s x) tensor (pbcTensorSection φ 1 y). No flatness or boundedness assumption is required.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final total-tensor display (lines 3706--3724); ordinary constituents from Modules on Sites, Tag 03EL, lemma-tensor-product-pullback."
+ },
+ "proof": [
+  {
+   "text": "Use the independent-site ordinary scalar tensor comparison. Transport its objects and maps by the published reductionChange identifications to pbcExtend of coefficientMap. Its naturality gives an isomorphism of ordinary tensor bifunctors; the sheafified unit formula gives its pure-section normalization. No new scalar functor or coefficient ring is defined.",
+   "uses": [
+    "lem-pur-independent-ringed-tensorator-existence",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the inverse total comparison by the published tensorPullbackTotal construction. Its bidegree formula and naturality give a natural isomorphism. On each total summand, cancel its inverse to obtain the forward component equation. Naturality of the scalar adjunction unit and the ordinary pure formula give the normalized total generator formula at scalar 1; bilinearity in the first generator and linearity of the scalar extension section give the formula for every scalar s.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-scalar-tensor-comparison",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-independent-ringed-tensorator-existence",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-scalar-tensor-comparison",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W3",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 final total-tensor display, specialized to scalar extension on one site; the formula for arbitrary scalars is obtained by linearity after the unit formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of sheaves of modules commutes with the unbounded total tensor product, with the pure tensor section formula",
+   "results": "Eight hits, including ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendScalars.map_tmul, and presheaf tensor constructions; none is the normalized sheaf cochain comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project ordinary comparison and Mathlib totalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map₂HomologicalComplex\", \"Iso\"",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "No direct normalized comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackTotal|tensor.*scalar.*[Bb]alance",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-28",
+   "verdict": "The project total-comparison API supplies the required construction."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleScalarTensorBalance",
+  "file": "lean/Sheaf/Paper/ProEtaleScalarTensorBalance.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_tensor_balance_exists",
+  "statement": "theorem pbc_tensor_balance_exists (X : Scheme.{u})\n    {A B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : A ⟶ B) :\n    ∃ balance : coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) A ⋙\n        (pbcExtend φ).mapHomologicalComplex (.up ℤ) ≅\n      (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).prod\n        ((pbcExtend φ).mapHomologicalComplex (.up ℤ))) ⋙\n          coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) B,\n      ∀ (P Q : CochainComplex (pbcModules X A) ℤ) (p q : ℤ) (U : X.ProEtᵒᵖ)\n          (s : B.obj.obj U) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),\n        ((balance.hom.app (P, Q)).f (p + q)).val.app U\n          (pbcTensorSection φ _ U s\n            (coefficientTensorGenerator.{u + 1, u + 1, u} (ProEt.topology X) A\n              P Q p q (p + q) rfl U x y)) =\n        coefficientTensorGenerator.{u + 1, u + 1, u} (ProEt.topology X) B\n          (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P)\n          (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj Q) p q (p + q) rfl U\n          (pbcTensorSection φ (P.X p) U s x) (pbcTensorSection φ (Q.X q) U 1 y)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T234347-L-113639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T234347-L-113639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

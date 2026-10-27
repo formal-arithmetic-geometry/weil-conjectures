@@ -6,7 +6,11 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.Paper.AdicCompletedTensorFiniteModels
-public import Sheaf.Paper.RationalRealizationTensorComparison
+import Sheaf.Paper.ProEtaleScalarTensorBalance
+import Sheaf.Paper.TensorPullbackRepresentativeDescent
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
+import all Sheaf.Paper.AdicCoefficientDatum
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
 /-! # Core normalized data for one finite completed tensor model
 
@@ -58,6 +62,101 @@ structure CompletedTensorFiniteModelCore
   representative : tensorFiniteRepresentative l X R closed models E
     completion balance kflat ordinary
 
+section Construction
+variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+  (R : LocallyFiniteAdicRealization.Realization l X)
+  [∀ x : X, Invertible (l : X.residueField x)]
+  (closed : CoefficientClosedStructure (ambientHom l X R))
+  (models : CoefficientTensorModels.{u + 1, u + 1, u}
+    (ProEt.topology X) (ring l X R) closed)
+  (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+
+omit [∀ x : X, Invertible (l : X.residueField x)] in
+private theorem extension_kflat
+    (P : CochainComplex (integralTowerModules l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients P) :
+    CochainComplex.IsKFlatIndependentCoefficients
+      ((integralComplex l X R E).obj P) := by
+  exact SheafOfModules.changeOfRings_isKFlat_independentCoefficients
+    (coefficientMap l X R E) P (pbcExtend (coefficientMap l X R E))
+    (reductionChange_obj_eq X (coefficientMap l X R E))
+    (reductionChange_map_eq X (coefficientMap l X R E)) hP
+
+private theorem balance_exists :
+    ∃ balance : constructibleTensorTotal l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X ⋙
+        integralComplex l X R E ≅
+      ((integralComplex l X R E).prod (integralComplex l X R E)) ⋙
+        coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) (ring l X R),
+      tensorFiniteBalanceSections l X R E balance := by
+  obtain ⟨balance, hbalance⟩ := pbc_tensor_balance_exists X (coefficientMap l X R E)
+  refine ⟨balance, ?_⟩
+  intro P Q p q U s x y
+  exact hbalance P Q p q U s x y
+
+private theorem core_of_balance
+    (completion : ConstructibleTensorCompletionPresentation l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X)
+    (balance : constructibleTensorTotal l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X ⋙
+        integralComplex l X R E ≅
+      ((integralComplex l X R E).prod (integralComplex l X R E)) ⋙
+        coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) (ring l X R))
+    (hbalance : tensorFiniteBalanceSections l X R E balance) :
+    Nonempty (CompletedTensorFiniteModelCore l X R closed models E completion) := by
+  let A := completedIntegralCommRingSheafUnrestricted l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X
+  let p := integralOperationsGoodComplex l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X
+  let q := integralOperationsGoodLocalization l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X
+  let v := (HomologicalComplex.quasiIso _ (.up ℤ)).inverseImage p.ι
+  let φ := coefficientMap l X R E
+  let f := integralComplex l X R E
+  let ps : ObjectProperty (CochainComplex (pbcModules X (ring l X R)) ℤ) :=
+    CochainComplex.IsKFlatIndependentCoefficients
+  have hf : ∀ P, p P → ps (f.obj P) := fun P hP ↦ extension_kflat l X R E P hP.1
+  let eps : DerivedCategory.Q ⋙ pbcDerivedExtend φ ⟶ f ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso _).inv (pbcDerivedExtend φ) ≫
+      Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) (pbcExtensionCounit φ) ≫
+      Functor.whiskerRight ((pbcExtend φ).mapHomotopyCategoryFactors (.up ℤ)).hom
+        DerivedCategory.Qh ≫
+      Functor.whiskerLeft f (DerivedCategory.quotientCompQhIso _).hom
+  have heps (P) : eps.app P = pbcComplexCounit φ P := rfl
+  have he (P) (hP : CochainComplex.IsKFlatIndependentCoefficients P) :
+      IsIso (eps.app P) := by
+    rw [heps]
+    dsimp only [pbcComplexCounit]
+    have := pbcExtensionCounit_isIso φ P hP
+    infer_instance
+  let : q.IsLocalization v := integralOperationsGoodLocalization_isLocalization l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X
+  let ff := Localization.fullyFaithfulWhiskeringLeft (q.prod q)
+    (v.prod v) (DerivedCategory (pbcModules X (ring l X R)))
+  obtain ⟨ordinary, hordinary, _⟩ := tensorComparisonDescent
+    DerivedCategory.Q DerivedCategory.Q f (pbcDerivedExtend φ) eps p ps hf ff
+    (constructibleTensorTotal l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X)
+    (coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) (ring l X R))
+    completion.tensor closed.tensor completion.model models.comparison balance
+    (fun P hP ↦ he P hP.1)
+    (fun P Q hP hQ ↦ he _
+      (coefficientTotalTensor_isKFlat.{u + 1, u + 1, u}
+        (ProEt.topology X) A P Q hP.1 hQ.1))
+  refine ⟨{ balance := balance
+            balance_sections := hbalance
+            kflat := fun P ↦ hf P.obj P.property
+            ordinary := ordinary
+            representative := ?_ }⟩
+  intro P Q
+  rcases P with ⟨P, hP⟩
+  rcases Q with ⟨Q, hQ⟩
+  have h := hordinary P Q hP hQ
+  simpa only [heps, CoefficientTensorModels.iso, Iso.app_hom] using h
+
+end Construction
+
 /-- The finite scalar-extension core exists for every fixed completion presentation.
 The proof is the finite cochain tensor comparison, K-flat preservation under scalar
 extension, and descent of the comparison through the two good-complex localizations;
@@ -76,6 +175,8 @@ theorem completed_tensor_finite_model_core
     (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
     (completion : ConstructibleTensorCompletionPresentation l
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :
-    Nonempty (CompletedTensorFiniteModelCore l X R closed models E completion) := by sorry
+    Nonempty (CompletedTensorFiniteModelCore l X R closed models E completion) := by
+  obtain ⟨balance, hbalance⟩ := balance_exists l X R E
+  exact core_of_balance l X R closed models E completion balance hbalance
 
 end WeilConjectures.AdicQbarRealization
