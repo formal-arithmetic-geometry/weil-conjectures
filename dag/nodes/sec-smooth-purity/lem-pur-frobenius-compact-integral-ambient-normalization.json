@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-frobenius-compact-integral-ambient-normalization",
+ "kind": "statement",
+ "title": "Ambient component normalization for compact-support Frobenius",
+ "statement": "In the finite-field setting of lem-pur-frobenius-compact-integral-normalization, the underlying ambient morphism of the compact integral Frobenius exchange agrees heterogeneously with the underlying ambient morphism of RationalWeilPurity.integralExchange at every integral constructible object.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 2, proper/open compact-support transport before restriction to the constructible wrapper"
+ },
+ "stmt_deps": [
+  "lem-pur-frobenius-compact-integral-normalization",
+  "def-weil-system-operation-exchange-realization",
+  "def-zl-frobenius-compact-support-comparison",
+  "lem-pur-rational-weil-naturality-mate"
+ ],
+ "proof": [
+  {
+   "text": "Expand the compact exchange into its normalized proper mate, system compact exchange, and inverse open mate. Compare each mate with the coefficient-normalized completed Frobenius square and paste the unit, square, and counit equations; the quotient transitions are preserved componentwise.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "def-zl-frobenius-compact-support-comparison",
+    "def-weil-frobenius-coefficient-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the intervening projection-normalized compact-support realization and its inverse. The remaining completed-to-ordinary factors and the completed compact-support Frobenius comparison are exactly the factors defining RationalWeilPurity.integralExchange; projecting to the underlying ambient hom gives the stated heterogeneous equality.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-pur-rational-weil-naturality-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-system-operation-exchange-realization",
+  "def-zl-frobenius-compact-support-comparison",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-pur-rational-weil-naturality-mate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 2, ambient compact-support transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobeniusCompactIntegral normalization and integralExchange component comparison",
+   "results": "No existing comparison theorem; the only definitions are FrobeniusExchange.frobeniusCompactIntegral and RationalWeilPurity.integralExchange.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusCompactIntegralNormalization",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frobenius-compact-integral-normalization",
+   "place": "Step 2 ambient proper/open compact-support transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusCompactIntegralAmbientNormalization",
+  "file": "lean/Sheaf/Paper/FrobeniusCompactIntegralAmbientNormalization.lean",
+  "declaration": "WeilConjectures.frobeniusCompactIntegral_ambient_normalization",
+  "statement": "theorem frobeniusCompactIntegral_ambient_normalization\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left]\n    [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (c₀ : Compactification f₀.left)\n    (M : sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left) :\n    HEq ((FrobeniusExchange.frobeniusCompactIntegral D l hl E f₀ c₀).app M).hom\n      (RationalWeilPurity.integralExchange D l hl f₀ E c₀ M).hom.hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T234018-L-4161572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T234018-L-4161572",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

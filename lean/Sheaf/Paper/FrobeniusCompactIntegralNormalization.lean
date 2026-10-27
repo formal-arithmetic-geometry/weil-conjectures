@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.FrobeniusGeometricExchange
 public import Sheaf.Paper.RationalWeilPurityNaturalityMate
+import Sheaf.Paper.FrobeniusCompactIntegralAmbientNormalization
 
 /-! # Integral normalization of compact-support Frobenius exchange
 
@@ -70,6 +71,10 @@ theorem frobeniusCompactIntegral_normalization
     (c₀ : Compactification f₀.left)
     (M : sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left) :
     HEq ((FrobeniusExchange.frobeniusCompactIntegral D l hl E f₀ c₀).app M)
-      (RationalWeilPurity.integralExchange D l hl f₀ E c₀ M).hom := by sorry
+      (RationalWeilPurity.integralExchange D l hl f₀ E c₀ M).hom         := by
+  have h := frobeniusCompactIntegral_ambient_normalization D l hl f₀ E c₀ M
+  apply heq_of_eq
+  apply ObjectProperty.hom_ext
+  exact eq_of_heq h
 
 end WeilConjectures
