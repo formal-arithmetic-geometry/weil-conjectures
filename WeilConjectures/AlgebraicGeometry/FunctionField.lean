@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 # Function fields of curves
 
 Source: literature/blueprint/master/blueprint/sec-abelian-varieties/
-sk-def-av-pic/def-sc-function-field.md,
+def-sc-picard-group/def-sc-function-field.md,
 node def-sc-function-field; Stacks Project, Morphisms, Lemma 01RV and
 Definition 01RW (blueprint: def-sc-function-field).
 

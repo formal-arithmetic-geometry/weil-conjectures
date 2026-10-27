@@ -25,8 +25,7 @@ which is therefore dense.
 
 ## Main results
 
-- `AlgebraicGeometry.AffineSpace.projectiveClosure_spec` — the properties listed above
-  (blueprint: `det-nagata-affine-opens-projective`).
+- `AlgebraicGeometry.AffineSpace.projectiveClosure_spec` — the properties listed above.
 - `AlgebraicGeometry.Compactification.isDense_ofIsImmersionAffineSpace` — the compactification
   `Compactification.ofIsImmersionAffineSpace` is dense.
 
@@ -42,8 +41,7 @@ namespace AlgebraicGeometry
 
 variable {U S : Scheme.{u}} {n : Type u} [Finite n]
 
-/-- Blueprint `det-nagata-affine-opens-projective`: Projective compactification of an affine
-piece.
+/-- Projective compactification of an affine piece.
 
 Let `U` be quasi-compact over a quasi-separated base `S` (e.g. `U` affine and `S`
 Noetherian), let `ι : U ⟶ 𝔸(n; S)` be an immersion over `S` and let
@@ -73,8 +71,7 @@ theorem AffineSpace.projectiveClosure_spec [CompactSpace U] [QuasiSeparatedSpace
     AffineSpace.toRelativeProjectiveSpace_over, hι]
 
 /-- The compactification `Compactification.ofIsImmersionAffineSpace` is dense: its open
-immersion is scheme-theoretically dominant.
-(blueprint: `det-nagata-affine-opens-projective`) -/
+immersion is scheme-theoretically dominant. -/
 theorem Compactification.isDense_ofIsImmersionAffineSpace {f : U ⟶ S} (ι : U ⟶ 𝔸(n; S))
     [IsImmersion ι] [QuasiCompact f] (hι : ι ≫ 𝔸(n; S) ↘ S = f) :
     (Compactification.ofIsImmersionAffineSpace ι hι).IsDense := by

@@ -16,8 +16,8 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierDataConstruction
 /-!
 # The Artin–Schreier sequence
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md,
-node `lem-sc-as-sequence` (blueprint: lem-sc-as-sequence).
+Source: `literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-second-kummer-divisors/
+lem-sc-as-sequence.md`, node `lem-sc-as-sequence` (blueprint: lem-sc-as-sequence).
 -/
 
 @[expose] public section

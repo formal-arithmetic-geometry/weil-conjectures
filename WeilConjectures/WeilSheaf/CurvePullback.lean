@@ -69,8 +69,14 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] [Fact (ringChar k₀ ≠ l)]
 noncomputable def curvePullback : WeilSheaf k₀ l X ⥤ WeilSheaf L l Y where
   obj F := ⟨(ProEtaleWeilSheaf.equivariantPullback _ j hj).obj (F.powIsoAlgebra N),
     F.isAdicConstructibleSheaf_carrier.upperStar j⟩
-  map φ := ObjectProperty.homMk ((ProEtaleWeilSheaf.equivariantPullback _ j hj).map
-    (ObjectProperty.homMk ⟨φ.hom.hom.f, frobeniusPowIso_hom_naturality φ N⟩))
+  -- The morphism of algebras is built between `IsoAlgebra.mk` and `Algebra.mk` objects, which the
+  -- kernel matches with `F.powIsoAlgebra N` by unfolding it; against `F.obj`, which has the same
+  -- carrier but is an algebra for another functor, the comparison is slow.
+  map {F G} φ := ObjectProperty.homMk ((ProEtaleWeilSheaf.equivariantPullback _ j hj).map
+    (ObjectProperty.homMk (X := IsoAlgebra.mk _ (F.frobeniusPowIso N))
+      (Y := IsoAlgebra.mk _ (G.frobeniusPowIso N))
+      (⟨φ.hom.hom.f, frobeniusPowIso_hom_naturality φ N⟩ :
+        Algebra.Hom ⟨_, (F.frobeniusPowIso N).hom⟩ ⟨_, (G.frobeniusPowIso N).hom⟩)))
   map_id _ := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
     (Algebra.Hom.ext ((j)^*ᵃ[l].map_id _)))
   map_comp _ _ := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
@@ -94,13 +100,34 @@ lemma curvePullback_obj_obj_obj_str (F : WeilSheaf k₀ l X) :
   IsoAlgebra.mapOfNatIso_obj_obj_str _ _
 
 
+-- Stated for an arbitrary isomorphism `α` and specialised to
+-- `ProEtale.upperStarIsoLowerStarInv` below: comparing two components of the concrete
+-- `upperStarIsoLowerStarInv` at objects which are only definitionally equal makes the kernel unfold
+-- the isomorphism (about 30s), while for a variable `α` it only compares the objects.
+private lemma hom_app_comp_forget_map_frobeniusPowIso (F : WeilSheaf k₀ l X) (M : ℕ)
+    (α : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).hom)^*[WeilCoefficients l]
+      ≅ (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ M).inv)_*[WeilCoefficients l]) :
+    α.hom.app F.obj.carrier.X ≫ (ProEtale.AdicSheaf.forget _).map (F.frobeniusPowIso M).hom =
+      α.hom.app (F.powIsoAlgebra M).carrier.X ≫
+        (ProEtale.AdicSheaf.forget _).map (F.powIsoAlgebra M).obj.str :=
+  rfl
+
 /-- The iterated Weil structure, on the underlying sheaves, in terms of the algebra
 `AlgebraicGeometry.WeilSheaf.powIsoAlgebra`. -/
 lemma frobeniusPowStr_eq_powIsoAlgebra (F : WeilSheaf k₀ l X) (M : ℕ) :
     F.frobeniusPowStr M = (ProEtale.upperStarIsoLowerStarInv _ _).hom.app
       (F.powIsoAlgebra M).carrier.X ≫
         (ProEtale.AdicSheaf.forget _).map (F.powIsoAlgebra M).obj.str :=
-  rfl
+  hom_app_comp_forget_map_frobeniusPowIso F M _
+
+-- Stated for an arbitrary isomorphism `α`, for the same reason as
+-- `hom_app_comp_forget_map_frobeniusPowIso` (about 75s for the concrete isomorphism).
+private lemma hom_app_comp_inv_app_curvePullback (F : WeilSheaf k₀ l X)
+    (α : ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l] ≅
+      ((Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]) :
+    α.hom.app ((curvePullback j hj).obj F).obj.carrier.X ≫
+      α.inv.app ((j)^*ᵃ[l].obj (F.powIsoAlgebra N).carrier).X = 𝟙 _ :=
+  Iso.hom_inv_id_app _ _
 
 private lemma upperStarIsoLowerStarInv_hom_inv_id_app_curvePullback (F : WeilSheaf k₀ l X) :
     (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
@@ -109,7 +136,7 @@ private lemma upperStarIsoLowerStarInv_hom_inv_id_app_curvePullback (F : WeilShe
     (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
       (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius).inv.app
         ((j)^*ᵃ[l].obj (F.powIsoAlgebra N).carrier).X = 𝟙 _ :=
-  Iso.hom_inv_id_app _ _
+  hom_app_comp_inv_app_curvePullback j hj F _
 
 /-- The Weil structure of the curve pullback, on the underlying sheaves: the pullback along `j`
 of the iterated Weil structure `φ_N`, through
@@ -268,9 +295,20 @@ noncomputable def curvePullbackCompForgetIso :
   NatIso.ofComponents (fun F ↦ eqToIso (curvePullback_obj_obj_carrier j hj F)) fun _ ↦
     (Category.comp_id _).trans (Category.id_comp _).symm
 
-instance : (curvePullback (l := l) j hj).Additive where
-  map_add := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
-    (Algebra.Hom.ext ((j)^*ᵃ[l].map_add)))
+-- Deduced from `curvePullbackCompForgetIso` rather than proved on morphisms: the kernel compares
+-- the sums of morphisms of the two algebras `F` and `F.powIsoAlgebra N` with the same underlying
+-- sheaf slowly (about 30s).
+instance : (curvePullback (l := l) j hj).Additive := by
+  have : @Functor.Additive (WeilSheaf k₀ l X) _ _ _ _ _ (WeilSheaf.objectProperty k₀ l X).ι :=
+    Functor.fullSubcategoryInclusion_additive _
+  have : @Functor.Additive (WeilSheaf L l Y) _ _ _ _ _ (WeilSheaf.objectProperty L l Y).ι :=
+    Functor.fullSubcategoryInclusion_additive _
+  have : ((curvePullback (l := l) j hj ⋙ (WeilSheaf.objectProperty L l Y).ι) ⋙
+      IsoAlgebra.forget _).Additive :=
+    Functor.additive_of_iso (Functor.associator _ _ _ ≪≫ curvePullbackCompForgetIso j hj).symm
+  have : (curvePullback (l := l) j hj ⋙ (WeilSheaf.objectProperty L l Y).ι).Additive :=
+    Functor.additive_of_comp_faithful _ (IsoAlgebra.forget _)
+  exact Functor.additive_of_comp_faithful _ (WeilSheaf.objectProperty L l Y).ι
 
 instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     PreservesFiniteLimits (curvePullback (l := l) j hj) := by

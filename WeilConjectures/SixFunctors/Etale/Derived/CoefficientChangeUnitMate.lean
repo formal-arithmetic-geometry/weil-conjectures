@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 # Mates of derived adjunctions and coefficient comparisons
 
 This file contains the abstract diagram chases behind the compatibility of the derived base
-change map with the restriction of scalars along a morphism of coefficient rings (blueprint
-`prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`).
+change map with the restriction of scalars along a morphism of coefficient rings.
 
 Consider two adjunctions `G ⊣ F` and `G' ⊣ F'` (think: over the coefficients `Λ` and `Λ'`),
 "restriction" functors `P₁`, `P₂` from the primed to the unprimed categories and a square

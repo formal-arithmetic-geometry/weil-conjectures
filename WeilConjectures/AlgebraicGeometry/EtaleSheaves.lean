@@ -18,7 +18,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 Locally constant and constructible sheaves of sets, and torsion cohomology of
 complexes of abelian sheaves, as in blueprint `def-weil-pbc-etale-sheaves` in
-`sec-abelian-varieties/sk-prop-av-finite-etale-points`.
+`sec-abelian-varieties/lem-sc-finite-etale-points`.
 
 Finite local constancy is the existing `Scheme.IsFiniteLocallyConstantSheafOfTypes`.
 Its finiteness condition uses separably closed geometric points. For sheaves of sets,

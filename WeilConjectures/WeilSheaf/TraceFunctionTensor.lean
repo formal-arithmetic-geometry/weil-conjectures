@@ -23,7 +23,7 @@ Weil sheaf.
 
 These are the properties of the trace function (blueprint `def-fd-trace-function`,
 `def-weil-local-frobenius-trace`) used in the proof of the Fourier trace formula
-(sketch blueprint `sk-thm-fourier-trace-formula`).
+(sketch blueprint `thm-fd-fourier-trace`).
 -/
 
 @[expose] public section

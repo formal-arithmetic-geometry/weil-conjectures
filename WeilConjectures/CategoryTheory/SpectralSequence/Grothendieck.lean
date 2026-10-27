@@ -27,7 +27,7 @@ spectral sequence with `E₂`-page `R^p G (R^q F X)` abutting to `R^{p + q} (F �
 
 Convergence is expressed through `CategoryTheory.SpectralSequence.AbutsTo` of
 `WeilConjectures/Mathlib/Algebra/Homology/SpectralSequence/Basic.lean`; the blueprint's
-`sk-def-groth-ss` describes both the acyclicity hypothesis on the pair `(F, G)` and the image
+`det-def-groth-ss` describes both the acyclicity hypothesis on the pair `(F, G)` and the image
 filtration attached to a first quadrant double complex, and the second half of that subsection
 is what `SpectralSequence.Abutment` records.
 
@@ -98,7 +98,7 @@ higher right derived functors `R^q G` for `q > 0` vanish. This is what makes an 
 resolution of `X : A` compute `R^n (F ⋙ G) X` after applying `F`, and hence what makes the
 Grothendieck spectral sequence of `Functor.exists_grothendieckSpectralSequence` exist.
 
-(blueprint: `sk-def-groth-ss`) -/
+(blueprint: `det-def-groth-ss`) -/
 def Functor.IsAcyclicComposablePair (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] : Prop :=
   ∀ (I : A) [Injective I] (q : ℕ), 0 < q → IsZero ((G.rightDerived q).obj (F.obj I))
 
@@ -116,7 +116,7 @@ omit [IsGrothendieckAbelian.{v₁} A] in
 left adjoint `u` which is exact (it is enough that `u` preserves finite limits), then `F` preserves
 injective objects (`lem-sp-right-adjoint-preserves-injectives`), so `(F, G)` is a composable pair
 with acyclicity for every `G`. This is the situation of `F = f_*`, `u = f⁻¹` for a morphism of
-sites `f` (Step 1 of the proof of `sk-thm-groth-ss`). -/
+sites `f` (Step 1 of the proof of `det-thm-groth-ss`). -/
 theorem Adjunction.isAcyclicComposablePair {u : B ⥤ A} {F : A ⥤ B} (adj : u ⊣ F)
     [PreservesFiniteLimits u] (G : B ⥤ C) [F.Additive] [G.Additive] :
     F.IsAcyclicComposablePair G :=
@@ -770,7 +770,7 @@ For `A` the abelian sheaves on a site `X`, `F = f_*` and `G = h_*` along morphis
 `h_* = Γ(Y, -)`, it specializes further to the Leray spectral sequence
 `H^p(Y, R^q f_* F) ⟹ H^{p + q}(X, F)`.
 
-(blueprint: `sk-thm-groth-ss`) -/
+(blueprint: `det-thm-groth-ss`) -/
 theorem Functor.exists_grothendieckSpectralSequence (F : A ⥤ B) (G : B ⥤ C)
     [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G]
     (hFG : F.IsAcyclicComposablePair G) (X : A) :

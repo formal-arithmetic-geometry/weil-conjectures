@@ -58,7 +58,7 @@ fibres compute the fibre cohomology
 `P` are exact in degrees `q > d`, hence so is `P`
 (`IsFiniteFreeComplex.isZero_homology_of_isZero_homology_pullback`).
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem isZero_higherDirectImage_of_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) {d : ℕ}
     (h : ∀ t q, d < q → ℱ.hFiber f q t = 0) {q : ℕ} (hq : d < q) :
     IsZero ((higherDirectImage f q).obj ℱ) := by
@@ -113,7 +113,7 @@ vanishes for `q > d`, and the statement is
 `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_hFiber_eq_zero` for the restriction
 of `f` over `U`.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem isZero_higherDirectImage_restrict_of_topologicalKrullDim_le (hℱ : ℱ.IsFlatOver f)
     (U : T.Opens) {d : ℕ} (hd : ∀ t ∈ U, topologicalKrullDim (f.fiber t) ≤ d) {q : ℕ}
     (hq : d < q) : IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
@@ -150,7 +150,7 @@ cover `f⁻¹ U`, which bounds the fibre dimension
 (`AlgebraicGeometry.exists_topologicalKrullDim_le_of_isPullback_of_compactSpace`), and the
 vanishing is `isZero_higherDirectImage_restrict_of_topologicalKrullDim_le`.
 
-(blueprint: `sk-thm-picard-coherence`) -/
+(blueprint: `det-thm-picard-coherence`) -/
 theorem exists_isZero_higherDirectImage_restrict_of_topologicalKrullDim_le
     (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧ (∀ s ∈ U, topologicalKrullDim (f.fiber s) ≤ d) ∧

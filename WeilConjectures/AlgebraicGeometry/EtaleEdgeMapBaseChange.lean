@@ -39,7 +39,7 @@ Proof (steps 1--6 of the node):
 exchange map is the adjoint of the square isomorphism followed by pullback of the counit
 (def-weil-pbc-underived-exchange, def-weil-pbc-inverse-image,
 lem-weil-pbc-inverse-image-composition, def-weil-pbc-cohomology-pullback,
-def-weil-pbc-kinjective-resolutions). Independence of resolutions follows from
+lem-sfb-grothendieck-k-injective). Independence of resolutions follows from
 lem-weil-pbc-cohomology-pullback-functorial, clause 1.
 2. The induced maps `Sheaf.H.map` preserve composition and identities, by composition
 of comparison lifts and functoriality of global sections and cohomology.

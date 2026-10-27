@@ -96,7 +96,7 @@ theorem nonempty_iso_fourierTransform_of_iso_constantTwist (ψ : AddChar k₀ (P
     (ProEtaleWeilSheaf.constantTwist k₀ l (affineLine k₀) b).mapDerivedCategory.mapIso
       ((fourierTransformCompιIso ψ).app K).symm⟩
 
--- TODO(unify): sk-prop-base-linear
+-- TODO(unify): prop-base-linear
 /-- The Fourier–Deligne transform of Weil complexes on the affine line commutes with the Tate
 twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)` as Weil complexes, naturally in `K`. This is the Weil
 structure part of the second clause of the base linearity proposition; the underlying

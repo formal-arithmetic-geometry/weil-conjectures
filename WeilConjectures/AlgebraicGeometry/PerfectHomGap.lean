@@ -203,7 +203,7 @@ vanishing of degree `j` of the derived tensor product. For every `j` in `[-N,0]`
 `[-v-N,-u]` suffices.
 3. Apply `lem-pc-finite-support-hi` to the qcqs map from `X` to `Spec Z`. Its higher direct
 images of quasi-coherent sheaves are quasi-coherent and vanish uniformly in high degrees.
-Use `lem-pc-affine-vanishing` and `lem-pc-leray-degenerate-sections` to obtain a nonnegative
+Use `pqf-lem-affine-vanishing` and `lem-pc-leray-degenerate-sections` to obtain a nonnegative
 uniform cohomological bound `N` for quasi-coherent sheaves on `X`. The tensor product has
 quasi-coherent cohomology. Its truncation triangle at `-N` gives an exact sequence of global
 cohomology. By `lem-pc-unbounded-derived-functor-cohomological-bound`, global degree-zero

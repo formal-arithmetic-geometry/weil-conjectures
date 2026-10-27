@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 /-!
 # Artin–Schreier map over an algebraically closed field
 
-Source: blueprint sec-abelian-varieties/sk-prop-av-lang-steinberg/lem-sc-artin-schreier-k.md
+Source: blueprint sec-abelian-varieties/lem-sc-lang-steinberg/lem-sc-artin-schreier-k.md
 (blueprint: lem-sc-artin-schreier-k)
 -/
 
@@ -24,7 +24,7 @@ namespace IsAlgClosed
 
 /-- Artin–Schreier on an algebraically closed field.
 
-Source: blueprint sec-abelian-varieties/sk-prop-av-lang-steinberg/lem-sc-artin-schreier-k.md,
+Source: blueprint sec-abelian-varieties/lem-sc-lang-steinberg/lem-sc-artin-schreier-k.md,
 Proof; Stacks Project, Tag 0A3J, opening Artin–Schreier sequence
 (blueprint: lem-sc-artin-schreier-k).
 

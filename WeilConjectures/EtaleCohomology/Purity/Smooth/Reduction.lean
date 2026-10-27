@@ -181,8 +181,7 @@ theorem map_smoothPurityTrace {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (Ψ
     Functor.map_comp_assoc, hS,
     ← reassoc_of% hψ, Iso.hom_inv_id_app_assoc, Functor.map_comp]
 
-/-- Blueprint `prop-pur-adic-reconstruction-trace-coherence`: Adic transport of trace and
-coherence
+/-- Adic transport of trace and coherence
 
 **The smooth traces of a normalized system form a morphism of systems.** Let `Ψ` be a change of
 coefficients commuting with `Rf_!` through `ψ`, for instance the restriction of scalars along

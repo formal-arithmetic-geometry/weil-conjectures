@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.PowerMapPullback
 /-!
 # Primitive-root trivializations commute with field extension
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 proof of thm-sc-constant-invariance, compatible primitive-root trivializations
 (blueprint: lem-sc-root-trivialization-base-change).
 -/
@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 proof of thm-sc-constant-invariance, compatible primitive roots in the proper case
 (blueprint: lem-sc-root-trivialization-base-change).
 

@@ -109,7 +109,7 @@ noncomputable def Scheme.affineOpenGenericPoints (X : Scheme.{u}) [QuasiSeparate
 /-- **Properties of the selected affine neighbourhood**: `A(x; s)` is affine and contains `x`
 and every point of `s`.
 (blueprint: `lemma-nagata-affine-neighbourhood-generic-points`; the existence statement
-`lemma-nagata-affine-neighbourhood-generic-points-exists` is
+`lemma-nagata-affine-neighbourhood-generic-points` is
 `AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`) -/
 theorem Scheme.affineOpenGenericPoints_spec (X : Scheme.{u}) [QuasiSeparatedSpace X]
     {s : Set X} (hsf : s.Finite) (hs : s ⊆ genericPoints X) (x : X) :

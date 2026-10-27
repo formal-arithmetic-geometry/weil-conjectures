@@ -14,7 +14,7 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 /-!
 # Finite homogeneous generators of a graded module
 
-Source: Weil conjectures blueprint, `sec-picard-framework/sk-thm-picard-duality`,
+Source: Weil conjectures blueprint, `sec-picard-framework/det-thm-picard-duality`,
 proof, construction of the initial graded free module from homogeneous generators
 (blueprint: lem-sc-p1-finite-homogeneous-generators).
 -/

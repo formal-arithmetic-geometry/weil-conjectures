@@ -44,7 +44,7 @@ theorem Smooth.flat_and_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X �
     Flat f ∧ LocallyOfFinitePresentation f :=
   ⟨inferInstance, inferInstance⟩
 
-/-- **Smoothness by flatness and smooth fibres** (blueprint `sbc-lem-smooth-criterion`). A
+/-- **Smoothness by flatness and smooth fibres** (blueprint `lem-pc-smooth-characterization`). A
 morphism `f : X ⟶ Y` is smooth if and only if it is flat, locally of finite presentation, and
 every fibre `X_y ⟶ Spec κ(y)` is smooth. A smooth morphism is flat and locally of finite
 presentation, and its fibres are smooth by base change; the converse is

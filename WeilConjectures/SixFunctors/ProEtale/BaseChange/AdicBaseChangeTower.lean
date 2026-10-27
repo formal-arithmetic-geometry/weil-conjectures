@@ -27,7 +27,7 @@ X --p--> S
 and a coefficient ring `R` with an ideal `I`. For an object `K` of `D(T_proét, R)` write
 `K_n = K ⊗ᴸ R/Iⁿ` for its reductions (`DerivedCategory.derivedCompletionDiagram`).
 
-Following blueprint `def-weil-pbc-completed-base-change-map`, the completed exchange map
+The completed exchange map
 `Lp^*_comp Rg_* K ⟶ Rh_* Le^*_comp K` is, up to the canonical identifications of the completed
 operations with the derived limits of their finite levels, the derived limit
 `R lim_n Ex_{K_n} : R lim_n p^* Rg_* K_n ⟶ R lim_n Rh_* e^* K_n` of the levelwise exchange maps
@@ -49,8 +49,8 @@ a smooth `p`, is the finite-level smooth base change, used in
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleComplete`
-  (`def-weil-pbc-bounded-constructible-complete`): the integral category `Dᵇc(T_proét, R)`.
+- `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleComplete`: the integral
+  category `Dᵇc(T_proét, R)`.
 - `AlgebraicGeometry.ProEtale.adicBaseChangeTowerMap`: the levelwise exchange maps.
 -/
 
@@ -90,12 +90,12 @@ set_option hygiene false in
 local notation "𝐃(" T ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} R))
 
-/-- Blueprint `def-weil-pbc-bounded-constructible-complete`: the integral category
-`Dᵇc(T_proét, R)`, for `R = 𝒪_E` and `I = 𝔪_E`, as an object property of `D(T_proét, R)`: the
-derived complete objects `K` whose reduction tower `K_n = K ⊗ᴸ R/Iⁿ` is uniformly bounded
-constructible with étale origins, that is, every `K_n` is of étale origin with bounded
-constructible cohomology (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`),
-with cohomology in one common interval `[a, b]`. -/
+/-- The integral category `Dᵇc(T_proét, R)`, for `R = 𝒪_E` and `I = 𝔪_E`, as an object
+property of `D(T_proét, R)`: the derived complete objects `K` whose reduction tower
+`K_n = K ⊗ᴸ R/Iⁿ` is uniformly bounded constructible with étale origins, that is, every `K_n` is
+of étale origin with bounded constructible cohomology
+(`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`), with cohomology in one
+common interval `[a, b]`. -/
 def DerivedCategory.boundedConstructibleComplete (T : Scheme.{u}) : ObjectProperty 𝐃(T) :=
   fun K ↦ derivedComplete (Scheme.ProEt.topology T) I K ∧ ∃ a b : ℤ, ∀ n : ℕ,
     ProEtale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} R) T
@@ -351,10 +351,9 @@ def DerivedCategory.boundedConstructibleIn (T : Scheme.{u}) (a b : ℤ) : Object
   fun M ↦ ProEtale.DerivedCategory.boundedConstructible 𝐌 T M ∧ TStructure.t.IsGE M a ∧
     TStructure.t.IsLE M b
 
-/-- Blueprint `sbc-def-admissible-lattices`: an *integral lattice* for an object `K` of
-`D_comp(T, E)` is an object `L` of `Dᵇc(T_proét, 𝒪_E)`
-(`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleComplete`) together with an
-isomorphism `L[1/ϖ] ≅ K`.
+/-- An *integral lattice* for an object `K` of `D_comp(T, E)` is an object `L` of
+`Dᵇc(T_proét, 𝒪_E)` (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleComplete`)
+together with an isomorphism `L[1/ϖ] ≅ K`.
 
 The blueprint asks for this isomorphism in `Dᵇc(T, E)`, the rationalization of
 `Dᵇc(T_proét, 𝒪_E)`; this is a full subcategory of `D_comp(T, E)` (the rationalization of a fully
@@ -376,22 +375,22 @@ namespace IntegralLattice
 
 variable {l E} {K : DerivedCategoryDerivedCompleteRational (Scheme.ProEt.topology T) l E}
 
-/-- Blueprint `sbc-def-admissible-lattices`: a lattice is *finite-level étale admissible* if each
-reduction `L_n = L ⊗ᴸ 𝒪_E/𝔪_Eⁿ` is of étale origin with bounded constructible cohomology. -/
+/-- A lattice is *finite-level étale admissible* if each reduction `L_n = L ⊗ᴸ 𝒪_E/𝔪_Eⁿ` is of
+étale origin with bounded constructible cohomology. -/
 def IsFiniteLevelEtaleAdmissible (Λ : IntegralLattice l E K) : Prop :=
   DerivedCategory.ReductionsBoundedConstructible 𝔪 T Λ.obj
 
 /-- Every integral lattice is finite-level étale admissible: in this formalisation the étale
-origin of the reductions is part of the definition of `Dᵇc(T_proét, 𝒪_E)`, as it is in blueprint
-`def-weil-pbc-bounded-constructible-complete`. -/
+origin of the reductions is part of the definition of `Dᵇc(T_proét, 𝒪_E)`, as it is in the
+blueprint. -/
 lemma isFiniteLevelEtaleAdmissible (Λ : IntegralLattice l E K) :
     Λ.IsFiniteLevelEtaleAdmissible :=
   Λ.mem.reductionsBoundedConstructible
 
-/-- Blueprint `sbc-def-admissible-lattices`: a lattice is *square-constructibly admissible* for
-a commutative square `sq` if the four finite-level systems `Rg_* L_n`, `Lp^* Rg_* L_n`, `Le^* L_n`
-and `Rh_* Le^* L_n` are of étale origin with bounded constructible cohomology in one common finite
-interval `[a, b]` (it is finite-level étale admissible by
+/-- A lattice is *square-constructibly admissible* for a commutative square `sq` if the four
+finite-level systems `Rg_* L_n`, `Lp^* Rg_* L_n`, `Le^* L_n` and `Rh_* Le^* L_n` are of étale
+origin with bounded constructible cohomology in one common finite interval `[a, b]` (it is
+finite-level étale admissible by
 `AlgebraicGeometry.ProEtale.IntegralLattice.isFiniteLevelEtaleAdmissible`). -/
 def IsSquareConstructiblyAdmissible (Λ : IntegralLattice l E K) (_ : CommSq e h g p) : Prop :=
   ∃ a b : ℤ, ∀ n : ℕ,

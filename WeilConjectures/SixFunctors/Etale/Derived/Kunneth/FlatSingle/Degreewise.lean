@@ -69,6 +69,12 @@ lemma CategoryTheory.NatTrans.isIso_app_of_retract_biproduct [Preadditive C] [Pr
   have := NatTrans.isIso_app_biproduct τ (fun _ : Fin m ↦ Z) fun _ ↦ hZ
   NatTrans.isIso_app_of_retract τ r
 
+/-- Transport `IsIso (τ.app X)` along an equality `X = Y`. Used with `rfl` when `Y` is a
+beta-redex: the kernel then compares the objects, not the components of `τ` at them. -/
+private lemma CategoryTheory.NatTrans.isIso_app_of_isIso_app_of_eq {S T : C ⥤ D} {τ : S ⟶ T}
+    {X Y : C} (hX : IsIso (τ.app X)) (h : X = Y) : IsIso (τ.app Y) :=
+  h ▸ hX
+
 /-- A natural transformation between functors preserving a colimit, which is an isomorphism on
 the diagram, is an isomorphism at the colimit. -/
 lemma CategoryTheory.NatTrans.isIso_app_of_isColimit_of_preservesColimit {J : Type*} [Category J]
@@ -456,11 +462,17 @@ lemma isIso_tensorBaseChangeHomologyMap'_app_biproduct_lowerStar_constantSheaf {
     IsIso ((tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
       (⨁ fun i ↦ (π i)_*[ModuleCat.{u + 1} Λ].obj
         ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i)))) := by
+  -- The hypothesis of `isIso_tensorBaseChangeHomologyMap'_app_biproduct` is about the summand
+  -- `(fun i ↦ π_i_* M_i) i`; the kernel compares `τ.app` of it with `τ.app (π_i_* M_i)` by
+  -- unfolding `τ`, so the summand is transported along `rfl` at the level of objects instead.
   exact isIso_tensorBaseChangeHomologyMap'_app_biproduct (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q
     (fun i ↦ (π i)_*[ModuleCat.{u + 1} Λ].obj
       ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) fun i ↦
-    isIso_tensorBaseChangeHomologyMap'_app_lowerStar_constantSheaf Λ p h e f' g w 𝓕 (π i) q
-      (hgood i) (M i) (hM i)
+    NatTrans.isIso_app_of_isIso_app_of_eq
+      (isIso_tensorBaseChangeHomologyMap'_app_lowerStar_constantSheaf Λ p h e f' g w 𝓕 (π i) q
+        (hgood i) (M i) (hM i))
+      (Y := (fun i ↦ (π i)_*[ModuleCat.{u + 1} Λ].obj
+        ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) i) rfl
 
 variable {Λ} in
 /-- A finite sum of sheaves `πᵢ_* Mᵢ`, `πᵢ` finite and `Mᵢ` finite, on a Noetherian scheme, is
@@ -546,9 +558,9 @@ theorem isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar [QuasiCompac
   have := preservesColimitsOfShape_singleFunctor_rightDerivedLowerStar Λ h q I
   have : PreservesColimitsOfShape I
       (tensorBaseChangeHomologyTarget (ModuleCat.{u + 1} Λ) p h e 𝓕 q) :=
-    inferInstanceAs (PreservesColimitsOfShape I
-      (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕 ⋙
-        higherDirectImageFunctor (ModuleCat.{u + 1} Λ) h q))
+    comp_preservesColimitsOfShape
+      (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕)
+      (higherDirectImageFunctor (ModuleCat.{u + 1} Λ) h q)
   have key := NatTrans.isIso_app_of_isColimit_of_preservesColimit
     (tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q) hcol fun j ↦ by
       have := hD j
@@ -557,7 +569,7 @@ theorem isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar [QuasiCompac
         hgood q (D.obj j) fun x hx ↦ by
           have := hmono j
           exact smul_id_eq_zero_of_mono (c.ι.app j) (hc ▸ hQ x hx)
-  rwa [hc] at key
+  exact NatTrans.isIso_app_of_isIso_app_of_eq key hc
 
 end ModuleCat
 

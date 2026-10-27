@@ -51,7 +51,7 @@ namespace Representation
 variable {k G V V' : Type*} [Field k] [Monoid G]
   [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
 
-/-- Blueprint `sk-d-real-operations`: Operations, constituents and coinvariants.
+/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
 
 `σ.IsConstituent ρ` says that `σ` is a *constituent* of `ρ`: it is irreducible and isomorphic
 to a subquotient of `ρ`. By Jordan-Hölder these are exactly the irreducible successive

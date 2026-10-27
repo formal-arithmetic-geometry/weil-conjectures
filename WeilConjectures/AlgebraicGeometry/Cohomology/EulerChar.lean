@@ -165,8 +165,8 @@ Mayer--Vietoris gluing of the canonical comparisons proves bijectivity on `U ∪
 all degrees. Apply the induction at the whole scheme and invert the resulting
 `K`-linear comparison from `K ⊗[k] H^q(X, M)` to the pullback cohomology.
 
-(blueprint: `lem-sc-flat-base-change-coherent`) 
-(blueprint: lem-sc-flat-base-change-coherent)
+(blueprint: `lem-pc-flat-base-change-cohom`) 
+(blueprint: lem-pc-flat-base-change-cohom)
 -/
 @[stacks 02KH]
 theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k))]

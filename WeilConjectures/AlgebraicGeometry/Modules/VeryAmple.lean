@@ -47,7 +47,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {X : Scheme.{u}}
 
-/-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
+/-- Blueprint `def-sc-ample`: Ample modules and the Hilbert degree.
 
 An `𝒪_X`-module `M` is *very ample* relative to `f : X ⟶ S` if there is a closed immersion
 `i : X ⟶ ℙ(n; S)` over `S`, into a projective space with finitely many homogeneous
@@ -119,7 +119,7 @@ theorem IsVeryAmple.tensorPow {S : Scheme.{u}} {f : X ⟶ S} {M : X.Modules}
   | 1, _ => hM.of_iso (ρ_ M).symm
   | k + 2, _ => hM.tensorObj (hM.tensorPow (Nat.succ_pos k))
 
-/-- Blueprint `sk-def-av-ample-degree`: Ample modules and the Hilbert degree.
+/-- Blueprint `def-sc-ample`: Ample modules and the Hilbert degree.
 
 An `𝒪_X`-module `M` on a `K`-scheme `X` is *ample* if it is invertible and some positive tensor
 power of it is very ample in the sense of `AlgebraicGeometry.IsVeryAmple`.

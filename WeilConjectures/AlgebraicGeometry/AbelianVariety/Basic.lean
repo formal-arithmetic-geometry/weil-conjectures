@@ -47,7 +47,8 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `sk-prop-av-char`: Abelian varieties are the complete group varieties.
+/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group
+varieties.
 
 Let `G` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
 is, an abelian variety in the sense of `AlgebraicGeometry.IsAbelianVariety`. Then `G` is
@@ -64,7 +65,8 @@ instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpOb
   have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected G.hom
   exact .of_geometricallyReduced_of_geometricallyIrreducible _
 
-/-- Blueprint `sk-prop-av-char`: Abelian varieties are the complete group varieties.
+/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group
+varieties.
 
 The underlying space of an abelian variety is irreducible, being geometrically irreducible over
 the one-point space `Spec K`.
@@ -74,7 +76,7 @@ instance IsAbelianVariety.irreducibleSpace (G : Over (Spec (.of K))) [GrpObj G]
     [IsAbelianVariety G] : IrreducibleSpace G.left :=
   GeometricallyIrreducible.irreducibleSpace_of_subsingleton G.hom
 
-/-- Blueprint `sk-cor-av-commutative`: Abelian varieties are commutative
+/-- Blueprint `lem-sc-av-commutative`: Abelian varieties are commutative
 
 Let `A` be an abelian variety over `K`. Then `m ∘ s = m`, where `s` is the swap of the two
 factors of `A ⊗ A`; that is, `A` is a commutative group object, and in particular `A(K)` is an
@@ -97,7 +99,7 @@ instance IsAbelianVariety.geometricallyConnected (A : Over (Spec (.of K))) [GrpO
     [IsAbelianVariety A] : GeometricallyConnected A.hom :=
   GeometricallyConnected.of_universallyClosed_of_section A.hom η[A].left (by simp)
 
-/-- Blueprint `sk-d-ab-field`: Finite fields, Frobenius and abelian varieties.
+/-- Blueprint `d-ab-field`: Finite fields, Frobenius and abelian varieties.
 
 This is also blueprint `d-ab-field`, which defines an abelian variety over `K` as a proper, smooth,
 geometrically connected, commutative group scheme of finite type over `K`. For a group scheme

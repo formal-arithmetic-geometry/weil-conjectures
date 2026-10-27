@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 # Colimits and inverse image of abelian étale sheaves
 
 Source: Stacks Project, Categories, Lemma 0038(1), applied to the inverse-image
-adjunction of Étale Cohomology, Definition 03Q0; Étale Cohomology, proof of Lemma 0A4B
-(blueprint: lem-weil-pbc-inverse-image-preserves-colimits).
+adjunction of Étale Cohomology, Definition 03Q0; Étale Cohomology, proof of Lemma 0A4B.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Inverse image of abelian sheaves on small étale sites preserves every small colimit.
-Source: Stacks Project, Lemma 0038(1) and the proof of Lemma 0A4B
-(blueprint: lem-weil-pbc-inverse-image-preserves-colimits).
+Source: Stacks Project, Lemma 0038(1) and the proof of Lemma 0A4B.
 
 First, `upperStarLowerStarAdjunction AddCommGrpCat f` identifies inverse image with the
 left adjoint of direct image (`def-weil-pbc-inverse-image`, Definition 03Q0).

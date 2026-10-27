@@ -67,7 +67,7 @@ scheme of finite type gives an immersion into projective space
 
 This is an input to the proof of Stacks 0BF7 (`AlgebraicGeometry.GrpObj.exists_isImmersion_
 projectiveSpace`), used for blueprint `lem-sc-abelian-variety-projective` and the subsection
-`sk-prop-av-projective`. -/
+`lem-sc-abelian-variety-projective`. -/
 @[stacks 0BDE]
 theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     {α : Type u} [Finite α]

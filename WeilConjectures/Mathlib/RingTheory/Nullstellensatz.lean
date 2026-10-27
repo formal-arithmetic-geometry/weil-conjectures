@@ -30,7 +30,7 @@ field `k`; and an element of `A` vanishing at every `k`-point is nilpotent.
 
 ## Blueprint
 
-- `sk-i-geometry`: the Nullstellensatz and the vanishing principle.
+- `det-i-geometry`: the Nullstellensatz and the vanishing principle.
 - `lem-wf-affine-nullstellensatz-vanishing`: residue fields of closed points and the vanishing
   principle.
 - `lem-wf-affine-product-reduced`: the vanishing principle on a product of reduced affine
@@ -45,7 +45,7 @@ variable (k A : Type*) [Field k] [IsAlgClosed k] [CommRing A] [Algebra k A]
 
 /-- Over an algebraically closed field `k`, every maximal ideal of a finitely generated
 `k`-algebra is the kernel of a `k`-algebra map to `k`: closed points have residue field `k`.
-(blueprint: `sk-i-geometry`) -/
+(blueprint: `det-i-geometry`) -/
 theorem exists_algHom_ker_eq_of_isMaximal (𝔪 : Ideal A) [𝔪.IsMaximal] :
     ∃ φ : A →ₐ[k] k, RingHom.ker φ = 𝔪 := by
   let : Field (A ⧸ 𝔪) := Ideal.Quotient.field 𝔪
@@ -56,7 +56,7 @@ theorem exists_algHom_ker_eq_of_isMaximal (𝔪 : Ideal A) [𝔪.IsMaximal] :
 
 /-- The vanishing principle: over an algebraically closed field `k`, an element of a finitely
 generated `k`-algebra vanishing at every `k`-point is nilpotent.
-(blueprint: `sk-i-geometry`) -/
+(blueprint: `det-i-geometry`) -/
 theorem iInf_ker_algHom_eq_nilradical :
     (⨅ φ : A →ₐ[k] k, RingHom.ker φ) = nilradical A := by
   have : IsJacobsonRing A := isJacobsonRing_of_finiteType (A := k)

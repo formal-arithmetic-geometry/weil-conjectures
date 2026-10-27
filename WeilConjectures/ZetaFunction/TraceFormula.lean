@@ -26,7 +26,7 @@ the constant Weil sheaf `ℚ̄_ℓ` every local trace is `1`, and the right hand
 `N_m = #X₀(𝔽_{qᵐ})` of `𝔽_{qᵐ}`-rational points. If `X₀` is proper, compactly supported
 cohomology is ordinary cohomology.
 
-The trace formula over `ℚ̄_ℓ` itself is the blueprint node `thm-trf-grothendieck-lefschetz-qbar`
+The trace formula over `ℚ̄_ℓ` itself is the blueprint node `det-thm-tf-uniform-formula-weil`
 of the trace formula chapter (subsection `sk-thm-trace-transport`); it is stated here for the
 Weil complexes of this repository, whose compactly supported cohomology is
 `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`, and is proved in that chapter.
@@ -34,7 +34,7 @@ Weil complexes of this repository, whose compactly supported cohomology is
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq`: the trace
-  formula over `ℚ̄_ℓ` (`thm-trf-grothendieck-lefschetz-qbar`).
+  formula over `ℚ̄_ℓ` (`det-thm-tf-uniform-formula-weil`).
 - `AlgebraicGeometry.WeilSheaf.traceFunction_adicConstant`: the trace function of the constant
   Weil sheaf is `1`.
 - `AlgebraicGeometry.WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology` and
@@ -63,7 +63,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `thm-trf-grothendieck-lefschetz-qbar` (Grothendieck–Lefschetz formula over `ℚ̄_ℓ`,
+/-- Blueprint `det-thm-tf-uniform-formula-weil` (Grothendieck–Lefschetz formula over `ℚ̄_ℓ`,
 subsection `sk-thm-trace-transport` of the trace formula chapter): for a Weil complex `K` on a
 separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
 

@@ -16,9 +16,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 # Compact support at the integral and rational stages
 
 Let `E/ℚ_ℓ` be a finite extension inside `ℚ̄_ℓ` with ring of integers `𝒪_E` and maximal ideal
-`𝔪_E = (ϖ_E)`, and let `f : X ⟶ Y` be a morphism admitting a compactification. Blueprint
-`def-weil-integral-rational-qbar-compact-support` defines, for `K ∈ Dᵇc(X, 𝒪_E)` with reductions
-`K_n = K ⊗ᴸ_{𝒪_E} A_{E,n}`,
+`𝔪_E = (ϖ_E)`, and let `f : X ⟶ Y` be a morphism admitting a compactification. The blueprint
+defines, for `K ∈ Dᵇc(X, 𝒪_E)` with reductions `K_n = K ⊗ᴸ_{𝒪_E} A_{E,n}`,
 
 `Rf_! K = R lim_n Res_n Rf_{!,n} K_n`,
 
@@ -47,9 +46,8 @@ The rational functor is induced on rationalizations
 (`CategoryTheory.Rationalization.map`), which is the blueprint's
 `Rf_! K_E = (Rf_! K) ⊗ᴸ_{𝒪_E} E`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedCompleteRationalFromIntegralIso`); in
-particular it does not depend on the integral representative
-(`AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_rightDerivedLowerShriekDerivedCompleteIntegral`,
-blueprint `lem-weil-compact-support-representative-independence`).
+particular it does not depend on the integral representative:
+`AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_rightDerivedLowerShriekDerivedCompleteIntegral`.
 
 ## Main definitions
 
@@ -96,8 +94,8 @@ local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers 
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `def-weil-integral-rational-qbar-compact-support`: Integral, rational, and
-algebraically closed compact-support functors (the integral stage `𝒪_E`).
+/-- Integral, rational, and algebraically closed compact-support functors (the integral stage
+`𝒪_E`).
 
 The compact-support direct image `Rf_! : D_comp(X_ét, 𝒪_E) ⥤ D_comp(Y_ét, 𝒪_E)`,
 `K ↦ R lim_n Res_n Rf_{!,n} K_n`: the derived completion of the étale `Rf_! K` over `𝒪_E`. Its
@@ -116,8 +114,7 @@ noncomputable instance : (rightDerivedLowerShriekDerivedCompleteIntegral l E f).
   inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ R(f)_![𝐌] ⋙
     DerivedCategoryDerivedCompleteIntegral.completion _ l E).CommShift ℤ)
 
-/-- Blueprint `lem-weil-compact-support-representative-independence` (first step): the integral
-compact-support functor is exact, being a composite of triangulated functors
+/-- The integral compact-support functor is exact, being a composite of triangulated functors
 (`lem-compact-support-direct-image-triangulated` for `Rf_!`, and the derived completion). -/
 instance : (rightDerivedLowerShriekDerivedCompleteIntegral l E f).IsTriangulated :=
   inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ R(f)_![𝐌] ⋙
@@ -144,8 +141,8 @@ instance (n : ℕ) (K : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopol
       (toRightDerivedLowerShriekDerivedCompleteIntegral l E f K)) :=
   isIso_reductionModIdeal_map_completionAdjunction_unit_app l E n _
 
-/-- Blueprint `def-weil-integral-rational-qbar-compact-support`: the reductions of the integral
-compact-support direct image. For `K ∈ D_comp(X_ét, 𝒪_E)` and `n : ℕ`,
+/-- The reductions of the integral compact-support direct image. For `K ∈ D_comp(X_ét, 𝒪_E)` and
+`n : ℕ`,
 
 `Res_n ((Rf_! K) ⊗ᴸ A_{E,n}) ≅ Res_n Rf_{!,n} K_n`,
 
@@ -188,13 +185,12 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriekDerivedCompleteInt
       (toRightDerivedLowerShriekDerivedCompleteIntegral l E f K)))
   exact ⟨(asIso τ).symm ≪≫ Functor.isoWhiskerLeft _ e⟩
 
-/-- Blueprint `def-weil-integral-rational-qbar-compact-support`: Integral, rational, and
-algebraically closed compact-support functors (the rational stage `E`).
+/-- Integral, rational, and algebraically closed compact-support functors (the rational stage `E`).
 
 The compact-support direct image `Rf_! : D_comp(X_ét, E) ⥤ D_comp(Y_ét, E)` at the rational
 stage, the functor induced on the rationalizations by the integral compact-support functor
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedCompleteIntegral`, which is exact and
-`𝒪_E`-linear (the rational transport of blueprint `prop-weil-pbc-rational-transport`). On an
+`𝒪_E`-linear (the rational transport of the integral functor). On an
 object `K_E` represented by an integral `K` it is `(Rf_! K) ⊗ᴸ_{𝒪_E} E`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedCompleteRationalFromIntegralIso`). -/
 noncomputable def rightDerivedLowerShriekDerivedCompleteRational :
@@ -211,8 +207,7 @@ noncomputable def rightDerivedLowerShriekDerivedCompleteRationalFromIntegralIso 
         DerivedCategoryDerivedCompleteRational.fromIntegral Y.smallEtaleTopology l E :=
   Rationalization.mapFac _ _
 
-/-- Blueprint `lem-weil-compact-support-representative-independence`: Independence of the
-integral representative.
+/-- Independence of the integral representative.
 
 If two integral complexes `K, K'` represent the same object of the rational stage, through an
 isomorphism `e : K ⊗ᴸ E ≅ K' ⊗ᴸ E`, then `(Rf_! K) ⊗ᴸ_{𝒪_E} E` and `(Rf_! K') ⊗ᴸ_{𝒪_E} E` are

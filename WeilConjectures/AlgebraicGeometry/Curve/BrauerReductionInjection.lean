@@ -29,7 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- Pullback to the reduction is injective on the cohomological Brauer group of a curve.
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-second-kummer-divisors/
 lem-sc-brauer-zero-all-curves.md, Proof, Step 1 and the following Claim.
 (blueprint: lem-sc-brauer-reduction-injection)
 

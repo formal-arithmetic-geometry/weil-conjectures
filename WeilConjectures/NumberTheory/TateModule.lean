@@ -34,7 +34,7 @@ of `Kˣ`, so the cyclotomic Tate module is literally the Tate module of the addi
 
 ## Blueprint
 
-`cyclotomicTateModule` implements `sk-d-ab-cyclotomic`;
+`cyclotomicTateModule` implements `det-d-ab-cyclotomic`;
 `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed` implements `sk-p-tate`; together with
 `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_symm_fixed`,
 `AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self` and
@@ -146,7 +146,7 @@ the `ℓ`-th power maps, and `ℤ_ℓ(1)` is the group of compatible systems `(u
 `u n ∈ μ_{ℓ^n}(K)` and `u (n + 1) ^ ℓ = u n`: that is, the Tate module of the abelian group
 `Kˣ`, written additively. The rational cyclotomic Tate module `ℚ_ℓ(1)` is the localisation
 `ℤ_ℓ(1)[1/ℓ]`; it is not defined separately here.
-(blueprint: `sk-d-ab-cyclotomic`) -/
+(blueprint: `det-d-ab-cyclotomic`) -/
 def cyclotomicTateModule (K : Type*) [CommMonoid K] (l : ℕ) [Fact l.Prime] :
     AddSubgroup (ℕ → Additive Kˣ) :=
   AddCommGroup.tateModule l (Additive Kˣ)
