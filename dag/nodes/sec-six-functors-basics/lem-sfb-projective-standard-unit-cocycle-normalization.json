@@ -13,35 +13,22 @@
  ],
  "proof": [
   {
-   "text": "For distinct indices i,j identify the overlap ring with k[t,t^-1,z], t=T_i/T_j. Polynomial degree in each z adds under products over a domain, so a unit and its inverse have degree zero in z. The greatest and least Laurent exponents also add; their difference for a unit is zero. Thus the unit is uniquely c_ij*(T_i/T_j)^e_ij with c_ij in k^*. These comparisons are compatible with restriction to triple overlaps.",
+   "text": "Apply the off-diagonal normalization theorem to the given cocycle. Its Laurent-polynomial calculation on each pairwise distinct overlap supplies one integer exponent and chart units satisfying the required equation whenever i and j are distinct.",
    "uses": [
-    "def-pc-projective-space-twist",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-laurent-polynomial-ring"
+    "lem-sfb-projective-standard-unit-cocycle-off-diagonal"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
     "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
    }
   },
   {
-   "text": "For distinct i,j,l use the two independent Laurent variables T_i/T_j and T_j/T_l on their triple overlap. The assumed cocycle identity gives e_ij=e_jl=e_il and c_ij*c_jl=c_il by comparing coefficients. The identities with repeated indices give t_ii=1 and t_ji=t_ij^-1, so reversing a pair preserves its exponent. Every pair of edges is joined by triples when r>=3; hence all exponents equal one integer d.",
+   "text": "Apply the diagonal completion theorem to the same cocycle, exponent and chart units. Repeated-index cocycle equations and cancellation of units extend the equation to i=j. Split on equality of indices to obtain the displayed equation for every pair.",
    "uses": [
-    "def-pc-projective-space-twist"
+    "lem-sfb-projective-standard-unit-cocycle-diagonal"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
-   }
-  },
-  {
-   "text": "Fix an index b. Put c_ii=1. The scalar equations give c_ij=c_ib/c_jb, including pairs involving b. On chart i choose the constant unit a_i=c_ib^-1. Then res(a_i)*t_ij=(T_i/T_j)^d*res(a_j) on every overlap. For i=j both sides equal a_i. This proves exactly the conclusion, without gluing any module.",
-   "uses": [
-    "def-pc-projective-space-twist"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
     "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
@@ -49,14 +36,13 @@
   }
  ],
  "proof_deps": [
-  "def-pc-projective-space-twist",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-laurent-polynomial-ring"
+  "lem-sfb-projective-standard-unit-cocycle-off-diagonal",
+  "lem-sfb-projective-standard-unit-cocycle-diagonal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+  "place": "Tag 0BXJ, double- and triple-overlap calculation, with the off-diagonal and repeated-index parts split into separate intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -150,9 +136,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261027T123516-L-2314137",
+  "landing": "20261027T151720-L-1196926",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

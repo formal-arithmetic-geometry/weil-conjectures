@@ -6,6 +6,8 @@ Authors: SHEAF group Q2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleOffDiagonal
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleDiagonal
 
 /-!
 # Normalizing unit cocycles on the standard projective-space cover
@@ -70,6 +72,14 @@ theorem exists_standardUnitCocycle_normalization (k : Type u) [Field k]
             (homOfLE inf_le_left).op (a i).val * (t i j).val =
           (transitionUnit _ (Spec (.of k)) d i j).val *
             (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map
-              (homOfLE inf_le_right).op (a j).val := by sorry
+              (homOfLE inf_le_right).op (a j).val := by
+  obtain ⟨d, a, hoff⟩ := exists_standardUnitCocycle_normalization_offDiagonal k r hr t ht
+  have hdiag := standardUnitCocycle_diagonal_normalization k r hr t ht d a hoff
+  refine ⟨d, a, ?_⟩
+  intro i j
+  by_cases hij : i = j
+  · subst j
+    exact hdiag i
+  · exact hoff i j hij
 
 end AlgebraicGeometry.ProjectiveSpace

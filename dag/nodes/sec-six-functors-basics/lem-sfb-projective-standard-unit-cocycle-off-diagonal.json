@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-projective-space-twist"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleNormalization",
+  "date": "2026-10-27",
+  "group": "M6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-standard-unit-cocycle-normalization",
+   "place": "Intermediate decomposition of the unit-cocycle normalization into distinct-index and repeated-index parts.",
+   "via": [
+    "lem-sfb-projective-standard-unit-cocycle-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "lem-sfb-projective-standard-unit-cocycle-off-diagonal",
+ "title": "Off-diagonal unit cocycle normalization on projective space",
+ "statement": "Let k be a field, r>=3, and let t_ij be units on the standard-cover overlaps of projective r-1-space satisfying the triple-overlap cocycle equation. There exist an integer d and chart units a_i such that the normalization equation holds for every pair of distinct indices i != j.",
+ "proof": [
+  {
+   "text": "On each pairwise distinct overlap identify the section ring with the Laurent polynomial ring in the coordinate ratio and the remaining affine coordinates. Degree comparison in the remaining variables forces a unit to be a scalar times one Laurent monomial. Comparing the two independent Laurent exponents on triple overlaps gives one common exponent and a scalar coboundary; choosing a base chart supplies the constants a_i.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, pairwise distinct double- and triple-overlap Laurent calculation."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleOffDiagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/StandardUnitCocycleOffDiagonal.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_standardUnitCocycle_normalization_offDiagonal",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-27",
+  "statement": "theorem exists_standardUnitCocycle_normalization_offDiagonal (k : Type u) [Field k] (r : ℕ) (hr : 3 ≤ r) (t : ∀ i j : ULift.{u} (Fin r), Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)), standardOpen _ (Spec (.of k)) i ⊓ standardOpen _ (Spec (.of k)) j)ˣ) (ht : ∀ (i j l : ULift.{u} (Fin r)) (W : ℙ(ULift.{u} (Fin r); Spec (.of k)).Opens) (hi : W ≤ standardOpen _ (Spec (.of k)) i) (hj : W ≤ standardOpen _ (Spec (.of k)) j) (hl : W ≤ standardOpen _ (Spec (.of k)) l), (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE (le_inf hi hj)).op (t i j).val * (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE (le_inf hj hl)).op (t j l).val = (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE (le_inf hi hl)).op (t i l).val) : ∃ d : ℤ, ∃ a : ∀ i : ULift.{u} (Fin r), Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)), standardOpen _ (Spec (.of k)) i)ˣ, ∀ i j : ULift.{u} (Fin r), i ≠ j → (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE inf_le_left).op (a i).val * (t i j).val = (transitionUnit _ (Spec (.of k)) d i j).val * (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE inf_le_right).op (a j).val"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit cocycle normalization on distinct standard projective-space chart overlaps",
+   "results": "No projective-space normalization theorem found.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Laurent polynomial units on projective-space overlaps and cocycle exponents",
+   "results": "Only generic Laurent-unit and cocycle results; no matching theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "projective standard overlap unit cocycle Laurent exponent",
+   "results": "Repository contains only the projective-line Laurent calculation and transition cocycle.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T151720-L-1196926",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T151720-L-1196926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

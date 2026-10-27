@@ -1,0 +1,119 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-projective-space-twist"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleNormalization",
+  "date": "2026-10-27",
+  "group": "M6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-standard-unit-cocycle-normalization",
+   "place": "Intermediate decomposition of the unit-cocycle normalization into distinct-index and repeated-index parts.",
+   "via": [
+    "lem-sfb-projective-standard-unit-cocycle-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "lem-sfb-projective-standard-unit-cocycle-diagonal",
+ "title": "Diagonal completion of the normalized unit cocycle",
+ "statement": "Under the hypotheses of the off-diagonal unit cocycle normalization, if d and a_i satisfy the normalization equation for every i != j, then the same equation holds for every diagonal pair i=i.",
+ "proof": [
+  {
+   "text": "Use the cocycle equation with repeated indices to obtain the diagonal unit relation. Apply the same repeated-index argument to the standard transition cocycle, substitute the equations for a pair and its reverse, and cancel the chart unit. This gives the normalization equation on each diagonal overlap.",
+   "uses": [
+    "lem-sfb-projective-standard-unit-cocycle-off-diagonal",
+    "lem-pc-twist-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, lemma-Pic-projective-space-UFD, double- and triple-overlap calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-standard-unit-cocycle-off-diagonal",
+  "lem-pc-twist-cocycle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, repeated-index cocycle equations and diagonal completion."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleDiagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/StandardUnitCocycleDiagonal.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.standardUnitCocycle_diagonal_normalization",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-27",
+  "statement": "theorem standardUnitCocycle_diagonal_normalization (k : Type u) [Field k] (r : ℕ) (hr : 3 ≤ r) (t : ∀ i j : ULift.{u} (Fin r), Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)), standardOpen _ (Spec (.of k)) i ⊓ standardOpen _ (Spec (.of k)) j)ˣ) (ht : ∀ (i j l : ULift.{u} (Fin r)) (W : ℙ(ULift.{u} (Fin r); Spec (.of k)).Opens) (hi : W ≤ standardOpen _ (Spec (.of k)) i) (hj : W ≤ standardOpen _ (Spec (.of k)) j) (hl : W ≤ standardOpen _ (Spec (.of k)) l), (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE (le_inf hi hj)).op (t i j).val * (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE (le_inf hj hl)).op (t j l).val = (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE (le_inf hi hl)).op (t i l).val) (d : ℤ) (a : ∀ i : ULift.{u} (Fin r), Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)), standardOpen _ (Spec (.of k)) i)ˣ) (hoff : ∀ i j : ULift.{u} (Fin r), i ≠ j → (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE inf_le_left).op (a i).val * (t i j).val = (transitionUnit _ (Spec (.of k)) d i j).val * (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE inf_le_right).op (a j).val) : ∀ i : ULift.{u} (Fin r), (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE inf_le_left).op (a i).val * (t i i).val = (transitionUnit _ (Spec (.of k)) d i i).val * (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map (homOfLE inf_le_right).op (a i).val"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cocycle diagonal identity from off-diagonal unit equations",
+   "results": "No direct projective-space result; generic cancellation lemmas only.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "repeated-index Cech cocycle diagonal normalization units",
+   "results": "No matching specialized theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "transitionUnit diagonal repeated cocycle projective",
+   "results": "Found transitionUnit_mul_transitionUnit, but no diagonal specialization.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T151720-L-1196926",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T151720-L-1196926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
