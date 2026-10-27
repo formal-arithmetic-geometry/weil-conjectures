@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-condensed-compositor-system-independence",
+ "kind": "statement",
+ "title": "Independence of the whole-system compositor word",
+ "statement": "Fix all data A,X,Y,Z,f,g,cf,cg,ch and a uniform integral K in [def-pur-condensed-compositor-realization-data]. Given two intervening compactifications d,dprime and their common-refinement data c,r,s and cprime,rprime,sprime, the resulting actual systemCompositor components at the reduction of K are equal in the ordinary derived semilinear system category. No reduction/limit or realization is involved. The coefficient data A and its reductions are those of [lem-pur-compact-support-condensed-realization]. Dependencies: [def-pur-condensed-compositor-realization-data], [lem-pur-compact-support-condensed-realization].",
+ "stmt_deps": [
+  "def-pur-condensed-compositor-realization-data",
+  "lem-pur-compact-support-condensed-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+  "place": "Towers and coefficient transport: agent-formulated comparison with the specified condensed proper/open compositor, including direct-image composition, open-extension composition and proper/open interchange. Exact condensed map: lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/ShriekComposition.lean:526–557. This simultaneous realization assertion is not claimed as a literal theorem of the blueprint."
+ },
+ "proof": [
+  {
+   "text": "Dominate both tower compactifications and both final common refinements. Proper/open mate pasting, proper and open compositor associativity and identity normalization identify the two words after this domination. The pinning equations make every refinement inverse unique. Cancel the invertible common refinement components on the uniform domain. No equality detection by finite evaluation is used; finite origins supply only invertibility.",
+   "uses": [
+    "def-pur-condensed-compositor-realization-data",
+    "lem-sp-compactification-refinement-coherence",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Towers and coefficient transport: agent-formulated comparison with the specified condensed proper/open compositor, including direct-image composition, open-extension composition and proper/open interchange. Exact condensed map: lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/ShriekComposition.lean:526–557. This simultaneous realization assertion is not claimed as a literal theorem of the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-condensed-compositor-realization-data",
+  "lem-sp-compactification-refinement-coherence",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+  "place": "Z8: strictly smaller step extracted from the supplied parent argument; source and complete proof are in the Lean docstring."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedCompositorRealization",
+  "date": "2026-10-27",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Intended source recorded by the item: thm-pur-rational-and-qbar-purity; current sk-prop-sp-composition proof, Towers and passage by Rlim, inversion of ell and finite-extension descent; sk-thm-purity-transport proof Steps 2–3, identifying the reconstructed compact-support adjunction with the specified condensed one. The created.item chain ends at the launcher-created nt-target-smooth-purity-qbar, whose created.item is a human description, so the computed nearest imported blueprint ancestor is null.",
+   "via": [
+    "lem-route-smooth-purity-iso-comp-open-immersion",
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedCompositorSystemIndependence",
+  "file": "lean/Sheaf/Paper/CondensedCompositorSystemIndependence.lean",
+  "declaration": "WeilConjectures.CondensedCompositorRealization.condensedCompositorSystemIndependence",
+  "statement": "theorem condensedCompositorSystemIndependence (A : CoefficientData l E k) (X Y Z : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme) (g : Y.scheme ⟶ Z.scheme) [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))] (cf : Compactification f) (cg : Compactification g) (ch : Compactification (f ≫ g)) (d : Compactification (cf.g ≫ cg.i)) (c : Compactification (f ≫ g)) (r : c.Refinement (composite k X Y Z f g cf cg d)) (s : c.Refinement ch) (d' : Compactification (cf.g ≫ cg.i)) (c' : Compactification (f ≫ g)) (r' : c'.Refinement (composite k X Y Z f g cf cg d')) (s' : c'.Refinement ch) (K : CondensedERealization.Integral l E X.scheme) (hK : Uniform l E k X K) : systemCompositor l E k A X Y Z f g cf cg ch d c r s K hK = systemCompositor l E k A X Y Z f g cf cg ch d' c' r' s' K hK",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper open compact support compositor is independent of common refinements and compatible with refinement of exterior compactifications",
+   "results": "8 topology hits, including IsCompactOpenCovered.of_comp, CompactlySupportedContinuousMap.comp, CompactlySupportedContinuousMap.compLeft and HasCompactSupport.comp_left; no geometric compositor statement.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for this step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp and general presheaf map composition lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Used for formal assembly, no geometric coherence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*refinement.*compos",
+   "results": "0 hits from search service; local rg found the finite-field-only SystemCompatibleCompositorNormalization and generic formal mate-pasting declarations.",
+   "date": "2026-10-27",
+   "verdict": "The finite-field-domain theorem does not cover arbitrary k."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open compact support compositor is independent of the intervening compactification tower and common refinement",
+   "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport, HasCompactMulSupport.comp_isClosedEmbedding, HasCompactSupport.comp_homeomorph, HasCompactMulSupport.comp_homeomorph, hasCompactSupport_comp_left, CompactlySupportedContinuousMap.comp, HasCompactSupport.comp₂_left. Generic derived-adjunction or compactly-supported-function declarations; no statement about this specified proper/open compact-support word.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. The generic derived adjunction API does not supply the geometric compositor or its coherence."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c23ed",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261027T210200-L-1668455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c23ed",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261027T210200-L-1668455",
+  "kind": "interface",
+  "note": "independent cc review: c23edad3 vs prior P7 6ceb delivery (identical Lean/nodes) and live ShriekComposition (restored fd9ee31c); item node vs sheaf-dag base; 4 holes as judged in Z8/H3/6ceb"
+ }
+}
