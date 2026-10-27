@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralCompactificationRealizationData
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportCore
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportPasting
 
 /-! # Transport of intrinsic proper/open pasting
 
@@ -49,6 +51,16 @@ These are equations in the derived system category, without detection of equalit
 by finite evaluation. Identity maps and empty opens use the same cancellation. -/
 theorem integralSystemProperOpenTransport (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o) :
-    Nonempty (ProperOpenCoherence l E o c a b) := by sorry
+    Nonempty (ProperOpenCoherence l E o c a b) := by
+  obtain ⟨hc⟩ := integralSystemProperOpenTransportCore l E o c a b
+  obtain ⟨hp⟩ := integralSystemProperOpenTransportPasting l E o c a hc.gamma
+  exact ⟨{
+    gamma := hc.gamma
+    adjunct := hc.adjunct
+    canonical := hc.canonical
+    vertical := hp.vertical
+    horizontal := hp.horizontal
+    baseChange := hp.baseChange
+  }⟩
 
 end WeilConjectures.IntegralSystemRealization

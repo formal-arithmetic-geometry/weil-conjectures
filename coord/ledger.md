@@ -19846,3 +19846,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:09 L: merged deliver/W6/Sheaf.Paper.SystemProperRestrictionCoherence (stage 3; reviewer PASS; first push; landing 20261027T180936-L-3915732 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:09 L: merged deliver/W7/Sheaf.Paper.SystemRestrictionFiniteNormalization (stage 3; reviewer PASS; first push; landing 20261027T180938-L-3916083 (interface); batch 20261027T180444; modules 5; new nodes 4)
 - 18:09 L: merged deliver/W8/Sheaf.Paper.NativeWeilTensorRingedComplexes (stage 3; reviewer PASS; first push; landing 20261027T180939-L-3916475 (interface); batch 20261027T180444; modules 4; new nodes 3)
+- 18:09 L: merged deliver/W9/Sheaf.SixFunctors.IntegralSystemProperOpenTransport (stage 3; reviewer PASS; first push; landing 20261027T180940-L-3916857 (interface); batch 20261027T180444; modules 3; new nodes 2)
