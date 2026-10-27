@@ -1,0 +1,99 @@
+{
+ "id": "lem-pur-compact-support-condensed-realization-id-component-to-unitor",
+ "kind": "statement",
+ "title": "Identity component reduces to the canonical unitor composite",
+ "statement": "theorem systemRefinement_id_component_to_unitor (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f) (M : coefficientSequenceDerived.{u, u} l E X.scheme) (hγ : GammaIdentityCondition l E k f c) : (systemRefinement l E k X Y f (Compactification.Refinement.id c)).app M = (Functor.leftUnitor (systemSupport l E c)).hom.app M ≫ (Functor.leftUnitor (systemSupport l E c)).inv.app M",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Identity normalization of the proper/open mate; Stacks Tag 0F7B"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Expand the normalized paste, use the supplied gamma identity, and cancel the proper compositor and associators, leaving the unitor hom-inverse composite.",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization-gamma-identity-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-condensed-realization-gamma-identity-condition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Identity normalization of the proper/open mate; Stacks Tag 0F7B"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SemilinearProperOpen.gamma_identities",
+   "results": "The generic identity normalization theorem is available in Sheaf.SixFunctors.SemilinearProperOpenMatePasting.",
+   "date": "2026-10-28",
+   "verdict": "used"
+  },
+  {
+   "tool": "loogle",
+   "query": "SemilinearProperOpen gamma identity mate",
+   "results": "No direct specialized match beyond the cited project theorem.",
+   "date": "2026-10-28",
+   "verdict": "use project theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity refinement proper open mate natural transformation",
+   "results": "No direct specialized match beyond the cited project theorem.",
+   "date": "2026-10-28",
+   "verdict": "use project theorem"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCondensedRealization",
+  "date": "2026-10-28",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-condensed-realization",
+   "place": "Proof Step 15 identity refinement component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportCondensedRealization",
+  "file": "lean/Sheaf/Paper/CompactSupportCondensedRealization.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.systemRefinement_id_component_to_unitor",
+  "statement": "theorem systemRefinement_id_component_to_unitor (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f) (M : coefficientSequenceDerived.{u, u} l E X.scheme) (hγ : GammaIdentityCondition l E k f c) : (systemRefinement l E k X Y f (Compactification.Refinement.id c)).app M = (Functor.leftUnitor (systemSupport l E c)).hom.app M ≫ (Functor.leftUnitor (systemSupport l E c)).inv.app M",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T234030-L-4167292",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T234030-L-4167292",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

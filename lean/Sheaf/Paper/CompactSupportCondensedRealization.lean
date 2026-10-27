@@ -1008,6 +1008,45 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
 
+/-- The identity equation required by the normalized semilinear mate calculation.
+Source: Stacks 0F7B and `SemilinearProperOpen.gamma_identities`.
+(blueprint: lem-pur-compact-support-condensed-realization).
+-/
+def GammaIdentityCondition {X Y : CondensedERealization.Base k}
+    (f : X.scheme ⟶ Y.scheme) (c : Compactification f) : Prop :=
+  ∀ N, ((AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma
+      (quotientRings l E) (quotientMaps l E) c.i (𝟙 X.scheme) (𝟙 c.Z) c.i (by simp)).app N ≫
+      (AlgebraicGeometry.ProEtale.SemilinearProperOpen.sId
+        (quotientRings l E) (quotientMaps l E) c.Z).hom.app
+        ((AlgebraicGeometry.ProEtale.SemilinearProperOpen.J
+          (quotientRings l E) (quotientMaps l E) c.i).obj N)) =
+    (AlgebraicGeometry.ProEtale.SemilinearProperOpen.J
+      (quotientRings l E) (quotientMaps l E) c.i).map
+      ((AlgebraicGeometry.ProEtale.SemilinearProperOpen.sId
+        (quotientRings l E) (quotientMaps l E) X.scheme).hom.app N)
+
+/-- The generic mate theorem supplies the identity equation for this compactification. -/
+theorem gammaIdentityCondition_exists {X Y : CondensedERealization.Base k}
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f) :
+    GammaIdentityCondition l E k f c := by
+  sorry
+
+/-- The normalized identity mate reduces to the canonical unitor composite.
+Source: Stacks 0F7B and `SemilinearProperOpen.gamma_identities`.
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: substitute the supplied gamma identity into the defining paste and cancel
+its proper compositor and associators, leaving the left-unitor hom followed by
+its inverse. -/
+theorem systemRefinement_id_component_to_unitor
+    (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (M : coefficientSequenceDerived.{u, u} l E X.scheme)
+    (hγ : GammaIdentityCondition l E k f c) :
+    (systemRefinement l E k X Y f (Compactification.Refinement.id c)).app M =
+      (Functor.leftUnitor (systemSupport l E c)).hom.app M ≫
+        (Functor.leftUnitor (systemSupport l E c)).inv.app M := by
+  sorry
+
 /-- The identity refinement component is the identity on every system object.
 Source: Stacks 0F7B; this is the component calculation for the identity mate.
 (blueprint: lem-pur-compact-support-condensed-realization).
@@ -1018,7 +1057,12 @@ theorem systemRefinement_id_component (X Y : CondensedERealization.Base k)
     (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f)
     (M : coefficientSequenceDerived.{u, u} l E X.scheme) :
     (systemRefinement l E k X Y f (Compactification.Refinement.id c)).app M = 𝟙 _ := by
-  sorry
+  calc
+    _ = (Functor.leftUnitor (systemSupport l E c)).hom.app M ≫
+        (Functor.leftUnitor (systemSupport l E c)).inv.app M :=
+      systemRefinement_id_component_to_unitor l E k X Y f c M
+        (gammaIdentityCondition_exists l E k f c)
+    _ = 𝟙 _ := (Functor.leftUnitor (systemSupport l E c)).hom_inv_id_app M
 
 /-- Identity refinement is the identity on the full derived semilinear system.
 Source: blueprint proof Step 15; Stacks 0F7B
