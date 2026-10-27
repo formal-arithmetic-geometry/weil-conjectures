@@ -20111,3 +20111,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:03 L: merged deliver/W4/Sheaf.Paper.QuotientSectionTensorTransportExtension (stage 3; reviewer PASS; first push; landing 20261027T210308-L-1685084 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:03 L: merged deliver/X2/Sheaf.Paper.QuotientSectionTensorTransportKFlat (stage 3; reviewer PASS; first push; landing 20261027T210310-L-1685612 (interface); batch 20261027T205736; modules 9; new nodes 8)
 - 21:03 L: merged deliver/X3/Sheaf.Paper.AdicCompletedTensorCommonLift (stage 3; reviewer PASS; first push; landing 20261027T210312-L-1685996 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 21:03 L: merged deliver/X3/Sheaf.Paper.QuotientSectionTensorTransportNormalizedBarB (stage 3; reviewer PASS; first push; landing 20261027T210313-L-1686404 (proof); batch 20261027T205736; modules 1; new nodes 0)
