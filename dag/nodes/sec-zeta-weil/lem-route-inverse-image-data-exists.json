@@ -10,21 +10,89 @@
     "lem-zl-proper-unit-condensed-realization",
     "lem-zl-condensed-global-frobenius-comparison"
    ],
-   "place": "provisional: the Lean of def-zl-compact-support-small-site-morphism (its declaration uses) uses CategoryTheory.ConstantCompletion.inverseImageData_exists (route sorry with no node, tools/route_nodes.py 2026-10-28)"
+   "place": "The route proof sentence in def-zl-compact-support-small-site-morphism: transport algebraic operations through finite products preserved by L, transport module actions and morphisms, and obtain the canonical constant-sheaf comparison."
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Every geometric inverse image has these algebraic lifts and canonical constant maps.",
- "statement": "PROVISIONAL (machine-made from the Lean declaration; stage 1 writes it in words): Every geometric inverse image has these algebraic lifts and canonical constant maps. Source: Stacks 00YV, 03D2, 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). Proof: transport algebraic operations through finite products preserved by L. The existing generalized-section equations define the transported ring and module actions. Transport morphisms through the same underlying-sheaf isomorphisms. Since L is a left adjoint and preserves the terminal object, it preserves coproducts of the terminal object and hence constant sheaves. This gives the comparison naturally in every coefficient ring, and its maps are the canonical constant-sheaf maps.\n\nLean (CategoryTheory.ConstantCompletion.inverseImageData_exists):\n```lean\ntheorem inverseImageData_exists (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u))\n    (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)\n    [PreservesFiniteLimits L] : Nonempty (InverseImageData L)\n```",
+ "statement": "Let C and C' be small categories in a common universe with Grothendieck topologies J and J'. Let L : Sheaf J (Type u) ⥤ Sheaf J' (Type u) and V : Sheaf J' (Type u) ⥤ Sheaf J (Type u) with an adjunction L ⊣ V, and assume PreservesFiniteLimits L. Then Nonempty (InverseImageData L), where InverseImageData L consists of: a functor rings : Sheaf J CommRingCat → Sheaf J' CommRingCat; for every commutative-ring sheaf O on J, an AlgebraicInverseImage L O (rings.obj O), including its ringUnderlying and moduleUnderlying comparisons and the transported ring/module operation graph equations; a naturality equation for every ring morphism φ : R ⟶ S, namely L.map (forget.map φ) ≫ (algebra S).ringUnderlying.hom = (algebra R).ringUnderlying.hom ≫ forget.map (rings.map φ); and a natural isomorphism constants : constantSheaf J CommRingCat ⋙ rings ≅ constantSheaf J' CommRingCat. The constants component at each ring is the canonical constant-sheaf map, and all maps are natural in coefficient-ring morphisms.",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
   "place": "def-zl-compact-support-small-site-morphism: the Lean of this node (its declaration uses) reaches CategoryTheory.ConstantCompletion.inverseImageData_exists, a sorry on the sorry route of batch2, batch3, batch4, batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/ConstantCompletionInverseImageExists.lean, declaration CategoryTheory.ConstantCompletion.inverseImageData_exists (module Sheaf.Paper.ConstantCompletionInverseImageExists, lines 97-109, proof `sorry`)"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-pur-constant-coefficient-inverse-image-data",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-route-inverse-image-ring-functor to obtain rings and, for each source ring sheaf, its underlying comparison e_R and the ring-operation transport.",
+   "uses": [
+    "lem-route-inverse-image-ring-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV"
+   }
+  },
+  {
+   "text": "For each O, apply lem-route-inverse-image-module-lift to R = O, A = rings.obj O and the isomorphism e_O of Step 1, whose identification of addition, multiplication, zero and one is the hypothesis of that node. This supplies (algebra O) with ringUnderlying exactly e_O, the moduleUnderlying comparison, and every ring/module graph equation required by the AlgebraicInverseImage field.",
+   "uses": [
+    "lem-route-inverse-image-ring-functor",
+    "lem-route-inverse-image-module-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2"
+   }
+  },
+  {
+   "text": "For a ring morphism φ : R ⟶ S, Step 2 gives (algebra R).ringUnderlying = e_R and (algebra S).ringUnderlying = e_S, and the naturality clause of lem-route-inverse-image-ring-functor, e_S ∘ L(|φ|) = |rings φ| ∘ e_R, is exactly the displayed ring_naturality equation after writing the two underlying-set functors as sheafCompose (forget CommRingCat).",
+   "uses": [
+    "lem-route-inverse-image-ring-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV"
+   }
+  },
+  {
+   "text": "Apply lem-route-inverse-image-constant-comparison to rings and the natural family e of Step 1 (natural, and compatible with the ring operations, by lem-route-inverse-image-ring-functor) to obtain the natural constants isomorphism; its components are the canonical constant-sheaf maps and are natural in coefficient morphisms.",
+   "uses": [
+    "lem-route-inverse-image-ring-functor",
+    "lem-route-inverse-image-constant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J and 00YV"
+   }
+  },
+  {
+   "text": "Package rings, the family algebra, ring_naturality, and constants into the InverseImageData record. The result is an inhabitant, hence its type is Nonempty (InverseImageData L).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-route-inverse-image-ring-functor",
+  "lem-route-inverse-image-module-lift",
+  "lem-route-inverse-image-constant-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YV (sites.tex) and 03D2 (sites-modules.tex)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,7 +104,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer",
@@ -59,5 +127,20 @@
   "by": "maintainer",
   "date": "2026-10-28",
   "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-route-inverse-image-data-exists",
+  "worker": "stage1",
+  "summary": "Audited the provisional Lean-signature node and split its construction into a ring-sheaf lift, a module/algebraic-inverse-image lift, and the natural constant-sheaf comparison. The final five-step assembly packages these data and the naturality equation into InverseImageData. The Lean declaration remains sorried upstream, so no attachment was claimed.",
+  "blueprint": "The ring-functor, module-lift, and constant-comparison nodes realize the construction sentence of def-zl-compact-support-small-site-morphism; the five assembly steps realize its use of CategoryTheory.ConstantCompletion.inverseImageData_exists."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NB-e62b18e95",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e62b18e95 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes, InverseImageData (ConstantCompletionInverseImage.lean:763-771), AlgebraicInverseImage (AlgebraicInverseImage.lean:32-130) and Stacks 00YV (sites.tex l.10473), 03D2 (sites-modules.tex l.1020) and 0H7J. The item statement matches the Lean (L ⊣ V, PreservesFiniteLimits L, CommRingCat-valued sheaves; no hypothesis added or dropped). All 3 new nodes are true: (1) ring lift via ring objects + lem-weil-pbc-adjunction-lifts-group-ring-objects; (2) module lift via 03D2, the case S=A, c=id of lem-weil-pbc-geometric-module-construction plus the AlgebraicInverseImage transport lemma; (3) constants via E_C = coproduct of E copies of the terminal sheaf, which L preserves along with the terminal sheaf and products. Edge cases checked: identity adjunction, zero ring, empty C. No duplicates (étale-site and fixed-ring nodes are different objects), no cycle, no restated clause. Three faults, all fixed in fixes/dag/nodes/sec-zeta-weil/: C4 step 3 used naturality of e_R, which the ring-functor node did not state, so a naturality clause was added; B2 module-lift and constant-comparison referred to objects of an existential node, so both now take rings/e_R with their compatibilities as their own hypotheses; B3 the item now has stmt_dep def-pur-constant-coefficient-inverse-image-data, the owner of InverseImageData (cycle-checked). Also: the cited Tag 099L is a derived-completion lemma, so the step 4 and constants-node sources are now 0H7J/00YV; steps 2 and 4 now also use ring-functor; proof_deps is unchanged and equals the union of step uses. No tool_uses, no drops.; 4 file(s) fixed by the reviewer"
  }
 }
