@@ -1,0 +1,120 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), integral class construction, functoriality and passage to the comparison site"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): Apply the two ordinary endpoint squares of lem-sp-integral-site-pullback-endpoints. Exact-functor Ext compatibility for composition and functor isomorphisms identifies the two transports across comparisonUpperStarCompUpperStarIso. Realize in the derived category using mapExactFunctor_hom; naturality of the single and shift comparisons proves compatibility with precomposition and shifted postcomposition. The integer square identifies the source composites and the units square identifies the target composites. Their common composite gives the claimed equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the Picard line bundle Ext one class under pullback of schemes",
+   "results": "Generic scheme pullback composition only; local source search finds gmCohomologyMap_toCohomologicalPicardGroup, which will be used separately.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the integer and units endpoint squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySingleFunctor",
+   "results": "No remote hits; declaration not indexed by this service.",
+   "date": "2026-10-27",
+   "verdict": "Use local exact-functor API."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStarCompUpperStarIso|cartierUnitsComparison|integerComparison",
+   "results": "Source canonical site square and adjoint-defined units comparison; no combined endpoint comparison. Blueprint search for the same names finds general inverse-image coherence and Picard naturality, which do not assert these endpoint squares.",
+   "date": "2026-10-27",
+   "verdict": "The generic adjunction API supplies the proof, not a matching statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image comparison of constant integer sheaves and units sheaves across etale proetale site comparison",
+   "results": "Sheaf.mem_essImage_of_isConstant, sheafCongr.inverse_map_val_app, pullbackObjUnitToUnit and constant-sheaf counit lemmas. No compatibility of these concrete units and integer maps.",
+   "date": "2026-10-27",
+   "verdict": "No matching endpoint-square statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerIntegralClassPullback",
+  "date": "2026-10-27",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Base change of the trace: geometric naturality of the integral Chern class, just the integer and full-units endpoint squares",
+   "via": [
+    "lem-sp-tower-integral-class-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "lem-sp-integral-cohomology-site-pullback",
+ "kind": "statement",
+ "title": "Exact-derived transport of integral units cohomology across the site square",
+ "statement": "For any scheme morphism f : X → Y and any etale degree-one units cohomology class e, let a : f_proet^* G_m,Y → G_m,X have adjoint the pullback of units along chart projections. Map e to the proetale site with integerComparison.inv and cartierUnitsComparison as endpoints [def-sp-tower-class-reduction]. Then mapping this ordinary derived arrow by f_proet^* and composing with a[1] equals precomposing by the constant-integer comparison and mapping gmCohomologyMap f e to the proetale site with the same endpoints on X. The canonical exact-functor single and shift comparisons are included by mapSingleArrow. This is an equality before passing to constant towers.",
+ "stmt_deps": [
+  "lem-sp-integral-site-pullback-endpoints",
+  "def-sp-tower-class-reduction",
+  "def-weil-proetale-inverse-image",
+  "def-pur-proetale-units-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the two ordinary endpoint squares of lem-sp-integral-site-pullback-endpoints. Exact-functor Ext compatibility for composition and functor isomorphisms identifies the two transports across comparisonUpperStarCompUpperStarIso. Realize in the derived category using mapExactFunctor_hom; naturality of the single and shift comparisons proves compatibility with precomposition and shifted postcomposition. The integer square identifies the source composites and the units square identifies the target composites. Their common composite gives the claimed equality.",
+   "uses": [
+    "lem-sp-integral-site-pullback-endpoints",
+    "def-sp-tower-class-reduction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-integral-site-pullback-endpoints",
+  "def-sp-tower-class-reduction",
+  "def-weil-proetale-inverse-image"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCohomologySitePullback",
+  "file": "lean/Sheaf/Paper/IntegralCohomologySitePullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.integral_cohomology_site_pullback",
+  "statement": "theorem integral_cohomology_site_pullback {X Y : Scheme.{u₁}} (f : X ⟶ Y)\n    (e : Sheaf.H Y.gmSheaf 1)\n    (a : (upperStar AddCommGrpCat.{u₁ + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶\n      Scheme.proEtaleUnitsSheaf X)\n    (ha : ∀ (U : Y.ProEtᵒᵖ) (x : (Scheme.proEtaleUnitsSheaf Y).obj.obj U),\n      (((upperStarLowerStarAdjunction AddCommGrpCat.{u₁ + 1} f).homEquiv _ _) a).hom.app\n          U x = ULift.up (Additive.ofMul\n          (Units.map (pullback.fst U.unop.hom f).appTop.hom.toMonoidHom x.down.toMul))) :\n    mapSingleArrow (upperStar AddCommGrpCat.{u₁ + 1} f) 1\n        (mapExtensionEndpoints (comparisonUpperStar AddCommGrpCat.{u₁ + 1} Y) e\n          (integerComparison Y).inv (cartierUnitsComparison Y)) ≫\n        ((DerivedCategory.singleFunctor (DiagonalAb X) 0).map a)⟦(1 : ℤ)⟧' =\n      (DerivedCategory.singleFunctor (DiagonalAb X) 0).map\n          (((upperStarLowerStarAdjunction AddCommGrpCat.{u₁ + 1} f).homEquiv _ _).symm\n            (Scheme.proEtaleConstantDirectImageMap f AddCommGrpCat.{u₁ + 1}\n              (AddCommGrpCat.of (ULift.{u₁ + 1} ℤ)))) ≫\n        mapExtensionEndpoints (comparisonUpperStar AddCommGrpCat.{u₁ + 1} X)\n          (Scheme.gmCohomologyMap f 1 e)\n          (integerComparison X).inv (cartierUnitsComparison X)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b370a",
+  "group": "G9",
+  "result": "fix",
+  "landing": "20261027T180625-L-3883944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b370a",
+  "group": "G9",
+  "result": "fix",
+  "landing": "20261027T180625-L-3883944",
+  "kind": "interface",
+  "note": "independent cc review: lem-sp-tower-integral-class-pullback node + 9 new nodes vs delivered Lean (10 modules) and clone 8eb0a2e; verbatim move of abPull..unitsDerivedPull diffed; 2 direct importers compiled OK in sandbox; axioms checked"
+ }
+}

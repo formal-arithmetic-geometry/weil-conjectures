@@ -1,0 +1,149 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), integral classes and exact constant towers"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): Retain the nine original constructions verbatim. Construct the ordinary integer and units maps by the same inverse-image adjunctions. Functor.compConstIso identifies inverse image of constant diagrams with constant inverse image. Evaluate the two tower endpoint identities at an arbitrary index: the comparison component is an identity, so each identity follows from the identity law. Transpose the units endpoint with the adjunction homEquiv; its chartwise formula is the definition of unitsDirect."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the Picard line bundle Ext one class under pullback of schemes",
+   "results": "Generic scheme pullback composition only; local source search finds gmCohomologyMap_toCohomologicalPicardGroup, which will be used separately.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the integer and units endpoint squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySingleFunctor",
+   "results": "No remote hits; declaration not indexed by this service.",
+   "date": "2026-10-27",
+   "verdict": "Use local exact-functor API."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStarCompUpperStarIso|cartierUnitsComparison|integerComparison",
+   "results": "Source canonical site square and adjoint-defined units comparison; no combined endpoint comparison. Blueprint search for the same names finds general inverse-image coherence and Picard naturality, which do not assert these endpoint squares.",
+   "date": "2026-10-27",
+   "verdict": "The generic adjunction API supplies the proof, not a matching statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image comparison of constant integer sheaves and units sheaves across etale proetale site comparison",
+   "results": "Sheaf.mem_essImage_of_isConstant, sheafCongr.inverse_map_val_app, pullbackObjUnitToUnit and constant-sheaf counit lemmas. No compatibility of these concrete units and integer maps.",
+   "date": "2026-10-27",
+   "verdict": "No matching endpoint-square statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor_mapExactFunctor_of_iso|compConstIso|mapDerivedCategorySingleFunctor",
+   "results": "WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:181 proves compatibility with composite and isomorphic exact functors. Mathlib/CategoryTheory/Functor/Const.lean:107 provides compConstIso.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing proved Ext compatibility and the canonical constant-diagram isomorphism; no new homological-algebra hole is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerIntegralClassPullback",
+  "date": "2026-10-27",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Geometric inverse image and normalized integer and units endpoints",
+   "via": [
+    "lem-sp-tower-integral-class-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "def-sp-tower-integral-pullback-data",
+ "kind": "definition",
+ "title": "Geometric inverse image and normalized integer and units endpoints",
+ "statement": "The pointwise exact inverse-image functor on abelian towers, chartwise full-units pullback, integer and units adjoints and their derived single/shift comparisons, with the canonical comparison to constant towers.",
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-reduction",
+  "def-sc-invertible-module",
+  "def-pur-proetale-units-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Retain the nine original constructions verbatim. Construct the ordinary integer and units maps by the same inverse-image adjunctions. Functor.compConstIso identifies inverse image of constant diagrams with constant inverse image. Evaluate the two tower endpoint identities at an arbitrary index: the comparison component is an identity, so each identity follows from the identity law. Transpose the units endpoint with the adjunction homEquiv; its chartwise formula is the definition of unitsDirect.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-reduction",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-reduction",
+  "def-sc-invertible-module"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIntegralPullbackData",
+  "file": "lean/Sheaf/Paper/TowerIntegralPullbackData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull_additive",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull_limits",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull_colimits",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.unitsDirect",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.integerPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.unitsPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.integerDerivedPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.unitsDerivedPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_constantPullIso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_integerSheafPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_unitsSheafPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_integerPull_iso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_unitsPull_iso",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_unitsSheafPull_transpose",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_unitsDirect_apply",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.towerIntegral_unitsPull_adjoint"
+  ],
+  "statement": "def abPull {X Y : Scheme.{u}} (f : X ⟶ Y) : Ab Y ⥤ Ab X",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b370a",
+  "group": "G9",
+  "result": "fix",
+  "landing": "20261027T180625-L-3883944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b370a",
+  "group": "G9",
+  "result": "fix",
+  "landing": "20261027T180625-L-3883944",
+  "kind": "interface",
+  "note": "independent cc review: lem-sp-tower-integral-class-pullback node + 9 new nodes vs delivered Lean (10 modules) and clone 8eb0a2e; verbatim move of abPull..unitsDerivedPull diffed; 2 direct importers compiled OK in sandbox; axioms checked"
+ }
+}

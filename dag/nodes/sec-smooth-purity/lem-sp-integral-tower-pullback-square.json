@@ -1,0 +1,125 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), integral classes and exact constant towers"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): Use congruence of derived inverse image and composition with the source realization equality and the units boundary equality to identify the left composite. Use congruence of composition with the integer boundary equality and the target realization equality to identify the right composite. The theorem constant_tower_derived_square gives equality of the two normalized composites. Transitivity gives the required equation, preserving the original single and shift comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the Picard line bundle Ext one class under pullback of schemes",
+   "results": "Generic scheme pullback composition only; local source search finds gmCohomologyMap_toCohomologicalPicardGroup, which will be used separately.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the integer and units endpoint squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySingleFunctor",
+   "results": "No remote hits; declaration not indexed by this service.",
+   "date": "2026-10-27",
+   "verdict": "Use local exact-functor API."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStarCompUpperStarIso|cartierUnitsComparison|integerComparison",
+   "results": "Source canonical site square and adjoint-defined units comparison; no combined endpoint comparison. Blueprint search for the same names finds general inverse-image coherence and Picard naturality, which do not assert these endpoint squares.",
+   "date": "2026-10-27",
+   "verdict": "The generic adjunction API supplies the proof, not a matching statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image comparison of constant integer sheaves and units sheaves across etale proetale site comparison",
+   "results": "Sheaf.mem_essImage_of_isConstant, sheafCongr.inverse_map_val_app, pullbackObjUnitToUnit and constant-sheaf counit lemmas. No compatibility of these concrete units and integer maps.",
+   "date": "2026-10-27",
+   "verdict": "No matching endpoint-square statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor_mapExactFunctor_of_iso|compConstIso|mapDerivedCategorySingleFunctor",
+   "results": "WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean:181 proves compatibility with composite and isomorphic exact functors. Mathlib/CategoryTheory/Functor/Const.lean:107 provides compConstIso.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing proved Ext compatibility and the canonical constant-diagram isomorphism; no new homological-algebra hole is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerIntegralClassPullback",
+  "date": "2026-10-27",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Normalized exact-derived constant-tower pullback square",
+   "via": [
+    "lem-sp-tower-integral-class-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "lem-sp-integral-tower-pullback-square",
+ "kind": "statement",
+ "title": "Normalized exact-derived constant-tower pullback square",
+ "statement": "An ordinary sheaf class square with exact inverse-image functors and specified constant-diagram comparison induces the tower square for realized classes and the normalized derived integer and units boundary maps.",
+ "stmt_deps": [
+  "def-sp-integral-tower-pullback-square-data"
+ ],
+ "proof": [
+  {
+   "text": "Use congruence of derived inverse image and composition with the source realization equality and the units boundary equality to identify the left composite. Use congruence of composition with the integer boundary equality and the target realization equality to identify the right composite. The theorem constant_tower_derived_square gives equality of the two normalized composites. Transitivity gives the required equation, preserving the original single and shift comparisons.",
+   "uses": [
+    "def-sp-integral-tower-pullback-square-data",
+    "lem-sp-constant-tower-derived-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-integral-tower-pullback-square-data",
+  "lem-sp-constant-tower-derived-square"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTowerPullbackSquare",
+  "file": "lean/Sheaf/Paper/IntegralTowerPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.normalized_integral_tower_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.normalized_integral_tower_square"
+  ],
+  "statement": "theorem normalized_integral_tower_square {X Y : Scheme.{u}}\n    [hDiagY : HasDerivedCategory.{u + 1} (DiagonalAb Y)]\n    [hDiagX : HasDerivedCategory.{u + 1} (DiagonalAb X)]\n    [hAbY : HasDerivedCategory.{u + 2} (Ab Y)]\n    [hAbX : HasDerivedCategory.{u + 2} (Ab X)]\n    (d : NormalizedIntegralTowerSquare X Y) :\n    d.P.mapDerivedCategory.map d.classY.towerClass ≫ d.uDerived =\n      d.iDerived ≫ d.classX.towerClass",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b370a",
+  "group": "G9",
+  "result": "fix",
+  "landing": "20261027T180625-L-3883944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b370a",
+  "group": "G9",
+  "result": "fix",
+  "landing": "20261027T180625-L-3883944",
+  "kind": "interface",
+  "note": "independent cc review: lem-sp-tower-integral-class-pullback node + 9 new nodes vs delivered Lean (10 modules) and clone 8eb0a2e; verbatim move of abPull..unitsDerivedPull diffed; 2 direct importers compiled OK in sandbox; axioms checked"
+ }
+}
