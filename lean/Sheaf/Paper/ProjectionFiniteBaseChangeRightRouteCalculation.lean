@@ -6,6 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.ProjectionFiniteBaseChangeCoordinates
+import Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteCalculation
+import Sheaf.Paper.ProjectionFiniteBaseChangeRightLeftPath
+import Sheaf.Paper.ProjectionFiniteBaseChangeDiamondEquality
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -63,6 +66,11 @@ theorem sixFunctorProjectionFinite_right_route_calculation
     I.map (sixFunctorProjectionFiniteRightPath S Q K L) ≫ target.hom =
       source.hom ≫ R'.functor.map
         (FiniteProjectionExchange.diamondRight A Q.square Q.compactification
-          (RX.inverse.obj K.obj) (RY.inverse.obj L.obj)) := by sorry
+          (RX.inverse.obj K.obj) (RY.inverse.obj L.obj)) := by
+  dsimp only
+  rw [sixFunctorProjectionFinite_right_left_path S Q K L]
+  rw [sixFunctorProjectionFinite_left_route_calculation S Q K L]
+  rw [sixFunctorProjectionFinite_diamond_equality S Q K L]
+  rfl
 
 end WeilConjectures
