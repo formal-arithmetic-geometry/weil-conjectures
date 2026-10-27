@@ -1,0 +1,103 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22 and Proposition 5.26"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "universe transfer of multiplication-normalized ScalarIdentity",
+   "results": "No direct declaration found; the transfer is specific to recorded ring-stage categories.",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "ScalarIdentity normalized universe transfer",
+   "results": "No matching declaration.",
+   "date": "2026-10-28",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarIdentityAtClosure",
+   "results": "No prior declaration.",
+   "date": "2026-10-28",
+   "verdict": "New helper required."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingEndpointScalarRestrictions",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-ring-endpoint-scalar-identity-transfer",
+ "title": "Universe transfer for normalized endpoint scalar identity",
+ "statement": "For a ring stage identity coefficient change, transfer the multiplication-normalized ScalarIdentity certificate from an equal-universe algebraically closed coefficient field Ψ of universe max u v to Ω of universe v, for the explicitly case-defined scalarAtClosure record.",
+ "proof": [
+  {
+   "text": "Case split on finite and integral ring stages. The underlying coefficient categories, inclusion functors, and ambient tensor identity are definitionally independent of the coefficient closure; only derived-category universe parameters differ.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport the identity isomorphism and its normalization equality across the maximum-universe to original-universe categorical presentations, preserving the literal multiplication tensor unitor.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22 and Proposition 5.26, universe bookkeeping"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ring-endpoint-scalar-restrictions",
+   "place": "identity normalization transfer",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingEndpointScalarIdentityTransfer",
+  "file": "lean/Sheaf/Paper/RingEndpointScalarIdentityTransfer.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.scalarIdentityAtClosure",
+  "statement": "theorem scalarIdentityAtClosure\n    (Ψ : Type (max u v)) [Field Ψ] [Algebra (Padic l) Ψ] [IsAlgClosure (Padic l) Ψ]\n    (W : Scheme.{max u v}) {s : RingStage.{max u v} l}\n    {a : PurCompactSupport.Change (s.coefficients l) (s.coefficients l)}\n    (h : ∀ T : Scheme.{max u v}, a.map T = 𝟙 _)\n    (S : Scalar.{max u v, max u v} l Ψ a W)\n    (I : ScalarIdentity.{max u v, max u v} l Ψ h W S) :\n    Nonempty (ScalarIdentity.{u, v} l Ω h W (scalarAtClosure.{u, v} l Ω Ψ W S))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T205944-L-1637097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T205944-L-1637097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

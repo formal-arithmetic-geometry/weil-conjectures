@@ -53,41 +53,37 @@
  "statement": "Fix a prime l, an algebraic closure Ω of Q_l, a finite-field datum D with l ≠ D.p and a finite-type D.k-scheme W, without structural separatedness [def-sf-ring-stage-assembly-data, def-sf-constructible-exceptional-assembly-data]. For all actual ring coefficient changes a with Allowed(a), choose exact additive scalar functors between the recorded finite-Tor categories on W. For finite targets they are literal restrictions of ambient derived extension and their realization is eqToIso of the inclusion equality. For completed-inclusion generators they are literal restrictions of the published strict-tower scalar extension and their inverse realization is the published completedScalarComparison on every input. Every scalar realization commutes with integer shifts for the canonical full-inclusion and universal scalar-counit shifts. These choices use only W and the coefficient map and require no compactification, operation or adjunction. For every actual identity coefficient map $a:s\\to s$, equality $h_W:a_W=1$ on every scheme, and Allowed witness, the chosen restriction carries a ScalarIdentity datum normalized by the actual equality and the ambient multiplication tensor unitor.",
  "proof": [
   {
-   "text": "For finite-to-finite changes apply finite scalar preservation to flat representatives; for an integral reduction use the defining finite reduction and its common Tor interval. For any other allowed map with finite target, scalar tensor associativity reduces to these cases. The literal ObjectProperty lift gives the required inclusion equality and its literal realization.",
+   "text": "Replace the closure Ω by ULift Ω in the maximum of the two universes. Transport polynomial splitting across the ring equivalence, and algebraicity along the injective algebra equivalence. Use the canonical proper compactification of the identity of W. Its morphism hypotheses hold without absolute separatedness of W. Apply the coherent ring-transport-family theorem to obtain ring operations, ambient left realizations and normalized system transport on this identity compactification.",
    "uses": [
-    "lem-sf-exceptional-finite-scalar-mates"
+    "lem-sf-exceptional-ring-transport-family"
    ],
    "elementary": false
   },
   {
-   "text": "For a completed-inclusion generator use the published strict-tower extension. The finite-free completed scalar comparison proves that it is realized by ordinary derived extension, with inverse realization exactly chi. The common Tor bounds are unchanged at the ramified cofinal levels and then at every further quotient. Constructibility is affine-local, so finite type does not require W to be separated.",
+   "text": "Apply exceptionalIntegralScalarMates_core to this family and transport. Its Mates record contains an endpoint scalar for every allowed actual coefficient change, the literal finite inclusion equality and eqToIso realization, the strict-tower integral equality and completedScalarComparison normalization, coherent scalar-realization shifts, and multiplication-normalized identities. Retain the endpoint true, which is W. The additional reduction and system-mate witnesses are not needed.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "lem-sf-exceptional-integral-scalar-mates-core"
    ],
    "elementary": false
   },
   {
-   "text": "Induct on Allowed for preservation at integral targets, using tensor multiplication for identities and tensor associativity for composites. Choose the literal finite lift at every finite target and the published strict-tower lift at each completed generator. Full inclusion transports the universal scalar-counit shift and reflects additivity and distinguished triangles, giving exact restrictions and shift-compatible realizations. Zero objects and exponent one obey the same constructions.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For every actual identity map, including composite Allowed witnesses, lift its coefficient-map equality followed by the ambient multiplication tensor unitor through the fully faithful endpoint inclusion. The component map/preimage equality proves ScalarIdentity normalization. This depends on neither an exceptional operation nor a compactification.",
+   "text": "For identity maps, apply the strictly smaller universe-transfer theorem for the multiplication-normalized ScalarIdentity certificate.",
    "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison"
+    "lem-sf-ring-endpoint-scalar-identity-transfer"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-exceptional-finite-scalar-mates",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pur-compact-support-integral-coefficient-comparison"
+  "lem-sf-exceptional-ring-transport-family",
+  "lem-sf-exceptional-integral-scalar-mates-core",
+  "lem-sf-ring-endpoint-scalar-identity-transfer",
+  "lem-sf-ring-endpoint-scalar-identity-transfer"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26; original coefficient-stage construction steps 1--4; the corresponding scalar-restriction or geometric-invertibility part of the original plan, with the categorical assembly removed."
+  "place": "Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26; specialization of the existing normalized ring transport and integral scalar-mates core to the identity of W, followed by closure-universe transfer."
  },
  "blueprint": {
   "is": null,
@@ -127,9 +123,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M7",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261027T103451-L-1084652",
+  "landing": "20261027T205944-L-1637097",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
