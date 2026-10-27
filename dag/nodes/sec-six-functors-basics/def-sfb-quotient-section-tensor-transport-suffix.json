@@ -1,0 +1,104 @@
+{
+ "id": "def-sfb-quotient-section-tensor-transport-suffix",
+ "kind": "definition",
+ "title": "Common final map for section tensor transport",
+ "statement": "def section_tensor_transport_suffix (T : Scheme.{u})\n    (c : ScalarSectionData a T) (P Q : CochainComplex (Modules Λ T) ℤ) :\n    let ERc := (equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)\n    let Bc := c.model.E.mapHomologicalComplex (.up ℤ)\n    (tensor Λ' T).obj\n      (c.model.T.obj ((derivedFunctor Λ T).obj (DerivedCategory.Q.obj P)),\n        c.model.T.obj ((derivedFunctor Λ T).obj (DerivedCategory.Q.obj Q))) ⟶\n      DerivedCategory.Q.obj (Bc.obj (ERc.obj P) ⊗ Bc.obj (ERc.obj Q))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; scalar and total tensor comparisons in the proof of pullback compatibility."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the map as the composite of the tensor of the two section localization equivalence maps, the tensor of the scalar cochain counits, and qTensor on the two scalar-extended section complexes. Its data is exactly this explicit composition; it is not selected from an existence statement.",
+   "uses": [
+    "def-sfb-quotient-section-tensor-data",
+    "def-pd-section-derived-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "def-pd-section-derived-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; explicit comparison argument by X2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a termwise scalar section comparison on a signed total tensor summand; compatibility of scalar extension with section tensor comparison",
+   "results": "LeanFinder found HomologicalComplex.ιTensorObj and elementary tensor/scalar formulas; no quotient-specific realization square.",
+   "date": "2026-10-28",
+   "verdict": "Prove the quotient-specific square; reuse tensor summand naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "GradedObject.Monoidal.ιTensorObj",
+   "results": "Loogle reported the identifier unknown. Local Mathlib source search found GradedObject.Monoidal.ι_tensorHom.",
+   "date": "2026-10-28",
+   "verdict": "Use the graded tensor naturality formula for the termwise comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientScalarTensor_summandNaturality|ordinary_scalar_square",
+   "results": "The service reported no hits. Local project rg found coefficientScalarTensor_summandNaturality and the older coefficient ordinary calculation.",
+   "date": "2026-10-28",
+   "verdict": "Prove the ordinary square directly from ScalarSectionNormalized; use existing tensor summand formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportKFlat",
+  "date": "2026-10-28",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-kflat",
+   "place": "Common final map for section tensor transport.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTransportSuffixData",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTransportSuffixData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_suffix",
+  "statement": "def section_tensor_transport_suffix (T : Scheme.{u})\n    (c : ScalarSectionData a T) (P Q : CochainComplex (Modules Λ T) ℤ) :\n    let ERc := (equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)\n    let Bc := c.model.E.mapHomologicalComplex (.up ℤ)\n    (tensor Λ' T).obj\n      (c.model.T.obj ((derivedFunctor Λ T).obj (DerivedCategory.Q.obj P)),\n        c.model.T.obj ((derivedFunctor Λ T).obj (DerivedCategory.Q.obj Q))) ⟶\n      DerivedCategory.Q.obj (Bc.obj (ERc.obj P) ⊗ Bc.obj (ERc.obj Q))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T210310-L-1685612",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T210310-L-1685612",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

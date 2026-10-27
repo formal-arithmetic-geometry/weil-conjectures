@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-quotient-section-tensor-total-square",
+ "kind": "statement",
+ "title": "Signed total scalar section tensor square",
+ "statement": "theorem section_tensor_total_scalar_square (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶\n      (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj\n        (curriedTensor (modules Λ' T)))\n    (he : ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W)\n      (n : N.val.obj W) (s : (ring Λ' T).obj.obj W),\n      (((e.app M).app N).val.app W)\n        (sectionScalarElement a T c (M ⊗ N) W (sectionPureTensor Λ T M N W m n) s) =\n      sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W\n        (sectionScalarElement a T c M W m 1) (sectionScalarElement a T c N W n s))\n    (P Q : CochainComplex (Modules Λ T) ℤ)\n    (g : (c.model.E.mapHomologicalComplex (.up ℤ)).obj\n        ((((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P) ⊗\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) ⟶\n      (c.model.E.mapHomologicalComplex (.up ℤ)).obj\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P) ⊗\n        (c.model.E.mapHomologicalComplex (.up ℤ)).obj\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q))\n    (hg : ∀ (i j k : ℤ) (h : i + j = k),\n      c.model.E.map\n        (HomologicalComplex.ιTensorObj\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P)\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q) i j k h) ≫\n        g.f k =\n      (e.app ((equivalence Λ T).functor.obj (P.X i))).app\n          ((equivalence Λ T).functor.obj (Q.X j)) ≫\n        HomologicalComplex.ιTensorObj\n          ((c.model.E.mapHomologicalComplex (.up ℤ)).obj\n            (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P))\n          ((c.model.E.mapHomologicalComplex (.up ℤ)).obj\n            (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) i j k h) :\n    let F := (extension a T).mapHomologicalComplex (.up ℤ)\n    let ES := (equivalence Λ' T).functor.mapHomologicalComplex (.up ℤ)\n    let o := NatIso.mapHomologicalComplex c.ordinary (.up ℤ)\n    ES.map (totalScalar a T P Q) ≫ (totalComparison Λ' T (F.obj P) (F.obj Q)).hom ≫\n      (o.hom.app P ⊗ₘ o.hom.app Q) =\n    o.hom.app (P ⊗ Q) ≫\n      (c.model.E.mapHomologicalComplex (.up ℤ)).map (totalComparison Λ T P Q).hom ≫ g",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; scalar and total tensor comparisons in the proof of pullback compatibility."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply homological-complex extensionality, then the direct-sum tensor universal property in each total degree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On each summand, the defining totalComparison formulas and the mapBifunctorComparison formula identify the total scalar map with the ordinary scalar map. Apply the ordinary scalar section tensor square.",
+   "uses": [
+    "lem-sfb-quotient-section-tensor-ordinary-square",
+    "def-pd-proetale-section-module-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the assumed summand formula for g and naturality of tensoring the two termwise ordinary comparison maps. Paste these equalities to obtain the same map on every summand.",
+   "uses": [
+    "lem-sfb-quotient-section-tensor-summand-formulas"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-section-tensor-ordinary-square",
+  "def-pd-proetale-section-module-functors",
+  "lem-sfb-quotient-section-tensor-summand-formulas"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; explicit comparison argument by X2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a termwise scalar section comparison on a signed total tensor summand; compatibility of scalar extension with section tensor comparison",
+   "results": "LeanFinder found HomologicalComplex.ιTensorObj and elementary tensor/scalar formulas; no quotient-specific realization square.",
+   "date": "2026-10-28",
+   "verdict": "Prove the quotient-specific square; reuse tensor summand naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "GradedObject.Monoidal.ιTensorObj",
+   "results": "Loogle reported the identifier unknown. Local Mathlib source search found GradedObject.Monoidal.ι_tensorHom.",
+   "date": "2026-10-28",
+   "verdict": "Use the graded tensor naturality formula for the termwise comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientScalarTensor_summandNaturality|ordinary_scalar_square",
+   "results": "The service reported no hits. Local project rg found coefficientScalarTensor_summandNaturality and the older coefficient ordinary calculation.",
+   "date": "2026-10-28",
+   "verdict": "Prove the ordinary square directly from ScalarSectionNormalized; use existing tensor summand formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportKFlat",
+  "date": "2026-10-28",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-kflat",
+   "place": "Signed direct-sum totalization of the ordinary square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTotalSquare",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTotalSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_total_scalar_square",
+  "statement": "theorem section_tensor_total_scalar_square (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶\n      (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj\n        (curriedTensor (modules Λ' T)))\n    (he : ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W)\n      (n : N.val.obj W) (s : (ring Λ' T).obj.obj W),\n      (((e.app M).app N).val.app W)\n        (sectionScalarElement a T c (M ⊗ N) W (sectionPureTensor Λ T M N W m n) s) =\n      sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W\n        (sectionScalarElement a T c M W m 1) (sectionScalarElement a T c N W n s))\n    (P Q : CochainComplex (Modules Λ T) ℤ)\n    (g : (c.model.E.mapHomologicalComplex (.up ℤ)).obj\n        ((((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P) ⊗\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) ⟶\n      (c.model.E.mapHomologicalComplex (.up ℤ)).obj\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P) ⊗\n        (c.model.E.mapHomologicalComplex (.up ℤ)).obj\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q))\n    (hg : ∀ (i j k : ℤ) (h : i + j = k),\n      c.model.E.map\n        (HomologicalComplex.ιTensorObj\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P)\n          (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q) i j k h) ≫\n        g.f k =\n      (e.app ((equivalence Λ T).functor.obj (P.X i))).app\n          ((equivalence Λ T).functor.obj (Q.X j)) ≫\n        HomologicalComplex.ιTensorObj\n          ((c.model.E.mapHomologicalComplex (.up ℤ)).obj\n            (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P))\n          ((c.model.E.mapHomologicalComplex (.up ℤ)).obj\n            (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) i j k h) :\n    let F := (extension a T).mapHomologicalComplex (.up ℤ)\n    let ES := (equivalence Λ' T).functor.mapHomologicalComplex (.up ℤ)\n    let o := NatIso.mapHomologicalComplex c.ordinary (.up ℤ)\n    ES.map (totalScalar a T P Q) ≫ (totalComparison Λ' T (F.obj P) (F.obj Q)).hom ≫\n      (o.hom.app P ⊗ₘ o.hom.app Q) =\n    o.hom.app (P ⊗ Q) ≫\n      (c.model.E.mapHomologicalComplex (.up ℤ)).map (totalComparison Λ T P Q).hom ≫ g",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T210310-L-1685612",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T210310-L-1685612",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

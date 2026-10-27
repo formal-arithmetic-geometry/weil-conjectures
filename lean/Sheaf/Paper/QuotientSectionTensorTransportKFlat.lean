@@ -6,12 +6,17 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientSectionTensorTransportDiagram
+import Sheaf.Paper.QuotientSectionTensorTransportSuffixIso
+import all Sheaf.Paper.QuotientSectionTensorTransportFormulas
 
 /-! # Flat-term representative conjugation for quotient section tensors -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
   CategoryTheory.Functor.mapDerivedCategory
@@ -43,16 +48,31 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
+attribute [local implicit_reducible] Functor.mapHomologicalComplex
+
+attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTensor
+  totalComparison totalScalar QuotientChange.compute Mod.extendScalars
+  CondensedRing.internalScalarMonoidal Mod.monoidalCategoryStruct
+  Localization.Monoidal.tensorBifunctor
+  HomologicalComplex₂.total Mod.inducingFunctorData
+  InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
+
+set_option maxHeartbeats 1600000 in
+-- Paste the localization diagram with its functors retained.
 /-- The conjugation equation on flat-term K-flat representatives.
 Source: Stacks 06YY, 07A4 and 07A6; parent proof steps 6--8.
-(blueprint: lem-sfb-quotient-section-tensor-transport-condition).
+(blueprint: lem-sfb-quotient-section-tensor-transport-kflat).
 
-Proof: choose flat-term K-flat representatives for the two derived inputs.  Expand the
-normalized section tensor equation supplied by `hbarB`, substitute the normalized scalar
-counit equation `hc` and the normalized internal tensorator equation `hb`, and cancel the
-invertible localization and comparison maps.  The remaining representative equation is
-exactly the displayed conjugation equation.  All maps are natural in both representatives,
-so the calculation is independent of the chosen resolutions. -/
+Proof: the section equivalence preserves the K-flat and flat-term tests. Compare
+ordinary scalar tensor maps on scalar-unit pure tensors and use the two coequalizer
+universal properties. Extend this equality to signed totals by checking every
+coproduct summand. Paste the scalar normalization on the total tensor with its
+counit naturality, the two tensor-localization equations, and `hb`. The factor
+scalar normalizations and naturality identify one path; `hbarB` identifies the
+other. The ordinary total square makes its total map invertible. K-flat scalar
+computation and counit naturality then make the section localization map invertible.
+Cancel it, the two factor scalar counits and localization maps, and finally the
+two scalar realization isomorphisms to obtain the displayed conjugation equation. -/
 theorem section_tensor_transport_kflat (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
     (b : TensorIso a T) (hb : TensorNormalized a T b)
@@ -75,6 +95,28 @@ theorem section_tensor_transport_kflat (T : Scheme.{u})
             (derivedFunctor Λ T).obj (DerivedCategory.Q.obj Q)) ≫
           (tensor Λ' T).map (Prod.mkHom (c.derived.inv.app (DerivedCategory.Q.obj P))
             (c.derived.inv.app (DerivedCategory.Q.obj Q))) := by
-  sorry
+  intro P Q hP hQ hPf hQf
+  let ED := derivedFunctor Λ T
+  let ESD := derivedFunctor Λ' T
+  let BD := c.model.T
+  let τR := tensorComparison Λ T
+  let τS := tensorComparison Λ' T
+  let tensorS := ModuleRingedComparison.tensor Λ' T
+  have h := section_tensor_transport_diagram a T c hc b hb barB hbarB P Q hP hQ hPf hQf
+  have := section_tensor_transport_suffix_isIso a T c hc barB hbarB P Q hP hQ hPf hQf
+  have hcore :
+      ESD.map (b.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+        τS.hom.app ((D a T).obj (DerivedCategory.Q.obj P),
+          (D a T).obj (DerivedCategory.Q.obj Q)) ≫
+        tensorS.map (Prod.mkHom (c.derived.hom.app (DerivedCategory.Q.obj P))
+          (c.derived.hom.app (DerivedCategory.Q.obj Q))) =
+      c.derived.hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q) ≫
+        BD.map (τR.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+        barB.hom.app (ED.obj (DerivedCategory.Q.obj P), ED.obj (DerivedCategory.Q.obj Q)) := by
+    apply (cancel_mono (section_tensor_transport_suffix a T c P Q)).mp
+    simpa only [Category.assoc] using h
+  simpa only [Category.assoc, Iso.app_inv] using
+    pair_conjugation tensorS (c.derived.app (DerivedCategory.Q.obj P))
+      (c.derived.app (DerivedCategory.Q.obj Q)) hcore
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

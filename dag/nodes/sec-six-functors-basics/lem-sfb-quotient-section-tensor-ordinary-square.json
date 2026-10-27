@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-quotient-section-tensor-ordinary-square",
+ "kind": "statement",
+ "title": "Ordinary scalar section tensor square",
+ "statement": "theorem section_tensor_ordinary_scalar_square (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶\n      (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj\n        (curriedTensor (modules Λ' T)))\n    (he : ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W)\n      (n : N.val.obj W) (s : (ring Λ' T).obj.obj W),\n      (((e.app M).app N).val.app W)\n        (sectionScalarElement a T c (M ⊗ N) W (sectionPureTensor Λ T M N W m n) s) =\n      sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W\n        (sectionScalarElement a T c M W m 1) (sectionScalarElement a T c N W n s))\n    (M N : Modules Λ T) :\n    let := CondensedRing.internalScalarMonoidal a T\n    (equivalence Λ' T).functor.map (Functor.OplaxMonoidal.δ (extension a T) M N) ≫\n      (ordinaryTensorComparison Λ' T _ _).hom ≫\n      (c.ordinary.hom.app M ⊗ₘ c.ordinary.hom.app N) =\n    c.ordinary.hom.app (M ⊗ N) ≫\n      c.model.E.map (ordinaryTensorComparison Λ T M N).hom ≫\n      (e.app ((equivalence Λ T).functor.obj M)).app\n        ((equivalence Λ T).functor.obj N)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; scalar and total tensor comparisons in the proof of pullback compatibility."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Compare the two maps after the scalar-extension coequalizer projection and the sheaf tensor projection. Sheafification and the coequalizer universal properties reduce equality to scalar multiples of pure tensors.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use scalar linearity to take scalar coefficient one. The normalized internal monoidal map sends the scalar unit on a pure tensor to the tensor of scalar units. Apply the ordinary section tensor comparison and its pure-tensor formula.",
+   "uses": [
+    "def-sfb-internal-scalar-tensor-comparison",
+    "def-pd-proetale-section-module-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "ScalarSectionNormalized identifies the images of scalar units under the ordinary realization. Naturality of the scalar extension generator and the normalized formula for e identify the other composite. No exactness of ordinary scalar extension is used.",
+   "uses": [
+    "lem-pd-sheaf-scalar-extension-constraint-coherence",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-section-scalar-adjunction",
+  "def-sfb-internal-scalar-tensor-comparison",
+  "def-pd-proetale-section-module-functors",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; explicit comparison argument by X2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a termwise scalar section comparison on a signed total tensor summand; compatibility of scalar extension with section tensor comparison",
+   "results": "LeanFinder found HomologicalComplex.ιTensorObj and elementary tensor/scalar formulas; no quotient-specific realization square.",
+   "date": "2026-10-28",
+   "verdict": "Prove the quotient-specific square; reuse tensor summand naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "GradedObject.Monoidal.ιTensorObj",
+   "results": "Loogle reported the identifier unknown. Local Mathlib source search found GradedObject.Monoidal.ι_tensorHom.",
+   "date": "2026-10-28",
+   "verdict": "Use the graded tensor naturality formula for the termwise comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientScalarTensor_summandNaturality|ordinary_scalar_square",
+   "results": "The service reported no hits. Local project rg found coefficientScalarTensor_summandNaturality and the older coefficient ordinary calculation.",
+   "date": "2026-10-28",
+   "verdict": "Prove the ordinary square directly from ScalarSectionNormalized; use existing tensor summand formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportKFlat",
+  "date": "2026-10-28",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-kflat",
+   "place": "Ordinary scalar-unit comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorOrdinarySquare",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorOrdinarySquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_ordinary_scalar_square",
+  "statement": "theorem section_tensor_ordinary_scalar_square (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (e : (Functor.postcompose₂.obj c.model.E).obj (curriedTensor (modules Λ T)) ⟶\n      (((Functor.whiskeringLeft₂ _).obj c.model.E).obj c.model.E).obj\n        (curriedTensor (modules Λ' T)))\n    (he : ∀ (M N : modules Λ T) (W : T.ProEtᵒᵖ) (m : M.val.obj W)\n      (n : N.val.obj W) (s : (ring Λ' T).obj.obj W),\n      (((e.app M).app N).val.app W)\n        (sectionScalarElement a T c (M ⊗ N) W (sectionPureTensor Λ T M N W m n) s) =\n      sectionPureTensor Λ' T (c.model.E.obj M) (c.model.E.obj N) W\n        (sectionScalarElement a T c M W m 1) (sectionScalarElement a T c N W n s))\n    (M N : Modules Λ T) :\n    let := CondensedRing.internalScalarMonoidal a T\n    (equivalence Λ' T).functor.map (Functor.OplaxMonoidal.δ (extension a T) M N) ≫\n      (ordinaryTensorComparison Λ' T _ _).hom ≫\n      (c.ordinary.hom.app M ⊗ₘ c.ordinary.hom.app N) =\n    c.ordinary.hom.app (M ⊗ N) ≫\n      c.model.E.map (ordinaryTensorComparison Λ T M N).hom ≫\n      (e.app ((equivalence Λ T).functor.obj M)).app\n        ((equivalence Λ T).functor.obj N)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T210310-L-1685612",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T210310-L-1685612",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
