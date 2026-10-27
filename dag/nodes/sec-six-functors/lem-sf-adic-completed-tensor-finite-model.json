@@ -1,0 +1,146 @@
+{
+ "kind": "lemma",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorRealizationDescent",
+  "date": "2026-10-28",
+  "group": "Q2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed.*tensor|realization.*tensor",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified quotient-augmentation normalization, native scalar counit square or common-stage integral agreement. Generic module completion and localization tools do not state these data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"Localization\"",
+   "results": "12 hits: CategoryTheory.Localization.instCategoryLocalizedMonoidal, CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal, CategoryTheory.Localization.Monoidal.monoidalCategoryStruct, CategoryTheory.Localization.Monoidal.toMonoidalCategory, CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory, CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory, CategoryTheory.Localization.Monoidal.ε', CategoryTheory.Localization.Monoidal.pentagon; digest 4438ce1bd86d1571",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified quotient-augmentation normalization, native scalar counit square or common-stage integral agreement. Generic module completion and localization tools do not state these data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed tensor realization descent on constructible proetale adic sheaves from normalized finite fields",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_naturality; digest 464e31a6d4cdb90a",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified quotient-augmentation normalization, native scalar counit square or common-stage integral agreement. Generic module completion and localization tools do not state these data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension has a normalized tensor comparison on K-flat complexes and descends to a common finite coefficient field",
+   "results": "8 hits: Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, LinearMap.tensorKerEquiv, Module.Flat.baseChange, Module.Flat.instTensorProduct, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, RingHom.Flat, IntermediateField.coe_extendScalars; digest 93220f960353e11b",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified quotient-augmentation normalization, native scalar counit square or common-stage integral agreement. Generic module completion and localization tools do not state these data."
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original tensor-realization descent proof: finite normalized comparison followed by rational and common-field passage; the unit route is unchanged.",
+   "via": [
+    "lem-sf-adic-completed-tensor-realization-descent",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-adic-completed-tensor-finite-model",
+ "title": "Normalized native scalar tensor comparison at one finite field",
+ "statement": "Fix a prime l, a qcqs scheme X on which l is invertible in each residue field, and any native realization R [def-sf-locally-finite-adic-realization-data]. Fix a CoefficientClosedStructure closed on ambientHom l X R and CoefficientTensorModels models for it [def-sf-native-adic-realization-data]. For each finite coefficient field E contained in PadicAlgCl l there exists a CompletedTensorFiniteModel l X R closed models E [def-sf-adic-completed-tensor-finite-models]. Thus the ordinary scalar tensor comparison has the balanced pure-section normalization, preserves the specified K-flat models, and satisfies the scalar-counit representative equation, with the normalized quotient-completion presentation. This assertion constructs no common-stage tensorator or common-stage coherence.",
+ "stmt_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data",
+  "def-sf-locally-finite-adic-realization-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; sites-modules.tex Tag 03EL; BS Definition 3.4.10 and Lemma 6.5.5; original tensor descent step 1."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 6.5.5; Stacks 07A4 and 03EL. Agent-written specialization to the actual native coefficient map."
+ },
+ "proof": [
+  {
+   "text": "Apply constructibleTensorCompletion to the coefficient field E and X. Package its ordinary tensor, K-flat comparison, quotient augmentation and descended map as ConstructibleTensorCompletionPresentation. The pure-section normalization, zero shifted Roos coordinate, representative square and constructible invertibility are exactly its four clauses.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary cochain scalar tensor comparison to coefficientMap. On each bidegree it sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y). The inverse multiplies the two coefficient scalars. Balancing proves these maps inverse; distributivity over direct sums gives the total-complex isomorphism. The tensor differential shows that it is a chain map with the recorded signs.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension carries K-flat complexes to K-flat complexes: tensor an acyclic native-coefficient test complex with the extension, use the balanced associator to identify this with the original complex tensored with the restricted test complex, and use exactness of restriction of scalars. This proves kflat for every integral good complex.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the cochain comparison on the two good-complex localizations. Compose with the supplied native K-flat model isomorphism, using the universal scalar counits. Their naturality gives precisely tensorFiniteRepresentative. Both sides invert quasi-isomorphisms in each variable, so two-variable localization supplies a natural isomorphism on the entire derived categories. The comparison retains the cochain pure-section equation of step 2.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert this comparison, the completion presentation and the K-flat proofs into CompletedTensorFiniteModel. No common-stage functor, tensorator or constraint coherence is constructed in this lemma.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorFiniteModelExistence",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorFiniteModelExistence.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completed_tensor_finite_model",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.completed_tensor_finite_model"
+  ],
+  "statement": "theorem completed_tensor_finite_model\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (closed : CoefficientClosedStructure (ambientHom l X R))\n    (models : CoefficientTensorModels.{u + 1, u + 1, u}\n      (ProEt.topology X) (ring l X R) closed)\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) :\n    Nonempty (CompletedTensorFiniteModel l X R closed models E)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-990c7",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261027T180734-L-3896912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-990c7",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261027T180734-L-3896912",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new modules/nodes + change record against clone sheaf-dag item, item node, importer AdicQbarConstructibleRealization (compiled OK in sandbox) and the upstream normalization definitions"
+ }
+}

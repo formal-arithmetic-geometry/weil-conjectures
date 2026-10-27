@@ -6,21 +6,13 @@ Authors: SHEAF group Q159
 module
 
 public import Sheaf.Paper.NativeAdicFiniteNormalization
+public import Sheaf.Paper.AdicCompletedTensorFiniteModels
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.Paper.CompletedCondensedCoefficients
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.CompletedPrimitiveCounitComparison
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Paper.NormalizedTensorConstraintTransport
-import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
-import Sheaf.Paper.IntegralAmbientOperationModels
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.ScalarExtensionTowerCoherence
-import Sheaf.CategoryTheory.ScalarLocalizationMonoidal
+import Sheaf.Paper.AdicCompletedTensorFiniteModelExistence
+import Sheaf.Paper.AdicCompletedTensorCommonLift
+import Sheaf.Paper.SfQbarLocalizationCommonStage
 
 /-! # Descent of the normalized completed tensor through realization
 
@@ -92,61 +84,6 @@ structure CompletedTensorRealization (R : LocallyFiniteAdicRealization.Realizati
       (symmetry.braiding ((ordinary l X R).obj A) ((ordinary l X R).obj B)).hom ≫
         tensor.hom.app (B, A)
 
-/-- The published raw localization at a finite field, followed by its actual
-common-stage inclusion. This is a composite of existing functors, not a new category.
-Source: BS Remark 6.8.15
-(blueprint: lem-sf-adic-completed-tensor-realization-descent). -/
-def tensorStage (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) :
-    sfIntegralConstructibleCategory l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X ⥤
-    generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X :=
-  sfRationalConstructibleLocalization l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X ⋙
-    GeneralAlgebraicallyClosedCoefficients.inclusion
-      (l := l) (Ω := PadicAlgCl l) (Y := X) E
-
-/-- The recorded object equality between rational tensor on integral objects and
-localization of their completed tensor. All maps are the existing operations.
-Source: BS Definition 3.4.10 and Remark 6.8.15
-(blueprint: lem-sf-adic-completed-tensor-realization-descent). -/
-def tensorIntegralObjectIso [∀ x : X, Invertible (l : X.residueField x)]
-    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
-    (K L : sfIntegralConstructibleCategory l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :
-    (rationalDerivedTensor l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj
-      ((sfRationalConstructibleLocalization l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj K,
-       (sfRationalConstructibleLocalization l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj L) ≅
-    (sfRationalConstructibleLocalization l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj
-      ((constructibleIntegralTensor l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj (K, L)) :=
-  eqToIso ((rationalDerivedTensor_existsUnique l
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).exists.choose_spec.1
-    ((sfRationalConstructibleLocalization l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj K,
-     (sfRationalConstructibleLocalization l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj L))
-
-/-- Invert precisely the recorded quotient-completion map on constructible pairs.
-The four normalization clauses in the presentation fix its entire chain representative.
-Source: BS Definition 3.4.10 and Lemma 6.5.5
-(blueprint: lem-sf-adic-completed-tensor-realization-descent). -/
-def tensorQuotientIso
-    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
-    (C : ConstructibleTensorCompletionPresentation l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X)
-    (K L : sfIntegralConstructibleCategory l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :
-    C.tensor.obj (K.obj, L.obj) ≅
-    (integralCompletedTensor l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj
-      (K.obj, L.obj) :=
-  @asIso _ _ _ _ (C.comparison.app (K.obj, L.obj))
-    (C.normalized.2.2.2 K.obj L.obj K.property L.property).2
-
 /-- The representative normalization equation for tensor descent, using the existing
 balanced scalar, completion and stage comparisons.
 Source: BS Definition 3.4.10, Remark 6.8.15; HRS Lemma 7.9
@@ -159,22 +96,7 @@ def tensorDescentFiniteBalanceSections (R : LocallyFiniteAdicRealization.Realiza
         integralComplex l X R E ≅
     ((integralComplex l X R E).prod (integralComplex l X R E)) ⋙
       coefficientTotalTensor.{u + 1, u + 1, u} (ProEt.topology X) (ring l X R)) : Prop :=
-  ∀ (P Q : CochainComplex (integralTowerModules l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) ℤ)
-      (p q : ℤ) (U : X.ProEtᵒᵖ) (s : (ring l X R).obj.obj U)
-      (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),
-    ((balance.hom.app (P, Q)).f (p + q)).val.app U
-      (pbcTensorSection (coefficientMap l X R E)
-        (((constructibleTensorTotal l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj
-            (P, Q)).X (p + q)) U s
-        (constructibleTensorTotalSection l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X P Q p q U x y)) =
-      coefficientTensorGenerator.{u + 1, u + 1, u} (ProEt.topology X) (ring l X R)
-        ((integralComplex l X R E).obj P) ((integralComplex l X R E).obj Q)
-        p q (p + q) rfl U
-        (pbcTensorSection (coefficientMap l X R E) (P.X p) U s x)
-        (pbcTensorSection (coefficientMap l X R E) (Q.X q) U 1 y)
+  tensorFiniteBalanceSections l X R E balance
 
 /-- The representative normalization equation for tensor descent, using the existing
 balanced scalar, completion and stage comparisons.
@@ -197,20 +119,8 @@ def tensorDescentFiniteRepresentative (R : LocallyFiniteAdicRealization.Realizat
     (ordinary : completion.tensor ⋙ pbcDerivedExtend (coefficientMap l X R E) ≅
     ((pbcDerivedExtend (coefficientMap l X R E)).prod
       (pbcDerivedExtend (coefficientMap l X R E))) ⋙ A.closed.tensor) : Prop :=
-  ∀ P Q : (integralOperationsGoodComplex l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).FullSubcategory,
-    (pbcDerivedExtend (coefficientMap l X R E)).map
-        (completion.model.hom.app (P, Q)) ≫
-      ordinary.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
-      A.closed.tensor.map (Prod.mkHom
-        (pbcComplexCounit (coefficientMap l X R E) P.obj)
-        (pbcComplexCounit (coefficientMap l X R E) Q.obj)) =
-    pbcComplexCounit (coefficientMap l X R E)
-        ((constructibleTensorTotal l
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj
-            (P.obj, Q.obj)) ≫
-      DerivedCategory.Q.map (balance.hom.app (P.obj, Q.obj)) ≫
-      (A.models.iso _ _ _ _ _ (kflat P) (kflat Q)).hom
+  tensorFiniteRepresentative l X R A.closed A.models E
+    completion balance kflat ordinary
 
 /-- The representative normalization equation for tensor descent, using the existing
 balanced scalar, completion and stage comparisons.
@@ -224,22 +134,7 @@ def tensorDescentFiniteTensorAgreement (R : LocallyFiniteAdicRealization.Realiza
     (comparison : completion.tensor ⋙ pbcDerivedExtend (coefficientMap l X R E) ≅
       ((pbcDerivedExtend (coefficientMap l X R E)).prod
         (pbcDerivedExtend (coefficientMap l X R E))) ⋙ A.closed.tensor) : Prop :=
-  ∀ K L : sfIntegralConstructibleCategory l
-      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X,
-    HEq (A.tensor.hom.app ((tensorStage l X E).obj K, (tensorStage l X E).obj L))
-    (A.closed.tensor.map (Prod.mkHom ((R.integral E).hom.app K) ((R.integral E).hom.app L)) ≫
-      comparison.inv.app (K.obj, L.obj) ≫
-      (pbcDerivedExtend (coefficientMap l X R E)).map (tensorQuotientIso l X E completion K L).hom ≫
-      (R.integral E).inv.app ((constructibleIntegralTensor l
-        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj (K, L)) ≫
-      (AdicQbarRealization.ordinary l X R).map ((GeneralAlgebraicallyClosedCoefficients.inclusion
-        (l := l) (Ω := PadicAlgCl l) (Y := X) E).map (tensorIntegralObjectIso l X E K L).inv) ≫
-      (AdicQbarRealization.ordinary l X R).map
-        (stageTensor l X (PadicAlgCl l) E
-          ((sfRationalConstructibleLocalization l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj K)
-          ((sfRationalConstructibleLocalization l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj L)).hom)
+  tensorFiniteAgreement l X R A.closed A.tensor E completion comparison
 
 /-- Finite-stage normalization of the descended tensorator. The ordinary comparison
 is fixed by balanced pure sections and its derived K-flat counit equation; the final
@@ -288,53 +183,58 @@ Source: BS Definition 3.4.10 and Remark 6.8.15; HRS Lemma 7.9
 (blueprint: lem-sf-adic-completed-tensor-realization-descent).
 
 Proof:
-1. The finite-realization cocone identifies the integral constructible categories,
-reductions and rationalizations. For the same representatives apply
-lem-fix-constructible-tensor-completion: chi is the natural quotient augmentation,
-with zero shifted Roos coordinate, and is invertible on constructible pairs.
-Ordinary derived scalar extension is monoidal by
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback and
-lem-pur-cochain-pullback-tensor-coherence. Its balanced multiplication followed by
-J(chi) is mu. Constructibility follows from
-lem-pur-integral-operations-preserve-constructible.
-2. Apply lem-pur-completed-primitive-counit-comparison and
-lem-coef-normalized-dvr-effectivity to the normalized coherent reductions.
-lem-pur-normalized-tensor-constraint-transport compares the entire systems by beta
-and gamma, for reassociation, both action unitors and signed swap. These same
-comparisons cover iterated tensors with re-resolved inner expressions.
-3. lem-pur-integral-ambient-operation-models identifies chi with the actual quotient
-augmentation. The squares are therefore the whole-system balanced total-complex
-squares, not unrelated levelwise isomorphisms. Apply
-lem-sfb-ringed-derived-monoidal-comparisons to obtain the four constraint equations.
-4. For E contained in F, insert the specified inverse completion comparison from
-lem-weil-finite-free-completed-scalar-comparison and use
-lem-pur-integral-operations-scalar-extension. By
-lem-pur-scalar-extension-tower-coherence its tensor square is the strict balanced
-quotient-tower square. Both routes multiply the same coefficient scalars, including
-identity extensions, ramification and successive field extensions. The ordinary
-scalar-composition maps are monoidal, including their unit normalization.
-5. Localize the integral Hom modules using def-weil-rationalization-karoubi and
-lem-sf-scalar-localization-monoidal. Pure rational arrows multiply coefficients;
-both naturality routes are ab times the integral square. Additivity and balancing
-give all rational arrows, and the inverse comparisons descend too.
-6. For two common-stage objects choose one finite field containing both stages.
-Extend its tensorator to the native coefficient sheaf and conjugate by the fixed
-integral/scalar and inclusion comparisons. Step 4 identifies this map after any
-further extension; two choices agree at a common further field. Do the same for
-arrows and inverse components. Thus the result is natural and independent of every
-object-stage and arrow representative in the actual Hom colimit.
-7. Every constraint diagram uses finitely many objects and arrows, hence is represented
-at one finite field. Steps 3--5 make it commute there, so it commutes after extension.
-Naturality includes the fixed finite scalar comparisons and their identity/tower
-maps. On the coefficient unit the map is multiplication r tensor e to re; its inverse
-inserts one. The two unitor equations with the fixed tensorator characterize this
-unit comparison uniquely. -/
+1. sfQbarLocalizationResidueInvertible (def-sf-qbar-localization-residue-invertible)
+gives the residue-field invertibility of l from l different from the characteristic.
+Quasi-compactness over the field gives CompactSpace T.left and separatedness gives
+QuasiSeparatedSpace T.left.
+2. lem-sf-ringed-derived-closed-symmetric-monoidal, applied to the actual native ring
+sheaf, supplies closed, models, symmetry and the native RingedDerivedTensorCoherence.
+3. For each finite field E, lem-sf-adic-completed-tensor-finite-model gives a
+normalized finite model for these fixed closed and models; choose one family N inside
+this proof of a Nonempty proposition.
+4. lem-sf-adic-completed-tensor-common-lift, applied to the same ambient data, its
+coherence and N, gives the common tensorator, the unit, the four constraint equations
+and agreement with N E at every finite field.
+5. Copy these into CompletedTensorRealization, and the fields of N E together with the
+agreement at E into CompletedTensorFiniteNormalization; the three finite predicates of
+this module unfold to the predicates of AdicCompletedTensorFiniteModels. The source
+argument for the two lemmas (BS 3.4.10, 6.5.5, 6.8.15; HRS 7.9) is in their docstrings. -/
 theorem adic_completed_tensor_realization_descent
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (T : Over (Spec (CommRingCat.of D.k)))
     [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom]
     (R : LocallyFiniteAdicRealization.Realization l T.left) :
     Nonempty (CompletedTensorRealizationDescent l T.left R) := by
-  sorry
+  classical
+  let := fun x ↦ sfQbarLocalizationResidueInvertible l D _hl T.left T.hom x
+  let : CompactSpace T.left := QuasiCompact.compactSpace_of_compactSpace T.hom
+  let : QuasiSeparatedSpace T.left := quasiSeparatedSpace_of_quasiSeparated T.hom
+  obtain ⟨closed, models, symmetry, ⟨coherence⟩⟩ :=
+    ringedDerived_closed_symmetric_monoidal.{u + 1, u, u + 1}
+      (ProEt.topology T.left) (ring l T.left R)
+  have finite : ∀ E, Nonempty (CompletedTensorFiniteModel l T.left R closed models E) :=
+    fun E ↦ completed_tensor_finite_model l T.left R closed models E
+  let N := fun E ↦ Classical.choice (finite E)
+  obtain ⟨C⟩ := completed_tensor_common_lift l T.left R closed models symmetry N coherence
+  let A : CompletedTensorRealization l T.left R :=
+    { closed := closed
+      models := models
+      symmetry := symmetry
+      coherence := coherence
+      tensor := C.tensor
+      unit := C.unit
+      associative := C.associative
+      left_unit := C.left_unit
+      right_unit := C.right_unit
+      symmetric := C.symmetric }
+  refine ⟨{ common := A, normalization := fun E ↦ ?_ }⟩
+  exact
+    { completion := (N E).completion
+      balance := (N E).balance
+      balance_sections := (N E).balance_sections
+      kflat := (N E).kflat
+      ordinary := (N E).ordinary
+      representative := (N E).representative
+      integral_tensor := C.integral_tensor E }
 
 end WeilConjectures.AdicQbarRealization
