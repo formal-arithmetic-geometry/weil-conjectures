@@ -48,7 +48,7 @@ namespace WeilConjectures.PurityFiniteSetting
 
 -- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
 -- keep the ones this module was written against.
-attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+attribute [local instance 10000] AlgebraicGeometry.strictEtaleSystemDerived
   AlgebraicGeometry.strictEtaleLevelDerived
 
 /-- The transported exceptional functor on all actual derived pro-étale systems,
