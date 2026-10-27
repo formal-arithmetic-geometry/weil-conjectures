@@ -14,13 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import Sheaf.CategoryTheory.FixedPairDerivedForgetComparison
 import Sheaf.Paper.NativeScalarForgetting
 import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.AlgebraicGeometry.CompactificationMiddleOverBase
-import Mathlib.Topology.Constructible
 
 /-! # Native coefficient hearts and normalized open/proper forgetting
 
@@ -134,17 +128,17 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 /-- Structural and derived properties of the actual native coefficient heart and its
 fixed pairs. Source: native comparison Steps 3--5; Category.lean and IsoAlgebra.lean
 (blueprint: lem-sf-native-weil-open-proper-forgetting).
-Proof: the ringed-site Grothendieck theorem applies on the small pro-etale site.
-Reindexing by geometric Frobenius and its inverse preserves covers and the coefficient
-functions with their finite fields. This gives inverse exact equivalences. Apply
+Proof: the native heart is Grothendieck by the existing AdicSheaf instance, and
+native Frobenius pullback is an equivalence, hence exact, with explicit inverse. Apply
 lem-sf-fixed-pair-derived-forget-comparison: the integer-indexed free pair shifts its
 summands, is exact, and is left adjoint to forgetting. Hence forgetting preserves
 K-injectives. Exactness gives the natural cohomology isomorphism. It reflects zero and
 therefore derived isomorphisms and boundedness. Exact-functor localization commutes with
 shifts and preserves cone triangles (lem-sf-exact-functor-derived-triangulated).
-Finally the geometric fibre is qcqs and Noetherian; the native qcqs-stratification lemma
-identifies local constructibility with a finite global stratification. Apply the
-cohomology comparison in each degree to obtain the last equivalence. -/
+Finally the geometric fibre is qcqs; the native qcqs-stratification lemma turns local
+constructibility into a finite stratified lisse sheaf, whose strata are constructible by
+definition, and conversely. Transport along the cohomology comparison in each degree to
+obtain the last equivalence. -/
 theorem hearts (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k₀))]
     [Fact (ringChar k₀ ≠ l)] [IsSeparated (T ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))]
@@ -188,7 +182,28 @@ theorem hearts (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k₀))]
             ((DerivedCategory.homologyFunctor _ n).obj
               ((IsoAlgebra.forget
                 (WeilSheaf.frobeniusPullback k₀ l T)).mapDerivedCategory.obj K))) := by
-  sorry
+  let F := WeilSheaf.frobeniusPullback k₀ l T
+  let U := IsoAlgebra.forget F
+  obtain ⟨hG, hlim, hcolim, href, hadj, hfreeLim, hfreeColim, hcarrier,
+    _, _, hKI, hDref⟩ := IsoAlgebra.fixedPair_forget_properties F
+  have hb (K : DerivedCategory (ProEtaleWeilSheaf k₀ l T)) :
+      DerivedCategory.TStructure.t.bounded K ↔
+        DerivedCategory.TStructure.t.bounded (U.mapDerivedCategory.obj K) :=
+    ⟨U.bounded_mapDerivedCategory_obj, U.bounded_of_bounded_mapDerivedCategory_obj⟩
+  refine ⟨inferInstance, hG, inferInstance, inferInstance, inferInstance,
+    hlim, hcolim, href, hadj, hfreeLim, hfreeColim, hcarrier, hKI, hDref,
+    ⟨inferInstance⟩, inferInstance, fun n ↦ ⟨U.mapDerivedCategoryHomologyFunctorIso n⟩,
+    hb, ?_⟩
+  intro K
+  constructor
+  · rintro ⟨hbound, hconstructible⟩
+    refine ⟨(hb K).1 hbound, fun n ↦ ?_⟩
+    exact (hconstructible n).isAdicStratifiedLisseSheaf.of_iso
+      ((U.mapDerivedCategoryHomologyFunctorIso n).app K)
+  · rintro ⟨hbound, hstratified⟩
+    refine ⟨(hb K).2 hbound, fun n ↦ ?_⟩
+    exact ((hstratified n).of_iso
+      ((U.mapDerivedCategoryHomologyFunctorIso n).symm.app K)).isAdicConstructibleSheaf
 
 /-- Frobenius and its inverse are the two coefficient-preserving reindexings of the
 geometric-fibre site. The inverse is explicit, rather than an unspecified quasi-inverse.
@@ -273,6 +288,95 @@ abbrev properRightUnit (p : Z ⟶ Y) [p.IsOver (Spec (CommRingCat.of k₀))]
       (Scheme.Hom.geometricFiberMap p
         (comp_over p (Spec (CommRingCat.of k₀))))).rightDerivedFunctorUnit I
 
+-- Uniqueness of total right derivation supplies the unit equations of each factor.
+-- The strict underlying square cancels the homotopy-composition comparisons.
+section UnitNormalization
+
+universe w w' v v' uC uD
+
+variable {C : Type uC} [Category.{v} C] [Abelian C]
+  {D : Type uD} [Category.{v'} D] [Abelian D]
+  (F : C ⥤ C) [F.Additive] [F.IsEquivalence]
+  [HasColimitsOfShape (Discrete ℤ) C] [HasExactColimitsOfShape (Discrete ℤ) C]
+  {G : D ⥤ D} [G.Additive] [G.IsEquivalence]
+  {L : C ⥤ D} [L.Additive] (e : L ⋙ G ≅ F ⋙ L)
+  [HasDerivedCategory.{w} (IsoAlgebra F)] [HasDerivedCategory.{w'} (IsoAlgebra G)]
+  [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]
+  [Abelian.HasKInjectiveResolutions (IsoAlgebra F)]
+  [Abelian.HasKInjectiveResolutions C]
+
+private theorem fixedPair_unit_normalization (I : CochainComplex (IsoAlgebra F) ℤ) :
+    KInjectiveExactSquare.leftUnit (IsoAlgebra.mapOfNatIso e) L
+      (IsoAlgebra.forget F) (IsoAlgebra.forget G) rfl
+      (IsoAlgebra.mapOfNatIso e).rightDerivedFunctor
+      (IsoAlgebra.mapOfNatIso e).rightDerivedFunctorUnit I ≫
+        (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso F e).hom.app
+          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) =
+      KInjectiveExactSquare.rightUnit L (IsoAlgebra.forget F) L.rightDerivedFunctor
+        L.rightDerivedFunctorUnit I := by
+  let P := IsoAlgebra.mapOfNatIso e
+  let r := IsoAlgebra.forget F
+  let s := IsoAlgebra.forget G
+  let K := (HomotopyCategory.quotient (IsoAlgebra F) (.up ℤ)).obj I
+  have h₁ : s.mapDerivedCategoryFactorsh.inv.app
+        ((P.mapHomotopyCategory (.up ℤ)).obj K) ≫
+      s.mapDerivedCategory.map (P.rightDerivedFunctorUnit.app K) ≫
+        (Functor.rightDerivedFunctorCompMapDerivedCategoryIso P s).inv.app
+          (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (P ⋙ s)) (.up ℤ)).hom.app K) ≫
+          (P ⋙ s).rightDerivedFunctorUnit.app K := by
+    apply (cancel_mono ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso P s).hom.app
+      (DerivedCategory.Qh.obj K))).1
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    simp [Functor.rightDerivedFunctorCompMapDerivedCategoryIso,
+      Functor.rightDerivedUnique, Functor.rightDerivedNatIso,
+      Functor.rightDerivedFunctorCompMapDerivedCategoryUnit]
+  have h₂ : (P ⋙ s).rightDerivedFunctorUnit.app K ≫
+      (Functor.rightDerivedFunctorNatIso
+        (IsoAlgebra.mapOfNatIsoCompForgetIso e)).hom.app (DerivedCategory.Qh.obj K) =
+      (r ⋙ L).rightDerivedFunctorUnit.app K := by
+    simp [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans,
+      IsoAlgebra.mapOfNatIsoCompForgetIso, P, r, s]
+  have h₃ : (r ⋙ L).rightDerivedFunctorUnit.app K ≫
+      (Functor.rightDerivedFunctorCompIso r L).hom.app (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (r ⋙ L)) (.up ℤ)).inv.app K) ≫
+        L.rightDerivedFunctorUnit.app ((r.mapHomotopyCategory (.up ℤ)).obj K) ≫
+          L.rightDerivedFunctor.map (r.rightDerivedFunctorUnit.app K) := by
+    simp [Functor.rightDerivedFunctorCompIso, Functor.rightDerivedFunctorCompUnit]
+  have h₄ : r.rightDerivedFunctorUnit.app K ≫
+      r.rightDerivedFunctorIsoMapDerivedCategory.hom.app (DerivedCategory.Qh.obj K) =
+      r.mapDerivedCategoryFactorsh.inv.app K := by
+    exact congr_app (Functor.rightDerivedFunctorIsoMapDerivedCategory_hom_fac r) K
+  have ha : (KInjectiveExactSquare.sourceIso P L r s rfl).hom.app K = 𝟙 _ := by
+    change (𝟙 _) ≫ (𝟙 _) = _
+    exact Category.id_comp _
+  have hc₁ : (Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (P ⋙ s)) (.up ℤ)).hom.app K = 𝟙 _ := rfl
+  have hc₃ : (Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (r ⋙ L)) (.up ℤ)).inv.app K = 𝟙 _ := rfl
+  dsimp only [KInjectiveExactSquare.leftUnit, KInjectiveExactSquare.rightUnit]
+  simp only [Category.assoc]
+  change DerivedCategory.Qh.map ((KInjectiveExactSquare.sourceIso P L r s rfl).hom.app K) ≫
+    s.mapDerivedCategoryFactorsh.inv.app ((P.mapHomotopyCategory (.up ℤ)).obj K) ≫
+      s.mapDerivedCategory.map (P.rightDerivedFunctorUnit.app K) ≫
+        (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso F e).hom.app
+          (DerivedCategory.Qh.obj K) =
+    L.rightDerivedFunctorUnit.app ((r.mapHomotopyCategory (.up ℤ)).obj K) ≫
+      L.rightDerivedFunctor.map (r.mapDerivedCategoryFactorsh.inv.app K)
+  simp only [IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso, Iso.trans_hom,
+    Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app]
+  rw [reassoc_of% h₁, ha, hc₁]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+  rw [reassoc_of% h₂, reassoc_of% h₃, hc₃, CategoryTheory.Functor.map_id,
+    Category.id_comp, ← L.rightDerivedFunctor.map_comp, h₄]
+
+end UnitNormalization
+
+-- Keep the existing characteristic binder for callers, although normalization is formal.
+set_option linter.unusedSectionVars false in
 /-- The total-derived comparison is induced by the equality of underlying sheaf functors
 with their units. This equation makes it the identity after identifying both sides with
 Q(p_* UI) by those units; it holds on every complex and in particular on K-injectives.
@@ -292,7 +396,33 @@ theorem proper_normalization (p : Z ⟶ Y) [p.IsOver (Spec (CommRingCat.of k₀)
           properRightUnit p I) ∧
       (∀ (I : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) [I.IsKInjective],
         IsIso (properLeftUnit p I) ∧ IsIso (properRightUnit p I)) := by
-  sorry
+  let r := IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have : r.PreservesKInjectiveComplexes := inferInstance
+  constructor
+  · intro I
+    exact fixedPair_unit_normalization (WeilSheaf.frobeniusPullback k₀ l Z)
+      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l p
+        (comp_over p (Spec (CommRingCat.of k₀)))) I
+  · intro I hI
+    have : CochainComplex.IsKInjective ((r.mapHomologicalComplex (.up ℤ)).obj I) :=
+      inferInstance
+    have hu : IsIso ((ProEtale.adicLowerStar l (Scheme.Hom.geometricFiberMap p
+        (comp_over p (Spec (CommRingCat.of k₀))))).rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj
+            ((r.mapHomologicalComplex (.up ℤ)).obj I))) := inferInstance
+    constructor
+    · dsimp only [properLeftUnit, KInjectiveExactSquare.leftUnit]
+      infer_instance
+    · dsimp only [properRightUnit, KInjectiveExactSquare.rightUnit]
+      have : IsIso ((ProEtale.adicLowerStar l (Scheme.Hom.geometricFiberMap p
+          (comp_over p (Spec (CommRingCat.of k₀))))).rightDerivedFunctorUnit.app
+            ((r.mapHomotopyCategory (.up ℤ)).obj
+              ((HomotopyCategory.quotient _ (.up ℤ)).obj I))) := hu
+      infer_instance
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- Exactness and literal sheaf-level forgetting for the native open lift.
@@ -521,11 +651,11 @@ Proof:
 are the same functions. The exact ringed-site extension by zero is the underlying
 native extension; the lift acts on arrows by the same functor. Exact conservative
 forgetting detects exactness, and exact-functor localization gives openComparison.
-2. The middle scheme of a compactification is separated finite type over k₀, by
-lem-sfb-compactification-middle-over-base. Its native and ordinary hearts are
-Grothendieck by hearts. Direct image is the left exact right adjoint from
-lem-weil-pbc-ringed-topoi-module-adjunction. The fixed-pair derived comparison gives
-properComparison, and proper_normalization includes its derived units.
+2. The native and ordinary hearts of the middle scheme are Grothendieck by the existing
+AdicSheaf instance, with no finite-type hypothesis on the middle scheme. The native
+adicLowerStar and its fixed-pair lift are additive and left exact. The fixed-pair
+derived comparison gives properComparison, and proper_normalization includes its
+derived units.
 3. Resolve the complex after open extension by a native K-injective I. It stays
 K-injective after forgetting, so both constructions are Q(p_* UI). The normalization
 equation identifies the comparison with the identity; proper_frobenius identifies

@@ -35,11 +35,12 @@
    }
   },
   {
-   "text": "Unpack an internal $B$-module action in sheaves of $\\underline\\Omega$-modules [sk-def-sfb-module-objects]. By [def-pur-sheaf-tensor-product] and the sheafification universal property [def-weil-presheaf-modules-sheafification], a map $B\\otimes_{\\underline\\Omega}M\\to M$ is exactly a restriction-compatible family of $\\underline\\Omega(V)$-balanced bilinear maps $B(V)\\times M(V)\\to M(V)$. The unit and associativity diagrams say $1m=m$ and $(bb')m=b(b'm)$ on sections. Conversely a sectionwise $B(V)$-module action supplies these maps, after restricting scalars along $\\underline\\Omega\\to B$. The two assignments are inverse; the morphism condition in the same definition is precisely sectionwise $B(V)$-linearity. Hence the module presentations, actions and forgetful functors agree.",
+   "text": "Unpack an internal $B$-module action in sheaves of $\\underline\\Omega$-modules [sk-def-sfb-module-objects]. By [def-pur-sheaf-tensor-product] and the sheafification universal property [def-weil-presheaf-modules-sheafification], a map $B\\otimes_{\\underline\\Omega}M\\to M$ is exactly a restriction-compatible family of $\\underline\\Omega(V)$-balanced bilinear maps $B(V)\\times M(V)\\to M(V)$. The unit and associativity diagrams say $1m=m$ and $(bb')m=b(b'm)$ on sections. Conversely a sectionwise $B(V)$-module action supplies these maps, after restricting scalars along $\\underline\\Omega\\to B$. The two assignments are inverse; the morphism condition in the same definition is precisely sectionwise $B(V)$-linearity. Hence the module presentations, actions and forgetful functors agree. In Lean the existing normalized nativeToOrdinaryModules composite is an equivalence by nativeScalarForgetting_isEquivalence [lem-sf-native-scalar-forgetting-equivalence], scalar restriction along the coefficient isomorphism, and nativeOrdinaryPresentation. Its underlying sheaf equation is definitional.",
    "uses": [
     "sk-def-sfb-module-objects",
     "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sf-native-scalar-forgetting-equivalence"
    ],
    "elementary": true,
    "source": {
@@ -48,17 +49,14 @@
    }
   },
   {
-   "text": "Use the small site models of [def-weil-pbc-proetale-site, def-weil-size-convention]. The sheaf $R_T$ is commutative, so [lem-pur-ringed-site-grothendieck-abelian] applies and makes $\\mathcal A_T$ Grothendieck abelian. Apply the site-reindexing assertion of [lem-sf-weil-frobenius-action-resolutions]: postcomposition by $g_T$ and $g_T^{-1}$ preserves coverings, gives inverse site equivalences and identifies the coefficient functions with the same functions, retaining their finite coefficient fields. Thus the module functors $P_T$ and $P_T^{-1}$ are inverse additive exact equivalences, with the native coefficient actions.",
+   "text": "For the actual native hearts, use the existing AdicSheaf.isGrothendieckAbelian instance from SixFunctors/ProEtale/Adic/Module.lean and the native frobeniusPullback equivalence instance from WeilSheaf/Category.lean [def-sf-native-weil-derived-framework]. Exactness follows from equivalence of abelian categories. The explicit inverse reindexing is the inverse of adicLowerStarEquivalence for geometricGaloisFrobenius.symm; its functor is definitionally frobeniusPullback. Thus no separate action-site or coefficient-presentation comparison is required for these native structural clauses.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-size-convention",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sf-weil-frobenius-action-resolutions"
+    "def-sf-native-weil-derived-framework"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "lean/WeilConjectures/WeilSheaf/Category.lean",
-    "place": "frobeniusPullback and ProEtaleWeilSheaf; site and ringed-module assertions supplied by the explicitly cited nodes."
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean; lean/WeilConjectures/WeilSheaf/Category.lean",
+    "place": "AdicSheaf Grothendieck instance; frobeniusPullback and its equivalence instance; adicLowerStarEquivalence."
    }
   },
   {
@@ -74,13 +72,12 @@
    }
   },
   {
-   "text": "The geometric fibres are separated finite-type $k$-schemes by [lem-pod-separated-finite-type-base-change]. Finite type gives quasi-compactness; separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. Thus [lem-sf-native-adic-qcqs-stratification] identifies the local constructibility condition of [def-sf-native-weil-derived-framework] with a finite stratification of the whole fibre by locally closed constructible subschemes with lisse restrictions. The converse restricts such a partition to open subsets; the strata stay constructible because $T$, of finite type over $k$, is a Noetherian space, where every finite union of locally closed subsets is constructible [def-weil-constructible-subset]. Step 2 identifies the restricted rings and finite free modules. Together with Step 4's cohomology identity, this proves that the displayed $\\mathcal W(T_0)=U_T^{-1}(\\mathcal C_T)$ is exactly the native bounded constructible full subcategory, and proves constructibility is tested after forgetting.",
+   "text": "The geometric fibre is quasi-compact and quasi-separated by base change [lem-pod-separated-finite-type-base-change, lem-pc-separated-quasi-separated]. Apply [lem-sf-native-adic-qcqs-stratification] to turn each native constructible cohomology sheaf into a finite stratified lisse sheaf, then transport across (U.mapDerivedCategoryHomologyFunctorIso n).app K. Conversely transport a stratified lisse sheaf back along the inverse homology comparison, and apply IsAdicStratifiedLisseSheaf.isAdicConstructibleSheaf from the native framework [def-sf-native-weil-derived-framework]. Combine this with bounded_mapDerivedCategory_obj and bounded_of_bounded_mapDerivedCategory_obj from Step 4. The converse uses the existing stratified predicate, which already retains constructible images; no Noetherian-space constructibility argument is needed.",
    "uses": [
     "lem-pod-separated-finite-type-base-change",
     "lem-pc-separated-quasi-separated",
     "lem-sf-native-adic-qcqs-stratification",
-    "def-sf-native-weil-derived-framework",
-    "def-weil-constructible-subset"
+    "def-sf-native-weil-derived-framework"
    ],
    "elementary": false,
    "source": {
@@ -89,26 +86,22 @@
    }
   },
   {
-   "text": "By [lem-weil-proetale-weakly-etale-localization] the pro-etale site of the open $X$ is the localization of that of $\\overline X$ at $X$. On an object over $X$, both restricted coefficient sheaves are the identical locally finite functions. Apply [lem-pur-site-restriction-module-adjunction-exact] to this ringed localization: the ordinary $j_!$ is exact. The actual native lift is specified in [def-sf-native-weil-derived-framework] as $(M,\\theta)\\mapsto(j_!M,j_!(\\theta)c_M)$, hence $U_{\\overline X}j_!^{\\mathrm W}=j_!U_X$ on sheaves and their maps. The lift is exact as well: its underlying short sequences are exact by ordinary $j_!$, and the exact conservative forgetful functor tests exactness by its cohomology identity. Termwise application therefore gives the same equality after localization, by [lem-sf-exact-functor-derived-triangulated].",
+   "text": "For the actual native open functor [def-sf-native-weil-derived-framework], use the existing finite-limit and finite-colimit preservation instances for adicOpenImmersionLowerShriek and its fixed-pair lift extensionByZero. The composite extensionByZero followed by forgetting is definitionally forgetting followed by adicOpenImmersionLowerShriek. The exact derived comparison is (mapDerivedCategoryCompIso _ _).symm, followed by mapDerivedCategoryNatIso of mapOfNatIsoCompForgetIso, followed by mapDerivedCategoryCompIso _ _ [lem-sf-exact-functor-derived-triangulated]. Thus the previously proved native open-extension API supplies this step directly, without a new abstract localized-module argument.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
     "def-sf-native-weil-derived-framework",
     "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Labels lemma-extension-by-zero and lemma-extension-by-zero-exact (03DI,03DJ), applied through the cited ringed-localization statements."
+    "document": "lean/WeilConjectures/WeilSheaf/OpenImmersion.lean; lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "ProEtaleWeilSheaf.extensionByZero and its exactness instances; exact-functor derived composition and natural-isomorphism comparisons."
    }
   },
   {
-   "text": "By [lem-sfb-compactification-middle-over-base] (with $S=\\operatorname{Spec}k_0$) the compactification $\\overline X_0$ is separated of finite type over $k_0$, so Steps 3--5 apply to $T_0=\\overline X_0$ and to $T_0=Y_0$. The ordinary module $p_*$ is additive and left exact: [lem-weil-pbc-ringed-topoi-module-adjunction] makes it a right adjoint, and a compatible family of maps into a limit corresponds under its Hom adjunction to a compatible family into the original limit. The native proper lift is the lift for $L=p_*$ and $e=a$ in [lem-sf-fixed-pair-derived-forget-comparison], by the formula in [def-sf-native-weil-derived-framework]. Applying that lemma with $(\\mathcal C,F)=(\\mathcal A_{\\overline X},P_{\\overline X})$ and $(\\mathcal D,H)=(\\mathcal A_Y,P_Y)$ gives Grothendieck hearts, K-injective preservation by $U_{\\overline X}$ and a derived isomorphism $U_YRp_*^{\\mathrm W}\\cong Rp_*U_{\\overline X}$. The lift formula gives the literal equality $U_Yp_*^{\\mathrm W}=p_*U_{\\overline X}$ on objects and morphisms; Step 8 takes the comparison $d$ induced by this equality and normalized by the units on all K-injective complexes, rather than an independently chosen objectwise isomorphism.",
+   "text": "Use the actual adicLowerStar and its fixed-pair lift lowerStar from the native framework [def-sf-native-weil-derived-framework]. The source already supplies their additive and left-exact structures. Define d to be the existing rightDerivedFunctorMapOfNatIsoCompForgetIso, whose four factors are the exact-right composition comparison, derivation of mapOfNatIsoCompForgetIso, the composition comparison for forgetting followed by adicLowerStar, and the identification of derived forgetting with exact localization [lem-sf-fixed-pair-derived-forget-comparison]. This is the comparison of the actual functors, rather than a new chosen isomorphism. Neither its construction nor the normalization below needs finite-type hypotheses on the middle scheme.",
    "uses": [
-    "lem-sfb-compactification-middle-over-base",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-sf-fixed-pair-derived-forget-comparison",
-    "def-sf-native-weil-derived-framework"
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-fixed-pair-derived-forget-comparison"
    ],
    "elementary": false,
    "source": {
@@ -117,16 +110,18 @@
    }
   },
   {
-   "text": "For a complex $K$ in the native source, take a K-injective resolution $s:j_!^{\\mathrm W}K\\to I$ in $\\mathcal B_{\\overline X}$ by [lem-sfb-grothendieck-k-injective]. Step 4 makes $U_{\\overline X}I$ K-injective and $U_{\\overline X}s$ a quasi-isomorphism. The K-injective computation and unit normalization in [def-sfb-right-derived-functor] identify both sides of $d$ with $Q(p_*U_{\\overline X}I)$; the normalization follows from the units themselves. At $I$, write $\\eta_I^{\\mathrm W}$ and $\\eta_{UI}$ for the native and ordinary derived units. Apply [lem-weil-pbc-kinjective-exact-square-comparison] with its exact functors $(r,s)=(U_{\\overline X},U_Y)$ and $(H',H)=(p_*^{\\mathrm W},p_*)$: both source hearts have K-injective resolutions, the forgetful functors are exact and $U_{\\overline X}$ preserves K-injectives (Step 4), and $U_Yp_*^{\\mathrm W}=p_*U_{\\overline X}$ (Step 7). Let $d$ be its unique natural isomorphism $\\beta$, so $d_{QI}\\,U_Y\\eta_I^{\\mathrm W}=\\eta_{UI}$ for every K-injective $I$. Both units are isomorphisms by the cited K-injective computation. Using their inverses to identify the targets with $Q(p_*UI)$ makes $d_{QI}$ the identity. Naturality along $s$ then identifies both units at $j_!^{\\mathrm W}K$ with $Q(p_*Us)$. The native structure on $p_*^{\\mathrm W}I$ is degreewise $p_*(\\theta_I)a_{UI}$; ordinary derivation computes the Frobenius comparison on the same underlying K-injective $UI$. Indeed $P_{\\overline X}UI\\cong UI$ is also K-injective. Thus the two Frobenius arrows are literally $Q(p_*(\\theta_I)a_{UI})$, and the identity comparison intertwines them.",
+   "text": "Prove proper_normalization directly for the canonical d, retaining the arrows leftUnit and rightUnit of [lem-weil-pbc-kinjective-exact-square-comparison]. In the fully proved private fixedPair_unit_normalization lemma, apply rightDerivedNatTrans_app to the exact-right composition comparison, the strict forgetting isomorphism, and the derived composition comparison. Their unit equations cancel the homotopy composition identifications. The equation rightDerivedFunctorIsoMapDerivedCategory_hom_fac then changes the last composite to the inverse exact-localization factor, giving leftUnit I followed by d_QI equals rightUnit I for every complex I. On a K-injective I the native unit is invertible; forgetting preserves K-injectives by Step 4, so the ordinary unit is invertible too [def-sfb-right-derived-functor]. This proves both isomorphism clauses. The theorem proper_frobenius follows separately by applying Q.map to equal complex maps and using extensionality in each degree: the fixed-pair lift structure is definitionally a followed by adicLowerStar of theta. For the remaining open_proper theorem, take native K-injective resolutions [lem-sfb-grothendieck-k-injective] after open extension, so this normalized proper comparison is the identity on their common underlying proper-pushforward representative.",
    "uses": [
-    "lem-sfb-grothendieck-k-injective",
+    "lem-sf-fixed-pair-derived-forget-comparison",
     "def-sfb-right-derived-functor",
-    "lem-weil-pbc-kinjective-exact-square-comparison"
+    "lem-weil-pbc-kinjective-exact-square-comparison",
+    "def-sf-native-weil-derived-framework",
+    "lem-sfb-grothendieck-k-injective"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Native refinement of the equivariance paragraph: the common K-injective representative and the identical lifted structure maps."
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean",
+    "place": "rightDerivedFunctorMapOfNatIsoCompForgetIso and the unit equations of its four factors; mapOfNatIso_obj_str. The final resolution argument remains the plan for open_proper."
    }
   },
   {
@@ -147,31 +142,22 @@
   "sk-def-sfb-module-objects",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-proetale-site",
-  "def-weil-size-convention",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "def-sf-native-weil-derived-framework",
   "lem-sf-fixed-pair-derived-forget-comparison",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-pod-separated-finite-type-base-change",
   "lem-pc-separated-quasi-separated",
   "lem-sf-native-adic-qcqs-stratification",
-  "def-sf-native-weil-derived-framework",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-sfb-grothendieck-k-injective",
   "def-sfb-right-derived-functor",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sfb-compactification-middle-over-base",
-  "def-weil-constructible-subset",
   "lem-weil-pbc-kinjective-exact-square-comparison",
-  "lem-sf-native-scalar-forgetting-equivalence"
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "lean/Sheaf/WeilSheaf/NativeOpenProperForgetting.lean",
-  "place": "The five filled declarations use the existing locally finite coefficient, scalar-forgetting, normalized realization, Frobenius equivalence and exact open-extension APIs; the four remaining theorem proofs retain the planned route."
+  "place": "G2: hearts is proved from fixedPair_forget_properties, the exact homology comparison, boundedness reflection, and native qcqs stratification. proper_normalization is proved by the unit equations of the existing four-factor canonical comparison, with explicit K-injective preservation. The previously landed proper_frobenius proof and the five other completed theorem bodies are preserved. This delivery closes two of the three current holes: eight of nine public theorem proofs are now complete, and open_proper remains the sole unchanged sorry. No new holes or intermediate theorem nodes are added."
  },
  "mathlib_searches": [
   {
@@ -515,22 +501,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J9",
-  "result": "pass",
-  "landing": "20261027T210113-L-1656476",
+  "reviewer": "C-ef656",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T233943-L-4140677",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.NativeWeilOpenProper.hearts",
-   "AlgebraicGeometry.NativeWeilOpenProper.open_proper",
-   "AlgebraicGeometry.NativeWeilOpenProper.proper_frobenius",
-   "AlgebraicGeometry.NativeWeilOpenProper.proper_normalization"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.NativeWeilOpenProper.hearts",
-   "AlgebraicGeometry.NativeWeilOpenProper.open_proper",
-   "AlgebraicGeometry.NativeWeilOpenProper.proper_normalization"
-  ]
+  "note": "independent cc review: item NativeOpenProperForgetting.lean + node lem-sf-native-weil-open-proper-forgetting vs clone 088f3a1c and unit sk-prop-sf-biduality-general (realized empty); importer NativeExceptionalHomTransport compiled against fixed item"
  }
 }
