@@ -648,6 +648,60 @@ structure SystemMates (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
       (Mates.b l Ω d z.change z.allowed).hom.app
         (((tr.reconstruction E false).evaluation z.n).obj N)
 
+/-- Construction of the mate and finite-reduction data used by the integral scalar comparison.
+Source: Zheng, Lemma 5.22 and Proposition 5.26; the finite reduction and completed scalar
+transport steps of the exceptional coefficient construction.
+(blueprint: lem-sf-exceptional-integral-scalar-mates-data).
+The proof constructs the finite scalar maps from the ordinary etale adjunction, transports them
+through the reduction/limit reconstruction, and assembles the integral scalar functor using the
+published completed scalar comparison. The counit transpose and all shift witnesses are retained.
+-/
+theorem exceptionalIntegralScalarMates_data
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (c : Compactification f)
+    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
+    (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
+    (transport : Transported l Ω D hl c operation left) :
+    ∃ d : Mates l Ω c operation left,
+      ∃ red : ∀ (E : FieldStage.{u} l) (n : ℕ),
+        ReductionMates l Ω D hl c operation left transport d E n, True := by
+  sorry
+
+/-- Construction of the whole-system scalar mate from the integral mate data.
+Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26; the cofinal ramified
+subsequence, finite-free comparison, and normalized system transport steps.
+(blueprint: lem-sf-exceptional-integral-scalar-mates-system).
+The proof transports finite-level mates along the normalized subsequence equivalence, uses the
+completed scalar comparison to identify the chosen integral functor, and conjugates the system
+counit equation through reconstruction. Balanced associativity supplies transitions and shifts.
+-/
+theorem exceptionalIntegralScalarMates_system
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (c : Compactification f)
+    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
+    (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
+    (transport : Transported l Ω D hl c operation left)
+    (d : Mates l Ω c operation left)
+    (red : ∀ (E : FieldStage.{u} l) (n : ℕ),
+      ReductionMates l Ω D hl c operation left transport d E n)
+    (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier) :
+    Nonempty (SystemMates l Ω D hl c operation left transport d red E L i) := by
+  sorry
+
 /-- Core integral scalar mate data before the arithmetic ramified-index witness.
 Source: Zheng, Lemma 5.22 and Proposition 5.26. The proof follows the parent's
 system transport, finite reduction, completed scalar comparison, reconstruction,
@@ -671,7 +725,10 @@ theorem exceptionalIntegralScalarMates_core
         ReductionMates l Ω D hl c operation left transport d E n,
       ∀ (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier),
         Nonempty (SystemMates l Ω D hl c operation left transport d red E L i) := by
-  sorry
+  obtain ⟨d, red, _⟩ := exceptionalIntegralScalarMates_data l Ω D hl c operation left transport
+  refine ⟨d, red, ?_⟩
+  intro E L i
+  exact exceptionalIntegralScalarMates_system l Ω D hl c operation left transport d red E L i
 
 private theorem restrictionBounds (E : FieldStage.{u} l) (T : Scheme.{u})
     (S : SystemLevelLeftExtensionTheory.{u + 1, u, u + 1}
