@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleCoordinateTraceData
+import Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality
 
 /-! # The transpose computation for the coordinate Kunneth factorization
 
@@ -16,6 +17,8 @@ transposes from the final cancellation by the derived adjunction.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
@@ -54,6 +57,6 @@ theorem coordinateKunnethFactorization_transpose [Finite A] {X Y : Scheme.{u}}
                 (orderedProjectionIso A (pullback.fst f f) M
                   ((pull A (pullback.snd f f)).obj ((pull A f).obj L))).hom)) ≫
         (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).counit.app _ := by
-  sorry
+  rw [coordinateKunnethFactorization_route_eq A f L M]
 
 end AlgebraicGeometry.Etale.CoordinateTrace

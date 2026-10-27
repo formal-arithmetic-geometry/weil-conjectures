@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-etale-coordinate-kunneth-route-equality",
+ "kind": "statement",
+ "title": "Pre-pullback equality of coordinate Kunneth routes",
+ "statement": "For finite A and proper f, the ordered-projection/direct-comparison route equals the projection/exchange route before applying pullback and the counit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, coordinate interchange calculation."
+ },
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand both routes using the ordered projection, exchange, comparison, and direct comparison mate equations and apply naturality of the tensor comparison.",
+   "uses": [
+    "lem-sfb-ringed-kunneth-factorizations",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-kun-unbounded-exchange",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-kunneth-factorizations",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-kun-unbounded-exchange",
+  "def-kun-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Coordinate interchange calculation before pullback."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-etale-coordinate-kunneth-factorization",
+   "place": "Coordinate interchange calculation.",
+   "via": [
+    "lem-sfb-etale-coordinate-kunneth-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateKunnethRouteEquality.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.coordinateKunnethFactorization_route_eq",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-28",
+  "statement": "theorem coordinateKunnethFactorization_route_eq [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) : (orderedProjectionIso A f ((push A f).obj M) ((pull A f).obj L)).hom ≫ (push A f).map (comparison A f L M).inv ≫ (directComparison A f).hom.app _ = ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app M).app ((push A f).obj ((pull A f).obj L)) ≫ (push A f).map (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map (exchange1 A f ((pull A f).obj L)).hom ≫ (orderedProjectionIso A (pullback.fst f f) M ((pull A (pullback.snd f f)).obj ((pull A f).obj L))).hom)"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose",
+  "date": "2026-10-28",
+  "group": "U2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "equality of two derived projection exchange routes before pullback",
+   "results": "No direct specialized theorem found; split is needed below the target.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction homEquiv projection exchange",
+   "results": "Only generic adjunction mate declarations found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateKunnethFactorization_route_eq",
+   "results": "No existing declaration.",
+   "date": "2026-10-28",
+   "verdict": "no duplicate"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T210245-L-1680372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T210245-L-1680372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
