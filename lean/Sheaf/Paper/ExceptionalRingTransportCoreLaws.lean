@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ExceptionalRingTransportCoreData
+import Sheaf.Paper.ExceptionalRingTransportCoreLawsSystem
+import Sheaf.Paper.ExceptionalRingTransportCoreLawsEvaluation
+import Sheaf.Paper.ExceptionalRingTransportCoreLawsNormalization
 
 /-! # Compatibility laws for exceptional integral transport
 
@@ -139,6 +142,23 @@ theorem exists_exceptional_transport_core_laws
       LeftRealization.{u} l Ω c s (operation s))
     (d : TransportCoreData l Ω D hl c operation left) :
     Nonempty (TransportCoreLaws l Ω D hl c operation left d) := by
-  sorry
+  obtain ⟨hs⟩ := exists_exceptional_transport_core_system_laws
+    l Ω D hl f c operation left d
+  obtain ⟨he⟩ := exists_exceptional_transport_core_evaluation_laws
+    l Ω D hl f c operation left d
+  obtain ⟨hn⟩ := exists_exceptional_transport_core_normalization_laws
+    l Ω D hl f c operation left d
+  exact ⟨{
+    support := hs.support
+    adjunction_eq := hs.adjunction_eq
+    reductionF_eq := hs.reductionF_eq
+    reductionG_eq := hs.reductionG_eq
+    evaluation_unit := he.evaluation_unit
+    evaluation_counit := he.evaluation_counit
+    evaluation_support := he.evaluation_support
+    integralLeft_normalized := hn.integralLeft_normalized
+    inputGood := hn.inputGood
+    openGood := hn.openGood
+    integral_system_normalized := hn.integral_system_normalized }⟩
 
 end WeilConjectures.ExceptionalIntegralScalar
