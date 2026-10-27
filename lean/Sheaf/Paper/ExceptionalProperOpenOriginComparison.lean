@@ -6,6 +6,8 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.Paper.ExceptionalSystemInterfaces
+import Sheaf.Paper.ExceptionalProperOpenOriginConstruction
+import Sheaf.Paper.ExceptionalProperOpenOriginProperties
 
 /-! # Proper/open comparison on strict pro-etale systems -/
 
@@ -79,6 +81,8 @@ theorem exceptionalProperOpenOriginComparison
     (CY.image.inverseEvaluation n).hom.app (S.functor.obj M) ≫
       (CY.image.level n).inverse.map ((S.evaluation n).hom.app M) ≫
       (exceptionalSystemLevelComparison R n).app ((S.PX.evaluation n).obj M)) := by
-  sorry
+  obtain ⟨P, ⟨R⟩⟩ := exceptionalProperOpenOriginConstruction CX CY CZ hX hY hZ
+  obtain h := exceptionalProperOpenOriginProperties G CX CY CZ hX hY hZ P R
+  exact ⟨P, R, h⟩
 
 end AlgebraicGeometry
