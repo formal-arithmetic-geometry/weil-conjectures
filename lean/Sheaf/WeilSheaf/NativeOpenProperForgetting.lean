@@ -378,6 +378,7 @@ def ordinaryFrobeniusChain (p : Z ⟶ Y) [p.IsOver (Spec (CommRingCat.of k₀))]
           (comp_over p (Spec (CommRingCat.of k₀))))).map (I.X n).str.hom
     comm' := fun i j _ ↦ t.comm i j }
 
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- On the common native K-injective representative both Frobenius arrows are
 Q(p_*(theta_I) a_UI), with the framework's precise direct-image comparison a.
 Source: native comparison Step 8; LowerStar.lean and mapOfNatIso_obj_str
@@ -395,7 +396,7 @@ theorem proper_frobenius (p : Z ⟶ Y) [p.IsOver (Spec (CommRingCat.of k₀))]
           (IsoAlgebra.strNatIso (WeilSheaf.frobeniusPullback k₀ l Y)).hom (.up ℤ)).app
             (((ProEtaleWeilSheaf.lowerStar k₀ l p).mapHomologicalComplex (.up ℤ)).obj I)) =
       DerivedCategory.Q.map (ordinaryFrobeniusChain (k₀ := k₀) (l := l) p I) := by
-  sorry
+  rfl
 
 /-- The ordinary ordered open/proper construction for the chosen compactification.
 Source: LowerShriek.lean and native comparison Step 9
