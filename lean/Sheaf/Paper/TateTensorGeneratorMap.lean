@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CondensedTateIntegralTowerData
+public import Sheaf.Paper.TateTensorGeneratorCompatibility
+import Sheaf.Paper.TateTensorGeneratorZero
+import Sheaf.Paper.TateTensorGeneratorOne
+import Sheaf.Paper.TateTensorGeneratorStep
 
 /-! Fixed-level root-generator comparison for the integral Tate tensor.
 
@@ -20,35 +24,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.MonoidalCategory
 open AlgebraicGeometry.Etale.FiniteSmoothPurity
 namespace AlgebraicGeometry.Scheme.PurityIntegralTower
-
-/-- The prescribed action of a morphism on compatible root generators.
-Source: smooth-purity transport, ordinary Tate quotient comparison. -/
-def GeneratorCompatible
-    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]
-    (n d : ℕ) (f : (realization T ell n).obj (finiteSheaf T ell n d) ⟶
-      quotientLine T ell n d) : Prop :=
-      ∀ (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ)
-        (v : W.unop ⟶ (toProEt T).obj U.unop)
-        (a : coefficient ell (n + 1))
-        (z : Fin d → (T.rootsOfUnitySheaf (ell ^ (n + 1))).obj.obj U)
-        (x : Fin d → (purTwistZlOne T ell).obj.obj W),
-        (∀ i : Fin d, finiteTateLimitRootValue ell T n W (x i) =
-          Units.map v.left.appTop.hom.toMonoidHom
-            (finiteTateEtaleRootValue T (ell ^ (n + 1)) U (z i))) →
-        f.val.app W
-            (1 • (@id (((realization T ell n).obj (finiteSheaf T ell n d)).val.obj W)
-              ((toSheafify (ProEt.topology T)
-              ((finiteSheaf T ell n d).obj ⋙ forget₂ _ AddCommGrpCat.{u + 1})).app W
-              ((finiteSheaf T ell n d).obj.map v.op
-                (((ProEtale.comparisonAdjunction
-                  (ModuleCat.{u + 1} (coefficient ell (n + 1))) T).unit.app
-                    (finiteEtaleTateTwist T (ell ^ (n + 1))
-                      (coefficient ell (n + 1)) (CharP.cast_eq_zero _ _) d)).hom.app U
-                  (finiteTateEtalePowerGenerator T _ (ell ^ (n + 1))
-                    (CharP.cast_eq_zero _ _) U a d z)))))) =
-          pbcTensorSection (pbcAdicProjection T (datum.{u} ell) n)
-            (integralLine T ell d) W (((scalars T ell n).app W).hom a)
-              (integralGenerator T ell W d x)
 
 /-- A morphism inducing the quotient projection on all compatible root generators.
 No invertibility is asserted here.
@@ -70,6 +45,16 @@ theorem tateTensorQuotient_generator_map
     (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]
     (hT : IsUnit (ell : Γ(T, ⊤))) (n d : ℕ) :
     ∃ f : (realization T ell n).obj (finiteSheaf T ell n d) ⟶ quotientLine T ell n d,
-      GeneratorCompatible T ell n d f := by sorry
+      GeneratorCompatible T ell n d f := by
+  have h1 := tateTensorQuotient_generator_one T ell hT n
+  induction d with
+  | zero => exact tateTensorQuotient_generator_zero T ell n
+  | succ d ih =>
+    cases d with
+    | zero => exact h1
+    | succ d =>
+      obtain ⟨f, hf⟩ := ih
+      obtain ⟨g, hg⟩ := h1
+      exact tateTensorQuotient_generator_step T ell n d f g hf hg
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower

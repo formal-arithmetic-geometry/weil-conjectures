@@ -20256,3 +20256,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/F1/Sheaf.Paper.TateTensorNormalizedSquarePair (stage 3; reviewer PASS; first push; landing 20261027T233922-L-4136776 (interface); batch 20261027T233735; modules 6; new nodes 6)
 - 23:39 L: merged deliver/F2/Sheaf.Paper.ProjectiveSupportedSourceNormalization (stage 3; reviewer PASS; first push; landing 20261027T233923-L-4137111 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/F3/Sheaf.Paper.AmbientTensorComposition (stage 3; reviewer PASS; first push; landing 20261027T233924-L-4137414 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:39 L: merged deliver/F3/Sheaf.Paper.TateTensorGeneratorMap (stage 3; reviewer PASS; first push; landing 20261027T233926-L-4137735 (interface); batch 20261027T233735; modules 5; new nodes 4; change records: coord/changes/tate-tensor-generator-compatibility.md)

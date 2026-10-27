@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-tate-tensor-generator-step",
+ "kind": "statement",
+ "title": "Append one root factor to two supplied normalized morphisms",
+ "statement": "For a Noetherian scheme T, prime ell, and n,d, suppose f in tensor degree d+1 and g in tensor degree 1 are supplied and each is GeneratorCompatible. Then there is a GeneratorCompatible morphism in degree d+2. No invertibility of ell is assumed. This is an inductive tensor operation on two actual morphisms, not existence in every degree.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2: Existence of the normalized integral Tate quotient morphism"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-tate-tensor-generator-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Use the positive-degree finite-twist recursion and the normalized tensor constraint of the comparison pullback.",
+   "uses": [
+    "lem-amb-comparison-pure-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport its tensor through scalar realization using the constant-scalar tensor comparison, then apply f tensor g.",
+   "uses": [
+    "lem-amb-constant-scalar-explicit-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse extension-of-scalars tensor constraint and contract the extra unit in integralLine 1. Split root tuples into castSucc and last, put a in the first factor and 1 in the last, and apply the two given compatibility equations. The resulting pure tensor is the defining integralGenerator recursion.",
+   "uses": [
+    "lem-pd-sheaf-scalar-extension-constraint-coherence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-comparison-pure-sections",
+  "lem-amb-constant-scalar-explicit-tensor",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2: degree-zero multiplication, first root projection, and tensor induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of a tensor power of the inverse limit of roots of unity modulo a prime power",
+   "results": "Eight hits: BDeRhamPlus, BDeRham, WittVector.StandardOneDimIsocrystal, and cyclotomicCharacter with its projection formulas. None concerns sheaf tensor realization.",
+   "date": "2026-10-28",
+   "verdict": "No matching sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, LinearEquiv",
+   "results": "TensorProduct.comm and its formulas, TensorProduct.equivOfCompatibleSMul, TensorProduct.lift.equiv and its formulas, LinearEquiv.lTensor, LinearEquiv.rTensor.",
+   "date": "2026-10-28",
+   "verdict": "Useful tensor algebra; no normalized comparison for these sheaf encodings."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*(tensor|unit)|tensor.*extendScalars|limit.*(rootsOfUnity|torsion)",
+   "results": "Six hits in ModuleCat/Monoidal/Adjunction, RingTheory/Regular/Free, RingTheory/Extension/Cotangent/Basic, and Module/SpanRankOperations.",
+   "date": "2026-10-28",
+   "verdict": "Generic scalar extension, no root-line or sheafified realization normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TateTensorGeneratorMap",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-tate-tensor-generator-map",
+   "place": "Append one root factor to two supplied normalized morphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TateTensorGeneratorStep",
+  "file": "lean/Sheaf/Paper/TateTensorGeneratorStep.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.tateTensorQuotient_generator_step",
+  "statement": "theorem tateTensorQuotient_generator_step\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime] (n d : ℕ)\n    (f : (realization T ell n).obj (finiteSheaf T ell n (d + 1)) ⟶\n      quotientLine T ell n (d + 1))\n    (g : (realization T ell n).obj (finiteSheaf T ell n 1) ⟶ quotientLine T ell n 1)\n    (hf : GeneratorCompatible T ell n (d + 1) f)\n    (hg : GeneratorCompatible T ell n 1 g) :\n    ∃ h : (realization T ell n).obj (finiteSheaf T ell n (d + 2)) ⟶\n      quotientLine T ell n (d + 2),\n      GeneratorCompatible T ell n (d + 2) h",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T233926-L-4137735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T233926-L-4137735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
