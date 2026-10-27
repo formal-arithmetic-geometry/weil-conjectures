@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.DiagonalTraceFiniteEvaluation
+import Sheaf.Paper.DiagonalTraceFiniteProjection
+import Sheaf.Paper.DiagonalTraceFinitePushUnitSeed
 
 /-! # The coefficient-unit component of finite direct-image comparison -/
 
@@ -55,6 +57,17 @@ theorem diagonalTrace_finitePush_unit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}
       (p.coefficientsS.unitMap l E p.LS ≫ (p.LS.projection n).app _) ≫
         evS.map (p.restrictionS.F.mapDerivedCategory.map
           ((SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _
-            (p.model.coefficientPullback.derivedIso l E).hom)) := by sorry
+            (p.model.coefficientPullback.derivedIso l E).hom)) := by
+  dsimp only
+  simp only [Presentation.finitePushComparison,
+    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Iso.symm_hom,
+    Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_comp, Category.assoc]
+  rw [← diagonalTrace_finiteEvaluation_projection l p _ n]
+  simp only [Category.assoc]
+  simp only [← Category.assoc]
+  rw [diagonalTrace_finitePush_unit_seed (p := p)]
+  simp
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
