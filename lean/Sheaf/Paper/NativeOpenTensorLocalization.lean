@@ -6,6 +6,8 @@ Authors: SHEAF group G7
 module
 
 public import Sheaf.Paper.NativeOpenTensorComparisonData
+import Sheaf.Paper.NativeOpenTensorComparisons
+import Sheaf.Paper.NativeOpenTensorPresentationExistence
 
 /-! # Localizing the native open tensor comparison
 
@@ -38,6 +40,8 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
+set_option maxHeartbeats 1000000 in
+-- The dependent presentation fields require a larger elaboration budget.
 /-- Totalize the fixed sheaf maps and descend them, with the prescribed models,
 to the unbounded ambient derived categories.
 
@@ -81,6 +85,9 @@ theorem native_open_tensor_localization (s : NativeOpenTensorData k₀ l j) :
       HEq c.iA (nativeOpenTensorInsertion k₀ l U) ∧
       HEq c.iB (nativeOpenTensorInsertion k₀ l Z) ∧
       HEq c.sheafGamma s.sheafGamma ∧ HEq c.gamma gamma ∧
-      HEq c.sheafRestriction s.sheafRestriction ∧ HEq c.restriction rho := by sorry
+      HEq c.sheafRestriction s.sheafRestriction ∧ HEq c.restriction rho := by
+  obtain ⟨rho, gamma, _⟩ := native_open_tensor_comparisons k₀ l j s
+  obtain ⟨c, hc⟩ := native_open_tensor_presentation_exists k₀ l j s rho gamma
+  exact ⟨rho, gamma, c, hc⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

@@ -16,57 +16,29 @@
  },
  "proof": [
   {
-   "text": "Apply the fixed sheaf comparisons s.sheafGamma and s.sheafRestriction and their inverses in every bidegree, with the actual native tensor and open operations. The signed differential on degree (p,q) is dx tensor y + (-1)^p x tensor dy in both orders. Coproducts are created by forgetting Weil structures. Hence the maps assemble to chain isomorphisms whose every summand is the prescribed sheaf map. The ordinary total-complex theorem gives exactly this direct-sum convention.",
+   "text": "Localize the totalized sheaf comparison and its inverse in the two-sided K-flat resolving subcategories. The localization universal property gives the natural derived restriction and open tensor isomorphisms rho and gamma.",
    "uses": [
-    "lem-sf-ringed-open-total-tensor-kflat",
-    "lem-sf-fixed-pair-created-abelian-structure"
+    "new-sf-native-open-tensor-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the equivariant flat-term K-flat resolution theorem on the twisted action site. Its finite-subextension coefficients agree with the native locally-finite-span coefficient functions: finitely many spanning values generate a finite subextension, and a quasi-compact test object requires finitely many neighborhoods. Their finite compositum gives the identification. By the K-flat preservation fields of s, extension and restriction send these resolutions to K-flat representatives of the exact open functors.",
+   "text": "With rho and gamma fixed, use the native total tensor, derived tensor, K-flat predicates, models, and summand insertions. Degreewise tensor comparison and exactness prove the representative normalization equations, and the localization universal property gives the native OpenTensorPresentation with all eighteen heterogeneous equalities.",
    "uses": [
-    "lem-sf-weil-frobenius-action-resolutions",
-    "def-sf-derived-weil-category-and-operations"
+    "new-sf-native-open-tensor-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; native resolution and coefficient identification by Q85"
-   }
-  },
-  {
-   "text": "Check flat-term preservation too. For a flat sheaf on the open, restrict an ambient short exact sequence, tensor with that sheaf, and extend; the fixed sheaf comparison identifies this with tensor by its extension. For a flat ambient sheaf, extend a short exact sequence on the open, tensor with the ambient sheaf, and restrict back using the invertible unit in s; its restriction is flat. Thus both functors preserve the resolving subcategories. Apply ringed action-site derived tensor descent and the localization universal property to the chain maps and their inverses. Under the prescribed native tensor models and exact-functor factors, obtain rho and gamma and both representative squares. Naturality, resolution independence and the inverse identities descend in each variable. Set every other presentation field to the actual native construction, so its heterogeneous compatibility equalities are reflexive.",
-   "uses": [
-    "lem-sf-twisted-action-ringed-site",
-    "lem-sf-weil-frobenius-action-resolutions",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sf-derived-weil-category-and-operations",
-  "lem-sf-fixed-pair-created-abelian-structure",
-  "lem-sf-ringed-open-total-tensor-kflat",
-  "lem-sf-twisted-action-ringed-site",
-  "lem-sf-weil-frobenius-action-resolutions",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "new-sf-native-open-tensor-comparisons",
+  "new-sf-native-open-tensor-presentation"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "P1 stage 3",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Native equivariant refinement of Stacks 0GL1/0E8I; parent argument steps 3, 5, 6; full proof in Lean docstring."
+  "place": "Tags 0GL1 and 06YN; native open tensor proof steps 3--6",
+  "note": "The proof is decomposed into the derived comparison existence and the fixed-comparison presentation construction."
  },
  "mathlib_searches": [
   {
@@ -162,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-90a6f",
-  "group": "G7",
+  "reviewer": "COMPILER",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261027T131454-L-2940282",
+  "landing": "20261027T180718-L-3893899",
   "kind": "interface",
-  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
