@@ -165,6 +165,12 @@ theorem exists_ring_left_refinement
     have hsquare := ring_refinement_scalar_word.{u, v} l Ω D hl r hi hg ε hε
       E L i K (SX.functor.obj K) (SX.realization.app K)
     apply JY.map_injective
+    have hmono : Mono ((R.left d (.integral L)).hom.app (SX.functor.obj K) ≫
+        Hd.map (SX.realization.hom.app K)) :=
+      mono_comp' (SplitMono.mk ((R.left d (.integral L)).app (SX.functor.obj K)).inv
+          ((R.left d (.integral L)).app (SX.functor.obj K)).hom_inv_id).mono
+        (SplitMono.mk (Hd.mapIso (SX.realization.app K)).inv
+          (Hd.mapIso (SX.realization.app K)).hom_inv_id).mono
     apply (cancel_mono ((R.left d (.integral L)).hom.app (SX.functor.obj K) ≫
       Hd.map (SX.realization.hom.app K))).1
     dsimp only [Scalar.counitQ, Scalar.q]
