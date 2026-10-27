@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.EtaleFiniteCoefficientHomArrow
 public import Sheaf.Paper.InternalAdjunctionPairingChange
 public import Mathlib.CategoryTheory.Comma.Arrow
+import Sheaf.Paper.FiniteHomOrdinaryTransposeEvaluation
 
 /-! # The ordinary coordinates of the finite coefficient Hom transpose
 Source: blueprint thm-coef-finite-hom, evaluation paragraph
@@ -18,9 +19,32 @@ Source: blueprint thm-coef-finite-hom, evaluation paragraph
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-universe u
-open CategoryTheory AlgebraicGeometry
+universe u a b c d
+open CategoryTheory AlgebraicGeometry Opposite
 namespace WeilConjectures
+
+private theorem finiteHom_unique_transpose
+      {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
+      {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+      (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
+      (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor)
+      (K M : A)
+      (v : F.obj (HA.obj (op K, M)) ⟶ HB.obj (op (F.obj K), F.obj M))
+      (hv : SB.tensor.map (Prod.mkHom v (𝟙 (F.obj K))) ≫
+        SB.evaluation (F.obj K) (F.obj M) =
+          μ.inv.app (HA.obj (op K, M), K) ≫ F.map (SA.evaluation K M)) :
+      v = coefficientBaseChangeHom SA SB F μ K M := by
+    have hu : (SB.transpose _ (F.obj K) (F.obj M)).symm v =
+        SB.tensor.map (Prod.mkHom v (𝟙 (F.obj K))) ≫
+          SB.evaluation (F.obj K) (F.obj M) := by
+      simpa [CoefficientClosedStructure.transpose, CoefficientClosedStructure.tensor,
+        CoefficientClosedStructure.evaluation] using!
+        (SB.adjunction (F.obj K)).homEquiv_counit _ (F.obj M) v
+    apply (SB.transpose _ (F.obj K) (F.obj M)).symm.injective
+    rw [hu, hv]
+    unfold coefficientBaseChangeHom
+    exact ((SB.transpose _ _ _).symm_apply_apply _).symm
+
 
 /-- The right-tensor closed transpose is the published ordinary left-tensor transpose.
 Source: blueprint thm-coef-finite-hom, proof paragraphs 1--2, the sentence defining v
@@ -48,6 +72,20 @@ theorem finiteHom_ordinary_transpose
     Arrow.mk (etaleFiniteHomCanonical l E X h K M) =
       Arrow.mk (Etale.CoefficientPairingChange.evaluationComparison
         (finiteHomQuotient l E h) X K M) := by
-  sorry
+  have hchar := finiteHom_ordinary_transpose_evaluation l E X h K M
+  have hv := finiteHom_unique_transpose (finiteHomEtaleClosed l E X n)
+    (finiteHomEtaleClosed l E X m) (finiteHomEtaleReduction l E X h)
+    (finiteHomEtaleTensor l E X h) K M
+    (Etale.CoefficientPairingChange.evaluationComparison
+      (finiteHomQuotient l E h) X K M) hchar
+  have hh := congrArg (fun f :
+      (finiteHomEtaleReduction l E X h).obj
+          ((finiteHomEtaleInternalHom l E X n).obj (op K, M)) ⟶
+        (finiteHomEtaleInternalHom l E X m).obj
+          (op ((finiteHomEtaleReduction l E X h).obj K),
+            (finiteHomEtaleReduction l E X h).obj M) =>
+      (Arrow.mk f : Arrow (finiteHomEtale l E X m))) hv.symm
+  unfold finiteHomEtaleCategory
+  exact hh 
 
 end WeilConjectures
