@@ -12,23 +12,17 @@
  ],
  "proof": [
   {
-   "text": "Form the two ScalarQuotientChain.Tower records from the completed coefficient rings, the finite coefficient rings, their actual projections, and their transitions. The identity completedCoefficientMap followed by a projection equals the E projection followed by integralScalarQuotientSheafMap; compatibility of the same-index quotient maps gives the transition identity, including for ramified extensions. The finite constant comparisons and their completed limits define Transport; their naturality and projection equations verify its six commutative squares. Apply scalar_quotient_chain_squares. Its ordinary scalar-extension functors and the chosen finiteChangeData, unrestrictedIntegralReductionFunctor and integralScalarReduction have the same prescribed sheafified tensor objects and maps. The object equalities and map formulas therefore define natural presentation isomorphisms carrying their pure tensors to finitePure, unrestrictedIntegralTensorSection and integralScalarTensorSection. Transport the supplied completed comparison and its CompletedFormula to the generic presentation, apply the generic finite theorem, and transport its output back. Whisker with the inclusion of good complexes. The forward reassociation formula sends s tensor (a tensor x) to (c_L inverse(s) * iota(a)) tensor x. Quotients insert 1 in the middle factor and reduce the outer scalar. Transitions reduce both finite scalars on the left and the single scalar on the right. Naturality of presentation transport preserves the quotient and transition squares. Restriction of scalars changes neither underlying sections nor these maps, giving exactly the displayed formulas and equalities. No projection is assumed surjective, and no coefficient map is assumed flat; the lowest level, zero complexes, and empty sites obey the same tensor identities.",
+   "text": "Apply the finite formula construction to obtain the comparison and the four local formula predicates. Apply the finite square construction to those maps and predicates. Assemble the resulting conjunctions.",
    "uses": [
-    "lem-weil-isomorphism-scalar-quotient-chain-squares",
-    "def-weil-integral-scalar-extension",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-pur-derived-change-of-rings"
+    "lem-weil-isomorphism-scalar-finite-model-core",
+    "lem-weil-isomorphism-scalar-finite-model-squares"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-integral-scalar-extension",
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-isomorphism-scalar-quotient-chain-squares",
-  "lem-weil-proetale-isomorphism-inverse-image"
+  "lem-weil-isomorphism-scalar-finite-model-core",
+  "lem-weil-isomorphism-scalar-finite-model-squares"
  ],
  "proof_origin": {
   "by": "agent",
@@ -100,7 +94,7 @@
   ],
   "statement": "theorem scalar_finite_model (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅ (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g) (hb : CompletedFormula l E L ι g b) : ∃ (bfin : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅ (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n) (vleft : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n) (vright : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n) (tleft : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n) (tright : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n), FiniteFormula l E L ι g bfin ∧ LeftQuotientFormula l E L ι g vleft ∧ RightQuotientFormula l E L ι g vright ∧ QuotientSquare l E L ι g b bfin vleft vright ∧ LeftTransitionFormula l E L ι g tleft ∧ RightTransitionFormula l E L ι g tright ∧ TransitionSquare l E L ι g bfin tleft tright",
   "branch": "sheaf-dag",
-  "by": "R7",
+  "by": "Q8",
   "date": "2026-10-27"
  },
  "lean_audit": {
@@ -124,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-ea616",
-  "group": "R7",
-  "result": "fix",
-  "landing": "20261027T123533-L-2318397",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T151734-L-1201238",
   "kind": "interface",
-  "note": "independent cc review: delivered Lean (verbatim vocabulary move, two conjunct-split holes, proved private descend_model) against the clone, the node statement and the 4 direct importers (all compile; item 45.9 s on rerun, 70 s first at load ~100); item node records against the Lean proof"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

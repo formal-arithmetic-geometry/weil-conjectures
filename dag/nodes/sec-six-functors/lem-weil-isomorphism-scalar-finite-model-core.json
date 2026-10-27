@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-isomorphism-scalar-finite-model-core",
+ "kind": "statement",
+ "title": "Finite scalar comparison and local formula construction",
+ "statement": "theorem scalar_finite_core\n    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅\n      (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)\n    (hb : CompletedFormula l E L ι g b) :\n    ∃ (bfin : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅\n          (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n)\n      (vleft : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n)\n      (vright : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n)\n      (tleft : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n)\n      (tright : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n),\n    FiniteFormula l E L ι g bfin ∧\n    LeftQuotientFormula l E L ι g vleft ∧\n    RightQuotientFormula l E L ι g vright ∧\n    LeftTransitionFormula l E L ι g tleft ∧\n    RightTransitionFormula l E L ι g tright",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL, Steps 4--6 of the normalized finite model argument."
+ },
+ "stmt_deps": [
+  "lem-weil-isomorphism-scalar-completed-model"
+ ],
+ "proof": [
+  {
+   "text": "The finite balanced reassociation and the unit insertion/reduction maps give the stated local formulas; tensor generation gives the natural transformations. The quotient and transition computations are the two corresponding commutative squares.",
+   "uses": [
+    "lem-weil-isomorphism-scalar-quotient-chain-squares"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-isomorphism-scalar-quotient-chain-squares"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismScalarFiniteModel",
+  "group": "Q8",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-isomorphism-scalar-finite-model",
+   "place": "Finite coefficient calculation, Steps 4--6",
+   "via": [
+    "lem-weil-isomorphism-scalar-finite-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismScalarFiniteCore",
+  "file": "lean/Sheaf/Paper/IsomorphismScalarFiniteCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.scalar_finite_core",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.scalar_finite_core"
+  ],
+  "statement": "theorem scalar_finite_core\n    (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅\n      (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g)\n    (hb : CompletedFormula l E L ι g b) :\n    ∃ (bfin : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅\n          (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n)\n      (vleft : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n)\n      (vright : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n)\n      (tleft : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n)\n      (tright : ∀ n : ℕ,\n        (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶\n          (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n),\n    FiniteFormula l E L ι g bfin ∧\n    LeftQuotientFormula l E L ι g vleft ∧\n    RightQuotientFormula l E L ι g vright ∧\n    LeftTransitionFormula l E L ι g tleft ∧\n    RightTransitionFormula l E L ι g tright",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-27",
+  "note": "New stage-3 split-off statement; its proof is postponed as a named strictly simpler substep of the finite-model argument."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T151734-L-1201238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261027T151734-L-1201238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
