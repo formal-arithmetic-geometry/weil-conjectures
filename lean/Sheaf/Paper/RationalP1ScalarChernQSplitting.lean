@@ -6,6 +6,8 @@ Authors: SHEAF group C7
 module
 
 public import Sheaf.Paper.RationalP1ScalarChernMaps
+import Sheaf.Paper.RationalP1ScalarChernQRightInverse
+import Sheaf.Paper.RationalP1ScalarChernQLeftInverse
 
 /-! # The two scalar unit/Chern splittings
 
@@ -28,6 +30,7 @@ attribute [local irreducible] coefficient line diagram trace singleUnitIso
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
+set_option linter.unusedVariables false
 /-- The scalar Q unit/Chern splitting isomorphism.
 
 Source: diagonal-tower unit/Chern splitting and the second rational P1 triangle.
@@ -67,6 +70,12 @@ theorem scalar_q_chern_splitting
       (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)
     let cq := scalarQChern l c Y r a
     let c₂ := scalarP2Chern l c Y r b
-    IsIso (biprod.desc uq cq) := by sorry
+    IsIso (biprod.desc uq cq) := by
+  dsimp
+  obtain ⟨vr, hr⟩ := scalar_q_chern_right_inverse l c k p hpl Y δ family r a ha b hb
+  obtain ⟨vl, hl⟩ := scalar_q_chern_left_inverse l c k p hpl Y δ family r a ha b hb
+  have hv : vl = vr := by
+    rw [← Category.comp_id vl, ← hr, ← Category.assoc, hl, Category.id_comp]
+  exact ⟨⟨vl, by rw [hv]; exact hr, hl⟩⟩
 
 end AlgebraicGeometry.ProEtale.RationalP1

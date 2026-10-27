@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-rational-p1-scalar-q-right-inverse",
+ "kind": "statement",
+ "title": "Scalar Q Chern splitting right inverse",
+ "statement": "In the setting of [lem-sfb-rational-p1-scalar-chern-splittings], the explicit scalar Q biproduct map admits the stated one-sided inverse. More precisely, with the displayed lets Λ, L, T, uq and cq, there exists v with biprod.desc uq cq ≫ v = 𝟙 _.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-trace-presentation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, scalar trace base change before tensoring with q*K; one-sided inverse component."
+ },
+ "proof": [
+  {
+   "text": "Transport the model unit/Chern splitting through the completed, realized and scalar coefficient comparisons; compose the resulting inverse component with the explicit scalar biproduct map and simplify by the component identities and biproduct laws.",
+   "uses": [
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "def-sfb-rational-p1-scalar-chern-maps",
+    "def-sfb-diagonal-coefficient-reference"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-twisted-splitting-components",
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "def-sfb-diagonal-coefficient-reference"
+ ],
+ "proof_origin": {
+  "kind": "split",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, scalar trace base change before tensoring with q*K; one-sided inverse component",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "one-sided inverse equations for a biproduct morphism in a preadditive category",
+   "date": "2026-10-28",
+   "results": "Only generic split-mono and split-epi facts; no geometric scalar Q transport theorem.",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso biprod.desc inverse",
+   "date": "2026-10-28",
+   "results": "Generic biproduct identities only; no theorem for the displayed geometric map.",
+   "verdict": "Use explicit categorical inverse assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_q_chern_right_inverse|scalar_q_chern_left_inverse",
+   "date": "2026-10-28",
+   "results": "No existing declaration before this delivery.",
+   "verdict": "New split obligations required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1ScalarChernQSplitting",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-scalar-q-splitting",
+   "place": "split into left/right inverse components",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1ScalarChernQRightInverse",
+  "file": "lean/Sheaf/Paper/RationalP1ScalarChernQRightInverse.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.scalar_q_chern_right_inverse",
+  "statement": "theorem scalar_q_chern_right_inverse\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (r : Reference l Y δ family)\n    (a : DiagonalTrace.completedUnit l Y ⟶\n      r.tq.Rc.R.obj ((DiagonalTrace.completedLine l (ProjectiveLine Y)) ⟦(2 : ℤ)⟧))\n    (ha : CompletedChernNormalized l r.tq.toPresentation a)\n    (b : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶\n      r.t₂.Rc.R.obj ((DiagonalTrace.completedLine l (diagonalSurface Y)) ⟦(2 : ℤ)⟧))\n    (hb : CompletedChernNormalized l r.t₂.toPresentation b) :\n    let Λ := (coefficient l c).X\n    let L := line l c\n    let T := fun X : Scheme.{u} ↦\n      ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj (L X)) ⟦(2 : ℤ)⟧\n    let uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))\n      (scalarQLineIso l c k p hpl Y)\n    let u₂ := scalarTwistedUnit Λ (secondProjection Y)\n      (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)\n    let cq := scalarQChern l c Y r a\n    let c₂ := scalarP2Chern l c Y r b\n    ∃ v, biprod.desc uq cq ≫ v = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T210055-L-1653112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T210055-L-1653112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
