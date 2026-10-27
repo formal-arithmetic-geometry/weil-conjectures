@@ -2,74 +2,133 @@
  "id": "lem-pur-derived-pullback-tensor-constraints-common-composition-existence",
  "kind": "statement",
  "title": "Existence of the normalized common-stage pullback composition representative satisfying its prescribed stage equations",
- "statement": "Existence of the normalized common-stage pullback composition representative satisfying its prescribed stage equations [lem-pur-derived-pullback-tensor-constraints].",
+ "statement": "Fix a prime $\\ell$, a field $\\Omega$ with `[Field \\Omega] [Algebra \\mathbb Q_\\ell \\Omega] [IsAlgClosure \\mathbb Q_\\ell \\Omega]`, and schemes $X,Y,Z$ on which $\\ell$ is invertible in every residue field. Let $f:X\\to Y$ and $h:Z\\to X$ be composable morphisms, and let $M$ be an object of the common-stage algebraically closed constructible category on $Y$ [def-weil-derived-pullback-tensor-hom]. There exists an isomorphism\n$$e:(h\\circ f)^*M\\xrightarrow{\\sim}h^*f^*M$$\ninside the common-stage category on $Z$ such that, for every finite coefficient stage $L$ containing the stage of $M$, the heterogeneous representative of $e$ is the prescribed `ofHom` map obtained by composing the comparison for $(h\\circ f)^*M$ with the rational pullback-composition isomorphism at $L$, then applying the inverse of the rational pullback map for $f$ and the inverse of the rational pullback map for $h$, exactly as in the Lean declaration `pullbackTensorCommonComposition_exists`.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YS, 07A4 and 0941; existence of the normalized common-stage representative"
  },
  "stmt_deps": [
   "def-weil-derived-pullback-tensor-hom",
-  "def-pur-completed-pullback-tensor-comparison",
-  "lem-pod-integral-system-reduction-fully-faithful",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pod-rational-common-pullback-composition",
   "lem-pod-integral-pullback-composition"
  ],
  "proof": [
   {
-   "text": "Construct the common-stage representative from the displayed normalized pullback tensor comparison and establish its equation at every finite coefficient enlargement. The remaining representative construction is the strictly simpler existence half of the parent uniqueness theorem.",
+   "text": "Write $E$ for the stage of $M$ and $M_E$ for its rational representative. By [def-weil-derived-pullback-tensor-hom] the three common-stage pullbacks $(h\\circ f)^*M$, $f^*M$ and $h^*f^*M$ are the pairs $(E,L(h\\circ f)_E^*M_E)$, $(E,Lf_E^*M_E)$ and $(E,Lh_E^*Lf_E^*M_E)$, so all of them have stage $E$, and for $g\\in\\{f,h,h\\circ f\\}$, an object $N$ of stage $E$ and $L\\supset E$ the prescribed comparison is $p_{g,N,L}=\\tau\\circ\\theta^g_{E,L,N_E}\\circ Lg_L^*(\\tau^{-1})$, where $\\theta^g_{E,L}:(Lg_E^*N_E)\\otimes_EL\\xrightarrow{\\sim}Lg_L^*(N_E\\otimes_EL)$ is the rationalized scalar-extension comparison and $\\tau$ denotes the natural transition identifications between the stage-$L$ representative of a pair and the rational scalar extension $-\\otimes_EL$ [def-weil-rationalization-karoubi]. For every finite field $F$, the rational composition isomorphism $c^F_{h,f}(N):L(h\\circ f)_F^*N\\xrightarrow{\\sim}Lh_F^*Lf_F^*N$ is, by [def-pod-rational-common-pullback-composition], the localization of the integral composition isomorphism $c^{\\mathcal O_F}_{h,f}(N)$ of [lem-pod-integral-pullback-composition]; it is natural in rational morphisms, because $c^{\\mathcal O_F}_{h,f}$ is natural in integral morphisms and the rational pullbacks act on a morphism $u\\otimes c$ by $Lg^*(u)\\otimes c$ [def-weil-derived-pullback-tensor-hom]. For every $L\\supset E$ put $r_L=p_{h\\circ f,M,L}\\circ c^L_{h,f}(M_L)\\circ Lh_L^*(p_{f,M,L}^{-1})\\circ p_{h,f^*M,L}^{-1}$ (composition in diagram order, as in the Lean statement), an isomorphism from the stage-$L$ representative of $(h\\circ f)^*M$ to that of $h^*f^*M$; it is the map whose class the statement prescribes.",
    "uses": [
-    "def-pur-completed-pullback-tensor-comparison",
-    "def-weil-constant-coefficient-objects",
     "def-weil-derived-pullback-tensor-hom",
-    "lem-pod-integral-pullback-composition",
-    "lem-pod-integral-system-reduction-fully-faithful",
-    "lem-pur-normalized-completed-operation-models",
-    "lem-pur-normalized-reconstruction-adjunction-calculus",
-    "lem-sf-derived-complete-legacy-comparison",
-    "lem-weil-proetale-dbc-triangulated"
+    "def-weil-rationalization-karoubi",
+    "def-pod-rational-common-pullback-composition",
+    "lem-pod-integral-pullback-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "final paragraph: the operation for $\\overline{\\mathbf Q}_\\ell$ by the common-stage coefficient construction (detailed in the DAG node def-weil-derived-pullback-tensor-hom, algebraically closed level)"
+   }
+  },
+  {
+   "text": "Substitute the formula for $p$ into $r_L$. In $Lh_L^*(p_{f,M,L}^{-1})\\circ p_{h,f^*M,L}^{-1}$ the factor $Lh_L^*(\\tau^{-1})$ coming from $p_{f,M,L}^{-1}$ is followed by the factor $Lh_L^*(\\tau)$ coming from $p_{h,f^*M,L}^{-1}$, and they cancel. By naturality of $c^L_{h,f}$ (step 1) applied to the isomorphism $\\tau$ on $Y$, the remaining $L(h\\circ f)_L^*(\\tau^{-1})\\circ c^L_{h,f}(M_L)\\circ Lh_L^*Lf_L^*(\\tau)$ equals $c^L_{h,f}(M_E\\otimes_EL)$. Hence, in diagram order, $r_L=\\tau\\circ\\theta^{h\\circ f}_{E,L,M_E}\\circ c^L_{h,f}(M_E\\otimes_EL)\\circ Lh_L^*(\\theta^f_{E,L,M_E})^{-1}\\circ(\\theta^h_{E,L,Lf_E^*M_E})^{-1}\\circ\\tau^{-1}$. Clause 1 of [lem-pod-pullback-identities-scalar-extension], with $k=f$, $h=h$ and $K$ the integral object underlying $M_E$, gives the integral identity $Lh_L^*(\\alpha^f_K)\\circ\\alpha^h_{Lf_E^*K}\\circ T_Z(c^{\\mathcal O_E}_{h,f}(K))=c^{\\mathcal O_L}_{h,f}(T_YK)\\circ\\alpha^{h\\circ f}_K$ of isomorphisms $T_Z(L(h\\circ f)_E^*K)\\to Lh_L^*Lf_L^*(T_YK)$. Apply the localization functor: the rational $\\theta^g_{E,L}$ is the localization of the integral comparison $\\alpha^g$ of [lem-pur-integral-operations-scalar-extension] [def-weil-derived-pullback-tensor-hom], the rational $c^E_{h,f}$ and $c^L_{h,f}$ are the localizations of the integral composition isomorphisms [def-pod-rational-common-pullback-composition], and the rational scalar extension is the localization of the integral one [def-weil-rationalization-karoubi]. So $c^L_{h,f}(M_E\\otimes_EL)\\circ\\theta^{h\\circ f}_{E,L,M_E}=Lh_L^*(\\theta^f_{E,L,M_E})\\circ\\theta^h_{E,L,Lf_E^*M_E}\\circ(c^E_{h,f}(M_E)\\otimes_EL)$, and substituting gives $r_L=\\tau\\circ(c^E_{h,f}(M_E)\\otimes_EL)\\circ\\tau^{-1}$. By naturality of $\\tau$, $r_L$ is the image of $r_E$ under the transition from stage $E$ to stage $L$ (the case $L=E$ of the same formula identifies $r_E$ with $c^E_{h,f}(M_E)$ conjugated by $\\tau$ at $L=E$). This uses the specified compositors and comparisons only, never the tower identity of the comparisons alone.",
+   "uses": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pod-rational-common-pullback-composition",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "final paragraph: common-stage construction; independence of the chosen common extension"
+   }
+  },
+  {
+   "text": "Morphisms of the common-stage category are classes in the directed colimit over common finite fields, a representative over $L$ and its transition to $L'\\supset L$ having the same class, and composites are computed over one common field [def-weil-algebraically-closed-coefficients]. Let $e$ have forward arrow the class of $r_E$ and inverse arrow the class of $r_E^{-1}$; both composites are classes of identities computed at stage $E$, so $e$ is an isomorphism between $(h\\circ f)^*M$ and $h^*f^*M$, which are the objects of [def-weil-derived-pullback-tensor-hom] from step 1. By step 2, for every $L\\supset E$ the class of $r_L$ (the `ofHom` map at $L$ for any proof $h_M$ of the stage containment) equals the class of $r_E$, i.e. $e.\\mathrm{hom}$; this is the displayed `HEq` condition, both sides having the same source and target.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "final paragraph: common-stage construction, morphisms as colimit classes"
+   }
   }
  ],
  "proof_deps": [
-  "def-pur-completed-pullback-tensor-comparison",
-  "def-weil-constant-coefficient-objects",
   "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-pod-rational-common-pullback-composition",
   "lem-pod-integral-pullback-composition",
-  "lem-pod-integral-system-reduction-fully-faithful",
-  "lem-pur-normalized-completed-operation-models",
-  "lem-pur-normalized-reconstruction-adjunction-calculus",
-  "lem-sf-derived-complete-legacy-comparison",
-  "lem-weil-proetale-dbc-triangulated"
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 07A4 and 0941; normalized common-stage representative construction"
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "final paragraph (operation for $\\overline{\\mathbf Q}_\\ell$ by the common-stage coefficient construction); argument written by an agent from the DAG nodes def-weil-derived-pullback-tensor-hom and def-weil-algebraically-closed-coefficients"
  },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Normalize tensor associators braidings unitors and pullback composition via faithful coherent reduction and scalar localization",
-   "results": "8 hits: CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_tensor, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.FreeMonoidalCategory.normalizeIsoApp, Mathlib.Tactic.Monoidal.tacticMonoidal_nf, CategoryTheory.FreeMonoidalCategory.normalizeObj, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux, Mathlib.Tactic.Monoidal.monoidalNf",
+   "query": "existence normalized common-stage pullback composition isomorphism finite coefficient representative",
+   "results": "8 hits: CategoryTheory.Precoherent.pullback; CategoryTheory.GlueData'.t''; CategoryTheory.Limits.pullbackFstFstIso; CategoryTheory.GlueData.t'_jii; SSet.finite_of_isPullback; CategoryTheory.Limits.pullbackRightPullbackFstIso; CategoryTheory.Limits.pullback.mapDesc_comp; CategoryTheory.Limits.pullback.map_isIso",
    "date": "2026-10-27",
-   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+   "verdict": "no match: no project-specific declaration"
   },
   {
    "tool": "loogle",
-   "query": "\"Monoidal\", \"Faithful\"",
-   "results": "9 hits: AddMonoidAlgebra.faithfulSMul, MonoidAlgebra.faithfulSMul, CategoryTheory.MonoidalCategory.instFaithfulFunctorTensoringLeft, CategoryTheory.MonoidalCategory.instFaithfulFunctorTensoringRight, CategoryTheory.monoidalPreadditive_of_faithful, CategoryTheory.MonoidalLinear.ofFaithful, SkewMonoidAlgebra.instFaithfulSMul, CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithfulι",
+   "query": "CategoryTheory.Iso, Functor.mapIso, CategoryTheory.Functor.Full, CategoryTheory.Functor.Faithful",
+   "results": "0 hits: loogle: unknown identifier 'Functor.mapIso'",
    "date": "2026-10-27",
-   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+   "verdict": "no match: loogle: unknown identifier 'Functor.mapIso'"
   },
   {
    "tool": "grep",
-   "query": "reduction.*[Aa]ssociator|[Aa]ssociator.*reduction",
-   "results": "0 hits: ",
+   "query": "pullbackTensorCommonComposition|commonStagePullbackComparison|ofHom",
+   "results": "0 hits: 0 hits",
    "date": "2026-10-27",
-   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+   "verdict": "no match: no project-specific declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "existence normalized common-stage pullback composition isomorphism finite coefficient representative",
+   "results": "8 hits: CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left; CategoryTheory.ChosenPullbacksAlong.pullbackComp; CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left; CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst; CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp; CategoryTheory.MorphismProperty.Over.pullbackComp; CategoryTheory.Functor.IsFibered.pullbackPullbackIso; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e",
+   "date": "2026-10-27",
+   "verdict": "no match: no project-specific declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "common-stage pullback composition isomorphism as a colimit class with scalar-extension compatibility",
+   "results": "8 hits: Algebra.IsPushout.cancelBaseChangeAux; Algebra.IsPushout.cancelBaseChange; Algebra.IsPushout.comp_iff; PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; Algebra.IsPushout.cancelBaseChange_tmul; ModuleCat.extendScalarsComp; Algebra.IsPushout.cancelBaseChangeAux_symm_tmul; Algebra.IsPushout.cancelBaseChange_symm_tmul",
+   "date": "2026-10-27",
+   "verdict": "no match: no project-specific declaration"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor, CategoryTheory.NatTrans, ModuleCat.extendScalarsComp",
+   "results": "0 hits: 0 hits",
+   "date": "2026-10-27",
+   "verdict": "no match: no project-specific declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStagePullbackComparison|pullbackTensorRationalComposition|rationalDerivedPullback",
+   "results": "0 hits: 0 hits",
+   "date": "2026-10-27",
+   "verdict": "no match: no project-specific declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "common-stage pullback composition isomorphism colimit scalar extension compatibility",
+   "results": "8 hits: CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left; CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst; CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left; CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp; CategoryTheory.Over.pullbackComp; CategoryTheory.ChosenPullbacksAlong.pullbackComp; CategoryTheory.MorphismProperty.Over.pullbackComp; CategoryTheory.Functor.lanCompColimIso",
+   "date": "2026-10-27",
+   "verdict": "no match: no project-specific declaration"
   }
  ],
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "Sheaf.Paper.DerivedPullbackTensorConstraints",
@@ -102,12 +161,10 @@
  "reviewed": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
+  "reviewer": "NT-cc-NC-e0f5b7622",
+  "group": "NC",
   "result": "pass",
-  "landing": "20261027T210131-L-1661663",
-  "kind": "proof",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-e0f5b7622 (reviewer sub-agent of L); spot-checked: The item statement matches the Lean declaration pullbackTensorCommonComposition_exists hypothesis by hypothesis: ℓ invertible on X,Y,Z; IsAlgClosure Ω; both objects of stage M.stage; the ofHom representative at every L ≥ M.stage with one proof hM used for source and target. I recomputed the proof. Using commonStagePullbackComparison = τ≫θ≫g_L^*(τ⁻¹) (DerivedPullbackTensorHom.lean:373) and the rational compositor as the localization of the integral one (Constraints.lean:189-225): the middle τ factors cancel, naturality of c^L reduces r_L to τ≫θ^{hf}≫c^L(M⊗L)≫h^*θ^{f,-1}≫θ^{h,-1}≫τ⁻¹, and the compositor/θ square gives r_L = transition of r_E. So e = [E,r_E] works. Edge cases L=E, f or h = id, M=0 are fine. FIX (C5/D1): the delivered new node is the rationalization of clause 1 of the existing node lem-pod-pullback-identities-scalar-extension (same α of lem-pur-integral-operations-scalar-extension, same c of lem-pod-integral-pullback-composition). It also had a null blueprint.from.node (B9), vague scheme hypotheses (B2), and attributed the rational compositors to an integral node (C4). I dropped it; nothing else cites it (rg -L). In the corrected item: (1) stmt_deps lose the new node and gain def-weil-algebraically-closed-coefficients (owner of the common-stage category and ofHom) and def-pod-rational-common-pullback-composition (owner of pullbackTensorRationalComposition), with no cycles. (2) Three steps now write out the setup, the τ cancellation and naturality (E5), the rationalized clause 1, and the colimit class; proof_deps = union of uses. (3) The step sources and proof_origin named a blueprint path that does not exist (latest/…/sec-smooth-purity/sk-def-sf-operations); they now name main-20261015 sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md, final paragraph. Accepted tool_uses: lem-pod-integral-pullback-composition and lem-pod-pullback-identities-scalar-extension (both sk-lem-finite, black boxes). Advisory for stage 3: the Lean integral compositor is integralPullbackComposition.choose (normalized level by level), while pullbackIdentities_scalarExtension is stated for integralComparisonComposition of an IntegralComparisonSystem; the two must be identified, or one pinned, before this item can be proved.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
   "date": "2026-10-27",
@@ -118,5 +175,26 @@
   "landing": "20261027T210131-L-1661663",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-derived-pullback-tensor-constraints-common-composition-existence",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: the proof builds the prescribed representative $r_L$ from the rational compositor (localization of the integral compositor) and the prescribed scalar comparisons, cancels the middle transition identifications, and identifies $r_L$ with the transition of $r_E$ by the rationalized clause 1 (scalar-extension/compositor square) of the existing node lem-pod-pullback-identities-scalar-extension; $e$ is the colimit class of $r_E$. Maintainer FIX: the delivered statement-only node lem-pur-common-stage-pullback-composition-theta-compatibility was the rational restatement of that existing clause and is dropped; item stmt_deps += def-weil-algebraically-closed-coefficients (common-stage category, ofHom) and def-pod-rational-common-pullback-composition (pullbackTensorRationalComposition); broken blueprint document paths corrected.",
+  "blueprint": "The steps realize the common-stage pullback paragraph of def-weil-derived-pullback-tensor-hom: finite rational composition, theta/compositor compatibility at every enlargement, and passage to the common-stage Hom colimit.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "The integral pullback-composition isomorphism whose localization is the rational compositor of the statement; owned by the finite/integral unit sk-lem-finite, no node of sk-def-purity-conv or sk-def-sf-operations gives it."
+   },
+   {
+    "node": "lem-pod-pullback-identities-scalar-extension",
+    "why": "Clause 1, the compatibility of the integral compositor with the scalar-extension comparisons, used as a black box (rationalized) in step 2; stated in sk-lem-finite, no node of the item's route gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-pullback-identities-scalar-extension"
+ ]
 }
