@@ -20446,3 +20446,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/X3/Sheaf.Paper.QuotientSectionTensorTransportIso (stage 3; reviewer PASS; first push; landing 20261027T234357-L-119355 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:43 L: merged deliver/X3/Sheaf.SixFunctors.RationalVerdierComparisonNaturality (stage 3; reviewer PASS; first push; landing 20261027T234358-L-119779 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:43 L: merged deliver/Y2/Sheaf.Paper.AdicTensorReindexingModels (stage 3; reviewer PASS; first push; landing 20261027T234359-L-120248 (interface); batch 20261027T233735; modules 3; new nodes 2)
+- 23:44 L: merged deliver/Y2/Sheaf.Paper.RationalP1ScalarChernQLeftInverse (stage 3; reviewer FIX; first push; landing 20261027T234400-L-120713 (interface); batch 20261027T233735; modules 2; new nodes 0; change records: coord/changes/Y2-scalar-q-left-inverse-exchange-cache.md)

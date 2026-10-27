@@ -52,27 +52,6 @@ def firstLineComparisonForTrace
       (firstProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))) x).invertible
   exact shiftedLineComparison l c (firstProjection Y)
 
-/-- The forward scalar exchange on the shifted line, with its fixed root comparison.
-Source: rational projective-line triangle calculation, Second identity
-(blueprint: lem-sfb-rational-p1-second-pretrace). -/
-@[irreducible]
-def secondTraceExchange
-    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
-    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
-    (Y : Scheme.{u}) [Y.Over (Spec (.of k))] :
-    (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj
-      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj
-        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))
-          0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)) ⟶
-    (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj
-      (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))
-        0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) := by
-  refine ?_ ≫ (moduleObjectDerivedPushforward (coefficient l c).X
-    (secondProjection Y)).map (firstLineComparisonForTrace l c k p hpl Y).hom
-  unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward
-  exact (condensedAmbientExchange (coefficient l c).X (square Y)).app
-    (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))
-      0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})
@@ -239,6 +218,25 @@ theorem secondPretraceExchangeMap_inverse
   unfold ambientExchangeInverse secondPretraceExchangeMap
   unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward
   exact IsIso.hom_inv_id ((condensedAmbientExchange Λ (square Y)).app M)
+
+/-- The forward scalar exchange on the shifted line, with its fixed root comparison.
+Source: rational projective-line triangle calculation, Second identity
+(blueprint: lem-sfb-rational-p1-second-pretrace). -/
+@[irreducible]
+def secondTraceExchange
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
+    (Y : Scheme.{u}) [Y.Over (Spec (.of k))] :
+    (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj
+      ((moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj
+        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (ProjectiveLine Y))
+          0).obj (line l c (ProjectiveLine Y))) ⟦(2 : ℤ)⟧)) ⟶
+    (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj
+      (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))
+        0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) :=
+  secondPretraceExchangeMap (coefficient l c).X Y _ ≫
+    (moduleObjectDerivedPushforward (coefficient l c).X
+      (secondProjection Y)).map (firstLineComparisonForTrace l c k p hpl Y).hom
 
 /-- The forward projection with the untwisted factor q*K outside the second direct image.
 The first pulled Tate line is identified with the fixed line on the self-product.
