@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeMate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionAssoc
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
@@ -20,10 +22,10 @@ identification `Rf_! ≅ Rf_*` for proper `f` and with the compact-support base-
 `Ex_!`, and derives the formal consequences used by the Frobenius comparison of the trace
 formula.
 
-## Sorried input
+## Main statements
 
-The following clauses of the six-functor package are stated here, with the proof deferred to
-their blueprint nodes:
+The following clauses of the six-functor package, proved in
+`…LowerShriek.CompositionAssoc`, `…LowerShriek.CompositionUnit` and `…LowerShriek.BaseChangeMate`:
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_assoc`,
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_id_left` and
@@ -79,7 +81,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_assoc (f : W ⟶ X) (g : 
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (g ≫ h)).hom.app K ≫
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g h).hom.app
           ((boundedConstructibleLowerShriek ℓ f).obj K) :=
-  sorry
+  boundedConstructibleLowerShriekComp_padicAlgCl_assoc' ℓ f g h K
 
 /-- **Left identity equation of the composition isomorphisms of the lower shriek** (blueprint
 `prop-functor-package`, clause (3)): `R(𝟙 ≫ f)_! ≅ R(𝟙)_! ⋙ Rf_! ≅ R(𝟙)_* ⋙ Rf_! ≅ Rf_!` is
@@ -91,7 +93,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_left (f : X ⟶ Y)
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X)).hom.app K ≫
             (boundedConstructibleLowerStarId ℓ X).hom.app K) =
       eqToHom (by rw [Category.id_comp]; rfl) :=
-  sorry
+  boundedConstructibleLowerShriekComp_padicAlgCl_id_left' ℓ f K
 
 /-- **Right identity equation of the composition isomorphisms of the lower shriek** (blueprint
 `prop-functor-package`, clause (3)): `R(f ≫ 𝟙)_! ≅ Rf_! ⋙ R(𝟙)_! ≅ Rf_! ⋙ R(𝟙)_* ≅ Rf_!` is
@@ -104,7 +106,7 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_right (f : X ⟶ Y)
         (boundedConstructibleLowerStarId ℓ Y).hom.app
           ((boundedConstructibleLowerShriek ℓ f).obj K) =
       eqToHom (by rw [Category.comp_id]; rfl) :=
-  sorry
+  boundedConstructibleLowerShriekComp_padicAlgCl_id_right' ℓ f K
 
 /-- **The identification `Rf_! ≅ Rf_*` is compatible with composition** (blueprint
 `prop-functor-package`, clause (3)): for proper `f` and `g`,
@@ -119,7 +121,7 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp (f : X ⟶ Y
           ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K) =
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (f ≫ g)).hom.app K ≫
         (boundedConstructibleLowerStarComp ℓ f g).inv.app K :=
-  sorry
+  boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp' ℓ f g K
 
 end Composition
 

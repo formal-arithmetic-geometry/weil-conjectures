@@ -24,11 +24,12 @@ compactification `U ⟶[𝟙] U ⟶[j] X`). This file expresses the composite `j
 through the single refinement `j` of the first compactification by the second
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp`).
 
-## Sorried input
+## Compactification coherence
 
 The clauses of blueprint `prop-compactification-coherence-detailed` (subsection
 `sk-prop-sf-cbc` of the six-functor chapter) used here, for the lower shriek of bounded
-constructible complexes attached to compactifications:
+constructible complexes attached to compactifications (proved in
+`…LowerShriek.RefinementCoherence` through the equalizer of two refinements):
 
 - the comparison of two compactifications through a common refinement does not depend on the
   refinement, so it is the comparison along any given refinement
