@@ -8,6 +8,16 @@ public import Sheaf.SixFunctors.IntegralCompactificationRealizationData
 
 /-! Pasting package for intrinsic proper/open coherence. -/
 
+/- STATEMENT-DISPUTED: the theorem below quantifies over an arbitrary supplied `gamma`,
+which has no compatibility hypothesis with the semilinear proper/open gamma or with
+the canonical bridge. The three displayed equations are coherence constraints on
+`gamma`, so they cannot follow for every natural transformation of the displayed
+type. The blueprint proof transports the equations only for the specially
+constructed bridge-conjugate gamma. A corrected statement must either take that
+transported gamma (or its compatibility equations) as data, or quantify existentially
+over gamma; this declaration is retained unchanged pending that statement repair.
+-/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
