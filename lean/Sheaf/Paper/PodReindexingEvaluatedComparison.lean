@@ -6,6 +6,8 @@ Authors: SHEAF group K8
 module
 
 public import Sheaf.Paper.PodReindexingCoherenceData
+import Sheaf.Paper.PodReindexingComparisonCore
+import Sheaf.Paper.PodReindexingEvaluationLaw
 
 /-! # Evaluation-normalized reindexing comparison
 
@@ -58,6 +60,8 @@ theorem evaluated_comparison_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
           SX.evaluation ((podReindexingDerivedFunctor l E g s).obj M)
             ((podReindexingDerivedFunctor l E g s).obj N) =
           (podReindexingDerivedFunctor l E g s).map (SY.evaluation M N) := by
-  sorry
+  obtain ⟨c⟩ := comparison_core_exists l E g s SX SY TX TY
+  refine ⟨c, ?_⟩
+  exact comparison_evaluation_law l E g s SX SY TX TY c
 
 end WeilConjectures.PodReindexingCoherence

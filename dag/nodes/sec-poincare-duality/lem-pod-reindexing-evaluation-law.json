@@ -1,0 +1,108 @@
+{
+ "id": "lem-pod-reindexing-evaluation-law",
+ "kind": "lemma",
+ "title": "Evaluation law for a normalized comparison",
+ "statement": "For any normalized Comparison c for an isomorphism of schemes, the reindexed tensor and derived Hom maps satisfy the displayed evaluation equation for every pair of derived objects.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 4; Stacks 0GMX, 0A8X and 08J9"
+ },
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat and K-injective representatives. Apply the one-sided chain-transpose equation, then use chain_projection and tensorChain_pure on pure generators. Sheafification extensionality and localization transport the equality to arbitrary derived objects.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-coefficient-tensor-curry-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-hom-kflat-chain-transpose",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-coefficient-tensor-curry-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "evaluation tensor derived Hom reindexing",
+   "results": "No direct project theorem states the normalized equation.",
+   "date": "2026-10-28",
+   "verdict": "Use this intermediate evaluation law."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed structure evaluation naturality comparison",
+   "results": "Only abstract closed-category lemmas match; none includes the project normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use the stated intermediate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "chain transpose evaluation pure tensor comparison",
+   "results": "No direct match for the concrete reindexing structure.",
+   "date": "2026-10-28",
+   "verdict": "Use the stated intermediate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingEvaluatedComparison",
+  "date": "2026-10-28",
+  "group": "N4"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-evaluated-comparison",
+   "place": "Step 4"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingEvaluationLaw",
+  "file": "lean/Sheaf/Paper/PodReindexingEvaluationLaw.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.comparison_evaluation_law",
+  "statement": "theorem comparison_evaluation_law {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s) (TX : Models l E X s SX) (TY : Models l E Y s SY) (c : Comparison l E g s SX SY TX TY) : ∀ M N : podReindexingDerived l E Y s, c.tensor.hom.app ((podReindexingDerivedHom l E Y s).obj (op M, N), M) ≫ SX.tensor.map (Prod.mkHom (c.derived.hom.app (op M, N)) (𝟙 ((podReindexingDerivedFunctor l E g s).obj M))) ≫ SX.evaluation ((podReindexingDerivedFunctor l E g s).obj M) ((podReindexingDerivedFunctor l E g s).obj N) = (podReindexingDerivedFunctor l E g s).map (SY.evaluation M N)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-28"
+ },
+ "stmt_deps": [
+  "def-pod-reindexing-coherence-data",
+  "lem-pod-reindexing-comparison-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T234124-L-4700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261027T234124-L-4700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
