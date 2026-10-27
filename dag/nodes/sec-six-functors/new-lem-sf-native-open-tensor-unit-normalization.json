@@ -1,0 +1,110 @@
+{
+ "id": "new-lem-sf-native-open-tensor-unit-normalization",
+ "kind": "statement",
+ "title": "Derived unit normalization of native open tensor",
+ "statement": "For the native open tensor data, supplied localized comparison maps and the recorded presentation satisfying the comparison equalities, OpenTensorUnitNormalization ....",
+ "stmt_deps": [
+  "lem-sf-native-open-tensor-localization",
+  "def-sf-native-open-tensor-presentation-data",
+  "lem-sf-weil-native-closed-forgetful"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "the localized representative squares and open-unit transpose"
+ },
+ "proof": [
+  {
+   "text": "Totalize the normalized sheaf equations over the recorded summands, use the prescribed K-flat model and representative squares, and descend through exact localization.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Native open tensor proof steps 7--8; strict sub-conclusion split from lem-sf-native-open-tensor-normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homEquiv.*(unit|naturality)|unit.*homEquiv",
+   "results": "OK 25 hits",
+   "date": "2026-10-27",
+   "verdict": "Adjunction homEquiv and unit identities are available; no complete specialized normalization theorem is present."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "OK 12 hits",
+   "date": "2026-10-27",
+   "verdict": "The generic adjunction API is available, but it does not state the supplied presentation normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction and a tensor comparison determine the projection formula inverse as the transpose of the unit, and forgetting commutes with this transpose",
+   "results": "OK 8 hits",
+   "date": "2026-10-27",
+   "verdict": "Only generic monoidal/adjunction candidates were found; the native equivariant statement remains project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOpenTensorNormalization",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-open-tensor-normalization",
+   "place": "the localized representative squares and open-unit transpose",
+   "via": [
+    "lem-sf-native-open-tensor-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenTensorUnitNormalization",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_tensor_unit_normalization",
+  "statement": "theorem native_open_tensor_unit_normalization (s : NativeOpenTensorData k₀ l j)\n    (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅\n      (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)\n    (gamma : nativeOpenDerivedLeft k₀ l j ≅ nativeOpenDerivedRight k₀ l j)\n    (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z))\n    (_hc :\n      HEq c.E (extensionByZero k₀ l j) ∧ HEq c.R (upperStar k₀ l j) ∧\n      HEq c.SA (nativeOpenSheafTensor k₀ l U) ∧ HEq c.SB (nativeOpenSheafTensor k₀ l Z) ∧\n      HEq c.TA (nativeTensorTotal k₀ l U) ∧ HEq c.TB (nativeTensorTotal k₀ l Z) ∧\n      HEq c.DA (nativeDerivedTensor k₀ l U) ∧ HEq c.DB (nativeDerivedTensor k₀ l Z) ∧\n      HEq c.flatA (NativeIsKFlat k₀ l U) ∧ HEq c.flatB (NativeIsKFlat k₀ l Z) ∧\n      HEq c.modelA (nativeOpenTensorModel k₀ l U) ∧ HEq c.modelB (nativeOpenTensorModel k₀ l Z) ∧\n      HEq c.iA (nativeOpenTensorInsertion k₀ l U) ∧ HEq c.iB (nativeOpenTensorInsertion k₀ l Z) ∧\n      HEq c.sheafGamma s.sheafGamma ∧ HEq c.gamma gamma ∧\n      HEq c.sheafRestriction s.sheafRestriction ∧ HEq c.restriction rho) :\n    OpenTensorUnitNormalization\n    (nativeOpenExtension k₀ l j) (nativeOpenPull k₀ l j)\n    (nativeDerivedTensor k₀ l U) (nativeDerivedTensor k₀ l Z)\n    s.adj.mapExactDerivedCategory rho gamma",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T180804-L-3902359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T180804-L-3902359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

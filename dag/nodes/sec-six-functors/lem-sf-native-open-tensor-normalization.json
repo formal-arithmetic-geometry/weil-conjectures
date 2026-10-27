@@ -18,44 +18,36 @@
  },
  "proof": [
   {
-   "text": "The sheaf inverse-unit equation is part of s. The supplied presentation pins both chain comparisons on all sheaf summands and both derived comparisons on all K-flat representatives. The exact-derived adjunction localizes this same unit and counit with the standard exact-functor factors. Totalize the sheaf inverse-unit equality on every summand, then use the two representative squares to localize it. The localization universal property extends the derived equation from K-flat representatives to arbitrary objects. This is precisely the inverse-unit conclusion for the supplied rho and gamma.",
+   "text": "Apply the split derived unit-normalization theorem to the supplied presentation and its comparison equalities.",
    "uses": [
-    "lem-sf-ringed-slice-tensor-generators",
-    "lem-sfb-localized-site-tensor-restriction",
-    "def-weil-exact-derived-adjunction"
+    "new-lem-sf-native-open-tensor-unit-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
-   }
+   "elementary": false
   },
   {
-   "text": "Forgetting the prescribed equivariant sheaf maps gives the balanced ordinary restriction and open tensor maps, including their inverse-unit formula. Equivariant flat-term K-flat resolutions forget to ordinary K-flat resolutions by the resolution theorem. Under the fixed native closed tensor comparison and the actual exact-open forgetting factorization isomorphisms, the supplied representative squares therefore identify the forgotten maps with those ordinary localized maps. The ordinary open tensor theorem characterizes its inverse by the same unit transpose. Taking inverses gives the forward forgetting square; the restriction compatibility square holds on the same pure-tensor summands and hence after localization. These data form OpenTensorForgetData. No arbitrary derived arrow is lifted by conservativity.",
+   "text": "Apply the split forgetting-normalization theorem to the same supplied presentation and comparisons.",
    "uses": [
-    "lem-sf-weil-native-closed-forgetful",
-    "lem-sf-weil-frobenius-action-resolutions",
-    "lem-sf-open-tensor-normalization"
+    "new-lem-sf-native-open-tensor-forget-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03DJ (lemma-extension-by-zero-exact), 03D8 (lemma-push-pull-composition-modules); native equivariant refinement by Q85"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Pair the two obtained conclusions.",
+   "uses": [
+    "new-lem-sf-native-open-tensor-unit-normalization",
+    "new-lem-sf-native-open-tensor-forget-normalization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-exact-derived-adjunction",
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-ringed-slice-tensor-generators",
-  "lem-sf-weil-frobenius-action-resolutions",
-  "lem-sf-weil-native-closed-forgetful",
-  "lem-sfb-localized-site-tensor-restriction"
+  "new-lem-sf-native-open-tensor-unit-normalization",
+  "new-lem-sf-native-open-tensor-forget-normalization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Native equivariant refinement of Stacks 0GL1/0E8I; parent argument steps 7, 8; full proof in Lean docstring."
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Native open tensor proof steps 7--8, decomposed into the derived unit and forgetting conclusions."
  },
  "mathlib_searches": [
   {
@@ -151,11 +143,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-90a6f",
-  "group": "G7",
+  "reviewer": "COMPILER",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261027T131454-L-2940282",
+  "landing": "20261027T180804-L-3902359",
   "kind": "interface",
-  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

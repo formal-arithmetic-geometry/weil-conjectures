@@ -6,6 +6,8 @@ Authors: SHEAF group G7
 module
 
 public import Sheaf.Paper.NativeOpenTensorComparisonData
+import Sheaf.Paper.NativeOpenTensorUnitNormalization
+import Sheaf.Paper.NativeOpenTensorForgetNormalization
 
 /-! # Unit and forgetting normalization of the localized open tensor map
 
@@ -99,6 +101,8 @@ theorem native_open_tensor_normalization (s : NativeOpenTensorData k₀ l j)
     (nativeDerivedClosedComparison k₀ l Z).tensorComparison
     (ProEtale.adicOpenImmersionLowerShriekAdjunction l
       (Scheme.Hom.geometricFiberMap j (comp_over j _))).mapExactDerivedCategory
-      rho gamma) := by sorry
+      rho gamma) := by
+  exact ⟨native_open_tensor_unit_normalization k₀ l j s rho gamma c _hc,
+    native_open_tensor_forget_normalization k₀ l j s rho gamma c _hc⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
