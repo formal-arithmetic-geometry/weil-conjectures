@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-integral-hom-evaluation-transport",
+ "kind": "statement",
+ "title": "Transport of normalized integral Hom counits",
+ "statement": "For every normalized TensorPresentation a of the derived tensor over a pro-etale ring sheaf, there exist a closed native structure S on the recorded derived internal Hom and a natural isomorphism e from a.tensor to the tensor with its two arguments exchanged, such that the counit of a is the transport of S's counit along e for every K and W.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08J9, K-flat tensor-Hom comparison and evaluation normalization."
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply the closed symmetric monoidal construction to the derived category of R-modules and restrict its tensor comparison to the product of K-flat complexes.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use full faithfulness of the product localization to lift the ratio between the native comparison and a.representative to a natural isomorphism from a.tensor to the exchanged native tensor.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-flat source representatives and K-injective targets, TensorPresentation.evaluation and the native signed Hom-tensor calculation give equal counits. K-flat and K-injective resolutions extend the equality to all derived objects.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-sf-integral-hom-reduction-models",
+  "lem-pc-kflat-resolution",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08J9, normalized tensor-Hom evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor-Hom counit transport through a natural tensor isomorphism",
+   "results": "No exact TensorPresentation theorem; the native CoefficientClosedStructure APIs provide the underlying counit naturality.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomEvaluationNaturality",
+  "date": "2026-10-28",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-hom-evaluation-naturality",
+   "place": "Proof decomposition: comparison of a supplied normalized presentation with native closed evaluation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomEvaluationTransport",
+  "file": "lean/Sheaf/Paper/IntegralHomEvaluationTransport.lean",
+  "declaration": "WeilConjectures.IntegralHom.tensorPresentation_counit_transport",
+  "statement": "theorem tensorPresentation_counit_transport (X : Scheme.{u}) (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (a : TensorPresentation.{u, u} X R) : ∃ S : CoefficientClosedStructure (hom.{u, u} X R), ∃ e : a.tensor ≅ swapTensor S.tensor, ∀ (K W : Derived.{u, u} X R), transportedCounit X R a S e K W = (a.adjunction K).counit.app W",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261027T233929-L-4138166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261027T233929-L-4138166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

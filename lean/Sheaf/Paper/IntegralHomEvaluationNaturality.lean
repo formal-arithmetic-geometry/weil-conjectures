@@ -6,6 +6,7 @@ Authors: SHEAF group X8
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
+import Sheaf.Paper.IntegralHomEvaluationTransport
 
 /-! # First-variable naturality of normalized integral evaluation
 
@@ -54,6 +55,9 @@ theorem evaluation_naturality (X : Scheme.{u})
     a.tensor.map (Prod.mkHom (𝟙 K')
       ((hom.{u, u} X R).map (Prod.mkHom f.op (𝟙 W)))) ≫
         (a.adjunction K').counit.app W =
-      a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W := by sorry
+      a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W := by
+  obtain ⟨S, e, hc⟩ := tensorPresentation_counit_transport X R a
+  rw [← hc K' W, ← hc K W]
+  exact transportedCounit_naturality X R a S e K K' W f
 
 end WeilConjectures.IntegralHom
