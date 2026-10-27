@@ -1,0 +1,158 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint) and 0941 (lemma-derived-limit-is-ok); the agent normalization refinement of integral reconstruction in fix-prop-projection-formula.proof.md"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction: compatibility of the specified augmentation maps; adjunction-mate refinement of the original two-step proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar reduction is strong monoidal and its right adjunction unit is the tensor completion augmentation",
+   "results": "8 hits; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.ihom.coev, CategoryTheory.Adjunction.unit_app_unit_comp_map_η_assoc",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of sheaves of modules commutes with derived scalar extension with compatible adjunction units",
+   "results": "8 hits; SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_comp_map_eq_iff|leftAdjointUniq",
+   "results": "8 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTensorPullbackAugmentation",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction: construction of the integral map from finite reduction and comparison of the same projection map; forward tensor/pullback augmentation calculation",
+   "via": [
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-sf-reduction-tensor-pullback",
+ "title": "Monoidal reduction/pullback square before applying the total limit",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, and let $f:X\\to Y$ be a scheme morphism with $\\ell$ invertible in every residue field of $X,Y$. Use completed coefficients [def-pur-integral-compact-support-coefficient-data]. Write $S_W$ for ordinary tensor, $F_f$ for ordinary ringed pullback, $L_W$ for coherent reduction, $t_W$ for coherent system tensor and $P_f$ for sequence inverse image [lem-fix-constructible-tensor-completion-presentation, lem-coef-derived-system-evaluation-calculus, def-pur-completed-pullback-tower-core]. Let $a_f:L_XF_f\\simeq P_fL_Y$ and $b_W:L_WS_W\\simeq t_W(L_W-,L_W-)$ be the uniquely normalized comparisons of [lem-sf-pullback-reduction-augmentation] and [lem-sf-tensor-reduction-augmentation]. Let $v_f:F_fS_Y\\simeq S_X(F_f-,F_f-)$ be the canonical ordinary comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], using exactly the specified ordinary tensor representatives, and let $w_f:P_ft_Y\\simeq t_X(P_f-,P_f-)$ be the canonical coherent comparison of [lem-pur-coherent-derived-pullback-tensor]. For all ambient derived objects $M,N$ on $Y$, in the derived system category on $X$ one has $a_f(S_Y(M,N));P_f(b_Y(M,N));w_f(L_YM,L_YN)=L_X(v_f(M,N));b_X(F_fM,F_fN);t_X(a_f(M),a_f(N))$. This is an equation before applying the total limit; it has no completion augmentation maps, no constructible restriction and no inverse reduction/limit counits.",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-fix-constructible-tensor-completion-presentation",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-completed-pullback-tower-core",
+  "lem-sf-tensor-reduction-augmentation",
+  "lem-sf-pullback-reduction-augmentation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-coherent-derived-pullback-tensor",
+  "def-pur-completed-pullback-tower-realizations"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous flat-term K-flat representatives of M and N. Scalar extension and ordinary inverse image preserve them. The normalized comparisons a and b identify on those representatives with the unit-preserving comparisons of the corresponding ordinary composite left adjoints.",
+   "uses": [
+    "lem-sf-tensor-reduction-augmentation",
+    "lem-sf-pullback-reduction-augmentation",
+    "lem-pc-kflat-resolution",
+    "lem-pur-coherent-reduction-kflat",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the signed total tensor normalizations of v and w. On a homogeneous pure tensor, both paths extend scalars by the quotient unit and then take the tensor of the two inverse-image unit sections. Balancing and naturality of the scalar and inverse-image units give equality. Sheafification and total-summand generator extensionality give equality of chain maps on the whole ringed sequence site, with the actual quotient transitions.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-coherent-derived-pullback-tensor",
+    "lem-pur-sequence-pullback-tensor-cochain",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize this single strict equality in the sequence category and descend from the product good-representative localization. Naturality transports it to M,N. At no point infer equality of derived maps from separately evaluated finite components.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-tensor-reduction-augmentation",
+  "lem-sf-pullback-reduction-augmentation",
+  "lem-pc-kflat-resolution",
+  "lem-pur-coherent-reduction-kflat",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-coherent-derived-pullback-tensor",
+  "lem-pur-sequence-pullback-tensor-cochain",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionTensorPullback",
+  "file": "lean/Sheaf/Paper/IntegralReductionTensorPullback.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.reductionTensorPullback",
+  "declarations": [
+   "WeilConjectures.IntegralOrdinary.reductionTensorPullback"
+  ],
+  "statement": "theorem reductionTensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (M N : DerivedCategory (integralTowerModules l E Y)) :\n    (pullbackReductionComparison l E f).hom.app\n        ((tensorModel l E Y).tensor.obj (M, N)) ≫\n      (pullbackTensorSequenceDerived l E f).map\n        ((tensorReductionComparison l E Y).hom.app (M, N)) ≫\n      (pullbackTensorSystemComparison l E f).hom.app\n        ((pullbackTensorCalculus l E Y).reduction.obj M,\n          (pullbackTensorCalculus l E Y).reduction.obj N) =\n    (pullbackTensorCalculus l E X).reduction.map\n        ((proEtaleCanonicalTensorComparison f\n          ((PurCompactSupport.completed l E).ring Y)\n          ((PurCompactSupport.completed l E).ring X)\n          ((PurCompactSupport.completed l E).pull f)\n          (tensorModel l E Y) (tensorModel l E X)).hom.app (M, N)) ≫\n      (tensorReductionComparison l E X).hom.app\n        ((PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj M,\n          (PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj N) ≫\n      (pullbackTensorCalculus l E X).systemClosed.tensor.map\n        (Prod.mkHom ((pullbackReductionComparison l E f).hom.app M)\n          ((pullbackReductionComparison l E f).hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-973e8",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T180554-L-3877743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-973e8",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T180554-L-3877743",
+  "kind": "interface",
+  "note": "independent cc review: item tensorPullback_augmentation proof + 3 new hole modules/nodes + tensorModel extraction against clone HEAD, node owners, importer IntegralOrdinaryTensorPullbackNormalization (compiled OK 29.5 s), axioms"
+ }
+}

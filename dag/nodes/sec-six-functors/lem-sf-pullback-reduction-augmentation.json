@@ -1,0 +1,153 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint) and 0941 (lemma-derived-limit-is-ok); the agent normalization refinement of integral reconstruction in fix-prop-projection-formula.proof.md"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction: compatibility of the specified augmentation maps; adjunction-mate refinement of the original two-step proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar reduction is strong monoidal and its right adjunction unit is the tensor completion augmentation",
+   "results": "8 hits; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.ihom.coev, CategoryTheory.Adjunction.unit_app_unit_comp_map_η_assoc",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of sheaves of modules commutes with derived scalar extension with compatible adjunction units",
+   "results": "8 hits; SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_comp_map_eq_iff|leftAdjointUniq",
+   "results": "8 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction, monoidal, and module pullback APIs; no theorem for these specified strict quotient/Roos normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTensorPullbackAugmentation",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction: construction of the integral map from finite reduction and comparison of the same projection map; forward tensor/pullback augmentation calculation",
+   "via": [
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-sf-pullback-reduction-augmentation",
+ "title": "Coherent reduction of ordinary pullback and its forward adjunct",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, and let $f:X\\to Y$ be any scheme morphism. Use the completed coefficient sheaves of [def-pur-integral-compact-support-coefficient-data]. Let $F_f$ be their ordinary ringed derived pullback, and let $\\rho_f:F_f\\to\\widehat F_f$ be the specified forward comparison of [lem-sf-integral-ordinary-pullback-comparison], defined as pullIso followed by the quotient/zero completion comparison of [lem-tw-ordinary-completed-integral-pullback]. For $W=X,Y$, write $L_W\\dashv R_W$ for the coherent reduction/limit adjunction of [lem-coef-derived-system-evaluation-calculus], with unit $\\eta_W$. Let $P_f$ be the exact derived inverse image on the ringed sequence sites of [def-pur-completed-pullback-tower-core], and let $e_f:\\widehat F_f\\simeq R_XP_fL_Y$ be the full strict-model realization of [lem-pur-integral-pullback-roos-realization]. There exists a natural isomorphism $a_f:L_XF_f\\simeq P_fL_Y$ whose adjunct on every ambient derived object $K$ is exactly $\\rho_f(K);e_f(K)=\\eta_X(F_fK);R_X(a_f(K))$. Its uniqueness is proved separately from the adjunction Hom bijection. No tensor, constructibility, invertibility of $\\ell$, properness, Noetherianness or dimension hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-completed-pullback-tower-core",
+  "lem-pur-integral-pullback-roos-realization",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "The two ordinary composite left adjoints, coherent reduction after ordinary inverse image and sequence inverse image after coherent reduction, have canonically identified right adjoints. The equality of completed direct coefficient maps and their actual finite projections identifies the scalar actions. Ordinary direct image commutes with the ordinary limit by its right adjunction. Uniqueness of left adjoints gives the unit-preserving ordinary comparison.",
+   "uses": [
+    "lem-sf-integral-ordinary-pullback-comparison",
+    "def-pur-completed-pullback-tower-core",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute both composite total left derived functors on flat-term K-flat representatives. The adjunction-normalized coherent reduction model and pullIso transport the ordinary unit identity to these derived coordinates. The strict quotient units and transitions agree, so product and mapping-cocone extensionality give the same whole Roos augmentation with zero shifted coordinate. Insert the specified pullback/Roos realization and descend through good-complex localization. This yields a and its displayed adjunct equation.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-pur-integral-pullback-roos-realization",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the proved uniqueness corollary, two such natural isomorphisms have equal adjuncts at every object. Injectivity of the adjunction Hom bijection, natural-transformation extensionality and isomorphism extensionality identify them.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "def-pur-completed-pullback-tower-core",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-tw-ordinary-completed-integral-pullback",
+  "lem-pur-integral-pullback-roos-realization",
+  "lem-pur-integral-operations-well-defined",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackReductionAugmentation",
+  "file": "lean/Sheaf/Paper/IntegralPullbackReductionAugmentation.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.pullbackReductionAugmentation_exists",
+  "declarations": [
+   "WeilConjectures.IntegralOrdinary.pullbackReductionAugmentation_exists",
+   "WeilConjectures.IntegralOrdinary.pullbackReductionAugmentation_existsUnique",
+   "WeilConjectures.IntegralOrdinary.pullbackReductionComparison"
+  ],
+  "statement": "theorem pullbackReductionAugmentation_exists {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ a : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⋙\n        (pullbackTensorCalculus l E X).reduction ≅\n      (pullbackTensorCalculus l E Y).reduction ⋙ pullbackTensorSequenceDerived l E f,\n      ∀ K : DerivedCategory (integralTowerModules l E Y),\n        (pullComparison l E f).app K ≫\n            (pullbackTensorIntegralPullbackModel l E f).hom.app K =\n          (pullbackTensorCalculus l E X).adjunction.unit.app\n              ((PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj K) ≫\n            (coefficientSequenceLimit l E X).map (a.hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-973e8",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T180554-L-3877743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-973e8",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T180554-L-3877743",
+  "kind": "interface",
+  "note": "independent cc review: item tensorPullback_augmentation proof + 3 new hole modules/nodes + tensorModel extraction against clone HEAD, node owners, importer IntegralOrdinaryTensorPullbackNormalization (compiled OK 29.5 s), axioms"
+ }
+}

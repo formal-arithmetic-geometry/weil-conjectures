@@ -6,9 +6,10 @@ Authors: SHEAF group W9
 module
 
 public import Sheaf.Paper.IntegralOrdinaryPullbackComparison
-public import Sheaf.Paper.ConstructibleTensorCompletionChain
+public import Sheaf.Paper.IntegralTensorReductionAugmentation
 public import Sheaf.Paper.CompletedPullbackTensorComparison
 public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
+import Sheaf.Paper.IntegralReductionTensorPullback
 
 /-! # The tensor/pullback square before inverting completion
 
@@ -27,33 +28,72 @@ namespace WeilConjectures.IntegralOrdinary
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The specified signed total tensor, restricted to the flat-term K-flat models.
-Source: Stacks 07A4
-(blueprint: lem-sf-integral-tensor-pullback-augmentation). -/
-@[reducible] def tensorModel (X : Scheme.{u}) :
-    ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X) where
-  tensor := ConstructibleTensorModel.ordinaryTensor l E X
-  representative := by
-    let i : (proEtaleFlatRepresentatives X
-        ((PurCompactSupport.completed l E).ring X)).FullSubcategory ⥤
-        (integralOperationsGoodComplex l E X).FullSubcategory :=
-      ObjectProperty.ιOfLE (fun P hP ↦
-        ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP.1, hP.2⟩)
-    with_unfolding_all
-      exact Functor.isoWhiskerLeft (i.prod i)
-        (ConstructibleTensorModel.tensorRepresentativeIso l E X)
-
-/-- The forward tensor augmentation is fixed on entire flat-term K-flat representatives.
-Source: Bhatt--Scholze, Definition 3.4.10; Stacks 0941
-(blueprint: lem-sf-integral-tensor-pullback-augmentation). -/
-def TensorAugmentationNormalized (X : Scheme.{u})
-    (τ : (tensorModel l E X).tensor ⟶ integralCompletedTensor l E X) : Prop :=
-  ∀ P Q : (integralOperationsGoodComplex l E X).FullSubcategory,
-    (ConstructibleTensorModel.tensorRepresentativeIso l E X).hom.app (P, Q) ≫
-        τ.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
-        (integralCompletedTensorComparison l E X).hom.app (P, Q) =
-      DerivedCategory.Q.map
-        ((ConstructibleTensorModel.tensorCompletionChain l E X).app (P.obj, Q.obj))
+private theorem limit_tensor_augmentation
+    {C D A B : Type*} [Category* C] [Category* D] [Category* A] [Category* B]
+    {LY : C ⥤ A} {RY : A ⥤ C} {LX : D ⥤ B} {RX : B ⥤ D}
+    (adjY : LY ⊣ RY) (adjX : LX ⊣ RX) (P : A ⥤ B) (t : B × B ⥤ B)
+    {S M N : C} {V T FM FN : D} {U : A} (bY : LY.obj S ⟶ U)
+    (bX : LX.obj T ⟶ t.obj (LX.obj FM, LX.obj FN))
+    (aS : LX.obj V ⟶ P.obj (LY.obj S))
+    (aM : LX.obj FM ⟶ P.obj (LY.obj M)) (aN : LX.obj FN ⟶ P.obj (LY.obj N))
+    (v : V ⟶ T) (w : P.obj U ⟶ t.obj (P.obj (LY.obj M), P.obj (LY.obj N)))
+    [IsIso (adjX.counit.app (P.obj (LY.obj M)))]
+    [IsIso (adjX.counit.app (P.obj (LY.obj N)))]
+    (hc : aS ≫ P.map bY ≫ w =
+      LX.map v ≫ bX ≫ t.map (Prod.mkHom aM aN)) :
+    adjX.unit.app V ≫ RX.map aS ≫
+        RX.map (P.map (LY.map (adjY.unit.app S ≫ RY.map bY))) ≫
+        RX.map (P.map (adjY.counit.app U)) ≫ RX.map w ≫
+        RX.map (t.map (Prod.mkHom
+          (inv (adjX.counit.app (P.obj (LY.obj M))))
+          (inv (adjX.counit.app (P.obj (LY.obj N)))))) =
+      v ≫ adjX.unit.app T ≫ RX.map bX ≫
+        RX.map (t.map (Prod.mkHom
+          (LX.map (adjX.unit.app FM ≫ RX.map aM))
+          (LX.map (adjX.unit.app FN ≫ RX.map aN)))) := by
+  have hy : LY.map (adjY.unit.app S ≫ RY.map bY) ≫ adjY.counit.app U = bY := by
+    simpa only [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit] using
+      (adjY.homEquiv S U).symm_apply_apply bY
+  have hm : LX.map (adjX.unit.app FM ≫ RX.map aM) =
+      aM ≫ inv (adjX.counit.app (P.obj (LY.obj M))) := by
+    apply (cancel_mono (adjX.counit.app (P.obj (LY.obj M)))).1
+    simpa only [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit,
+      Category.assoc, IsIso.inv_hom_id, Category.comp_id] using
+      (adjX.homEquiv FM (P.obj (LY.obj M))).symm_apply_apply aM
+  have hn : LX.map (adjX.unit.app FN ≫ RX.map aN) =
+      aN ≫ inv (adjX.counit.app (P.obj (LY.obj N))) := by
+    apply (cancel_mono (adjX.counit.app (P.obj (LY.obj N)))).1
+    simpa only [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit,
+      Category.assoc, IsIso.inv_hom_id, Category.comp_id] using
+      (adjX.homEquiv FN (P.obj (LY.obj N))).symm_apply_apply aN
+  have hs : aS ≫ P.map (LY.map (adjY.unit.app S ≫ RY.map bY)) ≫
+      P.map (adjY.counit.app U) ≫ w ≫
+        t.map (Prod.mkHom (inv (adjX.counit.app (P.obj (LY.obj M))))
+          (inv (adjX.counit.app (P.obj (LY.obj N))))) =
+      LX.map v ≫ bX ≫ t.map (Prod.mkHom
+        (LX.map (adjX.unit.app FM ≫ RX.map aM))
+        (LX.map (adjX.unit.app FN ≫ RX.map aN))) := by
+    have hpy : P.map (LY.map (adjY.unit.app S ≫ RY.map bY)) ≫
+        P.map (adjY.counit.app U) = P.map bY := by
+      rw [← P.map_comp, hy]
+    calc
+      _ = (aS ≫ P.map bY ≫ w) ≫
+          t.map (Prod.mkHom (inv (adjX.counit.app (P.obj (LY.obj M))))
+            (inv (adjX.counit.app (P.obj (LY.obj N))))) := by
+        simpa only [Category.assoc] using congrArg
+          (fun z ↦ aS ≫ z ≫ w ≫ t.map (Prod.mkHom
+            (inv (adjX.counit.app (P.obj (LY.obj M))))
+            (inv (adjX.counit.app (P.obj (LY.obj N)))))) hpy
+      _ = _ := by
+        rw [hc, hm, hn]
+        simp only [Category.assoc, ← t.map_comp]
+        rfl
+  have hr := congrArg (fun z ↦ adjX.unit.app V ≫ RX.map z) hs
+  simp only [Functor.map_comp, Category.assoc] at hr ⊢
+  have hu := adjX.unit.naturality v
+  dsimp only [Functor.id_map, Functor.comp_map] at hu
+  rw [← Category.assoc (adjX.unit.app V) (RX.map (LX.map v)), ← hu] at hr
+  simpa only [Category.assoc] using hr
 
 /-- The canonical completed comparison commutes with the forward quotient augmentations.
 This is a component equation for specified maps, without constructing any isomorphism
@@ -102,6 +142,98 @@ theorem tensorPullback_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y)
           (PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj N.obj) ≫
       (integralCompletedTensor l E X).map
         (Prod.mkHom ((pullComparison l E f).app M.obj)
-          ((pullComparison l E f).app N.obj)) := by sorry
+          ((pullComparison l E f).app N.obj)) := by
+  let CY := pullbackTensorCalculus l E Y
+  let CX := pullbackTensorCalculus l E X
+  let O := PurCompactSupport.pull (PurCompactSupport.completed l E) f
+  let G := integralDerivedPullback l E f
+  let H := pullbackTensorReferencePullback l E f
+  let U := pullbackTensorReferenceTensor l E X
+  let a := pullbackReductionComparison l E f
+  let bX := tensorReductionComparison l E X
+  let bY := tensorReductionComparison l E Y
+  let e := pullbackTensorIntegralPullbackModel l E f
+  let dX := pullbackTensorIntegralTensorModel l E X
+  let dY := pullbackTensorIntegralTensorModel l E Y
+  let ρ := pullComparison l E f
+  let v := (proEtaleCanonicalTensorComparison f
+    ((PurCompactSupport.completed l E).ring Y)
+    ((PurCompactSupport.completed l E).ring X)
+    ((PurCompactSupport.completed l E).pull f)
+    (tensorModel l E Y) (tensorModel l E X)).hom.app (M.obj, N.obj)
+  have ha := (pullbackReductionAugmentation_existsUnique l E f).exists.choose_spec
+  have hbX := (tensorReductionAugmentation_existsUnique l E X).exists.choose_spec τX hX
+  have hbY := (tensorReductionAugmentation_existsUnique l E Y).exists.choose_spec τY hY
+  have hε := pullbackTensorComparisonCounits l E f M N
+  have := hε.1
+  have := hε.2.1
+  have := hε.2.2
+  have hformal := limit_tensor_augmentation CY.adjunction CX.adjunction
+    (pullbackTensorSequenceDerived l E f) CX.systemClosed.tensor
+    (bY.hom.app (M.obj, N.obj)) (bX.hom.app (O.obj M.obj, O.obj N.obj))
+    (a.hom.app ((tensorModel l E Y).tensor.obj (M.obj, N.obj)))
+    (a.hom.app M.obj) (a.hom.app N.obj) v
+    ((pullbackTensorSystemComparison l E f).hom.app
+      (CY.reduction.obj M.obj, CY.reduction.obj N.obj))
+    (reductionTensorPullback l E f M.obj N.obj)
+  have href : (ρ.app ((tensorModel l E Y).tensor.obj (M.obj, N.obj)) ≫
+        e.hom.app ((tensorModel l E Y).tensor.obj (M.obj, N.obj))) ≫
+      H.map (τY.app (M.obj, N.obj) ≫ dY.hom.app (M.obj, N.obj)) ≫
+      (pullbackTensorReferenceComparison l E f M N).hom =
+    v ≫ (τX.app (O.obj M.obj, O.obj N.obj) ≫
+      dX.hom.app (O.obj M.obj, O.obj N.obj)) ≫
+      U.map (Prod.mkHom (ρ.app M.obj ≫ e.hom.app M.obj)
+        (ρ.app N.obj ≫ e.hom.app N.obj)) := by
+    dsimp only [ρ, e, dX, dY, O, H, U]
+    rw [ha, hbY, hbX, ha, ha]
+    dsimp only [CX, CY, O, a, bX, bY, pullbackReductionComparison,
+      tensorReductionComparison] at hformal
+    simpa only [pullbackTensorReferenceComparison, pullbackTensorReferencePullback,
+      pullbackTensorReferenceTensor, Functor.comp_map, Functor.prod_map,
+      Functor.comp_obj, Functor.prod_obj, Functor.id_obj,
+      Functor.mapIso_hom, Functor.mapIso_inv, Iso.trans_hom, Iso.symm_hom,
+      asIso_hom, asIso_inv, Iso.prod_hom, Iso.prod_inv, Iso.app_hom,
+      Category.assoc] using hformal
+  let z := U.mapIso (Iso.prod (e.app M.obj) (e.app N.obj))
+  let q := dX.hom.app (G.obj M.obj, G.obj N.obj) ≫ z.hom
+  have hcanonical : ((canonicalIntegralPullbackTensor l E f M N).hom).hom ≫ q =
+      e.hom.app ((integralCompletedTensor l E Y).obj (M.obj, N.obj)) ≫
+        H.map (dY.hom.app (M.obj, N.obj)) ≫
+          (pullbackTensorReferenceComparison l E f M N).hom := by
+    change (e.hom.app _ ≫ H.map (dY.hom.app _) ≫
+      (pullbackTensorReferenceComparison l E f M N).hom ≫ z.inv ≫
+      dX.inv.app (G.obj M.obj, G.obj N.obj)) ≫
+      (dX.hom.app (G.obj M.obj, G.obj N.obj) ≫ z.hom) = _
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id,
+      Category.comp_id]
+  have hnat := dX.hom.naturality (Prod.mkHom (ρ.app M.obj) (ρ.app N.obj))
+  have hrnat := ρ.naturality (τY.app (M.obj, N.obj))
+  have hz : U.map (Prod.mkHom (ρ.app M.obj) (ρ.app N.obj)) ≫ z.hom =
+      U.map (Prod.mkHom (ρ.app M.obj ≫ e.hom.app M.obj)
+        (ρ.app N.obj ≫ e.hom.app N.obj)) := by
+    change U.map _ ≫ U.map (Prod.mkHom (e.hom.app M.obj) (e.hom.app N.obj)) = _
+    rw [← U.map_comp]
+    rfl
+  apply (cancel_mono q).1
+  change (O.map (τY.app (M.obj, N.obj)) ≫ ρ.app _ ≫
+      ((canonicalIntegralPullbackTensor l E f M N).hom).hom) ≫ q =
+    (v ≫ τX.app (O.obj M.obj, O.obj N.obj) ≫
+      (integralCompletedTensor l E X).map (Prod.mkHom (ρ.app M.obj) (ρ.app N.obj))) ≫ q
+  rw [Category.assoc, Category.assoc, hcanonical]
+  dsimp only [q]
+  simp only [Category.assoc]
+  rw [← Category.assoc ((integralCompletedTensor l E X).map _) (dX.hom.app _), hnat]
+  simp only [Category.assoc]
+  rw [hz]
+  have he := e.hom.naturality (τY.app (M.obj, N.obj))
+  have he' : (ρ.app ((tensorModel l E Y).tensor.obj (M.obj, N.obj)) ≫
+      e.hom.app ((tensorModel l E Y).tensor.obj (M.obj, N.obj))) ≫
+      H.map (τY.app (M.obj, N.obj)) =
+    (O.map (τY.app (M.obj, N.obj)) ≫ ρ.app _) ≫ e.hom.app _ := by
+    rw [Category.assoc, ← he, ← Category.assoc, ← hrnat]
+  rw [H.map_comp] at href
+  simp only [← Category.assoc] at href ⊢
+  rw [he'] at href
+  exact href
 
 end WeilConjectures.IntegralOrdinary
