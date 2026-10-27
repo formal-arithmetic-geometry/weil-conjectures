@@ -8,6 +8,9 @@ public import Sheaf.Paper.TowerClassReduction
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import WeilConjectures.WeilSheaf.FieldCoefficientTateTwist
+import Sheaf.Paper.IntegralSitePullbackIntegerEndpointMate
+import Sheaf.Paper.IntegralSitePullbackIntegerEndpointInverseImage
 
 /-! # Integer endpoint in the change-of-site pullback square
 
@@ -47,8 +50,59 @@ theorem integral_site_pullback_integer_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y)
         κ.hom.app ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           (AddCommGrpCat.of (ULift.{u + 1} ℤ))) =
       z ≫ (integerComparison X).inv ≫
-        (comparisonUpperStar AddCommGrpCat.{u + 1} X).map zEt) := by
-  sorry
+        (comparisonUpperStar AddCommGrpCat.{u + 1} X).map zEt)  := by
+  dsimp
+  let A := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+    (AddCommGrpCat.of (ULift.{u + 1} ℤ))
+  let B := (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+    (AddCommGrpCat.of (ULift.{u + 1} ℤ))
+  let AY := (constantSheaf (Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1}).obj
+    (AddCommGrpCat.of (ULift.{u + 1} ℤ))
+  let BX := (constantSheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).obj
+    (AddCommGrpCat.of (ULift.{u + 1} ℤ))
+  let zEt := ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).symm.app
+    (AddCommGrpCat.of (ULift.{u + 1} ℤ))).hom
+  let z := ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv AY BX).symm
+    (Scheme.proEtaleConstantDirectImageMap f AddCommGrpCat.{u + 1}
+      (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
+  let u2 : (upperStar AddCommGrpCat.{u + 1} f).obj AY ⟶ BX := by
+    change (proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj AY ⟶ BX
+    exact proEtaleConstantInverseImageMap f AddCommGrpCat.{u + 1}
+      (AddCommGrpCat.of (ULift.{u + 1} ℤ))
+  have h := CategoryTheory.conjugateIsoEquiv_symm_hom_app_comp_map_comp
+    (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+    (ProEtale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f)
+    (comparisonAdjunction AddCommGrpCat.{u + 1} Y)
+    (comparisonAdjunction AddCommGrpCat.{u + 1} X)
+    (lowerStarCompComparisonLowerStarIso f AddCommGrpCat.{u + 1}).symm
+    (u₁ := ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).app
+      (AddCommGrpCat.of (ULift.{u + 1} ℤ))).hom) (u₂ := u2) (v := (integerComparison Y).hom)
+    (v' := (integerComparison X).hom)
+  have h' := h (by
+    simpa [zEt, u2, proEtaleConstantInverseImageMap]
+      using integral_site_pullback_integer_endpoint_mate f)
+  have hz : u2 = z := by
+    simpa [u2, z] using
+      (integral_site_pullback_integer_endpoint_inverse_image f).symm
+  have hk : (comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f).hom.app A =
+      ((conjugateIsoEquiv
+        ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).comp
+          (comparisonAdjunction AddCommGrpCat.{u + 1} X))
+        ((comparisonAdjunction AddCommGrpCat.{u + 1} Y).comp
+          (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f))).symm
+        (lowerStarCompComparisonLowerStarIso f AddCommGrpCat.{u + 1}).symm).hom.app A := rfl
+  rw [hk]
+  apply (cancel_mono
+    ((comparisonUpperStar AddCommGrpCat.{u + 1} X).map
+        ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).app
+          (AddCommGrpCat.of (ULift.{u + 1} ℤ))).hom ≫
+      (integerComparison X).hom)).mp
+  rw [Category.assoc, Category.assoc, h']
+  rw [← (upperStar AddCommGrpCat.{u + 1} f).map_comp_assoc]
+  simp only [Category.assoc]
+  rw [(integerComparison Y).inv_hom_id]
+  simp
+  simpa [z] using hz
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
