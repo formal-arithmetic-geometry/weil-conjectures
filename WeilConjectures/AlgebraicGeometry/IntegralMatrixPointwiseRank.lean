@@ -116,8 +116,6 @@ private theorem exists_small_evaluation
   have hp := hb q
   rw [h] at hp
   have hp' := congrArg ULift.down hp
-  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    AddCommGrpCat.comp_apply] at hp'
   change (b (F.map q (b.symm 1))).down =
     (((inv e ≫ p.hom ≫ e).hom.app (op (Scheme.ProEt.mk (𝟙 Y))))
       (ULift.up 1)).down (a z) at hp'
