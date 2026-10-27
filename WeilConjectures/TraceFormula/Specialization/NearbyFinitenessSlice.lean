@@ -25,8 +25,9 @@ geometric generic fibres of the coordinate projections of the special fibre. The
   the pullback exchange `α : Lhᵢ,ₛ^* Ψ B ⟶ Ψ_K (Lhᵢ^* B)` of the morphism of geometric models
   over the slice (`NearbyCyclesModel.affineSpaceSliceHom`) is a split monomorphism, so `Lhᵢ,ₛ^* Ψ B`
   is a retract of the nearby cycles over the trait `Spec K⟦t⟧`
-  (`NearbyCyclesModel.nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice`). The slice `Spec K⟦t⟧ ⟶ 𝔸¹_S` is (up to a purely inseparable extension of the
-  residue field) the completion of the strict localization `S'` of `𝔸¹_S` at the generic point of
+  (`NearbyCyclesModel.nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice`).
+  The slice `Spec K⟦t⟧ ⟶ 𝔸¹_S` is (up to a purely inseparable extension of the residue field) the
+  completion of the strict localization `S'` of `𝔸¹_S` at the generic point of
   its special fibre. The nearby cycles over `S` of the base change to `S'` are the invariants
   `(Ψ_{S'})^P` of the nearby cycles over `S'` under the kernel `P` of the surjection of inertia
   groups `I_{S'} ⟶ I_S`, a pro-`p` group (SGA 4½, [Th. finitude], Lemme 3.3), and the nearby
