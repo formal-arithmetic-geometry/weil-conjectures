@@ -12766,3 +12766,5 @@ public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FixedPointScheme
+public import WeilConjectures.PoincareDuality.Verdier
+public import WeilConjectures.TraceFormula.Stalk
