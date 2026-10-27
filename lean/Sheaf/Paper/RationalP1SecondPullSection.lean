@@ -7,6 +7,12 @@ module
 
 public import Sheaf.Paper.RationalP1SecondPullComparison
 public import Sheaf.Paper.ProjectivePullSectionCompatibility
+import Sheaf.Paper.PullSectionTransport
+import Sheaf.Paper.RationalP1SecondPullSectionTransportData
+import Sheaf.Paper.RationalP1SecondPullComparisonExpansion
+import Sheaf.Paper.RationalP1SecondPullSectionTransportSpecialized
+import Sheaf.Paper.RationalP1SecondPullSectionFinalTransport
+import Sheaf.Paper.RationalP1SecondPullSectionCoreComm
 
 /-! # The second pullback comparison restricted to the diagonal -/
 
@@ -25,9 +31,38 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
-attribute [local irreducible] coefficient line twist firstProjection secondProjection square
+attribute [local irreducible] coefficient line twist firstProjection secondProjection
+attribute [local irreducible] square pullSectionIso
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] projectionMap singleUnitIso secondLineComparison
+
+/-- The ambient pullback comparison restricts to the identity on the diagonal for the
+untwisted base object. This is the composition-coherence part of the second pull-section
+argument; the Tate-line and tensor transport are handled by `second_pull_section`.
+Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
+sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
+Second identity, first factor before the Tate twist.
+(blueprint: lem-sfb-rational-p1-second-pull-section-core).
+Proof: expand the ambient square comparison into the normalized inverse-image
+compositors. Both composites with the diagonal are the identity because
+`diagonalImmersion Y ≫ firstProjection Y` and `diagonalImmersion Y ≫ secondProjection Y`
+are the identity; the pullback-composition coherence and identity compositor then give
+the displayed equality. -/
+theorem second_pull_section_core
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
+    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
+    (K : DerivedCategory (Modules (coefficient l c).X Y)) :
+    PullSectionCompatibility
+      (moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y))
+      (moduleObjectDerivedPullback (coefficient l c).X (secondProjection Y))
+      (moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y))
+      (pullSectionIso (coefficient l c).X Y (firstProjection Y)
+        (by unfold firstProjection; exact pullback.diagonal_fst _))
+      (pullSectionIso (coefficient l c).X Y (secondProjection Y)
+        (by unfold secondProjection; exact pullback.diagonal_snd _))
+      ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K)
+      ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K).inv := by sorry
 
 set_option maxHeartbeats 800000 in
 -- The statement compares the fixed derived pullback and tensor interfaces.
@@ -38,7 +73,7 @@ sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
 Second identity, cancellation on the diagonal.
 (blueprint: lem-sfb-rational-p1-second-pull-section).
 
-Proof: expand secondPullComparison into the two pullTwistIso maps and the square
+Proof: expand into the two pullTwistIso maps and the square
 comparison on q*K. Pullback composition coherence, applied to Delta p1 = id and
 Delta p2 = id, identifies the restriction of the square comparison with identity
 on q*K. On each finite root sheaf the Cartesian comparison commutes with restriction
@@ -71,6 +106,7 @@ theorem second_pull_section
       ((twist (coefficient l c).X (ProjectiveLine Y)
         (line l c (ProjectiveLine Y))).obj
         ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K))
-      (secondPullComparison l c k p hpl Y K).inv := by sorry
+      (secondPullComparison l c k p hpl Y K).inv := by
+  sorry
 
 end AlgebraicGeometry.ProEtale.RationalP1

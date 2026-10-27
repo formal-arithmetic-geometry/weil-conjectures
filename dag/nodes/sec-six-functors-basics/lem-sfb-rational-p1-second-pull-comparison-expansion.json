@@ -1,0 +1,97 @@
+{
+ "id": "lem-sfb-rational-p1-second-pull-comparison-expansion",
+ "kind": "lemma",
+ "title": "rational p1 second pull comparison expansion",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is a strict intermediate coherence step of the section argument; prove it by expanding the named categorical comparisons and applying their naturality and identity laws.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal pullback comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PullSectionCompatibility diagonal pullback",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback section comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondPullSection",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-pull-section",
+   "place": "Strict intermediate step of the second identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondPullComparisonExpansion",
+  "file": "lean/Sheaf/Paper/RationalP1SecondPullComparisonExpansion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_pull_comparison_inv_expansion",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28",
+  "statement": "theorem second_pull_comparison_inv_expansion\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [hproj : ∀ x : ProjectiveLine Y, Invertible (l : (ProjectiveLine Y).residueField x)]\n    [hdiag : ∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x)]\n    (K : DerivedCategory (Modules (coefficient l c).X Y)) :\n    (secondPullComparison l c k p hpl Y K).inv =\n      (pullTwistIso (coefficient l c).X (firstProjection Y) _ _\n        (shiftedLineComparison l c (firstProjection Y))\n        ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K) ≪≫\n      (twist (coefficient l c).X (diagonalSurface Y)\n        (line l c (diagonalSurface Y))).mapIso\n        ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K) ≪≫\n      (pullTwistIso (coefficient l c).X (secondProjection Y) _ _\n        (secondLineComparison l c k p hpl Y)\n        ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K)).symm).inv"
+ },
+ "statement": "Intermediate statement for second_pull_comparison_inv_expansion",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

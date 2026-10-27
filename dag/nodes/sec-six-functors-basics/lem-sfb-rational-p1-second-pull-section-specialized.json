@@ -1,0 +1,96 @@
+{
+ "id": "lem-sfb-rational-p1-second-pull-section-specialized",
+ "kind": "lemma",
+ "title": "Specialized pull-section transport calculation",
+ "statement": "The intermediate categorical equality used by the rational projective-line second pull-section proof.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence."
+ },
+ "proof": [
+  {
+   "text": "This is the named intermediate coherence statement for the corresponding transport or expansion step; its proof is split off for a subsequent worker.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent M4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence.",
+  "note": "Strict intermediate statement split from the assigned section proof."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalP1SecondPullSectionTransportSpecialized",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_pull_section_transport_specialized",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/RationalP1SecondPullSectionTransportSpecialized.lean",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28",
+  "statement": "theorem second_pull_section_transport_specialized\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [hproj : ∀ x : ProjectiveLine Y, Invertible (l : (ProjectiveLine Y).residueField x)]\n    [hdiag : ∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x)]\n    (K : DerivedCategory (Modules (coefficient l c).X Y))\n    (data : PullSectionTransportData\n      (F₁ := moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y))\n      (F₂ := moduleObjectDerivedPullback (coefficient l c).X (secondProjection Y))\n      (G := moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y))\n      (s₁ := pullSectionIso (coefficient l c).X Y (firstProjection Y)\n        (by unfold firstProjection; exact pullback.diagonal_fst _))\n      (s₂ := pullSectionIso (coefficient l c).X Y (secondProjection Y)\n        (by unfold secondProjection; exact pullback.diagonal_snd _))\n      (T := twist (coefficient l c).X (ProjectiveLine Y)\n        (line l c (ProjectiveLine Y)))\n      (U := twist (coefficient l c).X (diagonalSurface Y)\n        (line l c (diagonalSurface Y)))\n      (M := ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K))\n      (e₁ := pullTwistIso (coefficient l c).X (firstProjection Y) _ _\n        (shiftedLineComparison l c (firstProjection Y))\n        ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K))\n      (e₂ := pullTwistIso (coefficient l c).X (secondProjection Y) _ _\n        (secondLineComparison l c k p hpl Y)\n        ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K))\n      (b := (ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K))\n    (hbase : (moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y)).map\n        ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K).inv ≫\n      (pullSectionIso (coefficient l c).X Y (firstProjection Y)\n        (by unfold firstProjection; exact pullback.diagonal_fst _)).hom.app\n        ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K) =\n      (pullSectionIso (coefficient l c).X Y (secondProjection Y)\n        (by unfold secondProjection; exact pullback.diagonal_snd _)).hom.app\n        ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K)) :\n    (moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y)).map\n        ((pullTwistIso (coefficient l c).X (firstProjection Y) _ _\n          (shiftedLineComparison l c (firstProjection Y))\n          ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K) ≪≫\n        (twist (coefficient l c).X (diagonalSurface Y)\n          (line l c (diagonalSurface Y))).mapIso\n          ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K) ≪≫\n        (pullTwistIso (coefficient l c).X (secondProjection Y) _ _\n          (secondLineComparison l c k p hpl Y)\n          ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K)).symm).inv) ≫\n      (pullSectionIso (coefficient l c).X Y (firstProjection Y)\n        (by unfold firstProjection; exact pullback.diagonal_fst _)).hom.app\n        ((twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).obj\n          ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K)) =\n      (pullSectionIso (coefficient l c).X Y (secondProjection Y)\n        (by unfold secondProjection; exact pullback.diagonal_snd _)).hom.app\n        ((twist (coefficient l c).X (ProjectiveLine Y)\n          (line l c (ProjectiveLine Y))).obj\n          ((moduleObjectDerivedPullback (coefficient l c).X\n          (ProjectiveLine Y ↘ Y)).obj K))"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondPullSection",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal pullback comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PullSectionCompatibility diagonal pullback",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback section comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "stmt_deps": [],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-pull-section",
+   "place": "Strict intermediate step of the second identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

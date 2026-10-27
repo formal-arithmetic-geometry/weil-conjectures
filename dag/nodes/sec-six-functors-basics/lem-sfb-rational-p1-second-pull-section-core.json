@@ -1,0 +1,96 @@
+{
+ "id": "lem-sfb-rational-p1-second-pull-section-core",
+ "kind": "lemma",
+ "title": "Rational P1 ambient comparison restriction on the untwisted base",
+ "statement": "The intermediate categorical equality used by the rational projective-line second pull-section proof.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence."
+ },
+ "proof": [
+  {
+   "text": "This is the named intermediate coherence statement for the corresponding transport or expansion step; its proof is split off for a subsequent worker.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent M4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence.",
+  "note": "Strict intermediate statement split from the assigned section proof."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalP1SecondPullSection",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_pull_section_core",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/RationalP1SecondPullSection.lean",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28",
+  "statement": "theorem second_pull_section_core\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    (K : DerivedCategory (Modules (coefficient l c).X Y)) :\n    PullSectionCompatibility\n      (moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y))\n      (moduleObjectDerivedPullback (coefficient l c).X (secondProjection Y))\n      (moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y))\n      (pullSectionIso (coefficient l c).X Y (firstProjection Y)\n        (by unfold firstProjection; exact pullback.diagonal_fst _))\n      (pullSectionIso (coefficient l c).X Y (secondProjection Y)\n        (by unfold secondProjection; exact pullback.diagonal_snd _))\n      ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K)\n      ((ambientPullbackComparison (coefficient l c).X (square Y)).symm.app K).inv"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondPullSection",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal pullback comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PullSectionCompatibility diagonal pullback",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback section comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "stmt_deps": [],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-pull-section",
+   "place": "Strict intermediate step of the second identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

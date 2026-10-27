@@ -1,0 +1,97 @@
+{
+ "id": "lem-sfb-rational-pull-section-transport",
+ "kind": "lemma",
+ "title": "rational pull section transport",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is a strict intermediate coherence step of the section argument; prove it by expanding the named categorical comparisons and applying their naturality and identity laws.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, intermediate transport and coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal pullback comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PullSectionCompatibility diagonal pullback",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback section comparison",
+   "results": "No exact existing theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondPullSection",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-pull-section",
+   "place": "Strict intermediate step of the second identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PullSectionTransport",
+  "file": "lean/Sheaf/Paper/PullSectionTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.pull_section_transport",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28",
+  "statement": "theorem pull_section_transport\n    {C D : Type*} [Category C] [Category D]\n    {F₁ F₂ : C ⥤ D} {G : D ⥤ C}\n    {s₁ : F₁ ⋙ G ≅ 𝟭 C} {s₂ : F₂ ⋙ G ≅ 𝟭 C}\n    (T : C ⥤ C) (U : D ⥤ D) (M : C)\n    (e₁ : F₁.obj (T.obj M) ≅ U.obj (F₁.obj M))\n    (e₂ : F₂.obj (T.obj M) ≅ U.obj (F₂.obj M))\n    (b : F₁.obj M ≅ F₂.obj M)\n    (data : PullSectionTransportData (G := G) (s₁ := s₁) (s₂ := s₂) T U M e₁ e₂ b)\n    (hbase : G.map b.inv ≫ s₁.hom.app M = s₂.hom.app M) :\n    G.map (e₁ ≪≫ U.mapIso b ≪≫ e₂.symm).inv ≫ s₁.hom.app (T.obj M) =\n      s₂.hom.app (T.obj M)"
+ },
+ "statement": "Intermediate statement for pull_section_transport",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234105-L-4188207",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
