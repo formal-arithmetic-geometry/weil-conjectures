@@ -13655,6 +13655,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecia
 public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
+public import WeilConjectures.TraceFormula.Specialization.FinitePointReflection
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportDiagonal
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportInduction
@@ -13683,6 +13684,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
+public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
+public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessFinite
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
@@ -13728,6 +13731,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelEmbedding
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
+public import WeilConjectures.TraceFormula.Specialization.TraitNearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict

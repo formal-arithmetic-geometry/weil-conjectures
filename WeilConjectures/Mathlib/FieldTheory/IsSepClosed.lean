@@ -148,3 +148,10 @@ theorem iff_forall_finrank_eq_one :
   rw [map_zero, ← hα, ← ha, ← eval₂_at_apply, aeval_def]
 
 end IsSepClosed
+
+/-- A separably closed field is separably closed for the field structure
+`(Field.toIsField K).toField` recovered from its ring structure. -/
+theorem IsField.isSepClosed_toField {K : Type*} [hK : Field K] [hs : IsSepClosed K] :
+    letI := (Field.toIsField K).toField; IsSepClosed K :=
+  @IsSepClosed.mk K (Field.toIsField K).toField fun p hp ↦
+    @IsSepClosed.splits_of_separable K hK hs p hp
