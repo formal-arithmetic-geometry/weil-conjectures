@@ -7744,6 +7744,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeCube
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionOfHomEq
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightMate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
