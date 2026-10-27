@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.IntegralProjectionEvaluationFactors
 public import Sheaf.Paper.SystemProjectionFormulaCoherence
+import Sheaf.Paper.FiniteIntrinsicTensorRealization
+import Sheaf.Paper.FiniteIntrinsicProjectionCompatibility
 
 /-! # Finite projection under the constant coefficient realization
 
@@ -86,7 +88,10 @@ theorem finiteIntrinsicProjectionRealization
               ((sixFunctorFiniteSupport D C E (m + 1)
                 (Nat.le_add_left 1 m) f c).map k.hom ≫
                 (S.finiteSupport f c).inv.app K) l.hom) ≫
-          (finiteInclusion (C := C) (E := E) m Y).map
-            (CompactSupportFiniteProjection.component S f c K L) := by sorry
+      (finiteInclusion (C := C) (E := E) m Y).map
+            (CompactSupportFiniteProjection.component S f c K L) := by
+  obtain ⟨e⟩ := finiteIntrinsicTensorRealization m S
+  exact ⟨e, fun f c K L U V k l ↦
+    finiteIntrinsicProjectionCompatibility m S e f c K L U V k l⟩
 
 end WeilConjectures.IntegralProjectionReduction
