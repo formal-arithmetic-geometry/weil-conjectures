@@ -6,6 +6,8 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
+import Sheaf.Paper.CoefficientDerivedSystemGammaProjectionTransport
+import Sheaf.Paper.CoefficientDerivedSystemHomProjectionTransport
 
 /-! # Actual finite projections of coefficient gamma
 
@@ -72,6 +74,8 @@ theorem coefficientDerivedSystemProjectionFormulas
     (S : CoefficientDerivedSystemCalculus l E W)
     (D : CoefficientDerivedSystemResolutionCoherence l E W S)
     (H : CoefficientDerivedSystemProjectionModels l E W S D) :
-    CoefficientGammaProjection l E W S D ∧ CoefficientHomProjection l E W S := by sorry
+    CoefficientGammaProjection l E W S D ∧ CoefficientHomProjection l E W S := by
+  exact ⟨coefficientDerivedSystemGammaProjectionTransport l E W S D H,
+    coefficientDerivedSystemHomProjectionTransport l E W S D H⟩
 
 end WeilConjectures

@@ -1,0 +1,117 @@
+{
+ "id": "lem-coef-derived-system-hom-projection-transport",
+ "kind": "statement",
+ "title": "Transported degree-zero coefficient Hom projection",
+ "statement": "theorem coefficientDerivedSystemHomProjectionTransport (S : CoefficientDerivedSystemCalculus l E W) (D : CoefficientDerivedSystemResolutionCoherence l E W S) (H : CoefficientDerivedSystemProjectionModels l E W S D) : CoefficientHomProjection l E W S",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 08JA, 0D6E and 0941; specialization of enrichedSequenceProjectionFormula"
+ },
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-derived-system-projection-models",
+  "lem-coef-enriched-sequence-projection-formula",
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Take degree zero in the transported enriched projection identity. Naturality of the recorded additive H-zero Hom equivalences turns Hom of the total-limit projection into postcomposition by that projection. H.scalar_hom_zero identifies the finite scalar adjunct, while the counit projection and naturality of S.reductionEvaluation rewrite the result as the pointwise clause of CoefficientHomProjection. Introducing P, N, hN, h and n then proves the forall statement.",
+   "uses": [
+    "lem-coef-enriched-sequence-projection-formula",
+    "lem-coef-scalar-hom-zero-compatibility",
+    "lem-coef-sequence-sections-limit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-sequence-projection-formula",
+  "lem-coef-scalar-hom-zero-compatibility",
+  "lem-coef-sequence-sections-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 08JA, 0D6E and 0941; specialization of enrichedSequenceProjectionFormula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived enriched sequence projection formula coefficient systems",
+   "results": "No exact coefficient-calculus match; generic enriched sequence projection theorem is the stated route.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv enriched projection",
+   "results": "Generic adjunction and naturality declarations only.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "enrichedSequenceProjectionFormula|CoefficientGammaProjection|CoefficientHomProjection",
+   "results": "The generic theorem and coefficient target definitions were read; no existing specialization was found.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSystemProjectionFormulas",
+  "date": "2026-10-28",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-system-projection-formulas",
+   "place": "Transport calculation split into its enriched and degree-zero clauses",
+   "via": [
+    "lem-coef-enriched-sequence-projection-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDerivedSystemHomProjectionTransport",
+  "file": "lean/Sheaf/Paper/CoefficientDerivedSystemHomProjectionTransport.lean",
+  "declaration": "WeilConjectures.coefficientDerivedSystemHomProjectionTransport",
+  "declarations": [
+   "WeilConjectures.coefficientDerivedSystemHomProjectionTransport"
+  ],
+  "statement": "theorem coefficientDerivedSystemHomProjectionTransport (S : CoefficientDerivedSystemCalculus l E W) (D : CoefficientDerivedSystemResolutionCoherence l E W S) (H : CoefficientDerivedSystemProjectionModels l E W S D) : CoefficientHomProjection l E W S",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261027T210241-L-1679632",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261027T210241-L-1679632",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
