@@ -767,6 +767,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
 form a monoidal subcategory of
@@ -774,7 +775,7 @@ form a monoidal subcategory of
 `ℚ̄_ℓ,X` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
 is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidal_boundedConstructible :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
@@ -793,7 +794,7 @@ are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a
 geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidalClosed_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
   ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_padicAlgClRingObj ℓ) X
@@ -874,14 +875,14 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves form a monoidal subcategory of
 `D(Mod_{E_X})` for the derived tensor product: they contain the unit `E_X` and are
 stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It is false for a
 general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidal_boundedConstructible
-    [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidal_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
@@ -900,8 +901,7 @@ set_option linter.overlappingInstances false in
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6;
 Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric
 point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
-theorem isMonoidalClosed_boundedConstructible
-    [Fact (ringChar k ≠ ℓ)] :
+theorem isMonoidalClosed_boundedConstructible :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
   ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_continuousMapRingObj ℓ E) X
