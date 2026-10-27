@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData
+import Sheaf.Paper.NormalizedScalarAssociatorLocalizationTransport
 
 /-! # Localization of a normalized completed scalar associator -/
 
@@ -78,6 +79,11 @@ theorem normalized_scalar_associator_localization
       (Fact.out : l.Prime).ne_zero M.carrier j).hom.app
         ((rationalization.{u, v} l Ω E T).obj K))
       ((rationalization.{u, v} l Ω M T).map (α.iso.hom.app K)) := by
-  sorry
+  have hc := (sfRationalScalarComp_existsUnique l E.carrier L.carrier i T 0
+      (Fact.out : l.Prime).ne_zero M.carrier j).exists.choose_spec
+    ((rationalization.{u, v} l Ω E T).obj K)
+  have ht := normalized_scalar_associator_localization_transport l Ω E L M i j T A B D
+    hA hB hD nA nB nD α K
+  exact hc.trans ht.symm
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

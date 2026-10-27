@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-normalized-scalar-associator-localization-transport",
+ "kind": "statement",
+ "title": "A normalized scalar associator transports through rational localization",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "With the same finite coefficient stages, embeddings, scheme, scalar functors, realization equalities, inverse-realization normalizations, normalized scalar composition, and integral object K as in lem-sf-normalized-scalar-associator-localization, the raw rationalization of the supplied associator component equals the raw localization of the canonical intrinsic completed integral scalar associator component at the underlying integral object. This is a forward transport equality and does not assert faithfulness of localization.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-scalar-extension",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 3.4.12, pp. 22-23; Proposition 3.5.1, p. 24; transport step extracted from the normalized associator comparison."
+ },
+ "proof": [
+  {
+   "text": "Identify the three supplied scalar functors with completed scalar extensions through the full integral inclusions and the three functor equalities. Rewrite the inverse realizations by the prescribed completed scalar comparisons using nA, nB, and nD.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Lemma 3.4.12, pp. 22-23"
+   }
+  },
+  {
+   "text": "Use the normalized ScalarComposition equation and the balanced tensor associator to identify the integral component with the canonical intrinsic completed integral associator, then apply the raw localization functor to transport the equality forward.",
+   "uses": [
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.5.1, p. 24"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 3.4.12, pp. 22-23; Proposition 3.5.1, p. 24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functor localization transports heterogeneous equality of morphisms",
+   "results": "General localization transport is available; no project-specific normalized associator theorem found.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; this transport is isolated as a project-specific intermediate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Provides forward transport of composition equations only.",
+   "date": "2026-10-27",
+   "verdict": "General transport only."
+  },
+  {
+   "tool": "grep",
+   "query": "sfRationalScalarComp_existsUnique",
+   "results": "The canonical rational associator has the required localization component specification.",
+   "date": "2026-10-27",
+   "verdict": "Use its component specification in the parent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedScalarAssociatorLocalization",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-normalized-scalar-associator-localization",
+   "place": "Integral transport part of the normalized scalar associator localization proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedScalarAssociatorLocalizationTransport",
+  "file": "lean/Sheaf/Paper/NormalizedScalarAssociatorLocalizationTransport.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.normalized_scalar_associator_localization_transport",
+  "statement": "theorem normalized_scalar_associator_localization_transport\n    (E L M : FieldStage.{max u v} l)\n    (i : E.carrier →ₐ[Padic l] L.carrier) (j : L.carrier →ₐ[Padic l] M.carrier)\n    (T : Scheme.{max u v})\n    (A : Scalar.{u, v} l Ω (s := .integral E) (t := .integral L)\n      (PurCompactSupport.completedChange l E.carrier L.carrier i) T)\n    (B : Scalar.{u, v} l Ω (s := .integral L) (t := .integral M)\n      (PurCompactSupport.completedChange l L.carrier M.carrier j) T)\n    (D : Scalar.{u, v} l Ω (s := .integral E) (t := .integral M)\n      (PurCompactSupport.completedChange l E.carrier M.carrier (j.comp i)) T)\n    (hA : A.functor ⋙ (finiteTorConstructibleIntegral l L.carrier T).ι =\n      (finiteTorConstructibleIntegral l E.carrier T).ι ⋙\n        integralScalarExtensionOfUniverses l E.carrier L.carrier i T)\n    (hB : B.functor ⋙ (finiteTorConstructibleIntegral l M.carrier T).ι =\n      (finiteTorConstructibleIntegral l L.carrier T).ι ⋙\n        integralScalarExtensionOfUniverses l L.carrier M.carrier j T)\n    (hD : D.functor ⋙ (finiteTorConstructibleIntegral l M.carrier T).ι =\n      (finiteTorConstructibleIntegral l E.carrier T).ι ⋙\n        integralScalarExtensionOfUniverses l E.carrier M.carrier (j.comp i) T)\n    (nA : ∀ K, HEq (A.realization.inv.app K)\n      ((completedScalarComparison l E.carrier L.carrier i T).app K.obj))\n    (nB : ∀ K, HEq (B.realization.inv.app K)\n      ((completedScalarComparison l L.carrier M.carrier j T).app K.obj))\n    (nD : ∀ K, HEq (D.realization.inv.app K)\n      ((completedScalarComparison l E.carrier M.carrier (j.comp i) T).app K.obj))\n    (α : ScalarComposition.{u, v} l Ω\n      (PurCompactSupport.completedMap_composition l E.carrier L.carrier i M.carrier j)\n      T A B D)\n    (K : C.{u, v} l Ω T (.integral E)) :\n    HEq ((rationalization.{u, v} l Ω M T).map (α.iso.hom.app K))\n      ((sfRationalConstructibleLocalization l M.carrier T).map\n        ((sfIntegralScalarComp l E.carrier L.carrier i T 0\n          (Fact.out : l.Prime).ne_zero M.carrier j).hom.app\n          ⟨K.obj, K.property.1⟩))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T151733-L-1200748",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T151733-L-1200748",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
