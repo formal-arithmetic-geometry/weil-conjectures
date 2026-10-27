@@ -19632,3 +19632,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:16 L: returned deliver/U1/Sheaf.Paper.CompletedAdicSliceScalarComparison (reviewer RETURN: (reviewer C-2d8a5, head 2d8a5d8b2) D1/brief-stage3 §43: the item proof is `have _ := completedAdic_slice_scalarCompariso)
 - 16:25 L: returned deliver/J4/Sheaf.Paper.CompletedPullbackTowerCore (reviewer RETURN: (reviewer C-c4b79, head c4b79b335) Stage3 §4 / roles/worker.md 3: unforced timing split. The merged CompletedPullbackTow)
 - 16:41 L: returned deliver/A6/Sheaf.Paper.QcqsCompactSupportNativeTowerComparison (reviewer RETURN: (reviewer C-7dc70, head 7dc706716) H10/2b: the added IsNativeCompactSupportTowerPresentation conjunct breaks the unadapt)
+- 17:32 L: returned deliver/C6/Sheaf.Paper.RationalP1SectionEvaluation (reviewer RETURN: (reviewer C-54a7f, head 54a7f8031) E2: rationalP1_section_evaluation_core is false: X₀, a, b are arbitrary and appear on)
