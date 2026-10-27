@@ -180,7 +180,7 @@ sheaves on its small pro-étale site. As `ν^*` is fully faithful
 `AlgebraicGeometry.ProEtale.faithful_comparisonUpperStar`), this says that a pro-étale sheaf is
 constructible if and only if it is `ν^*` of a constructible étale sheaf. That `ν^*` preserves
 constructibility is `isConstructible_comparisonUpperStar_obj`; the essential surjectivity is the
-content of the lemma. -/
+content of the lemma (Stacks, Tag 09AK). -/
 theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_obj
     [IsNoetherianRing Λ]
     {T : Scheme.{u}} {F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)} :
