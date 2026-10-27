@@ -13,20 +13,42 @@
  ],
  "proof": [
   {
-   "text": "The sheafified pure tensors 1 tensor m generate change of rings; the normalized formula identifies the map with the canonical extension map, whose inverse is induced by restriction of scalars.",
+   "text": "Apply internal_section_scalar_adjunction to the coefficient map on T. Only its ordinary restriction and extension isomorphisms, identity-on-sections restriction normalization and Hom-transpose equation are used. Standard derived categories supply its incidental derived hypotheses without changing the fixed SectionModel.",
    "uses": [
-    "lem-sfb-quotient-scalar-section-ordinary-normalized-map"
+    "lem-sfb-internal-section-scalar-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate the Hom-transpose equation at the identity of the internal scalar extension. Postcompose with restriction of the extension comparison to cancel its inverse. The restriction comparison is identity on sections; hence the extension comparison carries the internal unit to the ordinary sectionwise unit. Compose with the prescribed object equality and apply the ScalarDerivedPair ordinaryUnit equation to obtain a canonical invertible component with exactly the required 1 tensor m formula.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Morphisms out of internal scalar extension are determined by composition with extendUnitHom, by injectivity of the extension/restriction Hom equivalence (Mod.extendScalarsObj_hom_ext'). This remains true after section reconstruction: use its full faithfulness, first transporting an arbitrary target by the counit isomorphism, and then compare the internal preimages on every section.",
+   "uses": [
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose ordinary.app M with the fixed model object equality. Its generator formula agrees with the canonical invertible component from step 2, so step 3 identifies the two morphisms. Cancel the object-equality isomorphism to conclude IsIso (ordinary.app M).",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-quotient-scalar-section-ordinary-normalized-map"
+  "lem-sfb-internal-section-scalar-adjunction",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Stacks 03EK and 06YY"
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-adjointness-tensor-restrict and section-tensor-product (Stacks 03EK); ordinary portion of internal_section_scalar_adjunction plus unit-extensionality. The existing unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -83,9 +105,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261027T210307-L-1684758",
+  "landing": "20261027T234303-L-88630",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
