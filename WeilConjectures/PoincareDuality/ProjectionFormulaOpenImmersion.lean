@@ -343,6 +343,33 @@ lemma ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (c : Compactif
 set_option profiler true in
 /-- **The comparison along a refinement of compactifications intertwines the exceptional
 projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
+theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification
+    {c d : Compactification f.left} (r : Compactification.OverRefinement d c)
+    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ r.isPullback)]
+    (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
+    (boundedConstructibleLowerShriekRefinementIso ℓ r.isPullback r.hom_overG).hom.app K ▷ B ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ d K.obj B.obj) =
+      ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c K.obj B.obj) ≫
+        (boundedConstructibleLowerShriekRefinementIso ℓ r.isPullback r.hom_overG).hom.app
+          (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) := by
+  rw [homMk_exceptionalProjectionMorphismOfCompactification_eq ℓ d K B _
+      (ι_map_eqToIso_trans_upperStarComp_inv_app_compactification ℓ d B),
+    homMk_exceptionalProjectionMorphismOfCompactification_eq ℓ c K B _
+      (ι_map_eqToIso_trans_upperStarComp_inv_app_compactification ℓ c B)]
+  simpa only [Category.assoc] using
+    boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp ℓ r.isPullback
+      r.hom_overG d.overI_overG c.overI_overG K B
+
+/-- **The comparison along a refinement of compactifications intertwines the exceptional
+projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
 theorem boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp
     {c d : Compactification f.left} (r : Compactification.OverRefinement d c)
     (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
@@ -359,11 +386,6 @@ theorem boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_co
           (exceptionalProjectionMorphismOfCompactification _ c K.obj B.obj) ≫
         (boundedConstructibleLowerShriekOverRefinementIso ℓ r).hom.app
           (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) := by
-  have := r.isProper
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
-    r.isPullback
-  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
-    r.isPullback
   sorry
 
 end Compactification
@@ -466,6 +488,12 @@ theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionCompari
       (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app K ▷ B := by
   obtain ⟨d, ⟨r₁⟩, ⟨r₂⟩⟩ := Compactification.exists_overRefinement (compactificationOverField j)
     (Compactification.ofIsOpenImmersion j.left)
+  have := r₁.isProper
+  have := r₂.isProper
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
+    r₁.isPullback
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
+    r₂.isPullback
   have h₁ := boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp ℓ r₁ K B
   have h₂ := boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp ℓ r₂ K B
   have h₂' : ObjectProperty.homMk
@@ -485,8 +513,10 @@ theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionCompari
           (exceptionalProjectionMorphismOfCompactification _
             (Compactification.ofIsOpenImmersion j.left) K.obj B.obj) := by
     rw [← cancel_mono ((boundedConstructibleLowerShriekOverRefinementIso ℓ r₂).hom.app _),
-      Category.assoc, Iso.inv_hom_id_app, Category.comp_id, Category.assoc, ← h₂,
-      ← comp_whiskerRight_assoc, Iso.inv_hom_id_app, id_whiskerRight, Category.id_comp]
+      Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    rw [Category.assoc, ← h₂, ← comp_whiskerRight_assoc, Iso.inv_hom_id_app]
+    erw [id_whiskerRight, Category.id_comp]
   have h₃ := homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion' ℓ j K B
   have hI : boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j =
       boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
