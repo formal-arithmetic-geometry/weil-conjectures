@@ -19784,3 +19784,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:07 L: merged deliver/P7/Sheaf.Paper.RingOpenMapInvertibility (stage 3; reviewer PASS; first push; landing 20261027T180729-L-3896268 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:07 L: merged deliver/P9/Sheaf.Paper.BoundaryDualizingComposition (stage 3; reviewer PASS; first push; landing 20261027T180730-L-3896430 (proof); batch 20261027T180444; modules 1; new nodes 0)
 - 18:07 L: merged deliver/P9/Sheaf.Paper.WeilIndOpenRealization (stage 3; reviewer PASS; first push; landing 20261027T180732-L-3896598 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:07 L: merged deliver/Q1/Sheaf.Paper.AdicAmbientHomEvaluationComparison (stage 3; reviewer PASS; first push; landing 20261027T180733-L-3896746 (proof); batch 20261027T180444; modules 1; new nodes 2)

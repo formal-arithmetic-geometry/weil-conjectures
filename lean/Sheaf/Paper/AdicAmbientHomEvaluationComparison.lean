@@ -334,34 +334,132 @@ structure Laws : Prop where
       (h : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F),
     homTransition l X R P F F h h = 𝟙 _ ∧ ambientTransition l X R P F F h h = 𝟙 _
 
-/-- Ambient Hom is constructible and the specified evaluation transpose is invertible,
-with every transpose, naturality, evaluation, signed symmetry and coefficient tower law.
-Source: BS 3.4.11 and 6.8.15; HRS 7.7, 7.9, 7.10
-(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison).
+/-- The ambient part of the seven-step comparison argument.
+This is the constructibility, invertibility, transpose, naturality and evaluation
+portion; the finite-stage coherence is isolated in `CoherenceLaws` below.
+Source: BS Lemma 3.4.11 and Remark 6.8.15
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison-core). -/
+structure CoreLaws : Prop where
+  bounded : ∀ P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory,
+    boundedConstructible l X R ((ambientHom l X R).obj
+      (op ((ordinary l X R).obj P.obj.1.unop), (ordinary l X R).obj P.obj.2))
+  isIso : ∀ P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory,
+    IsIso (comparison l X R A source P)
+  postcomposition : ∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X)
+      (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory),
+    Function.Bijective (fun a : (ordinary l X R).obj L ⟶
+      (ordinary l X R).obj ((commonStageDerivedInternalHom l (PadicAlgCl l) X).obj P) ↦
+        a ≫ comparison l X R A source P)
+  transpose : ∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) X)
+      (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
+      (a : L ⟶ (commonStageDerivedInternalHom l (PadicAlgCl l) X).obj P),
+    A.closed.transpose _ _ _
+        (A.tensor.hom.app (L, P.obj.1.unop) ≫
+          (ordinary l X R).map
+            ((commonStageDerivedTensor l (PadicAlgCl l) X).map
+              (Prod.mkHom a (𝟙 _)) ≫ source.evaluation P)) =
+      (ordinary l X R).map a ≫ comparison l X R A source P
+  naturality : ∀ (P Q : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
+      (f : P ⟶ Q),
+    (ordinary l X R).map ((commonStageDerivedInternalHom l (PadicAlgCl l) X).map f) ≫
+        comparison l X R A source Q =
+      comparison l X R A source P ≫ (ambientHom l X R).map
+        (Prod.mkHom ((ordinary l X R).map f.hom.1.unop).op
+          ((ordinary l X R).map f.hom.2))
+  evaluation : ∀ P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory,
+    A.closed.tensor.map (Prod.mkHom (comparison l X R A source P) (𝟙 _)) ≫
+        A.closed.evaluation ((ordinary l X R).obj P.obj.1.unop)
+          ((ordinary l X R).obj P.obj.2) = realizedEvaluation l X R A source P
 
-Proof:
-1. The constructibility-identification and finiteness clauses of
-lem-sf-adic-finite-realization-cocone identify the locally finite free and stratified-lfp
-conventions. Apply lem-sfb-dc-hom-preserves to the finite-subextension-valued condensed
-coefficient, using the geometric hypotheses sk-def-sfb-dc-setting. Zero is included.
-2. The internal-abelian/sectionwise-module equivalence preserves cohomology and balanced
-tensor. Uniqueness of right adjoints identifies the closed relative-module Hom with the
-recorded ambient Hom by lem-sf-ringed-derived-tensor-hom-adjunction and
-lem-sf-ringed-derived-native-tensor. Constructibility is invariant under this isomorphism.
-3. Naturality of the tensorator and ambient adjunction identifies the three Hom
-bijections with postcomposition with comparison. The counit gives evaluation.
-4. Since Q is constructible, essential surjectivity supplies a source representative.
-Surjectivity on Hom gives a right inverse of c; injectivity on the test object H makes
-it a left inverse. No assertion about detection of arbitrary ambient objects is used.
-5. The permitted-Hom evaluation square (lem-sf-adic-common-stage-hom-transpose) makes
-both uncurries of the naturality equation equal. Injectivity of transposition proves it.
-6. Symmetric monoidality and naturality of the native braiding give signed_symmetry;
-the native complex swap has sign (-1)^(pq), preserved by the K-flat comparisons.
-7. Finite rational transpose normalization and balanced scalar multiplication identify
-finite_evaluation with the same pairing. Transposition proves finite_comparison and
-extension. In a tower the gamma maps cancel and the contravariant inverses compose in
-reverse order, giving tower. Reflexive scalar and Hom comparisons give identity.
-This is the seven-step argument retained in the node, with all comparisons actual maps. -/
+/-- The finite-stage and coefficient-tower part of the comparison argument.
+It is independent of the constructibility and Hom-bijection fields packaged in
+`CoreLaws`, and records the remaining actual evaluation maps and their coherence.
+Source: BS Remark 6.8.15 and HRS Lemmas 7.7--7.10
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison-coherence). -/
+structure CoherenceLaws : Prop where
+  signed_symmetry : ∀ P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory,
+    A.closed.tensor.map (Prod.mkHom (𝟙 _) (comparison l X R A source P)) ≫
+        (A.symmetry.braiding ((ordinary l X R).obj P.obj.1.unop)
+          ((ambientHom l X R).obj
+            (op ((ordinary l X R).obj P.obj.1.unop), (ordinary l X R).obj P.obj.2))).hom ≫
+        A.closed.evaluation ((ordinary l X R).obj P.obj.1.unop)
+          ((ordinary l X R).obj P.obj.2) =
+      A.tensor.hom.app
+          (P.obj.1.unop, (commonStageDerivedInternalHom l (PadicAlgCl l) X).obj P) ≫
+        (ordinary l X R).map
+          ((pullbackTensorCommonBraiding l (PadicAlgCl l) X P.obj.1.unop
+            ((commonStageDerivedInternalHom l (PadicAlgCl l) X).obj P)).hom ≫
+            source.evaluation P)
+  finite_evaluation : ∀ (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
+      (F : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (h : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F),
+    A.closed.tensor.map
+        (Prod.mkHom (gammaH l X R P F h).hom (gammaM l X R P F h).hom) ≫
+        finiteEvaluation l X R A P F h =
+      realizedEvaluation l X R A source P ≫ (gammaN l X R P F h).hom
+  finite_comparison : ∀ (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
+      (F : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (h : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F),
+    (gammaH l X R P F h).hom ≫ finiteComparison l X R A P F h =
+      comparison l X R A source P ≫ (ambientHom l X R).map
+        (Prod.mkHom (gammaM l X R P F h).inv.op (gammaN l X R P F h).hom)
+  extension : ∀ (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
+      (F G : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) (_hFG : F ≤ G)
+      (hF : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F)
+      (hG : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ G),
+    homTransition l X R P F G hF hG ≫ finiteComparison l X R A P G hG =
+      finiteComparison l X R A P F hF ≫ ambientTransition l X R P F G hF hG
+  tower : ∀ (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
+      (F G K : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (_hFG : F ≤ G) (_hGK : G ≤ K)
+      (hF : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F)
+      (hG : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ G)
+      (hK : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ K),
+    homTransition l X R P F G hF hG ≫ homTransition l X R P G K hG hK =
+        homTransition l X R P F K hF hK ∧
+      ambientTransition l X R P F G hF hG ≫ ambientTransition l X R P G K hG hK =
+        ambientTransition l X R P F K hF hK
+  identity : ∀ (P : (commonStageHomPairs l (PadicAlgCl l) X).FullSubcategory)
+      (F : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (h : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F),
+    homTransition l X R P F F h h = 𝟙 _ ∧ ambientTransition l X R P F F h h = 𝟙 _
+
+/-- Construct the core comparison laws. This is the first, constructibility and
+ambient-adjunction half of the proof in the node. -/
+theorem adic_ambient_hom_evaluation_comparison_core
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (T : Over (Spec (CommRingCat.of D.k)))
+    [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
+    [∀ x : T.left, Invertible (l : T.left.residueField x)]
+    (R : LocallyFiniteAdicRealization.Realization l T.left)
+    (presentation : (sectionFunctor l T.left R).IsEquivalence)
+    (A : TensorInput l T.left R)
+    (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left)
+      (commonStageHomPairs l (PadicAlgCl l) T.left)
+      (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
+    (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
+    CoreLaws l T.left R A source := by
+  sorry
+
+/-- Construct the finite-stage and coefficient tower laws. This is the second half
+of the seven-step argument in the node. -/
+theorem adic_ambient_hom_evaluation_comparison_coherence
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (T : Over (Spec (CommRingCat.of D.k)))
+    [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
+    [∀ x : T.left, Invertible (l : T.left.residueField x)]
+    (R : LocallyFiniteAdicRealization.Realization l T.left)
+    (presentation : (sectionFunctor l T.left R).IsEquivalence)
+    (A : TensorInput l T.left R)
+    (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left)
+      (commonStageHomPairs l (PadicAlgCl l) T.left)
+      (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
+    (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
+    CoherenceLaws l T.left R A source := by
+  sorry
+
+/-- Assemble the ambient comparison laws from their strictly smaller core and coherence packages.
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison). -/
 theorem adic_ambient_hom_evaluation_comparison
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (T : Over (Spec (CommRingCat.of D.k)))
@@ -375,7 +473,23 @@ theorem adic_ambient_hom_evaluation_comparison
       (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
     (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
     Laws l T.left R A source := by
-  sorry
+  let c := adic_ambient_hom_evaluation_comparison_core D l hl T R presentation A source
+    source_normalized
+  let h := adic_ambient_hom_evaluation_comparison_coherence D l hl T R presentation A source
+    source_normalized
+  exact
+    { bounded := c.bounded
+      isIso := c.isIso
+      postcomposition := c.postcomposition
+      transpose := c.transpose
+      naturality := c.naturality
+      evaluation := c.evaluation
+      signed_symmetry := h.signed_symmetry
+      finite_evaluation := h.finite_evaluation
+      finite_comparison := h.finite_comparison
+      extension := h.extension
+      tower := h.tower
+      identity := h.identity }
 
 end AmbientHomEvaluation
 end WeilConjectures.AdicQbarRealization
