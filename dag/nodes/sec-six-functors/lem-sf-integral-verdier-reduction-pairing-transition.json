@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-integral-verdier-reduction-pairing-transition",
+ "kind": "statement",
+ "title": "Finite transition compatibility of normalized evaluation",
+ "statement": "The first conjunct of lem-sf-integral-verdier-reduction-pairing: under the same data and hypotheses, for every ambient K and n, the finite transition commutes with finite evaluation and the dualizing transition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "First paragraph: evaluation-preserving reduction."
+ },
+ "stmt_deps": [
+  "def-sf-integral-verdier-models",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "Represent the source and target by the normalized K-flat/K-injective models. The coefficient unit and quotient transition preserve evaluation; transpose through the finite adjunction and cancel the comparison isomorphisms.",
+   "uses": [
+    "lem-coef-integral-hom-reduction",
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-integral-verdier-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-hom-reduction",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-verdier-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "First paragraph: evaluation-preserving reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SignedSymmetry|finiteIntrinsicVerdier|reductionPairing|ringedSiteBidual",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlatIndependentCoefficients\", \"IsIso\", \"bidual\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent signed derived tensor presentations and evaluation naturality; intrinsic finite Verdier Tor bounds and biduality; compatibility of scalar reduction with evaluation",
+   "results": "8 hits: Module.Dual.eval_naturality, contractLeft, DFinsupp.comul_comp_lapply, dualTensorHomEquiv, MvPolynomial.scalarRTensor_apply_tmul_apply, LinearMap.IsPerfPair.dualEval, FGModuleCat.FGModuleCatEvaluation, PiTensorProduct.dualDistrib_apply",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary algebraic evaluation and condensed closed structures do not state this normalized ringed-site result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralVerdierReductionPairing",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-verdier-reduction-pairing",
+   "place": "Split of the corresponding conjunct for stage-3 reduction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralVerdierReductionPairingTransition",
+  "file": "lean/Sheaf/SixFunctors/IntegralVerdierReductionPairingTransition.lean",
+  "declaration": "WeilConjectures.IntegralVerdier.reductionPairing_transition",
+  "statement": "theorem reductionPairing_transition\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheaf l E X D hl))\n    (s : SignedSymmetry X (completedIntegralCommRingSheaf l E X D hl) a)\n    (hs : ∀ (K L K' L' : Ambient l E X) (f : K ⟶ K') (g : L ⟶ L'),\n      a.tensor.map (Prod.mkHom f g) ≫ (s.swap K' L').hom =\n        (s.swap K L).hom ≫ a.tensor.map (Prod.mkHom g f))\n    (m : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n)\n    (t : ∀ n : ℕ, SignedSymmetry X (integralCoefficientCommRingSheaf l E X n)\n      (m n).target)\n    (ht : ∀ (n : ℕ) (K L K' L' : DerivedCategory (scalarReductionTarget l E X n))\n      (f : K ⟶ K') (g : L ⟶ L'),\n      (m n).target.tensor.map (Prod.mkHom f g) ≫ ((t n).swap K' L').hom =\n        ((t n).swap K L).hom ≫ (m n).target.tensor.map (Prod.mkHom g f))\n    (he : ∀ (K K' W : Ambient l E X) (f : K' ⟶ K),\n      a.tensor.map (Prod.mkHom (𝟙 K')\n        ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheaf l E X D hl)).map\n          (Prod.mkHom f.op (𝟙 W)))) ≫ (a.adjunction K').counit.app W =\n      a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W)\n    (het : ∀ (n : ℕ) (K K' W : DerivedCategory (scalarReductionTarget l E X n))\n      (f : K' ⟶ K),\n      (m n).target.tensor.map (Prod.mkHom (𝟙 K')\n        ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map\n          (Prod.mkHom f.op (𝟙 W)))) ≫ ((m n).target.adjunction K').counit.app W =\n      (m n).target.tensor.map (Prod.mkHom f (𝟙 _)) ≫\n        ((m n).target.adjunction K).counit.app W)\n    (ω : sfIntegralConstructibleCategory l E X)\n    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅\n      integralDualizingFiniteTerm l E D X n)\n    (h : ∀ (K : Ambient l E X) (n : ℕ), IsIso (comparison l E X D hl (m n) ω r K)) :\n    (∀ (K : Ambient l E X) (n : ℕ),\n      a.tensor.map (Prod.mkHom (𝟙 K) (finiteTransition l E X D hl m ω r K (h K) n)) ≫\n        finiteEvaluation l E X D hl m K n =\n      finiteEvaluation l E X D hl m K (n + 1) ≫ dualizingTransition l E X D ω r n)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T180620-L-3882964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T180620-L-3882964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

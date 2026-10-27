@@ -6,6 +6,8 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.SixFunctors.IntegralVerdierModels
+import Sheaf.SixFunctors.IntegralVerdierReductionPairingTransition
+import Sheaf.SixFunctors.IntegralVerdierReductionPairingDelta
 
 /-! # Reduction of signed evaluation pairings
 
@@ -94,6 +96,8 @@ theorem reductionPairing
             (h K n)).inv.op (𝟙 (integralDualizingFiniteTerm l E D X n))) =
       delta X (m n).target (t n) (integralDualizingFiniteTerm l E D X n)
         ((scalarReductionDerivedExtension l E X n).obj K)) := by
-  sorry
+  constructor
+  · exact reductionPairing_transition D l hl E X a s hs m t ht he het ω r h
+  · exact reductionPairing_delta D l hl E X a s hs m t ht he het ω r h
 
 end WeilConjectures.IntegralVerdier
