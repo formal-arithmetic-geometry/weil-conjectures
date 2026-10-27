@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: the corresponding component of the unit, composition and tensor-associator equations."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionComposition",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-finite-extension-composition",
+   "place": "Proof steps 1 and 2 of the composition component.",
+   "via": [
+    "lem-sf-integral-finite-extension-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "identity and composition equations for normalized finite coefficient scalar extension comparisons",
+   "results": "Generic adjunction and tensor coherence lemmas only; no completed integral finite-extension cocycle theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory tensor associator adjunction counit naturality scalar extension",
+   "results": "Generic functor map and associator declarations; no theorem for the specified integral comparisons.",
+   "date": "2026-10-28",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "IdentityConclusion CompositionConclusion comparison_cocycles",
+   "results": "The project contains only the definitions and parent statement; no duplicate component theorem.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate declaration."
+  }
+ ],
+ "id": "lem-sf-integral-finite-extension-composition-pure-tensor",
+ "title": "Pure-tensor unit and associator equations for integral finite comparisons",
+ "statement": "For fixed E to L data and normalized presentations, the scalar unit equations and the associator pentagon component of CompositionConclusion hold for every further finite extension.",
+ "proof": [
+  {
+   "text": "Compute scalar extension on pure tensors: multiplication gives both unit equations, and balanced multiplication gives the pentagon after normalized completion cancellation.",
+   "uses": [
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: the corresponding component of the unit, composition and tensor-associator equations."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionPureTensor",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionPureTensor.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.comparison_composition_pure_tensor",
+  "statement": "theorem comparison_composition_pure_tensor\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (X : Scheme.{u})\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]\n    (wE : DualizingDatum l X D hl E) (wL : DualizingDatum l X D hl L)\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l E X))\n    (b : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheafUnrestricted l L X)) :\n    ∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n      [FiniteDimensional (Padic l) F]\n      (j : L →ₐ[Padic l] F) (wF : DualizingDatum l X D hl F)\n      (c : IntegralHom.TensorPresentation.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l F X)),\n      (∀ (K : sfIntegralConstructibleCategory l E X),\n        (comp l E E (AlgHom.id (Padic l) E) X L ι K.obj K.property.1).hom =\n          (integralScalarExtensionOfUniverses l E L ι X).map\n            (unit l E X K.obj K.property.1).hom) ∧\n      (∀ (K : sfIntegralConstructibleCategory l E X),\n        (comp l E L ι X L (AlgHom.id (Padic l) L) K.obj K.property.1).hom =\n          (unit l L X\n            ((integralScalarExtensionOfUniverses l E L ι X).obj K.obj)\n            (extension_complete l E L ι X K.obj K.property.1)).hom) ∧\n      (∀ (G : Type u) [Field G] [Algebra (Padic l) G]\n        [FiniteDimensional (Padic l) G]\n        (k : F →ₐ[Padic l] G) (K : sfIntegralConstructibleCategory l E X),\n        (integralScalarExtensionOfUniverses l F G k X).map\n            (comp l E L ι X F j K.obj K.property.1).hom ≫\n          (comp l E F (j.comp ι) X G k K.obj K.property.1).hom =\n          (comp l L F j X G k\n            ((integralScalarExtensionOfUniverses l E L ι X).obj K.obj)\n            (extension_complete l E L ι X K.obj K.property.1)).hom ≫\n          (comp l E L ι X G (k.comp j) K.obj K.property.1).hom)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234106-L-4188878",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234106-L-4188878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

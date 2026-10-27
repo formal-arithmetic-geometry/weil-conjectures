@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionPureTensor
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionTranspose
 
 /-! Composition equation for integral finite-extension comparisons.
 
@@ -22,8 +24,9 @@ namespace WeilConjectures.IntegralFiniteExtension
 /-- Composition and pentagon equations for the fixed integral comparisons.
 Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower, final paragraph.
 (blueprint: lem-sf-integral-finite-extension-composition)
-Proof: compute the scalar unit and associator on pure tensors, then transpose
-the v and beta equations and pass through the normalized completion maps. -/
+Proof: combine the pure-tensor coefficient coherence with the transposed
+u, v and beta coherence for the same further extension.
+-/
 theorem comparison_composition
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -62,6 +65,11 @@ theorem comparison_composition
               (Prod.mkHom f.op (𝟙 M)))) ≫ (c.adjunction K').counit.app M =
           c.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (c.adjunction K).counit.app M) →
       CompositionConclusion l E L ι X D hl wE wL a b F j wF c := by
-  sorry
+  intro F _ _ _ j wF c hc
+  obtain ⟨h₁, h₂, h₆⟩ :=
+    comparison_composition_pure_tensor l E L ι X D hl wE wL a b F j wF c
+  obtain ⟨h₃, h₄, h₅⟩ :=
+    comparison_composition_transpose l E L ι X D hl wE wL a b _hevalE _hevalL F j wF c hc
+  exact ⟨h₁, h₂, h₃, h₄, h₅, h₆⟩
 
 end WeilConjectures.IntegralFiniteExtension
