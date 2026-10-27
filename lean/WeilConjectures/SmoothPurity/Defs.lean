@@ -884,6 +884,34 @@ private theorem smoothPurityIso_zero_of_trace_formula
     (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).symm htrace
   simpa only [Iso.symm_symm_eq] using h
 
+private theorem representing_trace_of_iso
+    {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    {M : C} {L : D} (e : M ≅ G.obj L) :
+    ∀ K : C, Function.Bijective
+      (fun b : K ⟶ M ↦ F.map b ≫ F.map e.hom ≫ adj.counit.app L) := by
+  intro K
+  constructor
+  · intro a b hab
+    change F.map a ≫ F.map e.hom ≫ adj.counit.app L =
+      F.map b ≫ F.map e.hom ≫ adj.counit.app L at hab
+    have h' := congrArg (adj.homEquiv K L) hab
+    have hc : (adj.homEquiv (G.obj L) L) (adj.counit.app L) = 𝟙 _ := by
+      rw [adj.homEquiv_unit, adj.right_triangle_components]
+    have h'' : a ≫ e.hom = b ≫ e.hom := by
+      simp only [← Category.assoc, ← F.map_comp,
+        adj.homEquiv_naturality_left, hc, Category.comp_id] at h'
+      exact h'
+    exact (cancel_mono e.hom).1 h''
+  · intro y
+    refine ⟨adj.homEquiv K L y ≫ e.inv, ?_⟩
+    change F.map (adj.homEquiv K L y ≫ e.inv) ≫ F.map e.hom ≫
+      adj.counit.app L = y
+    rw [← Category.assoc, ← F.map_comp, Category.assoc, e.inv_hom_id,
+      Category.comp_id]
+    exact (adj.homEquiv_counit K L (adj.homEquiv K L y)).symm.trans
+      ((adj.homEquiv K L).symm_apply_apply y)
+
 /-- Blueprint `sk-thm-purity-transport`, étale case: **normalization of purity in relative
 dimension zero**: for an open immersion `j`, the purity isomorphism `Rj^! ℚ̄_ℓ ≅ ℚ̄_ℓ(0)[0]` is
 the canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
@@ -894,7 +922,32 @@ theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j
       (ObjectProperty.ι _).mapIso (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j) ≪≫
         (tateTwistDerivedZeroIso ℓ X.left).symm ≪≫
         ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).symm :=
-  sorry
+  let D_X := Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧
+  let D_Y := Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧
+  let M := boundedConstructibleTateTwist ℓ X 0 (2 * 0)
+  let U := 𝟙_ D_Y
+  let a : (𝟙_ D_X).obj ≅ M.obj :=
+    (tateTwistDerivedZeroIso ℓ X.left).symm ≪≫
+      ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).symm
+  let A : (𝟙_ D_X) ≅ M := (ObjectProperty.ι _).preimageIso a
+  let c := boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j
+  let e : M ≅
+      (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj U :=
+    A.symm ≪≫ c.symm
+  let adj := boundedConstructibleUpperShriekAdjunction
+    (Profinite.padicAlgClRingObj ℓ) ℓ j
+  let hsm : SmoothOfRelativeDimension 0 j.left := inferInstance
+  let hE := existsUnique_smoothTrace ℓ j 0 hsm M (Iso.refl _)
+    U rfl
+  have htrace : smoothTrace ℓ j 0 =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map e.hom ≫
+        adj.counit.app U := by
+    have heq : smoothTrace ℓ j 0 = hE.choose := by
+      simp [smoothTrace, hsm]
+    rw [heq]
+    exact hE.unique hE.choose_spec.1 (representing_trace_of_iso adj e)
+  smoothPurityIso_zero_of_trace_formula ℓ j
+    (by simpa [a, A, c, e, adj] using htrace)
 
 omit [SmoothOfRelativeDimension d f.left] in
 /-- Invert the actual purity-map square obtained from trace transitivity.
