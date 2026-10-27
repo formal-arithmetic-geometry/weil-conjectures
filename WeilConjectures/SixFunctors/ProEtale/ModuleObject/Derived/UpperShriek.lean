@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekExistence
 
 /-!
 
@@ -106,8 +107,12 @@ stage `ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`). For a proper
 constructible `ℚ̄_ℓ`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image
 `Rg^!` along `g` (SGA 4 XVIII, 3.1.4; Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper g.left] :
-    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
-  sorry
+    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint := by
+  by_cases hk : Finite k ∨ IsSepClosed k
+  · exact
+      isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_or_isSepClosed ℓ g
+        hk
+  · exact isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not ℓ g hk
 
 /-- For a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
 derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
@@ -116,8 +121,12 @@ Bhatt–Scholze, Section 6.8). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     [IsProper g.left] :
-    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint := by
+  by_cases hk : Finite k ∨ IsSepClosed k
+  · exact
+      isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_finite_or_isSepClosed ℓ g
+        E hk
+  · exact isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not ℓ g E hk
 
 /-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
 pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a
@@ -127,8 +136,12 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
     [IsProper g.left] :
-    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
+    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint := by
+  by_cases hk : Finite k ∨ IsSepClosed k
+  · exact
+      isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_finite_or_isSepClosed ℓ g
+        E hk
+  · exact isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not ℓ g E hk
 
 end ProperLowerStar
 

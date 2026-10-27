@@ -224,6 +224,45 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_
       boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_padicAlgClRingObj
         ℓ Z.hom Y.hom _ (Over.w g) hk adj L hL
 
+/-! ### Fields of infinite cohomological dimension -/
+
+/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`, for `k` neither finite nor separably
+closed: for a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
+derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint (SGA 4 XVIII, 3.1.4;
+SGA 4½, [Th. finitude]; Bhatt–Scholze, Section 6.8). The Brown representability argument of
+`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_finite_or_isSepClosed`
+needs `cd_ℓ(k) < ∞`; for a general `k` the right adjoint is the derived limit of the étale
+`Rg^!` on the torsion levels. -/
+theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (hk : ¬(Finite k ∨ IsSepClosed k)) :
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
+  sorry
+
+/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-oe`, for `k` neither finite nor
+separably closed: for a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`,
+the derived pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is a left adjoint (SGA 4 XVIII,
+3.1.4; SGA 4½, [Th. finitude]; Bhatt–Scholze, Section 6.8). The Brown representability argument
+of `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_finite_or_isSepClosed`
+needs `cd_ℓ(k) < ∞`; for a general `k` the right adjoint is the derived limit of the étale
+`Rg^!` on the torsion levels. -/
+theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    (hk : ¬(Finite k ∨ IsSepClosed k)) :
+    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
+  sorry
+
+/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, for `k` neither finite nor
+separably closed: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
+`Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint (SGA 4 XVIII, 3.1.4; SGA 4½,
+[Th. finitude]; Bhatt–Scholze, Section 6.8). The Brown representability argument of
+`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_or_isSepClosed` needs
+`cd_ℓ(k) < ∞`. -/
+theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not
+    (hk : ¬(Finite k ∨ IsSepClosed k)) :
+    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
+  sorry
+
 end ProperLowerStar
 
 end AlgebraicGeometry.ProEtale.CondensedRing
