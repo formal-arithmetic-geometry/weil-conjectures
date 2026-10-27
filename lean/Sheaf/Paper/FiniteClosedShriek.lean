@@ -13,6 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Clo
 import all Sheaf.Paper.FiniteCompactSupportConstructibility
 import Sheaf.AlgebraicGeometry.IntrinsicTorAmplitudeTransport
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
+import Sheaf.Paper.FiniteClosedShriekMapPart
+import Sheaf.Paper.FiniteClosedShriekDomainPart
 
 /-! # Finite coefficient change for closed exceptional inverse image
 
@@ -398,7 +400,21 @@ theorem finiteCoefficientClosedShriek
     finiteTorConstructibleProEtaleModule l L (n + 1) (Nat.succ_pos n) Z.left
       ((finiteClosedExceptional (finiteClosedCoefficient l L n) i.left).obj ((finiteClosedScalar φ
         X.left).obj M)) := by
-  sorry
+  have hm := finiteClosedShriek_mapPart D l _hl E L m n φ X Z i M _hM
+  have hd := finiteClosedShriek_domainPart D l _hl E L m n φ X Z i M _hM
+  refine ⟨?_, ?_, hm.2.2.1, hm.2.2.2, hd.1, hd.2.1, hd.2.2⟩
+  · simpa only [splitIsMap, IsFiniteClosedShriekMap, splitPush, splitCounit,
+      splitDirectInverse, splitExceptional, finiteClosedExceptional,
+      splitScalar, finiteClosedScalar, splitMap, finiteClosedShriekMap,
+      splitCoefficient, finiteClosedCoefficient, finiteClosedDerived,
+      finiteClosedExceptional, finiteClosedScalar, finiteClosedPush,
+      finiteClosedCounit, finiteClosedDirectInverse] using hm.1
+  · simpa only [splitIsMap, IsFiniteClosedShriekMap, splitPush, splitCounit,
+      splitDirectInverse, splitExceptional, finiteClosedExceptional,
+      splitScalar, finiteClosedScalar, splitMap, finiteClosedShriekMap,
+      splitCoefficient, finiteClosedCoefficient, finiteClosedDerived,
+      finiteClosedExceptional, finiteClosedScalar, finiteClosedPush,
+      finiteClosedCounit, finiteClosedDirectInverse] using hm.2.1
 
 /-- Naturality in every morphism between finite-Tor constructible inputs.
 Source: blueprint sec-six-functors/sk-prop-sf-biduality-general, order 2139,
