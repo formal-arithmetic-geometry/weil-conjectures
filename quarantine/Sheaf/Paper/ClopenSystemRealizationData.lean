@@ -46,6 +46,11 @@ universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures.PurityFiniteSetting
 
+-- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module was written against.
+attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+  AlgebraicGeometry.strictEtaleLevelDerived
+
 /-- The transported exceptional functor on all actual derived pro-étale systems,
 in the recorded equivalent sequence-site presentation, before reduction or limit.
 Source: Zheng 4.10 and 5.22 (blueprint: def-pur-clopen-system-realization-data). -/
