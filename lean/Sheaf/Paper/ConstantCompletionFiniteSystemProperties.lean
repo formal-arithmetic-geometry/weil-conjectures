@@ -15,6 +15,12 @@ variable {C : Type u} [SmallCategory C]
 /--
 Source: Stacks Project, Tags 093M and 0912
 (blueprint: new-e2-constant-completion-finite-system-properties).
+STATEMENT-DISPUTED: the arbitrary module instance in the hypotheses does not
+force the asserted scalar tower. For example, take a terminal site, `I = 0`, and
+`A = ℤ[X]`; transport the regular `A`-module structure along the nontrivial ring
+automorphism `X ↦ X + 1`. The asserted tower at `n = 0` and `b = 1` would imply
+`X + 1 = X`. The statement must require the canonical quotient-section module
+instance (or assume the scalar tower) before the planned proof can be valid.
 Proof: the finite constant quotient sections are flat over their coefficient
 quotients; quotient maps give surjective transitions; and the canonical reduction
 maps identify tensoring a stage by `A/I^(n+1)` with the `min` stage, with the stated
