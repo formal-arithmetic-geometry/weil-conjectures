@@ -19598,3 +19598,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/H5/Sheaf.Algebra.Homology.RingedForgetTensorUnitLeftRepresentatives (stage 3; reviewer PASS; first push; landing 20261027T151712-L-1194910 (interface); batch 20261027T151642; modules 1; new nodes 0)
 - 15:17 L: merged deliver/J6/Sheaf.Paper.TowerScalarCounitNormalization (stage 3; reviewer PASS; first push; landing 20261027T151713-L-1195167 (interface); batch 20261027T151642; modules 1; new nodes 0)
 - 15:17 L: merged deliver/J7/Sheaf.AlgebraicGeometry.ProjectiveBundleIntegerTwistSeparation (stage 3; reviewer PASS; first push; landing 20261027T151714-L-1195427 (proof); batch 20261027T151642; modules 1; new nodes 0)
+- 15:17 L: merged deliver/J8/Sheaf.AlgebraicGeometry.ProjectiveBundlePullbackLineReflection (stage 3; reviewer PASS; first push; landing 20261027T151715-L-1195720 (proof); batch 20261027T151642; modules 1; new nodes 0)
