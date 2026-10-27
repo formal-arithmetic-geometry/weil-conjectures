@@ -70,6 +70,7 @@ theorem diagonalCyclic_uniformizerSquare
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
     (q : UniformizerSquareData l Y E π n A hA) :
-    q.equation l Y E π n A hA := by sorry
+    q.equation l Y E π n A hA := by
+  exact (by sorry)
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
