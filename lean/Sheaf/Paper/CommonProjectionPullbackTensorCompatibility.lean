@@ -181,7 +181,7 @@ theorem commonProjectionPullbackTensorCompatibility
     fun x ↦ (sixFunctorSpace_coefficient_invertible C Q.Z x).some
   letI : ∀ x : Q.Y.obj.left, Invertible (C.l : Q.Y.obj.left.residueField x) :=
     fun x ↦ (sixFunctorSpace_coefficient_invertible C Q.Y x).some
-  apply projectionTensorComparisonCompatible_of_representative_formula H E Q
+  refine projectionTensorComparisonCompatible_of_representative_formula H E Q ?_
   intro M N L h
   exact canonicalCommonStagePullbackTensor_formula C.Qbar Q.p.hom.left
     ((GeneralAlgebraicallyClosedCoefficients.inclusion (Y := Q.Y.obj.left) E).obj M)
