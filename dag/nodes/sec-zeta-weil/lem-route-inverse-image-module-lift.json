@@ -12,9 +12,99 @@
   "def-weil-pbc-algebraic-inverse-image",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal E=\\operatorname{Sh}(C,J,\\mathrm{Set})$, $\\mathcal E'=\\operatorname{Sh}(C',J',\\mathrm{Set})$. Finite products of set sheaves are sectionwise products: compatible local tuples glue uniquely coordinate by coordinate, including the empty tuple. Thus their projections have the universal property of [def-weil-category-product]. For a finite list $\\mathbf X=(X_1,\\ldots,X_n)$ let $P_{\\mathbf X}=\\prod_iX_i$ and $\\lambda_{\\mathbf X}:L(P_{\\mathbf X})\\xrightarrow{\\sim}\\prod_iL(X_i)$ be the comparison with projections $L(\\mathrm{pr}_i)$; it is invertible by the finite-limit hypothesis, including $n=0$. For arrows $f_i:Z\\to X_i$, projection uniqueness gives $\\lambda_{\\mathbf X}L(\\langle f_i\\rangle)=\\langle L(f_i)\\rangle$. It also gives $\\lambda_{\\mathbf Y}L(\\prod_i g_i)=(\\prod_iL(g_i))\\lambda_{\\mathbf X}$ for $g_i:X_i\\to Y_i$. These identities apply to repeated factors, diagonals, permutations and either bracketing of products, since their composites with each projection agree.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+   }
+  },
+  {
+   "text": "For $M\\in\\operatorname{Mod}(R)$ put $X=|R|$, $Y=|M|$, $N=L(Y)$. Its source operations are sheaf morphisms $a_M:Y\\times Y\\to Y$, $z_M:*\\to Y$, $n_M:Y\\to Y$ and $\\mu_M:X\\times Y\\to Y$: restriction compatibility follows from the sectionwise linearity in [def-weil-sheaf-of-modules-category]. Define morphisms on $N$ by\n$$a_N=L(a_M)\\lambda_{Y,Y}^{-1},\\quad z_N=L(z_M)\\lambda_{\\varnothing}^{-1},\\quad n_N=L(n_M),$$\nand define $\\mu_N:|A|\\times N\\to N$ by\n$$\\mu_N=L(\\mu_M)\\lambda_{X,Y}^{-1}(e_R^{-1}\\times\\mathrm{id}_N).$$\nFor the ring sort use the actual operations of $A$. By the hypothesis on $e_R$ their formulas are exactly the conjugates of $L$ of the ring operations; negation has the same property, since an additive inverse is unique.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+   }
+  },
+  {
+   "text": "Here is the calculation checking composite operations, rather than assuming preservation of algebraic laws. In a context $\\mathbf X$ consisting of finitely many ring and module variables, let $P'_{\\mathbf X}$ be the product of the corresponding copies of $|A|$ and $N$. Put $q_X=e_R^{-1}$, $q_Y=\\mathrm{id}_N$, and $c_{\\mathbf X}=\\lambda_{\\mathbf X}^{-1}\\circ\\prod_iq_{X_i}:P'_{\\mathbf X}\\xrightarrow{\\sim}L(P_{\\mathbf X})$. For a variable $t=\\mathrm{pr}_i$, $q_{X_i}t'=L(t)c_{\\mathbf X}$ by the definition of $\\lambda$. If the formula holds for operands $t_i$, the pairing identity of step 1 and the formula $q_Zo'=L(o)\\lambda^{-1}\\prod_iq_{Z_i}$ for their operation $o$ give\n$$q_Zo'(t'_1,\\ldots,t'_k)=L(o)\\lambda^{-1}\\langle L(t_i)c_{\\mathbf X}\\rangle=L(o\\circ\\langle t_i\\rangle)c_{\\mathbf X}.$$\nFor a nullary operation the same formula follows from uniqueness of the map to the terminal object. Induction on the finite expression proves this formula for every expression needed in the module axioms. Consequently equality of two such source morphisms gives equality of the target morphisms, cancelling the isomorphism $q_Z$.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+   }
+  },
+  {
+   "text": "Apply that calculation to the source identities\n$$(x+y)+z=x+(y+z),\\quad x+y=y+x,\\quad 0+x=x,\\quad x+(-x)=0,$$\nand\n$$r(x+y)=rx+ry,\\quad(r+s)x=rx+sx,\\quad(rs)x=r(sx),\\quad1x=x.$$\nThey hold as morphism equalities because on every source section they are the axioms of the sectionwise modules of [def-weil-sheaf-of-modules-category]. Their contexts are respectively $Y^3,Y^2,Y,Y,X\\times Y^2,X^2\\times Y,X^2\\times Y,Y$; step 3 therefore proves precisely the corresponding target equalities on $N$, with the actual ring operations of $A$. On each object $U$ of $C'$ these identities make $N(U)$ an abelian group and an $A(U)$-module. The further zero and negative scalar identities follow by additive cancellation: $0x=0x+0x$, $r0=r0+r0$ and $rx+(-r)x=(r-r)x=0$. This checks all module laws without an exactness or flatness assertion about module categories.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+   }
+  },
+  {
+   "text": "All four operations in step 2 are morphisms of set sheaves. Naturality for an arrow $v:U'\\to U$ of $C'$ consequently gives\n$$(x+y)|_{U'}=x|_{U'}+y|_{U'},\\quad0|_{U'}=0,\\quad(-x)|_{U'}=-x|_{U'},\\quad(rx)|_{U'}=r|_{U'}x|_{U'}.$$\nThus the restrictions are additive and semilinear over the restrictions of $A$. The underlying set presheaf is already the sheaf $N$, so the unique gluing of sets is also the unique gluing of the sections of this abelian presheaf. Therefore these sectionwise structures define an actual object $I_R(M)$ of $\\operatorname{Mod}(A)$ by [def-weil-sheaf-of-modules-category], with underlying sheaf exactly $N$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+   }
+  },
+  {
+   "text": "For an $R$-linear sheaf morphism $h:M\\to M'$ define $I_R(h)$ to have underlying morphism $L(|h|)$. The source equalities\n$$h a_M=a_{M'}(h\\times h),\\quad h z_M=z_{M'},\\quad h\\mu_M=\\mu_{M'}(\\mathrm{id}_X\\times h)$$\nare the sectionwise additivity, zero and scalar equations of [def-weil-sheaf-of-modules-category]. Applying $L$ and the product naturality from step 1 gives respectively the target equalities with $a_N,z_N,\\mu_N$; the factor $e_R^{-1}$ is the same for both modules and cancels on the ring coordinate. Hence $L(|h|)$ is sectionwise $A$-linear. Since $L$ preserves identities and composition, these maps and the objects in step 5 form a functor $I_R$. Take $e_M:|I_R(M)|\\to L(|M|)$ to be the identity for every $M$; the definition of $I_R(h)$ makes these identities a natural isomorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+   }
+  },
+  {
+   "text": "Finally check the generalized-section graphs of [def-weil-pbc-algebraic-inverse-image]. If $a,b,t:T\\to Y$ obey $t=a_M\\langle a,b\\rangle$, then step 1 gives $L(t)=a_N\\langle L(a),L(b)\\rangle$. If $r:T\\to X$, $m,t:T\\to Y$ obey $t=\\mu_M\\langle r,m\\rangle$, the definition of $\\mu_N$ gives\n$$L(t)=\\mu_N\\langle e_R L(r),L(m)\\rangle.$$\nIf $t=z_M!_T$, then $L(t)=z_N!_{L(T)}$, because $\\lambda_{\\varnothing}L(!_T)=!_{L(T)}$. For the ring operations the same pairing and terminal calculations, using the given operation equations for $e_R$, give the addition, multiplication, zero and one graphs in $A$. Every displayed equation is an equality of sheaf morphisms, so it holds on every section over every target object, not only on global sections. Together with $e_M=\\mathrm{id}$ these are exactly the required graph conditions. Thus $(e_R,I_R,e_M)$ is the stipulated algebraic inverse-image presentation with ring comparison exactly the supplied $e_R$.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-category-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, proof; the operation and functoriality checks are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +133,66 @@
    "results": "SheafOfModules.pullback and pullbackPushforwardAdjunction; no coherent arbitrary-site construction",
    "date": "2026-10-27",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite limit preserving functor between sheaf categories transports modules over a ring object and their underlying sheaves",
+   "results": "8 hits: SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.toSheaf, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, SheafOfModules.createsLimit, SheafOfModules.forgetPreservesLimitsOfShape",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|AlgebraicInverseImage|algebraicTheory",
+   "results": "0 hits: none",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of modules along a geometric morphism transports addition and scalar multiplication",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePullback, PresheafOfModules.Sheafify.smul_add, PresheafOfModules.Sheafify.SMulCandidate.h, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pushforward, PresheafOfModules.Sheafify.map_smul_eq",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso; pullback assumes a continuous site functor and a coefficient map; does not give the arbitrary-L graph lift",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving finite products maps interpretations of many sorted algebraic terms and equations to their transported interpretations",
+   "results": "8 hits: FirstOrder.Language.BoundedFormula.realize_mapTermRel_id, FirstOrder.Language.HomClass.realize_term, FirstOrder.Language.LHom.realize_onTerm, FirstOrder.Language.LHom.onTerm, FirstOrder.Language.LEquiv.onTerm_apply, FirstOrder.Language.Equiv.map_fun', Equiv.inducedStructure_funMap, FirstOrder.Language.Equiv.map_fun; model-theoretic term transport is for homomorphisms of set structures, not functors between sheaf categories",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullback|def pullbackIso|variable|sheafPushforwardContinuous",
+   "results": "5 hits: 17, 39, 44, 48, 51; the single-file grep output used line numbers as file labels; full path and declaration lines verified by the subsequent directory grep",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.prodComparison",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.prodComparison'",
+   "date": "2026-10-27",
+   "verdict": "no match: query identifier was not recognized"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullback|def pullbackIso|mapMod|AlgebraicInverseImage",
+   "results": "7 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-27",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-route-inverse-image-data-exists",
@@ -69,5 +215,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-route-inverse-image-module-lift",
+  "worker": "stage1",
+  "summary": "Expanded the product-comparison construction of Stacks 03D2: explicit operations, a written structural calculation for their composites, all module axioms, semilinear restriction maps, linear morphisms and generalized-section graphs. The given ring comparison is retained literally. No new nodes: each check is an elementary calculation from the product universal property and the sectionwise module definitions. No exactness or flatness assumption is added.",
+  "blueprint": "The inherited ancestry sk-thm-rationality and its intervening compact-support realization nodes is retained; this implements the algebraic module-operation transport sentence identified in blueprint.from.place, below lem-route-inverse-image-data-exists. The current latest blueprint rationality proof is det-thm-rationality, separated case via compactly supported cohomology; no unit or chapter route is altered."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-ND-662865da7",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-662865da7 (reviewer sub-agent of L); spot-checked: Read the item in full (all 7 steps; there are no new nodes), the statements of the 4 cited nodes (algebraic-inverse-image def, sheaf-of-modules def, category-product leaf, sites-and-cohomology), the parent lem-route-inverse-image-data-exists, and Stacks sites-modules.tex Tag 03D2 lemma-pullback-module, whose 3-line proof omits the axiom checks that this split writes out. 03D7 was also checked; the item does not use it. Statement: kept verbatim. It matches the hypothesis of the parent's step 2 (e_O from the ring-functor node). The directions of e_R : L|R|->|A| and e_M : |I M|->L|M| match the def. The coefficient category is Mod(R)->Mod(A) of def-weil-sheaf-of-modules-category; no hypothesis is added or dropped. Steps, all checked: (1) set-sheaf products are sectionwise and the comparisons are invertible. (2) Typing of mu_N = L(mu_M) lambda^-1 (e_R^-1 x id) is correct. (3) Term induction verified for the variable, operation and nullary cases, with cancellation of q_Z; base and inductive claim are properly set up. (4) The 8 laws have correct contexts, and 0x = 0 etc. follow by cancellation. (5) Semilinear restrictions; the abelian sheaf condition is elementary. (6) L(h) is A-linear because the e_R^-1 factor is common to both sides; functoriality comes from L and e_M = id. (7) Graph equations verified for an arbitrary test sheaf T, including L(mu_M<r,m>) = mu_N<e_R L r, L m> and the zero graph. Small cases: L = id, nonidentity e_R, zero ring, zero module, empty site. Duplicate search: all 47 algebraic-inverse-image citers that mention finite limits. lem-pur-ringed-pullback-presentation-on-sites covers only continuous-functor L with its own RI; lem-sfb-constant-scalar-algebraic-pullback covers only constant rings; lem-weil-pbc-algebraic-inverse-image-of-module-transport only packages given operations. None is a duplicate or a one-line generalization. Records: every step cites only definitions or the Mathlib leaf, so no tool_uses are needed; proof_deps equals the union of uses; there are no cycles. Minor remark: the report says the source.place was updated, but it is unchanged; this is harmless. No fixes."
  }
 }
