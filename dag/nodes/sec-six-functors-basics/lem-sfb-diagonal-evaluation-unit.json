@@ -16,20 +16,26 @@
  },
  "proof": [
   {
-   "text": "Resolve each complex by a termwise flat K-flat complex. On that complex evaluated reduction is tensor with the positive prime-power residue ring, and the ordinary quotient map defines its underlying unit. Use the inverse derived counit on the resolution.",
+   "text": "Use the already proved scalarExtension_exact in the module of [lem-sfb-diagonal-derived-reduction-exists]: Z_ell is torsion-free, hence flat over Z, and sheafified extension of scalars is exact. The left adjoint to evaluation at n sends M at m to the coproduct indexed by arrows n to m. This index is subsingleton, so these finite coproducts preserve finite limits. Composing this exact left adjoint with scalar extension gives an exact left adjoint to G_n. Localize the termwise adjunction to obtain a right adjoint D(G_n).",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-constant-two-term-resolution",
-    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+    "lem-sfb-diagonal-derived-reduction-exists",
+    "def-sfb-diagonal-system-interface"
    ],
    "elementary": false
   },
   {
-   "text": "Comparison of resolutions commutes with the quotient map. Descend the maps to a natural transformation; naturality of the universal counit gives its complexes equation. Specializing to a single complex gives the displayed single equation.",
+   "text": "The supplied simultaneous reduction D is a right Kan extension along Q by its universal field. Its pointwise field and the fact that D(G_n) is a right adjoint imply preservation of this right Kan extension (Mathlib Functor.PreservesRightKanExtension.preserves). On complexes form the natural transformation q from the identity-complex comparison and the termwise ordinary quotient unit. Postcompose with Q and the inverse exact-functor comparison for G_n, obtaining beta: Q composed with id to E composed with Q composed with D(G_n). The right Kan extension lift of beta is eta: id to T composed with D(G_n). Its factorization equation, followed by the exact-functor comparison, is precisely the complexes field.",
    "uses": [
     "def-sfb-diagonal-system-interface"
    ],
    "elementary": false
+  },
+  {
+   "text": "Specialize the complexes equation to the degree-zero single complex of S. Expand the specified derived single counit and the exact-functor single comparison. Naturality of the exact-functor comparison moves the single-complex comparison for E past D(G_n). The remaining equation is an equality of maps of single complexes: at degree zero both are the ordinary quotient unit; in all other degrees their source is zero. Applying Q proves the single field. Package eta and the two equations into DiagonalEvaluationUnit.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": true
   },
   {
    "text": "The finite restriction and forgetting functors have identical underlying abelian sheaves and section maps. Construct their natural isomorphism by identity components; after unfolding only this comparison, its inverse transports the heterogeneous equality by identity composition.",
@@ -40,15 +46,13 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-constant-two-term-resolution",
-  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+  "lem-sfb-diagonal-derived-reduction-exists",
   "def-sfb-diagonal-system-interface"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
-  "place": "Steps (2) and (4): the underlying quotient unit of evaluated simultaneous reduction."
+  "place": "Steps (2) and (4), using the right Kan extension lift and the exact scalar-extension/evaluation adjunction instead of constructing a new K-flat resolution."
  },
  "mathlib_searches": [
   {
@@ -125,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-55c6b",
-  "group": "F5",
-  "result": "fix",
-  "landing": "20261027T180605-L-3879427",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261027T205806-L-1616804",
   "kind": "interface",
-  "note": "independent cc review: moved defs vs published item module (verbatim except blueprint labels); new sorry statements vs nodes/source (both true, strictly smaller); item proof vs axioms (sorryAx only via the two new holes); node stmt_deps vs owners of declarations used; direct importer KummerStrictTargetTransport compiled vs delivered files (46.8 s; published 43.8 s at the same time)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
