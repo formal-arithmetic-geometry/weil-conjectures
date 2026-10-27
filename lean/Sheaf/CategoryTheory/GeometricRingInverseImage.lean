@@ -11,6 +11,9 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 
+import Sheaf.CategoryTheory.InverseImageRingFunctor
+import Sheaf.CategoryTheory.RouteInverseImageConstantComparison
+
 /-! # Ring transport along a geometric inverse image
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tag 03D2.
@@ -77,7 +80,44 @@ end SheafOfModules
 
 namespace CategoryTheory.ConstantCompletion
 
-open CategoryTheory.Limits
+open CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open CategoryTheory.CartesianMonoidalCategory
+
+/-- A binary operation graph is preserved by its product-comparison equation. -/
+private theorem transport_binary
+    {A B : Type*} [Category A] [Category B]
+    [CartesianMonoidalCategory A] [CartesianMonoidalCategory B]
+    (F : A ⥤ B) [PreservesFiniteProducts F]
+    {X : A} {Y : B} (e : F.obj X ⟶ Y)
+    (op : X ⊗ X ⟶ X) (op' : Y ⊗ Y ⟶ Y)
+    (hop : F.map op ≫ e = (prodComparisonIso F X X).hom ≫ (e ⊗ₘ e) ≫ op')
+    {T : A} (a b t : T ⟶ X) (ht : t = lift a b ≫ op) :
+    F.map t ≫ e = lift (F.map a ≫ e) (F.map b ≫ e) ≫ op' := by
+  have hp : F.map (lift a b) ≫ (prodComparisonIso F X X).hom ≫ (e ⊗ₘ e) =
+      lift (F.map a ≫ e) (F.map b ≫ e) := by
+    apply CartesianMonoidalCategory.hom_ext
+    · simp only [Category.assoc, tensorHom_fst, prodComparisonIso_hom,
+        CartesianMonoidalCategory.prodComparison_fst_assoc, lift_fst]
+      rw [← Category.assoc, ← F.map_comp, lift_fst]
+    · simp only [Category.assoc, tensorHom_snd, prodComparisonIso_hom,
+        CartesianMonoidalCategory.prodComparison_snd_assoc, lift_snd]
+      rw [← Category.assoc, ← F.map_comp, lift_snd]
+  rw [ht, F.map_comp, Category.assoc, hop]
+  simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ op') hp
+
+/-- A constant operation graph is preserved by its terminal-comparison equation. -/
+private theorem transport_constant
+    {A B : Type*} [Category A] [Category B]
+    [CartesianMonoidalCategory A] [CartesianMonoidalCategory B]
+    (F : A ⥤ B) [PreservesFiniteProducts F]
+    {X : A} {Y : B} (e : F.obj X ⟶ Y)
+    (op : 𝟙_ A ⟶ X) (op' : 𝟙_ B ⟶ Y)
+    (hop : F.map op ≫ e = (preservesTerminalIso F).hom ≫ op')
+    {T : A} (a : T ⟶ X) (ha : a = toUnit T ≫ op) :
+    F.map a ≫ e = toUnit (F.obj T) ≫ op' := by
+  rw [ha, F.map_comp, Category.assoc, hop, ← Category.assoc]
+  congr 1
+  exact toUnit_unique _ _
 
 /-- Coherent inverse image of ring sheaves, including the natural constant comparison.
 Source: Stacks Project, Sites, Tag 00YV (ring objects and constant objects), and
@@ -109,6 +149,49 @@ theorem coherentRingInverseImage_exists
         L.map ((sheafCompose J (forget CommRingCat)).map f) ≫ (d S).ringUnderlying.hom =
           (d R).ringUnderlying.hom ≫ (sheafCompose K (forget CommRingCat)).map (F.map f)) ∧
       Nonempty (constantSheaf J CommRingCat.{u} ⋙ F ≅ constantSheaf K CommRingCat.{u}) := by
-  sorry
+  obtain ⟨F, _, _, e, _, hops, _⟩ := inverseImage_ring_functor J K adj
+  let d : ∀ R : Sheaf J CommRingCat.{u}, CategoryTheory.RingInverseImage L R (F.obj R) :=
+    fun R ↦
+      { ringUnderlying := e.app R
+        ringAdd := by
+          intro T a b t ht W x
+          have h : t = lift a b ≫ ringSheafAdd R := by
+            ext U y
+            exact ht U y
+          exact congrArg (fun f ↦ f.hom.app W x)
+            (transport_binary L (e.app R).hom _ _ (hops R).1 a b t h)
+        ringMul := by
+          intro T a b t ht W x
+          have h : t = lift a b ≫ ringSheafMul R := by
+            ext U y
+            exact ht U y
+          exact congrArg (fun f ↦ f.hom.app W x)
+            (transport_binary L (e.app R).hom _ _ (hops R).2.1 a b t h)
+        ringZero := by
+          intro T a ha W x
+          have h : a = toUnit T ≫ ringSheafZero R := by
+            ext U y
+            exact ha U y
+          exact congrArg (fun f ↦ f.hom.app W x)
+            (transport_constant L (e.app R).hom _ _ (hops R).2.2.1 a h)
+        ringOne := by
+          intro T a ha W x
+          have h : a = toUnit T ≫ ringSheafOne R := by
+            ext U y
+            exact ha U y
+          exact congrArg (fun f ↦ f.hom.app W x)
+            (transport_constant L (e.app R).hom _ _ (hops R).2.2.2 a h) }
+  have hn : ∀ {R S : Sheaf J CommRingCat.{u}} (f : R ⟶ S),
+      L.map ((sheafCompose J (forget CommRingCat)).map f) ≫ (d S).ringUnderlying.hom =
+        (d R).ringUnderlying.hom ≫ (sheafCompose K (forget CommRingCat)).map (F.map f) :=
+    fun f ↦ e.hom.naturality f
+  obtain ⟨constants, _, _⟩ := inverseImageConstantComparison J K L V adj
+    inferInstance F d hn
+  exact ⟨F, fun R ↦
+    { ringUnderlying := (d R).ringUnderlying
+      ringAdd := (d R).ringAdd
+      ringMul := (d R).ringMul
+      ringZero := (d R).ringZero
+      ringOne := (d R).ringOne }, hn, ⟨constants⟩⟩
 
 end CategoryTheory.ConstantCompletion
