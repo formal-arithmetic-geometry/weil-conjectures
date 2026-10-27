@@ -442,7 +442,6 @@ set_option maxHeartbeats 1000000 in
 /-- **The Frobenius comparison at a fibre** (blueprint `lem-trf-weil-shriek-operator-fibres`,
 proof of (2)): for the fibre `Z` of `f = r ≫ f'` over a point `y` fixed by `Φ_Y`, the base change
 `β : Ly^* Rf_! ≅ RΓ_c(Z, -)` intertwines `Ly^*(θ_f)` with the pullback `Φ_Z^♯`. -/
-@[reassoc]
 lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {p : X' ⟶ X}
     {f' : X' ⟶ Y} {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y}
     [IsFinite r.left] [IsUniversalHomeomorphism r.left] [IsProper ΦZ.left]
@@ -485,6 +484,36 @@ lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {
       ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app _)]
   simp only [Category.assoc]
   rw [hk]
+
+set_option maxHeartbeats 1000000 in
+-- the instances of the categories of sheaves make the rewriting slow
+/-- `baseChange_comp_weilLowerShriekFrobeniusComparison_stalk`
+followed by a morphism `h`; stated by hand, `@[reassoc]` took 7-20 s here. -/
+lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk_assoc {ΦY : Y ⟶ Y} {p : X' ⟶ X}
+    {f' : X' ⟶ Y} {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y}
+    [IsFinite r.left] [IsUniversalHomeomorphism r.left] [IsProper ΦZ.left]
+    (sq : IsPullback p f' (r ≫ f') ΦY) (hy : y ≫ ΦY = y)
+    (hZ : IsPullback (j ≫ p) (toPoint Z) (r ≫ f') y) (hL : IsPullback j (toPoint Z) f' y)
+    (hT : IsPullback (j ≫ p) ΦZ r j) (hi : ΦZ ≫ j ≫ p = (j ≫ p) ≫ r ≫ p)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    {W : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} (h : _ ⟶ W) :
+    eqToHom (congrArg (fun g ↦ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+        ℓ g).obj ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          (r ≫ f')).obj K)) hy.symm) ≫
+      (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ y ΦY).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f')).obj K) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((weilLowerShriekFrobeniusComparison ℓ (r ≫ p) ΦY (r ≫ f') sq r rfl rfl).hom.app K) ≫
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K) ≫ h =
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app K ≫
+      (compactPullback ℓ ΦZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+        ((weilUpperStarComparison ℓ ΦZ (r ≫ p) (j ≫ p) hi).hom.app K) ≫ h := by
+  have e := baseChange_comp_weilLowerShriekFrobeniusComparison_stalk ℓ sq hy hZ hL hT hi K =≫ h
+  simp only [Category.assoc] at e
+  exact e
 
 end Fibre
 
@@ -575,7 +604,6 @@ include sq hrp hrf in
 /-- **The Frobenius comparison of `Rf_!` on compactly supported cohomology** (blueprint
 `lem-trf-weil-shriek-operator-fibres`, proof of (1)): under the composition isomorphism
 `c_f : RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, `RΓ_c(Y, θ_f) ∘ Φ_Y^♯` is `Φ_X^♯`. -/
-@[reassoc]
 lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (compactPullback ℓ ΦY).app
@@ -610,6 +638,25 @@ lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
     ← compactPullback_app_congr ℓ hrp, compactPullback_comp_app]
   simp only [Category.assoc]
 
+omit [IsUniversalHomeomorphism ΦX.left] [IsUniversalHomeomorphism ΦY.left] in
+include sq hrp hrf in
+/-- `compactPullback_comp_weilLowerShriekFrobeniusComparison`
+followed by a morphism `h`; stated by hand, `@[reassoc]` took 7-20 s here. -/
+lemma compactPullback_comp_weilLowerShriekFrobeniusComparison_assoc
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    {W : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧} (h : _ ⟶ W) :
+    (compactPullback ℓ ΦY).app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf).hom.app K) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦX).obj K) ≫ h =
+    (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K ≫ (compactPullback ℓ ΦX).app K ≫
+      h := by
+  have e := compactPullback_comp_weilLowerShriekFrobeniusComparison ℓ sq hrp hrf K =≫ h
+  simp only [Category.assoc] at e
+  exact e
+
 set_option maxHeartbeats 1000000 in
 -- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
 /-- **The Leray isomorphism for Weil objects** (blueprint `lem-trf-weil-shriek-operator-fibres`,
@@ -630,7 +677,9 @@ theorem nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso
     weilLowerShriekOfFrobenius_obj_str]
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
   rw [hn]
-  exact compactPullback_comp_weilLowerShriekFrobeniusComparison_assoc ℓ sq hrp hrf K.carrier _
+  -- the carriers are `Rf_! K` (resp. `Li^* K`) by `rfl`: make them syntactic so `rw` matches
+  dsimp only [weilLowerShriekOfFrobenius_obj_carrier]
+  rw [compactPullback_comp_weilLowerShriekFrobeniusComparison_assoc ℓ sq hrp hrf K.carrier]
 
 variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom] {ΦZ : Z ⟶ Z} [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
@@ -671,8 +720,11 @@ theorem nonempty_weilStalk_weilLowerShriekOfFrobenius_iso (K : WeilBoundedConstr
   have hn := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).naturality K.str.hom
   simp only [Functor.comp_map] at hn
   rw [hn]
-  exact baseChange_comp_weilLowerShriekFrobeniusComparison_stalk_assoc ℓ sq hy hZ hL hT hi
-    K.carrier _
+  -- the carriers are `Rf_! K` (resp. `Li^* K`) by `rfl`: make them syntactic so `rw` matches
+  dsimp only [weilLowerShriekOfFrobenius_obj_carrier,
+    weilUpperStar_obj_carrier]
+  rw [baseChange_comp_weilLowerShriekFrobeniusComparison_stalk_assoc ℓ sq hy hZ hL hT hi
+    K.carrier]
 
 end Compatibilities
 
