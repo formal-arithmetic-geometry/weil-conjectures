@@ -19960,3 +19960,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/E4/Sheaf.Paper.FiniteProjectionBinaryTriangleSquare (stage 3; reviewer PASS; first push; landing 20261027T205921-L-1634030 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 20:59 L: merged deliver/E4/Sheaf.Paper.TateTensorQuotientBalancing (stage 3; reviewer PASS; first push; landing 20261027T205923-L-1634228 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:59 L: merged deliver/E5/Sheaf.Paper.EtaleSystemProjectionComparisonData (stage 3; reviewer PASS; first push; landing 20261027T205924-L-1634474 (interface); batch 20261027T205736; modules 5; new nodes 4)
+- 20:59 L: merged deliver/E6/Sheaf.Paper.EtaleSystemRestrictionEvaluation (stage 3; reviewer PASS; first push; landing 20261027T205926-L-1634706 (interface); batch 20261027T205736; modules 2; new nodes 1)

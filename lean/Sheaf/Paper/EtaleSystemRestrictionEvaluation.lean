@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.EtaleSystemProjectionData
+import Sheaf.Paper.EtaleSystemRestrictionEvaluationForward
 
 /-! # Evaluation of the restriction comparison for ordinary systems
 
@@ -58,8 +59,14 @@ theorem etaleSystemRestriction_evaluation
         (ModuleCat.{u + 1} (B.rings.obj (op n))) c).map
           ((t.scalarEvaluationX a n).restriction.hom.app N) ≫
         d.inv.app ((t.evaluationX C n).E.obj N) ≫
-        (Sheaf.derivedRestrictScalars Y.smallEtaleTopology (a.app (op n)).hom).map
+    (Sheaf.derivedRestrictScalars Y.smallEtaleTopology (a.app (op n)).hom).map
           ((t.supportEvaluation C n).iso.inv.app N) := by
-  sorry
+  let D := Sheaf.derivedRestrictScalars Y.smallEtaleTopology (a.app (op n)).hom
+  let e := (t.supportEvaluation C n).iso.hom.app N
+  apply (cancel_mono (D.map e)).1
+  dsimp [D, e]
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+  simpa using
+    (etaleSystemRestriction_evaluation_forward c l t B C a n d hd N)
 
 end AlgebraicGeometry.Etale.SystemProjection

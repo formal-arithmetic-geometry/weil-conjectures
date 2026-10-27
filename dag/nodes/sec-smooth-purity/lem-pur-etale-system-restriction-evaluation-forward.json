@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-etale-system-restriction-evaluation-forward",
+ "kind": "statement",
+ "title": "Forward restriction evaluation cube",
+ "statement": "For the normalized ordinary system data and any compatible single-ring restriction comparison d, the composite of inverse support evaluation, inverse system restriction evaluation, scalar evaluation on Y, and the support evaluation hom on C equals the B compact-support image of scalar evaluation on X followed by d inverse.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; Zheng Lemma 5.16"
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Paste the normalized proper and open restriction comparisons using their sectionwise identity maps, inverse-image mates and exact localizations; naturality gives the displayed forward cube.",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "def-pur-etale-level-restriction",
+    "lem-pur-etale-image-restriction-level",
+    "lem-pur-etale-open-restriction-level"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-system-projection-data",
+  "def-pur-etale-level-restriction",
+  "lem-pur-etale-image-restriction-level",
+  "lem-pur-etale-open-restriction-level"
+ ],
+ "proof_origin": {
+  "by": "E6",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, forward restriction cube before cancellation"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-system-restriction-evaluation",
+   "place": "forward cube substep",
+   "via": [
+    "lem-pur-etale-system-restriction-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleSystemRestrictionEvaluationForward",
+  "file": "lean/Sheaf/Paper/EtaleSystemRestrictionEvaluationForward.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemRestriction_evaluation_forward",
+  "statement": "theorem etaleSystemRestriction_evaluation_forward\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l)\n    (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)\n    (d : rightDerivedLowerShriekOfCompactification\n        (ModuleCat.{u + 1} (C.rings.obj (op n))) c ⋙\n        Sheaf.derivedRestrictScalars Y.smallEtaleTopology (a.app (op n)).hom ≅\n      Sheaf.derivedRestrictScalars X.smallEtaleTopology (a.app (op n)).hom ⋙\n        rightDerivedLowerShriekOfCompactification\n          (ModuleCat.{u + 1} (B.rings.obj (op n))) c)\n    (hd : d.hom = singleRestriction (a.app (op n)) c)\n    (N : Derived X C.rings) :\n    ((t.supportEvaluation B n).iso.inv.app ((restriction X a).obj N) ≫\n        (t.evaluationY B n).E.map ((t.restriction a).iso.inv.app N) ≫\n        (t.scalarEvaluationY a n).restriction.hom.app ((t.support C).F.obj N)) ≫\n      (Sheaf.derivedRestrictScalars Y.smallEtaleTopology (a.app (op n)).hom).map\n        ((t.supportEvaluation C n).iso.hom.app N) =\n      (rightDerivedLowerShriekOfCompactification\n        (ModuleCat.{u + 1} (B.rings.obj (op n))) c).map\n          ((t.scalarEvaluationX a n).restriction.hom.app N) ≫\n        d.inv.app ((t.evaluationX C n).E.obj N)",
+  "branch": "sheaf-dag",
+  "by": "E6",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemRestrictionEvaluation",
+  "date": "2026-10-28",
+  "group": "E6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation restriction comparison compact support derived category",
+   "results": "No direct match; generic mate and localization identities do not specialize to this normalized system cube.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "Generic mate composition lemmas only; no direct normalized system restriction cube.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "restriction_evaluation compact support singleRestriction",
+   "results": "Only the assigned module and its parent projection evaluation use these names.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate declaration."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T205926-L-1634706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T205926-L-1634706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
