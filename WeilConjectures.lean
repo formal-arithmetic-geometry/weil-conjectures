@@ -10336,8 +10336,14 @@ public import WeilConjectures.NumberTheory.Padics.ULiftDiscreteValuationRing
 public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.PoincareDuality.Biduality.CoefficientChange
+public import WeilConjectures.PoincareDuality.Biduality.CoefficientChangeBraided
 public import WeilConjectures.PoincareDuality.Biduality.Constructible
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReading
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHom
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomAdjunction
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomTensor
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizing
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizingUnit
 public import WeilConjectures.PoincareDuality.Biduality.Integral
 public import WeilConjectures.PoincareDuality.Biduality.Reduction
 public import WeilConjectures.PoincareDuality.Poincare

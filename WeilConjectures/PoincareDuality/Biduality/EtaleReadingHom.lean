@@ -116,6 +116,7 @@ noncomputable def finiteEtaleReadingIhomIso
   asIso ((ambientEtaleReadingAdjunction ℓ E n X).ihomComparison
     (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X) A.obj B.obj)
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- Naturality of `finiteEtaleReadingIhomIso` in the first variable. -/
 lemma finiteEtaleReadingIhomIso_hom_naturality
     {A A' : Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧} (f : A ⟶ A')
