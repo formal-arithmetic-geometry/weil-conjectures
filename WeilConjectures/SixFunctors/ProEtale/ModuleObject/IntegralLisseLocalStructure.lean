@@ -78,6 +78,7 @@ theorem exists_cover_iso_integralConstantModule (Z : Scheme.{u})
       (PadicAlgCl.exists_norm_eq_pow_of_maximalIdeal_eq_span ℓ E ϖ hϖ)
       fun h ↦ hϖ0 (Subtype.ext h)) Z M hM
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The pullback of a constant module `⊕ⱼ 𝒪_E/ϖ^{eⱼ} ⊕ 𝒪_E^r` is the constant module. -/
 theorem nonempty_upperStar_integralConstantModule_iso {W V : Scheme.{u}} (g : W ⟶ V)
     (ϖ : PadicAlgCl.integers ℓ E) (k r : ℕ) (e : Fin k → ℕ) :

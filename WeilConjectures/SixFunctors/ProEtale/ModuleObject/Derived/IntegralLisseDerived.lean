@@ -21,7 +21,7 @@ presented module object over `𝒪̲_{E,Z}`) is pro-étale locally isomorphic to
 
 * if `A` and `L` are bounded complexes with lisse cohomology sheaves, then `A ⊗ᴸ L` is bounded
   constructible
-  (`ProEtale.CondensedRing.PadicIntegersRingObj.boundedConstructible_tensorObj_of_lisse_homology'`):
+  (`ProEtale.CondensedRing.PadicIntegersRingObj.boundedConstructible_tensorObj_of_lisse_homology`):
   by dévissage in both variables it suffices to treat `P[0] ⊗ᴸ N[0]` for lisse `P` and `N`, whose
   cohomology sheaves are computed, on a common trivializing cover, by
   `ProEtale.CondensedRing.integralConstantModule_tensorObj_homology`;
@@ -62,6 +62,7 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- If the pullback of `M` along `f` is constant, so is its pullback along `a ≫ f`. -/
 lemma nonempty_upperStar_comp_iso_integralConstantModule {Y W V : Scheme.{u}} (a : Y ⟶ W)
     (f : W ⟶ V) {M : Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
@@ -164,7 +165,7 @@ theorem boundedConstructible_singleFunctor_tensorObj_singleFunctor (Z : Scheme.{
 /-- **The derived tensor product of complexes with lisse cohomology.** If `A` and `L` are bounded
 complexes of `𝒪̲_E`-module objects on a scheme with noetherian underlying space, whose cohomology
 sheaves are lisse, then `A ⊗ᴸ L` is bounded constructible. -/
-theorem boundedConstructible_tensorObj_of_lisse_homology' (Z : Scheme.{u})
+theorem boundedConstructible_tensorObj_of_lisse_homology (Z : Scheme.{u})
     [TopologicalSpace.NoetherianSpace Z]
     {A L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Z))}
@@ -187,6 +188,7 @@ theorem boundedConstructible_tensorObj_of_lisse_homology' (Z : Scheme.{u})
     (IsLocallyFinitelyPresented _)
     (fun N hN ↦ boundedConstructible_singleFunctor_tensorObj_singleFunctor ℓ E Z hP hN) L hL hL'
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 /-- On the members of a trivializing pro-étale cover of a lisse `𝒪_E`-sheaf `P`, the pullback of
 `P[q]` has a left dual concentrated in degrees `[-q, 1 - q]` with lisse cohomology sheaves. -/
 theorem exists_exactPairing_leftDerivedUpperStar_singleFunctor {Z W : Scheme.{u}} (g : W ⟶ Z)

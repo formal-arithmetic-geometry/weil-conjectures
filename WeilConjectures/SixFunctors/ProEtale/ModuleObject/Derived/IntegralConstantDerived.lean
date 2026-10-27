@@ -69,6 +69,7 @@ private instance : (isFinitelyPresentedProperty ℓ E V).IsClosedUnderIsomorphis
   ⟨fun e h ↦ h.of_iso e⟩
 
 omit [FiniteDimensional ℚ_[ℓ] E] in
+omit [FiniteDimensional ℚ_[ℓ] E] in
 include hϖ in
 /-- The multiplication by a power of a uniformizer on `𝒪_{E,V}` is a monomorphism. -/
 private lemma mono_padicIntegersRegularEndOfAlgebra_pow (a : ℕ) :
@@ -76,6 +77,7 @@ private lemma mono_padicIntegersRegularEndOfAlgebra_pow (a : ℕ) :
   mono_padicIntegersRegularEndOfAlgebra V ℓ E (pow_ne_zero a fun h ↦
     PadicAlgCl.maximalIdeal_integers_ne_bot ℓ E (by rw [hϖ, h, Ideal.span_singleton_eq_bot]))
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 omit [FiniteDimensional ℚ_[ℓ] E] in
 include hϖ in
 /-- The derived tensor product of two constant `𝒪_E`-modules placed in degree `0` has finitely
@@ -93,6 +95,7 @@ private lemma torConcentrated_integralConstantModule (k r k' r' : ℕ) (e : Fin 
       exact comp_whiskerRight_cokernel_eq_zero _ _)
     (fun _ ↦ Mod.isFinitelyPresented_cokernel_regular _) Mod.isFinitelyPresented_regular e e'
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 include hϖ in
 /-- The derived tensor product of two constant `𝒪_E`-modules placed in degree `0` has locally
 finitely presented cohomology sheaves, concentrated in degrees `-1` and `0`. -/
@@ -108,6 +111,7 @@ theorem integralConstantModule_tensorObj_homology (k r k' r' : ℕ) (e : Fin k �
   have h := torConcentrated_integralConstantModule ℓ E V ϖ hϖ k r k' r' e e' n
   ⟨isLocallyFinitelyPresented_of_isFinitelyPresented' h.1, h.2⟩
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 include hϖ in
 /-- A constant `𝒪_E`-module placed in degree `q` is dualizable in `D(Mod_{𝒪_{E,V}})`, with a
 left dual concentrated in degrees `[-q, 1 - q]` whose cohomology sheaves are locally finitely
