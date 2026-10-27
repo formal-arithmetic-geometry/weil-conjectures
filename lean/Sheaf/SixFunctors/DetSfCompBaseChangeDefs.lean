@@ -77,7 +77,7 @@ noncomputable abbrev detSfDerivedPullback
 /-- The derived lower-shriek functor attached to a compactification.
 Source: the module-object six-functor definitions
 (blueprint: det-sf-comp-composition-base-change). -/
-noncomputable def detSfCompactSupport
+noncomputable abbrev detSfCompactSupport
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {A B : Scheme.{u}} {h : A ⟶ B}
     (d : Compactification h) :

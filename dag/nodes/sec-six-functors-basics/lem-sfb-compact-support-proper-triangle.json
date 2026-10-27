@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-compact-support-proper-triangle",
+ "kind": "statement",
+ "title": "Proper mate pasting along a commuting triangle",
+ "statement": "For an arbitrary commutative condensed ring Λ [sk-def-sfb-module-derived-pushpull], use the canonical unbounded pullback L and right direct image R, and the specified exchange β [def-weil-pbc-ambient-ringed-exchange, def-sfb-compact-support-base-change-maps]. Let a:A→B, p:B→Y, q:A→Y satisfy e:a;p=q, and let v:Y'→Y. Write A'=A×_Y Y', B'=B×_Y Y', v_A:A'→A, v_B:B'→B, q':A'→Y', p':B'→Y', and a':A'→B' for the canonical pullback of a. Let κ(a,p,q,e):Ra;Rp≅Rq be the inverse K-injective-normalized direct-image compositor [det-sf-comp-coherence-refinement] followed by transport along e. The pullback square for a has its canonical Cartesian realization, hence its specified mate β_a:v_B*Ra→Ra'v_A*. For W and maps s:W→A', r:W→B', z:W→Y' satisfying s;q'=z, r;p'=z and s;a'=r, take arbitrary M∈D(A), N∈D(W), and t:v_A*M→Rs N. Let b:Rp;v*→v_B*;Rp' be specified with b=β_p, so its components remain abstract during the calculation. Then, in diagrammatic order,\nv*κ(a,p,q,e)_M ; β_q,M ; Rq'(t) ; κ(s,q',z)_N = b_RaM ; Rp'(β_a,M ; Ra'(t) ; κ(s,a',r)_N) ; κ(r,p',z)_N.\nThis statement does not involve opens, compactifications, extension by zero, density, localizing closure, or invertibility of β or t.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-compact-support-base-change-maps",
+  "det-sf-comp-coherence-refinement",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "Substitute b=β_p. The canonical direct-image triangle comparator is the inverse normalized derived compositor followed by the equality of scheme maps. Pull back a by the universal property of the literal fibre products; pullback pasting proves its square Cartesian. These constructions require no existence choice.",
+   "uses": [
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize direct-image composition by its K-injective derived units. Its inverse is the conjugate of the exact pullback composition comparison, after the canonical comparison of exact and total derived pullbacks. Pullback composition associativity identifies the rectangle for q with the paste of the squares for a and p.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply horizontal mate pasting and conjugate-mate compatibility to identify exchange for q with exchange for p followed by exchange for a, inserting the two normalized triangle comparisons.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move the arbitrary arrow t across the pulled-back triangle comparison by naturality. The two triple direct-image comparators into Rz agree: on a K-injective resolution both are the ordinary triple compositor and the coefficient identifications agree by associativity. Use s;a'=r and the two equations to z to identify the equality transports. This gives exactly the displayed formula. The calculation is an equality and requires no invertibility of an exchange.",
+   "uses": [
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sf-comp-coherence-refinement",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Horizontal pasting for the canonical derived proper base change mate, naturality in an arbitrary arrow, and coherence of the direct image compositor",
+   "results": "mateEquiv_hcomp, TwoSquare.hComp and pullback pasting. No specialized normalized module-object triangle equation.",
+   "date": "2026-10-28",
+   "verdict": "General categorical tools only; the named canonical derived comparators still need identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "CategoryTheory.mateEquiv_hcomp and its bicategorical version.",
+   "date": "2026-10-28",
+   "verdict": "Useful for the proof, not the asserted geometric derived equation."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*comp|baseChange.*refinement",
+   "results": "Mate pasting in Mathlib.CategoryTheory.Adjunction.Mates; no compactification-refinement exchange. Searches in both source roots found the original upper equation and the integral normalized boundary equation, which requires invertible refinement maps.",
+   "date": "2026-10-28",
+   "verdict": "No declaration with the needed unbounded, arbitrary-coefficient statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompactSupportRefinementBaseChange",
+  "date": "2026-10-28",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-composition-base-change",
+   "place": "Proof (3), proper mate pasting along a commuting triangle.",
+   "via": [
+    "lem-sfb-compact-support-refinement-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CompactSupportProperTriangle",
+  "file": "lean/Sheaf/SixFunctors/CompactSupportProperTriangle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportProperTriangle_pasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportPushforwardTriangle",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportTrianglePullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportTrianglePullbackSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportProperTriangle_pasting"
+  ],
+  "statement": "theorem compactSupportProperTriangle_pasting\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {A B Y Y' W : Scheme.{u}} (a : A ⟶ B) (p : B ⟶ Y) (q : A ⟶ Y)\n    (e : a ≫ p = q) (v : Y' ⟶ Y)\n    (s : W ⟶ pullback q v) (r : W ⟶ pullback p v) (z : W ⟶ Y')\n    (es : s ≫ pullback.snd q v = z) (er : r ≫ pullback.snd p v = z)\n    (esr : s ≫ compactSupportTrianglePullback a p q e v = r)\n    (M : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology A) Ab.{u + 1}) (condensedRingObj Λ A)))\n    (N : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)))\n    (t : (detSfDerivedPullback Λ (pullback.fst q v)).obj M ⟶ R((s)_*⟦Λ⟧).obj N)\n    (b : R((p)_*⟦Λ⟧) ⋙ detSfDerivedPullback Λ v ⟶\n      detSfDerivedPullback Λ (pullback.fst p v) ⋙ R((pullback.snd p v)_*⟦Λ⟧))\n    (hb : b = detSfProperBaseChangeMap Λ p v) :\n    (detSfDerivedPullback Λ v).map\n        ((compactSupportPushforwardTriangle Λ a p q e).hom.app M) ≫\n      (detSfProperBaseChangeMap Λ q v).app M ≫\n      R((pullback.snd q v)_*⟦Λ⟧).map t ≫\n      (compactSupportPushforwardTriangle Λ s (pullback.snd q v) z es).hom.app N =\n    b.app (R((a)_*⟦Λ⟧).obj M) ≫\n      R((pullback.snd p v)_*⟦Λ⟧).map\n        ((condensedAmbientExchange Λ (compactSupportTrianglePullbackSquare a p q e v)).app M ≫\n          R((compactSupportTrianglePullback a p q e v)_*⟦Λ⟧).map t ≫\n          (compactSupportPushforwardTriangle Λ s\n            (compactSupportTrianglePullback a p q e v) r esr).hom.app N) ≫\n      (compactSupportPushforwardTriangle Λ r (pullback.snd p v) z er).hom.app N",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-672ca",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210118-L-1658029",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-672ca",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210118-L-1658029",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new sorry statements compactSupportProperTriangle_pasting / compactSupportOpenRefinement_pasting against their nodes and source proof (3); detSfCompactSupport def→abbrev against change record, G1's earlier record and the 3b importers (2 OK); node stmt_deps against owners of the declarations in the statements"
+ }
+}

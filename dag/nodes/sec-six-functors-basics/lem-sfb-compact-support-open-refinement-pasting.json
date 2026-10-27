@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-compact-support-open-refinement-pasting",
+ "kind": "statement",
+ "title": "Open-adjunction refinement pasting before the final proper direct image",
+ "statement": "Fix an arbitrary commutative condensed ring Λ and the unbounded module operations [sk-def-sfb-module-derived-pushpull]. Let f:X→Y be quasi-compact and v:Y'→Y arbitrary, c=(X→Z_c→Y), d=(X→Z_d→Y) compactifications, and h:d→c a boundary-preserving refinement [det-nagata-definition-refinement]. Denote their literal base changes by c',d', their open maps by J_c,J_d,J_c',J_d', their proper projections by p_c,p_d,p_c',p_d', and pullbacks by V_c,V_d,U. Specify open comparison isomorphisms o_c:J_c V_c≅U J_c' and o_d:J_d V_d≅U J_d' whose inverses are the canonical unit-square-counit open exchanges [def-sfb-compact-support-base-change-maps]. Let w be a boundary compactification after pullback, hd:w→d', hc:w→c' boundary refinements. Let h':Z_d'→Z_c' be the canonical pullback of h, and assume hd;h'=hc as scheme maps. Let e_h,e_hd,e_hc be the canonical open-adjunction localizing refinement maps [det-sf-comp-coherence-refinement], and κ(hd,h',hc) the normalized direct-image triangle comparator [lem-sfb-compact-support-proper-triangle]. Then for every unbounded K on X,\nV_c(e_h,K) ; β_h,J_dK ; Rh'(o_d,K ; e_hd,UK) ; κ(hd,h',hc)_(J_w UK) = o_c,K ; e_hc,UK\nas maps V_c J_c K→Rhc J_w UK on Z_c'. No final Rp_c' is applied. None of c,d,w or their pullbacks is required dense, and no localizing hypothesis or proper-exchange invertibility is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-nagata-compactification",
+  "det-nagata-definition-refinement",
+  "def-sfb-compact-support-base-change-maps",
+  "det-sf-comp-coherence-refinement",
+  "lem-sfb-compact-support-proper-triangle",
+  "def-nagata-compactification-base-change",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Precompose the two local maps with the inverse open comparison o_c. Both are now maps from the extension by zero along c' into Rhc of extension by zero along w. Transpose by the actual open adjunction; its Hom equivalence is injective.",
+   "uses": [
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalization equations for the refinement maps identify their adjuncts with the inverse restriction isomorphisms followed by the open units. The inverse open comparisons are specified unit-square-counit maps, so their restrictions contribute the canonical pullback comparison and open unit.",
+   "uses": [
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper mate for h restricts to the identity on the common source open. Compute directly from its defining unit, square comparison and counit: on the Cartesian open the ordinary restriction is the sectionwise identity; the derived resolution comparisons identify it with that identity, and the triangle identities cancel the unit and counit. This is the argument of the cited identity-open lemma, with no arithmetic or localizing use.",
+   "uses": [
+    "lem-sfb-base-change-identity-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition of the normalized restriction mates agrees with the displayed κ; normalize on K-injectives to identify the canonical compositor. The equality hd;h'=hc identifies the underlying open triangle. The two adjuncts are therefore the same inverse hc restriction followed by the open unit. Injectivity, then cancellation of the open comparison, proves the required local equality.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sf-comp-coherence-refinement",
+  "lem-sfb-base-change-identity-open-restriction",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-base-change.proof.md",
+  "place": "Proof (2), proper exchange on the localizing generators; proof (3), identity on the open and mate pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero open adjunction uniqueness implies the canonical local compactification refinement map commutes with the pullback exchange mate on unbounded derived categories",
+   "results": "General derived adjunctions, pullback Hom extensionality and sheaf pullback adjunctions. No equation for the normalized module-object refinement maps.",
+   "date": "2026-10-28",
+   "verdict": "No match for the local equation; the canonical mate and restriction comparisons still need to be combined."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "CategoryTheory.mateEquiv_hcomp and its bicategorical version.",
+   "date": "2026-10-28",
+   "verdict": "Useful for the proof, not the asserted geometric derived equation."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*comp|baseChange.*refinement",
+   "results": "Mate pasting in Mathlib.CategoryTheory.Adjunction.Mates; no compactification-refinement exchange. Searches in both source roots found the original upper equation and the integral normalized boundary equation, which requires invertible refinement maps.",
+   "date": "2026-10-28",
+   "verdict": "No declaration with the needed unbounded, arbitrary-coefficient statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompactSupportRefinementBaseChange",
+  "date": "2026-10-28",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-composition-base-change",
+   "place": "Proof (3), open-adjunction refinement pasting before the final proper direct image.",
+   "via": [
+    "lem-sfb-compact-support-refinement-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CompactSupportOpenRefinementPasting",
+  "file": "lean/Sheaf/SixFunctors/CompactSupportOpenRefinementPasting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportOpenRefinement_pasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.compactSupportOpenRefinement_pasting"
+  ],
+  "statement": "theorem compactSupportOpenRefinement_pasting\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] (v : Y' ⟶ Y)\n    (c : Compactification f) (d : Compactification.BoundaryCompactification f)\n    (oc : D((c.i)_!open⟦Λ⟧) ⋙ detSfDerivedPullback Λ (pullback.fst c.g v) ≅\n      detSfDerivedPullback Λ (pullback.fst f v) ⋙ D(((c.baseChange v).i)_!open⟦Λ⟧))\n    (od : D((d.obj.obj.i)_!open⟦Λ⟧) ⋙ detSfDerivedPullback Λ (pullback.fst d.obj.obj.g v) ≅\n      detSfDerivedPullback Λ (pullback.fst f v) ⋙ D(((d.obj.obj.baseChange v).i)_!open⟦Λ⟧))\n    (hoc : oc.inv = detSfOpenBaseChangeMap Λ f v c)\n    (hod : od.inv = detSfOpenBaseChangeMap Λ f v d.obj.obj)\n    (h : d ⟶ detSfBoundaryCompactification c)\n    (w : Compactification.BoundaryCompactification (pullback.snd f v))\n    (hd : w ⟶ detSfBoundaryCompactification (d.obj.obj.baseChange v))\n    (hc : w ⟶ detSfBoundaryCompactification (c.baseChange v))\n    (esr : hd.hom.hom.hom ≫\n        compactSupportTrianglePullback h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v =\n      hc.hom.hom.hom)\n    (K : DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :\n    (detSfDerivedPullback Λ (pullback.fst c.g v)).map (localizingRefinementMap Λ h K) ≫\n      (condensedAmbientExchange Λ (compactSupportTrianglePullbackSquare\n        h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v)).app (D((d.obj.obj.i)_!open⟦Λ⟧).obj K) ≫\n      R((compactSupportTrianglePullback h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v)_*⟦Λ⟧).map\n        (od.hom.app K ≫ localizingRefinementMap Λ hd\n          ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)) ≫\n      (compactSupportPushforwardTriangle Λ hd.hom.hom.hom\n        (compactSupportTrianglePullback h.hom.hom.hom c.g d.obj.obj.g h.hom.hom.hom_g v)\n        hc.hom.hom.hom esr).hom.app\n          (D((w.obj.obj.i)_!open⟦Λ⟧).obj\n            ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)) =\n    oc.hom.app K ≫ localizingRefinementMap Λ hc\n      ((detSfDerivedPullback Λ (pullback.fst f v)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-672ca",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210118-L-1658029",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-672ca",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261027T210118-L-1658029",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new sorry statements compactSupportProperTriangle_pasting / compactSupportOpenRefinement_pasting against their nodes and source proof (3); detSfCompactSupport def→abbrev against change record, G1's earlier record and the 3b importers (2 OK); node stmt_deps against owners of the declarations in the statements"
+ }
+}
