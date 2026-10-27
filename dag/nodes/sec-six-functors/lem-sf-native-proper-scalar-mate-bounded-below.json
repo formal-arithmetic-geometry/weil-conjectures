@@ -1,0 +1,184 @@
+{
+ "id": "lem-sf-native-proper-scalar-mate-bounded-below",
+ "kind": "statement",
+ "title": "The normalized completed-to-native proper scalar mate on bounded-below complexes",
+ "statement": "Fix a prime $\\ell$ and normalized native inverse-image data NativeRings [def-sf-locally-finite-adic-compact-support-data]. Let $E$ be a finite unlifted coefficient index in $\\overline{\\mathbf Q}_\\ell$ [def-weil-algebraically-closed-coefficients]. Let $a$ be a compatible Change from the completed integral coefficient family of $E$ to the native locally finite coefficient family [def-pur-integral-compact-support-coefficient-data]. Assume that for every scheme $T$ and every normalized CoefficientPresentation $C$ at this index, $a.map(T)=C.integralMap$ [def-sf-locally-finite-adic-realization-data]. For any proper morphism of schemes $g:U\\to V$ and any ambient derived module $M$ over the completed integral ring on $U$ that is bounded below for the standard t-structure, the actual component $(properComparison(a,g))_M$ is invertible. Here properComparison is the inverse scalar-adjunction mate of the canonical restriction/direct-image square [def-pur-finite-compact-support-scalar-data]. No constructibility, completeness or Tor condition on $M$, and no field of definition or absolute separatedness of the schemes, is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3–4; Hemo–Richarz–Scholbach, Lemma 5.3(1)."
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized coefficient presentations to identify the completed integral ring with continuous integral coefficients, and its localization with continuous E-coefficients. Use the locally finite coefficient realization, normalized on finite-field legs and natural for all scheme morphisms, to identify the target ring. These identifications give the exact integral-to-rational-to-native factorization of a.map. The NativeRings normalization identifies its pullback with the precomposition square under the same coefficient realization.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "def-sf-locally-finite-adic-realization-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3–4; Hemo–Richarz–Scholbach, Lemma 5.3(1)."
+   }
+  },
+  {
+   "text": "Transport module sheaves through the internal/section equivalence and its operation compatibility. For the first factor use localizedDirectImageComparison: a proper map is qcqs, so the localization mate is invertible on every bounded-below M. Localization is flat and hence its derived scalar extension preserves the lower bound.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-localized-direct-image-comparison",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3–4; Hemo–Richarz–Scholbach, Lemma 5.3(1)."
+   }
+  },
+  {
+   "text": "Apply the proved bounded proper pushforward comparison for the inclusion of the finite coefficient field into the algebraic closure, to the scalar-extended bounded-below object. Its target is the finite-subextension condensed coefficient ring identified with native coefficients in step 1, not the larger ring of all norm-continuous functions.",
+   "uses": [
+    "lem-weil-pbc-condensed-qbar-bounded-push",
+    "lem-sf-locally-finite-coefficient-ring-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3–4; Hemo–Richarz–Scholbach, Lemma 5.3(1)."
+   }
+  },
+  {
+   "text": "The balanced tensor associator identifies successive scalar extensions with extension along their composite. Ring-sheaf scalar adjunction identifies the comparison maps with the specified counit mates. Pasted-mate counit normalization, together with the coefficient square from step 1, identifies the composite with the actual properComparison a g, rather than an arbitrary isomorphism between its endpoints. All transport and associator maps, and both proper comparisons, are invertible. The same unit/counit equations cover identity maps, zero objects and empty schemes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-pasted-mates-counit-normalization",
+    "def-sfb-derived-push-hom",
+    "def-sfb-mate-push-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3–4; Hemo–Richarz–Scholbach, Lemma 5.3(1)."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3–4; Hemo–Richarz–Scholbach, Lemma 5.3(1).",
+  "note": "D8 isolates only the proper factor from steps 3–4 of its item; the lower bound and all open-mate arguments are handled in the item itself."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with derived proper pushforward of bounded constructible adic sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforward_assoc\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"1f8ddcfc5379084c\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact proper scalar comparison; the mate-calculus search supplies the formal open argument, not this analytic proper statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans.app",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"CategoryTheory.NatTrans.naturality_inv\", \"CategoryTheory.NatTrans.naturality_inv_assoc\", \"CategoryTheory.NatIso.hom_app_isIso\", \"CategoryTheory.NatIso.inv_app_isIso\", \"CategoryTheory.NatIso.isIso_app_of_isIso\", \"CategoryTheory.NatIso.isIso_of_isIso_app\", \"CategoryTheory.NatTrans.isIso_iff_isIso_app\", \"CategoryTheory.NatIso.isIso_inv_app\"], \"digest\": \"24d6e731ec63d547\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact proper scalar comparison; the mate-calculus search supplies the formal open argument, not this analytic proper statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*mate|mate.*isIso",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact proper scalar comparison; the mate-calculus search supplies the formal open argument, not this analytic proper statement."
+  },
+  {
+   "tool": "grep",
+   "query": "iterated_mateEquiv_conjugateEquiv|conjugateEquiv_symm_iso",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"883daca50d197908\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact proper scalar comparison; the mate-calculus search supplies the formal open argument, not this analytic proper statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of completed integral p-adic coefficient sheaves to locally finite algebraic closure coefficients commutes with proper derived pushforward on bounded below complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"PadicComplex.nnnorm_extends\", \"PadicComplex\", \"PadicComplex.norm_extends\", \"LightCondensed.lanLightCondSet\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"SheafOfModules.pushforwardPushforwardAdj\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"PadicAlgCl.instCoePadic\"], \"digest\": \"f2dd8fd9a70726bc\"}",
+   "date": "2026-10-28",
+   "verdict": "No exact proper scalar comparison; the mate-calculus search supplies the formal open argument, not this analytic proper statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportScalarMateInvertible",
+  "date": "2026-10-28",
+  "group": "D8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proper factor of native compact-support scalar-mate invertibility, original steps 3–4; its inherited paper anchor is cor-coef-verdier-weil-equivariance. tools/blueprint_refs.py ancestor returns None for this item chain.",
+   "via": [
+    "lem-sf-native-compact-support-scalar-mate-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "proof_deps": [
+  "def-sf-locally-finite-adic-realization-data",
+  "def-sfb-derived-push-hom",
+  "def-sfb-mate-push-hom",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeProperScalarMateBoundedBelow",
+  "file": "lean/Sheaf/Paper/NativeProperScalarMateBoundedBelow.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_proper_scalar_mate_bounded_below",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_proper_scalar_mate_bounded_below"
+  ],
+  "statement": "theorem native_proper_scalar_mate_bounded_below\n    (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]\n    (E : Index l (PadicAlgCl l))\n    (a : PurCompactSupport.Change (PurCompactSupport.completed l\n      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (ha : ∀ (T : Scheme.{u})\n      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),\n      a.map T = C.integralMap l T)\n    {U V : Scheme.{u}} (g : U ⟶ V) [IsProper g]\n    (M : DerivedCategory (pbcModules U\n      ((PurCompactSupport.completed l (Coefficient.{u} l (PadicAlgCl l) E)).ring U)))\n    (hM : DerivedCategory.TStructure.t.plus M) :\n    IsIso ((PurCompactSupport.properComparison a g).app M)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T205910-L-1631334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T205910-L-1631334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

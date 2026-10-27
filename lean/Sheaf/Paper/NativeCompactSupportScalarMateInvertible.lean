@@ -1,11 +1,14 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group N3
+Authors: SHEAF groups N3 and D8
 -/
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicCompactSupportData
+import Sheaf.Paper.NativeProperScalarMateBoundedBelow
+import Sheaf.Paper.SfIntegralStandardTruncations
+import Sheaf.SixFunctors.ExactLocalizationInverseMate
 
 /-! # Integral scalar-mate steps for native compact support -/
 
@@ -26,6 +29,56 @@ namespace WeilConjectures.LocallyFiniteAdicCompactSupport
 open LocallyFiniteAdicRealization
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 open ConstructibleExceptionalCoefficients
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem open_scalar_mate_isIso
+    {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S)
+    {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :
+    IsIso (PurCompactSupport.openComparison a j) := by
+  have := proEtaleRingRestrictionPullbackInv_isIso
+    j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+      (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)
+  let d := asIso (proEtaleRingRestrictionPullbackInv
+    j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+      (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j))
+  have : IsIso ((mateEquiv
+      (PurCompactSupport.openAdjunction S j) (PurCompactSupport.openAdjunction R j)).symm
+      (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans := by
+    change IsIso (PurCompactSupport.openRestrictionMap a j)
+    infer_instance
+  have hm := (exact_localization_inverse_mate
+    (PurCompactSupport.openAdjunction S j) (PurCompactSupport.openAdjunction R j)
+    d.symm).2.1
+  change ((mateEquiv
+    (PurCompactSupport.openDerivedAdjunction S j)
+    (PurCompactSupport.openDerivedAdjunction R j)).symm
+    (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback
+      j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+        (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)).hom)).natTrans =
+    (PurCompactSupport.openRestriction a j).hom at hm
+  let δ := TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback
+    j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+      (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)).hom
+  have hm' : ((mateEquiv (PurCompactSupport.openDerivedAdjunction S j)
+      (PurCompactSupport.openDerivedAdjunction R j)).symm δ) =
+      TwoSquare.mk _ _ _ _ (PurCompactSupport.openRestriction a j).hom := by
+    ext M
+    exact congr_app hm M
+  have h := iterated_mateEquiv_conjugateEquiv_symm
+    (pbcDerivedScalarAdjunction (a.map U)) (pbcDerivedScalarAdjunction (a.map V))
+    (PurCompactSupport.openDerivedAdjunction R j)
+    (PurCompactSupport.openDerivedAdjunction S j) δ
+  erw [hm'] at h
+  have hh := congrArg TwoSquare.natTrans h
+  change PurCompactSupport.openComparison a j =
+    (conjugateEquiv
+      ((pbcDerivedScalarAdjunction (a.map U)).comp
+        (PurCompactSupport.openDerivedAdjunction S j))
+      ((PurCompactSupport.openDerivedAdjunction R j).comp
+        (pbcDerivedScalarAdjunction (a.map V)))).symm δ.natTrans at hh
+  rw [hh]
+  infer_instance
+
 variable (l : ℕ) [Fact l.Prime]
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   {X Y : Scheme.{u}}
@@ -40,28 +93,26 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 include D hl
 
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option linter.unusedSectionVars false in
 /-- Invertibility of the single completed-to-native compact-support scalar mate.
 Source: Bhatt--Scholze, Remark 6.8.15; Hemo--Richarz--Scholbach, Lemma 5.3(1);
 Stacks Tag 0GL1; steps 3 and 5--7 of the native finite comparison plan.
 (blueprint: lem-sf-native-compact-support-scalar-mate-invertible).
 
-Proof: open extension of K is complete and constructible, by the normalized open
-reduction comparison and the common finite-level constructibility interval. The
-stratified-perfect characterization makes it bounded below, and residue Tor gives
-uniform Tor bounds. Integral compactification-system realization and completed
-direct-image limits identify its recorded proper image with the actual one.
-Factor the coefficient inclusion as completed integral to finite rational to native.
-Localized direct-image comparison is invertible on this bounded-below object because
-the proper map is qcqs. The bounded-push theorem for the finite field inclusion into
-the algebraic closure makes the second proper comparison invertible. Identify the
-native coefficient sheaf with the pulled-back locally finite coefficient ring by the
-finite-field sheaf colimit. The normalized coefficient maps identify these comparisons
-with the specified counit mates. Flat tensor associativity and pasted-mates counit
-normalization identify their composite with the single proper scalar mate.
-The open scalar mate is the K-flat tensor isomorphism b tensor j_!m sent to
-j_!(b restricted tensor m). Its proper image is invertible. Paste this open comparison
-with the proper scalar mate to obtain precisely PurCompactSupport.comparison.
-Thus its component at K is invertible. The argument uses no absolute separatedness. -/
+Proof: the intrinsic standard-truncation theorem makes the underlying integral
+constructible object bounded. Exact open extension preserves its lower bound. Apply
+the bounded-below native proper scalar-mate theorem to this open extension.
+For the open factor, the ordinary inverse restriction/pullback square has invertible
+open-adjunction mate. Exact localization identifies its derived mate with the
+specified open restriction isomorphism. The iterated-mate/conjugation identity then
+identifies the scalar mate with the conjugate of an isomorphism between right
+adjoints, so it is invertible on every input. Finally the proved proper/open
+factorization identifies the compact-support comparison with the proper component
+followed by the direct image of this open component. Both factors are invertible.
+No completeness or Tor assertion about the open extension is needed. -/
 theorem native_compact_support_scalar_mate_invertible [G : NativeGeometry.{u} l]
     (E : Index l (PadicAlgCl l))
     (a : PurCompactSupport.Change (PurCompactSupport.completed l
@@ -70,6 +121,21 @@ theorem native_compact_support_scalar_mate_invertible [G : NativeGeometry.{u} l]
       (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),
       a.map T = C.integralMap l T)
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
-    IsIso ((PurCompactSupport.comparison a c).app K.obj) := by sorry
+    IsIso ((PurCompactSupport.comparison a c).app K.obj) := by
+  obtain ⟨⟨n, hn⟩, _⟩ :=
+    (sfIntegralStandardTruncations l (Coefficient.{u} l (PadicAlgCl l) E) X D hl
+      ⟨K.obj, K.property.1⟩).1
+  let := hn
+  let J : scalarReductionSource l (Coefficient.{u} l (PadicAlgCl l) E) X ⥤
+      scalarReductionSource l (Coefficient.{u} l (PadicAlgCl l) E) c.Z :=
+    PurCompactSupport.openExtension
+      (PurCompactSupport.completed l (Coefficient.{u} l (PadicAlgCl l) E)) c.i
+  have hJ : DerivedCategory.TStructure.t.plus (J.mapDerivedCategory.obj K.obj) :=
+    ⟨n, J.isGE_mapDerivedCategory_obj K.obj n⟩
+  have := native_proper_scalar_mate_bounded_below l E a ha c.g
+    (J.mapDerivedCategory.obj K.obj) hJ
+  have := open_scalar_mate_isIso a c.i
+  erw [PurCompactSupport.comparison_factorization]
+  infer_instance
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
