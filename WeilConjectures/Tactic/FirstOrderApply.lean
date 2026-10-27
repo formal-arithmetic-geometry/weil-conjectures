@@ -23,6 +23,13 @@ metavariable of the pattern directly to the corresponding subterm, compares appl
 the same head argument by argument, accepts any two proofs (proof irrelevance), and only falls
 back to `isDefEq` on the smallest subterms where the two sides differ.
 
+The kernel then still has to identify the types of the given proofs with the instantiated
+hypotheses, which may again unfold large definitions. So the given proofs (and, for `fo_apply`,
+the conclusion) are transported along congruence proofs of `HEq A B` built along the common
+structure of `A` and `B` (`heqProofAux`), whose leaves are small; arguments `rfl` and `HEq.rfl`
+are proved the same way. Finally, a proof without remaining goals is added as an auxiliary
+theorem (`sealProof`), so that the kernel checks it on its own.
+
 -/
 
 public meta section
@@ -35,8 +42,6 @@ namespace Mathlib.Tactic.FirstOrderApply
 not a cast (assigned at the end of `foInstantiate`, by congruence). -/
 initialize castEqs : IO.Ref (Array (MVarId × Expr × Expr)) ← IO.mkRef #[]
 
-/-- The pairs of subterms identified by `isDefEq` during the last matchings (for diagnostics). -/
-initialize foPairs : IO.Ref (Array (Expr × Expr)) ← IO.mkRef #[]
 
 /-- First-order matching of a pattern `p` (containing unassigned metavariables) against `e`. The
 `cache` records the pairs already matched, so that shared subterms are visited once. -/
@@ -50,11 +55,7 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
     if ← isProof e then return true
   let fallback : MetaM Bool := do
     if ← isProof e then return true
-    trace[debug] "isDefEq fallback: {p} \n VERSUS \n {e}"
-    let r ← isDefEq p e
-    trace[debug] "  -> {r}"
-    if r then foPairs.modify (·.push (← instantiateMVars p, e))
-    return r
+    isDefEq p e
   -- a pattern `cast h x` against a term which is not a cast: match `x`, and take `h := rfl`
   if p.isAppOfArity ``cast 4 && !e.isAppOfArity ``cast 4 then
     let args := p.getAppArgs
@@ -104,7 +105,6 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
           return true
         if ok then pure true else fallback
       else if fp.isConst && fe.isConst then
-        trace[debug] "foMatch: head mismatch {fp} vs {fe}"
         let unfoldAbbrev (x : Expr) : MetaM (Option Expr) := do
           let .const n _ := x.getAppFn | return none
           unless ← isReducible n do return none
@@ -171,6 +171,8 @@ partial def plausibleEq (a b : Expr) (fuel : Nat := 64) : MetaM Bool := do
   if a == b then return true
   if fuel == 0 then return false
   if (← isProof a) then return (← isProof b)
+  if a.isAppOfArity ``cast 4 then return ← plausibleEq (a.getArg! 3) b (fuel - 1)
+  if b.isAppOfArity ``cast 4 then return ← plausibleEq a (b.getArg! 3) (fuel - 1)
   let a ← normObj a
   let b ← normObj b
   if a == b then return true
@@ -215,6 +217,32 @@ partial def heqProofAux (cache : IO.Ref (Std.HashMap (Expr × Expr) Expr)) (a b 
   let r ← do
     if (← isProof a) && (← isProof b) then
       pure (mkApp4 (mkConst ``proof_irrel_heq) (← inferType a) (← inferType b) a b)
+    else if b.isAppOfArity ``cast 4 then
+      -- `HEq a (cast h x)` from `HEq a x` and `cast_heq h x`
+      let x := b.getArg! 3
+      let h₁ ← heqProofAux cache a x
+      let h₂ ← mkHEqSymm (← mkAppM ``cast_heq #[b.getArg! 2, x])
+      mkHEqTrans h₁ h₂
+    else if a.isAppOfArity ``cast 4 then
+      let x := a.getArg! 3
+      let h₁ ← mkAppM ``cast_heq #[a.getArg! 2, x]
+      let h₂ ← heqProofAux cache x b
+      mkHEqTrans h₁ h₂
+    else if a.isForall && b.isForall &&
+        (← isProp a) && (← isProp b) then
+      -- `forall_congr` along the bodies
+      let α := a.bindingDomain!
+      let u ← getLevel α
+      let h ← withLocalDecl a.bindingName! a.binderInfo α fun x => do
+        let pa := a.bindingBody!.instantiate1 x
+        let pb := b.bindingBody!.instantiate1 x
+        let h ← heqProofAux cache pa pb
+        let h := mkApp4 (mkConst ``eq_of_heq [1]) (mkSort 0) pa pb h
+        mkLambdaFVars #[x] h
+      let p := mkLambda a.bindingName! a.binderInfo α a.bindingBody!
+      let q := mkLambda b.bindingName! b.binderInfo α b.bindingBody!
+      let e := mkApp4 (mkConst ``forall_congr [u]) α p q h
+      pure (mkApp3 (mkConst ``heq_of_eq [1]) (mkSort 0) a b |>.app e)
     else
       let fa := a.getAppFn
       let fb := b.getAppFn
@@ -280,8 +308,9 @@ def transport (a A B : Expr) : MetaM Expr := do
   return mkApp4 (mkConst ``Eq.mp [.zero]) A B
     (mkApp4 (mkConst ``eq_of_heq [1]) (mkSort 0) A B h) a
 
-/-- A proof of `l = r` (or `HEq l r`) for definitionally equal `l` and `r`, by congruence along their
-common structure (`heqProofAux`), so that the kernel only compares the small subterms which differ. -/
+/-- A proof of `l = r` (or `HEq l r`) for definitionally equal `l` and `r`, by congruence along
+their common structure (`heqProofAux`), so that the kernel only compares the small subterms which
+differ. -/
 def congrProof (ty : Expr) : MetaM (Option Expr) := do
   let ty ← whnfR (← instantiateMVars ty)
   if let some (α, l, r) := ty.eq? then
@@ -309,12 +338,18 @@ def foInstantiate (fe : Expr) (args : Array Term) (target? : Option Expr) :
   -- the explicit binders, with the given terms
   let mut given : Array (Nat × Nat) := #[]
   let mut refls : Array Nat := #[]
+  let mut tacs : Array (Nat × Nat) := #[]
   let mut newGoals : Array MVarId := #[]
   let mut k := 0
   for i in [:mvs.size] do
     if bis[i]! == .default then
       if h : k < args.size then
-        if args[k].raw.isOfKind ``Lean.Parser.Term.hole then
+        let isBy : Bool := args[k].raw.isOfKind ``Lean.Parser.Term.byTactic ||
+          (args[k].raw.isOfKind ``Lean.Parser.Term.paren &&
+            args[k].raw[1].isOfKind ``Lean.Parser.Term.byTactic)
+        if isBy then
+          tacs := tacs.push (i, k)
+        else if args[k].raw.isOfKind ``Lean.Parser.Term.hole then
           newGoals := newGoals.push mvs[i]!.mvarId!
         else if args[k].raw.isIdent &&
             (args[k].raw.getId == `rfl || args[k].raw.getId == `HEq.rfl) then
@@ -361,11 +396,30 @@ def foInstantiate (fe : Expr) (args : Array Term) (target? : Option Expr) :
       let B ← instantiateMVars (← inferType mvs[i]!)
       let A ← instantiateMVars (← inferType a)
       mvs[i]!.mvarId!.assign (← transport a A B)
+  -- the hypotheses given by tactic blocks
+  for (i, kt) in tacs do
+    let v ← elabTermEnsuringType args[kt]! (← instantiateMVars (← inferType mvs[i]!))
+    Term.synthesizeSyntheticMVarsNoPostponing
+    mvs[i]!.mvarId!.assign (← instantiateMVars v)
   let goals ← newGoals.filterM fun g => return !(← g.isAssigned)
   let pf ← instantiateMVars (mkAppN fe mvs)
   match target? with
   | some target => return (← transport pf (← instantiateMVars (← inferType pf)) target, goals)
   | none => return (pf, goals)
+
+/-- Add `pf : ty` as an auxiliary theorem, abstracted over the local context, and return its
+application to the local context. The kernel then checks `pf` on its own, and the proof using it
+only refers to the auxiliary theorem. (`mkAuxTheorem` computes a minimal closure instead, which
+is very slow on large terms.) -/
+def sealProof (ty pf : Expr) : MetaM Expr := do
+  let fvars := (← getLCtx).foldl (init := #[]) fun acc d =>
+    if d.isImplementationDetail || d.isLet then acc else acc.push d.toExpr
+  let type ← instantiateMVars (← mkForallFVars fvars ty)
+  let value ← instantiateMVars (← mkLambdaFVars fvars pf)
+  let lps := (collectLevelParams (collectLevelParams {} type) value).params.toList
+  let name ← mkAuxDeclName (kind := `_fo_seal)
+  addDecl (.thmDecl { name, levelParams := lps, type, value })
+  return mkAppN (mkConst name (lps.map mkLevelParam)) fvars
 
 /-- `fo_have h := lemma using a₁, …, aₙ` adds `h : (the conclusion of lemma)`, where the
 explicit hypotheses of `lemma` are the `aᵢ` (`_` for a hypothesis left as a new goal) and the
@@ -375,6 +429,8 @@ elab "fo_have " h:ident " := " f:term:max " using " args:term,* : tactic =>
     let fe ← elabLemma f
     let (pf, newGoals) ← foInstantiate fe args.getElems none
     let ty ← instantiateMVars (← inferType pf)
+    let pf ← instantiateMVars pf
+    let pf ← if newGoals.isEmpty && !pf.hasMVar then sealProof ty pf else pure pf
     let g' ← (← getMainGoal).assert h.getId ty pf
     let (_, g'') ← g'.intro1P
     replaceMainGoal (g'' :: newGoals.toList)
@@ -391,321 +447,10 @@ elab "fo_apply " f:term:max " using " args:term,* : tactic =>
     for m in ms do
       unless newGoals.contains m do
         logInfo m!"fo_apply: unassigned {mkMVar m} : {← inferType (mkMVar m)}"
+    let pf ← instantiateMVars pf
+    let pf ← if newGoals.isEmpty && !pf.hasMVar then
+      sealProof (← instantiateMVars (← g.getType)) pf else pure pf
     g.assign pf
     replaceMainGoal newGoals.toList
-
-end Mathlib.Tactic.FirstOrderApply
-
-namespace Mathlib.Tactic.FirstOrderApply
-
-/-- Diagnostic: send each pair recorded in `foPairs` to the kernel as an auxiliary theorem
-`p = e := rfl`, logging to `/tmp/fo.log` before each. -/
-elab "fo_kernel_check_pairs" : tactic => withMainContext do
-  let pairs ← foPairs.get
-  let mut i := 0
-  for (p, e) in pairs do
-    IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"kernel pair {i} start"
-    let t0 ← IO.monoMsNow
-    let p ← instantiateMVars p
-    let ty ← mkEq p e
-    let _ ← mkAuxTheorem ty (← mkEqRefl p)
-    let t1 ← IO.monoMsNow
-    IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"kernel pair {i} ok {t1 - t0} ms"
-    i := i + 1
-
-/-- Diagnostic: clear the recorded pairs. -/
-elab "fo_clear_pairs" : tactic => foPairs.set #[]
-
-end Mathlib.Tactic.FirstOrderApply
-
-namespace Mathlib.Tactic.FirstOrderApply
-
-/-- Diagnostic variant of `fo_apply` checking each `isDefEq`-identified pair in the kernel. -/
-elab "fo_apply_check " f:term:max " using " args:term,* : tactic =>
-  withMainContext do
-    foPairs.set #[]
-    let g ← getMainGoal
-    let fe ← elabLemma f
-    let (pf, newGoals) ← foInstantiate fe args.getElems (some (← instantiateMVars (← g.getType)))
-    -- check each explicit argument and the conclusion in the kernel separately
-    let args := pf.getAppArgs
-    let fty ← instantiateMVars (← inferType fe)
-    let (_, _, _) ← forallMetaTelescopeReducing fty
-    let mut ty := fty
-    for i in [:args.size] do
-      let .forallE _ d b bi := ty | break
-      let a := args[i]!
-      if bi == .default && (← isProof a) then
-        IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"kernel arg {i} start"
-        let t0 ← IO.monoMsNow
-        let _ ← mkAuxTheorem (← instantiateMVars d) a
-        let t1 ← IO.monoMsNow
-        IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"kernel arg {i} ok {t1 - t0} ms"
-      ty := b.instantiate1 a
-    IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn "kernel concl start"
-    let _ ← mkAuxTheorem (← instantiateMVars (← g.getType)) pf
-    IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn "kernel concl ok"
-    g.assign pf
-    replaceMainGoal newGoals.toList
-
-end Mathlib.Tactic.FirstOrderApply
-
-namespace Mathlib.Tactic.FirstOrderApply
-
-/-- Diagnostic: the maximal differing subterm pairs of two expressions (structural walk). -/
-partial def structDiff (a b : Expr) (acc : IO.Ref (Array (Expr × Expr)))
-    (parent : Option (Expr × Expr) := none) (under : Bool := false) (path : String := "") :
-    MetaM Unit := do
-  let a := a.consumeMData
-  let b := b.consumeMData
-  if a == b then return
-  if (← acc.get).size ≥ 40 then return
-  let fa := a.getAppFn
-  let fb := b.getAppFn
-  let as := a.getAppArgs
-  let bs := b.getAppArgs
-  if fa == fb && as.size == bs.size && as.size > 0 then
-    let under' := under || fa.isConstOf `CategoryTheory.CategoryStruct.comp || fa.isConstOf `Prefunctor.map
-    for i in [:as.size] do
-      structDiff as[i]! bs[i]! acc (some (a, b)) under' s!"{path}/{fa.constName?.getD `x}#{i}"
-  else
-    if true then
-      let pr := (a, b)
-      unless (← acc.get).contains pr do
-        acc.modify (·.push pr)
-        IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"PATH {path}"
-
-/-- Diagnostic variant of `fo_apply`: kernel-check each structural difference between the goal and
-the instantiated conclusion separately (logging to `/tmp/fo.log`), then fail. -/
-elab "fo_apply_diff " f:term:max " using " args:term,* : tactic =>
-  withMainContext do
-    let g ← getMainGoal
-    let fe ← elabLemma f
-    let (pf, _) ← foInstantiate fe args.getElems (some (← instantiateMVars (← g.getType)))
-    let concl ← instantiateMVars (← inferType pf)
-    let acc ← IO.mkRef #[]
-    structDiff concl (← instantiateMVars (← g.getType)) acc
-    let mut i := 0
-    for (a, b) in ← acc.get do
-      let sa ← ppExpr a
-      let sb ← ppExpr b
-      IO.FS.withFile "/tmp/fo.log" .append fun h =>
-        h.putStrLn s!"diff {i}: {sa} ||| {sb}"
-      let t0 ← IO.monoMsNow
-      let _ ← mkAuxTheorem (← mkEq a b) (← mkEqRefl a)
-      let t1 ← IO.monoMsNow
-      IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"diff {i} ok {t1 - t0} ms"
-      i := i + 1
-    throwError "fo_apply_diff: done"
-
-end Mathlib.Tactic.FirstOrderApply
-
-namespace Mathlib.Tactic.FirstOrderApply
-
-/-- Diagnostic variant of `fo_apply`: log the structural differences between the type of each
-explicit proof argument and the instantiated binder type, and between the conclusion and the goal
-(to `/tmp/fo.log`), then fail. -/
-elab "fo_apply_argdiff " f:term:max " using " args:term,* : tactic =>
-  withMainContext do
-    let g ← getMainGoal
-    let fe ← elabLemma f
-    let (pf, _) ← foInstantiate fe args.getElems (some (← instantiateMVars (← g.getType)))
-    let pargs := pf.getAppArgs
-    let mut ty ← instantiateMVars (← inferType fe)
-    for i in [:pargs.size] do
-      let .forallE _ d b bi := ty | break
-      let a := pargs[i]!
-      if bi == .default && (← isProof a) then
-        let acc ← IO.mkRef #[]
-        structDiff (← instantiateMVars d) (← instantiateMVars (← inferType a)) acc
-        for (x, y) in ← acc.get do
-          let sx ← withOptions (fun o => o.setBool `pp.explicit true |>.setBool `pp.proofs true) (ppExpr x)
-          let sy ← withOptions (fun o => o.setBool `pp.explicit true |>.setBool `pp.proofs true) (ppExpr y)
-          IO.FS.withFile "/tmp/fo.log" .append fun h =>
-            h.putStrLn s!"arg {i}:\n  {sx}\n  |||\n  {sy}"
-      ty := b.instantiate1 a
-    let acc ← IO.mkRef #[]
-    structDiff (← instantiateMVars (← inferType pf)) (← instantiateMVars (← g.getType)) acc
-    for (x, y) in ← acc.get do
-      let sx ← ppExpr x
-      let sy ← ppExpr y
-      IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"concl:\n  {sx}\n  |||\n  {sy}"
-    throwError "fo_apply_argdiff: done"
-
-end Mathlib.Tactic.FirstOrderApply
-
-namespace Mathlib.Tactic.FirstOrderApply
-
-/-- Diagnostic variant of `fo_apply`: kernel-check each `isDefEq`-identified pair separately. -/
-elab "fo_apply_pairs " f:term:max " using " args:term,* : tactic =>
-  withMainContext do
-    foPairs.set #[]
-    let g ← getMainGoal
-    let fe ← elabLemma f
-    let _ ← foInstantiate fe args.getElems (some (← instantiateMVars (← g.getType)))
-    let mut i := 0
-    for (p, e) in ← foPairs.get do
-      let p ← instantiateMVars p
-      let sp ← ppExpr p
-      let se ← ppExpr e
-      IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"pair {i}: {sp} ||| {se}"
-      let t0 ← IO.monoMsNow
-      let _ ← mkAuxTheorem (← mkEq p e) (← mkEqRefl p)
-      let t1 ← IO.monoMsNow
-      IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"pair {i} ok {t1 - t0} ms"
-      i := i + 1
-    throwError "fo_apply_pairs: done"
-
-end Mathlib.Tactic.FirstOrderApply
-
-namespace Mathlib.Tactic.FirstOrderApply
-
-
-/-- `unify_proofs h₁ … hₙ`: in the goal and the hypotheses `hᵢ`, replace all proofs of the same
-proposition (up to definitional equality of the propositions) by a single one. Afterwards, terms
-which differed only by their proofs are syntactically equal, so that the kernel does not need to
-unfold definitions to compare them.
-
-The old and the new statement are related through an auxiliary definition
-`aux := fun h₁ … hₘ ↦ T[h₁, …, hₘ]` abstracting all the proofs: the kernel compares
-`aux p₁ … pₘ` with `aux q₁ … qₘ` argument by argument (by proof irrelevance), and does not need
-to compare the two statements themselves. -/
-elab "unify_proofs" hs:(ppSpace colGt ident)* : tactic => do
-  let g ← getMainGoal
-  let fvs ← g.withContext <| hs.mapM fun h => return (← getLocalDeclFromUserName h.getId).fvarId
-  let (reverted, g) ← g.revert fvs
-  let auxName ← Term.mkAuxName `unifyProofsAux
-  let g ← g.withContext do
-    let target ← instantiateMVars (← g.getType)
-    let proofs ← IO.mkRef (#[] : Array (Expr × Expr))
-    let visited ← IO.mkRef (Std.HashSet.emptyWithCapacity : Std.HashSet Expr)
-    let rec visit (e : Expr) : MetaM Unit := do
-      if (← visited.get).contains e then return
-      visited.modify (·.insert e)
-      if !e.hasLooseBVars && !e.isMVar then
-        if ← isProof e then
-          let ty ← instantiateMVars (← inferType e)
-          unless ty.hasLooseBVars || ty.hasFVar && false do proofs.modify (·.push (ty, e))
-          return
-      match e with
-      | .app f a => visit f; visit a
-      | .lam _ t b _ | .forallE _ t b _ => visit t; visit b
-      | .letE _ t v b _ => visit t; visit v; visit b
-      | .mdata _ b => visit b
-      | .proj _ _ b => visit b
-      | _ => pure ()
-    visit target
-    -- the canonical proof of each proposition, the propositions being normalized by replacing
-    -- their inner proofs by canonical ones
-    let canonFor ← IO.mkRef (Std.HashMap.emptyWithCapacity : Std.HashMap Expr Expr)
-    let normCache ← IO.mkRef (Std.HashMap.emptyWithCapacity : Std.HashMap Expr Expr)
-    let rec canonOf (fuel : Nat) (p : Expr) : MetaM Expr := do
-      let ty ← instantiateMVars (← inferType p)
-      let ty ← normType fuel ty
-      match (← canonFor.get)[ty]? with
-      | some q => return q
-      | none =>
-        -- small propositions are also compared up to definitional equality
-        if ty.approxDepth < 40 then
-          for (ty₀, q) in (← canonFor.get).toList do
-            if ty₀.getAppFn == ty.getAppFn && ty₀.approxDepth < 40 then
-              if ← withNewMCtxDepth (withTransparency .instances (isDefEq ty₀ ty)) then
-                canonFor.modify (·.insert ty q)
-                return q
-        canonFor.modify (·.insert ty p); return p
-    , normType (fuel : Nat) (e : Expr) : MetaM Expr := do
-      match fuel with
-      | 0 => return e
-      | fuel + 1 =>
-      if let some r := (← normCache.get)[e]? then return r
-      let r ← do
-        if !e.hasLooseBVars && !e.isMVar && (← isProof e) then canonOf fuel e
-        else match e with
-        | .app f a => return e.updateApp! (← normType (fuel + 1) f) (← normType (fuel + 1) a)
-        | .mdata _ b => return e.updateMData! (← normType (fuel + 1) b)
-        | _ => return e
-      normCache.modify (·.insert e r)
-      return r
-    let mut repl : Array (Expr × Expr × Expr) := #[]  -- (proof, its type, canonical proof)
-    for (ty, p) in ← proofs.get do
-      if repl.any (·.1 == p) then continue
-      let q ← canonOf 8 p
-      if q != p then repl := repl.push (p, ty, q)
-    for (ty, q) in (← canonFor.get).toList do
-      if ty.isAppOf `CategoryTheory.Precoherent then trace[debug] "canon {ty} := {q}"
-    for (p, ty, q) in repl do
-      if ty.isAppOf `CategoryTheory.Precoherent then trace[debug] "repl {p} ↦ {q}"
-    if repl.isEmpty then return g
-    -- the auxiliary definition abstracting the replaced proofs
-    let auxBody ← withLocalDeclsDND (repl.mapIdx fun i (_, ty, _) => (Name.mkSimple s!"h{i}", ty))
-      fun hs => do
-        let body := target.replace fun e =>
-          match repl.findIdx? (·.1 == e) with
-          | some i => some hs[i]!
-          | none => none
-        mkLambdaFVars hs body
-    let auxTy ← inferType auxBody
-    let aux ← mkAuxDefinition auxName auxTy auxBody (compile := false)
-    let oldT := mkAppN aux (repl.map (·.1))
-    let newT := mkAppN aux (repl.map (·.2.2))
-    let newTarget := (auxBody.beta (repl.map (·.2.2))).headBeta
-    let next ← mkFreshExprSyntheticOpaqueMVar newTarget
-    -- `next : newTarget ≡ aux q…`, `aux q… ≡ aux p…` (proof irrelevance), `aux p… ≡ target`
-    g.assign (← mkExpectedTypeHint (← mkExpectedTypeHint (← mkExpectedTypeHint next newT) oldT)
-      target)
-    trace[debug] "unify_proofs: {repl.size} proofs replaced"
-    pure next.mvarId!
-  let (_, g) ← g.introNP reverted.size
-  replaceMainGoal [g]
-
-end Mathlib.Tactic.FirstOrderApply
-
-namespace Mathlib.Tactic.FirstOrderApply
-
-/-- Diagnostic: kernel-check `a = b` under a heartbeat limit; on failure, recurse into the
-differing arguments, logging the minimal failing pairs to `/tmp/fo.log`. -/
-partial def kernelBisect (a b : Expr) (depth : Nat) : MetaM Unit := do
-  if a == b then return
-  if ← isProof a then return
-  let ok ← try
-      withCurrHeartbeats <| withOptions (fun o => o.insert `maxHeartbeats (.ofNat 100000)) <|
-        withTheReader Core.Context (fun c => { c with maxHeartbeats := 100000 * 1000 }) do
-        let _ ← mkAuxTheorem (← mkEq a b) (← mkEqRefl a)
-      pure true
-    catch _ => pure false
-  if ok then return
-  let fa := a.getAppFn
-  let fb := b.getAppFn
-  let as := a.getAppArgs
-  let bs := b.getAppArgs
-  let mut recursed := false
-  if fa == fb && as.size == bs.size && depth < 40 then
-    for i in [:as.size] do
-      if as[i]! != bs[i]! then
-        if (← isDefEq (← inferType as[i]!) (← inferType bs[i]!)) then
-          recursed := true
-          kernelBisect as[i]! bs[i]! (depth + 1)
-  unless recursed do
-    let sa ← ppExpr a
-    let sb ← ppExpr b
-    IO.FS.withFile "/tmp/fo.log" .append fun h =>
-      h.putStrLn s!"BISECT leaf (depth {depth}) {fa.constName?} / {fb.constName?}:\n  {sa}\n  |||\n  {sb}"
-
-/-- Diagnostic variant of `fo_apply`: bisect the kernel check of each explicit proof argument. -/
-elab "fo_apply_bisect " f:term:max " using " args:term,* : tactic =>
-  withMainContext do
-    let g ← getMainGoal
-    let fe ← elabLemma f
-    let (pf, _) ← foInstantiate fe args.getElems (some (← instantiateMVars (← g.getType)))
-    let pargs := pf.getAppArgs
-    let mut ty ← instantiateMVars (← inferType fe)
-    for i in [:pargs.size] do
-      let .forallE _ d b bi := ty | break
-      let a := pargs[i]!
-      if bi == .default && (← isProof a) then
-        IO.FS.withFile "/tmp/fo.log" .append fun h => h.putStrLn s!"bisect arg {i}"
-        kernelBisect (← instantiateMVars d) (← instantiateMVars (← inferType a)) 0
-      ty := b.instantiate1 a
-    throwError "fo_apply_bisect: done"
 
 end Mathlib.Tactic.FirstOrderApply

@@ -13338,6 +13338,7 @@ public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 public import WeilConjectures.TraceFormula.Specialization.Integral
+public import WeilConjectures.TraceFormula.Specialization.LowerShriekCompOfEq
 public import WeilConjectures.TraceFormula.Specialization.MatchTactic
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
@@ -13359,6 +13360,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchange
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAux
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponent
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnProperShape

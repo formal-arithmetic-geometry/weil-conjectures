@@ -15,9 +15,10 @@ For `j : B ⟶ F`, `d : F ⟶ X` and `a : X ⟶ P`, with `d ≫ a = a_F` and `(j
 identifications `Ra_{F!} Rj_! ≅ Ra_! Rd_! Rj_! ≅ Ra_! R(j ≫ d)_! ≅ Ra_{B!}` and
 `Ra_{F!} Rj_! ≅ Ra_{B!}` of `lowerShriekCompOfEq` agree
 (`ProEtale.CondensedRing.lowerShriekCompOfEq_hom_app_comp_map_comp_inv_app`), by the associativity
-of the composition isomorphisms (`boundedConstructibleLowerShriekComp_padicAlgCl_assoc`). The
-variant `lowerShriekCompOfEq_hom_app_comp_map_isoLowerStar_comp_inv_app` passes through the
-identifications `Rg_! ≅ Rg_*` of proper morphisms, for a morphism `g` equal to `j ≫ d`.
+of the composition isomorphisms (`boundedConstructibleLowerShriekComp_padicAlgCl_assoc`).
+For an equality `f = g` of proper morphisms, `Ra_! Rf_* ≅ Ra_! Rf_! ≅ Ra_{B!}` is the transport of
+`Ra_! Rg_* ≅ Ra_! Rg_! ≅ Ra_{B!}`
+(`ProEtale.CondensedRing.map_isoLowerStar_eqToHom_comp_lowerShriekCompOfEq_inv`).
 
 -/
 
@@ -77,4 +78,5 @@ theorem map_isoLowerStar_eqToHom_comp_lowerShriekCompOfEq_inv {f g : B ⟶ X} (h
       (lowerShriekCompOfEq ℓ f a wf).inv.app Q := by
   subst h
   simp
+
 end AlgebraicGeometry.ProEtale.CondensedRing
