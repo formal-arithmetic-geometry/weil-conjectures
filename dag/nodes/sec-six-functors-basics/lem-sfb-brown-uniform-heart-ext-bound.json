@@ -13,33 +13,27 @@
  },
  "proof": [
   {
-   "text": "If there is no heart object with degree-zero image in L, take N=0 and the assertion is vacuous. Otherwise fix one such object F_0. For each n choose a heart object with a nonzero Hom group in degree n if one exists, and use F_0 otherwise. All chosen objects have degree-zero image in L. These choices are internal to a propositional proof.",
+   "text": "Use the formal Brown criterion to extract the coproduct structure and compactness of the given constructible finite-Tor object. Apply the individual-compactness uniform heart bound, which does not need the other Brown hypotheses.",
    "uses": [
-    "sk-def-localizing-closure"
+    "lem-sfb-brown-hypotheses-criterion",
+    "lem-sfb-compact-uniform-heart-ext-bound"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the varying-heart eventual-vanishing theorem to this sequence. For any n above its bound, the existence of any nonzero map into any eligible heart object would imply the chosen object has a nonzero map in degree n; eventual vanishing contradicts this. Thus the same bound works for every heart object.",
-   "uses": [
-    "lem-sfb-brown-varying-heart-ext-bound"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For the contrapositive, instantiate the unboundedness hypothesis at the uniform bound, then apply the bound to its heart object, degree and nonzero morphism. The resulting zero equality is a contradiction.",
+   "text": "For the contrapositive extract the same compactness clause from the Brown criterion and contradict it with the individual noncompactness obstruction under unbounded Ext.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure",
-  "lem-sfb-brown-varying-heart-ext-bound"
+  "lem-sfb-brown-hypotheses-criterion",
+  "lem-sfb-compact-uniform-heart-ext-bound"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "B2 stage 3",
   "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
-  "place": "finite-support argument in not_preservesColimitsOfShape_of_forall_hom_ne_zero, generalized using DegreewiseLimits.lean, HomologicalComplex.isLimitFanMkProjOfIsColimit"
+  "place": "finite-support argument; extract individual compactness before invoking the generalized uniform bound"
  },
  "mathlib_searches": [
   {
@@ -111,16 +105,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261027T180447-L-3862468",
+  "landing": "20261027T205752-L-1612719",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.brownHypotheses"
-  ],
-  "sorry_after": [
-   "CategoryTheory.brownHypotheses"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

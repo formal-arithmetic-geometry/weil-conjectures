@@ -14,7 +14,8 @@ import Sheaf.Paper.IntegralConstructibleCompactness
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
 import WeilConjectures.CategoryTheory.CompactObjectsThick
 import WeilConjectures.CategoryTheory.DerivedCategory.Products
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
+import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
+import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 
 /-!
 # Hypotheses of Brown representability
@@ -99,6 +100,18 @@ attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
 attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
   AlgebraicGeometry.ProEtale.CondensedRing.upperStar
+
+/-- Exact countable products follow directly from repleteness and the exact forgetful
+functor on module objects. Keep this proof local to avoid importing proper direct images. -/
+private theorem brownHypotheses_countableAB4Star
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
+    CountableAB4Star (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :=
+  .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi
+    Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
+
+attribute [local instance] brownHypotheses_countableAB4Star
 
 /-- The conclusions of the Brown-hypotheses lemma, for a specified coefficient ring.
 The localizing closure and constructible finite-Tor property are the recorded definitions.
@@ -275,6 +288,9 @@ theorem brownHypothesesFor_iff
     let B : S.FullSubcategory := ⟨Y, hY⟩
     exact ⟨e.inverse.obj B, ⟨(S.ι.mapIso (e.counitIso.app B)).symm⟩⟩
 
+-- Later proofs use the criterion API; keep the large bundle folded.
+attribute [local irreducible] BrownHypothesesFor
+
 /-- Compactness in the Brown criterion can be checked on thick generators of the
 constructible finite-Tor objects. The generators need not represent every isomorphism
 class. The thick-envelope hypothesis is in the actual localizing full subcategory,
@@ -391,6 +407,33 @@ theorem brownHypothesesFor_iff_compact_representatives
   · rintro ⟨ht, hi, hr, hs, hcop, hc⟩
     exact criterion.mpr ⟨ht, hi, hr, hs, hcop, hc hL⟩
 
+private theorem finite_nonzero_hom_of_compact_product_coproduct
+    {C : Type*} [Category.{u + 1} C] [Preadditive C] [HasCoproducts.{u + 1} C]
+    (K : C) (hK : IsCompactObject K)
+    {I : Type (u + 1)} (E : I → C)
+    (c : Cofan E) (hc : IsColimit c) (π : ∀ i, c.pt ⟶ E i)
+    (hp : IsLimit (Fan.mk c.pt π))
+    (hdiag : ∀ i j, i ≠ j → c.inj i ≫ π j = 0) :
+    ∃ S : Finset I, ∀ i ∉ S, Subsingleton (K ⟶ E i) := by
+  classical
+  have hfinite := (isCompactObject_iff_isCompactObj K).mp hK
+  have hchoice (i : I) : ∃ f : K ⟶ E i, ∀ g : K ⟶ E i, f = 0 → g = 0 := by
+    by_cases h : ∀ g : K ⟶ E i, g = 0
+    · exact ⟨0, fun g _ ↦ h g⟩
+    · obtain ⟨f, hf⟩ := not_forall.mp h
+      exact ⟨f, fun _ hz ↦ (hf hz).elim⟩
+  choose f hf using hchoice
+  obtain ⟨S, g, hg⟩ := hfinite c hc (Fan.IsLimit.lift hp f)
+  refine ⟨S, fun i hi ↦ ?_⟩
+  have hz : Fan.IsLimit.lift hp f ≫ π i = 0 := by
+    rw [hg, Preadditive.sum_comp]
+    apply Finset.sum_eq_zero
+    intro j hj
+    rw [Category.assoc, hdiag j i (ne_of_mem_of_not_mem hj hi), comp_zero]
+  have hfi : f i = 0 := (Fan.IsLimit.fac hp f i).symm.trans hz
+  exact ⟨fun a b ↦ (hf i a hfi).trans (hf i b hfi).symm⟩
+
+
 /-- A Brown bundle forces finite support of Hom groups into a family whose coproduct
 is also its product, with the usual diagonal projections.
 
@@ -417,25 +460,9 @@ theorem BrownHypothesesFor.finite_nonzero_hom_of_product_coproduct
     (hp : IsLimit (Fan.mk c.pt π))
     (hdiag : ∀ i j, i ≠ j → c.inj i ≫ π j = 0) :
     ∃ S : Finset I, ∀ i ∉ S, Subsingleton (K ⟶ E i) := by
-  classical
   obtain ⟨_, _, _, _, hcop, hcompact⟩ := (brownHypothesesFor_iff Λ X).mp hB
   let _ := hcop
-  have hfinite := (isCompactObject_iff_isCompactObj K).mp (hcompact K hK)
-  have hchoice (i : I) : ∃ f : K ⟶ E i, ∀ g : K ⟶ E i, f = 0 → g = 0 := by
-    by_cases h : ∀ g : K ⟶ E i, g = 0
-    · exact ⟨0, fun g _ ↦ h g⟩
-    · obtain ⟨f, hf⟩ := not_forall.mp h
-      exact ⟨f, fun _ hz ↦ (hf hz).elim⟩
-  choose f hf using hchoice
-  obtain ⟨S, g, hg⟩ := hfinite c hc (Fan.IsLimit.lift hp f)
-  refine ⟨S, fun i hi ↦ ?_⟩
-  have hz : Fan.IsLimit.lift hp f ≫ π i = 0 := by
-    rw [hg, Preadditive.sum_comp]
-    apply Finset.sum_eq_zero
-    intro j hj
-    rw [Category.assoc, hdiag j i (ne_of_mem_of_not_mem hj hi), comp_zero]
-  have hfi : f i = 0 := (Fan.IsLimit.fac hp f i).symm.trans hz
-  exact ⟨fun a b ↦ (hf i a hfi).trans (hf i b hfi).symm⟩
+  exact finite_nonzero_hom_of_compact_product_coproduct K (hcompact K hK) E c hc π hp hdiag
 
 /-- An infinite family of nonzero Hom groups into a coproduct which is also a product
 obstructs the Brown bundle.
@@ -466,29 +493,12 @@ theorem not_brownHypothesesFor_of_product_coproduct
   exact hf ((hS i hi).elim f 0)
 
 open scoped CategoryTheory.Obj in
-/-- Brown compactness forces finite Hom support into degreewise disjoint complexes.
-The complexes may have several nonzero terms and need not be bounded or constructible.
-Only their derived images must belong to the localizing closure.
-
-Source: the finite-support argument in
-`WeilConjectures.CategoryTheory.DerivedCategory.NotPreservesCoproducts`, using
-`HomologicalComplex.isLimitFanMkProjOfIsColimit` from `DegreewiseLimits`.
-(blueprint: lem-sfb-brown-disjoint-complex-hom-support).
-
-Proof: form the termwise coproduct of the complexes. In each degree at most one
-summand is nonzero, so the canonical projections also make it their product.
-Exact countable products of pro-etale module objects transport this product to
-the derived category; the derived localization preserves the coproduct as well.
-The localizing intersection contains that coproduct because it contains each
-summand. Fullness restricts both universal properties to the localizing category.
-The Brown finite-support theorem applies there. Passing through the full inclusion
-and lowering the lifted natural-number indices gives the asserted finite set. -/
-theorem BrownHypothesesFor.finite_nonzero_hom_of_degreewise_disjoint
+private theorem finite_nonzero_hom_of_compact_degreewise_disjoint
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (hB : BrownHypothesesFor Λ X)
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    [HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory]
     (K : (localizingClosureProEtale Λ X).FullSubcategory)
-    (hK : constantModelBoundedConstructible Λ X K.obj ∧
-      DerivedCategory.finiteTorAmplitude _ K.obj)
+    (hK : IsCompactObject K)
     (M : ℕ → CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
     (hM : ∀ n, localizingClosureProEtale Λ X (DerivedCategory.Q.obj (M n)))
@@ -498,8 +508,7 @@ theorem BrownHypothesesFor.finite_nonzero_hom_of_degreewise_disjoint
   classical
   let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
   let L := localizingClosureProEtale Λ X
-  have hdata := hB
-  obtain ⟨_, htri, hiso, _, _, _, _, _, hcop, _⟩ := hdata
+  obtain ⟨_, htri, hiso, _, hcop, _⟩ := brownHypotheses_structural Λ X
   let _ := htri
   let _ := hiso
   let _ := hcop
@@ -551,7 +560,7 @@ theorem BrownHypothesesFor.finite_nonzero_hom_of_degreewise_disjoint
       intro n
       exact (congrArg (fun f ↦ f.hom) (hf ⟨n⟩)).trans
         (Fan.IsLimit.fac hp (fun n ↦ (s.proj ⟨n⟩).hom) n).symm
-  obtain ⟨S, hS⟩ := hB.finite_nonzero_hom_of_product_coproduct K hK E c hc' π hp'
+  obtain ⟨S, hS⟩ := finite_nonzero_hom_of_compact_product_coproduct K hK E c hc' π hp'
     (fun i j hij ↦ by
       apply ObjectProperty.hom_ext
       have hne : i.down ≠ j.down := fun h ↦ hij (ULift.ext _ _ h)
@@ -563,6 +572,84 @@ theorem BrownHypothesesFor.finite_nonzero_hom_of_degreewise_disjoint
   refine ⟨fun f g ↦ ?_⟩
   exact congrArg (fun h : K ⟶ E ⟨n⟩ ↦ h.hom)
     ((hS _ hnS).elim (ObjectProperty.homMk f) (ObjectProperty.homMk g))
+
+
+open scoped CategoryTheory.Obj in
+/-- Brown compactness forces finite Hom support into degreewise disjoint complexes.
+The complexes may have several nonzero terms and need not be bounded or constructible.
+Only their derived images must belong to the localizing closure.
+
+Source: the finite-support argument in
+`WeilConjectures.CategoryTheory.DerivedCategory.NotPreservesCoproducts`, using
+`HomologicalComplex.isLimitFanMkProjOfIsColimit` from `DegreewiseLimits`.
+(blueprint: lem-sfb-brown-disjoint-complex-hom-support).
+
+Proof: form the termwise coproduct of the complexes. In each degree at most one
+summand is nonzero, so the canonical projections also make it their product.
+Exact countable products of pro-etale module objects transport this product to
+the derived category; the derived localization preserves the coproduct as well.
+The localizing intersection contains that coproduct because it contains each
+summand. Fullness restricts both universal properties to the localizing category.
+The Brown finite-support theorem applies there. Passing through the full inclusion
+and lowering the lifted natural-number indices gives the asserted finite set. -/
+theorem BrownHypothesesFor.finite_nonzero_hom_of_degreewise_disjoint
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (hB : BrownHypothesesFor Λ X)
+    (K : (localizingClosureProEtale Λ X).FullSubcategory)
+    (hK : constantModelBoundedConstructible Λ X K.obj ∧
+      DerivedCategory.finiteTorAmplitude _ K.obj)
+    (M : ℕ → CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ)
+    (hM : ∀ n, localizingClosureProEtale Λ X (DerivedCategory.Q.obj (M n)))
+    (hdisjoint : ∀ (d : ℤ) (m n : ℕ),
+      ¬ IsZero ((M m).X d) → ¬ IsZero ((M n).X d) → m = n) :
+    ∃ S : Finset ℕ, ∀ n ∉ S, Subsingleton (K.obj ⟶ DerivedCategory.Q.obj (M n)) := by
+  obtain ⟨_, _, _, _, hcop, hcompact⟩ := (brownHypothesesFor_iff Λ X).mp hB
+  let _ := hcop
+  exact finite_nonzero_hom_of_compact_degreewise_disjoint K (hcompact K hK) M hM hdisjoint
+
+open scoped CategoryTheory.Obj in
+private theorem eventually_hom_single_shift_eq_zero_of_compact
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    [HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory]
+    (K : (localizingClosureProEtale Λ X).FullSubcategory)
+    (hK : IsCompactObject K)
+    (F : ℕ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hF : ∀ n, localizingClosureProEtale Λ X
+      ((DerivedCategory.singleFunctor _ 0).obj (F n))) :
+    ∃ N : ℕ, ∀ n ≥ N, ∀ f : K.obj ⟶
+      ((DerivedCategory.singleFunctor _ 0).obj (F n))⟦(n : ℤ)⟧, f = 0 := by
+  classical
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  let M (n : ℕ) := ((CochainComplex.singleFunctor A 0).obj (F n))⟦(n : ℤ)⟧
+  obtain ⟨_, htri, hiso, _, _, _⟩ := brownHypotheses_structural Λ X
+  let _ := htri
+  let _ := hiso
+  let e (n : ℕ) : DerivedCategory.Q.obj (M n) ≅
+      ((DerivedCategory.singleFunctor A 0).obj (F n))⟦(n : ℤ)⟧ :=
+    ((DerivedCategory.Q (C := A)).commShiftIso (n : ℤ)).app
+        ((CochainComplex.singleFunctor A 0).obj (F n)) ≪≫
+      (shiftFunctor _ (n : ℤ)).mapIso ((DerivedCategory.singleFunctorIsoCompQ A 0).app (F n)).symm
+  have hm (n : ℕ) : localizingClosureProEtale Λ X (DerivedCategory.Q.obj (M n)) :=
+    (localizingClosureProEtale Λ X).prop_of_iso (e n).symm
+      ((localizingClosureProEtale Λ X).le_shift (n : ℤ) _ (hF n))
+  have hdisjoint (d : ℤ) (m n : ℕ)
+      (hm : ¬ IsZero ((M m).X d)) (hn : ¬ IsZero ((M n).X d)) : m = n := by
+    have hdegree (j : ℕ) (hj : ¬ IsZero ((M j).X d)) : d + j = 0 := by
+      by_contra h
+      exact hj (HomologicalComplex.isZero_single_obj_X (.up ℤ) _ _ _ h)
+    have := hdegree m hm
+    have := hdegree n hn
+    omega
+  obtain ⟨S, hS⟩ := finite_nonzero_hom_of_compact_degreewise_disjoint K hK M hm hdisjoint
+  refine ⟨S.sup id + 1, fun n hn f ↦ ?_⟩
+  have hnS : n ∉ S := fun h ↦ by
+    have hle : n ≤ S.sup id := Finset.le_sup (f := id) h
+    omega
+  have hz : f ≫ (e n).inv = 0 := (hS n hnS).elim _ _
+  simpa using congrArg (fun g ↦ g ≫ (e n).hom) hz
+
 
 open scoped CategoryTheory.Obj in
 /-- Brown compactness forces eventual vanishing along any sequence of shifted heart objects.
@@ -590,36 +677,85 @@ theorem BrownHypothesesFor.eventually_hom_single_shift_eq_zero
       ((DerivedCategory.singleFunctor _ 0).obj (F n))) :
     ∃ N : ℕ, ∀ n ≥ N, ∀ f : K.obj ⟶
       ((DerivedCategory.singleFunctor _ 0).obj (F n))⟦(n : ℤ)⟧, f = 0 := by
+  obtain ⟨_, _, _, _, hcop, hcompact⟩ := (brownHypothesesFor_iff Λ X).mp hB
+  let _ := hcop
+  exact eventually_hom_single_shift_eq_zero_of_compact K (hcompact K hK) F hF
+
+open scoped CategoryTheory.Obj in
+/-- A compact object of the localizing closure has a uniform bound on maps to shifted
+heart objects in that closure. No constructibility or Brown bundle is assumed for K.
+
+Source: the finite-support argument in
+`WeilConjectures.CategoryTheory.DerivedCategory.NotPreservesCoproducts.lean`.
+(blueprint: lem-sfb-compact-uniform-heart-ext-bound).
+
+Proof: degreewise disjoint shifted single complexes have a coproduct which is also
+their product, since countable products of pro-etale module objects are exact.
+Compactness of K forces finite support of its maps to the summands. If some heart
+object supports a nonzero map in arbitrarily high degrees, choose such an object
+in each degree where possible (and a fixed eligible object otherwise). Finite
+support for this varying sequence gives a contradiction. If there is no eligible
+heart object, the bound zero works vacuously. The source K may itself be unbounded. -/
+theorem exists_uniform_hom_single_shift_bound_of_compact
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    [HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory]
+    (K : (localizingClosureProEtale Λ X).FullSubcategory)
+    (hK : IsCompactObject K) :
+    ∃ N : ℕ, ∀ F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X),
+      localizingClosureProEtale Λ X ((DerivedCategory.singleFunctor _ 0).obj F) →
+      ∀ n ≥ N, ∀ f : K.obj ⟶
+        ((DerivedCategory.singleFunctor _ 0).obj F)⟦(n : ℤ)⟧, f = 0 := by
   classical
   let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-  let M (n : ℕ) := ((CochainComplex.singleFunctor A 0).obj (F n))⟦(n : ℤ)⟧
-  have hdata := hB
-  obtain ⟨_, htri, hiso, _, _, _, _, _, _, _⟩ := hdata
-  let _ := htri
-  let _ := hiso
-  let e (n : ℕ) : DerivedCategory.Q.obj (M n) ≅
-      ((DerivedCategory.singleFunctor A 0).obj (F n))⟦(n : ℤ)⟧ :=
-    ((DerivedCategory.Q (C := A)).commShiftIso (n : ℤ)).app
-        ((CochainComplex.singleFunctor A 0).obj (F n)) ≪≫
-      (shiftFunctor _ (n : ℤ)).mapIso ((DerivedCategory.singleFunctorIsoCompQ A 0).app (F n)).symm
-  have hm (n : ℕ) : localizingClosureProEtale Λ X (DerivedCategory.Q.obj (M n)) :=
-    (localizingClosureProEtale Λ X).prop_of_iso (e n).symm
-      ((localizingClosureProEtale Λ X).le_shift (n : ℤ) _ (hF n))
-  have hdisjoint (d : ℤ) (m n : ℕ)
-      (hm : ¬ IsZero ((M m).X d)) (hn : ¬ IsZero ((M n).X d)) : m = n := by
-    have hdegree (j : ℕ) (hj : ¬ IsZero ((M j).X d)) : d + j = 0 := by
-      by_contra h
-      exact hj (HomologicalComplex.isZero_single_obj_X (.up ℤ) _ _ _ h)
-    have := hdegree m hm
-    have := hdegree n hn
-    omega
-  obtain ⟨S, hS⟩ := hB.finite_nonzero_hom_of_degreewise_disjoint K hK M hm hdisjoint
-  refine ⟨S.sup id + 1, fun n hn f ↦ ?_⟩
-  have hnS : n ∉ S := fun h ↦ by
-    have hle : n ≤ S.sup id := Finset.le_sup (f := id) h
-    omega
-  have hz : f ≫ (e n).inv = 0 := (hS n hnS).elim _ _
-  simpa using congrArg (fun g ↦ g ≫ (e n).hom) hz
+  let L := localizingClosureProEtale Λ X
+  by_cases hex : ∃ F : A, L ((DerivedCategory.singleFunctor A 0).obj F)
+  · obtain ⟨F₀, hF₀⟩ := hex
+    let P (n : ℕ) := ∃ F : A, L ((DerivedCategory.singleFunctor A 0).obj F) ∧
+      ∃ f : K.obj ⟶ ((DerivedCategory.singleFunctor A 0).obj F)⟦(n : ℤ)⟧, f ≠ 0
+    let F (n : ℕ) : A := if h : P n then h.choose else F₀
+    have hF (n : ℕ) : L ((DerivedCategory.singleFunctor A 0).obj (F n)) := by
+      dsimp only [F]
+      split_ifs with h
+      · exact h.choose_spec.1
+      · exact hF₀
+    obtain ⟨N, hN⟩ := eventually_hom_single_shift_eq_zero_of_compact K hK F hF
+    refine ⟨N, fun M hM n hn f ↦ ?_⟩
+    by_contra hf
+    have hp : P n := ⟨M, hM, f, hf⟩
+    obtain ⟨g, hg⟩ := hp.choose_spec.2
+    have hz := hN n hn
+    change ∀ g : K.obj ⟶
+      ((DerivedCategory.singleFunctor A 0).obj (F n))⟦(n : ℤ)⟧, g = 0 at hz
+    rw [show F n = hp.choose from dif_pos hp] at hz
+    exact hg (hz g)
+  · exact ⟨0, fun F hF ↦ (hex ⟨F, hF⟩).elim⟩
+
+
+open scoped CategoryTheory.Obj in
+/-- Unbounded maps to shifted heart objects detect a noncompact source object directly.
+Source: the finite-support argument of `DerivedCategory.NotPreservesCoproducts`.
+(blueprint: lem-sfb-compact-uniform-heart-ext-bound).
+
+Proof: compactness gives a uniform bound by the preceding theorem. Choose a nonzero
+map in a degree at least that bound. The bound makes this map zero, a contradiction.
+Neither constructibility of the source nor compactness of other objects is needed. -/
+theorem not_isCompactObject_of_unbounded_ext
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    [HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory]
+    (K : (localizingClosureProEtale Λ X).FullSubcategory)
+    (hExt : ∀ N : ℕ, ∃ (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X)),
+      localizingClosureProEtale Λ X ((DerivedCategory.singleFunctor _ 0).obj F) ∧
+      ∃ n ≥ N, ∃ f : K.obj ⟶
+        ((DerivedCategory.singleFunctor _ 0).obj F)⟦(n : ℤ)⟧, f ≠ 0) :
+    ¬ IsCompactObject K := by
+  intro hK
+  obtain ⟨N, hN⟩ := exists_uniform_hom_single_shift_bound_of_compact K hK
+  obtain ⟨F, hF, n, hn, f, hf⟩ := hExt N
+  exact hf (hN F hF n hn f)
 
 open scoped CategoryTheory.Obj in
 /-- The Ext bound forced by the Brown bundle is uniform over heart objects in the closure.
@@ -644,30 +780,9 @@ theorem BrownHypothesesFor.exists_uniform_hom_single_shift_bound
       localizingClosureProEtale Λ X ((DerivedCategory.singleFunctor _ 0).obj F) →
       ∀ n ≥ N, ∀ f : K.obj ⟶
         ((DerivedCategory.singleFunctor _ 0).obj F)⟦(n : ℤ)⟧, f = 0 := by
-  classical
-  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-  let L := localizingClosureProEtale Λ X
-  by_cases hex : ∃ F : A, L ((DerivedCategory.singleFunctor A 0).obj F)
-  · obtain ⟨F₀, hF₀⟩ := hex
-    let P (n : ℕ) := ∃ F : A, L ((DerivedCategory.singleFunctor A 0).obj F) ∧
-      ∃ f : K.obj ⟶ ((DerivedCategory.singleFunctor A 0).obj F)⟦(n : ℤ)⟧, f ≠ 0
-    let F (n : ℕ) : A := if h : P n then h.choose else F₀
-    have hF (n : ℕ) : L ((DerivedCategory.singleFunctor A 0).obj (F n)) := by
-      dsimp only [F]
-      split_ifs with h
-      · exact h.choose_spec.1
-      · exact hF₀
-    obtain ⟨N, hN⟩ := hB.eventually_hom_single_shift_eq_zero K hK F hF
-    refine ⟨N, fun M hM n hn f ↦ ?_⟩
-    by_contra hf
-    have hp : P n := ⟨M, hM, f, hf⟩
-    obtain ⟨g, hg⟩ := hp.choose_spec.2
-    have hz := hN n hn
-    change ∀ g : K.obj ⟶
-      ((DerivedCategory.singleFunctor A 0).obj (F n))⟦(n : ℤ)⟧, g = 0 at hz
-    rw [show F n = hp.choose from dif_pos hp] at hz
-    exact hg (hz g)
-  · exact ⟨0, fun F hF ↦ (hex ⟨F, hF⟩).elim⟩
+  obtain ⟨_, _, _, _, hcop, hcompact⟩ := (brownHypothesesFor_iff Λ X).mp hB
+  let _ := hcop
+  exact exists_uniform_hom_single_shift_bound_of_compact K (hcompact K hK)
 
 open scoped CategoryTheory.Obj in
 /-- Unbounded Ext into heart objects of the closure contradicts Brown's hypotheses.
@@ -692,9 +807,9 @@ theorem not_brownHypothesesFor_of_unbounded_ext
         ((DerivedCategory.singleFunctor _ 0).obj F)⟦(n : ℤ)⟧, f ≠ 0) :
     ¬ BrownHypothesesFor Λ X := by
   intro hB
-  obtain ⟨N, hN⟩ := hB.exists_uniform_hom_single_shift_bound K hK
-  obtain ⟨F, hF, n, hn, f, hf⟩ := hExt N
-  exact hf (hN F hF n hn f)
+  obtain ⟨_, _, _, _, hcop, hcompact⟩ := (brownHypothesesFor_iff Λ X).mp hB
+  let _ := hcop
+  exact not_isCompactObject_of_unbounded_ext K hExt (hcompact K hK)
 
 open scoped CategoryTheory.Obj in
 /-- Nonzero maps to every positive shift of a heart object in the localizing closure
@@ -985,9 +1100,6 @@ theorem brownHypothesesFor_padicIntegers_iff_ext_bounded
     exact (brownHypothesesFor_iff_compact_of_noetherian ℓ X Λ hcoeff).mpr
       ⟨hcop, fun K hK ↦ hc K hK.1⟩
 
-
--- The remaining proofs use the criterion API; keep the large bundle folded.
-attribute [local irreducible] BrownHypothesesFor
 
 private theorem integer_hom_bound_iff_natural_ext_bound
     {A : Type*} [Category* A] [Abelian A]

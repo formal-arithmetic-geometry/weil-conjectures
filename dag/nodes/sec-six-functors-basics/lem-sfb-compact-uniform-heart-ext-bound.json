@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-compact-uniform-heart-ext-bound",
+ "kind": "statement",
+ "title": "Uniform heart Hom bound from individual compactness",
+ "statement": "Let X be any scheme, let Λ be a commutative condensed ring, and let L=Loc(Dctf(X,Λ)) [sk-def-localizing-closure]. Fix any coproduct structure in the hom universe on L and any object K of L. If K is compact [def-pc-compact-object], there is a natural number N such that every morphism K→F[0][n] in the ambient derived category is zero whenever n≥N and F is a module sheaf with F[0] in L. There is no constructibility, boundedness, admissibility, base-field, or Brown-bundle assumption on K or Λ. Consequently, unbounded nonzero maps to such shifted heart objects imply that K is not compact.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-pc-compact-object"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support proof of not_preservesColimitsOfShape_of_forall_hom_ne_zero, generalized to varying heart targets"
+ },
+ "proof": [
+  {
+   "text": "Choose one morphism K→E_i, nonzero whenever possible, for a family whose coproduct is also its product with off-diagonal composites zero. The product universal property combines these maps into one map to the coproduct. Compactness expresses it as a finite sum through summands. Projection onto any other summand is zero, so all Hom groups outside that finite set vanish. This is a purely additive argument.",
+   "uses": [
+    "def-pc-compact-object"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a degreewise disjoint countable family of cochain complexes, the termwise coproduct is also their product. Exact countable products of pro-etale module objects and K-injective resolutions carry this product to the derived category; derived localization also carries the coproduct. If their derived images lie in L, the defining localizing intersection contains the coproduct. Fullness restricts both universal properties to L. Apply the preceding compactness argument. The structural theorem supplies the canonical triangulation and repleteness, independently of Brown compactness.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "h1-brown-hypotheses-structural"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply this to F_n[0][n]. A term in degree d can be nonzero only when d+n=0, so distinct n give degreewise disjoint support. The canonical shift and localization isomorphisms identify the resulting Hom groups. A number larger than all indices in their finite support is a vanishing bound for any prescribed sequence F_n of eligible heart objects.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If there is no eligible F, take N=0. Otherwise fix one such F_0. In every degree n choose a heart object with a nonzero degree-n map if one exists, and F_0 otherwise. The previous sequence bound rules out every nonzero map in each degree beyond it, uniformly over all eligible heart objects. All choices are internal to this propositional proof, with no chosen data used in any definition. In particular K need not itself be a heart object or constructible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the contrapositive, choose a nonzero map at or above the bound obtained from individual compactness. This contradicts the zero equality supplied by that bound.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "sk-def-localizing-closure",
+  "h1-brown-hypotheses-structural"
+ ],
+ "proof_origin": {
+  "by": "B2 stage 3; agent generalization of the source argument",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support proof of not_preservesColimitsOfShape_of_forall_hom_ne_zero, generalized to varying heart targets"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact object in a derived category with exact countable products has uniformly bounded Hom into all shifted heart objects",
+   "results": "Eight results about the standard derived t-structure, HasExt, and single functors; no uniform compactness bound. Read the existing source finite-support proof and the Brown-specific bound in the item.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact object of a derived category has a uniform bound on morphisms to shifted heart objects when countable products are exact",
+   "results": "Eight results on CountableAB4/CountableAB4Star and their constructors; none is a uniform Hom vanishing result.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObj\"",
+   "results": "Zero hits.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*[Ee]xt|[Ee]xt.*compact|compact.*heart|uniform.*[Ee]xt in Mathlib/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "No relevant hit. Project-wide search finds the existing Brown-specific uniform bound but no theorem with individual compactness as the sole source hypothesis.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-28",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2, testing compactness of the constructible representatives; necessary finite-support obstruction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.exists_uniform_hom_single_shift_bound_of_compact",
+  "statement": "theorem exists_uniform_hom_single_shift_bound_of_compact\n    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}\n    [HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory]\n    (K : (localizingClosureProEtale Λ X).FullSubcategory)\n    (hK : IsCompactObject K) :\n    ∃ N : ℕ, ∀ F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X),\n      localizingClosureProEtale Λ X ((DerivedCategory.singleFunctor _ 0).obj F) →\n      ∀ n ≥ N, ∀ f : K.obj ⟶\n        ((DerivedCategory.singleFunctor _ 0).obj F)⟦(n : ℤ)⟧, f = 0",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-28",
+  "declarations": [
+   "CategoryTheory.exists_uniform_hom_single_shift_bound_of_compact",
+   "CategoryTheory.not_isCompactObject_of_unbounded_ext"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T205752-L-1612719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T205752-L-1612719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
