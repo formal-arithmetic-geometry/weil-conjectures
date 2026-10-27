@@ -13972,6 +13972,7 @@ public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeTrait
 public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
