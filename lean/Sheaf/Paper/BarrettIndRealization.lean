@@ -8,6 +8,10 @@ module
 public import Sheaf.Paper.WeilIndSheafCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
+import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
+import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.Paper.BarrettOrdinaryIndRealization
+import Sheaf.CategoryTheory.IndDerivedRepresentableDetection
 
 /-! # Constructible realization in the derived ind-heart
 
@@ -18,11 +22,28 @@ The free Weil functor occurs only in its compatibility with inverse image.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 universe u v w t wX wY tX tY
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Endofunctor AlgebraicGeometry
+/-- Free induction commutes with a left adjoint intertwining two autoequivalences.
+Both composites are left adjoint to the same underlying lifted right adjoint. -/
+private def freeTransportIso
+    {C B : Type*} [Category C] [Category B]
+    (F : C ⥤ C) [F.IsEquivalence] (G : B ⥤ B) [G.IsEquivalence]
+    [HasColimitsOfShape (Discrete ℤ) C] [HasColimitsOfShape (Discrete ℤ) B]
+    (L : C ⥤ B) [L.IsLeftAdjoint] (e : L ⋙ G ≅ F ⋙ L) :
+    L ⋙ IsoAlgebra.Free.functor G ≅
+      IsoAlgebra.Free.functor F ⋙ IsoAlgebra.mapOfNatIso e := by
+  let adj := Adjunction.ofIsLeftAdjoint L
+  let eR := IsoAlgebra.mateIso adj e
+  exact Adjunction.leftAdjointUniq
+    ((adj.comp (IsoAlgebra.Free.adjunction G)).ofNatIsoRight
+      (IsoAlgebra.mapOfNatIsoCompForgetIso eR).symm)
+    ((IsoAlgebra.Free.adjunction F).comp
+      (IsoAlgebra.mapOfNatIsoAdjunction adj e eR rfl))
+
 namespace WeilConjectures
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -209,6 +230,70 @@ theorem zlBarrettIndRealization
         JY ⋙ zlIndDerivedFree D l hl Ω Y₀ ⋙ zlIndDerivedPull D l hl Ω f) ∧
       (∀ {M N : DerivedCategory.Plus (Ind (zlSmallHeart D l Ω hl Y₀))} (g : M ⟶ N),
         (∀ B, Function.Bijective (fun h : JY.obj B ⟶ M ↦ h ≫ g)) → IsIso g) := by
-  sorry
+  obtain ⟨ha, hlim, hcolim, hadj, JX, JY, hX, hY, hheart, hcoh, hcover, ⟨e⟩⟩ :=
+    zlBarrettOrdinaryIndRealization D l hl Ω f
+  let L := zlIndMap (zlSmallPull D l hl Ω f)
+  let : L.Additive := ha
+  let : PreservesFiniteLimits L := hlim
+  let : PreservesFiniteColimits L := hcolim
+  let : L.IsLeftAdjoint := hadj
+  have hfree : L.mapDerivedCategoryPlus ⋙ zlIndDerivedFree D l hl Ω X₀ ≅
+      zlIndDerivedFree D l hl Ω Y₀ ⋙ zlIndDerivedPull D l hl Ω f := by
+    obtain ⟨haX, hlX, hcX, heX⟩ := zlIndFrobenius_exact D l hl Ω X₀
+    obtain ⟨haY, hlY, hcY, heY⟩ := zlIndFrobenius_exact D l hl Ω Y₀
+    let := haX
+    let := hlX
+    let := hcX
+    let := heX
+    let := haY
+    let := hlY
+    let := hcY
+    let := heY
+    let : Abelian (zlIndWeilHeart D l hl Ω X₀) := zlIndWeilHeartAbelian D l hl Ω X₀
+    let : Preadditive (zlIndWeilHeart D l hl Ω X₀) :=
+      (zlIndWeilHeartAbelian D l hl Ω X₀).toPreadditive
+    let : Abelian (zlIndWeilHeart D l hl Ω Y₀) := zlIndWeilHeartAbelian D l hl Ω Y₀
+    let : Preadditive (zlIndWeilHeart D l hl Ω Y₀) :=
+      (zlIndWeilHeartAbelian D l hl Ω Y₀).toPreadditive
+    let FX := IsoAlgebra.Free.functor (zlIndMap (zlSmallFrobenius D l hl Ω X₀))
+    let FY := IsoAlgebra.Free.functor (zlIndMap (zlSmallFrobenius D l hl Ω Y₀))
+    let P := zlIndWeilPull D l hl Ω f
+    let : FX.IsLeftAdjoint := (IsoAlgebra.Free.adjunction _).isLeftAdjoint
+    let : FY.IsLeftAdjoint := (IsoAlgebra.Free.adjunction _).isLeftAdjoint
+    let : FX.Additive := zlIndFree_additive D l hl Ω X₀
+    let : FY.Additive := zlIndFree_additive D l hl Ω Y₀
+    let : P.Additive := (zlIndWeilPull_exact D l hl Ω f).1
+    let := (zlIndWeilPull_exact D l hl Ω f).2.1
+    let := (zlIndWeilPull_exact D l hl Ω f).2.2
+    have eFree : L ⋙ FX ≅ FY ⋙ P :=
+      freeTransportIso _ _ L
+        (zlIndSquare (zlSmallPull D l hl Ω f)
+          (zlSmallFrobenius D l hl Ω Y₀) (zlSmallFrobenius D l hl Ω X₀)
+          (zlSmallSquare D l hl Ω f))
+    change L.mapDerivedCategoryPlus ⋙ FX.mapDerivedCategoryPlus ≅
+      FY.mapDerivedCategoryPlus ⋙ P.mapDerivedCategoryPlus
+    exact (Functor.mapDerivedCategoryPlusCompIso L FX).symm ≪≫
+      Functor.mapDerivedCategoryPlusNatIso eFree ≪≫
+      Functor.mapDerivedCategoryPlusCompIso FY P
+  refine ⟨JX, JY, hX, hY, hheart, hcoh, ?_, ?_⟩
+  · exact ⟨Functor.isoWhiskerRight e (zlIndDerivedFree D l hl Ω X₀) ≪≫
+      Functor.associator JY L.mapDerivedCategoryPlus (zlIndDerivedFree D l hl Ω X₀) ≪≫
+      Functor.isoWhiskerLeft JY hfree⟩
+  · intro M N g hg
+    apply CategoryTheory.indDerived_singleYoneda_detects_iso
+      (zlSmallHeart D l Ω hl Y₀) g
+    intro A n
+    obtain ⟨B, ⟨i⟩⟩ := hcover A n
+    constructor
+    · intro a b hab
+      apply (cancel_epi i.hom).1
+      apply (hg B).injective
+      simpa only [Category.assoc] using congrArg (fun h ↦ i.hom ≫ h) hab
+    · intro a
+      obtain ⟨b, hb⟩ := (hg B).surjective (i.hom ≫ a)
+      change b ≫ g = i.hom ≫ a at hb
+      refine ⟨i.inv ≫ b, ?_⟩
+      change (i.inv ≫ b) ≫ g = a
+      rw [Category.assoc, hb, Iso.inv_hom_id_assoc]
 
 end WeilConjectures

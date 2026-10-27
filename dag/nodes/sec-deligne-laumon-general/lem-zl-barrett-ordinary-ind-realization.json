@@ -1,0 +1,130 @@
+{
+ "id": "lem-zl-barrett-ordinary-ind-realization",
+ "kind": "statement",
+ "title": "Ordinary constructible realization and inverse image before Frobenius",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, an algebraic closure Ω of Q_l, finite-type k₀-schemes X₀,Y₀ and a morphism f:X₀→Y₀, as in [def-weil-weil-sheaf-complex] and [def-zl-weil-ind-sheaf-category]. Write C_T for the specified small ordinary constructible heart. With independently chosen derived localization universes for Ind(C_X) and Ind(C_Y), put L=Ind(f*) using the specified Yoneda Kan extension. Then L is additive, exact, and left adjoint. There exist fully faithful J_T:D_c^b(T,Ω)→D⁺(Ind(C_T)) such that J_X(A)=y(A)[0] up to isomorphism for each A in C_X; each H^n(J_Y K) is represented by an object of C_Y; for every A in C_Y and integer n there is B with J_Y(B) isomorphic to the single complex y(A) in degree n; and f*⋙J_X is naturally isomorphic to J_Y⋙D⁺(L). This statement concerns ordinary objects only and includes no fixed pairs or isomorphism detection.",
+ "source": {
+  "document": "Owen Barrett, The derived category of the abelian category of constructible sheaves, arXiv:2005.10859; Kashiwara–Schapira, Categories and Sheaves; SGA 4",
+  "place": "Barrett Theorem 1.1 and §3; Categories and Sheaves §15.3; finite-open-cover descent in lem-zl-barrett-ind-realization steps 1–2. The coefficient-stage and nonseparated assembly is written by R5."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply Barrett Theorem 1.1 at each finite coefficient field on a separated geometric fibre, identifying the bounded constructible category with the bounded derived category of its ordinary heart. Compose its inverse realization with bounded derived Yoneda. A bounded roof and all its finitely many arrows and exactness relations descend to a common filtered stage, proving full faithfulness of this Yoneda functor. Termwise exactness gives its heart and cohomology formulas. A heart object placed in degree n gives a preimage of each single representable in degree n.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image on the ordinary heart extends by filtered colimits to the specified Kan extension L. Exactness of filtered colimits proves exactness of L; the ind right adjoint makes L left adjoint. Applying inverse image to bounded complexes and then localizing gives the natural inverse-image comparison. Its heart comparison is the specified Yoneda Kan unit. The coefficient-extension comparison uses the same termwise functor, so it respects roofs, equations and common finite coefficient stages.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a nonseparated fibre take a finite affine open cover. Finite intersections are separated and quasi-compact. Use its finite Cech resolution to glue the realizations and comparisons. Comparisons agree on overlaps because both are induced termwise and have the same Kan-unit normalization. The resolution gives full faithfulness, represented cohomology and compatibility with inverse image globally. Shifts give all single representables. For the empty fibre and zero complexes these constructions specialize without change.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Owen Barrett, The derived category of the abelian category of constructible sheaves, arXiv:2005.10859; Kashiwara–Schapira, Categories and Sheaves; SGA 4",
+  "place": "Barrett Theorem 1.1 and §3; Categories and Sheaves §15.3; finite-open-cover descent in lem-zl-barrett-ind-realization steps 1–2. The coefficient-stage and nonseparated assembly is written by R5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructible derived category realization fully faithful in derived ind heart and compatibility with inverse image",
+   "results": "8 hits: CategoryTheory.Ind.inclusion.fullyFaithful, CategoryTheory.Ind.yoneda.fullyFaithful, CategoryTheory.fullyFaithfulInducedFunctor, HasDerivedCategory.standard, CategoryTheory.Functor.Full, ComplexShape.Embedding.fullyFaithfulExtendFunctor, DerivedCategory.instCategory, CategoryTheory.Functor.FullyFaithful.mk",
+   "date": "2026-10-27",
+   "verdict": "No theorem of this statement: the hits concern ordinary full faithfulness, single complexes, or the general localization infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fully faithful realization of constructible derived category in bounded below derived category of ind objects of constructible heart",
+   "results": "8 hits: DerivedCategory.instFullSingleFunctor, HasDerivedCategory.standard, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-27",
+   "verdict": "No theorem of this statement: the hits concern ordinary full faithfulness, single complexes, or the general localization infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "Barrett|realization|realisation",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean, Mathlib/CategoryTheory/Filtered/Small.lean, Mathlib/CategoryTheory/Filtered/Small.lean, Mathlib/CategoryTheory/Filtered/Small.lean, Mathlib/CategoryTheory/Filtered/Small.lean, Mathlib/CategoryTheory/Filtered/Small.lean",
+   "date": "2026-10-27",
+   "verdict": "No theorem of this statement: the hits concern ordinary full faithfulness, single complexes, or the general localization infrastructure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BarrettIndRealization",
+  "date": "2026-10-28",
+  "group": "R5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First proof paragraph: constructible realization used to compare higher compact-support images; lem-zl-barrett-ordinary-ind-realization",
+   "via": [
+    "lem-zl-barrett-ind-realization",
+    "lem-zl-ind-proper-higher-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BarrettOrdinaryIndRealization",
+  "file": "lean/Sheaf/Paper/BarrettOrdinaryIndRealization.lean",
+  "declaration": "WeilConjectures.zlBarrettOrdinaryIndRealization",
+  "statement": "theorem zlBarrettOrdinaryIndRealization\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    [HasDerivedCategory.{wX} (Ind (zlSmallHeart D l Ω hl X₀))]\n    [HasDerivedCategory.{wY} (Ind (zlSmallHeart D l Ω hl Y₀))] (f : X₀ ⟶ Y₀) :\n    let L := zlIndMap (zlSmallPull D l hl Ω f)\n    ∃ (_ha : L.Additive) (_hlim : PreservesFiniteLimits L)\n      (_hcolim : PreservesFiniteColimits L) (_hadj : L.IsLeftAdjoint)\n      (JX : generalAlgebraicallyClosedConstructibleCategory l Ω\n        (D.geometricFiber X₀).left ⥤\n        DerivedCategory.Plus (Ind (zlSmallHeart D l Ω hl X₀)))\n      (JY : generalAlgebraicallyClosedConstructibleCategory l Ω\n        (D.geometricFiber Y₀).left ⥤\n        DerivedCategory.Plus (Ind (zlSmallHeart D l Ω hl Y₀))),\n      Nonempty JX.FullyFaithful ∧ Nonempty JY.FullyFaithful ∧\n      (∀ A : zlSmallHeart D l Ω hl X₀,\n        Nonempty (JX.obj (AsSmall.down.obj A).obj ≅\n          (DerivedCategory.Plus.singleFunctor _ 0).obj (Ind.yoneda.obj A))) ∧\n      (∀ (K : generalAlgebraicallyClosedConstructibleCategory l Ω\n          (D.geometricFiber Y₀).left) (n : ℤ),\n        ∃ A : zlSmallHeart D l Ω hl Y₀,\n          Nonempty (Ind.yoneda.obj A ≅\n            (DerivedCategory.Plus.homologyFunctor _ n).obj (JY.obj K))) ∧\n      (∀ (A : zlSmallHeart D l Ω hl Y₀) (n : ℤ),\n        ∃ B, Nonempty (JY.obj B ≅\n          (DerivedCategory.Plus.singleFunctor _ n).obj (Ind.yoneda.obj A))) ∧\n      Nonempty (zlPull D l hl Ω f ⋙ JX ≅ JY ⋙ L.mapDerivedCategoryPlus)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261027T180753-L-3899311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261027T180753-L-3899311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

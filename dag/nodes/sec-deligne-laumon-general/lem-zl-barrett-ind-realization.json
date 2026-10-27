@@ -13,45 +13,48 @@
  },
  "proof": [
   {
-   "text": "For separated finite-type schemes over the algebraically closed geometric field, apply Barrett Theorem 1.1 at each finite extension E/Q_l: ordinary bounded constructible complexes are the bounded derived category of the constructible heart. The exact Yoneda embedding in the ind-heart is fully faithful on bounded derived categories. A bounded roof and its finitely many arrows and exactness equations descend to a common stage of the filtered ind-presentations. The resulting realization is fully faithful, agrees with Yoneda on heart objects, and its cohomology is Yoneda of the constructible cohomology.",
+   "text": "Apply [lem-zl-barrett-ordinary-ind-realization] to f. Retain its exact left adjoint L, fully faithful functors J_X,J_Y, heart and cohomology formulas, coverage of single representables, and ordinary inverse-image isomorphism e. These data do not involve Frobenius or direct image.",
    "uses": [
-    "def-weil-weil-sheaf-complex",
-    "def-zl-weil-ind-sheaf-category"
+    "lem-zl-barrett-ordinary-ind-realization"
    ],
    "elementary": false
   },
   {
-   "text": "The inverse-image comparison is induced termwise and fixed on degree-zero objects by the Yoneda Kan unit. Scalar extension has the same termwise comparison, so all data descend to common finite coefficient stages. For nonseparated finite-type schemes choose a finite affine open cover. Its finite intersections are separated and quasi-compact; finite Cech resolutions glue the comparison and full faithfulness. The comparisons agree on overlaps because they come from the same termwise inverse image and its units.",
-   "uses": [
-    "def-zl-weil-ind-sheaf-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Representables generate the ind-heart: if every map from a representable to an object vanishes, the maps from all members of its filtered presentation vanish, hence its identity vanishes. If a bounded-below derived object is right orthogonal to all shifts of representable heart objects, start at its bottom cohomological degree. The bottom truncation identifies the corresponding Hom groups with maps to bottom cohomology, forcing this to vanish; repeat degree by degree. To test an arrow, use its cone and the long exact Hom sequences. Thus represented derived objects detect isomorphisms.",
-   "uses": [
-    "def-zl-weil-ind-sheaf-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The free Frobenius functor is the coproduct of all integer Frobenius iterates, which is exact. The specified inverse image commutes with these sums, and its normalized Frobenius square identifies each summand. Applying these operations termwise and localizing gives the free-induction inverse-image comparison. This concerns inverse image only and does not assume any direct-image representability.",
+   "text": "Let F_Y,F_X be the exact ind-Frobenius autoequivalences and let e_F:L⋙F_X≅F_Y⋙L be the prescribed ind square. Choose the right adjoint R of L. Because F_Y and F_X are equivalences, the right mate of e_F inverse is invertible. Lift L⊣R using [lem-sf-fixed-pair-adjunction-lift]. Now L⋙Free_X and Free_Y⋙(ind-Weil f*) have right adjoints U_X⋙R and lifted R⋙U_Y, identified by the underlying-object comparison. Uniqueness of left adjoints gives L⋙Free_X≅Free_Y⋙(ind-Weil f*). This is the private proved freeTransportIso in Lean. Exactness of the free functors is the source Free.preservesHomology_functor used in [lem-sf-fixed-pair-derived-forget-comparison].",
    "uses": [
     "def-zl-weil-ind-sheaf-category",
+    "lem-sf-fixed-pair-adjunction-lift",
     "lem-sf-fixed-pair-derived-forget-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply exact bounded-below derivation to the heart-level free comparison. Invert the composition isomorphism on the L⋙Free_X side and use the forward composition isomorphism on Free_Y⋙(ind-Weil f*). Whisker the ordinary comparison e by D⁺Free_X and this derived free comparison by J_Y. Their composite is exactly the asserted free-induction inverse-image isomorphism, with all four independently chosen localization universes retained.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arrow g satisfying the hypothesis of the isomorphism test, fix A,n and choose the supplied B and i:J_Y(B)≅y(A)[-n]. Injectivity of postcomposition from y(A)[-n] follows by precomposing with i.hom and using injectivity from J_Y(B). Given a:y(A)[-n]→N, choose b:J_Y(B)→M with b g=i.hom a; then i.inv b maps to a. Thus all single representable Hom maps are bijective. Apply [lem-zl-ind-derived-representable-detection]. Assemble this with the retained full faithfulness, heart, cohomology and free-comparison data.",
+   "uses": [
+    "lem-zl-ind-derived-representable-detection"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-weil-sheaf-complex",
+  "lem-zl-barrett-ordinary-ind-realization",
   "def-zl-weil-ind-sheaf-category",
-  "lem-sf-fixed-pair-derived-forget-comparison"
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-zl-ind-derived-representable-detection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Owen Barrett, The derived category of the abelian category of constructible sheaves, arXiv:2005.10859; Kashiwara–Schapira, Categories and Sheaves; SGA 4",
-  "place": "Barrett Theorem 1.1 and its proof in §3 via Theorem 1.3; Categories and Sheaves §15.3 (bounded derived full faithfulness of the exact ind embedding); finite open-cover descent. The common-stage and free-induction assembly is written by B5."
+  "document": "lean/Sheaf/Paper/BarrettIndRealization.lean",
+  "place": "R5: ordinary realization, free comparison by unique left adjoints and exact derived composition, and explicit Hom transport to the generic detection lemma. The free comparison and final assembly are complete Lean proofs."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -130,12 +133,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B5",
+  "group": "R5",
   "result": "pass",
-  "landing": "20261025T041130-L-1016477",
+  "landing": "20261027T180753-L-3899311",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
