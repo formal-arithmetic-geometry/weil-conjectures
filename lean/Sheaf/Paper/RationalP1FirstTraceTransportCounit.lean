@@ -10,6 +10,8 @@ public import Sheaf.Paper.RationalTatePullback
 public import Sheaf.Paper.LocalizingClosure
 public import Sheaf.Paper.DiagonalCoefficientReference
 
+import Sheaf.Paper.RationalP1FirstTraceTransportCounitExpanded
+
 /-! # Normalized counit equality for the terminal first projective-line trace
 
 Source: the Kunneth and trace base-change calculation in the first rational projective-line
@@ -36,6 +38,20 @@ attribute [local irreducible] moduleObjectDerivedPushforward moduleObjectDerived
 attribute [local irreducible] twist projectionMap singleUnitIso
 attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] condensedAmbientExchange
+
+private theorem rationalP1_counitComponent_factor
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})
+    (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
+    (K : DerivedCategory (Modules Λ Y))
+    (hq : IsIso (projectionMap Λ (ProjectiveLine Y ↘ Y) K
+      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj
+        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧))) :
+    counitComponent Λ Y L d K hq =
+      counitProjectionPart Λ Y (L (ProjectiveLine Y)) K hq ≫
+        (K ◁ (trace Λ Y L d ≫ (singleUnitIso Λ Y).hom)) ≫ (ρ_ K).hom := by
+  unfold counitComponent counitProjectionPart
+  simp only [whiskerLeft_comp, Category.assoc]
 
 
 set_option maxHeartbeats 800000 in
@@ -127,6 +143,9 @@ theorem rationalP1_first_trace_transport_counit
       (((DerivedCategory.singleFunctor
           (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
             (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧)
-      (diagram l c Y family).trace₁ h₁ := by sorry
+      (diagram l c Y family).trace₁ h₁ := by
+  rw [rationalP1_counitComponent_factor]
+  exact rationalP1_first_trace_transport_counit_expanded l c k p hpl Y δ family
+    reference M hM hq hb hp h₁
 
 end AlgebraicGeometry.ProEtale.RationalP1
