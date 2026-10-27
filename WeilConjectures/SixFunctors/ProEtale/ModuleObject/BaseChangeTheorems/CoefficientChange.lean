@@ -11,8 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayam
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangePadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
-public import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeResidueExchange
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
