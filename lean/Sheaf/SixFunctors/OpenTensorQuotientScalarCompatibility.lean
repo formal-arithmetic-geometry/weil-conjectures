@@ -6,6 +6,8 @@ Authors: SHEAF group Z5
 module
 
 public import Sheaf.SixFunctors.OpenTensorQuotientData
+import Sheaf.SixFunctors.OpenQuotientScalarCompatibilityData
+import Sheaf.SixFunctors.OpenQuotientScalarComparisonExistence
 
 /-! # Scalar units and open restriction of strict quotient towers
 
@@ -78,6 +80,25 @@ theorem scalarUnitTower_natural (W : Scheme.{u})
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
+/-- For fixed normalized scalar data and a strict scalar comparison, the scalar-adjunction
+unit agrees with extension by zero. The proof is the generator calculation: both maps
+send each extension summand to the same unit generator, and extensionality of
+sheafification, complexes, and strict towers assembles the equality. This includes zero
+and negative degrees and empty or identity opens.
+Source: Stacks Project, Tags 03DI, 03EK, 0E8I and 0941.
+(blueprint: lem-sf-open-quotient-scalar-unit-equation). -/
+theorem openQuotientScalarUnitEquation
+    (o : IntegralOpenReduction.Operations l E j)
+    (tc : IntegralOpenReduction.TensorComparison l E j o)
+    (sc : ScalarCompatibility l E j o)
+    (r : ScalarComparison l E j o sc tc) :
+    ∀ P : CochainComplex (scalarReductionSource l E U) ℤ,
+      scalarUnitTower l E X ((OpenSemilinearTensor.extensionComplex l E j o).obj P) ≫
+          r.iso.hom.app P =
+        (Functor.constComp ℕᵒᵖ P (OpenSemilinearTensor.extensionComplex l E j o)).inv ≫
+          Functor.whiskerRight (scalarUnitTower l E U P)
+            (OpenSemilinearTensor.extensionComplex l E j o) := by sorry
+
 /-- Scalar restriction of the fixed open operations admits a strict comparison which
 intertwines the actual scalar-adjunction units on every complex. This is only the
 scalar comparison; no tensor balancing or open tensor square is asserted.
@@ -109,6 +130,9 @@ theorem openQuotientScalarUnitCompatibility
             r.iso.hom.app P =
           (Functor.constComp ℕᵒᵖ P (OpenSemilinearTensor.extensionComplex l E j o)).inv ≫
             Functor.whiskerRight (scalarUnitTower l E U P)
-              (OpenSemilinearTensor.extensionComplex l E j o) := by sorry
+              (OpenSemilinearTensor.extensionComplex l E j o) := by
+  obtain ⟨sc⟩ := openQuotientScalarCompatibilityData l E j o
+  obtain ⟨r⟩ := openQuotientScalarComparisonExistence l E j o tc sc
+  exact ⟨sc, r, openQuotientScalarUnitEquation l E j o tc sc r⟩
 
 end WeilConjectures.OpenTensorQuotient

@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-open-quotient-scalar-unit-equation",
+ "kind": "statement",
+ "title": "Scalar unit equation for a fixed strict comparison",
+ "statement": "For fixed normalized scalar compatibility and strict scalar comparison data, the scalar-adjunction unit agrees with extension by zero on every cochain complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03EK, 0E8I and 0941; generator formula for the unit and extensionality."
+ },
+ "stmt_deps": [
+  "def-sf-open-tensor-quotient-data"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate both composites on extension-by-zero generators. The normalized finite and system comparison formulas send the unit generator 1 tensor x to the same extension summand. Sheafification, complex, and strict-tower extensionality give equality in every degree and level.",
+   "uses": [
+    "def-sf-open-tensor-quotient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-tensor-quotient-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03EK, 0E8I and 0941; generator formula for the unit and extensionality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scalar adjunction unit open extension generator equality",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero scalar unit strict tower",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.whiskerRight scalarUnit",
+   "results": "Generic whiskering only.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarUnitTower openQuotientScalarUnitEquation",
+   "results": "Only current module declarations.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorQuotientScalarCompatibility",
+  "date": "2026-10-28",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-quotient-scalar-unit-compatibility",
+   "place": "strict scalar quotient-tower unit calculation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorQuotientScalarCompatibility",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorQuotientScalarCompatibility.lean",
+  "declaration": "WeilConjectures.OpenTensorQuotient.openQuotientScalarUnitEquation",
+  "declarations": [
+   "WeilConjectures.OpenTensorQuotient.openQuotientScalarUnitEquation"
+  ],
+  "statement": "theorem openQuotientScalarUnitEquation\n    (o : IntegralOpenReduction.Operations l E j)\n    (tc : IntegralOpenReduction.TensorComparison l E j o)\n    (sc : ScalarCompatibility l E j o)\n    (r : ScalarComparison l E j o sc tc) :\n    ∀ P : CochainComplex (scalarReductionSource l E U) ℤ,\n      scalarUnitTower l E X ((OpenSemilinearTensor.extensionComplex l E j o).obj P) ≫\n          r.iso.hom.app P =\n        (Functor.constComp ℕᵒᵖ P (OpenSemilinearTensor.extensionComplex l E j o)).inv ≫\n          Functor.whiskerRight (scalarUnitTower l E U P)\n            (OpenSemilinearTensor.extensionComplex l E j o)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T180614-L-3881184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T180614-L-3881184",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

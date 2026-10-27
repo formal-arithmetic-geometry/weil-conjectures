@@ -19729,3 +19729,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:06 L: merged deliver/G2/Sheaf.Paper.FiniteSectionSpecializationScalar (stage 3; reviewer PASS; first push; landing 20261027T180610-L-3880276 (interface); batch 20261027T180444; modules 2; new nodes 1)
 - 18:06 L: merged deliver/G2/Sheaf.Paper.TensorReductionStrictDerivedSquare (stage 3; reviewer PASS; first push; landing 20261027T180612-L-3880467 (interface); batch 20261027T180444; modules 2; new nodes 1)
 - 18:06 L: merged deliver/G3/Sheaf.SecSmoothPurity.FiniteGeneralRingIntegrationExponent (stage 3; reviewer PASS; first push; landing 20261027T180613-L-3880821 (interface); batch 20261027T180444; modules 2; new nodes 1)
+- 18:06 L: merged deliver/G3/Sheaf.SixFunctors.OpenTensorQuotientScalarCompatibility (stage 3; reviewer PASS; first push; landing 20261027T180614-L-3881184 (interface); batch 20261027T180444; modules 3; new nodes 3)
