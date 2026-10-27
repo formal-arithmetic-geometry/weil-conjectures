@@ -1,0 +1,93 @@
+{
+ "id": "lem-sfb-rational-p1-unit-counit-shift-compatibility",
+ "kind": "statement",
+ "title": "Shift compatibility of the normalized rational projective-line unit and counit",
+ "statement": "For the normalized rational projective-line unit and counit, after triangulated and commutative-shift structures are chosen on the two restricted functors, both component natural transformations commute with all shifts.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Exactness: shift compatibility of normalized unit and counit"
+ },
+ "stmt_deps": [
+  "lem-sfb-rational-p1-localizing-preservation",
+  "lem-sfb-rational-p1-unit-inversions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Exactness: shift compatibility of normalized unit and counit"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.RationalP1UnitCounit",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.unitCounit_shift_compatibility",
+  "file": "lean/Sheaf/Paper/RationalP1UnitCounit.lean",
+  "statement": "theorem unitCounit_shift_compatibility (family : Family l Y)\n    [triP : (CategoryTheory.localizingClosure\n      (constantModelBoundedConstructible (coefficient l c).X\n        (ProjectiveLine Y))).IsTriangulated]\n    [triY : (CategoryTheory.localizingClosure\n      (constantModelBoundedConstructible (coefficient l c).X Y)).IsTriangulated]\n    [commF : (push l c k p hpl Y).CommShift ℤ]\n    [commG : (exceptional l c k p hpl Y).CommShift ℤ] :\n    NatTrans.CommShift (unitCounit l c k p hpl Y family).1 ℤ ∧\n      NatTrans.CommShift (unitCounit l c k p hpl Y family).2 ℤ",
+  "branch": "A2",
+  "by": "A2",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ObjectProperty.IsTriangulated lift CommShift",
+   "results": "No direct existing project declaration found.",
+   "date": "2026-10-28",
+   "verdict": "the helper packages the standard full-subcategory lift construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.IsTriangulated",
+   "results": "Mathlib shift/subcategory APIs used by the helper.",
+   "date": "2026-10-28",
+   "verdict": "used the inherited full-subcategory instances"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact triangulated functor restricted full subcategory",
+   "results": "No shorter project theorem found.",
+   "date": "2026-10-28",
+   "verdict": "the helper is the shortest route"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-28",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "Exactness decomposition of the rational projective-line unit/counit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T233738-L-4107950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T233738-L-4107950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

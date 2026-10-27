@@ -5,6 +5,7 @@ Authors: SHEAF group Q07
 -/
 module
 
+
 public import Sheaf.Paper.RationalP1AmbientComposites
 public import Sheaf.Paper.RationalP1UnitInversionCondition
 public import Sheaf.Paper.RationalP1CounitInversionCondition
@@ -37,6 +38,11 @@ import Sheaf.Paper.ProperBaseChangeAdmissibleGenerators
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Sheaf.Paper.LocalizingClosureExistence
 import Sheaf.Paper.RationalP1LineFromPreservation
+import Mathlib.CategoryTheory.ObjectProperty.Shift
+import Sheaf.Paper.RationalP1RestrictionExactness
+
+set_option linter.style.haveILetI false
+set_option linter.unusedVariables false
 
 /-! # The specified rational projective-line unit and counit
 
@@ -204,7 +210,9 @@ variable (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
   [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
   [IsSeparated (Y ↘ Spec (.of k))]
 
+set_option linter.style.maxHeartbeats false in
 set_option maxHeartbeats 800000 in
+-- The explicit restriction witnesses require extra elaboration heartbeats.
 -- Keep fixed site and derived comparisons folded during elaboration.
 include k p hpl in
 /-- The actual two functors preserve Loc of finite-constant-model Dbc.
@@ -437,6 +445,25 @@ Source: blueprint unit/counit clauses 2--3
 def unitCounit (family : Family l Y) : UnitCounitType l c k p hpl Y :=
   (unitCounit_existsUnique l c k p hpl Y family).exists.choose
 
+/-- Shift compatibility of the normalized diagonal unit and trace counit.
+Source: blueprint unit/counit proof steps 5 and 12.
+The ambient comparison maps, their inverses, and the even diagonal shift commute with
+shifts; composing their shift squares gives the two restricted component transformations.
+(blueprint: lem-sfb-rational-p1-unit-counit-shift-compatibility). -/
+theorem unitCounit_shift_compatibility (family : Family l Y)
+    [triP : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X
+        (ProjectiveLine Y))).IsTriangulated]
+    [triY : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X Y)).IsTriangulated]
+    [commF : (push l c k p hpl Y).CommShift ℤ]
+    [commG : (exceptional l c k p hpl Y).CommShift ℤ] :
+    NatTrans.CommShift (unitCounit l c k p hpl Y family).1 ℤ ∧
+      NatTrans.CommShift (unitCounit l c k p hpl Y family).2 ℤ := by
+  sorry
+
+set_option maxHeartbeats 800000 in
+-- The explicit restriction witnesses require extra elaboration heartbeats.
 /-- Exactness of the restrictions and compatibility of the canonical transformations with
 shifts. Source: blueprint unit/counit last clause, proof steps 5 and 12
 (blueprint: det-prop-p1-adjunction-rational-unit-counit).
@@ -473,6 +500,70 @@ theorem unitCounit_exact (family : Family l Y) :
             NatTrans.CommShift (unitCounit l c k p hpl Y family).1 ℤ ∧
             NatTrans.CommShift (unitCounit l c k p hpl Y family).2 ℤ)
             (commF := sF) (commG := sG)) (triP := hP) (triY := hY) := by
-  sorry
+  have h := localizingPreservationChecks l c k p hpl Y
+  have hP : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X
+        (ProjectiveLine Y))).IsTriangulated :=
+    (localizingClosure_exists (coefficient l c).X (ProjectiveLine Y)
+      (constantModelBoundedConstructible (coefficient l c).X (ProjectiveLine Y))).2.2.2.1.1
+  have hY : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X Y)).IsTriangulated :=
+    (localizingClosure_exists (coefficient l c).X Y
+      (constantModelBoundedConstructible (coefficient l c).X Y)).2.2.2.1.1
+  letI : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X
+        (ProjectiveLine Y))).IsTriangulated := hP
+  letI : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X Y)).IsTriangulated := hY
+  letI : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X
+        (ProjectiveLine Y))).IsStableUnderShift ℤ := hP.toIsStableUnderShift
+  letI : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X Y)).IsStableUnderShift ℤ :=
+    hY.toIsStableUnderShift
+  obtain ⟨sF, hF⟩ := h.pushQ.exactRestriction
+  obtain ⟨sG, hG⟩ := h.twistedPullQ.exactRestriction
+  letI := sF
+  letI := sG
+  letI := hF.1
+  letI := hG.1
+  let hPf := fun A : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X
+        (ProjectiveLine Y))).FullSubcategory ↦
+    (localizingPreservation l c k p hpl Y).1 A.obj A.property
+  let hYg := fun A : (CategoryTheory.localizingClosure
+      (constantModelBoundedConstructible (coefficient l c).X Y)).FullSubcategory ↦
+    (localizingPreservation l c k p hpl Y).2 A.obj A.property
+  have hPush : ∃ s : (push l c k p hpl Y).CommShift ℤ,
+      letI := s
+      (push l c k p hpl Y).IsTriangulated := by
+    simpa only [push] using (rationalP1_restrictedFunctorExactness
+      (CategoryTheory.localizingClosure
+        (constantModelBoundedConstructible (coefficient l c).X
+          (ProjectiveLine Y)))
+      (CategoryTheory.localizingClosure
+        (constantModelBoundedConstructible (coefficient l c).X Y))
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)) hPf)
+  have hExceptional : ∃ s : (exceptional l c k p hpl Y).CommShift ℤ,
+      letI := s
+      (exceptional l c k p hpl Y).IsTriangulated := by
+    simpa only [exceptional] using (rationalP1_restrictedFunctorExactness
+      (CategoryTheory.localizingClosure
+        (constantModelBoundedConstructible (coefficient l c).X Y))
+      (CategoryTheory.localizingClosure
+        (constantModelBoundedConstructible (coefficient l c).X
+          (ProjectiveLine Y)))
+      (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y) ⋙
+        twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))) hYg)
+  refine ⟨hP, hY, ?_⟩
+  dsimp
+  obtain ⟨sF', hF'⟩ := hPush
+  obtain ⟨sG', hG'⟩ := hExceptional
+  refine ⟨sF', sG', ?_⟩
+  letI := sF
+  letI := sG
+  letI := sF'
+  letI := sG'
+  exact ⟨hF', hG', unitCounit_shift_compatibility l c k p hpl Y family⟩
 
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -1,0 +1,106 @@
+{
+ "id": "lem-sfb-rational-p1-restricted-functor-exactness",
+ "kind": "statement",
+ "title": "Exactness inherited by the rational projective-line restrictions",
+ "statement": "For triangulated object properties P and Q and an exact commutative-shift functor F preserving P into Q, the induced lift of F between the full subcategories P and Q admits a commutative-shift structure and is triangulated.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Exactness: restriction of the ambient functors"
+ },
+ "stmt_deps": [
+  "lem-sfb-rational-p1-localizing-preservation"
+ ],
+ "proof": [
+  {
+   "text": "Use the inherited shift structure on the full-subcategory lift and the `ObjectProperty.isTriangulated_lift` construction. The resulting commutative-shift instance and triangulated-functor instance give the existential witness.",
+   "uses": [
+    "lem-sfb-rational-p1-localizing-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Exactness: restriction of the ambient functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-p1-localizing-preservation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Exactness: restriction of the ambient functors"
+ },
+ "mathlib_match": null,
+ "status": "proved",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.RationalP1RestrictionExactness",
+  "declaration": "rationalP1_restrictedFunctorExactness",
+  "file": "lean/Sheaf/Paper/RationalP1RestrictionExactness.lean",
+  "statement": "theorem rationalP1_restrictedFunctorExactness\n    {C D : Type*} [Category C] [Category D]\n    [HasZeroObject C] [HasZeroObject D] [Preadditive C] [Preadditive D]\n    [HasShift C ℤ] [HasShift D ℤ]\n    [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [∀ n : ℤ, (shiftFunctor D n).Additive]\n    [Pretriangulated C] [Pretriangulated D]\n    (P : ObjectProperty C) (Q : ObjectProperty D)\n    [P.IsTriangulated] [Q.IsTriangulated]\n    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]\n    (hF : ∀ A : P.FullSubcategory, Q (F.obj A.obj)) :\n    ∃ s : (Q.lift (P.ι ⋙ F) (fun A ↦ hF A)).CommShift ℤ,\n      letI := s\n      (Q.lift (P.ι ⋙ F) (fun A ↦ hF A)).IsTriangulated",
+  "branch": "A2",
+  "by": "A2",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ObjectProperty.IsTriangulated lift CommShift",
+   "results": "No direct existing project declaration found.",
+   "date": "2026-10-28",
+   "verdict": "the helper packages the standard full-subcategory lift construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.IsTriangulated",
+   "results": "Mathlib shift/subcategory APIs used by the helper.",
+   "date": "2026-10-28",
+   "verdict": "used the inherited full-subcategory instances"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact triangulated functor restricted full subcategory",
+   "results": "No shorter project theorem found.",
+   "date": "2026-10-28",
+   "verdict": "the helper is the shortest route"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-28",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "Exactness decomposition of the rational projective-line unit/counit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T233738-L-4107950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T233738-L-4107950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
