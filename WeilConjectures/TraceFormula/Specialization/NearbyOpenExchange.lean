@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchangeComposition
 public import WeilConjectures.TraceFormula.Specialization.NearbyCompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.OpenImmersionLowerShriekComp
@@ -367,3 +368,152 @@ noncomputable def Compactification.ofOpen (C : hM.Compactification)
   g_eq := by rw [hg, NearbyCyclesModel.Hom.comp_generic, Category.assoc, ← C.g_eq]
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModelOfBase
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModelOfBase
+
+open Scheme
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {k' : Type u} [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
+  [Fact (ringChar k' ≠ ℓ)] [Algebra k k']
+  {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom] {Y' : Over (Spec (.of k'))} [LocallyOfFiniteType Y'.hom]
+  [QuasiCompact Y'.hom] [IsSeparated Y'.hom] {N : NearbyCyclesModel Y.left Y'.left}
+  {q : N.total ⟶ trait k'} {g : N.generic ⟶ Spec (.of (traitGenericField k'))}
+  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left} {qM : M.total ⟶ trait k'}
+  {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {hM : M.IsTraitModelOfBase k qM gM}
+
+/-- The compact-support exchange of the compactification `N ⊆ P` restricted from `M ⊆ P`. -/
+lemma Compactification.compactSupportExchange_ofOpen (C : hM.Compactification)
+    (hN : N.IsTraitModelOfBase k q g) (j : Y ⟶ X) [IsOpenImmersion j.left] (j' : Y' ⟶ X')
+    [IsOpenImmersion j'.left] (φ : N.Hom M j.left j'.left) [IsOpenImmersion φ.total]
+    (hφ : IsPullback φ.generic N.j M.j φ.total) (hq : q = φ.total ≫ qM)
+    (hg : g = φ.generic ≫ gM) [IsOpenImmersion (j ≫ C.ι).left]
+    [IsOpenImmersion (j' ≫ C.ι').left]
+    [IsIso ((φ.comp C.hom).pullbackExchange (Profinite.padicAlgClRingObj ℓ))] :
+    (C.ofOpen hN j j' φ hφ hq hg).compactSupportExchange ℓ =
+      compactSupportExchangeOfCompactification ℓ (hN.preservesBoundedConstructible ℓ)
+        (preservesBoundedConstructible_traitModel ℓ) (comp_toPoint (j ≫ C.ι))
+        (comp_toPoint (j' ≫ C.ι')) (φ.comp C.hom) C.isTraitModelOfBase.toTrait
+        (C.isIsoOn_pushforwardExchange ℓ) :=
+  rfl
+
+/-- **The compact-support exchanges along an open sub-model** (blueprint
+`det-nearby-exchange-maps`, `det-nearby-exceptional-tensor` (3)): for an open sub-model `N ⊆ M`
+over open immersions `j`, `j'` and a compactification `M ⊆ P`, the compact-support exchange of
+the restricted compactification `N ⊆ P` is the composite of the exchange `ν_j` (adjoint to
+`α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`, through the composition isomorphisms
+`Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`.
+
+Mathematically: `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of
+the composition isomorphisms of the pullbacks (`ProEtale.CondensedRing.lowerShriekExchangeOfInv_comp_app`
+with `NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq`); these conjugates are the composition
+isomorphisms of the lower shrieks under `Rf_! ≅ f_!`
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_hom_app_of_isOpenImmersion`,
+`ProEtale.CondensedRing.compactificationLowerShriekIso_hom_app_comp_map_openImmersionLowerShriekComp`);
+the shapes `χ_P⁻¹ ∘ Rp'_*(ν)` then compose
+(`ProEtale.CondensedRing.compactSupportExchangeAux_lift_comp_app_of_eq`). -/
+theorem Compactification.compactSupportExchange_ofOpen_app (C : hM.Compactification)
+    (hN : N.IsTraitModelOfBase k q g) (j : Y ⟶ X) [IsOpenImmersion j.left] (j' : Y' ⟶ X')
+    [IsOpenImmersion j'.left] (φ : N.Hom M j.left j'.left) [IsOpenImmersion φ.total]
+    (hφ : IsPullback φ.generic N.j M.j φ.total) (hq : q = φ.total ≫ qM)
+    (hg : g = φ.generic ≫ gM)
+    [IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    ((C.ofOpen hN j j' φ hφ hq hg).compactSupportExchange ℓ).app K ≫
+        (traitSpecialization k k' (ℓ := ℓ)).map
+          ((lowerShriekCompOfEq ℓ j (toPoint X) (comp_toPoint j)).hom.app K) =
+      (lowerShriekCompOfEq ℓ j' (toPoint X') (comp_toPoint j')).hom.app
+          ((boundedConstructibleNearbyCycles (hN.preservesBoundedConstructible ℓ)).obj K) ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X')).map
+          ((φ.boundedConstructibleLowerShriekExchange ℓ (hN.preservesBoundedConstructible ℓ)
+            (hM.preservesBoundedConstructible ℓ)).app K) ≫
+        (C.compactSupportExchange ℓ).app ((boundedConstructibleLowerShriek ℓ j).obj K) :=
+  sorry
+
+end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModelOfBase
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+section DualizingComp
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {k' : Type u} [Field k'] [Fact (ringChar k').Prime]
+  [Fact (ringChar k' ≠ ℓ)]
+  {F X : Over (Spec (.of k))} [LocallyOfFiniteType F.hom] [QuasiCompact F.hom]
+  [IsSeparated F.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  {F' X' : Over (Spec (.of k'))} [LocallyOfFiniteType F'.hom] [QuasiCompact F'.hom]
+  [IsSeparated F'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  {ΨF : Dᵇc(F.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(F'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  {ΨX : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  {Ψpt : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+    Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+  (σpt : 𝟙_ _ ⟶ Ψpt.obj (𝟙_ _)) [IsIso σpt]
+
+/-- `ProEtale.CondensedRing.dualizingExchange_eq_comp` for the dualizing complexes
+`ProEtale.CondensedRing.dualizingComplex` of Verdier duality. -/
+theorem dualizingExchange_eq_comp_dualizingComplex (d : F ⟶ X) (d' : F' ⟶ X')
+    (νd : ΨF ⋙ boundedConstructibleLowerShriek ℓ d' ⟶
+      boundedConstructibleLowerShriek ℓ d ⋙ ΨX)
+    (νX : ΨX ⋙ boundedConstructibleLowerShriek ℓ (toPoint X') ⟶
+      boundedConstructibleLowerShriek ℓ (toPoint X) ⋙ Ψpt)
+    (νF : ΨF ⋙ boundedConstructibleLowerShriek ℓ (toPoint F') ⟶
+      boundedConstructibleLowerShriek ℓ (toPoint F) ⋙ Ψpt)
+    (h : ∀ M, νF.app M ≫
+        Ψpt.map ((lowerShriekCompOfEq ℓ d (toPoint X) (comp_toPoint d)).hom.app M) =
+      (lowerShriekCompOfEq ℓ d' (toPoint X') (comp_toPoint d')).hom.app (ΨF.obj M) ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint X')).map
+          (νd.app M) ≫
+          νX.app ((boundedConstructibleLowerShriek ℓ d).obj M)) :
+    @Eq (ΨF.obj (dualizingComplex ℓ F) ⟶ dualizingComplex ℓ F') (dualizingExchange ℓ σpt νF)
+      (ΨF.map (Iso.inv (X := (boundedConstructibleUpperShriek ℓ d).obj (dualizingComplex ℓ X))
+          (Y := dualizingComplex ℓ F) (dualizingComplexComp ℓ d)) ≫
+        (exceptionalExchange ℓ d d' νd).app (dualizingComplex ℓ X) ≫
+        (boundedConstructibleUpperShriek ℓ d').map
+          (X := ΨX.obj (dualizingComplex ℓ X)) (Y := dualizingComplex ℓ X')
+          (dualizingExchange ℓ σpt νX) ≫
+        Iso.hom (X := (boundedConstructibleUpperShriek ℓ d').obj (dualizingComplex ℓ X'))
+          (Y := dualizingComplex ℓ F') (dualizingComplexComp ℓ d')) :=
+  dualizingExchange_eq_comp ℓ σpt d d' νd νX νF h
+
+/-- The identification `ρ : Lj^* ω_X ≅ ω_U` of the dualizing complexes along an open immersion is
+`Rj^! ≅ Lj^*` followed by the composition isomorphism of the dualizing complexes. -/
+lemma dualizingComplexUpperStarIso_hom_eq {U Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (i : U ⟶ Z)
+    [IsOpenImmersion i.left] :
+    (NearbyCyclesModel.dualizingComplexUpperStarIso ℓ i).hom =
+      (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ i).inv.app
+          (dualizingComplex ℓ Z) ≫ (dualizingComplexComp ℓ i).hom := by
+  rw [NearbyCyclesModel.dualizingComplexUpperStarIso, dualizingComplexIsoUpperStar,
+    boundedConstructibleUpperShriekIsoUpperStar_eq_padicAlgCl,
+    upperShriekDualizingComplexIso_eq_dualizingComplexComp]
+  simp
+
+end DualizingComp
+
+/-- The rearrangement behind the compatibility of the dualizing maps with open restriction. -/
+lemma map_comp_eq_of_exceptionalExchange {A B A' B' : Type*} [Category A] [Category B]
+    [Category A'] [Category B'] {ΨM : B ⥤ B'} {ΨN : A ⥤ A'} {Lj Uj : B ⥤ A} {Lj' Uj' : B' ⥤ A'}
+    (α : ΨM ⋙ Lj' ⟶ Lj ⋙ ΨN) [IsIso α] (u : Uj ≅ Lj) (u' : Uj' ≅ Lj')
+    (β : Uj ⋙ ΨN ⟶ ΨM ⋙ Uj')
+    (hβ : ∀ b, β.app b = ΨN.map (u.hom.app b) ≫ (inv α).app b ≫ u'.inv.app (ΨM.obj b))
+    {ω : B} {ω' : B'} {ωY : A} {ωY' : A'} (θM : ΨM.obj ω ⟶ ω') (θN : ΨN.obj ωY ⟶ ωY')
+    (d : Uj.obj ω ≅ ωY) (d' : Uj'.obj ω' ≅ ωY')
+    (hθ : θN = ΨN.map d.inv ≫ β.app ω ≫ Uj'.map θM ≫ d'.hom) (ρ : Lj.obj ω ≅ ωY)
+    (hρ : ρ.hom = u.inv.app ω ≫ d.hom) (ρ' : Lj'.obj ω' ≅ ωY')
+    (hρ' : ρ'.hom = u'.inv.app ω' ≫ d'.hom) :
+    Lj'.map θM ≫ ρ'.hom = α.app ω ≫ ΨN.map ρ.hom ≫ θN := by
+  have n := u'.inv.naturality θM
+  rw [hθ, hβ, hρ, hρ', reassoc_of% n]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← ΨN.map_comp_assoc d.hom d.inv, Iso.hom_inv_id, CategoryTheory.Functor.map_id,
+    Category.id_comp, ← ΨN.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, ← NatTrans.comp_app_assoc, IsIso.hom_inv_id, NatTrans.id_app,
+    Category.id_comp]
+
+end AlgebraicGeometry.ProEtale.CondensedRing

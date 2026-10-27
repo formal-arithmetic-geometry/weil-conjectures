@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingConstruction
+public import WeilConjectures.TraceFormula.Specialization.NearbyOpenExchange
 
 /-!
 
@@ -57,8 +58,33 @@ theorem map_dualizingMap_comp_dualizingComplexUpperStarIso {X : Over (Spec (.of 
       (φ.boundedConstructiblePullbackExchange ℓ (hN.preservesBoundedConstructible ℓ)
           (hM.preservesBoundedConstructible ℓ)).app (dualizingComplex ℓ X) ≫
         (boundedConstructibleNearbyCycles (hN.preservesBoundedConstructible ℓ)).map
-          (dualizingComplexUpperStarIso ℓ j).hom ≫ hN.dualizingMap ℓ :=
-  sorry
+          (dualizingComplexUpperStarIso ℓ j).hom ≫ hN.dualizingMap ℓ := by
+  obtain ⟨C⟩ := hM.nonempty_compactification
+  have := φ.isIso_pullbackExchange_of_isOpenImmersion (Profinite.padicAlgClRingObj ℓ) hφ
+  refine map_comp_eq_of_exceptionalExchange
+    (φ.boundedConstructiblePullbackExchange ℓ (hN.preservesBoundedConstructible ℓ)
+      (hM.preservesBoundedConstructible ℓ))
+    (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j)
+    (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ j')
+    (exceptionalExchange ℓ j j' (φ.boundedConstructibleLowerShriekExchange ℓ
+      (hN.preservesBoundedConstructible ℓ) (hM.preservesBoundedConstructible ℓ)))
+    (fun b ↦ by
+      cast_proofs φ.exceptionalExchange_boundedConstructibleLowerShriekExchange_app ℓ
+        (hN.preservesBoundedConstructible ℓ) (hM.preservesBoundedConstructible ℓ) b)
+    (hM.dualizingMap ℓ) (hN.dualizingMap ℓ) (dualizingComplexComp ℓ j)
+    (dualizingComplexComp ℓ j') ?_ (dualizingComplexUpperStarIso ℓ j)
+    (by cast_proofs dualizingComplexUpperStarIso_hom_eq ℓ j) (dualizingComplexUpperStarIso ℓ j')
+    (by cast_proofs dualizingComplexUpperStarIso_hom_eq ℓ j')
+  rw [dualizingMap, dualizingMap,
+    hN.compactSupportExchange_eq_compactSupportExchange ℓ (C.ofOpen hN j j' φ hφ hq hg),
+    hM.compactSupportExchange_eq_compactSupportExchange ℓ C]
+  have h := dualizingExchange_eq_comp_dualizingComplex ℓ (traitSpecializationUnit k k' (ℓ := ℓ))
+    j j'
+    (φ.boundedConstructibleLowerShriekExchange ℓ (hN.preservesBoundedConstructible ℓ)
+      (hM.preservesBoundedConstructible ℓ)) (C.compactSupportExchange ℓ)
+    ((C.ofOpen hN j j' φ hφ hq hg).compactSupportExchange ℓ) (fun K ↦ by
+      cast_proofs Compactification.compactSupportExchange_ofOpen_app ℓ C hN j j' φ hφ hq hg K)
+  cast_proofs h
 
 end IsTraitModelOfBase
 
