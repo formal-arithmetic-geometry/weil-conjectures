@@ -20165,3 +20165,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:10 L: returned deliver/B4/Sheaf.Paper.ExceptionalDerivedSiteRealization (reviewer RETURN: (reviewer C-2977e, head 2977e4cd4) 2b/A: unforced split on a stale base — the published module already carries the root-)
 - 23:11 L: merged deliver/NB/lem-route-twist-line-scalar-iso-exists-unique (reviewer FIX; first push; new nodes: 0)
 - 23:11 L: returned deliver/NE/lem-pur-integral-scalar-reduction-intertwining (reviewer RETURN: I read the item in full; the delivery adds no new nodes. I read the full statements of all 7 cited nodes plus lem-coef-n)
+- 23:14 L: merged deliver/NF/lem-pur-integral-tensor-associator-naturality (reviewer FIX; first push; new nodes: 0)

@@ -4,11 +4,65 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "The representative-independent derived naturality specialization of the normalized completed associator recorded in the live construction; no separate blueprint node states this interface."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal R_W$ for coherent reduction to the strict coefficient systems on the ringed sequence site and $\\otimes^{\\mathrm{sys}}$ for their derived tensor. The integral tensor $T$ is the derived-limit operation, and the normalized reduction/tensor comparison $c_{M,N}:\\mathcal R_WT(M,N)\\xrightarrow{\\sim}\\mathcal R_WM\\otimes^{\\mathrm{sys}}\\mathcal R_WN$ is obtained by applying the counit of the fixed adjunction $\\mathcal R_W\\dashv\\mathcal L_W$ to the levelwise tensor comparison [def-pur-completed-pullback-tensor-comparison]. Since $\\mathcal R_W$ is a functor on the derived category and the unit, counit and all comparisons are natural for morphisms of the inputs [lem-coef-derived-system-evaluation-calculus], $c$ is natural in both variables: $c_{M',N'}\\circ\\mathcal R_W(T(u,v))=(\\mathcal R_Wu\\otimes^{\\mathrm{sys}}\\mathcal R_Wv)\\circ c_{M,N}$ for all integral $u:M\\to M'$, $v:N\\to N'$. Applying this twice gives the nested squares: $\\mathcal R_W(T(T(f,g),h))$ followed by $c_{T(A',B'),C'}$ and $c_{A',B'}\\otimes^{\\mathrm{sys}}1$ equals $c_{T(A,B),C}$ and $c_{A,B}\\otimes^{\\mathrm{sys}}1$ followed by $(\\mathcal R_Wf\\otimes^{\\mathrm{sys}}\\mathcal R_Wg)\\otimes^{\\mathrm{sys}}\\mathcal R_Wh$, and symmetrically for $T(f,T(g,h))$ with $c_{A,T(B,C)}$ and $1\\otimes^{\\mathrm{sys}}c_{B,C}$. By [def-pod-integral-tensor-constraints], $\\mathcal R_W(\\alpha^{\\mathrm{int}}_{A,B,C})$ followed by $c_{A,T(B,C)}$ and $1\\otimes^{\\mathrm{sys}}c_{B,C}$ equals $c_{T(A,B),C}$ and $c_{A,B}\\otimes^{\\mathrm{sys}}1$ followed by the strict-system associator $\\alpha^{\\mathrm{sys}}_{\\mathcal R_WA,\\mathcal R_WB,\\mathcal R_WC}$.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pod-integral-tensor-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 07A4 and 0941; derived-limit tensor comparison and its naturality"
+   }
+  },
+  {
+   "text": "The strict-system tensor $\\otimes^{\\mathrm{sys}}$ is the tensor bifunctor of the closed tensor-Hom structure of the derived coefficient-system calculus, i.e. of a monoidal structure on the derived category of the ringed sequence site [def-coef-ringed-tensor-hom-model, def-coef-ringed-sequence-site, lem-coef-derived-system-evaluation-calculus], and the strict-system associator $\\alpha^{\\mathrm{sys}}$ of [def-pod-integral-tensor-constraints] is the associator of that monoidal structure. The associator of a monoidal category is natural in all three variables, so for the reduced arrows, which are arbitrary morphisms of the derived system category and need not be represented by chain maps,\n$$\\bigl((\\mathcal R_Wf\\otimes^{\\mathrm{sys}}\\mathcal R_Wg)\\otimes^{\\mathrm{sys}}\\mathcal R_Wh\\bigr);\\alpha^{\\mathrm{sys}}_{\\mathcal R_WA',\\mathcal R_WB',\\mathcal R_WC'}=\\alpha^{\\mathrm{sys}}_{\\mathcal R_WA,\\mathcal R_WB,\\mathcal R_WC};\\bigl(\\mathcal R_Wf\\otimes^{\\mathrm{sys}}(\\mathcal R_Wg\\otimes^{\\mathrm{sys}}\\mathcal R_Wh)\\bigr).$$\nNo representative formula for $\\alpha^{\\mathrm{sys}}$ is used.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-coef-ringed-sequence-site",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pod-integral-tensor-constraints"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ (lemma-symmetric-monoidal-cat-complexes); the associator of a monoidal structure is natural"
+   }
+  },
+  {
+   "text": "Apply $\\mathcal R_W$ to both composites of the claimed square and compose with the isomorphism $c_{A',T(B',C')}$ followed by $1\\otimes^{\\mathrm{sys}}c_{B',C'}$. For the left composite, the nested square of Step 1, then the defining equation of $\\alpha^{\\mathrm{int}}_{A',B',C'}$ from Step 1, then the naturality of $\\alpha^{\\mathrm{sys}}$ from Step 2, then the defining equation of $\\alpha^{\\mathrm{int}}_{A,B,C}$ read backwards and the second nested square of Step 1 turn it into the right composite. Cancelling the isomorphism gives $\\mathcal R_W(T(T(f,g),h);\\alpha^{\\mathrm{int}}_{A',B',C'})=\\mathcal R_W(\\alpha^{\\mathrm{int}}_{A,B,C};T(f,T(g,h)))$. The completed tensor and its map on pairs of morphisms preserve the derived-complete constructible category [def-weil-derived-pullback-tensor-hom], so both composites are morphisms $T(T(A,B),C)\\to T(A',T(B',C'))$ there. Coherent reduction is fully faithful, hence faithful, on that category by [lem-pod-integral-system-reduction-fully-faithful]; hence it reflects the equality and proves the displayed naturality equation for arbitrary integral $f,g,h$, including identities, zero arrows and zero objects.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pod-integral-tensor-constraints",
+    "lem-pod-integral-system-reduction-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 07A4 and 0941; faithful coherent reduction reflects the normalized associator square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pod-integral-tensor-constraints",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pod-integral-system-reduction-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0941; completed tensor associator naturality via coherent reduction, strict-system associator naturality, and faithful reflection"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-rational-tensor-associator-scalar-square",
@@ -28,30 +82,30 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "The completed integral tensor associator is natural for arbitrary derived morphisms represented by compatible K-flat chain maps",
-   "results": "Generic HomologicalComplex associator/naturality declarations; no completed constructible derived specialization.",
-   "date": "2026-10-28",
+   "query": "Naturality of the normalized integral tensor associator on arbitrary derived morphisms in a completed constructible category",
+   "results": "Mathlib.Tactic.Monoidal.naturality_associator; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_tensor; CategoryTheory.FreeMonoidalCategory.normalize_naturality; CategoryTheory.MonoidalCategory.id_tensor_associator_inv_naturality; CategoryTheory.GradedObject.Monoidal.associator_naturality; CategoryTheory.Localization.Monoidal.associator_naturality₃; CategoryTheory.Localization.Monoidal.associator_naturality; CategoryTheory.Localization.Monoidal.associator_naturality₂. These are generic monoidal/localization results and do not state the completed constructible integral specialization.",
+   "date": "2026-10-27",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.Functor.Faithful, CategoryTheory.NatTrans.naturality, TensorProduct.induction_on",
-   "results": "No direct match; generic faithful functor and tensor induction APIs only.",
-   "date": "2026-10-28",
+   "query": "CategoryTheory.MonoidalCategory.associator_naturality, CategoryTheory.NatTrans.naturality",
+   "results": "0 hits.",
+   "date": "2026-10-27",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "KFlat|K-flat|associator_naturality|map_injective in Mathlib/CategoryTheory",
-   "results": "Generic map_injective and localization associator_naturality hits, no project-specific derived K-flat statement.",
-   "date": "2026-10-28",
+   "query": "associator_naturality|integral_naturality|pullbackTensorIntegralAssociator in Mathlib/CategoryTheory",
+   "results": "25 generic associator_naturality hits in Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Localization/Monoidal/Basic.lean and related files; no project-specific completed integral coefficient theorem.",
+   "date": "2026-10-27",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "naturality of a derived tensor associator after passing from K-flat representatives to the derived category",
-   "results": "Generic free-monoidal, Dialectica and HomologicalComplex associator results; no project-specific theorem.",
-   "date": "2026-10-28",
+   "query": "Naturality of the completed integral derived tensor associator for arbitrary morphisms",
+   "results": "CategoryTheory.FreeMonoidalCategory.HomEquiv.associator_naturality; CategoryTheory.Mathlib.Tactic.MonTauto.associator_hom_comp_tensorHom_tensorHom; CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.associator_naturality; CategoryTheory.MonoidalCategory.id_tensor_associator_naturality; CategoryTheory.MonoidalCategory.associator_naturality; CategoryTheory.GradedObject.Monoidal.associator_naturality; CategoryTheory.Dial.associator_naturality; CategoryTheory.FreeMonoidalCategory.HomEquiv.below.associator_naturality. No completed integral derived specialization.",
+   "date": "2026-10-27",
    "verdict": "no match"
   }
  ],
@@ -65,5 +119,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-integral-tensor-associator-naturality",
+  "worker": "stage1",
+  "summary": "Audited the live integral associator construction and split its naturality proof into reduction/comparison naturality, the strict-system associator calculation, and faithful reflection. The existing definitions already provide the completed tensor, its normalized associator, and the reduction model, so no new node was needed. I preserved the exact prime, coefficient, residue-field invertibility, constructibility and arbitrary-morphism hypotheses. Review NF (cc): Step 2 now cites def-coef-ringed-tensor-hom-model for the monoidal structure whose associator is the strict-system associator, and drops the unpinned representative rebracketing claim; Steps 1 and 3 spell out the nested squares and the cancellation.",
+  "blueprint": "The current blueprint has no separate node for this extracted interface (blueprint.from.node is null). The three steps realize the live normalized-integral tensor paragraph behind Tags 06YS, 07A4 and 0941: naturality of the reduction/tensor comparison, strict-system associator naturality, and lifting through faithful coherent reduction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NF-c7fee6bb5",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-c7fee6bb5 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the Lean (RationalPullbackTensorAssociatorNaturality.lean:50-156, DerivedPullbackTensorConstraints.lean:152-578) and Stacks 06YS/07A4/0941/0FPQ in sites-cohomology.tex. The statement is unchanged from base and matches the private integral_naturality: same ℓ, E, residue-field invertibility, integral constructible category and arbitrary f,g,h. Identity and zero cases hold. I found no duplicate in the DAG: the rational analogue, the constraints existence nodes and the braiding sibling are all different statements. The route matches the Lean and the landed braiding sibling: c is natural via the counit of R⊣L plus the tensor model, α^int is fixed by its reduction equation (def-pod-integral-tensor-constraints), and faithfulness comes from lem-pod-integral-system-reduction-fully-faithful. C4/C1 fault in Step 2: it used the strict-system monoidal associator without citing the node that defines it, which is def-coef-ringed-tensor-hom-model (it owns CoefficientClosedStructure.monoidal). It also claimed a K-flat rebracketing formula, but that associator is not pinned on K-flat representatives. Fixed: cited def-coef-ringed-tensor-hom-model, used the monoidal-category naturality axiom, removed the representative claim, and changed the source to 0FPQ. I also spelled out the c-naturality and nested squares in Step 1 and the cancellation in Step 3, and added def-coef-ringed-tensor-hom-model to proof_deps. Batch 5: lem-pod-integral-system-reduction-fully-faithful is general adic reconstruction (full faithfulness of coherent reduction), not a step of the Poincaré-duality or trace-formula proofs. The item's closure grows by only 4 nodes, none from trf, PD or the targets, and the landed braiding sibling cites the same node, so I accepted it. No tool_uses and no new nodes.; 1 file(s) fixed by the reviewer"
  }
 }
