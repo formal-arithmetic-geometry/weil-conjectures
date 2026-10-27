@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerStar
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
 
 /-!
@@ -99,22 +100,6 @@ lemma triangEnvelope_lisseLowerStarGenerator_lowerStar_lowerStar {Z U : Over (Sp
   exact ObjectProperty.le_triangEnvelope _ _ ⟨Z, inferInstance, inferInstance, inferInstance, g,
     inferInstance, U, inferInstance, inferInstance, inferInstance, inferInstance, j, inferInstance,
     L, hL, ⟨Iso.refl _⟩⟩
-
-/-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` on bounded constructible complexes is an
-isomorphism: `Lj^*` has the fully faithful left adjoint `j_!`, so its right adjoint `Rj_*` is
-fully faithful as well. -/
-lemma isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion
-    {Z U : Over (Spec (.of k))}
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] (j : U ⟶ Z)
-    [IsOpenImmersion j.left] :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-      j).counit :=
-  (Adjunction.Triple.mk
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ j)
-    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
-      j)).isIso_unit_iff_isIso_counit.1 inferInstance
 
 /-- For an open immersion `j : U ⟶ Z` and a distinguished triangle `F ⟶ N ⟶ Rj_* Lj^* N ⟶ F[1]`
 whose second map is the unit of `Lj^* ⊣ Rj_*`, the restriction `Lj^* F` vanishes: `Lj^*` of the

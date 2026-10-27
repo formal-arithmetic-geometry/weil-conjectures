@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.PurityTensorMap
+public import WeilConjectures.TateTwist.LocallyFree
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeDualizable
 
 /-!
 
@@ -62,8 +64,14 @@ subsection `sk-prop-an`: "for `Λ ∈ {A, 𝒪_E, E, ℚ̄_ℓ}` the sheaf `Λ_X
 `Λ_X`-module [...] hence so are `Λ_X(d)` and `Λ_X(-d)`"): the Tate twist `ℚ̄_ℓ,X(d)`, placed in
 degree `0`, is a dualizable bounded constructible complex. -/
 theorem isDualizable_boundedConstructibleTateTwist (d : ℤ) :
-    IsDualizable (boundedConstructibleTateTwist ℓ X d 0) :=
-  sorry
+    IsDualizable (boundedConstructibleTateTwist ℓ X d 0) := by
+  have : NeZero (ℓ : k) := ⟨fun h ↦ (Fact.out : ringChar k ≠ ℓ)
+    (((Fact.out : ℓ.Prime).eq_one_or_self_of_dvd _ ((ringChar.spec k ℓ).1 h)).resolve_left
+      (CharP.ringChar_ne_one))⟩
+  refine (isDualizable_singleFunctor_of_isLocallyFree ℓ X (tateTwist X.left ℓ d)
+    (isLocallyFree_tateTwist ℓ X.hom d)).of_iso
+    ((boundedConstructible _).fullyFaithfulι.preimageIso ?_)
+  exact ((shiftFunctorZero _ ℤ).app (tateTwistDerived X.left ℓ d)).symm
 
 variable (X) in
 /-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` is the shift of `ℚ̄_ℓ,X(d)` in `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/

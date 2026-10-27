@@ -14,9 +14,9 @@ public import WeilConjectures.TraceFormula.Specialization.TraitSlice
 
 # The generic slices of the finite-support step of Gabber's Künneth formula
 
-Let `S = Spec k'⟦t⟧` and let `K = k'(x)^alg` (`AlgebraicGeometry.sliceField`), with
-`x = X ∈ k'(X)` transcendental (`AlgebraicGeometry.sliceCoord`). For a model `M` over `S` with a
-coordinate `b : 𝒳 ⟶ 𝔸¹_S`, the special fibre `b_s : 𝒳_s ⟶ 𝔸¹_{k'}` of `b`
+Let `S = Spec k'⟦t⟧` and let `K = k'(x)^alg` (`AlgebraicGeometry.traitSliceField`), with
+`x = X ∈ k'(X)` transcendental (`AlgebraicGeometry.traitSliceCoord`). For a model `M` over `S` with
+a coordinate `b : 𝒳 ⟶ 𝔸¹_S`, the special fibre `b_s : 𝒳_s ⟶ 𝔸¹_{k'}` of `b`
 (`ProEtale.CondensedRing.NearbyCyclesModel.specialCoordinate`) and the generic slice
 `σ : Spec K⟦t⟧ ⟶ 𝔸¹_S` (`AlgebraicGeometry.traitSlice`), every point of `𝒳_s` lying over the
 generic point of the special-fibre line `𝔸¹_{k'}` is in the image of the special fibre
@@ -39,23 +39,23 @@ variable (k' : Type u) [Field k']
 
 /-- The algebraically closed field `K = k'(X)^alg` of the generic slices: the residue field of the
 geometric generic point of the special-fibre line `𝔸¹_{k'}`. -/
-abbrev sliceField : Type u :=
+abbrev traitSliceField : Type u :=
   AlgebraicClosure (RatFunc k')
 
 /-- The coordinate `x = X ∈ k'(X) ⊆ K` of the generic slices. -/
-noncomputable def sliceCoord : sliceField k' :=
-  algebraMap (RatFunc k') (sliceField k') RatFunc.X
+noncomputable def traitSliceCoord : traitSliceField k' :=
+  algebraMap (RatFunc k') (traitSliceField k') RatFunc.X
 
 /-- The coordinate of the generic slices is transcendental over `k'`. -/
-lemma transcendental_sliceCoord : Transcendental k' (sliceCoord k') :=
-  (transcendental_algebraMap_iff (algebraMap (RatFunc k') (sliceField k')).injective).2
+lemma transcendental_traitSliceCoord : Transcendental k' (traitSliceCoord k') :=
+  (transcendental_algebraMap_iff (algebraMap (RatFunc k') (traitSliceField k')).injective).2
     RatFunc.transcendental_X
 
 /-- The point `x : Spec K ⟶ 𝔸¹_{k'}` of the generic slices is the generic point of the
 special-fibre line. -/
-lemma isGenericPoint_traitSlicePoint_sliceCoord (p : Spec (.of (sliceField k'))) :
-    IsGenericPoint (traitSlicePoint (k' := k') (sliceCoord k') p) Set.univ :=
-  isGenericPoint_traitSlicePoint _ (transcendental_sliceCoord k') p
+lemma isGenericPoint_traitSlicePoint_traitSliceCoord (p : Spec (.of (traitSliceField k'))) :
+    IsGenericPoint (traitSlicePoint (k' := k') (traitSliceCoord k') p) Set.univ :=
+  isGenericPoint_traitSlicePoint _ (transcendental_traitSliceCoord k') p
 
 namespace ProEtale.CondensedRing.NearbyCyclesModel
 
