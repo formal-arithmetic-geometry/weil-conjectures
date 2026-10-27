@@ -170,8 +170,9 @@ Unfinished: this is Deligne's theorem, not a formal consequence of base change.
   (SGA 4½, [Th. finitude], Thm. 3.2), whose lisse generic case is still `sorry` here
   (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`).
   It needs generic base change (SGA 4½, [Th. finitude], Thm. 1.9) and the reduction to relative
-  curves. None of these is formalised for pro-étale `ℚ̄_ℓ`-sheaves, and neither is smooth base change for
-  nearby cycles (`ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth`).
+  curves. None of these is formalised for pro-étale `ℚ̄_ℓ`-sheaves, and neither is smooth base
+  change for nearby cycles
+  (`ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth`).
 * Reducing to the generic-slicing identification for `𝒴 ×_S 𝔸¹_S ⟶ 𝔸¹_S` (whose slice is `N''`)
   only identifies `Lσ^* Ψ_N B` with the `P`-invariants of `Ψ_{N''} B`, not with `Ψ_{N''} B`.
 
