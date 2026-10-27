@@ -1,0 +1,131 @@
+{
+ "id": "lem-zl-compact-support-realization-square-existence",
+ "kind": "statement",
+ "title": "Existence of the completed support restriction square",
+ "statement": "theorem ordinaryRestrictionSquare_exists {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (AX : CondensedERealization.At l E X) (AY : CondensedERealization.At l E Y) :\n    let ordinaryRestrictCore := fun (W : Scheme.{u})\n        (A : CondensedERealization.At l E W) =>\n      (CondensedERealization.moduleEncoding l E W A.sectionIso).functor ⋙\n        pbcRestrict (A.integralIso.hom ≫ A.inclusion) ⋙\n          purOrdinaryCoefficientModel l E W\n    ∃ e : CondensedRing.lowerStar (Profinite.continuousCoefficientRingObj E) g ⋙\n        ordinaryRestrictCore Y AY ≅\n      ordinaryRestrictCore X AX ⋙\n        proEtaleRingModuleDirectImage g ((PurCompactSupport.completed l E).ring Y)\n          ((PurCompactSupport.completed l E).ring X)\n          ((PurCompactSupport.completed l E).pull g),\n      ∀ (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})\n          (CondensedERealization.Coefficient E X)) (V : Y.ProEtᵒᵖ)\n        (x : ((ordinaryRestrictCore X AX ⋙\n          proEtaleRingModuleDirectImage g ((PurCompactSupport.completed l E).ring Y)\n            ((PurCompactSupport.completed l E).ring X)\n            ((PurCompactSupport.completed l E).pull g)).obj M).val.obj V),\n        ((e.hom.app M).val.app V).hom x = x",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), separated existence part of the identity-on-sections restriction square in the parent coordinate setup."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-pur-compact-support-condensed-realization",
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural isomorphism induced by the sectionwise coefficient restriction and direct-image maps. The coefficient normalizations make both composites act as the identity on every pro-etale section; the remaining naturality and inverse equations are the standard module pushforward/restriction construction.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-pur-compact-support-condensed-realization",
+    "def-pur-completed-coefficient-presentation-transport",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-weil-pbc-condensed-e-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), existence half of the section-normalized ordinary restriction square; separated from the parent uniqueness argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "identity on sections scalar restriction direct image square for sheaf modules",
+   "results": "Generic restriction-of-scalars and identity-on-sections declarations; no exact completed support square.",
+   "date": "2026-10-28",
+   "verdict": "generic matches only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity on sections scalar restriction direct image square for sheaf modules",
+   "results": "Generic restriction and section identity declarations; no exact project theorem.",
+   "date": "2026-10-28",
+   "verdict": "generic matches only"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward ?a ≅ SheafOfModules.restrictScalars ?b",
+   "results": "No matches.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionPushforward|pushforwardComp|sectionModuleComapIso",
+   "results": "Generic pushforward composition and module restriction constructions in Mathlib; no exact target theorem.",
+   "date": "2026-10-28",
+   "verdict": "generic matches only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportRealizationCoordinates",
+  "date": "2026-10-28",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-compact-support-realization-coordinates-setup",
+   "place": "identity-on-sections restriction-square step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportRealizationSquareExistence",
+  "file": "lean/Sheaf/Paper/CompactSupportRealizationSquareExistence.lean",
+  "declaration": "WeilConjectures.CompactSupportFactorNormalization.ordinaryRestrictionSquare_exists",
+  "declarations": [
+   "WeilConjectures.CompactSupportFactorNormalization.ordinaryRestrictionSquare_exists"
+  ],
+  "statement": "theorem ordinaryRestrictionSquare_exists {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (AX : CondensedERealization.At l E X) (AY : CondensedERealization.At l E Y) :\n    let ordinaryRestrictCore := fun (W : Scheme.{u})\n        (A : CondensedERealization.At l E W) =>\n      (CondensedERealization.moduleEncoding l E W A.sectionIso).functor ⋙\n        pbcRestrict (A.integralIso.hom ≫ A.inclusion) ⋙\n          purOrdinaryCoefficientModel l E W\n    ∃ e : CondensedRing.lowerStar (Profinite.continuousCoefficientRingObj E) g ⋙\n        ordinaryRestrictCore Y AY ≅\n      ordinaryRestrictCore X AX ⋙\n        proEtaleRingModuleDirectImage g ((PurCompactSupport.completed l E).ring Y)\n          ((PurCompactSupport.completed l E).ring X)\n          ((PurCompactSupport.completed l E).pull g),\n      ∀ (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})\n          (CondensedERealization.Coefficient E X)) (V : Y.ProEtᵒᵖ)\n        (x : ((ordinaryRestrictCore X AX ⋙\n          proEtaleRingModuleDirectImage g ((PurCompactSupport.completed l E).ring Y)\n            ((PurCompactSupport.completed l E).ring X)\n            ((PurCompactSupport.completed l E).pull g)).obj M).val.obj V),\n        ((e.hom.app M).val.app V).hom x = x",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-28"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T234045-L-4176497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T234045-L-4176497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

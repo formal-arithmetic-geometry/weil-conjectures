@@ -41,6 +41,7 @@ import Sheaf.CategoryTheory.ScalarLocalizationSheafExact
 import Sheaf.AlgebraicGeometry.ContinuousCoefficientLocalization
 import Sheaf.AlgebraicGeometry.ContinuousCoefficientGeneralPullbackIso
 import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+import Sheaf.Paper.CompactSupportRealizationSquareExistence
 
 /-! # Coordinates for compact-support realization factor normalization
 
@@ -436,7 +437,14 @@ theorem ordinaryRestrictionSquare_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y)
             ((PurCompactSupport.completed l E).ring X)
             ((PurCompactSupport.completed l E).pull g)).obj M).val.obj V),
         ((e.hom.app M).val.app V).hom x = x := by
-  sorry
+  obtain ⟨e, he⟩ := ordinaryRestrictionSquare_exists l E g AX AY
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  ext M V x
+  exact (he' M V x).trans (he M V x).symm
+
+
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
