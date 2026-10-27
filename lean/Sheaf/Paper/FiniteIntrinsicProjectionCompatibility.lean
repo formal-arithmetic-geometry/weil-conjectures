@@ -34,7 +34,11 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
 
 STATEMENT-DISPUTED: the family `e` has no naturality or compatibility hypothesis across
 `SixFunctorSpace` morphisms, so twisting `e Y` by an automorphism changes the right side
-without changing the left-side comparison at `X`.
+without changing the left-side comparison at `X`. More explicitly, the hypotheses permit
+independent replacement of one component `(e Y)` by its composite with any automorphism;
+none of the supplied data relates that replacement to `(e X)`, while the displayed equation
+contains both components. A valid compatibility theorem therefore needs a naturality or
+normalization hypothesis on `e` and cannot be proved from the current statement.
 
 (blueprint: new-sf-finite-intrinsic-projection-compatibility).
 
