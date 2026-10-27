@@ -22,65 +22,61 @@
  },
  "proof": [
   {
-   "text": "Finite-type geometry and the coefficient hypotheses apply to X_i and Y, without absolute separatedness. Compare R.base.integralI to the normalized integral exceptional functor for c.precomp j by the unique counit-preserving comparison of right adjoints to the very same specified integral compact-support functor. Their unit values are isomorphic, so their scalar reductions are isomorphic. Use the normalized integral exceptional construction and its actual reduction system to identify its residue with the finite exceptional image of the coefficient unit; this is not an inference from equality of arbitrary tower limits. Smooth tensor duality for g composed with j gives an etale rank-one line L shifted by 2d. The finite exceptional adjunction and intrinsic site realization identify that finite exceptional image with the intrinsic pullback of L[2d]. Transport this presentation to the residue of the actual R.base.integralI unit value through the reduction of the integral right-adjoint comparison. The latter integral object is derived complete because it belongs to the integral constructible category.",
+   "text": "At any finite coefficient field E, apply smooth_clopen_residue_line to the coefficient comparison record to obtain an etale residue line in shift 2d. The integral exceptional value is constructible and therefore complete: sfDerivedComplete_iff_legacy, with a finite-field datum in universe zero of characteristic different from l, identifies its canonical augmented-tower completeness with IntegralOnSlice.IsComplete. Finite-setting comparison hypotheses give Noetherianity of Xi and the purity datum supplies stalkwise invertibility of l.",
    "uses": [
+    "lem-pur-smooth-clopen-residue-line",
+    "lem-sf-derived-complete-legacy-comparison",
     "lem-pur-finite-setting-comparison-hypotheses",
-    "thm-asd-smooth-tensor",
-    "def-weil-exceptional-inverse-image",
-    "thm-weil-pbc-site-comparison",
-    "det-sp-unique-right-adjoint",
     "def-pur-clopen-exceptional-all-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
-    "place": "First paragraph, shifted rank-one smooth dualizing object; integral and field extension in Step 4 of finite-clopen inverse assembly"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the complete-residue-line inverse theorem with m=2d to this complete object. It gives its internal-Hom dual, both specified completed-tensor evaluation isomorphisms, constructibility, and common Tor intervals [-2d,-2d] and [2d,2d] at all positive reductions. Regard the dual as an object of the full integral constructible category, and lift both evaluations through the fully faithful inclusion. The tensor and unit are the same normalized completed operations defining the clopen tensor and unit, so these lifted maps are exactly the two required inverse isomorphisms.",
+   "text": "Apply completeResidueLineInverse with shift 2d. Take its actual internal-Hom dual as the integral inverse, using the finite-Tor conclusion to supply its constructible membership. The normalized completedTensor_global_comparison and the universal property of integralCompletedTensorDescent identify the completed tensor used in that theorem with integralCompletedTensor. Lift both resulting evaluation isomorphisms through the fully faithful constructible inclusion. This proves integral_component_inverse for arbitrary E.",
    "uses": [
     "lem-pur-complete-residue-line-inverse",
-    "def-pur-clopen-coefficient-operations",
+    "def-pur-integral-derived-operations",
+    "def-weil-derived-pullback-tensor-hom",
     "def-weil-finite-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
-    "place": "First paragraph, shifted rank-one smooth dualizing object; integral and field extension in Step 4 of finite-clopen inverse assembly"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply rational localization to that pair and its evaluation isomorphisms. On integral representatives the rational tensor is the same tensor and its unit is the image of the same integral unit. The rationalObjectI coherence field of R identifies the exceptional factor with the specified rational exceptional image. This gives the rational assertion. For a coefficient stage A repeat the integral argument with R.stage A and localize there; the stage_eqI field identifies that rational exceptional functor with the stage of R.actionI. Represent the inverse and both arrows at A. The normalized common-stage tensor and unit comparisons identify their sources and targets, including the identity-extension case. Functoriality preserves both inverse identities. Empty components have zero coefficient categories, so every map is the unique isomorphism and the same bounds are valid.",
+   "text": "The object formula in rationalDerivedTensor_existsUnique identifies tensor of integral representatives with rationalization of their integral tensor. Apply the actual rational localization functor to both integral evaluations. The rationalObjectI equation in the coefficient record identifies the exceptional factor with the specified rationalI unit value. This proves rational_component_inverse at every finite E, and in particular the base rational assertion.",
    "uses": [
-    "def-pur-clopen-exceptional-all-coefficients",
     "def-weil-derived-pullback-tensor-hom",
-    "def-weil-algebraically-closed-coefficients"
+    "def-pur-clopen-exceptional-all-coefficients",
+    "def-pur-clopen-coefficient-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
-    "place": "First paragraph, shifted rank-one smooth dualizing object; integral and field extension in Step 4 of finite-clopen inverse assembly"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For a stage A apply rational_component_inverse to R.stage A. Use stage_eqI to identify its exceptional factor with R.actionI at A. The actual common-stage tensor object formula, isoToStage at the compositum A join A, commonStageTensorComparison, operationStageTransitionIso and the coefficient-system unitor identify tensor of pairs represented at A with inclusion of the rational tensor at A. Apply the stage inclusion to both rational evaluations. Their target is precisely the unit represented at A. No extension or identity normalization is omitted.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients",
+    "def-pur-clopen-exceptional-all-coefficients",
+    "def-pur-clopen-coefficient-operations"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-smooth-clopen-residue-line",
+  "lem-sf-derived-complete-legacy-comparison",
   "lem-pur-finite-setting-comparison-hypotheses",
-  "thm-asd-smooth-tensor",
-  "def-weil-exceptional-inverse-image",
-  "thm-weil-pbc-site-comparison",
-  "det-sp-unique-right-adjoint",
   "def-pur-clopen-exceptional-all-coefficients",
   "lem-pur-complete-residue-line-inverse",
-  "def-pur-clopen-coefficient-operations",
-  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-derived-operations",
   "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-clopen-coefficient-operations",
   "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
-  "place": "First paragraph, shifted rank-one smooth dualizing object; integral and field extension in Step 4 of finite-clopen inverse assembly; P4 makes the missing interface step explicit."
+  "place": "T4: residue-line reduction followed by the existing complete-residue inverse theorem, fully faithful integral lifting, rational localization, and explicit common-stage identity comparisons."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -181,11 +177,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-46a98",
-  "group": "P4",
-  "result": "fix",
-  "landing": "20261027T180726-L-3895569",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261027T210242-L-1679930",
   "kind": "interface",
-  "note": "independent cc review: item node + 2 new nodes and change records vs delivered Lean, ClopenExceptionalAllCoefficients/CoefficientComparisonData fields in FiniteClopenExceptionalRestriction, Core split history (602f9184/7e93fa29) for the forced import, packet 3b importer OK"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
