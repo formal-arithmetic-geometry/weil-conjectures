@@ -89,7 +89,7 @@ theorem scalar_finite_model
   obtain ⟨bfin, vleft, vright, tleft, tright, hF, hL, hR, hTL, hTR⟩ :=
     scalar_finite_core l E L ι g b hb
   obtain ⟨hQ, hT⟩ := scalar_finite_squares l E L ι g b bfin vleft vright tleft tright
-    hF hL hR hTL hTR
+    hb hF hL hR hTL hTR
   exact ⟨bfin, vleft, vright, tleft, tright, hF, hL, hR, hQ, hTL, hTR, hT⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor
