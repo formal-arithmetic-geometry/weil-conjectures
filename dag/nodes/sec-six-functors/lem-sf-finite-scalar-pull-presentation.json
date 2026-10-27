@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-finite-scalar-pull-presentation",
+ "kind": "statement",
+ "title": "Equality of the two ordinary finite scalar pullback presentations",
+ "statement": "Fix a prime l, a finite extension E/Q_l, schemes X,Y, a morphism f:X→Y and n≥0. For an ordinary completed module M on Y, let αX,αY be the ordinary scalar presentations of [lem-sf-finite-scalar-ordinary-reduction-iso], let q=scalarPullModule(reduction to exponent n+1,f), and let G be ringed geometric pullback for the finite coefficient sheaves. Then q.inv_M followed by G(αY.hom_M) and finitePullbackIso(f,n).hom_(scalarExt(Y,n)(M)) equals αX.hom_(completedPull(f)(M)), followed by ordinaryFiniteScalarPull(f,n).hom_M and pullbackTensorLevelIntrinsic(f,n).hom_(scalarExt(Y,n)(M)). This is a statement solely about ordinary module adjunctions; there is no derived object, coefficient sequence, or realization model.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "lem-sf-finite-scalar-ordinary-reduction-iso",
+  "lem-sf-scalar-pull-coefficient-complex-normalization",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the two ordinary composites through the completed geometric and finite scalar adjunctions. Transfer scalar transposes through the leftAdjointUniq scalar presentations. Transfer the finite geometric transpose through finiteDirectImage_eq and the finitePullbackIso uniqueness map. The unit formula that uniquely defines pullbackTensorLevelIntrinsic identifies it with the corresponding uniqueness map. The resulting restriction/direct-image comparison is finiteScalarRestrictionDirect on both sides. Injectivity of the Hom equivalence proves the equality; this is an ordinary module calculation with no derived or realization data. The formal combination is adjunctionSquareTransport. Uniqueness of the normalized intrinsic comparison identifies it with leftAdjointUniq; leftAdjointUniq_trans_app then factors the finite geometric presentation through the level one.",
+   "uses": [
+    "lem-sf-integral-finite-scalar-pull-ordinary",
+    "lem-sf-finite-scalar-ordinary-reduction-iso",
+    "lem-sf-scalar-pull-coefficient-complex-normalization",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-sf-finite-scalar-pull-adjunction-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "lem-sf-finite-scalar-ordinary-reduction-iso",
+  "lem-sf-scalar-pull-coefficient-complex-normalization",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-sf-finite-scalar-pull-adjunction-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Equality of the two ordinary finite scalar pullback presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*(comp|trans)|unit_leftAdjointUniq",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/LeftExact.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical left adjoint isomorphisms commute with composition of adjunctions and transport of the right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "Equality of the two ordinary finite scalar pullback presentations",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteScalarPullPresentation",
+  "file": "lean/Sheaf/SixFunctors/FiniteScalarPullPresentation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.finiteScalarPullPresentation",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.finiteScalarPullPresentation"
+  ],
+  "statement": "theorem finiteScalarPullPresentation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (M : integralTowerModules l E Y) :\n    (PurCompactSupport.scalarPullModule\n        (PurCompactSupport.reduction l E (n + 1) (Nat.le_add_left 1 n)) f).inv.app M ≫\n      (proEtaleRingModulePullback f\n        ((PurCompactSupport.finite l E (n + 1) (Nat.le_add_left 1 n)).ring Y)\n        ((PurCompactSupport.finite l E (n + 1) (Nat.le_add_left 1 n)).ring X)\n        ((PurCompactSupport.finite l E (n + 1) (Nat.le_add_left 1 n)).pull f)).map\n          ((finiteScalarOrdinaryReductionIso l E Y n).hom.app M) ≫\n      (PurCompactSupport.finitePullbackIso l E n f).hom.app\n        ((scalarReductionExtension l E Y n).obj M) =\n    (finiteScalarOrdinaryReductionIso l E X n).hom.app\n        ((integralOrdinaryPull l E f).obj M) ≫\n      (ordinaryFiniteScalarPull l E f n).hom.app M ≫\n      (pullbackTensorLevelIntrinsic l E f n).hom.app\n        ((scalarReductionExtension l E Y n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

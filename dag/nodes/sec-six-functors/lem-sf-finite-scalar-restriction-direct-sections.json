@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-finite-scalar-restriction-direct-sections",
+ "kind": "statement",
+ "title": "Section normalization of finite scalar restriction and direct image",
+ "statement": "Fix a prime l, a finite extension E/Q_l, schemes X,Y, a morphism f:X→Y and n≥0. Use the actual finiteScalarRestrictionDirect(f,n) of [lem-sf-integral-finite-scalar-pull-ordinary]. For every finite-coefficient module N on X, every object V of Y.ProEt, and every x in N evaluated at the base change of V along f, the underlying section of finiteScalarRestrictionDirect(f,n).hom_N at V sends x to x, up to heterogeneous equality accounting for the equality transport in finiteDirectImage_eq. No nonzero module or nonempty-scheme hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The ringed restriction/direct-image comparison is identity on sections by the predicate that uniquely defines it. The preceding finiteDirectImage_eq contributes equality transport only. Equality induction on the functor equality shows that whiskering the equality isomorphism preserves the heterogeneous identity of sections. Compose these heterogeneous equalities. This argument has no nonzero-module or positive-exponent restriction beyond n+1.",
+   "uses": [
+    "lem-sf-integral-finite-scalar-pull-ordinary",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Section normalization of finite scalar restriction and direct image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*hom_ext|hom_ext.*leftDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical isomorphism between scalar extension followed by pullback and pullback followed by scalar extension is computed degreewise on K-flat cochain complexes",
+   "results": "8 hits: HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.extendOpIso, KaehlerDifferential.tensorKaehlerEquiv, HomologicalComplex.extendXIso, ModuleCat.extendScalars_id_comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "Section normalization of finite scalar restriction and direct image",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteScalarRestrictionDirectSections",
+  "file": "lean/Sheaf/SixFunctors/FiniteScalarRestrictionDirectSections.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.finiteScalarRestrictionDirect_sections",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.finiteScalarRestrictionDirect_sections"
+  ],
+  "statement": "theorem finiteScalarRestrictionDirect_sections {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (N : normalizedDVRModules l E X n) (V : Y.ProEt)\n    (x : N.val.obj (op ((proEtaleBaseChange f).obj V))) :\n    HEq (((finiteScalarRestrictionDirect l E f n).hom.app N).val.app (op V) x) x",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

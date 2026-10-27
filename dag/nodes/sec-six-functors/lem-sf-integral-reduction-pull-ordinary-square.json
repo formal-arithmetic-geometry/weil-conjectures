@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-integral-reduction-pull-ordinary-square",
+ "kind": "statement",
+ "title": "Finite evaluation of the ordinary reduction and pullback mate",
+ "statement": "Fix a prime l, a finite extension E/Q_l, schemes X,Y, a morphism f:X→Y and n≥0. Supply an OrdinaryLimitModel a as in [def-sf-integral-system-canonical-bridge]. Write ρX,ρY for pullbackTensorReductionEvaluation, θ for pullbackTensorSequenceInverseEvaluation, F for completed ordinary pullback, EvX/EvY for finite sequence evaluation and L for level pullback. For every completed ordinary module M on Y, ρX_(F M) followed by EvX(a.reductionPull(f)_M) and θ⁻¹_(ordinaryReduction(Y)(M)) equals ordinaryFiniteScalarPull(f,n)_M followed by L(ρY_M). On every cochain complex P, the degreewise equation gives EvXcx(a.reductionPullComplex(f,P)) followed by θcx⁻¹_(ordinaryReduction(Y)cx(P)) and Lcx(ρYcx⁻¹_P), equal to ρXcx⁻¹_(Fcx(P)) followed by ordinaryFiniteScalarPullComplex(f,n,P).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "lem-sf-finite-scalar-restriction-direct-sections",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the ordinary finite square through the completed geometric adjunction and the finite scalar adjunction. The defining unit equations of reductionPull, reductionEvaluation and inverseEvaluation reduce the equality to the square of limit projections and scalar restriction/direct image. The OrdinaryLimitModel.projections equation and finiteScalarRestrictionDirect_sections prove it sectionwise. Naturality of the scalar unit finishes the transposed equation. Injectivity gives the ordinary square. Apply this square in each degree, cancel the reduction-evaluation isomorphism, and use functoriality to prove the cochain form.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "lem-sf-integral-finite-scalar-pull-ordinary",
+    "lem-sf-finite-scalar-restriction-direct-sections",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "lem-sf-finite-scalar-restriction-direct-sections",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Finite evaluation of the ordinary reduction and pullback mate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*hom_ext|hom_ext.*leftDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical isomorphism between scalar extension followed by pullback and pullback followed by scalar extension is computed degreewise on K-flat cochain complexes",
+   "results": "8 hits: HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.extendOpIso, KaehlerDifferential.tensorKaehlerEquiv, HomologicalComplex.extendXIso, ModuleCat.extendScalars_id_comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "Finite evaluation of the ordinary reduction and pullback mate",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralReductionPullOrdinarySquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralReductionPullOrdinarySquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralReductionPullOrdinaryComplex",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.integralReductionPullOrdinarySquare",
+   "WeilConjectures.IntegralSystemRealization.integralReductionPullOrdinaryComplex"
+  ],
+  "statement": "theorem integralReductionPullOrdinaryComplex (a : OrdinaryLimitModel l E)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) :\n    ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).map\n        (a.reductionPullComplex l E f P) ≫\n      (pullbackTensorInverseEvaluationComplex l E f n).inv.app\n        (((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      ((integralOperationsLevelPullback l E f n).mapHomologicalComplex (.up ℤ)).map\n        ((pullbackTensorReductionEvaluationComplex l E Y n).inv.app P) =\n    (pullbackTensorReductionEvaluationComplex l E X n).inv.app\n        (((integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      ordinaryFiniteScalarPullComplex l E f n P",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

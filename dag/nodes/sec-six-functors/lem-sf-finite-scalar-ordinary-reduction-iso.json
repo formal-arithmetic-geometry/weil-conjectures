@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-finite-scalar-ordinary-reduction-iso",
+ "kind": "statement",
+ "title": "Ordinary scalar presentation and its cochain unit normalization",
+ "statement": "Fix a prime l, a finite extension E/Q_l, a scheme W and n≥0. Let π be the actual projection to the exponent n+1 quotient. Define finiteScalarOrdinaryReductionIso:pbcExtend(π)≅scalarReductionExtension(W,n) by left-adjoint uniqueness for their common restriction functor. For every cochain complex P of completed modules on W, the transpose of the degreewise hom of this isomorphism through the cochain pbc scalar adjunction is exactly the unit of the cochain scalarReductionExtension adjunction at P. No K-flatness or flat-term assumption is needed for this ordinary equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Construct the isomorphism by leftAdjointUniq for the ordinary pbc and finite scalar adjunctions. On each degree, homEquiv_leftAdjointUniq_hom_app identifies its transpose with the target adjunction unit. Extensionality of cochain maps proves the degreewise unit normalization.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Ordinary scalar presentation and its cochain unit normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*(comp|trans)|unit_leftAdjointUniq",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/LeftExact.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical left adjoint isomorphisms commute with composition of adjunctions and transport of the right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "Ordinary scalar presentation and its cochain unit normalization",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteScalarOrdinaryReductionIso",
+  "file": "lean/Sheaf/SixFunctors/FiniteScalarOrdinaryReductionIso.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.finiteScalarOrdinaryReductionIso_unitComplex",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.finiteScalarOrdinaryReductionIso",
+   "WeilConjectures.IntegralSystemRealization.finiteScalarOrdinaryReductionIso_unitComplex",
+   "WeilConjectures.IntegralSystemRealization.finiteScalarOrdinaryReductionIso_eq"
+  ],
+  "statement": "theorem finiteScalarOrdinaryReductionIso_unitComplex (W : Scheme.{u}) (n : ℕ)\n    (P : CochainComplex (integralTowerModules l E W) ℤ) :\n    let := sfExtensionAdditive l E W n\n    ((pbcScalarAdjunction\n        (PurCompactSupport.projection l E (n + 1) (Nat.le_add_left 1 n) W)).mapHomologicalComplex\n      (.up ℤ)).homEquiv _ _\n        ((NatTrans.mapHomologicalComplex (finiteScalarOrdinaryReductionIso l E W n).hom\n          (.up ℤ)).app P) =\n      (((scalarReductionExtension_adjunction.{u, u} l E W n).choose).mapHomologicalComplex\n        (.up ℤ)).unit.app P",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

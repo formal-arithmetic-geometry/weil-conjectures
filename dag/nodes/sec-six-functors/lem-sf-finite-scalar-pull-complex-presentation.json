@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-finite-scalar-pull-complex-presentation",
+ "kind": "statement",
+ "title": "Degreewise finite scalar pullback presentations",
+ "statement": "For any morphism f:X→Y, n≥0 and any cochain complex P of completed integral modules on Y, the inverse scalarPullComplex comparison, followed by the geometric pullback of the degreewise ordinary finite scalar presentation and then the degreewise finitePullbackIso, equals the degreewise finite scalar presentation at X, followed by ordinaryFiniteScalarPullComplex and then the degreewise pullbackTensorLevelIntrinsic. No K-flatness, flat terms, derived object, realization model or quotient-presentation hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The degreewise ordinary-presentation step of integralFiniteScalarPullCochainModel; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "lem-sf-finite-scalar-ordinary-reduction-iso",
+  "lem-sf-scalar-pull-coefficient-complex-normalization",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply extensionality for morphisms of cochain complexes. In degree j the complex composition identifications are identities, each mapped scalar and geometric presentation is its ordinary component, and the equation is finiteScalarPullPresentation at P.X j.",
+   "uses": [
+    "lem-sf-finite-scalar-pull-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-pull-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Degreewise finite scalar pullback presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.mapHomologicalComplex",
+   "results": "12 hits, including NatTrans.mapHomologicalComplex, mapHomologicalComplex_app_f, mapHomologicalComplex_id and mapHomologicalComplex_comp.",
+   "date": "2026-10-28",
+   "verdict": "The general degreewise lift supplies the component formulas; the specified scalar and geometric presentation equality is the local ordinary theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexCompIso|HomologicalComplex.hom_ext",
+   "results": "3 hits: Functor.mapHomologicalComplexCompIso in Mathlib/Algebra/Homology/Additive.lean:212, its homotopy lift, and a use of HomologicalComplex.hom_ext in group homology.",
+   "date": "2026-10-28",
+   "verdict": "Use morphism extensionality and the ordinary presentation equation; no separate derived normalization is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar extension and pullback presentation square for cochain complexes follows degreewise from the ordinary module square",
+   "results": "8 hits, including ChainComplex.linearYonedaObj, cochain module structures, cotangent complex base change, coextension of scalars, presheaf pullback existence and the free sheaf pullback formula.",
+   "date": "2026-10-28",
+   "verdict": "No canonical finite scalar/pullback presentation square. Use the proved ordinary presentation theorem degreewise, with Mathlib homological-complex extensionality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-finite-scalar-pull-cochain-model",
+   "place": "The degreewise ordinary finite scalar/pullback presentation equation",
+   "via": [
+    "lem-sf-integral-reduction-pull-finite-square",
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteScalarPullComplexPresentation",
+  "file": "lean/Sheaf/SixFunctors/FiniteScalarPullComplexPresentation.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.finiteScalarPullComplexPresentation",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.finiteScalarPullComplexPresentation"
+  ],
+  "statement": "theorem finiteScalarPullComplexPresentation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) :\n    let := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f\n    let := scalarReductionExtensionAdditive.{u, u} l E X n\n    let := scalarReductionExtensionAdditive.{u, u} l E Y n\n    let a := PurCompactSupport.reduction l E (n + 1) (Nat.le_add_left 1 n)\n    let S := PurCompactSupport.finite l E (n + 1) (Nat.le_add_left 1 n)\n    let T := proEtaleRingModulePullback f (S.ring Y) (S.ring X) (S.pull f)\n    let CY := ((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj P\n    (PurCompactSupport.scalarPullComplex a f).inv.app P ≫\n        (T.mapHomologicalComplex (.up ℤ)).map\n          ((NatTrans.mapHomologicalComplex (finiteScalarOrdinaryReductionIso l E Y n).hom\n            (.up ℤ)).app P) ≫\n        (NatIso.mapHomologicalComplex (PurCompactSupport.finitePullbackIso l E n f)\n          (.up ℤ)).hom.app CY =\n      (NatTrans.mapHomologicalComplex (finiteScalarOrdinaryReductionIso l E X n).hom\n        (.up ℤ)).app (((integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n        ordinaryFiniteScalarPullComplex l E f n P ≫\n        (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n)\n          (.up ℤ)).hom.app CY",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

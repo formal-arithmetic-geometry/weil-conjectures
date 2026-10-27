@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-integral-finite-scalar-pull-cochain-model",
+ "kind": "statement",
+ "title": "Cochain normalization of the canonical finite scalar and pullback square",
+ "statement": "For a prime l, finite extension E/Q_l, morphism f:X→Y, n≥0 and a flat-term K-flat complex P of completed integral modules on Y whose ordinary geometric inverse image is also flat-term K-flat, the canonical integralFiniteScalarPull(f,n) at Q(P), followed by finite pullback of the finite scalar computation isomorphism at Y and the intrinsic geometric computation isomorphism, equals scalar reduction of the completed geometric computation isomorphism, followed by the finite scalar computation isomorphism at X, Q of the termwise ordinaryFiniteScalarPull square, and Q of pullbackTensorLevelIntrinsic. The ordinary square is defined by left-adjoint uniqueness from finiteScalarRestrictionDirect, the actual finite direct-image/scalar-restriction identity. No RealizationModel, coefficient sequence, quotient-presentation comparison, or integral-reduction/pullback comparison is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-integral-finite-scalar-pull-ordinary",
+  "def-sp-finite-intrinsic-pullback",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the Y scalar and geometric presentations using finiteScalarPullReductionComparison.",
+   "uses": [
+    "lem-sf-finite-scalar-pull-reduction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finiteScalarPullPbcNormalization to compute the remaining pbc square on the ordinary complex.",
+   "uses": [
+    "lem-sf-finite-scalar-pull-pbc-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finiteScalarReductionCounitNormalization on the pulled-back good complex and naturality of the X scalar presentation at the completed geometric computation factor. Cancel the source scalar presentation and unfold the unchanged definition of integralFiniteScalarPull.",
+   "uses": [
+    "lem-sf-finite-scalar-reduction-counit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-pull-reduction-comparison",
+  "lem-sf-finite-scalar-pull-pbc-normalization",
+  "lem-sf-finite-scalar-reduction-counit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Cochain normalization of the canonical finite scalar and pullback square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*hom_ext|hom_ext.*leftDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical isomorphism between scalar extension followed by pullback and pullback followed by scalar extension is computed degreewise on K-flat cochain complexes",
+   "results": "8 hits: HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.extendOpIso, KaehlerDifferential.tensorKaehlerEquiv, HomologicalComplex.extendXIso, ModuleCat.extendScalars_id_comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "The derived scalar/pullback comparison on the chosen flat-term K-flat representative",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralFiniteScalarPullCochainModel",
+  "file": "lean/Sheaf/SixFunctors/IntegralFiniteScalarPullCochainModel.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralFiniteScalarPullCochainModel",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.integralFiniteScalarPull",
+   "WeilConjectures.IntegralSystemRealization.integralFiniteScalarPullCochainModel"
+  ],
+  "statement": "theorem integralFiniteScalarPullCochainModel {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory)\n    (h : integralOperationsGoodComplex l E X\n      (((integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)).obj P.obj)) :\n    let := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f\n    let := sfIntrinsicPullback_preservesFiniteLimits (finiteCoefficientRing l E (n + 1)) f\n    let := sfIntrinsicPullback_preservesFiniteColimits (finiteCoefficientRing l E (n + 1)) f\n    (integralFiniteScalarPull l E f n).hom.app (DerivedCategory.Q.obj P.obj) ≫\n        (finiteDerivedPullback l E n f).map\n          (coefficientFiniteReductionModel l E Y P.obj P.property.1 n).hom ≫\n        (sfIntrinsicPullback\n          (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app\n          (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj P.obj) =\n      (scalarReductionDerivedExtension l E X n).map\n          ((integralOrdinaryPull l E f).mapDerivedCategoryFactors.hom.app P.obj) ≫\n        (coefficientFiniteReductionModel l E X\n          (((integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)).obj P.obj) h.1 n).hom ≫\n        DerivedCategory.Q.map\n          (ordinaryFiniteScalarPullComplex l E f n P.obj) ≫\n        DerivedCategory.Q.map\n          ((NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ)).hom.app\n            (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj P.obj))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

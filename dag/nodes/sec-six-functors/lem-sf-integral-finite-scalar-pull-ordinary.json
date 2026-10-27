@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-integral-finite-scalar-pull-ordinary",
+ "kind": "statement",
+ "title": "Ordinary finite scalar and pullback comparison",
+ "statement": "Fix a prime l, a finite extension E/Q_l, schemes X,Y, a morphism f:X→Y and n≥0. Let δ:finiteDirect(f)⋙scalarRestr(Y,n)≅scalarRestr(X,n)⋙completedDirect(f) be finiteDirectImage_eq followed by the sectionwise ringed restriction/direct-image comparison. Construct ν:completedPull(f)⋙scalarExt(X,n)≅scalarExt(Y,n)⋙levelPull(f,n) as left-adjoint uniqueness after transferring the first composite adjunction across δ⁻¹. For every ordinary completed module M on Y, its transpose under the completed-pull/scalar-extension composite adjunction is (scalarAdj(Y,n).comp levelAdj(f,n)).unit_M followed by δ_(levelPull(scalarExt(Y,n)(M))). The components ν_(P.X i) assemble to an actual cochain map for every cochain complex P.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the restriction/direct-image square by finiteDirectImage_eq followed by the ringed restriction/direct-image comparison. Transfer the composite scalar and geometric adjunction across its inverse and take leftAdjointUniq with the finite geometric composite adjunction. Its unit normalization gives ordinaryFiniteScalarPull_transpose, by cancellation of the invertible right comparison. Apply the ordinary natural isomorphism degreewise to construct the cochain map; naturality proves its compatibility with differentials.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-sf-integral-system-canonical-bridge",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Ordinary finite scalar and pullback comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*(comp|trans)|unit_leftAdjointUniq",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/LeftExact.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical left adjoint isomorphisms commute with composition of adjunctions and transport of the right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "Ordinary finite scalar and pullback comparison",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralFiniteScalarPullOrdinary",
+  "file": "lean/Sheaf/SixFunctors/IntegralFiniteScalarPullOrdinary.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryFiniteScalarPull_transpose",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.finiteScalarRestrictionDirect",
+   "WeilConjectures.IntegralSystemRealization.ordinaryFiniteScalarPull",
+   "WeilConjectures.IntegralSystemRealization.ordinaryFiniteScalarPull_transpose",
+   "WeilConjectures.IntegralSystemRealization.ordinaryFiniteScalarPullComplex",
+   "WeilConjectures.IntegralSystemRealization.ordinaryFiniteScalarPull_eq"
+  ],
+  "statement": "theorem ordinaryFiniteScalarPull_transpose {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (M : integralTowerModules l E Y) :\n    let ar := proEtaleRingModuleAdjunction f ((PurCompactSupport.completed l E).ring Y)\n      ((PurCompactSupport.completed l E).ring X) ((PurCompactSupport.completed l E).pull f)\n    let ax := pullbackTensorFiniteAdjunction l E X n\n    let ay := pullbackTensorFiniteAdjunction l E Y n\n    let e := coefficientProEtaleModuleAdjunction.{u, u} f\n      (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))\n    (ar.comp ax).homEquiv M _ ((ordinaryFiniteScalarPull l E f n).hom.app M) =\n      (ay.comp e).unit.app M ≫ (finiteScalarRestrictionDirect l E f n).hom.app\n        ((integralOperationsLevelPullback l E f n).obj\n          ((scalarReductionExtension l E Y n).obj M))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

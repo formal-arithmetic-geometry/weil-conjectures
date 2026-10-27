@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-integral-reduction-pull-evaluation-quotient",
+ "kind": "statement",
+ "title": "Transport of derived evaluation to the ordinary quotient model",
+ "statement": "Fix a prime l, a finite extension E/Q_l, schemes X,Y, a morphism f:X→Y and n≥0. For a cochain complex P of completed ordinary modules on Y, let C=ordinaryReduction(Y)cx(P), κ=pullbackTensorReductionEvaluationComplex(Y,n).inv_P, I=intrinsic finite pullback, V=finite derived pullback, τ=pullbackTensorLevelIntrinsic(f,n), and S=ordinary sequence inverse image. Write facG for the canonical exact-functor localization comparison Gderived(QK)→Q(Gcx(K)). Then pullbackTensorDerivedEvaluation(f,n).hom_(QC), followed by V(facEvalY(C)≫Qκ) and facI(scalarExt(Y,n)cx(P)), equals EvalXderived(facS(C)), followed by facEvalX(Scx(C)), Q(pullbackTensorInverseEvaluationComplex(f,n).inv_C≫levelPull(f,n)cx(κ)), and Q(τcx.hom_(scalarExt(Y,n)cx(P))).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sp-finite-intrinsic-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the cochain normalization which uniquely defines pullbackTensorDerivedEvaluation on the ordinary reduction complex. Postcompose by the localized inverse ordinary reduction-evaluation isomorphism. Naturality of the intrinsic exact pullback computation map moves this isomorphism through geometric pullback. Naturality of pullbackTensorLevelIntrinsic moves its level pullback through the ordinary intrinsic comparison. Functoriality of localization then gives the displayed quotient-coordinate formula.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Transport of derived evaluation to the ordinary quotient model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*hom_ext|hom_ext.*leftDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical isomorphism between scalar extension followed by pullback and pullback followed by scalar extension is computed degreewise on K-flat cochain complexes",
+   "results": "8 hits: HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.extendOpIso, KaehlerDifferential.tensorKaehlerEquiv, HomologicalComplex.extendXIso, ModuleCat.extendScalars_id_comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction and complex tools only; local scalarPull_complex_normalization covers the pbc presentation, while the finite scalar and intrinsic pullback transports still require normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "Transport of derived evaluation to the ordinary quotient model",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralReductionPullEvaluationQuotient",
+  "file": "lean/Sheaf/SixFunctors/IntegralReductionPullEvaluationQuotient.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralReductionPullEvaluationQuotient",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.integralReductionPullEvaluationQuotient"
+  ],
+  "statement": "theorem integralReductionPullEvaluationQuotient {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) :\n    letI := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f\n    letI := sfIntrinsicPullback_preservesFiniteLimits (finiteCoefficientRing l E (n + 1)) f\n    letI := sfIntrinsicPullback_preservesFiniteColimits (finiteCoefficientRing l E (n + 1)) f\n    let C := ((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P\n    let κ := (pullbackTensorReductionEvaluationComplex l E Y n).inv.app P\n    let I := sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f\n    (pullbackTensorDerivedEvaluation l E f n).hom.app (DerivedCategory.Q.obj C) ≫\n        (finiteDerivedPullback l E n f).map\n          ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app C ≫\n            DerivedCategory.Q.map κ) ≫\n        I.mapDerivedCategoryFactors.hom.app\n          (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj P) =\n      (coefficientSequenceDerivedEvaluation l E X n).map\n          ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app C) ≫\n        (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app\n          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj C) ≫\n        DerivedCategory.Q.map\n          ((pullbackTensorInverseEvaluationComplex l E f n).inv.app C ≫\n            ((integralOperationsLevelPullback l E f n).mapHomologicalComplex (.up ℤ)).map κ) ≫\n        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex\n          (pullbackTensorLevelIntrinsic l E f n) (.up ℤ)).hom.app\n            (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}

@@ -13,38 +13,52 @@
   "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-pur-compact-support-integral-coefficient-comparison",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-pbc-ring-sheaf-change-adjunction"
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sf-integral-finite-scalar-pull-cochain-model"
  ],
  "proof": [
   {
-   "text": "choose a flat-term K-flat representative P of H. Geometric inverse image\npreserves flat terms and K-flatness, so model.model applies to P and its inverse\nimage. Evaluate that equation at n. The ordinary limit projection equation in\nmodel.ordinary identifies the evaluated ordinary conjugate with quotient/pullback\ninterchange: after inserting the scalar units, both section maps send a section\nand its quotient coefficient to the same pulled-back tensor. The unit-normalized\nrestriction/direct-image comparison defining integralFiniteScalarPull has that\nsame transpose. The reductionModel equations of the calculus and the cochain\nnormalization of pullbackTensorDerivedEvaluation cancel the computation\nisomorphisms on both sides. This proves the displayed equation on Q(P).\nNaturality and the K-flat resolution isomorphism transport it to H. No open\nextension, open mate, constructibility, completeness or nonempty-scheme\nhypothesis is used; zero complexes and n=0 obey the same tensor equation.",
+   "text": "At the ordinary module level, transpose the proposed square through the two composite adjunctions. The reduction evaluation and sequence inverse evaluation are normalized by their scalar and geometric units. The OrdinaryLimitModel.projections equation and the sectionwise identity of finiteScalarRestrictionDirect identify the right projection square. Naturality of units and injectivity of the composite transpose give the ordinary square, degreewise on complexes.",
+   "uses": [
+    "lem-sf-integral-reduction-pull-ordinary-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a flat-term K-flat complex P, geometric inverse image remains good. Evaluate RealizationModel.model and use completedQuotientReductionPresentation at X,Y, the defining cochain normalization of pullbackTensorDerivedEvaluation, and the ordinary square from the first step. Cancel the finite scalar and geometric computation isomorphisms and apply integralFiniteScalarPullCochainModel. This proves the theorem at Q(P).",
    "uses": [
     "def-sf-integral-system-canonical-bridge",
-    "def-sf-integral-system-operations",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pur-completed-quotient-reduction-presentation",
     "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-sf-integral-finite-scalar-pull-cochain-model",
+    "lem-sf-integral-reduction-pull-evaluation-quotient",
+    "def-sp-varying-ring-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-    "place": "Coefficient comparisons of evaluation and adjunction units/counits; open evaluation component of the original node plan, Step 2; Lean split from lean/Sheaf/SixFunctors/IntegralSupportProjectionTransport.lean, original proof docstring lines 28–45"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Both sides are components of natural transformations. The localization of the full subcategory of flat-term K-flat complexes is the entire integral derived category. Localization.natTrans_ext therefore extends the equality on Q(P) to every H.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sf-integral-reduction-pull-ordinary-square",
   "def-sf-integral-system-canonical-bridge",
-  "def-sf-integral-system-operations",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-completed-quotient-reduction-presentation",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-pbc-ring-sheaf-change-adjunction"
+  "lem-sf-integral-finite-scalar-pull-cochain-model",
+  "lem-sf-integral-reduction-pull-evaluation-quotient",
+  "def-sp-varying-ring-operations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-  "place": "Explicit finite pullback and scalar open-unit steps of the original integralOpenFiniteEvaluation proof; Stacks 07A4, 07A6, 0D6D, 03DI and 0E8I."
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
  },
  "mathlib_searches": [
   {
@@ -104,7 +118,6 @@
   "by": "W5",
   "date": "2026-10-27",
   "declarations": [
-   "WeilConjectures.IntegralSystemRealization.integralFiniteScalarPull",
    "WeilConjectures.IntegralSystemRealization.integralReductionPullFiniteSquare"
   ]
  },
@@ -121,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W5",
-  "result": "pass",
-  "landing": "20261027T084509-L-3686393",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
  }
 }

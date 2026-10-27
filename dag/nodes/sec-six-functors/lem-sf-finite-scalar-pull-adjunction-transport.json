@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-finite-scalar-pull-adjunction-transport",
+ "kind": "statement",
+ "title": "Transport of a canonical adjunction square through presentations",
+ "statement": "Let A,B,C,D be categories. Let F:A→B, S,S′:B→D, T,T′:A→C and G,V:C→D have adjunctions a,s,s′,t,t′,g,v with right adjoints R, RX, RX, RY, RY, U, U′ respectively. Supply right isomorphisms d:U⋙RY≅RX⋙R and e:U≅U′. Let δ=(e⁻¹ whiskered by RY) followed by d. Let q be left-adjoint uniqueness for a.comp s transported across d⁻¹ and t.comp g, let ν be the analogous uniqueness map for a.comp s′ transported across δ⁻¹ and t′.comp v, let αx:s≅s′ and αy:t≅t′ be canonical left-adjoint uniqueness, and let β:g≅v be uniqueness after right transport by e. Then for every M in A, q_M followed by G(αy_M) and β_(T′M) equals αx_(FM) followed by ν_M.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The scalar/pullback comparison on a flat-term K-flat representative in the finite-evaluation argument; Stacks Tags 07A6, 06YY and 0D6E."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Hom equivalence for a.comp s. Left-adjoint uniqueness transfers the second transpose to a.comp s′ and its unit. Naturality of d moves it past the geometric comparison in the first transpose. Naturality of the geometric unit moves the scalar uniqueness map; the scalar unit transfers to t′ by uniqueness. The defining unit equation of β transfers the remaining geometric unit through e. The result is the same composite unit followed by δ, so injectivity proves equality.",
+   "uses": [
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-normalized-adjunction-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Transport of a canonical adjunction square through presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*(comp|trans)|unit_leftAdjointUniq",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/LeftExact.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical left adjoint isomorphisms commute with composition of adjunctions and transport of the right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc",
+   "date": "2026-10-27",
+   "verdict": "These provide the canonical uniqueness, unit and composition tools used in the proof. No result is the specified finite scalar presentation rectangle; that normalization is supplied explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralReductionPullFiniteSquare",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-reduction-pull-finite-square",
+   "place": "Ordinary adjunction presentation transport in the finite scalar square",
+   "via": [
+    "lem-sf-integral-open-finite-evaluation",
+    "lem-sf-integral-support-projection-transport",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteScalarPullAdjunctionTransport",
+  "file": "lean/Sheaf/SixFunctors/FiniteScalarPullAdjunctionTransport.lean",
+  "declaration": "CategoryTheory.adjunctionSquareTransport",
+  "declarations": [
+   "CategoryTheory.adjunctionSquareTransport"
+  ],
+  "statement": "theorem adjunctionSquareTransport\n    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]\n    {F : A ⥤ B} {R : B ⥤ A} {S S' : B ⥤ D} {RX : D ⥤ B}\n    {T T' : A ⥤ C} {RY : C ⥤ A} {G V : C ⥤ D} {U U' : D ⥤ C}\n    (a : F ⊣ R) (s : S ⊣ RX) (s' : S' ⊣ RX) (t : T ⊣ RY) (t' : T' ⊣ RY)\n    (g : G ⊣ U) (v : V ⊣ U') (d : U ⋙ RY ≅ RX ⋙ R) (e : U ≅ U') (M : A) :\n    let δ := Functor.isoWhiskerRight e.symm RY ≪≫ d\n    let q := ((a.comp s).ofNatIsoRight d.symm).leftAdjointUniq (t.comp g)\n    let ν := ((a.comp s').ofNatIsoRight δ.symm).leftAdjointUniq (t'.comp v)\n    let αx := s.leftAdjointUniq s'\n    let αy := t.leftAdjointUniq t'\n    let β := (g.ofNatIsoRight e).leftAdjointUniq v\n    q.hom.app M ≫ G.map (αy.hom.app M) ≫ β.hom.app (T'.obj M) =\n      αx.hom.app (F.obj M) ≫ ν.hom.app M",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7121f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234013-L-4160411",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 12 new proved modules against node lem-sf-integral-reduction-pull-finite-square and the 12 new nodes; verbatim move of integralFiniteScalarPull against change record and 3 users (all compile OK); #print axioms (sorryAx only via upstream completedQuotientReductionPresentation)"
+ }
+}
