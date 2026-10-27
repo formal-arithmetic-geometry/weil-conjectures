@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SecSmoothPurity.FiniteGeneralRingData
+import Sheaf.SecSmoothPurity.FiniteGeneralRingLocalTraceExponent
 
 /-! # Kummer exponent comparison of the vector-bundle integration
 
@@ -19,6 +20,37 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
+
+private theorem integration_eq_of_normalization
+    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
+    (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S]
+    (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank d]
+    (k : Etale.vectorIntegrationSource A N hA S d F ⟶
+      Etale.ordinaryFiniteUnit A S)
+    (hk : Etale.VectorIntegrationNormalization N hN A hA S hS d F k) :
+    k = Etale.vectorBundleIntegration N hN A hA S hS d F := by
+  let p := Etale.vectorIntegrationGluing N hN A hA S hS d F
+  obtain ⟨ell, hell⟩ := (_root_.DerivedCategory.singleFunctor _ 0).map_surjective
+    (p.1.inv ≫ k)
+  have he : p.1.hom ≫ (_root_.DerivedCategory.singleFunctor _ 0).map ell = k := by
+    rw [hell, ← Category.assoc, p.1.hom_inv_id, Category.id_comp]
+  have hp' : (_root_.DerivedCategory.homologyFunctor _ 0).map p.1.hom ≫
+      (_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom.app
+        (Etale.vectorIntegrationSheaf A N hA S d F) =
+        𝟙 (Etale.vectorIntegrationSheaf A N hA S d F) ∧
+      Etale.VectorIntegrationNormalization N hN A hA S hS d F
+        (p.1.hom ≫ (_root_.DerivedCategory.singleFunctor _ 0).map p.2) := by
+    dsimp only [p]
+    unfold Etale.vectorIntegrationGluing
+    exact (Etale.existsUnique_vectorIntegrationGluing N hN A hA S hS d F).2.exists.choose_spec
+  have heq : (p.1, ell) = p :=
+    (Etale.existsUnique_vectorIntegrationGluing N hN A hA S hS d F).2.unique
+      ⟨hp'.1, by rw [he]; exact hk⟩ hp'
+  have hell' : ell = p.2 := congrArg Prod.snd heq
+  rw [← he, hell']
+  unfold Etale.vectorBundleIntegration
+  rfl
 
 /-- A root-normalized Kummer exponent comparison preserves actual vector-bundle
 integration, before taking an adjunction transpose or restricting to the zero section.
@@ -67,6 +99,17 @@ theorem finiteGeneralRingIntegrationExponent
           (finiteGeneralRingLevelPower A M N hM hN S b d).hom) ≫
         Etale.vectorBundleIntegration N hNpos A hN S hS' d F =
       Etale.vectorBundleIntegration M hMpos A hM S hS d F := by
-  sorry
+  let P := Etale.ordinaryFinitePullback A (VectorBundleZeroSection.π S d F)
+  let e := finiteGeneralRingLevelPower A M N hM hN S b d
+  let k := (Etale.vectorBundlePurityLower A S d F).map (P.map e.hom) ≫
+    Etale.vectorBundleIntegration N hNpos A hN S hS' d F
+  have hk : Etale.VectorIntegrationNormalization M hMpos A hM S hS d F k := by
+    intro t D V eV
+    have hl := finiteGeneralRingLocalTraceExponent A M N hMpos hNpos hdiv
+      hM hN S hS hS' d F q b hb t D V eV
+    dsimp only [k, P, e]
+    simpa only [Functor.map_comp, Category.assoc] using hl
+  change k = Etale.vectorBundleIntegration M hMpos A hM S hS d F
+  exact integration_eq_of_normalization M hMpos A hM S hS d F k hk
 
 end AlgebraicGeometry.ProEtale
