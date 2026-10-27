@@ -19886,3 +19886,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:02 L: returned deliver/Q4/Sheaf.Paper.CompactSupportStrictScalarComposition (reviewer RETURN: (reviewer C-955b5, head 955b51f6e) D1/G2: compactSupportStrictScalarComposition_core is the item restated (LHS ≫ map(com)
 - 20:06 L: returned deliver/NA/lem-sf-native-proper-projection-realization (reviewer RETURN: L: independent stage-2 immutable head e234cae0e823: Sheaf.Paper.NativeProjectionTensorComparisonData declares names that)
 - 20:20 L: returned deliver/E7/Sheaf.Paper.NativeWeilTensorRingedDerivedSquareOrdinary (reviewer RETURN: (reviewer C-40155, head 401551ed1) E2: the new lemma is false. The normalization constrains model P Q only for K-flat Q,)
+- 20:20 L: returned deliver/J7/Sheaf.Paper.NativeWeilScalarFrobeniusCounit (reviewer RETURN: (reviewer C-49fc0, head 49fc0be34) E2: native_frobenius_normalization_exists and native_scalar_normalization_exists quan)
