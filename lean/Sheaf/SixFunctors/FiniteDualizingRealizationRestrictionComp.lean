@@ -6,6 +6,8 @@ Authors: SHEAF group P7
 module
 
 public import Sheaf.SixFunctors.FiniteDualizingData
+import Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionComp
+import Sheaf.SixFunctors.FiniteDualizingRestrictionTransport
 
 /-! # Coherence of finite-coefficient realization restriction -/
 
@@ -51,6 +53,18 @@ theorem finiteDualizingRealizationRestriction_comp
           ((Sheaf.derivedRestrictScalars X.smallEtaleTopology
             (finiteDualizingQuotient l E hmn)).obj K) ≫
         (normalizedDVRRes l E X hrm).map
-          ((finiteDualizingRealizationRestriction l E X hmn).inv.app K) := by sorry
+          ((finiteDualizingRealizationRestriction l E X hmn).inv.app K) := by
+  unfold finiteDualizingRealizationRestriction
+  dsimp only [finiteDualizingRealization]
+  simp only [Functor.comp_obj, Iso.trans_inv, Functor.isoWhiskerRight_inv,
+    Iso.symm_inv, Category.assoc, Functor.isoWhiskerLeft_inv, NatTrans.comp_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Category.comp_id, Category.id_comp, Functor.comp_map,
+    Functor.map_comp]
+  let Cn := ProEtale.comparisonUpperStar
+    (ModuleCat (finiteDualizingCoeff l E n)) X
+  let CK := Cn.mapDerivedCategory.obj K
+  rw [finiteDualizingIntrinsicRestriction_comp l E X hrm hmn CK]
+  exact finiteDualizingRealizationRestriction_transport l E X hrm hmn K
 
 end WeilConjectures

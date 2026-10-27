@@ -1,0 +1,110 @@
+{
+ "id": "lem-coef-dualizing-intrinsic-restriction-comp",
+ "kind": "statement",
+ "title": "Intrinsic finite-dualizing restriction composition",
+ "statement": "For n ≤ m ≤ r and every object K of the pro-etale derived category at level n, the inverse intrinsic finite-dualizing restriction comparison for n ≤ r, followed by the inverse normalized restriction compositor, equals the pro-etale derived scalar compositor inverse, followed by the inverse intrinsic comparison for m ≤ r and the normalized restriction image of the inverse intrinsic comparison for n ≤ m.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Final sentence: transport by the finite dualizing comparison, with identity and successive-coefficient normalization"
+ },
+ "stmt_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "The section-normalized intrinsic comparison is uniquely characterized on scalar-unit sections. Quotient maps compose on representatives, so the direct and successive comparisons have the same normalization. Uniqueness transports this equality through exact derived localization; pasting with the canonical derived scalar and normalized restriction compositors gives the stated component identity.",
+   "uses": [
+    "def-coef-finite-dualizing-data",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Final sentence: transport by the finite dualizing comparison, with identity and successive-coefficient normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Final sentence: transport by the finite dualizing comparison, with identity and successive-coefficient normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Intrinsic finite-dualizing restriction composition",
+   "results": "No exact public theorem; the intrinsic and comparison layers are separate APIs.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intrinsic finite-dualizing restriction composition",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryCompIso and derived scalar restriction naturality are available.",
+   "date": "2026-10-28",
+   "verdict": "No exact match for this specialized statement."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizingIntrinsicRestriction and pbcDerivedComparisonRestrict composition",
+   "results": "No existing theorem in lean/Sheaf.",
+   "date": "2026-10-28",
+   "verdict": "New split required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteDualizingRealizationRestrictionComp",
+  "date": "2026-10-28",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Final sentence: transport by the finite dualizing comparison, with identity and successive-coefficient normalization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionComp",
+  "file": "lean/Sheaf/SixFunctors/FiniteDualizingIntrinsicRestrictionComp.lean",
+  "declaration": "WeilConjectures.finiteDualizingIntrinsicRestriction_comp",
+  "statement": "theorem finiteDualizingIntrinsicRestriction_comp\n    {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m)\n    (K : DerivedCategory (Sheaf (ProEt.topology X)\n      (ModuleCat (finiteDualizingCoeff l E n)))) :\n    (finiteDualizingIntrinsicRestriction l E X (hmn.trans hrm)).inv.app K ≫\n        (normalizedDVRResComp l E X hrm hmn).inv.app\n          ((sfIntrinsicDerivedEquivalence X\n            (Padic.coefficientExtensionRing l E (n + 1))).functor.obj K) =\n      (sfIntrinsicDerivedEquivalence X\n          (Padic.coefficientExtensionRing l E (r + 1))).functor.map\n        ((Sheaf.derivedRestrictScalarsCompIso (ProEt.topology X)\n          (finiteDualizingQuotient_comp l E hrm hmn)).inv.app K) ≫\n        (finiteDualizingIntrinsicRestriction l E X hrm).inv.app\n          ((Sheaf.derivedRestrictScalars (ProEt.topology X)\n            (finiteDualizingQuotient l E hmn)).obj K) ≫\n        (normalizedDVRRes l E X hrm).map\n          ((finiteDualizingIntrinsicRestriction l E X hmn).inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T234312-L-92682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T234312-L-92682",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
