@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-etale-cofinal-factor-evaluation",
+ "kind": "statement",
+ "title": "Cofinal factors and evaluation diagrams",
+ "statement": "For a projection theory T, coefficient tower B, order embedding r, local selected extensions Lx and Ly, and CofinalRepeatSupport R, there exist CofinalFactor data Fx and Fy, repetition evaluation isomorphisms x and y, and the three factor/support evaluation equations of CofinalBlockEvaluation.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23; finite-block generalization already in parent proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-cofinal-data"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "At each m use the least selected index t(m). The repeated tensor extension and the supplied selected extension are left adjoints of the same actual cofinal restriction and have the same unit on selected sections. Adjoint uniqueness gives the ordinary factors, while the normalized universal left-derived comparisons give their derived fields and evaluation equations. The block proper square and the section-normalized open-extension square give the support equation.",
+   "uses": [
+    "lem-pur-system-block-repetition",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-ordinary-selected-extension",
+    "lem-pur-system-level-left-extension",
+    "lem-pur-system-evaluation-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-block-repetition",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-ordinary-selected-extension",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-evaluation-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A selected cofinal extension of sheaf module systems has a normalized left derived adjunction and tensor evaluation",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.sheafificationAdjunction, CategoryTheory.constantSheafAdj, SheafOfModules.pushforwardPushforwardAdj, stalkSkyscraperSheafAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app.",
+   "date": "2026-10-28",
+   "verdict": "No complete match for this normalized statement about actual étale sequence-site systems. Reuse the existing Sheaf declarations recorded in proof_deps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Selected subsequence left extension of ringed-topos module systems has a normalized derived adjunction and a tensor formula at every level",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.Presentation.map, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.HasDifferentials, LightCondensed.instMonoidalClosedLightCondMod, localCohomology.diagram.",
+   "date": "2026-10-28",
+   "verdict": "No complete match for this normalized statement about actual étale sequence-site systems. Reuse the existing Sheaf declarations recorded in proof_deps."
+  },
+  {
+   "tool": "grep",
+   "query": "selected.*[Ee]xtension|subsequence.*[Aa]djoint|[Aa]djoint.*subsequence",
+   "results": "0 hits: .",
+   "date": "2026-10-28",
+   "verdict": "No complete match for this normalized statement about actual étale sequence-site systems. Reuse the existing Sheaf declarations recorded in proof_deps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCofinalBlockFactorization",
+  "date": "2026-10-28",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-cofinal-block-factorization",
+   "place": "Construction 4.1 decomposition of geometric block repetition and factorization",
+   "via": [
+    "lem-pur-etale-cofinal-block-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCofinalFactorEvaluation",
+  "file": "lean/Sheaf/Paper/EtaleCofinalFactorEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleCofinalFactorEvaluation_nonempty",
+  "statement": "theorem etaleCofinalFactorEvaluation_nonempty\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}\n    (T : Theory c l) (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)\n    (Lx : CofinalExtension X B r) (Ly : CofinalExtension Y B r)\n    (R : CofinalRepeatSupport T B r) :\n    ∃ (Fx : CofinalFactor X B r Lx R.x (T.scalarX (cofinalCoefficient B r)))\n      (Fy : CofinalFactor Y B r Ly R.y (T.scalarY (cofinalCoefficient B r)))\n      (x : ∀ m : ℕ,\n        R.x.R.mapDerivedCategory ⋙ (T.evaluationX (cofinalRepeated B r) m).E ≅\n          (T.evaluationX (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m)).E)\n      (y : ∀ m : ℕ,\n        R.y.R.mapDerivedCategory ⋙ (T.evaluationY (cofinalRepeated B r) m).E ≅\n          (T.evaluationY (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m)).E),\n      (∀ (m : ℕ) (N : Derived X (cofinalCoefficients B r).rings),\n        (T.evaluationX B m).E.map (Fx.derived.hom.app N) ≫\n          (T.scalarEvaluationX (cofinalCoefficient B r) m).iso.hom.app\n            (R.x.R.mapDerivedCategory.obj N) ≫\n          (scalarExtension ((cofinalCoefficient B r).app (op m)).hom X).map\n            ((x m).hom.app N) =\n        (Lx.level m (T.evaluationX B m)\n          (T.evaluationX (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m))).hom.app N) ∧\n      (∀ (m : ℕ) (N : Derived Y (cofinalCoefficients B r).rings),\n        (T.evaluationY B m).E.map (Fy.derived.hom.app N) ≫\n          (T.scalarEvaluationY (cofinalCoefficient B r) m).iso.hom.app\n            (R.y.R.mapDerivedCategory.obj N) ≫\n          (scalarExtension ((cofinalCoefficient B r).app (op m)).hom Y).map\n            ((y m).hom.app N) =\n        (Ly.level m (T.evaluationY B m)\n          (T.evaluationY (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m))).hom.app N) ∧\n      (∀ (m : ℕ) (N : Derived X (cofinalCoefficients B r).rings),\n        (T.evaluationY (cofinalRepeated B r) m).E.map (R.kappa.hom.app N) ≫\n          (y m).hom.app ((T.support (cofinalCoefficients B r)).F.obj N) ≫\n          (T.supportEvaluation (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m)).iso.hom.app N =\n        (T.supportEvaluation (cofinalRepeated B r) m).iso.hom.app\n            (R.x.R.mapDerivedCategory.obj N) ≫\n          (rightDerivedLowerShriekOfCompactification\n            (ModuleCat.{u + 1} ((cofinalRepeated B r).rings.obj (op m))) c).map\n            ((x m).hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T210014-L-1644562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T210014-L-1644562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

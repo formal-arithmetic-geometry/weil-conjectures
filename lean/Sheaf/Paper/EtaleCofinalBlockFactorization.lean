@@ -6,6 +6,9 @@ Authors: SHEAF group U6
 module
 
 public import Sheaf.Paper.EtaleSystemCofinalData
+import Sheaf.Paper.EtaleSystemProjectionExistence
+import Sheaf.Paper.EtaleCofinalRepeatSupportExistence
+import Sheaf.Paper.EtaleCofinalFactorEvaluation
 
 /-! # Repetition and scalar factorization of a selected extension
 
@@ -107,6 +110,13 @@ theorem etaleCofinalBlockFactorization
         ∃ (R : CofinalRepeatSupport T B r)
           (Fx : CofinalFactor X B r Lx R.x (T.scalarX (cofinalCoefficient B r)))
           (Fy : CofinalFactor Y B r Ly R.y (T.scalarY (cofinalCoefficient B r))),
-          Nonempty (CofinalBlockEvaluation T B r Lx Ly R Fx Fy) := by sorry
+          Nonempty (CofinalBlockEvaluation T B r Lx Ly R Fx Fy) := by
+  obtain ⟨T⟩ := etaleSystemProjectionTheory_nonempty c l
+  refine ⟨T, ?_⟩
+  intro B r Lx Ly
+  obtain ⟨R⟩ := etaleCofinalRepeatSupport_nonempty T B r
+  obtain ⟨Fx, Fy, x, y, hfactorX, hfactorY, hsupport⟩ :=
+    etaleCofinalFactorEvaluation_nonempty T B r Lx Ly R
+  exact ⟨R, Fx, Fy, ⟨x, y, hfactorX, hfactorY, hsupport⟩⟩
 
 end AlgebraicGeometry.Etale.SystemProjection
