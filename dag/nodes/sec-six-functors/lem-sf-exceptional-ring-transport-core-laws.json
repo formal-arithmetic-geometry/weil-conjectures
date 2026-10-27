@@ -1,0 +1,101 @@
+{
+ "id": "lem-sf-exceptional-ring-transport-core-laws",
+ "kind": "statement",
+ "title": "Exceptional transport compatibility and normalization laws",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Given the finite and integral operation families, compact-support left realizations, and the object and functor data fields of ExceptionalIntegralScalar.Transported, there exists the support, adjunction, evaluation, and proper/open normalization laws required by that record.",
+ "stmt_deps": [
+  "lem-sf-exceptional-ring-transport-core-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
+ },
+ "proof": [
+  {
+   "text": "Transport the strict-system units, counits, finite evaluations and realization comparisons through the reconstruction equivalences. The proper/open realization normalization gives the integral-left and whole-system equations; the same construction supplies the Good-domain predicates.",
+   "uses": [
+    "lem-sf-exceptional-ring-transport-core-data",
+    "lem-sf-exceptional-system-transport",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-ring-transport-core-data",
+  "lem-sf-exceptional-system-transport",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TransportCoreData TransportCoreLaws ExceptionalIntegralScalar.Transported",
+   "results": "No existing declaration isolates these strict subsets of Transported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized exceptional transport data and compatibility laws",
+   "results": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty TransportCoreData",
+   "results": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRingTransportCore",
+  "date": "2026-10-28",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-ring-transport-core",
+   "place": "the normalized system transport and proper/open realization construction"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingTransportCoreLaws",
+  "file": "lean/Sheaf/Paper/ExceptionalRingTransportCoreLaws.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.exists_exceptional_transport_core_laws",
+  "statement": "theorem exists_exceptional_transport_core_laws\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))\n    (left : ∀ s : RingStage.{u} l,\n      LeftRealization.{u} l Ω c s (operation s))\n    (d : TransportCoreData l Ω D hl c operation left) :\n    Nonempty (TransportCoreLaws l Ω D hl c operation left d)",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T205845-L-1624541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T205845-L-1624541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
