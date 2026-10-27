@@ -20084,3 +20084,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:02 L: merged deliver/T1/Sheaf.Paper.PrimitiveQuotientScalarModelExistence (stage 3; reviewer FIX; after a return; landing 20261027T210234-L-1677775 (interface); batch 20261027T205736; modules 8; new nodes 1; change records: coord/changes/T1-scalar-presentation-coherence.md)
 - 21:02 L: merged deliver/T2/Sheaf.Paper.FinitePerfectAdicConstantCoherence (stage 3; reviewer PASS; first push; landing 20261027T210235-L-1678292 (proof); batch 20261027T205736; modules 1; new nodes 0)
 - 21:02 L: merged deliver/T2/Sheaf.Paper.NormalizedVectorPurityScalarLineWitness (stage 3; reviewer PASS; first push; landing 20261027T210236-L-1678749 (proof); batch 20261027T205736; modules 1; new nodes 0)
+- 21:02 L: merged deliver/T2/Sheaf.Paper.PullbackTensorUnitCoherence (stage 3; reviewer PASS; first push; landing 20261027T210237-L-1678968 (interface); batch 20261027T205736; modules 4; new nodes 3)

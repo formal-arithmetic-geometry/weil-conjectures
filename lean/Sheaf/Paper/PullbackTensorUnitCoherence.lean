@@ -6,6 +6,9 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.Paper.DerivedPullbackTensorConstraints
+import Sheaf.Paper.PullbackTensorIntegralUnitCoherence
+import Sheaf.Paper.PullbackTensorRationalUnitCoherence
+import Sheaf.Paper.PullbackTensorCommonStageUnitCoherence
 
 /-! # Units of the higher pullback tensor comparisons
 
@@ -76,6 +79,9 @@ theorem pullbackTensorUnitCoherence {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
     canonicalIntegralPullbackTensor_unit l E f ∧
       canonicalRationalPullbackTensor_unit l E f ∧
-        canonicalCommonStagePullbackTensor_unit l Ω f := by sorry
+        canonicalCommonStagePullbackTensor_unit l Ω f := by
+  exact ⟨pullbackTensorIntegralUnitCoherence l E f,
+    pullbackTensorRationalUnitCoherence l E f,
+    pullbackTensorCommonStageUnitCoherence l Ω f⟩
 
 end WeilConjectures
