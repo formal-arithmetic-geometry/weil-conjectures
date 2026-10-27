@@ -8,153 +8,22 @@
  },
  "proof": [
   {
-   "text": "Here is the whole-tower comparison. The functor $\\mathcal T_f^c$ named in [lem-weil-compact-support-reduction-tower-functor] is the specified exact lift formed on the ringed sequence sites from simultaneous derived reduction $\\mathcal R_X$, exact levelwise open extension, the total right derived functor of levelwise $p_*$ on the system category (computed by a K-injective resolution of the entire system) and exact termwise restriction $U_Y$. Its stated evaluations are $\\operatorname{Res}_nRp_{*,n}j_!K_n$, and its stated transitions are the quotient-induced maps followed by the coefficient-restriction comparisons. The item's $F=S_pJ_j$ is the same total derived system direct image of the same exact open extension, so $U_YC_f(K)=U_YS_p^{\\mathrm{str}}J_j^{\\mathrm{str}}\\mathcal R_XK$ is that same composite of functors, and $\\delta_{f,K}$ is its identity. It is therefore a natural whole-tower isomorphism, functorial on all derived morphisms, and it is not chosen from evaluations. The evaluation identifications and the counit-transpose coefficient comparisons in that statement are supplied on the enhanced section models of [lem-coef-semilinear-derived-sections]. The strict/enhanced model equivalence of [lem-trf-compact-support-system-evaluation-coherence], applied to $M=\\mathcal R_XK$, carries them to this strict composite, together with its units, counits and coefficient transposes. Hence $\\delta_{f,K}$ evaluates to the canonical identification with $\\operatorname{Res}_nRf^c_{!,n}K_n$, and it carries each transition to the quotient-induced transition followed by the coefficient-restriction comparison.",
+   "text": "Apply the witness component and the point-specialization component, then construct the conjunction by Lean’s constructor.",
    "uses": [
-    "lem-weil-compact-support-reduction-tower-functor",
-    "lem-coef-semilinear-derived-sections",
-    "lem-trf-compact-support-system-evaluation-coherence"
+    "lem-trf-compact-support-system-realization-normalization-witness",
+    "lem-trf-compact-support-system-realization-normalization-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Agent-formulated prerequisite to (3): choosing and comparing the simultaneous compact-support tower models"
-   }
-  },
-  {
-   "text": "By [lem-coef-derived-system-evaluation-calculus], $\\mathcal L_Y=R\\lim U_Y$. The integral compact-support definition [def-weil-integral-rational-qbar-compact-support] takes the derived limit of the same finite outputs and quotient-induced/coefficient-restriction transitions. Apply the functorial $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to the whole-system isomorphism $\\delta$ from step 1; its total-limit cone and naturality on strict maps give the defining identification on objects and morphisms\n$$\\mathcal L_YC_f(K)=Rf_!^cK.$$ \nIts value belongs to $D^b_c(Y,R)$ by [lem-sf-integral-compact-support-constructible]. No inverse-limit reconstruction of the output system is used.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-sf-integral-compact-support-constructible",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(3), second paragraph: integral compact-support realization on objects and morphisms"
-   }
-  },
-  {
-   "text": "Fix $W=X,\\overline X,Y$ and $r\\ge1$. Set $I_r=(g_W^r)^{-1}$ on integral complexes. The new completion-unit lemma [lem-weil-isomorphism-derived-pullback-comparison-normalization] identifies the SPECIFIED $\\kappa_N$ of [def-weil-inverse-image-pullback-comparison] by $\\theta\\kappa_N=I_r(u_N)$. Derived completeness of $N$ makes $u_N$ invertible, hence $\\kappa_N$ invertible; an unspecified $\\lambda$ is not used. Inverse image preserves flat-term K-flat representatives by [lem-weil-pbc-ringed-topos-kflat-pullback], using its coefficient structure isomorphism. On one such $Q\\to N$, the chain maps $\\beta_n$ in [lem-weil-isomorphism-derived-pullback-reduction-tower] commute with quotient and transition maps. Their inverses give a map $\\sigma_{r,N}:\\mathcal R_W I_rN\\xrightarrow{\\sim}G_{W,r}\\mathcal R_WN$ of strict complexes of systems, natural in $Q$. The simultaneous section model descends this map and its inverse on derived morphisms. Thus $b^W_{r,N}=\\sigma_{r,N}\\mathcal R_W(\\kappa_N^{-1})$ is exactly the system isomorphism and tensor formula in the item.",
-   "uses": [
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-weil-isomorphism-derived-pullback-reduction-tower",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-proetale-isomorphism-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2): pullback/reduction normalization, with completeness of the specified map established"
-   }
-  },
-  {
-   "text": "Write $I_h=h^{-1}$, $I_k=k^{-1}$ for composable scheme isomorphisms, $d:I_hI_k\\to I_{kh}$ for their inverse-image compositor, and $t:G_hG_k\\to G_{kh}$ on systems. The tensor comparison $\\sigma$ of step 3 satisfies\n$$\\sigma_{kh,N}\\mathcal R(d_N)=t_{\\mathcal R N}G_h(\\sigma_{k,N})\\sigma_{h,I_kN}.$$\nIndeed, on a flat-term representative both sides are chain maps of strict quotient systems. The inverse tensor maps send $I_hI_k(x)\\otimes a$ to the inverse image of $x\\otimes a$, with $a$ transported by the composite coefficient isomorphism. The two coefficient maps agree: on a constant section they both give that same constant, and their completed maps agree on all limit projections. This proves equality on the sheaf tensor generators, for every term and every quotient; each map also commutes with the actual quotient transitions. Thus the equality holds BEFORE localization as a map of strict systems. Descent preserves this equality, rather than detecting equality from ordinary derived evaluations.",
-   "uses": [
-    "lem-weil-isomorphism-derived-pullback-reduction-tower",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-proetale-inverse-image",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2), composition compatibility: elementary tensor calculation on the specified strict representatives"
-   }
-  },
-  {
-   "text": "Let $c:P_hP_k\\to P_{kh}$ be the inverse-direction integral compositor. By [lem-trf-integral-inverse-image-comparison-composition],\n$$c\\kappa^h_{P_kN}I_h(\\kappa^k_N)=\\kappa^{kh}_N d_N.$$\nIts hypotheses hold: $N$ is bounded constructible and derived complete, and $P_kN$ lies in the same class by [lem-weil-isomorphism-derived-pullback]. Put $e_g=b_g^{-1}=\\mathcal R(\\kappa^g)\\sigma_g^{-1}$. Naturality of $\\sigma_h$ at $\\kappa^k_N$ gives\n$$\\sigma_{h,P_kN}^{-1}G_h\\mathcal R(\\kappa^k_N)=\\mathcal R I_h(\\kappa^k_N)\\sigma_{h,I_kN}^{-1}.$$\nSubstitution into $\\mathcal R(c)e_{h,P_kN}G_h(e_{k,N})$ first gives\n$$\\mathcal R(\\kappa^{kh}_Nd_N)\\sigma_{h,I_kN}^{-1}G_h(\\sigma_{k,N}^{-1}),$$\nwhich equals $\\mathcal R(\\kappa^{kh}_N)\\sigma_{kh,N}^{-1}t=e_{kh,N}t$ by step 4. With $h=g_W$ and $k=g_W^m$ this is exactly the displayed SYSTEM identity. The equality for $\\kappa$ is the stated whole-derived-morphism equation of the cited node; the generic scalar equation with $E=L$ is not used to infer it.",
-   "uses": [
-    "lem-trf-integral-inverse-image-comparison-composition",
-    "lem-weil-isomorphism-derived-pullback",
-    "lem-trf-integral-pullback-comparison-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2), iterated pullback comparisons: actual kappa composition followed by tensor naturality"
-   }
-  },
-  {
-   "text": "For arbitrary $C$ put $N=\\mathcal L_YC\\in D^b_c(Y,R)$. The exact inverse-image equivalence $I_r$ along $g_Y^r$ preserves all limits [lem-weil-proetale-isomorphism-inverse-image]. It induces an exact equivalence on strict completed-module towers. Its exact inverse is a left adjoint, so [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $I_r$ preserve K-injective tower complexes. Resolve $U_YC\\to J$ in the WHOLE tower category. The total-limit model [lem-weil-pbc-ringed-strict-tower-homotopy-limit] computes $\\mathcal L_YC$ by $\\lim J$ and $\\mathcal L_YG_{Y,r}C$ by $\\lim I_rJ$. The isomorphism $I_r\\lim J\\to\\lim I_rJ$ has components $I_r$ of the actual cone projections. Restriction of scalars commutes with $I_r$ by the coefficient-projection square in the reduction-tower lemma. Compose this limit isomorphism with the inverse of the specified $\\kappa_N$, invertible by the completion-unit lemma, to get exactly $\\nu^Y_{r,C}$. At $Y=s=\\operatorname{Spec}k$ this uses the same $\\kappa$ inverse and full cone comparison as $\\nu$ in [lem-trf-integral-point-transport-tower-powers]. No $\\zeta$ or point-transport realization assertion is needed.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-isomorphism-derived-pullback-reduction-tower",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "lem-trf-integral-point-transport-tower-powers"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Agent-formulated prerequisite to (3): exact inverse image of the entire resolved limit cone"
-   }
-  },
-  {
-   "text": "For $h_W=g_W^r$, the source comparison named in [def-weil-frobenius-square-exchange], item 2, is formed before the limit from three specified maps: the unit $u_{P_{Y,r}H}$, the strict tensor map $b^Y_{r,H}:\\mathcal R_YP_{Y,r}H\\to G_{Y,r}\\mathcal R_YH$, and the counit $e_C:\\mathcal R_Y\\mathcal L_YC\\to C$. Here $C=C_f(K)$ and $H=H_f(K)=\\mathcal L_YC$. The definition forms its operations on the enhanced section models of [lem-coef-semilinear-derived-sections]. The model equivalence of [lem-trf-compact-support-system-evaluation-coherence] identifies these with the strict operations used here, together with their units and counits. Hence its actual formula is the $\\alpha^{\\mathrm{can}}_{!,r,K}$ displayed in the statement. Write $I=(g_Y^r)^{-1}$, $\\kappa=\\kappa^{g_Y^r}$ and $\\sigma=\\sigma_r$ from step 3. Let $\\omega_D:I\\mathcal L_YD\\xrightarrow{\\sim}\\mathcal L_YG_{Y,r}D$ be the whole-cone comparison of step 6, so that $\\nu^Y_{r,C}=\\omega_C\\kappa_H^{-1}$. By [lem-cbc-exact-product-functor-strict-limit] it is, in cone coordinates, the product comparison on both summands. It is natural in the system $D$.\n\n(i) By step 3, $b^Y_{r,H}=\\sigma_H\\mathcal R_Y(\\kappa_H^{-1})$. Naturality of the unit of $\\mathcal R_Y\\dashv\\mathcal L_Y$ [lem-coef-derived-system-evaluation-calculus] at the isomorphism $\\kappa_H^{-1}$ gives $\\mathcal L_Y(b^Y_{r,H})u_{P_{Y,r}H}=\\mathcal L_Y(\\sigma_H)u_{IH}\\kappa_H^{-1}$.\n\n(ii) Here is the mate identity $\\mathcal L_Y(\\sigma_N)u_{IN}=\\omega_{\\mathcal R_YN}I(u_N)$ for $N\\in D^b_c(Y,R)$. Take a flat-term K-flat $Q\\to N$. Then $IQ$ is again K-flat with flat terms (step 3), so it computes $\\mathcal R_YIN$. Let $\\mu_N:P_{Y,r}N\\xrightarrow{\\sim}\\mathcal L_Y\\mathcal R_YIN$ be the identification of the defining cone of $P_{Y,r}N$ in [def-weil-inverse-image-pullback-comparison] (b) with the cone of $(IQ\\otimes B_{Y,n})_n$. It is given by the multiplication maps $(g_Y^r)^*Q_n\\to IQ_n$ followed by $\\beta_n$ of [lem-weil-isomorphism-derived-pullback-reduction-tower]. The defining formula of $\\kappa_N$ (components $x\\mapsto x\\otimes1$, zero shifted coordinate), together with the level-$n$ description of $u$, gives $\\mu_N\\kappa_N=u_{IN}$. Since $\\sigma=\\beta^{-1}$, the description of $\\theta$ in [lem-weil-isomorphism-derived-pullback-comparison-normalization] (the multiplication maps followed by the product/cone comparison) reads $\\theta_N=\\omega_{\\mathcal R_YN}^{-1}\\mathcal L_Y(\\sigma_N)\\mu_N$. Its equation $\\theta_N\\kappa_N=I(u_N)$ is therefore exactly the mate identity.\n\n(iii) Naturality of $\\omega$ at $e_C$ gives $\\mathcal L_YG_{Y,r}(e_C)\\,\\omega_{\\mathcal R_YH}=\\omega_C\\,I\\mathcal L_Y(e_C)$. The triangle identity of [lem-coef-derived-system-evaluation-calculus] gives $\\mathcal L_Y(e_C)u_{\\mathcal L_YC}=\\mathrm{id}$.\n\nCombining these,\n$$\\alpha^{\\mathrm{can}}_{!,r,K}=\\mathcal L_Y(G_{Y,r}e_C)\\mathcal L_Y(\\sigma_H)u_{IH}\\kappa_H^{-1}=\\mathcal L_Y(G_{Y,r}e_C)\\omega_{\\mathcal R_YH}I(u_H)\\kappa_H^{-1}=\\omega_CI(\\mathcal L_Y(e_C)u_H)\\kappa_H^{-1}=\\omega_C\\kappa_H^{-1}=\\nu^Y_{r,C}.$$\nFor the target, the operation construction in the same definition uses the inverse strict map $(b^X_{r,K})^{-1}$ before applying $\\mathcal L_YF$. Read through the same model equivalence, its actual formula is $\\beta^{\\mathrm{can}}_{!,r,K}=\\mathcal L_YF((b^X_{r,K})^{-1})=\\mathcal L_Y(v_{r,K})$. The reduction comparisons preserve units, counits and tensor associativity by [lem-fix-operation-reduction], so these identifications are the named canonical maps, including for every positive power $r$.",
-   "uses": [
-    "def-weil-frobenius-square-exchange",
-    "lem-trf-compact-support-system-evaluation-coherence",
-    "lem-coef-semilinear-derived-sections",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-isomorphism-derived-pullback-reduction-tower",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Agent-formulated prerequisite to (3): normalize the actual source and target operation comparisons, including powers"
-   }
-  },
-  {
-   "text": "The model-comparison theorem is natural on whole systems, the specified $\\kappa$ comparison is natural on derived inputs, and the explicit unit--tensor--counit and inverse-tensor formulas in step 7 are natural for system morphisms. Together with the tensor and $\\kappa$ compositor calculations in steps 4--5 these give the stated naturality and compatibility for all displayed identifications. No step needs $\\mathcal R_YH_f(K)\\cong C_f(K)$: the arbitrary output system is retained through the entire-limit calculation in step 6. The completion-unit lemma is valid for every derived-complete input and the operation construction imposes no finite Tor-amplitude assumption on finite reductions, so the full bounded constructible domain in the statement is covered.",
-   "uses": [
-    "lem-trf-compact-support-system-evaluation-coherence",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "lem-trf-integral-inverse-image-comparison-composition",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Agent-formulated prerequisite to (3): naturality, compositor coherence and the full bounded constructible domain"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-frobenius-square-exchange",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-inverse-image-pullback-comparison",
-  "def-weil-proetale-inverse-image",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-semilinear-derived-sections",
-  "lem-fix-operation-reduction",
-  "lem-sf-integral-compact-support-constructible",
-  "lem-trf-compact-support-system-evaluation-coherence",
-  "lem-trf-integral-inverse-image-comparison-composition",
-  "lem-trf-integral-point-transport-tower-powers",
-  "lem-trf-integral-pullback-comparison-realization",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "lem-weil-isomorphism-derived-pullback-reduction-tower",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-proetale-isomorphism-inverse-image"
+  "lem-trf-compact-support-system-realization-normalization-witness",
+  "lem-trf-compact-support-system-realization-normalization-point"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Agent-formulated missing comparison prerequisite; reconstruction from the simultaneous quotient-system constructions"
+  "place": "Parent conjunction assembled from the witness and point-specialization components."
  },
  "mathlib_match": null,
  "status": "split",
@@ -511,5 +380,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T234333-L-104567",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

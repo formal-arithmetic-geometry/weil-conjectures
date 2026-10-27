@@ -442,40 +442,78 @@ def Laws (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (D.geometricFrobenius X₀) (D.geometricFrobenius (zlCompactificationMiddle D f₀ c₀))
     (D.geometricFrobenius Y₀)) ∧ PointSpec l E D hl
 
+/-- The normalization witness component of the compact-support comparison.
+Source: clauses (2)--(3) of `prop-trf-rational-frobenius-integral-model.proof.md`.
+Proof: choose the simultaneous reduction, open extension, total derived proper
+image, and coefficient restriction model.  Apply the whole-system comparison,
+then the derived-limit comparison and the specified pullback normalization.
+The resulting source, middle, and target power data satisfy the compositor,
+naturality, evaluation, realization, alpha, and beta fields by the corresponding
+normalized comparison lemmas; package them with the canonical finite
+transitions.  This is exactly the `Normalization` witness for the fixed
+geometric compactification.
+(blueprint: lem-trf-compact-support-system-realization-normalization-witness). -/
+theorem compactSupportSystemRealizationNormalization_witness
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X₀ Y₀ : Over (Spec (.of D.k₀))}
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left]
+    [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
+    (c₀ : Compactification f₀.left) :
+    letI : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+      (FrobeniusExchange.fiber_finiteType D X₀).1
+    letI : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+      (FrobeniusExchange.fiber_finiteType D X₀).2
+    letI : LocallyOfFiniteType ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+      (FrobeniusExchange.fiber_finiteType D Y₀).1
+    letI : QuasiCompact ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+      (FrobeniusExchange.fiber_finiteType D Y₀).2
+    letI := fun x ↦ sfWeilPrimeInvertible D l hl X₀ x
+    letI := fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y
+    letI := fun z ↦ sfWeilPrimeInvertible D l hl (zlCompactificationMiddle D f₀ c₀) z
+    letI := (FrobeniusExchange.fiberMap_properties D f₀).1
+    letI := (FrobeniusExchange.fiberMap_properties D f₀).2.1
+    letI := (FrobeniusExchange.fiberMap_properties D f₀).2.2
+    Nonempty (Normalization l E D.k (zlClosurePrimeUnit D l hl)
+      (xft := (FrobeniusExchange.fiber_finiteType D X₀).1)
+      (xqc := (FrobeniusExchange.fiber_finiteType D X₀).2)
+      (yft := (FrobeniusExchange.fiber_finiteType D Y₀).1)
+      (yqc := (FrobeniusExchange.fiber_finiteType D Y₀).2)
+      (FrobeniusExchange.fiberMap D f₀)
+      (FrobeniusExchange.geometricCompactification D f₀ c₀)
+      (D.geometricFrobenius X₀)
+      (D.geometricFrobenius (zlCompactificationMiddle D f₀ c₀))
+      (D.geometricFrobenius Y₀)) := by
+  sorry
+
+/-- The point specialization component of the compact-support comparison.
+Source: clause (3) of `prop-trf-rational-frobenius-integral-model.proof.md`.
+Proof: install the pointwise Frobenius invertibility instance.  For every power
+and derived system, identify the whole-cone comparison with the specified
+integral point-transport comparison using the same kappa inverse, cone maps,
+and adjunction unit.  The resulting equality is natural in the system and is
+precisely `PointSpec`.
+(blueprint: lem-trf-compact-support-system-realization-normalization-point). -/
+theorem compactSupportSystemRealizationNormalization_point
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X₀ Y₀ : Over (Spec (.of D.k₀))}
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left]
+    [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
+    (c₀ : Compactification f₀.left) : PointSpec l E D hl := by
+  sorry
+
 /-- The finite-output system, its entire-limit realization and the specified Frobenius
 operation comparisons have the simultaneous normalization in the node.
 Source: blueprint main-20261015, sec-trace-formula/sk-d-weil,
-prop-trf-rational-frobenius-integral-model.proof.md, (2)--(3)
+`prop-trf-rational-frobenius-integral-model.proof.md`, (2)--(3)
 (blueprint: lem-trf-compact-support-system-realization-normalization).
 
-Proof:
-1. Use the same reduction, exact open extension, entire-system derived proper image
-and coefficient restriction as lem-weil-compact-support-reduction-tower-functor.
-Their common composite gives delta before evaluation. The section-model comparison
-lem-trf-compact-support-system-evaluation-coherence supplies evaluation and transitions.
-2. Apply total derived limit; the normalized Roos projections identify the result
-with def-weil-integral-rational-qbar-compact-support, on objects and morphisms.
-Use lem-sf-integral-compact-support-constructible for its output domain.
-3. The completion-unit identity of
-lem-weil-isomorphism-derived-pullback-comparison-normalization makes the specified
-kappa invertible on every derived-complete constructible input. The normalized tensor
-map of lem-weil-isomorphism-derived-pullback-reduction-tower gives sigma on one flat
-K-flat representative and its strict quotient diagram; descent gives every derived map.
-4. Tensor generators and the coefficient projection square give the sigma compositor
-identity before localization. Combine it with the actual kappa composition equation
-of lem-trf-integral-inverse-image-comparison-composition to obtain the b identity.
-5. Resolve an arbitrary output system in the entire tower category. Exact inverse
-image preserves the resolution and its limit cone. Transposing the entire counit,
-with the tensor-unit restriction comparison, gives the unique cone isomorphism omega.
-Compose omega with kappa inverse to get nu, also at the point. No output reconstruction
-or finite-Tor hypothesis enters.
-6. In the source word substitute b = sigma R(kappa inverse). Naturality of the unit
-moves kappa inverse outside. The mate identity for sigma and omega, naturality of
-omega at the counit, and the triangle identity cancel the reduction/limit pair.
-The resulting map is nu. The target word is literally total limit of F(b inverse).
-7. The same constructions are natural on derived morphisms. Their compositor identities
-on strict tensor generators descend unchanged, yielding all power and naturality laws.
-- third-party finite evaluations are never used to detect equality of system maps. -/
+The proof is assembled from the two named components immediately above: the full
+normalization witness and its geometric-point specialization.
+-/
 theorem compactSupportSystemRealizationNormalization
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X₀ Y₀ : Over (Spec (.of D.k₀))}
@@ -484,6 +522,9 @@ theorem compactSupportSystemRealizationNormalization
     (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left]
     [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
     (c₀ : Compactification f₀.left) : Laws l E D hl f₀ c₀ := by
-  sorry
+  dsimp only [Laws]
+  constructor
+  · exact compactSupportSystemRealizationNormalization_witness l E D hl f₀ c₀
+  · exact compactSupportSystemRealizationNormalization_point l E D hl f₀ c₀
 
 end WeilConjectures.CompactSupportNormalization
