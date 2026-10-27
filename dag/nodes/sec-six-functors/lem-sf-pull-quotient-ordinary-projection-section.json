@@ -1,0 +1,90 @@
+{
+ "id": "lem-sf-pull-quotient-ordinary-projection-section",
+ "kind": "statement",
+ "title": "Sectionwise finite projection of the ordinary quotient pullback mate",
+ "statement": "Fix the data of lem-sf-pull-quotient-ordinary-projection, a cochain degree i, a pro-etale object V of X and a section x of the pulled complex in degree i. The degree-i section of the nth projected ordinary quotient pullback mate equals the degree-i section of the nth quotient augmentation followed by p.tower.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, sectionwise finite projection calculation."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-pull-completion-comparison",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the conjugate ordinary adjunction unit at degree i and section V. Use the ordinary limit projection equation, the inverse-image and reduction evaluation normalizations, and p.generators to identify both sides with the same finite pullback adjunction unit.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-pull-completion-comparison",
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-pull-completion-comparison",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Ordinary projected-section calculation."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PullQuotientOrdinaryProjection",
+  "date": "2026-10-28",
+  "group": "Z7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-pull-quotient-ordinary-projection",
+   "place": "sectionwise reduction of the projected cochain-map identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PullQuotientOrdinaryProjectionSection",
+  "file": "lean/Sheaf/SixFunctors/PullQuotientOrdinaryProjectionSection.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.pullQuotientOrdinaryProjection_section",
+  "statement": "theorem pullQuotientOrdinaryProjection_section\n    (a : IntegralSystemRealization.OrdinaryLimitModel l E)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : OpenFactorCoherence.Pull l E f)\n    (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) (i : ℤ)\n    (V : X.ProEtᵒᵖ)\n    (x : (((OpenFactorCoherence.pullCx l E f).obj P).X i).val.obj V) :\n    (((((pullbackTensorOrdinaryAdjunction l E X).mapHomologicalComplex (.up ℤ)).unit.app\n      ((OpenFactorCoherence.pullCx l E f).obj P) ≫\n      ((pullbackTensorOrdinaryLimit l E X).mapHomologicalComplex (.up ℤ)).map\n        (a.reductionPullComplex l E f P) ≫\n      (Functor.mapHomologicalComplexCompIso\n        (Iso.refl (coefficientSequenceRestriction l E X ⋙\n          pullbackTensorConstantLimit l E X)) (.up ℤ)).inv.app\n        (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj\n          (((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P)) ≫\n      (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app\n        (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).obj\n          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj\n            (((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P))) ≫\n      (pullbackTensorPullbackTower l E f P).hom.app (op n)).f i).val.app V x) =\n      (((((IntegralOnSlice.augmentation l E X none).app\n        ((OpenFactorCoherence.pullCx l E f).obj P)).app (op n) ≫\n        (p.tower.hom.app P).app (op n)).f i).val.app V x)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261027T181025-L-3922759",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261027T181025-L-3922759",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,7 @@ Authors: SHEAF group K7
 module
 
 public import Sheaf.SixFunctors.IntegralSystemCanonicalBridge
+import Sheaf.SixFunctors.PullQuotientOrdinaryProjectionSection
 
 /-! # Ordinary projections of the quotient pullback mate
 
@@ -70,6 +71,11 @@ theorem pullQuotientOrdinaryProjection
         (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app Z ≫
         (pullbackTensorPullbackTower l E f P).hom.app (op n) =
       ((IntegralOnSlice.augmentation l E X none).app R).app (op n) ≫
-        (p.tower.hom.app P).app (op n) := by sorry
+        (p.tower.hom.app P).app (op n) := by
+  intro R C Z
+  apply HomologicalComplex.hom_ext
+  intro i
+  ext V x
+  exact pullQuotientOrdinaryProjection_section l E a f p P n i V x
 
 end WeilConjectures.GeneratorReduction
