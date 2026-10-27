@@ -6,6 +6,8 @@ Authors: SHEAF group J5
 module
 
 public import Sheaf.Paper.IntegralComparisonRealizationModels
+import Sheaf.Paper.AmbientQuotientScalarRealizationExistence
+import Sheaf.Paper.AmbientQuotientScalarNormalizationExistence
 
 /-! # Ambient coherent scalar quotient realization
 
@@ -54,6 +56,9 @@ theorem ambientQuotientScalarModel_exists (l : ℕ) [Fact l.Prime]
     (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t})
     (S : CoefficientDerivedSystemCalculus l E X)
     (ρ : IntegralComparisonRoosModel l L X) :
-    Nonempty (IntegralComparisonScalarModel l E L ι X S ρ) := by sorry
+    Nonempty (IntegralComparisonScalarModel l E L ι X S ρ) := by
+  obtain ⟨realization⟩ := ambientQuotientScalarModel_realization_exists l E L ι X S
+  exact ⟨⟨realization,
+    ambientQuotientScalarModel_normalization_exists l E L ι X S ρ realization⟩⟩
 
 end WeilConjectures

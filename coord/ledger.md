@@ -19896,3 +19896,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:57 L: merged deliver/A7/Sheaf.Paper.SystemOpenScalarEvaluation (stage 3; reviewer PASS; first push; landing 20261027T205745-L-1611192 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:57 L: merged deliver/A8/Sheaf.Paper.ConstructibleCompactSupportTargetIsoStage (stage 3; reviewer PASS; first push; landing 20261027T205746-L-1611343 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:57 L: merged deliver/A8/Sheaf.Paper.SystemProperScalarEvaluation (stage 3; reviewer PASS; first push; landing 20261027T205747-L-1611604 (interface); batch 20261027T205736; modules 2; new nodes 1; change records: coord/changes/A8-system-proper-scalar-evaluation-mate.md)
+- 20:57 L: merged deliver/A9/Sheaf.Paper.AmbientQuotientScalarModelExistence (stage 3; reviewer PASS; first push; landing 20261027T205748-L-1611791 (interface); batch 20261027T205736; modules 3; new nodes 2)
