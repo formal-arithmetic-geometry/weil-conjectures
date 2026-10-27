@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-derived-square-native-coherence",
+ "kind": "statement",
+ "title": "Coherence of the native tensor-forgetting comparison",
+ "statement": "Given the native derived-square data, a comparison t satisfying the full representative square has a TensorCoherence witness for the transported native monoidal and symmetric structures. This isolates the transport of the associator, unitors, and symmetry equations from the representative-square construction.",
+ "stmt_deps": [
+  "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-data",
+  "def-sf-native-weil-tensor-ringed-bridge",
+  "def-sf-native-weil-closed-models",
+  "def-sf-native-weil-tensor-ringed-structure",
+  "lem-sf-ringed-forget-tensor-descent",
+  "lem-sf-native-weil-tensor-ringed-complexes",
+  "def-sf-native-weil-tensor-ringed-model",
+  "lem-sf-native-weil-tensor-forget-kflat",
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor transport, geometric tensor part of step 3; Stacks 06YU, 0FPT"
+ },
+ "proof": [
+  {
+   "text": "Transport the four coherence equations of the supplied ringed TensorComparison through the native and ordinary localized equivalences. Use the representative square to identify the transported comparison with t, then cancel the comparison isomorphisms and use naturality to obtain associator, left and right unit, and symmetry equations.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-descent",
+    "def-sf-native-weil-tensor-ringed-structure",
+    "def-sf-native-weil-tensor-ringed-model",
+    "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-forget-tensor-descent",
+  "def-sf-native-weil-tensor-ringed-structure",
+  "def-sf-native-weil-tensor-ringed-model",
+  "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-data"
+ ],
+ "proof_origin": {
+  "by": "worker B4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor transport, geometric tensor part of step 3; split from the parent after the representative square was proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport TensorCoherence through an equivalence of derived categories and identify a comparison by its representative square",
+   "results": "No exact theorem matching the native and ordinary equivalence transport with the displayed representative-square normalization; the generic ringed coherence theorem is the closest interface.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; retain as a strict intermediate statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingedForgetTensorTransposition.TensorCoherence nativeWeilRingedMonoidal",
+   "results": "Found the TensorCoherence structure and generic ringed_forget_tensor_coherence, but no theorem for this native transport interface.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "nativeWeilRingedSymmetric TensorCoherence native_weil_tensor_ringed_derived_square",
+   "results": "The existing NativeWeilTensorRingedTransport theorem contains the intended transport in a later module that imports the parent, so it cannot be imported here without a cycle.",
+   "date": "2026-10-28",
+   "verdict": "No usable existing declaration; split the residual transport statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedDerivedSquareNative",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-ringed-derived-square-native-data",
+   "place": "Residual coherence component of the native tensor derived square",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": null,
+ "import_flags": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedDerivedSquareNativeCoherence",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedDerivedSquareNativeCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_derived_square_native_coherence",
+  "statement": "theorem native_weil_tensor_ringed_derived_square_native_coherence (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X) [T.Additive] [∀ P, (T.obj P).Additive] (adj : T ⊣₂ ihomBifunctor k₀ l X) (e : Functor.uncurry.obj T ⋙ Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X) ≅ (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).prod (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) ⋙ Functor.uncurry.obj (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)) (he : ∀ (P Q I : ProEtaleWeilSheaf k₀ l X) (f : Q ⟶ ((ihomBifunctor k₀ l X).obj (op P)).obj I), e.inv.app (P, Q) ≫ (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map (((adj.adj P).homEquiv Q I).symm f) = ((Mod.ihomAdjunction P.carrier).homEquiv Q.carrier I.carrier).symm f.hom.f) [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T] (chain : ∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, ((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj (CochainComplex.mapBifunctor P Q T) ≅ ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P) (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q)) (hchain : ∀ (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (p q n : ℤ) (h : p + q = n), (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).map (HomologicalComplex.ιMapBifunctor P Q T (.up ℤ) p q n h) ≫ (chain P Q).hom.f n = e.hom.app (P.X p, Q.X q) ≫ HomologicalComplex.ιMapBifunctor (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P) (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q) (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (.up ℤ) p q n h) (b : NativeWeilTensorRingedBridge k₀ l X) [HasDerivedCategory.{u + 2} (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)] [HasDerivedCategory.{u + 2} (RingedTensorModules.{u + 1, u + 1, u + 1} b.K b.Q)] (A : NativeWeilRingedTensorComplexes b T adj) (M : NativeClosedHomModels k₀ l X) (S : CoefficientClosedStructure M.ordinaryHom) (β : @SymmetricCategory _ _ S.monoidal) (hmonoidal : S.monoidal = (inferInstance : MonoidalCategory (DerivedCategory (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)))) (hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber M.ordinaryHom M.ordinaryRepresentatives S β) (SB : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u + 1, u + 1, u + 1, u + 2} b.J b.R)) (TB : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.J b.R SB) (βB : @SymmetricCategory _ _ SB.monoidal) (cB : RingedDerivedTensorCoherence b.J b.R SB TB βB) (SA : CoefficientClosedStructure (derivedInternalHomOfUniverses.{u + 1, u + 1, u + 1, u + 2} b.K b.Q)) (TA : CoefficientTensorModels.{u + 1, u + 1, u + 1, u + 2} b.K b.Q SA) (βA : @SymmetricCategory _ _ SA.monoidal) (cA : RingedDerivedTensorCoherence b.K b.Q SA TA βA) (d : RingedForgetTensorTransposition.TensorComparison b.J b.R b.K b.Q b.forget b.underived SB TB βB cB SA TA βA cA) (ordinaryModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) (_ : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P), S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj (ordinaryTensorTotal l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P Q)) (_hordinary : NativeAdjunctionNormalization (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (fun P ↦ Mod.ihomAdjunction P) M.ordinaryHom M.ordinaryRepresentatives S (NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ordinaryModel) (_hnaturality : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) (hP : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P) (hP' : NativeOrdinaryKFlat l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber P') (f : P ⟶ P') (g : Q ⟶ Q'), S.tensor.map (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P)) (Y := (DerivedCategory.Q.obj Q', DerivedCategory.Q.obj P')) (Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f)) ≫ (ordinaryModel P' Q' hP').hom = (ordinaryModel P Q hP).hom ≫ DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (.up ℤ))) (t : @MonoidalCategory.tensor _ _ (nativeWeilRingedMonoidal b SB) ⋙ nativeForget k₀ l X ≅ (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor) (hforget : (∀ (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (hP : NativeTensorKFlat k₀ l X T P), (nativeForget k₀ l X).map (nativeWeilRingedTensorModel b T adj A SB TB βB cB P Q hP).hom ≫ ((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategoryFactors.hom.app (CochainComplex.mapBifunctor P Q T)) ≫ DerivedCategory.Q.map (chain P Q).hom = t.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≫ S.tensor.map (X := ((nativeForget k₀ l X).obj (DerivedCategory.Q.obj Q), (nativeForget k₀ l X).obj (DerivedCategory.Q.obj P))) (Y := (DerivedCategory.Q.obj (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q), DerivedCategory.Q.obj (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P))) (Prod.mkHom ((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategoryFactors.hom.app Q) ((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategoryFactors.hom.app P)) ≫ (ordinaryModel (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj P) (((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapHomologicalComplex (.up ℤ)).obj Q) (native_weil_tensor_forget_kflat k₀ l X T chain P hP)).hom)) : Nonempty (RingedForgetTensorTransposition.TensorCoherence (nativeWeilRingedMonoidal b SB) S.monoidal (nativeWeilRingedSymmetric b SB βB) β (nativeForget k₀ l X) t)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7b1eb",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T233802-L-4114713",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7b1eb",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T233802-L-4114713",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Comparison/Coherence modules and 3 node files against the clone (published module, nodes), the node statements, and lcompile timings of original vs merged vs split"
+ }
+}
