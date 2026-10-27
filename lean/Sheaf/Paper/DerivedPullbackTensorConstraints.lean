@@ -224,6 +224,35 @@ def pullbackTensorRationalComposition {X Y Z : Scheme.{u}}
     (M : sfRationalConstructibleCategory l E Y) :=
   ((@pullbackTensorRationalComposition_existsUnique l _ E _ _ _ X Y Z f h hX hY hZ) M).exists.choose
 
+/-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
+Source: Stacks 06YS, 07A4, 0941.
+(blueprint: lem-pur-derived-pullback-tensor-constraints-common-composition-existence). -/
+theorem pullbackTensorCommonComposition_exists {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (h : Z ⟶ X)
+    [hX : ∀ x : X, Invertible (l : X.residueField x)]
+    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
+    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]
+    (M : generalAlgebraicallyClosedConstructibleCategory l Ω Y) :
+    ∃ e : ((@commonStageDerivedPullback l _ Ω _ _ _ Z Y (h ≫ f) hZ hY)).obj M ≅
+      ((@commonStageDerivedPullback l _ Ω _ _ _ Z X h hZ hX)).obj (((@commonStageDerivedPullback l _
+        Ω _ _ _ X Y f hX hY)).obj M),
+      ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω) (hM : M.stage ≤ L),
+        HEq e.hom (ofHom (commonStagePullbackObject l Ω (h ≫ f) M)
+          (commonStagePullbackObject l Ω h (commonStagePullbackObject l Ω f M)) L hM hM
+          ((commonStagePullbackComparison l Ω (h ≫ f) M L hM).hom ≫
+            ((@pullbackTensorRationalComposition l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ X
+              Y Z f h hX hY
+              hZ)
+              (M.toStage hM)).hom ≫
+            ((@rationalDerivedPullback l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ Z
+              X h hZ hX)).map
+              (commonStagePullbackComparison l Ω f M L hM).inv ≫
+            (commonStagePullbackComparison l Ω h
+              (commonStagePullbackObject l Ω f M) L hM).inv)) := by
+  sorry
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Common-stage composition, specified at every larger finite coefficient field.
@@ -257,7 +286,11 @@ theorem pullbackTensorCommonComposition_existsUnique {X Y Z : Scheme.{u}}
               (commonStagePullbackComparison l Ω f M L hM).inv ≫
             (commonStagePullbackComparison l Ω h
               (commonStagePullbackObject l Ω f M) L hM).inv)) := by
-  sorry
+  obtain ⟨e, he⟩ := pullbackTensorCommonComposition_exists l Ω f h M
+  refine ⟨e, he, ?_⟩
+  intro d hd
+  apply Iso.ext
+  exact eq_of_heq ((hd M.stage le_rfl).trans (he M.stage le_rfl).symm)
 
 /-- The composition isomorphism represented by the prescribed rational comparison.
 Source: Stacks 07A4, 0941; blueprint coefficient conventions
@@ -690,6 +723,36 @@ def pullbackTensorCommonRight (W : Scheme.{u})
 
 attribute [local irreducible] pullbackTensorCommonLeft pullbackTensorCommonRight
 
+/-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
+Source: Stacks 06YS, 07A4, 0941.
+(blueprint: lem-pur-derived-pullback-tensor-constraints-common-associator-existence). -/
+theorem pullbackTensorCommonAssociator_exists (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)]
+    (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
+    ∃ e : ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj (((@commonStageDerivedTensor l _ Ω _ _
+      _ W hW)).obj (M,N),P) ≅
+      ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj (M,((@commonStageDerivedTensor l _ Ω _ _ _
+        W hW)).obj (N,P)),
+      ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω)
+        (hS : (commonStageTensorObject l Ω W (commonStageTensorObject l Ω W M N) P).stage ≤ L) (hT :
+          (commonStageTensorObject l Ω W M (commonStageTensorObject l Ω W N P)).stage ≤ L),
+        HEq e.hom (ofHom (commonStageTensorObject l Ω W (commonStageTensorObject l Ω W M N) P)
+          (commonStageTensorObject l Ω W M (commonStageTensorObject l Ω W N P)) L hS hT
+          (((@pullbackTensorCommonLeft l _ Ω _ _ _ W hW) M N P L hS).hom ≫
+            ((@pullbackTensorRationalAssociator l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ W
+              hW)
+              (M.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage N.stage).1.trans
+                (((Padic.finiteCoefficientFields_properties l Ω).1 (commonStageTensorObject l Ω W M
+                N).stage P.stage).1.trans hS))) (N.toStage
+                (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage N.stage).2.trans
+                (((Padic.finiteCoefficientFields_properties l Ω).1 (commonStageTensorObject l Ω W M
+                N).stage P.stage).1.trans hS))) (P.toStage
+                (((Padic.finiteCoefficientFields_properties l Ω).1 (commonStageTensorObject l Ω W M
+                N).stage P.stage).2.trans hS))).hom ≫
+            ((@pullbackTensorCommonRight l _ Ω _ _ _ W hW) M N P L hT).inv)) := by
+  sorry
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The common-stage associator has its prescribed representative at every larger field.
@@ -724,7 +787,16 @@ theorem pullbackTensorCommonAssociator_existsUnique (W : Scheme.{u})
                 (((Padic.finiteCoefficientFields_properties l Ω).1 (commonStageTensorObject l Ω W M
                 N).stage P.stage).2.trans hS))).hom ≫
             ((@pullbackTensorCommonRight l _ Ω _ _ _ W hW) M N P L hT).inv)) := by
-  sorry
+  obtain ⟨e, he⟩ := pullbackTensorCommonAssociator_exists l Ω W M N P
+  refine ⟨e, he, ?_⟩
+  intro d hd
+  apply Iso.ext
+  let S := commonStageTensorObject l Ω W (commonStageTensorObject l Ω W M N) P
+  let T := commonStageTensorObject l Ω W M (commonStageTensorObject l Ω W N P)
+  let L := Padic.finiteCoefficientCompositum l Ω S.stage T.stage
+  let hS := ((Padic.finiteCoefficientFields_properties l Ω).1 S.stage T.stage).1
+  let hT := ((Padic.finiteCoefficientFields_properties l Ω).1 S.stage T.stage).2
+  exact eq_of_heq ((hd L hS hT).trans (he L hS hT).symm)
 
 /-- The stage-independent rational associator class.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
@@ -735,6 +807,29 @@ def pullbackTensorCommonAssociator (W : Scheme.{u})
   ((@pullbackTensorCommonAssociator_existsUnique l _ Ω _ _ _ W hW) M N P).exists.choose
 
 attribute [local irreducible] pullbackTensorCommonAssociator
+
+/-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
+Source: Stacks 06YS, 07A4, 0941.
+(blueprint: lem-pur-derived-pullback-tensor-constraints-common-braiding-existence). -/
+theorem pullbackTensorCommonBraiding_exists (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)]
+    (M N : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
+    ∃ e : ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj (M,N) ≅
+      ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj (N,M),
+      ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω)
+        (hS : (commonStageTensorObject l Ω W M N).stage ≤ L) (hT : (commonStageTensorObject l Ω W N
+          M).stage ≤ L),
+        HEq e.hom (ofHom (commonStageTensorObject l Ω W M N)
+          (commonStageTensorObject l Ω W N M) L hS hT
+          ((commonStageTensorComparison l Ω W M N L hS).hom ≫
+            ((@pullbackTensorRationalBraiding l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ W
+              hW)
+              (M.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage N.stage).1.trans
+                hS)) (N.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage
+                N.stage).2.trans hS))).hom ≫
+            (commonStageTensorComparison l Ω W N M L hT).inv)) := by
+  sorry
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -763,7 +858,16 @@ theorem pullbackTensorCommonBraiding_existsUnique (W : Scheme.{u})
                 hS)) (N.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage
                 N.stage).2.trans hS))).hom ≫
             (commonStageTensorComparison l Ω W N M L hT).inv)) := by
-  sorry
+  obtain ⟨e, he⟩ := pullbackTensorCommonBraiding_exists l Ω W M N
+  refine ⟨e, he, ?_⟩
+  intro d hd
+  apply Iso.ext
+  let S := commonStageTensorObject l Ω W M N
+  let T := commonStageTensorObject l Ω W N M
+  let L := Padic.finiteCoefficientCompositum l Ω S.stage T.stage
+  let hS := ((Padic.finiteCoefficientFields_properties l Ω).1 S.stage T.stage).1
+  let hT := ((Padic.finiteCoefficientFields_properties l Ω).1 S.stage T.stage).2
+  exact eq_of_heq ((hd L hS hT).trans (he L hS hT).symm)
 
 /-- The stage-independent rational braiding class.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions

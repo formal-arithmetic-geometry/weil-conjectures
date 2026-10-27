@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-derived-pullback-tensor-constraints-common-braiding-existence",
+ "kind": "statement",
+ "title": "Existence of the normalized common-stage tensor braiding satisfying its prescribed finite-stage equations",
+ "statement": "Existence of the normalized common-stage tensor braiding satisfying its prescribed finite-stage equations [lem-pur-derived-pullback-tensor-constraints].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0941; existence of the normalized common-stage representative"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pod-integral-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Construct the common-stage representative from the displayed normalized pullback tensor comparison and establish its equation at every finite coefficient enlargement. The remaining representative construction is the strictly simpler existence half of the parent uniqueness theorem.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-weil-constant-coefficient-objects",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-integral-pullback-composition",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-pur-normalized-completed-operation-models",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-constant-coefficient-objects",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pur-normalized-completed-operation-models",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0941; normalized common-stage representative construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalize tensor associators braidings unitors and pullback composition via faithful coherent reduction and scalar localization",
+   "results": "8 hits: CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_tensor, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.FreeMonoidalCategory.normalizeIsoApp, Mathlib.Tactic.Monoidal.tacticMonoidal_nf, CategoryTheory.FreeMonoidalCategory.normalizeObj, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux, Mathlib.Tactic.Monoidal.monoidalNf",
+   "date": "2026-10-27",
+   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"Faithful\"",
+   "results": "9 hits: AddMonoidAlgebra.faithfulSMul, MonoidAlgebra.faithfulSMul, CategoryTheory.MonoidalCategory.instFaithfulFunctorTensoringLeft, CategoryTheory.MonoidalCategory.instFaithfulFunctorTensoringRight, CategoryTheory.monoidalPreadditive_of_faithful, CategoryTheory.MonoidalLinear.ofFaithful, SkewMonoidAlgebra.instFaithfulSMul, CategoryTheory.MonoidalCategory.InducedLawfulDayConvolutionMonoidalCategoryStructCore.fullyFaithfulι",
+   "date": "2026-10-27",
+   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*[Aa]ssociator|[Aa]ssociator.*reduction",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+  }
+ ],
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorConstraints",
+  "date": "2026-10-28",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5, the canonical pullback tensor comparison; normalized higher coefficient constraints and naturality",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedPullbackTensorConstraints",
+  "file": "lean/Sheaf/Paper/DerivedPullbackTensorConstraints.lean",
+  "declaration": "WeilConjectures.pullbackTensorCommonBraiding_exists",
+  "statement": "theorem pullbackTensorCommonBraiding_exists (W : Scheme.{u}) [hW : ∀ w : W, Invertible (l : W.residueField w)] (M N : generalAlgebraicallyClosedConstructibleCategory l Ω W) : ∃ e : ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj (M,N) ≅ ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj (N,M), ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω) (hS : (commonStageTensorObject l Ω W M N).stage ≤ L) (hT : (commonStageTensorObject l Ω W N M).stage ≤ L), HEq e.hom (ofHom (commonStageTensorObject l Ω W M N) (commonStageTensorObject l Ω W N M) L hS hT ((commonStageTensorComparison l Ω W M N L hS).hom ≫ ((@pullbackTensorRationalBraiding l _ (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ W hW) (M.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage N.stage).1.trans hS)) (N.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage N.stage).2.trans hS))).hom ≫ (commonStageTensorComparison l Ω W N M L hT).inv))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T210131-L-1661663",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T210131-L-1661663",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
