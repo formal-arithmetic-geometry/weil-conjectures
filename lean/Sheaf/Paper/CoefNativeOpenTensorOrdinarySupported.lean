@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.CompactSupportNativeSystemEvaluation
 public import Sheaf.Paper.SemilinearSystemModels
+import Sheaf.Paper.CoefNativeOpenTensorOrdinaryCounit
 
 /-! # Ordinary tensor support for native open extension
 
@@ -19,6 +20,7 @@ set_option relaxedAutoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 open WeilConjectures.SemilinearSections
@@ -64,6 +66,18 @@ theorem nativeOpenTensor_ordinary_supported {X Z : Scheme.{u}} (j : X ⟶ Z)
           (coefficientSequenceCommRingSheaf.{u, u} l E Z)
           ((ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
             (compactSupportSystemQuotient l E) j).obj M) N) := by
-  sorry
+  let T := ordinaryTensor.{u + 1, u, u}
+    (coefficientSequenceTopology (ProEt.topology Z))
+    (coefficientSequenceCommRingSheaf.{u, u} l E Z)
+    ((ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) j).obj M) N
+  haveI : IsIso ((AlgebraicGeometry.ProEtale.VaryingRing.moduleJAdj
+      (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j).counit.app T) :=
+    nativeOpenTensor_ordinary_counit_isIso l E j M N
+  exact Functor.essImage.ofIso
+    (asIso ((AlgebraicGeometry.ProEtale.VaryingRing.moduleJAdj
+      (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j).counit.app T))
+    ((AlgebraicGeometry.ProEtale.VaryingRing.extension
+      (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j).obj_mem_essImage _)
 
 end WeilConjectures.CoefSupportOpenTensor

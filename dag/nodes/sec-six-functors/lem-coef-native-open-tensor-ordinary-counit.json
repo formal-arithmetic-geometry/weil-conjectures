@@ -1,0 +1,114 @@
+{
+ "id": "lem-coef-native-open-tensor-ordinary-counit",
+ "kind": "lemma",
+ "title": "Native ordinary open tensor counit is invertible",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell, and an open immersion j:X -> Z of schemes in universe u. For ordinary modules M on X and N on Z, the counit of the actual native open-extension adjunction, evaluated at the ordinary tensor of j_! M with N, is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-compact-support-native-system-evaluation",
+  "def-coef-semilinear-system-models",
+  "def-sp-varying-ring-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; the projection-formula isomorphism is the inverse of the native extension counit."
+ },
+ "proof": [
+  {
+   "text": "Identify the coefficient sequence site with the product of the open pro-etale slice and the coefficient index, and transport the direct-sum extension-by-zero construction along the constant-section comparison to the actual native extension adjunction.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the localized ordinary extension/tensor projection formula of Tag 0E8I on each coefficient quotient. The direct-sum generators and balanced tensor maps commute with every horizontal quotient transition, so the resulting comparison descends to the sequence site and is exactly the native counit. Its generator calculation gives both inverse composites.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-sp-varying-ring-operations",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, ordinary projection-formula counit calculation transported to the coefficient sequence site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "counit of open extension by zero tensor is an isomorphism",
+   "results": "No matching result for arbitrary ringed sequence sites.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib theorem supplies the native coefficient-site comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.counit IsIso extension tensor sheaf",
+   "results": "Only generic adjunction and sheaf tensor declarations; no open-extension support theorem.",
+   "date": "2026-10-28",
+   "verdict": "No applicable declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*ordinaryTensor|extension.*counit.*tensor",
+   "results": "No existing native ordinary support theorem.",
+   "date": "2026-10-28",
+   "verdict": "The intermediate categorical step remains project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeOpenTensorOrdinarySupported",
+  "date": "2026-10-28",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-native-open-tensor-ordinary-supported",
+   "place": "The localized projection-formula step of the ordinary support proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefNativeOpenTensorOrdinaryCounit",
+  "file": "lean/Sheaf/Paper/CoefNativeOpenTensorOrdinaryCounit.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.nativeOpenTensor_ordinary_counit_isIso",
+  "statement": "theorem nativeOpenTensor_ordinary_counit_isIso {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (M : coefficientSequenceModules.{u, u} l E X) (N : coefficientSequenceModules.{u, u} l E Z) : IsIso ((AlgebraicGeometry.ProEtale.VaryingRing.moduleJAdj (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j).counit.app (ordinaryTensor.{u + 1, u, u} (coefficientSequenceTopology (ProEt.topology Z)) (coefficientSequenceCommRingSheaf.{u, u} l E Z) ((AlgebraicGeometry.ProEtale.VaryingRing.extension (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j).obj M) N))",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261027T234008-L-4159267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261027T234008-L-4159267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
