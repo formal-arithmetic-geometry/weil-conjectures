@@ -6,6 +6,7 @@ Authors: SHEAF group G5
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleCoordinateTraceData
+import Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose
 
 /-! # Two coordinate factorizations before applying a trace
 
@@ -55,6 +56,8 @@ theorem coordinateKunnethFactorization [Finite A] {X Y : Scheme.{u}}
               (exchange1 A f ((pull A f).obj L)).hom ≫
             (orderedProjectionIso A (pullback.fst f f) M
               ((pull A (pullback.snd f f)).obj ((pull A f).obj L))).hom) := by
-  sorry
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f
+  apply (adj.homEquiv _ _).symm.injective
+  exact coordinateKunnethFactorization_transpose A f L M
 
 end AlgebraicGeometry.Etale.CoordinateTrace
