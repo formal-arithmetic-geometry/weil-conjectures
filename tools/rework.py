@@ -931,6 +931,24 @@ def _mark_failed_texts(rows: dict, tried: dict) -> int:
     return n
 
 
+def _failed_text(rid: str, m: str, data: bytes) -> bool:
+    """`data` is lean/<m>.lean as built by the build that reverted landing `rid` (its commit is named in the closed
+    record's reason, "the global build of <sha> failed in ..."); True when that cannot be read"""
+    import json, subprocess
+    try:
+        r = json.loads((ROOT / "local" / "builds" / "done" / f"{rid}.json").read_text()).get("reason", "")
+    except (OSError, ValueError):
+        return True
+    mm = re.search(r"global build of ([0-9a-f]{7,40})", r)
+    if not mm:
+        return True
+    try:
+        res = subprocess.run(["git", "-C", str(ROOT), "show", f"{mm.group(1)}:{opath(m)}"], capture_output=True, timeout=60)
+    except (OSError, subprocess.SubprocessError):
+        return True
+    return res.returncode != 0 or res.stdout == data
+
+
 def settle_restores() -> None:
     """Restored modules whose landing the merge queue reverted (file gone again from lean/) are put back in quarantine:
     their quarantined text is marked tried (so the next cluster restore does not put them back unchanged; the level-wise
@@ -957,7 +975,9 @@ def settle_restores() -> None:
         # 2026-10-21: only a module the build itself named failing is a root with its own error (marked tried); one the
         # merge queue reverted with others (collateral) stays an ordinary quarantined module and comes back with the
         # next batch once no unfixed root blocks it (1129 of 1191 were collateral and had been frozen as roots)
-        if q.is_file() and m in _failing_of(rid):
+        # 2026-10-28: only when the quarantined text is the text that failed: a fix committed into quarantine/ while
+        # the build ran (SfQbarLocalizationCommonStage 8eb0a2e697d) was marked tried and blocked unbuilt
+        if q.is_file() and m in _failing_of(rid) and _failed_text(rid, m, q.read_bytes()):
             tried[m] = hashlib.sha1(q.read_bytes()).hexdigest(); back += 1
             if m in rows:
                 rows[m]["cause"] = "error: failed in the global build after a cluster restore (see the build log)"
