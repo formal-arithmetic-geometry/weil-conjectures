@@ -36,8 +36,8 @@ The tensor factors are reversed relative to the source: tensor symmetry takes
 `1 ⊗ d a` to `d a ⊗ 1`, so injectivity is unchanged.
 
 Proof:
-1. Put `A = R/m²` and `n = m/m²`, so `n² = 0` and `A/n = κ`. Apply
-   `lem-weil-pbc-kahler-differentials-mod-power-ideal` (Tag 02HQ, exponent one)
+1. Put `A = R/m²` and `n = m/m²`, so `n² = 0` and `A/n = κ`. Use the computation of
+   Kähler differentials modulo a power of an ideal (Tag 02HQ, exponent one)
    to identify `Ω[R/k] ⊗[R] κ` with `Ω[A/k] ⊗[A] κ`, preserving `d a ⊗ 1`.
    The map from `m/m²` to `n` is the identity on residue classes; reduce to `A`.
 2. Choose a separating transcendence basis `x̄₁, …, x̄ᵣ` of `κ/k`, using

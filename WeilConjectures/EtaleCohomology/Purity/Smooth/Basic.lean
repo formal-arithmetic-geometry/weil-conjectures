@@ -28,7 +28,7 @@ of the diagonal, a closed section of the first projection `X ×_Y X ⟶ X`.
 
 ## Structure of the proof
 
-The blueprint remarks `sk-rem-split` and `rem-pur-five-moves` record where the moves of the
+The blueprint remark `sk-rem-split` records where the moves of the
 proof sit: the rank-one computation (Kummer class, excision, Gysin identification) in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine` (`sk-prop-a1-kummer`), the Künneth
 and frame-independence arguments in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`

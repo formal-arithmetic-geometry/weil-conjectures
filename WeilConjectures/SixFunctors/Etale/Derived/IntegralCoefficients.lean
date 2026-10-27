@@ -28,11 +28,10 @@ matrix `rem-sf-preservation-matrix` cites:
   (`cor-coef-integral-internal-hom`): the internal hom preserves `Dᵇc(X, Λ)`;
 - the integral exceptional adjoint (`Rf^!` commuting with derived limits of reductions,
   `AlgebraicGeometry.Etale.exists_iso_rightDerivedUpperShriek`, and
-  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`,
-  `prop-coef-integral-exceptional-adjoint`, and the preservation matrix entries
-  `AlgebraicGeometry.Etale.preservationMatrix_integral` are in
-  `WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoint`);
-- `AlgebraicGeometry.Etale.NormalizedTower` (`def-coef-normalized-dvr-tower`) and
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) and the
+  preservation matrix entries `AlgebraicGeometry.Etale.preservationMatrix_integral` are in
+  `WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoint`;
+- `AlgebraicGeometry.Etale.NormalizedTower` and
   `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`
   (`lem-coef-normalized-dvr-effectivity`): a normalized tower is the tower of reductions of its
   derived limit.
@@ -310,7 +309,7 @@ section Tower
 noncomputable abbrev quotientPowSuccFactor (n : ℕ) : Λ ⧸ I ^ (n + 2) →+* Λ ⧸ I ^ (n + 1) :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))
 
-/-- Blueprint `def-coef-normalized-dvr-tower`: A normalized DVR tower.
+/-- A normalized DVR tower.
 
 A normalized tower on `X` consists of complexes `M_n ∈ D(X_ét, A_n)`, `A_n = Λ ⧸ Iⁿ⁺¹`, with
 transition maps `M_{n+1} ⟶ Res M_n` whose adjoints `M_{n+1} ⊗ᴸ_{A_{n+1}} A_n ⟶ M_n` are
@@ -359,8 +358,7 @@ lemma exists_transition_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
         η n ≫ (derivedRestrictScalarsQuotientPowSuccIso n).inv.app (Kn n) :=
   (hη (n + 1) ((derivedRestrictScalars (quotientPowSuccFactor I n) X).obj (Kn n))).2 _
 
-/-- Blueprint `rem-sf-tower-shapes-occurring`: the reductions of an object form a normalized
-tower.
+/-- The reductions of an object form a normalized tower.
 
 For `K ∈ D(X_ét, Λ)` and derived reductions `η_n : K ⟶ Res K_n` exhibiting each
 `K_n ∈ D(X_ét, Λ ⧸ Iⁿ⁺¹)` as `K ⊗ᴸ_Λ Λ ⧸ Iⁿ⁺¹`, the transition maps `K_{n+1} ⟶ Res K_n` are
@@ -432,7 +430,7 @@ theorem NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit (M : NormalizedTo
       DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt :=
   ⟨sorry, M.derivedComplete_of_isHomotopyLimit hϖ hI hc⟩
 
-/-- Blueprint `rem-sf-tower-shapes-occurring`: Tower shapes that occur.
+/-- Tower shapes that occur.
 
 1. The derived reductions `K_n = K ⊗ᴸ_Λ Λ ⧸ Iⁿ⁺¹` of any `K ∈ D(X_ét, Λ)` form a normalized
    tower (`AlgebraicGeometry.Etale.NormalizedTower.ofIsDerivedBaseChange`).
@@ -444,7 +442,8 @@ The common Tor interval of the reductions of an integral object is
 reductions of its derived limit, is the separate effectivity theorem
 `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`
 (`lem-coef-normalized-dvr-effectivity`), which the remark cites; the compact-support and
-exceptional versions are `prop-coef-integral-exceptional-adjoint`. -/
+exceptional versions are in `WeilConjectures.SixFunctors.Etale.Derived.IntegralExceptionalAdjoint`.
+-/
 theorem exists_normalizedTower_and_boundedConstructibleIntegral_iff :
     (∀ (K : 𝐃(X, Λ)) (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
       (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n)),

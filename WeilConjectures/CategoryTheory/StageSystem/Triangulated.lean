@@ -15,13 +15,11 @@ public import Mathlib.CategoryTheory.Triangulated.Triangulated
 If all the stages of a stage system with triangulated transition functors are triangulated
 (octahedral axiom), so is the pair category: two composable morphisms of the pair category are
 represented at a common stage, and the octahedron of the representatives maps to an octahedron
-of the pair category under the triangulated inclusion of that stage
-(blueprint `thm-weil-pbc-verdier-axioms`, TR4).
+of the pair category under the triangulated inclusion of that stage (TR4).
 
 Combined with `CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`, the pair category
 of a stage system of idempotent complete triangulated categories is an idempotent complete
-triangulated category, and the functor to its Karoubi envelope is an exact equivalence
-(blueprint `thm-weil-pbc-idempotent-complete-triangulation`).
+triangulated category, and the functor to its Karoubi envelope is an exact equivalence.
 
 ## Main statements
 
@@ -68,8 +66,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I] {C : I → T
 
 namespace PairCategory
 
-/-- Blueprint `thm-weil-pbc-verdier-axioms` (the octahedral axiom TR4): if all the stages are
-triangulated, so is the pair category. -/
+/-- The octahedral axiom TR4: if all the stages are triangulated, so is the pair category. -/
 instance isTriangulated [∀ i, IsTriangulated (C i)] : IsTriangulated S.PairCategory :=
   IsTriangulated.mk' fun X₁ X₂ X₃ u₁₂ u₂₃ ↦ by
     obtain ⟨n, -, hX₁, hX₂, hX₂', hX₃, a, b, rfl, rfl⟩ := exists_common_stage u₁₂ u₂₃ X₁.stage
@@ -94,21 +91,19 @@ instance isTriangulated [∀ i, IsTriangulated (C i)] : IsTriangulated S.PairCat
 /-- The functor from the pair category to its Karoubi envelope is triangulated. -/
 lemma isTriangulated_toKaroubi : (toKaroubi S.PairCategory).IsTriangulated := inferInstance
 
-/-- Blueprint `thm-weil-pbc-verdier-axioms`: Verdier axioms and stagewise triangulation.
-For a stage system of triangulated categories with triangulated transition functors, the pair
-category is triangulated (its pretriangulated structure being
-`CategoryTheory.StageSystem.PairCategory.pretriangulated`), every stage inclusion `ι i` is a
+/-- Verdier axioms and stagewise triangulation. For a stage system of triangulated categories with
+triangulated transition functors, the pair category is triangulated (its pretriangulated structure
+being `CategoryTheory.StageSystem.PairCategory.pretriangulated`), every stage inclusion `ι i` is a
 triangulated functor, and the identifications `T_{j/i} ⋙ ι j ≅ ι i` commute with the shifts. -/
 theorem verdier_axioms [∀ i, IsTriangulated (C i)] :
     IsTriangulated S.PairCategory ∧ (∀ i, (S.ι i).IsTriangulated) ∧
       ∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ :=
   ⟨inferInstance, fun _ ↦ inferInstance, fun _ _ _ ↦ inferInstance⟩
 
-/-- Blueprint `thm-weil-pbc-idempotent-complete-triangulation`: Idempotent-complete
-triangulation. For a stage system of idempotent complete triangulated categories with
-triangulated transition functors, the pair category is an idempotent complete triangulated
-category, the canonical functor to its Karoubi envelope is an equivalence and is triangulated,
-and the stage inclusions `ι i` are triangulated functors.
+/-- Idempotent-complete triangulation. For a stage system of idempotent complete triangulated
+categories with triangulated transition functors, the pair category is an idempotent complete
+triangulated category, the canonical functor to its Karoubi envelope is an equivalence and is
+triangulated, and the stage inclusions `ι i` are triangulated functors.
 
 The linearity statement of the blueprint (`ℚ̄_ℓ`-linearity of the pair category and
 `E`-linearity of the inclusions) involves coefficient fields varying with the stage and is not

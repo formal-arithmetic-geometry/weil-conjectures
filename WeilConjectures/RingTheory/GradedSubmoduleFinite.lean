@@ -15,7 +15,7 @@ import Mathlib.RingTheory.PrincipalIdealDomain
 /-!
 # Finite homogeneous generators for graded submodules over the projective-line ring
 
-Source: blueprint `sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md`,
+Source: blueprint `sec-picard-framework/det-thm-picard-duality/lem-sc-p1-graded-resolution.md`,
 proof, Noetherianity of successive graded kernels
 (blueprint: lem-sc-p1-graded-submodule-finite).
 -/

@@ -57,7 +57,7 @@ records, that these are exactly the complete group varieties is
 class IsAbelianVariety (A : Over (Spec (.of K))) : Prop
     extends IsProper A.hom, Smooth A.hom, ConnectedSpace A.left
 
-/-- Blueprint `sk-def-av-jacobian`: the dimension of an abelian variety, that is, the Krull
+/-- Blueprint `def-sc-jacobian`: the dimension of an abelian variety, that is, the Krull
 dimension of its underlying topological space, as a natural number.
 
 `AlgebraicGeometry.IsAbelianVariety.topologicalKrullDim_eq` says that this really is the Krull

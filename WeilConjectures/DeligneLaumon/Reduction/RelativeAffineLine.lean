@@ -180,7 +180,7 @@ with those of the compactly supported cohomology of the fibre: with `d = [κ(y) 
 
 `det (1 - T^d F_y ∣ (Rⁱh₀!F)_ȳ) = det (1 - T F ∣ H_c^i(X' ⊗ k̄, g^*F))`
 
-(blueprint: `lem-zl-relative-curve-punctual`, `thm-cbc-qbar`). -/
+(blueprint: `lem-zl-relative-curve-punctual`). -/
 theorem exists_fiber_charpolyRev_higherLowerShriek (hfib : ∀ y, IsAffine (h.fiber y))
     (y : Y.finitePoints) :
     haveI := SmoothOfRelativeDimension.smooth 1 h

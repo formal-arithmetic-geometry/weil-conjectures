@@ -68,7 +68,7 @@ noncomputable def ProEtaleWeilSheaf.extensionByZeroToLowerStar (j : U ⟶ X) [Is
 
 namespace WeilSheaf
 
--- TODO(unify): sk-d-real-boundary
+-- TODO(unify): d-real-boundary
 /-- The *ordinary* sheaf direct image `j_*` along a quasi-compact open immersion `j` into a
 `k₀`-scheme locally of finite type: the pushforward `WeilSheaf.lowerStar j`. Its stalks at the
 missing points are the inertia invariants. -/
@@ -77,7 +77,7 @@ noncomputable abbrev directImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact
     WeilSheaf k₀ l U ⥤ WeilSheaf k₀ l X :=
   lowerStar j
 
--- TODO(unify): sk-d-real-boundary
+-- TODO(unify): d-real-boundary
 -- TODO: the isomorphism `higherDirectImage j 0 ≅ directImage j` (`R⁰j_* = j_*`), from
 -- `H⁰ ∘ Rf_* ∘ single 0 ≅ f_*` for pro-étale Weil sheaves along an arbitrary `f`.
 /-- The higher direct image `Rⁱj_*` along a quasi-compact open immersion `j`: the higher direct

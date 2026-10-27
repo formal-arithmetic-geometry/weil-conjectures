@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 /-!
 # Boundary principal divisors and algebraically closed base change
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
   affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change).
 -/
 
@@ -53,7 +53,7 @@ of the Jacobian point comparison, and the divisor exact sequence supplies a unit
 extension. Set antisymmetry gives equality. The two cited intermediate geometric statements
 remain open; this is a decomposition of the blueprint argument.
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
   affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change). -/
 theorem affine_unit_divisor_base_change
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']

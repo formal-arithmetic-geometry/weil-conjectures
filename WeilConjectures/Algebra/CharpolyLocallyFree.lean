@@ -16,7 +16,6 @@ import Mathlib.Algebra.Ring.ULift
 
 /-! # Characteristic polynomial of a locally free module
 Source: literature/stacks-project/more-algebra.tex, Lemma Tag 09XI
-(blueprint: lem-weil-pbc-charpoly-locally-free-existence)
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ Scalar-extension compatibility of the free characteristic polynomial identifies
 each mapped local polynomial with the characteristic polynomial in the
 corresponding transported basis. Basis independence makes these equal.
 This proof also holds for zero rings, a = b, and rank zero.
-(blueprint: lem-weil-pbc-charpoly-locally-free-existence).
 -/
 private theorem charpoly_standardCover_overlap
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
@@ -111,7 +109,6 @@ and those above n all vanish, by the matrix characteristic-polynomial formula.
 Thus X^n plus the sum of the glued lower coefficients has exactly the required
 images, by coefficientwise equality. This also works for n = 0 and for the
 empty cover, which forces the base ring to be zero.
-(blueprint: lem-weil-pbc-charpoly-locally-free-existence).
 -/
 private theorem charpoly_standardCover_glue
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
@@ -171,7 +168,6 @@ and scalar-extension compatibility of matrix characteristic polynomials give
 the desired equality in each such localization. Injectivity of the standard
 cover, applied to every coefficient, gives equality over A′. Neither argument
 requires a nonzero ring or a positive rank.
-(blueprint: lem-weil-pbc-charpoly-locally-free-existence).
 -/
 private theorem charpoly_standardCover_comparison
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
@@ -254,8 +250,7 @@ private theorem charpoly_standardCover_comparison
 
 set_option linter.unusedVariables false in
 /-- Existence and uniqueness of the characteristic polynomial on a finite locally free module.
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 09XI, proof of (3)⇒(1)
-(blueprint: lem-weil-pbc-charpoly-locally-free-existence).
+Source: literature/stacks-project/more-algebra.tex, Lemma Tag 09XI, proof of (3)⇒(1).
 1. Use `lem-weil-pbc-localization-module-tensor` to identify each localized endomorphism
 with scalar extension. In a local basis take its matrix characteristic polynomial
 (`def-weil-pbc-charpoly-free-module`); basis independence and the monic expansion follow

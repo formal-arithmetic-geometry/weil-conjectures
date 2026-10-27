@@ -253,7 +253,7 @@ theorem isZero_boundedConstructibleClosedUpperShriek_obj
 omit hN hΛ s in
 /-- The bijection `Hom(P, Ri^! K) ≃ Hom(P, Rᵉˣi^! K)` between maps into the right adjoint of
 `Ri_*` (`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) and maps into
-the exceptional inverse image `Rᵉˣi^!` of blueprint `sk-def-sf-operations` (vi)
+the exceptional inverse image `Rᵉˣi^!` of blueprint `det-def-sf-operations` (vi)
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), for `P` bounded below of étale origin and
 `K` bounded below: both are `Hom(Ri_! P, K)`, as `Ri_! = Ri_*` for a closed immersion
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar`). -/
@@ -292,7 +292,7 @@ lemma closedUpperShriekHomEquivRightDerivedUpperShriek_naturality [HasCompactifi
 
 /-- Blueprint `prop-sf-localization-all-stages`, clause (2) at the finite stage `A_{E,n}`: on
 `Dᵇc_proét(X, Λ)` the right adjoint `Ri^!` of `Ri_*` is the exceptional inverse image of
-blueprint `def-weil-exceptional-inverse-image` (`sk-def-sf-operations` (vi),
+blueprint `def-weil-exceptional-inverse-image` (`det-def-sf-operations` (vi),
 `AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), by uniqueness of right adjoints: both
 represent `P ↦ Hom(Ri_* P, K)` on the complexes `P` bounded below of étale origin
 (`AlgebraicGeometry.ProEtale.closedUpperShriekHomEquivRightDerivedUpperShriek`), and both objects

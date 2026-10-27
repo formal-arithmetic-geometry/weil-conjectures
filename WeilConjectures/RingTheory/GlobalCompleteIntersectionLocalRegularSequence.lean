@@ -47,17 +47,16 @@ regular sequence of `m` generators by `lem-weil-pbc-regular-local-generators-reg
 so its depth is at least `m` (`def-weil-pbc-depth`).
 3. Apply `lem-weil-pbc-noetherian-height-quotient-bound` to the `t` equations: the local
 quotient has dimension at least `m - t` (`def-weil-pbc-krull-dimension-ring`).
-4. Lift chains of primes of the local quotient to the global quotient via
-`lem-weil-pbc-localization-prime-residue-field-iso`. Thus its dimension is at most the
-global dimension `m - t` (`def-kun-topological-krull-dimension`), giving equality.
+4. Lift chains of primes of the local quotient to the global quotient via the prime correspondence
+for localizations. Thus its dimension is at most the global dimension `m - t`
+(`def-kun-topological-krull-dimension`), giving equality.
 5. Apply `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` to obtain regularity at
 this maximal ideal (`def-weil-pbc-regular-sequence`).
 6. Localize further at the given prime using
-`lem-weil-pbc-weakly-regular-sequence-localization-prime`; identify this iterated
-localization with the original localization using
-`lem-weil-pbc-localization-prime-residue-field-iso`. The isomorphism preserves the
-successive quotients and multiplication maps, hence regularity. This final passage from
-a maximal ideal to the given prime is the node's elaboration of Tag 00SC. -/
+`lem-weil-pbc-weakly-regular-sequence-localization-prime`; identify this iterated localization with
+the original localization (localization at a prime commutes with a previous localization). The
+isomorphism preserves the successive quotients and multiplication maps, hence regularity. This final
+passage from a maximal ideal to the given prime is the node's elaboration of Tag 00SC. -/
 theorem isRegular_localizationAtPrime_of_quotient_dimension
     (k : Type u) [Field k] (m t : ℕ) (f : Fin t → MvPolynomial (Fin m) k)
     [Nontrivial (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))]

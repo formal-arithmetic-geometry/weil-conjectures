@@ -34,7 +34,7 @@ part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_st
 * The six operations are those of the ambient derived categories `D(-_ét, Λ)`; their restrictions
   to `Dctf` are `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`, …, and
   the typing rule relating the two is `AlgebraicGeometry.Etale.typingRule`
-  (`rem-sf-typing-rule`).
+  (`sk-rem-sf-typing-rule`).
 * The dimension-free internal-Hom interval `[c - b, d - a]` needs a site-perfect (dualizable)
   first variable; that it fails in general (the origin of `𝔸¹`) is
   `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`, which needs a normalized Tate
@@ -293,7 +293,7 @@ finite-type morphism of separated finite-type `k`-schemes. Then:
   `lem-coef-integral-hom-reduction`);
 * the derived limit `G_f L` of the finite exceptional inverse images of the reductions of
   `L ∈ Dᵇc(Y, Λ)` lies in `Dᵇc(X, Λ)`, is `Rf^! L` compatibly with the maps to the
-  `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions (`prop-coef-integral-exceptional-adjoint`).
+  `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions.
 
 These are the integral entries `AlgebraicGeometry.Etale.preservationMatrix_integral` of the
 preservation matrix. -/

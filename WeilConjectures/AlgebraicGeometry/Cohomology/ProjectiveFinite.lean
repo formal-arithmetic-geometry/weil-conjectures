@@ -450,7 +450,7 @@ open scoped AlgebraicGeometry.Scheme.Modules in
 subscheme, i.e. a closed immersion `i : X ⟶ ℙ(n; Spec A)`, and `ℱ` a coherent sheaf on `X`.
 Then `H^q(X, ℱ ⊗ 𝒪_X(m)) = 0` for all `q > 0` and all `m ≫ 0`, where `𝒪_X(m)` is the pullback
 along `i` of the twisting sheaf `𝒪(m)`. This extends
-`AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensor_twist` (`sk-thm-picard-serre-b`)
+`AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensor_twist` (`det-thm-picard-serre-b`)
 from a field to a noetherian ring.
 
 As in the field case, `H^q(X, ℱ ⊗ 𝒪_X(m)) ≅ H^q(ℙⁿ_A, (i_* ℱ)(m))` by the projection formula
@@ -458,7 +458,7 @@ and the affineness of `i`, and Serre vanishing on `ℙⁿ_A`
 (`AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist_of_isNoetherianRing`)
 applies to the coherent module `i_* ℱ`.
 
-(blueprint: `lem-pc-serre-vanishing`, `sk-thm-picard-serre-b`) -/
+(blueprint: `lem-pc-serre-vanishing`, `det-thm-picard-serre-b`) -/
 theorem Scheme.Modules.exists_subsingleton_H_tensor_twist_of_isNoetherianRing (A : Type u)
     [CommRing A] [IsNoetherianRing A] (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i]
     (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]

@@ -25,7 +25,7 @@ field `K`, and `x` a closed point. The local ring `𝒪_{X,x} ⊆ K`
   `ϖ` some `u ∈ 𝒪_{X,x}` acts on `𝒪_{X,x} ⧸ ϖ 𝒪_{X,x}` with nonzero trace
   (`AlgebraicGeometry.Scheme.exists_trace_mapQ_ne_zero_of_isSeparable`).
 
-(blueprint: `sk-thm-picard-duality`)
+(blueprint: `det-thm-picard-duality`)
 -/
 
 @[expose] public section

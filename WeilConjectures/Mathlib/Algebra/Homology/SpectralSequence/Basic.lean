@@ -64,7 +64,7 @@ is exhaustive (`F⁰ = ⊤`) and separated in the strong first quadrant sense (`
 successive quotients are the `E∞`-terms of total degree `n`. This is the filtration that the
 image filtration on the total complex of a first quadrant double complex produces.
 
-(blueprint: `sk-def-groth-ss`) -/
+(blueprint: `det-def-groth-ss`) -/
 structure SpectralSequence.Abutment (E : E₂CohomologicalSpectralSequenceNat C) (H : ℕ → C) where
   /-- The `p`-th step of the decreasing filtration of `H n`. -/
   filtration (n p : ℕ) : Subobject (H n)

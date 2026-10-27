@@ -58,7 +58,7 @@ namespace AddCommGroup
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (M : Type u) [AddCommGroup M]
 
-/-- Blueprint `sk-d-ab-tate`: Integral and rational Tate modules.
+/-- Blueprint `def-tate-module-abelian-group`: Integral and rational Tate modules.
 
 The *Tate module* `T_ℓ M` of an abelian group `M` at a prime `ℓ` is the subgroup of the product
 `∀ n : ℕ, M` consisting of the compatible systems `t` of `ℓ ^ n`-torsion points, that is, those
@@ -122,7 +122,7 @@ theorem appr_zsmul_coe_eq (t : tateModule ℓ M) (a : ℤ_[ℓ]) {n : ℕ} {x : 
     (a.appr n : ℤ) • (t : ∀ _ : ℕ, M) n = x • (t : ∀ _ : ℕ, M) n :=
   zsmul_coe_congr (dvd_sub_of_intCast_eq (by rw [Int.cast_natCast, natCast_appr, h]))
 
-/-- Blueprint `sk-d-ab-tate`: Integral and rational Tate modules.
+/-- Blueprint `def-tate-module-abelian-group`: Integral and rational Tate modules.
 
 The Tate module `T_ℓ M` is a module over the ring `ℤ_[ℓ]` of `ℓ`-adic integers, acting
 coordinatewise: an `ℓ`-adic integer acts on the `n`-th coordinate through its reduction modulo
@@ -302,7 +302,7 @@ theorem nonempty_linearEquiv_of_natCard_eq (hdiv : ∀ x : M, ∃ y : M, (ℓ : 
 
 end tateModule
 
-/-- Blueprint `sk-d-ab-tate`: Integral and rational Tate modules.
+/-- Blueprint `def-tate-module-abelian-group`: Integral and rational Tate modules.
 
 The *rational Tate module* `V_ℓ M = ℚ_[ℓ] ⊗_{ℤ_[ℓ]} T_ℓ M`. -/
 def rationalTateModule : Type u :=

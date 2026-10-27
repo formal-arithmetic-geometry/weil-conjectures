@@ -35,7 +35,7 @@ Proof:
 1. Regard the affine open U as its induced open subscheme. Its structure sheaf is the
 restriction of the structure sheaf of X, and F restricted to U remains quasi-coherent.
 The hypothesis IsAffineOpen U says precisely that this induced scheme is affine.
-2. Apply affine-scheme vanishing (lem-pc-affine-vanishing) to U and the restricted
+2. Apply affine-scheme vanishing (pqf-lem-affine-vanishing) to U and the restricted
 module, obtaining zero cohomology in every positive degree. The comparison between
 abelian-sheaf cohomology in that input and module cohomology uses the acyclicity of
 injective O_U-modules (Stacks Tag 03FD).
