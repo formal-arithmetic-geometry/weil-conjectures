@@ -6,6 +6,8 @@ Authors: SHEAF group P2
 module
 public import Sheaf.SixFunctors.IntegralKernelUnitCounit
 public import Sheaf.SixFunctors.IntegralNormalizedFamily
+import Sheaf.SixFunctors.IntegralKernelFirstAmbientFormula
+import Sheaf.SixFunctors.IntegralKernelFirstTransport
 /-! # Split integral diagonal contraction -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,5 +59,9 @@ theorem integralKernel_first_contraction
             (family.integral E).trace₁ ≫
             (RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)
               (ProjectiveLine Y)).hom)) ≫ (ρ_ M.obj).hom)) := by
-  sorry
+  intro M
+  obtain ⟨u, v, hu, hv, htransport⟩ := integralKernel_first_transport
+    ℓ E k Y hq hr family _href a _hnorm M
+  have hambient := integralKernel_first_ambient_formula ℓ E k Y family M.obj u v hu hv
+  exact htransport.trans hambient
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction

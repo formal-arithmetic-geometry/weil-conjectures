@@ -1,0 +1,85 @@
+{
+ "id": "lem-integral-kernel-first-ambient-formula",
+ "kind": "statement",
+ "title": "Ambient integral first contraction",
+ "statement": "For the fixed integral diagonal family, the ambient normalized unit and counit components satisfy the first diagonal trace contraction formula before restriction to localizing subcategories.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), ambient trace/base-change contraction before restriction"
+ },
+ "stmt_deps": [],
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "proof": [
+  {
+   "text": "Transport the completed first trace/base-change equation through the integral family reference. Use the projection/section normalization to cancel the diagonal insertion and identify the remaining morphism with support₁, the diagonal class, and trace₁.",
+   "uses": [
+    "det-prop-diagonal-tower-coefficients",
+    "lem-sfb-trace-base-change-first",
+    "lem-sfb-projection-section-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-diagonal-tower-coefficients",
+  "lem-sfb-trace-base-change-first",
+  "lem-sfb-projection-section-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), ambient trace/base-change contraction before restriction"
+ },
+ "status": "split",
+ "merged_into": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-integral-kernel-first-contraction",
+   "place": "Paragraph (1), ambient trace/base-change contraction before restriction",
+   "via": [
+    "lem-integral-kernel-first-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralKernelFirstContraction",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralKernelFirstAmbientFormula",
+  "file": "lean/Sheaf/SixFunctors/IntegralKernelFirstAmbientFormula.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralKernel_first_ambient_formula",
+  "statement": "theorem integralKernel_first_ambient_formula\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [∀ x : ProjectiveLine Y, Invertible (ℓ : (ProjectiveLine Y).residueField x)]\n    [∀ x : diagonalSurface Y, Invertible (ℓ : (diagonalSurface Y).residueField x)]\n    (family : Family ℓ Y) :\n    (∀ (M : DerivedCategory\n        (Modules (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y)))\n      (u : M ⟶ (twist (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y)\n        (spIntegralTwist (ProjectiveLine Y) ℓ E)).obj\n          ((moduleObjectDerivedPullback\n            (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).obj\n            ((moduleObjectDerivedPushforward\n              (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).obj M)))\n      (v : (moduleObjectDerivedPushforward\n          (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).obj\n        ((twist (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y)\n          (spIntegralTwist (ProjectiveLine Y) ℓ E)).obj\n            ((moduleObjectDerivedPullback\n              (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).obj\n              ((moduleObjectDerivedPushforward\n                (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).obj M))) ⟶\n        (moduleObjectDerivedPushforward\n          (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).obj M)\n      (_hu : RationalP1.UnitComponentNormalized\n        (Profinite.padicIntegersRingObj ℓ E.val) Y (fun X ↦ spIntegralTwist X ℓ E)\n        (family.integral E)\n        (by simpa only [traceTate] using\n          (integralShiftedLinePullIso ℓ E (secondProjection Y))) M u)\n      (_hv : RationalP1.CounitComponentNormalized\n        (Profinite.padicIntegersRingObj ℓ E.val) Y (fun X ↦ spIntegralTwist X ℓ E)\n        (family.integral E)\n        ((moduleObjectDerivedPushforward\n          (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).obj M) v),\n      (moduleObjectDerivedPushforward\n        (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).map u ≫ v =\n      (moduleObjectDerivedPushforward\n        (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveLine Y ↘ Y)).map\n        ((ρ_ M).inv ≫ (M ◁\n          ((singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n            (ProjectiveLine Y)).inv ≫ (family.integral E).support₁.hom ≫\n            (family.integral E).R₁.R.map (family.integral E).delta ≫\n            (family.integral E).trace₁ ≫\n            (singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n              (ProjectiveLine Y)).hom)) ≫ (ρ_ M).hom))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205821-L-1620221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205821-L-1620221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

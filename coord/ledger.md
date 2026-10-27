@@ -19921,3 +19921,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/B9/Sheaf.Paper.ExceptionalRingOperationsExistence (stage 3; reviewer PASS; first push; landing 20261027T205817-L-1618718 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 20:58 L: merged deliver/B9/Sheaf.Paper.FinitePartialTensorIdentityComponent (stage 3; reviewer PASS; first push; landing 20261027T205818-L-1619156 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:58 L: merged deliver/C1/Sheaf.CategoryTheory.TwistedActionUnderivedRestriction (stage 3; reviewer PASS; first push; landing 20261027T205820-L-1619573 (interface); batch 20261027T205736; modules 8; new nodes 7)
+- 20:58 L: merged deliver/C1/Sheaf.SixFunctors.IntegralKernelFirstContraction (stage 3; reviewer PASS; first push; landing 20261027T205821-L-1620221 (interface); batch 20261027T205736; modules 3; new nodes 2)
