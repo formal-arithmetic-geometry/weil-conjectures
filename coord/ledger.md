@@ -20132,3 +20132,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 05:53 L: batch 20261027T205736 dependency take-out
 - 22:00 L: merged deliver/ND/lem-pur-integral-braiding-scalar-extension-square (reviewer FIX; first push; new nodes: 0)
+- 22:02 L: returned deliver/A2/WeilConjectures.SmoothPurity.Defs (reviewer RETURN: (the landing tools, head 83a4f8788) the delivery did not land: missing import source modules: WeilConjectures.SmoothPuri)
