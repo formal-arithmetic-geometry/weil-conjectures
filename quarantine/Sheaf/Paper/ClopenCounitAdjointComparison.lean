@@ -34,6 +34,10 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 open scoped CategoryTheory.Functor
 namespace WeilConjectures.PurityFiniteSetting
 
+-- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module was written against.
+attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
+
 /-- The ordinary étale right adjoint with the specified compactification instance.
 Source: Zheng, after Lemma 5.16 (blueprint: lem-pur-clopen-counit-adjoint-comparison). -/
 def clopenCounitEtaleRight (A : Type u) [CommRing A] [Finite A]
