@@ -6,6 +6,7 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.Paper.AdicCompletedTensorFiniteModels
+import Sheaf.Paper.AdicCompletedTensorCommonLiftAgreement
 
 /-! # Common-stage descent of finite normalized tensor comparisons
 
@@ -121,6 +122,17 @@ extensions and odd-degree swaps require no different construction. -/
 theorem completed_tensor_common_lift
     (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}
       (ProEt.topology X) (ring l X R) closed models symmetry) :
-    Nonempty (CompletedTensorCommonLift l X R closed models symmetry N) := by sorry
+    Nonempty (CompletedTensorCommonLift l X R closed models symmetry N) := by
+  obtain ⟨C⟩ := completed_tensor_common_lift_coherence l X R closed models symmetry N
+    coherence
+  have hAgreement := completed_tensor_common_lift_agreement l X R closed models symmetry N
+    coherence C
+  refine ⟨{ tensor := C.tensor
+            unit := C.unit
+            associative := C.associative
+            left_unit := C.left_unit
+            right_unit := C.right_unit
+            symmetric := C.symmetric
+            integral_tensor := hAgreement }⟩
 
 end WeilConjectures.AdicQbarRealization

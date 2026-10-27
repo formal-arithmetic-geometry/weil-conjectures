@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-adic-completed-tensor-common-lift-agreement",
+ "kind": "lemma",
+ "title": "Finite normalization of a supplied common-stage tensor lift",
+ "statement": "theorem completed_tensor_common_lift_agreement\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry)\n    (C : CompletedTensorCommonLiftCoherence l X R closed symmetry) :\n    ∀ E, tensorFiniteAgreement l X R closed C.tensor E\n      (N E).completion (N E).ordinary",
+ "stmt_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; finite normalization portion of the original proof."
+ },
+ "proof": [
+  {
+   "text": "For each finite coefficient field, use the normalized completion comparison and the native integral realization comparison to identify the common-stage tensorator component with the prescribed finite composite.",
+   "uses": [
+    "lem-sf-adic-completed-tensor-finite-models",
+    "def-sf-native-adic-realization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The componentwise identifications are exactly tensorFiniteAgreement, so collect them for all finite fields.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Remark 6.8.15; split intermediate interface for the common-stage tensor descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed.*tensor|realization.*tensor",
+   "results": "No exact declaration for the specified normalized common-stage interface.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Monoidal\"",
+   "results": "No exact declaration for this interface.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized common-stage tensor comparison with finite coefficient agreement",
+   "results": "Only generic direct-limit tensor lemmas; no exact declaration.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-completed-tensor-common-lift",
+   "place": "Original common-stage tensor lift proof; strict intermediate interface.",
+   "via": [
+    "lem-sf-adic-completed-tensor-common-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorCommonLift",
+  "date": "2026-10-28",
+  "group": "X3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorCommonLiftAgreement",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorCommonLiftAgreement.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_agreement",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.completed_tensor_common_lift_agreement"
+  ],
+  "statement": "theorem completed_tensor_common_lift_agreement\n    (N : ∀ E, CompletedTensorFiniteModel l X R closed models E)\n    (coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) (ring l X R) closed models symmetry)\n    (C : CompletedTensorCommonLiftCoherence l X R closed symmetry) :\n    ∀ E, tensorFiniteAgreement l X R closed C.tensor E\n      (N E).completion (N E).ordinary",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T210312-L-1685996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T210312-L-1685996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
