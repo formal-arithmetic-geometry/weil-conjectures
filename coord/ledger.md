@@ -19965,3 +19965,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/E7/Sheaf.Paper.ExceptionalFiniteScalar (stage 3; reviewer PASS; first push; landing 20261027T205928-L-1635219 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:59 L: merged deliver/E7/Sheaf.Paper.NativeWeilTensorRingedDerivedSquareOrdinary (stage 3; reviewer FIX; after a return; landing 20261027T205930-L-1635358 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:59 L: merged deliver/E8/Sheaf.Paper.ExceptionalFiniteScalarMaps (stage 3; reviewer PASS; first push; landing 20261027T205931-L-1635574 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:59 L: merged deliver/E8/Sheaf.Paper.NativeWeilTensorRingedKFlatData (stage 3; reviewer PASS; first push; landing 20261027T205932-L-1635787 (interface); batch 20261027T205736; modules 3; new nodes 2)

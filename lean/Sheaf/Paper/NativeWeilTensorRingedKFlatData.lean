@@ -6,6 +6,8 @@ Authors: SHEAF group W8
 module
 
 public import Sheaf.Paper.NativeWeilTensorRingedBridgeData
+import Sheaf.Paper.NativeWeilTensorRingedKFlatFlat
+import Sheaf.Paper.NativeWeilTensorRingedKFlatLocalization
 
 /-! # K-flat and localization data for normalized native ringed tensors
 
@@ -51,6 +53,8 @@ homotopy localization criterion then give the displayed localization.  The
 argument applies to unbounded complexes and does not use the chosen chain map.
 -/
 theorem native_weil_tensor_ringed_kflat_data :
-    Nonempty (NativeWeilRingedTensorKFlatData b T adj) := by sorry
+    Nonempty (NativeWeilRingedTensorKFlatData b T adj) := by
+  refine ⟨{ flat := native_weil_tensor_ringed_kflat_flat b T
+            localization := native_weil_tensor_ringed_kflat_localization T }⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
