@@ -1,0 +1,75 @@
+{
+ "id": "lem-sf-structural-reduction-word-substitution-pullcomposition",
+ "kind": "statement",
+ "title": "Structural word substitution PullComposition",
+ "statement": "Constructor-specific structural coefficient square for PullComposition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Structural substitution step, constructor case."
+ },
+ "stmt_deps": [
+  "def-sf-generator-reduction-data",
+  "lem-sf-open-interchange-reduction-squares"
+ ],
+ "proof": [
+  {
+   "text": "Reconstruct the child systems, apply the bounded structural square to the resulting short skeleton, and paste the naturality and recursive comparison equations.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Structural substitution step, constructor case."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.StructuralReductionWordSubstitution",
+  "date": "2026-10-28",
+  "group": "Z5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-structural-reduction-word-substitution",
+   "place": "Constructor-specific split"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.StructuralReductionPullComposition",
+  "file": "lean/Sheaf/SixFunctors/StructuralReductionPullComposition.lean",
+  "declaration": "WeilConjectures.OpenInterchangeReduction.structuralReductionPullComposition",
+  "statement": "theorem structuralReductionPullComposition {D : FiniteFieldDatum.{u}} (coeff : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic coeff.l) E] [FiniteDimensional (Padic coeff.l) E] (o : GeneratorReduction.Operations coeff.l E) (_hShort : ∀ {S : Type s} (W : S → Scheme.{u}) (_hW : GeneratorReduction.FiniteTypeFamily W D.k) {I : Type i} (location : I → S) {a : S} {B C : GeneratorReduction.Word W location a} (g : GeneratorReduction.GeneratorKind W location B C), Structural g → B.length ≤ 3 → C.length ≤ 3 → ∀ (K : ∀ k : I, DerivedCategory (scalarReductionSource coeff.l E (W (location k)))) (lo hi torLo torHi : ℤ), (∀ k : I, GeneratorReduction.Admissible coeff.l E (IntegralSystemRealization.calculus coeff.l E (W (location k))) (K k) lo hi torLo torHi) → GeneratorReduction.Word.admissible coeff.l E W location o K lo hi torLo torHi B → GeneratorReduction.Word.admissible coeff.l E W location o K lo hi torLo torHi C → GeneratorReduction.Assertion coeff.l E W location o K g) {S : Type s} (W : S → Scheme.{u}) (_hW : GeneratorReduction.FiniteTypeFamily W D.k) {I : Type i} (location : I → S) {{a b c : S}} (f : W a ⟶ W b) (g : W b ⟶ W c) (hsf : IsSeparated f) (htf : LocallyOfFiniteType f) (hqf : QuasiCompact f) (hsg : IsSeparated g) (htg : LocallyOfFiniteType g) (hqg : QuasiCompact g) (hs : IsSeparated (f ≫ g)) (ht : LocallyOfFiniteType (f ≫ g)) (hq : QuasiCompact (f ≫ g)) {{B : GeneratorReduction.Word W location c}} (K : ∀ k : I, DerivedCategory (scalarReductionSource coeff.l E (W (location k)))) (lo hi torLo torHi : ℤ) (_hAdm : ∀ k : I, GeneratorReduction.Admissible coeff.l E (IntegralSystemRealization.calculus coeff.l E (W (location k))) (K k) lo hi torLo torHi) (hB : GeneratorReduction.Word.admissible coeff.l E W location o K lo hi torLo torHi (GeneratorReduction.Word.pull f hsf htf hqf (GeneratorReduction.Word.pull g hsg htg hqg B))) (hC : GeneratorReduction.Word.admissible coeff.l E W location o K lo hi torLo torHi (GeneratorReduction.Word.pull (f ≫ g) hs ht hq B)) : GeneratorReduction.Assertion coeff.l E W location o K (GeneratorReduction.GeneratorKind.pullComposition f g hsf htf hqf hsg htg hqg hs ht hq B)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T181021-L-3922169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T181021-L-3922169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

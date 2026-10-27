@@ -19858,3 +19858,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:10 L: merged deliver/Y8/Sheaf.SixFunctors.ProperOpenInterchangeReductionSquare (stage 3; reviewer PASS; first push; landing 20261027T181016-L-3921681 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:10 L: merged deliver/Y9/Sheaf.SixFunctors.ProperOpenLambdaReductionSquare (stage 3; reviewer PASS; first push; landing 20261027T181017-L-3921890 (interface); batch 20261027T180444; modules 4; new nodes 3)
 - 18:10 L: merged deliver/Z5/Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjective (stage 3; reviewer PASS; first push; landing 20261027T181019-L-3922018 (interface); batch 20261027T180444; modules 2; new nodes 1)
+- 18:10 L: merged deliver/Z5/Sheaf.SixFunctors.StructuralReductionWordSubstitution (stage 3; reviewer PASS; first push; landing 20261027T181021-L-3922169 (interface); batch 20261027T180444; modules 10; new nodes 9)

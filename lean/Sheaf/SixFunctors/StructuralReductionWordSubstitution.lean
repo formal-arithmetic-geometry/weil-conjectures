@@ -6,6 +6,15 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.SixFunctors.OpenInterchangeReductionData
+import Sheaf.SixFunctors.StructuralReductionTensorAssociator
+import Sheaf.SixFunctors.StructuralReductionTensorLeftUnit
+import Sheaf.SixFunctors.StructuralReductionTensorRightUnit
+import Sheaf.SixFunctors.StructuralReductionPullComposition
+import Sheaf.SixFunctors.StructuralReductionPushComposition
+import Sheaf.SixFunctors.StructuralReductionPullPushUnit
+import Sheaf.SixFunctors.StructuralReductionPullPushCounit
+import Sheaf.SixFunctors.StructuralReductionOpenUnit
+import Sheaf.SixFunctors.StructuralReductionOpenCounit
 
 /-! # Substitution into structural coefficient squares
 
@@ -84,6 +93,61 @@ theorem structuralReductionWordSubstitution
         B.admissible coeff.l E W location o K lo hi torLo torHi →
         C.admissible coeff.l E W location o K lo hi torLo torHi →
         GeneratorReduction.Assertion coeff.l E W location o K g) :
-    StructuralSquares.{u, s, i} coeff.l E D o := by sorry
+    StructuralSquares.{u, s, i} coeff.l E D o := by
+  intro S W hW I location a B C g hg K lo hi torLo torHi hAdm hB hC
+  cases g with
+  | tensorAssociator B C T =>
+      exact structuralReductionTensorAssociator coeff E o hShort W hW location K lo hi torLo torHi
+        hAdm hB hC
+  | tensorLeftUnit B =>
+      exact structuralReductionTensorLeftUnit coeff E o hShort W hW location K lo hi torLo torHi
+        hAdm hB hC
+  | tensorRightUnit B =>
+      exact structuralReductionTensorRightUnit coeff E o hShort W hW location K lo hi torLo torHi
+        hAdm hB hC
+  | @pullComposition a b c f g hsf htf hqf hsg htg hqg hs ht hq B =>
+      exact structuralReductionPullComposition coeff E o hShort W hW location
+        (a := a) (b := b) (c := c) f g hsf htf hqf hsg htg hqg hs ht hq K
+        lo hi torLo torHi
+        hAdm hB hC
+  | @pushComposition a b c f g hsf htf hqf hpf hsg htg hqg hpg hs ht hq hp B =>
+      exact structuralReductionPushComposition coeff E o hShort W hW location
+        (a := a) (b := b) f g hsf htf hqf hpf hsg htg hqg hpg hs ht hq hp K
+        lo hi torLo torHi
+        hAdm hB hC
+  | @pullPushUnit a b f hs ht hq hp B =>
+      exact structuralReductionPullPushUnit coeff E o hShort W hW location
+        f hs ht hq hp K lo hi torLo torHi hAdm hB hC
+  | @pullPushCounit a b f hs ht hq hp C =>
+      exact structuralReductionPullPushCounit coeff E o hShort W hW location
+        f hs ht hq hp K lo hi torLo torHi hAdm hB hC
+  | @openUnit a b j hj hq B =>
+      exact structuralReductionOpenUnit coeff E o hShort W hW location
+        j hj hq K lo hi torLo torHi hAdm
+        hB hC
+  | @openCounit a b j hj hq C =>
+      exact structuralReductionOpenCounit coeff E o hShort W hW location
+        j hj hq K lo hi torLo torHi hAdm
+        hB hC
+  | openBaseChange gU j' j g h sq hgU htgU hqgU hg htg hqg hj' hqj' hj hqj B =>
+      have hfalse : False := by
+        change False at hg
+        exact hg
+      exact hfalse.elim
+  | openTensor j hj hq B C =>
+      have hfalse : False := by
+        change False at hg
+        exact hg
+      exact hfalse.elim
+  | properOpenInterchange k r p i h hk hki hi hii hr hp B =>
+      have hfalse : False := by
+        change False at hg
+        exact hg
+      exact hfalse.elim
+  | properOpenLambda k r p i h hk hki hi hii hr hp B =>
+      have hfalse : False := by
+        change False at hg
+        exact hg
+      exact hfalse.elim
 
 end WeilConjectures.OpenInterchangeReduction
