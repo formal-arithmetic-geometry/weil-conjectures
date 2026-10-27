@@ -20157,3 +20157,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:30 L: returned deliver/A4/Sheaf.Paper.ExceptionalFiniteSupportRealization (reviewer RETURN: (the global build of 228eb961b6, still running) your landing 20261027T222753-L-2823508 fails to compile in Sheaf.Paper.E)
 
 - 06:34 L: batch 20261027T222751 dependency take-out
+- 22:37 L: merged deliver/B3/Sheaf.Paper.NativeCompactSupportGeometry (stage 3; reviewer PASS; first push; landing 20261027T223738-L-3051537 (proof); batch 20261027T223736; modules 1; new nodes 0)
