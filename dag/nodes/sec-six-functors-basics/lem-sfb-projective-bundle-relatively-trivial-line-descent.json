@@ -16,9 +16,10 @@
  ],
  "proof": [
   {
-   "text": "On every base open V the canonical function map Gamma(V,O_S)->Gamma(p^{-1}V,O_P) is an isomorphism of rings. Check on affine opens trivializing E by the constant-monomial H^0(P^{r-1}_R,O)=R calculation, which identifies this map itself. The local inverse maps commute with further restrictions and glue by the sheaf axiom. Thus the function map also identifies units, including on nonaffine overlaps.",
+   "text": "On affine opens trivializing E, use the normalized symmetric-Proj open and free comparisons to identify the bundle with standard projective (r-1)-space over the affine base. The arbitrary-ring H0(O(0)) computation, O(0)=O and the degree-zero polynomial equivalence show that its functions form a free module of rank one. A unital algebra free of rank one has bijective canonical algebraMap (also for the zero ring). Affine frame opens form a basis; the existing sheaf-module criterion for bijectivity on a basis therefore gives bijectivity of the canonical structure map on every base open.",
    "uses": [
-    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-symmetric-proj-tautological-chart-gluing",
+    "lem-trf-symmetric-proj-free-comparison",
     "lem-pc-projective-space-twist-cohomology"
    ],
    "elementary": false,
@@ -28,10 +29,12 @@
    }
   },
   {
-   "text": "Choose the given trivializations of F above a base covering. Write their overlap automorphisms as unit sections and descend those units uniquely through the function-ring identification. The cocycle equation descends by injectivity. Glue the trivial base modules with these transitions to N, which is invertible by its local bases.",
+   "text": "Choose a neighbourhood U_s and the given trivialization for each base point s. Construct N explicitly as p_*F. Open base change identifies the tensor pullback of N to U_s with p_{U_s*} of F restricted to p^{-1}U_s. Push forward the given frame and invert the canonical structure-module map, which is an isomorphism by the preceding function calculation and the formula for restriction of a scheme morphism. Compare tensor pullback with the standard pullback by uniqueness of left adjoints. This gives the local structure-sheaf frames in the definition of N.IsInvertible.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "def-sc-invertible-module"
+    "lem-weil-pbc-module-open-square-isiso",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -40,10 +43,13 @@
    }
   },
   {
-   "text": "The original local trivializations are now compatible with the pulled-back transitions of N. Glue them and their inverses to give F isomorphic to p^*N. Empty opens and an empty base use the empty gluing family; no finite covering or quasi-compactness hypothesis enters.",
+   "text": "Use the counit p^*p_*F -> F. For a restricted morphism p_U, its counit is an isomorphism at the structure module: its composite with pullback of the invertible structure map is the canonical pullback-of-unit isomorphism. Counit naturality then gives the same for the given trivial restriction of F. The pushforward square of the inverse-image open square is a natural isomorphism; its first mate is the invertible open base-change map and its second mate is invertible because the iterated mates are conjugation of composite adjunctions (Mathlib CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm). The mate-counit identity identifies the local counit with the restriction of the original counit, up to these isomorphisms. Thus the original counit is invertible on the inverse-image open cover, hence globally by local detection. Its inverse supplies F isomorphic to p^*N. Empty schemes and opens use the same cover argument without a nonemptiness assumption.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-module-open-square-isiso",
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
    ],
    "elementary": false,
    "source": {
@@ -53,16 +59,23 @@
   }
  ],
  "proof_deps": [
-  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-symmetric-proj-tautological-chart-gluing",
+  "lem-trf-symmetric-proj-free-comparison",
   "lem-pc-projective-space-twist-cohomology",
-  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-module-open-square-isiso",
   "def-sc-invertible-module",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "X3",
   "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-  "place": "Remark 4.2.7, printed p.75; Stacks sheaves.tex, lemmas glue-maps, glue-sheaves, glue-sheaves-structures (Tags 04TN, 00AL, 00AM), and coherent.tex, lemma-cohomology-projective-space-over-ring (Tag 01XS)."
+  "place": "Remark 4.2.7, printed p.75; Stacks sheaves.tex, lemmas glue-maps, glue-sheaves, glue-sheaves-structures (Tags 04TN, 00AL, 00AM), and coherent.tex, lemma-cohomology-projective-space-over-ring (Tag 01XS).",
+  "note": "Direct-image/counit implementation of descent; the private base-function calculation reuses the proved argument of ProjectiveBundlePullbackLineReflection (J8). No new sorry or mathematical assumption."
  },
  "mathlib_searches": [
   {
@@ -155,16 +168,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J9",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261027T151716-L-1196017",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_relatively_trivial_line_descent"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_relatively_trivial_line_descent"
-  ]
+  "landing": "20261027T180943-L-3917545",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
