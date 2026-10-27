@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorQuotientData
+import Sheaf.SixFunctors.OpenQuotientScalarComparisonTransition
 
 /-! # Finite-level data for the strict open scalar comparison
 
@@ -60,6 +61,21 @@ theorem openQuotientScalarComparisonLevelData
     (tc : IntegralOpenReduction.TensorComparison l E j o)
     (sc : ScalarCompatibility l E j o) :
     Nonempty (ScalarComparisonLevelData l E j o tc sc) := by
-  sorry
+  let level : ∀ (n : ℕ) (Q : CochainComplex (scalarReductionSource l E U) ℤ),
+      (unrestrictedIntegralComplexFunctor l E X n).obj
+          ((OpenSemilinearTensor.extensionComplex l E j o).obj Q) ≅
+        (OpenSemilinearTensor.extensionComplex l E j o).obj
+          ((unrestrictedIntegralComplexFunctor l E U n).obj Q) := by
+    intro n Q
+    let e := Functor.isoWhiskerRight (tc.ordinary n)
+        (scalarReductionRestriction l E X n) ≪≫
+      Functor.isoWhiskerLeft (scalarReductionExtension l E U n) (sc.finite n)
+    exact (NatIso.mapHomologicalComplex e (.up ℤ)).app Q
+  refine ⟨{ level := level, components := ?_, transition := ?_ }⟩
+  · intro n Q i
+    rfl
+  · intro n Q i
+    exact openQuotientScalarComparisonTransition l E j o tc sc level
+      (fun n Q i ↦ by rfl) n Q i
 
 end WeilConjectures.OpenTensorQuotient
