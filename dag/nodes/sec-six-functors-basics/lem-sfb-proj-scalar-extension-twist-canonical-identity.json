@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-proj-scalar-extension-twist-canonical-identity",
+ "kind": "statement",
+ "title": "Canonical identity scalar-extension twist comparison",
+ "statement": "The section-normalized identity pullback comparison of every Proj twisting sheaf satisfies the normalized scalar-extension fraction rule.",
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-proj-scalar-extension-twist-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MY and 01N2, the identity scalar-extension fraction formula."
+ },
+ "proof": [
+  {
+   "text": "Expand the section-normalized tensor-pullback adjunction on the identity scheme map. Its canonical comparison sends the normalized tensor section of a homogeneous fraction to that fraction. Evaluating the denominator equation pointwise and using the identity graded-ring homomorphism gives the displayed fraction rule.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sfb-proj-scalar-extension-twist-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MY and 01N2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sfb-proj-scalar-extension-twist-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MY and 01N2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorPullbackSectionId identity twist fraction",
+   "results": "No existing theorem states the canonical identity normalized fraction rule.",
+   "date": "2026-10-28",
+   "verdict": "The local normalization is split as a strictly smaller theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsScalarExtensionTwistComparison tensorPullbackSectionId",
+   "results": "No matching declaration.",
+   "date": "2026-10-28",
+   "verdict": "No library match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical identity tensor pullback comparison on Proj twists",
+   "results": "Only generic pullback identity and section adjunction declarations found.",
+   "date": "2026-10-28",
+   "verdict": "No specialized match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistIdentity",
+  "date": "2026-10-28",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proj-scalar-extension-twist-fraction-laws-identity",
+   "place": "Canonical identity fraction normalization used by the uniqueness proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistCanonicalIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjScalarExtensionTwistCanonicalIdentity.lean",
+  "declaration": "AlgebraicGeometry.Proj.scalarExtension_twist_canonical_identity",
+  "statement": "theorem scalarExtension_twist_canonical_identity\n    {A : Type u} [CommRing A]\n    {σ : Type u} [SetLike σ A] [AddSubgroupClass σ A]\n    {𝒜 : ℕ → σ} [GradedRing 𝒜] :\n    IsScalarExtensionTwistComparison (GradedRingHom.id 𝒜) (𝟙 (Proj 𝒜))\n      (fun j ↦ (tensorPullbackSectionId (Proj 𝒜)).app (twist 𝒜 j))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T234151-L-19721",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T234151-L-19721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
