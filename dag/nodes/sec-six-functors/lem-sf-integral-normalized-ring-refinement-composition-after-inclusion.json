@@ -1,0 +1,97 @@
+{
+ "id": "lem-sf-integral-normalized-ring-refinement-composition-after-inclusion",
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "title": "Objectwise integral refinement composition after coefficient inclusion",
+ "statement": "theorem integral_normalized_ring_refinement_composition_after_inclusion\n    (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))\n    (F : CoefficientConstructionFields.{u, v} l Ω D hl R)\n    (M : CoefficientConstructionCommon.{u, v} l Ω D hl R F)\n    (N : CoefficientConstructionRefinements.{u, v} l Ω D hl R F M)\n    (E : FieldStage.{max u v} l) :\n    ∀ {a b c : Compactification f} (r : a.Refinement b) (t : b.Refinement c)\n      (K : C.{u, v} l Ω X (.integral E)),\n      (RingStage.inclusion.{u, v} l Ω Y (.integral E)).map\n          ((N.refinement (r.comp t) (.integral E)).left.hom.app K) =\n        (RingStage.inclusion.{u, v} l Ω Y (.integral E)).map\n          (((N.refinement r (.integral E)).left ≪≫\n            (N.refinement t (.integral E)).left).hom.app K)",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "the binary refinement diagram after integral coefficient inclusion"
+ },
+ "proof": [
+  {
+   "text": "Apply the integral normalized refinement pasting theorem to the binary refinement diagram, using the normalized open comparison and integral-left realization supplied by N and R.",
+   "uses": [
+    "lem-sf-integral-normalized-refinement-pasting",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-refinement-diagram-admissibility",
+    "lem-sf-ring-open-refinement",
+    "lem-sf-integral-ringed-clopen-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-normalized-refinement-pasting",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-refinement-diagram-admissibility",
+  "lem-sf-ring-open-refinement",
+  "lem-sf-integral-ringed-clopen-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "the binary refinement diagram after integral coefficient inclusion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integral normalized refinement composition after inclusion",
+   "results": "No existing Mathlib theorem; this is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralNormalizedRingRefinementComposition",
+  "date": "2026-10-28",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-normalized-ring-refinement-composition",
+   "place": "strict objectwise-after-inclusion reduction",
+   "via": [
+    "lem-sf-integral-normalized-ring-refinement-composition"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralNormalizedRingRefinementCompositionAfterInclusion",
+  "file": "lean/Sheaf/Paper/IntegralNormalizedRingRefinementCompositionAfterInclusion.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.integral_normalized_ring_refinement_composition_after_inclusion",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-28",
+  "statement": "theorem integral_normalized_ring_refinement_composition_after_inclusion\n    (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))\n    (F : CoefficientConstructionFields.{u, v} l Ω D hl R)\n    (M : CoefficientConstructionCommon.{u, v} l Ω D hl R F)\n    (N : CoefficientConstructionRefinements.{u, v} l Ω D hl R F M)\n    (E : FieldStage.{max u v} l) :\n    ∀ {a b c : Compactification f} (r : a.Refinement b) (t : b.Refinement c)\n      (K : C.{u, v} l Ω X (.integral E)),\n      (RingStage.inclusion.{u, v} l Ω Y (.integral E)).map\n          ((N.refinement (r.comp t) (.integral E)).left.hom.app K) =\n        (RingStage.inclusion.{u, v} l Ω Y (.integral E)).map\n          (((N.refinement r (.integral E)).left ≪≫\n            (N.refinement t (.integral E)).left).hom.app K)"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261027T234315-L-94411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261027T234315-L-94411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

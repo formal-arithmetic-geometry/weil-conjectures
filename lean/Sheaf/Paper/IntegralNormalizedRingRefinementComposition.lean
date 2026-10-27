@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientConstructionData
+import Sheaf.Paper.IntegralNormalizedRingRefinementCompositionAfterInclusion
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -42,6 +43,18 @@ theorem integral_normalized_ring_refinement_composition
       (N.refinement (r.comp t) (.integral E)).left =
         (N.refinement r (.integral E)).left ≪≫
           (N.refinement t (.integral E)).left := by
-  sorry
+  let I := RingStage.inclusion.{u, v} l Ω Y (.integral E)
+  let _ : I.Faithful := by
+    dsimp only [I]
+    cases E
+    dsimp only [RingStage.inclusion]
+    infer_instance
+  intro a b c r t
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply I.map_injective
+  exact integral_normalized_ring_refinement_composition_after_inclusion
+    l Ω D hl R F M N E r t K
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
