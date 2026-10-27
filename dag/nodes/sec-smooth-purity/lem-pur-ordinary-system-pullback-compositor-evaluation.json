@@ -17,33 +17,40 @@
  ],
  "proof": [
   {
-   "text": "By c.sections, the direct compositor is the canonical restriction along the iterated-base-change isomorphism. Use extensionality on every (n,U) section to identify the natural isomorphisms, then injectivity of conjugateIsoEquiv and c.conjugate to identify the ordinary inverse compositor.",
+   "text": "The inverse of the displayed evaluation comparison is the mate of pullbackTensorSequenceDirectEvaluation under the sequence and intrinsic adjunctions. Apply the specified inverse-evaluation Hom formula and the unit formula characterizing pullbackTensorLevelIntrinsic; cancel the finite comparison with its inverse. This is implemented by evaluation_mate and ordinary_evaluation_mate.",
    "uses": [
-    "def-sf-integral-system-operations"
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-pur-completed-pullback-tower-core"
    ],
    "elementary": true
   },
   {
-   "text": "Use ordinaryCompositionEvaluation for the canonical ordinary sequence inverse image and the coefficient-module pullback. Its unit-normalized evaluation agrees with pullbackTensorSequenceInverseEvaluation inverse: both are characterized by transposition of the identical direct-image evaluation square.",
+   "text": "Use the proved unrestricted finite_comp_mate helper of AmbientAdjunctionCompositorNormalization to identify the intrinsic compositor conjugate in fixed-scalar coordinates. The section realization is bijective, natural in module maps and compatible with restriction. Its normalized direct-image comparison therefore shows that this conjugate acts on every section by restriction along the canonical base-change composition isomorphism. No finite-type or ground-field assumption is used by these ordinary helpers.",
    "uses": [
-    "lem-pur-ordinary-pullback-composition-evaluation",
-    "def-pur-completed-pullback-tensor-comparison"
+    "lem-sf-ambient-adjunction-compositor-normalization",
+    "lem-pur-proetale-direct-image-global-evaluation",
+    "def-sp-finite-intrinsic-open-square"
    ],
    "elementary": false
   },
   {
-   "text": "Conjugate the coefficient-module pullback comparisons through pullbackTensorLevelIntrinsic. Its defining unit equation identifies the conjugated compositor with sfIntrinsicPullbackComp: their right-adjoint mates are the same section restriction under base change. Naturality pastes the two evaluation factors, proving the displayed ordinary equation. The same unit calculations apply to n=0, zero sheaves and identity morphisms.",
+   "text": "The three direct-image/evaluation comparisons are identity maps on underlying sections by their unique specifications. Combined with c.sections and the intrinsic section formula, this proves that direct evaluation respects the two direct-image compositors. Use c.conjugate to identify the system direct compositor with the conjugate of c.ordinaryPull.",
    "uses": [
-    "def-pur-completed-pullback-tensor-comparison",
-    "def-sp-finite-intrinsic-open-square"
+    "def-sf-integral-system-operations",
+    "def-pur-completed-pullback-tower-core"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the injective Mathlib mate correspondence to the two inverse-evaluation pastings. mateEquiv_hcomp and the two conjugate/mate vertical-pasting identities turn their equality into the direct-image equation just proved. Evaluate at M and cancel the inverse evaluation isomorphisms to obtain the displayed forward square. This gives a direct proof of the ordinary evaluation step without invoking ordinaryCompositionEvaluation. Every calculation uses arbitrary sections, so includes n=0, zero modules and identity maps.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "03D8, specialized to evaluation on the sequence site and the two specified ordinary adjunctions."
+  "place": "Tag 03D8, lemma-push-pull-composition-modules; direct-image section normalization and Mathlib adjunction mate pasting, implemented by F4 on 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -114,10 +121,12 @@
   "date": "2026-10-27"
  },
  "proof_deps": [
-  "def-sf-integral-system-operations",
-  "lem-pur-ordinary-pullback-composition-evaluation",
   "def-pur-completed-pullback-tensor-comparison",
-  "def-sp-finite-intrinsic-open-square"
+  "def-pur-completed-pullback-tower-core",
+  "lem-sf-ambient-adjunction-compositor-normalization",
+  "lem-pur-proetale-direct-image-global-evaluation",
+  "def-sp-finite-intrinsic-open-square",
+  "def-sf-integral-system-operations"
  ],
  "lean_audit": {
   "master": {
@@ -141,9 +150,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261027T123538-L-2319149",
+  "landing": "20261027T180603-L-3879194",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
