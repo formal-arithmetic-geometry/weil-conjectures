@@ -6,6 +6,7 @@ Authors: SHEAF group Q9
 module
 
 public import Sheaf.Paper.WeilIndSheafCategory
+import Sheaf.Paper.WeilIndProperOpenHigherComparison
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-! # Proper/open interchange for higher ind-images
@@ -65,6 +66,9 @@ theorem zlIndWeilProperOpenHigher
         ((zlIndWeilPush D l hl Ω p₂).rightDerived n).obj
           ((zlIndWeilOpenShriek D l hl Ω j₂).obj
             ((zlWeilIndEmbedding D l hl Ω X₀).obj F))) := by
-  sorry
+  obtain ⟨e, he⟩ := zlIndWeilProperOpenHigher_comparison D l hl Ω j₁ j₂ p₁ p₂ r _hi _hp n
+    ((zlWeilIndEmbedding D l hl Ω X₀).obj F)
+  let _ : IsIso e := he
+  exact ⟨asIso e⟩
 
 end WeilConjectures
