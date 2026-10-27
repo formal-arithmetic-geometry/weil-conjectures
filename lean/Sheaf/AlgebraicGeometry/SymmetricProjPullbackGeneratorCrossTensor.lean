@@ -7,30 +7,22 @@ module
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientData
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.SymmetricProjPullbackGeneratorLocalCoefficients
+import Sheaf.AlgebraicGeometry.SymmetricProjCrossTensorFromLocal
 
 /-! # Degree-two relation on pulled module generators
-
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
 (blueprint: lem-trf-symmetric-proj-pullback-generator-cross-tensor).
 -/
-
 @[expose] public section
-
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-
 universe u
 open CategoryTheory Opposite
 open scoped AlgebraicGeometry
-
 namespace AlgebraicGeometry.SymmetricProjTautologicalCharts
-
 attribute [local instance 2000] CategoryTheory.Abelian.hasFiniteLimits
-
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
-  Scheme.Modules.tensorPullbackSectionComp Scheme.Modules.tensorPullbackSectionAdjunction
-  Scheme.GradedAlgebraData.relProj Scheme.GradedAlgebraData.relProjι
-  Scheme.GradedAlgebraData.PullbackData.relProjComparison
+open Scheme.Modules CategoryTheory.MonoidalCategory
 
 /-- The degree-two cross relation on actual pulled generators over affine opens.
 
@@ -104,6 +96,16 @@ theorem normalized_pullback_generator_cross_tensor
           (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)
           E U.1 n)
       Scheme.Modules.tmulSection (q.app W.1 m') (q'.app W.1 n') =
-        Scheme.Modules.tmulSection (q.app W.1 n') (q'.app W.1 m') := by sorry
+        Scheme.Modules.tmulSection (q.app W.1 n') (q'.app W.1 m')  := by
+  exact cross_tensor_of_local_coefficients_public
+    (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom) E
+    ((Scheme.Modules.tensorPullbackSectionComp b.relProjComparison
+      (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).hom.app E ≫
+      (Scheme.Modules.tensorPullback b.relProjComparison).map D.quotient)
+    ((eqToIso e).hom ≫
+      (Scheme.Modules.tensorPullbackSectionComp
+        (SymmetricAlgebraSheaf.gradedAlgebraData
+          ((Scheme.Modules.tensorPullback g).obj E)).relProjHom g).hom.app E ≫ D'.quotient)
+    (normalized_pullback_generator_local_coefficients g E D D' b hb e)
 
 end AlgebraicGeometry.SymmetricProjTautologicalCharts
