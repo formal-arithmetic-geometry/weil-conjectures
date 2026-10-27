@@ -5,9 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralProjectionEvaluationFactors
-import Sheaf.SixFunctors.ProEtaleIntrinsicTensorComparison
-import Sheaf.AlgebraicGeometry.IntrinsicRealizationTensorComplex
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.FinitePullbackTensorConstruction
+import Sheaf.Paper.FiniteScalarTensorRealization
 
 /-! # Pointwise finite intrinsic tensor comparison
 
@@ -53,6 +52,62 @@ theorem finiteIntrinsicTensorRealization_component
     (X : SixFunctorSpace D) :
     Nonempty (finiteIntrinsicDerivedTensor C.l E X.obj.left m ≅
       evaluatedTensor (C := C) (E := E) m X) := by
-  sorry
+  classical
+  let A := Padic.coefficientExtensionRing C.l E (m + 1)
+  let F := CompactSupportFiniteProjection.realization
+    (C := C) (E := E) (n := m + 1)
+    (hn := Nat.le_add_left 1 m) X
+  let a := pullbackTensorFiniteModel C.l E X.obj.left m
+  let e := finiteScalarTensorRealization X.obj.left A a
+  let Tfix := CompactSupportFiniteProjection.fixedTensor (C := C) (E := E)
+    (n := m + 1) X
+  let preT := (((Functor.whiskeringLeft₂ _).obj F.inverse).obj F.inverse).obj Tfix
+  let postpre := (Functor.postcompose₂.obj F.functor).obj preT
+  let prepost := (((Functor.whiskeringLeft₂ _).obj F.inverse).obj F.inverse).obj
+    ((Functor.postcompose₂.obj F.functor).obj Tfix)
+  let r : postpre ≅ prepost :=
+    NatIso.ofComponents
+      (fun K ↦ NatIso.ofComponents (fun L ↦ Iso.refl _)
+        (by intros; simp [postpre, prepost, preT])) (by
+        intros
+        apply NatTrans.ext
+        ext
+        simp [postpre, prepost, preT])
+  let ePre := (((Functor.whiskeringLeft₂ _).obj F.inverse).obj F.inverse).mapIso e
+  let j :
+      (((Functor.whiskeringLeft₂ _).obj F.inverse).obj F.inverse).obj
+          ((((Functor.whiskeringLeft₂ _).obj F.functor).obj F.functor).obj
+            (Functor.curry.obj a.tensor)) ≅
+        Functor.curry.obj a.tensor :=
+    NatIso.ofComponents
+      (fun K ↦ NatIso.ofComponents
+        (fun L ↦ a.tensor.mapIso
+          (Iso.prod (F.counitIso.app K) (F.counitIso.app L))) (by
+          intro L L' g
+          dsimp
+          rw [← a.tensor.map_comp, ← a.tensor.map_comp]
+          congr 1
+          ext
+          · simp
+          · exact F.counitIso.hom.naturality g)) (by
+        intro K K' f
+        apply NatTrans.ext
+        ext L
+        dsimp
+        rw [← a.tensor.map_comp, ← a.tensor.map_comp]
+        congr 1
+        ext
+        · exact F.counitIso.hom.naturality f
+        · simp)
+  let eh := ePre ≪≫ j
+  let ehU := Functor.uncurry.mapIso eh
+  let fin := Functor.uncurry.mapIso r ≪≫ ehU ≪≫
+    Functor.currying.counitIso.app a.tensor ≪≫
+    pullbackTensorFiniteModelIso C.l E X.obj.left m
+  exact ⟨by
+    simpa [evaluatedTensor, CompactSupportFiniteProjection.tensor,
+      CompactSupportFiniteProjection.realization, CompactSupportFiniteProjection.fixedTensor,
+      sixFunctorFiniteRealization, F, A, a, e, ePre, j, eh, ehU, r, Tfix, preT, postpre,
+      prepost, fin, integralCoefficientCommRingSheaf] using fin.symm⟩
 
 end WeilConjectures.IntegralProjectionReduction
