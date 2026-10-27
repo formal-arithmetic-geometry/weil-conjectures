@@ -20150,3 +20150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:03 L: returned deliver/A2/Sheaf.Paper.TowerOrientationEvaluation (reviewer RETURN: (the landing tools, head 58bbdfb4c) the delivery did not land: missing import source modules: Sheaf.Paper.TowerOrientati)
 - 22:03 L: returned deliver/A4/Sheaf.Paper.TraceBoundedQuotientStalkRealization (reviewer RETURN: (the landing tools, head c0cea42d9) the delivery did not land: lean/Sheaf/Paper/TraceBoundedQuotientStalkRealization.lea)
 - 22:03 L: returned deliver/R3/Sheaf.Paper.FiniteClopenExceptionalRestriction (reviewer RETURN: (the landing tools, head 2c9ec18f7) the delivery did not land: lean/Sheaf/Paper/AdicPurityObjects.lean was removed from )
+- 22:05 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: E2/E4: the new node lem-pur-integral-scalar-associator-square says the component of gamma_A: R_L(B A) -> S_{L/E}(R_E A) )
