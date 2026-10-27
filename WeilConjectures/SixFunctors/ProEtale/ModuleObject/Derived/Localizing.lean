@@ -65,51 +65,52 @@ local notation "𝔻(" X ")" =>
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-! Cached instances for module objects over `Λ_Z`, used by every `L((f)^*⟦Λ⟧)` below.
-Searching them from the generic instances costs seconds per use. -/
+Searching them from the generic instances costs seconds per use. They are local: as global
+instances they made unification against `AdicCompletion.ring` time out in importing files. -/
 
-instance (priority := 2000) hasTensorFour_modCondensed (Z : Scheme.{u})
+local instance (priority := 2000) hasTensorFour_modCondensed (Z : Scheme.{u})
     (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj Λ Z))) : GradedObject.HasTensor₄ObjExt A B C D :=
   inferInstance
 
-instance (priority := 2000) hasGoodTensor₁₂Tensor_modCondensed (Z : Scheme.{u})
+local instance (priority := 2000) hasGoodTensor₁₂Tensor_modCondensed (Z : Scheme.{u})
     (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj Λ Z))) : GradedObject.HasGoodTensor₁₂Tensor A B C :=
   inferInstance
 
-instance (priority := 2000) hasGoodTensorTensor₂₃_modCondensed (Z : Scheme.{u})
+local instance (priority := 2000) hasGoodTensorTensor₂₃_modCondensed (Z : Scheme.{u})
     (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj Λ Z))) : GradedObject.HasGoodTensorTensor₂₃ A B C :=
   inferInstance
 
-instance (priority := 2000) hasColimitsOfShapeInt_modCondensed (Z : Scheme.{u}) :
+local instance (priority := 2000) hasColimitsOfShapeInt_modCondensed (Z : Scheme.{u}) :
     HasColimitsOfShape ℤ
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
   inferInstance
 
-instance (priority := 2000) hasExactColimitsOfShapeInt_modCondensed (Z : Scheme.{u}) :
+local instance (priority := 2000) hasExactColimitsOfShapeInt_modCondensed (Z : Scheme.{u}) :
     HasExactColimitsOfShape ℤ
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
   inferInstance
 
-instance (priority := 2000) hasCountableCoproducts_modCondensed (Z : Scheme.{u}) :
+local instance (priority := 2000) hasCountableCoproducts_modCondensed (Z : Scheme.{u}) :
     HasCountableCoproducts
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
   inferInstance
 
-instance (priority := 2000) preservesColimitsOfShapeInt_tensorLeft_modCondensed
+local instance (priority := 2000) preservesColimitsOfShapeInt_tensorLeft_modCondensed
     (Z : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
     PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) :=
   inferInstance
 
-instance (priority := 2000) preservesColimitsOfShapeInt_tensorRight_modCondensed
+local instance (priority := 2000) preservesColimitsOfShapeInt_tensorRight_modCondensed
     (Z : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
     PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) :=
   inferInstance
 
-instance (priority := 2000) hasFunctorialFlatResolution_modCondensed (Z : Scheme.{u}) :
+local instance (priority := 2000) hasFunctorialFlatResolution_modCondensed (Z : Scheme.{u}) :
     Abelian.HasFunctorialFlatResolution
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
   inferInstance
