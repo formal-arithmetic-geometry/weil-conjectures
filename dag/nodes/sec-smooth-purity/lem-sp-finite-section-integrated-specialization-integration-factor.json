@@ -10,21 +10,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This factor is the corresponding geometric, specialization, or integration square in the displayed DNC base-change argument; its proof is left as a named intermediate theorem for a parallel worker.",
+   "text": "Apply the proved bundleSectionAdjoint_baseChange theorem to the two conormal bundles and the Cartesian presentation obtained by conjugating the given normal exchange. This is the integration adjunct square restricted to the zero sections; it follows from scalar integration trace base change by adjunction and coefficient restriction.",
    "uses": [
-    "lem-sp-finite-section-integrated-specialization-normal-exchange"
+    "lem-sp-finite-bundle-section-adjoint-base-change"
    ],
    "elementary": false
+  },
+  {
+   "text": "Let e and e′ be reesConeComparison followed by coneBundleIso. Conjugate the given normal-cone map by these isomorphisms to obtain v=e′⁻¹ν e between the conormal bundles. Transport sqν along the isomorphisms to get its Cartesian square. The zero-section identities of both cone comparisons and the given hzero give the zero-section identity for v. Section exchange transitivity identifies the two factorizations of the common outer rectangle, with upper edge ν e=e′v. The left and right unit laws for pullback compositors cancel the identity-base comparisons in normalSectionMap.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-section-exceptional-fibre-coherence",
+    "def-pur-finite-smooth-canonical-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the bundle adjunct square with the conjugation square. Cancel the invertible normalSectionMaps and the bundleSectionAdjoints, whose inverses are bundleOrientation by definition. Functoriality and inverse cancellation give precisely the stated integration square. No existence theorem for the normal exchange is needed because its map and its projection and zero-section equations are hypotheses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-finite-section-integrated-specialization-normal-exchange"
+  "lem-sp-finite-bundle-section-adjoint-base-change",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-trf-section-exceptional-fibre-coherence",
+  "def-pur-finite-smooth-canonical-interfaces"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E2",
+  "group": "F3",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
-  "place": "Proof (1), corresponding strict factor of the integrated square."
+  "place": "Proof (1), vector-bundle integration compatibility with pullback, transposed and conjugated by the two normal-cone presentations."
  },
  "mathlib_searches": [
   {
@@ -73,7 +90,7 @@
   "module": "Sheaf.Paper.FiniteSectionIntegratedSpecializationIntegrationBaseChange",
   "file": "lean/Sheaf/Paper/FiniteSectionIntegratedSpecializationIntegrationBaseChange.lean",
   "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.normalExchange_integration",
-  "statement": "theorem normalExchange_integration\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {V S V' S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S']\n    (d : ℕ) (g : V ⟶ S) (g' : V' ⟶ S')\n    [SmoothOfRelativeDimension d g] [SmoothOfRelativeDimension d g']\n    [IsSeparated g] [QuasiCompact g] [HasCompactification g]\n    [IsSeparated g'] [QuasiCompact g'] [HasCompactification g']\n    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']\n    [FiniteRingSectionDeformation.Geometry d g s]\n    [FiniteRingSectionDeformation.Geometry d g' s']\n    (hs : s ≫ g = 𝟙 S) (hs' : s' ≫ g' = 𝟙 S')\n    (b : S' ⟶ S) (q : V' ⟶ V) (cart : IsPullback q g' g b)\n    (hsec : s' ≫ q = b ≫ s)\n    (sq : IsPullback\n      ((reesConeComparison s ≪≫ FiniteRingSectionDeformation.coneBundleIso d g s).hom)\n      (Scheme.Hom.normalConeProj g s)\n      (VectorBundleZeroSection.π S d (ConormalGradedAlgebra.piece s 1)) (𝟙 S))\n    (sq' : IsPullback\n      ((reesConeComparison s' ≪≫ FiniteRingSectionDeformation.coneBundleIso d g' s').hom)\n      (Scheme.Hom.normalConeProj g' s')\n      (VectorBundleZeroSection.π S' d (ConormalGradedAlgebra.piece s' 1)) (𝟙 S'))\n    (hS : IsUnit (N : Γ(S, ⊤))) (hS' : IsUnit (N : Γ(S', ⊤)))\n    (ν : s'.ker.normalCone ⟶ s.ker.normalCone)\n    (sqν : IsPullback ν (Scheme.Hom.normalConeProj g' s')\n      (Scheme.Hom.normalConeProj g s) b)\n    (hzero : s'.normalConeZeroSection ≫ ν = b ≫ s.normalConeZeroSection)\n    (hn : IsIso (normalSectionMap A d g s hs sq))\n    (hn' : IsIso (normalSectionMap A d g' s' hs' sq')) :\n    (ordinaryFinitePullback A b).map\n        ((@inv _ _ _ _ (normalSectionMap A d g s hs sq) hn) ≫\n          (FiniteRingSectionDeformation.bundleOrientation N hN A hA S hS d\n            (ConormalGradedAlgebra.piece s 1)).hom) ≫\n        (vectorIntegrationBaseCoefficientPullback A N hA\n          (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hS d).hom =\n      NoetherianSectionSpecialization.sectionMap A\n        (Scheme.Hom.normalConeProj g s) (Scheme.Hom.normalConeProj g' s') b ν sqν\n        s.normalConeZeroSection s'.normalConeZeroSection hzero ≫\n        (@inv _ _ _ _ (normalSectionMap A d g' s' hs' sq') hn') ≫\n        (FiniteRingSectionDeformation.bundleOrientation N hN A hA S' hS' d\n          (ConormalGradedAlgebra.piece s' 1)).hom",
+  "statement": "theorem normalExchange_integration\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {V S V' S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S']\n    (d : ℕ) (g : V ⟶ S) (g' : V' ⟶ S')\n    [SmoothOfRelativeDimension d g] [SmoothOfRelativeDimension d g']\n    [IsSeparated g] [QuasiCompact g] [HasCompactification g]\n    [IsSeparated g'] [QuasiCompact g'] [HasCompactification g']\n    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']\n    [FiniteRingSectionDeformation.Geometry d g s]\n    [FiniteRingSectionDeformation.Geometry d g' s']\n    (hs : s ≫ g = 𝟙 S) (hs' : s' ≫ g' = 𝟙 S')\n    (b : S' ⟶ S) (q : V' ⟶ V) (cart : IsPullback q g' g b)\n    (hsec : s' ≫ q = b ≫ s)\n    (sq : IsPullback\n      ((reesConeComparison s ≪≫ FiniteRingSectionDeformation.coneBundleIso d g s).hom)\n      (Scheme.Hom.normalConeProj g s)\n      (VectorBundleZeroSection.π S d (ConormalGradedAlgebra.piece s 1)) (𝟙 S))\n    (sq' : IsPullback\n      ((reesConeComparison s' ≪≫ FiniteRingSectionDeformation.coneBundleIso d g' s').hom)\n      (Scheme.Hom.normalConeProj g' s')\n      (VectorBundleZeroSection.π S' d (ConormalGradedAlgebra.piece s' 1)) (𝟙 S'))\n    (hS : IsUnit (N : Γ(S, ⊤))) (hS' : IsUnit (N : Γ(S', ⊤)))\n    (ν : s'.ker.normalCone ⟶ s.ker.normalCone)\n    (sqν : IsPullback ν (Scheme.Hom.normalConeProj g' s')\n      (Scheme.Hom.normalConeProj g s) b)\n    (hzero : (Scheme.Hom.normalConeZeroSection s') ≫ ν = b ≫ (Scheme.Hom.normalConeZeroSection s))\n    (hn : IsIso (normalSectionMap A d g s hs sq))\n    (hn' : IsIso (normalSectionMap A d g' s' hs' sq')) :\n    (ordinaryFinitePullback A b).map\n        ((@inv _ _ _ _ (normalSectionMap A d g s hs sq) hn) ≫\n          (FiniteRingSectionDeformation.bundleOrientation N hN A hA S hS d\n            (ConormalGradedAlgebra.piece s 1)).hom) ≫\n        (vectorIntegrationBaseCoefficientPullback A N hA\n          (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hS d).hom =\n      NoetherianSectionSpecialization.sectionMap A\n        (Scheme.Hom.normalConeProj g s) (Scheme.Hom.normalConeProj g' s') b ν sqν\n        (Scheme.Hom.normalConeZeroSection s) (Scheme.Hom.normalConeZeroSection s') hzero ≫\n        (@inv _ _ _ _ (normalSectionMap A d g' s' hs' sq') hn') ≫\n        (FiniteRingSectionDeformation.bundleOrientation N hN A hA S' hS' d\n          (ConormalGradedAlgebra.piece s' 1)).hom",
   "branch": "sheaf-dag",
   "by": "E2",
   "date": "2026-10-28"
@@ -91,11 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
-  "result": "pass",
-  "landing": "20261027T180534-L-3872725",
+  "reviewer": "C-69455",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T205942-L-1636873",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: normalExchange_integration + bundleSectionAdjoint_baseChange against item/new nodes; elaborated item type hash old=new (3139481940); sandbox compile of new module, item and importer FiniteSectionIntegratedSpecialization all OK; axioms sorryAx only via upstream vectorIntegration_cartesianTrace"
  }
 }

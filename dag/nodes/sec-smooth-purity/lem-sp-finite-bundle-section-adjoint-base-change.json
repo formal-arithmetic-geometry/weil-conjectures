@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-finite-bundle-section-adjoint-base-change",
+ "kind": "statement",
+ "title": "Cartesian base change for the zero-section integration adjunct",
+ "statement": "Let A be a finite commutative ring killed by a positive integer N. Let B and B′ be Noetherian schemes on which N is invertible, and let F and F′ be finite locally free modules of the same rank d. For any Cartesian square between their vector bundles over b : B′ → B that preserves the zero sections, pullback of the integration adjunct restricted to the old zero section, followed by section exchange, equals the normalized Tate coefficient pullback followed by the integration adjunct restricted to the new zero section. The adjuncts and section exchange are those of lem-trf-finite-ring-section-deformation, with the twist transport of def-pur-vector-purity-normalization.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), the normal-bundle integration square, transposed and restricted to the zero section"
+ },
+ "stmt_deps": [
+  "lem-trf-finite-ring-section-deformation",
+  "def-pur-vector-purity-normalization",
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-pur-noetherian-etale-section-specialization",
+  "def-amb-vector-integration-charts",
+  "def-asd-vector-bundle-zero-section"
+ ],
+ "proof": [
+  {
+   "text": "Use vectorIntegration_cartesianTrace for the given Cartesian bundle presentation. Cancel the isomorphism from the constant coefficient to the tensor unit. The ordinary finite unit pullback normalization identifies the resulting scalar trace square.",
+   "uses": [
+    "lem-pur-vector-integration-cartesian-trace",
+    "lem-z8-ordinary-finite-unit-pullback-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the trace square under the two vectorBundlePurityAdjunctions. Naturality of the counit and the mate counit formula identify the transposed square. The ordinary finite unit-coordinate theorem identifies this mate with dualizingComplexBaseChangeMap.",
+   "uses": [
+    "lem-pur-ordinary-finite-unit-coordinate-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply sectionPullback_coefficient_naturality to the zero sections, with the given zero-section equation and the two projection-unit equations. Unfold bundleSectionAdjoint and sectionMap and associate composition to obtain the stated equality.",
+   "uses": [
+    "lem-trf-section-pullback-coefficient-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-vector-integration-cartesian-trace",
+  "lem-z8-ordinary-finite-unit-pullback-normalization",
+  "lem-pur-ordinary-finite-unit-coordinate-identification",
+  "lem-trf-section-pullback-coefficient-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), normal-bundle integration compatibility under base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjunct of vector bundle integration restricted to zero commutes with arbitrary Cartesian base change for finite coefficients",
+   "results": "Eight results about topological vector-bundle coordinates; none concerns etale compact-support integration.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "The generic adjunction naturality lemma in Mathlib.CategoryTheory.Adjunction.Basic helps the mate calculation; no geometric statement.",
+   "date": "2026-10-28",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "bundleSectionAdjoint_baseChange|bundleSectionAdjoint.*sectionMap",
+   "results": "No Mathlib declaration matches.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSectionIntegratedSpecializationIntegrationBaseChange",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), compatibility of integration on the normal bundle with base change",
+   "via": [
+    "lem-sp-finite-section-integrated-specialization-integration-factor",
+    "lem-sp-finite-section-integrated-specialization-base-change",
+    "lem-sp-finite-normalized-orientation-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteBundleSectionAdjointBaseChange",
+  "file": "lean/Sheaf/Paper/FiniteBundleSectionAdjointBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteRingSectionDeformation.bundleSectionAdjoint_baseChange",
+  "statement": "theorem bundleSectionAdjoint_baseChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {B B' : Scheme.{u}} [IsNoetherian B] [IsNoetherian B']\n    (hB : IsUnit (N : Γ(B, ⊤))) (hB' : IsUnit (N : Γ(B', ⊤)))\n    (d : ℕ) (F : B.Modules) (F' : B'.Modules)\n    [F.IsFiniteLocallyFreeOfRank d] [F'.IsFiniteLocallyFreeOfRank d]\n    (b : B' ⟶ B)\n    (v : VectorBundleZeroSection.scheme B' d F' ⟶ VectorBundleZeroSection.scheme B d F)\n    (sq : IsPullback v (VectorBundleZeroSection.π B' d F')\n      (VectorBundleZeroSection.π B d F) b)\n    (hz : VectorBundleZeroSection.zero B' d F' ≫ v =\n      b ≫ VectorBundleZeroSection.zero B d F) :\n    (ordinaryFinitePullback A b).map\n        (FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA B hB d F) ≫\n      NoetherianSectionSpecialization.sectionMap A\n        (VectorBundleZeroSection.π B d F) (VectorBundleZeroSection.π B' d F') b v sq\n        (VectorBundleZeroSection.zero B d F) (VectorBundleZeroSection.zero B' d F') hz =\n      (vectorIntegrationBaseCoefficientPullback A N hA\n        (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hB d).hom ≫\n        FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA B' hB' d F'",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-69455",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T205942-L-1636873",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-69455",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T205942-L-1636873",
+  "kind": "interface",
+  "note": "independent cc review: normalExchange_integration + bundleSectionAdjoint_baseChange against item/new nodes; elaborated item type hash old=new (3139481940); sandbox compile of new module, item and importer FiniteSectionIntegratedSpecialization all OK; axioms sorryAx only via upstream vectorIntegration_cartesianTrace"
+ }
+}
