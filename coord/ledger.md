@@ -19572,3 +19572,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:48 L: batch 20261027T134950 dependency take-out
 - 15:05 L: returned deliver/T1/Sheaf.Paper.PrimitiveQuotientScalarModelExistence (reviewer RETURN: (reviewer C-ff2c4, head ff2c4697e) 2b/A3: the split IntegralComparisonRealizationModels → new Sheaf.Paper.IntegralCompar)
 - 15:16 L: returned deliver/E2/Sheaf.Paper.QcqsCompactSupportTorsionInputDetection (reviewer RETURN: (the landing tools, head cae3e2f59) the delivery did not land: lean/Sheaf/Paper/QcqsCompactSupportTorsionInputDetection.)
+- 15:16 L: returned deliver/H1/Sheaf.Paper.AdicReindexingFunctoriality (reviewer RETURN: (the landing tools, head 31889a742) the delivery did not land: lean/Sheaf/Paper/AdicReindexingFunctoriality.lean was rem)
