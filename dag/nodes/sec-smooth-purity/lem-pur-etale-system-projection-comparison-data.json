@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; Zheng Constructions 4.1 and 5.14--5.15."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6; construction split into ordinary operations and comparison data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Existence of normalized geometric inverse image direct image extension by zero scalar extension and evaluation on ringed vertical sequence sites of small etale topoi",
+   "results": "['AlgebraicGeometry.Scheme.Hom.normalizationDiagram', 'AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap', 'SheafOfModules.Presentation.map_π_eq', \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", 'AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap', 'AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor']; 8 hits; search log digest 8044d38267dd27b4",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']; 12 hits; search log digest b8ac30fd6644aa85",
+   "date": "2026-10-24",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_mate|mateEquiv_vcomp|mapDerivedCategorySquareIso_comp",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean']; 11 hits; search log digest 5efc7bd8027581eb",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: compatible finite-level functors before derived inverse limits; coefficient projection and scalar-unit/composition normalization for the ordinary etale system compact-support functor. Original item proof steps 1-2: construction of actual ordinary system operations and restriction comparisons.",
+   "via": [
+    "lem-pur-etale-system-coefficient-projection",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemProjectionExistence",
+  "date": "2026-10-28",
+  "group": "M8"
+ },
+ "id": "lem-pur-etale-system-projection-comparison-data",
+ "title": "Normalized etale system comparison data exist",
+ "statement": "Let f:X\\to Y be a scheme morphism, c a compactification of f, l a natural number, and b:BasicData c l. There is a record ComparisonData b containing the sectionwise support evaluations, scalar evaluations on X and Y, and restriction comparisons, with the prescribed ordinary and derived mate normalizations.",
+ "proof": [
+  {
+   "text": "Use the identity-on-sections direct-image comparison and its inverse-image mate at every level. Localize the exact open and proper comparisons, then paste them. Apply the normalized scalar change-of-rings adjunction and its mate equations to obtain the scalar evaluations and restriction-support comparisons.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-system-level-left-extension",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleSystemProjectionComparisonData",
+  "file": "lean/Sheaf/Paper/EtaleSystemProjectionComparisonData.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemProjectionComparisonData_nonempty",
+  "statement": "theorem etaleSystemProjectionComparisonData_nonempty\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}\n    (b : BasicData c l) : Nonempty (ComparisonData b)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T180710-L-3892409",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T180710-L-3892409",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

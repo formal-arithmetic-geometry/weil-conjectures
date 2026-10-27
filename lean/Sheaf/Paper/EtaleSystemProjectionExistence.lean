@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.EtaleSystemProjectionData
+import Sheaf.Paper.EtaleSystemProjectionBasicData
+import Sheaf.Paper.EtaleSystemProjectionComparisonData
 
 /-! # Normalized system presentations
 
@@ -41,6 +43,20 @@ All equations required by Theory are the defining mate equations or exact locali
 identities, including the fixed scalar model's unit normalization. -/
 theorem etaleSystemProjectionTheory_nonempty
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) :
-    Nonempty (Theory c l) := by sorry
+    Nonempty (Theory c l) := by
+  obtain ⟨b⟩ := etaleSystemProjectionBasicData_nonempty c l
+  obtain ⟨d⟩ := etaleSystemProjectionComparisonData_nonempty b
+  exact ⟨{
+    support := b.support
+    evaluationX := b.evaluationX
+    evaluationZ := b.evaluationZ
+    evaluationY := b.evaluationY
+    supportEvaluation := d.supportEvaluation
+    scalarX := b.scalarX
+    scalarY := b.scalarY
+    scalarEvaluationX := d.scalarEvaluationX
+    scalarEvaluationY := d.scalarEvaluationY
+    restriction := d.restriction
+  }⟩
 
 end AlgebraicGeometry.Etale.SystemProjection
