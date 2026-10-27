@@ -1,0 +1,121 @@
+{
+ "id": "lem-sf-native-encoding-pullback-cube",
+ "kind": "statement",
+ "title": "Normalized native encoding respects the ordinary pullback square",
+ "statement": "For every prime l, commutative square v:X′→X, p′:X′→Y′, p:X→Y, g:Y′→Y of schemes, and native adic sheaf M on Y, the normalized ordinary inverse-image comparisons of lem-sf-native-adic-encoding-ordinary-operations commute with the specified square compositors. Explicitly, pull back the inverse comparison for g along p′, compose with the inverse comparison for p′ evaluated at native g* M, and then apply the encoding to the native square compositor. This equals the condensed square compositor on the encoding of M, followed by the condensed pullback along v of the inverse comparison for p, followed by the inverse comparison for v evaluated at native p* M. The square compositors are the inverse composition isomorphism for (p′,g), equality transport along the square, and the composition isomorphism for (v,p).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "stmt_deps": [
+  "lem-sf-native-adic-encoding-ordinary-operations"
+ ],
+ "proof": [
+  {
+   "text": "The normalized direct-image comparison is the identity on underlying abelian sheaf sections. Both direct-image compositors act by the same canonical iterated fiber-product restriction. Thus the direct-image comparison commutes with composition, by evaluation on sections.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply equivalenceAdjunctionComparison_compositor to the two native adjunctions, the condensed adjunctions, their composite adjunctions, and the normalized push and pull comparisons. The mate normalization and the definitions of the inverse-image compositors give the inverse-image composition identity.",
+   "uses": [
+    "lem-sfb-equivalence-square-inverse-mate-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison induced by an equality of scheme maps is compatible with encoding, by equality induction. Paste this middle comparison with the two composition comparisons using associativity of morphism composition. Invert the outside comparison isomorphisms to obtain the displayed equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "lem-sfb-equivalence-square-inverse-mate-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates transport compatibility of direct image compositors to a pullback comparison for a commutative square",
+   "results": "8 hits, including mateEquiv_square and generic sheaf adjunction and pullback composition results. None compares the specified normalized native encoding.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateEquiv",
+   "results": "0 hits: unknown qualified identifier; the library compositor comparison is used.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*comp|conjugateEquiv.*comp",
+   "results": "25 hits, including mateEquiv_vcomp and conjugateEquiv_leftAdjointCompIso_inv. These are generic ingredients; no theorem for the specified native encoding.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeDerivedExchangeComparison",
+  "date": "2026-10-28",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-derived-exchange-condensed-comparison",
+   "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps",
+   "via": [
+    "lem-sf-native-derived-exchange-condensed-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeEncodingPullbackCoherence",
+  "file": "lean/Sheaf/Paper/NativeEncodingPullbackCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_pullback_cube",
+  "statement": "theorem encoding_pullback_cube (l : ℕ) [Fact l.Prime]\n    {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {p' : X' ⟶ Y'}\n    {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v p' p g)\n    (M : AdicSheaf l Y) :\n    (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) p').map\n        ((pullComparison l g).inv.app M) ≫\n      (pullComparison l p').inv.app ((adicUpperStar l g).obj M) ≫\n      (encoding l X').map ((adicUpperStarCompIso l sq.w.symm).hom.app M) =\n    (condensedPullbackSquare l sq).hom.app\n        ((encoding l Y).obj M) ≫\n      (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) v).map\n        ((pullComparison l p).inv.app M) ≫\n      (pullComparison l v).inv.app ((adicUpperStar l p).obj M)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NativeEncoding.condensedPullbackSquare",
+   "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_pullback_cube"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261027T234014-L-4160728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261027T234014-L-4160728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

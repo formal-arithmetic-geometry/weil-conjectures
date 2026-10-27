@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Transport the real encoding along the given equality of bundled coefficient rings; no coefficient data are chosen. Use the coefficient-realization family chosen by nativeModuleCoefficientIso. Its finite-extension chart normalization and naturality are parts of locallyFiniteCoefficientRing_realization. They determine the same normalized coefficient isomorphism as the explicit native encoding. Scalar forgetting followed by restriction along this isomorphism is an additive exact equivalence. Identity section maps compare direct images, and the adjunction conjugate compares inverse images, preserving units, counits and their compositors.",
+   "text": "Finite-extension chart normalization identifies the chosen coefficient isomorphism with the explicit NativeEncoding.coefficientIso by colimit hom-extensionality. Hence the two scalar-forgetting encodings, and their exact derived localizations, agree.",
    "uses": [
     "lem-sf-locally-finite-coefficient-ring-realization",
     "lem-sf-native-adic-encoding-ordinary-operations",
@@ -29,12 +29,11 @@
    }
   },
   {
-   "text": "The equivalences preserve K-injectives. Derive the ordinary direct-image comparisons on common K-injective representatives. The adjunction transpose of each localized chain map is the localization of its ordinary transpose, so the derived unit and counit have the same normalization. Apply the mate cube to identify encoding of the native exchange with the ambient condensed exchange. Exact condensed pullback is canonically its left derived functor. The existing native derivedPushComparison_unit supplies its normalization on K-injective native complexes. The general derived adjoint-square and exchange-mate cube lemmas supply the adjunction and mate calculations.",
+   "text": "Use the normalized ordinary pullback cube. Localize it with mapDerivedCategory_exactCube. The theorem derived_exact_forget_mate identifies the mates of the localized pull comparisons with derivedPushComparison. Apply exchangeMate_cube to produce the isomorphism from the encoded native exchange to the exact condensed exchange. Naturality in the input and transport along hΛ give this comparison at the specified K.obj for the bundled coefficient Λ.",
    "uses": [
-    "lem-sf-finite-span-module-derived-comparison",
-    "lem-sf-native-adic-encoding-ordinary-operations",
-    "lem-sf-native-encoding-derived-operations",
-    "lem-kun-derived-adjoint-square-comparison",
+    "lem-sf-native-encoding-pullback-cube",
+    "lem-fix-site-open-exchange-localization",
+    "lem-sf-derived-exact-forget-mate",
     "lem-weil-pbc-exchange-mate-cube"
    ],
    "elementary": false,
@@ -44,9 +43,23 @@
    }
   },
   {
-   "text": "The conditional bounded-constructible operations are fully faithful restrictions of the ambient operations. Their compatibility isomorphisms carry the restricted adjunction unit and counit to the ambient unit and counit. Pasting these comparisons identifies the underlying restricted exchange component with the same ambient exchange. Compose the source and target isomorphisms to obtain the stated isomorphism in the arrow category. No properness hypothesis was used; the Cartesian record fixes the same specified commutativity proof throughout, and no assertion of invertibility was made. Use naturality of the specified exchange in its input to transport from D(E_X)M to K along the given e.",
+   "text": "Expand the canonical exact-to-total-left-derived comparisons and their compositors. Pasting the two composition identities across the square gives the total-to-exact cube. The derived adjunction is the exact adjunction transported along this left comparison; the corresponding right mate is the identity by the triangle identity. The mate cube therefore compares the total ambient and exact condensed exchanges.",
    "uses": [
-    "det-thm-sfb-proper-base-change-rational"
+    "lem-sf-total-derived-exchange-exact-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism: restriction to affine charts and comparison of the specified exchange maps"
+   }
+  },
+  {
+   "text": "The bounded-constructible inclusion takes the restricted compositor to the ambient compositor because its fully faithful preimage has that image. Equality transport and inversion give the same statement for the pullback square. Ell-adic bounded constructibility is triangulated on these noetherian schemes. Apply the established full-subcategory exchange normalization. After rewriting the component, normalize the arrow endpoints using the object equations for restricted pullback and pushforward; the underlying restricted arrow is then the ambient total-derived arrow. Compose the native-to-exact comparison with the inverse of the total-to-exact comparison.",
+   "uses": [
+    "lem-sfb-derived-exchange-exact-normalization",
+    "lem-sfb-dc-ell-adic-triangulated",
+    "det-thm-sfb-proper-base-change-rational",
+    "def-sfb-dc-upper-star-comp"
    ],
    "elementary": false,
    "source": {
@@ -59,11 +72,15 @@
   "lem-sf-locally-finite-coefficient-ring-realization",
   "lem-sf-native-adic-encoding-ordinary-operations",
   "lem-sf-native-scalar-forgetting-equivalence",
-  "lem-sf-finite-span-module-derived-comparison",
-  "lem-sf-native-encoding-derived-operations",
-  "lem-kun-derived-adjoint-square-comparison",
+  "lem-sf-native-encoding-pullback-cube",
+  "lem-fix-site-open-exchange-localization",
+  "lem-sf-derived-exact-forget-mate",
   "lem-weil-pbc-exchange-mate-cube",
-  "det-thm-sfb-proper-base-change-rational"
+  "lem-sfb-derived-exchange-exact-normalization",
+  "lem-sfb-dc-ell-adic-triangulated",
+  "det-thm-sfb-proper-base-change-rational",
+  "def-sfb-dc-upper-star-comp",
+  "lem-sf-total-derived-exchange-exact-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -150,11 +167,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-cbdd2",
-  "group": "W3",
-  "result": "fix",
-  "landing": "20261027T050651-L-251723",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261027T234014-L-4160728",
   "kind": "interface",
-  "note": "independent cc review: delivered item + 4 new modules + 7 node files against the clone (sheaf-dag) and their node statements; sole direct importer NativeBaseChangeForgetComparison compiled with the delivered set (all 6 OK)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
