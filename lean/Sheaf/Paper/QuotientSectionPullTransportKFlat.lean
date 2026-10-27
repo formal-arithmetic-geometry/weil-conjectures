@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.InternalScalarPullbackNormalizationData
+import Sheaf.Paper.QuotientSectionPullTransportKFlatOrdinary
+import Sheaf.Paper.QuotientSectionPullTransportKFlatDerived
 
 /-! # Flat-term part of normalized quotient section pull transport -/
 
@@ -44,6 +47,28 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
+
+private def sectionPullTransportDerived {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
+    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) :
+    cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T := by
+  let e : (derivedEquivalence Λ Y).functor ⋙
+        (cY.model.T ⋙ derivedPullback Λ' f) ≅
+      (derivedEquivalence Λ Y).functor ⋙
+        (derivedPullback Λ f ⋙ cX.model.T) :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight cY.derived.symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (scalarSectionPullComparison Λ' f).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight lam (derivedEquivalence Λ' X).functor ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ cX.derived ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (scalarSectionPullComparison Λ f) _ ≪≫
+      Functor.associator _ _ _
+  exact ((Functor.whiskeringLeft _ _ _).obj
+    (derivedEquivalence Λ Y).functor).preimageIso e
 
 /-- The flat-term fragment of `SectionPullNormalized`. It retains the ordinary
 section square and requires the derived computation square only on the flat-term
@@ -91,6 +116,10 @@ theorem section_pull_transport_section_normalized_kflat {X Y : Scheme.{u}} (f : 
     (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam) :
     ∃ barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T,
       SectionPullNormalizedOnKFlat a f cX cY barLam := by
-  sorry
+  let barLam := sectionPullTransportDerived a f cX cY lam
+  refine ⟨barLam, ?_⟩
+  obtain ⟨e, he⟩ := section_pull_transport_kflat_ordinary a f cX cY hcX hcY
+  refine ⟨e, he, ?_⟩
+  exact section_pull_transport_kflat_derived a f cX cY hcX hcY lam hlam barLam e he
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

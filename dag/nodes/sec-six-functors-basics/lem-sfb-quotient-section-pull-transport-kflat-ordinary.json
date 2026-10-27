@@ -1,0 +1,100 @@
+{
+ "id": "lem-sfb-quotient-section-pull-transport-kflat-ordinary",
+ "kind": "statement",
+ "title": "Ordinary section square for flat-term quotient pull transport",
+ "statement": "For normalized endpoint ScalarSectionData there is an ordinary section pullback comparison e satisfying the displayed coefficient, scalar-model and pullback square on every module.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 0D6D and 0G7E; ordinary-generator part of parent transport proof step 8."
+ },
+ "status": "split",
+ "proof_origin": {
+  "by": "stage-3 worker W4",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Ordinary-generator component of flat-term transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized quotient section pullback ordinary square",
+   "results": "No exact existing declaration; only generic category isomorphism tools found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.isoWhiskerRight pullComparison",
+   "results": "Generic whiskering declarations only; no theorem for this ScalarSectionData square.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "section_pull_transport_kflat_ordinary",
+   "results": "No existing declaration in lean/WeilConjectures or lean/Sheaf.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-pull-transport-kflat",
+   "place": "ordinary section square component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "proof": [
+  {
+   "text": "Conjugate the canonical internal coefficient pullback isomorphism by cX.ordinary, cY.ordinary and pullComparison. Evaluate on section generators; hcX and hcY identify the result with the displayed balanced map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionPullTransportKFlatOrdinary",
+  "file": "lean/Sheaf/Paper/QuotientSectionPullTransportKFlatOrdinary.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_kflat_ordinary",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_kflat_ordinary"
+  ],
+  "statement": "theorem section_pull_transport_kflat_ordinary {X Y : Scheme.{u}} (f : X ⟶ Y) (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y) (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY) : ∃ e : cY.model.E ⋙ pullback Λ' f ≅ pullback Λ f ⋙ cX.model.E, ∀ M : Modules Λ Y, (equivalence Λ' X).functor.map ((CondensedRing.pullIso a f).inv.app M) ≫ cX.ordinary.hom.app ((CondensedRing.upperStar Λ f).obj M) ≫ cX.model.E.map ((pullComparison Λ f).hom.app M) = (pullComparison Λ' f).hom.app ((QuotientChange.extension a Y).obj M) ≫ (pullback Λ' f).map (cY.ordinary.hom.app M) ≫ e.hom.app ((equivalence Λ Y).functor.obj M)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionPullTransportKFlat",
+  "date": "2026-10-28",
+  "group": "W4"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T234350-L-115860",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T234350-L-115860",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
