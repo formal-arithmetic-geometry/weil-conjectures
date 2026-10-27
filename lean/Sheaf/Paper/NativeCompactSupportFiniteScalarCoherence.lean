@@ -6,6 +6,8 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.Paper.NativeCompactSupportIntegralScalarMorphism
+import Sheaf.Paper.NativeCompactSupportFiniteScalarCoherenceGenerator
+import Sheaf.Paper.IntegralResidueTor
 
 /-! # Integral scalar-mate steps for native compact support -/
 
@@ -79,6 +81,33 @@ theorem native_compact_support_finite_scalar_coherence [G : NativeGeometry.{u} l
       (alpha A.stage).hom.app A.obj ≫ (source.J ⋙ actual l c).map
         ((StageSystem.isoToStage
           (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X) A h).hom)
-    := by sorry
+    := by
+  classical
+  let primeUnit : IsUnit (l : Γ(X, ⊤)) := by
+    let ρ := (Scheme.ΓSpecIso (.of D.k)).inv ≫ (X ↘ Spec (.of D.k)).appTop
+    simpa only [map_natCast] using
+      (PurCompactSupport.coefficientPrimeUnit l D hl).map ρ.hom
+  let (x : X) : Invertible (l : X.residueField x) :=
+    (show IsUnit (l : X.residueField x) from by
+      simpa only [map_natCast] using
+        ((primeUnit.map (X.presheaf.germ ⊤ x trivial).hom).map
+          (X.residue x).hom)).invertible
+  rcases A with ⟨i, K⟩
+  let Kint : sfIntegralConstructibleCategory l
+      (Coefficient.{u} l (PadicAlgCl l) i) X :=
+    CategoryTheory.ScalarLocalization.obj K
+  let K' : finiteTorConstructibleIntegralCategory l
+      (Coefficient.{u} l (PadicAlgCl l) i) X :=
+    ⟨Kint.obj, by
+      rw [← (integral_residue_tor D l hl
+        (Coefficient.{u} l (PadicAlgCl l) i) X).2]
+      exact Kint.property⟩
+  have hK' :
+      (rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l i) X).obj K' = K := by
+    rfl
+  rw [← hK']
+  exact native_compact_support_finite_scalar_coherence_generator l D hl P c
+    source target stage change hs ht alpha hα i E
+      ((rationalization l (ULift.{u} (PadicAlgCl l)) (finiteField l i) X).obj K') h
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
