@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-smooth-section-exchange-independence",
+ "kind": "statement",
+ "title": "Independence of section comparison from a Cartesian ambient lift",
+ "statement": "Let $A$ be a finite commutative ring killed by an integer $N>0$. Let $Y,Y'$ be Noetherian schemes with $N$ invertible on $Y$. Let $f:X\\to Y$ and $f':X'\\to Y'$ be smooth, separated, compactifiable, of the same pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms, def-asd-compactifiable], with closed sections $s,s'$ [def-weil-closed-immersion]. Work in the ordinary etale derived categories and put $C=s^*f^\\times A$ and $C'=s'^*f'^\\times A$ using the compact-support right adjoints of [lem-pur-noetherian-etale-section-specialization]. Fix $b:Y'\\to Y$. Suppose $v,w:X'\\to X$ each give a Cartesian square $(v,f',f,b)$ and $(w,f',f,b)$ [def-pc-fibre-product], and $vs'=sb=ws'$. Then their actual counit-defined section comparisons $b^*C\\to C'$ of [lem-pur-noetherian-etale-section-specialization] are equal.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), orientation comparison; composition of counit-defined comparisons"
+ },
+ "stmt_deps": [
+  "lem-pur-noetherian-etale-section-specialization",
+  "def-sbc-smooth-morphisms",
+  "def-asd-compactifiable",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "The two universal pullback isomorphisms give a=X'≅X' such that a≫v=w and a≫f'=f'. Cartesian uniqueness and the section commutativities imply s'≫a=s'.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply composition coherence to v followed by a. The comparison for w is the pullback comparison for v followed by the comparison for a, with the inverse-image compositor.",
+   "uses": [
+    "lem-trf-section-exceptional-fibre-coherence",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invertibility of N pulls back to Y'. Replace the comparison for a by the identity-inverse-image comparison. Its naturality moves it past the comparison for v, and the left identity law for inverse-image composition cancels the compositor.",
+   "uses": [
+    "lem-sp-smooth-section-automorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-section-exceptional-fibre-coherence",
+  "lem-sp-smooth-section-automorphism",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), orientation comparison; composition of counit-defined comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of a smooth scheme over a base fixing a section acts trivially on its dualizing complex along the section",
+   "results": "Eight hits about scheme isomorphisms on sections and smooth base change; no dualizing-complex result. Scheme.Hom.instIsIsoCommRingCatApp matches a basic fact used in Rees transport.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphism fixing a smooth section acts as the identity on the section dualizing complex",
+   "results": "Eight results about cotangent sections and vector bundle trivializations; none states a dualizing-complex comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\"",
+   "results": "Twelve pullback definitions and elementary categorical constructions. Used IsPullback.isoPullback and its projection equations in the proof; no section-duality or Rees theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionMap_automorphism|pairMap_isPullback|sectionMap_eq_of_cartesian",
+   "results": "No declaration found; local rg found the canonical Rees chart pushouts, normalized-family coherence and comparison composition used here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSectionIntegratedSpecializationSpecializationBaseChange",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), orientation comparison; composition of counit-defined comparisons",
+   "via": [
+    "lem-sp-finite-normalized-orientation-base-change",
+    "lem-sp-finite-section-integrated-specialization-base-change",
+    "lem-sp-finite-section-integrated-specialization-specialization-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothSectionExchangeIndependence",
+  "file": "lean/Sheaf/Paper/SmoothSectionExchangeIndependence.lean",
+  "declaration": "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.sectionMap_eq_of_cartesian",
+  "statement": "theorem sectionMap_eq_of_cartesian\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {X Y X' Y' : Scheme.{u}} [IsNoetherian Y] [IsNoetherian Y']\n    (d : ℕ) (f : X ⟶ Y) (f' : X' ⟶ Y')\n    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension d f']\n    [IsSeparated f] [QuasiCompact f] [HasCompactification f]\n    [IsSeparated f'] [QuasiCompact f'] [HasCompactification f']\n    (s : Y ⟶ X) (s' : Y' ⟶ X') [IsClosedImmersion s] [IsClosedImmersion s']\n    (hs : s ≫ f = 𝟙 Y) (hs' : s' ≫ f' = 𝟙 Y')\n    (hY : IsUnit (N : Γ(Y, ⊤)))\n    (b : Y' ⟶ Y) (v w : X' ⟶ X)\n    (sqv : IsPullback v f' f b) (sqw : IsPullback w f' f b)\n    (hv : s' ≫ v = b ≫ s) (hw : s' ≫ w = b ≫ s) :\n    sectionMap A f f' b v sqv s s' hv = sectionMap A f f' b w sqw s s' hw",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ce",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T234017-L-4161416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ce",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T234017-L-4161416",
+  "kind": "interface",
+  "note": "independent cc review: specialization_normalExchange (+hS) against node lem-sp-finite-section-integrated-specialization-specialization-factor, change record and parent caller; 3 new modules against their nodes; scratch set compile with #print axioms (sorryAx only via sectionMap_automorphism)"
+ }
+}

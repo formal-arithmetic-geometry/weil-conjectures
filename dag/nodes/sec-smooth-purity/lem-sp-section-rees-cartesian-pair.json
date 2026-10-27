@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-section-rees-cartesian-pair",
+ "kind": "statement",
+ "title": "Cartesian Rees exchange for an arbitrary Cartesian presentation of smooth section pairs",
+ "statement": "Let $S,S'$ be Noetherian schemes [def-pc-scheme, def-weil-pbc-noetherian-ring] and let $g:V\\to S$ be smooth, separated, quasi-compact of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Let $g':V'\\to S'$ be a morphism and let $s:S\\to V$, $s':S'\\to V'$ be closed immersions [def-weil-closed-immersion] with $g s=1_S$ and $g's'=1_{S'}$. Suppose $(q,g',g,b)$ is a Cartesian square [def-pc-fibre-product], where $q:V'\\to V$ and $b:S'\\to S$, and $q s'=s b$. For the ideals $I,I'$ of the section images [def-sbc-closed-immersion-ideal-sheaf], form the actual extended-Rees deformations $D_sV=\\operatorname{Spec}_V\\mathcal O_V[t,I/t]$ and $D_{s'}V'=\\operatorname{Spec}_{V'}\\mathcal O_{V'}[t,I'/t]$ [def-pur-rees-cone-normalization]. The coefficientwise Rees map induced by $q$ and $b$ gives a Cartesian square $D_{s'}V'\\to D_sV$ over $\\mathbf A^1_{S'}\\to\\mathbf A^1_S$, where the lower arrow is induced by $b$ and fixes $t$. No flatness of $b$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), deformation commutes with arbitrary base change; sk-thm-dnc local construction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pur-rees-cone-normalization",
+  "def-pc-fibre-product",
+  "def-pur-section-rees-pair-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify V' with the canonical pullback V×_S S' using the universal property. The sections agree under this isomorphism by equality of their two projections; their ideal sheaves therefore agree after comap.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On each affine neighbourhood in the canonical pullback use the centred-coordinate extended-Rees pushout. Pull the affine neighbourhood back along the pair isomorphism; its ring map is an isomorphism and carries the section ideal onto the new section ideal. The induced extended-Rees map is an isomorphism. Paste this isomorphism pushout with the canonical base-change pushout.",
+   "uses": [
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition of coefficient maps identifies the pasted map with the direct Rees map for q. The affine pullback criterion then glues the Cartesian deformation square. The coordinate t is fixed, so the line map is AffineSpace.map b.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-section-rees-base-change-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), deformation commutes with arbitrary base change; sk-thm-dnc local construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of a smooth scheme over a base fixing a section acts trivially on its dualizing complex along the section",
+   "results": "Eight hits about scheme isomorphisms on sections and smooth base change; no dualizing-complex result. Scheme.Hom.instIsIsoCommRingCatApp matches a basic fact used in Rees transport.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphism fixing a smooth section acts as the identity on the section dualizing complex",
+   "results": "Eight results about cotangent sections and vector bundle trivializations; none states a dualizing-complex comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\"",
+   "results": "Twelve pullback definitions and elementary categorical constructions. Used IsPullback.isoPullback and its projection equations in the proof; no section-duality or Rees theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionMap_automorphism|pairMap_isPullback|sectionMap_eq_of_cartesian",
+   "results": "No declaration found; local rg found the canonical Rees chart pushouts, normalized-family coherence and comparison composition used here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSectionIntegratedSpecializationSpecializationBaseChange",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), deformation commutes with arbitrary base change; sk-thm-dnc local construction",
+   "via": [
+    "lem-sp-finite-normalized-orientation-base-change",
+    "lem-sp-finite-section-integrated-specialization-base-change",
+    "lem-sp-finite-section-integrated-specialization-specialization-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionReesCartesianPair",
+  "file": "lean/Sheaf/Paper/SectionReesCartesianPair.lean",
+  "declaration": "AlgebraicGeometry.SectionReesBaseChange.pairMap_isPullback",
+  "statement": "theorem pairMap_isPullback\n    {V S V' S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S']\n    (d : ℕ) (g : V ⟶ S) (g' : V' ⟶ S')\n    [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]\n    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']\n    (hs : s ≫ g = 𝟙 S) (hs' : s' ≫ g' = 𝟙 S')\n    (b : S' ⟶ S) (q : V' ⟶ V) (cart : IsPullback q g' g b)\n    (hsec : s' ≫ q = b ≫ s) :\n    IsPullback (pairMap s s' q b hsec) (Scheme.Hom.deformationSpaceProj g' s')\n      (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) b)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ce",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T234017-L-4161416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ce",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T234017-L-4161416",
+  "kind": "interface",
+  "note": "independent cc review: specialization_normalExchange (+hS) against node lem-sp-finite-section-integrated-specialization-specialization-factor, change record and parent caller; 3 new modules against their nodes; scratch set compile with #print axioms (sorryAx only via sectionMap_automorphism)"
+ }
+}

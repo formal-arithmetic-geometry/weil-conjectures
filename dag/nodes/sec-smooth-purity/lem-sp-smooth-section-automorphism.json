@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-smooth-section-automorphism",
+ "kind": "statement",
+ "title": "An ambient automorphism fixing a smooth section acts trivially on its dualizing line",
+ "statement": "Let $A$ be a finite commutative ring, $N>0$ an integer with $NA=0$, and $Y$ a Noetherian scheme with $N$ invertible in $\\Gamma(Y,\\mathcal O_Y)$. Let $f:X\\to Y$ be smooth, separated, compactifiable, of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms, def-asd-compactifiable], and $s:Y\\hookrightarrow X$ a closed section [def-weil-closed-immersion]. Work in the ordinary etale derived categories, and put $C=s^*f^\\times A$, using the compact-support right adjoint and the actual counit-defined section comparison of [lem-pur-noetherian-etale-section-specialization]. Let $a:X\\xrightarrow{\\sim}X$ satisfy $fa=f$ and $as=s$. For its Cartesian square $(a,f,f,1_Y)$ [def-pc-fibre-product], the section comparison $(1_Y)^*C\\to C$ equals the canonical identity-inverse-image isomorphism. This is an assertion about one automorphism; it has no deformation family or specialization map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), equality of orientation arrows on coordinate charts; sk-thm-dnc centred coordinates and trace normalization"
+ },
+ "stmt_deps": [
+  "lem-pur-noetherian-etale-section-specialization",
+  "def-sbc-smooth-morphisms",
+  "def-asd-compactifiable",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Shift the section dualizing complex by -2d. Smooth tensor duality identifies it with a locally constant free rank-one A-sheaf. Equality of its endomorphisms is equality of stalk scalars.",
+   "uses": [
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use centred etale coordinates at the section. The local fundamental-class generator is normalized by the affine-space compact-support trace. An isomorphism fixing the section has local degree one, so transitivity of this trace and the etale inverse-image/counit comparison preserve that generator. Applying the inverse isomorphism gives the inverse comparison, excluding any multiplicity.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar is one at every geometric stalk. Fully faithfulness of the degree-zero embedding and conservative geometric stalks imply equality before shifting. Restoring the shift and the identity-inverse-image comparison gives the equation. Rank zero is the etale identity-counit equation; the empty base and zero ring give equality in zero categories.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-asd-smooth-tensor",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), equality of orientation arrows on coordinate charts; sk-thm-dnc centred coordinates and trace normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of a smooth scheme over a base fixing a section acts trivially on its dualizing complex along the section",
+   "results": "Eight hits about scheme isomorphisms on sections and smooth base change; no dualizing-complex result. Scheme.Hom.instIsIsoCommRingCatApp matches a basic fact used in Rees transport.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphism fixing a smooth section acts as the identity on the section dualizing complex",
+   "results": "Eight results about cotangent sections and vector bundle trivializations; none states a dualizing-complex comparison.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\"",
+   "results": "Twelve pullback definitions and elementary categorical constructions. Used IsPullback.isoPullback and its projection equations in the proof; no section-duality or Rees theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionMap_automorphism|pairMap_isPullback|sectionMap_eq_of_cartesian",
+   "results": "No declaration found; local rg found the canonical Rees chart pushouts, normalized-family coherence and comparison composition used here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSectionIntegratedSpecializationSpecializationBaseChange",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), equality of orientation arrows on coordinate charts; sk-thm-dnc centred coordinates and trace normalization",
+   "via": [
+    "lem-sp-finite-normalized-orientation-base-change",
+    "lem-sp-finite-section-integrated-specialization-base-change",
+    "lem-sp-finite-section-integrated-specialization-specialization-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothSectionAutomorphism",
+  "file": "lean/Sheaf/Paper/SmoothSectionAutomorphism.lean",
+  "declaration": "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.sectionMap_automorphism",
+  "statement": "theorem sectionMap_automorphism\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    {X Y : Scheme.{u}} [IsNoetherian Y]\n    (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimension d f]\n    [IsSeparated f] [QuasiCompact f] [HasCompactification f]\n    (s : Y ⟶ X) [IsClosedImmersion s] (hs : s ≫ f = 𝟙 Y)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (a : X ≅ X)\n    (sq : IsPullback a.hom f f (𝟙 Y)) (hsect : s ≫ a.hom = (𝟙 Y) ≫ s) :\n    sectionMap A f f (𝟙 Y) a.hom sq s s hsect =\n      (leftDerivedUpperStarId (ModuleCat.{u + 1} A) Y).hom.app\n        (sectionInvariant A f s)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ce",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T234017-L-4161416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ce",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T234017-L-4161416",
+  "kind": "interface",
+  "note": "independent cc review: specialization_normalExchange (+hS) against node lem-sp-finite-section-integrated-specialization-specialization-factor, change record and parent caller; 3 new modules against their nodes; scratch set compile with #print axioms (sorryAx only via sectionMap_automorphism)"
+ }
+}

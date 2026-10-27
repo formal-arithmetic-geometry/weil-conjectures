@@ -169,7 +169,15 @@ theorem integratedSpecialization_baseChange
           (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hS d).hom =
       NoetherianSectionSpecialization.sectionMap A g g' b q cart s s' hsec ≫
         integratedSpecialization A d g' s' hs' sq' N hN hA hS' κ' := by
-  obtain ⟨ν, sqν, hzero⟩ := normalExchange_exists g g' s s' hs hs' b q cart hsec d
+  -- `normalExchange_exists` takes the section equations `hs hs'` (G3 statement repair);
+  -- the second alternative only serves the pre-repair signature until G3 has landed.
+  obtain ⟨ν, sqν, hzero⟩ : ∃ (ν : s'.ker.normalCone ⟶ s.ker.normalCone),
+      IsPullback ν (Scheme.Hom.normalConeProj g' s')
+        (Scheme.Hom.normalConeProj g s) b ∧
+      s'.normalConeZeroSection ≫ ν = b ≫ s.normalConeZeroSection := by
+    first
+      | exact normalExchange_exists g g' s s' hs hs' b q cart hsec d
+      | exact normalExchange_exists g g' s s' b q cart hsec d
   let e := NoetherianSectionSpecialization.sectionMap A
     (Scheme.Hom.normalConeProj g s) (Scheme.Hom.normalConeProj g' s') b ν sqν
     s.normalConeZeroSection s'.normalConeZeroSection hzero
@@ -184,7 +192,7 @@ theorem integratedSpecialization_baseChange
     normalSectionMap_isIso A d g' s' hs' sq' N hN hA hS'
   let _ := hn
   let _ := hn'
-  have hδ := specialization_normalExchange A N hN hA d g g' s s' hs hs' b q cart
+  have hδ := specialization_normalExchange A N hN hA hS d g g' s s' hs hs' b q cart
     hsec ν sqν hzero κ κ' hκ hκ'
   have hio := normalExchange_integration A N hN hA d g g' s s' hs hs' b q cart
     hsec sq sq' hS hS' ν sqν hzero hn hn'
