@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.FiniteScalarTensorComplex
 public import Sheaf.Paper.FiniteScalarTensorResolution
+import Sheaf.Paper.FiniteScalarTensorComplex
 
 /-! # Component normalization for the finite scalar total tensor comparison
 
@@ -16,6 +16,8 @@ Source: Stacks Project, Tags 06YN and 07A4.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 open CategoryTheory.Functor MonoidalCategory
 attribute [local instance 2000] isNoetherian_of_finite
@@ -37,6 +39,8 @@ attribute [local instance 30000] SheafOfModules.instPreadditive
 
 universe u
 namespace WeilConjectures
+
+attribute [local irreducible] finiteScalarFlatRepresentatives
 
 /-- The ordinary and specialized total tensor comparisons have the same component
 normalization after the intrinsic equivalence.
@@ -81,6 +85,8 @@ theorem finiteScalarTotalTensorIso_representative_component_eq
         (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex
           (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩,
          ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex
-          (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩) := by sorry
+          (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩) := by
+  simp only [finiteScalarTotalTensorIso]
+  congr 1
 
 end WeilConjectures
