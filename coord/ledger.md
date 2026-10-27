@@ -20170,3 +20170,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:24 L: merged deliver/NA/lem-route-twist-scalar-maps-exists-unique (reviewer FIX; after a return; new nodes: 0)
 - 23:25 L: merged deliver/NG/lem-pur-system-scalar-associator-coherence (reviewer FIX; first push; new nodes: 0)
 - 23:28 L: merged deliver/NE/lem-pur-integral-scalar-reduction-intertwining (reviewer FIX; after a return; new nodes: 1)
+- 23:37 L: returned deliver/V1/Sheaf.Paper.IntegralSupportAdjointOfPreservation (reviewer RETURN: (the landing tools, head a1342c0d1) the delivery did not land: import cycle: Sheaf.Paper.IntegralSupportAdjointOfPreserv)
