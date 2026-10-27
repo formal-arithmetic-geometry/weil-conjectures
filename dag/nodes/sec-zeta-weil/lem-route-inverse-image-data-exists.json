@@ -142,5 +142,19 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e62b18e95 (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes, InverseImageData (ConstantCompletionInverseImage.lean:763-771), AlgebraicInverseImage (AlgebraicInverseImage.lean:32-130) and Stacks 00YV (sites.tex l.10473), 03D2 (sites-modules.tex l.1020) and 0H7J. The item statement matches the Lean (L ⊣ V, PreservesFiniteLimits L, CommRingCat-valued sheaves; no hypothesis added or dropped). All 3 new nodes are true: (1) ring lift via ring objects + lem-weil-pbc-adjunction-lifts-group-ring-objects; (2) module lift via 03D2, the case S=A, c=id of lem-weil-pbc-geometric-module-construction plus the AlgebraicInverseImage transport lemma; (3) constants via E_C = coproduct of E copies of the terminal sheaf, which L preserves along with the terminal sheaf and products. Edge cases checked: identity adjunction, zero ring, empty C. No duplicates (étale-site and fixed-ring nodes are different objects), no cycle, no restated clause. Three faults, all fixed in fixes/dag/nodes/sec-zeta-weil/: C4 step 3 used naturality of e_R, which the ring-functor node did not state, so a naturality clause was added; B2 module-lift and constant-comparison referred to objects of an existential node, so both now take rings/e_R with their compatibilities as their own hypotheses; B3 the item now has stmt_dep def-pur-constant-coefficient-inverse-image-data, the owner of InverseImageData (cycle-checked). Also: the cited Tag 099L is a derived-completion lemma, so the step 4 and constants-node sources are now 0H7J/00YV; steps 2 and 4 now also use ring-functor; proof_deps is unchanged and equals the union of step uses. No tool_uses, no drops.; 4 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T205936-L-1636255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ConstantCompletion.inverseImageData_exists"
+  ],
+  "sorry_after": []
  }
 }

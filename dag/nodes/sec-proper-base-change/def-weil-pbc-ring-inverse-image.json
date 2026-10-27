@@ -1,0 +1,109 @@
+{
+ "id": "def-weil-pbc-ring-inverse-image",
+ "kind": "definition",
+ "title": "Ring-only algebraic inverse-image presentation",
+ "statement": "Let $(C,J),(D,K)$ be sites and $L:\\operatorname{Sh}(J,\\mathrm{Set})\\to\\operatorname{Sh}(K,\\mathrm{Set})$. For ring sheaves $R,S$, a ring inverse-image presentation is an isomorphism $e:L|R|\\cong |S|$ preserving addition, multiplication, zero and one on arbitrary generalized sections. Precisely, for every test sheaf $T$, source arrows $a,b,t:T\\to |R|$ satisfying $t=a+b$ or $t=ab$ sectionwise, the arrows $eL(a),eL(b),eL(t)$ satisfy the same equation sectionwise on the target site. Every identically zero or one arrow remains so. This is exactly the ring-only portion of [def-weil-pbc-algebraic-inverse-image]; it has no module functor or module operation.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, rings as sextuples; constant objects as coproducts of the terminal sheaf. Ring-only subargument of inverseImageData_exists."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite limit preserving left adjoint on sheaves of sets induces a functor on sheaves of commutative rings preserving constant sheaves",
+   "results": "Eight hits, including constantSheaf, constantSheafΓAdj, HasSheafify.isLeftExact, and site-induced sheaf pullback. No coherent ring lift of an arbitrary topos morphism.",
+   "date": "2026-10-27",
+   "verdict": "Use the constant-sheaf adjunction as an ingredient, not as the desired ring lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite product preserving functor of sheaves of sets transports commutative rings and modules and preserves constant ring sheaves",
+   "results": "Eight hits concerning condensed module constructors and finite limits of module sheaf evaluation. None gives the coherent ring lift.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CommRingCat",
+   "results": "Twelve hits on colimits in CommRingCat, not topos inverse images.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|geometric_ring_transport|CommRingObjCat|constantCommuteCompose",
+   "results": "Mathlib Monoidal/Ring.lean defines CommRingObjCat and its forgetful functor; Sites/ConstantSheaf.lean supplies constantCommuteCompose. Project searches locate finiteProductRingFunctor, sheaves_algebraicStructures_objects, objectwise algebraic_presentation_exists and imageFunctor. No theorem gives functorial ring lifts with the natural constant-ring comparison.",
+   "date": "2026-10-27",
+   "verdict": "Reuse ring objects and constant-sheaf comparison APIs. Existing AlgebraicInverseImage has additional module fields, so the ring-only fragment is a separate record, not a replacement definition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletionInverseImageExists",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Algebraic inverse image and canonical constant coefficients in the detailed constant-to-completed coefficient comparison",
+   "via": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GeometricRingInverseImage",
+  "file": "lean/Sheaf/CategoryTheory/GeometricRingInverseImage.lean",
+  "declaration": "SheafOfModules.RingInverseImage",
+  "statement": "structure RingInverseImage\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    (L : Sheaf JC (Type (w)) ⥤ Sheaf JD (Type (w)))\n    (R : Sheaf JC CommRingCat.{w})\n    (RI : Sheaf JD CommRingCat.{w})",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T205936-L-1636255",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T205936-L-1636255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
