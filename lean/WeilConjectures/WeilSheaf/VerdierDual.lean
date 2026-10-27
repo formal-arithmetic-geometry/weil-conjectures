@@ -19,6 +19,8 @@ import Sheaf.Paper.NativeGeometricHomComparison
 import Sheaf.Paper.ConstantModelTorAmplitude
 import Sheaf.CategoryTheory.KInjectiveReplacementTriangulated
 import Sheaf.CategoryTheory.DerivedCategory.BifunctorHomHomotopyExact
+import Sheaf.WeilSheaf.SmoothDualizingConcentration
+import Sheaf.WeilSheaf.SmoothDualizingCohomology
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -681,8 +683,39 @@ theorem nonempty_dualizingComplex_iso (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (dualizingComplex k₀ l X ≅
       ((tateTwist k₀ l X d).obj
-        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) :=
-  sorry
+        (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧) := by
+  let J := upperShriek (k₀ := k₀) (l := l) (X ↘ Spec (CommRingCat.of k₀))
+  let adj := derivedLowerShriekUpperShriekAdjunction (k₀ := k₀) (l := l)
+    (X ↘ Spec (CommRingCat.of k₀))
+  obtain ⟨hge, hle⟩ := smooth_dualizing_concentration J adj d
+  let K := dualizingComplex k₀ l X
+  let b : ℤ := -2 * (d : ℤ)
+  have : K.obj.IsGE b := hge
+  have : K.obj.IsLE b := hle
+  obtain ⟨A, ⟨e⟩⟩ :=
+    _root_.DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE K.obj b
+  obtain ⟨h⟩ := nonempty_smooth_dualizing_cohomology_iso J adj d
+  let L := WeilSheaf.tateTwistSheaf k₀ l X d
+  let hL : L.IsLisse := WeilSheaf.isLisse_tateTwistSheaf k₀ l X d
+  let T := L.tensorObj (WeilSheaf.adicConstant k₀ l X) hL
+  let eA : A ≅ T.obj :=
+    ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ b).app A).symm ≪≫
+      (_root_.DerivedCategory.homologyFunctor _ b).mapIso e.symm ≪≫
+      (WeilSheaf.objectProperty k₀ l X).ι.mapIso h
+  let eK : K ≅ (WeilSheaf.toComplex.obj T)⟦(2 * d : ℤ)⟧ :=
+    ObjectProperty.isoMk _ (e ≪≫ (_root_.DerivedCategory.singleFunctor _ b).mapIso eA ≪≫
+      ((_root_.DerivedCategory.singleFunctors _).shiftIso (2 * (d : ℤ)) b 0
+        (by dsimp [b]; lia)).symm.app _ ≪≫
+      (((objectProperty k₀ l X).ι.commShiftIso (2 * (d : ℤ))).app
+        (WeilSheaf.toComplex.obj T)).symm)
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor (L.dual hL).obj hL.dual
+  let F := ProEtaleWeilSheaf.ihomFunctor k₀ l X (L.dual hL).obj
+  let eT : (tateTwist k₀ l X d).obj
+      (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) ≅
+      WeilSheaf.toComplex.obj T :=
+    ObjectProperty.isoMk _
+      (F.singleFunctorCompRightDerivedFunctorIso.app (WeilSheaf.adicConstant k₀ l X).obj)
+  exact ⟨eK ≪≫ (shiftFunctor _ (2 * (d : ℤ))).mapIso eT.symm⟩
 
 end Smooth
 

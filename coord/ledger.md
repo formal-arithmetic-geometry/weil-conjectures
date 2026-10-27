@@ -19753,3 +19753,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:06 L: merged deliver/H8/Sheaf.Paper.CompactSupportQuotientRawOutputIdentity (stage 3; reviewer PASS; first push; landing 20261027T180643-L-3886453 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:06 L: merged deliver/H9/Sheaf.SixFunctors.FiniteDualizingCoefficientNormalization (stage 3; reviewer PASS; first push; landing 20261027T180644-L-3886679 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:06 L: merged deliver/J1/Sheaf.SixFunctors.IntegralRefinementDiagramAdmissibility (stage 3; reviewer PASS; first push; landing 20261027T180645-L-3886940 (proof); batch 20261027T180444; modules 1; new nodes 0)
+- 18:06 L: merged deliver/J1/WeilConjectures.WeilSheaf.VerdierDual (stage 3; reviewer PASS; first push; landing 20261027T180647-L-3887274 (interface); batch 20261027T180444; modules 3; new nodes 2)

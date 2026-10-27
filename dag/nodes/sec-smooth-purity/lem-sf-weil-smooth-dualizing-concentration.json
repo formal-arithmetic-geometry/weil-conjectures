@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-weil-smooth-dualizing-concentration",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-weil-smooth-dualizing-complex",
+   "place": "Native cohomological decomposition of smooth dualizing purity: concentration",
+   "via": []
+  }
+ },
+ "kind": "statement",
+ "title": "Concentration of the native smooth exceptional constant object",
+ "statement": "Let k₀ be a finite field and ℓ a prime different from its characteristic. Let a₀ : X₀ → Spec k₀ be separated, finite type, and smooth of relative dimension d ∈ ℕ. Use the native bounded constructible derived category of pro-etale Weil sheaves [def-sf-native-weil-derived-framework], not fixed pairs of derived objects. For any right adjoint J of the native derived compact-support functor Ra₀! and its adjunction adj, put K = J(ℚ̄_ℓ,Spec k₀[0]), with the canonical constant Weil structure [def-weil-constant-weil-structure]. Then K lies both in D≥−2d and D≤−2d for the canonical t-structure of the ambient derived category of pro-etale Weil sheaves. There is no assertion identifying its surviving cohomology sheaf. The geometric hypotheses use [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "Apply smooth purity to the structure morphism and the constant coefficient object; native exceptional adjunction and canonical Frobenius refinement."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof": [
+  {
+   "text": "Base change a₀ to the algebraic closure. Separated finite type and smooth relative dimension d persist. Apply the counit-normalized native exceptional forgetting comparison to adj at the constant point object. Its scalar-unit normalization identifies the result with the ordinary common-stage exceptional constant object, including closure transport.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Apply smooth purity to the structure morphism and the constant coefficient object; native exceptional adjunction and canonical Frobenius refinement."
+   }
+  },
+  {
+   "text": "Apply the smooth dualizing specialization of the coefficient-stage purity theorem. Its finite normalized trace is transported by integral reconstruction, rationalization, and common-stage descent exactly as in unit sk-thm-purity-transport. The resulting ordinary object is the constant Tate line shifted by 2d.",
+   "uses": [
+    "cor-pur-adic-and-rational-smooth-dualizing-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Apply smooth purity to the structure morphism and the constant coefficient object; native exceptional adjunction and canonical Frobenius refinement."
+   }
+  },
+  {
+   "text": "The realized object has zero cohomology in degrees different from −2d. Forgetting the native Weil structure is induced by an exact conservative functor of abelian categories, and the section-module and closure-change realizations are exact equivalences on the indicated sheaves. They commute with cohomology and detect zero objects. Thus native cohomology also vanishes outside −2d. The canonical derived t-structure characterizes these vanishings as IsGE (−2d) and IsLE (−2d). No Frobenius identification of the surviving sheaf is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "Apply smooth purity to the structure morphism and the constant coefficient object; native exceptional adjunction and canonical Frobenius refinement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sf-weil-native-exceptional-forgetful",
+  "lem-sf-adic-qbar-constructible-realization",
+  "cor-pur-adic-and-rational-smooth-dualizing-complexes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "Apply smooth purity to the structure morphism and the constant coefficient object; native exceptional adjunction and canonical Frobenius refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a smooth scheme of relative dimension d the exceptional pullback of the constant l-adic sheaf has cohomology concentrated in degree minus two d",
+   "results": "Hits inspected: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. These concern ordinary module pullback, smoothness, or generic sheaf cohomology, not native Weil exceptional purity.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth scheme of relative dimension d the exceptional pullback of the constant l-adic sheaf has cohomology concentrated in degree minus two d",
+   "results": "Hits inspected: AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CochainComplex.isLE_iff, DerivedCategory.isZero_of_isLE, CochainComplex.isGE_iff. Generic smoothness, sheaf cohomology or t-structure lemmas; no native exceptional-purity statement.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplex\"",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|smooth_dualizing|upperShriek",
+   "results": "No hits.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-28",
+  "group": "J1",
+  "why": "Strict cohomological part of native smooth purity; the existing fixed-pair comparison is not an identification of native derived categories."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.SmoothDualizingConcentration",
+  "file": "lean/Sheaf/WeilSheaf/SmoothDualizingConcentration.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.smooth_dualizing_concentration",
+  "statement": "theorem smooth_dualizing_concentration (J : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X) (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ J) (d : ℕ) [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] : ((J.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).obj.IsGE (-2 * (d : ℤ))) ∧ ((J.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (Spec (CommRingCat.of k₀))))).obj.IsLE (-2 * (d : ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T180647-L-3887274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T180647-L-3887274",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
