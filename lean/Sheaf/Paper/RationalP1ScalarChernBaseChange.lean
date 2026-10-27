@@ -6,6 +6,8 @@ Authors: SHEAF group C7
 module
 
 public import Sheaf.Paper.RationalP1ScalarChernMaps
+import Sheaf.Paper.RationalP1ScalarChernBaseChangeUnit
+import Sheaf.Paper.RationalP1ScalarChernBaseChangeChern
 
 /-! # Exchange on the two actual Chern generators
 
@@ -87,6 +89,9 @@ theorem scalar_chern_base_change
     F.map uq ≫ secondTraceExchange l c k p hpl Y =
         (scalarQLineIso l c k p hpl Y).hom ≫ u₂ ∧
       F.map cq ≫ secondTraceExchange l c k p hpl Y =
-        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by sorry
+        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by
+  dsimp only
+  exact ⟨scalar_chern_base_change_unit l c k p hpl Y δ family r a ha b hb,
+    scalar_chern_base_change_chern l c k p hpl Y δ family r a ha b hb⟩
 
 end AlgebraicGeometry.ProEtale.RationalP1
