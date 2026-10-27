@@ -6,6 +6,8 @@ Authors: SHEAF group U9
 module
 
 public import Sheaf.Paper.ExceptionalSystemInterfaces
+import Sheaf.Paper.ExceptionalProCompactSupportConstruction
+import Sheaf.Paper.ExceptionalSystemCompactificationComparisonConstruction
 
 /-! # Construction of the proper/open strict-system operation -/
 
@@ -49,6 +51,7 @@ theorem exceptionalProperOpenOriginConstruction
     ∃ (P : ExceptionalProCompactSupport O ell c
         CX.proEvaluation CY.proEvaluation CZ.proEvaluation),
       Nonempty (ExceptionalSystemCompactificationComparison S CX CY CZ P) := by
-  sorry
+  obtain ⟨P⟩ := exceptionalProCompactSupport_exists CX CY CZ hX hY hZ
+  exact ⟨P, exceptionalSystemCompactificationComparison_exists CX CY CZ hX hY hZ P⟩
 
 end AlgebraicGeometry
