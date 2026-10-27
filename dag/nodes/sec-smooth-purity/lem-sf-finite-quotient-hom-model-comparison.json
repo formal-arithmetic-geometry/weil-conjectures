@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-finite-quotient-hom-model-comparison",
+ "kind": "statement",
+ "title": "Universal scalar comparison identifies the two evaluation-defined finite quotient Hom maps",
+ "statement": "Fix a prime l, a finite extension E/Q_l, a scheme W and m≤n. Let φ be the actual quotient of finite integral coefficient sheaves O_E/(t^(n+1))→O_E/(t^(m+1)) of [def-weil-integral-derived-reduction]. For every evaluation-normalized scalar Hom model A furnished by [lem-fix-site-perfect-scalar-hom], let A.scalar.T be its universal derived scalar extension. Let F be the fixed finite quotient derived functor and H_n,H_m its derived internal Homs [def-sf-finite-rational-derived-operations, def-coef-derived-system-calculus-data]. There is a natural isomorphism e:A.scalar.T≅F such that, for every ambient P,Q at level n, the siteScalarHomComparison of A followed by H_m((e_P^-1)^op,e_Q) equals e_(H_n(P,Q)) followed by finiteIntrinsicReductionHom(P,Q). This is an equality of the specified evaluation transposes, not an invertibility assertion; no perfectness is required. All universe choices and components appear verbatim in Lean.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph: identify ringed-site duality evaluation with the specified finite quotient Hom reduction"
+ },
+ "stmt_deps": [
+  "def-weil-integral-derived-reduction",
+  "def-sf-finite-rational-derived-operations",
+  "def-coef-derived-system-calculus-data",
+  "lem-fix-site-perfect-scalar-hom"
+ ],
+ "proof": [
+  {
+   "text": "The two ordinary scalar operations are the same sheafified balanced tensor functor. Uniqueness of its total left derived functor gives the natural isomorphism e normalized by the universal counits.",
+   "uses": [
+    "lem-fix-site-perfect-scalar-hom",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed tensors have the same specified internal Hom. Their adjunctions give the unique comparison between their left adjoints. Their K-flat model equations identify this comparison and both scalar tensorators on pure tensors; signed total symmetry gives the same conversion from symmetric evaluation to Hom-tensor-P evaluation.",
+   "uses": [
+    "lem-fix-site-perfect-scalar-hom",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uncurry the asserted square. Naturality of e and the normalized tensor squares identify both sides with scalar extension of source evaluation. Injectivity of the target adjunction proves the equality. This works for arbitrary ambient P,Q and uses no dualizability or invertibility conclusion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-site-perfect-scalar-hom",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph: identify ringed-site duality evaluation with the specified finite quotient Hom reduction; full representative argument in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient change preserves internal Hom evaluation and finite quotient tensor coherence",
+   "results": "8 hits: ModuleCat.ihom_ev_app, Rep.ihom_ev_app_hom, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, Rep.ihom_coev_app_hom, Rep.Tor_map, CategoryTheory.IsGrothendieckAbelian.tensorObj, CategoryTheory.Tor_map",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedLimitTriangle|ihomComparison.*isIso",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension on derived sheaves preserves internal Hom from a perfect complex",
+   "results": "8 hits: DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Sheaf.H, CategoryTheory.Functor.mapExactFunctor_smul, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, DerivedCategory.instLinear, CategoryTheory.Abelian.Ext.homLinearEquiv, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension internal Hom perfect complex and compact support reduction",
+   "results": "8 hits: LinearMap.IsPerfPair.restrictScalars_of_field, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, LinearMap.IsPerfPair.restrictScalars, CategoryTheory.Abelian.Ext.smul_hom, ModuleCat.ExtendRestrictScalarsAdj.counit, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.instIsSupportedOfIsStrictlySupported",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived adic tower realization for finite compact support with uniformly bounded constructible reductions",
+   "results": "8 hits: AdicCompletion, IsAdicComplete, Hausdorffification, AdicCompletion.AdicCauchySequence, AdicCompletion.IsAdicCauchy, AdicCompletion.submodule, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BasicOperationReductionAndEvaluation",
+  "date": "2026-10-28",
+  "group": "Z9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-operation-reduction",
+   "place": "First paragraph: identify ringed-site duality evaluation with the specified finite quotient Hom reduction",
+   "via": [
+    "lem-fix-basic-operation-reduction-and-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientHomModelComparison",
+  "file": "lean/Sheaf/Paper/FiniteQuotientHomModelComparison.lean",
+  "declaration": "WeilConjectures.finiteQuotient_homModel_comparison",
+  "statement": "theorem finiteQuotient_homModel_comparison\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (W : Scheme.{u}) (m n : ℕ) (h : m ≤ n) :\n    letI : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0} _\n    letI := integralCoefficientAbSheafify.{u, u} W\n    letI := integralCoefficientAbLocallyBijective.{u, u} W\n    letI := HasDerivedCategory.standard (RingedTensorModules.{u + 1, u, u}\n      (ProEt.topology W) (integralCoefficientCommRingSheaf l E W n))\n    letI := HasDerivedCategory.standard (RingedTensorModules.{u + 1, u, u}\n      (ProEt.topology W) (integralCoefficientCommRingSheaf l E W m))\n    ∀ A : SitePerfectScalarHomData.{u + 1, u, u, u + 2} (ProEt.topology W)\n      (coefficientFiniteQuotient l E W h),\n    ∃ e : SheafOfModules.DerivedChangeOfRingsCochainModel.T.{u + 1, u, u + 1, u + 2, u + 2}\n        (SitePerfectScalarHomData.scalar.{u + 1, u, u, u + 2} A) ≅\n          coefficientFiniteQuotientDerived l E W h,\n      ∀ P Q : normalizedDVRDerived l E W n,\n        siteScalarHomComparison.{u + 1, u, u, u + 2} _ (coefficientFiniteQuotient l E W h) A P Q ≫\n            (coefficientFiniteInternalHom l E W m).map\n              (Prod.mkHom (e.inv.app P).op (e.hom.app Q)) =\n          e.hom.app ((coefficientFiniteInternalHom l E W n).obj (op P, Q)) ≫\n            finiteIntrinsicReductionHom l E W h P Q",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261027T181026-L-3922921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261027T181026-L-3922921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

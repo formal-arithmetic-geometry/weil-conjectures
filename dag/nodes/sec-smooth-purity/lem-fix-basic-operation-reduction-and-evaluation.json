@@ -23,46 +23,49 @@
  ],
  "proof": [
   {
-   "text": "(1) Compact support. For a compactification `f = p ∘ j`, the integral\ncompact-support complex is the derived limit `M` of the tower of finite compact-support\nimages `K_n ↦ p_* j_! K_n`. Its reduction modulo `ϖ^{n+1}` is compared with `p_* j_! K_n`\nby the projection `p` and the finite open-extension and proper direct-image coefficient\ncomparisons; these are isomorphisms because extension by zero is exact, the proper\ndirect image of a finite-Tor constructible complex commutes with the finite-free\ncoefficient change, and two derived limits of the same tower are isomorphic compatibly\nwith their projections. The same projections make the comparisons compatible with the\ntransition maps, and integral constructibility of `M` follows from that of the\nreductions and a uniform cohomological bound (Bhatt--Scholze 6.8.14).\n(2) Finite quotient evaluation. On flat-term K-flat representatives the quotient tensor\ncomparison sends `(x ⊗ a) ⊗ (y ⊗ b)` to `(x ⊗ y) ⊗ ab`; it preserves reassociation on pure\ntriples and the unit, hence by transposition the internal composition and evaluation\nmaps; repeated levels `m = n` give identities.\n(3) Site-perfect Hom. For site-perfect `P`, ringed-site duality gives\n`RHom(P, Q) ≅ P^∨ ⊗ Q` for arbitrary `Q`; the dual of a bounded complex of finite\nprojectives commutes with the quotient coefficient change termwise, and the\nevaluation calculation identifies the result with the evaluation-defined reduction\nmap, which is therefore an isomorphism, locally and hence globally.\n(4) Integral scalar extension `O_E → O_L` is finite free, so the same pure-tensor\ncalculation as in (2) gives its evaluation compatibility and Hom evaluation laws.",
+   "text": "Realize the finite compact-support tower by a normalized DVR tower with uniformly bounded constructible levels. Transport the given Roos triangle along its term isomorphisms. Apply normalized DVR effectivity to this transported triangle. Naturality of scalar adjunction identifies its counit reductions, followed by the finite level isomorphisms, with exactly the prescribed projection adjuncts. Transport finite constructibility and cohomological supports along these isomorphisms, and use the legacy completeness comparison to obtain sfIntegralConstructible.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-pur-integral-coherence-tower",
-    "lem-pur-completed-operation-tower-substitution",
+    "lem-sf-compact-support-normalized-reduction-tower",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composition of the first two arrows of the given distinguished Roos triangle is zero. Projection to its nth factor yields the adjacent projection equality. Transport this equality through the two scalar adjunctions to obtain the required reduction transition square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For finite quotient and finite-extension scalar functors, use the existing coefficient tensor associativity equation. Prove generically that transposition of a strong tensor comparison preserves evaluation, internal-Hom naturality and internal composition. Apply these categorical calculations to both functors. An auxiliary finite-field datum with prime characteristic different from l indexes the normalization theorem; it imposes no geometric hypothesis.",
+   "uses": [
+    "lem-sf-coefficient-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ringed-site perfect scalar Hom comparison to obtain a normalized model with invertible comparison for a site-perfect source. Conjugate it by the model-comparison natural isomorphism and the induced internal-Hom isomorphism. The comparison equality then gives invertibility of the specified finiteIntrinsicReductionHom.",
+   "uses": [
     "lem-fix-site-perfect-scalar-hom",
-    "lem-sfb-ringed-site-perfect-duality",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-sf-ringed-finite-free-hom-base-change",
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-fix-internal-hom-comparison-composition"
+    "lem-sf-finite-quotient-hom-model-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-pur-integral-coherence-tower",
-  "lem-pur-completed-operation-tower-substitution",
+  "lem-sf-compact-support-normalized-reduction-tower",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-sf-coefficient-tensor-normalization",
   "lem-fix-site-perfect-scalar-hom",
-  "lem-sfb-ringed-site-perfect-duality",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "prop-weil-pbc-direct-image-limits",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-sf-open-tensor-normalization",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-sf-ringed-finite-free-hom-base-change",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-fix-internal-hom-comparison-composition"
+  "lem-sf-finite-quotient-hom-model-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-  "place": "steps 1, 2, 4 and 5 (compact-support reduction, finite, site-perfect and scalar Hom evaluation); the clauses already stated by lem-pur-integral-operations-preserve-constructible, lem-sf-integral-direct-image-constructible, prop-finite-compact-support-constructibility, lem-coef-integral-hom-reduction, lem-pur-integral-operations-scalar-extension and lem-pur-derived-pullback-tensor-iso are applied directly in lem-fix-operation-reduction; dependencies kept off the downstream exchange-realization route back to operation reduction (repair of b270ea00522)"
+  "place": "Z9: categorical transposition and Roos-triangle arguments written in Lean; finite compact-support tower realization and the evaluation-normalized Hom model comparison are the two strict substeps split off. Original theorem signature and unit route are preserved."
  },
  "mathlib_searches": [
   {
@@ -124,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-53384",
-  "group": "F7",
-  "result": "fix",
-  "landing": "20261025T162417-L-442363",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261027T181026-L-3922921",
   "kind": "interface",
-  "note": "independent cc review: 533840fb Lean files byte-identical to b270ea0/28abdf8 (whose reviewer FIXes were dropped) vs clone: item theorem statement byte-identical, 16 defs moved verbatim to OperationCoefficientActionData and publicly re-exported; DAG edges checked with a re-implementation of stage3_delivery edge_fails"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

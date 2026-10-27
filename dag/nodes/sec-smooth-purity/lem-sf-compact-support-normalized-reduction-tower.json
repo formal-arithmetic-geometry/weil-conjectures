@@ -1,0 +1,160 @@
+{
+ "id": "lem-sf-compact-support-normalized-reduction-tower",
+ "kind": "statement",
+ "title": "The finite compact-support tower has a normalized DVR realization and uniform bounds",
+ "statement": "Let l be prime, E a finite extension of Q_l, K₀ an arbitrary field with l invertible, X,Y finite-type quasi-compact K₀-schemes, f:X→Y a separated finite-type quasi-compact K₀-map, and c=(X→Z→Y) a compactification [def-weil-compactifications-refinements]. Let K in the derived category of integral module sheaves on X be integral constructible in the sense of [def-weil-derived-pullback-tensor-hom], so it is derived complete and its reductions K_n modulo the positive exponents n+1 have constructible cohomology with a common bounded interval [def-weil-derived-complete-integral-detailed, def-weil-integral-derived-reduction]. Write V_n=Rp_*j_! K_n, the finite compact-support terms of [def-pur-operation-scalar-transport], and v_n for their specified transitions after restriction. For every indexing finite-field datum D with l≠D.p there exists a normalized DVR tower T [def-coef-normalized-dvr-tower], with isomorphisms a_n:T.M_n≅V_n, such that its evaluation isomorphism followed by restricted a_n intertwines every adjacent transition with v_n. There is one interval [b₀,b₁], b₀≤b₁, on which all V_n have constructible cohomology and outside which their cohomology vanishes. No base structure over D is assumed. The assertion concerns only the finite tower: it has no integral limit M, no projection p, and no conclusion about their reduction comparisons. The displayed squares and quantifiers are recorded verbatim in Lean.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support paragraph: finite coefficient-change comparisons, before taking the derived limit"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-pur-operation-scalar-transport",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "Take flat-term K-flat representatives of K and use the finite-free resolution of each positive quotient of the integral DVR to identify its iterated derived reductions with its quotient levels. The coefficient comparison maps are normalized by their scalar units.",
+   "uses": [
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extension by zero is exact and its reduction comparison is sectionwise tensor by the unit. For the proper image, apply the perfect projection formula to the two-term finite free quotient complex. Thus finite compact support commutes with the quotient reductions through the specified scalar-adjunction mates.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lemma-weil-pbc-perfect-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These mates preserve quotient composition and identities on representatives. Coherent tower assembly and substitution provide a normalized DVR tower and its level isomorphisms. Their restriction squares give the displayed adjacent transition equation, without making any inverse-limit comparison.",
+   "uses": [
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-completed-operation-tower-substitution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite compact-support constructibility gives constructible finite levels. Apply the relative proper cohomological bound to the common bounded interval of the input reductions; exact extension by zero does not enlarge it. The fixed finite-type map has a bound independent of the exponent, giving b₀,b₁. This is the bounded finite-level part of the proper-image limit argument and does not invoke integral operation reduction.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-open-tensor-normalization",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-pur-integral-coherence-tower",
+  "lem-pur-completed-operation-tower-substitution",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support paragraph: finite coefficient-change comparisons, before taking the derived limit; full representative argument in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient change preserves internal Hom evaluation and finite quotient tensor coherence",
+   "results": "8 hits: ModuleCat.ihom_ev_app, Rep.ihom_ev_app_hom, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, Rep.ihom_coev_app_hom, Rep.Tor_map, CategoryTheory.IsGrothendieckAbelian.tensorObj, CategoryTheory.Tor_map",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_counit",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedLimitTriangle|ihomComparison.*isIso",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension on derived sheaves preserves internal Hom from a perfect complex",
+   "results": "8 hits: DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Sheaf.H, CategoryTheory.Functor.mapExactFunctor_smul, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, DerivedCategory.instLinear, CategoryTheory.Abelian.Ext.homLinearEquiv, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension internal Hom perfect complex and compact support reduction",
+   "results": "8 hits: LinearMap.IsPerfPair.restrictScalars_of_field, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, LinearMap.IsPerfPair.restrictScalars, CategoryTheory.Abelian.Ext.smul_hom, ModuleCat.ExtendRestrictScalarsAdj.counit, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.instIsSupportedOfIsStrictlySupported",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived adic tower realization for finite compact support with uniformly bounded constructible reductions",
+   "results": "8 hits: AdicCompletion, IsAdicComplete, Hausdorffification, AdicCompletion.AdicCauchySequence, AdicCompletion.IsAdicCauchy, AdicCompletion.submodule, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top",
+   "date": "2026-10-28",
+   "verdict": "No theorem for the specified derived coefficient models or compact-support tower. Use the recorded library interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BasicOperationReductionAndEvaluation",
+  "date": "2026-10-28",
+  "group": "Z9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-operation-reduction",
+   "place": "Compact-support paragraph: finite coefficient-change comparisons, before taking the derived limit",
+   "via": [
+    "lem-fix-basic-operation-reduction-and-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportNormalizedReductionTower",
+  "file": "lean/Sheaf/Paper/CompactSupportNormalizedReductionTower.lean",
+  "declaration": "WeilConjectures.compactSupport_normalizedReductionTower",
+  "statement": "theorem compactSupport_normalizedReductionTower\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (K₀ : Type u) [Field K₀] (hl₀ : IsUnit (l : K₀))\n    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))]\n    [QuasiCompact (X ↘ Spec (.of K₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))]\n    [QuasiCompact (Y ↘ Spec (.of K₀))]\n    [f.IsOver (Spec (.of K₀))] [IsSeparated f]\n    [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (hK : sfIntegralConstructible l E X K)\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) :\n    ∃ (T : NormalizedDVRTower l E Y D hl)\n      (a : ∀ n : ℕ, T.M n ≅\n        (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).obj\n          ((scalarReductionDerivedExtension l E X n).obj K)),\n      (∀ n : ℕ,\n        (normalizedDVRTowerTransition l E Y D hl n.le_succ).app T.tower ≫\n            (T.evaluationIso n ≪≫\n              (scalarReductionDerivedRestriction l E Y n).mapIso (a n)).hom =\n          (T.evaluationIso (n + 1) ≪≫\n              (scalarReductionDerivedRestriction l E Y (n + 1)).mapIso (a (n + 1))).hom ≫\n            sfCompactSupportTransition l E c K n) ∧\n      ∃ b₀ b₁ : ℤ, b₀ ≤ b₁ ∧ ∀ n : ℕ,\n        intrinsicFiniteTorsionConstructible l E (n + 1)\n          (Nat.succ_le_succ (Nat.zero_le n)) Y\n          ((sfAmbientCompactSupportCandidate\n            (Padic.coefficientExtensionRing l E (n + 1)) c).obj\n              ((scalarReductionDerivedExtension l E X n).obj K)) ∧\n        proEtaleCohomologicalSupport\n          ((sfAmbientCompactSupportCandidate\n            (Padic.coefficientExtensionRing l E (n + 1)) c).obj\n              ((scalarReductionDerivedExtension l E X n).obj K)) ⊆ Set.Icc b₀ b₁",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261027T181026-L-3922921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261027T181026-L-3922921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
