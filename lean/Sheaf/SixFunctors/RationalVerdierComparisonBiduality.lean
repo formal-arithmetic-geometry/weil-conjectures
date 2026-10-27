@@ -6,6 +6,7 @@ Authors: SHEAF group C6
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
+import Sheaf.SixFunctors.RationalVerdierScalarInterchange
 
 /-! # Biduality follows from the scalar evaluation square
 
@@ -24,6 +25,98 @@ open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
 open scoped TensorProduct
 
 namespace WeilConjectures.RationalVerdier
+
+private theorem tensor_map_comp {C : Type*} [Category* C] (T : C × C ⥤ C)
+    (K : C) {M N P : C} (f : M ⟶ N) (g : N ⟶ P) :
+    T.map (Prod.mkHom (𝟙 K) (f ≫ g)) =
+      T.map (Prod.mkHom (𝟙 K) f) ≫ T.map (Prod.mkHom (𝟙 K) g) := by
+  rw [← T.map_comp]
+  congr 1
+  ext <;> simp
+
+private theorem tensor_map_exchange {C : Type*} [Category* C] (T : C × C ⥤ C)
+    {K K' M M' : C} (f : K ⟶ K') (g : M ⟶ M') :
+    T.map (Prod.mkHom (𝟙 K) g) ≫ T.map (Prod.mkHom f (𝟙 M')) =
+      T.map (Prod.mkHom f (𝟙 M)) ≫ T.map (Prod.mkHom (𝟙 K') g) := by
+  rw [← T.map_comp, ← T.map_comp]
+  simp
+
+private theorem evaluation_bidual
+    {C C' : Type*} [Category* C] [Category* C']
+    (T : C × C ⥤ C) (T' : C' × C' ⥤ C') (F : C ⥤ C')
+    (DA : Cᵒᵖ ⥤ C) (DB : C'ᵒᵖ ⥤ C') (W : C) (W' : C')
+    (ev : ∀ K : C, T.obj (K, DA.obj (op K)) ⟶ W)
+    (ev' : ∀ K : C', T'.obj (K, DB.obj (op K)) ⟶ W')
+    (delta : ∀ K : C, K ⟶ DA.obj (op (DA.obj (op K))))
+    (delta' : ∀ K : C', K ⟶ DB.obj (op (DB.obj (op K))))
+    (s : ∀ K M : C, T.obj (K, M) ⟶ T.obj (M, K))
+    (s' : ∀ K M : C', T'.obj (K, M) ⟶ T'.obj (M, K))
+    (mu : T ⋙ F ≅ F.prod F ⋙ T') (w : F.obj W ⟶ W')
+    (beta : ∀ K : C, F.obj (DA.obj (op K)) ⟶ DB.obj (op (F.obj K)))
+    (hdelta : ∀ K, T.map (Prod.mkHom (𝟙 (DA.obj (op K))) (delta K)) ≫
+      ev (DA.obj (op K)) = s (DA.obj (op K)) K ≫ ev K)
+    (hdelta' : ∀ K, T'.map (Prod.mkHom (𝟙 (DB.obj (op K))) (delta' K)) ≫
+      ev' (DB.obj (op K)) = s' (DB.obj (op K)) K ≫ ev' K)
+    (hnat : ∀ (K M K' M' : C') (f : K ⟶ K') (g : M ⟶ M'),
+      T'.map (Prod.mkHom f g) ≫ s' K' M' =
+        s' K M ≫ T'.map (Prod.mkHom g f))
+    (hevnat : ∀ (K M : C') (f : K ⟶ M),
+      T'.map (Prod.mkHom f (𝟙 (DB.obj (op M)))) ≫ ev' M =
+        T'.map (Prod.mkHom (𝟙 K) (DB.map f.op)) ≫ ev' K)
+    (hdetect : ∀ (K V : C') (f g : V ⟶ DB.obj (op K)),
+      T'.map (Prod.mkHom (𝟙 K) f) ≫ ev' K =
+        T'.map (Prod.mkHom (𝟙 K) g) ≫ ev' K → f = g)
+    (hs : ∀ K M, s' (F.obj K) (F.obj M) ≫ mu.inv.app (M, K) =
+      mu.inv.app (K, M) ≫ F.map (s K M))
+    (heval : ∀ K, T'.map (Prod.mkHom (𝟙 (F.obj K)) (beta K)) ≫ ev' (F.obj K) =
+      mu.inv.app (K, DA.obj (op K)) ≫ F.map (ev K) ≫ w) (K : C) :
+    F.map (delta K) ≫ beta (DA.obj (op K)) =
+      delta' (F.obj K) ≫ DB.map (beta K).op := by
+  apply hdetect (F.obj (DA.obj (op K))) (F.obj K)
+  have hmu := mu.inv.naturality (Prod.mkHom (𝟙 (DA.obj (op K))) (delta K))
+  change T'.map (Prod.mkHom (F.map (𝟙 (DA.obj (op K)))) (F.map (delta K))) ≫
+      mu.inv.app (DA.obj (op K), DA.obj (op (DA.obj (op K)))) =
+    mu.inv.app (DA.obj (op K), K) ≫
+      F.map (T.map (Prod.mkHom (𝟙 (DA.obj (op K))) (delta K))) at hmu
+  rw [F.map_id] at hmu
+  calc
+    _ = T'.map (Prod.mkHom (𝟙 (F.obj (DA.obj (op K)))) (F.map (delta K))) ≫
+        mu.inv.app (DA.obj (op K), DA.obj (op (DA.obj (op K)))) ≫
+          F.map (ev (DA.obj (op K))) ≫ w := by
+      rw [tensor_map_comp, Category.assoc, heval]
+    _ = mu.inv.app (DA.obj (op K), K) ≫
+        F.map (T.map (Prod.mkHom (𝟙 (DA.obj (op K))) (delta K)) ≫
+          ev (DA.obj (op K))) ≫ w := by
+      simpa only [Functor.map_comp, Category.assoc] using
+        congrArg (fun q ↦ q ≫ F.map (ev (DA.obj (op K))) ≫ w) hmu
+    _ = mu.inv.app (DA.obj (op K), K) ≫ F.map (s (DA.obj (op K)) K) ≫
+        F.map (ev K) ≫ w := by
+      simp only [hdelta, Functor.map_comp, Category.assoc]
+    _ = s' (F.obj (DA.obj (op K))) (F.obj K) ≫
+        T'.map (Prod.mkHom (𝟙 (F.obj K)) (beta K)) ≫ ev' (F.obj K) := by
+      rw [heval]
+      simpa only [Category.assoc] using
+        congrArg (fun q ↦ q ≫ F.map (ev K) ≫ w) (hs (DA.obj (op K)) K).symm
+    _ = T'.map (Prod.mkHom (beta K) (𝟙 (F.obj K))) ≫
+        s' (DB.obj (op (F.obj K))) (F.obj K) ≫ ev' (F.obj K) := by
+      simpa only [Category.assoc] using congrArg (fun q ↦ q ≫ ev' (F.obj K))
+        (hnat _ _ _ _ (beta K) (𝟙 (F.obj K))).symm
+    _ = T'.map (Prod.mkHom (beta K) (𝟙 (F.obj K))) ≫
+        T'.map (Prod.mkHom (𝟙 (DB.obj (op (F.obj K)))) (delta' (F.obj K))) ≫
+          ev' (DB.obj (op (F.obj K))) := by rw [hdelta']
+    _ = T'.map (Prod.mkHom (𝟙 (F.obj (DA.obj (op K)))) (delta' (F.obj K))) ≫
+        T'.map (Prod.mkHom (𝟙 (F.obj (DA.obj (op K)))) (DB.map (beta K).op)) ≫
+          ev' (F.obj (DA.obj (op K))) := by
+      calc
+        _ = T'.map (Prod.mkHom (𝟙 (F.obj (DA.obj (op K)))) (delta' (F.obj K))) ≫
+            T'.map (Prod.mkHom (beta K)
+              (𝟙 (DB.obj (op (DB.obj (op (F.obj K))))))) ≫
+                ev' (DB.obj (op (F.obj K))) := by
+          simpa only [Category.assoc] using congrArg
+            (fun q ↦ q ≫ ev' (DB.obj (op (F.obj K))))
+            (tensor_map_exchange T' (beta K) (delta' (F.obj K))).symm
+        _ = _ := by rw [hevnat]
+    _ = _ := by rw [tensor_map_comp, Category.assoc]
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
@@ -79,6 +172,19 @@ theorem evaluation_implies_biduality
     (scalar l X E L i).map (A.bidual.hom.app K) ≫
       e.comparison.hom.app (op (A.dual.obj (op K))) =
     B.bidual.hom.app ((scalar l X E L i).obj K) ≫
-      B.dual.map (e.comparison.hom.app (op K)).op) := by sorry
+      B.dual.map (e.comparison.hom.app (op K)).op)  := by
+  obtain ⟨sA⟩ := pairing_calculus D l hl X E wE A hA
+  obtain ⟨sB⟩ := pairing_calculus D l hl X L wL B hB
+  intro K
+  exact evaluation_bidual (tensor D l hl X E) (tensor D l hl X L)
+    (scalar l X E L i) A.dual B.dual
+    ((sfRationalConstructibleLocalization l E X).obj wE.omega)
+    ((sfRationalConstructibleLocalization l L X).obj wL.omega)
+    A.evaluation B.evaluation (fun K ↦ A.bidual.hom.app K)
+    (fun K ↦ B.bidual.hom.app K) sA.swap sB.swap
+    (@rationalTensorScalarComparison l _ E _ _ _ L _ _ _ i X (units D l hl X))
+    e.omega.hom (fun K ↦ e.comparison.hom.app (op K))
+    sA.bidual sB.bidual sB.natural B.evaluation_natural sB.detect
+    (scalar_interchange D l hl X E L i wE wL A B hA hB sA sB) heval K
 
 end WeilConjectures.RationalVerdier

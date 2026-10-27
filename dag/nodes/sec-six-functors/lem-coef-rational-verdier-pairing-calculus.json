@@ -1,0 +1,161 @@
+{
+ "id": "lem-coef-rational-verdier-pairing-calculus",
+ "kind": "statement",
+ "title": "Construction of normalized rational signed transposition calculus",
+ "statement": "Fix D,l,X,E,w and normalized rational Verdier Datum A [def-sf-rational-verdier-data]. Suppose its supplied ordinary signed symmetry [def-sf-integral-verdier-models] is natural in both ambient derived variables. Conjugate that signed swap by the invertible completion maps to construct completedInterchange on integral constructible pairs. There is a rational PairingCalculus with swap equal, on every integral pair, to the localization of this constructed interchange; swap is natural in both raw rational variables. The actual specified bidual map untransposes to swap followed by evaluation: tensor(1_DK,delta_K);ev_DK=swap_DK,K;ev_K. Finally the normalized evaluation detects maps into DK. The calculus is assembled from these specified components, not chosen as an arbitrary symmetry.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Paragraph 1, the internal-Hom comparison as the transpose of evaluation; paragraph 3 repeats the same argument for E to L."
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "def-sf-integral-verdier-models",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Construct the integral interchange as inverse completion, ordinary signed swap, and completion in the reverse order. Transport ordinary naturality by the four completion isomorphisms, using naturality of the completion transformation.",
+   "uses": [
+    "def-sf-integral-verdier-models",
+    "def-sf-rational-verdier-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 1, the internal-Hom comparison as the transpose of evaluation; paragraph 3 repeats the same argument for E to L."
+   }
+  },
+  {
+   "text": "Apply the already proved raw bilinear natural-isomorphism localization theorem to the integral natural interchange and to the rational tensor and its flipped functor. Reverse the bilinear arrow map in the flipped input; commutativity of localized scalars gives its required pure-tensor formula. This constructs the normalized natural rational swap.",
+   "uses": [
+    "lem-sf-localized-bilinear-comparison",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 1, the internal-Hom comparison as the transpose of evaluation; paragraph 3 repeats the same argument for E to L."
+   }
+  },
+  {
+   "text": "Apply the inverse Hom-equivalence identity to the definition of IntegralVerdier.delta. Move the tensor arrow past inverse completion by naturality, and cancel the two adjacent completion isomorphisms. This proves the integral delta-evaluation equation. Localize it, using A.objects, A.bidual_integral, A.evaluation_integral and the rational tensor pure-tensor formula, to obtain the claimed rational equation. Equality and heterogeneous equality transport identify every endpoint explicitly.",
+   "uses": [
+    "def-sf-integral-verdier-models",
+    "def-sf-rational-verdier-data",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 1, the internal-Hom comparison as the transpose of evaluation; paragraph 3 repeats the same argument for E to L."
+   }
+  },
+  {
+   "text": "Use nondegeneracy of normalized rational evaluation and assemble the constructed swap, its integral normalization, naturality, bidual equation and detection into PairingCalculus.",
+   "uses": [
+    "lem-coef-rational-verdier-evaluation-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "Paragraph 1, the internal-Hom comparison as the transpose of evaluation; paragraph 3 repeats the same argument for E to L."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-verdier-models",
+  "def-sf-rational-verdier-data",
+  "lem-sf-localized-bilinear-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-rational-verdier-evaluation-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Expanded genuine part of the evaluation-transposition argument of lem-coef-rational-verdier-comparison-biduality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of a linear tensor Hom adjunction preserves injectivity of the evaluation transpose",
+   "results": "IsLocalizedModule.map_injective and generic localization injectivity facts. These do not identify the supplied normalized Verdier evaluation; that identification is the remaining detection step.",
+   "date": "2026-10-28",
+   "verdict": "Generic linear-localization tools; no exact project normalization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv.baseChange",
+   "results": "LinearEquiv.baseChange, baseChange_tmul and baseChange_symm_tmul. They base-change a supplied linear equivalence; the normalized tensor-Hom equivalence must first be identified.",
+   "date": "2026-10-28",
+   "verdict": "Useful generic API for the stated proof, no duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|map_braiding|LaxBraided",
+   "results": "Generic Mathlib braiding naturality in monoidal categories and localizations. Project search additionally found IntegralVerdierSignedCalculus and EvaluationBidualComparisonTransport, which use native monoidal structures rather than the supplied normalized presentations and raw rational tensors. No standalone theorem of integral scalar interchange for these supplied presentations.",
+   "date": "2026-10-28",
+   "verdict": "No exact duplicate; use elementary categorical calculus and existing bilinear localization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierComparisonBiduality",
+  "date": "2026-10-28",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "Evaluation and second transposition; signed transpose equation and rational naturality",
+   "via": [
+    "lem-coef-rational-verdier-comparison-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierPairingCalculus",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierPairingCalculus.lean",
+  "declaration": "WeilConjectures.RationalVerdier.pairing_calculus",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.completedInterchange",
+   "WeilConjectures.RationalVerdier.PairingCalculus",
+   "WeilConjectures.RationalVerdier.normalized_evaluation_transpose",
+   "WeilConjectures.RationalVerdier.pairing_calculus"
+  ],
+  "statement": "theorem pairing_calculus (A : Datum D l hl X E w)\n    (hA : ∀ (K M K' M' : IntegralHom.Derived.{u, u} X\n        (completedIntegralCommRingSheafUnrestricted l E X))\n      (f : K ⟶ K') (g : M ⟶ M'),\n      A.ordinary.tensor.map (Prod.mkHom f g) ≫ (A.symmetry.swap K' M').hom =\n        (A.symmetry.swap K M).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f)) :\n    Nonempty (PairingCalculus D l hl X E w A)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T234349-L-115146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T234349-L-115146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
