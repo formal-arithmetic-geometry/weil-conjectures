@@ -21,81 +21,57 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathbf Z/\\ell^n$. The unital structure map $R\\to A$ exists because $\\ell^nA=0$. Use the fixed coefficient-independent compactification supplied by [sk-def-sfb-dc-setting] for $f$ at both coefficient rings. The unit $R_Y$ is in the bounded constructible finite-Tor category (it is free of rank one in degree zero). Thus [det-sp-reduction-exceptional] gives $c_f:(\\omega_{f,R})_A\\xrightarrow{\\sim}\\omega_{f,A}$. Apply [thm-pur-diagonal-dualizing-object] at $E=\\mathbf Q_\\ell$, whose level-$n$ quotient is exactly $R$, to obtain $\\theta_{f,R}:\\omega_{f,R}\\xrightarrow{\\sim}R_X(d)[2d]$. All its scheme hypotheses hold in our explicit separated finite-type setting. Since $\\ell$ is invertible on every $k$-scheme here, the Tate clause applies. By the free-line and exact-functor clauses of [det-sp-scalar-extension-functor], scalar extension carries this isomorphism to $(\\omega_{f,R})_A\\xrightarrow{\\sim}A_X(d)[2d]$. Set $\\theta_{f,A}^{(n)}=(\\theta_{f,R})_A c_f^{-1}$. This proves clause (1), with exactly its displayed map and arrow directions.",
+   "text": "Construct the bottom coefficient ring equivalence, the unital map to A, and the common-exponent generator-normalized coefficient line.",
    "uses": [
-    "det-sp-reduction-exceptional",
+    "lem-sp-general-ring-prime-quotient-equivalence",
+    "lem-sp-general-ring-common-exponent-line"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the ordinary A orientation from the actual closed diagonal, normalized Rees specialization and inverse bundle integration. Extract the coordinate-normalized ordinary prime-power orientation from the unique diagonalDualizingObject, and identify its Rees normalization.",
+   "uses": [
+    "lem-sp-finite-smooth-normalized-existence",
     "thm-pur-diagonal-dualizing-object",
-    "det-sp-scalar-extension-functor",
-    "sk-def-sfb-dc-setting"
+    "lem-pur-diagonal-ordinary-rees-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "We compare the three arrows in the diagonal/DNC construction, rather than infer canonicity from the existence of an isomorphism. Put $W=X\\times_YX$, with $p_1,p_2$ and $\\Delta$. The prime-power diagonal arrow $a_R:C_R(p_1,\\Delta)\\to\\omega_{f,R}$ is the base-change identification of [lem-pur-diagonal-base-change]. Its construction uses the smooth base-change exchange and $p_2\\Delta=1_X$. The base-change and pullback coherence in [lem-pur-dnc-coefficient-transport], applied with $g_0=f$, $h=f$, and $g'_0=p_1$ to this square (the base-change clause requires no section of $f$), gives\n$$a_A q_{p_1,\\Delta}=c_f(a_R)_A.$$\nHere $a_A$ is the same specified base-change composite over $A$, not an arbitrary identification. For the actual normal bundle $\\pi_N:N_\\Delta\\to X$, the normalized deformation map $\\delta_R:C_R(p_1,\\Delta)\\to C_R(\\pi_N,0_N)$ is [thm-pur-dnc-invariance]. The final equation of [lem-pur-dnc-coefficient-transport] gives\n$$\\delta_A q_{p_1,\\Delta}=q_{\\pi_N,0_N}(\\delta_R)_A.$$\nThat lemma identifies $\\delta_A$ with the direct normalized construction over $A$, and supplies its uniqueness at $t=1$. The pair is eligible: the diagonal of the smooth separated map $f$ is a closed section of $p_1$ and its actual normal bundle is the rank-$d$ tangent bundle, as stated in [lem-pur-diagonal-regular-immersion]. The geometry, including this bundle, is the same at both coefficient rings. The helper uses [def-pur-dnc-section-family] for that geometric space and its structural maps; its two displayed formulas define the family objects separately at $R$ and $A$, so the fixed-coefficient convention of that definition is respected.",
+   "text": "Apply normalizedOrientation_scalar at equal exponents and cancel orientation inverses. The ordinary dualizing scalar map is invertible by finite_smooth_dualizing_scalar. The bounded-below comparison-adjunction unit makes both dualizing-unit maps invertible.",
    "uses": [
-    "lem-pur-diagonal-base-change",
-    "lem-pur-dnc-coefficient-transport",
-    "thm-pur-dnc-invariance",
-    "lem-pur-diagonal-regular-immersion",
-    "def-pur-dnc-section-family"
+    "lem-sp-finite-normalized-orientation-scalar",
+    "lem-pur-finite-smooth-dualizing-scalar"
    ],
    "elementary": false
   },
   {
-   "text": "The last arrow $\\beta_R:C_R(\\pi_N,0_N)\\to R_X(d)[2d]$ is the zero-section pullback of the canonical vector-bundle orientation [cor-pur-vector-bundle-purity]. More precisely, at $R$ the theorem [thm-amb-vector-bundle-purity] explicitly specifies its inverse as the transpose of the inverse projection formula followed by integration $t_{\\pi_N}$; this is the integration normalization specified in our statement. Over a trivializing open, vector integration is the affine-space counit, and [def-amb-vector-integration] specifies it for every finite ring, including $A$, by these local restrictions and unique gluing. Let $T_D=D_N(d)[2d]$ and let $j_D:T_D\\to\\omega_{\\pi_N,D}$ be the adjoint transpose of $t_{\\pi_N,D}$ for $D=R,A$. The specified affine trace of [lem-amb-affine-space-top-trace] is the counit of the ordered affine-space adjunction, so on a trivializing open $j_D$ is the identity in that adjunction's identification $\\omega_{p_d,D}=D(d)[2d]$. The chart clause of [det-sp-reduction-exceptional] uses the counit-preserving chart identification, with counit the fibre sum followed by the specified affine-space counit. On a vector-bundle trivializing open the etale coordinate map is the identity, so this fibre sum is the identity and it identifies $c_{\\pi_N}$ with the coefficient identification between precisely these affine right adjoints; thus on that open $c_{\\pi_N}(j_R)_A=j_A$. To pass from charts to global maps, $c_{\\pi_N}(j_R)_A:T_A\\to\\omega_{\\pi_N,A}$ is an isomorphism, since $j_R$ and $c_{\\pi_N}$ are isomorphisms. Its target is therefore a locally free rank-one sheaf shifted by $[2d]$, as is its source. By [lem-weil-pbc-derived-single-fully-faithful], after removing that common shift both $c_{\\pi_N}(j_R)_A$ and $j_A$ are ordinary sheaf morphisms. Their equality on each trivializing open gives equality globally by [lem-pur-sheaf-hom-cover-gluing]. Thus $c_{\\pi_N}(j_R)_A=j_A$. The left-hand map is invertible, so $j_A$ is invertible and $j_A^{-1}c_{\\pi_N}=(j_R^{-1})_A$. Restrict along the zero section and use the pullback/tensor identification [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the free-line identification [det-sp-scalar-extension-functor]. This gives the pullback of the equality between the specified inverse-integration maps just proved. In the pro-etale realization the same equality holds: by [lem-pur-finite-ring-site-tensor-transpose](3), applied to $\\pi_N$ with $M=D_N(d)[2d]$, $K=D_X$ and $e=t_{\\pi_N,D}$ for $D=R,A$, the pro-etale transpose of the transported integration is $\\nu^*$ of the etale $j_D$ under the counit-preserving identification $\\rho$ of its clause (1); the chart counits of [det-sp-reduction-exceptional] are transported from the etale site through the same comparison, and the tensor comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Consequently the last arrow of the direct $A$-construction satisfies\n$$\\beta_A q_{\\pi_N,0_N}=(\\beta_R)_A.$$\nThe coefficient notation at the zero section is canonical by [lem-asd-etale-finite-twist-pullback]. This argument concerns specified integration and its transpose; it never asserts that all isomorphisms of Tate lines coincide.",
+   "text": "Paste the site/scalar dualizing-unit square with the ordinary orientation square and the prime-power comparison equation. The abstract categorical assembly proves exceptional reduction invertibility and the exact orientation equation. Naturality of the intrinsic scalar-presentation isomorphism supplies the prescribed finiteGeneralRingOrientationExtension.",
    "uses": [
-    "cor-pur-vector-bundle-purity",
-    "def-amb-vector-integration",
-    "det-sp-reduction-exceptional",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "det-sp-scalar-extension-functor",
-    "lem-asd-etale-finite-twist-pullback",
-    "thm-amb-vector-bundle-purity",
-    "lem-amb-affine-space-top-trace",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-sheaf-hom-cover-gluing",
-    "lem-pur-finite-ring-site-tensor-transpose"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The direct diagonal construction is $\\theta_{f,A}^{\\mathrm{dir}}=\\beta_A\\delta_Aa_A^{-1}$; the prime-power orientation is $\\theta_{f,R}=\\beta_R\\delta_Ra_R^{-1}$. Here $\\theta_{f,R}$ is the orientation of [thm-pur-diagonal-dualizing-object], i.e. the diagonal construction, which that theorem forms over the preimages $X_i=f^{-1}(V_i)$ of an affine open cover $\\{V_i\\}$ of $Y$ and glues. In our separated setting the global composite $\\beta_R\\delta_Ra_R^{-1}$ is defined on all of $X$, and it restricts on each $X_i$ to the local composite for $f_i:X_i\\to V_i$: the pair $(W,\\Delta)$ and the normal bundle $N_\\Delta$ restrict to $(X_i\\times_{V_i}X_i,\\Delta_i)$ and $N_{\\Delta_i}$; $a_R$ restricts to the diagonal arrow of $f_i$ because the canonical comparison of the base-change clause of [thm-pur-cohomological-smoothness] is compatible with base change, here along the open immersion $X_i\\hookrightarrow X$; $\\delta_R$ restricts to the comparison for $(p_{1,i},\\Delta_i)$ by the localization and base-change clause of [thm-pur-dnc-invariance]; and $\\beta_R$ restricts to the zero-section arrow of $N_{\\Delta_i}$ by the base-change compatibility of [cor-pur-vector-bundle-purity]. Both $\\theta_{f,R}$ and $\\beta_R\\delta_Ra_R^{-1}$ are isomorphisms $\\omega_{f,R}\\to R_X(d)[2d]$; after removing the common shift $[2d]$ both source and target are sheaves in degree zero, so the two maps are sheaf maps by [lem-weil-pbc-derived-single-fully-faithful], and they agree on the cover $\\{X_i\\to X\\}$, hence globally by [lem-pur-sheaf-hom-cover-gluing]. Thus $\\theta_{f,R}=\\beta_R\\delta_Ra_R^{-1}$, independently of the cover. Substitute the three equations proved in Steps 2–3. They give\n$$\\theta_{f,A}^{\\mathrm{dir}}c_f\n=\\beta_A\\delta_Aq_{p_1,\\Delta}(a_R)_A^{-1}\n=(\\beta_R)_A(\\delta_R)_A(a_R)_A^{-1}\n=(\\theta_{f,R})_A.$$\nSince $c_f$ is invertible, $\\theta_{f,A}^{\\mathrm{dir}}=(\\theta_{f,R})_Ac_f^{-1}=\\theta_{f,A}^{(n)}$. This proves clause (2).",
-   "uses": [
-    "thm-pur-diagonal-dualizing-object",
-    "thm-pur-cohomological-smoothness",
-    "thm-pur-dnc-invariance",
-    "cor-pur-vector-bundle-purity",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pur-sheaf-hom-cover-gluing"
+    "lem-sp-general-ring-site-scalar",
+    "lem-sp-general-ring-orientation-assembly",
+    "lem-sp-general-ring-scalar-presentation-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-pur-vector-bundle-purity",
-  "def-amb-vector-integration",
-  "def-pur-dnc-section-family",
-  "det-sp-reduction-exceptional",
-  "det-sp-scalar-extension-functor",
-  "lem-amb-affine-space-top-trace",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-pur-diagonal-base-change",
-  "lem-pur-diagonal-regular-immersion",
-  "lem-pur-dnc-coefficient-transport",
-  "lem-pur-finite-ring-site-tensor-transpose",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-def-sfb-dc-setting",
-  "thm-amb-vector-bundle-purity",
-  "thm-pur-cohomological-smoothness",
-  "thm-pur-diagonal-dualizing-object",
-  "thm-pur-dnc-invariance"
+  "lem-sp-general-ring-common-exponent-line",
+  "lem-pur-diagonal-ordinary-rees-normalization",
+  "lem-pur-finite-smooth-dualizing-scalar",
+  "lem-sp-finite-normalized-orientation-scalar",
+  "lem-sp-finite-smooth-normalized-existence",
+  "lem-sp-general-ring-orientation-assembly",
+  "lem-sp-general-ring-prime-quotient-equivalence",
+  "lem-sp-general-ring-scalar-presentation-naturality",
+  "lem-sp-general-ring-site-scalar",
+  "thm-pur-diagonal-dualizing-object"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "F1",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
-  "place": "Proof (1) and (2): scalar coefficient comparison and the direct diagonal/Rees/integration orientation"
+  "place": "Proof (1)-(2); existing normalizedOrientation_scalar and explicit site/scalar square"
  },
  "mathlib_searches": [
   {
@@ -151,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-93ff3",
-  "group": "X2",
+  "reviewer": "COMPILER",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261025T124336-L-1979690",
+  "landing": "20261027T180556-L-3877961",
   "kind": "interface",
-  "note": "independent cc review: FiniteGeneralRingData vs the clone's FiniteGeneralRing block (verbatim, string-equal); item theorem signature vs the clone (identical); 2 direct importers compiled against the delivered modules (exit 0); #print axioms (sorryAx only from the split statements and upstream smooth_tensor_duality); unit realized lists vs the removed imports"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

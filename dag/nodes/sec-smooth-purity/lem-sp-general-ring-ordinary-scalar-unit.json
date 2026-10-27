@@ -1,0 +1,99 @@
+{
+ "id": "lem-sp-general-ring-ordinary-scalar-unit",
+ "kind": "statement",
+ "title": "Ordinary derived coefficient-unit conversion cancels from scalar extension",
+ "statement": "For a unital commutative-ring map φ:A→B and scheme T, scalar extension of the single-functor unit isomorphism at A, followed by ExceptionalCoefficients.unitIso at T and the inverse single-functor unit isomorphism at B, has exactly the same forward arrow as ExceptionalCoefficients.unitIso. This is an equality in the ordinary derived category, before applying site comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (1)-(2), normalized diagonal/Rees/integration comparison"
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations"
+ ],
+ "proof": [
+  {
+   "text": "The inverse single-functor unit isomorphism is the identity by the existing unit-model theorem. Its hom-inverse identity gives the forward identity. Expand only the homs of isomorphism composition and functor mapIso. Scalar extension preserves the first identity and the target identity cancels, proving the ordinary scalar-unit equation. This holds for the zero ring and empty schemes as an identity of categorical unit maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (1)-(2); explicit Lean construction and square pasting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth dualizing orientation under extension from prime-power coefficients to a finite ring",
+   "results": "No matching geometric purity theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "Use the already stated geometric orientation comparison and categorical isomorphism APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor.map",
+   "results": "Functor.map_isIso and general inverse cancellation lemmas.",
+   "date": "2026-10-28",
+   "verdict": "Useful for categorical assembly, not for the geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientKerEquivOfSurjective|map_ringEquiv_maximalIdeal",
+   "results": "PadicInt.ker_toZModPow, Ideal.quotientEquiv, RingHom.quotientKerEquivOfSurjective, IsLocalRing.map_ringEquiv_maximalIdeal.",
+   "date": "2026-10-28",
+   "verdict": "These directly construct the bottom coefficient quotient equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.FiniteGeneralRingOrientation",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-general-ring-orientation",
+   "place": "Diagonal/Rees normalization and scalar/site assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.FiniteGeneralRingOrdinaryScalarUnit",
+  "file": "lean/Sheaf/SecSmoothPurity/FiniteGeneralRingOrdinaryScalarUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ordinaryScalarUnitSandwich",
+  "statement": "theorem ordinaryScalarUnitSandwich\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :\n    ((Etale.scalarExtension φ T).mapIso\n        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T) ≪≫\n      Etale.ExceptionalCoefficients.unitIso φ T ≪≫\n      (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} B) T).symm).hom =\n        (Etale.ExceptionalCoefficients.unitIso φ T).hom",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T180556-L-3877961",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T180556-L-3877961",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
