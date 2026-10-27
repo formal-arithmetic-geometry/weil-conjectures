@@ -65,6 +65,21 @@ variable {E₀ E₁ E₂ E₃ P₀ P₁ P₂ P₃ : Type*}
     a'.hom.app (g.obj M) ≫ p'.map (c.hom.app M) ≫ ϑ.app (A₀.obj M))
 
 include a a' hb hb' hsq in
+/-- Transport of mates along comparison functors. Consider two squares of left adjoints
+```
+        g                      q
+   E₀ ────▶ E₂            P₀ ────▶ P₂
+   │        │             │        │
+  l│   θ    │l'          p│   ϑ    │p'
+   ▼        ▼             ▼        ▼
+   E₁ ────▶ E₃            P₁ ────▶ P₃
+        h                      t
+```
+with `e : l ⊣ r`, `e' : l' ⊣ r'`, `d : p ⊣ s`, `d' : p' ⊣ s'`, and comparison functors
+`Aᵢ : Eᵢ ⥤ Pᵢ` together with isomorphisms `a, a', c, c'` between the left adjoints and maps
+`b, b'` between the right adjoints. If `b, b'` are compatible with the counits (`hb`, `hb'`)
+and the cube of left adjoints commutes (`hsq`), then the mate of `θ`, conjugated by the
+comparison functors, is the mate of `ϑ`. -/
 private theorem comparison_mate_transport (K : E₁) :
     A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K) ≫ b'.app (h.obj K) ≫
       s'.map (c'.hom.app K) =

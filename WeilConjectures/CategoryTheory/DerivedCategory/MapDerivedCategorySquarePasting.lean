@@ -84,6 +84,19 @@ variable {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
   [PreservesFiniteLimits E₂] [PreservesFiniteColimits E₂]
 
 /-- Exact derivation takes a pasted comparison to the paste of its derived comparisons.
+For the two squares
+```
+        F         G
+   C₀ ────▶ C₁ ────▶ C₂
+   │        │        │
+ E₀│   α    │E₁  β   │E₂
+   ▼        ▼        ▼
+   D₀ ────▶ D₁ ────▶ D₂
+        P         Q
+```
+with `α : F ⋙ E₁ ≅ E₀ ⋙ P` and `β : G ⋙ E₂ ≅ E₁ ⋙ Q`, the derived comparison of the outer
+square `F ⋙ G`, `P ⋙ Q` is the paste of `D(α)` and `D(β)`, conjugated by the composition
+isomorphisms `D(F ⋙ G) ≅ D(F) ⋙ D(G)` and `D(P ⋙ Q) ≅ D(P) ⋙ D(Q)`.
 Source: WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate,
 composition associativity and whiskering naturality.
 

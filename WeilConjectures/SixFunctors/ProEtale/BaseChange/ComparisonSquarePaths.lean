@@ -43,6 +43,21 @@ noncomputable def comparisonSquareProEtalePathOfData
     Functor.isoWhiskerLeft s.K₀ s.sp
 
 /-- Component coherence identifies the two specified ordinary paths.
+The data `s` is a cube: the top face `se : L₁ ⋙ L₂ ≅ L₁' ⋙ L₂'`, the bottom face
+`sp : R₁ ⋙ R₂ ≅ R₁' ⋙ R₂'`, and four vertical squares `c₁, c₂, c₁', c₂'`:
+```
+        L₁       L₂                 L₁'      L₂'
+   A ────▶ B ────▶ C           A ────▶ B' ────▶ C
+   │       │       │           │       │        │
+ K₀│  c₁   │K₁ c₂  │K₂       K₀│  c₁'  │K₁' c₂' │K₂
+   ▼       ▼       ▼           ▼       ▼        ▼
+   P ────▶ Q ────▶ R           P ────▶ Q' ────▶ R
+        R₁       R₂                 R₁'      R₂'
+```
+The two isomorphisms `(L₁ ⋙ L₂) ⋙ K₂ ≅ K₀ ⋙ (R₁' ⋙ R₂')` are `se`, then the right-hand
+row of squares (`comparisonSquareEtalePathOfData`), and the left-hand row of squares, then
+`sp` (`comparisonSquareProEtalePathOfData`). They agree when every component of the cube
+commutes (`ComparisonSquareComponent`).
 Source: extensionality of natural transformations. -/
 theorem comparisonSquarePaths_eq (s : ComparisonSquareData A B B' C P Q Q' R)
     (h : ∀ F, ComparisonSquareComponent s F) :
