@@ -1,0 +1,107 @@
+{
+ "id": "def-coef-native-open-tensor-primitives",
+ "kind": "definition",
+ "title": "Explicit native open tensor cochain specializations",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, schemes X and Z in universe u and an open immersion j:X -> Z. Define SystemOpenCochainsData l E j to be OpenTensorCochainData [def-sf-open-tensor-cochain-data] on the ringed sequence sites with the actual positive-quotient VaryingRing extension, pullback, adjunction and pullSection of [def-coef-native-open-tensor-evaluation-data]. For n in N define FiniteOpenCochainsData l E j n to be that same structure on the pro-etale sites with the StrictTower extension, pullback, adjunction and finitePullSection at quotient stage n+1. These are transparent type abbreviations with all functors and instances explicitly specified; they assert no existence of data.",
+ "stmt_deps": [
+  "def-sf-open-tensor-cochain-data",
+  "def-coef-native-open-tensor-evaluation-data",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, expanding its omitted totalization/descent; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tags 07A4 and 0G7E."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves along an open immersion preserves tensor products and K flat complexes; extension by zero satisfies the tensor projection formula",
+   "results": "Scheme.Modules.restrictFunctor, restrictAdjunction; Sheaf.tensorProd_isSheaf (Cartesian tensor, not relative module tensor).",
+   "date": "2026-10-28",
+   "verdict": "No native pro-etale sequence/finite module tensor datum. The scheme-module restriction is on a different site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero open immersion tensor projection formula on sheaf cochain complexes natural in both factors",
+   "results": "SheafedSpace.IsOpenImmersion.invApp_app_apply and related open-immersion section identities.",
+   "date": "2026-10-28",
+   "verdict": "No theorem constructing the ordinary/cochain projection datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction.homEquiv, homEquiv_apply, homEquiv_unit, homEquiv_symm_apply.",
+   "date": "2026-10-28",
+   "verdict": "Useful adjunction API, but does not supply the restriction tensorator or total comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "OpenTensorCochainData|ringedSlice_extension_tensor|ringedOpen_totalTensor",
+   "results": "msearch Mathlib grep: no hits. Project rg: OpenTensorCochainData, RingedSliceExtensionTensor and RingedOpenTotalTensorKFlat provide the generic input, not native specialization.",
+   "date": "2026-10-28",
+   "verdict": "Native specialization remains necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeOpenTensorCochains",
+  "date": "2026-10-28",
+  "group": "R8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, mapping-complex adjunction and specified natural maps before limits; returned expansion lem-coef-tower-evaluation-pairing, steps 4-5: Compact-support reduction realization with normalized open tensor comparison. Native interface specialization: steps 5--6. Ordinary and cochain construction followed by normalized projection descent (support-open-tensor steps 5--6).",
+   "via": [
+    "lem-coef-native-open-tensor-cochains",
+    "lem-coef-native-open-tensor-models-data-existence",
+    "lem-coef-native-open-tensor-models-existence",
+    "lem-coef-support-open-tensor-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefNativeOpenTensorPrimitives",
+  "file": "lean/Sheaf/Paper/CoefNativeOpenTensorPrimitives.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.SystemOpenCochainsData",
+  "declarations": [
+   "WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.SystemOpenCochainsData",
+   "WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.FiniteOpenCochainsData"
+  ],
+  "statement": "abbrev SystemOpenCochainsData {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T180758-L-3900819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T180758-L-3900819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

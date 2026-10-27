@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.CoefOpenTensorEvaluationData
 public import Sheaf.SixFunctors.OpenTensorCochainData
+public import Sheaf.Paper.CoefNativeOpenTensorPrimitives
+import Sheaf.Paper.CoefNativeOpenTensorSystemExistence
+import Sheaf.Paper.CoefNativeOpenTensorFiniteExistence
 
 /-! # Ordinary native open tensor representatives
 
@@ -37,65 +40,15 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Sequence-site specialization of ordinary open tensor data.
 Source: Stacks 0E8I (blueprint: lem-coef-native-open-tensor-cochains). -/
 abbrev SystemOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :=
-  letI := ProEtale.VaryingRing.extensionAdditive
-    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j
-  letI := ProEtale.VaryingRing.extensionLimits
-    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j
-  letI := ProEtale.VaryingRing.extensionColimits
-    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j
-  letI := ProEtale.VaryingRing.pullAdditive
-    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j
-  letI := ProEtale.VaryingRing.pullLimits
-    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j
-  letI := ProEtale.VaryingRing.pullColimits
-    (compactSupportSystemLevel l E) (compactSupportSystemQuotient l E) j
-  @OpenTensorCochainData.{u + 1, u, u} (ℕ × Z.ProEt) _
-    (ProEtale.VaryingRing.sequenceSiteSmall Z)
-    (coefficientSequenceTopology (ProEt.topology Z)) (coefficientSequenceCommRingSheaf.{u, u} l E Z)
-    (ℕ × X.ProEt) _ (ProEtale.VaryingRing.sequenceSiteSmall X)
-    (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf.{u, u} l E X)
-    (ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) j)
-    (ProEtale.VaryingRing.pull (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) j)
-    (ProEtale.VaryingRing.extensionAdditive (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) j)
-    (ProEtale.VaryingRing.pullAdditive (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) j)
-    (ProEtale.VaryingRing.moduleJAdj (compactSupportSystemLevel l E)
-      (compactSupportSystemQuotient l E) j)
-    (ProEtale.VaryingRing.baseChange j) (pullSection l E j)
+  WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.SystemOpenCochainsData l E j
 
 /-- Finite-coefficient specialization of ordinary open tensor data.
 Source: Stacks 0E8I (blueprint: lem-coef-native-open-tensor-cochains). -/
 abbrev FiniteOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (n : ℕ) :=
-  letI := ProEtale.StrictTower.moduleJ_additive (compactSupportSystemLevel l E n) j
-  letI := ProEtale.StrictTower.moduleJ_finiteLimits (compactSupportSystemLevel l E n) j
-  letI := ProEtale.StrictTower.moduleJ_finiteColimits (compactSupportSystemLevel l E n) j
-  letI := proEtaleRingModulePullback_additive j
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) Z)
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) X)
-    (ProEtale.StrictTower.constantRingIso (compactSupportSystemLevel l E n) j)
-  letI := proEtaleRingModulePullback_preservesFiniteLimits j
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) Z)
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) X)
-    (ProEtale.StrictTower.constantRingIso (compactSupportSystemLevel l E n) j)
-  letI := proEtaleRingModulePullback_preservesFiniteColimits j
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) Z)
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) X)
-    (ProEtale.StrictTower.constantRingIso (compactSupportSystemLevel l E n) j)
-  @OpenTensorCochainData.{u + 1, u, u} Z.ProEt _
-    (ProEtale.VaryingRing.siteSmall Z) (ProEt.topology Z)
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) Z)
-    X.ProEt _ (ProEtale.VaryingRing.siteSmall X) (ProEt.topology X)
-    (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) X)
-    (ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j)
-    (ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) j)
-    _ _
-    (ProEtale.StrictTower.moduleJAdj (compactSupportSystemLevel l E n) j)
-    (proEtaleBaseChange j) (finitePullSection l E j n)
+  WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.FiniteOpenCochainsData l E j n
 
+set_option linter.unusedVariables false in
 /-- Native restriction and projection data before derived localization.
 Source: Stacks sites-modules.tex, lemma-j-shriek-and-tensor (0E8I),
 sites-cohomology.tex, lemma-pullback-K-flat (0G7E), and Homology 012Z
@@ -126,6 +79,9 @@ positive quotient), and unbounded complexes require no exceptions. -/
 theorem nativeOpenTensor_cochains_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] :
     ∃ (D : SystemOpenCochains l E j) (Dn : ∀ n : ℕ, FiniteOpenCochains l E j n), True := by
-  sorry
+  obtain ⟨D, hD⟩ := nativeOpenTensor_system_exists l E j
+  have hDn (n : ℕ) : ∃ Dn : FiniteOpenCochains l E j n, True :=
+    nativeOpenTensor_finite_exists l E j n
+  exact ⟨D, fun n ↦ Classical.choose (hDn n), hD⟩
 
 end WeilConjectures.CoefSupportOpenTensor
