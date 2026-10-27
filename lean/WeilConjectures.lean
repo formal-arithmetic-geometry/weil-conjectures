@@ -12758,3 +12758,4 @@ public import WeilConjectures.TraceFormula.CompactCohomologyFibres
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
+public import WeilConjectures.SmoothPurity.Defs
