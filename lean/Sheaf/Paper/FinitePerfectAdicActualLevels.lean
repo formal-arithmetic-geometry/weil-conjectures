@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantNormalization
 public import Sheaf.Paper.FinitePerfectAdicStalkModels
+import Sheaf.Paper.FinitePerfectAdicActualLevelObjects
+import Sheaf.Paper.FinitePerfectAdicActualLevelStalk
+import Sheaf.Paper.FinitePerfectAdicActualLevelTransitions
 
 /-! # Levelwise actual finite quotient data
 
@@ -62,6 +65,19 @@ theorem finitePerfectAdic_actual_levels
     (T : FinitePerfectAdicAlgebraTower d)
     (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n))
     (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) :
-    Nonempty (FinitePerfectAdicActualLevelData X d M V T) := by sorry
+    Nonempty (FinitePerfectAdicActualLevelData X d M V T) := by
+  obtain ⟨K, hKbounded, hKlisse⟩ := finitePerfectAdic_actual_level_objects
+    X d φ hφ hcompat M V T hperfect hmark
+  have hKstalk := finitePerfectAdic_actual_level_stalk
+    X d φ hφ hcompat M V T hmark K
+  obtain ⟨dK, huniversalK⟩ := finitePerfectAdic_actual_level_transitions
+    X d φ hφ hcompat M V T hmark K
+  exact ⟨{
+    K := K
+    boundedK := hKbounded
+    lisseK := hKlisse
+    stalk := hKstalk
+    dK := dK
+    universalK := huniversalK }⟩
 
 end AlgebraicGeometry.Scheme
