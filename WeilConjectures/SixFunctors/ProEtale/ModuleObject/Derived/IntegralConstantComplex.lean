@@ -395,84 +395,81 @@ section BoundedDual
 
 variable (P : ObjectProperty C)
 
-/-- An object `M` of `D(C)` has a bounded left dual whose cohomology objects lie in `P`. -/
-def HasBoundedDual (M : DerivedCategory C) : Prop :=
-  ∃ D : DerivedCategory C, TStructure.t.bounded D ∧ (∀ n, P ((homologyFunctor C n).obj D)) ∧
+/-- An object `M` of `D(C)` has a left dual `D` with cohomology concentrated in degrees
+`[a, b]`, whose cohomology objects lie in `P`. -/
+def HasBoundedDual (a b : ℤ) (M : DerivedCategory C) : Prop :=
+  ∃ D : DerivedCategory C, D.IsGE a ∧ D.IsLE b ∧ (∀ n, P ((homologyFunctor C n).obj D)) ∧
     Nonempty (ExactPairing D M)
 
 variable {P}
 
 /-- Having a bounded left dual with cohomology objects in `P` is invariant under isomorphisms. -/
-lemma HasBoundedDual.of_iso {M M' : DerivedCategory C} (e : M ≅ M') (h : HasBoundedDual P M) :
-    HasBoundedDual P M' := by
-  obtain ⟨D, hD, hP, ⟨_⟩⟩ := h
-  exact ⟨D, hD, hP, ⟨exactPairingCongr (Iso.refl _) e.symm⟩⟩
+lemma HasBoundedDual.of_iso {a b : ℤ} {M M' : DerivedCategory C} (e : M ≅ M')
+    (h : HasBoundedDual P a b M) : HasBoundedDual P a b M' := by
+  obtain ⟨D, ha, hb, hP, ⟨_⟩⟩ := h
+  exact ⟨D, ha, hb, hP, ⟨exactPairingCongr (Iso.refl _) e.symm⟩⟩
 
 /-- A zero object has itself as bounded left dual. -/
-lemma HasBoundedDual.of_isZero (h0 : ∀ X : C, IsZero X → P X) {M : DerivedCategory C}
-    (hM : IsZero M) : HasBoundedDual P M := by
+lemma HasBoundedDual.of_isZero (h0 : ∀ X : C, IsZero X → P X) {a b : ℤ} {M : DerivedCategory C}
+    (hM : IsZero M) : HasBoundedDual P a b M := by
   have hH (n : ℤ) : IsZero ((homologyFunctor C n).obj M) := (homologyFunctor C n).map_isZero hM
-  refine ⟨M, ?_, fun n ↦ h0 _ (hH n), ⟨exactPairingOfIsZero hM⟩⟩
-  rw [← exists_homologyConcentratedIn_iff_bounded]
-  exact ⟨0, 0, (isGE_iff M 0).2 fun i _ ↦ hH i, (isLE_iff M 0).2 fun i _ ↦ hH i⟩
+  exact ⟨M, (isGE_iff M a).2 fun i _ ↦ hH i, (isLE_iff M b).2 fun i _ ↦ hH i,
+    fun n ↦ h0 _ (hH n), ⟨exactPairingOfIsZero hM⟩⟩
 
 /-- Having a bounded left dual with cohomology objects in `P` is stable under binary biproducts,
 if `P` is. -/
 lemma HasBoundedDual.biprod [P.IsClosedUnderIsomorphisms]
-    (h2 : ∀ X Y : C, P X → P Y → P (X ⊞ Y)) {M M' : DerivedCategory C}
-    (h : HasBoundedDual P M) (h' : HasBoundedDual P M') : HasBoundedDual P (M ⊞ M') := by
-  obtain ⟨D, hD, hP, ⟨_⟩⟩ := h
-  obtain ⟨D', hD', hP', ⟨_⟩⟩ := h'
+    (h2 : ∀ X Y : C, P X → P Y → P (X ⊞ Y)) {a b : ℤ} {M M' : DerivedCategory C}
+    (h : HasBoundedDual P a b M) (h' : HasBoundedDual P a b M') :
+    HasBoundedDual P a b (M ⊞ M') := by
+  obtain ⟨D, ha, hb, hP, ⟨_⟩⟩ := h
+  obtain ⟨D', ha', hb', hP', ⟨_⟩⟩ := h'
   let _ : HasRightDual D := ⟨M⟩
   let _ : HasRightDual D' := ⟨M'⟩
   have (n : ℤ) := preservesBinaryBiproducts_of_preservesBiproducts (homologyFunctor C n)
-  refine ⟨D ⊞ D', ?_, fun n ↦ P.prop_of_iso ((homologyFunctor C n).mapBiprod D D').symm
-    (h2 _ _ (hP n) (hP' n)), ⟨exactPairingBiprod D D'⟩⟩
-  rw [← exists_homologyConcentratedIn_iff_bounded] at hD hD' ⊢
-  obtain ⟨a, b, hab⟩ := hD
-  obtain ⟨a', b', hab'⟩ := hD'
-  have : D.IsGE a := hab.1
-  have : D.IsLE b := hab.2
-  have : D'.IsGE a' := hab'.1
-  have : D'.IsLE b' := hab'.2
-  refine ⟨min a a', max b b', (isGE_iff _ _).2 fun i hi ↦ ?_, (isLE_iff _ _).2 fun i hi ↦ ?_⟩
-  · exact IsZero.of_iso ((biprod_isZero_iff _ _).2 ⟨D.isZero_of_isGE a i (by omega),
-      D'.isZero_of_isGE a' i (by omega)⟩) ((homologyFunctor C i).mapBiprod D D')
-  · exact IsZero.of_iso ((biprod_isZero_iff _ _).2 ⟨D.isZero_of_isLE b i (by omega),
-      D'.isZero_of_isLE b' i (by omega)⟩) ((homologyFunctor C i).mapBiprod D D')
+  refine ⟨D ⊞ D', (isGE_iff _ _).2 fun i hi ↦ ?_, (isLE_iff _ _).2 fun i hi ↦ ?_,
+    fun n ↦ P.prop_of_iso ((homologyFunctor C n).mapBiprod D D').symm
+      (h2 _ _ (hP n) (hP' n)), ⟨exactPairingBiprod D D'⟩⟩
+  · exact IsZero.of_iso ((biprod_isZero_iff _ _).2 ⟨D.isZero_of_isGE a i hi,
+      D'.isZero_of_isGE a i hi⟩) ((homologyFunctor C i).mapBiprod D D')
+  · exact IsZero.of_iso ((biprod_isZero_iff _ _).2 ⟨D.isZero_of_isLE b i hi,
+      D'.isZero_of_isLE b i hi⟩) ((homologyFunctor C i).mapBiprod D D')
 
-/-- The unit placed in degree `q` has a bounded left dual whose cohomology objects lie in `P`,
-provided `P` contains the unit and the zero objects. -/
+/-- The unit placed in degree `q` has a left dual concentrated in degrees `[-q, -q + 1]` whose
+cohomology objects lie in `P`, provided `P` contains the unit and the zero objects. -/
 lemma hasBoundedDual_singleFunctor_tensorUnit [P.IsClosedUnderIsomorphisms]
     (h0 : ∀ X : C, IsZero X → P X) (h1 : P (𝟙_ C)) (q : ℤ) :
-    HasBoundedDual P ((singleFunctor C q).obj (𝟙_ C)) := by
+    HasBoundedDual P (-q) (-q + 1) ((singleFunctor C q).obj (𝟙_ C)) := by
   let _ : HasRightDual (0 : C) := { rightDual := 0, exact := exactPairingOfIsZero (isZero_zero C) }
-  obtain ⟨D, u, hD, hz, ⟨e₀⟩, ⟨e₁⟩, ⟨_⟩⟩ :=
+  obtain ⟨D, u, -, hz, ⟨e₀⟩, ⟨e₁⟩, ⟨_⟩⟩ :=
     exists_exactPairing_singleFunctor_cokernel (0 : (0 : C) ⟶ 𝟙_ C) q
-  refine HasBoundedDual.of_iso
+  have hP (n : ℤ) : P ((homologyFunctor C n).obj D) := by
+    by_cases h₀ : n = -q
+    · subst h₀
+      exact P.prop_of_iso (e₀ ≪≫ kernel.mapIso _ (0 : (𝟙_ C)ᘁ ⟶ (0 : C)ᘁ) (Iso.refl _)
+        (Iso.refl _) (by simp [(isZero_zero C).eq_of_tgt (u • (0 : (0 : C) ⟶ 𝟙_ C)ᘁ) 0]) ≪≫
+        kernelZeroIsoSource).symm h1
+    by_cases h₁ : n = -q + 1
+    · subst h₁
+      have := (isZero_zero C).epi (u • (0 : (0 : C) ⟶ 𝟙_ C)ᘁ)
+      exact h0 _ ((isZero_cokernel_of_epi _).of_iso e₁)
+    exact h0 _ (hz n h₀ h₁)
+  exact HasBoundedDual.of_iso
     ((singleFunctor C q).mapIso (cokernelZeroIsoTarget (X := (0 : C)) (Y := 𝟙_ C)))
-    ⟨D, hD, fun n ↦ ?_, ⟨inferInstance⟩⟩
-  by_cases h₀ : n = -q
-  · subst h₀
-    exact P.prop_of_iso (e₀ ≪≫ kernel.mapIso _ (0 : (𝟙_ C)ᘁ ⟶ (0 : C)ᘁ) (Iso.refl _) (Iso.refl _)
-      (by simp [(isZero_zero C).eq_of_tgt (u • (0 : (0 : C) ⟶ 𝟙_ C)ᘁ) 0]) ≪≫
-      kernelZeroIsoSource).symm h1
-  by_cases h₁ : n = -q + 1
-  · subst h₁
-    have := (isZero_zero C).epi (u • (0 : (0 : C) ⟶ 𝟙_ C)ᘁ)
-    exact h0 _ ((isZero_cokernel_of_epi _).of_iso e₁)
-  exact h0 _ (hz n h₀ h₁)
+    ⟨D, (isGE_iff D _).2 fun i hi ↦ hz i (by omega) (by omega),
+      (isLE_iff D _).2 fun i hi ↦ hz i (by omega) (by omega), hP, ⟨inferInstance⟩⟩
 
-/-- For a monomorphism `g : 𝟙 ⟶ 𝟙`, the cokernel of `g` placed in degree `q` has a bounded left
-dual whose cohomology objects lie in `P`, provided `P` contains the zero objects and the cokernels
-of all endomorphisms of the unit. -/
+/-- For a monomorphism `g : 𝟙 ⟶ 𝟙`, the cokernel of `g` placed in degree `q` has a left dual
+concentrated in degrees `[-q, -q + 1]` whose cohomology objects lie in `P`, provided `P` contains
+the zero objects and the cokernels of all endomorphisms of the unit. -/
 lemma hasBoundedDual_singleFunctor_cokernel [P.IsClosedUnderIsomorphisms]
     (h0 : ∀ X : C, IsZero X → P X) (hc : ∀ f : 𝟙_ C ⟶ 𝟙_ C, P (cokernel f))
     (g : 𝟙_ C ⟶ 𝟙_ C) [Mono g] (q : ℤ) :
-    HasBoundedDual P ((singleFunctor C q).obj (cokernel g)) := by
-  obtain ⟨D, u, hD, hz, ⟨e₀⟩, ⟨e₁⟩, ⟨_⟩⟩ := exists_exactPairing_singleFunctor_cokernel g q
+    HasBoundedDual P (-q) (-q + 1) ((singleFunctor C q).obj (cokernel g)) := by
+  obtain ⟨D, u, -, hz, ⟨e₀⟩, ⟨e₁⟩, ⟨_⟩⟩ := exists_exactPairing_singleFunctor_cokernel g q
   rw [rightAdjointMate_tensorUnit] at e₀ e₁
-  refine ⟨D, hD, fun n ↦ ?_, ⟨inferInstance⟩⟩
+  refine ⟨D, (isGE_iff D _).2 fun i hi ↦ hz i (by omega) (by omega),
+    (isLE_iff D _).2 fun i hi ↦ hz i (by omega) (by omega), fun n ↦ ?_, ⟨inferInstance⟩⟩
   by_cases h₀ : n = -q
   · subst h₀
     have : IsIso (u • 𝟙 (𝟙_ C)) := ⟨u⁻¹ • 𝟙 _, by simp [smul_smul], by simp [smul_smul]⟩
@@ -486,21 +483,22 @@ lemma hasBoundedDual_singleFunctor_cokernel [P.IsClosedUnderIsomorphisms]
   exact h0 _ (hz n h₀ h₁)
 
 /-- **Duals of constant objects.** For monomorphisms `g a : 𝟙 ⟶ 𝟙`, an object
-`⊕ⱼ coker (g (e j)) ⊕ 𝟙ʳ` placed in degree `q` has a bounded left dual whose cohomology objects
-lie in `P`, provided `P` contains the zero objects, the unit, the cokernels of all endomorphisms
-of the unit, and is stable under binary biproducts. -/
+`⊕ⱼ coker (g (e j)) ⊕ 𝟙ʳ` placed in degree `q` has a left dual concentrated in degrees
+`[-q, -q + 1]` whose cohomology objects lie in `P`, provided `P` contains the zero objects, the
+unit, the cokernels of all endomorphisms of the unit, and is stable under binary biproducts. -/
 theorem hasBoundedDual_singleFunctor_biprod_cokernel_unit [HasFiniteBiproducts C]
     [P.IsClosedUnderIsomorphisms] (h0 : ∀ X : C, IsZero X → P X)
     (h2 : ∀ X Y : C, P X → P Y → P (X ⊞ Y)) (hc : ∀ f : 𝟙_ C ⟶ 𝟙_ C, P (cokernel f))
     (h1 : P (𝟙_ C)) (g : ℕ → (𝟙_ C ⟶ 𝟙_ C)) [∀ a, Mono (g a)] {k r : ℕ} (e : Fin k → ℕ)
     (q : ℤ) :
-    HasBoundedDual P ((singleFunctor C q).obj
+    HasBoundedDual P (-q) (-q + 1) ((singleFunctor C q).obj
       ((⨁ fun j ↦ cokernel (g (e j))) ⊞ ⨁ fun _ : Fin r ↦ 𝟙_ C)) := by
   have := preservesBinaryBiproducts_of_preservesBiproducts (singleFunctor C q)
-  have hfin {k : ℕ} (A : Fin k → C) (hA : ∀ j, HasBoundedDual P ((singleFunctor C q).obj (A j))) :
-      HasBoundedDual P ((singleFunctor C q).obj (⨁ A)) :=
+  have hfin {k : ℕ} (A : Fin k → C)
+      (hA : ∀ j, HasBoundedDual P (-q) (-q + 1) ((singleFunctor C q).obj (A j))) :
+      HasBoundedDual P (-q) (-q + 1) ((singleFunctor C q).obj (⨁ A)) :=
     HasBoundedDual.of_iso ((singleFunctor C q).mapBiproduct A).symm
-      (prop_biproduct_of_forall (HasBoundedDual P) (fun e h ↦ h.of_iso e)
+      (prop_biproduct_of_forall (HasBoundedDual P (-q) (-q + 1)) (fun e h ↦ h.of_iso e)
         (fun _ h ↦ .of_isZero h0 h)
         (fun _ _ h h' ↦ h.biprod h2 h') _ hA)
   exact HasBoundedDual.of_iso ((singleFunctor C q).mapBiprod _ _).symm (HasBoundedDual.biprod h2

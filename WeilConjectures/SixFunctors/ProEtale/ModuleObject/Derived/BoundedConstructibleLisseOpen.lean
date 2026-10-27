@@ -17,6 +17,8 @@ to `E` is pro-étale locally finitely presented
 (`ProEtale.CondensedRing.exists_isLocallyFinitelyPresented_homology_upperStar`). The scheme `E` is
 `V` up to nilpotents: it is the intersection of `V` with strata of stratifications adapted to the
 finitely many nonzero cohomology sheaves of `K`, which carry their reduced scheme structures.
+The same holds simultaneously for two bounded constructible complexes `K` and `L`
+(`ProEtale.CondensedRing.exists_isLocallyFinitelyPresented_homology_upperStar₂`).
 
 This file does not import
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`, so that the
@@ -134,5 +136,50 @@ theorem exists_isLocallyFinitelyPresented_homology_upperStar {D : Scheme.{u}}
   · refine isLocallyFinitelyPresented_of_isZero _ ((c ≫ j)^*⟦Λ⟧.map_isZero (hab n ?_))
     rw [Finset.mem_Icc] at hn
     lia
+
+/-- **Two bounded constructible complexes are simultaneously lisse on a dense open, up to
+nilpotents**: on a nonempty scheme `D` with noetherian underlying space, bounded constructible
+complexes `K` and `L` have a common nonempty open `V` and surjective closed immersion
+`c : E ⟶ V` such that all cohomology sheaves of the pullbacks of `K` and of `L` to `E` are
+pro-étale locally finitely presented. -/
+theorem exists_isLocallyFinitelyPresented_homology_upperStar₂ {D : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace D] [Nonempty D]
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology D) Ab.{u + 1})
+      (condensedRingObj Λ D))}
+    (hK : boundedConstructible (condensedRingObj Λ D) K)
+    (hL : boundedConstructible (condensedRingObj Λ D) L) :
+    ∃ (V : D.Opens) (E : Scheme.{u}) (c : E ⟶ V), (V : Set D).Nonempty ∧
+      IsClosedImmersion c ∧ Surjective c ∧ (∀ n : ℤ,
+        IsLocallyFinitelyPresented (condensedRingObj Λ E)
+          ((DerivedCategory.homologyFunctor _ n).obj ((L(((c ≫ V.ι))^*⟦Λ⟧)).obj K))) ∧
+      ∀ n : ℤ, IsLocallyFinitelyPresented (condensedRingObj Λ E)
+        ((DerivedCategory.homologyFunctor _ n).obj ((L(((c ≫ V.ι))^*⟦Λ⟧)).obj L)) := by
+  obtain ⟨⟨a, b, hab⟩, hc⟩ := (mem_boundedConstructible_iff _ K).1 hK
+  obtain ⟨⟨a', b', hab'⟩, hc'⟩ := (mem_boundedConstructible_iff _ L).1 hL
+  obtain ⟨W, E, j, c, _, ⟨w⟩, _, _, h⟩ := exists_isLocallyFinitelyPresented_upperStar_of_finset
+    ((Finset.Icc a b).disjSum (Finset.Icc a' b')) D
+    (Sum.elim (fun n ↦ (DerivedCategory.homologyFunctor _ n).obj K)
+      (fun n ↦ (DerivedCategory.homologyFunctor _ n).obj L))
+    fun i _ ↦ i.rec hc hc'
+  have hcj : (c ≫ j.isoOpensRange.hom) ≫ j.opensRange.ι = c ≫ j := by
+    rw [Category.assoc, Scheme.Hom.isoOpensRange_hom_ι]
+  refine ⟨j.opensRange, E, c ≫ j.isoOpensRange.hom, ⟨j w, w, rfl⟩, inferInstance,
+    inferInstance, fun n ↦ ?_, fun n ↦ ?_⟩
+  · rw [hcj]
+    refine IsLocallyFinitelyPresented.of_iso
+      ((leftDerivedUpperStarHomologyIso Λ (c ≫ j) n).app K) ?_
+    by_cases hn : n ∈ Finset.Icc a b
+    · exact h (.inl n) (Finset.inl_mem_disjSum.2 hn)
+    · refine isLocallyFinitelyPresented_of_isZero _ ((c ≫ j)^*⟦Λ⟧.map_isZero (hab n ?_))
+      rw [Finset.mem_Icc] at hn
+      lia
+  · rw [hcj]
+    refine IsLocallyFinitelyPresented.of_iso
+      ((leftDerivedUpperStarHomologyIso Λ (c ≫ j) n).app L) ?_
+    by_cases hn : n ∈ Finset.Icc a' b'
+    · exact h (.inr n) (Finset.inr_mem_disjSum.2 hn)
+    · refine isLocallyFinitelyPresented_of_isZero _ ((c ≫ j)^*⟦Λ⟧.map_isZero (hab' n ?_))
+      rw [Finset.mem_Icc] at hn
+      lia
 
 end AlgebraicGeometry.ProEtale.CondensedRing

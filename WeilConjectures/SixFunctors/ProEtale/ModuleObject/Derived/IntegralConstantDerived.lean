@@ -24,8 +24,9 @@ Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with uniformizer `ϖ
 * the derived tensor product `C[0] ⊗ᴸ C'[0]` of two constant modules has locally finitely
   presented cohomology sheaves (the constant modules `Tor_i^{𝒪_E}`), concentrated in degrees
   `-1` and `0` (`ProEtale.CondensedRing.integralConstantModule_tensorObj_homology`);
-* `C[q]` is dualizable in `D(Mod_{𝒪_{E,V}})`, with a bounded dual whose cohomology sheaves are
-  locally finitely presented (`ProEtale.CondensedRing.exists_exactPairing_integralConstantModule`).
+* `C[q]` is dualizable in `D(Mod_{𝒪_{E,V}})`, with a dual concentrated in degrees `[-q, 1 - q]`
+  whose cohomology sheaves are locally finitely presented
+  (`ProEtale.CondensedRing.exists_exactPairing_integralConstantModule`).
 
 This file does not import
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible`.
@@ -109,21 +110,23 @@ theorem integralConstantModule_tensorObj_homology (k r k' r' : ℕ) (e : Fin k �
 
 include hϖ in
 /-- A constant `𝒪_E`-module placed in degree `q` is dualizable in `D(Mod_{𝒪_{E,V}})`, with a
-bounded left dual whose cohomology sheaves are locally finitely presented. -/
+left dual concentrated in degrees `[-q, 1 - q]` whose cohomology sheaves are locally finitely
+presented. -/
 theorem exists_exactPairing_integralConstantModule (k r : ℕ) (e : Fin k → ℕ) (q : ℤ) :
     ∃ D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) V)),
-      DerivedCategory.TStructure.t.bounded D ∧
+      D.IsGE (-q) ∧ D.IsLE (1 - q) ∧
       (∀ n, IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) V)
         ((DerivedCategory.homologyFunctor _ n).obj D)) ∧
       Nonempty (ExactPairing D
         ((DerivedCategory.singleFunctor _ q).obj (integralConstantModule ℓ E V ϖ k r e))) := by
   have := mono_padicIntegersRegularEndOfAlgebra_pow ℓ E V ϖ hϖ
-  obtain ⟨D, hD, hP, hp⟩ := DerivedCategory.hasBoundedDual_singleFunctor_biprod_cokernel_unit
+  obtain ⟨D, ha, hb, hP, hp⟩ := DerivedCategory.hasBoundedDual_singleFunctor_biprod_cokernel_unit
     (P := isFinitelyPresentedProperty ℓ E V) (fun _ hX ↦ Mod.IsFinitelyPresented.of_isZero hX)
     (fun _ _ hX hY ↦ hX.biprod hY) (fun _ ↦ Mod.isFinitelyPresented_cokernel_regular _)
     Mod.isFinitelyPresented_regular (fun a ↦ padicIntegersRegularEndOfAlgebra V ℓ E (ϖ ^ a))
     (r := r) e q
-  exact ⟨D, hD, fun n ↦ isLocallyFinitelyPresented_of_isFinitelyPresented' (hP n), hp⟩
+  rw [neg_add_eq_sub] at hb
+  exact ⟨D, ha, hb, fun n ↦ isLocallyFinitelyPresented_of_isFinitelyPresented' (hP n), hp⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
