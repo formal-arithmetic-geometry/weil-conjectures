@@ -27,26 +27,46 @@
  ],
  "proof": [
   {
-   "text": "Localize the integral tensor multiplication unit. Its integral naturality gives rational naturality on pure tensors and sums, and the localized integral inverse remains inverse. The identity-extension equation of integral finite extension, transported between normalized ordinary presentations, localizes to e.comparison_K = j_(A.dual K) followed by A.dual(j_K). Normalization of e and the pure-tensor formula for A identify every displayed arrow. Every rational object is an integral representative.",
+   "text": "The completion comparison is a natural transformation, invertible on constructible complete inputs. Its inverse naturality, followed by the ordinary tensor identity natural isomorphism, makes the specified integral multiplication units a natural isomorphism on the constructible subcategory. The pure-tensor map formula at coefficient one identifies rational scalar extension precomposed with localization with integral scalar extension followed by localization. Descend the localized integral unit using naturalIso_of_integral to obtain j; its component equation gives precisely the required HEq normalization.",
    "uses": [
-    "lem-coef-integral-finite-extension",
+    "def-weil-rationalization-karoubi",
+    "def-sf-integral-finite-extension-core",
+    "lem-real-raw-localization-natural-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply evaluation_naturality to A.ordinary, then specialize comparison_cocycles to the identity field embedding and identical dualizing data and presentations. Its third identity equation gives beta_K followed by D(unit_K inverse)=unit_DK. Postcompose with D(unit_K hom); functoriality and the inverse identities cancel the inverse-unit factor. Restrict this equality to the integral constructible category and apply localization.",
+   "uses": [
+    "lem-sf-integral-hom-evaluation-naturality",
+    "lem-sf-integral-finite-extension-cocycles",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any rational object K, use its literal integral representative K.obj. ExtensionProperties identifies the localized beta with e.comparison. The normalized component of j at the integral dual, together with A.objects, identifies the first factor. A.pure at coefficient one identifies the second factor with A.dual(j_K). The object formulas for scalar extension and duality fix the three endpoints, so heterogeneous composition and the localized integral equality prove the desired equation. No faithfulness, lattice choices, nonzero-object condition or extra geometry is used.",
+   "uses": [
+    "def-sf-rational-verdier-data",
     "def-weil-rationalization-karoubi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-    "place": "paragraph 3, unit equation; recorded DAG step 7, identity clause"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-coef-integral-finite-extension",
-  "def-weil-rationalization-karoubi"
+  "def-weil-rationalization-karoubi",
+  "def-sf-integral-finite-extension-core",
+  "lem-real-raw-localization-natural-iso",
+  "lem-sf-integral-hom-evaluation-naturality",
+  "lem-sf-integral-finite-extension-cocycles",
+  "def-sf-rational-verdier-data"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "X2",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "paragraph 3, unit equation; recorded DAG step 7, identity clause; proof written by B6 from the recorded integral rationalization plan."
+  "place": "paragraph 3, unit equation; recorded DAG step 7, identity clause; Lean proof by descent of the prescribed integral unit and localization of the existing integral comparison cocycle identity."
  },
  "mathlib_searches": [
   {
@@ -110,13 +130,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-06a6b",
-  "group": "B6",
-  "result": "fix",
-  "landing": "20261025T122531-L-1781499",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T180941-L-3917176",
   "kind": "interface",
-  "note": "independent cc review: delivered RationalVerdierModels vs clone RationalVerdier.lean (identical except irreducible completionChain via third_exists_first, change-recorded); four split statements vs Conclusion and IntegralVerdier.SignedSymmetry/delta definitions; 12 direct importers compiled against sandboxed delivery (11 ok, VerdierCoefficientRealization pre-existing missing olean)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
