@@ -20151,3 +20151,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:03 L: returned deliver/A4/Sheaf.Paper.TraceBoundedQuotientStalkRealization (reviewer RETURN: (the landing tools, head c0cea42d9) the delivery did not land: lean/Sheaf/Paper/TraceBoundedQuotientStalkRealization.lea)
 - 22:03 L: returned deliver/R3/Sheaf.Paper.FiniteClopenExceptionalRestriction (reviewer RETURN: (the landing tools, head 2c9ec18f7) the delivery did not land: lean/Sheaf/Paper/AdicPurityObjects.lean was removed from )
 - 22:05 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: E2/E4: the new node lem-pur-integral-scalar-associator-square says the component of gamma_A: R_L(B A) -> S_{L/E}(R_E A) )
+- 22:09 L: merged deliver/A2/Sheaf.Paper.ConstructibleRingLeftRefinement (stage 3; reviewer PASS; after a return; landing 20261027T220953-L-2626919 (proof); batch 20261027T220948; modules 1; new nodes 0)
