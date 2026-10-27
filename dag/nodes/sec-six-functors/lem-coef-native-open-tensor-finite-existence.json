@@ -15,30 +15,32 @@
  },
  "proof": [
   {
-   "text": "Identify the native open sites, coefficient sheaves, and exact module adjunctions with their localized-site presentations. Restriction of sheafification of tensor gives the natural ordinary restriction comparison and its specified pure-section formula. The ordinary direct image is the right adjoint of the native restriction. Fix n and use the constant ring compactSupportSystemLevel l E n throughout; no product site or family of data is required.",
+   "text": "Use the existing unique native ordinary pullback tensor comparison at the fixed constant ring compactSupportSystemLevel l E n. Its section equation is definitionally the equation for finitePullSection; its two-variable naturality gives pullNaturality. Take the native module direct image and adjunction for the right adjoint.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "def-weil-pbc-proetale-operations"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction preserves flat sheaves and flat-term K-flat complexes by the pullback preservation theorem, on both the sequence site and each finite site.",
+   "text": "Realize native module inverse image as the algebraic inverse-image module functor followed by the specified change of rings. Apply ringed-topos preservation of flat-term K-flat complexes. Transport along the equality of functors to obtain both pullKFlat and pullFlat.",
    "uses": [
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
     "lem-weil-pbc-ringed-pullback-preserves-kflat"
    ],
    "elementary": false
   },
   {
-   "text": "Use the unit transpose of the inverse restriction/tensor comparison as the inverse ordinary projection. The ringed-slice tensor formula and open-unit normalization prove it invertible; adjunction uniqueness proves ordinary naturality.",
+   "text": "Tensoring an extended module by an arbitrary ambient module remains in the essential image of native extension. The native open unit is invertible, so extension is fully faithful and its counit on this tensor is invertible. Define p as the transpose of unit tensor identity followed by inverse pullback tensor comparison. This adjunct is invertible, and p is extension of that adjunct followed by the invertible counit, hence is invertible. Define ordinary as (asIso p).symm. The adjunction hom equivalence proves ordinaryInverse; naturality of the unit and pullback tensor comparison proves naturality of p, hence of its inverse.",
    "uses": [
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-sf-open-tensor-normalization"
+    "lem-coef-native-finite-tensor-support",
+    "lem-cbc-tower-open-beta-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "For this fixed finite coefficient ring, totalize the ordinary comparison over all a+b=k using extension preservation of coproducts. On each summand naturality for each differential proves the signed chain equation; ordinary naturality for arbitrary module maps gives chainNaturality. The n=0 case is the first positive quotient, and requires no exception.",
+   "text": "Make the ordinary isomorphisms into an isomorphism of curried bifunctors. Apply the proved generic comparisonPrecompose_exists totalization helper: extension preserves the countable coproducts because it is a left adjoint. Its inclusion equation gives summand after inverting the comparison, and its two-variable chain naturality gives chainNaturality after inverting the comparison.",
    "uses": [
     "lem-sf-ringed-open-total-tensor-kflat"
    ],
@@ -46,17 +48,21 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-weil-pbc-proetale-operations",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "det-pe-topos-functoriality-inverse-image",
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-sf-open-tensor-normalization",
+  "lem-coef-native-finite-tensor-support",
+  "lem-cbc-tower-open-beta-normalization",
   "lem-sf-ringed-open-total-tensor-kflat"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1, separating the sequence-site and finite coefficient constructions."
+  "group": "G7",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I; sites-cohomology.tex Tags 0GL1 and 0G7E; totalization by the existing RingedOpenTotalTensorKFlat helpers."
  },
  "mathlib_searches": [
   {
@@ -137,9 +143,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R8",
+  "group": "G7",
   "result": "pass",
-  "landing": "20261027T180758-L-3900819",
+  "landing": "20261027T210017-L-1645538",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

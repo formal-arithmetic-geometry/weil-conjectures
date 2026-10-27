@@ -1,0 +1,126 @@
+{
+ "id": "lem-coef-native-finite-tensor-support",
+ "kind": "lemma",
+ "title": "Native finite open support is closed under ambient tensor",
+ "statement": "Fix a prime l, a finite extension E of Q_l, schemes X and Z in universe u, an open immersion j:X -> Z and a natural number n. For every module M over the finite constant coefficient sheaf on X and every module N on Z at positive quotient level n+1, the ordinary sheaf tensor of StrictTower.moduleJ M with N lies in the essential image of StrictTower.moduleJ at that same finite coefficient ring. The tensor and coefficient conventions are those of def-coef-native-open-tensor-primitives and def-coef-native-open-tensor-evaluation-data. No cochain, derived, sequence-site or unit normalization datum is asserted.",
+ "stmt_deps": [
+  "def-coef-native-open-tensor-primitives",
+  "def-coef-native-open-tensor-evaluation-data",
+  "def-cbc-strict-tower-open-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; the essential-image consequence after native open slice presentation."
+ },
+ "proof": [
+  {
+   "text": "Present native open extension as an equivalence e from open modules to modules on the ambient slice, followed by literal localized extension L. This presentation uses precisely the given finite constant coefficient ring and is valid also for the empty open.",
+   "uses": [
+    "lem-sp-proetale-open-slice-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the slice module e(M) and ambient module N, take S to be sheafification of the sectionwise tensor of e(M) with N restricted to the slice. The ringed-slice tensor theorem identifies L(S) with the sheafification of the presheaf tensor of L(e(M)) and N. The canonical tensor/sheafification isomorphism identifies the latter with their ordinary sheaf tensor.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use e.inverse(S) as the open witness. The extension-presentation isomorphism and the image under L of the counit e(e.inverse(S)) -> S identify its extension with L(S). Compose the previous tensor comparison and tensor the extension-presentation isomorphism for M with identity on N. This gives the required essential-image witness. No monoidal structure on e is needed, and no data are chosen from an unproved mere-existence theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proetale-open-slice-presentation",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; the essential-image consequence after native open slice presentation.",
+  "by": "agent",
+  "group": "G7",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The essential image of extension by zero for sheaves of modules along an open immersion is closed under tensoring with arbitrary ambient modules",
+   "results": "Scheme.Modules.restrictFunctor and restrictAdjunction concern ordinary Zariski restriction; no tensor support theorem on native pro-etale module sheaves.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the existing project slice presentation and slice tensor formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage.ofIso",
+   "results": "Functor.essImage.ofIso transports essential-image membership along an isomorphism.",
+   "date": "2026-10-28",
+   "verdict": "Useful categorical API, but does not supply the native extension tensor witness."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*tensor|tensor.*essImage",
+   "results": "Six Mathlib hits about Cartesian and Day-convolution tensor structures. Project source has condensed module-object and derived support theorems, in different categories from this ordinary sheaf-module statement. Blueprint searches for tensor extension and 0E8I gave no exact imported blueprint node.",
+   "date": "2026-10-28",
+   "verdict": "No exact match for native finite ordinary sheaf modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeOpenTensorFiniteExistence",
+  "date": "2026-10-28",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, mapping-complex adjunction and specified natural maps before limits; returned expansion lem-coef-tower-evaluation-pairing, steps 4-5: Compact-support reduction realization with normalized open tensor comparison. Native interface specialization: steps 5--6. Ordinary and cochain construction followed by normalized projection descent (support-open-tensor steps 5--6). Single finite-stage clause only. Ordinary finite extension: tensor-closure of its essential image (finite existence proof step 3).",
+   "via": [
+    "lem-coef-native-open-tensor-finite-existence",
+    "lem-coef-native-open-tensor-cochains",
+    "lem-coef-native-open-tensor-models-data-existence",
+    "lem-coef-native-open-tensor-models-existence",
+    "lem-coef-support-open-tensor-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefNativeFiniteTensorSupport",
+  "file": "lean/Sheaf/Paper/CoefNativeFiniteTensorSupport.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.nativeFiniteTensor_mem_essImage",
+  "statement": "theorem nativeFiniteTensor_mem_essImage\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (n : ℕ)\n    (M : normalizedDVRModules.{u, u} l E X n)\n    (N : normalizedDVRModules.{u, u} l E Z n) :\n    (ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j).essImage\n      (ordinaryTensor.{u + 1, u, u} (ProEt.topology Z)\n        (ProEtale.StrictTower.coefficients (compactSupportSystemLevel l E n) Z)\n        ((ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j).obj M) N)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T210017-L-1645538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T210017-L-1645538",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
