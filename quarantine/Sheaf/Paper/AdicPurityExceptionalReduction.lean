@@ -17,6 +17,11 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures
+
+-- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module was written against (those of ExceptionalDerivedSiteRealization).
+attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+  AlgebraicGeometry.strictEtaleLevelDerived
 variable (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
   (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
   {X Y : Scheme.{u}}
