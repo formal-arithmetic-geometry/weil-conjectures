@@ -15,44 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Transport each actual semilinear transition through the supplied comparisons and the canonical coefficient interchange. Bounded-below full faithfulness gives its unique etale preimage delta_n.",
+   "text": "Take the uniquely section-normalized scalar squares from lem-weil-pbc-lisse-tower-scalar-restriction. Transport each actual restricted transition along the supplied e_(n+1), the restricted inverse of e_n, and the inverse derived scalar square. Exact restriction preserves the lower cohomological bound on D_n. Apply the existing ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map to the source and target, and the fully faithful fixed realization equivalence, to obtain delta_n. The proof explicitly cancels the inverse scalar square and e_n to prove its descent equation.",
    "uses": [
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
     "thm-weil-pbc-site-comparison",
     "def-weil-pbc-lisse-tower-etale-descent-data"
    ],
    "elementary": false
   },
   {
-   "text": "The scalar-extension mate of the coefficient square is invertible. The adjunct of delta_n therefore maps to the invertible actual normalization. Conservative exact comparison reflects invertibility, proving universality; inverse image to each etale object has the same invertible mate. Exact constants give local universality of any universal algebraic arrow. Pasting coefficient mates with inverse-image compositors gives the local_delta and constant_coherence equations.",
+   "text": "The scalar-square theorem supplies source-site universality of the lifted delta_n and of every universal algebraic constant arrow at that quotient. The independently proved etaleNormalization_coherence supplies the coherence of delta_n and of constants for every algebraic k, including non-universal k. Assemble these as local_delta, local_constant_universal and constant_coherence. No cyclic scalar-extension/local-systems theorem is imported.",
    "uses": [
-    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-etale-universal-normalization"
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-weil-pbc-etale-normalization-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "On V realize fixed modules by algebraic scalar restriction and module sheafification; then pull back to W. Pull back the given comparisons for actual, and use constant sheafification for model, naturally in every algebraic E. Two scalar restrictions give scalar. Its equation on delta_n is the pullback of the defining descent equation and equals the actual restricted step. On any constant k it is the sectionwise constant identity; the derived composition and restriction compositors identify it with lisseTowerAlgebraArrow. Paste the specified quotient-right comparison to obtain model_normalized.",
+   "text": "Use the explicit lisseTowerLocalRealization: fixed-coefficient inverse image along f.left followed by the prescribed fixed realization on W. Apply lisseTower_localized_realization to the constructed delta_n and their proved descent equations. Its model, actual, scalar and two normalization equations fill the remaining fields of LisseTowerEtaleNormalization. No arbitrary realization functor is chosen and the original statement is unchanged.",
    "uses": [
-    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-constant-adic-restricted-tower-maps"
+    "lem-weil-pbc-lisse-tower-localized-realization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
   "thm-weil-pbc-site-comparison",
   "def-weil-pbc-lisse-tower-etale-descent-data",
-  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "def-weil-pbc-etale-universal-normalization",
-  "lem-weil-pbc-constant-adic-restricted-tower-maps"
+  "lem-weil-pbc-etale-normalization-coherence",
+  "lem-weil-pbc-lisse-tower-localized-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099Z and 09B1, bounded-below classical comparison; Tag 099Y, finite local systems; Tag 09BV, local Isom torsors; derived base change of Tag 06YY."
+  "place": "Tags 099Z and 09B1; explicit bounded-below full-faithfulness lift of actual arrows. Source universality is isolated with the fixed coefficient square, and localized model comparisons are a separate genuine step. The inverse-compositor coherence is proved directly from ordinary coefficient composition and exact-localization square pasting, without importing cyclic scalar-extension infrastructure."
  },
  "mathlib_searches": [
   {
@@ -127,8 +124,8 @@
   "declaration": "AlgebraicGeometry.Scheme.lisse_tower_etale_normalization_descent",
   "statement": "theorem lisse_tower_etale_normalization_descent\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (U : Y.ProEt)\n    (D : ∀ n : ℕ, DerivedCategory\n      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))\n    (hbounded : ∀ n : ℕ, ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (D n)))\n    (e : ∀ n : ℕ, (lisseTowerFixedRealization (U.hom ≫ g) d n).obj\n      ((ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj (D n)) ≅\n      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n)) :\n    Nonempty (LisseTowerEtaleNormalization X Y g d M U D)",
   "branch": "sheaf-dag",
-  "by": "Q4",
-  "date": "2026-10-27"
+  "by": "N1",
+  "date": "2026-10-28"
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -143,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-ef6eb",
-  "group": "Q4",
-  "result": "fix",
-  "landing": "20261027T180743-L-3897846",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T210145-L-1664349",
   "kind": "interface",
-  "note": "independent cc review: item proof (signature unchanged) against its node; verbatim moved block in LisseTowerEtaleDescentData against the published item module; two new sorry statements against their nodes and sources; importer LisseTowerIsomorphismSections compiled OK against delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

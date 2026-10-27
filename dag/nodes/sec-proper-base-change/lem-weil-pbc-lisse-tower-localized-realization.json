@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-localized-realization",
+ "kind": "statement",
+ "title": "Localized comparisons for an already descended semilinear tower",
+ "statement": "Let X,Y,g,d,M,U and etale levels D_n be as in [def-weil-pbc-lisse-tower-etale-descent-data]. Supply section-normalized consecutive ordinary coefficient squares c_n [lem-weil-pbc-lisse-tower-scalar-restriction], arrows delta_n:D_(n+1)→Res(q_n)D_n, level comparisons e_n to the pulled actual levels, and the descent equations identifying the realized delta_n with the actual restricted transitions. For V in U.left.ProEt, W in Y.ProEt and f:W→ProEt.mk(V.hom≫U.hom), define the concrete realization to be exact inverse image of fixed B_n-module sheaves along f.left followed by lisseTowerFixedRealization(W.hom≫g,d,n). The record LisseTowerLocalizedComparisons is inhabited: it gives model isomorphisms on every algebraic constant complex, actual isomorphisms for D_n, coefficient-restriction isomorphisms after restriction to the constant completion, and the exact actual_normalized and model_normalized equations in LisseTowerEtaleNormalization. The second equation is required for every algebraic arrow k. This assertion supplies no arrows delta, universality, boundedness, finite local constancy, markings or stalk inhabitance. The realization functor is an explicit construction, not chosen from existence.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY (inverse image and scalar extension); Modules on Sites Tags 03CY and 03DA; sites.tex Tag 0H7J (constant sheaf adjunction). Local realization and both normalization equations in the amplification proof finite-level descent step."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "lem-weil-pbc-constant-adic-restricted-tower-maps"
+ ],
+ "proof": [
+  {
+   "text": "Module sheafification along the prescribed locally bijective coefficient presentation commutes canonically with inverse image. Its underlying additive comparison is the sheafified identity on pulled sections. Localize the comparison. Paste it with comparison pullback and the inverse-image compositor for f.left, V.hom and U.hom; use f.w to identify the composite with W.hom. Applied to e_n this gives actual; applied to constant algebraic complexes it gives model, naturally in every complex.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the section-normalized squares c_n with the inverse-image coefficient mates and the two scalar-restriction compositors. The relation between consecutive coefficient maps gives scalar. Apply inverse image to the supplied descent equation and use naturality and these pasting identities. The result is the required actual_normalized equation with constantAdicRestrictedStep, with its specified actual transition and compositor.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-scalar-restriction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-constant-adic-restricted-tower-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary algebraic arrow k, the same comparisons are the identity on constant generators and commute with k. Localize this section equation, retaining mapDerivedCategoryCompIso and restrictScalarsComp' rather than replacing them by arbitrary isomorphisms. This identifies the coefficient-restricted arrow with lisseTowerAlgebraArrow. Paste with the section-normalized constantAdicQuotientRightIso to obtain exactly model_normalized. This calculation uses no universality of k and works for empty bases and zero objects.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-constant-adic-finite-diagram-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-lisse-tower-scalar-restriction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-constant-adic-restricted-tower-maps",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-constant-adic-finite-diagram-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY (inverse image and scalar extension); Modules on Sites Tags 03CY and 03DA; sites.tex Tag 0H7J (constant sheaf adjunction). Local realization and both normalization equations in the amplification proof finite-level descent step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful derived comparison functor between etale and proetale sheaves lifts normalization arrows and preserves scalar restriction",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.Etale.comp",
+   "date": "2026-10-28",
+   "verdict": "No exact scalar-square or normalized etale-local pullback theorem in Mathlib; use existing project comparison, scalar-mate and exact-localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StructuredArrow.IsUniversal",
+   "results": "12 hits; CategoryTheory.StructuredArrow.IsUniversal, CategoryTheory.StructuredArrow.IsUniversal.desc, CategoryTheory.StructuredArrow.IsUniversal.uniq, CategoryTheory.StructuredArrow.IsUniversal.hom_desc, CategoryTheory.StructuredArrow.IsUniversal.fac, CategoryTheory.StructuredArrow.IsUniversal.existsUnique, CategoryTheory.StructuredArrow.IsUniversal.fac_assoc, CategoryTheory.StructuredArrow.IsUniversal.hom_ext",
+   "date": "2026-10-28",
+   "verdict": "No exact scalar-square or normalized etale-local pullback theorem in Mathlib; use existing project comparison, scalar-mate and exact-localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|normalizationRestrict",
+   "results": "0 hits; no matching declaration",
+   "date": "2026-10-28",
+   "verdict": "No exact scalar-square or normalized etale-local pullback theorem in Mathlib; use existing project comparison, scalar-mate and exact-localization APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image of sheaves of modules commutes with extension of scalars and preserves universal coefficient arrows",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-28",
+   "verdict": "No exact scalar-square or normalized etale-local pullback theorem in Mathlib; use existing project comparison, scalar-mate and exact-localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationCompPullback|IsUniversal|restrictScalarsComp",
+   "results": "25 hits; Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/EquivalenceRelation.lean, Mathlib/CategoryTheory/EquivalenceRelation.lean, Mathlib/CategoryTheory/EquivalenceRelation.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact scalar-square or normalized etale-local pullback theorem in Mathlib; use existing project comparison, scalar-mate and exact-localization APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerEtaleNormalizationDescent",
+  "date": "2026-10-28",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Localized comparisons for an already descended semilinear tower; amplification proof (c), descent at finite quotient levels and compatibility with their actual normalization arrows.",
+   "via": [
+    "lem-weil-pbc-lisse-tower-etale-normalization-descent",
+    "lem-weil-pbc-lisse-tower-etale-descent",
+    "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerLocalizedRealization",
+  "file": "lean/Sheaf/Paper/LisseTowerLocalizedRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseTower_localized_realization",
+  "statement": "theorem lisseTower_localized_realization\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (U : Y.ProEt)\n    (D : ∀ n : ℕ, DerivedCategory\n      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))\n    (c : ∀ n : ℕ, LisseTowerScalarSquare (U.hom ≫ g) d n)\n    (hc : ∀ n : ℕ, LisseTowerScalarSquareSections (U.hom ≫ g) d n (c n))\n    (δ : ∀ n : ℕ, D (n + 1) ⟶\n      (normalizationRestrict U.left.smallEtaleTopology (lisseTowerEtaleQuotient d n)).obj\n        (D n))\n    (e : ∀ n : ℕ, (lisseTowerEtaleRealization (U.hom ≫ g) d n).obj (D n) ≅\n      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n))\n    (hδ : ∀ n : ℕ,\n      (lisseTowerEtaleRealization (U.hom ≫ g) d (n + 1)).map (δ n) ≫\n          (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫\n          (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n            (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom =\n        (e (n + 1)).hom ≫\n          adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n)) :\n    Nonempty (LisseTowerLocalizedComparisons X Y g d M U D δ)",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.lisseTowerLocalRealization",
+   "AlgebraicGeometry.Scheme.LisseTowerLocalizedComparisons",
+   "AlgebraicGeometry.Scheme.lisseTower_localized_realization"
+  ],
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T210145-L-1664349",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T210145-L-1664349",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
