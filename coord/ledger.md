@@ -20444,3 +20444,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/X2/Sheaf.SixFunctors.RationalVerdierComparisonEvaluation (stage 3; reviewer PASS; first push; landing 20261027T234355-L-118361 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:43 L: merged deliver/X3/Sheaf.Paper.AdicReindexingUnitCompatibility (stage 3; reviewer PASS; first push; landing 20261027T234356-L-118880 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:43 L: merged deliver/X3/Sheaf.Paper.QuotientSectionTensorTransportIso (stage 3; reviewer PASS; first push; landing 20261027T234357-L-119355 (proof); batch 20261027T233735; modules 1; new nodes 0)
+- 23:43 L: merged deliver/X3/Sheaf.SixFunctors.RationalVerdierComparisonNaturality (stage 3; reviewer PASS; first push; landing 20261027T234358-L-119779 (interface); batch 20261027T233735; modules 2; new nodes 1)

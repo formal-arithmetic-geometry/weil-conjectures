@@ -16,34 +16,7 @@
  ],
  "proof": [
   {
-   "text": "The ordinary homMap is the transpose of scalar-extended evaluation. Transport this identity by the three completion comparisons in v and postcompose by internal Hom into u. The inverse adjunction bijection then identifies beta with the completed evaluation transpose. On good K-flat pairs the two completion normalizations have the same quotient maps on homogeneous tensors and zero shifted coordinate; cochain tensor model rigidity extends the resulting equality of natural maps.",
-   "uses": [
-    "def-sf-integral-finite-extension-core",
-    "def-sf-integral-finite-extension-models",
-    "lem-fix-constructible-tensor-completion",
-    "lem-sf-cochain-tensor-model-rigidity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
-   }
-  },
-  {
-   "text": "For an integral f, uncurry the two proposed localized naturality composites. Substitute the preceding transpose identity, the first-variable evaluation naturality equations in A and B, and tensorator naturality. The uncurried maps agree. For each fixed tensor input the integral adjunction localizes to a bijection on Hom groups: tensoring an inverse pair of linear maps preserves inverse equations. Its injectivity proves the naturality equation for Q_E(f). This uses the recorded rational evaluation naturality, and does not assume equality of arbitrary integral adjunctions away from K-flat first inputs.",
-   "uses": [
-    "def-sf-rational-verdier-data",
-    "def-weil-rationalization-karoubi",
-    "def-sf-integral-hom-reduction-models"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
-   }
-  },
-  {
-   "text": "For a pure tensor a tensor f, the pure formulas for A.dual, B.dual and scalar extension multiply this equation by the same scalar i(a) on both sides. Their additive structures extend the equation to sums of pure tensors. All raw rational objects are integral representatives, so this covers every pair of objects. The assumed heterogeneous component equations identify the supplied family with these components.",
+   "text": "Unpack the two scalar-localization objects and apply TensorProduct.induction_on to the rational morphism. The zero and addition cases reduce by the additive functor and composition laws.",
    "uses": [
     "def-sf-rational-verdier-data",
     "def-weil-rationalization-karoubi"
@@ -51,25 +24,32 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-    "place": "paragraph 3, comparison and evaluation/biduality compatibility; recorded DAG step 6"
+    "place": "paragraph 3, rational tensor extension and additivity"
+   }
+  },
+  {
+   "text": "For a pure tensor of an integral coefficient a and an integral arrow f, invoke the integral pure-tensor beta naturality calculation. Its endpoint equations are exactly the supplied component hypothesis hc.",
+   "uses": [
+    "lem-coef-rational-verdier-integral-beta-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, integral-arrow transpose and pure tensor calculation"
    }
   }
  ],
  "proof_deps": [
-  "def-sf-integral-finite-extension-core",
-  "def-sf-integral-finite-extension-models",
-  "lem-fix-constructible-tensor-completion",
-  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-coef-rational-verdier-integral-beta-naturality",
   "def-sf-rational-verdier-data",
-  "def-weil-rationalization-karoubi",
-  "def-sf-integral-hom-reduction-models"
+  "def-weil-rationalization-karoubi"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C6",
-  "date": "2026-10-27",
+  "group": "X3",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-  "place": "Paragraph 3, evaluation-transpose scalar comparison; agent-expanded step of lem-coef-rational-verdier-extension."
+  "place": "Paragraph 3, TensorProduct.induction_on with the integral pure-tensor calculation."
  },
  "mathlib_searches": [
   {
@@ -147,9 +127,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C6",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261027T180515-L-3868300",
+  "landing": "20261027T234358-L-119779",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

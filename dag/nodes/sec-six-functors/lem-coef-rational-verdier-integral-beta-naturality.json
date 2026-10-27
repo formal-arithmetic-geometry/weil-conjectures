@@ -1,0 +1,124 @@
+{
+ "id": "lem-coef-rational-verdier-integral-beta-naturality",
+ "kind": "statement",
+ "title": "Naturality of localized beta on integral pure tensors",
+ "statement": "Fix the finite-field, prime, scheme, coefficient extensions, dualizing data, rational Verdier data, family c and component equations of [lem-coef-rational-verdier-comparison-naturality]. For integral constructible objects K and M, an integral coefficient a and an integral arrow f, the localized beta naturality equation holds for the pure tensor a tensor f. This is the integral pure-tensor subcase used to prove the rational statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, integral-arrow transpose and pure tensor calculation"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-rational-verdier-data",
+  "def-weil-rationalization-karoubi",
+  "def-sf-integral-finite-extension-core"
+ ],
+ "proof": [
+  {
+   "text": "Expand IntegralFiniteExtension.beta as the scalar-extended evaluation transpose followed by the canonical dualizing map. Naturality of the tensor-Hom adjunction, the scalar tensorator formula on pure tensors, and naturality of the internal Hom map identify the two transposes. Localization preserves that identity, and the endpoint equations together with hc identify the supplied c-components.",
+   "uses": [
+    "def-sf-integral-finite-extension-core",
+    "def-sf-rational-verdier-data",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, integral-arrow transpose and pure tensor calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-rational-verdier-data",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, integral-arrow transpose and pure tensor calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localized naturality of scalar extended Verdier beta on integral pure tensor arrows",
+   "results": "Generic adjunction naturality only; no exact project theorem for the specified beta and normalized c.",
+   "date": "2026-10-28",
+   "verdict": "no exact theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Additive.map_add TensorProduct.induction_on adjunction homEquiv naturality",
+   "results": "Generic tensor induction and adjunction map lemmas only; no exact normalized beta statement.",
+   "date": "2026-10-28",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralFiniteExtension.beta naturality localizedBeta",
+   "results": "Project search found only the beta definition, reduction pairing, and the parent theorem; no standalone integral naturality theorem.",
+   "date": "2026-10-28",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierComparisonNaturality",
+  "date": "2026-10-28",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-verdier-comparison-naturality",
+   "place": "paragraph 3, integral-arrow transpose and pure tensor calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierIntegralBetaNaturality",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierIntegralBetaNaturality.lean",
+  "declaration": "WeilConjectures.RationalVerdier.integralBeta_naturality",
+  "statement": "theorem integralBeta_naturality (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (i : E →ₐ[Padic l] L) (wE : IntegralFiniteExtension.DualizingDatum l X D hl E) (wL : IntegralFiniteExtension.DualizingDatum l X D hl L) (A : Datum D l hl X E wE) (B : Datum D l hl X L wL) (c : ∀ K : sfRationalConstructibleCategory l E X, (scalar l X E L i).obj (A.dual.obj (op K)) ⟶ B.dual.obj (op ((scalar l X E L i).obj K))) (hc : (∀ K : sfIntegralConstructibleCategory l E X, HEq (c ((sfRationalConstructibleLocalization l E X).obj K)) ((sfRationalConstructibleLocalization l L X).map (ObjectProperty.homMk (X := (integralScalar l X E L i).obj ((IntegralVerdier.restrictedDual l E X wE.omega.obj A.preserves).obj (op K))) (Y := (IntegralVerdier.restrictedDual l L X wL.omega.obj B.preserves).obj (op ((integralScalar l X E L i).obj K))) (IntegralFiniteExtension.beta l E L i X D hl wE wL A.ordinary B.ordinary K.obj K.property.1))))) (K M : sfIntegralConstructibleCategory l E X) (a : Localization.Away (Padic.coefficientExtensionUniformizer l E)) (f : K ⟶ M) : (A.dual ⋙ scalar l X E L i).map (Quiver.Hom.op (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] f : (sfRationalConstructibleLocalization l E X).obj K ⟶ (sfRationalConstructibleLocalization l E X).obj M)) ≫ c ((sfRationalConstructibleLocalization l E X).obj K) = c ((sfRationalConstructibleLocalization l E X).obj M) ≫ ((scalar l X E L i).op ⋙ B.dual).map (Quiver.Hom.op (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] f : (sfRationalConstructibleLocalization l E X).obj K ⟶ (sfRationalConstructibleLocalization l E X).obj M))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T234358-L-119779",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T234358-L-119779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
