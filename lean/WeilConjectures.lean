@@ -12768,3 +12768,5 @@ public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.PoincareDuality.Verdier
 public import WeilConjectures.TraceFormula.Stalk
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
+public import WeilConjectures.SmoothPurity.Defs
