@@ -1,0 +1,85 @@
+{
+ "id": "lem-sf-finite-scalar-total-tensor-iso-representative-component-equality",
+ "kind": "statement",
+ "title": "Finite scalar total tensor component normalization",
+ "statement": "theorem finiteScalarTotalTensorIso_representative_component_eq (R : Type u) [CommRing R] [Finite R] {Y : Scheme.{u}} (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R)) (P Q : CochainComplex (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) (hP : finiteScalarFlatRepresentatives Y R P) (hQ : finiteScalarFlatRepresentatives Y R Q) : (sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app (CochainComplex.mapBifunctor P Q (curriedTensor (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))))) ≫ DerivedCategory.Q.map ((finiteScalarTotalTensorIso Y R).hom.app (P, Q)) ≫ aY.representative.hom.app (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩, ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩) = (sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app ((Functor.uncurry.obj ((curriedTensor (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R)))).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))).obj (P, Q)) ≫ DerivedCategory.Q.map ((finiteScalarTotalTensorIsoOfOrdinary (sfIntrinsicModuleEquivalence Y R).functor (finiteScalarOrdinaryTensorIso Y R)).hom.app (P, Q)) ≫ aY.representative.hom.app (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩, ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK and 07A4; specialization of the representative tensor descent"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the specified construction and identify the displayed maps componentwise.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex",
+    "lem-sf-finite-scalar-tensor-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "lem-sf-finite-scalar-tensor-realization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK and 07A4"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentativeEquation",
+  "date": "2026-10-27",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representative-equation",
+   "place": "intermediate component calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTotalTensorIsoComponentEquality",
+  "file": "lean/Sheaf/Paper/FiniteScalarTotalTensorIsoComponentEquality.lean",
+  "declaration": "WeilConjectures.finiteScalarTotalTensorIso_representative_component_eq",
+  "statement": "theorem finiteScalarTotalTensorIso_representative_component_eq (R : Type u) [CommRing R] [Finite R] {Y : Scheme.{u}} (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R)) (P Q : CochainComplex (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) (hP : finiteScalarFlatRepresentatives Y R P) (hQ : finiteScalarFlatRepresentatives Y R Q) : (sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app (CochainComplex.mapBifunctor P Q (curriedTensor (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))))) ≫ DerivedCategory.Q.map ((finiteScalarTotalTensorIso Y R).hom.app (P, Q)) ≫ aY.representative.hom.app (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩, ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩) = (sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app ((Functor.uncurry.obj ((curriedTensor (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R)))).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))).obj (P, Q)) ≫ DerivedCategory.Q.map ((finiteScalarTotalTensorIsoOfOrdinary (sfIntrinsicModuleEquivalence Y R).functor (finiteScalarOrdinaryTensorIso Y R)).hom.app (P, Q)) ≫ aY.representative.hom.app (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩, ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T151654-L-1190109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T151654-L-1190109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
