@@ -20005,3 +20005,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:00 L: merged deliver/H4/Sheaf.SixFunctors.IntegralPullEvaluationQuotientSquare (stage 3; reviewer PASS; first push; landing 20261027T210025-L-1648221 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:00 L: merged deliver/H5/Sheaf.Paper.TowerIntegralInverseSystemNormalization (stage 3; reviewer PASS; first push; landing 20261027T210027-L-1648420 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:00 L: merged deliver/H6/Sheaf.Paper.TowerScalarRootAbelianTranspose (stage 3; reviewer PASS; first push; landing 20261027T210028-L-1648716 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 21:00 L: merged deliver/H7/Sheaf.Paper.TowerScalarUnitAbelianTranspose (stage 3; reviewer PASS; first push; landing 20261027T210029-L-1648984 (interface); batch 20261027T205736; modules 2; new nodes 1)

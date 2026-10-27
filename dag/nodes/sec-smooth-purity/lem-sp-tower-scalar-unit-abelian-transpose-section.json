@@ -1,0 +1,134 @@
+{
+ "id": "lem-sp-tower-scalar-unit-abelian-transpose-section",
+ "kind": "statement",
+ "title": "Sectionwise abelian transpose of the ordinary scalar coefficient-unit comparison",
+ "statement": "In the setting of [lem-sp-tower-scalar-unit-abelian-transpose], for every tower level n, every pro-etale chart U of Y, and every section x of the forgotten coefficient tower on U, the values at x of the two displayed abelian transpose morphisms in that lemma are equal.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; sectionwise realization of geometric naturality in steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-chern-pullback-intermediate",
+  "def-sp-tower-class-coefficients",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-shriek-data",
+  "def-coef-semilinear-system-models",
+  "lem-sp-tower-restricted-scalar-adjunction",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary adjunct equations for eY and eX to rewrite both transposes as the scalar generator on sections. Naturality of the geometric adjunct and the section identity hchi reduce the comparison to constant coefficient sections. CoefficientPullback.normalization and d.unit_normalization identify the two constant maps with integerPull. The sheafification of the constant integer presheaf is locally surjective, so linearity and separatedness extend the equality to all sections, including empty charts and zero rings.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-sp-tower-class-coefficients",
+    "lem-sp-tower-restricted-scalar-adjunction",
+    "def-sp-tower-class-diagonal",
+    "def-sp-tower-chern-pullback-intermediate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; sectionwise realization of geometric naturality in steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-coefficients",
+  "lem-sp-tower-restricted-scalar-adjunction",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-chern-pullback-intermediate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H7",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): sectionwise realization of geometric naturality in steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sectionwise equality of morphisms of sheaves of abelian groups induced by ordinary scalar adjunction and coefficient-unit normalization",
+   "results": "Generic sheaf and adjunction extensionality lemmas; no specialized tower coefficient-unit transpose theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; generic extensionality is used by the parent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left homEquiv_naturality_right",
+   "results": "Generic adjunction Hom-equivalence naturality and unit formulas.",
+   "date": "2026-10-28",
+   "verdict": "Generic ingredients only; they do not state the coefficient tower section calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg \"scalarUnit_abelianTranspose|CoefficientPullback.normalization|unit_normalization\" lean/Sheaf/Paper lean/WeilConjectures",
+   "results": "No duplicate sectionwise theorem; normalization fields and related scalar/root transpose modules found.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerScalarUnitAbelianTranspose",
+  "date": "2026-10-28",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-scalar-unit-abelian-transpose",
+   "place": "Sectionwise realization of the ordinary scalar coefficient-unit comparison in proof steps 1--2.",
+   "via": [
+    "lem-sp-tower-scalar-unit-abelian-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerScalarUnitAbelianTransposeSection",
+  "file": "lean/Sheaf/Paper/TowerScalarUnitAbelianTransposeSection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarUnit_abelianTranspose_section",
+  "statement": "theorem scalarUnit_abelianTranspose_section\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)\n    (cY : Chern l E Y) (cX : Chern l E X)\n    (d : IntegralCoefficientPullback l E f cY cX)\n    (χ : (g.push ⋙ SemilinearSections.res.{u + 1, u, u + 1}\n        (coefficientSystemMap l E Y)) ⋙ cY.reduction.forget.F ≅\n      (SemilinearSections.res.{u + 1, u, u + 1}\n        (coefficientSystemMap l E X) ⋙ cX.reduction.forget.F) ⋙ abPush f)\n    (hχ : ∀ (N : Systems X (Arings l E X)) (n : ℕ) (U : Y.ProEtᵒᵖ)\n      (x : (((cY.reduction.forget.F.obj\n        ((SemilinearSections.res.{u + 1, u, u + 1}\n          (coefficientSystemMap l E Y)).obj (g.push.obj N))).obj (op n)).obj.obj U)),\n      HEq ((((χ.hom.app N).app (op n)).hom.app U) x) x)\n    (θ₀ : CoefficientPullback l E b f g)\n    (eY : cY.scalar.model.E.obj (coefficient Y (Rrings l Y)) ⟶\n      coefficient Y (Arings l E Y))\n    (eX : cX.scalar.model.E.obj (coefficient X (Rrings l X)) ⟶\n      coefficient X (Arings l E X))\n    (heY : (cY.scalar.ordinaryAdjunction.homEquiv _ _) eY = scalarGenerator l E Y)\n    (heX : (cX.scalar.ordinaryAdjunction.homEquiv _ _) eX = scalarGenerator l E X)\n    (n : ℕᵒᵖ) (U : Y.ProEtᵒᵖ)\n    (x : ((cY.reduction.forget.F.obj (coefficient Y (Rrings l Y))).obj n).obj.obj U) :\n    (AddCommGrpCat.Hom.hom\n      (((cY.reduction.forget.F.map\n        (((cY.scalar.ordinaryAdjunction.comp g.ordinaryAdjunction).homEquiv _ _)\n          (g.pull.map eY ≫ θ₀.iso.hom)) ≫\n        χ.hom.app (coefficient X (Arings l E X))).app n).hom.app U)) x =\n      (AddCommGrpCat.Hom.hom\n        (((((abAdjunction f).homEquiv _ _)\n          (d.forgetIso.hom.app (coefficient Y (Rrings l Y)) ≫\n            cX.reduction.forget.F.map\n              ((cX.scalar.ordinaryAdjunction.homEquiv _ _)\n                (cX.scalar.model.E.map d.unitIso.hom ≫ eX)))).app n).hom.app U)) x",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T210029-L-1648984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T210029-L-1648984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

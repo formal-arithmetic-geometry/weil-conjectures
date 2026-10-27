@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.TowerRestrictedScalarAdjunction
 public import Sheaf.Paper.TowerClassPullback
+import Sheaf.Paper.TowerScalarUnitAbelianTransposeSection
 
 /-! # The abelian transpose of the coefficient-unit comparison
 
@@ -76,6 +77,15 @@ theorem scalarUnit_abelianTranspose
         (d.forgetIso.hom.app (coefficient Y (Rrings l Y)) ≫
           cX.reduction.forget.F.map
             ((cX.scalar.ordinaryAdjunction.homEquiv _ _)
-              (cX.scalar.model.E.map d.unitIso.hom ≫ eX))) := by sorry
+              (cX.scalar.model.E.map d.unitIso.hom ≫ eX))) := by
+  apply NatTrans.ext
+  funext n
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  apply AddCommGrpCat.hom_ext
+  apply AddMonoidHom.ext
+  intro x
+  exact scalarUnit_abelianTranspose_section l E f b g cY cX d χ hχ θ₀ eY eX heY heX n U x
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
