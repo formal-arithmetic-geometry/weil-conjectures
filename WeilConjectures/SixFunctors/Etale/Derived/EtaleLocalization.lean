@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-!
 # Étale localization of the derived categories of étale sheaves
@@ -21,7 +23,8 @@ Two facts about a surjective or arbitrary étale morphism `u : U ⟶ X` and the 
   jointly surjective family of étale maps reflect isomorphisms of sheaves;
 * the exceptional inverse image localizes along étale maps,
   `Lu^* Rf^! ≅ R(u ≫ f)^!` (blueprint `lem-amb-etale-adjoint-locality`, a node of the blueprint
-  subsection `sk-prop-sf-cbc`, recorded here without proof).
+  subsection `sk-prop-sf-cbc`), proved through the extension by zero along the compactified
+  graph of `u` (`AlgebraicGeometry.Etale.canonicalEtaleCompactSupportComparison`).
 
 ## Main statements
 
@@ -92,8 +95,29 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]
     [HasCompactification h] :
     Nonempty (R(f)^![Λ] ⋙ L((u)^*[ModuleCat.{u + 1} Λ]) ≅
-      R(h)^![Λ]) :=
-  sorry
+      R(h)^![Λ]) := by
+  subst h
+  let c := HasCompactification.compactification (u ≫ f)
+  let a : U ⟶ pullback c.g f := pullback.lift c.i u c.comm.symm
+  have : IsImmersion (a ≫ pullback.fst c.g f) := by
+    change IsImmersion ((pullback.lift c.i u c.comm.symm) ≫ pullback.fst c.g f)
+    rw [pullback.lift_fst]
+    infer_instance
+  have : IsImmersion a := IsImmersion.of_comp a (pullback.fst c.g f)
+  have : HasCompactification u :=
+    HasCompactification.of_isImmersion a (pullback.snd c.g f) (pullback.lift_snd _ _ _)
+  let cu := HasCompactification.compactification u
+  let e : R(u)_![ModuleCat.{u + 1} Λ] ≅
+      (etaleLowerShriek (ModuleCat.{u + 1} Λ) u inferInstance).mapDerivedCategory :=
+    canonicalEtaleCompactSupportComparison Λ u cu
+  let adj :=
+    ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) u
+      inferInstance).mapDerivedCategoryAdjunction).ofNatIsoLeft e.symm
+  obtain ⟨ec⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ u f
+  exact ⟨Functor.isoWhiskerLeft _
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) u) ≪≫
+      (adj.comp (rightDerivedUpperShriekAdjunction Λ f)).rightAdjointUniq
+        ((rightDerivedUpperShriekAdjunction Λ (u ≫ f)).ofNatIsoLeft ec)⟩
 
 end Etale
 
