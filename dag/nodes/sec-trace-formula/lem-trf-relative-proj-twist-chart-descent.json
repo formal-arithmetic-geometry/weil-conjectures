@@ -10,38 +10,22 @@
  "stmt_deps": [
   "def-nagata-relative-proj",
   "def-weil-pbc-proj-twisting-sheaf",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-trf-relative-proj-twist-chart-descent-compatibility"
  ],
  "proof": [
   {
-   "text": "Use the scalar-extension twist comparisons along affine restrictions; their fraction formulas give identity and composition.",
+   "text": "Apply the object component to obtain a module and chart family with normalized scalar-extension compatibility, then apply the transition component to that compatible family.",
    "uses": [
-    "lem-sfb-proj-scalar-extension-twist-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Refine intersections of affine base opens by affine opens. The comparisons agree on further refinements, giving overlap isomorphisms and the triple cocycle. Descend the actual twists across the relative Proj cover.",
-   "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "lemma-nagata-relative-proj-exists"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The induced restriction maps on sections are additive. Descent compatibility gives their equation with chart reading, and the homogeneous fraction formula gives the a/1 equation. Identify ordinary restriction and tensor pullback using the normalized adjunction.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-sfb-proj-scalar-extension-twist-comparison"
+    "lem-trf-relative-proj-twist-chart-descent-object",
+    "lem-trf-relative-proj-twist-chart-descent-transition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-proj-scalar-extension-twist-comparison",
-  "lem-weil-pbc-glue-sheaves-of-modules",
-  "lemma-nagata-relative-proj-exists",
-  "def-pc-module-pullback"
+  "lem-trf-relative-proj-twist-chart-descent-object",
+  "lem-trf-relative-proj-twist-chart-descent-transition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -150,17 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M6",
-  "result": "pass",
-  "landing": "20261027T210140-L-1663326",
+  "reviewer": "C-79eba",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234009-L-4159809",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.exists_twist_chart_descent"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.exists_twist_chart_descent"
-  ]
+  "note": "independent cc review: item exists_twist_chart_descent and new Object/Transition/Compatibility modules+nodes against node lem-trf-relative-proj-twist-chart-descent, scalarExtension_twist_comparison, return C-2969d, and importers FractionAdd/SPAGL/SymmetricProjGluedSections compiled against the corrected item"
  }
 }

@@ -1,0 +1,127 @@
+{
+ "id": "lem-trf-relative-proj-twist-chart-descent-compatibility",
+ "kind": "definition",
+ "title": "Compatibility datum for relative Proj twist charts",
+ "statement": "For a relative Proj module L with affine chart isomorphisms chart_U to the degree-one twists, define TwistChartCompatibility A L chart to mean that every affine restriction carries the normalized scalar-extension twist comparison and that the canonical tensor-pullback chart square commutes.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NR, normalized scalar-extension comparisons and their cocycle on affine restrictions"
+ },
+ "stmt_deps": [
+  "def-nagata-relative-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback",
+  "lem-sfb-proj-scalar-extension-twist-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the displayed predicate: it records the normalized scalar-extension comparison and the commuting chart square for every affine inclusion.",
+   "uses": [
+    "lem-sfb-proj-scalar-extension-twist-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proj-scalar-extension-twist-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NR, normalized scalar-extension comparisons and cocycle compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative Proj twist gluing; base coefficients as constant homogeneous fractions; linear symmetric degree-one section",
+   "results": "Absolute Proj chart maps, basicOpenToSpec_app_top, and SymmetricAlgebra.ι; no relative twist descent or packaged normalized section map.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue twisting sheaves on relative Proj and their canonical degree one sections",
+   "results": "Absolute Proj awayToSection, awayι, fromOfGlobalSections; no relative twist descent.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relProj.*[Tt]wist|[Tt]wist.*relProj|unitToTwist|toSpecOfAlgebra",
+   "results": "Source structural maps, unitToTwist pointwise formula, generic module descent; no theorem with this interface.",
+   "date": "2026-10-27",
+   "verdict": "components used; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescent",
+  "date": "2026-10-28",
+  "group": "J1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 1--3, open-base part of step 9, and step 11. This child isolates original steps 1, 2, 3, 4, 5, 6, 7, 8, 11: Normalized degree-one symmetric Proj quotient and affine descent. This child handles Normalized twist descent: Tag 01NR (lemma-glue-relative-proj-twists), object gluing and compatibility, before constructing the graded section morphism.",
+   "via": [
+    "lem-trf-symmetric-proj-glued-sections",
+    "lem-trf-symmetric-proj-affine-comparison",
+    "lem-trf-symmetric-proj-normalized-descent",
+    "lem-trf-symmetric-proj-tautological-chart-gluing",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjTwistChartDescentCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GradedAlgebraData.TwistChartCompatibility",
+  "statement": "def TwistChartCompatibility (L : A.relProj.Modules)\n    (chart : ∀ U : S.affineOpens,\n      (Scheme.Modules.tensorPullback (A.relProjι U)).obj L ≅\n        Proj.twist (A.grading U) 1) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.TwistChartCompatibility",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.twistChartOpen",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.twistChartFraction",
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.twistChartRead"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-79eba",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234009-L-4159809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-79eba",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T234009-L-4159809",
+  "kind": "interface",
+  "note": "independent cc review: item exists_twist_chart_descent and new Object/Transition/Compatibility modules+nodes against node lem-trf-relative-proj-twist-chart-descent, scalarExtension_twist_comparison, return C-2969d, and importers FractionAdd/SPAGL/SymmetricProjGluedSections compiled against the corrected item"
+ }
+}

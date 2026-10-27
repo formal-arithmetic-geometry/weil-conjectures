@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
-public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
+public import Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentCompatibility
+import Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentObject
+import Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescentTransition
 
 /-! # Descent of degree-one twists, before constructing a map from a base module
 
@@ -26,30 +26,6 @@ open scoped AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.GradedAlgebraData
 
 variable {S : Scheme.{u}} (A : S.GradedAlgebraData)
-
-/-- The open on which a chart reads the sections above its base open. -/
-noncomputable def twistChartOpen (U : S.affineOpens) : (Proj (A.grading U)).Opens :=
-  A.relProjι U ⁻¹ᵁ (A.relProjHom ⁻¹ᵁ U.1)
-
-/-- A homogeneous element, viewed as a section of the affine degree-one twist. -/
-noncomputable def twistChartFraction (U : S.affineOpens) (a : A.grading U 1) :
-    Γ(Proj.twist (A.grading U) 1, A.twistChartOpen U) :=
-  (Proj.unitToTwist a.property).app (A.twistChartOpen U)
-    (1 : Γ(Proj (A.grading U), A.twistChartOpen U))
-
-/-- Reading a global module section in an affine twist chart, using the actual tensor unit.
-The codomain is written as iterated pushforward so this is a linear map over the base. -/
-noncomputable def twistChartRead (L : A.relProj.Modules)
-    (chart : ∀ U : S.affineOpens,
-      (Scheme.Modules.tensorPullback (A.relProjι U)).obj L ≅ Proj.twist (A.grading U) 1)
-    (U : S.affineOpens) :
-    ((Scheme.Modules.pushforward A.relProjHom).obj L).val.obj (op U.1) ⟶
-      ((Scheme.Modules.pushforward A.relProjHom).obj
-        ((Scheme.Modules.pushforward (A.relProjι U)).obj
-          (Proj.twist (A.grading U) 1))).val.obj (op U.1) :=
-  (((Scheme.Modules.pushforward A.relProjHom).map
-    ((Scheme.Modules.tensorPullbackSectionAdjunction (A.relProjι U)).unit.app L ≫
-      (Scheme.Modules.pushforward (A.relProjι U)).map (chart U).hom)).val.app (op U.1))
 
 /-- The affine twists descend with their restriction maps. This is object descent only:
 there is no morphism from a module on the base in the conclusion.
@@ -87,7 +63,7 @@ theorem exists_twist_chart_descent :
         (∀ a : A.grading V 1,
           t (A.twistChartFraction V a) =
             A.twistChartFraction U ⟨A.res h a, (A.res h).map_mem a.property⟩) := by
-  classical
-  sorry
+  obtain ⟨L, chart, hcompat⟩ := A.exists_twist_chart_descent_object
+  exact ⟨L, chart, A.exists_twist_chart_descent_transition L chart hcompat⟩
 
 end AlgebraicGeometry.Scheme.GradedAlgebraData
