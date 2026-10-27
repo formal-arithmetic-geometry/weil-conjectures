@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-chain-tower-component",
+ "kind": "statement",
+ "title": "Degreewise scalar pullback chain tower comparison",
+ "statement": "For finite coefficient fields E,L,F over Q_l with maps iota:E→L and j:L→F, every scheme morphism f:X→Y, every cochain complex P of completed E-coefficient modules on Y, and every degree i, the degree-i components of the two composites in lem-pur-integral-scalar-pullback-chain-tower are equal.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Finite pullback generators, consecutive reduction squares, and unshifted and shifted Roos coordinate calculations in scalar-comparison proof step 9."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Fix a cochain degree. Expand scalarPullbackChain as the diagonal Roos map of scalarPullbackTower followed by the strict tower map. At every finite level, compare the two maps on the normalized pullback generators; both multiply the introduced coefficients in the same order by scalar associativity. The resulting equality is preserved by the reduction maps. Project to the unshifted and shifted product coordinates of the Roos complex, where the strict tower-map equality gives the same component. Joint injectivity of the product projections yields equality of the degree component.",
+   "uses": [
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Degreewise reduction of scalar-comparison proof step 9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension comparisons commute with coefficient towers on complexes of sheaves",
+   "results": "No specialized theorem; only generic naturality results.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degreewise Roos scalar pullback comparison tower",
+   "results": "No specialized comparison theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain.*tower",
+   "results": "No prior integral chain tower equation found.",
+   "date": "2026-10-27",
+   "verdict": "New component statement required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarPullbackChainTower",
+  "group": "U4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-scalar-pullback-chain-tower",
+   "place": "Degreewise component used to assemble the chain-map equality.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarPullbackChainTowerComponent",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackChainTowerComponent.lean",
+  "declaration": "WeilConjectures.integralScalarPullbackChainTower_f",
+  "statement": "theorem integralScalarPullbackChainTower_f {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ) : (((integralOrdinaryScalar l L F j X).mapHomologicalComplex (.up ℤ)).map (scalarPullbackChain l E L ι f P) ≫ scalarPullbackChain l L F j f (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P) ≫ (integralOperationsPullbackComplexFunctor l F f).map ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι Y F j) (.up ℤ)).hom.app P)).f i = ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι X F j) (.up ℤ)).hom.app ((integralOperationsPullbackComplexFunctor l E f).obj P) ≫ scalarPullbackChain l E F (j.comp ι) f P).f i",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T180834-L-3907987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T180834-L-3907987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

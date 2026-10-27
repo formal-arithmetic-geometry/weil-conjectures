@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralOperationsScalarComparisonModels
 public import Sheaf.Paper.ScalarExtensionComposition
+import Sheaf.Paper.IntegralScalarPullbackChainTowerComponent
 
 /-! # Scalar pullback chain comparisons and coefficient towers
 
@@ -88,6 +89,9 @@ theorem integralScalarPullbackChainTower {X Y : AlgebraicGeometry.Scheme.{u}}
           (.up ℤ)).hom.app P) =
     (NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι X F j)
       (.up ℤ)).hom.app ((integralOperationsPullbackComplexFunctor l E f).obj P) ≫
-        scalarPullbackChain l E F (j.comp ι) f P := by sorry
+        scalarPullbackChain l E F (j.comp ι) f P := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  exact integralScalarPullbackChainTower_f l E L ι F j f P i
 
 end WeilConjectures
