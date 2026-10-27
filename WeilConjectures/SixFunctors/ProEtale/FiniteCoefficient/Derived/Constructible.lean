@@ -38,10 +38,11 @@ functor of `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`.
 
 In the blueprint, a bounded constructible pro-étale complex is defined intrinsically
 (`def-weil-finite-torsion-constructibility`): its homology sheaves are locally constant with
-finite stalks on the strata of a finite stratification. That every such complex is of étale
-origin is the lemma `lem-sf-proetale-constructible-origin`, which holds only at the finite
-coefficient stages `A = A_{E,n}` (it relies on Stacks 09AK, which needs Noetherian torsion
-coefficients). At these stages the blueprint itself adopts the étale-origin reading
+finitely generated stalks on the strata of a finite stratification. That every such complex is
+of étale origin is the lemma `lem-sf-proetale-constructible-origin`, which holds for discrete
+Noetherian coefficient rings (Stacks 09AK, 09AL), in particular at the finite coefficient stages
+`A = A_{E,n}`, and fails for the `ℓ`-adic stages, which are not discrete (see below). At the
+finite stages the blueprint itself adopts the étale-origin reading
 (`def-weil-pbc-proetale-modules`), and this file takes it as the definition, for any `A`. This
 avoids a pro-étale notion of constructible sheaf, which is not formalised.
 
