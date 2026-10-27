@@ -43,8 +43,10 @@ if the Künneth map of the geometric slice is an isomorphism, so is the restrict
 (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`), given the two facts on traits:
 the invariance of nearby cycles under change of trait
 (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, unfinished) and the
-generic-slicing identification with invariants, compatibly with the Künneth maps
-(`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`, unfinished).
+generic-slicing identification with invariants
+(`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`, unfinished); the projection
+formula for invariants makes the retractions compatible with the Künneth maps
+(`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`).
 Since the slice of a local chart `V ⟶ 𝔸ᵐ_S` along one of its coordinates is a local chart of
 dimension `m - 1` over `Spec K⟦t⟧` (`AlgebraicGeometry.exists_isImmersion_pullback_reindex`),
 the Künneth formula for charts of smaller dimension over `Spec K⟦t⟧`

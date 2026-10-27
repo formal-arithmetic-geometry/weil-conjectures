@@ -41,7 +41,7 @@ Künneth formula in chart dimension `n - 1` over the trait `Spec K⟦t⟧` of th
 (`NearbyCyclesModel.KunnethFormula`); its only unfinished inputs are the invariance of nearby
 cycles under change of trait (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`)
 and the generic-slicing identification with invariants
-(`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`), see
+(`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`), see
 `WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep`.
 
 The reduction to proper models in chart dimension `n` (`NearbyCyclesModel.ProperKunnethFormula`)
