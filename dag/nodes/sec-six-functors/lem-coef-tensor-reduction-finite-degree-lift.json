@@ -1,0 +1,126 @@
+{
+ "id": "lem-coef-tensor-reduction-finite-degree-lift",
+ "kind": "statement",
+ "title": "The finite tensor comparisons admit a degreewise coherent lift",
+ "statement": "For arbitrary integral cochain complexes P,Q on W let T=Tot(P,Q), G be ordinary coherent reduction applied termwise, and B=Tot(GP,GQ) on the coefficient sequence site. In every degree i there is a sequence-module map psi_i:(G T)^i to B^i. For every finite level n, its canonical evaluation is exactly the degree-i component of the composite reductionEvaluationComplex.inv at T, coefficientScalarTensorIso.hom, the finite total tensor of reductionEvaluationComplex.hom at P and Q, and coefficientEvaluationTensorIso.inv. No compatibility of the psi_i with differentials is asserted or needed; no flatness or boundedness assumptions are used.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; scalar tensor units as in sites-modules.tex, Tag 03EK."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Transport the strict tensor cone by the inverse of pullbackTensorTensorTower. Its degree-i components give a cone from T^i to coefficientSequenceRestriction(B^i). Take its limit lift and transpose through pullbackTensorOrdinaryAdjunction to construct psi_i.",
+   "uses": [
+    "lem-coef-tensor-reduction-strict-cone-coordinates",
+    "lem-pur-coherent-tensor-tower",
+    "def-pur-completed-pullback-tower-core",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary reduction/evaluation unit normalization identifies the limit projection of the transpose with the finite scalar transpose of reductionEvaluation.hom followed by evaluation(psi_i). Postcompose with the evaluation tensor comparison and the tensor of the two inverse reduction/evaluation comparisons. The prescribed tensor-tower component identifies this with the strict cone coordinate, which is the finite scalar transpose of coefficientScalarTensorIso by the preceding coordinate theorem. Injectivity of the finite Hom equivalence and cancellation of the four isomorphisms give the displayed component formula. The argument works for all degrees and all finite levels, including n=0, zero complexes and the empty site.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-pur-coherent-tensor-tower",
+    "lem-coef-tensor-reduction-strict-cone-coordinates",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-tensor-reduction-strict-cone-coordinates",
+  "lem-pur-coherent-tensor-tower",
+  "def-pur-completed-pullback-tower-core",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; normalized quotient augmentation and ordinary adjunction calculation, fully proved in Lean by H2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict cone of finite quotient tensor maps transposes through the reduction inverse limit adjunction to a coherent module map",
+   "results": "Eight hits, mostly condensed projectivity and adic completion; ModuleCat.limitπLinearMap supplies a related generic limit projection, but no fixed tensor cone or coherent reduction component theorem.",
+   "verdict": "No exact match; use the existing project normalizations and Mathlib adjunction/limit tools.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Twelve hits including homEquiv, homEquiv_unit and the unit/counit formulations.",
+   "verdict": "Use homEquiv to transpose the explicit limit lift; the prescribed finite tensor identification is project-specific.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality_right|limit.lift_π|ofOpSequence_obj",
+   "results": "Twenty-five Mathlib hits include homEquiv naturality and limit.lift_π(_assoc) calculations.",
+   "verdict": "Use these general tools; none states the fixed quotient tensor coordinate calculation.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorReductionFiniteComponents",
+  "date": "2026-10-28",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-tensor-reduction-finite-components",
+   "place": "Strict cone coordinates and degreewise ordinary reduction/limit transposition in the proof.",
+   "via": [
+    "lem-coef-tensor-reduction-finite-components"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorReductionFiniteDegreeLift",
+  "file": "lean/Sheaf/Paper/TensorReductionFiniteDegreeLift.lean",
+  "declaration": "WeilConjectures.tensorReductionFiniteDegreeLift",
+  "declarations": [
+   "WeilConjectures.tensorReductionFiniteDegreeLift"
+  ],
+  "statement": "theorem tensorReductionFiniteDegreeLift (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (i : ℤ) :\n    let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)\n    let G := (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)\n    let B := (coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf l E W)).obj (G.obj P, G.obj Q)\n    ∃ ψ : (G.obj T).X i ⟶ B.X i, ∀ n : ℕ,\n      (coefficientSequenceEvaluation l E W n).map ψ =\n        ((pullbackTensorReductionEvaluationComplex l E W n).inv.app T ≫\n          (coefficientScalarTensorIso l E W n P Q).hom ≫\n          (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n            (integralCoefficientCommRingSheaf l E W n)).map\n            (Prod.mkHom ((pullbackTensorReductionEvaluationComplex l E W n).hom.app P)\n              ((pullbackTensorReductionEvaluationComplex l E W n).hom.app Q)) ≫\n          (coefficientEvaluationTensorIso l E W n (G.obj P) (G.obj Q)).inv).f i",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T180633-L-3884936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T180633-L-3884936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

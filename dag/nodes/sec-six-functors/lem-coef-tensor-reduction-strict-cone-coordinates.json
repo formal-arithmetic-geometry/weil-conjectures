@@ -1,0 +1,126 @@
+{
+ "id": "lem-coef-tensor-reduction-strict-cone-coordinates",
+ "kind": "statement",
+ "title": "Finite scalar transposes are coordinates of the strict tensor cone",
+ "statement": "For arbitrary integral cochain complexes P,Q on W, let T be their direct-sum total tensor and D the actual finite quotient tensor tower. The explicit quotient augmentation followed by IntegralAmbient.tensorTowerIso is a strict cone with vertex T. For every n, its nth component equals the transpose under the finite scalar-extension/restriction adjunction of coefficientScalarTensorIso.hom. These are equal chain maps T to D_n. No K-flatness, boundedness, completeness or termwise-flatness hypothesis is imposed. The named cone and its map are real constructions from the prescribed augmentations and comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; scalar tensor units as in sites-modules.tex, Tag 03EK."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof": [
+  {
+   "text": "Compose the actual quotient augmentation of T with the normalized strict tensor-tower isomorphism. This gives a natural transformation from the constant T tower, hence a strict cone with vertex T.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply complex hom extensionality and total-tensor generator extensionality. The finite adjunction unit inserts coefficient one. coefficientScalarTensorIso sends the resulting homogeneous pure tensor to the tensor of its two quotient units. The quotient augmentation followed by tensorTowerIso has exactly the same formula, by their unique prescribed generator equations. Hence the maps agree in each degree. Zero complexes, the empty site and n=0 satisfy the same generator equations.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-strict-tensor-augmentation-coordinates",
+    "lem-pur-integral-ambient-operation-models",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-strict-tensor-augmentation-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; normalized quotient augmentation and ordinary adjunction calculation, fully proved in Lean by H2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict cone of finite quotient tensor maps transposes through the reduction inverse limit adjunction to a coherent module map",
+   "results": "Eight hits, mostly condensed projectivity and adic completion; ModuleCat.limitπLinearMap supplies a related generic limit projection, but no fixed tensor cone or coherent reduction component theorem.",
+   "verdict": "No exact match; use the existing project normalizations and Mathlib adjunction/limit tools.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Twelve hits including homEquiv, homEquiv_unit and the unit/counit formulations.",
+   "verdict": "Use homEquiv to transpose the explicit limit lift; the prescribed finite tensor identification is project-specific.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality_right|limit.lift_π|ofOpSequence_obj",
+   "results": "Twenty-five Mathlib hits include homEquiv naturality and limit.lift_π(_assoc) calculations.",
+   "verdict": "Use these general tools; none states the fixed quotient tensor coordinate calculation.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorReductionFiniteComponents",
+  "date": "2026-10-28",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-tensor-reduction-finite-components",
+   "place": "Strict cone coordinates and degreewise ordinary reduction/limit transposition in the proof.",
+   "via": [
+    "lem-coef-tensor-reduction-finite-components"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorReductionStrictConeCoordinates",
+  "file": "lean/Sheaf/Paper/TensorReductionStrictConeCoordinates.lean",
+  "declaration": "WeilConjectures.tensorReductionStrictCone_finiteTranspose",
+  "declarations": [
+   "WeilConjectures.tensorReductionStrictConeMap",
+   "WeilConjectures.tensorReductionStrictCone",
+   "WeilConjectures.tensorReductionStrictCone_finiteTranspose"
+  ],
+  "statement": "theorem tensorReductionStrictCone_finiteTranspose (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :\n    let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)\n    let D := (integralOperationsTensorTowerFunctor l E W).obj (P, Q)\n    @Eq (T ⟶ D.obj (op n))\n      (((pullbackTensorFiniteAdjunction l E W n).mapHomologicalComplex (.up ℤ)).homEquiv T\n        ((coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n          (integralCoefficientCommRingSheaf l E W n)).obj\n          (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P,\n            ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q))\n        (coefficientScalarTensorIso l E W n P Q).hom)\n      ((tensorReductionStrictCone l E W P Q).π.app (op n))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T180633-L-3884936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T180633-L-3884936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
