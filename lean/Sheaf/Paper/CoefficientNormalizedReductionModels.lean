@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
 public import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.Paper.CoefficientNormalizedReductionCore
+import Sheaf.Paper.CoefficientNormalizedReductionNormalizations
 
 /-! # Normalized coefficient reduction and quotient tensors
 
@@ -84,6 +86,10 @@ theorem coefficientNormalizedReductionModels (T : CoefficientDerivedSystemTensor
       CoefficientEvaluationTensorNormalization l E W R ∧
       CoefficientReductionTensorEvaluation l E W R ∧
       Nonempty (CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors) :=
-  by sorry
+  by
+  obtain ⟨R, hRT, hQ⟩ := coefficientNormalizedReductionCore l E W T
+  obtain ⟨hR, hF, hE, hRE⟩ :=
+    coefficientNormalizedReductionNormalizations l E W T R hRT hQ.some
+  exact ⟨R, hRT, hR, hF, hE, hRE, hQ⟩
 
 end WeilConjectures

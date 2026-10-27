@@ -1,0 +1,97 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-reduction-models",
+   "place": "Construction split from the sequence-projection, scalar-extension and tensor-normalization proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoefficientDerivedSystemReduction construction and normalization fields",
+   "results": "The existing evaluation-data module supplies the core record and the normalization predicates, but no theorem assembles them.",
+   "date": "2026-10-28",
+   "verdict": "No existing theorem; split along the two independent construction steps."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientNormalizedReductionModels",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "id": "lem-coef-normalized-reduction-models-core",
+ "title": "Core reduction record and finite quotient calculus",
+ "statement": "Fix a prime ℓ, a finite extension E/ℚ_ℓ and a scheme W. For every coefficient tensor record T there exists a coefficient derived-system reduction record R whose tensor subrecord is T, together with a finite quotient calculus on that tensor record.",
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-sequence-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A6 and 0941; sequence projection and finite quotient construction"
+ },
+ "proof": [
+  {
+   "text": "Apply the sequence projection derived adjunction and pushforward-limit projections to the completed coefficient ring and its quotient tower. Transport the resulting functors and projection equations across the strict-system sequence equivalence and identify finite evaluations with the prescribed scalar-derived pairs. Apply the same construction to every finite quotient to obtain the ordinary unit, derived counit and tensor data of the finite quotient calculus.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-coef-actual-scalar-derived-pair"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-actual-scalar-derived-pair"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker P2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 07A6 and 0941; sequence projection and finite quotient construction"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientNormalizedReductionCore",
+  "file": "lean/Sheaf/Paper/CoefficientNormalizedReductionCore.lean",
+  "declaration": "WeilConjectures.coefficientNormalizedReductionCore",
+  "statement": "theorem coefficientNormalizedReductionCore (T : CoefficientDerivedSystemTensors l E W) :\n    ∃ R : CoefficientDerivedSystemReduction l E W,\n      R.toCoefficientDerivedSystemTensors = T ∧\n      Nonempty (CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T234129-L-7388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T234129-L-7388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
