@@ -12,6 +12,7 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentClassReductio
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 public import WeilConjectures.TraceFormula.Specialization.MatchTactic
+public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
 
 /-!
 
@@ -222,7 +223,17 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as _hSI
   -- Facts (I) and (III) and the unit class identity of `ν_B` are `hI`, `h3` and `hD`; the
   -- cancellation is `TraceSpecialization.specializesComponentClass_of_eq`, and `glue_unit_class`
-  -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`.
+  -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`. Its
+  -- route: `fixedLocusToPointCompactSupportExchange_app_comp_eq_of_eq` for `_hSI` and
+  -- `pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm`, then
+  -- `CategoryTheory.exchange_app_eq_of_fixedSquare_aux` with the coherences of
+  -- `ComponentExchangeAssembly`. The elaborator side of this route goes through (in about 80 s,
+  -- by syntactic matching), but the kernel check of the resulting term does not finish: the
+  -- hypotheses spell the same objects differently (`(specialCorrespondence k' hc).C` and
+  -- `deformationSpecialFibre c.C _ k'`, `x.obj` and `ι.obj x`, different `Precoherent` proofs
+  -- inside the `MonObj` instances), and the kernel unfolds the enclosing composites. Note that
+  -- a declaration with `sorry` is not kernel-checked: the steps above (`_hSI`, `glue_unit_class`)
+  -- have so far only been checked by the elaborator.
   refine TraceSpecialization.specializesComponentClass_of_eq _ _ _ j hI
     (W := _) ?φ ((deformationCompactSupportExchange B b.left.ker k').app (𝟙_ _)) ?h1 ?h2
   case h2 => glue_unit_class h3 hD

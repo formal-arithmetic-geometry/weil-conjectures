@@ -13317,6 +13317,7 @@ public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
 public import WeilConjectures.TraceFormula.Specialization.ComponentClass
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
+public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
 public import WeilConjectures.TraceFormula.Specialization.ComponentSpecialFibre
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClass
