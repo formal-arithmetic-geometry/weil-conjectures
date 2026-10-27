@@ -1,0 +1,117 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph, reassociation of the same threefold tensor product before localization; Stacks sites-cohomology.tex Tags 07A4, 07A6, 0941."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph, reassociation of the same threefold tensor product before localization; Stacks sites-cohomology.tex Tags 07A4, 07A6, 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient reduction and inverse image commute with the tensor comparison on derived sheaves of modules",
+   "results": "Eight results for free module sheaf generators and pullback presentations, including SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. None states the strict-system cochain square.",
+   "verdict": "No exact match; ordinary generators and their adjunction units are the proof route.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization.natTrans_ext\"",
+   "results": "CategoryTheory.Localization.natTrans_ext.",
+   "verdict": "Useful for the separate derived descent, not this ordinary cochain equality.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionPull.*tensor|canonicalReductionTensorPull|coefficient.*tensor.*composition",
+   "results": "No indexed match. Local search finds the proved scalarPull_coefficient_total_tensor for a fixed coefficient change, tensorReductionStrictMap_component and the sequence cochain unit normalization.",
+   "verdict": "Use these finite and cochain formulas; the ordinary whole-system mate square is not already stated.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary coefficient reduction and geometric inverse image preserve the tensor comparison on cochain complexes of sheaves",
+   "results": "Eight hits on cochain homotopies and shifts, coherent sheaf comparison, and Karoubi complexes; none states the coefficient tensor square or its representative normalizations.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Use the library normalization equations, Mathlib naturality and associativity, and isolate the ordinary cochain tensor calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CanonicalReductionTensorPull",
+  "date": "2026-10-28",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-canonical-reduction-tensor-pull-left",
+ "kind": "lemma",
+ "title": "Left path of the coefficient tensor square on representatives",
+ "statement": "For any good integral cochain representatives P,Q, pre composed with the left derived tensor/reduction/pullback path and then post is leftNormal, namely the derived image of the ordinary left cochain path, conjugated by the prescribed representative maps.",
+ "stmt_deps": [
+  "lem-sf-canonical-reduction-tensor-pull-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply naturality of the realization comparison to the ordinary tensor representative, and naturality of the system tensor comparison to the reduction-model components. Normalize the reduction tensor comparison using mu_model. Use the defining system tensor representative square and naturality of the exact pullback factorization on the strict reduction map. The realization model equation for the total tensor completes the path. Paste these six equations using associativity.",
+   "uses": [
+    "lem-sf-canonical-reduction-tensor-pull-models",
+    "def-sf-integral-system-canonical-bridge",
+    "lem-pur-coherent-derived-pullback-tensor",
+    "lem-pur-sequence-pullback-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-canonical-reduction-tensor-pull-models",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-pur-coherent-derived-pullback-tensor",
+  "lem-pur-sequence-pullback-kflat"
+ ],
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-canonical-reduction-tensor-pull",
+   "place": "Proved representative normalization, split into files to respect the per-file compile limit.",
+   "via": [
+    "fix-prop-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CanonicalReductionTensorPullLeft",
+  "file": "lean/Sheaf/SixFunctors/CanonicalReductionTensorPullLeft.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.CanonicalTensorPullProof.left_on_representatives",
+  "statement": "theorem left_on_representatives\n    (o : Operations l E) (m : RealizationModel l E o) (d : RingedModels l E)\n    {U V : Scheme.{u}} (f : U ⟶ V) (P Q : (good l E V).FullSubcategory) :\n    pre l E o m d f P Q ≫\n        (leftPath l E o m d f).app\n          (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫\n        post l E o m d f P Q = leftNormal l E o m d f P Q",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T210007-L-1642981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T210007-L-1642981",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

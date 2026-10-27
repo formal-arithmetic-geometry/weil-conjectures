@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-canonical-reduction-tensor-pull-complex",
+ "kind": "lemma",
+ "title": "Ordinary reduction and geometric inverse image preserve signed total tensor",
+ "statement": "Fix l,E and the ordinary section-normalized limit comparison a of [def-sf-integral-system-canonical-bridge]. For every scheme morphism f:U→V and arbitrary completed-coefficient cochain complexes P,Q on V, let F be ordinary geometric inverse image on complexes, R_W ordinary whole-system quotient reduction, S the ordinary sequence inverse image, T_W integral total tensor, and B_W system total tensor. Let delta be the ordinary left-adjoint mate a.reductionPullComplex, psi_W the fixed strict reduction tensor map [lem-coef-tensor-reduction-strict-assembly], beta the inverse ordinary ringed total-tensor comparison and tau the ordinary sequence tensor comparison [lem-pur-sequence-pullback-tensor-cochain]. Then delta(T_V(P,Q)); S(psi_V(P,Q)); tau(R_V P,R_V Q) equals R_U(beta(P,Q)); psi_U(FP,FQ); B_U(delta(P),delta(Q)). Equality is in cochain complexes of strict coefficient systems, with all quotient transitions. No derived category, derived tensor model, K-flatness, flatness, completion or constructibility hypothesis is involved.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph, reassociation of the same threefold tensor product before localization; Stacks sites-cohomology.tex Tags 07A4, 07A6, 0941."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-tensor-reduction-strict-assembly",
+  "lem-pur-sequence-pullback-tensor-cochain"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the ordinary limit-comparison projection equations through the ordinary geometric and coefficient adjunctions. Joint monicity of the actual ordinary limit projections identifies the mate on iterated quotient and inverse-image units. This uses ordinary sections only, never faithfulness of derived finite evaluation.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose in total degree k with each (p,q) tensor summand. Use the strict reduction map finite-component characterization and the sequence pullback tensor unit formula. The coefficient and inverse-image paths send every pure tensor to (b tensor x) tensor (1 tensor y). The ordinary scalar/geometric tensor calculation supplies the finite coefficient identity; linearity, balancing and sheafification extend it to each module summand.",
+   "uses": [
+    "lem-coef-tensor-reduction-strict-assembly",
+    "lem-sf-scalar-pull-coefficient-total-tensor",
+    "lem-pur-sequence-pullback-tensor-cochain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image and scalar extension preserve the direct sums defining the total complexes. Their summand injections determine the degree maps. Both paths preserve input degrees, hence the signed differential, and their finite-component formulas preserve every quotient transition. This yields equality in the category of whole strict system complexes. Identity morphisms and zero complexes satisfy the same calculation.",
+   "uses": [
+    "lem-coef-tensor-reduction-strict-assembly",
+    "lem-pur-sequence-pullback-tensor-cochain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-completed-pullback-tower-core",
+  "lem-coef-tensor-reduction-strict-assembly",
+  "lem-sf-scalar-pull-coefficient-total-tensor",
+  "lem-pur-sequence-pullback-tensor-cochain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph, reassociation of the same threefold tensor product before localization; Stacks sites-cohomology.tex Tags 07A4, 07A6, 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient reduction and inverse image commute with the tensor comparison on derived sheaves of modules",
+   "results": "Eight results for free module sheaf generators and pullback presentations, including SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. None states the strict-system cochain square.",
+   "verdict": "No exact match; ordinary generators and their adjunction units are the proof route.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization.natTrans_ext\"",
+   "results": "CategoryTheory.Localization.natTrans_ext.",
+   "verdict": "Useful for the separate derived descent, not this ordinary cochain equality.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionPull.*tensor|canonicalReductionTensorPull|coefficient.*tensor.*composition",
+   "results": "No indexed match. Local search finds the proved scalarPull_coefficient_total_tensor for a fixed coefficient change, tensorReductionStrictMap_component and the sequence cochain unit normalization.",
+   "verdict": "Use these finite and cochain formulas; the ordinary whole-system mate square is not already stated.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary coefficient reduction and geometric inverse image preserve the tensor comparison on cochain complexes of sheaves",
+   "results": "Eight hits on cochain homotopies and shifts, coherent sheaf comparison, and Karoubi complexes; none states the coefficient tensor square or its representative normalizations.",
+   "date": "2026-10-28",
+   "verdict": "No exact match. Use the library normalization equations, Mathlib naturality and associativity, and isolate the ordinary cochain tensor calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CanonicalReductionTensorPull",
+  "date": "2026-10-28",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-canonical-reduction-tensor-pull",
+   "place": "Proof step 2, the equality of whole strict system complexes before localization.",
+   "via": [
+    "fix-prop-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CanonicalReductionTensorPullComplex",
+  "file": "lean/Sheaf/SixFunctors/CanonicalReductionTensorPullComplex.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.canonicalReductionTensorPullComplex",
+  "statement": "theorem canonicalReductionTensorPullComplex\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (a : OrdinaryLimitModel l E) {U V : Scheme.{u}} (f : U ⟶ V)\n    (P Q : CochainComplex (integralTowerModules l E V) ℤ) :\n    let F := (integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)\n    let R (W : Scheme.{u}) :=\n      (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)\n    let S := (pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)\n    let T := (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology V)\n      (completedIntegralCommRingSheafUnrestricted l E V)).obj (P, Q)\n    a.reductionPullComplex l E f T ≫\n        S.map (tensorReductionStrictMap l E V P Q) ≫\n        (pullbackTensorSequenceCochain l E f).hom.app ((R V).obj P, (R V).obj Q) =\n      (R U).map\n          (proEtaleTensorPullbackTotalIso f ((PurCompactSupport.completed l E).ring V)\n            ((PurCompactSupport.completed l E).ring U)\n            ((PurCompactSupport.completed l E).pull f) P Q).inv ≫\n        tensorReductionStrictMap l E U (F.obj P) (F.obj Q) ≫\n        (coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology U))\n          (coefficientSequenceCommRingSheaf l E U)).map\n          (Prod.mkHom (a.reductionPullComplex l E f P) (a.reductionPullComplex l E f Q))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T210007-L-1642981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T210007-L-1642981",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

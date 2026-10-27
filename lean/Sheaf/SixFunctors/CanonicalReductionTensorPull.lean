@@ -5,25 +5,55 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralSystemCanonicalBridge
+import Sheaf.SixFunctors.CanonicalReductionTensorPullComplex
+import Sheaf.SixFunctors.CanonicalReductionTensorPullLeft
+import Sheaf.SixFunctors.CanonicalReductionTensorPullRight
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
 /-! # Pullback and tensor under ordinary coefficient reduction
 
 Source: blueprint fix-prop-coherence, individual coefficient comparisons; Stacks 07A4.
 -/
 
-@[expose] public section
+@[expose] public noncomputable section
 set_option autoImplicit false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
+set_option backward.defeqAttrib.useBackward true
 universe u
-open CategoryTheory AlgebraicGeometry
+open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
 
+open CanonicalTensorPullProof
 attribute [local irreducible] pullbackTensorCalculus
-  completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
-  HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  AlgebraicGeometry.Scheme.proEtaleCanonicalTensorComparison
+
+private theorem on_representatives
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (o : Operations l E) (m : RealizationModel l E o) (d : RingedModels l E)
+    {U V : Scheme.{u}} (f : U ⟶ V) (P Q : (good l E V).FullSubcategory) :
+    (leftPath l E o m d f).app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) =
+      (rightPath l E o m d f).app
+        (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) := by
+  apply (cancel_epi (pre l E o m d f P Q)).mp
+  apply (cancel_mono (post l E o m d f P Q)).mp
+  simp only [Category.assoc]
+  rw [left_on_representatives, right_on_representatives]
+  have h := congrArg DerivedCategory.Q.map
+    (canonicalReductionTensorPullComplex l E m.ordinary f P.obj Q.obj)
+  simp only [Functor.map_comp] at h
+  simpa only [leftNormal, rightNormal, Functor.map_comp, Category.assoc] using
+    congrArg (fun a ↦ (calculus l E U).reduction.map
+      ((integralOrdinaryPull l E f).mapDerivedCategoryFactors.hom.app
+        ((total l E V).obj (P.obj, Q.obj))) ≫
+      (pullbackTensorReductionModel l E U).hom.app
+        ⟨((integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)).obj
+          ((total l E V).obj (P.obj, Q.obj)),
+          pull_good l E f ⟨_, total_good l E V P Q⟩⟩ ≫ a ≫
+      (pullbackTensorSystemModel l E U _ _
+        (pullbackTensorSequenceGood l E f _ (pullbackTensorReductionGood l E V P))
+        (pullbackTensorSequenceGood l E f _ (pullbackTensorReductionGood l E V Q))).hom) h
 
 /-- The normalized reduction/pullback comparison preserves the ordinary tensor map.
 Source: blueprint sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md,
@@ -67,6 +97,20 @@ theorem canonicalReductionTensorPull
         (μ U).app ((ringedPull l E f).obj K, (ringedPull l E f).obj H) ≫
         (calculus l E U).systemClosed.tensor.map
           (Prod.mkHom ((m.reductionPull f).hom.app K) ((m.reductionPull f).hom.app H)) := by
-  sorry
+  suffices hh : (leftPath l E o m d f).app (K, H) =
+      (rightPath l E o m d f).app (K, H) by
+    simpa only [leftPath, rightPath, mu, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, NatTrans.prod, Functor.prod_obj, Category.assoc] using hh
+  let L := integralOperationsGoodLocalization l E V
+  let W := (HomologicalComplex.quasiIso (integralTowerModules l E V) (.up ℤ)).inverseImage
+    (good l E V).ι
+  let : L.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E V
+  let : L.EssSurj := Localization.essSurj L W
+  let e := Iso.prod (L.objObjPreimageIso K) (L.objObjPreimageIso H)
+  have h := on_representatives l E o m d f (L.objPreimage K) (L.objPreimage H)
+  have hn := (leftPath l E o m d f).naturality e.hom
+  have hn' := (rightPath l E o m d f).naturality e.hom
+  erw [h] at hn
+  exact (cancel_epi _).mp (hn.trans hn'.symm)
 
 end WeilConjectures.IntegralSystemRealization
