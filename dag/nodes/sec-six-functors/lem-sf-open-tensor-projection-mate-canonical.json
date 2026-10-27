@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-open-tensor-projection-mate-canonical",
+ "kind": "lemma",
+ "title": "Canonical adjunction-transpose projection identity on resolving pairs",
+ "statement": "Under the same ringed-site, tensor-comparison, and cochain hypotheses as the resolving-pair projection lemma, with the projection mate fixed canonically as the adjoint transpose of tensor(unit,identity) followed by the inverse restriction comparison, the displayed chain comparison equation holds for a cochain C and P with P K-flat and flat terms.",
+ "stmt_deps": [
+  "def-sf-open-tensor-cochain-data",
+  "def-sf-open-tensor-representative-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tags 07A4 and 06YS--06YT"
+ },
+ "proof": [
+  {
+   "text": "On each signed total summand, use D.ordinaryInverse, hordinary, and the summand formulas to identify the adjunct of the chain map with the tensor of the adjunction unit and identity followed by the inverse restriction comparison.",
+   "uses": [
+    "def-sf-open-tensor-cochain-data",
+    "def-sf-open-tensor-representative-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chain equality through the exact derived adjunction and substitute the supplied one-flat comparison models.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "def-sf-open-tensor-representative-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-tensor-cochain-data",
+  "def-sf-open-tensor-representative-data",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, resolving-pair inverse transpose calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula exact adjunction tensor derived category localization",
+   "results": "Adjunction.derivedε_fac_app, derivedη_fac_app, derivedε, derivedε_fac_app_assoc, derived_counit, derived_unit, derivedη_fac_app_assoc, derived′_unit. No theorem computing the projection mate with the supplied ringed tensor models.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalized resolving-pair calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "CategoryTheory.Adjunction.homEquiv_counit in Mathlib.CategoryTheory.Adjunction.Basic: the inverse hom equivalence is F.map followed by counit.",
+   "date": "2026-10-27",
+   "verdict": "Used the hom-equivalence API to construct the canonical mate; it does not supply the chain representative calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionComparison|projectionFormulaMap|IsIso.*app.*representative",
+   "results": "msearch grep: 0 hits. Local rg finds the specialized condensed-ring projection formula in WeilConjectures.PoincareDuality.ProjectionFormula, which uses different module categories and fixed monoidal derived structures. No generic normalization for the supplied models.",
+   "date": "2026-10-27",
+   "verdict": "No matching lemma; the resolving-pair calculation is a genuine part of the source argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorProjectionMateResolving",
+  "date": "2026-10-27",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-projection-mate-resolving",
+   "place": "Canonical mate reduction of the resolving-pair calculation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorProjectionMateCanonical",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorProjectionMateCanonical.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_canonical",
+  "statement": "theorem openTensorProjection_mate_canonical\n    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)\n    (restriction : A.tensor ⋙ G.mapDerivedCategory ≅\n      (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ A'.tensor)\n    (restrictionModel : TensorComparisonModel.{c, v, r} J J' R R' G A A' T T' restriction)\n    (hordinary : restrictionModel.ordinary = D.pullTensor)\n    (ambientModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J R A)\n    (openModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J' R' A')\n    (C : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)\n    (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (flatP : flatTerms.{c, v, r} J R P) :\n      DerivedCategory.Q.map (D.chain C P).hom ≫\n        F.mapDerivedCategoryFactors.inv.app ((totalTensor.{c, v, r} J' R').obj\n          (C, (G.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n        F.mapDerivedCategory.map ((openModel C ((G.mapHomologicalComplex (.up ℤ)).obj P)\n          (Or.inr (restrictionModel.kflat P hP flatP))).hom) ≫\n        F.mapDerivedCategory.map (A'.tensor.map\n          (Prod.mkHom (𝟙 _) (G.mapDerivedCategoryFactors.inv.app P))) ≫\n        (canonicalProjectionMate A.tensor A'.tensor F.mapDerivedCategory\n          G.mapDerivedCategory\n          (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj)\n          restriction).app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =\n    (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫\n        A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T180513-L-3868116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T180513-L-3868116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

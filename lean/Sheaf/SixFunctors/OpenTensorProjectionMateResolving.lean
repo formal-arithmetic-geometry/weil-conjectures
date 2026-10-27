@@ -6,6 +6,7 @@ module
 
 public import Sheaf.SixFunctors.OpenTensorCochainData
 public import Sheaf.SixFunctors.OpenTensorRepresentativeData
+import Sheaf.SixFunctors.OpenTensorProjectionMateCanonical
 
 /-! # The projection mate on resolving pairs
 
@@ -100,6 +101,27 @@ theorem openTensorProjection_mate_resolving
         alpha.app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =
     (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫
         A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _)) := by
-  sorry
+  have _ := ambientBoth
+  have _ := openBoth
+  have _ := hC
+  have _ := flatC
+  let canonical := canonicalProjectionMate A.tensor A'.tensor F.mapDerivedCategory
+    G.mapDerivedCategory
+    (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj) restriction
+  have hcanonical (M N) :
+      (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj).homEquiv _ _
+          (canonical.app (M, N)) =
+        A'.tensor.map (Prod.mkHom
+            ((SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj).unit.app M)
+            (𝟙 (G.mapDerivedCategory.obj N))) ≫
+          restriction.inv.app (F.mapDerivedCategory.obj M, N) := by
+    exact Equiv.apply_symm_apply _ _
+  have heq (M N) : alpha.app (M, N) = canonical.app (M, N) := by
+    apply (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj).homEquiv
+      _ _ |>.injective
+    rw [halpha, hcanonical]
+  simpa only [heq] using
+    (openTensorProjection_mate_canonical.{c, v, r} J R A T J' R' A' T' F G adj H
+      sectionPull D restriction restrictionModel hordinary ambientModel openModel C P hP flatP)
 
 end WeilConjectures.CoefSupportOpenTensor
