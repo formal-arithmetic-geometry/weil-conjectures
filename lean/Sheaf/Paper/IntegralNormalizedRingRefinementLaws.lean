@@ -6,6 +6,8 @@ Authors: SHEAF group H7
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientConstructionData
+import Sheaf.Paper.IntegralNormalizedRingRefinementIdentity
+import Sheaf.Paper.IntegralNormalizedRingRefinementComposition
 
 /-! # Integral normalized refinement laws
 
@@ -56,6 +58,9 @@ theorem integral_normalized_ring_refinement_laws
     (∀ {a b c : Compactification f} (r : a.Refinement b) (t : b.Refinement c),
       (N.refinement (r.comp t) (.integral E)).left =
         (N.refinement r (.integral E)).left ≪≫
-          (N.refinement t (.integral E)).left) := by sorry
+          (N.refinement t (.integral E)).left) := by
+  constructor
+  · exact integral_normalized_ring_refinement_identity l Ω D hl R F M N E
+  · exact integral_normalized_ring_refinement_composition l Ω D hl R F M N E
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
