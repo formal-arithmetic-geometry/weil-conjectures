@@ -132,5 +132,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-29ab0001b (reviewer sub-agent of L); spot-checked: The item statement is true and matches def-pod-integral-tensor-constraints; I tested it on O_E[-1] (bidegree (1,1) sign), on identity arrows and on the zero object. Source checked: Stacks 0FPQ, sites-cohomology.tex l.12936-12957. The delivery adds no new nodes, and no existing node duplicates the item. Two small faults are fixed in the corrected item JSON. (1) E3/E5: step 1 'chooses chain lifts of a,b', but arbitrary derived arrows between K-flat complexes need not lift to chain maps (Ext^1 of flat sheaves). Step 2 now uses the naturality of sigma that comes with its definition in def-pur-ringed-site-signed-tensor-models, on the ringed sequence site def-coef-ringed-sequence-site; the chain check is kept only for chain maps. (2) C1/C4: the naturality of the reduction/tensor comparison was used without a citation. It now cites def-pur-completed-pullback-tensor-comparison (c is the counit of R ⊣ L), lem-coef-derived-system-evaluation-calculus (naturality of the comparisons) and def-weil-derived-pullback-tensor-hom (T(a,b) is the functorial derived limit, and the integral tensor preserves D^b_c, which step 3 needs). proof_deps is now the union of the step uses. None of the added citations creates a cycle, and all were already in the closure of the item's stmt_dep. Batch-5: def-pur-ringed-site-signed-tensor-models is a general ringed-site definition, with no trace-formula or Poincaré-duality node in its closure, so it is acceptable. lem-pod-integral-system-reduction-fully-faithful is a foundational coefficient-calculus fact that neither assumption gives and that is not a step of either theorem; apart from itself it adds no sec-trace-formula or sec-poincare-duality node beyond the existing stmt_dep closure, and lem-sf-common-tensor-braiding-naturality already cites it for the same purpose, so it is acceptable. The report mentions a citations.json that is not on the branch.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralBraidingNaturality",
+  "declaration": "WeilConjectures.pullbackTensorIntegralBraiding_naturality",
+  "file": "lean/Sheaf/Paper/IntegralBraidingNaturality.lean",
+  "statement": "theorem pullbackTensorIntegralBraiding_naturality (M M' N N' : sfIntegralConstructibleCategory l E W) (a : M ⟶ M') (b : N ⟶ N') : (constructibleIntegralTensor l E W).map (Prod.mkHom a b) ≫ (pullbackTensorIntegralBraiding l E W M' N').hom = (pullbackTensorIntegralBraiding l E W M N).hom ≫ (constructibleIntegralTensor l E W).map (Prod.mkHom b a)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a52befc0",
+  "group": "NC",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause (prime, finite E/Q_l, W with l invertible, arbitrary M M' N N' a b, diagrammatic order of the naturality square correct, endpoints T(M,N) to T(N',M')); lean.statement verbatim (diff). Uses the def-pod-integral-tensor-constraints declaration pullbackTensorIntegralBraiding itself; same universe/binders as the dep. True: braiding pinned by R(e) then c = c then sigma, sigma is a NatIso, reduction_tensor proves c natural, coherentReduction fully faithful; identical private lemmas already proved (DerivedPullbackTensorIso:438, CompletedTensorHomTranspose:331), so no public duplicate exists. proof_deps = union of step uses; all owner modules exist and are imported; statement owner public import. Stacks 0FPQ checked. No new defs, sorry only, docstrings carry source and blueprint tags; Worker report and Second reading present. Advisories: docstring does not name def-pod-integral-tensor-constraints or def-coef-ringed-sequence-site; tensor and category owners cited only transitively. No file changed, nothing compiled."
  }
 }
