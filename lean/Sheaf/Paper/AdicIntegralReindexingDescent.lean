@@ -6,6 +6,8 @@ Authors: SHEAF group C4
 module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
+import Sheaf.Paper.AdicIntegralReindexingMaps
+import Sheaf.Paper.AdicRealizationComparisonDescent
 
 /-! # Integral comparison and common-stage descent
 
@@ -55,6 +57,9 @@ theorem exists_integral_realization_reindexing (D : FiniteFieldDatum.{u})
       ordinary l U.base.left (d U).realization ⋙ derivedPull l T.base.left g.hom B,
     ∀ E, integralRealizationAgreement l g.hom (d T).realization (d U).realization
       B E (I E) c := by
-  sorry
+  classical
+  obtain ⟨I⟩ := exists_integral_reindexing_maps l D d T U g B
+  obtain ⟨c, hc⟩ := exists_realization_comparison_descent l D d T U g B I
+  exact ⟨I, c, hc⟩
 
 end WeilConjectures.AdicQbarRealization

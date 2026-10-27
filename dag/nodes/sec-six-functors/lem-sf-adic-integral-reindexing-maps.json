@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-adic-integral-reindexing-maps",
+ "kind": "statement",
+ "title": "Existence of balanced integral reindexing maps",
+ "statement": "Fix the data of [def-sf-adic-realization-isomorphism-data] and a function-normalized RingReindex B as in [def-sf-native-adic-reindexing-data]. For every finite coefficient field E there is an IntegralReindex map I(E) for B.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; explicit subargument of lem-sf-adic-reindexing-core, not a verbatim statement of either source."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the balanced integral reindexing family E ↦ I(E) by comparing the finite quotient projections of the completed coefficient sheaves, using the coefficient cartesian and finite-colimit statements and the inverse-image tensor/Hom comparison. The result is a Nonempty family of IntegralReindex maps; no realization comparison is used.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-pur-isomorphism-inverse-image-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "R4 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; balanced integral reindexing subargument split from the parent descent statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits; CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuousId|pushforwardCongr₂|mapDerivedCategoryNatIso",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicIntegralReindexingDescent",
+  "date": "2026-10-28",
+  "group": "R4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation from lem-sf-adic-reindexing-core: balanced integral reindexing and common-stage realization descent. No imported blueprint node states this native normalization.",
+   "via": [
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicIntegralReindexingMaps",
+  "file": "lean/Sheaf/Paper/AdicIntegralReindexingMaps.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_integral_reindexing_maps",
+  "statement": "theorem exists_integral_reindexing_maps (D : FiniteFieldDatum.{u})\n    (d : ∀ T : GeometricSpace D, SpaceData l D T)\n    (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n    (B : RingReindex l T.base.left g.hom (d T).realization (d U).realization) :\n    letI := (d T).units\n    letI := (d U).units\n    Nonempty (∀ E, IntegralReindex l T.base.left g.hom B E)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T234256-L-85098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T234256-L-85098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

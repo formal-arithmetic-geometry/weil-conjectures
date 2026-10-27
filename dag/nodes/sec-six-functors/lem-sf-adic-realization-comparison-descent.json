@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-adic-realization-comparison-descent",
+ "kind": "statement",
+ "title": "Common-stage realization comparison descent",
+ "statement": "Given a family I(E) of IntegralReindex maps for the normalized RingReindex B, there is a natural isomorphism from common-stage pullback followed by ordinary realization on T to ordinary realization on U followed by derived pullback along B, and it satisfies integralRealizationAgreement for every E.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; explicit subargument of lem-sf-adic-reindexing-core, not a verbatim statement of either source."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-native-adic-reindexing-data"
+ ],
+ "proof": [
+  {
+   "text": "Given the balanced IntegralReindex family, compose the specified integral realization isomorphism with the inverse derived balanced comparison and inverse completion-unit comparison. The scalar-extension and finite-free comparison squares identify the components over common finite fields; naturality and inverse identities descend from integral representatives. This yields the common-stage natural isomorphism and integralRealizationAgreement for every E.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-weil-isomorphism-comparison-natural",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "R4 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; HRS Lemma 7.9; comparison and representative-agreement subargument split from the parent descent statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits; CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuousId|pushforwardCongr₂|mapDerivedCategoryNatIso",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean. Generic categorical or module operations do not state the native normalized comparison required here.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicIntegralReindexingDescent",
+  "date": "2026-10-28",
+  "group": "R4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation from lem-sf-adic-reindexing-core: balanced integral reindexing and common-stage realization descent. No imported blueprint node states this native normalization.",
+   "via": [
+    "lem-sf-adic-reindexing-core",
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicRealizationComparisonDescent",
+  "file": "lean/Sheaf/Paper/AdicRealizationComparisonDescent.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.exists_realization_comparison_descent",
+  "statement": "theorem exists_realization_comparison_descent (D : FiniteFieldDatum.{u})\n    (d : ∀ T : GeometricSpace D, SpaceData l D T)\n    (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n    (B : RingReindex l T.base.left g.hom (d T).realization (d U).realization)\n    (I : ∀ E, IntegralReindex l T.base.left g.hom B E) :\n    letI := (d T).units\n    letI := (d U).units\n    ∃ c : commonStageDerivedPullback l (PadicAlgCl l) g.hom ⋙\n        ordinary l T.base.left (d T).realization ≅\n      ordinary l U.base.left (d U).realization ⋙ derivedPull l T.base.left g.hom B,\n    ∀ E, integralRealizationAgreement l g.hom (d T).realization (d U).realization\n      B E (I E) c",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T234256-L-85098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T234256-L-85098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
