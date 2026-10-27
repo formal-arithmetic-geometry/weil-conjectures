@@ -14,6 +14,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.CoefficientLift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.Main
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.KFlatResolution
 
 /-!
 
@@ -177,7 +180,10 @@ Blueprint `lem-sfb-module-mapmod-pullback-kflat`: the pullback
 `mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to K-flat complexes. See the
 module docstring for the argument. -/
 instance preservesKFlatComplexes_mapMod_upperStar :
-    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes := sorry
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes :=
+  preservesKFlatComplexes_mapMod_upperStar_of_lift Λ f
+    (fun S R _ e g ↦ exists_weaklyEtale_surjective_globalSectionsToUpperStar Λ S R e g)
+    (fun P _ ↦ exists_quasiIso_kFlat_mapMod_upperStar Λ f P)
 
 /-- The pullback `(f)^*⟦Λ⟧ = mapMod(f^*) ⋙ Ext_{α_f}` on module objects over `Λ` preserves
 quasi-isomorphisms between K-flat complexes: `mapMod(f^*)` is exact and preserves K-flat

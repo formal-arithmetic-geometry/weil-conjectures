@@ -13115,6 +13115,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FrobeniusPoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.CoefficientLift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.LiftedPresentation
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.Main
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.KFlatPullback.MapModTransfer
