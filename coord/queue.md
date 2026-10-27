@@ -2,7 +2,7 @@
 
 329 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (1 clusters, 485 modules)
+## Rework: quarantined by the upstream sync (1 clusters, 183 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -12,17 +12,15 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 0, stage 3 3 items.
 
-## Stage 1: nodes to split (5)
+## Stage 1: nodes to split (3)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-route-twist-scalar-maps-exists-unique` | 2006 | none |
 | `lem-pur-integral-scalar-reduction-intertwining` | 6005 | none |
-| `lem-pur-integral-tensor-associator-naturality` | 6005 | none |
 | `lem-pur-system-scalar-associator-coherence` | 6005 | none |
-| `lem-route-twist-line-scalar-iso-exists-unique` | 6007 | none |
 
-## Stage 2: nodes to state (13)
+## Stage 2: nodes to state (14)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -36,11 +34,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-composition-comparison-scalar-compatibility` | 2 | state | 0 |
 | `lem-pur-integral-braiding-naturality` | 2 | state | 0 |
 | `lem-pur-integral-braiding-scalar-extension-square` | 2 | state | 0 |
+| `lem-pur-integral-tensor-associator-naturality` | 2 | state | 0 |
 | `lem-pur-rational-normalized-purity-diagrams` | 2 | state | 0 |
 | `lem-pur-rational-tensor-associator-scalar-square` | 2 | state | 0 |
 | `lem-pur-rational-braiding-scalar-compatibility` | 3 | state | 0 |
 
-Not open yet: 1130 nodes that below a finished node, not needed, 3 nodes that wait for a statement dependency (bottom-up), 3 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 1130 nodes that below a finished node, not needed, 3 nodes that wait for a statement dependency (bottom-up), 2 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (309)
 
