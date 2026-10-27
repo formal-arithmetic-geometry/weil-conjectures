@@ -81,6 +81,17 @@ theorem tensor_section_condition_transport_iso
           barB.hom.app ((derivedFunctor Λ T).obj M,
             (derivedFunctor Λ T).obj N) ≫
           (tensor Λ' T).map (Prod.mkHom (c.derived.inv.app M) (c.derived.inv.app N)) := by
-  sorry
+  let lhs := Functor.whiskerRight b.hom (derivedFunctor Λ' T) ≫
+    Functor.whiskerLeft ((D a T).prod (D a T)) (tensorComparison Λ' T).hom
+  let rhs := Functor.whiskerLeft (Functor.uncurry.obj (CondensedRing.derivedTensor Λ T))
+      c.derived.hom ≫
+    Functor.whiskerRight (tensorComparison Λ T).hom c.model.T ≫
+    Functor.whiskerLeft ((derivedFunctor Λ T).prod (derivedFunctor Λ T)) barB.hom ≫
+    Functor.whiskerRight (NatTrans.prod c.derived.inv c.derived.inv) (tensor Λ' T)
+  have h' : lhs.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =
+      rhs.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) := h
+  change lhs.app (M, N) = rhs.app (M, N)
+  rw [← lhs.naturality_1 (Iso.prod eP eQ), ← rhs.naturality_1 (Iso.prod eP eQ), h']
+  rfl
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
