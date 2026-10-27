@@ -19844,3 +19844,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:09 L: merged deliver/W4/Sheaf.SixFunctors.RationalVerdierDatum (stage 3; reviewer PASS; first push; landing 20261027T180934-L-3914982 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:09 L: merged deliver/W5/Sheaf.TraceFormula.ScalarModelRoosZeroLift (stage 3; reviewer PASS; first push; landing 20261027T180935-L-3915421 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:09 L: merged deliver/W6/Sheaf.Paper.SystemProperRestrictionCoherence (stage 3; reviewer PASS; first push; landing 20261027T180936-L-3915732 (interface); batch 20261027T180444; modules 3; new nodes 2)
+- 18:09 L: merged deliver/W7/Sheaf.Paper.SystemRestrictionFiniteNormalization (stage 3; reviewer PASS; first push; landing 20261027T180938-L-3916083 (interface); batch 20261027T180444; modules 5; new nodes 4)

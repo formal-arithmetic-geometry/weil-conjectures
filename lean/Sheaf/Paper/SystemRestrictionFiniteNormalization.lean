@@ -1,6 +1,10 @@
 module
 
 public import Sheaf.Paper.SystemCompactSupportRestrictionEvaluation
+import Sheaf.Paper.SystemRestrictionFiniteNormalization.OpenIso
+import Sheaf.Paper.SystemRestrictionFiniteNormalization.OpenNormalized
+import Sheaf.Paper.SystemRestrictionFiniteNormalization.OpenEvaluation
+import Sheaf.Paper.SystemRestrictionFiniteNormalization.ProperEvaluation
 
 /-! # Finite normalization of system coefficient restriction
 
@@ -52,6 +56,23 @@ theorem systemRestrictionFiniteNormalization (l : ℕ) [Fact l.Prime]
     {B C : Etale.SystemProjection.Coefficients.{u} l} (a : B.rings ⟶ C.rings)
     {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y)
     (d : Comparison a j p) : Nonempty (FiniteCompatibility d) := by
-  sorry
+  have hLevel : ∀ {U V : Scheme.{u}} (f : U ⟶ V), ∀ n : ℕ, LevelComm a f n := by
+    intro U V f n
+    unfold LevelComm levelMap
+    change _ = (Scheme.proEtaleSheafInverseImage f CommRingCat).map _ ≫ _
+    dsimp only [StrictTower.constantRingIso]
+    simp only [asIso_hom]
+    exact (Scheme.proEtaleConstantInverseImageMap_naturality f (a.app (op n))).symm
+  have hOpen : ∀ n : ℕ, LevelComm a j n := hLevel j
+  have hProper : ∀ n : ℕ, LevelComm a p n := hLevel p
+  obtain ⟨o⟩ := finiteCompatibility_openIso l a j p d
+  refine ⟨{
+    openComm := hOpen
+    properComm := hProper
+    openIso := o
+    openNormalized := finiteCompatibility_openNormalized l a j p d hOpen o
+    openEvaluation := finiteCompatibility_openEvaluation l a j p d hOpen o
+    properEvaluation := finiteCompatibility_properEvaluation l a j p d hProper
+  }⟩
 
 end AlgebraicGeometry.ProEtale.SystemCompactSupportRestriction

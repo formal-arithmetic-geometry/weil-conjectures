@@ -1,0 +1,103 @@
+{
+ "id": "lem-sp-system-restriction-finite-open-normalized",
+ "kind": "statement",
+ "title": "Finite-level open restriction unit normalization",
+ "statement": "The unit normalization equation for the finite-level open comparison. It is strictly one field of FiniteCompatibility.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 03DJ, 0D6E and 070Y; coefficient-composition argument, step 7"
+ },
+ "proof": [
+  {
+   "text": "This strictly smaller field is obtained by the section-normalized finite comparison construction described in the parent coefficient-composition argument. The complete proof is left for the worker assigned this field.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03DI, 03DJ, 0D6E and 070Y; coefficient-composition argument, step 7"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "W7",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 03DJ, 0D6E and 070Y; coefficient-composition argument, step 7"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemRestrictionFiniteNormalization",
+  "date": "2026-10-28",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-system-restriction-finite-normalization",
+   "place": "coefficient-composition argument, step 7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemRestrictionFiniteNormalization.OpenNormalized",
+  "file": "lean/Sheaf/Paper/SystemRestrictionFiniteNormalization/OpenNormalized.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SystemCompactSupportRestriction.finiteCompatibility_openNormalized",
+  "statement": "theorem finiteCompatibility_openNormalized (l : ℕ) [Fact l.Prime]\n    {B C : Etale.SystemProjection.Coefficients.{u} l} (a : B.rings ⟶ C.rings)\n    {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y)\n    (d : Comparison a j p) (h : ∀ n : ℕ, LevelComm a j n)\n    (o : ∀ n : ℕ, levelRestriction X a n ⋙ (StrictTower.moduleJ (levels B n) j).mapDerivedCategory ≅\n      (StrictTower.moduleJ (levels C n) j).mapDerivedCategory ⋙ levelRestriction Z a n) : ∀ (n : ℕ)\n    (M : DerivedCategory (StrictTower.Modules (levels C n) X)),\n    (VaryingRing.levelJAdj (levels B) j n).unit.app ((levelRestriction X a n).obj M) ≫\n      (StrictTower.modulePullback (levels B n) j).mapDerivedCategory.map\n        ((o n).hom.app M) ≫\n      (levelPull (h n)).inv.app\n        ((StrictTower.moduleJ (levels C n) j).mapDerivedCategory.obj M) =\n    (levelRestriction X a n).map ((VaryingRing.levelJAdj (levels C) j n).unit.app M)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-28"
+ },
+ "unit": "sk-def-sf-operations",
+ "chapter": "sec-smooth-purity",
+ "stmt_deps": [],
+ "mathlib_match": null,
+ "lean_audit": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T180938-L-3916083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261027T180938-L-3916083",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite derived evaluation natural isomorphism normalized restriction comparison",
+   "results": "No specialized theorem matching the finite compatibility field; only generic naturality and derived-category APIs.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Generic naturality and isomorphism cancellation lemmas only; no theorem for this system restriction field.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteCompatibility openEvaluation properEvaluation openNormalized",
+   "results": "The parent evaluation structure is the only declaration of these fields; no existing proof theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "New split statement required."
+  }
+ ]
+}
