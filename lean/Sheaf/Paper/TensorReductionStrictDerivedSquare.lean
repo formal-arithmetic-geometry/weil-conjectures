@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.CompletedPullbackTowerRealizations
 public import Sheaf.Paper.TensorReductionStrictComparison
+import Sheaf.Paper.TensorReductionCanonicalSquare
 
 /-! # Derived normalization of the strict reduction tensor map
 
@@ -70,6 +71,21 @@ theorem tensorReductionStrictMap_derived_square (W : Scheme.{u})
       DerivedCategory.Q.map (tensorReductionStrictMap l E W P.obj Q.obj) ≫
       (pullbackTensorSystemModel l E W _ _
         (pullbackTensorReductionGood l E W P)
-        (pullbackTensorReductionGood l E W Q)).hom := by sorry
+        (pullbackTensorReductionGood l E W Q)).hom := by
+  dsimp only
+  obtain ⟨ψ, hψ, hψcomp⟩ := tensorReductionCanonicalSquare_exists l E W P Q hT
+  have huniq := tensorReductionStrictMap_existsUnique l E W P.obj Q.obj
+  dsimp only at huniq
+  have hψprop : ∀ n : ℕ,
+      ((SheafOfModules.systemSequenceEvaluation.{u + 1, u, u + 1}
+        (coefficientSequenceCommRingSystem l E W) n).mapHomologicalComplex (.up ℤ)).map ψ =
+        tensorReductionSystemFiniteComponent l E W P.obj Q.obj n := by
+    intro n
+    unfold tensorReductionFiniteProperty at hψcomp
+    exact (hψcomp n).trans (huniq.choose_spec.1 n)
+  have hψeq : ψ = tensorReductionStrictMap l E W P.obj Q.obj := by
+    apply huniq.unique hψprop
+    exact huniq.choose_spec.1
+  simpa only [hψeq] using hψ
 
 end WeilConjectures

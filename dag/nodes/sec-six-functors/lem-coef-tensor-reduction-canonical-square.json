@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-tensor-reduction-canonical-square",
+ "kind": "statement",
+ "title": "Existential canonical representative square before strict-map selection",
+ "statement": "For good flat-term K-flat integral complexes P,Q and their good total tensor, there exists a strict chain map ψ from ordinary reduction of the total tensor to the tensor of ordinary reductions such that the adjunction-normalized whole-system reduction tensor square commutes with the localization of ψ. Moreover, ψ has the finite component maps of the already assembled strict tensor reduction map, so uniqueness of strict assembly identifies ψ with that map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6; transport of the simultaneous representative normalization in step 2 of lem-coef-tensor-reduction-ordinary-model"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-tensor-reduction-strict-assembly"
+ ],
+ "proof": [
+  {
+   "text": "Transport the simultaneous representative normalization of the coefficient reduction calculus along the adjunction-normalized reduction and tensor model isomorphisms for P, Q and their total tensor. This produces a chain map ψ and the whole-system square.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the transported representative square at each coefficient stage and use the normalized ordinary scalar tensor comparison; the finite components are exactly those of tensorReductionStrictMap.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-tensor-reduction-strict-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-tensor-reduction-strict-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Transport of simultaneous reductionTensor normalization to the fixed ordinary model in step 2 of lem-coef-tensor-reduction-ordinary-model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transport a normalized derived tensor comparison square to fixed K-flat representatives",
+   "results": "No exact match for the project-specific reduction models.",
+   "verdict": "No complete match.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "loogle",
+   "query": "Exists chain map with derived tensor comparison square and prescribed evaluations",
+   "results": "Generic localization and tensor comparison lemmas only; no exact project-specific match.",
+   "verdict": "No complete match.",
+   "date": "2026-10-28"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientReductionTensorNormalization pullbackTensor reduction tensor representative square",
+   "results": "CoefficientReductionTensorNormalization and pullbackTensorCalculus.reductionTensor_normalization provide the stated transport data.",
+   "verdict": "Existing project declarations used; no standalone match.",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorReductionStrictDerivedSquare",
+  "date": "2026-10-28",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-tensor-reduction-strict-derived-square",
+   "place": "proof reduction: canonical representative-square transport before strict-map selection",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorReductionCanonicalSquare",
+  "file": "lean/Sheaf/Paper/TensorReductionCanonicalSquare.lean",
+  "declaration": "WeilConjectures.tensorReductionCanonicalSquare_exists",
+  "declarations": [
+   "WeilConjectures.tensorReductionFiniteProperty",
+   "WeilConjectures.tensorReductionCanonicalSquare_exists"
+  ],
+  "statement": "theorem tensorReductionCanonicalSquare_exists (W : Scheme.{u})\n    (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)\n    (hT : integralOperationsGoodComplex l E W\n      ((coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n        (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.obj, Q.obj))) :\n    let S := pullbackTensorCalculus l E W\n    let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)\n      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.obj, Q.obj)\n    let G := (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)\n    let B := (coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (Scheme.ProEt.topology W))\n      (coefficientSequenceCommRingSheaf l E W)).obj (G.obj P.obj, G.obj Q.obj)\n    ∃ ψ : G.obj T ⟶ B,\n      S.reduction.map ((S.integralTensorModel.iso (Scheme.ProEt.topology W)\n          (completedIntegralCommRingSheafUnrestricted l E W) S.integralClosed\n          P.obj Q.obj P.property.1 Q.property.1).hom) ≫\n        S.reductionTensor.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫\n        S.systemClosed.tensor.map\n          (Prod.mkHom ((pullbackTensorReductionModel l E W).hom.app P)\n            ((pullbackTensorReductionModel l E W).hom.app Q)) =\n      (pullbackTensorReductionModel l E W).hom.app ⟨T, hT⟩ ≫\n        DerivedCategory.Q.map ψ ≫\n        (pullbackTensorSystemModel l E W _ _\n          (pullbackTensorReductionGood l E W P)\n          (pullbackTensorReductionGood l E W Q)).hom ∧\n      tensorReductionFiniteProperty l E W P.obj Q.obj ψ",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T180612-L-3880467",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T180612-L-3880467",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
