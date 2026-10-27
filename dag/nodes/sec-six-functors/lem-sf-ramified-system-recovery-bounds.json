@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-ramified-system-recovery-bounds",
+ "kind": "statement",
+ "title": "Ramified recovery preserves the original four endpoints",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum D with algebraic closure k [def-weil-finite-field-fiber], a prime l distinct from D.p, finite extensions E and L of Q_l [def-weil-l-adic-coefficient-extension], an algebra map i:E→L, a positive ramification index e with the actual uniformizer-ideal equality, a finite-type k-scheme T, and a SystemLevelLeftExtensionTheory S on its pro-etale site [def-pur-system-level-left-extension-basic]. Write B for the strict L-coefficient tower [def-coef-ringed-sequence-site] and r(n)=e(n+1)-1 [def-sf-positive-ramification-subsequence]. Suppose N is a derived B_r-system with invertible transition-adjoints, and every level N_n is finite-Tor constructible [def-weil-finite-tor-amplitude], has cohomology in [a,b], and has Tor amplitude [c,d] [def-weil-proetale-tor-amplitude]. Then each level of the actual selected left extension L_r(N) is finite-Tor constructible [def-weil-finite-tor-amplitude], has cohomology in the same [a,b], and has Tor amplitude in the same [c,d]. These are the four original endpoints, independently of the output index. There is no adjunction-isomorphism or normalization-preservation conclusion in this statement.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "def-sf-positive-ramification-subsequence",
+  "def-coef-ringed-sequence-site",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "At index m, selectedDerivedBelow identifies recovery with extension of N at t(m) along the positive quotient A_{L,r(t(m))+1}→A_{L,m+1}. Balanced derived tensor associativity identifies the tensor test by a target module with the source tensor test after restriction of that module. Therefore the interval [c,d] is unchanged.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+   }
+  },
+  {
+   "text": "Keep the independent cohomological interval [a,b]. At each stalk on each constructible stratum the input is a perfect complex over the local Artinian DVR quotient: bounded finite cohomology and finite Tor amplitude give a bounded finite free representative. Cancel every invertible differential entry to obtain a minimal representative. If its least nonzero degree were below a, a nonzero socle vector in that term would be a cycle and could not be a boundary; if its greatest degree were above b, its top cokernel would be nonzero by Nakayama. Thus the minimal representative has support in [a,b]. Extending it to a smaller positive quotient leaves that support unchanged. This proves both cohomological endpoints, without replacing them by the Tor endpoints. Apply the evaluation isomorphism to transfer all assertions to each recovered level. On a common constructible stratum the locally constant perfect input admits such finite free representatives locally. Extension preserves their finite free terms, hence the finite locally constant cohomology of the output. Refine the original finite constructible stratification to obtain intrinsic constructibility, without an exceptional scalar-mate theorem.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof_origin": "Agent expansion of the normalized-system calculation in integral scalar mates step 2, following Zheng Construction 4.1; Lean by R9, 2026-10-28.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized systems of modules restriction to a cofinal subsequence derived left extension preserves Tor amplitude and bounds",
+   "results": "8 results concerning ordinary module direct limits and scalar restriction; no matching derived strict-system theorem.",
+   "date": "2026-10-28",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit and counit of cofinal subsequence restriction and left extension are isomorphisms on normalized inverse systems",
+   "results": "8 results concerning inverse systems and small-object iterations; none states the derived strict-system conclusion.",
+   "date": "2026-10-28",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "systemSelectedAdjunctionIsos|systemSelectedNormalization|ramifiedSystemRecoveryBounds|recovery_bounds",
+   "results": "No existing matching declaration; inspected SystemLevelLeftExtensionBasic, SystemSelectedDerivedEvaluation, SystemDerivedSubsequenceTransition, SystemDerivedTransitionCoherence, SystemSelectedDerivedTransition, CofinalFiniteReductionConstructibility and ExceptionalFiniteScalarMates. Blueprint searches for subsequence and normalized systems found the source context, no separate matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "new supporting steps; reuse all existing canonical models and coherence lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralScalarMates",
+  "date": "2026-10-28",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-compatibility",
+   "place": "Clause (7), coefficient comparisons; refines the cofinal normalized-system recovery in lem-sf-exceptional-integral-scalar-mates, proof step 2.",
+   "via": [
+    "lem-sf-exceptional-integral-scalar-mates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RamifiedSystemRecoveryBounds",
+  "file": "lean/Sheaf/Paper/RamifiedSystemRecoveryBounds.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralScalar.ramifiedSystemRecoveryBounds",
+  "statement": "theorem ramifiedSystemRecoveryBounds\n    (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier)\n    (e : ℕ+) (_he : PurCompactSupport.Ramification l E.carrier L.carrier i e)\n    (T : Scheme.{u}) [T.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))]\n    (S : SystemLevelLeftExtensionTheory.{u + 1, u, u + 1}\n      (C := T.ProEt) (J := Scheme.ProEt.topology T)) :\n    let B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=\n      coefficientSequenceCommRingSystem.{u, u} l L.carrier T\n    let r := Etale.SystemProjection.cofinalRamification e\n      (Nat.one_le_iff_ne_zero.mpr e.ne_zero)\n    ∀ (N : DerivedCategory (StrictRingSystem.{u + 1, u, u + 1}\n        (selectedSystemRings.{u + 1, u, u + 1} B r))) (a b c d : ℤ),\n      (∀ {m n : ℕ} (h : m ≤ n),\n        IsIso (((systemDerivedTensorAdj.{u + 1, u, u + 1} S.scalar\n          (selectedSystemRings.{u + 1, u, u + 1} B r) h).homEquiv _ _).symm\n          ((SystemLevelLeftExtensionTheory.transition.{u + 1, u, u + 1} S\n            (selectedSystemRings.{u + 1, u, u + 1} B r) h).app N))) →\n      (∀ n : ℕ,\n        finiteTorConstructible l L.carrier (r n + 1) (Nat.succ_pos _) T\n          ((derivedSystemEvaluation.{u + 1, u, u + 1}\n            (selectedSystemRings.{u + 1, u, u + 1} B r) n).obj N) ∧\n        ((derivedSystemEvaluation.{u + 1, u, u + 1}\n            (selectedSystemRings.{u + 1, u, u + 1} B r) n).obj N).IsGE a ∧\n        ((derivedSystemEvaluation.{u + 1, u, u + 1}\n            (selectedSystemRings.{u + 1, u, u + 1} B r) n).obj N).IsLE b ∧\n        HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l L.carrier (r n + 1))\n          ((derivedSystemEvaluation.{u + 1, u, u + 1}\n            (selectedSystemRings.{u + 1, u, u + 1} B r) n).obj N) c d) →\n      ∀ m : ℕ,\n        finiteTorConstructible l L.carrier (m + 1) (Nat.succ_pos _) T\n          ((derivedSystemEvaluation.{u + 1, u, u + 1} B m).obj\n            ((S.selected B r).derived.obj N)) ∧\n        ((derivedSystemEvaluation.{u + 1, u, u + 1} B m).obj\n            ((S.selected B r).derived.obj N)).IsGE a ∧\n        ((derivedSystemEvaluation.{u + 1, u, u + 1} B m).obj\n            ((S.selected B r).derived.obj N)).IsLE b ∧\n        HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l L.carrier (m + 1))\n          ((derivedSystemEvaluation.{u + 1, u, u + 1} B m).obj\n            ((S.selected B r).derived.obj N)) c d",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T180801-L-3901640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T180801-L-3901640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

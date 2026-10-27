@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-system-selected-adjunction-isos",
+ "kind": "statement",
+ "title": "Selected left-extension unit and normalized counit are invertible",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let B be an inverse sequence of commutative ring sheaves on a site and S a SystemLevelLeftExtensionTheory [def-pur-system-level-left-extension-basic]. For every order embedding r of the natural numbers, the actual selected-extension adjunction unit is invertible on every derived selected system N. Its counit is invertible on every derived full system M for which every transition-adjoint, for every m≤n, is invertible. No normalization of N, flatness of coefficients, or boundedness is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [
+  {
+   "text": "Minimality and strict monotonicity give t(r(n))=n. Tensor at the identity coefficient map is naturally isomorphic to the identity. Hence the scalar adjunction at that map is an equivalence, and its Hom transpose carries isomorphisms to isomorphisms. Apply selectedDerivedTranspose to the identity of L_r(N); its left side is invertible. Its right side is the evaluated unit followed by the evaluation comparison and the identity transition. The last two factors are invertible by transition_identity and the scalar unitor. Cancel them and use detectsIso to prove the actual unit is invertible.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+   }
+  },
+  {
+   "text": "Apply selectedDerivedTranspose to the actual counit. Its adjunction transpose is the identity by the triangle identity. Transpose the formula back through the scalar adjunction; the evaluated counit, preceded by selectedDerivedBelow inverse, equals derived tensor applied to the selected evaluation comparison, followed by the normalized transition-adjoint. This composite is invertible. Cancel the comparison and apply detectsIso.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof_origin": "Agent expansion of the normalized-system calculation in integral scalar mates step 2, following Zheng Construction 4.1; Lean by R9, 2026-10-28.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized systems of modules restriction to a cofinal subsequence derived left extension preserves Tor amplitude and bounds",
+   "results": "8 results concerning ordinary module direct limits and scalar restriction; no matching derived strict-system theorem.",
+   "date": "2026-10-28",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit and counit of cofinal subsequence restriction and left extension are isomorphisms on normalized inverse systems",
+   "results": "8 results concerning inverse systems and small-object iterations; none states the derived strict-system conclusion.",
+   "date": "2026-10-28",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "systemSelectedAdjunctionIsos|systemSelectedNormalization|ramifiedSystemRecoveryBounds|recovery_bounds",
+   "results": "No existing matching declaration; inspected SystemLevelLeftExtensionBasic, SystemSelectedDerivedEvaluation, SystemDerivedSubsequenceTransition, SystemDerivedTransitionCoherence, SystemSelectedDerivedTransition, CofinalFiniteReductionConstructibility and ExceptionalFiniteScalarMates. Blueprint searches for subsequence and normalized systems found the source context, no separate matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "new supporting steps; reuse all existing canonical models and coherence lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralScalarMates",
+  "date": "2026-10-28",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-compatibility",
+   "place": "Clause (7), coefficient comparisons; refines the cofinal normalized-system recovery in lem-sf-exceptional-integral-scalar-mates, proof step 2.",
+   "via": [
+    "lem-sf-exceptional-integral-scalar-mates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSelectedAdjunctionIsos",
+  "file": "lean/Sheaf/CategoryTheory/SystemSelectedAdjunctionIsos.lean",
+  "declaration": "SheafOfModules.systemSelectedAdjunctionIsos",
+  "statement": "theorem systemSelectedAdjunctionIsos\n    (S : SystemLevelLeftExtensionTheory (J := J))\n    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ) :\n    (∀ N, IsIso ((S.selected B r).adjunction.unit.app N)) ∧\n      ∀ M, (∀ {m n : ℕ} (h : m ≤ n),\n        IsIso (((systemDerivedTensorAdj S.scalar B h).homEquiv _ _).symm\n          ((S.transition B h).app M))) →\n        IsIso ((S.selected B r).adjunction.counit.app M)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T180801-L-3901640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T180801-L-3901640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

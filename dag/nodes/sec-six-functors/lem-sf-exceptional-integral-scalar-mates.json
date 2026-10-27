@@ -51,10 +51,13 @@
    }
   },
   {
-   "text": "Put $B_m=A_{L,m}$ and $r(n)=en$. Apply the subsequence adjunction $L_r\\dashv U_r$ to strict systems, with $t(m)=\\min\\{n:en\\ge m\\}$. Its evaluation is $e_mL_rN=B_m\\otimes^L_{B_{et(m)}}N_{t(m)}$ with the stated selected-level transitions. On a normalized $M$, the counit $L_rU_rM\\to M$ evaluates to the normalization isomorphism $B_m\\otimes^L_{B_{et(m)}}M_{et(m)}\\to M_m$. On a selected system $N$, $t(en)=n$, so the unit $N\\to U_rL_rN$ evaluates to the tensor unitor. Joint conservativity proves these are isomorphisms. The transition formula shows $L_rN$ is normalized whenever $N$ is; testing its $m$th tensor with a $B_m$-module is the same test on $N_{t(m)}$, so the common Tor interval is preserved. Its unit test gives the same common cohomological interval, and its finite coefficients preserve constructibility by the finite scalar lemma. Thus these adjunction maps restrict to inverse equivalences on the normalized categories in the statement.",
+   "text": "Put $B_m=A_{L,m}$ and $r(n)=en$. Apply the subsequence adjunction $L_r\\dashv U_r$ to strict systems, with $t(m)=\\min\\{n:en\\ge m\\}$. Its evaluation is $e_mL_rN=B_m\\otimes^L_{B_{et(m)}}N_{t(m)}$ with the stated selected-level transitions. On a normalized $M$, the counit $L_rU_rM\\to M$ evaluates to the normalization isomorphism $B_m\\otimes^L_{B_{et(m)}}M_{et(m)}\\to M_m$. On a selected system $N$, $t(en)=n$, so the unit $N\\to U_rL_rN$ evaluates to the tensor unitor. Joint conservativity proves these are isomorphisms. The transition formula shows $L_rN$ is normalized whenever $N$ is; testing its $m$th tensor with a $B_m$-module is the same test on $N_{t(m)}$, so the common Tor interval is preserved. Its unit test gives the same common cohomological interval, and its finite coefficients preserve constructibility by the finite scalar lemma. Thus these adjunction maps restrict to inverse equivalences on the normalized categories in the statement. R9 realizes this recovery argument by systemSelectedAdjunctionIsos (fully proved unit and normalized counit), systemSelectedNormalization, restrictionBounds (fully proved selection and isomorphism transport), and ramifiedSystemRecoveryBounds. Assemble restricts and recovers using the same witnesses a,b,c,d and their original order inequalities. The recovery-bounds statement is the remaining independent finite-quotient bound step.",
    "uses": [
-    "lem-pur-system-level-left-extension",
-    "lem-sf-exceptional-finite-scalar-mates"
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-selected-adjunction-isos",
+    "lem-pur-system-selected-normalization",
+    "lem-sf-ramified-system-recovery-bounds",
+    "lem-weil-finite-ctf-triangulated"
    ],
    "elementary": false,
    "source": {
@@ -177,35 +180,40 @@
   }
  ],
  "proof_deps": [
-  "def-weil-finite-tor-amplitude",
+  "lem-sf-exceptional-integral-reconstruction",
+  "lem-sf-exceptional-system-transport",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-pur-adic-scalar-extension-tor-bound",
-  "lem-pur-coefficient-associator-shifts",
-  "lem-pur-coefficient-scalar-units",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-integral-compactification-system-realization",
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-selected-adjunction-isos",
+  "lem-pur-system-selected-normalization",
+  "lem-sf-ramified-system-recovery-bounds",
+  "lem-weil-finite-ctf-triangulated",
   "lem-pur-etale-coefficient-system-adjoint",
   "lem-pur-etale-system-coefficient-projection",
-  "lem-pur-etale-system-cofinal-mate",
   "lem-pur-etale-system-scalar-mate-coherence",
-  "lem-pur-integral-realization-shift-coherence",
-  "lem-pur-ringed-coefficient-projection-cocycle",
-  "lem-pur-system-level-left-extension",
-  "lem-sf-exceptional-finite-scalar-mates",
-  "lem-sf-exceptional-integral-reconstruction",
-  "lem-sf-exceptional-integral-scalar-mates-core",
-  "lem-sf-exceptional-system-transport",
-  "lem-sf-integral-compactification-system-realization",
-  "lem-sf-open-tensor-normalization",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-completed-scalar-chain-shift",
+  "lem-pur-etale-system-cofinal-mate",
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-adic-scalar-extension-tor-bound",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-integral-realization-shift-coherence",
+  "lem-weil-completed-scalar-chain-shift",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
-  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-sf-exceptional-finite-scalar-mates",
+  "lem-pur-coefficient-scalar-units",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-pur-coefficient-associator-shifts",
+  "lem-sf-exceptional-integral-scalar-mates-core"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Explicit assembly of Zheng Construction 4.1, Construction 5.15, Lemmas 5.16 and 5.22 and Proposition 5.26 through the cited existing derived-system, reconstruction and normalized realization statements. The precise shift and ambient-map assertions use the separately stated DAG tools, not an unquoted claim of Zheng. K3: the main theorem now applies the existing core theorem and proves the independent explicit ramified-index witness. The original plan is retained for the remaining core and ramifiedRecovery holes."
+  "place": "Explicit assembly of Zheng Construction 4.1, Construction 5.15, Lemmas 5.16 and 5.22 and Proposition 5.26 through the cited existing derived-system, reconstruction and normalized realization statements. The precise shift and ambient-map assertions use the separately stated DAG tools, not an unquoted claim of Zheng. K3: the main theorem now applies the existing core theorem and proves the independent explicit ramified-index witness. The original plan is retained for the remaining core and ramifiedRecovery holes. R9: ramifiedRecovery is assembled from normalization preservation, proven actual adjunction isomorphisms, proven restriction bounds, and the separate finite-quotient recovery-bounds step."
  },
  "mathlib_searches": [
   {
@@ -430,11 +438,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-6ba87",
-  "group": "K3",
+  "reviewer": "COMPILER",
+  "group": "R9",
   "result": "pass",
-  "landing": "20261027T034704-L-3674379",
-  "kind": "proof",
-  "note": "independent cc review: delivered ExceptionalIntegralScalarMates.lean + node lem-sf-exceptional-integral-scalar-mates against clone 368903d5532, unit sk-thm-sf-compatibility (realized empty), import graph (0 importers), scratch #print axioms"
+  "landing": "20261027T180801-L-3901640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

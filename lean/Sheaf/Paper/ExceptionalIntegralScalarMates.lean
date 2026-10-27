@@ -18,6 +18,10 @@ public import Sheaf.Paper.CoefficientExtensionReductionData
 public import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
 
 public import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
+import Sheaf.CategoryTheory.SystemSelectedAdjunctionIsos
+import Sheaf.CategoryTheory.SystemSelectedNormalization
+import Sheaf.Paper.RamifiedSystemRecoveryBounds
+import Sheaf.Paper.FiniteCtfTriangulated
 
 /-! # Integral scalar mates for the exceptional adjunction
 
@@ -669,6 +673,26 @@ theorem exceptionalIntegralScalarMates_core
         Nonempty (SystemMates l Ω D hl c operation left transport d red E L i) := by
   sorry
 
+private theorem restrictionBounds (E : FieldStage.{u} l) (T : Scheme.{u})
+    (S : SystemLevelLeftExtensionTheory.{u + 1, u, u + 1}
+      (J := Scheme.ProEt.topology T)) (r : ℕ ↪o ℕ)
+    (M : DerivedCategory (StrictRingSystem.{u + 1, u, u + 1}
+      (coefficientSequenceCommRingSystem l E.carrier T))) (a b c d : ℤ)
+    (h : systemBounds l E T (OrderIso.refl ℕ).toOrderEmbedding a b c d M) :
+    systemBounds l E T r a b c d
+      ((derivedSystemSubsequence (coefficientSequenceCommRingSystem l E.carrier T) r).obj M) := by
+  intro n
+  obtain ⟨hf, hge, hle, htor⟩ := h (r n)
+  let e := (S.selectedEvaluation (coefficientSequenceCommRingSystem l E.carrier T) r n).app M
+  let : ObjectProperty.IsClosedUnderIsomorphisms
+      (finiteTorConstructible l E.carrier (r n + 1) (Nat.succ_pos _) T) :=
+    (finite_ctf_isTriangulated l E.carrier (r n + 1) (Nat.succ_pos _) T).1
+  refine ⟨(finiteTorConstructible l E.carrier (r n + 1) (Nat.succ_pos _) T).prop_of_iso
+    e.symm hf, ⟨(DerivedCategory.TStructure.t.ge a).prop_of_iso e.symm hge.ge⟩,
+    ⟨(DerivedCategory.TStructure.t.le b).prop_of_iso e.symm hle.le⟩, htor.1, ?_⟩
+  rintro N P ⟨q⟩ f hf hP A i hi
+  exact htor.2 N P ⟨q ≪≫ e⟩ f hf hP A i hi
+
 /-- Ramified restriction is an equivalence with the specified selected left extension.
 Source: Zheng, Construction 4.1
 (blueprint: lem-sf-exceptional-integral-scalar-mates).
@@ -685,7 +709,26 @@ theorem ramifiedRecovery (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
       (J := Scheme.ProEt.topology T)) :
     Nonempty (Recovery l L T S
       (Etale.SystemProjection.cofinalRamification e (Nat.one_le_iff_ne_zero.mpr e.ne_zero))) := by
-  sorry
+  let B := coefficientSequenceCommRingSystem l L.carrier T
+  let r := Etale.SystemProjection.cofinalRamification e
+    (Nat.one_le_iff_ne_zero.mpr e.ne_zero)
+  obtain ⟨hrestrict, hrecover⟩ := systemSelectedNormalization S B r
+  obtain ⟨hunit, hcounit⟩ := systemSelectedAdjunctionIsos S B r
+  have hbounds := ramifiedSystemRecoveryBounds l D hl E L i e he T S
+  refine ⟨{
+    restricts := ?_
+    recovers := ?_
+    unit := fun N _ ↦ hunit N
+    counit := fun M hM ↦ hcounit M hM.1
+    restriction_bounds := restrictionBounds l L T S r
+    recovery_bounds := fun N a b c d hN hb ↦ hbounds N a b c d hN.1 hb }⟩
+  · intro M hM
+    obtain ⟨hnorm, a, b, c, d, hab, hcd, hb⟩ := hM
+    exact ⟨hrestrict M hnorm, a, b, c, d, hab, hcd,
+      restrictionBounds l L T S r M a b c d hb⟩
+  · intro N hN
+    obtain ⟨hnorm, a, b, c, d, hab, hcd, hb⟩ := hN
+    exact ⟨hrecover N hnorm, a, b, c, d, hab, hcd, hbounds N a b c d hnorm hb⟩
 
 /-- Integral scalar mates for the chosen proper/open adjunction and its realization.
 Source: Zheng, Constructions 4.1 and 5.15, Lemma 5.22, Propositions 5.24 and 5.26

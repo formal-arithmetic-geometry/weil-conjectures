@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-system-selected-normalization",
+ "kind": "statement",
+ "title": "Selected restriction and left extension preserve normalization",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let B be an inverse sequence of commutative ring sheaves on a site, S a SystemLevelLeftExtensionTheory [def-pur-system-level-left-extension-basic], and r an order embedding of the natural numbers. Define normalized(A,M) to mean invertibility of every scalar-adjoint transition from n to m for all m≤n. Exact selected restriction U_r sends normalized B-systems to normalized selected B_r-systems. The actual selected left extension L_r sends normalized selected B_r-systems to normalized B-systems. No bound, constructibility or coefficient flatness is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [
+  {
+   "text": "The representative normalizations transition_rep and selectedEvaluation_rep determine the S transitions and evaluation comparisons uniquely, by localization detection of natural transformations and cancellation of the exact derived factorization isomorphisms. Thus they equal the canonical derived transitions and selected evaluation comparisons.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-derived-transition",
+    "lem-pur-system-derived-subsequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+   }
+  },
+  {
+   "text": "Use systemDerivedSubsequenceTransition for arbitrary m≤n. Its scalar transpose identifies the selected transition-adjoint, followed by the lower evaluation comparison, with scalar extension of the upper evaluation comparison followed by the original normalized transition-adjoint. All other factors are invertible, so cancellation gives normalization of restriction.",
+   "uses": [
+    "lem-pur-system-derived-subsequence-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+   }
+  },
+  {
+   "text": "For arbitrary m≤n, put a=t(m), b=t(n); minimality gives a≤b. The canonical full transition composition law and subsequence transition square give the right-adjoint cocone identity for these two levels. selectedDerivedTranspose at the identity supplies the two evaluation transpose equations. Apply adjunctionTransition_coherence to this cocone: the recovered transition-adjoint is a composite of evaluation isomorphisms, canonical left-adjoint-uniqueness associators and scalar extension of the normalized selected transition-adjoint. Every factor is invertible. This works for arbitrary m≤n, including a=b and m=n.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-derived-transition-coherence",
+    "lem-pur-system-derived-subsequence-transition",
+    "lem-pur-adjunction-transition-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1; Proposition 5.24; integral scalar mates, proof step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-derived-transition",
+  "lem-pur-system-derived-subsequence",
+  "lem-pur-system-derived-subsequence-transition",
+  "lem-pur-system-derived-transition-coherence",
+  "lem-pur-adjunction-transition-coherence"
+ ],
+ "proof_origin": "Agent expansion of the normalized-system calculation in integral scalar mates step 2, following Zheng Construction 4.1; Lean by R9, 2026-10-28.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized systems of modules restriction to a cofinal subsequence derived left extension preserves Tor amplitude and bounds",
+   "results": "8 results concerning ordinary module direct limits and scalar restriction; no matching derived strict-system theorem.",
+   "date": "2026-10-28",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit and counit of cofinal subsequence restriction and left extension are isomorphisms on normalized inverse systems",
+   "results": "8 results concerning inverse systems and small-object iterations; none states the derived strict-system conclusion.",
+   "date": "2026-10-28",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "systemSelectedAdjunctionIsos|systemSelectedNormalization|ramifiedSystemRecoveryBounds|recovery_bounds",
+   "results": "No existing matching declaration; inspected SystemLevelLeftExtensionBasic, SystemSelectedDerivedEvaluation, SystemDerivedSubsequenceTransition, SystemDerivedTransitionCoherence, SystemSelectedDerivedTransition, CofinalFiniteReductionConstructibility and ExceptionalFiniteScalarMates. Blueprint searches for subsequence and normalized systems found the source context, no separate matching theorem.",
+   "date": "2026-10-28",
+   "verdict": "new supporting steps; reuse all existing canonical models and coherence lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalIntegralScalarMates",
+  "date": "2026-10-28",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-compatibility",
+   "place": "Clause (7), coefficient comparisons; refines the cofinal normalized-system recovery in lem-sf-exceptional-integral-scalar-mates, proof step 2.",
+   "via": [
+    "lem-sf-exceptional-integral-scalar-mates"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSelectedNormalization",
+  "file": "lean/Sheaf/CategoryTheory/SystemSelectedNormalization.lean",
+  "declaration": "SheafOfModules.systemSelectedNormalization",
+  "statement": "theorem systemSelectedNormalization\n    (S : SystemLevelLeftExtensionTheory (J := J))\n    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ) :\n    let normalized := fun (A : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\n        (M : DerivedCategory (StrictRingSystem A)) ↦\n      ∀ {m n : ℕ} (h : m ≤ n),\n        IsIso (((systemDerivedTensorAdj S.scalar A h).homEquiv _ _).symm\n          ((S.transition A h).app M))\n    (∀ M, normalized B M →\n      normalized (selectedSystemRings B r) ((derivedSystemSubsequence B r).obj M)) ∧\n    (∀ N, normalized (selectedSystemRings B r) N →\n      normalized B ((S.selected B r).derived.obj N))",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T180801-L-3901640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T180801-L-3901640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
