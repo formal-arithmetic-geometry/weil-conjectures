@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData
 public import Sheaf.Paper.SfScalarExtensionComposition
+import Sheaf.Paper.NormalizedScalarAssociatorIntegralTransportCore
 
 /-! # Integral transport of a normalized scalar associator -/
 
@@ -80,6 +81,10 @@ theorem normalized_scalar_associator_integral_transport
       ((sfIntegralScalarComp l E.carrier L.carrier i T 0
         (Fact.out : l.Prime).ne_zero M.carrier j).hom.app
         (⟨K.obj, K.property.1⟩ : sfIntegralConstructibleCategory l E.carrier T)) := by
-  sorry
+  have hcore := normalized_scalar_associator_integral_transport_core l Ω E L M i j T A B D
+    hA hB hD nA nB nD α K hsource htarget
+  apply heq_of_eq
+  apply (sfIntegralConstructible l M.carrier T).ι.map_injective
+  exact hcore
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
