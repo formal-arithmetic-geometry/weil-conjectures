@@ -20130,3 +20130,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:40 L: merged deliver/NA/lem-pur-rational-braiding-scalar-compatibility (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 21:45 L: returned deliver/J1/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescent (reviewer RETURN: (reviewer C-2969d, head 2969d679c) 6/H2: the item node lem-trf-relative-proj-twist-chart-descent.json is not in the deli)
 - 21:50 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: D3/E5 + C4, the main reason: the scalar square is never proved at the integral level. Step 1 only gives single-field fac)
+- 21:52 L: merged deliver/NC/lem-pur-integral-braiding-naturality (reviewer FIX; first push; new nodes: 0)
