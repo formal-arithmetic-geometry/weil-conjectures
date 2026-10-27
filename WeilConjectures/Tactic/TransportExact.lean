@@ -125,6 +125,19 @@ elab "transport_exact " h:term : tactic => withMainContext do
     pure (mkApp4 (mkConst ``Eq.mp [.zero]) A B
       (mkApp4 (mkConst ``eq_of_heq [1]) (mkSort 0) A B e) a)
   let pf ← instantiateMVars pf
+  if pf.hasExprMVar then throwError "transport_exact: the proof has unassigned metavariables"
+  g.assign (← sealProof B pf)
+  replaceMainGoal []
+
+/-- `transport_rfl` closes a goal `l = r` with `l` and `r` definitionally equal but spelled
+differently, along a congruence proof with small leaves, added as an auxiliary theorem. -/
+elab "transport_rfl" : tactic => withMainContext do
+  let g ← getMainGoal
+  let B ← instantiateMVars (← g.getType)
+  let some (α, l, r) := (← whnfR B).eq? | throwError "transport_rfl: the goal is not an equation"
+  let e ← heqProof (← IO.mkRef {}) l r
+  let u ← getLevel α
+  let pf ← instantiateMVars (mkApp4 (mkConst ``eq_of_heq [u]) α l r e)
   g.assign (← sealProof B pf)
   replaceMainGoal []
 

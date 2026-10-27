@@ -13679,6 +13679,7 @@ public import WeilConjectures.TraceFormula.Specialization.Integral
 public import WeilConjectures.TraceFormula.Specialization.KernelPullback
 public import WeilConjectures.TraceFormula.Specialization.KernelPullbackDeformation
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
+public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesBraided
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityCompactification
@@ -13748,6 +13749,8 @@ public import WeilConjectures.TraceFormula.Specialization.TraitSliceGeneric
 public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernelDiagonal
+public import WeilConjectures.TraceFormula.Specialization.UniversalKernelFirst
+public import WeilConjectures.TraceFormula.Specialization.UniversalKernelFirstInputs
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
 public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine
