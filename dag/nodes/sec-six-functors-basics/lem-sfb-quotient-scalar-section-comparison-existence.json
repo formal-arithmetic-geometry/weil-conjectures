@@ -1,0 +1,112 @@
+{
+ "id": "lem-sfb-quotient-scalar-section-comparison-existence",
+ "kind": "statement",
+ "title": "Existence of normalized comparisons for a fixed sectionwise scalar model",
+ "statement": "For every scheme T and every fixed model m : SectionModel a T, there exist ordinary and derived comparisons whose packaged ScalarSectionData is ScalarSectionNormalized a T.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The section scalar construction, specialized to the actual section ring map."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Compare the fixed cochain model with the universal sectionwise scalar model. The ordinary comparison is fixed on sheafified generators; uniqueness of total left-derived functors gives the derived comparison and its counit equation on every complex.",
+   "uses": [
+    "lem-sfb-quotient-scalar-model-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-scalar-model-existence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03EK and 06YY, with the fixed sectionwise model interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars is monoidal and its canonical tensor comparison commutes with pullback and computation counits",
+   "results": "Ordinary module extension, its counit and pseudofunctor composition; monoidal adjunction counit. No exact match for the specified unbounded internal/section comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project generic derived-monoidal API and section comparison interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedTensorComparison",
+   "results": "Unknown identifier: a project declaration outside the Mathlib search environment.",
+   "date": "2026-10-27",
+   "verdict": "Read the existing project declaration directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is a strong monoidal functor, computed on K-flat complexes by the tensor balancing map",
+   "results": "Tor, exact mapDerivedCategory, and ordinary tensor constructions; no direct normalized section comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic derived comparison found locally in WeilConjectures."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalized|ScalarSectionNormalized|SectionPullNormalized",
+   "results": "Mathlib search has no matches. Local search finds the fixed project definitions, the restricted coefficient normalization and the downstream private canonicalScalarTensorIso computations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic computations without importing the circular downstream module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientScalarSectionExistence",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-scalar-section-existence",
+   "place": "Strictly simpler comparison substatement split from the section scalar existence proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientScalarSectionComparisonExistence",
+  "file": "lean/Sheaf/Paper/QuotientScalarSectionComparisonExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalar_section_comparisons_exists",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalar_section_comparisons_exists"
+  ],
+  "statement": "theorem scalar_section_comparisons_exists (T : Scheme.{u})\n    (model : SectionModel a T) :\n    ∃ ordinary : QuotientChange.extension a T ⋙\n        (equivalence Λ' T).functor ≅\n      (equivalence Λ T).functor ⋙ model.E,\n      ∃ derived : D a T ⋙ derivedFunctor Λ' T ≅\n        derivedFunctor Λ T ⋙ model.T,\n        ScalarSectionNormalized a T\n          { model := model, ordinary := ordinary, derived := derived }",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151708-L-1193899",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151708-L-1193899",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

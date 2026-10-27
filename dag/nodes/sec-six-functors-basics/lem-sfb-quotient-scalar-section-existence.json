@@ -12,22 +12,22 @@
  ],
  "proof": [
   {
-   "text": "take the sheafified sectionwise scalar-extension functor and its everywhere\ndefined total left derived functor with its universal cochain counit. The ordinary\ninternal/section scalar adjunction gives the comparison on module sheaves: inserting\nthe scalar unit internally maps to the sheafified generator 1 tensor m. Transport\nthis comparison termwise to complexes and through the exact section equivalences.\nBoth composites are total left derived functors of the same ordinary composite;\nthe counit-compatible unique isomorphism gives the derived comparison. Its defining\nuniversal-counit square, with the two complex-composition comparisons inserted,\nis exactly the second normalization equation, for every complex. This construction\nuses no exactness of scalar extension and works for zero modules, zero target rings,\nempty schemes, and arbitrary unbounded complexes.",
+   "text": "Choose the sectionwise cochain model from scalar_section_model_exists. Apply scalar_section_comparisons_exists to that fixed model, then package its ordinary and derived comparisons as ScalarSectionData.",
    "uses": [
-    "lem-sfb-internal-section-scalar-adjunction",
-    "lem-pur-derived-change-of-rings"
+    "lem-sfb-quotient-scalar-model-existence",
+    "lem-sfb-quotient-scalar-section-comparison-existence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-internal-section-scalar-adjunction",
-  "lem-pur-derived-change-of-rings"
+  "lem-sfb-quotient-scalar-model-existence",
+  "lem-sfb-quotient-scalar-section-comparison-existence"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "The parent proof steps, specialized to the actual condensed coefficient map and fixed internal/section comparisons."
+  "place": "The target proof is assembled from the actual sectionwise model existence and the fixed-model comparison theorem."
  },
  "mathlib_searches": [
   {
@@ -88,7 +88,7 @@
   ],
   "statement": "theorem scalar_section_exists (T : Scheme.{u}) :\n    ∃ c : ScalarSectionData a T, ScalarSectionNormalized a T c",
   "branch": "sheaf-dag",
-  "by": "T3",
+  "by": "G3",
   "date": "2026-10-27"
  },
  "lean_audit": {
@@ -112,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-75592",
-  "group": "T3",
-  "result": "fix",
-  "landing": "20261027T135442-L-3709173",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151708-L-1193899",
   "kind": "interface",
-  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
