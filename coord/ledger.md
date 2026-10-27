@@ -19881,3 +19881,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:44 L: merged deliver/K4/Sheaf.Paper.RationalP1ScalarChernSplittings (stage 3; reviewer PASS; first push; landing 20261027T194451-L-848120 (interface); batch 20261027T194418; modules 3; new nodes 2)
 - 19:44 L: merged deliver/N3/Sheaf.Paper.RationalP1UnitCounit (stage 3; reviewer PASS; first push; landing 20261027T194456-L-852530 (interface); batch 20261027T194418; modules 1; new nodes 0)
 - 19:45 L: merged deliver/P2/Sheaf.SixFunctors.IntegralKernelContractions (stage 3; reviewer PASS; first push; landing 20261027T194501-L-853655 (interface); batch 20261027T194418; modules 3; new nodes 2)
+- 19:51 L: returned deliver/P7/Sheaf.Paper.CondensedCompositorRealization (reviewer RETURN: (reviewer C-6ceb1, head 6ceb12936) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CondensedCompo)
