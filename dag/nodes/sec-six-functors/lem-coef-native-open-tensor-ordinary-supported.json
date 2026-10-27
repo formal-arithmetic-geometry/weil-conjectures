@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-native-open-tensor-ordinary-supported",
+ "kind": "lemma",
+ "title": "Ordinary tensor support for native open extension on the sequence site",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell, and an open immersion j:X -> Z of schemes in universe u. For any ordinary module M on the positive-quotient coefficient sequence site of X and any ordinary module N on that of Z, the ordinary sheaf tensor j_! M tensor N belongs to the essential image of the actual native VaryingRing.extension functor, using the coefficient rings of [lem-coef-derived-system-evaluation-calculus], the positive-quotient levels and transitions of [def-weil-compact-support-native-system-evaluation], the native operations of [def-sp-varying-ring-operations], and the ordinary tensor of [def-coef-semilinear-system-models]. This asserts only essential-image membership for ordinary modules: it asserts no normalized morphism, no restriction tensorator, no cochain comparison and no preservation of flatness.",
+ "stmt_deps": [
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-semilinear-system-models",
+  "def-sp-varying-ring-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; its extension to a sheaf-localization is explained in the following remark-j-shriek-tensor."
+ },
+ "proof": [
+  {
+   "text": "Identify the open pro-etale site with the ambient slice at the subterminal object j. Take its product with the coefficient index and the vertical topology. The constant-section isomorphism identifies the native open coefficient ring with the restricted ambient ring, naturally in every quotient arrow. Transport module restriction and extension; uniqueness of adjoints identifies transported extension with the actual native extension.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the localized ordinary extension/tensor formula 0E8I. Its maps are induced by the direct-sum generators for extension and the balanced universal property of tensor, followed by sheafification; those constructions are functorial in the coefficient ring. Consequently their formulas commute with all horizontal quotient arrows on the product sequence site. They exhibit the ambient tensor as extension of the tensor of M with the restricted N. Transport this isomorphism to native modules and use its inverse as an essential-image witness. The same construction gives zero for the empty open and works for zero coefficient rings.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-sp-varying-ring-operations",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, isolated ordinary essential-image clause of the system-existence proof. Direct-sum and balanced-tensor maps give quotient compatibility on the vertical sequence site."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product with a sheaf of modules extended by zero from an open immersion belongs to the essential image of extension by zero",
+   "results": "Eight hits: Scheme.Modules.restrictFunctor, restrict, restrictAdjunction and its left-adjoint instance; four light-condensed monoidal/projectivity results. None is native ordinary extension support.",
+   "date": "2026-10-28",
+   "verdict": "Scheme.Modules uses the structure sheaf on the small Zariski site, rather than arbitrary positive-quotient rings on the pro-etale sequence site. No matching support theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage",
+   "results": "CategoryTheory.Adjunction.isIso_counit_app_iff_mem_essImage in Mathlib.CategoryTheory.Adjunction.FullyFaithful.",
+   "date": "2026-10-28",
+   "verdict": "Used to turn this support clause into invertibility in the parent; does not prove support."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*tensor|tensor.*essImage|extensionByZero.*tensor",
+   "results": "Six Mathlib hits, all about Cartesian essential-image subcategories or Day convolution; no module extension by zero support result.",
+   "date": "2026-10-28",
+   "verdict": "The localized project tensor formula supplies the plan; native ordinary support remains to be transported."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeOpenTensorSystemExistence",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "The ordinary support portion of step 3 of lem-coef-native-open-tensor-system-existence, before normalization and totalization.",
+   "via": [
+    "lem-coef-native-open-tensor-system-existence",
+    "lem-coef-native-open-tensor-cochains",
+    "lem-coef-native-open-tensor-models-data-existence",
+    "lem-coef-native-open-tensor-models-existence",
+    "lem-coef-support-open-tensor-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefNativeOpenTensorOrdinarySupported",
+  "file": "lean/Sheaf/Paper/CoefNativeOpenTensorOrdinarySupported.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.nativeOpenTensor_ordinary_supported",
+  "statement": "theorem nativeOpenTensor_ordinary_supported {X Z : Scheme.{u}} (j : X ⟶ Z)\n    [IsOpenImmersion j]\n    (M : coefficientSequenceModules.{u, u} l E X)\n    (N : coefficientSequenceModules.{u, u} l E Z) :\n    (ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)\n      (compactSupportSystemQuotient l E) j).essImage\n        (ordinaryTensor.{u + 1, u, u} (coefficientSequenceTopology (ProEt.topology Z))\n          (coefficientSequenceCommRingSheaf.{u, u} l E Z)\n          ((ProEtale.VaryingRing.extension (compactSupportSystemLevel l E)\n            (compactSupportSystemQuotient l E) j).obj M) N)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261027T210019-L-1646420",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261027T210019-L-1646420",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

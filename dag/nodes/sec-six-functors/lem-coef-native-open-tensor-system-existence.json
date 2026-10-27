@@ -15,48 +15,51 @@
  },
  "proof": [
   {
-   "text": "Identify the native open sites, coefficient sheaves, and exact module adjunctions with their localized-site presentations. Restriction of sheafification of tensor gives the natural ordinary restriction comparison and its specified pure-section formula. The ordinary direct image is the right adjoint of the native restriction. Work on the product with N and the vertical topology throughout; naturality in horizontal arrows is part of the sheaf construction.",
+   "text": "Construct the finite-limit-preserving inverse image of sheaves of sets on the vertical sequence sites. Lift it to modules and compose with scalar extension. The normalized module adjunction and uniqueness of left adjoints identify this functor with the actual native pull. Transport the ordinary tensorator along this isomorphism. Apply unit naturality to the sheaf of pairs of sections and the pure-tensor map; the normalized transpose formula identifies its scalar insertion with the specified native pullSection. This proves simultaneous naturality and the required pure-section equation, with all horizontal coefficient arrows retained.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "lem-coef-native-open-tensor-restriction",
+    "lem-pur-independent-composite-algebraic-image",
+    "lem-pur-varying-ring-tensor-comparison",
+    "lem-sf-open-operation-models"
    ],
    "elementary": false
   },
   {
-   "text": "Restriction preserves flat sheaves and flat-term K-flat complexes by the pullback preservation theorem, on both the sequence site and each finite site.",
+   "text": "Apply ringed-topos preservation of flat-term K-flat complexes to the constructed inverse image/scalar-extension functor. Transport K-flatness along its cochain isomorphism with native pull and flatness along the component isomorphisms. Take native push as right, with moduleAdj.",
    "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-coef-native-open-tensor-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Use the unit transpose of the inverse restriction/tensor comparison as the inverse ordinary projection. The ringed-slice tensor formula and open-unit normalization prove it invertible; adjunction uniqueness proves ordinary naturality.",
+   "text": "The native open-extension unit is invertible. Ordinary tensor support makes the extension counit at the ambient tensor invertible. Form the natural transformation which tensors this unit with the identity and composes with the inverse restriction tensorator. Transpose it under moduleJAdj. Its adjunct is an isomorphism; since its target is supported, the transpose is extension of its adjunct followed by the invertible counit, hence is invertible. Invert the resulting natural isomorphism to obtain ordinary; the Hom-equivalence inverse law gives ordinaryInverse, and naturality gives ordinaryNaturality.",
    "uses": [
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-sf-open-tensor-normalization"
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-coef-native-open-tensor-ordinary-supported"
    ],
    "elementary": false
   },
   {
-   "text": "For the sequence site itself, totalize the ordinary comparison over all a+b=k using extension preservation of coproducts. On each summand naturality for each differential proves the signed chain equation; ordinary naturality for arbitrary module maps gives chainNaturality. This retains every horizontal quotient arrow.",
+   "text": "Apply the direct-sum totalization comparisonFromComponents_exists to the inverse ordinary isomorphisms and their simultaneous naturality. Extension preserves all required coproducts as a left adjoint. Invert this cochain comparison. Its insertion formula gives summand after canceling its degreewise isomorphism; its naturality gives chainNaturality by the inverse-square identity. Assemble these fields into the unchanged native sequence-site cochain datum.",
    "uses": [
-    "lem-sf-ringed-open-total-tensor-kflat"
+    "lem-coef-native-open-tensor-totalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-ringed-open-total-tensor-kflat"
+  "lem-coef-native-open-tensor-restriction",
+  "lem-pur-independent-composite-algebraic-image",
+  "lem-pur-varying-ring-tensor-comparison",
+  "lem-sf-open-operation-models",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-coef-native-open-tensor-ordinary-supported",
+  "lem-coef-native-open-tensor-totalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1, separating the sequence-site and finite coefficient constructions."
+  "place": "Tags 0GL1 and 0G7E; sites-modules.tex Tags 03EL and 0E8I; direct-sum totalization in Homology 012Z. G9 constructs the restriction and total comparison and reduces only ordinary tensor support."
  },
  "mathlib_searches": [
   {
@@ -137,9 +140,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R8",
+  "group": "G9",
   "result": "pass",
-  "landing": "20261027T180758-L-3900819",
+  "landing": "20261027T210019-L-1646420",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
