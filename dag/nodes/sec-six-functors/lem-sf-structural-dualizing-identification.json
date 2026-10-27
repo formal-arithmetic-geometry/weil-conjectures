@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-structural-dualizing-identification",
+ "kind": "statement",
+ "title": "Identification of the specified structural exceptional dualizing object",
+ "statement": "Fix a finite-field datum D, a prime l distinct from D.p, an evaluation-normalized realization family R, and a separated finite-type model X. Put Y = X base changed to the algebraic closure. Let B be a common-stage Verdier duality datum [def-sf-common-stage-verdier-data], and assume its Dualizing clause. For every normalized structural exceptional coefficient system S [lem-sf-weil-native-exceptional-forgetful] and every compactification c of the structure morphism Y to Spec(D.k), B.omega is isomorphic to the closed-coefficient exceptional image (S_c)^! of geometricPointOmega, the actual common-stage coefficient tensor unit. This statement makes no assertion about a bidual arrow or about native adjoints.",
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "lem-sf-weil-native-exceptional-forgetful"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Paragraph 1: the dualizing object supplied by the exceptional adjoint; final paragraph: the same coefficient comparisons and adjunction units and counits."
+ },
+ "proof": [
+  {
+   "text": "Use the finite dualizing identifications in B.Dualizing at the least coefficient field. Its auxiliary exceptional system and the specified S have isomorphic rational compact-support functors at the canonical compactification, by their rationalLeft comparisons to the same operation. Transport the first adjunction along this left isomorphism and apply uniqueness of right adjoints. Compose with B.omegaComparison and the commonComparison.b component for S.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a common refinement of the canonical compactification and c. The two specified closed-coefficient right refinement isomorphisms identify their exceptional functors.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The regular completed coefficient and the reconstructed integral tensor unit have isomorphic coherent reductions: use regularCoefficient_coherentReduction and pullbackTensorIntegralUnitReduction. Full faithfulness of integralSystemReduction lifts the isomorphism. Apply rational localization and the least-stage inclusion to identify CoefQbarVerdier.coefficientUnit with geometricPointOmega. Apply the exceptional right functor to this isomorphism and compose all factors. Every factor is an isomorphism, including for the empty scheme and zero coefficients in the zero category.",
+   "uses": [
+    "lem-pur-regular-coefficient-coherent-reduction",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-pur-regular-coefficient-coherent-reduction",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Formal assembly of the dualizing-object identification from the existing normalized coefficient and adjoint comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of right adjoints identifies the exceptional image of a coefficient unit under a natural isomorphism of left adjoints",
+   "results": "Found Adjunction.rightAdjointUniq and its unit/counit formulas. These supply the formal adjoint comparison; the geometric normalization is project-specific.",
+   "date": "2026-10-27",
+   "verdict": "Generic tools used; no duplicate geometric construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Found rightAdjointUniq and its component formulas. Used rightAdjointUniq after ofNatIsoLeft.",
+   "date": "2026-10-27",
+   "verdict": "Generic tools used; no duplicate geometric construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|preimageIso",
+   "results": "Found rightAdjointUniq and preimageIso. Use them for the adjoint comparison and the coherent-reduction unit comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic tools used; no duplicate geometric construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.StructuralBidualInvertible",
+  "date": "2026-10-27",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-structural-evaluation-bidual-invertible",
+   "place": "Proof step 1: compare the specified structural exceptional dualizing object with B.omega.",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.StructuralDualizingIdentification",
+  "file": "lean/Sheaf/WeilSheaf/StructuralDualizingIdentification.lean",
+  "declaration": "WeilConjectures.NativeBidualRealization.structural_dualizing_identification",
+  "declarations": [
+   "WeilConjectures.NativeBidualRealization.structural_dualizing_identification"
+  ],
+  "statement": "theorem structural_dualizing_identification\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] [Fact (l ≠ D.p)]\n    (R : Family l D) (X : Space D)\n    (B : CoefQbarVerdier.Duality D l (Fact.out : l ≠ D.p) (PadicAlgCl l)\n      (geometric D X).base.left)\n    (hB : CoefQbarVerdier.Dualizing D l (Fact.out : l ≠ D.p) (PadicAlgCl l)\n      (geometric D X).base.left B)\n    (S : StructuralSystem D l X)\n    (c : Compactification (geometric D X).base.hom) :\n    Nonempty (B.omega ≅ (S.ring.operation c .closed).G.obj (geometricPointOmega D l R))",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T151645-L-1187746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T151645-L-1187746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
