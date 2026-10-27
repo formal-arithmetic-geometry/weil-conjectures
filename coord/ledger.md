@@ -20101,3 +20101,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:02 L: merged deliver/V1/Sheaf.Paper.ScalarTowerTensorLimitSquare (stage 3; reviewer PASS; first push; landing 20261027T210255-L-1682564 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:02 L: merged deliver/V1/Sheaf.TraceFormula.ScalarModelRoosZeroLiftUniqueness (stage 3; reviewer PASS; first push; landing 20261027T210256-L-1682723 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:02 L: merged deliver/V2/Sheaf.Paper.PodReindexingTensorAugmentationSquare (stage 3; reviewer PASS; first push; landing 20261027T210258-L-1683106 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 21:02 L: merged deliver/V3/Sheaf.Paper.IntegralSupportPreservation (stage 3; reviewer PASS; first push; landing 20261027T210259-L-1683357 (interface); batch 20261027T205736; modules 1; new nodes 0)
