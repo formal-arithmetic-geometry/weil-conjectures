@@ -104,6 +104,24 @@ lemma polynomialSpecMap_polynomialSpecToAffineSpace :
 
 namespace IdealSheafData
 
+variable {h} in
+/-- If `I ≤ h_* J`, that is `h^* I ⊆ J`, then `h` maps the ideal `I(U)` into `J(U')` over affine
+opens `U' ⊆ h⁻¹ U`: the chartwise hypothesis of the functoriality of the deformation to the normal
+cone (`Scheme.IdealSheafData.deformationSpaceMap`). -/
+lemma siteIdeal_map_appLE_le_of_le_map {I : X.IdealSheafData} {J : X'.IdealSheafData}
+    (H : I ≤ J.map h) ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄
+    (hU : U'.1 ≤ h ⁻¹ᵁ U.1) :
+    (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U' := by
+  rw [Ideal.map_le_iff_le_comap]
+  intro a ha
+  have h1 := Hom.ideal_ker_le _ ⟨U.1, U.2⟩ (H ⟨U.1, U.2⟩ ha)
+  rw [RingHom.mem_ker] at h1
+  rw [Ideal.mem_comap, siteIdeal, ← J.ker_subschemeι, Hom.ker_apply, RingHom.mem_ker,
+    Scheme.Hom.app_eq_appLE, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
+  rw [Scheme.Hom.app_eq_appLE] at h1
+  rw [← Scheme.Hom.appLE_map (J.subschemeι ≫ h) le_rfl
+    (homOfLE (J.subschemeι.preimage_mono hU)).op, CommRingCat.comp_apply, h1, map_zero]
+
 variable (I : X.IdealSheafData) (J : X'.IdealSheafData)
   (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
     (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U')
@@ -247,6 +265,57 @@ instance : IsClosedImmersion (relativeGluingMap X.coequifibered_toPolynomialPres
       IsClosedImmersion.spec_of_surjective _
         (Polynomial.map_surjective _ Ideal.Quotient.mk_surjective)
 
+/-- The relative affine line `Spec_X (𝒪_X / ⊥)[t]` of the zero ideal is `𝔸¹_X`. -/
+instance isIso_relativeGluingMap_polynomialToQuotientPolynomial_bot :
+    IsIso (relativeGluingMap X.coequifibered_toPolynomialPresheaf
+      (⊥ : X.IdealSheafData).coequifibered_toQuotientPolynomialAlgebra
+      (⊥ : X.IdealSheafData).polynomialToQuotientPolynomial) :=
+  relativeGluingMap_of_forall _ (MorphismProperty.isomorphisms _) _ _
+    (⊥ : X.IdealSheafData).toPolynomialPresheaf_comp_polynomialToQuotientPolynomial fun U ↦ by
+      have : IsIso ((⊥ : X.IdealSheafData).polynomialToQuotientPolynomial.app (op U)) :=
+        (ConcreteCategory.isIso_iff_bijective _).mpr
+          ⟨Polynomial.map_injective _ ((RingHom.injective_iff_ker_eq_bot _).mpr Ideal.mk_ker),
+            Polynomial.map_surjective _ Ideal.Quotient.mk_surjective⟩
+      exact (inferInstance : IsIso (Spec.map
+        ((⊥ : X.IdealSheafData).polynomialToQuotientPolynomial.app (op U))))
+
+/-- Along a closed immersion `h : X' ⟶ X`, the morphism `D_⊥ X' ⟶ D_⊥ X` of deformation spaces of
+the zero ideals is a closed immersion: it is the morphism `𝔸¹_{X'} ⟶ 𝔸¹_X` of relative affine
+lines. -/
+lemma isClosedImmersion_deformationSpaceMap_bot [IsClosedImmersion h]
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      ((⊥ : X.IdealSheafData).siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤
+        (⊥ : X'.IdealSheafData).siteIdeal U') :
+    IsClosedImmersion (deformationSpaceMap h ⊥ ⊥ hJ) := by
+  have : IsClosedImmersion (AffineSpace.map (ULift.{u} (Fin 1)) h) :=
+    MorphismProperty.of_isPullback (AffineSpace.isPullback_map h).flip ‹_›
+  rw [(IsIso.eq_comp_inv _).mpr (deformationSpaceMap_toPolynomialSpec h ⊥ ⊥ hJ),
+    (IsIso.eq_comp_inv _).mpr (polynomialSpecMap_polynomialSpecToAffineSpace h)]
+  infer_instance
+
+/-- Along any morphism `h : X' ⟶ X`, the deformation space `D_⊥ X' ≅ 𝔸¹_{X'}` of the zero ideal
+is the base change of `D_⊥ X ≅ 𝔸¹_X` along `h`:
+```
+D_⊥ X' ⟶ D_⊥ X
+  │         │
+  X'   ⟶    X
+```
+-/
+lemma isPullback_deformationSpaceMap_bot
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄ (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      ((⊥ : X.IdealSheafData).siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤
+        (⊥ : X'.IdealSheafData).siteIdeal U') :
+    IsPullback (deformationSpaceMap h ⊥ ⊥ hJ) (⊥ : X'.IdealSheafData).deformationSpaceProj
+      (⊥ : X.IdealSheafData).deformationSpaceProj h := by
+  have e (Y : Scheme.{u}) : (⊥ : Y.IdealSheafData).deformationSpaceProj =
+      ((⊥ : Y.IdealSheafData).deformationSpaceToPolynomialSpec ≫ Y.polynomialSpecToAffineSpace) ≫
+        𝔸(ULift.{u} (Fin 1); Y) ↘ Y := by
+    simpa [AffineSpace.map_id] using (deformationSpaceProj_over' (⊥ : Y.IdealSheafData) (𝟙 Y)).symm
+  rw [e X, e X']
+  refine IsPullback.paste_vert (IsPullback.of_vert_isIso ⟨?_⟩) (AffineSpace.isPullback_map h)
+  rw [deformationSpaceMap_toPolynomialSpec_assoc, Category.assoc,
+    polynomialSpecMap_polynomialSpecToAffineSpace]
+
 section OpenImmersion
 
 variable [IsOpenImmersion h]
@@ -280,6 +349,15 @@ lemma isPushout_extendedReesPullbackData_imageSite (hJI : J = I.comap h)
     (ConcreteCategory.isIso_iff_bijective _).mpr (Ideal.bijective_extendedReesAlgebraMap
       (asIso (h.appLE (imageSite h U).1 U.1 _)).commRingCatIsoToRingEquiv _ e)
   exact IsPushout.of_horiz_isIso ⟨((extendedReesPullbackData h I _ hJ).app_comp_map _).symm⟩
+
+/-- Along an open immersion `h : X' ⟶ X`, the deformation space of `J = h^* I` is the base change
+`X' ×_X D_I X` of the deformation space of `I`. -/
+lemma isPullback_deformationSpaceMap_of_isOpenImmersion (hJI : J = I.comap h) :
+    IsPullback (deformationSpaceMap h I J hJ) J.deformationSpaceProj I.deformationSpaceProj h := by
+  refine (extendedReesPullbackData h I J hJ).isPullback_comparison _ _ fun x ↦ ?_
+  obtain ⟨U, hU, hx, -⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp X'.isBasis_affineOpens
+    (show x ∈ (⊤ : X'.Opens) from trivial)
+  exact ⟨⟨U, hU⟩, _, _, hx, isPushout_extendedReesPullbackData_imageSite _ _ _ _ hJI _⟩
 
 end OpenImmersion
 

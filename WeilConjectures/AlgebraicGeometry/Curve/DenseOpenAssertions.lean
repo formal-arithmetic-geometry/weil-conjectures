@@ -22,7 +22,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 # The eight curve assertions on a dense open
 
 Source: Stacks Project, Etale Cohomology, Lemma 0GJA, Situation 0A52
-(blueprint: lem-weil-pbc-curve-assertions-dense-open).
+(blueprint: sk-lem-curve-dense-open).
+
+The unconditional equivalence, without a condition on the torsion of the sheaf, is
+`AlgebraicGeometry.IsCurve.assertions_iff_dense_open`, a corollary of the curve package.
 -/
 
 @[expose] public section
@@ -37,7 +40,10 @@ namespace AlgebraicGeometry
  the original constructible torsion sheaf. The converse holds for primary or prime-to-the-
  characteristic torsion, and hence for a sheaf killed by a prime.
  Source: Stacks Project, Lemma 0GJA and Situation 0A52, with the converse torsion condition
- recorded in the node (blueprint: lem-weil-pbc-curve-assertions-dense-open).
+ recorded in the node (blueprint: sk-lem-curve-dense-open). The equivalence without the
+ torsion condition is `AlgebraicGeometry.IsCurve.assertions_iff_dense_open`: both sides hold by
+ the curve package, whose proof goes through the prime-torsion comparison
+ `AlgebraicGeometry.IsCurve.assertions_iff_dense_open_prime`.
 
  Abelian sheaves are converted to modules by precisely the coefficient functor used in
  `IsCurve.finite_pushforward_assertions`; this adds no coefficient structure or hypothesis.

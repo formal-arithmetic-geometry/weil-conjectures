@@ -39,7 +39,10 @@ instance : TopologicalSpace (integersResidueField l E) := ⊥
 
 instance : DiscreteTopology (integersResidueField l E) := ⟨rfl⟩
 
-instance : IsTopologicalRing (integersResidueField l E) :=
+/-- `𝔽_E` is a topological ring. All occurrences of `IsTopologicalRing 𝔽_E` should be this named
+instance: kernel checks comparing terms built from different (definitionally equal) proofs of
+`IsTopologicalRing 𝔽_E` can be very expensive. -/
+instance isTopologicalRing_integersResidueField : IsTopologicalRing (integersResidueField l E) :=
   DiscreteTopology.topologicalRing
 
 /-- The residue map `𝒪_E → 𝒪_E ⧸ 𝔪_E`. -/

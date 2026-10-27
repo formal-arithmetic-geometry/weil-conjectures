@@ -20,10 +20,11 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBi
 /-!
 # Ext groups of sheaves of modules on a scheme
 
-For `𝒪_X`-modules `ℱ` and `𝒢` on a scheme `X`, the group `Ext^i_X(ℱ, 𝒢)` is the `i`-th right
-derived functor of `Hom_{𝒪_X}(-, 𝒢)` evaluated at `ℱ`. We use Mathlib's `Abelian.Ext`, the
-morphisms `ℱ ⟶ 𝒢[i]` in the derived category of the abelian category `X.Modules`, which computes
-these derived functors.
+For `𝒪_X`-modules `ℱ` and `𝒢` on a scheme `X`, the group `Ext^i_X(ℱ, 𝒢)` is Mathlib's
+`Abelian.Ext`: the morphisms `ℱ ⟶ 𝒢[i]` in the derived category of the abelian category
+`X.Modules`. As `X.Modules` has enough injectives, this is the `i`-th right derived functor of
+`Hom_{𝒪_X}(ℱ, -)` evaluated at `𝒢`; it is not computed by projective resolutions of `ℱ`, which
+need not exist.
 
 ## Main definitions
 
@@ -65,9 +66,10 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}} [HasExt.{u} X.Modules]
 
-/-- The **Ext groups** `Ext^i_X(ℱ, 𝒢)` of two `𝒪_X`-modules: the right derived functors of
-`Hom_{𝒪_X}(-, 𝒢)` on the abelian category of `𝒪_X`-modules, evaluated at `ℱ`. In degree `0` this
-is `Hom_{𝒪_X}(ℱ, 𝒢)` (`CategoryTheory.Abelian.Ext.homEquiv₀`).
+/-- The **Ext groups** `Ext^i_X(ℱ, 𝒢)` of two `𝒪_X`-modules: the morphisms `ℱ ⟶ 𝒢[i]` in the
+derived category of `𝒪_X`-modules, equivalently the right derived functors of `Hom_{𝒪_X}(ℱ, -)`
+evaluated at `𝒢` (`𝒪_X`-modules have enough injectives but in general not enough projectives).
+In degree `0` this is `Hom_{𝒪_X}(ℱ, 𝒢)` (`CategoryTheory.Abelian.Ext.homEquiv₀`).
 
 (blueprint: `def-sc-ext-sheaf`) -/
 abbrev Ext (ℱ 𝒢 : X.Modules) (i : ℕ) : Type u :=
