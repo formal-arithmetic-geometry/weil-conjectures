@@ -2,7 +2,7 @@
 
 85 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (2 clusters, 1188 modules)
+## Rework: quarantined by the upstream sync (2 clusters, 1191 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -13,23 +13,23 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 1, stage 3 1 items.
 
-## Stage 1: nodes to split (2)
+## Stage 1: nodes to split (1)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-pur-rational-tensor-associator-scalar-square` | 6004 | none |
-| `lem-pur-integral-braiding-scalar-extension-square` | 6005 | none |
 
-## Stage 2: nodes to state (4)
+## Stage 2: nodes to state (5)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `lem-pur-general-legacy-hom-coordinates` | 1 | state | 2 |
 | `lem-zl-finite-separable-tensor-primitive-presentation` | 1 | state | 0 |
 | `lem-pur-integral-braiding-naturality` | 2 | state | 0 |
+| `lem-pur-integral-braiding-scalar-extension-square` | 2 | state | 0 |
 | `lem-pur-rational-braiding-scalar-compatibility` | 3 | state | 0 |
 
-Not open yet: 1137 nodes that below a finished node, not needed, 2 nodes that wait for a statement dependency (bottom-up), 2 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 1137 nodes that below a finished node, not needed, 2 nodes that wait for a statement dependency (bottom-up), 1 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (76)
 
