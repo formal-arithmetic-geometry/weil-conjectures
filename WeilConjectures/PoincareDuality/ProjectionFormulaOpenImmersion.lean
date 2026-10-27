@@ -11,11 +11,52 @@ public import WeilConjectures.PoincareDuality.RefinementProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.RefinementCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
-import WeilConjectures.Scratch.Diff
 
 /-!
 
 # The projection formula of an open immersion
+
+Let `j : U ⟶ X` be an open immersion of separated `k`-schemes of finite type. Through the
+identification `Rj_! ≅ j_!`
+(`boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl`),
+the exceptional projection morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` of bounded
+constructible `ℚ̄_ℓ`-complexes is the inverse of the projection comparison of `j_! ⊣ Lj^*`
+(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjection_comp_projectionComparison`,
+blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2).
+
+The proof follows the definition of `Rj_! ≅ j_!`: the lower shriek `Rj_!` is defined through the
+compactification of `j` chosen by Nagata's theorem, compared with the trivial compactification
+`(j, 𝟙)` through a common refinement.
+
+1. On bounded constructible complexes, the exceptional projection morphism of a compactification
+   `c = (X ⟶[i] Z ⟶[p] Y)` is the projection morphism of `Lp^* ⊣ Rp_*`, followed by the inverse
+   projection comparison of `i_! ⊣ Li^*` and the identification `Lf^* ≅ Lp^* ⋙ Li^*`
+   (`ProEtale.CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq`).
+2. The comparison `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement of factorizations intertwines
+   these morphisms
+   (`boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp`),
+   by the abstract `CategoryTheory.Adjunction.whiskerRight_refinement_comp_exceptionalProjection`.
+3. For the trivial compactification, the statement is the abstract
+   `CategoryTheory.Adjunction.trivial_exceptionalProjection_comp_projectionComparison`
+   (`homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion`).
+
+## Sorried input
+
+- `boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp`:
+  step 2 for the comparison `boundedConstructibleLowerShriekOverRefinementIso` of a refinement of
+  compactifications. It is the proved
+  `boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification`
+  transported along `boundedConstructibleLowerShriekRefinementIso_eq'`; the transport itself times
+  out in the kernel, see its docstring.
+
+## Implementation notes
+
+The coefficient ring is written `_` wherever it is determined by the bounded constructible
+complexes: elaborating `ℚ̲̄_ℓ` explicitly synthesizes its ring structure along a path whose proof
+terms differ from those of the categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, and the comparison of the two is
+prohibitively expensive. For the same reason the projection of the monoidal structure of
+`Dᵇc(X)⟦ℚ̲̄_ℓ⟧` is the preferred tensor product, as in
+`WeilConjectures.TraceFormula.KunnethVerdierOpen`.
 
 -/
 
@@ -39,7 +80,6 @@ section General
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
 
-set_option profiler true in
 /-- The inverse of the composition isomorphism of the trivial compactification `(j, 𝟙)` of an
 open immersion is `Lj^*` of the identity isomorphism `L(𝟙 Y)^* ≅ 𝟭`. -/
 lemma leftDerivedUpperStarCompactificationIso_ofIsOpenImmersion_inv_app
@@ -132,7 +172,6 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
-set_option profiler true in
 /-- **The exceptional projection morphism of a compactification on bounded constructible
 complexes**: for a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, `PF^c_{K,B}` is the
 projection morphism of `Lp^* ⊣ Rp_*` at `i_! K`, followed by `Rp_*` of the inverse of the
@@ -140,7 +179,8 @@ projection comparison of `i_! ⊣ Li^*` and of `Li^* Lp^* ≅ Lf^*`. -/
 lemma homMk_exceptionalProjectionMorphismOfCompactification_eq (c : Compactification f.left)
     (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧)
     (ε : (boundedConstructibleUpperStar _ ℓ c.overI).obj
-      ((boundedConstructibleUpperStar _ ℓ c.overG).obj B) ⟶ (boundedConstructibleUpperStar _ ℓ f).obj B)
+      ((boundedConstructibleUpperStar _ ℓ c.overG).obj B) ⟶
+        (boundedConstructibleUpperStar _ ℓ f).obj B)
     (hε : (boundedConstructible _).ι.map ε =
       (leftDerivedUpperStarOverCompactificationIso _ c).inv.app B.obj) :
     ObjectProperty.homMk
@@ -176,7 +216,6 @@ variable {X Z Z₁ Y : Over (Spec (.of k))}
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]
   [IsSeparated Z₁.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option profiler true in
 /-- **The projection morphism of a composite** `h ≫ p₁` on bounded constructible complexes: the
 projection morphism of `Lp₁^* ⊣ Rp₁_*` followed by `Rp₁_*` of that of `Lh^* ⊣ Rh_*`, through the
 composition isomorphisms. -/
@@ -206,7 +245,6 @@ section Refinement
 
 variable {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
 
-set_option profiler true in
 /-- The comparison `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement is `Rp₁_*` of the abstract
 pushforward comparison `CategoryTheory.Adjunction.refinementPushforward`, followed by the
 composition isomorphism. -/
@@ -236,7 +274,6 @@ lemma boundedConstructibleLowerShriekRefinementIso_hom_app (sq : IsPullback (�
   simp only [boundedConstructibleOpenImmersionLowerShriekRefinement_app,
     Adjunction.refinementPushforward, Functor.map_comp]
 
-set_option profiler true in
 omit [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] in
 /-- The composition isomorphisms of the pullbacks along `i₁ = i ≫ h` and `f = i₁ ≫ p₁ = i ≫ h ≫ p₁`
 are compatible. -/
@@ -251,12 +288,10 @@ lemma boundedConstructibleUpperStarComp_refinement_hom_app {p₁ : Z₁ ⟶ Y} {
       (boundedConstructibleUpperStar 𝐐 ℓ i).map
         ((boundedConstructibleUpperStarComp 𝐐 ℓ h p₁).hom.app B) := by
   subst w hf₁
-  simp only [boundedConstructibleUpperStarTriangleComparison, Iso.trans_hom, NatTrans.comp_app,
-    eqToIso_refl, Iso.refl_hom, NatTrans.id_app, Category.id_comp, Category.assoc,
-    boundedConstructibleUpperStarComp_assoc_app, eqToIso.hom, eqToHom_app, eqToHom_trans_assoc]
+  simp only [boundedConstructibleUpperStarTriangleComparison, Iso.trans_hom,
+    eqToIso_refl, Iso.refl_hom, Category.id_comp, boundedConstructibleUpperStarComp_assoc_app]
   rw [eqToHom_refl, Category.id_comp]
 
-set_option profiler true in
 /-- **The comparison along a refinement intertwines the exceptional projection morphisms**: for
 factorizations `f = i ≫ p` and `f = i₁ ≫ p₁` into open immersions followed by morphisms and a
 refinement `h` (`i ≫ h = i₁` cartesian, `h ≫ p₁ = p`), the comparison
@@ -340,7 +375,6 @@ lemma ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (c : Compactif
   exact ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app _ ℓ c.overI c.overG
     c.overI_overG B
 
-set_option profiler true in
 /-- **The comparison along a refinement of compactifications intertwines the exceptional
 projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
 theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification
@@ -369,7 +403,19 @@ theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_c
       r.hom_overG d.overI_overG c.overI_overG K B
 
 /-- **The comparison along a refinement of compactifications intertwines the exceptional
-projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
+projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2), for the
+comparison `boundedConstructibleLowerShriekOverRefinementIso` used by the independence of the lower
+shriek from the compactification.
+
+Unfinished: this is
+`boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification` through
+`boundedConstructibleLowerShriekOverRefinementIso = boundedConstructibleLowerShriekRefinementIso`
+(`boundedConstructibleLowerShriekRefinementIso_eq'`). Rewriting along that identity and closing
+with the proved statement elaborates in seconds but the kernel check times out (> 100 s, or runs
+out of memory with a larger budget): the categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` in the types of the two
+comparisons are elaborated in different files, with different proof terms for the ring structure
+of `ℚ̲̄_ℓ` (`pointLowerStar._proof_1` against an inline `Precoherent Profinite` instance), and the
+kernel compares them at thousands of positions. -/
 theorem boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp
     {c d : Compactification f.left} (r : Compactification.OverRefinement d c)
     (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
@@ -398,7 +444,6 @@ variable {U X : Over (Spec (.of k))}
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
 
-set_option profiler true in
 /-- The inverse of the composition isomorphism of the trivial compactification `(j, 𝟙)` of an
 open immersion is `Lj^*` of the identity isomorphism `L(𝟙 X)^* ≅ 𝟭`. -/
 lemma ι_map_upperStar_map_upperStarId_hom_app (B : Dᵇc(X.left)⟦𝐐⟧) :
@@ -412,7 +457,6 @@ lemma ι_map_upperStar_map_upperStarId_hom_app (B : Dᵇc(X.left)⟦𝐐⟧) :
     ← boundedConstructibleUpperStarId_hom_app_hom _ ℓ (X := X) B]
   rfl
 
-set_option profiler true in
 /-- **The projection formula of the trivial compactification** `(j, 𝟙)` of an open immersion:
 through `R(𝟙 X)_* ≅ 𝟭`, the exceptional projection morphism followed by the projection comparison
 of `j_! ⊣ Lj^*` is the identification. -/
@@ -426,7 +470,8 @@ lemma homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion
             (K ⊗ (boundedConstructibleUpperStar _ ℓ j).obj B))
         (exceptionalProjectionMorphismOfCompactification _
           (Compactification.ofIsOpenImmersion j.left) K.obj B.obj) ≫
-      (boundedConstructibleLowerStarId ℓ X).hom.app ((boundedConstructibleOpenImmersionLowerShriek _ ℓ
+      (boundedConstructibleLowerStarId ℓ X).hom.app
+        ((boundedConstructibleOpenImmersionLowerShriek _ ℓ
           j).obj (K ⊗ (boundedConstructibleUpperStar _ ℓ j).obj B)) ≫
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
           j).projectionComparison K B =
@@ -437,7 +482,6 @@ lemma homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion
   exact Adjunction.trivial_exceptionalProjection_comp_projectionComparison _ _ _
     (fun X' Y' ↦ boundedConstructibleUpperStarId_hom_app_tensor_δ ℓ X X' Y') K B
 
-set_option profiler true in
 /-- `homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion` through the
 identification `j_! ⋙ R(𝟙 X)_* ≅ j_!`. -/
 lemma homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion'
@@ -473,19 +517,19 @@ variable {U X : Over (Spec (.of k))}
   [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
 
-set_option profiler true in
 /-- **The projection formula of an open immersion is the adjoint of the monoidal structure of the
 pullback** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2): through
 `Rj_! ≅ j_!`, the exceptional projection morphism of `j` followed by the projection comparison of
 `j_! ⊣ Lj^*` is the identification. -/
-theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison_of_isOpenImmersion
+theorem boundedConstructibleExceptionalProjection_comp_projectionComparison
     (K : Dᵇc(U.left)⟦𝐐⟧) (B : Dᵇc(X.left)⟦𝐐⟧) :
     boundedConstructibleExceptionalProjectionMorphism ℓ j K B ≫
         (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app
           (K ⊗ (boundedConstructibleUpperStar _ ℓ j).obj B) ≫
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
           j).projectionComparison K B =
-      (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app K ▷ B := by
+      (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app K ▷
+        B := by
   obtain ⟨d, ⟨r₁⟩, ⟨r₂⟩⟩ := Compactification.exists_overRefinement (compactificationOverField j)
     (Compactification.ofIsOpenImmersion j.left)
   have := r₁.isProper

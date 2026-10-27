@@ -25,6 +25,11 @@ morphisms (`CategoryTheory.Adjunction.whiskerRight_refinement_comp_exceptionalPr
 abstract adjunctions: this is the independence of the projection formula from the
 compactification (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2).
 
+For the trivial compactification `(j, 𝟙)` of an open immersion, with `Gs ≅ 𝟭` and the conjugate
+`G ≅ 𝟭`, the exceptional projection morphism followed by the projection comparison of `I ⊣ Is` is
+the identification
+(`CategoryTheory.Adjunction.trivial_exceptionalProjection_comp_projectionComparison`).
+
 -/
 
 @[expose] public section
@@ -40,6 +45,8 @@ variable {𝒳 𝒵 𝒵₁ 𝒴 : Type*} [Category 𝒳] [Category 𝒵] [Categ
   {Hs : 𝒵₁ ⥤ 𝒵} {H : 𝒵 ⥤ 𝒵₁} [Hs.Monoidal] (ah : Hs ⊣ H)
   (e : I₁s ≅ Hs ⋙ Is)
 
+omit [MonoidalCategory 𝒳] [MonoidalCategory 𝒵] [MonoidalCategory 𝒵₁] [Is.Monoidal] [I₁s.Monoidal]
+  [Hs.Monoidal] in
 /-- The restriction comparison `I ⟶ Hs ∘ I₁` is natural. -/
 @[reassoc]
 lemma restrictionComparison_naturality {M M' : 𝒳} (φ : M ⟶ M') :
@@ -62,6 +69,8 @@ variable [∀ M, IsIso (restrictionComparison bi bi₁ e M)]
 noncomputable def refinementPushforward (M : 𝒳) : I₁.obj M ⟶ H.obj (I.obj M) :=
   ah.unit.app (I₁.obj M) ≫ H.map (inv (restrictionComparison bi bi₁ e M))
 
+omit [MonoidalCategory 𝒳] [MonoidalCategory 𝒵] [MonoidalCategory 𝒵₁] [Is.Monoidal] [I₁s.Monoidal]
+  [Hs.Monoidal] in
 /-- The pushforward comparison of a refinement is natural. -/
 @[reassoc]
 lemma refinementPushforward_naturality {M M' : 𝒳} (φ : M ⟶ M') :

@@ -10,23 +10,25 @@ public import WeilConjectures.PoincareDuality.ProjectionFormula
 
 /-!
 
-# The exceptional projection morphism of a compactification on bounded constructible complexes
+# The exceptional projection morphism of a compactification through adjunctions
 
-For a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, the exceptional projection morphism
-`PF^c_{K,B} : Rf_!^c K ⊗ᴸ B ⟶ Rf_!^c (K ⊗ᴸ Lf^* B)` is defined on the ambient derived categories
-(`ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification`). This file expresses
-its restriction to bounded constructible `ℚ̄_ℓ`-complexes through the adjunctions
-`Lp^* ⊣ Rp_*` and `i_! ⊣ Li^*` of bounded constructible complexes: it is the projection morphism
-of `Lp^* ⊣ Rp_*` at `i_! K`, followed by `Rp_*` of the inverse of the projection comparison of
-`i_! ⊣ Li^*` and of the composition isomorphism `Lf^* ≅ Lp^* ⋙ Li^*`
-(`ProEtale.CondensedRing.homMk_exceptionalProjectionMorphismOfCompactification_eq`).
+For a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of a morphism `f` over a scheme `S`, the
+exceptional projection morphism `PF^c_{K,B} : Rf_!^c K ⊗ᴸ B ⟶ Rf_!^c (K ⊗ᴸ Lf^* B)`
+(`ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification`) is the projection
+morphism of `Lp^* ⊣ Rp_*` at `Di_! K`, followed by `Rp_*` of the inverse of the projection
+comparison of `Di_! ⊣ Li^*` and of the identification `Lf^* ≅ Lp^* ⋙ Li^*`, written with the
+morphisms `c.overI` and `c.overG` over `S`
+(`ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification_eq_adjunction`).
+This file also identifies the composition isomorphisms of the pullbacks of bounded constructible
+complexes with those of the ambient derived categories
+(`ProEtale.CondensedRing.ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app`).
 
 ## Implementation notes
 
-The definition of the exceptional projection morphism is first unfolded for a general coefficient
-ring (`ProEtale.CondensedRing.exceptionalProjectionMorphismOfCompactification_eq_adjunction`):
-for the coefficient ring `ℚ̲̄_ℓ`, comparing it with re-elaborated terms is prohibitively
-expensive.
+All statements are made for a general coefficient ring `Λ`: comparing the definition of the
+exceptional projection morphism with re-elaborated terms is cheap for a general `Λ` and
+prohibitively expensive for the coefficient ring `ℚ̲̄_ℓ` (whose instances are synthesized along
+different paths in different files). They are applied to `ℚ̲̄_ℓ` by unification.
 
 -/
 
@@ -108,15 +110,18 @@ lemma ι_map_boundedConstructibleUpperStarComp_inv_app {Z : Over (Spec (.of k))}
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
     Functor.associator_hom_app, Functor.associator_inv_app]
-  simp
+  simp only [Functor.comp_obj, ObjectProperty.ι_obj, Functor.whiskeringRight_obj_obj,
+    Over.comp_left, ObjectProperty.lift_obj_obj, Category.id_comp, Category.comp_id,
+    Category.assoc, ObjectProperty.ι_map, ObjectProperty.homMk_hom]
   erw [Category.id_comp]
   erw [CategoryTheory.Functor.map_id]
   exact Category.id_comp _
 
 /-- The composition isomorphism `Lf^* ≅ Lg^* ⋙ Li^*` along `f = i ≫ g` on bounded constructible
 complexes is that of the ambient derived categories. -/
-lemma ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
-    [IsSeparated Z.hom] (i : X ⟶ Z) (g : Z ⟶ Y) (w : i ≫ g = f) (B : Dᵇc(Y.left)⟦Λ⟧) :
+lemma ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (i : X ⟶ Z) (g : Z ⟶ Y)
+    (w : i ≫ g = f) (B : Dᵇc(Y.left)⟦Λ⟧) :
     (boundedConstructible _).ι.map
       ((eqToIso (congrArg (boundedConstructibleUpperStar Λ ℓ) w.symm) ≪≫
         boundedConstructibleUpperStarComp Λ ℓ i g).inv.app B) =
@@ -126,6 +131,8 @@ lemma ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app {Z : Over (
   simp only [eqToIso_refl, Iso.refl_trans]
   exact ι_map_boundedConstructibleUpperStarComp_inv_app Λ ℓ i g B
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
 /-- `leftDerivedUpperStarOverCompactificationIso` as an `eqToIso` followed by the composition
 isomorphism. -/
 lemma leftDerivedUpperStarOverCompactificationIso_eq (c : Compactification f.left) :

@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
 public import WeilConjectures.TraceFormula.KunnethVerdierOpen
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
 /-!
 
@@ -34,11 +35,13 @@ functors (`traceAux_eq_counit_of_lowerShriekIso`, `traceAux_eq_counit_of_restric
 
 - `ProEtale.CondensedRing.exceptionalKunnethMapRestriction`.
 
-## Sorried input
+## The projection formula of an open immersion
 
-- `boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`:
-  for an open immersion, the projection formula is the inverse of the projection comparison of
-  `j_! ⊣ Lj^*` (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, §5).
+`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`: for an open
+immersion, the projection formula is the inverse of the projection comparison of `j_! ⊣ Lj^*`
+(blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, §5). It is
+`boundedConstructibleExceptionalProjection_comp_projectionComparison` of
+`WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion`.
 
 ## Implementation notes
 
@@ -267,7 +270,8 @@ theorem boundedConstructibleExceptionalProjectionMorphism_comp_projectionCompari
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ
           f).projectionComparison K B =
       (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app K ▷ B :=
-  sorry
+  boundedConstructibleExceptionalProjection_comp_projectionComparison ℓ
+    f K B
 
 end ProjectionFormula
 

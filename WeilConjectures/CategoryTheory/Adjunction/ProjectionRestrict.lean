@@ -16,7 +16,8 @@ Let `L ⊣ R` be an adjunction between monoidal categories and `P`, `Q` full mon
 preserved by `L` and `R`. The projection comparison of the restricted adjunction
 (`CategoryTheory.Adjunction.restrictFullyFaithful`) is the projection comparison of `L ⊣ R`
 (`CategoryTheory.Adjunction.ι_map_projectionComparison_restrictFullyFaithful`); the companion
-statement for projection morphisms is `CategoryTheory.Adjunction.ι_map_projectionMorphism_restrictFullyFaithful`.
+statement for projection morphisms is
+`CategoryTheory.Adjunction.ι_map_projectionMorphism_restrictFullyFaithful`.
 
 For a composite `i_! ⋙ p_*` of a left adjoint `i_! ⊣ i^*` and a right adjoint `p^* ⊣ p_*` and
 an identification `f^* ≅ p^* ⋙ i^*`, the composite of the projection morphism of `p^* ⊣ p_*`, of
@@ -98,7 +99,8 @@ lemma ι_map_exceptionalProjection_restrictFullyFaithful (K : PX.FullSubcategory
         ((PZ.lift (PY.ι ⋙ Gs) hGs).obj B)))
     (hq : IsIso (bi.projectionComparison K.obj (Gs.obj B.obj))) :
     PY.ι.map ((ag.restrictFullyFaithful PY.fullyFaithfulι PZ.fullyFaithfulι
-        (PZ.liftCompιIso (PY.ι ⋙ Gs) hGs).symm (PY.liftCompιIso (PZ.ι ⋙ G) hG).symm).projectionMorphism
+        (PZ.liftCompιIso (PY.ι ⋙ Gs) hGs).symm
+        (PY.liftCompιIso (PZ.ι ⋙ G) hG).symm).projectionMorphism
           ((PZ.lift (PX.ι ⋙ I) hI).obj K) B ≫
         (PY.lift (PZ.ι ⋙ G) hG).map
           (inv ((bi.restrictFullyFaithful PX.fullyFaithfulι PZ.fullyFaithfulι
