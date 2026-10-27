@@ -139,8 +139,14 @@ noncomputable def smoothPurityMap :
   (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d)
 
 /-- Blueprint `sk-thm-sp-qbar`: **smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
-adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism. -/
-instance isIso_smoothPurityMap : IsIso (smoothPurityMap ℓ f d) :=
+adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism.
+
+The smoothness hypothesis is a binder of the instance itself: an `instance` does not pick up an
+instance-implicit section variable that its statement does not use, and `smoothPurityMap` does not
+use it. Without it the statement is false: for `f = 𝟙` on a separably closed point and `d = 1`
+it would identify the unit, in degree `0`, with a complex concentrated in degree `-2`. -/
+instance isIso_smoothPurityMap [SmoothOfRelativeDimension d f.left] :
+    IsIso (smoothPurityMap ℓ f d) :=
   sorry
 
 /-- **Smooth purity**: for a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type
