@@ -20358,3 +20358,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:41 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparison (stage 3; reviewer PASS; first push; landing 20261027T234128-L-6719 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:41 L: merged deliver/P2/Sheaf.Paper.CoefficientNormalizedReductionModels (stage 3; reviewer PASS; first push; landing 20261027T234129-L-7388 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:41 L: merged deliver/P2/Sheaf.Paper.FiniteQuotientCoefficientLayerTriangleCore (stage 3; reviewer PASS; first push; landing 20261027T234130-L-8127 (interface); batch 20261027T233735; modules 1; new nodes 0)
+- 23:41 L: merged deliver/P2/Sheaf.Paper.PodReindexingSignedShifts (stage 3; reviewer PASS; first push; landing 20261027T234131-L-8883 (interface); batch 20261027T233735; modules 3; new nodes 2)

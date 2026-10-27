@@ -6,6 +6,8 @@ Authors: SHEAF group K8
 module
 
 public import Sheaf.Paper.PodReindexingCoherenceData
+import Sheaf.Paper.PodReindexingShiftChainPart
+import Sheaf.Paper.PodReindexingShiftDerivedPart
 
 /-! # Signed shifts of normalized reindexing comparisons
 
@@ -52,6 +54,8 @@ theorem signed_shift_laws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (c : Comparison l E g s SX SY TX TY) :
     ∃ (sX : ChainShift l E X s) (sY : ChainShift l E Y s),
       ShiftLaws l E g s SX SY TX TY c sX sY := by
-  sorry
+  obtain ⟨sX, sY, hchain⟩ := chain_shift_part_exists l E g s SX SY TX TY c
+  refine ⟨sX, sY, ⟨hchain, ?_⟩⟩
+  exact derived_shift_part l E g s SX SY TX TY c
 
 end WeilConjectures.PodReindexingCoherence

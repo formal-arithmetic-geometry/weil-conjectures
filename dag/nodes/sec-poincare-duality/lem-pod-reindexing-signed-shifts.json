@@ -15,33 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Construct the double-shift map by reindexing p to p-a and multiplying by (-1)^(a*r). Consecutive degree scalars differ by (-1)^a, which compensates the source shift sign in both Hom differential terms. Reverse the reindexing with the same scalar for its inverse. Apply each Hom-product projection to the reindexing square: both routes have the same scalar and component by chain_projection and the identity degreewise shift comparison.",
+   "text": "Obtain signed chain shift presentations and the representative chain square from the strictly smaller chain-part theorem.",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-pod-reindexing-hom-resolution-model"
+    "lem-pod-reindexing-shift-chain-part"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Shifted K-injective targets remain K-injective by shifting a map from an acyclic complex back, null-homotoping it and shifting the homotopy with (-1)^b. Apply derived_model to these targets. The right and left derived Hom shifts are characterized by the same signed product projections and augmentation equations, so localizing the chain square gives precisely signedShift. Use naturality along resolutions for arbitrary derived objects.",
+   "text": "Apply the strictly smaller derived-part theorem to those presentations, then package its equation together with the chain equation as the two fields of ShiftLaws.",
    "uses": [
-    "def-pur-kinjective-complex",
-    "lem-pod-reindexing-hom-resolution-model",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+    "lem-pod-reindexing-shift-derived-part"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "lem-pod-reindexing-hom-resolution-model",
-  "def-pur-kinjective-complex",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+  "lem-pod-reindexing-shift-chain-part",
+  "lem-pod-reindexing-shift-derived-part"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1, 2 and 4; representative details in the parent node lem-pod-reindexing-evaluation-shift-composition."
+  "place": "Step 4, decomposed into chain and derived field obligations and combined by the ShiftLaws constructor."
  },
  "mathlib_searches": [
   {
@@ -119,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-54610",
-  "group": "K8",
-  "result": "fix",
-  "landing": "20261027T135435-L-3707416",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T234131-L-8883",
   "kind": "interface",
-  "note": "independent cc review: item + 5 new modules vs clone item (verbatim forced data split, statements unchanged), 4 leaves vs parent clauses, nodes vs Lean; reader gate: both direct importers compiled OK against delivered files"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
