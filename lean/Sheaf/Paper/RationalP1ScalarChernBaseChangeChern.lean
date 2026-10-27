@@ -6,6 +6,8 @@ Authors: SHEAF group E9
 module
 
 public import Sheaf.Paper.RationalP1ScalarChernMaps
+import Sheaf.Paper.RationalP1ScalarChernBaseChangeChernSome
+import Sheaf.Paper.RationalP1ScalarChernBaseChangeChernNone
 
 /-! # Component equations for scalar Chern base change
 
@@ -29,11 +31,13 @@ attribute [local irreducible] coefficient line diagram trace singleUnitIso
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] firstProjection secondProjection square condensedAmbientExchange
 
+set_option linter.unusedVariables false in
 /-- The scalar exchange preserves the positive Chern generator equation.
 
-This is a strict component of scalar_chern_base_change. The proof follows
-the geometric exchange mate, the root-normalized Tate comparison, and the
-whole-system normalized Chern construction.
+This is a strict component of scalar_chern_base_change. Its finite-coefficient
+option is split into the concrete finite-intermediate-field and closure cases;
+each case retains the geometric exchange mate, root-normalized Tate comparison,
+and whole-system normalized Chern construction as its remaining obligation.
 (blueprint: lem-sfb-rational-p1-scalar-chern-base-change). -/
 theorem scalar_chern_base_change_chern
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -65,6 +69,12 @@ theorem scalar_chern_base_change_chern
     let c₂ := scalarP2Chern l c Y r b
     let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)
     F.map cq ≫ secondTraceExchange l c k p hpl Y =
-        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by sorry
+        (scalarUnitPullIso Λ Y).hom ≫ c₂ := by
+  dsimp only
+  cases c with
+  | some E =>
+      simpa using scalar_chern_base_change_chern_some l E k p hpl Y δ family r a ha b hb
+  | none =>
+      simpa using scalar_chern_base_change_chern_none l k p hpl Y δ family r a ha b hb
 
 end AlgebraicGeometry.ProEtale.RationalP1

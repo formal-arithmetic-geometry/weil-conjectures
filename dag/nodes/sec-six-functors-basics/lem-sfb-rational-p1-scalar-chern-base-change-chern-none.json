@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-rational-p1-scalar-chern-base-change-chern-none",
+ "kind": "statement",
+ "title": "Positive Chern generator exchange (none coefficient)",
+ "statement": "For the scalar coefficient choice none, under the same standing hypotheses and normalized completed Chern arrows as the parent component, the geometric exchange equation holds: the pullback of the q Chern adjunct followed by secondTraceExchange equals scalarUnitPullIso followed by the p2 Chern adjunct.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-sfb-rational-p1-second-pretrace"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, scalar trace base change before tensoring with q*K."
+ },
+ "proof": [
+  {
+   "text": "Fix the finite coefficient to the closure coefficient branch and carry out the scalar Chern exchange diagram chase from the second-identity proof. The remaining geometric exchange mate, root-normalized Tate comparison, and whole-system Chern normalization are the strictly concrete closure coefficient obligations.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-sfb-rational-p1-scalar-chern-maps",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "lem-sp-tower-integral-class-pullback",
+    "def-sfb-diagonal-coefficient-reference",
+    "def-sfb-diagonal-trace-models",
+    "def-sfb-diagonal-coefficient-diagrams"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-sp-tower-integral-class-pullback",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Concrete none coefficient specialization of the second identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unit and Chern class split the derived direct image on a projective line, with trace values zero and one",
+   "date": "2026-10-27",
+   "results": "Eight hits: projective resolutions, linear algebra direct-sum traces, and split maps of cochain complexes. No projective-line Chern splitting or sheaf trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line Chern splitting normalized trace commutes with pullback base change",
+   "date": "2026-10-27",
+   "results": "Eight hits on normalized field traces, elliptic curves and LinearMap.trace_baseChange. None for the derived geometric trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biprod\", \"desc\"",
+   "date": "2026-10-27",
+   "results": "biprod.desc, inl_desc, inr_desc and their reassociations. These are used for the categorical assembly; they do not construct the geometric generators.",
+   "verdict": "Use Mathlib biproduct calculus for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*Chern|chern.*trace",
+   "date": "2026-10-27",
+   "results": "No Mathlib matches. In the project, DiagonalCompletedChernLift constructs normalized completed adjuncts, DiagonalTraceTwistedSplittingComponents proves the strict-system components, and DiagonalUniformizerTraceChernDegree proves completed Chern degree privately. DiagonalTowerCoefficients.baseChange needs two families and completed cycle systems not present in this item.",
+   "verdict": "Separate the intrinsic splittings from geometric preservation of their actual generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1ScalarChernBaseChangeChern",
+  "date": "2026-10-28",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-scalar-chern-base-change-chern-component",
+   "place": "Coefficient case decomposition of the positive Chern exchange component.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1ScalarChernBaseChangeChernNone",
+  "file": "lean/Sheaf/Paper/RationalP1ScalarChernBaseChangeChernNone.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.scalar_chern_base_change_chern_none",
+  "statement": "theorem scalar_chern_base_change_chern_none\n    (l : ℕ) [Fact l.Prime]\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (r : Reference l Y δ family)\n    (a : DiagonalTrace.completedUnit l Y ⟶\n      r.tq.Rc.R.obj ((DiagonalTrace.completedLine l (ProjectiveLine Y)) ⟦(2 : ℤ)⟧))\n    (ha : CompletedChernNormalized l r.tq.toPresentation a)\n    (b : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶\n      r.t₂.Rc.R.obj ((DiagonalTrace.completedLine l (diagonalSurface Y)) ⟦(2 : ℤ)⟧))\n    (hb : CompletedChernNormalized l r.t₂.toPresentation b) :\n    let Λ := (coefficient l none).X\n    let cq := scalarQChern l none Y r a\n    let c₂ := scalarP2Chern l none Y r b\n    let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)\n    F.map cq ≫ secondTraceExchange l none k p hpl Y =\n        (scalarUnitPullIso Λ Y).hom ≫ c₂",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.scalar_chern_base_change_chern_none"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T233942-L-4140445",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T233942-L-4140445",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
