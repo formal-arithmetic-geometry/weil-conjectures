@@ -8,6 +8,8 @@ public import Sheaf.SixFunctors.IntegralRealizationAssemblyData
 import Sheaf.SixFunctors.IntegralSupportTowerNormalization
 import all Sheaf.SixFunctors.ShortWordIntegralDomain
 
+import Sheaf.Paper.QcqsCompactSupportRealization
+
 /-! # Counit-normalized projection of the primitive compact-support comparison
 
 Source: blueprint fix-prop-coherence, strict-system expression realization.
@@ -288,7 +290,7 @@ theorem integralSupportCounitProjection (D : FiniteFieldDatum.{u}) (hl : l ≠ D
     exact (Category.assoc _ _ _).symm
   have hspec : SfQcqsCompactSupportRealizationSpec l E D.k hu c
       (sfQcqsCompactSupportRealization l E D.k hu c) :=
-    (sfQcqsCompactSupportRealization_existsUnique l E D.k hu c).exists.choose_spec
+    (sfQcqsCompactSupportRealization_spec l E D.k hu c)
   let red := (sfCompactSupportFiniteReductionIso l D.k hu c E
     ((basicSupportInput l E o c).obj KH) n).hom
   let z := (PurCompactSupport.finiteReductionIso l E V.left n).inv.app

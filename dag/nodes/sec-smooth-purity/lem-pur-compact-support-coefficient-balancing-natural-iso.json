@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-compact-support-coefficient-balancing-natural-iso",
+ "kind": "statement",
+ "title": "Unique natural coefficient tensor balancing",
+ "statement": "For a scheme W, sheaves R and S of commutative rings on its pro-etale site, a ring-sheaf map phi : R to S, and an S-module sheaf N, there is a unique natural isomorphism in the R-module sheaf M from the restriction to R of (S tensor_R M) tensor_S N to M tensor_R (N restricted to R); here extension and restriction of scalars along phi are those of [def-weil-pbc-bounded-constructible-tower], and the ordinary module-sheaf tensor product and its local pure tensors are those of [def-sfb-proetale-tensor-model]. It sends each local pure tensor (s tensor x) tensor z to x tensor (s times z). No flatness assumption is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), coefficient-model proof Step 7; Stacks 03EK and 06YY (ordinary tensor balancing)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-sfb-proetale-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the proved ordinaryTensorCancellation comparison to the recorded extension functor, using its existing object equality with ordinary change of rings and its map formula. Invert the component comparison. Its naturality in the module M, with N fixed, constructs a natural isomorphism by NatIso.ofComponents. Its local tensor formula gives the required normalization. For uniqueness, precompose a candidate component with the forward cancellation map and apply local tensor-generator extensionality through sheafification. Set the scalar s to one in the normalization to prove equality on each generator. Componentwise and natural-transformation extensionality then prove equality of the natural isomorphisms. This also handles the empty scheme and zero modules; when phi is the identity it is the usual tensor cancellation associativity map.",
+   "uses": [
+    "lem-trf-site-derived-tensor-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-site-derived-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "A2",
+  "date": "2026-10-28",
+  "note": "Already fully proved private coefficientBalancingNaturalIso_existsUnique from CompactSupportCoefficientModels, moved without changing its statement or argument and given a public name and node. The proof-module split is needed to meet 60 seconds; no new hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism cancels extension and restriction of scalars for tensor products of sheaves of modules, uniquely determined by pure tensors",
+   "date": "2026-10-28",
+   "results": "8 hits: free sheaf pullback formulas and ordinary ModuleCat extend/restrict hom equivalences.",
+   "verdict": "No matching normalized sheaf natural-isomorphism uniqueness theorem. Reuse the already proved project private helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ordinaryTensorCancellation",
+   "date": "2026-10-28",
+   "results": "0 hits; unknown identifier in Mathlib.",
+   "verdict": "The required comparison is a private proved project declaration in SiteDerivedTensorRestriction."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_generator_ext|ordinaryTensorCancellation",
+   "date": "2026-10-28",
+   "results": "0 hits from the Mathlib search service. Local repository search finds ordinaryTensorCancellation at SiteDerivedTensorRestriction.lean:403 and the already proved helper in CompactSupportCoefficientModels.",
+   "verdict": "Move the existing proof; do not introduce an unproved replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportTorsionInputDetection",
+  "date": "2026-10-28",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-coefficient-models",
+   "place": "Proof Step 7, normalized ordinary tensor-balancing natural isomorphism.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportCoefficientModelHelpers",
+  "file": "lean/Sheaf/Paper/CompactSupportCoefficientModelHelpers.lean",
+  "declaration": "WeilConjectures.compactSupportCoefficientModels_balancing_existsUnique",
+  "statement": "theorem compactSupportCoefficientModels_balancing_existsUnique\n    (W : Scheme.{u}) {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}\n    (φ : R ⟶ S) (N : pbcModules W S) :\n    ∃! α : pbcExtend φ ⋙ (proEtaleOrdinaryTensor W S).flip.obj N ⋙ pbcRestrict φ ≅\n      (proEtaleOrdinaryTensor W R).flip.obj ((pbcRestrict φ).obj N),\n      ∀ (M : pbcModules W R) (V : W.ProEtᵒᵖ) (s : S.obj.obj V)\n        (x : M.val.obj V) (z : N.val.obj V),\n        (α.hom.app M).val.app V\n            (proEtaleTensorPair W S ((pbcExtend φ).obj M) N V\n              (pbcTensorSection φ M V s x) z) =\n          proEtaleTensorPair W R M ((pbcRestrict φ).obj N) V x\n            (@SMul.smul _ _ (N.val.obj V).isModule.toSMul s z)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-28",
+  "note": "Fully proved tensor-balancing helper; all other helpers in the file remain private. The scalar action is written explicitly via ModuleCat.isModule, so the public signature uses no private local instance."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-702fa",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T205738-L-1609185",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-702fa",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T205738-L-1609185",
+  "kind": "interface",
+  "note": "independent cc review: Pruned item/ReductionRigidity/NormalizedLift and the explicit asIso realization with alg-closed uniqueness, against the def-weil-integral-rational-qbar-compact-support node, the change record, the 120 importer compiles in 3b and my own timing and axiom compiles"
+ }
+}

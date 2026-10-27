@@ -90,13 +90,14 @@
    }
   },
   {
-   "text": "For moduleBalancing, the existing inverse ordinaryTensorCancellation comparison has the required section formula. Uniqueness follows by precomposing with its inverse and using tensor-generator extensionality through the module sheafification adjunction. The quotient square and balanced reduction remain as proved. For furtherTensor, specialize the existing ordinaryTensorCancellation to pbcExtend at the retained quotient map, using its object and map identifications. Its inverse has the moduleBalancing normalization and therefore equals the chosen unique module map. Its naturality with the second module fixed gives a natural isomorphism between the two termwise tensor functors. Apply NatIso.mapHomologicalComplex, and conjugate by mapBifunctorSingle₂Iso on source and target to obtain the chain isomorphism. Its degreewise equation is the stated normalization. Compose the fixed mapDerivedCategoryFactors with DerivedCategory.Q.mapIso of this chain isomorphism. Any other witness has the same chain components after cancellation of the target mapBifunctorSingle₂Iso, hence the same chain isomorphism and the same localization. No flatness or positivity is needed for this chain-level identity; in particular the existing K-flat hypothesis is retained but unused. The native associator and unitor clauses still refer to the proved RingedDerivedNative comparisons.",
+   "text": "For moduleBalancing, the existing inverse ordinaryTensorCancellation comparison has the required section formula. Uniqueness follows by precomposing with its inverse and using tensor-generator extensionality through the module sheafification adjunction. The quotient square and balanced reduction remain as proved. For furtherTensor, specialize the existing ordinaryTensorCancellation to pbcExtend at the retained quotient map, using its object and map identifications. Its inverse has the moduleBalancing normalization and therefore equals the chosen unique module map. Its naturality with the second module fixed gives a natural isomorphism between the two termwise tensor functors. Apply NatIso.mapHomologicalComplex, and conjugate by mapBifunctorSingle₂Iso on source and target to obtain the chain isomorphism. Its degreewise equation is the stated normalization. Compose the fixed mapDerivedCategoryFactors with DerivedCategory.Q.mapIso of this chain isomorphism. Any other witness has the same chain components after cancellation of the target mapBifunctorSingle₂Iso, hence the same chain isomorphism and the same localization. No flatness or positivity is needed for this chain-level identity; in particular the existing K-flat hypothesis is retained but unused. The native associator and unitor clauses still refer to the proved RingedDerivedNative comparisons. The normalized natural comparison is now the proved compactSupportCoefficientModels_balancing_existsUnique in the helper module; the remaining component and localization arguments are unchanged.",
    "uses": [
     "def-pur-finite-compact-support-scalar-data",
     "def-weil-compact-support-reduction-tower-data",
     "lem-trf-site-derived-tensor-restriction",
     "lem-pur-derived-change-of-rings",
-    "lem-sf-ringed-derived-native-tensor"
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-pur-compact-support-coefficient-balancing-natural-iso"
    ],
    "elementary": false,
    "source": {
@@ -132,7 +133,7 @@
    }
   },
   {
-   "text": "Apply the proved scalar clause to M. The existing normalized sfQcqsCompactSupportRealization_existsUnique, once for E and once for F, identifies the two ambient proper/open images with values of the actual constructible integral compact-support functors. Their values have the constructible property by their codomain. Transport this property across each realization isomorphism using closure under isomorphisms. At E, compose the same realization component with sfCompactSupportFiniteIntegralFunctor_obj to obtain the displayed value comparison. Retain the two specification and uniqueness proofs verbatim for the final two conjuncts.",
+   "text": "Apply the proved scalar clause to M. The constructed sfQcqsCompactSupportRealization, once for E and once for F, identifies the two ambient proper/open images with values of the constructible integral compact-support functors. Transport their constructible properties across these realizations and compose the E component with sfCompactSupportFiniteIntegralFunctor_obj for the value comparison. Derive IsAlgClosed D.k from IsAlgClosure.isAlgClosed D.k₀ and apply sfQcqsCompactSupportRealization_existsUnique_of_isAlgClosed for the two final uniqueness assertions. Every consumer conclusion is unchanged.",
    "uses": [
     "def-weil-integral-rational-qbar-compact-support",
     "lem-weil-integral-constructible-triangulated"
@@ -165,12 +166,13 @@
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-completed-constant-presentation-transport",
   "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-profinite-coefficient-inverse-image"
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-pur-compact-support-coefficient-balancing-natural-iso"
  ],
  "proof_origin": {
-  "by": "R5",
-  "date": "2026-10-26",
-  "note": "Reduced ordinary comparison to objectwise basis isomorphisms and proved naturality and uniqueness using tensor generators."
+  "by": "A2",
+  "date": "2026-10-28",
+  "note": "Retain the proved coefficient-model argument; expose its existing natural tensor-balancing proof in a separate helper module/node to meet compile limits. Step 9 now uses the constructed realizations for object properties and the proved algebraically closed uniqueness theorem for the final assertions. All public consumer signatures and all other mathematical steps are unchanged."
  },
  "mathlib_searches": [
   {
@@ -396,7 +398,7 @@
   "by": "Q15",
   "date": "2026-10-24",
   "existing": false,
-  "note": "The declarations jointly state all clauses of the node. Repair of 37f19db0aafc: cite the finite scalar-data owner, omit the presentation-transport theorem dependency, and uniquely pin furtherTensor to localization of the degreewise section-normalized module-balancing chain isomorphism. No statement correction. Reviewer fix (H4): the three CompactSupportCoefficientNative associator/unitor squares were universe-general sorry copies of the proved CategoryTheory.RingedDerivedNative.associator_square, leftUnitor_square and rightUnitor_square of the cited lem-sf-ringed-derived-native-tensor; they are dropped and the node's native-tensor clause is rendered by those proved declarations.",
+  "note": "The declarations jointly state all clauses of the node. Repair of 37f19db0aafc: cite the finite scalar-data owner, omit the presentation-transport theorem dependency, and uniquely pin furtherTensor to localization of the degreewise section-normalized module-balancing chain isomorphism. No statement correction. Reviewer fix (H4): the three CompactSupportCoefficientNative associator/unitor squares were universe-general sorry copies of the proved CategoryTheory.RingedDerivedNative.associator_square, leftUnitor_square and rightUnitor_square of the cited lem-sf-ringed-derived-native-tensor; they are dropped and the node's native-tensor clause is rendered by those proved declarations. A2: public declarations remain in this module with identical signatures; proved private arithmetic and tensor-balancing helpers are moved verbatim into Sheaf.Paper.CompactSupportCoefficientModelHelpers and imported with import all, to meet the 60-second compile limit. The final proof uses constructed realizations for object properties and the algebraically closed uniqueness theorem for its final two clauses. The proved natural-balancing helper is now publicly attached to lem-pur-compact-support-coefficient-balancing-natural-iso; its new public name is the only visibility change in the moved helpers.",
   "fixed_by": "NT-stage2-cc-45f964714"
  },
  "reviewed_lean": {
@@ -408,13 +410,13 @@
   "note": "Re-delivery of 37f19db0: all three RETURN points repaired. (1) Theorem stmt_dep lem-weil-pbc-completed-constant-presentation-transport removed; CompletedConstantPresentationData is owned by the cited def-weil-pbc-completed-constant-presentation-data. (2) def-pur-finite-compact-support-scalar-data added: it owns Ramification/ramifiedMap/tensorComposition, is on the base and creates no cycle. (3) _furtherTensor is now ∃! δ = mapDerivedCategoryFactors ≪≫ Q.mapIso γ, with γ.hom.f k conjugate (via mapBifunctorSingle₂Iso) to the ∃!-pinned moduleBalancing (s⊗x)⊗z ↦ x⊗sz; γ and δ are unique and no flatness is assumed. Node JSON diff: only stmt_deps and lean.note; lean.statement verbatim. Other clauses rechecked (arithmetic, constant tower/limit, ordinary, χ, inverse-image/quotient squares, balanced reduction, Tor interval, compact-support constructibility and pinned realizations); no extra hypotheses; edge cases E=F, a<en, nonflat B/v^3, n=0, M=0. FIX H4: CompactSupportCoefficientNative.associator_square/leftUnitor_square/rightUnitor_square are universe-general sorry copies of the proved RingedDerivedNative.*_square of the cited lem-sf-ringed-derived-native-tensor (same fault as NJ F4, Q103 F3). They are deleted from the module (docstring now points to the proved declarations); the lean-record drops them (16 declarations remain) and extends the note. nt_compile --json on the fixed module: 12.8 s, exit 0, clean. Advisory: specialised restatements in _chi/_constant* kept; uncited definition-node owners (def-coef-ringed-tensor-hom-model, ConstantCompletion.* owners, etc.) as in 37f19."
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R5",
-  "result": "pass",
-  "landing": "20261026T070817-L-3660453",
+  "reviewer": "C-702fa",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T205738-L-1609185",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Pruned item/ReductionRigidity/NormalizedLift and the explicit asIso realization with alg-closed uniqueness, against the def-weil-integral-rational-qbar-compact-support node, the change record, the 120 importer compiles in 3b and my own timing and axiom compiles"
  }
 }

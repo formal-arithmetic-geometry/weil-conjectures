@@ -8,6 +8,8 @@ import Sheaf.SixFunctors.IntegralOpenMateNormalization
 import Sheaf.SixFunctors.IntegralSupportStrictTowerComparison
 import Sheaf.SixFunctors.IntegralSupportProjectionTransport
 
+import Sheaf.Paper.QcqsCompactSupportRealization
+
 /-! # Whole compact-support tower normalization -/
 
 @[expose] public noncomputable section
@@ -210,7 +212,7 @@ theorem integralSupportTowerNormalization (D : FiniteFieldDatum.{u})
           ((basicSupportInput l E o c).obj K) n).hom) ha).trans ?_
     refine scalarProjection_comp
       (derivedScalarExtensionRestrictionAdjunction l E Y n).choose a b τ _ _ _
-      ((sfQcqsCompactSupportRealization_existsUnique l E D.k hl c).exists.choose_spec
+      ((sfQcqsCompactSupportRealization_spec l E D.k hl c)
         ((basicSupportInput l E o c).obj K) n) ?_
     exact integralSupportProjectionTransport l E o model c K.obj (hunit K) n
 

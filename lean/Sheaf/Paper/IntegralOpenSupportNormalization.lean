@@ -13,6 +13,8 @@ import all Sheaf.Paper.SfCompleteDirectImageReduction
 import Sheaf.SixFunctors.OpenQuotientKoszulCompleteness
 import Sheaf.SixFunctors.OpenDvrRingedIdentification
 
+import Sheaf.Paper.QcqsCompactSupportRealization
+
 /-! # Open support comparison and strict-system adjunction maps
 
 Source: smooth-purity localization support paragraphs; Stacks 03DI, 0GL1, 0A07
@@ -357,7 +359,7 @@ theorem openSupportNormalization (D : FiniteFieldDatum.{u}) (primeUnit : IsUnit 
       simp only [Category.assoc, ← R.map_comp_assoc, Iso.hom_inv_id_app]
       erw [Category.comp_id]
       have hs :=
-        (sfQcqsCompactSupportRealization_existsUnique l E D.k primeUnit c).exists.choose_spec K n
+        (sfQcqsCompactSupportRealization_spec l E D.k primeUnit c) K n
       erw [← hs]
       erw [← R.map_comp_assoc, Iso.inv_hom_id_app, R.map_id, Category.id_comp]
     openAdjunction := a

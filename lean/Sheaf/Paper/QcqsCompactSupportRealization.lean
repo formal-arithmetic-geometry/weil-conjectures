@@ -8,10 +8,11 @@ module
 public import Sheaf.Paper.IntegralRationalQbarCompactSupport
 public import Sheaf.Paper.CompactSupportFiniteAction
 public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
-import Sheaf.Paper.SfIntegralConstructibleTriangulated
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+public import Sheaf.Paper.QcqsCompactSupportStrictReductionComparison
+import all Sheaf.Paper.QcqsCompactSupportNormalizedIsoExistence
 import Sheaf.Paper.QcqsCompactSupportFiniteComparison
-import Sheaf.Paper.QcqsCompactSupportNormalizedLift
+import Sheaf.Paper.IntegralReductionShiftedHomFiniteAlgClosed
+import Sheaf.Paper.DerivedCompleteFiniteReductionDetection
 
 /-! # Compact-support realization without separated structure morphisms
 
@@ -63,98 +64,78 @@ def SfQcqsCompactSupportRealizationSpec
         (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).map
           ((finiteReductionIso l E X n).hom.app K.obj)
 
-private theorem complete_zero_of_reductions
-    (W : Scheme.{u}) (A : DerivedCategory (scalarReductionSource l E W))
-    (hA : IsSfDerivedComplete l E W A)
-    (hzero : ∀ n : ℕ, IsZero ((scalarReductionDerivedExtension l E W n).obj A)) :
-    IsZero A := by
-  obtain ⟨hp, δ, hδ⟩ := hA
-  letI := hp
-  have hz : IsZero (∏ᶜ fun n : ℕ ↦ (sfDerivedReductionRestricted l E W n).obj A) := by
-    apply (IsZero.iff_id_eq_zero _).mpr
-    apply Pi.hom_ext
-    intro n
-    haveI := (scalarReductionRestriction_exact l E W n).1
-    haveI := (scalarReductionRestriction_exact l E W n).2
-    haveI : (scalarReductionDerivedRestriction l E W n).Additive := by
-      dsimp only [scalarReductionDerivedRestriction]
-      infer_instance
-    exact ((scalarReductionDerivedRestriction l E W n).map_isZero (hzero n)).eq_of_tgt _ _
-  exact Pretriangulated.Triangle.isZero₁_of_isZero₂₃ _ hδ hz hz
-
-private theorem constructible_of_complete_reduction_isos
-    (W : Scheme.{u}) {A B : DerivedCategory (scalarReductionSource l E W)}
-    (hA : IsSfDerivedComplete l E W A) (hB : sfIntegralConstructible l E W B)
-    (e : ∀ n : ℕ, (scalarReductionDerivedExtension l E W n).obj A ≅
-      (scalarReductionDerivedExtension l E W n).obj B) :
-    sfIntegralConstructible l E W A := by
-  obtain ⟨_, a, b, hab, hred⟩ := hB
-  refine ⟨hA, a, b, hab, fun n ↦ ?_⟩
-  let R := Padic.coefficientExtensionRing l E (n + 1)
-  letI : Finite R := Padic.finite_coefficientExtensionRing l E (n + 1)
-    (Nat.succ_le_succ (Nat.zero_le n))
-  haveI : ObjectProperty.IsClosedUnderIsomorphisms
-      (intrinsicFiniteTorsionConstructible l E (n + 1)
-        (Nat.succ_le_succ (Nat.zero_le n)) W) :=
-    (proEtale_bounded_constructible_isTriangulated W R).1
-  refine ⟨ObjectProperty.prop_of_iso _ (e n).symm (hred n).1, ?_⟩
-  intro i hi
-  apply (hred n).2
-  intro hz
-  exact hi (((DerivedCategory.homologyFunctor _ i).mapIso (e n)).isZero_iff.mpr hz)
-
-private theorem constructible_isIso_of_reductions
-    (W : Scheme.{u}) {A B : DerivedCategory (scalarReductionSource l E W)}
-    (a : A ⟶ B) (hA : sfIntegralConstructible l E W A)
-    (hB : sfIntegralConstructible l E W B)
-    (ha : ∀ n : ℕ, IsIso ((scalarReductionDerivedExtension l E W n).map a)) :
-    IsIso a := by
-  obtain ⟨C, g, δ, hT⟩ := Pretriangulated.distinguished_cocone_triangle a
-  obtain ⟨C', hC', ⟨e⟩⟩ := ObjectProperty.ext_of_isTriangulatedClosed₃'
-    (sfIntegralConstructible l E W) _ hT hA hB
-  have hz : IsZero C' := by
-    apply complete_zero_of_reductions l E W C' hC'.1
-    intro n
-    let R := scalarReductionDerivedExtension l E W n
-    obtain ⟨hshift, htri⟩ :=
-      (scalarReductionDerivedExistence l E W n).choose_spec.choose_spec.2.1
-    letI : R.CommShift ℤ := hshift
-    haveI : R.IsTriangulated := htri
-    have hzC : IsZero (R.obj C) :=
-      Pretriangulated.Triangle.isZero₃_of_isIso₁ _ (R.map_distinguished _ hT) (ha n)
-    exact hzC.of_iso (R.mapIso e).symm
-  exact (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).mp (hz.of_iso e)
-
-/-- The projection-normalized realization on the whole integral constructible category.
-Source: Bhatt--Scholze, Definition 6.7.6, Lemmas 6.7.7 and 6.1.13
+/-- The actual strict reduction-unit/proper-open-mate/total-limit composite.
+Source: Bhatt--Scholze, Definition 6.7.6; Stacks 0941, 0F7J
 (blueprint: def-weil-integral-rational-qbar-compact-support).
 
-Proof: use the coherent reduction tower of
-lem-weil-compact-support-reduction-tower-functor and its actual total right-derived
-limit. The integral residue-Tor theorem supplies a common finite Tor interval for all
-reductions of each constructible input. Completed open extension commutes with that
-normalized tower, using its completion unit. Proper image commutes with total limit
-by the right-adjunction comparison. Their composite identifies the actual proper/open
-functor, on objects and roofs, with the recorded integral action. The normalized
-universal comparisons carry its finite scalar mates to the chosen Roos projections,
-which gives the displayed equation and uniqueness. All schemes occurring are finite
-type over a field, hence Noetherian and qcqs; none of these arguments uses separatedness
-of a structure morphism. The only separated morphism is f, as in the definition. -/
-theorem sfQcqsCompactSupportRealization_existsUnique :
-    ∃! τ : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ≅
+The chosen data consist of a whole coherent strict comparison and its recorded
+limit identification. The map is their displayed universal-adjunction composite. -/
+def sfQcqsCompactSupportRealizationMap :
+    (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ⟶
       sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
-        (sfIntegralConstructible l E Y).ι,
-      SfQcqsCompactSupportRealizationSpec l E K₀ hl c τ := by
-  obtain ⟨τ, hτ, huniq⟩ :=
-    sfQcqsCompactSupport_normalizedLift_existsUnique l E K₀ hl c
+        (sfIntegralConstructible l E Y).ι :=
+  let H := qcqsCompactSupport_strictReductionComparison l E K₀ hl c
+  let SY := H.choose_spec.choose
+  let β := H.choose_spec.choose_spec.choose
+  let γ := H.choose_spec.choose_spec.choose_spec.choose
+  let A := (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c
+  Functor.whiskerLeft A SY.adjunction.unit ≫
+    Functor.whiskerRight (Functor.whiskerLeft (sfIntegralConstructible l E X).ι β)
+      (coefficientSequenceLimit l E Y) ≫ γ.inv
+
+/-- The explicit universal comparison has the finite proper/open projection coordinates.
+Source: Bhatt--Scholze, Definition 6.7.6; Stacks 0941, 0F7J
+(blueprint: def-weil-integral-rational-qbar-compact-support).
+
+Proof: transpose the actual reduction unit and total-limit projection under the
+finite scalar adjunction. The normalized strict comparison equations identify the
+two resulting factors with the actual proper/open mate in the stated coordinates. -/
+theorem sfQcqsCompactSupportRealizationMap_spec :
+    ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),
+      (scalarReductionDerivedExtension l E Y n).map
+          ((sfQcqsCompactSupportRealizationMap l E K₀ hl c).app K) ≫
+          (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom =
+        (finiteReductionIso l E Y n).inv.app ((image (completed l E) c).obj K.obj) ≫
+          (comparison (reduction l E (n + 1) (Nat.le_add_left 1 n)) c).app K.obj ≫
+          (finiteImageIso l E n c).hom.app
+            ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj K.obj) ≫
+          (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1))
+            c).map ((finiteReductionIso l E X n).hom.app K.obj) := by
+  let H := qcqsCompactSupport_strictReductionComparison l E K₀ hl c
+  let SX := H.choose
+  let SY := H.choose_spec.choose
+  let β := H.choose_spec.choose_spec.choose
+  let γ := H.choose_spec.choose_spec.choose_spec.choose
+  have hβ := H.choose_spec.choose_spec.choose_spec.choose_spec.1
+  have hγ := H.choose_spec.choose_spec.choose_spec.choose_spec.2
+  intro K n
+  exact (projection_transpose (coefficientFiniteAdjunction l E Y n) SY.adjunction
+    (coefficientSequenceDerivedEvaluation l E Y n) (coefficientSequenceProjection l E Y n)
+    (SY.reductionEvaluation n) (fun P ↦ SY.unit_projection P n)
+    (β.app K.obj) (γ.app K)
+    _ (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom (hγ K n)).trans (hβ K.obj n)
+
+/-- The explicit comparison is invertible on every integral constructible input.
+Source: Bhatt--Scholze, Lemma 6.7.7; Stacks 0941, 0F7J
+(blueprint: def-weil-integral-rational-qbar-compact-support).
+
+Proof: its finite reductions are the invertible proper/open coefficient mates.
+Completeness of the actual output and these reductions give its constructibility.
+The constructible cone then has zero reductions; its completeness Roos triangle
+makes it zero. Componentwise invertibility gives invertibility of the transformation. -/
+theorem sfQcqsCompactSupportRealizationMap_isIso :
+    IsIso (sfQcqsCompactSupportRealizationMap l E K₀ hl c) := by
+  let τ := sfQcqsCompactSupportRealizationMap l E K₀ hl c
   have hcomponent (K : sfIntegralConstructibleCategory l E X) : IsIso (τ.app K) := by
     obtain ⟨hcomplete, hfinite⟩ := sfQcqsCompactSupport_finiteComparison l E K₀ hl c K
     have hred (n : ℕ) :
         IsIso ((scalarReductionDerivedExtension l E Y n).map (τ.app K)) := by
-      haveI := hfinite n
-      haveI : IsIso ((scalarReductionDerivedExtension l E Y n).map (τ.app K) ≫
+      have := hfinite n
+      have : IsIso ((scalarReductionDerivedExtension l E Y n).map (τ.app K) ≫
           (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom) := by
-        rw [hτ K n]
+        rw [show (scalarReductionDerivedExtension l E Y n).map (τ.app K) ≫
+            (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom = _ from
+          sfQcqsCompactSupportRealizationMap_spec l E K₀ hl c K n]
         infer_instance
       exact IsIso.of_isIso_comp_right
         ((scalarReductionDerivedExtension l E Y n).map (τ.app K))
@@ -165,20 +146,61 @@ theorem sfQcqsCompactSupportRealization_existsUnique :
         ((scalarReductionDerivedExtension l E Y n).map (τ.app K)) (hred n))
     exact constructible_isIso_of_reductions l E Y (τ.app K) himage
       ((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).property hred
-  letI : ∀ K, IsIso (τ.app K) := hcomponent
-  haveI : IsIso τ := NatIso.isIso_of_isIso_app τ
-  refine ⟨asIso τ, hτ, ?_⟩
-  intro σ hσ
-  apply Iso.ext
-  exact huniq σ.hom hσ
+  let : ∀ K, IsIso (τ.app K) := hcomponent
+  exact NatIso.isIso_of_isIso_app τ
 
-/-- The canonical realization fixed by the preceding projection normalization.
-Source: Bhatt--Scholze, Definition 6.7.6
+/-- The constructed realization of the recorded integral compact-support action.
+Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J
 (blueprint: def-weil-integral-rational-qbar-compact-support). -/
 def sfQcqsCompactSupportRealization :
     (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ≅
       sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
         (sfIntegralConstructible l E Y).ι :=
-  (sfQcqsCompactSupportRealization_existsUnique l E K₀ hl c).exists.choose
+  letI := sfQcqsCompactSupportRealizationMap_isIso l E K₀ hl c
+  asIso (sfQcqsCompactSupportRealizationMap l E K₀ hl c)
+
+/-- The constructed realization has the actual finite proper/open projection coordinates.
+Source: Bhatt--Scholze, Definition 6.7.6; Stacks 0941, 0F7J
+(blueprint: def-weil-integral-rational-qbar-compact-support).
+
+Proof: these are the projection equations of the explicit universal comparison. -/
+theorem sfQcqsCompactSupportRealization_spec :
+    SfQcqsCompactSupportRealizationSpec l E K₀ hl c
+      (sfQcqsCompactSupportRealization l E K₀ hl c) :=
+  sfQcqsCompactSupportRealizationMap_spec l E K₀ hl c
+
+/-- The projection-normalized realization is unique over an algebraically closed field.
+Source: SGA 4½, finiteness theorem; Bhatt--Scholze 6.7.6--6.7.7; Stacks 0941.
+(blueprint: def-weil-integral-rational-qbar-compact-support).
+
+Proof: cancel the finite reduction isomorphisms in the projection equations.
+The recorded output is constructible and complete. Transport the algebraically
+closed finite shifted-Hom theorem through the constructed realization to obtain
+finite shifted Hom from the actual output into each restricted output reduction.
+The Milnor injection then identifies the two components. Natural-transformation
+and natural-isomorphism extensionality prove uniqueness. No assertion of uniqueness
+over an arbitrary base field is used to construct the realization. -/
+theorem sfQcqsCompactSupportRealization_existsUnique_of_isAlgClosed [IsAlgClosed K₀] :
+    ∃! τ : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ≅
+      sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
+        (sfIntegralConstructible l E Y).ι,
+      SfQcqsCompactSupportRealizationSpec l E K₀ hl c τ := by
+  let σ := sfQcqsCompactSupportRealization l E K₀ hl c
+  have hσ := sfQcqsCompactSupportRealization_spec l E K₀ hl c
+  refine ⟨σ, hσ, fun τ hτ ↦ ?_⟩
+  apply Iso.ext
+  ext K
+  let M := (sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K
+  apply derivedComplete_finiteReduction_ext l E Y M.property.1 ?_
+    (τ.hom.app K) (σ.hom.app K) ?_
+  · intro n
+    let e := (shiftFunctor _ (1 : ℤ)).mapIso (σ.app K)
+    have hfin : Finite
+        (M.obj⟦(1 : ℤ)⟧ ⟶ (sfDerivedReductionRestricted l E Y n).obj M.obj) :=
+      integralReduction_shiftedHom_finite_algClosed l E K₀ hl Y M M n
+    exact @Finite.of_equiv _ _ hfin (e.homCongr (Iso.refl _)).symm
+  · intro n
+    apply (cancel_mono (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom).mp
+    exact (hτ K n).trans (hσ K n).symm
 
 end WeilConjectures

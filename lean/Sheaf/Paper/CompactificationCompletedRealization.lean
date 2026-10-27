@@ -13,6 +13,8 @@ import Sheaf.Paper.ProjectionTensorCoefficientComparison
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import WeilConjectures.ZetaSeries
 
+import Sheaf.Paper.QcqsCompactSupportRealization
+
 /-! # Reconstruction and projection for completed compactification realization -/
 
 @[expose] public noncomputable section
@@ -157,7 +159,7 @@ theorem completedRealization [QuasiCompact c.i] :
   obtain ⟨S, hS, hopen, β, γ, hγ, hdc, hβ⟩ := strictRealization l E c k hl
   have hspec : SfQcqsCompactSupportRealizationSpec l E k hl c
       (sfQcqsCompactSupportRealization l E k hl c) :=
-    (sfQcqsCompactSupportRealization_existsUnique l E k hl c).exists.choose_spec
+    (sfQcqsCompactSupportRealization_spec l E k hl c)
   have hconstructible (K : sfIntegralConstructibleCategory l E X) :
       sfIntegralConstructible l E Y ((image (completed l E) c).obj K.obj) :=
     (sfIntegralConstructible l E Y).prop_of_iso
