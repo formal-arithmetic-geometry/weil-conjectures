@@ -12,7 +12,30 @@
  ],
  "proof": [
   {
-   "text": "This component is split from the parent theorem and is proved by the sectionwise adic tower argument described in the source.",
+   "text": "For each quotient R = A/I^(n+1), compare the additive presheaf underlying its constant ring sheaf with the additive presheaf underlying the constant regular R-module sheaf, using the two sheafifyComposeIso comparisons. Both comparisons preserve constant sections. Local lifting of a ring section along its sheafification unit shows that this additive equivalence is R-linear for the canonical scalar action. Since R is Noetherian, the flat-section clause of constantModule_section_properties applied to the regular R-module makes every finite-level section module flat over R.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every quotient transition is a surjective ring map. Choose a section of its underlying set map, apply the constant set-sheaf functor, and conjugate by constantCommuteCompose for the forgetful functor from commutative rings. Functoriality preserves the right-inverse equation, proving sectionwise surjectivity. Naturality of the ring sheafification unit proves that the A-action on every finite term factors through its specified quotient action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J (lemma-constant-exact), set-theoretic splitting argument"
+   }
+  },
+  {
+   "text": "Lift the actual quotient cone to a tower in the category under the constant A-ring sheaf. The coefficientMap cone is limiting because its underlying cone is the specified ring-sheaf limit. Apply the proved flatness-only helper adicSectionwiseFlatTensor of the sectionwise adic algebra limit module to the finite section modules, using the flatness and surjectivity just proved. The unique isomorphism between the coefficientMap cone and the chosen under-category limit transports sectionwise A-flatness to the completed coefficient sheaf.",
+   "uses": [
+    "lem-weil-pbc-sectionwise-adic-algebra-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved helper adicSheafFlat from the same module to the coefficient-map algebra sheaf: lift the finitely many constant-ring coefficients of each relation on a common covering sieve, factor the resulting A-module relation using sectionwise flatness, and descend by the local relation criterion. Finally transport exactness through siteSheafTensorRightIso to obtain exactly the existing SheafOfModules.IsFlat predicate.",
    "uses": [
     "lem-weil-pbc-sectionwise-adic-algebra-limit"
    ],
@@ -20,9 +43,14 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-constant-module-section-properties",
   "lem-weil-pbc-sectionwise-adic-algebra-limit"
  ],
- "proof_origin": "stage-3 decomposition of flat_and_quotients",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M (lemma-completion-flat), flatness paragraph using Tags 093J and 093L and More on Algebra Tag 0912; formalized by C4 on 2026-10-28 using the existing proved flatness-only helpers."
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
  "status": "open",
@@ -66,9 +94,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261027T180632-L-3884786",
+  "landing": "20261027T205830-L-1622627",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
