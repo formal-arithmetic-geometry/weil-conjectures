@@ -32,8 +32,21 @@ private theorem properRouteCompIso_inv_app_eq {W X S : Scheme.{u}}
         (rightDerivedLowerShriekCongrIso A w).hom.app E := by
   simp only [properRouteCompIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app]
 
-attribute [local irreducible] rightDerivedLowerShriekIsoRightDerivedLowerStar
-  rightDerivedLowerStarCompIsoOfComp rightDerivedLowerShriekCompIso properRouteCompIso
+
+private theorem route_refl {W X S : Scheme.{u}} (p : W ⟶ X) (f : X ⟶ S)
+    [IsProper p] [IsProper f] :
+    properRouteCompIso A p f (p ≫ f) rfl = rightDerivedLowerShriekCompIso A p f := by
+  unfold properRouteCompIso rightDerivedLowerShriekCongrIso
+  simp
+
+/-- The equality case of the specified compositor is the canonical compositor.
+Source: blueprint latest, first triangle of thm-amb-p1-adjunction.proof.md.
+(blueprint: lem-sf-proper-shriek-compositor-supports-refl)
+-/
+theorem properRouteCompIso_refl {W X S : Scheme.{u}} (p : W ⟶ X) (f : X ⟶ S)
+    [IsProper p] [IsProper f] :
+    properRouteCompIso A p f (p ≫ f) rfl = rightDerivedLowerShriekCompIso A p f := by
+  sorry
 
 /-- The specified compact-support compositor transports to the ordinary compositor.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
