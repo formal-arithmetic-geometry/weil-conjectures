@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-layer-tensor-homology-comparison",
+ "kind": "statement",
+ "title": "Homology comparison for the explicit ideal-layer tensor complex",
+ "statement": "Let X be any scheme, (A,I) an adic coefficient datum, phi a compatible family of constant-to-actual finite coefficient isomorphisms as in [def-weil-pbc-finite-perfect-quotient-model-data], M a derived completed-coefficient object, n a natural number, and Z an etale chart. Let P be a bounded-above cochain complex of projective A/I^1-modules. Suppose the residue reduction of M on Z is isomorphic to the constant realization of P transported by phi_0. Let T_n(P) be the explicit ideal-layer tensor complex of [def-weil-pbc-finite-quotient-layer-tensor-complex]. Then in every integer degree q the homology of the actual layer object [def-weil-pbc-finite-quotient-coefficient-layer-data], restricted to Z, is isomorphic to the ordinary constant realization [def-weil-pbc-finite-coefficient-local-homology-models] of H^q(T_n(P)), transported by phi_{n+1} and restricted to Z. No lower support bound, finite-generation hypothesis on P, compactness, or local Noetherian hypothesis on X is required.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-coefficient-local-homology-models",
+  "def-weil-pbc-finite-quotient-layer-tensor-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, lemma-locally-constant-bounded, the displayed ideal-layer balancing identity; Tag 094H, lemma-locally-constant-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "Identify the explicit ideal-layer module with the algebraic quotient-map kernel. Exact constant realization and the compatible coefficient isomorphisms identify its sheaf realization, with its retained successor-ring action, with kernel(finiteQuotientUnitMap).",
+   "uses": [
+    "def-weil-pbc-finite-quotient-layer-tensor-complex",
+    "def-weil-pbc-finite-quotient-coefficient-layer-data",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived tensor balancing writes the layer as the residue reduction derived-tensored with the ideal layer, and restricted back to successor coefficients. Exact slice restriction commutes with this comparison. Apply the given residue-model isomorphism on the slice.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bounded-above projective complex computes derived tensor by ordinary termwise tensor. Under exact constant realization its differential is 1 tensor d_P, exactly the constructed tensor complex. Exact constants, coefficient transport along an isomorphism, and exact slice restriction commute with homology. Thus the localized homology of the layer is the constant realization of the explicit complex homology. Neither finite generation nor a lower bound is used.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-layer-tensor-complex",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-finite-coefficient-local-homology-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-quotient-layer-tensor-complex",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-finite-coefficient-local-homology-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, lemma-locally-constant-bounded, the displayed ideal-layer balancing identity; Tag 094H, lemma-locally-constant-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded projective complex tensor module derived tensor computes ordinary tensor and preserves bounds",
+   "results": "Generic HomologicalComplex tensor and totalization declarations; no coefficient-layer chartwise comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the existing tensor functor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow",
+   "results": "Found the algebraic ideal-power quotient equivalence in Mathlib.RingTheory.Ideal.Quotient.Operations. It does not include the complex or sheaf comparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the ideal-power quotient equivalence in the explicit construction."
+  },
+  {
+   "tool": "grep",
+   "query": "powQuotPowSucc|quotient.*smul.*[Mm]odule|module.*smul.*[Qq]uotient",
+   "results": "Mathlib supplies Module.isTorsionBySet_quotient_ideal_smul and the quotient module instance; local rg also found Ideal.Quotient.factor_ker. No project declaration computes the explicit ideal-layer tensor complex.",
+   "date": "2026-10-28",
+   "verdict": "Reuse these algebraic definitions and equivalences; no duplicate complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of projective modules is K flat and tensoring its constant realization with an ideal quotient computes derived tensor",
+   "results": "Module.Flat.of_projective, CochainComplex.isKProjective_of_projective, and generic tensor exactness lemmas. No comparison for the project-specific coefficient layer.",
+   "date": "2026-10-28",
+   "verdict": "No exact sheaf-derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientLayerLocalComplexCore",
+  "date": "2026-10-28",
+  "group": "P3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 094I: the displayed tensor identity with I^n/I^(n+1), as used by the chartwise local-model calculation.",
+   "via": [
+    "lem-weil-pbc-finite-quotient-layer-local-complex-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientLayerTensorHomologyComparison",
+  "file": "lean/Sheaf/Paper/FiniteQuotientLayerTensorHomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_layer_tensor_homology_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotient_layer_tensor_homology_comparison"
+  ],
+  "statement": "theorem finiteQuotient_layer_tensor_homology_comparison\n    (X : Scheme.{t})\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n))\n    (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d))\n    (b : ℤ) (n : ℕ) (Z : X.Etale)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (0 + 1))) ℤ)\n    (hPb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Projective (A ⧸ d.ideal ^ (0 + 1)) (P.X i))\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicQuotientReduction X d 0).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicDerivedChange X (φ 0)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :\n    ∀ q : ℤ, Nonempty\n      ((SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n          ((DerivedCategory.homologyFunctor _ q).obj\n            (finiteQuotientLayerObject X d M n)) ≅\n        (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n          ((finiteCoefficientConstantFunctor X (A ⧸ d.ideal ^ (n + 1 + 1))\n            (φ (n + 1))).obj ((finiteQuotientLayerTensorComplex d.ideal n P).homology q)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210155-L-1667419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210155-L-1667419",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

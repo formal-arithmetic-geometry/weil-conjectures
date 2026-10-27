@@ -1,0 +1,137 @@
+{
+ "id": "def-weil-pbc-finite-quotient-layer-tensor-complex",
+ "kind": "definition",
+ "title": "Explicit finite ideal-layer tensor complex",
+ "statement": "Let A be a commutative ring, I an ideal and n a natural number. Put B_0=A/I^1 and B_{n+1}=A/I^(n+2). Define L_n=I^(n+1)/((I^1) I^(n+1)) as a B_0-module. Identify its carrier with the kernel of B_{n+1} to A/I^(n+1). Define the additive functor T_n from B_0-modules to B_{n+1}-modules as L_n tensor over B_0 followed by restriction along B_{n+1} to B_0, and define T_n(P) termwise on cochain complexes. For an adic datum [def-weil-pbc-adic-coefficient-datum], L_n is a finite type, finitely generated terms of P give finitely generated terms of T_n(P), and either strict support bound of P is inherited by T_n(P). These properties need no projectivity hypothesis.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, lemma-locally-constant-bounded, the displayed ideal-layer balancing identity; Tag 094H, lemma-locally-constant-tensor-product."
+ },
+ "proof": [
+  {
+   "text": "Construct L_n as I^(n+1) modulo (I^1) times the whole I^(n+1)-module. Mathlib supplies its A/I^1-module action. The ideal-power quotient equivalence and factor_ker identify its carrier with the kernel of A/I^(n+2) to A/I^(n+1).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the ordinary tensor-left functor by L_n, followed by restriction of scalars along A/I^(n+2) to A/I. Both functors are additive, so applying them to the terms and differentials constructs the complex.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the adic datum, the successor quotient is finite. The kernel identification makes L_n finite. Finitely generated terms over the finite residue ring and L_n have finite tensor product, hence finite successor-ring terms.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An additive functor sends a zero object to a zero object. Apply the strict-support characterizations to transport each support bound separately; no ordering of the two endpoints is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, lemma-locally-constant-bounded, the displayed ideal-layer balancing identity; Tag 094H, lemma-locally-constant-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded projective complex tensor module derived tensor computes ordinary tensor and preserves bounds",
+   "results": "Generic HomologicalComplex tensor and totalization declarations; no coefficient-layer chartwise comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the existing tensor functor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow",
+   "results": "Found the algebraic ideal-power quotient equivalence in Mathlib.RingTheory.Ideal.Quotient.Operations. It does not include the complex or sheaf comparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the ideal-power quotient equivalence in the explicit construction."
+  },
+  {
+   "tool": "grep",
+   "query": "powQuotPowSucc|quotient.*smul.*[Mm]odule|module.*smul.*[Qq]uotient",
+   "results": "Mathlib supplies Module.isTorsionBySet_quotient_ideal_smul and the quotient module instance; local rg also found Ideal.Quotient.factor_ker. No project declaration computes the explicit ideal-layer tensor complex.",
+   "date": "2026-10-28",
+   "verdict": "Reuse these algebraic definitions and equivalences; no duplicate complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of projective modules is K flat and tensoring its constant realization with an ideal quotient computes derived tensor",
+   "results": "Module.Flat.of_projective, CochainComplex.isKProjective_of_projective, and generic tensor exactness lemmas. No comparison for the project-specific coefficient layer.",
+   "date": "2026-10-28",
+   "verdict": "No exact sheaf-derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientLayerLocalComplexCore",
+  "date": "2026-10-28",
+  "group": "P3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 094I: the displayed tensor identity with I^n/I^(n+1), as used by the chartwise local-model calculation.",
+   "via": [
+    "lem-weil-pbc-finite-quotient-layer-local-complex-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientLayerTensorComplex",
+  "file": "lean/Sheaf/Paper/FiniteQuotientLayerTensorComplex.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotientLayerTensorComplex",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerModule",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerKernelEquiv",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerTensor",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerTensor_additive",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerTensorComplex",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerModule_finite",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerTensorComplex_finite",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerTensorComplex_ge",
+   "AlgebraicGeometry.Scheme.finiteQuotientLayerTensorComplex_le"
+  ],
+  "statement": "def finiteQuotientLayerTensorComplex {A : Type t} [CommRing A] (I : Ideal A) (n : ℕ)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ I ^ (0 + 1))) ℤ) :\n    CochainComplex (ModuleCat.{t} (A ⧸ I ^ (n + 1 + 1))) ℤ",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210155-L-1667419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210155-L-1667419",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

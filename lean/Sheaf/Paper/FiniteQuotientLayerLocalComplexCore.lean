@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.FiniteQuotientCoefficientLayerData
 public import Sheaf.Paper.FiniteCoefficientLocalHomologyModels
+import Sheaf.Paper.FiniteQuotientLayerTensorHomologyComparison
 
 /-! # Chartwise comparison for finite quotient coefficient layers
 Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
@@ -66,6 +67,11 @@ theorem finiteQuotient_layer_local_complex_core
             (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj
               ((finiteCoefficientConstantFunctor X (A ⧸ d.ideal ^ (n + 1 + 1))
                 (φ (n + 1))).obj (Q.homology q))) := by
-  sorry
+  refine ⟨finiteQuotientLayerTensorComplex d.ideal n P,
+    finiteQuotientLayerTensorComplex_ge d.ideal n P a hPa,
+    finiteQuotientLayerTensorComplex_le d.ideal n P b hPb,
+    finiteQuotientLayerTensorComplex_finite d n P (fun i ↦ (hP i).2), ?_⟩
+  exact finiteQuotient_layer_tensor_homology_comparison X d φ hφ hcompat M b n Z P hPb
+    (fun i ↦ (hP i).1) e
 
 end AlgebraicGeometry.Scheme
