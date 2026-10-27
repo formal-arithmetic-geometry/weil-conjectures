@@ -180,6 +180,34 @@ noncomputable def exceptionalTensorMap (M N : D) [IsIso (leftProjection pf M (S.
     F.obj M ⊗ S.obj N ⟶ S.obj (M ⊗ N) :=
   adj'.homEquiv _ _ (inv (leftProjection pf M (S.obj N)) ≫ M ◁ adj'.counit.app N)
 
+/-- Naturality of `exceptionalTensorMap` in the exceptional variable. -/
+lemma whiskerLeft_map_comp_exceptionalTensorMap (M : D) {N N' : D} (g : N ⟶ N')
+    [IsIso (leftProjection pf M (S.obj N))] [IsIso (leftProjection pf M (S.obj N'))] :
+    F.obj M ◁ S.map g ≫ exceptionalTensorMap adj' pf M N' =
+      exceptionalTensorMap adj' pf M N ≫ S.map (M ◁ g) := by
+  apply (adj'.homEquiv _ _).symm.injective
+  have h : P.map (F.obj M ◁ S.map g) ≫ inv (leftProjection pf M (S.obj N')) =
+      inv (leftProjection pf M (S.obj N)) ≫ M ◁ P.map (S.map g) := by
+    rw [IsIso.comp_inv_eq, Category.assoc, leftProjection_naturality, IsIso.inv_hom_id_assoc]
+  rw [Adjunction.homEquiv_naturality_left_symm, exceptionalTensorMap, exceptionalTensorMap,
+    Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Equiv.symm_apply_apply,
+    Category.assoc, reassoc_of% h, ← MonoidalCategory.whiskerLeft_comp,
+    Adjunction.counit_naturality, MonoidalCategory.whiskerLeft_comp]
+
+/-- Naturality of `exceptionalTensorMap` in the pulled back variable. -/
+lemma whiskerRight_comp_exceptionalTensorMap {M M' : D} (a : M' ⟶ M) (N : D)
+    [IsIso (leftProjection pf M (S.obj N))] [IsIso (leftProjection pf M' (S.obj N))] :
+    F.map a ▷ S.obj N ≫ exceptionalTensorMap adj' pf M N =
+      exceptionalTensorMap adj' pf M' N ≫ S.map (a ▷ N) := by
+  apply (adj'.homEquiv _ _).symm.injective
+  have h : P.map (F.map a ▷ S.obj N) ≫ inv (leftProjection pf M (S.obj N)) =
+      inv (leftProjection pf M' (S.obj N)) ≫ a ▷ P.obj (S.obj N) := by
+    rw [IsIso.comp_inv_eq, Category.assoc, leftProjection_naturality_left,
+      IsIso.inv_hom_id_assoc]
+  rw [Adjunction.homEquiv_naturality_left_symm, exceptionalTensorMap, exceptionalTensorMap,
+    Adjunction.homEquiv_naturality_right_symm, Equiv.symm_apply_apply, Equiv.symm_apply_apply,
+    Category.assoc, reassoc_of% h, whisker_exchange]
+
 variable [MonoidalClosed C] [MonoidalClosed D]
 
 /-- The inverse `τ : c^! RHom(M, N) ⟶ RHom(c^* M, c^! N)` of the exceptional internal hom exchange
@@ -198,5 +226,46 @@ theorem uncurry_inv_exceptionalHomMap (M N : D) [∀ T, IsIso ((pf.app T).app M)
       ← uncurry_id_eq_ev, curry_uncurry, Category.comp_id, Adjunction.homEquiv_unit,
       Adjunction.right_triangle_components]
   rw [← IsIso.eq_inv_of_inv_hom_id key, uncurry_curry]
+
+/-- **The exceptional internal hom exchange commutes with `𝔥`**, for the exchanges
+`τ = (exceptionalHomMap)⁻¹` and the maps `t = exceptionalTensorMap` of two adjunctions
+`P ⊣ S` (`Rc_! ⊣ Rc^!`) and `P₂ ⊣ S₂` (`Rc_{s!} ⊣ Rc_s^!`): `map_comp_exchangeHom_eq` with all
+hypotheses but the compatibility `hβ` of `β` with `t` (blueprint
+`det-nearby-exceptional-tensor` (2)) discharged. -/
+theorem map_inv_exceptionalHomMap_comp_eq {C₂ D₂ : Type*} [Category C₂] [MonoidalCategory C₂]
+    [Category D₂] [MonoidalCategory D₂] [BraidedCategory C₂] [BraidedCategory D₂]
+    [MonoidalClosed C₂] [MonoidalClosed D₂] {F₂ : D₂ ⥤ C₂} {P₂ : C₂ ⥤ D₂} {S₂ : D₂ ⥤ C₂}
+    (adj₂ : P₂ ⊣ S₂) (pf₂ : curriedTensorInsertFunctor₁ P₂ ⟶
+      curriedTensorPost P₂ ⋙ (Functor.whiskeringLeft D₂ C₂ D₂).obj F₂)
+    {SP : D ⥤ D₂} {SC : C ⥤ C₂} [SP.LaxMonoidal] [SC.LaxMonoidal]
+    (α : SP ⋙ F₂ ⟶ F ⋙ SC) (β : S ⋙ SC ⟶ SP ⋙ S₂) (A B : D) (A' B' : D₂)
+    [∀ T, IsIso ((pf.app T).app A)] [∀ T N, IsIso ((pf₂.app T).app N)]
+    (a : A' ⟶ SP.obj A) (b : SP.obj B ⟶ B')
+    (hβ : α.app A ▷ SC.obj (S.obj ((ihom A).obj B)) ≫
+        Functor.LaxMonoidal.μ SC (F.obj A) (S.obj ((ihom A).obj B)) ≫
+        SC.map (exceptionalTensorMap adj' pf A ((ihom A).obj B)) ≫
+        β.app (A ⊗ (ihom A).obj B) =
+      F₂.obj (SP.obj A) ◁ β.app ((ihom A).obj B) ≫
+        exceptionalTensorMap adj₂ pf₂ (SP.obj A) (SP.obj ((ihom A).obj B)) ≫
+        S₂.map (Functor.LaxMonoidal.μ SP A ((ihom A).obj B))) :
+    haveI := isIso_exceptionalHomMap_of_isIso adj' pf A B
+    haveI := isIso_exceptionalHomMap_of_isIso adj₂ pf₂ A' B'
+    SC.map (inv (exceptionalHomMap adj' pf A B)) ≫ curry ((F₂.map a ≫ α.app A) ▷
+        SC.obj ((ihom (F.obj A)).obj (S.obj B)) ≫
+        Functor.LaxMonoidal.μ SC (F.obj A) ((ihom (F.obj A)).obj (S.obj B)) ≫
+        SC.map ((ihom.ev (F.obj A)).app (S.obj B)) ≫ β.app B ≫ S₂.map b) =
+      β.app ((ihom A).obj B) ≫ S₂.map (curry (a ▷ SP.obj ((ihom A).obj B) ≫
+        Functor.LaxMonoidal.μ SP A ((ihom A).obj B) ≫ SP.map ((ihom.ev A).app B) ≫ b)) ≫
+        inv (exceptionalHomMap adj₂ pf₂ A' B') := by
+  have := isIso_exceptionalHomMap_of_isIso adj' pf A B
+  have := isIso_exceptionalHomMap_of_isIso adj₂ pf₂ A' B'
+  refine map_comp_exchangeHom_eq α β ((ihom.ev A).app B) ((ihom.ev A').app B') a b _
+    ?_ ((ihom.ev (F.obj A)).app (S.obj B)) (exceptionalTensorMap adj' pf A ((ihom A).obj B)) _
+    ?_ (fun N M ↦ exceptionalTensorMap adj₂ pf₂ N M)
+    (whiskerLeft_map_comp_exceptionalTensorMap adj₂ pf₂ A' _)
+    (whiskerRight_comp_exceptionalTensorMap adj₂ pf₂ a _) hβ _ ?_ _ (uncurry_curry _)
+  · rw [← uncurry_eq, uncurry_curry]
+  · rw [← uncurry_eq, uncurry_inv_exceptionalHomMap]
+  · exact uncurry_inv_exceptionalHomMap adj₂ pf₂ A' B'
 
 end CategoryTheory.Verdier
