@@ -20161,3 +20161,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:42 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: I read the item, all three new nodes, every cited statement and the Lean sources (DerivedPullbackTensorConstraints 152-1)
 - 22:43 L: returned deliver/U4/Sheaf.Paper.IntegralOrdinaryProjectionEndpointCompatibility (reviewer RETURN: (reviewer C-f0eab, head f0eab297b) Point 2 / brief-stage3 §4: unforced definition change (new field compatibility) in Sh)
 - 22:59 L: merged deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer FIX; after a return; new nodes: 3)
+- 23:09 L: returned deliver/NA/lem-route-twist-scalar-maps-exists-unique (reviewer RETURN: I read the item in full (there are no new nodes), all six cited statements, the Lean at CoefficientTwistsDetailed.lean:4)
