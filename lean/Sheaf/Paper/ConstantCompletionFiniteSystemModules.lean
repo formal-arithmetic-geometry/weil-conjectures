@@ -24,5 +24,7 @@ theorem finiteSystem_module_instances (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     Nonempty (∀ (n : ℕ) (U : Cᵒᵖ),
       Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) := by
-  sorry
+  refine ⟨fun n U ↦ ?_⟩
+  exact (((toSheafify J
+    ((Functor.const Cᵒᵖ).obj (CommRingCat.of (A ⧸ I ^ (n + 1))))).app U).hom).toModule
 end CategoryTheory.ConstantCompletion
