@@ -7553,6 +7553,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapUnit
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismComp
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismMonoidal
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
@@ -13308,6 +13309,7 @@ public import WeilConjectures.TraceFormula.FrobeniusFixedPointsFinite
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.GenericBaseChange
+public import WeilConjectures.TraceFormula.GenericBaseChangePullback
 public import WeilConjectures.TraceFormula.GenericQuotient
 public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.HomologyUnit
@@ -13341,7 +13343,10 @@ public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.OrdinaryKunneth
 public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
 public import WeilConjectures.TraceFormula.OrdinaryKunnethDevissage
+public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobal
+public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobalSections
 public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
+public import WeilConjectures.TraceFormula.OrdinaryKunnethProjection
 public import WeilConjectures.TraceFormula.PieceAdditivity
 public import WeilConjectures.TraceFormula.PieceVanishing
 public import WeilConjectures.TraceFormula.PointComplement

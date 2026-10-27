@@ -16,6 +16,28 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualiz
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 public import WeilConjectures.Tactic.ExactModProofs
 
+/-!
+# The ordinary Künneth formula for global sections on `Dᵇc`
+
+For a cartesian square `P = X ×_k Y` of separated `k`-schemes of finite type, the Künneth map
+`RΓ(X, A) ⊗ RΓ(Y, B) ⟶ RΓ(P, Lp₁^* A ⊗ Lp₂^* B)` on bounded constructible `ℚ̄_ℓ`-complexes is an
+isomorphism (`ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback_point`). On `Dᵇc` it
+is the Künneth map of the factorization `P ⟶ Y ⟶ Spec k`
+(`ProEtale.CondensedRing.isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_of_isPullback`):
+generic base change along `Y ⟶ Spec k`, the relative Künneth formula for `p₂` and the projection
+formula over the point, where every bounded constructible complex is dualizable. It is then
+compared with the ambient Künneth map `ProEtale.CondensedRing.lowerStarKunnethMap'`
+(`ProEtale.CondensedRing.map_baseChangeMap_app_comp_counit`,
+`CategoryTheory.Adjunction.ι_map_homEquiv_δ_tensorHom_restrictFullyFaithful`).
+
+## Implementation notes
+
+Statements on `Dᵇc` and on the ambient derived categories carry different proofs of
+`Precoherent Profinite` inside the coefficient ring `ℚ̲̄_ℓ`, and different presentations of the same
+objects. They are compared by `exact_mod_proofs`, by `simp only` (rather than successive `rw`,
+whose motives mix the two) and by `convert` followed by `rfl` on the small remaining goals.
+-/
+
 @[expose] public section
 
 universe u
@@ -38,6 +60,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 
 
+set_option linter.flexible false in
 /-- The counits of the restricted adjunction `Lf^* ⊣ Rf_*` on `Dᵇc` are those of the ambient
 adjunction. -/
 lemma counit_app_hom_boundedConstructibleUpperStarLowerStarAdjunction {Y : Over (Spec (.of k))}
@@ -55,6 +78,7 @@ lemma counit_app_hom_boundedConstructibleUpperStarLowerStarAdjunction {Y : Over 
   simp [boundedConstructibleUpperStarCompatibility, boundedConstructibleLowerStarCompatibility,
     ObjectProperty.liftCompιIso]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
+
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace CategoryTheory.Adjunction
@@ -90,7 +114,8 @@ lemma ι_map_homEquiv_δ_tensorHom_restrictFullyFaithful {U₁ U₂ : Q.FullSubc
     Q.ι.map ((adj'.restrictFullyFaithful Q.fullyFaithfulι P.fullyFaithfulι
       (P.liftCompιIso (Q.ι ⋙ F') hF).symm (Q.liftCompιIso (P.ι ⋙ G') hG).symm).homEquiv _ _
         (Functor.OplaxMonoidal.δ (P.lift (Q.ι ⋙ F') hF) U₁ U₂ ≫ (c₁ ⊗ₘ c₂))) =
-      adj'.homEquiv _ _ (Functor.OplaxMonoidal.δ F' U₁.obj U₂.obj ≫ (P.ι.map c₁ ⊗ₘ P.ι.map c₂)) := by
+      adj'.homEquiv _ _
+        (Functor.OplaxMonoidal.δ F' U₁.obj U₂.obj ≫ (P.ι.map c₁ ⊗ₘ P.ι.map c₂)) := by
   rw [restrictFullyFaithful_homEquiv_apply, Functor.FullyFaithful.map_preimage, homEquiv_unit]
   simp only [ObjectProperty.liftCompιIso, Iso.symm_hom, Iso.refl_inv, Functor.map_comp]
   erw [Functor.map_id, Category.id_comp, Category.comp_id]
@@ -145,9 +170,11 @@ lemma map_baseChangeMap_app_comp_counit {q : P ⟶ P'} {p : P ⟶ X} {p' : P' �
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) q.left)
     (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq)
     (baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq) rfl B.obj
-  have H2 : (prodUpperStarCounit ℓ w B).hom = (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq).hom.app _ ≫
-      L((p.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-        ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).counit.app B.obj) := by
+  have H2 : (prodUpperStarCounit ℓ w B).hom =
+      (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq).hom.app _ ≫
+        L((p.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+          ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left).counit.app
+            B.obj) := by
     rw [pullbackSquareComparison_hom_app]
     simp only [prodUpperStarCounit, ObjectProperty.FullSubcategory.comp_hom,
       boundedConstructibleUpperStarComp_hom_app_hom, boundedConstructibleUpperStarComp_inv_app_hom',
@@ -183,7 +210,8 @@ theorem isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_of_isIso {q : P ⟶ Q} {
     (h₁ : IsIso ((boundedConstructibleBaseChange ℓ sq₁).app B₁))
     (h₂ : IsIso ((boundedConstructibleBaseChange ℓ sq₂).app B₂))
     (hr : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ r).projectionMorphism
-      ((boundedConstructibleUpperStar _ ℓ p₁).obj B₁) ((boundedConstructibleUpperStar _ ℓ ρ₂).obj B₂)))
+      ((boundedConstructibleUpperStar _ ℓ p₁).obj B₁)
+      ((boundedConstructibleUpperStar _ ℓ ρ₂).obj B₂)))
     (hs : IsIso ((boundedConstructibleUpperStarLowerStarAdjunction ℓ s).leftProjectionMorphism
       ((boundedConstructibleUpperStar _ ℓ π₁).obj ((boundedConstructibleLowerStar ℓ f₁).obj B₁))
       ((boundedConstructibleUpperStar _ ℓ ρ₂).obj B₂))) :
@@ -304,10 +332,12 @@ lemma lowerStarKunnethMap'_eq_homEquiv_padicAlgCl {X X₁ Y Y₁ Z Z₁ : Scheme
         (Functor.OplaxMonoidal.δ L((k)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _ ≫
           ((L((k)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
               ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq₁).app A) ≫
-              (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) k).counit.app _) ⊗ₘ
+              (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) k).counit.app
+                _) ⊗ₘ
             (L((k)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
               ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq₂).app B) ≫
-              (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) k).counit.app _))) := by
+              (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) k).counit.app
+                _))) := by
   exact_mod_proofs lowerStarKunnethMap'_eq_homEquiv (Profinite.padicAlgClRingObj ℓ) sq₁ sq₂ A B
 
 /-- **The ordinary Künneth formula for global sections**, for squares of morphisms over the base

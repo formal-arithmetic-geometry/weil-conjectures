@@ -422,7 +422,7 @@ end TraitGenericField
 
 section Global
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
