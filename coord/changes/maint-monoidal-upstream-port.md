@@ -55,3 +55,27 @@ comparison-chain-map, lem-sfb-derived-pullback-tensor-left-derived, lem-sfb-deri
 tensor-comparison-iso, lem-sfb-derived-pullback-strong-monoidal. The preferred-upstream note for
 this module (proofs to re-apply) is obsolete and removed. The pending upstream sync meets
 identical text here, so its catch-up has nothing to merge in these files.
+
+## Follow-up (same day): cached instances scoped; IntegralProperReductionBound restored
+
+Upstream's Monoidal publicly imports `Sheaf.SixFunctors.ModCondensedCachedInstances` (in the split,
+via MonoidalComplex), so its 14 cached instances for `Mod (Sheaf (ProEt.topology Z) Ab)
+(condensedRingObj Λ Z)` became visible to everything downstream of Monoidal. In
+`Sheaf.Paper.IntegralProperReductionBound`, whose ring `AdicCompletion.ring l E X` is an abbreviation
+of `condensedRingObj (DerivedNakayama.integerRing l E) X`, unifying them made the search for
+`Mod.derivedExtendMapDerivedCategoryAdjunction` time out (a `Sheaf.monoidalCategory` defeq of 13 s);
+the build of 2026-10-27T14:11Z went red and the module and its 3821 importers were quarantined.
+
+Fix: the instances are now `scoped` in the namespace
+`AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances`; the modules that import the file
+open that scope (the 8 Monoidal modules, ProjectionMapShift, ContinuousIntegralExchangeTargetAdjunct).
+Downstream modules see none of them, as before this port. Making the import private instead was
+tried and rejected: inside the `public section` the private instances do not serve the public
+declarations, and MonoidalIso took 65-88 s.
+
+Measured alone (-j1, load ~50): ModCondensedCachedInstances 8.6 s, MonoidalComplex 27.1 s,
+ComplexHom 23.7 s, Counit 37.8 s, RightCounit 23.8 s, Tensor 27.1 s, Iso 31.4 s, Oplax 17.5 s,
+Monoidal 17.0 s, ProjectionMapShiftFac 4.7 s, ProjectionMapShift 39.8 s,
+ContinuousIntegralExchangeTargetAdjunct 40.4 s, IntegralProperReductionBound 18.2 s (unchanged
+text, restored from quarantine/ in this landing; its importers come back by the rework cluster
+restore).

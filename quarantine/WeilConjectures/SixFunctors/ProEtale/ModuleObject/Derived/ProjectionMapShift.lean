@@ -47,6 +47,8 @@ Every object is isomorphic to such a `Qh A`, since `p^*` preserves K-flat comple
 
 @[expose] public section
 
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
+
 universe u
 
 open CategoryTheory Limits MonoidalCategory
