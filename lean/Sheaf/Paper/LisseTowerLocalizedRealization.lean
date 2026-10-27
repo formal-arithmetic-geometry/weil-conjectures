@@ -6,6 +6,8 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.Paper.LisseTowerScalarRestriction
+import Sheaf.Paper.LisseTowerLocalizedConstants
+import Sheaf.Paper.LisseTowerLocalizedActual
 
 /-! # Localizing a descended semilinear tower
 
@@ -144,6 +146,21 @@ theorem lisseTower_localized_realization
             (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom =
         (e (n + 1)).hom ≫
           adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n)) :
-    Nonempty (LisseTowerLocalizedComparisons X Y g d M U D δ) := by sorry
+    Nonempty (LisseTowerLocalizedComparisons X Y g d M U D δ) := by
+  classical
+  have hmodel := fun (V : U.left.ProEt) (W : Y.ProEt)
+    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) ↦
+      lisseTower_localized_constants (W.hom ≫ g) V.hom f.left d
+  have hactual := fun (V : U.left.ProEt) (W : Y.ProEt)
+    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom)) ↦
+      lisseTower_localized_actual X Y g d M U V W f D c hc δ e hδ
+  choose model hmodel using hmodel
+  choose actual hactual using hactual
+  exact ⟨{
+    model := model
+    actual := actual
+    scalar := fun V W f n ↦ lisseTowerPulledScalarIso (W.hom ≫ g) f.left d n
+    actual_normalized := hactual
+    model_normalized := hmodel }⟩
 
 end AlgebraicGeometry.Scheme
