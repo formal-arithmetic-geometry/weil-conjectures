@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.Topology.NoetherianSpace
 
 /-!
 # Complements on immersions
@@ -75,6 +76,11 @@ lemma isIso_of_nonempty {K : Type u} [Field K] {Z : Scheme.{u}}
   have : IsReduced Y := isReduced_of_isOpenImmersion g₂
   have : IsIso g₁ := isIso_of_isClosedImmersion_of_surjective g₁
   infer_instance
+
+/-- A scheme immersed into a noetherian space is noetherian. -/
+lemma noetherianSpace {D X : Scheme.{u}} (i : D ⟶ X) [IsImmersion i]
+    [TopologicalSpace.NoetherianSpace X] : TopologicalSpace.NoetherianSpace D :=
+  i.isEmbedding.isInducing.noetherianSpace
 
 end IsImmersion
 
