@@ -20122,3 +20122,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: returned deliver/NC/lem-pur-derived-pullback-tensor-constraints-common-composition-existence (reviewer RETURN: I read the item, the Lean declaration (DerivedPullbackTensorConstraints.lean:230; commonStagePullbackComparison at Deriv)
 - 21:19 L: merged deliver/NB/lem-pur-derived-pullback-tensor-constraints-common-braiding-existence (reviewer FIX; first push; new nodes: 1)
 - 21:21 L: merged deliver/NA/lem-pur-derived-pullback-tensor-constraints-common-associator-existence (reviewer PASS; first push; new nodes: 1)
+- 21:27 L: returned deliver/J1/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescent (reviewer RETURN: (reviewer C-adab3, head adab3cd35) E2: exists_twist_chart_descent_transition is false for arbitrary charts (S=Spec Q[s],)
