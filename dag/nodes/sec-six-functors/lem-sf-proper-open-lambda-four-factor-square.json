@@ -1,0 +1,96 @@
+{
+ "id": "lem-sf-proper-open-lambda-four-factor-square",
+ "kind": "statement",
+ "title": "Four-factor ordinary proper/open lambda component square",
+ "statement": "For a commutative proper/open square and arbitrary ringed object M, system object N, and child comparison f from reduction(M) to N, the expanded pull/proper/open source map followed by the system properOpenLambda component equals reduction of the ringed properOpenLambda component followed by the expanded proper target map. This is the component square before substituting a recursive finite word.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proper/open lambda coefficient-square expansion, four factors."
+ },
+ "stmt_deps": [
+  "def-sf-open-interchange-reduction-data",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Expand properOpenLambda and ringedProperOpenLambda into cartesian conjugation, restriction, clopen comparison and proper compositor factors. Apply the ordinary reduction square for each factor, using mate naturality and the unit/counit triangle identities, then paste the four equalities by associativity.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Proper/open lambda coefficient-square expansion."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Four-factor ordinary lambda component calculation.",
+  "by": "worker",
+  "group": "K5",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properOpenLambda four-factor ordinary reduction component square",
+   "results": "No existing declaration has the expanded K5 component statement; it is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProperOpenLambdaOrdinarySquare",
+  "date": "2026-10-28",
+  "group": "K5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-open-lambda-ordinary-square",
+   "place": "Split the ordinary square at the four-factor component calculation.",
+   "via": [
+    "lem-sf-proper-open-lambda-ordinary-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProperOpenLambdaFourFactorSquare",
+  "file": "lean/Sheaf/SixFunctors/ProperOpenLambdaFourFactorSquare.lean",
+  "declaration": "WeilConjectures.OpenInterchangeReduction.properOpenLambdaFourFactorSquare",
+  "statement": "theorem properOpenLambdaFourFactorSquare\n    {D : FiniteFieldDatum.{u}} (Cf : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic Cf.l) E]\n    [FiniteDimensional (Padic Cf.l) E] (o : Operations Cf.l E)\n    {S : Type s} (W : S → Scheme.{u})\n    {a b c d : S}\n    (k : W a ⟶ W b) (r : W a ⟶ W c) (p : W b ⟶ W d) (j : W c ⟶ W d)\n    (h : k ≫ p = r ≫ j) (hk : IsOpenImmersion k) (hki : QuasiCompact k)\n    (hjo : IsOpenImmersion j) (hji : QuasiCompact j)\n    (hr : IsProper r) (hp : IsProper p)\n    (M : DerivedCategory (scalarReductionSource Cf.l E (W a)))\n    (N : coefficientSequenceDerived Cf.l E (W a))\n    (f : (IntegralSystemRealization.calculus Cf.l E (W a)).reduction.obj M ⟶ N) :\n    properOpenLambdaFourFactorSource Cf.l E W o k r p j hk hki hjo hji hr hp M N f ≫\n        (IntegralSystemRealization.properOpenLambda Cf.l E o.system o.composition o.opens\n          k r p j h).hom.app N =\n      (IntegralSystemRealization.calculus Cf.l E (W c)).reduction.map\n          ((IntegralSystemRealization.ringedProperOpenLambda Cf.l E o.ringed\n            o.ringedOpens k r p j h).hom.app M) ≫\n        properOpenLambdaFourFactorTarget Cf.l E W o r hr M N f",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.OpenInterchangeReduction.properOpenLambdaFourFactorSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T210126-L-1660723",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T210126-L-1660723",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

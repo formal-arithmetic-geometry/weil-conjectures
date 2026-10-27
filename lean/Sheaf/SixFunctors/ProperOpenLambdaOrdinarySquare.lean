@@ -6,6 +6,7 @@ Authors: SHEAF group Y9
 module
 
 public import Sheaf.SixFunctors.OpenInterchangeReductionData
+import Sheaf.SixFunctors.ProperOpenLambdaFourFactorSquare
 
 /-! # Ordinary proper/open lambda square
 
@@ -19,6 +20,8 @@ statement below.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.unusedVariables false
+set_option linter.style.haveILetI false
 
 universe u s i
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -111,8 +114,20 @@ theorem properOpenLambdaOrdinarySquare
             Cf.l E W location o K) ≫
         properOpenOrdinaryR Cf.l E location o K
           (Word.push r (by let := hr; infer_instance) (by let := hr; infer_instance)
-            (by let := hr; infer_instance) hr B) := by
-  sorry
-
+            (by let := hr; infer_instance) hr B)  := by
+  letI := hk
+  letI := hki
+  letI := hjo
+  letI := hji
+  letI := hr
+  letI := hp
+  have hf := properOpenLambdaFourFactorSquare Cf E o W k r p j h hk hki hjo hji hr hp
+    (B.ringedValue Cf.l E W location o K)
+    (B.systemValue Cf.l E W location o (inputReduction Cf.l E W location K))
+    (properOpenOrdinaryR Cf.l E location o K B)
+  simpa [properOpenOrdinaryR, GeneratorKind.systemMap, GeneratorKind.ringedMap,
+    properOpenLambdaFourFactorSource, properOpenLambdaFourFactorTarget,
+    ordinaryPushReductionK5, ordinaryPushReductionY9, Functor.comp_obj,
+    Word.ringedValue, Word.systemValue] using hf
 
 end WeilConjectures.OpenInterchangeReduction
