@@ -14,10 +14,8 @@
  ],
  "proof": [
   {
-   "text": "Represent M by a K-injective I, and resolve FI->J by a K-injective target. Form the ordinary Hom-complex comparison followed by postcomposition to J. On K-flat tensor representatives, uncurrying identifies its localization with exactly the canonical derived evaluation transpose.",
+   "text": "Use the already proved source-library mapDerivedCategoryTensorComparison and its fixed-first-variable CommShift instance. Prove the fixed-second-variable instance by the source commShift_of_tensorRight_fac theorem on a functorial K-flat resolution whose image under F is K-flat, and transport it along the resolution isomorphism. This is done in private proved helpers comparison_flip_Qh, comparison_flip_of_iso and comparison_flip. Unfold exactClosedDerivedMonoidal only to identify its oplax tensor map with this canonical comparison (exactDerived_δ).",
    "uses": [
-    "lem-sf-ringed-hom-complex-pullback-shift",
-    "lem-pc-kflat-resolution",
     "lem-sf-exact-closed-derived-hom"
    ],
    "elementary": false,
@@ -27,7 +25,27 @@
    }
   },
   {
-   "text": "Signed reindexing commutes with the ordinary comparison and with postcomposition. Localize this equation, identify the adjoint source shifts by evaluation, and multiply both rows by the common quadratic scalar. This is exactly the CommShift equation for any normalized structures.",
+   "text": "Combine the two tensor shift equations. Cancel the invertible oplax tensor maps and the shift comparisons, obtaining the tensor interchange square for (tensorLeft K).commShiftIso n followed by the inverse parameter-shift isomorphism. The private tensor_interchange proof performs these cancellations explicitly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+   }
+  },
+  {
+   "text": "Apply naturality of the adjunction mate equivalence to the tensor interchange square. The defining rightAdjointUniq isomorphism siteHomSourceShift is the conjugate of the tensor interchange; the mate of the inverse functor shift comparison is the comparison at the negative degree, by the shift adjunction triangle identities. Thus the raw source-shift square for ihomComparison follows. Reindex from -(-n) to n by equality transport to obtain the siteHomOppositeSourceShift square. These facts are proved in private helpers mate_naturality, sourceShift_conjugate, shift_mate, sourceShift_comparison and sourceShift_comparison_reindex.",
+   "uses": [
+    "lem-sf-native-derived-hom-signed-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+   }
+  },
+  {
+   "text": "Compute the shifts of both composite functors, using the standard opposite-functor shift comparison. Substitute the given component equations for beta and the all-degree normalizations hC and hD. Both sides have the same quadratic scalar (n*(n+1)/2).negOnePow, so the raw square proves the required NatTrans.CommShift equation. No exactness or invertibility theorem for internal Hom comparisons is used.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -37,15 +55,14 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-ringed-hom-complex-pullback-shift",
-  "lem-pc-kflat-resolution",
-  "lem-sf-exact-closed-derived-hom"
+  "lem-sf-exact-closed-derived-hom",
+  "lem-sf-native-derived-hom-signed-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q1",
-  "date": "2026-10-25",
-  "note": "Extracted genuine intermediate steps of the parent proof, not a restatement of its conclusion."
+  "group": "C2",
+  "date": "2026-10-28",
+  "note": "Complete categorical proof from the existing canonical derived tensor comparison and adjunction mates. Removes the site-specific Hom-complex comparison and independent-coefficient resolution route; no new unproved statements."
  },
  "mathlib_searches": [
   {
@@ -120,13 +137,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-50959",
-  "group": "Q1",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261025T164119-L-953435",
+  "landing": "20261027T233818-L-4118778",
   "kind": "interface",
-  "note": "independent cc review: item proof assembly + 3 new nodes/modules against lem-sf-site-hom-comparison-thick, change record site-hom-native-shifts, existing nativeInternalHom_contravariant_exact (sign convention), unit sk-prop-sf-rf-shriek-preservation realized; importer LisseFlatHomSiteComparison compiled against delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -20202,3 +20202,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:38 L: merged deliver/B8/Sheaf.SixFunctors.RationalVerdierDatumNaturality (stage 3; reviewer PASS; first push; landing 20261027T233815-L-4117647 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:38 L: merged deliver/B9/Sheaf.Paper.RationalP1SecondExchangeProjection (stage 3; reviewer PASS; first push; landing 20261027T233816-L-4118018 (interface); batch 20261027T233735; modules 2; new nodes 2)
 - 23:38 L: merged deliver/B9/Sheaf.SixFunctors.IntegralSystemProperOpenTransportCanonical (stage 3; reviewer PASS; first push; landing 20261027T233817-L-4118473 (interface); batch 20261027T233735; modules 4; new nodes 4)
+- 23:38 L: merged deliver/C2/Sheaf.CategoryTheory.ExactDerivedHomComparisonShift (stage 3; reviewer PASS; first push; landing 20261027T233818-L-4118778 (interface); batch 20261027T233735; modules 1; new nodes 0)
