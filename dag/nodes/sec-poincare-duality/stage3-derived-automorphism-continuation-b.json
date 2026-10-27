@@ -1,0 +1,102 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX: evaluation equation of the pullback/internal-Hom comparison"
+ },
+ "proof_origin": "Helper of podSystemHomComparison_realizedEvaluation (lem-pod-derived-automorphism-hom-evaluation), private in the original module, made public when the module was split for the 60 s compile limit: the published original takes 62 s.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed transpose counit evaluation base change hom",
+   "results": "Not rerun by the reviewer (the review server has no network); the statement concerns a project structure, which Mathlib cannot contain.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "closed transpose counit evaluation base change hom",
+   "results": "Not rerun by the reviewer (no network on the review server); see the grep entry.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientBaseChangeHom in lean/Sheaf; Adjunction.homEquiv_counit in Mathlib",
+   "results": "lean/Sheaf has only the definition coefficientBaseChangeHom (CoefDerivedSystemEvaluationCalculus) and no evaluation lemma for it; Mathlib's Adjunction.homEquiv_counit is the general counit identity used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "Proved helper with its node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedAutomorphismHomEvaluation",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-coefficient-base-change-hom",
+   "place": "evaluation equation of the base-change map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-coefficient-base-change-hom"
+ ],
+ "proof": [
+  {
+   "text": "By definition [def-pur-coefficient-base-change-hom], $c^F_{P,Q}$ is the closed transpose of $F(\\mathrm{ev}_{P,Q})\\circ\\mu^{-1}_{H_A(P,Q),P}$ for the adjunction $-\\otimes FP\\dashv H_B(FP,-)$ of $S_B$ [def-coef-ringed-tensor-hom-model]. The counit identity of that adjunction gives $\\mathrm{ev}_{FP,FQ}\\circ(c^F_{P,Q}\\otimes1)=F(\\mathrm{ev}_{P,Q})\\circ\\mu^{-1}$; precomposing with $\\mu$ gives the equation.",
+   "uses": [
+    "def-pur-coefficient-base-change-hom",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-coefficient-base-change-hom"
+ ],
+ "id": "stage3-derived-automorphism-continuation-b",
+ "title": "Evaluation equation of the coefficient base-change map",
+ "statement": "Let $A,B$ be categories with internal-Hom bifunctors $H_A,H_B$ and closed tensor-Hom structures $S_A,S_B$ [def-coef-ringed-tensor-hom-model], $F:A\\to B$ a functor and $\\mu:F(X\\otimes_AY)\\xrightarrow{\\sim}FX\\otimes_BFY$ a natural isomorphism. For $P,Q\\in A$ the coefficient base-change map $c^F_{P,Q}$ [def-pur-coefficient-base-change-hom] satisfies $$\\mathrm{ev}_{FP,FQ}\\circ(c^F_{P,Q}\\otimes 1_{FP})\\circ\\mu_{H_A(P,Q),P}=F(\\mathrm{ev}_{P,Q}).$$",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationB",
+  "file": "lean/Sheaf/Paper/DerivedAutomorphismHomEvaluationContinuationB.lean",
+  "declaration": "WeilConjectures.baseChangeHom_evaluation",
+  "statement": "theorem baseChangeHom_evaluation\n    {A : Type a} {B : Type c} [Category.{b} A] [Category.{d} B]\n    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}\n    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)\n    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) (P Q : A) :\n    μ.hom.app (HA.obj (op P, Q), P) ≫\n      SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 _)) ≫\n      SB.evaluation (F.obj P) (F.obj Q) = F.map (SA.evaluation P Q)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "independent cc review: verbatim 4-way split of DerivedAutomorphismHomEvaluation (orig 61-74 s CPU, forced) vs clone module; laws decomposition vs original conjunction; 4 new nodes vs Lean signatures; 8 direct importers compiled against corrected set"
+ }
+}

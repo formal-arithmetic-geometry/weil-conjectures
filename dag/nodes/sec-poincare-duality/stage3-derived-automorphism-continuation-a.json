@@ -1,0 +1,99 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX context: the partial closed data of def-pod-partial-closed-interfaces (extensionality)"
+ },
+ "proof_origin": "Helper of the item's uniqueness statements (podIntegralClosed_existsUnique), made public when the item module was split for the 60 s compile limit: the published original takes 62 s.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "structure equality from equal transposition equivalences",
+   "results": "Not rerun by the reviewer (the review server has no network); the statement concerns a project structure, which Mathlib cannot contain.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "structure equality from equal transposition equivalences",
+   "results": "Not rerun by the reviewer (no network on the review server); see the grep entry.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "PodPartialClosed ext in lean/Sheaf; @[ext] for structures with a Prop field in Mathlib",
+   "results": "No extensionality lemma for PodPartialClosed exists in lean/Sheaf; the structure is project-local.",
+   "date": "2026-10-27",
+   "verdict": "Proved helper with its node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedAutomorphismHomEvaluation",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pod-partial-closed-interfaces",
+   "place": "extensionality of partial closed data",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "stmt_deps": [
+  "def-pod-partial-closed-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "A partial closed datum [def-pod-partial-closed-interfaces] consists of the family of transposition equivalences together with the naturality condition, which is a property. Equal families (function extensionality in $L$ and the pair) therefore give equal data.",
+   "uses": [
+    "def-pod-partial-closed-interfaces"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pod-partial-closed-interfaces"
+ ],
+ "id": "stage3-derived-automorphism-continuation-a",
+ "title": "Partial closed data are determined by their transpositions",
+ "statement": "Let $C$ be a preadditive category, $T:C\\times C\\to C$ a tensor bifunctor, $J$ an object predicate on $C^{op}\\times C$ and $H:J\\to C$. Two partial closed data $S,S'$ for $(T,J,H)$ [def-pod-partial-closed-interfaces] whose additive transposition equivalences $\\operatorname{Hom}(T(L,M),N)\\simeq\\operatorname{Hom}(L,H(M,N))$ coincide for every object $L$ and every permitted pair $(M,N)$ are equal.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationA",
+  "file": "lean/Sheaf/Paper/DerivedAutomorphismHomEvaluationContinuationA.lean",
+  "declaration": "WeilConjectures.podPartialClosed_ext",
+  "statement": "theorem podPartialClosed_ext\n    {C : Type a} [Category.{b} C] [Preadditive C]\n    {T : C × C ⥤ C} {J : ObjectProperty (Cᵒᵖ × C)} {H : J.FullSubcategory ⥤ C}\n    (S S' : PodPartialClosed T J H)\n    (h : ∀ L P, S.transpose L P = S'.transpose L P) : S = S'",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "independent cc review: verbatim 4-way split of DerivedAutomorphismHomEvaluation (orig 61-74 s CPU, forced) vs clone module; laws decomposition vs original conjunction; 4 new nodes vs Lean signatures; 8 direct importers compiled against corrected set"
+ }
+}

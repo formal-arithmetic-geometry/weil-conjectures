@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX (pullback and internal Hom), naturality of the comparison map"
+ },
+ "proof_origin": "Stage-3 decomposition of podFiniteHomComparison_laws (lem-pod-derived-automorphism-hom-evaluation, steps 1--2): its naturality clause; the formal argument is that of Stacks 0GMX.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite derived internal hom pullback comparison naturality",
+   "results": "Not rerun by the reviewer (the review server has no network); the statement concerns a project structure, which Mathlib cannot contain.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "finite derived internal hom pullback comparison naturality",
+   "results": "Not rerun by the reviewer (no network on the review server); see the grep entry.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteHomPullback_naturality; podFiniteHomComparison in lean/Sheaf and Mathlib",
+   "results": "finiteHomPullback_naturality is recorded by thm-trf-internal-hom-pullback in Sheaf.Paper.InternalHomPullback, which is not on sheaf-dag (branch newtargets-dag) and concerns site-perfect inputs over a finite field; nothing in Mathlib or lean/Sheaf states naturality of podFiniteHomComparison.",
+   "date": "2026-10-27",
+   "verdict": "Split-off statement with its node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedAutomorphismHomEvaluation",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-derived-automorphism-hom-evaluation",
+   "place": "finite comparison laws decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "id": "stage3-pod-finite-hom-comparison-naturality",
+ "title": "Finite derived Hom comparison is natural in both arguments",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $n\\geq0$, and $g:X\\xrightarrow{\\sim}Y$ a scheme isomorphism with $\\ell$ invertible on $X$ and $Y$. Use the finite derived pullback $F=Lg^*$, derived tensor $T$, internal Hom $H$, evaluation and closed transposition at $A_{E,n+1}$ [def-sf-finite-rational-derived-operations], the canonical tensor comparison $\\mu$ [def-pur-finite-pullback-tensor-comparison], and the finite evaluation-defined comparison $c_{M,N}:FH(M,N)\\to H(FM,FN)$, the transpose of $\\mu^{-1}_{H(M,N),M}$ followed by $F(\\mathrm{ev}_{M,N})$ [def-pod-system-hom-reindexing-maps]. For all $M,N,M',N'\\in D(Y_{\\mathrm{proet}},A_{E,n+1})$, $a:M'\\to M$ and $b:N\\to N'$: $$c_{M',N'}\\circ F(H(a,b))=H(Fa,Fb)\\circ c_{M,N}.$$",
+ "stmt_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "def-pur-finite-pullback-tensor-comparison",
+  "def-pod-system-hom-reindexing-maps"
+ ],
+ "proof": [
+  {
+   "text": "Both sides are maps $FH(M,N)\\to H(FM',FN')$; since closed transposition is a bijection [def-sf-finite-rational-derived-operations], compare their transposes $T(FH(M,N),FM')\\to FN'$.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By parameter naturality of transposition, the transpose of the left side is $T(F H(a,b),1)$ followed by $\\mu^{-1}_{H(M',N'),M'}$ and $F(\\mathrm{ev}_{M',N'})$ (definition of $c$ [def-pod-system-hom-reindexing-maps]). Naturality of $\\mu$ [def-pur-finite-pullback-tensor-comparison] moves $F H(a,b)$ inside $F$, and dinaturality of evaluation, $\\mathrm{ev}_{M',N'}\\circ T(H(a,b),1)=b\\circ\\mathrm{ev}_{M,N}\\circ T(1,a)$, gives $F b\\circ F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}_{H(M,N),M}\\circ T(1,Fa)$ after a second use of naturality of $\\mu$.",
+   "uses": [
+    "def-pod-system-hom-reindexing-maps",
+    "def-pur-finite-pullback-tensor-comparison",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transpose of the right side is $Fb\\circ\\mathrm{ev}_{FM,FN}\\circ T(c_{M,N},1)\\circ T(1,Fa)$ by the same dinaturality on $X$, and $\\mathrm{ev}_{FM,FN}\\circ T(c_{M,N},1)=F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}_{H(M,N),M}$ is the counit identity of the transpose defining $c_{M,N}$. The two transposes agree, so the two maps agree.",
+   "uses": [
+    "def-pod-system-hom-reindexing-maps",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-system-hom-reindexing-maps",
+  "def-pur-finite-pullback-tensor-comparison",
+  "def-sf-finite-rational-derived-operations"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedAutomorphismHomEvaluationBase",
+  "file": "lean/Sheaf/Paper/DerivedAutomorphismHomEvaluationBase.lean",
+  "declaration": "WeilConjectures.podFiniteHomComparison_naturality",
+  "statement": "theorem podFiniteHomComparison_naturality (n : ℕ)\n    (M N M' N' : proEtaleDerivedCategory Y (finiteCoefficientRing l E (n + 1)))\n    (a : M' ⟶ M) (b : N ⟶ N') :\n    (finiteDerivedPullback l E n g).map\n        ((finiteIntrinsicDerivedInternalHom l E Y n).map (Prod.mkHom a.op b)) ≫\n      podFiniteHomComparison l E g n M' N' =\n    podFiniteHomComparison l E g n M N ≫\n      (finiteIntrinsicDerivedInternalHom l E X n).map\n        (Prod.mkHom ((finiteDerivedPullback l E n g).map a).op\n          ((finiteDerivedPullback l E n g).map b))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "independent cc review: verbatim 4-way split of DerivedAutomorphismHomEvaluation (orig 61-74 s CPU, forced) vs clone module; laws decomposition vs original conjunction; 4 new nodes vs Lean signatures; 8 direct importers compiled against corrected set"
+ }
+}

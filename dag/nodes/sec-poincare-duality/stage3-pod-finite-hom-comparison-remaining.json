@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX (pullback and internal Hom), comparison isomorphism, evaluation and transposition"
+ },
+ "proof_origin": "Stage-3 decomposition of podFiniteHomComparison_laws (lem-pod-derived-automorphism-hom-evaluation, steps 1--2): the clauses other than naturality.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite derived internal hom pullback comparison isomorphism evaluation transpose",
+   "results": "Not rerun by the reviewer (the review server has no network); the statement concerns a project structure, which Mathlib cannot contain.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "finite derived internal hom pullback comparison isomorphism evaluation transpose",
+   "results": "Not rerun by the reviewer (no network on the review server); see the grep entry.",
+   "date": "2026-10-27",
+   "verdict": "Use the project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "podFiniteHomComparison; finiteHomPullback in lean/Sheaf and Mathlib",
+   "results": "Only the item module states these equations; finiteHomPullback (thm-trf-internal-hom-pullback) is not on sheaf-dag and has site-perfect, finite-type hypotheses.",
+   "date": "2026-10-27",
+   "verdict": "Split-off statement with its node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedAutomorphismHomEvaluation",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-derived-automorphism-hom-evaluation",
+   "place": "finite comparison laws decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "id": "stage3-pod-finite-hom-comparison-remaining",
+ "title": "Finite derived Hom comparison: invertibility, evaluation and transposition",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $n\\geq0$, and $g:X\\xrightarrow{\\sim}Y$ a scheme isomorphism with $\\ell$ invertible on $X$ and $Y$. Use the finite derived pullback $F=Lg^*$, derived tensor $T$, internal Hom $H$, evaluation $\\mathrm{ev}$ and closed transposition $(-)^\\sharp$ at $A_{E,n+1}$ [def-sf-finite-rational-derived-operations], the canonical tensor comparison $\\mu$ [def-pur-finite-pullback-tensor-comparison], and the finite evaluation-defined comparison $c_{M,N}:FH(M,N)\\to H(FM,FN)$ [def-pod-system-hom-reindexing-maps]. Then for all $L,M,N\\in D(Y_{\\mathrm{proet}},A_{E,n+1})$: (i) $c_{M,N}$ is an isomorphism; (ii) $\\mathrm{ev}_{FM,FN}\\circ T(c_{M,N},1_{FM})\\circ\\mu_{H(M,N),M}=F(\\mathrm{ev}_{M,N})$; (iii) for every $b:T(L,M)\\to N$, $(F(b)\\circ\\mu^{-1}_{L,M})^\\sharp=c_{M,N}\\circ F(b^\\sharp)$.",
+ "stmt_deps": [
+  "def-sf-finite-rational-derived-operations",
+  "def-pur-finite-pullback-tensor-comparison",
+  "def-pod-system-hom-reindexing-maps"
+ ],
+ "proof": [
+  {
+   "text": "(i) Reindexing along the isomorphism of sites is an exact equivalence preserving K-flat and K-injective complexes, products and total tensor; its product-Hom comparison $c^0$ is an isomorphism for arbitrary unbounded inputs [lem-pod-reindexing-hom-resolution-model]. The evaluation calculus identifies $c^0$ with the evaluation-defined comparison $c_{M,N}$ [lem-pod-reindexing-evaluation-shift-composition, def-pod-system-hom-reindexing-maps]; hence $c_{M,N}$ is invertible.",
+   "uses": [
+    "lem-pod-reindexing-hom-resolution-model",
+    "lem-pod-reindexing-evaluation-shift-composition",
+    "def-pod-system-hom-reindexing-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(ii) $c_{M,N}$ is the transpose of $F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}$ [def-pod-system-hom-reindexing-maps]; the counit identity of the closed adjunction [def-sf-finite-rational-derived-operations] gives $\\mathrm{ev}\\circ T(c_{M,N},1)=F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}$, and precomposing with $\\mu$ gives (ii).",
+   "uses": [
+    "def-pod-system-hom-reindexing-maps",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "(iii) Transpose both sides. By parameter naturality of transposition and (ii), the right side transposes to $F(\\mathrm{ev}_{M,N})\\circ\\mu^{-1}_{H(M,N),M}\\circ T(F(b^\\sharp),1)$; naturality of $\\mu$ [def-pur-finite-pullback-tensor-comparison] makes this $F(\\mathrm{ev}_{M,N}\\circ T(b^\\sharp,1))\\circ\\mu^{-1}_{L,M}=F(b)\\circ\\mu^{-1}_{L,M}$, the transpose of the left side.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-comparison",
+    "def-sf-finite-rational-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-system-hom-reindexing-maps",
+  "def-pur-finite-pullback-tensor-comparison",
+  "def-sf-finite-rational-derived-operations",
+  "lem-pod-reindexing-evaluation-shift-composition",
+  "lem-pod-reindexing-hom-resolution-model"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedAutomorphismHomEvaluationBase",
+  "file": "lean/Sheaf/Paper/DerivedAutomorphismHomEvaluationBase.lean",
+  "declaration": "WeilConjectures.podFiniteHomComparison_laws_remaining",
+  "statement": "theorem podFiniteHomComparison_laws_remaining (n : ℕ) :\n    (∀ M N, IsIso (podFiniteHomComparison l E g n M N)) ∧\n    (∀ M N,\n      (canonicalFinitePullbackTensor l E g n\n        ((finiteIntrinsicDerivedInternalHom l E Y n).obj (op M, N)) M).hom ≫\n      (finiteIntrinsicDerivedTensor l E X n).map\n        (Prod.mkHom (podFiniteHomComparison l E g n M N) (𝟙 _)) ≫\n      finiteIntrinsicEvaluation l E X n\n        ((finiteDerivedPullback l E n g).obj M) ((finiteDerivedPullback l E n g).obj N) =\n      (finiteDerivedPullback l E n g).map (finiteIntrinsicEvaluation l E Y n M N)) ∧\n    (∀ L M N (b : (finiteIntrinsicDerivedTensor l E Y n).obj (L, M) ⟶ N),\n      finiteIntrinsicTranspose l E X n _ _ _\n        ((canonicalFinitePullbackTensor l E g n L M).inv ≫\n          (finiteDerivedPullback l E n g).map b) =\n      (finiteDerivedPullback l E n g).map (finiteIntrinsicTranspose l E Y n L M N b) ≫\n        podFiniteHomComparison l E g n M N)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8f3bd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261027T151705-L-1193309",
+  "kind": "interface",
+  "note": "independent cc review: verbatim 4-way split of DerivedAutomorphismHomEvaluation (orig 61-74 s CPU, forced) vs clone module; laws decomposition vs original conjunction; 4 new nodes vs Lean signatures; 8 direct importers compiled against corrected set"
+ }
+}
