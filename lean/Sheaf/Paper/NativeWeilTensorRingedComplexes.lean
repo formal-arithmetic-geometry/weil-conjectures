@@ -135,7 +135,9 @@ theorem native_weil_tensor_ringed_complexes :
     Nonempty (NativeWeilRingedTensorComplexes b T adj) := by
   obtain ⟨u⟩ := native_weil_tensor_ringed_underived_data b T adj
   obtain ⟨c⟩ := native_weil_tensor_ringed_chain_data b T adj u
-    (nativeRingedTensorSign b)
+    (nativeRingedTensorSign b) (by
+      intro p q Y Z f
+      rfl)
   obtain ⟨k⟩ := native_weil_tensor_ringed_kflat_data b T adj
   refine ⟨{ underived := u.underived
             uncurry := u.uncurry

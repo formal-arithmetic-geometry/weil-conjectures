@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-chain-laws",
+ "kind": "statement",
+ "title": "Signed summand and naturality laws for the native ringed total comparison",
+ "statement": "For a normalized underived bifunctor comparison and the associated total map, the total map satisfies the signed homogeneous summand equation and naturality in both complex variables.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YN, 06YU and 0FPT"
+ },
+ "stmt_deps": [
+  "lem-sf-native-weil-tensor-ringed-underived-data",
+  "def-sf-native-weil-tensor-ringed-bridge",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand mapBifunctorComparison and use the total-complex flip isomorphism. Its summand formula gives the Koszul scalar, and its naturality theorem gives naturality in both variables; hτ and hchain identify the components with U.underived and the chosen chain.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-underived-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-tensor-ringed-underived-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E5",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Generic total comparison, flip summands and bifunctor naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural bifunctor isomorphism from normalized tensor-Hom mate equations",
+   "results": "No exact native Weil match; the mate-normalization step remains project-specific.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "assemble pointwise tensor comparisons into a natural bifunctor isomorphism",
+   "results": "Generic NatIso and adjunction uniqueness APIs only; no exact native statement.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents mapBifunctorComparison",
+   "results": "Generic total-complex comparison declarations found; no underived native normalization theorem.",
+   "date": "2026-10-28",
+   "verdict": "Use generic API in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "native_weil_tensor_ringed_underived_iso|native_weil_tensor_ringed_chain_laws",
+   "results": "No prior declaration; these are the strict intermediate statements introduced for this proof.",
+   "date": "2026-10-28",
+   "verdict": "New nodes required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedChainData",
+  "date": "2026-10-28",
+  "group": "E5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-ringed-chain-data",
+   "place": "Strict intermediate law statement for the total comparison.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-chain-data"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedChainLaws",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedChainLaws.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_chain_laws",
+  "statement": "theorem native_weil_tensor_ringed_chain_laws (U : NativeWeilRingedTensorUnderivedData b T adj) (sign : ∀ (_p _q : ℤ) {Y Z : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R} (_f : Y ⟶ Z), Y ⟶ Z) (hsign : ∀ (_p _q : ℤ) {Y Z : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R} (_f : Y ⟶ Z), sign _p _q _f = letI : AddCommGroup (Y ⟶ Z) := @Preadditive.homGroup (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) _ inferInstance Y Z ZSMul.zsmul ((_p * _q).negOnePow : ℤ) _f) (τ : (Functor.postcompose₂.obj b.native.functor).obj T ⟶ (((Functor.whiskeringLeft₂ (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)).obj b.native.functor).obj b.native.functor).obj (MonoidalCategory.curriedTensor (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)).flip) (hτ : ∀ P Q : ProEtaleWeilSheaf k₀ l X, (τ.app P).app Q = (U.underived P Q).hom) (chain : ∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, (b.native.functor.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.mapBifunctor P Q T) ≅ (coefficientTotalTensor.{u + 1, u + 1, u + 1} b.J b.R).obj ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj Q, (b.native.functor.mapHomologicalComplex (.up ℤ)).obj P)) (hchain : ∀ P Q, (chain P Q).hom = (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) P Q ≫ (HomologicalComplex.mapBifunctorFlipIso ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj Q) ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj P) (MonoidalCategory.curriedTensor (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)) (.up ℤ)).hom)) : (∀ (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (p q n : ℤ) (hpq : p + q = n) (hqp : q + p = n), b.native.functor.map (HomologicalComplex.ιMapBifunctor P Q T (.up ℤ) p q n hpq) ≫ (chain P Q).hom.f n = sign p q ((U.underived (P.X p) (Q.X q)).hom ≫ RingedForgetTensorTransposition.tensorSummand b.J b.R ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj Q) ((b.native.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp)) ∧ (∀ (P Q P' Q' : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) (f : P ⟶ P') (g : Q ⟶ Q'), (b.native.functor.mapHomologicalComplex (.up ℤ)).map (HomologicalComplex.mapBifunctorMap f g T (.up ℤ)) ≫ (chain P' Q').hom = (chain P Q).hom ≫ (coefficientTotalTensor.{u + 1, u + 1, u + 1} b.J b.R).map (Prod.mkHom ((b.native.functor.mapHomologicalComplex (.up ℤ)).map g) ((b.native.functor.mapHomologicalComplex (.up ℤ)).map f)))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f345b",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T233915-L-4134784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f345b",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T233915-L-4134784",
+  "kind": "interface",
+  "note": "independent cc review: native_weil_tensor_ringed_chain_data (+hsign) and the two split theorems against node lem-sf-native-weil-tensor-ringed-chain-data, the new nodes, Mathlib BifunctorFlip/WeilConjectures Bifunctor comparison lemmas and the sole caller NativeWeilTensorRingedComplexes"
+ }
+}
