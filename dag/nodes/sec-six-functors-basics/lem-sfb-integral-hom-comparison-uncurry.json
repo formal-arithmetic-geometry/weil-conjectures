@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-integral-hom-comparison-uncurry",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-hom-comparison-normalization",
+   "place": "representative-level uncurrying step of the comparison normalization proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Uncurried normalization of the integral Hom comparison",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Let D, ℓ, E, X and n be as in the integral Hom reduction comparison normalization statement. Let a be a normalized TensorPresentation and m a ReductionPresentation of a at n. For all derived inputs K,L, apply the inverse Hom equivalence of the target TensorPresentation adjunction at the canonical comparison integralHomReductionComparison. The resulting map equals the composite m.mu.inv at (K, Hom(K,L)) followed by the derived reduction of the source adjunction counit at (K,L).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06YY and 08J7, normalization of the evaluation transpose on K-flat representatives."
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-hom-reduction-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Resolve K and L by flat-term K-flat representatives and the Hom target by a K-injective complex. The cochain tensor model rigidity comparison identifies both normalized tensor presentations with the signed total tensor. On homogeneous sections, the evaluation sign cancels the Koszul exchange, while the scalar unit sends x to 1 tensor x. The two normalization equations therefore give the same uncurried map after applying the target adjunction.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the representative comparisons and the localization universal property to transport the representative equality to arbitrary K and L. The displayed composite is exactly the uncurried form of the ReductionPresentation comparison by its definition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cochain-tensor-model-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06YY and 08J7, representative evaluation normalization and extension to derived objects."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived internal Hom reduction map is independent of normalized tensor presentations",
+   "results": "lTensorHomEquivHomLTensor; ModuleCat.monoidalClosedHomEquiv; homTensorHomEquiv; Rep.homEquiv; CategoryTheory.FreeMonoidalCategory.normalizeMapAux; Rep.coinvariantsTensor_hom_ext; LightCondensed.ihomPoints; rTensorHomEquivHomRTensor_toLinearMap",
+   "date": "2026-10-22",
+   "verdict": "No match: none concerns the specified normalized derived coefficient presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison between normalized tensor-Hom presentations of integral derived reduction",
+   "results": "Algebra.Presentation.tensorModelOfHasCoeffsInv; Module.Relations.Solution.isPresentationCoreTensor; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul; Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul; Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul; CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor; Module.Presentation.tensor_relation",
+   "date": "2026-10-22",
+   "verdict": "No match: none concerns the specified normalized derived coefficient presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSfbAdicComplete|integralHomReductionComparison|IsSfbAdicConstructible in Mathlib; normalization and residue-origin names in lean/WeilConjectures and lean/Sheaf",
+   "results": "No Mathlib occurrence of these predicates or comparisons; no existing declaration of the asserted presentation comparison in either library root.",
+   "date": "2026-10-22",
+   "verdict": "No match; the existing general-lfp, ringed-site completeness and finite-field witness declarations use different coefficient presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomComparisonNormalization",
+  "date": "2026-10-28",
+  "group": "F1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomComparisonUncurry",
+  "file": "lean/Sheaf/Paper/IntegralHomComparisonUncurry.lean",
+  "declaration": "WeilConjectures.integralHomComparison_uncurry_eq",
+  "statement": "theorem integralHomComparison_uncurry_eq\n    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : AlgebraicGeometry.Scheme.{u}) (n : ℕ)\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheaf l E X D hl))\n    (m : IntegralHom.ReductionPresentation l E X D hl a n)\n    (K L : completedIntegralDerivedCategory l E X D hl) :\n    ((m.target.adjunction\n      ((integralDerivedReduction l E X D hl n).obj K)).homEquiv _ _).symm\n      (integralHomReductionComparison D l hl E X n K L) =\n      m.mu.inv.app\n          (K,\n            (homReductionHom (completedIntegralCommRingSheaf l E X D hl)).obj (op K, L)) ≫\n        (integralDerivedReduction l E X D hl n).map\n          ((a.adjunction K).counit.app L)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233920-L-4136269",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T233920-L-4136269",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

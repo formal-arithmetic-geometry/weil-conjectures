@@ -20252,3 +20252,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/E5/Sheaf.Paper.RationalP1ScalarChernP2HomologyCriterion (stage 3; reviewer PASS; first push; landing 20261027T233917-L-4135178 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/E7/Sheaf.Paper.RationalP1ScalarChernQRightInverse (stage 3; reviewer PASS; first push; landing 20261027T233918-L-4135523 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/F1/Sheaf.Paper.AmbientPullbackCompositionLaws (stage 3; reviewer PASS; first push; landing 20261027T233919-L-4135976 (interface); batch 20261027T233735; modules 3; new nodes 2)
+- 23:39 L: merged deliver/F1/Sheaf.Paper.IntegralHomComparisonNormalization (stage 3; reviewer PASS; first push; landing 20261027T233920-L-4136269 (interface); batch 20261027T233735; modules 2; new nodes 1)

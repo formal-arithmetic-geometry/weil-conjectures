@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralHomReductionComparison
 public import Sheaf.Paper.IntegralHomReductionModels
-import Sheaf.Algebra.Homology.CochainTensorModelRigidity
+import Sheaf.Paper.IntegralHomComparisonUncurry
 
 /-! # Independence of the normalized integral Hom reduction presentation
 
@@ -54,6 +54,10 @@ theorem integralHomComparison_normalization
     (m : IntegralHom.ReductionPresentation l E X D hl a n)
     (K L : completedIntegralDerivedCategory l E X D hl) :
     integralHomReductionComparison D l hl E X n K L =
-      IntegralHom.comparison l E X D hl m K L := by sorry
+      IntegralHom.comparison l E X D hl m K L := by
+  apply ((m.target.adjunction
+    ((integralDerivedReduction l E X D hl n).obj K)).homEquiv _ _).symm.injective
+  rw [integralHomComparison_uncurry_eq D l hl E X n a m K L]
+  simp [IntegralHom.comparison]
 
 end WeilConjectures
