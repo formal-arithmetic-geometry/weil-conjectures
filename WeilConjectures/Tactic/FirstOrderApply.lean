@@ -21,7 +21,9 @@ as soon as two subterms are not syntactically equal, even when they only differ 
 the instance path of an instance, and then run out of heartbeats. First-order matching assigns a
 metavariable of the pattern directly to the corresponding subterm, compares applications with
 the same head argument by argument, accepts any two proofs (proof irrelevance), and only falls
-back to `isDefEq` on the smallest subterms where the two sides differ.
+back to `isDefEq` on the smallest subterms where the two sides differ. Explicit arguments
+are matched before implicit ones; an implicit argument which does not match yet is retried once
+the others are matched.
 
 The kernel then still has to identify the types of the given proofs with the instantiated
 hypotheses, which may again unfold large definitions. So the given proofs (and, for `fo_apply`,
@@ -42,11 +44,11 @@ namespace Mathlib.Tactic.FirstOrderApply
 not a cast (assigned at the end of `foInstantiate`, by congruence). -/
 initialize castEqs : IO.Ref (Array (MVarId × Expr × Expr)) ← IO.mkRef #[]
 
-
 /-- First-order matching of a pattern `p` (containing unassigned metavariables) against `e`. The
-`cache` records the pairs already matched, so that shared subterms are visited once. -/
+`cache` records the pairs already matched; failures on implicit arguments are recorded in
+`defer`, to be retried once the other arguments are matched. -/
 partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr)
-    (bound : Array FVarId) : MetaM Bool := do
+    (bound : Array FVarId) (defer : IO.Ref (Array (Expr × Expr))) : MetaM Bool := do
   let p := p.consumeMData
   let e := e.consumeMData
   if p == e then return true
@@ -59,7 +61,7 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
   -- a pattern `cast h x` against a term which is not a cast: match `x`, and take `h := rfl`
   if p.isAppOfArity ``cast 4 && !e.isAppOfArity ``cast 4 then
     let args := p.getAppArgs
-    if ← foMatchAux cache args[3]! e bound then
+    if ← foMatchAux cache args[3]! e bound defer then
       let h := (← instantiateMVars args[2]!).consumeMData
       if let .mvar hm := h then
         unless ← hm.isAssigned do
@@ -71,7 +73,7 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
     | .mvar m =>
       if ← m.isAssigned then
         let v ← instantiateMVars p
-        if v == e then pure true else foMatchAux cache v e bound
+        if v == e then pure true else foMatchAux cache v e bound defer
       else if ← m.isDelayedAssigned then
         fallback
       else if !bound.isEmpty && (← bound.anyM fun x => exprDependsOn e x) then
@@ -82,9 +84,9 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
     | .forallE n d₁ b₁ bi =>
       match e with
       | .forallE _ d₂ b₂ _ =>
-        if ← foMatchAux cache d₁ d₂ bound then
+        if ← foMatchAux cache d₁ d₂ bound defer then
           withLocalDecl n bi (← instantiateMVars d₂) fun x => do
-            foMatchAux cache (b₁.instantiate1 x) (b₂.instantiate1 x) (bound.push x.fvarId!)
+            foMatchAux cache (b₁.instantiate1 x) (b₂.instantiate1 x) (bound.push x.fvarId!) defer
         else pure false
       | _ => fallback
     | .app .. =>
@@ -97,13 +99,33 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
         | .fvar f₁, .fvar f₂ => f₁ == f₂
         | _, _ => false
       if sameHead then
+        let n0 := (← defer.get).size
         let ok ← commitWhen do
           for (u, v) in fp.constLevels!.zip fe.constLevels! do
             unless ← isLevelDefEq u v do return false
-          for i in (List.range ap.size).reverse do
-            unless ← foMatchAux cache ap[i]! ae[i]! bound do return false
+          let finfo ← getFunInfoNArgs fp ap.size
+          let isExpl (i : Nat) : Bool :=
+            if h : i < finfo.paramInfo.size then finfo.paramInfo[i].binderInfo.isExplicit
+            else true
+          -- the explicit arguments first
+          let order := (List.range ap.size).filter isExpl ++
+            ((List.range ap.size).filter (fun i => !isExpl i)).reverse
+          for i in order do
+            unless ← foMatchAux cache ap[i]! ae[i]! bound defer do
+              if !isExpl i && bound.isEmpty then
+                defer.modify (·.push (ap[i]!, ae[i]!))
+              else return false
           return true
-        if ok then pure true else fallback
+        if ok then pure true else
+          defer.modify (·.shrink n0)
+          fallback
+      else if p.isAppOfArity `CategoryTheory.Functor.map 8 &&
+          e.isAppOf `CategoryTheory.InducedCategory.Hom.hom then
+        -- `P.ι.map f` against `g.hom`
+        let F ← instantiateMVars (p.getArg! 4)
+        if F.isAppOfArity `CategoryTheory.ObjectProperty.ι 3 then
+          foMatchAux cache (p.getArg! 7) e.appArg! bound defer
+        else fallback
       else if fp.isConst && fe.isConst then
         let unfoldAbbrev (x : Expr) : MetaM (Option Expr) := do
           let .const n _ := x.getAppFn | return none
@@ -111,8 +133,8 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
           if (← getProjectionFnInfo? n).isSome then return none
           if (← isInstance n) then return none
           unfoldDefinition? x
-        if let some p' ← unfoldAbbrev p then foMatchAux cache p' e bound
-        else if let some e' ← unfoldAbbrev e then foMatchAux cache p e' bound
+        if let some p' ← unfoldAbbrev p then foMatchAux cache p' e bound defer
+        else if let some e' ← unfoldAbbrev e then foMatchAux cache p e' bound defer
         else fallback
       else fallback
     | .sort u => match e with
@@ -130,7 +152,18 @@ partial def foMatchAux (cache : IO.Ref (Std.HashSet (Expr × Expr))) (p e : Expr
 
 /-- First-order matching of a pattern `p` (containing unassigned metavariables) against `e`. -/
 def foMatch (p e : Expr) : MetaM Bool := do
-  foMatchAux (← IO.mkRef {}) p e #[]
+  let cache ← IO.mkRef {}
+  let defer ← IO.mkRef #[]
+  unless ← foMatchAux cache p e #[] defer do return false
+  for _round in [:3] do
+    let ds ← defer.get
+    if ds.isEmpty then return true
+    defer.set #[]
+    for (p, e) in ds do
+      let p ← instantiateMVars p
+      unless p == e do
+        unless ← foMatchAux cache p e #[] defer do return false
+  return (← defer.get).isEmpty
 
 /-- Elaborate a lemma name to its constant (with fresh universe metavariables), keeping all its
 binders; other terms are elaborated as usual. -/
@@ -376,15 +409,11 @@ def foInstantiate (fe : Expr) (args : Array Term) (target? : Option Expr) :
     if bis[i]! == .instImplicit then
       unless ← mvs[i]!.mvarId!.isAssigned do
         mvs[i]!.mvarId!.assign (← synthInstance (← instantiateMVars (← inferType mvs[i]!)))
-  -- the equations of the casts, and the remaining implicit equations, by congruence
+  -- the equations of the casts, by congruence
   for (m, α, β) in ← castEqs.get do
     unless ← m.isAssigned do
       let some p ← congrProof (← mkEq (← instantiateMVars α) (← instantiateMVars β)) | pure ()
       m.assign p
-  for i in [:mvs.size] do
-    unless ← mvs[i]!.mvarId!.isAssigned do
-      if bis[i]! != .default then
-        if let some p ← congrProof (← inferType mvs[i]!) then mvs[i]!.mvarId!.assign p
   -- reflexivity arguments, by congruence
   for i in refls do
     let some p ← congrProof (← inferType mvs[i]!)
@@ -443,10 +472,6 @@ elab "fo_apply " f:term:max " using " args:term,* : tactic =>
     let g ← getMainGoal
     let fe ← elabLemma f
     let (pf, newGoals) ← foInstantiate fe args.getElems (some (← instantiateMVars (← g.getType)))
-    let ms ← getMVars pf
-    for m in ms do
-      unless newGoals.contains m do
-        logInfo m!"fo_apply: unassigned {mkMVar m} : {← inferType (mkMVar m)}"
     let pf ← instantiateMVars pf
     let pf ← if newGoals.isEmpty && !pf.hasMVar then
       sealProof (← instantiateMVars (← g.getType)) pf else pure pf

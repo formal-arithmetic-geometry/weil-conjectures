@@ -46,7 +46,15 @@ variable {CB CF CX CP CC CB' CF' CX' CP' CC' : Type*} [Category CB] [Category CF
 /-- **The exchange of the fixed loci on `j_! 𝟙`**, abstractly: from the identity `h` (the
 fixed-square exchange followed by the normal form of `ν_X`), the composition isomorphism
 coherences `hS3` (generic fibre) and `hS4` (special fibre) and `a₂ = c₂`, the exchange `νFN` is
-`a_{F'}(y ≫ r_!≅r_*⁻¹) ≫ e_{F'}⁻¹ ≫ ν_B ≫ Ψ(e_F)`. -/
+`a_{F'}(y ≫ r_!≅r_*⁻¹) ≫ e_{F'}⁻¹ ≫ ν_B ≫ Ψ(e_F)`, i.e. the square
+```
+aF'(ι'U (ΨC (ιL (Jsh K)))) ---------- νFN ---------> Ψ(aF(Jsh K))
+            |                                              ^
+  aF'(y ≫ isoR⁻¹)                                      Ψ(eF)
+            v                                              |
+      aF'(Rsh Q) ----- eF'⁻¹ -----> aB' Q ----- νB -----> Ψ(aB K)
+```
+commutes, where `y = ι'U(ΨC(ιL(isoJ) ≫ c₂) ≫ z) ≫ ε`. -/
 theorem exchange_app_eq_of_fixedSquare_aux (Ψ : CP ⥤ CP')
     {aB : CB ⥤ CP} {aF : CF ⥤ CP} {aX : CX ⥤ CP}
     {aB' : CB' ⥤ CP'} {aF' : CF' ⥤ CP'} {aX' : CX' ⥤ CP'}

@@ -13100,6 +13100,7 @@ public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.Tactic.FirstOrderApply
+public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.Topology.AbelianIntegerExtensionHomExt
@@ -13541,8 +13542,6 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangul
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
-public import WeilConjectures.TraceFormula.Specialization.LowerShriekCompOfEq
-public import WeilConjectures.TraceFormula.Specialization.MatchTactic
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure

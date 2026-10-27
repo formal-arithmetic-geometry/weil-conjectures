@@ -11,7 +11,7 @@ public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnCompo
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
-public import WeilConjectures.TraceFormula.Specialization.MatchTactic
+public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
 
@@ -53,13 +53,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
   {y : RationalPoint c.C} (hc : c.IsContractingAt y) (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
-
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
-/-- A morphism from a proper `k`-scheme to a separated one is proper. -/
-private lemma isProper_left_of_isProper_hom {B Y : Over (Spec (.of k))} [IsProper B.hom]
-    [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
-  have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
-  exact IsProper.of_comp _ Y.hom
 
 set_option Elab.async false in
 set_option maxHeartbeats 2000000 in

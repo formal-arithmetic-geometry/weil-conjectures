@@ -11,6 +11,7 @@ public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAux
 public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnComponent
+public import WeilConjectures.Tactic.FirstOrderApply
 
 /-!
 
@@ -88,11 +89,11 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
   have hχa := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
     (deformationToTraitModelHom B b.left.ker k') hMB hMS (𝟙_ _)
   have : IsProper (g ≫ (compactificationOverField (toPoint X)).overI).left :=
-    isProper_left_of_isProper_hom' _
-  have : IsProper (g ≫ toPoint X).left := isProper_left_of_isProper_hom' _
+    isProper_left_of_isProper_hom _
+  have : IsProper (g ≫ toPoint X).left := isProper_left_of_isProper_hom _
   have : IsProper ((g ≫ (compactificationOverField (toPoint X)).overI) ≫
       toPoint (compactificationOverField (toPoint X)).overObj).left :=
-    isProper_left_of_isProper_hom' _
+    isProper_left_of_isProper_hom _
   have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
   have g1 := congrArg R(((toPoint (compactificationOverField (toPoint X)).overObj).left)_*⟦
     Profinite.padicAlgClRingObj ℓ⟧).map (closedExtension_id_app_of_eq
@@ -117,30 +118,30 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
       (toPoint (compactificationOverField (toPoint X)).overObj))
     ((boundedConstructibleLowerStar ℓ g).obj (𝟙_ _))
   have g7 : (boundedConstructibleLowerStarCompatibility ℓ (toPoint B)).hom.app (𝟙_ _) = 𝟙 _ := rfl
-  fo_have_transport hG := genericRoute_aux using g5, g1, g3, g2, g4, g7, _
+  fo_have hG := genericRoute_aux using g5, g1, g3, g2, g4, g7, _
   case hg =>
     rw [pointCompModelHom_pointComponentModelHom_left]
     rfl
   have : IsProper (deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k').left :=
-    isProper_left_of_isProper_hom' _
+    isProper_left_of_isProper_hom _
   have : IsProper ((deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k') ≫
       deformationSpecialFibreToCompactified (compactificationOverField (toPoint X)).overObj
         (x ≫ (compactificationOverField (toPoint X)).overI) k').left :=
-    isProper_left_of_isProper_hom' _
+    isProper_left_of_isProper_hom _
   have : IsProper (((deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k') ≫
       deformationSpecialFibreToCompactified (compactificationOverField (toPoint X)).overObj
         (x ≫ (compactificationOverField (toPoint X)).overI) k') ≫
       toPoint (compactifiedSpecialFibre (compactificationOverField (toPoint X)).overObj
         (x ≫ (compactificationOverField (toPoint X)).overI) k')).left :=
-    isProper_left_of_isProper_hom' _
+    isProper_left_of_isProper_hom _
   have : IsProper ((deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k') ≫
       toPoint (deformationSpecialFibre (compactificationOverField (toPoint X)).overObj
         (Hom.ker (x ≫ (compactificationOverField (toPoint X)).overI).left) k')).left :=
-    isProper_left_of_isProper_hom' _
+    isProper_left_of_isProper_hom _
   have : IsProper (toPoint (compactifiedSpecialFibre (compactificationOverField (toPoint X)).overObj
       (x ≫ (compactificationOverField (toPoint X)).overI) k')).left := by
     rw [toPoint_left]
@@ -226,13 +227,13 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
       (φ := deformationToTraitModelHom B b.left.ker k') hMB hMS
       (isPullback_deformationSpecialFibre_toPoint B _ k')
       (isPullback_deformationModel_ε_toPoint B _ k')
-  fo_apply_transport pointExchange_normalForm_aux using _, _, _, _, _, _, _, _, _, hχiso, _, _,
+  fo_apply pointExchange_normalForm_aux using _, _, _, _, _, _, _, _, _, hχiso, _, _,
     _, _, _, _, _, _, _, _, _, _, _, hnat, hχa, hF3, _, hG, _, _, _, _, _, _, _, hχg, _, _, _, _,
     _, hF1, _
   case hS =>
-    fo_apply_transport specialRoute_aux using s1, s2, s3, _, _
+    fo_apply specialRoute_aux using s1, s2, s3, _, _
     case s6 =>
-      fo_apply_transport specialNormalForm_aux using hlc1, hlcg, hlcg1, _, hO1, T1, hassoc, htrans
+      fo_apply specialNormalForm_aux using hlc1, hlcg, hlcg1, _, hO1, T1, hassoc, htrans
   case hνB => rfl
   case hι => infer_instance
   case hI => infer_instance
