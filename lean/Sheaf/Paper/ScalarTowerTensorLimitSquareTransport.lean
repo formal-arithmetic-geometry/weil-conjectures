@@ -6,6 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.Paper.ScalarExtensionTowerRealizationData
+import Sheaf.Paper.ScalarTowerTensorLimitTransportAssembly
 
 /-! # Transport of the normalized strict tensor comparison to total limits
 
@@ -83,10 +84,13 @@ theorem scalarTowerTensorLimitSquare_of_derivedSigmaModel (W : Scheme.{u})
             (scalarReduction l E L ι W SE SL ρL SY N.obj))) =
       SY.realization.hom.app
           ((integralCompletedTensor.{u, u} l E W).obj (M.obj, N.obj)) ≫
-        (coefficientSequenceLimit.{u, u} l L W).map
+      (coefficientSequenceLimit.{u, u} l L W).map
           ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map
             (tensorReduction l E W SE ρE TE M.obj N.obj) ≫
           α.hom.app (SE.reduction.obj M.obj, SE.reduction.obj N.obj)) := by
-  sorry
+  apply scalarTowerTensorLimitSquare_of_strictWitnesses l E L ι W SE SL ρE ρL SY TE TL
+    _hl M N hT α
+  intro P Q hP hQ
+  exact strictTensorWitness_of_derivedSigmaModel l E L ι W SE SL α hα P Q hP hQ
 
 end WeilConjectures.ScalarExtensionTower
