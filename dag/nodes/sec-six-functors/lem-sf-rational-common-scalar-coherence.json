@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-rational-common-scalar-coherence",
+ "kind": "statement",
+ "title": "Explicit unshifted common-field adjunction",
+ "statement": "Fix a prime l, an algebraic closure Ω of Padic l, a finite-field datum D with l ≠ D.p, finite-type quasi-compact D.k-schemes X and Y, and a separated finite-type quasi-compact D.k-morphism f : X → Y. Let A be RingStageAssembly l Ω D hl for f [def-sf-ring-stage-assembly-data], and P a RationalStageAssembly over A [lem-sf-rational-stage-localization]. No absolute separatedness is assumed. Transport P.scalar.q and P.scalar.b to the published transitions of the actual common-field stage systems [def-weil-algebraically-closed-coefficients]. The q maps satisfy the stage-system balanced tower equation. They define rationalCommonLeft, preserving the coefficient stage on objects. The b maps define rationalCommonRight; their tower equation follows by counit transposition. The actual stage units and counits form compatible families, and their descended transformations give rationalCommonAdjunction between these two literal pair functors. No shift or exactness structures are chosen.",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data",
+  "lem-sf-rational-stage-localization",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.6, common-field descent steps 1–3: actual pair functors and the adjunction from the fixed rational scalar mates."
+ },
+ "proof": [
+  {
+   "text": "Identify each published transition by stageSystem_existsUnique. Identify each associator by its HEq specification with the rational scalar associator followed by coefficient-inclusion composition transport. Type the supplied finite functors and adjunction with the published stage categories, without changing their data. Form the raw tower equation as an equality of natural transformations from ring_stage_rational_left_composition, transport that equation across endpoint equalities, and only then evaluate it at an object. This gives exactly pairFunctorCoherent for the supplied q without unfolding tensor-composition terms during the endpoint conversions.",
+   "uses": [
+    "lem-sf-ring-stage-rational-left-composition",
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the left StageSystem.Morphism from these data. Transpose the supplied scalar counit equation. Apply each finite adjunction Hom equivalence injectively to derive the unit equation and the right tower equation; cancellation reduces both to the left tower and the supplied counit equation. This explicitly forms the right system and the compatible unit/counit families.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply StageSystem.Morphism.adjunction to the actual finite adjunctions and the two constructed families. The triangles reduce to the finite triangles. All functors, comparisons, units, counits and the adjunction are explicit definitions, not witnesses chosen from an unproved existence theorem.",
+   "uses": [
+    "lem-coef-qbar-stage-adjunction-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-qbar-stage-adjunction-descent",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-sf-ring-stage-rational-left-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.6, common-field descent steps 1–3: actual pair functors and the adjunction from the fixed rational scalar mates."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar.*[Cc]ocycle|[Cc]omposition.*[Ss]calar|pairFunctorCoherent",
+   "results": "Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Basic.lean",
+   "date": "2026-10-28",
+   "verdict": "No matching fixed geometric family theorem. Generic results are used through the existing project API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-28",
+   "verdict": "No matching fixed geometric family theorem. Generic results are used through the existing project API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension comparisons for a left adjoint commute with the composition associator of scalar extension",
+   "results": "ModuleCat.extendScalars_assoc', ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_comp_id, ModuleCat.instIsLeftAdjointExtendScalars",
+   "date": "2026-10-28",
+   "verdict": "No matching fixed geometric family theorem. Generic results are used through the existing project API."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalCommonStageFromRational",
+  "date": "2026-10-28",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Construction 6.6, common-field descent steps 1–3: actual pair functors and the adjunction from the fixed rational scalar mates.",
+   "via": [
+    "lem-sf-common-stage-descent-fixed-rational",
+    "lem-sf-field-stage-completion",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRationalCommonCoherence",
+  "file": "lean/Sheaf/Paper/ExceptionalRationalCommonCoherence.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.rational_common_scalar_coherence",
+  "statement": "theorem rational_common_scalar_coherence (c : Compactification f) :\n    StageSystem.pairFunctorCoherent\n      (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X)\n      (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)\n      (fun i ↦ (rationalCommonF A P c i))\n      (rationalCommonQ A P c)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.ExceptionalCommonMate.unitEquation",
+   "WeilConjectures.ExceptionalCommonMate.tower",
+   "WeilConjectures.ExceptionalCommonMate.rightSystem",
+   "WeilConjectures.ExceptionalCommonMate.unitFamily",
+   "WeilConjectures.ExceptionalCommonMate.counitFamily",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.commonStageTransition_eq",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.commonComparisonCast",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.commonComparisonCast_counit",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonF",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonG",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonFiniteAdjunction",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonRawQ",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonRawB",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonQ",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonB",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rational_common_scalar_coherence",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonLeft",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommon_counit",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommon_transpose",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonRight",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonUnit",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonCounit",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.rationalCommonAdjunction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T205918-L-1633416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T205918-L-1633416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
