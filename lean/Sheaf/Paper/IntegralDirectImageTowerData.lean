@@ -328,7 +328,7 @@ def Evaluation.derived (s : Presentation l E) (e : Evaluation l E s)
   letI := (s.towers T).equivalenceAdditive
   letI := (s.towers T).evaluationLimits n
   letI := (s.towers T).evaluationColimits n
-  let hAdd : (spCoefficientEvaluation l E T (s.towers T).equivalence n).Additive := by
+  letI hAdd : (spCoefficientEvaluation l E T (s.towers T).equivalence n).Additive := by
     letI := (s.towers T).equivalenceAdditive
     letI := (s.towers T).evaluationLimits n
     exact Functor.additive_of_preserves_binary_products _
