@@ -24,15 +24,16 @@ public import Sheaf.Paper.CompletedOperationTowerSubstitution
 public import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
 import all Sheaf.Paper.ScalarExtensionTensorUnit
 import Sheaf.Paper.ScalarExtensionQuotientAssociation
-import all Sheaf.Paper.CoefficientExtensionOrdinaryStrictTensor
-import Sheaf.Paper.TensorPullbackRepresentativeDescent
-import Sheaf.Paper.ResolvingRepresentativeWhiskering
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Paper.ScalarExtensionTowerComparisonData
 public import Sheaf.Paper.ScalarExtensionTowerComposition
+public import Sheaf.Paper.ScalarExtensionTowerRealizationData
+public import Sheaf.Paper.ScalarExtensionQuotientSectionExt
+import Sheaf.Paper.ScalarTowerPullbackLimitSquare
+import Sheaf.Paper.ScalarTowerTensorLimitSquare
+import Sheaf.Paper.IntegralOperationRoosEffectivity
+import all Sheaf.Paper.IntegralOperationsWellDefined
 import all Sheaf.Paper.ScalarExtensionTowerComparisonData
 
 /-! # Scalar extension on strict quotient models
@@ -180,252 +181,7 @@ theorem unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (fun P Q p q V x y ↦
         (comparisons l).sigma_formula E E (AlgHom.id ℚ_[l] E) Y P Q p q V 1 x y)
 
-/-- A generator read in the legacy restricted finite-tensor tower's exact section type.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def integralTensorGenerator (W : Scheme.{u})
-    (P Q : CochainComplex (integralTowerModules.{u, u} l E W) ℤ)
-    (n : ℕ) (p r : ℤ) (U : W.ProEtᵒᵖ)
-    (x : (((unrestrictedIntegralFiniteComplex.{u, u} l E W n).obj P).X p).val.obj U)
-    (y : (((unrestrictedIntegralFiniteComplex.{u, u} l E W n).obj Q).X r).val.obj U) :
-    ((((integralOperationsTensorTowerFunctor.{u, u} l E W).obj (P, Q)).obj
-      (op n)).X (p + r)).val.obj U :=
-  integralOperationsTotalTensorSection.{u, u} l E W n P Q p r U x y
-
-/-- Representative normalization of the completed tensor realization, including its
-local tensor formula and its specified Roos comparison.
-Source: Stacks 06YS, 07A4, 0941 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def IsTensorModelNormalized (W : Scheme.{u})
-    (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (ρ : IntegralComparisonRoosModel.{u, u} l E W)
-    (realization : integralCompletedTensor.{u, u} l E W ≅ S.reduction.prod S.reduction ⋙
-      S.systemClosed.tensor ⋙ coefficientSequenceLimit.{u, u} l E W) : Prop :=
-  ∀ (P Q : (integralOperationsGoodComplex.{u, u} l E W).FullSubcategory)
-    (C D : Complex l E W)
-    (eC : S.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)
-    (eD : S.reduction.obj (DerivedCategory.Q.obj Q.obj) ≅ DerivedCategory.Q.obj D)
-    (κC : ∀ n : ℕ,
-      ((coefficientSequenceEvaluation.{u, u} l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
-        (unrestrictedIntegralFiniteComplex.{u, u} l E W n).obj P.obj)
-    (κD : ∀ n : ℕ,
-      ((coefficientSequenceEvaluation.{u, u} l E W n).mapHomologicalComplex (.up ℤ)).obj D ≅
-        (unrestrictedIntegralFiniteComplex.{u, u} l E W n).obj Q.obj)
-    (hC : CochainComplex.IsKFlatIndependentCoefficients
-      (R := coefficientSequenceCommRingSheaf.{u, u} l E W) C)
-    (hD : CochainComplex.IsKFlatIndependentCoefficients
-      (R := coefficientSequenceCommRingSheaf.{u, u} l E W) D),
-    CoefficientReductionPresentation.{u, u} l E W S.toCoefficientDerivedSystemReduction
-      P.obj P.property.1 C eC κC →
-    CoefficientReductionPresentation.{u, u} l E W S.toCoefficientDerivedSystemReduction
-      Q.obj Q.property.1 D eD κD →
-    ∃ q : (((coefficientSequenceRestriction.{u, u} l E W).mapHomologicalComplex (.up ℤ)).obj
-        ((tensor l E W).obj (C, D))).asFunctor ≅
-      (integralOperationsTensorTowerFunctor.{u, u} l E W).obj (P.obj, Q.obj),
-      (∀ (n : ℕ) (p r : ℤ) (U : W.ProEtᵒᵖ)
-        (x : (C.X p).val.obj (op (n, U.unop)))
-        (y : (D.X r).val.obj (op (n, U.unop))),
-        ((q.hom.app (op n)).f (p + r)).val.app U
-          (integralComparisonRestrictedSection.{u, u} l E W
-            (((tensor l E W).obj (C, D)).X (p + r)) n U
-            (generator l E W C D p r (op (n, U.unop)) x y)) =
-          integralTensorGenerator l E W P.obj Q.obj n p r U
-            (((κC n).hom.f p).val.app U (coefficientEvaluationSection.{u, u} l E W (C.X p) n U x))
-            (((κD n).hom.f r).val.app U
-              (coefficientEvaluationSection.{u, u} l E W (D.X r) n U y))) ∧
-      FiveStepEquation
-        (realization.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
-        ((coefficientSequenceLimit.{u, u} l E W).map
-          (S.systemClosed.tensor.map (Prod.mkHom eC.hom eD.hom)))
-        ((coefficientSequenceLimit.{u, u} l E W).map
-          ((S.systemTensorModel.iso _ _ _ C D hC hD).inv))
-        ((integralComparisonRoosBridge.{u, u} l E W ρ
-          ((tensor l E W).obj (C, D))).hom)
-        (DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom))
-        ((integralCompletedTensorComparison.{u, u} l E W).hom.app (P, Q))
-
-
-attribute [local irreducible] IsTensorModelNormalized
-
-/-- A normalized presentation of the named completed tensor by whole quotient systems.
-Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4 and 0941
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-structure TensorModel (W : Scheme.{u})
-    (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (ρ : IntegralComparisonRoosModel.{u, u} l E W) where
-  /-- The named completed tensor, realized by the specified system closed tensor. -/
-  realization : integralCompletedTensor.{u, u} l E W ≅ S.reduction.prod S.reduction ⋙
-    S.systemClosed.tensor ⋙ coefficientSequenceLimit.{u, u} l E W
-  /-- Normalization at every simultaneous good quotient presentation. -/
-  normalization : IsTensorModelNormalized l E W S ρ realization
-
-/-- The actual reduction of a completed pullback, followed by the coherent counit.
-Source: node proof step 8 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def pullbackReduction (W : Bool → Scheme.{u}) (M : CompletedOperations.Models.{u, u} l E W)
-    (f : W true ⟶ W false) (K : DerivedCategory (scalarReductionSource.{u, u} l E (W false))) :
-    (M.calculus true).reduction.obj ((integralDerivedPullback.{u, u} l E f).obj K) ⟶
-      (integralComparisonDerivedSequencePullback.{u, u} l E f).obj
-        ((M.calculus false).reduction.obj K) :=
-  (M.calculus true).reduction.map ((M.pullback f).realization.hom.app K) ≫
-    (M.calculus true).adjunction.counit.app _
-
-/-- The actual coherent scalar-reduction comparison, obtained from its normalized
-realization and the coherent counit, with no arbitrary quotient identification.
-Source: node proof step 8 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def scalarReduction (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
-    (ρ : IntegralComparisonRoosModel.{u, u} l L W)
-    (M : IntegralComparisonScalarModel.{u, u} l E L ι W SE ρ)
-    (K : DerivedCategory (scalarReductionSource.{u, u} l E W)) :
-    SL.reduction.obj ((integralScalarExtension.{u} l E L ι W).obj K) ⟶
-      (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).obj (SE.reduction.obj K) :=
-  SL.reduction.map (M.realization.hom.app K) ≫ SL.adjunction.counit.app _
-
-/-- The completed tensor's actual quotient comparison, followed by the coherent counit.
-Source: node proof step 8 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def tensorReduction (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (ρ : IntegralComparisonRoosModel.{u, u} l E W) (M : TensorModel l E W S ρ)
-    (K N : DerivedCategory (scalarReductionSource.{u, u} l E W)) :
-    S.reduction.obj ((integralCompletedTensor.{u, u} l E W).obj (K, N)) ⟶
-      S.systemClosed.tensor.obj (S.reduction.obj K, S.reduction.obj N) :=
-  S.reduction.map (M.realization.hom.app (K, N)) ≫ S.adjunction.counit.app _
-
-/-- The flat-term K-flat class used for scalar/tensor descent on the sequence site.
-Source: Stacks 06YS, 0G7E (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def Good (W : Scheme.{u}) (P : Complex l E W) : Prop :=
-  CochainComplex.IsKFlatIndependentCoefficients
-    (R := coefficientSequenceCommRingSheaf.{u, u} l E W) P ∧
-  ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
-    (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
-    (R := coefficientSequenceCommRingSheaf.{u, u} l E W) (P.X n)
-
-/-- Cochain normalization of the system derived scalar/tensor comparison.
-Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def DerivedSigmaModel (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
-    (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅
-      (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
-        (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor) :
-    Prop :=
-  ∀ (P Q : Complex l E W) (hP : Good l E W P) (hQ : Good l E W Q),
-    ∃ (hsP : Good l L W ((scalar l E L ι W).obj P))
-      (hsQ : Good l L W ((scalar l E L ι W).obj Q)),
-    (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map
-        ((SE.systemTensorModel.iso _ _ _ P Q hP.1 hQ.1).hom) ≫
-      α.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-      SL.systemClosed.tensor.map (Prod.mkHom
-        ((integralComparisonSequenceScalarModel.{u, u} l E L ι W).ε.app P)
-        ((integralComparisonSequenceScalarModel.{u, u} l E L ι W).ε.app Q)) =
-    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).ε.app
-        ((tensor l E W).obj (P, Q)) ≫
-      DerivedCategory.Q.map (((comparisons l).sigma E L ι W).hom.app (P, Q)) ≫
-      (SL.systemTensorModel.iso _ _ _ _ _ hsP.1 hsQ.1).hom
-
-attribute [local irreducible] DerivedSigmaModel
-
-private theorem scalar_good (W : Scheme.{u}) (P : Complex l E W) (hP : Good l E W P) :
-    Good l L W ((scalar l E L ι W).obj P) := by
-  unfold Good at hP ⊢
-  have h := SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
-    (integralComparisonSequenceScalarMap.{u, u} l E L ι W) P
-    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).E
-    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).obj_eq
-    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).map_eq hP.1
-    (fun n ↦ (exactFunctor _ _).prop_of_iso
-      (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1}
-        (coefficientSequenceCommRingSheaf.{u, u} l E W) (P.X n)) (hP.2 n))
-  refine ⟨h.1, fun n ↦ ?_⟩
-  exact (exactFunctor _ _).prop_of_iso
-    (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1}
-      (coefficientSequenceCommRingSheaf.{u, u} l L W)
-      (((scalar l E L ι W).obj P).X n)).symm (h.2 n)
-
-
-set_option maxHeartbeats 800000 in
--- Compare the restricted tensor models and counits simultaneously.
-
-/-- The derived comparison is determined by the same strict sigma on good representatives.
-Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: flat-term K-flat change of rings works without flatness of the ring map.
-It preserves Good and computes scalar derived extension by its universal counit.
-Localize sigma on the two resolving subcategories, inserting the normalized tensor
-models and scalar counits. Simultaneous K-flat resolutions give naturality on roofs
-and independence of resolutions. The localization universal property gives uniqueness
-with this cochain model equation. -/
-theorem derivedSigma_existsUnique (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W) :
-    ∃! α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅
-      (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
-        (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor,
-      DerivedSigmaModel l E L ι W SE SL α := by
-  unfold DerivedSigmaModel
-  let A := coefficientSequenceModules.{u, u} l E W
-  let B := coefficientSequenceModules.{u, u} l L W
-  let P : ObjectProperty (CochainComplex A ℤ) := Good l E W
-  let S : ObjectProperty (CochainComplex B ℤ) := Good l L W
-  let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ P X.as
-  have hres : ∀ X : HomotopyCategory A (.up ℤ),
-      ∃ (Y : H.FullSubcategory) (f : Y.obj ⟶ X), HomotopyCategory.quasiIso A (.up ℤ) f := by
-    intro X
-    obtain ⟨K, f, hK, hflat, hf, _⟩ :=
-      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
-        (R := coefficientSequenceCommRingSheaf.{u, u} l E W) X.as
-    have hs : ∀ n, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
-        (R := coefficientSequenceCommRingSheaf.{u, u} l E W) (K.X n) := fun n ↦
-      (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1}
-        (coefficientSequenceCommRingSheaf.{u, u} l E W) (K.X n)).symm (hflat n)
-    refine ⟨⟨(HomotopyCategory.quotient A (.up ℤ)).obj K, hK, hs⟩,
-      (HomotopyCategory.quotient A (.up ℤ)).map f, ?_⟩
-    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hf
-  obtain ⟨ff⟩ := resolvingRepresentativesFullyFaithfulWhiskering (DerivedCategory B)
-    (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
-    (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh P H (fun _ ↦ Iff.rfl) hres
-  let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ (DerivedCategory B)).mapIso
-    (NatIso.prod (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))
-      (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A))))
-  let PE : ObjectProperty (CochainComplex A ℤ) :=
-    CochainComplex.IsKFlatIndependentCoefficients
-      (R := coefficientSequenceCommRingSheaf.{u, u} l E W)
-  let PL : ObjectProperty (CochainComplex B ℤ) :=
-    CochainComplex.IsKFlatIndependentCoefficients
-      (R := coefficientSequenceCommRingSheaf.{u, u} l L W)
-  let iE : P.FullSubcategory ⥤ PE.FullSubcategory :=
-    ObjectProperty.lift _ P.ι (fun X ↦ X.property.1)
-  let iL : S.FullSubcategory ⥤ PL.FullSubcategory :=
-    ObjectProperty.lift _ S.ι (fun X ↦ X.property.1)
-  let r := Functor.isoWhiskerLeft (iE.prod iE) SE.systemTensorModel.comparison
-  let r' := Functor.isoWhiskerLeft (iL.prod iL) SL.systemTensorModel.comparison
-  obtain ⟨α, hα, huniq⟩ := tensorComparisonDescent
-    DerivedCategory.Q DerivedCategory.Q (scalar l E L ι W)
-    (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W)
-    (integralComparisonSequenceScalarModel.{u, u} l E L ι W).ε P S
-    (fun X hX ↦ scalar_good l E L ι W X hX) ff' (tensor l E W) (tensor l L W)
-    SE.systemClosed.tensor SL.systemClosed.tensor r r'
-    ((comparisons l).sigma E L ι W)
-    (fun X hX ↦ (integralComparisonSequenceScalarModel.{u, u} l E L ι W).computes X hX.1)
-    (fun X Y hX hY ↦ (integralComparisonSequenceScalarModel.{u, u} l E L ι W).computes _
-      (coefficientTotalTensor_isKFlat.{u, u + 1, u} _ _ X Y hX.1 hY.1))
-  refine ⟨α, ?_, ?_⟩
-  · intro X Y hX hY
-    exact ⟨scalar_good l E L ι W X hX, scalar_good l E L ι W Y hY, hα X Y hX hY⟩
-  · intro β hβ
-    apply huniq β
-    intro X Y hX hY
-    obtain ⟨hX', hY', h⟩ := hβ X Y hX hY
-    exact h
-
-/-- The representative-normalized derived tensor scalar comparison on coherent systems.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def derivedSigma (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W) :=
-  (derivedSigma_existsUnique l E L ι W SE SL).exists.choose
-
-attribute [local irreducible] integralScalarExtension integralScalarExtensionOfUniverses
-  integralCompletedTensor integralDerivedPullback
+attribute [local irreducible] integralCompletedTensor integralDerivedPullback
   integralComparisonDerivedSequenceScalar integralComparisonDerivedSequencePullback
   pullbackReduction scalarReduction tensorReduction derivedSigma
 
@@ -441,12 +197,33 @@ limit; scalar extension is its defining strict Roos limit. The K-injective-norma
 Roos bridge identifies these with total derived limit. The generator formulas fix
 all tower identifications. Universal localization gives the displayed realizations
 and their normalization on every simultaneous presentation. -/
+-- STATEMENT-DISPUTED: the scalar-model predicate quantifies over presentations
+-- fixed only by finite derived evaluations. Invisible whole-system automorphisms
+-- can alter its required limit equation; see the T6 primitive-realization report.
+-- The tensor normalization has the same missing whole-system coherence condition.
 theorem realizationModels (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W) (ML : CompletedOperations.Models.{u, u} l L W) :
     ∀ a : Bool, Nonempty (TensorModel l E (W a) (ME.calculus a) (ME.roos a)) ∧
       Nonempty (IntegralComparisonScalarModel.{u, u} l E L ι (W a)
         (ME.calculus a) (ML.roos a)) := by
   sorry
+
+private theorem reduction_of_limit_square
+    {C D : Type*} [Category C] [Category D] {R : C ⥤ D} {G : D ⥤ C}
+    (adj : R ⊣ G) {A B : C} {X Y T : D}
+    (a : A ⟶ B) (x : B ⟶ G.obj X) (y : A ⟶ G.obj Y)
+    (t : X ⟶ T) (s : Y ⟶ T)
+    (h : a ≫ x ≫ G.map t = y ≫ G.map s) :
+    R.map a ≫ (R.map x ≫ adj.counit.app X) ≫ t =
+      (R.map y ≫ adj.counit.app Y) ≫ s := by
+  calc
+    _ = R.map (a ≫ x ≫ G.map t) ≫ adj.counit.app T := by
+      simp only [R.map_comp, Category.assoc]
+      rw [adj.counit_naturality t]
+    _ = R.map (y ≫ G.map s) ≫ adj.counit.app T := by rw [h]
+    _ = _ := by
+      simp only [R.map_comp, Category.assoc]
+      rw [adj.counit_naturality s]
 
 /-- The coherent quotient representatives of the canonical completed comparisons.
 Together with square, unit, composition and the normalized cochain definitions, this
@@ -526,53 +303,47 @@ theorem scalarExtensionTowerCoherence (W : Bool → Scheme.{u})
           (tensorReduction l E (W false) (ME.calculus false) (ME.roos false) TE M.obj N.obj) ≫
         (derivedSigma l E L ι (W false) (ME.calculus false) (ML.calculus false)).hom.app
           ((ME.calculus false).reduction.obj M.obj, (ME.calculus false).reduction.obj N.obj)) := by
-  sorry
+  let qGood := integralOperationsGoodLocalization.{u, u} l E (W false)
+  let weak :=
+    (HomologicalComplex.quasiIso (integralTowerModules l E (W false)) (.up ℤ)).inverseImage
+      (integralOperationsGoodComplex l E (W false)).ι
+  have : qGood.IsLocalization weak :=
+    integralOperationsGoodLocalization_isLocalization l E (W false)
+  have : qGood.EssSurj := Localization.essSurj qGood weak
+  let PM := qGood.objPreimage M.obj
+  let PN := qGood.objPreimage N.obj
+  let eM : DerivedCategory.Q.obj PM.obj ≅ M.obj := qGood.objObjPreimageIso M.obj
+  let eN : DerivedCategory.Q.obj PN.obj ≅ N.obj := qGood.objObjPreimageIso N.obj
+  have hF := ((integralOperationRoos_effectivity l E).1 f PM _
+    ((integralDerivedPullback l E f).mapIso eM.symm ≪≫
+      (integralDerivedPullbackComparison l E f).app PM)).1
+  have hT := ((integralOperationRoos_effectivity l E).2 (W false) PM PN _
+    ((integralCompletedTensor l E (W false)).mapIso (Iso.prod eM.symm eN.symm) ≪≫
+      (integralCompletedTensorComparison l E (W false)).app (PM, PN))).1
+  refine ⟨hF, hT, ?_, ?_⟩
+  · have h := scalarTowerPullbackLimitSquare l E L ι W ME ML SX SY f _hX _hY M hF
+    simpa only [pullbackReduction, scalarReduction, Category.assoc] using
+      reduction_of_limit_square (ML.calculus true).adjunction
+        (scalarPullbackCompleted l E L ι f M.obj M.property.1 hF).hom
+        ((ML.pullback f).realization.hom.app
+          ((integralScalarExtension.{u} l E L ι (W false)).obj M.obj))
+        (SX.realization.hom.app ((integralDerivedPullback.{u, u} l E f).obj M.obj))
+        _ _ h
+  · have h := scalarTowerTensorLimitSquare l E L ι (W false)
+      (ME.calculus false) (ML.calculus false) (ME.roos false) (ML.roos false)
+      SY TE TL _hY M N hT
+    simpa only [tensorReduction, scalarReduction, Category.assoc] using
+      reduction_of_limit_square (ML.calculus false).adjunction
+        (scalarTensorCompleted l E L ι (W false) M.obj N.obj
+          M.property.1 N.property.1 hT).hom
+        (TL.realization.hom.app
+          ((integralScalarExtension.{u} l E L ι (W false)).obj M.obj,
+            (integralScalarExtension.{u} l E L ι (W false)).obj N.obj))
+        (SY.realization.hom.app
+          ((integralCompletedTensor.{u, u} l E (W false)).obj (M.obj, N.obj))) _ _ h
 
 attribute [local semireducible] coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf
-
-/-- The actual local section of a strict quotient model specified by its evaluation iso.
-Source: node proof step 2 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
-def modelSection (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
-    (A : CoefficientExtensionSystems.{u, u} l E L ι W)
-    (d : CoefficientExtensionReductionData.{u, u} l E L ι W SE SL A)
-    (P : (integralOperationsGoodComplex.{u, u} l E W).FullSubcategory)
-    (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ)
-    (b : (coefficientSequenceCommRingSheaf l L W).obj.obj (op (n, U.unop)))
-    (x : (P.obj.X i).val.obj U) :
-    ((d.direct.obj P).X i).val.obj (op (n, U.unop)) :=
-  integralComparisonSequenceSection.{u, u} l L W ((d.direct.obj P).X i) n U
-    ((((d.directEvaluation n).inv.app P).f i).val.app U
-      (integralScalarTensorSection.{u, u} l E L ι W n (P.obj.X i) U b x))
-
-private theorem modelSection_hom_ext (W : Scheme.{u})
-    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
-    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
-    (A : CoefficientExtensionSystems.{u, u} l E L ι W)
-    (d : CoefficientExtensionReductionData.{u, u} l E L ι W SE SL A)
-    (K : (integralOperationsGoodComplex.{u, u} l E W).FullSubcategory) (i : ℤ)
-    {T : coefficientSequenceModules.{u, u} l L W}
-    (f g : (d.direct.obj K).X i ⟶ T)
-    (h : ∀ (n : ℕ) (U : W.ProEtᵒᵖ)
-      (b : (coefficientSequenceCommRingSheaf l L W).obj.obj (op (n, U.unop)))
-      (x : (K.obj.X i).val.obj U),
-      f.val.app (op (n, U.unop)) (modelSection l E L ι W SE SL A d K n i U b x) =
-        g.val.app (op (n, U.unop)) (modelSection l E L ι W SE SL A d K n i U b x)) :
-    f = g := by
-  have he (n : ℕ) : (coefficientSequenceEvaluation l L W n).map f =
-      (coefficientSequenceEvaluation l L W n).map g := by
-    apply (cancel_epi (((d.directEvaluation n).inv.app K).f i)).mp
-    apply (SheafOfModules.toSheaf _).map_injective
-    apply WeilConjectures.scalarTensor_ab_hom_ext l E L ι W n (K.obj.X i)
-    intro U b x
-    exact h n U b x
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  ext x
-  exact congrArg (fun k ↦ k.val.app (op U.unop.2) x) (he U.unop.1)
 
 /-- Scalar extension of the actual E quotient complex is the actual B quotient complex,
 with the balanced association formula and all quotient transitions retained.
@@ -626,7 +397,7 @@ theorem quotientModels {X Y : Scheme.{u}} (f : X ⟶ Y)
     apply HomologicalComplex.hom_ext
     intro i
     apply ((scalar_adj l E L ι Y).homEquiv _ _).injective
-    apply modelSection_hom_ext l E E (AlgHom.id ℚ_[l] E) Y SE SE A0 d0 K i
+    apply quotientModelSection_hom_ext l E E (AlgHom.id ℚ_[l] E) Y SE SE A0 d0 K i
     intro n U a x
     rw [scalar_transpose_section, scalar_transpose_section]
     exact (hδ' n i U 1 a x).trans (hδ n i U 1 a x).symm
