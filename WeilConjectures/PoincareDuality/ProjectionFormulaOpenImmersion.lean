@@ -35,19 +35,12 @@ compactification of `j` chosen by Nagata's theorem, compared with the trivial co
 2. The comparison `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement of factorizations intertwines
    these morphisms
    (`boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp`),
-   by the abstract `CategoryTheory.Adjunction.whiskerRight_refinement_comp_exceptionalProjection`.
+   by the abstract `CategoryTheory.Adjunction.whiskerRight_refinement_comp_exceptionalProjection`;
+   hence so does the comparison `Rf_!^{c₁} ≅ Rf_!^{c₂}` of two compactifications
+   (`boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp`).
 3. For the trivial compactification, the statement is the abstract
    `CategoryTheory.Adjunction.trivial_exceptionalProjection_comp_projectionComparison`
    (`homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion`).
-
-## Sorried input
-
-- `boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp`:
-  step 2 for the comparison `boundedConstructibleLowerShriekOverRefinementIso` of a refinement of
-  compactifications. It is the proved
-  `boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification`
-  transported along `boundedConstructibleLowerShriekRefinementIso_eq'`; the transport itself times
-  out in the kernel, see its docstring.
 
 ## Implementation notes
 
@@ -57,6 +50,12 @@ terms differ from those of the categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, and the c
 prohibitively expensive. For the same reason the projection of the monoidal structure of
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` is the preferred tensor product, as in
 `WeilConjectures.TraceFormula.KunnethVerdierOpen`.
+
+The comparisons of factorizations are typed by `i_! ⋙ Rp_*` and those of compactifications by
+`Rf_!^c`, whose categories carry different proof terms. A concrete comparison applied to objects
+elaborated on either side is compared by the kernel by unfolding it completely; the two typings are
+therefore related only for a variable natural transformation
+(`natTrans_app_whiskerRight_comp_homMk_exceptionalProjectionMorphismOfCompactification`).
 
 -/
 
@@ -402,24 +401,47 @@ theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_c
     boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp ℓ r.isPullback
       r.hom_overG d.overI_overG c.overI_overG K B
 
-/-- **The comparison along a refinement of compactifications intertwines the exceptional
-projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2), for the
-comparison `boundedConstructibleLowerShriekOverRefinementIso` used by the independence of the lower
-shriek from the compactification.
-
-Unfinished: this is
-`boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification` through
-`boundedConstructibleLowerShriekOverRefinementIso = boundedConstructibleLowerShriekRefinementIso`
-(`boundedConstructibleLowerShriekRefinementIso_eq'`). Rewriting along that identity and closing
-with the proved statement elaborates in seconds but the kernel check times out (> 100 s, or runs
-out of memory with a larger budget): the categories `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` in the types of the two
-comparisons are elaborated in different files, with different proof terms for the ring structure
-of `ℚ̲̄_ℓ` (`pointLowerStar._proof_1` against an inline `Precoherent Profinite` instance), and the
-kernel compares them at thousands of positions. -/
-theorem boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp
+/-- The comparison `boundedConstructibleLowerShriekRefinementIso` along a refinement of
+compactifications intertwines the exceptional projection morphisms, through its inverse. -/
+theorem boundedConstructibleLowerShriekRefinementIso_inv_app_whiskerRight_comp_compactification
     {c d : Compactification f.left} (r : Compactification.OverRefinement d c)
+    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ r.isPullback)]
     (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
-    (boundedConstructibleLowerShriekOverRefinementIso ℓ r).hom.app K ▷ B ≫
+    ObjectProperty.homMk
+        (X := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj K ⊗ B)
+        (Y := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj
+          (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+        (exceptionalProjectionMorphismOfCompactification _ d K.obj B.obj) ≫
+        (boundedConstructibleLowerShriekRefinementIso ℓ r.isPullback r.hom_overG).inv.app
+          (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) =
+      (boundedConstructibleLowerShriekRefinementIso ℓ r.isPullback r.hom_overG).inv.app K ▷ B ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c K.obj B.obj) := by
+  rw [← cancel_mono ((boundedConstructibleLowerShriekRefinementIso ℓ r.isPullback
+      r.hom_overG).hom.app _), Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  rw [Category.assoc,
+    ← boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification ℓ r K
+      B, ← comp_whiskerRight_assoc, Iso.inv_hom_id_app]
+  erw [id_whiskerRight, Category.id_comp]
+
+/-- A natural transformation `i_! ⋙ Rp_* ⟶ i'_! ⋙ Rp'_*` between the lower shrieks of two
+compactifications which intertwines their exceptional projection morphisms also does so as a
+natural transformation `Rf_!^c ⟶ Rf_!^d`.
+
+The two statements agree up to unfolding `boundedConstructibleLowerShriekOfCompactification`; the
+natural transformation is a variable so that the kernel compares them without unfolding it. -/
+theorem natTrans_app_whiskerRight_comp_homMk_exceptionalProjectionMorphismOfCompactification
+    {c d : Compactification f.left}
+    (η : boundedConstructibleOpenImmersionLowerShriek 𝐐 ℓ c.overI ⋙
+        boundedConstructibleLowerStar ℓ c.overG ⟶
+      boundedConstructibleOpenImmersionLowerShriek 𝐐 ℓ d.overI ⋙
+        boundedConstructibleLowerStar ℓ d.overG)
+    (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧)
+    (h : η.app K ▷ B ≫
         ObjectProperty.homMk
           (X := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj K ⊗ B)
           (Y := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj
@@ -430,9 +452,119 @@ theorem boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_co
           (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
             (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
           (exceptionalProjectionMorphismOfCompactification _ c K.obj B.obj) ≫
-        (boundedConstructibleLowerShriekOverRefinementIso ℓ r).hom.app
+        η.app (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B)) :
+    @NatTrans.app _ _ _ _ (boundedConstructibleLowerShriekOfCompactification ℓ c)
+        (boundedConstructibleLowerShriekOfCompactification ℓ d) η K ▷ B ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ d K.obj B.obj) =
+      ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c K.obj B.obj) ≫
+        @NatTrans.app _ _ _ _ (boundedConstructibleLowerShriekOfCompactification ℓ c)
+          (boundedConstructibleLowerShriekOfCompactification ℓ d) η
+          (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) := h
+
+/-- `natTrans_app_whiskerRight_comp_homMk_exceptionalProjectionMorphismOfCompactification` for a
+natural transformation in the other direction. -/
+theorem homMk_exceptionalProjectionMorphismOfCompactification_comp_natTrans_app
+    {c d : Compactification f.left}
+    (η : boundedConstructibleOpenImmersionLowerShriek 𝐐 ℓ d.overI ⋙
+        boundedConstructibleLowerStar ℓ d.overG ⟶
+      boundedConstructibleOpenImmersionLowerShriek 𝐐 ℓ c.overI ⋙
+        boundedConstructibleLowerStar ℓ c.overG)
+    (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧)
+    (h : ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ d K.obj B.obj) ≫
+        η.app (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) =
+      η.app K ▷ B ≫ ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c K.obj B.obj)) :
+    ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ d K.obj B.obj) ≫
+        @NatTrans.app _ _ _ _ (boundedConstructibleLowerShriekOfCompactification ℓ d)
+          (boundedConstructibleLowerShriekOfCompactification ℓ c) η
+          (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) =
+      @NatTrans.app _ _ _ _ (boundedConstructibleLowerShriekOfCompactification ℓ d)
+          (boundedConstructibleLowerShriekOfCompactification ℓ c) η K ▷ B ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c K.obj B.obj) := h
+
+/-- The comparison `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` of the lower
+shrieks of two compactifications intertwines the exceptional projection morphisms. -/
+theorem boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_hom_app_whiskerRight_comp
+    (c₁ c₂ : Compactification f.left) (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
+    (boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ c₁ c₂).hom.app K ▷ B ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c₂).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c₂).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c₂ K.obj B.obj) =
+      ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c₁).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c₁).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c₁ K.obj B.obj) ≫
+        (boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ c₁ c₂).hom.app
           (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) := by
-  sorry
+  have := (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isProper
+  have := (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isProper
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
+    (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
+    (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
+  have h₁ := boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification
+    ℓ (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some K B
+  have h₂ := boundedConstructibleLowerShriekRefinementIso_inv_app_whiskerRight_comp_compactification
+    ℓ (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some K B
+  have h₁' := natTrans_app_whiskerRight_comp_homMk_exceptionalProjectionMorphismOfCompactification
+    ℓ (boundedConstructibleLowerShriekRefinementIso ℓ
+      (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
+      (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.hom_overG).hom K B h₁
+  have h₂' := homMk_exceptionalProjectionMorphismOfCompactification_comp_natTrans_app
+    ℓ (boundedConstructibleLowerShriekRefinementIso ℓ
+      (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
+      (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.hom_overG).inv K B h₂
+  rw [boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq_refinementIso]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc, comp_whiskerRight]
+  rw [← h₂', ← Category.assoc, h₁', Category.assoc]
+
+/-- **The comparison of the lower shrieks of two compactifications intertwines the exceptional
+projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2): through
+`Rf_!^{c₁} ≅ Rf_!^{c₂}`, the exceptional projection morphism of `c₁` is that of `c₂`. -/
+theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
+    (c₁ c₂ : Compactification f.left) (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂).hom.app K ▷ B ≫
+        ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c₂).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c₂).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c₂ K.obj B.obj) =
+      ObjectProperty.homMk
+          (X := (boundedConstructibleLowerShriekOfCompactification ℓ c₁).obj K ⊗ B)
+          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c₁).obj
+            (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B))
+          (exceptionalProjectionMorphismOfCompactification _ c₁ K.obj B.obj) ≫
+        (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂).hom.app
+          (K ⊗ (boundedConstructibleUpperStar _ ℓ f).obj B) := by
+  rw [← boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq']
+  exact boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_hom_app_whiskerRight_comp ℓ
+    c₁ c₂ K B
 
 end Compactification
 
@@ -530,49 +662,19 @@ theorem boundedConstructibleExceptionalProjection_comp_projectionComparison
           j).projectionComparison K B =
       (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).hom.app K ▷
         B := by
-  obtain ⟨d, ⟨r₁⟩, ⟨r₂⟩⟩ := Compactification.exists_overRefinement (compactificationOverField j)
-    (Compactification.ofIsOpenImmersion j.left)
-  have := r₁.isProper
-  have := r₂.isProper
-  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
-    r₁.isPullback
-  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl ℓ
-    r₂.isPullback
-  have h₁ := boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp ℓ r₁ K B
-  have h₂ := boundedConstructibleLowerShriekOverRefinementIso_hom_app_whiskerRight_comp ℓ r₂ K B
-  have h₂' : ObjectProperty.homMk
-        (X := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj K ⊗ B)
-        (Y := (boundedConstructibleLowerShriekOfCompactification ℓ d).obj
-          (K ⊗ (boundedConstructibleUpperStar _ ℓ j).obj B))
-        (exceptionalProjectionMorphismOfCompactification _ d K.obj B.obj) ≫
-        (boundedConstructibleLowerShriekOverRefinementIso ℓ r₂).inv.app
-          (K ⊗ (boundedConstructibleUpperStar _ ℓ j).obj B) =
-      (boundedConstructibleLowerShriekOverRefinementIso ℓ r₂).inv.app K ▷ B ≫
-        ObjectProperty.homMk
-          (X := (boundedConstructibleLowerShriekOfCompactification ℓ
-            (Compactification.ofIsOpenImmersion j.left)).obj K ⊗ B)
-          (Y := (boundedConstructibleLowerShriekOfCompactification ℓ
-            (Compactification.ofIsOpenImmersion j.left)).obj
-              (K ⊗ (boundedConstructibleUpperStar _ ℓ j).obj B))
-          (exceptionalProjectionMorphismOfCompactification _
-            (Compactification.ofIsOpenImmersion j.left) K.obj B.obj) := by
-    rw [← cancel_mono ((boundedConstructibleLowerShriekOverRefinementIso ℓ r₂).hom.app _),
-      Category.assoc, Iso.inv_hom_id_app]
-    erw [Category.comp_id]
-    rw [Category.assoc, ← h₂, ← comp_whiskerRight_assoc, Iso.inv_hom_id_app]
-    erw [id_whiskerRight, Category.id_comp]
   have h₃ := homMk_exceptionalProjectionMorphismOfCompactification_ofIsOpenImmersion' ℓ j K B
   have hI : boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j =
       boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
         (compactificationOverField j) (.ofIsOpenImmersion j.left) ≪≫
       (Functor.isoWhiskerLeft (boundedConstructibleOpenImmersionLowerShriek _ ℓ j)
         (boundedConstructibleLowerStarId ℓ X) ≪≫ Functor.rightUnitor _) := rfl
-  rw [hI, boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_trans_symm ℓ r₁ r₂]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc, comp_whiskerRight]
-    at h₃ ⊢
+  rw [hI]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc, comp_whiskerRight] at h₃ ⊢
   change ObjectProperty.homMk _ ≫ _ = _
-  rw [← reassoc_of% h₁, reassoc_of% h₂']
-  exact congrArg (fun t ↦ _ ▷ B ≫ _ ▷ B ≫ t) h₃
+  rw [← reassoc_of%
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
+    ℓ (compactificationOverField j) (.ofIsOpenImmersion j.left) K B)]
+  exact congrArg (fun t ↦ _ ▷ B ≫ t) h₃
 
 end OpenImmersion
 
