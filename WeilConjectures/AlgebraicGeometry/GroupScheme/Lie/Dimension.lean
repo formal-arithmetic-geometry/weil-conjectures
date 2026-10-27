@@ -34,10 +34,14 @@ of `A` at the identity, which is the dimension of `Lie(G)`.
 - `AlgebraicGeometry.GrpObj.topologicalKrullDim_le_finrank_lie`: `dim G ≤ dim Lie(G)`.
 - `AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim`: in characteristic zero,
   `dim Lie(G) = dim G`.
+- `AlgebraicGeometry.GrpObj.isIso_left_of_differential_bijective`: in characteristic zero, a
+  closed subgroup scheme of a connected group scheme of finite type with the same Lie algebra is
+  everything.
 
 ## Blueprint
 
 - `sk-i-cartier`: the Lie algebra clauses of Cartier's theorem.
+- `lem-wf-same-lie-closed-subgroup`: the Lie criterion for closed subgroups.
 -/
 
 @[expose] public section
@@ -191,6 +195,25 @@ theorem finrank_lie_eq_topologicalKrullDim (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [CharZero k] :
     (Module.finrank k (Lie G) : WithBot ℕ∞) = topologicalKrullDim G.left :=
   le_antisymm finrank_lie_le_topologicalKrullDim (topologicalKrullDim_le_finrank_lie G)
+
+/-- The Lie criterion for closed subgroups: over a field of characteristic zero, a closed subgroup
+scheme `K` of a connected group scheme `G` of finite type with the same Lie algebra (the
+differential of the inclusion is bijective) is all of `G`. By Cartier's theorem
+`dim K = dim Lie(K) = dim Lie(G) = dim G`, and `K` and `G` are reduced, so
+`AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq` applies.
+(blueprint: `lem-wf-same-lie-closed-subgroup`) -/
+theorem isIso_left_of_differential_bijective [CharZero k] {K G : Over (Spec (.of k))} [GrpObj K]
+    [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [ConnectedSpace G.left]
+    (f : K ⟶ G) [IsMonHom f] [IsClosedImmersion f.left]
+    (h : Function.Bijective (differential f)) : IsIso f.left := by
+  have hK : K.hom = f.left ≫ G.hom := (Over.w f).symm
+  have : LocallyOfFiniteType K.hom := by rw [hK]; infer_instance
+  have : QuasiCompact K.hom := by rw [hK]; infer_instance
+  have := isReduced_of_charZero K
+  have := isReduced_of_charZero G
+  refine isIso_left_of_topologicalKrullDim_eq f ?_
+  rw [← finrank_lie_eq_topologicalKrullDim, ← finrank_lie_eq_topologicalKrullDim,
+    (LinearEquiv.ofBijective (differential f).toLinearMap h).finrank_eq]
 
 end GrpObj
 
