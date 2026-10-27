@@ -9,6 +9,8 @@ public import Sheaf.Paper.RationalP1AmbientComposites
 public import Sheaf.Paper.DiagonalCoefficientDiagrams
 public import Sheaf.SixFunctors.IntegralNormalizedFamily
 public import Sheaf.SixFunctors.IntegralKernelUnitCounit
+import Sheaf.SixFunctors.IntegralKernelFirstContraction
+import Sheaf.SixFunctors.IntegralKernelSecondContraction
 /-! # The two integral diagonal contractions before integration
 
 Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
@@ -84,5 +86,6 @@ theorem integralKernel_contractions
             (RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)
               (ProjectiveLine Y)).hom)) ≫
         (ρ_ (((restrictedPull ℓ E (ProjectiveLine Y ↘ Y) 1 hq).obj K).obj)).hom) := by
-  sorry
+  exact ⟨integralKernel_first_contraction ℓ E k Y hq hr family _href a _hnorm,
+    integralKernel_second_contraction ℓ E k Y hq hr family _href a _hnorm⟩
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction

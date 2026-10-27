@@ -1,0 +1,116 @@
+{
+ "kind": "statement",
+ "title": "First integral diagonal kernel contraction",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), the corresponding diagonal contraction component"
+ },
+ "stmt_deps": [
+  "lem-integral-normalized-family",
+  "def-integral-kernel-unit-counit"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagonal class and normalized projective line traces extend from completed integral coefficients to a family of coefficient rings",
+   "results": "8 hits: Algebra.normalizedTrace_algebraMap_of_lifts, Algebra.normalizedTrace, Algebra.normalizedTrace_surjective, Algebra.normalizedTrace_map, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace_algebraMap_apply, Algebra.normalizedTrace_algebraMap_apply_eq_self, Algebra.normalizedTrace_trans",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "1 hits: CategoryTheory.NatTrans.ext",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(integral|trace)|unitCounit.*exists",
+   "results": "7 hits: Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple.lean, Mathlib/Algebra/DirectSum/LinearMap.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching normalized integral projective-line statement; the general categorical tools are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pair of natural transformations satisfying the two triangle identities defines an adjunction",
+   "results": "8 hits, including CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.mk, CategoryTheory.Adjunction.CoreUnitCounit.mk.",
+   "date": "2026-10-25",
+   "verdict": "The general unit-counit constructor closes the assembly; it does not construct the geometric Tate comparisons, coefficient family, natural transformations, or contraction formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "id": "lem-integral-kernel-first-contraction",
+ "statement": "The first conjunct of the integral diagonal kernel contraction formulas holds under the hypotheses of lem-integral-kernel-contractions.",
+ "proof": [
+  {
+   "text": "Prove the first component by transporting the completed trace/base-change equation through the normalized integral coefficient family, then applying projection and section normalization.",
+   "uses": [
+    "det-prop-diagonal-tower-coefficients",
+    "lem-sfb-trace-base-change-first",
+    "lem-sfb-projection-section-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-prop-diagonal-tower-coefficients",
+  "lem-sfb-trace-base-change-first",
+  "lem-sfb-projection-section-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (1), first diagonal contraction component"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralKernelContractions",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-integral-kernel-contractions",
+   "place": "Paragraph (1), first diagonal contraction component",
+   "via": [
+    "lem-integral-kernel-contractions"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralKernelFirstContraction",
+  "file": "lean/Sheaf/SixFunctors/IntegralKernelFirstContraction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralKernel_first_contraction",
+  "statement": "theorem integralKernel_first_contraction\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [∀ x : ProjectiveLine Y, Invertible (ℓ : (ProjectiveLine Y).residueField x)]\n    [∀ x : diagonalSurface Y, Invertible (ℓ : (diagonalSurface Y).residueField x)]\n    (hq : ∀ K, IntegralCompactSupport.localizing\n        (Profinite.padicIntegersRingObj ℓ E.val) Y K →\n      IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val)\n        (ProjectiveSpace (ULift.{u} (Fin 2)) Y)\n        ((pullTwistShift ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) 1).obj K))\n    (hr : ∀ K, IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val)\n        (ProjectiveSpace (ULift.{u} (Fin 2)) Y) K →\n      IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) Y\n        ((IntegralCompactSupport.push (Profinite.padicIntegersRingObj ℓ E.val)\n          (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y)).obj K))\n    (family : Family ℓ Y) (_href : IntegralFamilyReference ℓ Y family)\n    (a : IntegralUnitCounitType ℓ E Y hq hr)\n    (_hnorm : IntegralUnitCounitNormalized ℓ E Y hq hr family a) :\n    (∀ M,\n      (((restrictedPush ℓ E (ProjectiveLine Y ↘ Y) hr).map (a.1.app M)) ≫\n        a.2.app ((restrictedPush ℓ E (ProjectiveLine Y ↘ Y) hr).obj M)).hom =\n      (moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val)\n        (ProjectiveLine Y ↘ Y)).map\n        ((ρ_ M.obj).inv ≫ (M.obj ◁\n          ((RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n            (ProjectiveLine Y)).inv ≫ (family.integral E).support₁.hom ≫\n            (family.integral E).R₁.R.map (family.integral E).delta ≫\n            (family.integral E).trace₁ ≫\n            (RationalP1.singleUnitIso (Profinite.padicIntegersRingObj ℓ E.val)\n              (ProjectiveLine Y)).hom)) ≫ (ρ_ M.obj).hom))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T194501-L-853655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T194501-L-853655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
