@@ -19570,3 +19570,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:28 L: returned deliver/X3/Sheaf.Paper.DiagonalTowerLimit (reviewer RETURN: (reviewer C-9ce8f, head 9ce8fbdb6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.DiagonalTowerL)
 
 - 22:48 L: batch 20261027T134950 dependency take-out
+- 15:05 L: returned deliver/T1/Sheaf.Paper.PrimitiveQuotientScalarModelExistence (reviewer RETURN: (reviewer C-ff2c4, head ff2c4697e) 2b/A3: the split IntegralComparisonRealizationModels → new Sheaf.Paper.IntegralCompar)
