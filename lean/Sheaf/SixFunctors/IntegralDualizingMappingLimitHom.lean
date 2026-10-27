@@ -6,6 +6,7 @@ Authors: SHEAF group D5
 module
 
 public import Sheaf.SixFunctors.IntegralDualizingRoosModel
+import Sheaf.SixFunctors.IntegralDualizingMappingLimitHomAt
 
 /-! The degree-zero mapping adjunction for the prescribed dualizing limit.
 
@@ -52,6 +53,8 @@ theorem integralDualizing_mapping_limit_hom
             (DerivedCategory.singleFunctor (scalarReductionSource l E (Spec (.of D.k))) 0).obj
               (SheafOfModules.unit
                 (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of D.k)))))) := by
-  sorry
+  intro K
+  simpa only [] using
+    (integralDualizing_mapping_limit_hom_at D l hl E X T e he M hM K)
 
 end WeilConjectures
