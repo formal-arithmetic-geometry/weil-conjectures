@@ -19576,3 +19576,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:16 L: returned deliver/R8/Sheaf.AlgebraicGeometry.SfDiagonalSectionForgetSupports (reviewer RETURN: (the landing tools, head 019de3f60) the delivery did not land: missing import source modules: Sheaf.AlgebraicGeometry.Sf)
 - 15:16 L: merged deliver/A4/Sheaf.AlgebraicGeometry.ProperOpenAlphaPasting (stage 3; reviewer PASS; after a return; landing 20261027T151644-L-1187363 (proof); batch 20261027T151642; modules 1; new nodes 0)
 - 15:16 L: merged deliver/A5/Sheaf.WeilSheaf.StructuralBidualInvertible (stage 3; reviewer PASS; first push; landing 20261027T151645-L-1187746 (interface); batch 20261027T151642; modules 2; new nodes 1)
+- 15:16 L: merged deliver/B2/Sheaf.Paper.FiniteRealizationScalarMate (stage 3; reviewer PASS; first push; landing 20261027T151646-L-1188164 (proof); batch 20261027T151642; modules 1; new nodes 0)

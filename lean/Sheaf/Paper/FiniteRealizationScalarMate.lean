@@ -87,15 +87,16 @@ theorem realizationScalar_directImage_mate
         (realizationRestrictionIso φ T).hom.app
           ((ProEtale.pbcFixedScalarExtension (ProEt.topology T) a).obj M) =
       (sfIntrinsicDerivedEquivalence T A).functor.map ((b T).unit.app M) := by
-    convert realizationScalar_unit (sfIntrinsicDerivedEquivalence T A)
+    -- Normalize the equality cast in the chosen inverse restriction square explicitly.
+    simpa only [realizationScalarIso, realizationRestrictionIso, realizationRestrictionRightIso,
+      ProEtale.pbcFixedScalarExtension, pbcDerivedRestrict, pbcRestrict, scalarRingMap,
+      proEtaleConstantRingMap, proEtaleCoefficientRestrictScalars, sfFixedRestriction,
+      Sheaf.restrictScalars, Sheaf.derivedRestrictScalars, Functor.id_obj, Functor.comp_obj,
+      eq_mpr_eq_cast, cast_eq, id_eq, a, b] using
+      realizationScalar_unit (sfIntrinsicDerivedEquivalence T A)
         (sfIntrinsicDerivedEquivalence T B)
         (pbcDerivedScalarAdjunction (scalarRingMap φ T)) (b T)
-        (realizationRestrictionRightIso φ T) M using 1;
-      simp [realizationScalarIso, realizationRestrictionIso, realizationRestrictionRightIso,
-        ProEtale.pbcFixedScalarExtension,
-        pbcDerivedRestrict, pbcRestrict, scalarRingMap, proEtaleConstantRingMap,
-        proEtaleCoefficientRestrictScalars, sfFixedRestriction, Sheaf.restrictScalars,
-        Sheaf.derivedRestrictScalars, Functor.id_obj, id_eq, a, b]
+        (realizationRestrictionRightIso φ T) M
   have hs : (mateEquiv (b Y) (b Z)
       (ProEtale.scalarPullbackProEtaleIso a g).inv).natTrans =
       (ProEtale.leftDerivedUpperStarRestrictScalarsIso a g).hom := by
