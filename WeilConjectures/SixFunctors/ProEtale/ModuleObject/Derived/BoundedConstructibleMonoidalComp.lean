@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
@@ -35,31 +36,6 @@ lemma eqToHom_comp_of_self {C : Type*} [Category C] {A B : C} (p : A = A) (x : A
 
 end CategoryTheory
 
-namespace CategoryTheory.ObjectProperty
-
-lemma tensorHom_hom' {C : Type*} [Category C] [MonoidalCategory C] {P : ObjectProperty C}
-    [P.IsMonoidal] {A B A' B' : P.FullSubcategory} (a : A ⟶ A') (b : B ⟶ B') :
-    (a ⊗ₘ b).hom = a.hom ⊗ₘ b.hom :=
-  rfl
-
-/-- The underlying morphism of the tensor comparison `δ` of the restriction `monoidalLift` of a
-strong monoidal functor is the tensor comparison of the functor. -/
-lemma monoidalLift_δ_hom {C D : Type*} [Category C] [MonoidalCategory C] [Category D]
-    [MonoidalCategory D] {P : ObjectProperty C} [P.IsMonoidal] {Q : ObjectProperty D}
-    [Q.IsMonoidal] (F : C ⥤ D) [F.Monoidal] (hF : ∀ X : P.FullSubcategory, Q (F.obj X.obj))
-    (X Y : P.FullSubcategory) :
-    (δ (Q.lift (P.ι ⋙ F) hF) X Y).hom = δ F X.obj Y.obj :=
-  rfl
-
-/-- The underlying morphism of the braiding of a full braided subcategory is the braiding. -/
-lemma fullBraidedSubcategory_braiding_hom_hom {C : Type*} [Category C] [MonoidalCategory C]
-    [BraidedCategory C] {P : ObjectProperty C} [P.IsMonoidal] (X Y : P.FullSubcategory) :
-    (@BraidedCategory.braiding _ _ _ (fullBraidedSubcategory P) X Y).hom.hom =
-      (β_ X.obj Y.obj).hom :=
-  rfl
-
-end CategoryTheory.ObjectProperty
-
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -80,7 +56,8 @@ section Ambient
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- `ProEtale.CondensedRing.leftDerivedUpperStarTensor_comp_of_eq` in terms of the tensor
-comparisons `δ`. -/
+comparisons `δ`: the composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` commutes with the
+tensor comparisons `δ : Lh^* (K ⊗ᴸ M) ⟶ Lh^* K ⊗ᴸ Lh^* M`. -/
 lemma δ_leftDerivedUpperStar_comp_of_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     {h : X ⟶ Z} (hh : h = f ≫ g)
     (K M : DerivedCategory
@@ -93,7 +70,8 @@ lemma δ_leftDerivedUpperStar_comp_of_eq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g :
   leftDerivedUpperStarTensor_comp_of_eq Λ f g hh K M
 
 /-- `ProEtale.CondensedRing.leftDerivedUpperStarTensor_id_of_eq` in terms of the tensor
-comparisons `δ`. -/
+comparisons `δ`: `L(𝟙 W)^*(K ⊗ᴸ M) ⟶ L(𝟙 W)^* K ⊗ᴸ L(𝟙 W)^* M ⟶ K ⊗ᴸ M` is the identity
+isomorphism. -/
 lemma δ_leftDerivedUpperStar_id_of_eq {W : Scheme.{u}} {h : W ⟶ W} (hh : h = 𝟙 W)
     (K M : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W))) :
@@ -104,7 +82,7 @@ lemma δ_leftDerivedUpperStar_id_of_eq {W : Scheme.{u}} {h : W ⟶ W} (hh : h = 
   leftDerivedUpperStarTensor_id_of_eq Λ W hh K M
 
 /-- `ProEtale.CondensedRing.leftDerivedUpperStarTensor_braiding` in terms of the tensor
-comparisons `δ`. -/
+comparisons `δ`: `Lf^* β_{K, M} ≫ δ_{M, K} = δ_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
 lemma leftDerivedUpperStar_map_braiding_hom_δ {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K M : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
@@ -129,6 +107,8 @@ lemma boundedConstructibleUpperStar_δ_hom (K M : Dᵇc(Y.left)⟦Profinite.padi
       δ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) K.obj M.obj :=
   ObjectProperty.monoidalLift_δ_hom _ _ K M
 
+/-- `ProEtale.CondensedRing.boundedConstructibleUpperStar_δ_hom` with the ambient tensor
+comparison written as `ProEtale.CondensedRing.leftDerivedUpperStarTensor`. -/
 lemma δ_boundedConstructibleUpperStar_hom (K M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) K M).hom =
       ((leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj ℓ) f.left).app K.obj).app M.obj :=
@@ -179,8 +159,8 @@ omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 lemma boundedConstructible_braiding_hom_hom (K M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (β_ K M).hom.hom =
       (@BraidedCategory.braiding _ _ _ (DerivedCategory.braidedCategory' _) K.obj M.obj).hom :=
-  @ObjectProperty.fullBraidedSubcategory_braiding_hom_hom _ _ _ (DerivedCategory.braidedCategory' _)
-    _ _ K M
+  @ObjectProperty.fullBraidedSubcategory_braiding_hom_hom _ _ _ _ _
+    (DerivedCategory.braidedCategory' _) K M
 
 /-- **The derived pullback of bounded constructible complexes is braided** for the Koszul
 braidings: `Lf^* β_{K, M} ≫ δ_{M, K} = δ_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/

@@ -121,7 +121,7 @@ private lemma liftExchange_tensor_oplax_aux
   subst hβ
   apply ObjectProperty.hom_ext
   simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
-    δ_boundedConstructibleUpperStar_hom', ObjectProperty.tensorHom_hom', liftExchange_app_hom]
+    boundedConstructibleUpperStar_δ_hom, ObjectProperty.tensorHom_hom', liftExchange_app_hom]
   exact hα A.obj B.obj
 
 /-- **The restricted pullback exchange is monoidal**, in the oplax form: the restriction of
