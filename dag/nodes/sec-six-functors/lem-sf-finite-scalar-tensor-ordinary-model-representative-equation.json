@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-ordinary-model-representative-equation",
+ "kind": "statement",
+ "title": "Representative equation for ordinary tensor realization models before scalar specialization",
+ "statement": "Let B be a symmetric monoidal closed Grothendieck abelian coefficient category with functorial flat resolutions, T a scheme, and Rₛ a sheaf of commutative rings on its pro-etale site. Let F from B-valued sheaves to Rₛ-module sheaves be an additive equivalence, LF its specified derived realization, and eps the specified localization factor isomorphism. Let P be a class of K-flat source cochain complexes preserved by F in the flat-term K-flat target class, with fully faithful restriction of derived bifunctors to pairs in P. Let a be a normalized intrinsic tensor model and b an ordinary tensor comparison for F [lem-sf-finite-scalar-tensor-realization]. For X,Z in P, the constructed finiteScalarTensorRealizationForOrdinaryModels satisfies the representative equation: applying LF to the fixed source representative, then the constructed comparison, then a.tensor on the two eps maps equals eps on the total source tensor, followed by the localization of the signed total comparison of b, followed by a.representative. The fixed representative is that of [lem-sf-finite-scalar-tensor-resolution], and the signed total comparison is that of [lem-sf-finite-scalar-tensor-complex].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof on flat-term K-flat representatives; categories.tex Tag 04VK, lemma-properties-right-localization; specialization of the proved representative-descent equation"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-sf-finite-scalar-tensor-descent",
+  "lem-sf-finite-scalar-tensor-resolution",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "Unfold finiteScalarTensorRealizationForOrdinaryModels, finiteScalarTensorRealizationForModels and finiteScalarTensorRealizationForCoefficients. Apply finiteScalarTensorRealizationOfRepresentatives_fac with the two derived localization functors, the complex functor induced by F, LF, eps, the representative classes and their preservation, fully faithful restriction, the fixed source representative, a.representative, and finiteScalarTotalTensorIsoOfOrdinary F b. Total tensor objects are definitionally the cochain mapBifunctor objects; the local reducibility setting exposes only the bifunctor shell while leaving sheafification folded.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-realization",
+    "lem-sf-finite-scalar-tensor-descent",
+    "lem-sf-finite-scalar-tensor-resolution",
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-realization",
+  "lem-sf-finite-scalar-tensor-descent",
+  "lem-sf-finite-scalar-tensor-resolution",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 and the existing generic normalized representative descent API"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor comparison constructed by descent satisfies its defining equation on flat K-flat representatives",
+   "results": "Eight hits, principally ordinary flat-module tensor exactness; none states the constructed model normalization equation.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project representative-descent equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived tensor comparison satisfies its defining equation on flat K-flat complex representatives",
+   "results": "Eight hits on flat tensor products, derivations, Dold-Kan and free monoidal normalization; no constructed model representative equation.",
+   "date": "2026-10-27",
+   "verdict": "No matching Mathlib statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Found ordinary functor preservation of composition and related presheaf declarations; these do not specialize the constructed tensor model.",
+   "date": "2026-10-27",
+   "verdict": "The project representative descent theorem is the relevant API."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteScalarTensorRealizationForOrdinaryModels|finiteScalarTensorRealizationOfRepresentatives_fac",
+   "results": "Mathlib search service returned zero hits. Repository rg located the wrapper in FiniteScalarTensorRealization and the proved generic equation in FiniteScalarTensorDescent.",
+   "date": "2026-10-27",
+   "verdict": "Specialize the existing theorem while the ordinary realization functor is abstract."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentativeEquation",
+  "date": "2026-10-28",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite coefficient tensor compatibility: representative normalization of the scalar realization used in the tensor-pullback square",
+   "via": [
+    "lem-sf-finite-scalar-proper-projection-presentation",
+    "lem-sf-finite-scalar-tensor-pullback-comparison",
+    "lem-sf-finite-scalar-tensor-pullback-representatives",
+    "lem-sf-finite-scalar-tensor-pullback-representative-equation",
+    "lem-sf-finite-scalar-tensor-scalar-source-model-representative-equation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorOrdinaryModelRepresentativeEquation",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorOrdinaryModelRepresentativeEquation.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorRealizationForOrdinaryModels_representative",
+  "statement": "theorem finiteScalarTensorRealizationForOrdinaryModels_representative\n    (B : Type u₁) [Category.{u + 1} B] [Abelian B]\n    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]\n    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]\n    [Abelian.HasFunctorialFlatResolution B] (T : Scheme.{u})\n    (Rₛ : Sheaf (ProEt.topology T) CommRingCat.{u + 1})\n    (F : Sheaf (ProEt.topology T) B ⥤ proEtaleRingModules T Rₛ)\n    [F.Additive] [F.IsEquivalence]\n    (LF : DerivedCategory (Sheaf (ProEt.topology T) B) ⥤\n      DerivedCategory (proEtaleRingModules T Rₛ))\n    (eps : DerivedCategory.Q ⋙ LF ≅ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    (P : ObjectProperty (CochainComplex (Sheaf (ProEt.topology T) B) ℤ))\n    (hP : ∀ Q, P Q → (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)\n    (hF : ∀ Q, P Q → proEtaleFlatRepresentatives T Rₛ\n      ((F.mapHomologicalComplex (.up ℤ)).obj Q))\n    (ff : ((whiskeringLeft (P.FullSubcategory × P.FullSubcategory)\n      (DerivedCategory (Sheaf (ProEt.topology T) B) ×\n        DerivedCategory (Sheaf (ProEt.topology T) B))\n      (DerivedCategory (proEtaleRingModules T Rₛ))).obj\n      ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q))).FullyFaithful)\n    (a : ProEtaleTensorModel T Rₛ)\n    (b : tensor (Sheaf (ProEt.topology T) B) ⋙ F ≅\n      (F.prod F) ⋙ @tensor (proEtaleRingModules T Rₛ) _\n        (SheafOfModules.monoidalCategory Rₛ))\n    (X Z : CochainComplex (Sheaf (ProEt.topology T) B) ℤ)\n    (hx : P X) (hz : P Z) :\n    letI := SheafOfModules.monoidalCategory Rₛ\n    LF.map ((finiteScalarFixedTensorRepresentativeForCoefficients B T P hP).hom.app\n        (⟨X, hx⟩, ⟨Z, hz⟩)) ≫\n      ((finiteScalarTensorRealizationForOrdinaryModels B T Rₛ F LF eps P hP hF ff a b).hom.app\n        (DerivedCategory.Q.obj X)).app (DerivedCategory.Q.obj Z) ≫\n      a.tensor.map (Prod.mkHom (eps.hom.app X) (eps.hom.app Z)) =\n    eps.hom.app (CochainComplex.mapBifunctor X Z\n      (curriedTensor (Sheaf (ProEt.topology T) B))) ≫\n      DerivedCategory.Q.map ((finiteScalarTotalTensorIsoOfOrdinary F b).hom.app (X, Z)) ≫\n      a.representative.hom.app\n        (⟨(F.mapHomologicalComplex (.up ℤ)).obj X, hF X hx⟩,\n         ⟨(F.mapHomologicalComplex (.up ℤ)).obj Z, hF Z hz⟩)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T180452-L-3863760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261027T180452-L-3863760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

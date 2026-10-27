@@ -6,6 +6,7 @@ Authors: SHEAF group H9
 module
 
 public import Sheaf.Paper.FiniteScalarTensorRealization
+import Sheaf.Paper.FiniteScalarTensorScalarSourceModelRepresentativeEquation
 
 /-! # Scalar tensor realization on a fixed representative
 
@@ -16,6 +17,19 @@ Source: Stacks Project, Tags 04VK and 07A4.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+attribute [local instance 40000] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
+attribute [local implicit_reducible] AlgebraicGeometry.Scheme.reductionModulesHasDerivedCategory
+  AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
+attribute [local irreducible] CategoryTheory.Functor.leftAdjoint CategoryTheory.presheafToSheaf
+  AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicRealization
+  SheafOfModules.monoidalCategory
+attribute [local irreducible] AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
+  DerivedCategory.Q HasDerivedCategory.standard
+  CategoryTheory.Functor.mapHomologicalComplex CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Functor.mapDerivedCategoryFactors
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 open CategoryTheory.Functor MonoidalCategory
 attribute [local instance 2000] isNoetherian_of_finite
@@ -73,5 +87,9 @@ theorem finiteScalarTensorRealization_Y_representative
         (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex
           (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩,
          ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex
-          (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩) := by sorry
+          (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩) := by
+  unfold finiteScalarTensorRealization finiteScalarTotalTensorIso
+  apply finiteScalarTensorRealizationForScalarSourceModels_representative R Y
+    (proEtaleConstantRing Y R)
+
 end WeilConjectures
