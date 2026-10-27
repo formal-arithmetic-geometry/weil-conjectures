@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientSectionTensorTransportIso
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # Resolution extension for quotient section tensor equations -/
 
@@ -73,6 +75,20 @@ theorem tensor_section_condition_of_kflat
           (tensor Λ' T).map (Prod.mkHom (c.derived.inv.app (DerivedCategory.Q.obj P))
             (c.derived.inv.app (DerivedCategory.Q.obj Q)))) :
     TensorSectionCondition a T c b barB := by
-  sorry
+  intro M N
+  let M₀ := DerivedCategory.Q.objPreimage M
+  let N₀ := DerivedCategory.Q.objPreimage N
+  let eM : DerivedCategory.Q.obj M₀ ≅ M := DerivedCategory.Q.objObjPreimageIso M
+  let eN : DerivedCategory.Q.obj N₀ ≅ N := DerivedCategory.Q.objObjPreimageIso N
+  obtain ⟨P, p, hpqi, hpflat, hP⟩ :=
+    CochainComplex.exists_quasiIso_flat_kFlat M₀
+  obtain ⟨Q, q, hqqi, hqflat, hQ⟩ :=
+    CochainComplex.exists_quasiIso_flat_kFlat N₀
+  let eP : DerivedCategory.Q.obj P ≅ M :=
+    asIso (DerivedCategory.Q.map p) ≪≫ eM
+  let eQ : DerivedCategory.Q.obj Q ≅ N :=
+    asIso (DerivedCategory.Q.map q) ≪≫ eN
+  exact tensor_section_condition_transport_iso a T c b barB P Q M N eP eQ
+    (hK P Q hP hQ hpflat hqflat)
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
