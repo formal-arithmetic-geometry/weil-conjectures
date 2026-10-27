@@ -6,6 +6,7 @@ Authors: SHEAF group G4
 module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierData
+import Sheaf.SixFunctors.CoefQbarFiniteExceptionalScalar
 
 /-! # Finite exceptional comparisons for specified Verdier dualities
 
@@ -105,6 +106,13 @@ on the pair category is part of this statement. -/
 theorem finite_exceptional_formula (BX : Duality D l hl Ω X) (BY : Duality D l hl Ω Y)
     (c : Compactification f)
     (S : ConstructibleExceptionalCoefficients.System l (AuxiliaryClosure.{u} l) D hl (f := f)) :
-    Nonempty (FiniteExceptionalFormula D l hl Ω X f BX BY c S) := by sorry
+    Nonempty (FiniteExceptionalFormula D l hl Ω X f BX BY c S) := by
+  obtain ⟨t⟩ := finite_exceptional_formula_core D l hl Ω X f BX BY c S
+  let z : FiniteExceptionalFormula D l hl Ω X f BX BY c S :=
+    { finite := t.finite
+      comparison := t.comparison
+      normalized := t.normalized
+      scalar := finite_exceptional_formula_scalar D l hl Ω X f BX BY c S t }
+  exact ⟨z⟩
 
 end WeilConjectures.CoefQbarVerdier
