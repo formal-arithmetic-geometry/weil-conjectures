@@ -96,8 +96,6 @@ private lemma cube_aux {C : Type*} [Category* C] {O₁ O₂ O₃ O₄ O₅ O₆ 
 
 variable {ℓ E} {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
--- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The cube condition of `CategoryTheory.Adjunction.nonempty_arrowIso_map_exchangeRight_app` for
 the derived pullbacks of module objects over `𝔽_E` and of sheaves of `𝔽_E`-modules along a
 commutative square, assuming the compatibility of `residueFieldDerivedUpperStarIso` with the
@@ -119,18 +117,18 @@ lemma residueFieldDerivedUpperStarIso_cube (sq : CommSq g' f' f g)
           ((residueFieldDerivedUpperStarIso ℓ E f).inv.app M) ≫
         (residueFieldDerivedUpperStarIso ℓ E g').inv.app
           (L((f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).obj M) := by
-  refine inv_inv_comp_eq_comp_inv_inv
-    (L((f')^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]).mapIso
-      ((residueFieldDerivedUpperStarIso ℓ E g).app M))
-    ((residueFieldDerivedUpperStarIso ℓ E f').app _) _ _
-    (L((g')^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]).mapIso
-      ((residueFieldDerivedUpperStarIso ℓ E f).app M))
-    ((residueFieldDerivedUpperStarIso ℓ E g').app _) ?_
+  -- The unifications with `inv_inv_comp_eq_comp_inv_inv` and `cube_aux` only need to unfold
+  -- reducible constants. At default transparency the elaborator unfolds the composition of the
+  -- derived categories (a localization) when comparing the (pretty-printing identical) sides,
+  -- which takes minutes.
+  simp only [← Iso.app_inv, ← Functor.mapIso_inv]
+  with_reducible refine inv_inv_comp_eq_comp_inv_inv _ _ _ _ _ _ ?_
   have H₁ := H₁ M
   have H₂ := H₂ M
   have H₃ := residueFieldDerivedUpperStarIso_hom_app_leftDerivedUpperStarCongr ℓ E sq.w.symm M
   simp only [Iso.app_hom, Functor.mapIso_hom, pullbackSquareComparison_hom_app, Functor.map_comp,
     Category.assoc, leftDerivedUpperStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  exact cube_aux _ _ _ _ _ _ _ _ _ _ _ _ _ _ (by simp [← Functor.map_comp]) (by simp) H₁ H₂ H₃
+  with_reducible
+    exact cube_aux _ _ _ _ _ _ _ _ _ _ _ _ _ _ (by simp [← Functor.map_comp]) (by simp) H₁ H₂ H₃
 
 end AlgebraicGeometry.ProEtale
