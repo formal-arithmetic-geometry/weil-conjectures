@@ -13,12 +13,20 @@
  ],
  "proof": [
   {
-   "text": "Expand pullbackTensorComparison and all fixed coordinate comparisons. Naturality of the equivalence unit moves the outer pullback map; the tensor comparison and inverse second-input comparison cancel by functoriality and isomorphism triangle identities. The remaining composite is the displayed fixed scalar pullback/tensor comparison.",
+   "text": "Write the defining ambient pullbackTensorComparison as pullRealization followed by the coefficient realization of the fixed-coordinate composite t. The coordinates functor maps this to the inverse realization of that composite. Apply Equivalence.unitInv_naturality to t.hom to move the target tensorCoordinates inverse unit across t.",
    "uses": [
     "def-sf-finite-projection-fixed-coordinates",
     "def-sf-finite-partial-pullback-tensor"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Expand the fixed-coordinate composite t. Its last factor is the tensor functor applied to the inverse second-input fixedPullRealization. The final targetCoordinates factor is the same tensor functor applied to the forward comparison. Combine the two functor maps and cancel the inverse and forward isomorphisms. The remaining prefix is exactly fixedPullRealization at the source tensor; associativity gives the stated equation.",
+   "uses": [
+    "def-sf-finite-projection-fixed-coordinates",
+    "def-sf-finite-partial-pullback-tensor"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -101,9 +109,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P6",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261027T112418-L-1581539",
+  "landing": "20261027T180533-L-3872094",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

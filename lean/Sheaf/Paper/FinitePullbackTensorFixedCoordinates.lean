@@ -20,6 +20,16 @@ namespace WeilConjectures.CompactSupportFiniteProjection
 variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   {E : Type u} [Field E] [Algebra (Padic C.l) E]
   [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}
+
+attribute [local irreducible] realization AlgebraicGeometry.ProEtale.derivedTensor
+
+private theorem map_inverse_cancel {A B : Type*} [Category* A] [Category* B]
+    (F : A ⥤ B) {U V : A} (e : U ≅ V) {W : B} (g : W ⟶ F.obj V) :
+    g ≫ F.map e.inv ≫ F.map e.hom = g := by
+  rw [← F.map_comp, e.inv_hom_id, F.map_id, Category.comp_id]
+
+set_option maxHeartbeats 800000 in
+-- Checking the explicit realization composites requires additional elaboration heartbeats.
 /-- The prescribed pullback/tensor comparison in fixed coefficient coordinates.
 Source: prop-sf-pf-coherence, proper-factor paragraph, and the explicit construction
 of pullbackTensorComparison (blueprint: lem-sf-finite-pullback-tensor-fixed-coordinates).
@@ -51,6 +61,38 @@ theorem pullbackTensor_fixed_coordinates (S : SixFunctorFiniteOperations D C E n
         (fixedPullRealization S f M).inv).app
           ((fixedDerivedPull (C := C) (E := E) (n := n) f).obj
             ((realization (C := C) (E := E) (n := n) (hn := hn) Y).inverse.obj L.obj)) := by
-  sorry
+  let := Padic.finite_coefficientExtensionRing C.l E n hn
+  let RX := realization (C := C) (E := E) (n := n) (hn := hn) X
+  let RY := realization (C := C) (E := E) (n := n) (hn := hn) Y
+  let TX := fixedTensor (C := C) (E := E) (n := n) X
+  let P := fixedDerivedPull (C := C) (E := E) (n := n) f
+  let A := ((partialTensor S Y).obj M).obj L
+  let a := pullRealization S f A
+  let b := fixedPullRealization S f M
+  let c := fixedPullRealization S f ⟨L.obj, L.property.1⟩
+  let q := (fixedPullComparison (C := C) (E := E) (n := n) f).symm.app
+    (RY.inverse.obj A.obj)
+  let m := AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorIso
+    (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))
+      f.hom.left (RY.inverse.obj M.obj) (RY.inverse.obj L.obj)
+  let t := q ≪≫ P.mapIso (tensorCoordinates S Y M L) ≪≫ m ≪≫
+    (TX.mapIso b.symm).app (P.obj (RY.inverse.obj L.obj)) ≪≫
+    (TX.obj (RX.inverse.obj ((S.finite.pull f).obj M).obj)).mapIso c.symm
+  have h : (pullbackTensorComparison S f M L).hom.hom =
+      a.hom ≫ RX.functor.map t.hom := rfl
+  change RX.inverse.map (pullbackTensorComparison S f M L).hom.hom ≫
+      RX.unitIso.inv.app _ ≫ (TX.obj _).map c.hom =
+    (RX.inverse.map a.hom ≫ RX.unitIso.inv.app _ ≫ q.hom) ≫
+      P.map (tensorCoordinates S Y M L).hom ≫ m.hom ≫
+        (TX.map b.inv).app (P.obj (RY.inverse.obj L.obj))
+  rw [h, RX.inverse.map_comp, Category.assoc]
+  erw [RX.unitInv_naturality_assoc t.hom]
+  simp only [t, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom,
+    Category.assoc]
+  exact congrArg
+    (fun z ↦ RX.inverse.map a.hom ≫ RX.unitInv.app _ ≫ q.hom ≫
+      P.map (tensorCoordinates S Y M L).hom ≫ m.hom ≫ z)
+    (map_inverse_cancel (TX.obj (RX.inverse.obj ((S.finite.pull f).obj M).obj)) c
+      ((TX.map b.inv).app (P.obj (RY.inverse.obj L.obj))))
 
 end WeilConjectures.CompactSupportFiniteProjection
