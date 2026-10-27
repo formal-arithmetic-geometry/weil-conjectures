@@ -13,9 +13,71 @@
   "def-sf-finite-rational-derived-operations",
   "def-pod-integral-tensor-constraints"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first with integral objects. Under the prime, finite-field, embedding and scheme hypotheses of the primitive-scalar existence node, use the ambient comparison-system family to choose the normalized primitive scalar model $S_Y$ and normalized Roos models. Choose $T_E,T_L$ to be the tensor model realizations supplied by the stage3 tensor-model normalization; their reduction transports are the fixed calculus transports. The reduction-intertwining node says, for every such $S_Y$, that $\\gamma$ is the invertible $\\operatorname{scalarReduction}_{S_Y}$ comparison and gives its same-index quotient component. Instantiate the stage3 scalar/tensor limit-square with these $S_Y,T_E,T_L$ and the chosen Roos models. It identifies the completed scalar/tensor comparison with the two scalarReduction maps and $\\mathrm{derivedSigma}$. To pass from that total-limit equation to the reduction of the candidate integral composites, apply coherent reduction, use counit naturality and the derived-limit comparison of [lem-pur-scalar-extension-tower-coherence], and cancel the invertible maps $\\gamma$, $\\gamma\\otimes(\\gamma\\otimes\\gamma)$ and the fixed tensor reduction comparison $r$. The fixed-calculus system-associator node then replaces the two nested derivedSigma composites by the actual `systemClosed.monoidal` associator. Thus the two coherent reductions over $\\mathcal O_L$ agree. Fully-faithful coherent reduction reflects this equality, and the defining uniqueness of the normalized integral associator identifies the reflected maps with the prescribed integral associators. This proves\n$$B_{L/E}(\\alpha^{\\rm int,E});B^{\\otimes,\\rm r}=B^{\\otimes,\\rm l};\\alpha^{\\rm int,L}.$$ Independently, the integral naturality node gives the naturality equation for arbitrary derived morphisms.",
+   "uses": [
+    "lem-trf-ambient-comparison-system-existence",
+    "lem-trf-primitive-quotient-scalar-model-existence",
+    "stage3-pur-scalar-tensor-model-normalization",
+    "lem-pur-integral-scalar-reduction-intertwining",
+    "stage3-pur-scalar-tensor-limit-square",
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-pur-system-scalar-associator-coherence",
+    "lem-pur-integral-tensor-associator-naturality",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "def-pod-integral-tensor-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4; coherent reduction, normalized tensor comparison, and strict-system associator pasting"
+   }
+  },
+  {
+   "text": "For integral objects, the rational-operation definition identifies the rational associator with localization of the normalized integral associator and identifies $b$ with localization of $B^{\\otimes}$; its nested composites are the localizations of $B^{\\otimes,\\rm l}$ and $B^{\\otimes,\\rm r}$. Raw rationalization preserves composition. Localizing the integral equality from Step 1 gives exactly $B_{L/E}(\\alpha^E);b^{\\rm r}=b^{\\rm l};\\alpha^L$, together with the localized naturality equality.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4; final coefficient-extension paragraph and raw Hom localization"
+   }
+  },
+  {
+   "text": "Every rational morphism is a finite sum of pure integral morphisms tensored with field scalars. The additive and balanced pure-tensor formulas in the rational-operation definition, together with the localized Hom and scalar-extension formulas, extend both equalities from integral objects and arrows to arbitrary X,Y,Z and arrows. The identity-field and zero-object cases are the identity and zero equations, and the integral square already includes ramified extensions, so no extra finite-Tor or finite-type hypothesis is introduced.",
+   "uses": [
+    "def-sf-finite-rational-derived-operations",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4; extension from pure tensors in the raw rational Hom modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-integral-tensor-constraints",
+  "def-sf-finite-rational-derived-operations",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-ambient-comparison-system-existence",
+  "lem-trf-primitive-quotient-scalar-model-existence",
+  "stage3-pur-scalar-tensor-model-normalization",
+  "lem-pur-integral-scalar-reduction-intertwining",
+  "stage3-pur-scalar-tensor-limit-square",
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-pur-system-scalar-associator-coherence",
+  "lem-pur-integral-tensor-associator-naturality",
+  "lem-pod-integral-system-reduction-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), with the normalized completed/rational coefficient-extension square expanded from the fixed operation definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-derived-pullback-tensor-constraints-common-associator-existence",
@@ -80,10 +142,49 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "The live item's Lean construction requires the finite-field scalar-associator square before forming the normalized common-stage representative.",
+   "place": "The item proof clause requiring the integral scalar square before rational localization: reduction intertwines scalar extension with the system scalar functor, the Roos/counit tensor comparisons are compatible, and the system scalar functor preserves the associator.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-rational-tensor-associator-scalar-square",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by quantifying scalarReduction over every normalized primitive scalar model, instantiating the stage3 limit-square with the fixed tensor and Roos models, spelling out the reduction/counit cancellation, and pinning system associativity to the K-flat-normalized calculus.",
+  "blueprint": "The live blueprint already owns scalarReduction, derivedSigma, and the scalar/tensor limit-square in the normalized scalar-extension tower. The two new interfaces expose the same-index gamma and the system associator equation; the item assembles them before rational localization.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-integral-system-reduction-fully-faithful",
+    "why": "Step 1 reflects equality of integral maps through fully faithful coherent reduction."
+   },
+   {
+    "node": "def-pod-integral-tensor-constraints",
+    "why": "Step 1 uses the uniqueness clause defining the normalized integral associator."
+   },
+   {
+    "node": "lem-trf-ambient-comparison-system-existence",
+    "why": "Step 1 chooses the normalized Roos and scalar realization data needed to instantiate the stage3 limit-square; this node is on the off-unit route."
+   },
+   {
+    "node": "lem-trf-primitive-quotient-scalar-model-existence",
+    "why": "Step 1 chooses the normalized primitive scalar model quantified by scalarReduction; this node is on the off-unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "def-pod-integral-tensor-constraints",
+  "lem-trf-ambient-comparison-system-existence",
+  "lem-trf-primitive-quotient-scalar-model-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NB-286563e37",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-286563e37 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full, every cited statement, the Lean code they rest on, and Stacks 07A4. The four faults of the previous review (441a) are repaired. (1) Step 1 now instantiates the stage3 limit square: the fixed calculi, Roos models from lem-trf-ambient-comparison-system-existence, the scalar model SY from lem-trf-primitive-quotient-scalar-model-existence (whose Lean takes any calculus SW, so the fixed one is allowed), and TE, TL from tensorModelRealization. For the fixed calculus the transports are identities, so tensorReduction_TE is r^E. The hypothesis IsUnit(l) is equivalent to ℓ being invertible at every residue field. (2) The passage to reductions is now written out: apply R_L, use counit naturality, cancel γ, γ⊗(γ⊗γ) and r, then reflect through faithful reduction. (3) The intertwining node is quantified over SY. It is true, since the counit is invertible on normalized systems. Ramified check with e=2: the indices are the same on both sides. (4) The system associator is pinned to the K-flat associators of lem-sf-ringed-derived-closed-symmetric-monoidal. With those, both routes send b⊗((x⊗y)⊗z) to (bx)⊗((1y)⊗(1z)), with no sign. The naturality node is unchanged and needed. The symmetric-calculus node and both existing rational naturality nodes reach the item, so citing any of them would close a cycle. Steps 2-3 (localization and pure-tensor extension) are correct. proof_deps equals the union of the step uses, all ids exist, and there is no cycle. FIX 1 (B2/B3), lem-pur-integral-scalar-reduction-intertwining: it wrote R_L(S_Y A), applying the model as if it were a functor; it used P and R_E without introducing them; it cited no node for derived-complete constructible, B_{L/E}, reduction or normalized. Corrected statement, and stmt_deps gains def-weil-derived-complete-integral-detailed, def-weil-integral-scalar-extension, def-weil-integral-reduction-tower and def-coef-normalized-dvr-tower (none reaches the item). FIX 2 (B7), lem-pur-system-scalar-associator-coherence: a loogle query error was recorded as 'no match'; re-recorded as a query error (the other three searches still cover the three kinds). Batch-5: each flagged citation is judged in review.md. All are coefficient-model foundations: model existence, the completion-unit adjunction, strict-quotient comparison and fully faithful reduction. None is a step of the trace formula or of Poincaré duality, and no nt-assume leaf is reached. I accept the tool_uses for the fully-faithful reduction node, def-pod-integral-tensor-constraints and the two trf existence nodes. Advisory for HUMAN: pullbackTensorCalculus is a .choose and no Lean field pins its associator; stage 2 must pin it. Also, lem-trf-primitive-quotient-scalar-model-existence has a truncated natural-language statement (pre-existing).; 2 file(s) fixed by the reviewer"
  }
 }

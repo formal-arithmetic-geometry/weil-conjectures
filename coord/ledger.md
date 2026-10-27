@@ -20160,3 +20160,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:37 L: merged deliver/B3/Sheaf.Paper.NativeCompactSupportGeometry (stage 3; reviewer PASS; first push; landing 20261027T223738-L-3051537 (proof); batch 20261027T223736; modules 1; new nodes 0)
 - 22:42 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: I read the item, all three new nodes, every cited statement and the Lean sources (DerivedPullbackTensorConstraints 152-1)
 - 22:43 L: returned deliver/U4/Sheaf.Paper.IntegralOrdinaryProjectionEndpointCompatibility (reviewer RETURN: (reviewer C-f0eab, head f0eab297b) Point 2 / brief-stage3 §4: unforced definition change (new field compatibility) in Sh)
+- 22:59 L: merged deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer FIX; after a return; new nodes: 3)
