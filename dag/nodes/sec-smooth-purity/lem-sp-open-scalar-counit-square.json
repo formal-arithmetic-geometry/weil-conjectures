@@ -25,92 +25,68 @@
  ],
  "proof": [
   {
-   "text": "Write $u_R=j_R^{-1}$ and $\\eta^R:1\\to u_RJ_R$ for the open unit. Apply [lem-sf-open-tensor-normalization] to the constant ring sheaf $R_Z$ on the small pro-etale site and the open $j$, for $R=A,B$. It gives the actual section-normalized isomorphism $\\eta^R$, on the ordinary unbounded derived category. Thus $u_RJ_R$ is identified with the identity using $(\\eta^R)^{-1}$. In particular the adjunction bijection sends $h:J_RM\\to N$ to $u_R(h)\\eta^R_M$. Hence two such arrows with equal restrictions are equal, by injectivity of that bijection. This is a statement about arrows with source $J_RM$, not faithfulness of restriction on the ambient derived category.",
+   "text": "The intrinsic sheaf extension is fully faithful by transport of the proved finite-coefficient extension-by-zero full/faithful instances. Thus its open unit is invertible. Compute the exact localized unit on cochain representatives with Adjunction.localization_unit_app and the identity and composition factor equations. This identifies it with sfIntrinsicDerivedOpenUnit. Prove that exact localization preserves the unit equation for leftAdjointUniq, using normalizedAdjunction_uniqueness and the localized Hom formula. Apply this to reductionOpenModel to identify the transported constant-coordinate unit with that same intrinsic unit. Its invertibility follows. Equality of restrictions of arrows with open-extended source gives equality of adjuncts, hence equality of arrows by injectivity of the open Hom equivalence.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-cbc-proetale-extension-zero"
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "def-sp-finite-intrinsic-open-square",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "def-weil-exact-derived-adjunction",
+    "lem-pur-normalized-adjunction-composition",
+    "def-sp-reduction-direct-image-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03DI/03DJ (sites-modules.tex, lemma-extension-by-zero and lemma-extension-by-zero-exact); exact open adjunction and section normalization; agent application to Hom injectivity."
-   }
+   "elementary": false
   },
   {
-   "text": "The scalar restriction isomorphism of [lem-cbc-proetale-extension-zero], in the orientation $a:J_Ar_X\\to r_ZJ_B$, is induced by the identity of the extension presheaves after forgetting the $B$-action. Over an object factoring through $X$, both presheaves have the same module and the map is the identity; their restrictions to the open are already sheaves. The sheafification universal property therefore identifies $u_A(a_L)$ with the identity, under $u_A r_Z=r_Xu_B$ and the units of step 1. Applying this degreewise and localizing preserves this equality, since these are the exact, degreewise-derived functors in that node. This also establishes the naturality of $a$.",
+   "text": "The scalar restriction unit equation is exactly lem-sp-open-scalar-restriction-unit in the coordinates of openScalarCounitAdjunction. It is strictly the scalar restriction half of openScalarCounitRestriction; it contains no tensor comparison or scalar counit equation.",
    "uses": [
-    "lem-cbc-proetale-extension-zero",
-    "def-weil-extension-by-zero",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-sp-open-scalar-restriction-unit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03DI, sites-modules.tex, lemma-extension-by-zero; canonical scalar comparison evaluated on the open."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $\\lambda:u_BT_Z\\xrightarrow{\\sim}T_Xu_A$ for canonical restriction/tensor balancing. The comparison in [def-sp-reduction-direct-image-comparison] is defined by the common right adjoint. Apply [lem-fix-open-scalar-tensor-normalization] to this same finite-ring, ordinary unbounded pro-etale datum: its $\\beta_j$ has exactly that definition, and its inverse is the open adjunct of $\\lambda^{-1}T_X(\\eta^A)$. It identifies this comparison with the balanced open tensor comparison. Consequently, by taking that open transpose and using the units of step 1,\n$$u_B(E_M)=\\lambda_{J_AM}$$\nunder $u_AJ_A\\cong1$ and $u_BJ_B\\cong1$. In particular $u_B(E_M)$ is the identity comparison under the specified tensor identifications. All maps here are the specified comparisons, rather than a freely chosen natural isomorphism.",
+   "text": "For the tensor unit equation, use the two open and two scalar adjunctions. Expand the unit equation of the left-adjoint uniqueness comparison defining openScalarIso, then use naturality of its right-adjoint comparison and the scalar mate unit equation. Injectivity of the scalar Hom equivalence proves scalarOpenTranspose. Transport both open left adjoints by reductionOpenModel: cancel the inverse/hom of the B-coordinate change, and apply naturality of inverse lambda at the inverse A-coordinate change. This proves the tensor restriction equation, independently of the tensor-normalization theorem.",
    "uses": [
+    "def-sp-open-scalar-operations",
+    "def-sp-open-scalar-tensor-data",
     "def-sp-reduction-direct-image-comparison",
-    "lem-fix-open-scalar-tensor-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 0E8I, sites-modules.tex, lemma-j-shriek-and-tensor; agent identification via the common-right-adjoint normalization."
-   }
-  },
-  {
-   "text": "Let $H\\in D(Z_{\\mathrm{proet}},B)$ and let $\\rho_H:u_Ar_ZH\\xrightarrow{\\sim}r_Xu_BH$ be the identity-on-actions comparison. By [lem-sfb-kflat-scalar-comparison-normalization], $\\theta=\\lambda^{-1}:T_Xu_A\\to u_BT_Z$ is precisely the scalar-adjunction mate of $\\rho$ for the representative-normalized scalar adjunctions. In the mate definition [def-weil-pbc-adjunction-mate], take $L_1=T_Z$, $R_1=r_Z$, $L_2=T_X$, $R_2=r_X$, $G=u_A$, $H=u_B$, and $\\alpha=\\theta$. The equivalent transpose formula in that definition gives the actual equality\n$$u_B(\\epsilon_Z(H))\\circ\\lambda^{-1}_{r_ZH}=\\epsilon_X(u_BH)\\circ T_X(\\rho_H).$$\nThis is valid for every unbounded $H$: the cited normalization theorem expressly makes no flatness assumption. In particular it does not replace the derived counit by underived multiplication on an arbitrary representative.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-sfb-kflat-scalar-comparison-normalization",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; agent use of the scalar mate transpose formula with the canonical balanced restriction comparison."
-   }
-  },
-  {
-   "text": "Let $f=\\epsilon_Z(J_BL)\\circ T_Z(a_L)$ and $g=J_B(\\epsilon_X(L))\\circ E_{r_XL}$. Restrict $f$ using $\\lambda$ and its naturality, and then use step 4 with $H=J_BL$. Under the open unit identifications this reads\n$$u_B(f)=\\epsilon_X(L)\\circ T_X(\\rho_{J_BL}\\circ u_A(a_L))=\\epsilon_X(L),$$\nbecause step 2 identifies the map in parentheses with the identity. Step 3 gives $u_B(g)=\\epsilon_X(L)$ as well. To conclude, precompose both $f$ and $g$ by $E_{r_XL}^{-1}:J_BT_Xr_XL\\to T_ZJ_Ar_XL$. Their restrictions remain equal, so step 1's open-adjunction injectivity gives $fE^{-1}=gE^{-1}$. Cancel this isomorphism to obtain the asserted counit equation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent assembly of steps 1-4; the restriction test is applied only after identifying the source with an open extension."
-   }
-  },
-  {
-   "text": "The map $a$ is natural by step 2. The common-right-adjoint comparison $E$ is natural by [lem-fix-open-scalar-tensor-normalization]; scalar counits are natural by their adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Thus the displayed equality is an equality of natural transformations. For $A\\xrightarrow{1}A$, $a$ is the identity sectionwise, and $E$ is the identity under scalar unitors by the identity normalization in [lem-fix-open-scalar-tensor-normalization]. The representative formulas $p\\mapsto p\\otimes1$ and $p\\otimes a\\mapsto ap$ in the scalar adjunction identify its counit with the scalar unitor in this case, so the equation becomes the identity equation. The arguments used only finite commutative rings and arbitrary unbounded derived objects. In particular $r_XL$ need not be K-flat or have finite Tor amplitude. Empty opens, the whole open $X=Z$, and zero complexes obey the same formulas (zero sources in the empty case).",
-   "uses": [
-    "lem-fix-open-scalar-tensor-normalization",
     "lem-pur-sheaf-ring-derived-coefficient-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent naturality and identity normalization from the cited comparison and normalized scalar adjunction; Tag 07A6."
-   }
+   "elementary": false
+  },
+  {
+   "text": "For the scalar counit square, precompose both arrows by the inverse open tensor comparison, putting their common source into open-extended form. Apply the B-open Hom equivalence. Rewrite its unit using the tensor equation of Step 3, move inverse lambda by naturality, and use mateEquiv_counit_symm. This Mathlib formula applies directly because inverse tensorPullbackIso is definitionally the inverse scalar mate of rightSquare.inv. The scalar restriction equation of Step 2 and naturality of the scalar counit make the two adjuncts equal. Injectivity, cancellation and natural-transformation extensionality give the asserted square.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the identity coefficient map, apply the existing derived identity law for sfOpenRestrictionDerived. The left-adjoint uniqueness counit formula identifies each scalar counit with the composite of the scalar and restriction unitors. Substitute these into the square of Step 4; naturality of the ambient scalar unitor and cancellation of the restriction unitor prove the tensor identity on restricted objects. Naturality at the restriction unitor extends it to every object. These calculations use no boundedness or flatness and include empty opens, whole opens and zero objects.",
+   "uses": [
+    "lem-sf-open-extension-scalar-restriction-coherence",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-open-tensor-normalization",
-  "lem-cbc-proetale-extension-zero",
-  "def-weil-extension-by-zero",
-  "def-weil-presheaf-modules-sheafification",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "def-sp-finite-intrinsic-open-square",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "def-weil-exact-derived-adjunction",
+  "lem-pur-normalized-adjunction-composition",
   "def-sp-reduction-direct-image-comparison",
-  "lem-fix-open-scalar-tensor-normalization",
+  "lem-sp-open-scalar-restriction-unit",
+  "def-sp-open-scalar-operations",
+  "def-sp-open-scalar-tensor-data",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sfb-kflat-scalar-comparison-normalization",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-open-extension-scalar-restriction-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
-  "place": "det-sp-tower-gluing, Levels paragraph: coefficient comparisons have the same chart description; scalar/open counit compatibility made explicit using Stacks Tags 03DI, 0E8I, 0GL1, 07A6."
+  "place": "Levels paragraph, unchanged open coefficient-comparison route. Lean proof by exact localization of units, adjoint uniqueness and the Mathlib mate-counit formula; scalar restriction unit half isolated as lem-sp-open-scalar-restriction-unit."
  },
  "mathlib_searches": [
   {
@@ -234,11 +210,8 @@
   ]
  },
  "tool_uses": [
-  "lem-sf-open-tensor-normalization",
   "lem-cbc-proetale-extension-zero",
-  "lem-fix-open-scalar-tensor-normalization",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sfb-kflat-scalar-comparison-normalization"
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-23",
@@ -273,5 +246,15 @@
   "group": "Q87",
   "result": "pass",
   "note": "Re-delivery after the H2 RETURN at 2d2128af2ba5. The Lean module is byte-identical to the accepted one (sha 155db2cb). The theorem stmt_deps lem-sf-open-extension-scalar-restriction-coherence and lem-trf-open-square-exchange are removed; the 6 base stmt_deps are kept; statement, proof and proof_deps are unchanged. New def-sp-open-scalar-restriction-comparison (existing:true) owns sfOpenRestriction and sfOpenRestrictionDerived: its signature matches side-live verbatim, its text describes the leftAdjointUniq-transport-then-localization construction, it has no theorem content, and its deps exist; on side-live only the theorem node named these defs, so it is not a duplicate. The requested owners are cited: def-coef-scalar-restriction-identity, def-trf-finite-pullback-coordinate-comparison, def-sp-finite-intrinsic-open-square, plus def-sp-open-scalar-tensor-data and def-sp-proetale-constant-coefficient-ring-map. Maths re-confirmed: no extra hypotheses or universe restriction; the square is a NatTrans equality with correct orientations; injectivity is claimed only on Hom(J_R M, N); restriction and identity clauses match; helper defs are real; proofs are sorry only. Advisory: sfIntrinsicDerivedOpenUnit is not in its owner's declarations list (dry run passed); two proof docstrings still name the removed theorem; three transitive owners are uncited. No compile, since no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210157-L-1667862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

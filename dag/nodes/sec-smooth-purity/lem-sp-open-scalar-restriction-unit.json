@@ -1,0 +1,150 @@
+{
+ "id": "lem-sp-open-scalar-restriction-unit",
+ "kind": "statement",
+ "title": "Scalar restriction preserves the prescribed constant-coordinate open unit",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $j:X\\hookrightarrow Z$ be an open immersion of schemes and $\\varphi:A\\to B$ a unital map of finite commutative rings. Use the ordinary unbounded constant-ring module derived categories [def-weil-pbc-proetale-modules]. Write $J_R$ for the recorded sheafified extension [def-weil-extension-by-zero], $r_W$ for scalar restriction and $a:J_A r_X\\cong r_ZJ_B$ for sfOpenRestrictionDerived [def-sp-open-scalar-restriction-comparison]. Give $J_R\\dashv v_R$ the adjunction obtained from OpenScalarTensor.openAdj by the left coordinate comparison reductionOpenModel, where $v_R$ is constantPullback and the comparison is as in [def-sp-reduction-direct-image-comparison]. Write $\\eta_R$ for this unit and $q:v_Br_X\\cong r_Zv_A$ for OpenScalarTensor.rightSquare [def-sp-open-scalar-tensor-data]. For every $L\\in D(X_{\\mathrm{proet}},B)$, one has $q^{-1}_{J_BL}\\circ v_A(a_L)\\circ\\eta_{A,r_XL}=r_X(\\eta_{B,L})$. No flatness, boundedness, constructibility or quasi-compactness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03CY; derived.tex Tag 015F. Scalar restriction part of Step 2 of lem-sp-open-scalar-counit-square, in the specified constant-pullback coordinates."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-open-immersion",
+  "def-weil-extension-by-zero",
+  "def-sp-open-scalar-restriction-comparison",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-open-scalar-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "For the ordinary sheaf comparison, use sfOpenRestriction_normalized_unique: the open unit followed by restriction of sfOpenRestriction and sfOpenRestrictionCoefficientSquare equals scalar restriction of the B-open unit. This is equality on all extension-presheaf generators, including the unique maps out of zero.",
+   "uses": [
+    "lem-sf-open-extension-scalar-restriction-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass from sfIntrinsicOpenRestriction to sfIntrinsicPullback by the canonical open upper-star comparison, and from intrinsic pullback to proEtaleConstantRingPullback by openSquarePullbackModel. These comparisons preserve their sectionwise pullback units. The resulting coefficient square equals the inverse restriction/pullback square: evaluate both sides on a section over an object of the open site; both preserve the section and its restricted A-action. The two transported unit equations therefore agree. This is a coordinate calculation, not a new choice of open adjunction.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "def-sp-finite-intrinsic-open-square",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "def-sp-open-scalar-tensor-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary equation degreewise to any unbounded cochain complex. Localize the exact functors with their prescribed composition factors and unit formula. Cancelling these factors gives the unit equation for the localized ordinary adjunction in constant-pullback coordinates. Equality after precomposition by the localization functor proves equality of natural transformations, hence the equation for all derived objects.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary left comparison defining reductionOpenModel is characterized by its unit equation. Exact localization preserves that equation (use the exact-functor factors and localization extensionality), so transport through reductionOpenModel identifies the localized unit just obtained with the unit of (OpenScalarTensor.openAdj R j).ofNatIsoLeft (reductionOpenModel R j).symm for R=A,B. Substitute these unit equations to obtain the displayed equality. No tensor counit square or tensor comparison normalization is used.",
+   "uses": [
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-sp-finite-intrinsic-open-square",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "def-sp-open-scalar-tensor-data",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sp-reduction-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Levels paragraph: coefficient comparisons have the same chart description. Extracted scalar restriction unit equation from old Step 2 of lem-sp-open-scalar-counit-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"leftAdjointUniq\"",
+   "results": "{\"n_hits\": 4, \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit_assoc\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic localization-unit and left-adjoint uniqueness lemmas are used in the argument, but none identifies the published pro-etale sheaf scalar comparison in the prescribed constant-pullback coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|mateEquiv_counit_symm",
+   "results": "{\"n_hits\": 25, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Order/Category/BddLat.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic localization-unit and left-adjoint uniqueness lemmas are used in the argument, but none identifies the published pro-etale sheaf scalar comparison in the prescribed constant-pullback coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"leftAdjointUniq\"",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq\", \"CategoryTheory.Adjunction.leftAdjointUniq_refl\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.unit_leftAdjointUniq_hom\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic localization-unit and left-adjoint uniqueness lemmas are used in the argument, but none identifies the published pro-etale sheaf scalar comparison in the prescribed constant-pullback coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localization of the open extension scalar restriction comparison preserves the adjunction unit under normalized inverse image coordinates",
+   "results": "{\"n_hits\": 8, \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"CategoryTheory.Adjunction.localization_unit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"CategoryTheory.ObjectProperty.isLocal_adj_unit_app\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\"], \"note\": \"\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic localization-unit and left-adjoint uniqueness lemmas are used in the argument, but none identifies the published pro-etale sheaf scalar comparison in the prescribed constant-pullback coordinates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenScalarCounitSquare",
+  "date": "2026-10-28",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels paragraph: the canonical coefficient comparisons have the same chart description, hence preserve the open local counits and units. Scalar restriction half of the open factor.",
+   "via": [
+    "lem-sp-open-scalar-counit-square",
+    "lem-sp-restriction-transition-transpose",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenScalarRestrictionUnit",
+  "file": "lean/Sheaf/Paper/OpenScalarRestrictionUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.openScalarRestrictionUnit",
+  "statement": "theorem openScalarRestrictionUnit\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :\n    ∀ L : proEtaleDerivedCategory X B,\n      ((OpenScalarTensor.openAdj A j).ofNatIsoLeft (reductionOpenModel A j).symm).unit.app\n          ((scalarRestriction φ X).obj L) ≫\n        (constantPullback (A := A) j).map ((sfOpenRestrictionDerived j φ).hom.app L) ≫\n        (OpenScalarTensor.rightSquare φ j).inv.app\n          ((sfIntrinsicExtensionByZero j B).mapDerivedCategory.obj L) =\n      (scalarRestriction φ X).map\n        (((OpenScalarTensor.openAdj B j).ofNatIsoLeft (reductionOpenModel B j).symm).unit.app L)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210157-L-1667862",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210157-L-1667862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
