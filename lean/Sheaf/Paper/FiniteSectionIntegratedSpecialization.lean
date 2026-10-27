@@ -8,6 +8,9 @@ module
 public import Sheaf.Paper.FiniteSmoothPurityMaps
 public import Sheaf.Paper.VectorPurityNormalization
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
+import Sheaf.Paper.FiniteSectionIntegratedSpecializationNormalExchange
+import Sheaf.Paper.FiniteSectionIntegratedSpecializationSpecializationBaseChange
+import Sheaf.Paper.FiniteSectionIntegratedSpecializationIntegrationBaseChange
 
 /-! # Integrated section specialization with arbitrary finite coefficients
 
@@ -165,6 +168,34 @@ theorem integratedSpecialization_baseChange
         (vectorIntegrationBaseCoefficientPullback A N hA
           (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hS d).hom =
       NoetherianSectionSpecialization.sectionMap A g g' b q cart s s' hsec ≫
-        integratedSpecialization A d g' s' hs' sq' N hN hA hS' κ' := by sorry
+        integratedSpecialization A d g' s' hs' sq' N hN hA hS' κ' := by
+  obtain ⟨ν, sqν, hzero⟩ := normalExchange_exists g g' s s' b q cart hsec d
+  let e := NoetherianSectionSpecialization.sectionMap A
+    (Scheme.Hom.normalConeProj g s) (Scheme.Hom.normalConeProj g' s') b ν sqν
+    s.normalConeZeroSection s'.normalConeZeroSection hzero
+  let qsec := NoetherianSectionSpecialization.sectionMap A g g' b q cart s s' hsec
+  let δ := NoetherianSectionSpecialization.specialization A g s κ
+  let δ' := NoetherianSectionSpecialization.specialization A g' s' κ'
+  let t := (vectorIntegrationBaseCoefficientPullback A N hA
+    (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hS d).hom
+  have hn : IsIso (normalSectionMap A d g s hs sq) :=
+    normalSectionMap_isIso A d g s hs sq N hN hA hS
+  have hn' : IsIso (normalSectionMap A d g' s' hs' sq') :=
+    normalSectionMap_isIso A d g' s' hs' sq' N hN hA hS'
+  let _ := hn
+  let _ := hn'
+  have hδ := specialization_normalExchange A N hN hA d g g' s s' hs hs' b q cart
+    hsec ν sqν hzero κ κ' hκ hκ'
+  have hio := normalExchange_integration A N hN hA d g g' s s' hs hs' b q cart
+    hsec sq sq' hS hS' ν sqν hzero hn hn'
+  simp only [integratedSpecialization]
+  rw [Functor.map_comp]
+  rw [Category.assoc]
+  rw [hio]
+  rw [← Category.assoc]
+  rw [hδ]
+  simp only [Category.assoc]
 
-end AlgebraicGeometry.Etale.FiniteSmoothPurity
+end FiniteSmoothPurity
+end Etale
+end AlgebraicGeometry
