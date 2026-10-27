@@ -1,0 +1,115 @@
+{
+ "id": "lem-coef-native-open-tensor-gamma-evaluation-component",
+ "kind": "lemma",
+ "title": "Pointwise evaluation compatibility of native open tensor representatives",
+ "statement": "For fixed data of native open tensor representatives, fixed n : ℕ, and fixed derived objects U and L, the evaluated system gamma composite equals the canonical finite gamma composite under the recorded evaluation, open-extension, tensor, and inverse-image maps.",
+ "stmt_deps": [
+  "def-coef-native-open-tensor-evaluation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Support-open-tensor steps 5–6; Stacks 0E8I, 0GL1 and 07A4."
+ },
+ "proof": [
+  {
+   "text": "On homogeneous tensor generators, exact finite evaluation preserves the open unit, restriction comparison, and signed total summands; vertical pullback preserves K-flat representatives.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Bilinearity, sheafification, and tensor descent extend the generator equality to the fixed derived pair (U,L).",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-ringed-slice-tensor-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-slice-tensor-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Support-open-tensor steps 5–6; pointwise generator calculation and descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves commutes with derived tensor product and finite coefficient evaluation",
+   "results": "Eight generic sheaf-cohomology and zero tensor facts; no native open tensor model existence theorem.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the existing project interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support reduction tower transitions and normalized open tensor finite evaluation",
+   "results": "Eight unrelated condensed module and test-function facts. Loogle NatTrans.naturality found the generic naturality square used in assembly, not a model construction.",
+   "date": "2026-10-25",
+   "verdict": "No matching native interface."
+  },
+  {
+   "tool": "grep",
+   "query": "SectionsModel|GammaEvaluation|SystemOpenModel|FiniteOpenModel; extensionByZero.*tensor; rightDerived.*Evaluation",
+   "results": "Project search found only data definitions and model consumers; Mathlib search found no such construction. Blueprint search point sections found det-pbc-torsion-stalk-proetale-point, which concerns a geometric point, not R-linear sequence sections. Existing open normalization uses independently chosen localized-site tensors and is insufficient by direct application.",
+   "date": "2026-10-25",
+   "verdict": "New interface specialization, retaining the stated construction dependencies."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeOpenTensorGammaEvaluation",
+  "date": "2026-10-27",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-native-open-tensor-gamma-evaluation",
+   "place": "Pointwise decomposition of the finite-evaluation generator calculation.",
+   "via": [
+    "lem-coef-native-open-tensor-gamma-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefNativeOpenTensorGammaEvaluationComponent",
+  "file": "lean/Sheaf/Paper/CoefNativeOpenTensorGammaEvaluationComponent.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.nativeOpenTensorGammaEvaluation_component",
+  "statement": "theorem nativeOpenTensorGammaEvaluation_component {X Z : Scheme.{u}} (j : X ⟶ Z)\n    [IsOpenImmersion j]\n    (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (SZ : CoefficientDerivedSystemCalculus.{u, u} l E Z)\n    (O : SystemOpenModel l E j SX.toCoefficientDerivedSystemTensors\n      SZ.toCoefficientDerivedSystemTensors)\n    (On : ∀ n : ℕ, FiniteOpenModel l E j SX.toCoefficientDerivedSystemTensors\n      SZ.toCoefficientDerivedSystemTensors n)\n    (n : ℕ) (U : coefficientSequenceDerived.{u, u} l E X)\n    (L : coefficientSequenceDerived.{u, u} l E Z) :\n    (coefficientSequenceDerivedEvaluation.{u, u} l E Z n).map\n        ((systemGamma l E j SX.toCoefficientDerivedSystemTensors\n          SZ.toCoefficientDerivedSystemTensors O).hom.app (U, L)) ≫\n      (ProEtale.VaryingRing.evalJ (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) j n).hom.app\n          (SX.systemClosed.tensor.obj (U,\n            (ProEtale.VaryingRing.G (compactSupportSystemLevel l E)\n              (compactSupportSystemQuotient l E) j).obj L)) ≫\n      (ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j).mapDerivedCategory.map\n        ((SX.evaluationTensor n).hom.app (U,\n          (ProEtale.VaryingRing.G (compactSupportSystemLevel l E)\n            (compactSupportSystemQuotient l E) j).obj L)) ≫\n      (ProEtale.StrictTower.moduleJ (compactSupportSystemLevel l E n) j).mapDerivedCategory.map\n        ((SX.finiteClosed n).tensor.map (Prod.mkHom (𝟙 _)\n          ((ProEtale.VaryingRing.evalG (compactSupportSystemLevel l E)\n            (compactSupportSystemQuotient l E) j n).hom.app L))) =\n    (SZ.evaluationTensor n).hom.app\n        ((ProEtale.VaryingRing.J (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) j).obj U, L) ≫\n      (SZ.finiteClosed n).tensor.map (Prod.mkHom\n        ((ProEtale.VaryingRing.evalJ (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) j n).hom.app U) (𝟙 _)) ≫\n      (finiteGamma l E j SX.toCoefficientDerivedSystemTensors\n        SZ.toCoefficientDerivedSystemTensors n (On n)).hom.app\n          ((coefficientSequenceDerivedEvaluation.{u, u} l E X n).obj U,\n        (coefficientSequenceDerivedEvaluation.{u, u} l E Z n).obj L)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261027T181023-L-3922608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261027T181023-L-3922608",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

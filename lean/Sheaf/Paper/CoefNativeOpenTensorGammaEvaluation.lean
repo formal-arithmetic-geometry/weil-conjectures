@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CoefOpenTensorEvaluationData
+import Sheaf.Paper.CoefNativeOpenTensorGammaEvaluationComponent
 
 /-! # Evaluation compatibility of native open tensor models
 
@@ -47,6 +48,7 @@ theorem nativeOpenTensorGammaEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z)
     (On : ∀ n : ℕ, FiniteOpenModel l E j SX.toCoefficientDerivedSystemTensors
       SZ.toCoefficientDerivedSystemTensors n) :
     GammaEvaluation l E j SX SZ O On := by
-  sorry
+  intro n U L
+  exact nativeOpenTensorGammaEvaluation_component l E j SX SZ O On n U L
 
 end WeilConjectures.CoefSupportOpenTensor
