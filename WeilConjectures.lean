@@ -13926,6 +13926,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
 public import WeilConjectures.TraceFormula.Specialization.NearbyOpenExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbyOpenExchangeComp
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent

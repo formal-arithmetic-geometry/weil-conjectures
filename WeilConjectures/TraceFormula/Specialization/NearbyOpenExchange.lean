@@ -409,49 +409,6 @@ lemma Compactification.compactSupportExchange_ofOpen (C : hM.Compactification)
         (C.isIsoOn_pushforwardExchange ℓ) :=
   rfl
 
-/-- **The compact-support exchanges along an open sub-model** (blueprint
-`det-nearby-exchange-maps`, `det-nearby-exceptional-tensor` (3)): for an open sub-model `N ⊆ M`
-over open immersions `j`, `j'` and a compactification `M ⊆ P`, the compact-support exchange of
-the restricted compactification `N ⊆ P` is the composite of the exchange `ν_j` (adjoint to
-`α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`, through the composition isomorphisms
-`Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`.
-
-Mathematically: `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of
-the composition isomorphisms of the pullbacks
-(`ProEtale.CondensedRing.lowerShriekExchangeOfInv_comp_app`
-with `NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq`); these conjugates are the composition
-isomorphisms of the lower shrieks under `Rf_! ≅ f_!`
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_hom_app_of_isOpenImmersion`,
-`compactificationLowerShriekIso_hom_app_comp_map_openImmersionLowerShriekComp`
-);
-the shapes `χ_P⁻¹ ∘ Rp'_*(ν)` then compose
-(`ProEtale.CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq`).
-
-TODO: the proof is not yet formalized. All the ingredients above are proved; what remains is
-the instantiation of `compactSupportExchangeAux_lift_comp_app_of_heq` at the restricted functors
-(the bare instantiation, with `HEq.rfl` for the shapes, elaborates in a few seconds) and the
-three identities `H` at each object. Matching its conclusion with this statement leaves
-differences `(boundedConstructible R).FullSubcategory` versus `Dᵇc(-)⟦ℚ̄_ℓ⟧` whose instance
-arguments are elaborated differently, and the kernel runs out of time or memory on them, also
-after `cast_proofs`. -/
-theorem Compactification.compactSupportExchange_ofOpen_app (C : hM.Compactification)
-    (hN : N.IsTraitModelOfBase k q g) (j : Y ⟶ X) [IsOpenImmersion j.left] (j' : Y' ⟶ X')
-    [IsOpenImmersion j'.left] (φ : N.Hom M j.left j'.left) [IsOpenImmersion φ.total]
-    (hφ : IsPullback φ.generic N.j M.j φ.total) (hq : q = φ.total ≫ qM)
-    (hg : g = φ.generic ≫ gM)
-    [IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
-    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    ((C.ofOpen hN j j' φ hφ hq hg).compactSupportExchange ℓ).app K ≫
-        (traitSpecialization k k' (ℓ := ℓ)).map
-          ((lowerShriekCompOfEq ℓ j (toPoint X) (comp_toPoint j)).hom.app K) =
-      (lowerShriekCompOfEq ℓ j' (toPoint X') (comp_toPoint j')).hom.app
-          ((boundedConstructibleNearbyCycles (hN.preservesBoundedConstructible ℓ)).obj K) ≫
-        (boundedConstructibleLowerShriek ℓ (toPoint X')).map
-          ((φ.boundedConstructibleLowerShriekExchange ℓ (hN.preservesBoundedConstructible ℓ)
-            (hM.preservesBoundedConstructible ℓ)).app K) ≫
-        (C.compactSupportExchange ℓ).app ((boundedConstructibleLowerShriek ℓ j).obj K) :=
-  sorry
-
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModelOfBase
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
