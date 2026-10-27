@@ -12750,3 +12750,13 @@ public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.ZetaFunction.SixOperations
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.FibreModel
+public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.ModelExtension
+public import WeilConjectures.TraceFormula.OpenSquare
+public import WeilConjectures.TraceFormula.RelativeFrobenius
+public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
