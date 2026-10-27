@@ -1,0 +1,169 @@
+{
+ "id": "def-sfb-rational-p1-second-pretrace-data",
+ "kind": "definition",
+ "title": "Fixed maps for forward trace-free projective-line coherence",
+ "statement": "Fix the condensed coefficient ring Lambda of [def-sfb-rational-tate-pullback-comparison], q:P1_Y to Y and the self-product W with projections p1,p2 of [def-sfb-projective-diagonal-pullback]. For a module line L, put T=L[2] and H(A)=A tensor L followed by shift two, with the native tensorShiftIso of [def-sfb-tate-twisted-projection-comparison]. Write F=q*, R=Rq*, P=p1*, Q=p2*, U=Rp2*. Retain the specified root-normalized first-line comparison e1:P(T) isomorphic T_W and beta=exchange_T followed by U(e1). Cache the canonical monoidal pullback tensorator, its unit comparison, and the native derived braiding. Define S_K,V:H(FK) tensor F(V) isomorphic H(F(K tensor V)) by undoing tensorShiftIso, associating, swapping T and F(V), applying the tensorator to FK and FV, and restoring tensorShiftIso. For an invertible projection_q(K,T), nu is R(tensorShiftIso.inv) followed by inverse projection_q(K,T). Retain the proposition SecondPretraceEquation: for specified M,N,X,V,f,x,S,J, and invertible exchange_M and twisted p2 projection, J followed by unitTail and f equals (identity_M tensor x) followed by S.\nDefine D_K:FK tensor U(T_W) to U(P(H(FK))) by the forward p2 projection, U of the self-square comparison Q(FK) to P(FK) tensored with identity_T_W, tensorShiftIso on W, and inverse pullTwistIso for p1. These are actual canonical composites, with no freely selected map data. The map secondPretraceExchangeMap is the actual native condensedAmbientExchange component with source q*Rq*M and target Rp2*p1*M, through the fixed module-object functors. Its body unfolds the two functor aliases and applies that component; it makes no new choice. The native exchange and fixed derived functors are those of [def-weil-pbc-ambient-ringed-exchange] and [sk-def-sfb-module-derived-pushpull].",
+ "stmt_deps": [
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-rational-p1-ambient-tail",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-proetale-projection-exchange-maps",
+  "def-sfb-projective-diagonal-pullback",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-internal-diagonal-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: extraction of q*K and cancellation of the projection, before applying a trace."
+ },
+ "proof": [
+  {
+   "text": "Reuse the existing shifted root comparisons, canonical pullback monoidal structure and native Koszul braiding. The strength and nu are the explicit composites described in the statement; no data is obtained from an existence theorem.",
+   "uses": [
+    "def-sfb-rational-tate-pullback-comparison",
+    "def-sfb-tate-twisted-projection-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define D_K by projection_p2 and the inverse of the first pullTwistIso, with the published self-square comparison on K. The equation interface is the literal unitTail equality.",
+   "uses": [
+    "def-sfb-rational-p1-second-pull-comparison",
+    "def-sfb-rational-p1-ambient-tail"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct secondPretraceExchangeMap by unfolding just the fixed derived pullback and pushforward aliases and using the native exchange component. This caches its literal endpoints without changing the map. Its two proved API lemmas transfer native invertibility and identify ambientExchangeInverse with its inverse. Unfold the wrapper and the two functor aliases for the first; use uniqueness of inverses for the second, unfold both wrappers and cancel the native exchange with its inverse.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-rational-p1-ambient-tail",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity: extraction of q*K and cancellation of the projection, before applying a trace."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula for a monoidal adjunction is compatible with base change exchange and tensor associativity",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightHomEquiv_tensor",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor_mate_coherence\"",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "exchange.*tensor|tensor.*exchange|projection.*tensor",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "0 hits: ",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projection formula map is compatible with the associator and the braiding of an even shifted rank one line",
+   "results": "8 hits: CategoryTheory.CommShift₂Setup.hε, CategoryTheory.CommShift₂Setup.ε, CategoryTheory.CommShift₂Setup.int, CategoryTheory.CommShift₂Setup.int_ε, CategoryTheory.Center.tensorObj_snd_β, CategoryTheory.CommShift₂Setup.toTwistShiftData, CategoryTheory.GradedObject.symmetricCategory, CategoryTheory.CommShift₂Setup.int_z",
+   "date": "2026-10-28",
+   "verdict": "No direct match for the fixed rational projective-line maps. Generic monoidal naturality and inverse cancellation are used in assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondPretrace",
+  "date": "2026-10-28",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Second identity: move q*K outside the second direct image before evaluating any trace.",
+   "via": [
+    "lem-sfb-rational-p1-second-pretrace",
+    "lem-sfb-rational-p1-second-trace-reordering",
+    "lem-sfb-rational-p1-second-ambient-contraction",
+    "lem-rational-p1-kernel-contractions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondPretraceData",
+  "file": "lean/Sheaf/Paper/RationalP1SecondPretraceData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.secondExtractProjection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.firstLineComparisonForTrace",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceExchange",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceUnitIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceTensorIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceSwap",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceStrength",
+   "AlgebraicGeometry.ProEtale.RationalP1.counitProjectionPart",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTracePullMonoidal",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceBraided",
+   "AlgebraicGeometry.ProEtale.RationalP1.SecondPretraceEquation",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondExtractProjection",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondPretraceExchangeMap",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondPretraceExchangeMap_isIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondPretraceExchangeMap_inverse"
+  ],
+  "statement": "def secondExtractProjection\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    (K : DerivedCategory (Modules (coefficient l c).X Y)) :\n    (moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K ⊗\n      (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n        (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y))\n          0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧) ⟶\n    (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).obj\n      ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj\n        ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj\n          ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj\n            K)))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-10dda",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261027T210135-L-1662446",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-10dda",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261027T210135-L-1662446",
+  "kind": "interface",
+  "note": "independent cc review: second_pretrace statement byte-identical to clone; moved defs verbatim in RationalP1SecondPretraceData; 2 new holes read against their nodes; direct importers ScalarChernMaps/SecondScalarTrace compiled OK against delivered set"
+ }
+}

@@ -9,7 +9,8 @@
   "def-sfb-projective-ambient-unit-counit-composites",
   "def-sfb-rational-tate-pullback-comparison",
   "def-sfb-tate-twisted-projection-comparison",
-  "def-sfb-proetale-projection-exchange-maps"
+  "def-sfb-proetale-projection-exchange-maps",
+  "def-sfb-rational-p1-second-pretrace-data"
  ],
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
@@ -17,44 +18,33 @@
  },
  "proof": [
   {
-   "text": "Apply the normalized exchange/tensor square with inside T and outside K. Transport the ringed square through the module/ringed derived comparison, retaining its published projection and exchange arrows. Invert the square using hq,hb,hx.",
+   "text": "Set V=Rq*(T) and z=beta in the forward two-factor projection identity. Rewrite its middle composite by the forward exchange/projection square. This yields S ; H(F(projection_q) ; F(R(tensorShiftIso.hom)) ; exchange_M) ; twistProjection = (identity_M tensor beta) ; J.",
    "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-pd-module-ringed-topos-derived-comparison"
+    "lem-sfb-rational-p1-second-exchange-projection",
+    "lem-sfb-rational-p1-second-projection-interchange",
+    "def-sfb-rational-p1-second-pretrace-data"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the two-factor projection identity to separate the last Tate factor. The canonical pulled-line comparisons agree on the common root frame. The degree-zero rank-one line has trivial self-transposition and its degree-two shifts contribute (-1)^4=1, so this factor interchange is identity. The comparison on q*K is the pullback-composition comparison; together these are exactly secondPullComparison.",
+   "text": "Apply the categorical inverse-square cancellation to this equality. The witnesses hq,hb,hp,hx make the pulled q projection, exchange_M, twisted p2 projection, and identity_M tensor beta invertible. Cancel each forward arrow against its specified inverse, including the tensorShiftIso pair. Functoriality identifies the remaining inverse composite with unitTail followed by H(F(counitProjectionPart)). Inverse tensor whiskering gives the stated identity_M tensor inverse beta followed by S. Package the resulting SecondPretraceEquation with abstract coefficient and exchanged-object variables before specializing to the rational coefficient. This is the proved generic_record_assembly interface step; it adds no hypothesis.",
    "uses": [
-    "lem-sfb-ringed-projection-tensor-composition",
-    "def-sfb-rational-tate-pullback-comparison",
-    "def-sfb-rational-p1-second-pull-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Cancel the projection and inverse projection in nu and the inverse twisted p2 projection in unitTail, using the given witnesses. Cancel the tensor-shift pairs. The resulting explicit word is identity tensor inverse beta followed by S_K,RT.",
-   "uses": [
-    "def-sfb-projective-ambient-unit-counit-composites",
+    "def-sfb-rational-p1-second-pretrace-data",
     "def-sfb-rational-p1-ambient-tail"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-pd-module-ringed-topos-derived-comparison",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "def-sfb-rational-tate-pullback-comparison",
-  "def-sfb-rational-p1-second-pull-comparison",
-  "def-sfb-projective-ambient-unit-counit-composites",
+  "lem-sfb-rational-p1-second-exchange-projection",
+  "lem-sfb-rational-p1-second-projection-interchange",
+  "def-sfb-rational-p1-second-pretrace-data",
   "def-sfb-rational-p1-ambient-tail"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Second identity: extraction of q*K and cancellation of the projection, before applying a trace."
+  "place": "Second identity: forward exchange square and two-factor projection identity, followed by explicit categorical inverse cancellation."
  },
  "mathlib_searches": [
   {
@@ -119,17 +109,7 @@
   "by": "R1",
   "date": "2026-10-27",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.RationalP1.firstLineComparisonForTrace",
-   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceExchange",
-   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceUnitIso",
-   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceTensorIso",
-   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceSwap",
-   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceStrength",
-   "AlgebraicGeometry.ProEtale.RationalP1.counitProjectionPart",
-   "AlgebraicGeometry.ProEtale.RationalP1.second_pretrace",
-   "AlgebraicGeometry.ProEtale.RationalP1.secondTracePullMonoidal",
-   "AlgebraicGeometry.ProEtale.RationalP1.secondTraceBraided",
-   "AlgebraicGeometry.ProEtale.RationalP1.SecondPretraceEquation"
+   "AlgebraicGeometry.ProEtale.RationalP1.second_pretrace"
   ]
  },
  "reviewed": {
@@ -145,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
-  "result": "pass",
-  "landing": "20261027T012925-L-2348420",
+  "reviewer": "C-10dda",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261027T210135-L-1662446",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: second_pretrace statement byte-identical to clone; moved defs verbatim in RationalP1SecondPretraceData; 2 new holes read against their nodes; direct importers ScalarChernMaps/SecondScalarTrace compiled OK against delivered set"
  }
 }
