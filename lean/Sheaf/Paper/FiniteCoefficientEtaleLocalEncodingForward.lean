@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.FiniteCoefficientSliceRestriction
 public import Sheaf.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalModelsComparison
+import Sheaf.Paper.FiniteCoefficientEtaleLocalEncodingForwardBridge
 
 /-! # Forward transport from etale finite models to fixed-scalar pro-etale models
 
@@ -58,6 +59,18 @@ theorem finiteCoefficient_etaleLocal_encoding_forward
                         (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom ⋙
                       koszulConstantFunctor X B).obj N)))
     P F → ProFiniteModels.fixedModels (ProEt.topology V.left) (ULift.{t + 1} B)
-      ((finiteCoefficientSliceRestriction X B R φ V).obj F) := by sorry
+      ((finiteCoefficientSliceRestriction X B R φ V).obj F) := by
+  dsimp
+  intro hP
+  let H := finiteCoefficientSliceRestriction X B R φ V
+  let e := proEtaleModuleEncoding V.left B
+  let G := e.inverse.obj (H.obj F)
+  have hG : IsFinitelyPresentedLocallyConstantProEtaleModule G := by
+    exact finiteCoefficient_etaleLocal_encoding_forward_bridge X B R φ hφ V F hP
+  have hfixed : ProFiniteModels.fixedModels (ProEt.topology V.left)
+      (ULift.{t + 1} B) (H.obj F) := by
+    have hfixedG := (ProFiniteModels.intrinsic_fixedModels V.left B G).mp hG
+    exact ProFiniteModels.fixedModels_of_iso _ _ (e.counitIso.app (H.obj F)) hfixedG
+  exact hfixed
 
 end AlgebraicGeometry.Scheme
