@@ -19805,3 +19805,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:08 L: merged deliver/S2/Sheaf.Algebra.Module.GradedLocalizationScalarExtension (stage 3; reviewer PASS; first push; landing 20261027T180802-L-3902024 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:08 L: merged deliver/S3/Sheaf.Paper.NativeOpenTensorNormalization (stage 3; reviewer PASS; first push; landing 20261027T180804-L-3902359 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:08 L: merged deliver/S3/Sheaf.Paper.RationalPullbackCompositionCoherence (stage 3; reviewer PASS; first push; landing 20261027T180805-L-3902553 (interface); batch 20261027T180444; modules 5; new nodes 4)
+- 18:08 L: merged deliver/S4/Sheaf.Paper.RationalScalarBalancedLocalization (stage 3; reviewer PASS; first push; landing 20261027T180807-L-3902712 (interface); batch 20261027T180444; modules 1; new nodes 0)

@@ -22,7 +22,9 @@ public import Sheaf.AlgebraicGeometry.ContinuousCoefficientPullback
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Paper.ContinuousCoefficientRealizations
 import all Sheaf.Paper.PbcScalarExtension
+import all Sheaf.Paper.CompletedPullbackReductionCoherence
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import Sheaf.NumberTheory.Padics.IntegersProfiniteTower
 import all Sheaf.AlgebraicGeometry.ContinuousCoefficientCompletion
 import all Sheaf.AlgebraicGeometry.ContinuousCoefficientPullbackIso
 import Sheaf.AlgebraicGeometry.ContinuousCoefficientGeneralPullbackIso
@@ -196,6 +198,150 @@ variable (X : Scheme.{u}) [IsNoetherian X]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 variable (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X)
 
+private theorem rationalBalancedFiniteScalarsUnit
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (W : Scheme.{u}) (n : ℕ) :
+    pbcFunctionScalars W d n = Functor.whiskerRight
+      (toSheafify (ProEt.topology W)
+          ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of (ProEtale.PbcQuotient d n))) ≫
+        (pbcLevelConstantComparison W d n).hom.hom)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
+  let e := AdicCoefficients.finiteRingComparison W (ProEtale.PbcQuotient d n)
+  have he : Functor.whiskerRight (toSheafify (ProEt.topology W)
+        (AdicCoefficients.functionPresheaf W (ProEtale.PbcQuotient d n)))
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫ e.hom.hom =
+        AdicCoefficients.finiteRingUnit W (ProEtale.PbcQuotient d n) :=
+    (AdicCoefficients.finiteRingComparison_exists W
+      (ProEtale.PbcQuotient d n)).choose_spec.1.2
+  have hconst : toSheafify (ProEt.topology W)
+        ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of (ProEtale.PbcQuotient d n))) ≫
+      (pbcLevelConstantComparison W d n).hom.hom =
+        AdicCoefficients.constants W (ProEtale.PbcQuotient d n) ≫
+          toSheafify (ProEt.topology W)
+            (AdicCoefficients.functionPresheaf W (ProEtale.PbcQuotient d n)) := by
+    ext U b
+    exact (pbcLevelConstantComparison_exists W d n).exists.choose_spec U b
+  rw [hconst]
+  apply (cancel_mono e.hom.hom).1
+  have hi : e.inv.hom ≫ e.hom.hom = 𝟙 _ := congrArg
+    (fun f : AdicCoefficients.finiteRingPresentation W (ProEtale.PbcQuotient d n) ⟶
+      AdicCoefficients.finiteRingPresentation W (ProEtale.PbcQuotient d n) ↦ f.hom)
+    e.inv_hom_id
+  change (ProEtale.finiteCoefficientScalarMap W (ProEtale.PbcQuotient d n) ≫
+    e.inv.hom) ≫ e.hom.hom = _
+  rw [Category.assoc, hi]
+  erw [Category.comp_id]
+  rw [Functor.whiskerRight_comp, Category.assoc, he]
+  rfl
+
+private theorem rationalBalancedFiniteComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (W : Scheme.{u}) [IsNoetherian W]
+    [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]
+    [Fact (∀ t : W, IsUnit (l : W.presheaf.stalk t))]
+    (s : RationalModuleRealization l E W) (n : ℕ) :
+    letI : TopologicalSpace (finiteCoefficientRing l E n) := ⊥
+    letI : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
+    (pbcLevelConstantComparison W (pbcIntegralDatum l E) n).hom ≫
+        (s.finiteIso n).hom =
+      (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
+          (integralCoefficientULift l E n).toCommRingCatIso.hom ≫
+        continuousCoefficientConstantComparison W (finiteCoefficientRing l E n) := by
+  let _ : TopologicalSpace (finiteCoefficientRing l E n) := ⊥
+  let _ : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _ (finiteContinuousCoefficientSheaf l W E n).property
+  have hu := rationalBalancedFiniteScalarsUnit (pbcIntegralDatum l E) W n
+  ext V a
+  apply ContinuousMap.ext
+  intro x
+  have hn := s.finite_normalization n V a x
+  have hunit := congrArg (fun z ↦ (z.app V).hom a) hu
+  change _ = _ at hunit
+  rw [hunit] at hn
+  have hmap := congr_app (toSheafify_naturality (ProEt.topology W)
+    ((Functor.const W.ProEtᵒᵖ).map (integralCoefficientULift l E n).toCommRingCatIso.hom)) V
+  have hmap' := ConcreteCategory.congr_hom hmap a
+  have hc := continuousCoefficientConstantComparison_unit W (finiteCoefficientRing l E n)
+  have hc' := ConcreteCategory.congr_hom (congr_app hc V)
+    (integralCoefficientULift l E n a)
+  let e := (integralCoefficientULift l E n).toCommRingCatIso.hom
+  let η := toSheafify (ProEt.topology W)
+    ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of (ProEtale.PbcQuotient (pbcIntegralDatum l E) n)))
+  let η' := toSheafify (ProEt.topology W)
+    ((Functor.const W.ProEtᵒᵖ).obj (finiteCoefficientRing l E n))
+  let q := continuousCoefficientConstantComparison W (finiteCoefficientRing l E n)
+  let m := sheafifyMap (ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).map e)
+  change (η'.app V) (e a) = (m.app V) ((η.app V) a) at hmap'
+  change (q.hom.app V) ((η'.app V) (e a)) = ContinuousMap.const V.unop.left
+    (show finiteCoefficientRing l E n from e a) at hc'
+  let f : C(V.unop.left, finiteCoefficientRing l E n) :=
+    (s.finiteIso n).hom.hom.app V
+      ((pbcLevelConstantComparison W (pbcIntegralDatum l E) n).hom.hom.app V
+        ((η.app V) a))
+  change f x = e a at hn
+  let g : C(V.unop.left, finiteCoefficientRing l E n) :=
+    q.hom.app V ((m.app V) ((η.app V) a))
+  change f x = g x
+  rw [hn]
+  have hg : g = ContinuousMap.const V.unop.left
+      (show finiteCoefficientRing l E n from e a) := by
+    change (q.hom.app V) ((m.app V) ((η.app V) a)) = _
+    rw [← hmap']
+    exact hc'
+  exact (congrArg (fun z : C(V.unop.left, finiteCoefficientRing l E n) ↦ z x) hg).symm
+
+private theorem rationalBalancedFiniteScalarChart (W : Scheme.{u}) [IsNoetherian W]
+    [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]
+    [Fact (∀ x : W, IsUnit (l : W.presheaf.stalk x))]
+    (AE : RationalModuleRealization l E W)
+    (AF : RationalModuleRealization l F W) (n : ℕ) :
+    let : TopologicalSpace (finiteCoefficientRing l E n) := ⊥
+    let : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
+    let : TopologicalSpace (finiteCoefficientRing l F n) := ⊥
+    let : DiscreteTopology (finiteCoefficientRing l F n) := ⟨rfl⟩
+    let q : finiteCoefficientRing l E n →+* finiteCoefficientRing l F n :=
+      (integralCoefficientULift l F n).toRingHom.comp
+      ((pbcScalarQuotientMap l E F i n).comp
+        (integralCoefficientULift l E n).symm.toRingHom)
+    AdicCoefficients.coefficientMap W (pbcScalarQuotientMap l E F i n) ≫
+        (AF.finiteIso n).hom =
+      (AE.finiteIso n).hom ≫ continuousCoefficientMap q continuous_of_discreteTopology W := by
+  let : TopologicalSpace (finiteCoefficientRing l E n) := ⊥
+  let : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
+  let : TopologicalSpace (finiteCoefficientRing l F n) := ⊥
+  let : DiscreteTopology (finiteCoefficientRing l F n) := ⟨rfl⟩
+  let q : finiteCoefficientRing l E n →+* finiteCoefficientRing l F n :=
+      (integralCoefficientULift l F n).toRingHom.comp
+    ((pbcScalarQuotientMap l E F i n).comp
+      (integralCoefficientULift l E n).symm.toRingHom)
+  apply (cancel_epi (pbcLevelConstantComparison W (pbcIntegralDatum l E) n).hom).mp
+  have hn :
+      (pbcLevelConstantComparison W (pbcIntegralDatum l E) n).hom ≫
+        AdicCoefficients.coefficientMap W (pbcScalarQuotientMap l E F i n) =
+      (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
+          (CommRingCat.ofHom (pbcScalarQuotientMap l E F i n)) ≫
+        (pbcLevelConstantComparison W (pbcIntegralDatum l F) n).hom := by
+    exact (scalarLevelConstantComparison_naturality W (pbcIntegralDatum l E)
+      (pbcIntegralDatum l F) n (pbcScalarQuotientMap l E F i n)).symm
+  conv_lhs =>
+    erw [← Category.assoc, hn, Category.assoc, rationalBalancedFiniteComparison l F W AF n]
+  conv_rhs =>
+    erw [← Category.assoc, rationalBalancedFiniteComparison l E W AE n, Category.assoc]
+  erw [← discreteConstantComparison_naturality W (CommRingCat.ofHom q)]
+  have hm : CommRingCat.ofHom (pbcScalarQuotientMap l E F i n) ≫
+        (integralCoefficientULift l F n).toCommRingCatIso.hom =
+      (integralCoefficientULift l E n).toCommRingCatIso.hom ≫ CommRingCat.ofHom q := by
+    apply CommRingCat.hom_ext
+    apply RingHom.ext
+    intro a
+    exact (integralCoefficientULift l E n).symm_apply_apply a |>.symm
+      |> congrArg (fun a ↦ integralCoefficientULift l F n
+        (pbcScalarQuotientMap l E F i n a))
+  conv_lhs => erw [← Category.assoc, ← Functor.map_comp]
+  conv_rhs => erw [← Category.assoc, ← Functor.map_comp]
+  erw [hm]
+
 /-- Integral coefficient inclusion is postcomposition under the specified realizations.
 Source: BS 6.8.2 (blueprint: lem-per-rational-scalar-balanced-localization).
 Proof: compose with every finite quotient projection. The residue of i(a) is the
@@ -207,7 +353,74 @@ theorem rationalBalancedIntegralNormalization
     (integralCoefficientValue l F X U
       ((sE.integralIso.inv ≫ pbcScalarCoefficientMap l E F i X ≫ sF.integralIso.hom).hom.app
         U b) x).val = i (integralCoefficientValue l E X U b x).val := by
-  sorry
+  let c := sE.integralIso.inv ≫ pbcScalarCoefficientMap l E F i X ≫ sF.integralIso.hom
+  let q (n : ℕ) : finiteCoefficientRing l E n →+* finiteCoefficientRing l F n :=
+    (integralCoefficientULift l F n).toRingHom.comp
+    ((pbcScalarQuotientMap l E F i n).comp
+      (integralCoefficientULift l E n).symm.toRingHom)
+  have hq (n : ℕ) (a : Padic.coefficientExtensionIntegers l E) :
+      q n (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) a)) =
+        ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l F (n + 1))
+          (WeilConjectures.integralScalarIntegerInclusion l E F i a)) := by
+    change integralCoefficientULift l F n
+      (pbcScalarQuotientMap l E F i n ((integralCoefficientULift l E n).symm _)) = _
+    have hE : integralCoefficientULift l E n
+        (Ideal.Quotient.mk _ (ULift.up a)) =
+          ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) a) :=
+      (integralCoefficientULift_exists l E n).exists.choose_spec (ULift.up a)
+    rw [← hE, RingEquiv.symm_apply_apply]
+    change integralCoefficientULift l F n
+      (Ideal.Quotient.mk _ (pbcEmbeddingIntegerMap l E F i (ULift.up a))) = _
+    exact (integralCoefficientULift_exists l F n).exists.choose_spec _
+  have hres (n : ℕ) :
+      Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l F (n + 1))
+          (integralCoefficientValue l F X U (c.hom.app U b) x) =
+        Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l F (n + 1))
+          (WeilConjectures.integralScalarIntegerInclusion l E F i
+            (integralCoefficientValue l E X U b x)) := by
+    let : TopologicalSpace (finiteCoefficientRing l E n) := ⊥
+    let : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
+    let : TopologicalSpace (finiteCoefficientRing l F n) := ⊥
+    let : DiscreteTopology (finiteCoefficientRing l F n) := ⟨rfl⟩
+    have hs : c ≫ sF.integralIso.inv ≫ pbcAdicProjection X (pbcIntegralDatum l F) n ≫
+          (sF.finiteIso n).hom =
+        (sE.integralIso.inv ≫ pbcAdicProjection X (pbcIntegralDatum l E) n ≫
+          (sE.finiteIso n).hom) ≫ continuousCoefficientMap (q n)
+            continuous_of_discreteTopology X := by
+      simp only [c, Category.assoc, Iso.hom_inv_id_assoc]
+      have hp : pbcScalarCoefficientMap l E F i X ≫
+          pbcAdicProjection X (pbcIntegralDatum l F) n =
+          pbcAdicProjection X (pbcIntegralDatum l E) n ≫
+            AdicCoefficients.coefficientMap X (pbcScalarQuotientMap l E F i n) :=
+        (pbcScalarCoefficientMap_exists l E F i X).exists.choose_spec n
+      rw [reassoc_of% hp]
+      erw [rationalBalancedFiniteScalarChart l E F i X sE sF n]
+    have hv := congrArg (fun z ↦
+      (finiteContinuousCoefficientValue l F X n U (z.hom.app U b) x).down) hs
+    have he := sE.integral_normalization n U b x
+    have hf := sF.integral_normalization n U (c.hom.app U b) x
+    rw [← hf]
+    change (finiteContinuousCoefficientValue l F X n U
+      ((c ≫ sF.integralIso.inv ≫ pbcAdicProjection X (pbcIntegralDatum l F) n ≫
+        (sF.finiteIso n).hom).hom.app U b) x).down = _
+    rw [hv]
+    change (q n (finiteContinuousCoefficientValue l E X n U
+      ((sE.integralIso.inv ≫ pbcAdicProjection X (pbcIntegralDatum l E) n ≫
+        (sE.finiteIso n).hom).hom.app U b) x)).down = _
+    rw [← ULift.up_down (finiteContinuousCoefficientValue l E X n U
+      ((sE.integralIso.inv ≫ pbcAdicProjection X (pbcIntegralDatum l E) n ≫
+        (sE.finiteIso n).hom).hom.app U b) x), he, hq]
+  obtain ⟨⟨e, he, _⟩, _⟩ := Padic.coefficientExtension_integers_profinite_tower.{u, u} l F
+  have h : integralCoefficientValue l F X U (c.hom.app U b) x =
+      WeilConjectures.integralScalarIntegerInclusion l E F i
+        (integralCoefficientValue l E X U b x) := by
+    apply e.injective
+    apply Subtype.ext
+    funext n
+    rw [he, he]
+    exact hres n
+  exact congrArg Subtype.val h
+
 
 
 /-- The specific completed integral map localizes to continuous postcomposition.
@@ -458,6 +671,7 @@ theorem rationalBalancedTower
 variable (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H]
   (k : G →ₐ[ℚ_[l]] H)
 
+attribute [-instance] ULift.module in
 /-- The four-field balanced pentagon, evaluated after realization on every raw object.
 Both routes flatten to the product of the three degree-zero coefficients.
 Source: Stacks 0D6D (blueprint: lem-per-rational-scalar-balanced-localization).
@@ -478,7 +692,48 @@ theorem rationalBalancedPentagon (sH : RationalModuleRealization l H X)
             ((pbcRationalScalarExtension l E F i X Fact.out Fact.out).obj K) ≫
           (pbcRationalScalarComp l E F H i (k.comp j) X Fact.out Fact.out).hom.app K) ≫
         (rationalBalancedTheta l E H ((k.comp j).comp i) X sE sH).hom.app K := by
-  sorry
+  have hp :
+      (pbcRationalScalarExtension l G H k X Fact.out Fact.out).map
+          ((pbcRationalScalarComp l E F G i j X Fact.out Fact.out).hom.app K) ≫
+        (pbcRationalScalarComp l E G H (j.comp i) k X Fact.out Fact.out).hom.app K =
+      (pbcRationalScalarComp l F G H j k X Fact.out Fact.out).hom.app
+          ((pbcRationalScalarExtension l E F i X Fact.out Fact.out).obj K) ≫
+        (pbcRationalScalarComp l E F H i (k.comp j) X Fact.out Fact.out).hom.app K := by
+    unfold pbcRationalScalarComp pbcRationalScalarCompComponent
+    change pbcRationalScalarHom l G H k X Fact.out Fact.out _ _
+        ((1 : Localization.Away (pbcUniformizer l G)) ⊗ₜ[PbcIntegralRing l G] _) ≫
+        ((1 : Localization.Away (pbcUniformizer l H)) ⊗ₜ[PbcIntegralRing l H] _) =
+      ((1 : Localization.Away (pbcUniformizer l H)) ⊗ₜ[PbcIntegralRing l H] _) ≫
+        ((1 : Localization.Away (pbcUniformizer l H)) ⊗ₜ[PbcIntegralRing l H] _)
+    rw [pbcRationalScalarHom_tmul]
+    simp only [map_one]
+    change ScalarLocalization.composition _ _ _ _ _ _
+        ((1 : Localization.Away (pbcUniformizer l H)) ⊗ₜ[PbcIntegralRing l H] _)
+        ((1 : Localization.Away (pbcUniformizer l H)) ⊗ₜ[PbcIntegralRing l H] _) =
+      ScalarLocalization.composition _ _ _ _ _ _
+        ((1 : Localization.Away (pbcUniformizer l H)) ⊗ₜ[PbcIntegralRing l H] _)
+        ((1 : Localization.Away (pbcUniformizer l H)) ⊗ₜ[PbcIntegralRing l H] _)
+    rw [ScalarLocalization.composition_tmul, ScalarLocalization.composition_tmul]
+    congr 1
+    apply ObjectProperty.hom_ext
+    simpa only [pbcRationalScalarExtension, Functor.comp_obj, ObjectProperty.ι_obj,
+      pbcEmbeddingAmbientTensor, AlgHom.comp_assoc,
+      pbcEmbeddingIntegralTensor, ObjectProperty.lift,
+      Functor.comp_map, ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom,
+      ObjectProperty.homMk_hom, ObjectProperty.isoMk, Iso.app_hom,
+      pbcAmbientScalarComp, NatIso.ofComponents_hom_app] using
+      (norm_assoc (pbcScalarCoefficientMap l E F i X)
+        (pbcScalarCoefficientMap l F G j X) (pbcScalarCoefficientMap l G H k X)
+        (pbcScalarCoefficientMap l E G (j.comp i) X)
+        (pbcScalarCoefficientMap l F H (k.comp j) X)
+        (pbcScalarCoefficientMap l E H (k.comp (j.comp i)) X)
+        (pbcScalarCoefficientMap_comp l E F G i j X)
+        (pbcScalarCoefficientMap_comp l F G H j k X)
+        (pbcScalarCoefficientMap_comp l E F H i (k.comp j) X)
+        (pbcScalarCoefficientMap_comp l E G H (j.comp i) k X) K.obj.obj)
+  exact congrArg (fun f ↦ sH.J.map f ≫
+    (rationalBalancedTheta l E H (k.comp (j.comp i)) X sE sH).hom.app K) hp
+
 
 /-- Equality coefficients have the multiplication unitor, with its cochain computation.
 Conjugation by the published raw tensor unit makes the raw source functor literally id.
@@ -621,42 +876,6 @@ variable [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
-private theorem rationalBalancedFiniteScalarsUnit
-    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-    (W : Scheme.{u}) (n : ℕ) :
-    pbcFunctionScalars W d n = Functor.whiskerRight
-      (toSheafify (ProEt.topology W)
-          ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of (ProEtale.PbcQuotient d n))) ≫
-        (pbcLevelConstantComparison W d n).hom.hom)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
-  let e := AdicCoefficients.finiteRingComparison W (ProEtale.PbcQuotient d n)
-  have he : Functor.whiskerRight (toSheafify (ProEt.topology W)
-        (AdicCoefficients.functionPresheaf W (ProEtale.PbcQuotient d n)))
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫ e.hom.hom =
-        AdicCoefficients.finiteRingUnit W (ProEtale.PbcQuotient d n) :=
-    (AdicCoefficients.finiteRingComparison_exists W
-      (ProEtale.PbcQuotient d n)).choose_spec.1.2
-  have hconst : toSheafify (ProEt.topology W)
-        ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of (ProEtale.PbcQuotient d n))) ≫
-      (pbcLevelConstantComparison W d n).hom.hom =
-        AdicCoefficients.constants W (ProEtale.PbcQuotient d n) ≫
-          toSheafify (ProEt.topology W)
-            (AdicCoefficients.functionPresheaf W (ProEtale.PbcQuotient d n)) := by
-    ext U b
-    exact (pbcLevelConstantComparison_exists W d n).exists.choose_spec U b
-  rw [hconst]
-  apply (cancel_mono e.hom.hom).1
-  have hi : e.inv.hom ≫ e.hom.hom = 𝟙 _ := congrArg
-    (fun f : AdicCoefficients.finiteRingPresentation W (ProEtale.PbcQuotient d n) ⟶
-      AdicCoefficients.finiteRingPresentation W (ProEtale.PbcQuotient d n) ↦ f.hom)
-    e.inv_hom_id
-  change (ProEtale.finiteCoefficientScalarMap W (ProEtale.PbcQuotient d n) ≫
-    e.inv.hom) ≫ e.hom.hom = _
-  rw [Category.assoc, hi]
-  erw [Category.comp_id]
-  rw [Functor.whiskerRight_comp, Category.assoc, he]
-  rfl
-
 private theorem rationalBalancedIntegralProjection (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u}) [IsNoetherian W]
@@ -675,63 +894,6 @@ private theorem rationalBalancedIntegralProjection (l : ℕ) [Fact l.Prime] (E :
   intro x
   apply ULift.down_injective
   exact (s.integral_normalization n V a x).symm
-
-private theorem rationalBalancedFiniteComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    (W : Scheme.{u}) [IsNoetherian W]
-    [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]
-    [Fact (∀ t : W, IsUnit (l : W.presheaf.stalk t))]
-    (s : RationalModuleRealization l E W) (n : ℕ) :
-    letI : TopologicalSpace (finiteCoefficientRing l E n) := ⊥
-    letI : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
-    (pbcLevelConstantComparison W (pbcIntegralDatum l E) n).hom ≫
-        (s.finiteIso n).hom =
-      (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
-          (integralCoefficientULift l E n).toCommRingCatIso.hom ≫
-        continuousCoefficientConstantComparison W (finiteCoefficientRing l E n) := by
-  let _ : TopologicalSpace (finiteCoefficientRing l E n) := ⊥
-  let _ : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
-  apply Sheaf.hom_ext
-  apply sheafify_hom_ext _ _ _ (finiteContinuousCoefficientSheaf l W E n).property
-  have hu := rationalBalancedFiniteScalarsUnit (pbcIntegralDatum l E) W n
-  ext V a
-  apply ContinuousMap.ext
-  intro x
-  have hn := s.finite_normalization n V a x
-  have hunit := congrArg (fun z ↦ (z.app V).hom a) hu
-  change _ = _ at hunit
-  rw [hunit] at hn
-  have hmap := congr_app (toSheafify_naturality (ProEt.topology W)
-    ((Functor.const W.ProEtᵒᵖ).map (integralCoefficientULift l E n).toCommRingCatIso.hom)) V
-  have hmap' := ConcreteCategory.congr_hom hmap a
-  have hc := continuousCoefficientConstantComparison_unit W (finiteCoefficientRing l E n)
-  have hc' := ConcreteCategory.congr_hom (congr_app hc V)
-    (integralCoefficientULift l E n a)
-  let e := (integralCoefficientULift l E n).toCommRingCatIso.hom
-  let η := toSheafify (ProEt.topology W)
-    ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of (ProEtale.PbcQuotient (pbcIntegralDatum l E) n)))
-  let η' := toSheafify (ProEt.topology W)
-    ((Functor.const W.ProEtᵒᵖ).obj (finiteCoefficientRing l E n))
-  let q := continuousCoefficientConstantComparison W (finiteCoefficientRing l E n)
-  let m := sheafifyMap (ProEt.topology W) ((Functor.const W.ProEtᵒᵖ).map e)
-  change (η'.app V) (e a) = (m.app V) ((η.app V) a) at hmap'
-  change (q.hom.app V) ((η'.app V) (e a)) = ContinuousMap.const V.unop.left
-    (show finiteCoefficientRing l E n from e a) at hc'
-  let f : C(V.unop.left, finiteCoefficientRing l E n) :=
-    (s.finiteIso n).hom.hom.app V
-      ((pbcLevelConstantComparison W (pbcIntegralDatum l E) n).hom.hom.app V
-        ((η.app V) a))
-  change f x = e a at hn
-  let g : C(V.unop.left, finiteCoefficientRing l E n) :=
-    q.hom.app V ((m.app V) ((η.app V) a))
-  change f x = g x
-  rw [hn]
-  have hg : g = ContinuousMap.const V.unop.left
-      (show finiteCoefficientRing l E n from e a) := by
-    change (q.hom.app V) ((m.app V) ((η.app V) a)) = _
-    rw [← hmap']
-    exact hc'
-  exact (congrArg (fun z : C(V.unop.left, finiteCoefficientRing l E n) ↦ z x) hg).symm
 
 /-- The finite-projection completed pullback is exactly continuous precomposition.
 Source: BS 6.8.2 (blueprint: lem-per-rational-scalar-balanced-localization).
@@ -820,8 +982,56 @@ private theorem rationalBalancedCancelUnit {C : Type*} [Category C] {A B D : C}
     σ.inv ≫ u.hom = v.hom := by
   rw [Iso.inv_comp_eq, h, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
+private theorem rationalBalancedNormalizedIdentityOf
+    {C D : Type*} [Category C] [Category D]
+    {F G : C ⥤ C} {J : C ⥤ D} {L : D ⥤ D}
+    (σ : F ≅ G) (u : F ≅ 𝟭 C) (θ : F ⋙ J ≅ J ⋙ L) (d : L ≅ 𝟭 D)
+    (e : G = 𝟭 C) (K : C)
+    (hn : σ.hom.app K = u.hom.app K ≫ eqToHom (congrArg (fun T ↦ T.obj K) e).symm)
+    (ht : θ.hom.app K ≫ d.hom.app (J.obj K) = J.map (u.hom.app K)) :
+    (isoWhiskerRight σ.symm J ≪≫ θ).hom.app K ≫ d.hom.app (J.obj K) =
+      J.map (eqToHom (congrArg (fun T ↦ T.obj K) e)) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom,
+    whiskerRight_app, Iso.symm_hom, Category.assoc]
+  rw [ht, ← J.map_comp]
+  congr 1
+  exact rationalBalancedCancelUnit (σ.app K) (u.app K)
+    (eqToIso (congrArg (fun T ↦ T.obj K) e)) hn
+
+
 section
-attribute [local irreducible] pbcRationalScalarExtension
+attribute [local irreducible] pbcRationalScalarExtension pbcScalarCoefficientMap
+
+private theorem rationalBalancedIndexedIdentity
+    {I C A D : Type*} [Category C] [Category A] [Category D]
+    (F : I → C ⥤ C) (O : I → A ⥤ A) (L : I → D ⥤ D)
+    (J : C ⥤ D) (θ : ∀ i : I, F i ⋙ J ≅ J ⋙ L i)
+    (P : ∀ i : I, (O i ≅ 𝟭 A) → Prop)
+    (Q : ∀ i : I, (O i ≅ 𝟭 A) → (L i ≅ 𝟭 D) → Prop)
+    {i j : I} (h : i = j) (G : C ⥤ C) (e : G = 𝟭 C)
+    (σ : F i ≅ G) (u : F j ≅ 𝟭 C) (o : O j ≅ 𝟭 A) (d : L j ≅ 𝟭 D)
+    (hσ : σ = eqToIso (congrArg F h) ≪≫ u ≪≫ eqToIso e.symm)
+    (ho : P j o) (hd : Q j o d)
+    (ht : ∀ K : C, (θ j).hom.app K ≫ d.hom.app (J.obj K) = J.map (u.hom.app K)) :
+    ∃ (o : O i ≅ 𝟭 A) (d : L i ≅ 𝟭 D), P i o ∧ Q i o d ∧
+      ∀ K : C, (isoWhiskerRight σ.symm J ≪≫ θ i).hom.app K ≫ d.hom.app (J.obj K) =
+        J.map (eqToHom (congrArg (fun T ↦ T.obj K) e)) := by
+  subst j
+  refine ⟨o, d, ho, hd, ?_⟩
+  intro K
+  apply rationalBalancedNormalizedIdentityOf σ u (θ i) d e K ?_ (ht K)
+  simp only [hσ, eqToIso_refl, Iso.refl_trans, Iso.trans_hom, NatTrans.comp_app,
+    eqToIso.hom, eqToHom_app]
+
+private theorem rationalBalancedStageNormalization
+    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] (A : Padic.FiniteCoefficientFields l Ω)
+    (e : pbcStageTransition l Ω X (le_refl A) = 𝟭 _) :
+    pbcStageNormalization l Ω X (le_refl A) =
+      eqToIso (congrArg (fun i ↦ pbcRationalScalarExtension l A.val A.val i X
+        Fact.out Fact.out) (pbcSubfieldInclusion_id l Ω A)) ≪≫
+          pbcRationalScalarUnit l A.val X Fact.out Fact.out ≪≫ eqToIso e.symm := by
+  simp only [pbcStageNormalization, ↓reduceDIte]
+
 
 /-- The multiplication comparison for a literally identity raw scalar functor.
 The displayed equality transports only along the literal identity normalization.
@@ -856,35 +1066,33 @@ theorem rationalBalancedNormalizedIdentity
             rationalBalancedTheta l A.val A.val (pbcSubfieldInclusion l Ω (le_refl A))
               X rA rA).hom.app K ≫ d.hom.app (rA.J.obj K) =
           rA.J.map (eqToHom (congrArg (fun T ↦ T.obj K) e))) := by
-  set_option backward.isDefEq.respectTransparency true in
-    set_option backward.isDefEq.respectTransparency.types true in
-      classical
-      obtain ⟨_, o, d, ho, hd, ht⟩ := rationalBalancedIdentity l A.val X rA
-      have e : pbcStageTransition l Ω X (le_refl A) = 𝟭 _ := by
-        simp only [pbcStageTransition, ↓reduceDIte]
-      refine ⟨e, o, d, ho, hd, ?_⟩
-      intro K
-      simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom,
-        whiskerRight_app, Iso.symm_hom, Category.assoc]
-      change rA.J.map ((pbcStageNormalization l Ω X (le_refl A)).inv.app K) ≫
-        ((rationalBalancedTheta l A.val A.val (AlgHom.id ℚ_[l] A.val) X rA rA).hom.app K ≫
-          d.hom.app (rA.J.obj K)) = _
-      erw [ht, ← rA.J.map_comp]
-      congr 1
-      have hn : (pbcStageNormalization l Ω X (le_refl A)).hom.app K =
-          (pbcRationalScalarUnit l A.val X Fact.out Fact.out).hom.app K ≫
-            eqToHom (congrArg (fun T ↦ T.obj K) e).symm := by
-        simp only [pbcStageNormalization, ↓reduceDIte, Iso.trans_hom, NatTrans.comp_app,
-          eqToIso.hom, eqToHom_app]
-        change (𝟙 ((pbcRationalScalarExtension l A.val A.val (AlgHom.id ℚ_[l] A.val)
-            X Fact.out Fact.out).obj K)) ≫
-          ((pbcRationalScalarUnit l A.val X Fact.out Fact.out).hom.app K ≫
-            eqToHom (congrArg (fun T ↦ T.obj K) e).symm) = _
-        exact Category.id_comp _
-      exact rationalBalancedCancelUnit
-        ((pbcStageNormalization l Ω X (le_refl A)).app K)
-        ((pbcRationalScalarUnit l A.val X Fact.out Fact.out).app K)
-        (eqToIso (congrArg (fun T ↦ T.obj K) e)) hn
+  classical
+  obtain ⟨_, o, d, ho, hd, ht⟩ := rationalBalancedIdentity l A.val X rA
+  have e : pbcStageTransition l Ω X (le_refl A) = 𝟭 _ := by
+    simp only [pbcStageTransition, ↓reduceDIte]
+  refine ⟨e, ?_⟩
+  let P (i : A.val →ₐ[ℚ_[l]] A.val)
+      (o : pbcExtend (rationalBalancedCoefficient l A.val A.val i X) ≅ 𝟭 _) : Prop :=
+    ∀ (M : pbcModules X (rationalCoefficientSheaf l X A.val)) (U : X.ProEtᵒᵖ)
+      (a : (rationalCoefficientSheaf l X A.val).obj.obj U) (m : M.val.obj U),
+      (o.hom.app M).val.app U
+        (pbcTensorSection (rationalBalancedCoefficient l A.val A.val i X) M U a m) = a • m
+  let Q (i : A.val →ₐ[ℚ_[l]] A.val)
+      (o : pbcExtend (rationalBalancedCoefficient l A.val A.val i X) ≅ 𝟭 _)
+      (d : pbcDerivedExtend (rationalBalancedCoefficient l A.val A.val i X) ≅ 𝟭 _) : Prop :=
+    ∀ P : CochainComplex (pbcModules X (rationalCoefficientSheaf l X A.val)) ℤ,
+      d.hom.app (DerivedCategory.Q.obj P) =
+        pbcComplexCounit (rationalBalancedCoefficient l A.val A.val i X) P ≫
+          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex o (.up ℤ)).hom.app P)
+  exact rationalBalancedIndexedIdentity
+    (fun i ↦ pbcRationalScalarExtension l A.val A.val i X Fact.out Fact.out)
+    (fun i ↦ pbcExtend (rationalBalancedCoefficient l A.val A.val i X))
+    (fun i ↦ pbcDerivedExtend (rationalBalancedCoefficient l A.val A.val i X))
+    rA.J (fun i ↦ rationalBalancedTheta l A.val A.val i X rA rA) P Q
+    (pbcSubfieldInclusion_id l Ω A) (pbcStageTransition l Ω X (le_refl A)) e
+    (pbcStageNormalization l Ω X (le_refl A))
+    (pbcRationalScalarUnit l A.val X Fact.out Fact.out) o d
+    (rationalBalancedStageNormalization l X Ω A e) ho hd ht
 
 end
 
