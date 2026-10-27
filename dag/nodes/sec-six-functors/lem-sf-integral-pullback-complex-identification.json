@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-integral-pullback-complex-identification",
+ "kind": "statement",
+ "title": "Ordinary and ringed cochain pullbacks with their unit and derived computation maps",
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "statement": "For prime l, finite E/Q_l and every scheme morphism f:X→Y, there exists a natural isomorphism b from the ringed cochain pullback OpenFactorCoherence.pullCx [def-sf-pull-completion-comparison] to ordinaryIntegralPullComplex [lem-tw-ordinary-completed-integral-pullback]. Its inverse sends each ordinary adjunction-unit section in degree i to the corresponding ringed adjunction-unit section. For every complex P, pullIso(QP) followed by the ordinary computation counit equals the ringed derived computation map followed by Q(b(P)). This is an identification of cochain pullback models and their computation maps; it does not involve a completion tower or a tensor input.",
+ "stmt_deps": [
+  "def-sf-pull-completion-comparison",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "lem-tw-ordinary-completed-integral-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the constructed module pullback isomorphism and its proved inverse-unit section formula.",
+   "uses": [
+    "def-sf-integral-pullback-module-identification",
+    "lem-sf-integral-pullback-module-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply that isomorphism degreewise. Naturality across the cochain-to-homotopy quotient, and uniqueness of total left derived functors, identify the universal computation maps. Cancel the quotient comparison isomorphisms.",
+   "uses": [
+    "def-sf-integral-pullback-module-identification",
+    "lem-sf-integral-ordinary-pullback-comparison",
+    "lem-tw-ordinary-completed-integral-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse module isomorphism to the unit identity and cancel its composite with the hom. This gives the required inverse-unit formula; package it with the derived computation formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-pullback-module-identification",
+  "lem-sf-integral-pullback-module-unit",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "lem-tw-ordinary-completed-integral-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D2 and 06YY; preservation of module adjunction units and derived computation maps under canonical model identification"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; normalization transport for the reduction and pullback augmentation square. Tags 03D2 and 06YY; preservation of module adjunction units and derived computation maps under canonical model identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of monoidal comparison between scalar extension and inverse image on derived sheaves",
+   "results": "8 hits; SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits; CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_comp_map.*[ηδ]|IsMonoidal.*[Uu]nit|leftAdjoint.*[Mm]onoidal",
+   "results": "20 hits; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of derived natural transformations from their values on resolving representatives and preservation of adjunction units by the unique left adjoint isomorphism",
+   "results": "8 hits; CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionTensorPullback",
+  "date": "2026-10-28",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction: comparison of ordinary tensor and pullback with their coherent quotient-system realizations; Tags 03D2 and 06YY; preservation of module adjunction units and derived computation maps under canonical model identification",
+   "via": [
+    "lem-sf-reduction-tensor-pullback",
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackComplexIdentification",
+  "file": "lean/Sheaf/Paper/IntegralPullbackComplexIdentification.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.pullbackComplexIdentification",
+  "declarations": [
+   "WeilConjectures.IntegralOrdinary.pullbackComplexIdentification"
+  ],
+  "statement": "theorem pullbackComplexIdentification {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ b : OpenFactorCoherence.pullCx l E f ≅ ordinaryIntegralPullComplex l E f,\n      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)\n        (V : Y.ProEt) (x : (P.X i).val.obj (op V)),\n        (((b.inv.app P).f i).val.app (op ((proEtaleBaseChange f).obj V)))\n          ((((ordinaryIntegralModuleAdjunction l E f).unit.app (P.X i)).val.app (op V)) x) =\n        (((proEtaleRingModuleAdjunction f ((PurCompactSupport.completed l E).ring Y)\n          ((PurCompactSupport.completed l E).ring X)\n          ((PurCompactSupport.completed l E).pull f)).unit.app (P.X i)).val.app (op V)) x) ∧\n      (∀ P : CochainComplex (integralTowerModules l E Y) ℤ,\n        (pullIso l E f).hom.app (DerivedCategory.Q.obj P) ≫\n            ordinaryIntegralPullComplexCounit l E f P =\n          (proEtaleRingDerivedPullbackFactors f ((PurCompactSupport.completed l E).ring Y)\n            ((PurCompactSupport.completed l E).ring X)\n            ((PurCompactSupport.completed l E).pull f)).hom.app P ≫\n          DerivedCategory.Q.map (b.hom.app P))",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T233836-L-4122313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T233836-L-4122313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

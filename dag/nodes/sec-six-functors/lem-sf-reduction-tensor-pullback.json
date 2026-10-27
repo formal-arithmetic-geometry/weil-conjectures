@@ -7,7 +7,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
-  "place": "Integral reconstruction: compatibility of the specified augmentation maps; adjunction-mate refinement of the original two-step proof"
+  "place": "Integral reconstruction: normalize the specified tensor and pullback augmentations against the existing canonical reduction square, then transport between ordinary tensor models. The canonical square is used as a generic tool; no step of the unit is bypassed."
  },
  "mathlib_searches": [
   {
@@ -81,46 +81,45 @@
  ],
  "proof": [
   {
-   "text": "Choose simultaneous flat-term K-flat representatives of M and N. Scalar extension and ordinary inverse image preserve them. The normalized comparisons a and b identify on those representatives with the unit-preserving comparisons of the corresponding ordinary composite left adjoints.",
+   "text": "Choose the existing normalized operations, realization and ringed models. Identify the ordinary tensor models by normalized localization isomorphisms.",
    "uses": [
-    "lem-sf-tensor-reduction-augmentation",
+    "lem-sf-integral-system-operation-models",
+    "lem-sf-integral-reduction-pullback-model",
+    "lem-sf-integral-ringed-model-existence",
+    "lem-sf-integral-tensor-model-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The single-input pullback augmentation identification and the primitive quotient adjunct equation identify the specified pullback reduction comparison with the realization comparison, by uniqueness. The tensor-reduction identification identifies both specified tensor comparisons.",
+   "uses": [
+    "lem-sf-integral-pullback-augmentation-identification",
+    "lem-sf-primitive-quotient-augmentations",
     "lem-sf-pullback-reduction-augmentation",
-    "lem-pc-kflat-resolution",
-    "lem-pur-coherent-reduction-kflat",
-    "lem-pur-integral-ambient-operation-models"
+    "lem-sf-integral-tensor-reduction-identification"
    ],
    "elementary": false
   },
   {
-   "text": "Use the signed total tensor normalizations of v and w. On a homogeneous pure tensor, both paths extend scalars by the quotient unit and then take the tensor of the two inverse-image unit sections. Balancing and naturality of the scalar and inverse-image units give equality. Sheafification and total-summand generator extensionality give equality of chain maps on the whole ringed sequence site, with the actual quotient transitions.",
+   "text": "Apply the existing canonical reduction-tensor-pullback square to the normalized ringed models. Naturality of the pullback reduction comparison across the source tensor isomorphism and transport of canonical tensor pullback across the tensor model isomorphisms conjugate this square to the stated one.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-coherent-derived-pullback-tensor",
-    "lem-pur-sequence-pullback-tensor-cochain",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Localize this single strict equality in the sequence category and descend from the product good-representative localization. Naturality transports it to M,N. At no point infer equality of derived maps from separately evaluated finite components.",
-   "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "lem-pc-kflat-resolution"
+    "lem-sf-canonical-reduction-tensor-pull",
+    "lem-sf-integral-tensor-model-pullback-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-tensor-reduction-augmentation",
+  "lem-sf-integral-system-operation-models",
+  "lem-sf-integral-reduction-pullback-model",
+  "lem-sf-integral-ringed-model-existence",
+  "lem-sf-integral-tensor-model-identification",
+  "lem-sf-integral-pullback-augmentation-identification",
+  "lem-sf-primitive-quotient-augmentations",
   "lem-sf-pullback-reduction-augmentation",
-  "lem-pc-kflat-resolution",
-  "lem-pur-coherent-reduction-kflat",
-  "lem-pur-integral-ambient-operation-models",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pur-coherent-derived-pullback-tensor",
-  "lem-pur-sequence-pullback-tensor-cochain",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pur-integral-operations-well-defined"
+  "lem-sf-integral-tensor-reduction-identification",
+  "lem-sf-canonical-reduction-tensor-pull",
+  "lem-sf-integral-tensor-model-pullback-transport"
  ],
  "lean": {
   "existing": false,
@@ -148,11 +147,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-973e8",
-  "group": "F1",
-  "result": "fix",
-  "landing": "20261027T180554-L-3877743",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T233836-L-4122313",
   "kind": "interface",
-  "note": "independent cc review: item tensorPullback_augmentation proof + 3 new hole modules/nodes + tensorModel extraction against clone HEAD, node owners, importer IntegralOrdinaryTensorPullbackNormalization (compiled OK 29.5 s), axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

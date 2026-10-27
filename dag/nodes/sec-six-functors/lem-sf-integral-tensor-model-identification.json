@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-integral-tensor-model-identification",
+ "kind": "statement",
+ "title": "Normalized isomorphism between ordinary pro-etale tensor models",
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "statement": "For a scheme W and a commutative ring sheaf R on its small pro-etale site, let a,b be signed flat-term K-flat presentations of ordinary derived tensor [def-sfb-proetale-tensor-model]. There exists a natural isomorphism e:a.tensor ≅ b.tensor such that for every pair of flat-term K-flat complexes P,Q, the representative map of a followed by e on (QP,QQ) equals the representative map of b.",
+ "stmt_deps": [
+  "def-sfb-proetale-tensor-model"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along the product of the flat-term K-flat localizations is fully faithful. Pull back the isomorphism a.representative inverse followed by b.representative through that fully faithful functor.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the map-preimage identity at P,Q and cancel the inverse representative isomorphism. This gives the displayed normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-tensor-descent-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 04VK; uniqueness of localization of the flat-term K-flat tensor representatives"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; normalization transport for the reduction and pullback augmentation square. Tags 07A4, 0G7E and 04VK; uniqueness of localization of the flat-term K-flat tensor representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of monoidal comparison between scalar extension and inverse image on derived sheaves",
+   "results": "8 hits; SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits; CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_comp_map.*[ηδ]|IsMonoidal.*[Uu]nit|leftAdjoint.*[Mm]onoidal",
+   "results": "20 hits; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of derived natural transformations from their values on resolving representatives and preservation of adjunction units by the unique left adjoint isomorphism",
+   "results": "8 hits; CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionTensorPullback",
+  "date": "2026-10-28",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction: comparison of ordinary tensor and pullback with their coherent quotient-system realizations; Tags 07A4, 0G7E and 04VK; uniqueness of localization of the flat-term K-flat tensor representatives",
+   "via": [
+    "lem-sf-reduction-tensor-pullback",
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorModelTransport",
+  "file": "lean/Sheaf/Paper/IntegralTensorModelTransport.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.tensorModelIso",
+  "declarations": [
+   "WeilConjectures.IntegralOrdinary.tensorModelIso"
+  ],
+  "statement": "theorem tensorModelIso (W : Scheme.{u})\n    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})\n    (a b : ProEtaleTensorModel W R) :\n    ∃ e : a.tensor ≅ b.tensor,\n      ∀ (P Q : CochainComplex (proEtaleRingModules W R) ℤ)\n        (hP : proEtaleFlatRepresentatives W R P)\n        (hQ : proEtaleFlatRepresentatives W R Q),\n        a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫\n          e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =\n        b.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T233836-L-4122313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T233836-L-4122313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

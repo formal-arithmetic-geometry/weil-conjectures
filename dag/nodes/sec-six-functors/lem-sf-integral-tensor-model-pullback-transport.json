@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-integral-tensor-model-pullback-transport",
+ "kind": "statement",
+ "title": "Canonical tensor pullback respects normalized tensor model transport",
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "statement": "Let f:X→Y, commutative coefficient sheaves R on Y and S on X, and c:f inverse R ≅ S be as in [def-weil-pbc-proetale-operations]. Let aY,bY and aX,bX be ordinary tensor models [def-sfb-proetale-tensor-model], with isomorphisms eY,eX whose composites with the a representative maps are the b representative maps. For arbitrary derived M,N on Y, writing F for ordinary ringed derived pullback and alpha,beta for the canonical tensor-pullback comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], F(eY(M,N));beta(M,N)=alpha(M,N);eX(FM,FN).",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use full faithfulness of product resolving-class restriction to test the natural transformation equality on flat-term K-flat pairs.",
+   "uses": [
+    "lem-weil-pbc-proetale-tensor-descent-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On such a pair use the defining representative equations for both canonical tensor-pullback comparisons. Precompose with F of the source representative map and postcompose with the target tensor of the two derived-pullback factorization maps, all isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source normalization identifies the left side. Naturality of eX across the two factorization maps and its target representative normalization identify the right side. Cancel the isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 04VK; transport of the normalized signed total tensor-pullback square"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction; normalization transport for the reduction and pullback augmentation square. Tags 07A4, 0G7E and 04VK; transport of the normalized signed total tensor-pullback square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of monoidal comparison between scalar extension and inverse image on derived sheaves",
+   "results": "8 hits; SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits; CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_comp_map.*[ηδ]|IsMonoidal.*[Uu]nit|leftAdjoint.*[Mm]onoidal",
+   "results": "20 hits; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of derived natural transformations from their values on resolving representatives and preservation of adjunction units by the unique left adjoint isomorphism",
+   "results": "8 hits; CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.leftAdjointUniq_trans_assoc",
+   "date": "2026-10-28",
+   "verdict": "The generic adjunction, localization and naturality APIs support the proof; no theorem matches these specified representative and strict quotient normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralReductionTensorPullback",
+  "date": "2026-10-28",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction: comparison of ordinary tensor and pullback with their coherent quotient-system realizations; Tags 07A4, 0G7E and 04VK; transport of the normalized signed total tensor-pullback square",
+   "via": [
+    "lem-sf-reduction-tensor-pullback",
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTensorModelTransport",
+  "file": "lean/Sheaf/Paper/IntegralTensorModelTransport.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.tensorModelPullback",
+  "declarations": [
+   "WeilConjectures.IntegralOrdinary.tensorModelPullback"
+  ],
+  "statement": "theorem tensorModelPullback {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (aY bY : ProEtaleTensorModel Y R)\n    (aX bX : ProEtaleTensorModel X S)\n    (eY : aY.tensor ≅ bY.tensor) (eX : aX.tensor ≅ bX.tensor)\n    (heY : ∀ (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)\n      (hP : proEtaleFlatRepresentatives Y R P)\n      (hQ : proEtaleFlatRepresentatives Y R Q),\n      aY.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫\n        eY.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =\n      bY.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩))\n    (heX : ∀ (P Q : CochainComplex (proEtaleRingModules X S) ℤ)\n      (hP : proEtaleFlatRepresentatives X S P)\n      (hQ : proEtaleFlatRepresentatives X S Q),\n      aX.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) ≫\n        eX.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =\n      bX.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩))\n    (M N : DerivedCategory (proEtaleRingModules Y R)) :\n    let F := proEtaleRingDerivedPullback f R S c\n    let α := proEtaleCanonicalTensorComparison f\n      R S\n      c aY aX\n    let β := proEtaleCanonicalTensorComparison f\n      R S\n      c bY bX\n    F.map (eY.hom.app (M, N)) ≫ β.hom.app (M, N) =\n      α.hom.app (M, N) ≫ eX.hom.app (F.obj M, F.obj N)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T233836-L-4122313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T233836-L-4122313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
