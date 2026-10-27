@@ -336,12 +336,20 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv'
   refine Eq.trans ?_ (mateEquiv_ofNatIsoRight _ _ _ _ _).symm
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq c
     (c.ofIsPullback sq.overLeft) (c.overBaseChangeFst sq) hi hp]
-  rw [mateEquiv_mk_whiskerRight_comp_comp_whiskerLeft,
-    mateEquiv_boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ c _ _ hi hp sq.w]
+  have hm := mateEquiv_mk_whiskerRight_comp_comp_whiskerLeft
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g')
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      (compactificationOverField f) c).hom
+    (boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ c _ _ hi hp)
+    (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
+      (c.ofIsPullback sq.overLeft) (compactificationOverField f')).hom
+  erw [hm]
+  rw [mateEquiv_boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ c _ _ hi hp sq.w]
   simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom]
-  rw [boundedConstructibleLowerShriekComp_padicAlgCl_inv_comp_hom_eq_triangles ℓ c _ _ hi hp sq.w,
-    boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq,
-    boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq]
+  rw [boundedConstructibleLowerShriekComp_padicAlgCl_inv_comp_hom_eq_triangles ℓ c _ _ hi hp sq.w]
+  simp only [boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq ℓ g',
+    boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq ℓ g]
   refine hcomp_comp_comp_hcomp_eq _ _ _ _ _ _ _ _ _ ?_
   rw [← Iso.symm_hom, boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_symm]
 

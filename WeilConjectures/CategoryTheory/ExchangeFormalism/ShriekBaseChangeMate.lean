@@ -83,8 +83,8 @@ variable {𝒜 ℬ 𝒞 𝒟 : Type*} [Category* 𝒜] [Category* ℬ] [Category
 
 /-- Conjugating a composite of 2-cells `M₁ ≫ M₂ : G₁' ⋙ F₁' ⟶ F₂' ⋙ G₂'` by isomorphisms
 `a : G₁ ≅ G₁'`, `d = e⁻¹ : G₂' ⟶ G₂` (for `e : G₂ ≅ G₂'`) and morphisms `b : F₁ ⟶ F₁'`,
-`c : F₂' ⟶ F₂` is the same as first replacing `G₁'` and `G₂'` by `G₁''` and `G₂''` along isomorphisms
-`p : G₁' ≅ G₁''` and `q : G₂' ≅ G₂''`. -/
+`c : F₂' ⟶ F₂` is the same as first replacing `G₁'` and `G₂'` by `G₁''` and `G₂''` along
+isomorphisms `p : G₁' ≅ G₁''` and `q : G₂' ≅ G₂''`. -/
 lemma hcomp_comp_comp_hcomp_eq (a : G₁ ≅ G₁') (p : G₁' ≅ G₁'') (b : F₁ ⟶ F₁')
     (M₁ : G₁' ⋙ F₁' ⟶ H) (M₂ : H ⟶ F₂' ⋙ G₂') (c : F₂' ⟶ F₂) (e : G₂ ≅ G₂') (q : G₂' ≅ G₂'')
     (d : G₂' ⟶ G₂) (hd : e.inv = d) :

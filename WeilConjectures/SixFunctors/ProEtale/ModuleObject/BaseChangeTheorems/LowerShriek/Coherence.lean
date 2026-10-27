@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
@@ -167,7 +168,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv
       (mateEquiv (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g')
         (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)).symm
         (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ sq.w).hom :=
-  sorry
+  boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv' ℓ sq
 
 end BaseChange
 
