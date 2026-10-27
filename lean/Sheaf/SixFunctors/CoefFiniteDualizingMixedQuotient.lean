@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.CoefScalarReductionExchange
+public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionModels
 
 /-! # The finite dualizing mixed quotient square
 

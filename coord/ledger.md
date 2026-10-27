@@ -19794,3 +19794,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:07 L: merged deliver/Q5/Sheaf.Paper.WeilIndOpenRepresentability (stage 3; reviewer PASS; first push; landing 20261027T180745-L-3898044 (interface); batch 20261027T180444; modules 2; new nodes 1)
 - 18:07 L: merged deliver/Q6/Sheaf.Paper.WeilIndProperHigherRealization (stage 3; reviewer PASS; first push; landing 20261027T180746-L-3898215 (interface); batch 20261027T180444; modules 2; new nodes 1)
 - 18:07 L: merged deliver/Q7/Sheaf.Paper.WeilIndProperOpenHigher (stage 3; reviewer PASS; first push; landing 20261027T180748-L-3898359 (interface); batch 20261027T180444; modules 2; new nodes 1)
+- 18:07 L: merged deliver/Q8/Sheaf.SixFunctors.CoefFiniteDualizingMixedQuotient (stage 3; reviewer PASS; first push; landing 20261027T180750-L-3898590 (proof); batch 20261027T180444; modules 1; new nodes 0; change records: coord/changes/Q8-finite-dualizing-model-import.md)
