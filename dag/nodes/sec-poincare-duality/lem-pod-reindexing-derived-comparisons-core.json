@@ -1,0 +1,120 @@
+{
+ "id": "lem-pod-reindexing-derived-comparisons-core",
+ "kind": "statement",
+ "title": "Core normalized derived reindexing comparisons",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "statement": "Under the strict reindexing data, normalized quotient maps and completion comparisons, there is a derived-data witness carrying the reduction/evaluation, limit/projection, unit, finite-model, and full-limit-model laws. The representative pullback normalization is omitted.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "lem-pod-reindexing-strict-comparisons"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; core strict quotient, finite evaluation, adjunction, and Roos-limit descent."
+ },
+ "proof": [
+  {
+   "text": "Construct the sectionwise finite and system comparisons from the strict quotient maps. Apply the exact product/Roos strict-limit comparison to obtain the normalized derived limit and projection equations, and transport the ordinary adjunction through localization. Package the five resulting laws as CoreLaws.",
+   "uses": [
+    "lem-pod-reindexing-strict-comparisons",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-trf-primitive-quotient-realization-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-strict-comparisons",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-trf-primitive-quotient-realization-comparisons"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; core strict quotient, finite evaluation, adjunction, and Roos-limit descent."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingDerivedComparisons",
+  "date": "2026-10-28",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-derived-comparisons",
+   "place": "Steps 1 and 5; core strict quotient, finite evaluation, adjunction, and Roos-limit descent.",
+   "via": [
+    "lem-pod-reindexing-derived-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingDerivedComparisonsCore",
+  "file": "lean/Sheaf/Paper/PodReindexingDerivedComparisonsCore.lean",
+  "declaration": "WeilConjectures.podReindexingDerivedComparisonsCore",
+  "declarations": [
+   "WeilConjectures.podReindexingQuotientGenerators",
+   "WeilConjectures.podReindexingQuotientTransition",
+   "WeilConjectures.PodReindexingDerivedData",
+   "WeilConjectures.PodReindexingDerivedData.assemble",
+   "WeilConjectures.PodReindexingDerivedData.CoreLaws",
+   "WeilConjectures.PodReindexingDerivedData.Laws",
+   "WeilConjectures.podReindexingDerivedComparisonsCore"
+  ],
+  "statement": "theorem podReindexingDerivedComparisonsCore [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (S : PodReindexingStrictData l E g) (hS : S.Laws l E g SY SX) (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ), integralOperationsGoodComplex l E Y P → ∀ n : ℕ, (isoReductionFiniteComplex l E g n).obj (unrestrictedTowerFiniteComplex l E Y n P) ≅ unrestrictedTowerFiniteComplex l E X n ((isoReductionIntegralComplex l E g).obj P)) (hβ : podReindexingQuotientGenerators l E g β) (htransition : podReindexingQuotientTransition l E g β) (CY : IntegralOnSlice.completion l E Y none ≅ (podReindexCalculus l E Y).reduction ⋙ coefficientSequenceLimit l E Y) (CX : IntegralOnSlice.completion l E X none ≅ (podReindexCalculus l E X).reduction ⋙ coefficientSequenceLimit l E X) : ∃ R : PodReindexingDerivedData l E g, R.CoreLaws l E g SY SX S β CY CX",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived reindexing comparison core",
+   "results": "Generic derived comparison and Roos-limit declarations; no exact project package.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback normalization derived Roos realization",
+   "results": "Generic pullback and limit normalization declarations; no exact displayed predicate.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PodCompletionReindex PullbackNormalization CoreLaws",
+   "results": "Found project predicates in PodCompletionReindexModels; used as the split interfaces.",
+   "date": "2026-10-28",
+   "verdict": "project declarations used"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-59069",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261027T234120-L-2334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-59069",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261027T234120-L-2334",
+  "kind": "interface",
+  "note": "independent cc review: delivered Core/Pullback split + item assembly against PodCompletionReindexModels predicates, IsIntegralComparisonPullbackNormalized, primitiveQuotientRealizations_unique and primitiveQuotientPullbackModelExistence; importers PodReindexingCompletionUnitTensor and AdicAmbientHomEvaluationComparison recompiled"
+ }
+}

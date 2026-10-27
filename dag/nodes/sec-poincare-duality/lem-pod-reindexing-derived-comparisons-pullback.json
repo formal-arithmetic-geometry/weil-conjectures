@@ -1,0 +1,109 @@
+{
+ "id": "lem-pod-reindexing-derived-comparisons-pullback",
+ "kind": "statement",
+ "title": "Pullback normalization for derived reindexing comparisons",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "statement": "For every derived-data witness R of an isomorphism g:X→Y with l invertible on X and Y, there is a realization p of the completed pullback through the source reduction system, the system pullback and the target total limit such that the package assembled from R with its pullback field replaced by p (all other fields unchanged) satisfies the prescribed integral comparison pullback normalization with respect to the target Roos model of R.",
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "lem-pod-reindexing-strict-comparisons",
+  "lem-pod-reindexing-derived-comparisons-core"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; normalized completed pullback realization."
+ },
+ "proof": [
+  {
+   "text": "Apply the primitive quotient pullback-model existence to g, the source calculus podReindexCalculus and the target Roos model of R. Its realization, with its representative normalization, is the required p; the assembled package's PullbackNormalization is exactly that normalization.",
+   "uses": [
+    "lem-trf-primitive-quotient-pullback-model-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-primitive-quotient-pullback-model-existence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; normalized completed pullback realization."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingDerivedComparisons",
+  "date": "2026-10-28",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-derived-comparisons",
+   "place": "Steps 1 and 5; normalized completed pullback realization.",
+   "via": [
+    "lem-pod-reindexing-derived-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingDerivedComparisonsPullback",
+  "file": "lean/Sheaf/Paper/PodReindexingDerivedComparisonsPullback.lean",
+  "declaration": "WeilConjectures.podReindexingDerivedComparisonsPullback",
+  "declarations": [
+   "WeilConjectures.podReindexingDerivedComparisonsPullback"
+  ],
+  "statement": "theorem podReindexingDerivedComparisonsPullback [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (S : PodReindexingStrictData l E g) (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ), integralOperationsGoodComplex l E Y P → ∀ n : ℕ, (isoReductionFiniteComplex l E g n).obj (unrestrictedTowerFiniteComplex l E Y n P) ≅ unrestrictedTowerFiniteComplex l E X n ((isoReductionIntegralComplex l E g).obj P)) (CY : IntegralOnSlice.completion l E Y none ≅ (podReindexCalculus l E Y).reduction ⋙ coefficientSequenceLimit l E Y) (CX : IntegralOnSlice.completion l E X none ≅ (podReindexCalculus l E X).reduction ⋙ coefficientSequenceLimit l E X) (R : PodReindexingDerivedData l E g) : ∃ p : integralDerivedPullback l E g ≅ (podReindexCalculus l E Y).reduction ⋙ integralComparisonDerivedSequencePullback l E g ⋙ coefficientSequenceLimit l E X, PodCompletionReindex.PullbackNormalization l E g (({ R with pullback := p } : PodReindexingDerivedData l E g).assemble l E g SY SX S β CY CX)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived reindexing comparison core",
+   "results": "Generic derived comparison and Roos-limit declarations; no exact project package.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback normalization derived Roos realization",
+   "results": "Generic pullback and limit normalization declarations; no exact displayed predicate.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PodCompletionReindex PullbackNormalization CoreLaws",
+   "results": "Found project predicates in PodCompletionReindexModels; used as the split interfaces.",
+   "date": "2026-10-28",
+   "verdict": "project declarations used"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-59069",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261027T234120-L-2334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-59069",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261027T234120-L-2334",
+  "kind": "interface",
+  "note": "independent cc review: delivered Core/Pullback split + item assembly against PodCompletionReindexModels predicates, IsIntegralComparisonPullbackNormalized, primitiveQuotientRealizations_unique and primitiveQuotientPullbackModelExistence; importers PodReindexingCompletionUnitTensor and AdicAmbientHomEvaluationComparison recompiled"
+ }
+}
