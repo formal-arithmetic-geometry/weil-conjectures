@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.RetractPadicAlgCl
-public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessQuasiFiniteClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessSlice
 
 /-!
