@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 01IB and 08CR"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison",
+  "date": "2026-10-28",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-residue-homology-chosen-geometric-maps",
+   "place": "Per-index representative and affine residue naturality choice"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T233740-L-4108309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T233740-L-4108309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "id": "new-picard-residue-homology-chosen-map",
+ "title": "Choice of one affine residue representative",
+ "statement": "For one derived arrow between strictly perfect affine models, affine residue naturality and the perfect affine representative theorem yield a target residue comparison and one chain map whose residue homology map agrees with the derived-fibre functor map.\n\nExact Lean statement:\ntheorem picard_residue_homology_choose_model_map [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] (W : Scheme.{v}) (w : W) (U : W.Opens) (hU : IsAffineOpen U) (hwU : w ∈ U) (p : Ideal Γ(W, U)) [p.IsPrime] (hp : p = RingHom.ker (W.evaluation U w hwU).hom) (E E' : schemeDerivedCategory W) (b : E ⟶ E') (K C : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (hC : IsStrictlyPerfect W U C) (m : (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) (m' : (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E' ≅ DerivedCategory.Q.obj C) (eK : affineResidueCycleHomology W U p K ≃+ derivedFiberCohomology W E 1 w) (hNat : ∃ eC : affineResidueCycleHomology W U p C ≃+ derivedFiberCohomology W E' 1 w, ∀ (φ : K ⟶ C), DerivedCategory.Q.map φ = m.inv ≫ (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.map b ≫ m'.hom → ∀ z, eC (affineResidueCycleHomologyMap φ z) = (derivedFiberCohomologyFunctor W w 1).map b (eK z)) : ∃ eC : affineResidueCycleHomology W U p C ≃+ derivedFiberCohomology W E' 1 w, ∃ φ : K ⟶ C, ∀ z, eC (affineResidueCycleHomologyMap φ z) = (derivedFiberCohomologyFunctor W w 1).map b (eK z)",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-derived-fiber-betti",
+  "lem-sc-affine-residue-cycle-class-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Choose a chain representative of the specified derived arrow using perfect_affine_map_representative.",
+   "uses": [
+    "lem-pc-perfect-affine-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the target affine residue comparison supplied by affine naturality and apply its representative equation.",
+   "uses": [
+    "new-affine-residue-model-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-affine-map-representative",
+  "new-affine-residue-model-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "date": "2026-10-28",
+  "document": "Stacks Project",
+  "place": "Tags 01IB and 08CR"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardResidueHomologyChosenMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardResidueHomologyChosenMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_residue_homology_choose_model_map",
+  "statement": "theorem picard_residue_homology_choose_model_map [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] (W : Scheme.{v}) (w : W) (U : W.Opens) (hU : IsAffineOpen U) (hwU : w ∈ U) (p : Ideal Γ(W, U)) [p.IsPrime] (hp : p = RingHom.ker (W.evaluation U w hwU).hom) (E E' : schemeDerivedCategory W) (b : E ⟶ E') (K C : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (hC : IsStrictlyPerfect W U C) (m : (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) (m' : (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E' ≅ DerivedCategory.Q.obj C) (eK : affineResidueCycleHomology W U p K ≃+ derivedFiberCohomology W E 1 w) (hNat : ∃ eC : affineResidueCycleHomology W U p C ≃+ derivedFiberCohomology W E' 1 w, ∀ (φ : K ⟶ C), DerivedCategory.Q.map φ = m.inv ≫ (SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.map b ≫ m'.hom → ∀ z, eC (affineResidueCycleHomologyMap φ z) = (derivedFiberCohomologyFunctor W w 1).map b (eK z)) : ∃ eC : affineResidueCycleHomology W U p C ≃+ derivedFiberCohomology W E' 1 w, ∃ φ : K ⟶ C, ∀ z, eC (affineResidueCycleHomologyMap φ z) = (derivedFiberCohomologyFunctor W w 1).map b (eK z)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affine residue naturality and representative declarations",
+   "results": "The delivered lower modules provide the needed project-specific declarations; no shorter existing theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "Used the delivered lower theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "affine residue homology map derived fibre comparison",
+   "results": "No exact theorem matching the family statement.",
+   "date": "2026-10-28",
+   "verdict": "Used the project bridge theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "chosen affine residue representative",
+   "results": "No exact theorem beyond the declared project bridge.",
+   "date": "2026-10-28",
+   "verdict": "Used the declared project bridge."
+  }
+ ]
+}

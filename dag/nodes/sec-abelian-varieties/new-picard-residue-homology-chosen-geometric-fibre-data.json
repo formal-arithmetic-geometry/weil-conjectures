@@ -1,0 +1,123 @@
+{
+ "id": "new-picard-residue-homology-chosen-geometric-fibre-data",
+ "kind": "statement",
+ "title": "Affine and geometric data for chosen residue maps",
+ "statement": "For the finite family in the chosen geometric maps theorem, package one source affine residue comparison, one target comparison, one chain representative per index, and the common geometric fibre comparisons into a single `Nonempty` structure. The structure records the affine and geometric compatibility equations used by the enclosing theorem.\n\nExact Lean statement:\ntheorem picard_residue_homology_chosen_geometric_fibre_data [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (L : X.Modules) [L.IsInvertible] (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k] (w : W) (s : S) (hw : k w = s) (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) (p : Ideal Γ(W, U)) [p.IsPrime] (hp : p = RingHom.ker (W.evaluation U w hwU).hom) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (hE : Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅ DerivedCategory.Q.obj K)) (C : Fin n → CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hC : ∀ i, IsStrictlyPerfect W U (C i)) (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) : let H := derivedFiberCohomologyFunctor W w 1 let E := (schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L)) let Ei := fun i ↦ (schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L))) Nonempty (PicardResidueHomologyGeometricData (Ksrc := affineResidueCycleHomology W U p K) (A := H.obj E) (C := Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1) (Tgt := fun i ↦ affineResidueCycleHomology W U p (C i)) (B := fun i ↦ H.obj (Ei i)) (D := fun i ↦ Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1) (P := fun i ↦ K ⟶ C i) (M := fun i ψ z ↦ affineResidueCycleHomologyMap ψ z) (N := fun i z ↦ structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 z))",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-sc-derived-fiber-betti",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "new-derived-fiber-cohomology-functor",
+  "new-picard-derived-coefficient-map",
+  "lem-sc-affine-residue-cycle-class-quotient"
+ ],
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0B91, 0BF2, 01IB and 08CR"
+ },
+ "proof": [
+  {
+   "text": "Apply the affine residue data theorem to choose eK, eC and φ with the derived-fibre map equation.",
+   "uses": [
+    "new-picard-residue-homology-chosen-geometric-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply picard_derived_fibre_naturality to choose e and ei for the common source and all targets, then package its geometric equations with the affine data.",
+   "uses": [
+    "new-picard-derived-fibre-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-picard-residue-homology-chosen-geometric-data",
+  "new-picard-derived-fibre-naturality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "kind": "written-by-agent",
+  "date": "2026-10-28",
+  "document": "Stacks Project",
+  "place": "Tags 0B91, 0BF2, 01IB and 08CR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "picard_derived_fibre_naturality and affine residue comparison declarations",
+   "results": "Existing project declarations provide both lower theorems; no Mathlib theorem states this combined family comparison.",
+   "date": "2026-10-28",
+   "verdict": "Used the existing project bridges."
+  },
+  {
+   "tool": "loogle",
+   "query": "derived fibre cohomology structure sheaf pullback naturality",
+   "results": "No exact combined theorem.",
+   "date": "2026-10-28",
+   "verdict": "The project naturality theorem is the required bridge."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "chosen chain representative affine residue homology derived fibre comparison",
+   "results": "No exact theorem beyond the imported project bridges.",
+   "date": "2026-10-28",
+   "verdict": "Used the imported project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologySourceResidueComparison",
+  "date": "2026-10-28",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-residue-homology-chosen-geometric-maps",
+   "place": "Common geometric and affine residue comparison data"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardResidueHomologyChosenGeometricFibreData",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardResidueHomologyChosenGeometricFibreData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_residue_homology_chosen_geometric_fibre_data",
+  "statement": "theorem picard_residue_homology_chosen_geometric_fibre_data [∀ Y : Scheme.{v}, HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1} (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))] {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ} (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)] (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i) (L : X.Modules) [L.IsInvertible] (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k] (w : W) (s : S) (hw : k w = s) (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅ SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) (p : Ideal Γ(W, U)) [p.IsPrime] (hp : p = RingHom.ker (W.evaluation U w hwU).hom) (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hK : IsStrictlyPerfect W U K) (hE : Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L))) ≅ DerivedCategory.Q.obj K)) (C : Fin n → CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (hC : ∀ i, IsStrictlyPerfect W U (C i)) (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v} (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) : let H := derivedFiberCohomologyFunctor W w 1 let E := (schemeDerivedDirectImage (pullback.snd f k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst f k)).obj L)) let Ei := fun i ↦ (schemeDerivedDirectImage (pullback.snd (fi i) k)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj ((Modules.tensorPullback (pullback.fst (fi i) k)).obj ((Modules.tensorPullback (ui i)).obj L))) Nonempty (PicardResidueHomologyGeometricData (Ksrc := affineResidueCycleHomology W U p K) (A := H.obj E) (C := Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1) (Tgt := fun i ↦ affineResidueCycleHomology W U p (C i)) (B := fun i ↦ H.obj (Ei i)) (D := fun i ↦ Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1) (P := fun i ↦ K ⟶ C i) (M := fun i ψ z ↦ affineResidueCycleHomologyMap ψ z) (N := fun i z ↦ structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 z))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PicardResidueHomologyGeometricData",
+   "AlgebraicGeometry.Scheme.picard_residue_homology_chosen_geometric_fibre_data"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T233740-L-4108309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261027T233740-L-4108309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

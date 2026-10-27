@@ -17,11 +17,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison
-import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex
-import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
-import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
-import Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyChosenGeometricFibreData
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyComposeData
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricDataToMaps
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # A strictly perfect affine model computes residue cycle homology
@@ -35,6 +33,11 @@ set_option autoImplicit false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+attribute [local irreducible] Modules.tensorPullback Modules.tensorPullbackObj
+  picardDerivedCoefficientMap
+
+
 
 /-- The explicit degree-one residue quotient computes the derived fibre of a
 represented object, independently of any geometric direct-image presentation.
@@ -160,21 +163,21 @@ theorem picard_residue_homology_chosen_geometric_maps
             (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
               (ui i) (hui i))).left) 1 (eK z) := by
   classical
-  -- The existing stronger theorem keeps the source comparison common to all indices.
-  -- Its naturality holds for every representative, so choosing representatives is enough.
-  by_cases hn : n = 0
-  · subst n
-    let E := (schemeDerivedDirectImage (pullback.snd f k)).obj
-      ((DerivedCategory.singleFunctor
-        (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj
-          ((Modules.tensorPullback (pullback.fst f k)).obj L))
-    obtain ⟨e₁⟩ := picard_residue_homology_source_residue_comparison W E w
-      U hwU hU p hp K hK hE
-    obtain ⟨e₂⟩ := picard_residue_homology_source_fibre_comparison f L W k w s hw τ
-    refine ⟨e₁.trans e₂, (fun i ↦ Fin.elim0 i), (fun i ↦ Fin.elim0 i), ?_⟩
-    intro i
-    exact Fin.elim0 i
-  · -- The former per-index naturality helper was deliberately withdrawn as false.
-    sorry
+  have hdata0 := picard_residue_homology_chosen_geometric_fibre_data
+    f Xi fi ui hui L W k w s hw τ U hwU hU p hp K hK hE C hC hCi
+  obtain ⟨d⟩ := hdata0
+  let M : ∀ i, (K ⟶ C i) → affineResidueCycleHomology W U p K →
+      affineResidueCycleHomology W U p (C i) :=
+    fun i ψ z ↦ (affineResidueCycleHomologyMap ψ) z
+  let N : ∀ i, Sheaf.H (structureSheafAb
+      (pullback f (S.fromSpecResidueField s))) 1 →
+      Sheaf.H (structureSheafAb
+        (pullback (fi i) (S.fromSpecResidueField s))) 1 :=
+    fun i z ↦ structureSheafCohomologyPullback
+      (((Over.pullback (S.fromSpecResidueField s)).map
+        (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
+          (ui i) (hui i))).left) 1 z
+  exact picard_residue_homology_geometric_data_to_maps
+    (M := M) (N := N) d
 
 end AlgebraicGeometry.Scheme
