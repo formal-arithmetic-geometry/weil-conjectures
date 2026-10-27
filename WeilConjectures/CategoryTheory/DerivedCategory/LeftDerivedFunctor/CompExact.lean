@@ -57,16 +57,7 @@ noncomputable def leftDerivedFunctorIsoOfIso (e : G ≅ G') :
     G.leftDerivedFunctor ≅ G'.leftDerivedFunctor :=
   leftDerivedNatIso G.leftDerivedFunctor G'.leftDerivedFunctor G.leftDerivedFunctorCounit
     G'.leftDerivedFunctorCounit (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
-    (isoWhiskerRight
-      { hom := NatTrans.mapHomotopyCategory e.hom (ComplexShape.up ℤ)
-        inv := NatTrans.mapHomotopyCategory e.inv (ComplexShape.up ℤ)
-        hom_inv_id := by
-          rw [← NatTrans.mapHomotopyCategory_comp, e.hom_inv_id,
-            NatTrans.mapHomotopyCategory_id]
-        inv_hom_id := by
-          rw [← NatTrans.mapHomotopyCategory_comp, e.inv_hom_id,
-            NatTrans.mapHomotopyCategory_id] }
-      DerivedCategory.Qh)
+    (isoWhiskerRight (NatIso.mapHomotopyCategory e (ComplexShape.up ℤ)) DerivedCategory.Qh)
 
 end Iso
 
@@ -85,26 +76,33 @@ instance preservesKFlatQuasiIso_comp_of_exact : (G ⋙ F').PreservesKFlatQuasiIs
       ((G.mapHomologicalComplex (ComplexShape.up ℤ)).map f)))
 
 /-- The counit exhibiting `L(G) ⋙ D(F')` as a candidate left derived functor of
-`(G ⋙ F').mapHomotopyCategory ⋙ Qh`, for an exact functor `F'`: it is assembled from the counit
-of `L(G)`, the comparison `F'.mapDerivedCategoryFactorsh` and the composition isomorphism of
-`mapHomotopyCategory`. -/
+`(G ⋙ F').mapHomotopyCategory ⋙ Qh`, for an exact functor `F'`: the counit of `L(G)`, followed
+by the comparison `F'.mapDerivedCategoryFactorsh` and the composition isomorphism of
+`mapHomotopyCategory` (an identity, `Functor.mapHomotopyCategoryCompIso_refl_hom_app`). -/
 noncomputable def leftDerivedFunctorCompMapDerivedCategoryRightCounit :
     DerivedCategory.Qh ⋙ (G.leftDerivedFunctor ⋙ F'.mapDerivedCategory) ⟶
       (G ⋙ F').mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh :=
-  (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight G.leftDerivedFunctorCounit F'.mapDerivedCategory ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (G.mapHomotopyCategory (ComplexShape.up ℤ))
-      F'.mapDerivedCategoryFactorsh.hom ≫
-    (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (G ⋙ F')) (ComplexShape.up ℤ)).hom
+  whiskerRight G.leftDerivedFunctorCounit F'.mapDerivedCategory ≫
+    whiskerLeft (G.mapHomotopyCategory (ComplexShape.up ℤ)) F'.mapDerivedCategoryFactorsh.hom ≫
+    whiskerRight (mapHomotopyCategoryCompIso (Iso.refl (G ⋙ F')) (ComplexShape.up ℤ)).hom
       DerivedCategory.Qh
+
+/-- The counit `Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit` is `D(F')` applied to
+the counit of `L(G)`, followed by the comparison `F'.mapDerivedCategoryFactorsh`. -/
+@[reassoc]
+lemma leftDerivedFunctorCompMapDerivedCategoryRightCounit_app
+    (K : HomotopyCategory C (ComplexShape.up ℤ)) :
+    (leftDerivedFunctorCompMapDerivedCategoryRightCounit G F').app K =
+      F'.mapDerivedCategory.map (G.leftDerivedFunctorCounit.app K) ≫
+        F'.mapDerivedCategoryFactorsh.hom.app
+          ((G.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) := by
+  simp [leftDerivedFunctorCompMapDerivedCategoryRightCounit,
+    mapHomotopyCategoryCompIso_refl_hom_app]
 
 /-- For an exact functor `F'`, `L(G) ⋙ D(F')`, equipped with
 `leftDerivedFunctorCompMapDerivedCategoryRightCounit`, is a left derived functor of
 `(G ⋙ F').mapHomotopyCategory ⋙ Qh`: on a K-flat complex the counit of `L(G)` is an
-isomorphism, and the other constituents of the counit are isomorphisms. -/
+isomorphism, and so is the comparison `F'.mapDerivedCategoryFactorsh`. -/
 instance isLeftDerivedFunctor_leftDerivedFunctor_comp_mapDerivedCategory :
     (G.leftDerivedFunctor ⋙ F'.mapDerivedCategory).IsLeftDerivedFunctor
       (leftDerivedFunctorCompMapDerivedCategoryRightCounit G F')
@@ -112,7 +110,7 @@ instance isLeftDerivedFunctor_leftDerivedFunctor_comp_mapDerivedCategory :
   rw [(G ⋙ F').isLeftDerivedFunctor_iff_isIso_app_of_kFlat]
   intro K hK
   have := G.isIso_leftDerivedFunctorCounit_app_of_kFlat K hK
-  dsimp [leftDerivedFunctorCompMapDerivedCategoryRightCounit]
+  rw [leftDerivedFunctorCompMapDerivedCategoryRightCounit_app]
   infer_instance
 
 /-- **Postcomposition with an exact functor**: for `G` preserving quasi-isomorphisms between

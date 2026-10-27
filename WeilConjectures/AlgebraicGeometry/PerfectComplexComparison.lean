@@ -39,22 +39,6 @@ universe w u
 
 open CategoryTheory CategoryTheory.Limits
 
-namespace CategoryTheory.NatIso
-
-/-- An isomorphism of additive functors induces an isomorphism of the functors on homotopy
-categories. -/
-noncomputable def mapHomotopyCategory {V W : Type*} [Category V] [Category W]
-    [Preadditive V] [Preadditive W] {F G : V ⥤ W} [hF : F.Additive] [hG : G.Additive] (e : F ≅ G) :
-    F.mapHomotopyCategory (ComplexShape.up ℤ) ≅ G.mapHomotopyCategory (ComplexShape.up ℤ) where
-  hom := NatTrans.mapHomotopyCategory e.hom _
-  inv := NatTrans.mapHomotopyCategory e.inv _
-  hom_inv_id := by rw [← NatTrans.mapHomotopyCategory_comp, e.hom_inv_id,
-    NatTrans.mapHomotopyCategory_id]
-  inv_hom_id := by rw [← NatTrans.mapHomotopyCategory_comp, e.inv_hom_id,
-    NatTrans.mapHomotopyCategory_id]
-
-end CategoryTheory.NatIso
-
 namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{u})
@@ -152,7 +136,7 @@ noncomputable def restrictMapDerivedCategoryIso :
       (Modules.restrictFunctor U.ι).mapDerivedCategoryFactorsh ≪≫
       Functor.isoWhiskerRight (NatIso.mapHomotopyCategory (F := Modules.restrictFunctor U.ι)
         (G := O ⋙ (Modules.overEquiv U).functor) (hG := hG)
-        (Modules.overFunctorEquiv U).symm) _ ≪≫
+        (Modules.overFunctorEquiv U).symm (.up ℤ)) _ ≪≫
       (O ⋙ (Modules.overEquiv U).functor).mapDerivedCategoryFactorsh.symm
   exact (Localization.whiskeringLeftFunctor' DerivedCategory.Qh
     (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ))

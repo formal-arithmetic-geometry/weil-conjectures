@@ -32,22 +32,6 @@ namespace CategoryTheory.Functor
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-section Helpers
-
-variable {V W V' : Type*} [Category* V] [Category* W] [Category* V'] [Preadditive V]
-  [Preadditive W] [Preadditive V'] {ι : Type*} (c : ComplexShape ι)
-
-/-- The inverse of the isomorphism `Functor.mapHomotopyCategoryCompIso` attached to
-`Iso.refl (F ⋙ G)` is the identity. -/
-lemma mapHomotopyCategoryCompIso_refl_inv_app (F : V ⥤ W) (G : W ⥤ V') [F.Additive]
-    [G.Additive] (Y : HomotopyCategory V c) :
-    (mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).inv.app Y = 𝟙 _ := by
-  rw [← cancel_epi ((mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app Y),
-    Iso.hom_inv_id_app, mapHomotopyCategoryCompIso_refl_hom_app]
-  exact (Category.comp_id _).symm
-
-end Helpers
-
 section Factorsh
 
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]

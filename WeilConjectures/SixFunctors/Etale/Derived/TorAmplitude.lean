@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTriangulated
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
@@ -83,6 +83,15 @@ lemma torAmplitudeIn.mono {a b a' b' : ℤ} (ha : a' ≤ a) (hb : b ≤ b')
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hM : torAmplitudeIn A X a b M) : torAmplitudeIn A X a' b' M :=
   _root_.DerivedCategory.torAmplitudeIn.mono ha hb hM
+
+/-- In a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]` with `X₂` of Tor amplitude in `[a, b]` and
+`X₃` of Tor amplitude in `[a, e]`, where `b ≤ e + 1`, the first vertex has Tor amplitude in
+`[a, e + 1]` (`DerivedCategory.torAmplitudeIn_obj₁_of_distTriang`). -/
+lemma torAmplitudeIn_obj₁_of_distTriang
+    (T : Pretriangulated.Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
+    (hT : T ∈ distTriang _) {a b e : ℤ} (hbe : b ≤ e + 1) (h₂ : torAmplitudeIn A X a b T.obj₂)
+    (h₃ : torAmplitudeIn A X a e T.obj₃) : torAmplitudeIn A X a (e + 1) T.obj₁ :=
+  _root_.DerivedCategory.torAmplitudeIn_obj₁_of_distTriang T hT hbe h₂ h₃
 
 variable (A X)
 

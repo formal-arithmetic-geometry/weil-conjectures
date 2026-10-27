@@ -42,124 +42,6 @@ open CategoryTheory Limits MonoidalCategory HomologicalComplex Functor.OplaxMono
 
 open scoped CategoryTheory.Functor
 
-namespace CategoryTheory
-
-section ProjectionTransposeUpperStar
-
-variable {A B A' B' : Type*} [Category A] [Category B] [Category A'] [Category B']
-  [Preadditive A] [Preadditive B] [Preadditive A'] [Preadditive B']
-  {T : A ⥤ A} {E : A ⥤ B} {gA : A ⥤ A'} {gB : B ⥤ B'} {T' : A' ⥤ A'} {E' : A' ⥤ B'}
-  [T.Additive] [E.Additive] [gA.Additive] [gB.Additive] [T'.Additive] [E'.Additive]
-
-/-- A commutative square of natural transformations `gB (p P) ≫ σ P = σ (T P) ≫ E' (τ P) ≫
-p' (gA P)` induces the corresponding commutative square on homotopy categories. -/
-private lemma NatTrans.mapHomotopyCategory_transpose_square (p : T ⋙ E ⟶ E) (p' : T' ⋙ E' ⟶ E')
-    (σ : E ⋙ gB ⟶ gA ⋙ E') (τ : T ⋙ gA ⟶ gA ⋙ T')
-    (h : ∀ P, gB.map (p.app P) ≫ σ.app P = σ.app (T.obj P) ≫ E'.map (τ.app P) ≫ p'.app (gA.obj P))
-    (σH : E.mapHomotopyCategory (.up ℤ) ⋙ gB.mapHomotopyCategory (.up ℤ) ⟶
-      gA.mapHomotopyCategory (.up ℤ) ⋙ E'.mapHomotopyCategory (.up ℤ))
-    (hσH : σH = (Functor.mapHomotopyCategoryCompIso (Iso.refl (E ⋙ gB)) (.up ℤ)).hom ≫
-      NatTrans.mapHomotopyCategory σ (.up ℤ) ≫
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (gA ⋙ E')) (.up ℤ)).inv)
-    (τH : T.mapHomotopyCategory (.up ℤ) ⋙ gA.mapHomotopyCategory (.up ℤ) ⟶
-      gA.mapHomotopyCategory (.up ℤ) ⋙ T'.mapHomotopyCategory (.up ℤ))
-    (hτH : τH = (Functor.mapHomotopyCategoryCompIso (Iso.refl (T ⋙ gA)) (.up ℤ)).hom ≫
-      NatTrans.mapHomotopyCategory τ (.up ℤ) ≫
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (gA ⋙ T')) (.up ℤ)).inv)
-    (K : HomotopyCategory A (.up ℤ)) :
-    (gB.mapHomotopyCategory (.up ℤ)).map
-        ((Functor.mapHomotopyCategoryCompIso (Iso.refl (T ⋙ E)) (.up ℤ)).hom.app K ≫
-          (NatTrans.mapHomotopyCategory p (.up ℤ)).app K) ≫ σH.app K =
-    σH.app ((T.mapHomotopyCategory (.up ℤ)).obj K) ≫
-      (E'.mapHomotopyCategory (.up ℤ)).map (τH.app K) ≫
-      (Functor.mapHomotopyCategoryCompIso (Iso.refl (T' ⋙ E')) (.up ℤ)).hom.app
-        ((gA.mapHomotopyCategory (.up ℤ)).obj K) ≫
-      (NatTrans.mapHomotopyCategory p' (.up ℤ)).app ((gA.mapHomotopyCategory (.up ℤ)).obj K) := by
-  subst hσH hτH
-  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  simp only [NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp, Category.comp_id,
-    NatTrans.mapHomotopyCategory, HomotopyCategory.quotient_obj_as,
-    Functor.mapHomotopyCategory_map]
-  simp only [← Functor.map_comp]
-  congr 1
-  refine HomologicalComplex.hom_ext _ _ (fun n ↦ ?_)
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    NatTrans.mapHomologicalComplex_app_f, HomologicalComplex.id_f]
-  erw [Category.id_comp]
-  exact h (K.X n)
-
-end ProjectionTransposeUpperStar
-
-section ProjectionTransposeUpperStarAux
-
-variable {𝒟₁ 𝒟₂ 𝒟₃ 𝒟₄ ℋ₁ ℋ₂ ℋ₃ ℋ₄ : Type*} [Category 𝒟₁] [Category 𝒟₂] [Category 𝒟₃]
-  [Category 𝒟₄] [Category ℋ₁] [Category ℋ₂] [Category ℋ₃] [Category ℋ₄]
-  {Q₁ : ℋ₁ ⥤ 𝒟₁} {Q₂ : ℋ₂ ⥤ 𝒟₂} {Q₃ : ℋ₃ ⥤ 𝒟₃} {Q₄ : ℋ₄ ⥤ 𝒟₄}
-  {LT₁ : 𝒟₁ ⥤ 𝒟₁} {LT₃ : 𝒟₃ ⥤ 𝒟₃} {LE₁ : 𝒟₁ ⥤ 𝒟₂} {LE₃ : 𝒟₃ ⥤ 𝒟₄}
-  {LgR : 𝒟₁ ⥤ 𝒟₃} {LgS : 𝒟₂ ⥤ 𝒟₄} {LRes₂ : 𝒟₂ ⥤ 𝒟₁} {LRes₄ : 𝒟₄ ⥤ 𝒟₃}
-  {T₁ : ℋ₁ ⥤ ℋ₁} {T₃ : ℋ₃ ⥤ ℋ₃} {E₁ : ℋ₁ ⥤ ℋ₂} {E₃ : ℋ₃ ⥤ ℋ₄} {gR : ℋ₁ ⥤ ℋ₃}
-  {gS : ℋ₂ ⥤ ℋ₄} {TE₁ : ℋ₁ ⥤ ℋ₂} {TE₃ : ℋ₃ ⥤ ℋ₄}
-
-/-- The diagram chase behind `leftDerivedSheafExtendScalarsProjection_transpose_upperStar`,
-stated for arbitrary categories, functors and natural transformations: localization functors
-`Qᵢ`, derived functors `L…` with counits `κ…`, derived projection maps `θᵢ` and adjunctions
-`adjᵢ`, the comparison maps `α` and `β` and their homotopy category counterparts `σ` and `τ`. -/
-private lemma transpose_upperStar_aux
-    (κT₁ : Q₁ ⋙ LT₁ ⟶ T₁ ⋙ Q₁) (κT₃ : Q₃ ⋙ LT₃ ⟶ T₃ ⋙ Q₃)
-    (κE₁ : Q₁ ⋙ LE₁ ⟶ E₁ ⋙ Q₂) (κE₃ : Q₃ ⋙ LE₃ ⟶ E₃ ⋙ Q₄)
-    (κgR : Q₁ ⋙ LgR ⟶ gR ⋙ Q₃) (κgS : Q₂ ⋙ LgS ⟶ gS ⋙ Q₄)
-    (θ₁ : LT₁ ⟶ LE₁ ⋙ LRes₂) (θ₃ : LT₃ ⟶ LE₃ ⋙ LRes₄)
-    (adj₁ : LE₁ ⊣ LRes₂) (adj₃ : LE₃ ⊣ LRes₄)
-    (α : LE₁ ⋙ LgS ≅ LgR ⋙ LE₃) (β : LT₁ ⋙ LgR ⟶ LgR ⋙ LT₃)
-    (cZ : Q₁ ⋙ LgR ⋙ LE₃ ⟶ gR ⋙ E₃ ⋙ Q₄)
-    (hcZ : cZ = Functor.whiskerRight κgR LE₃ ≫ Functor.whiskerLeft gR κE₃)
-    (cY : Q₁ ⋙ LE₁ ⋙ LgS ⟶ E₁ ⋙ gS ⋙ Q₄)
-    (hcY : cY = Functor.whiskerRight κE₁ LgS ≫ Functor.whiskerLeft E₁ κgS)
-    (cT : Q₁ ⋙ LT₁ ⋙ LgR ⟶ T₁ ⋙ gR ⋙ Q₃)
-    (hcT : cT = Functor.whiskerRight κT₁ LgR ≫ Functor.whiskerLeft T₁ κgR)
-    (cT' : Q₁ ⋙ LgR ⋙ LT₃ ⟶ gR ⋙ T₃ ⋙ Q₃)
-    (hcT' : cT' = Functor.whiskerRight κgR LT₃ ≫ Functor.whiskerLeft gR κT₃)
-    (σ : E₁ ⋙ gS ≅ gR ⋙ E₃) (τ : T₁ ⋙ gR ⟶ gR ⋙ T₃)
-    (e₁ : T₁ ⋙ E₁ ≅ TE₁) (p₁ : TE₁ ⟶ E₁) (e₃ : T₃ ⋙ E₃ ≅ TE₃) (p₃ : TE₃ ⟶ E₃)
-    (hα : ∀ K, α.hom.app (Q₁.obj K) ≫ cZ.app K = cY.app K ≫ Q₄.map (σ.hom.app K))
-    (hβ : ∀ K, β.app (Q₁.obj K) ≫ cT'.app K = cT.app K ≫ Q₃.map (τ.app K))
-    (htr₁ : ∀ K, LE₁.map (θ₁.app (Q₁.obj K)) ≫ adj₁.counit.app (LE₁.obj (Q₁.obj K)) ≫
-        κE₁.app K =
-      LE₁.map (κT₁.app K) ≫ κE₁.app (T₁.obj K) ≫ Q₂.map (e₁.hom.app K ≫ p₁.app K))
-    (htr₃ : ∀ K, LE₃.map (θ₃.app (Q₃.obj K)) ≫ adj₃.counit.app (LE₃.obj (Q₃.obj K)) ≫
-        κE₃.app K =
-      LE₃.map (κT₃.app K) ≫ κE₃.app (T₃.obj K) ≫ Q₄.map (e₃.hom.app K ≫ p₃.app K))
-    (hH : ∀ K, gS.map (e₁.hom.app K ≫ p₁.app K) ≫ σ.hom.app K =
-      σ.hom.app (T₁.obj K) ≫ E₃.map (τ.app K) ≫ e₃.hom.app (gR.obj K) ≫ p₃.app (gR.obj K))
-    (K : ℋ₁) :
-    (LgS.map (LE₁.map (θ₁.app (Q₁.obj K)) ≫ adj₁.counit.app (LE₁.obj (Q₁.obj K))) ≫
-      α.hom.app (Q₁.obj K)) ≫ cZ.app K =
-    (α.hom.app (LT₁.obj (Q₁.obj K)) ≫
-      LE₃.map (β.app (Q₁.obj K) ≫ θ₃.app (LgR.obj (Q₁.obj K))) ≫
-      adj₃.counit.app (LE₃.obj (LgR.obj (Q₁.obj K)))) ≫ cZ.app K := by
-  have hα₁ := hα K
-  have hα₂ := hα (T₁.obj K)
-  have hY := congrArg LgS.map (htr₁ K)
-  have hZ := htr₃ (gR.obj K)
-  have ha := congrArg LE₃.map (hβ K)
-  have hS := κgS.naturality (e₁.hom.app K ≫ p₁.app K)
-  have hϑ := congrArg LE₃.map (θ₃.naturality (κgR.app K))
-  have hΨ := κE₃.naturality (τ.app K)
-  have hn := α.hom.naturality (κT₁.app K)
-  have hH' := congrArg Q₄.map (hH K)
-  subst hcZ hcY hcT hcT'
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.map_comp, Functor.comp_map, Functor.comp_obj, Category.assoc]
-    at hα₁ hα₂ hY hZ ha hS hϑ hΨ hn hH' ⊢
-  rw [hα₁, reassoc_of% hY, reassoc_of% hS, hH']
-  erw [← Adjunction.counit_naturality_assoc]
-  rw [← reassoc_of% hϑ, hZ, reassoc_of% ha, reassoc_of% hΨ, ← reassoc_of% hn, reassoc_of% hα₂]
-
-end ProjectionTransposeUpperStarAux
-
-end CategoryTheory
-
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
@@ -275,13 +157,11 @@ lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar
         (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K) ≫
       (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Z) (.up ℤ)).app
         (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K) :=
-  NatTrans.mapHomotopyCategory_transpose_square (sheafExtendScalarsProjectionTranspose R S Y)
+  NatTrans.mapHomotopyCategory_comp_app_eq (sheafExtendScalarsProjectionTranspose R S Y)
     (sheafExtendScalarsProjectionTranspose R S Z)
     (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom
     (tensorRestrictScalarsUnitUpperStarMap R S g)
-    (sheafExtendScalarsProjectionTranspose_upperStar R S g)
-    (mapHomotopyCategorySheafExtendScalarsCompUpperStarIso R S g).hom rfl
-    (mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g) rfl K
+    (sheafExtendScalarsProjectionTranspose_upperStar R S g) K
 
 set_option hygiene false in
 /-- Derived extension of scalars on `X`. -/
@@ -316,41 +196,41 @@ private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
       (leftDerivedSheafExtendScalarsAdjunction R S Z).counit.app
         ((Ψ[Z]).obj ((𝓖R).obj (DerivedCategory.Qh.obj K)))) ≫
       (leftDerivedUpperStarSheafExtendScalarsCounit R S g).app K :=
-  transpose_upperStar_aux
+  Adjunction.leftDerived_transpose_naturality_app
     (T₁ := (tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ))
     (T₃ := (tensorRight (sheafRestrictScalarsUnit R S Z)).mapHomotopyCategory (.up ℤ))
     (E₁ := (sheafExtendScalars (algebraMap R S) Y).mapHomotopyCategory (.up ℤ))
     (E₃ := (sheafExtendScalars (algebraMap R S) Z).mapHomotopyCategory (.up ℤ))
     (gR := (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ))
     (gS := (g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ))
-    (tensorRight (sheafRestrictScalarsUnit R S Y)).leftDerivedFunctorCounit
-    (tensorRight (sheafRestrictScalarsUnit R S Z)).leftDerivedFunctorCounit
-    (sheafExtendScalars (algebraMap R S) Y).leftDerivedFunctorCounit
-    (sheafExtendScalars (algebraMap R S) Z).leftDerivedFunctorCounit
-    (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit
-    (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit
-    (leftDerivedSheafExtendScalarsProjection R S Y) (leftDerivedSheafExtendScalarsProjection R S Z)
-    (leftDerivedSheafExtendScalarsAdjunction R S Y) (leftDerivedSheafExtendScalarsAdjunction R S Z)
-    (leftDerivedUpperStarExtendScalarsIso R S g)
-    (leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g)
-    (leftDerivedUpperStarSheafExtendScalarsCounit R S g) rfl
-    (leftDerivedSheafExtendScalarsUpperStarCounit R S g) rfl
-    (leftDerivedTensorRightUpperStarCounit (c_Y := sheafRestrictScalarsUnit R S Y) g) rfl
-    (leftDerivedUpperStarTensorRightCounit g (sheafRestrictScalarsUnit R S Z)) rfl
-    (mapHomotopyCategorySheafExtendScalarsCompUpperStarIso R S g)
-    (mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g)
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Y) ⋙
-      sheafExtendScalars (algebraMap R S) Y)) (.up ℤ))
-    (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Y) (.up ℤ))
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Z) ⋙
-      sheafExtendScalars (algebraMap R S) Z)) (.up ℤ))
-    (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Z) (.up ℤ))
-    (leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit R S g)
-    (leftDerivedTensorRightUpperStarMap_app_comp_counit g
+    (κT₁ := (tensorRight (sheafRestrictScalarsUnit R S Y)).leftDerivedFunctorCounit)
+    (κT₃ := (tensorRight (sheafRestrictScalarsUnit R S Z)).leftDerivedFunctorCounit)
+    (κE₁ := (sheafExtendScalars (algebraMap R S) Y).leftDerivedFunctorCounit)
+    (κE₃ := (sheafExtendScalars (algebraMap R S) Z).leftDerivedFunctorCounit)
+    (κgR := (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit)
+    (κgS := (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit)
+    (θ₁ := leftDerivedSheafExtendScalarsProjection R S Y)
+    (θ₃ := leftDerivedSheafExtendScalarsProjection R S Z)
+    (adj₁ := leftDerivedSheafExtendScalarsAdjunction R S Y)
+    (adj₃ := leftDerivedSheafExtendScalarsAdjunction R S Z)
+    (α := leftDerivedUpperStarExtendScalarsIso R S g)
+    (β := leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g)
+    (σ := mapHomotopyCategorySheafExtendScalarsCompUpperStarIso R S g)
+    (τ := mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g)
+    (e₁ := Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Y) ⋙
+        sheafExtendScalars (algebraMap R S) Y)) (.up ℤ))
+    (p₁ := NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Y) (.up ℤ))
+    (e₃ := Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Z) ⋙
+        sheafExtendScalars (algebraMap R S) Z)) (.up ℤ))
+    (p₃ := NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Z) (.up ℤ))
+    (hα := leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit R S g)
+    (hβ := leftDerivedTensorRightUpperStarMap_app_comp_counit g
       (upperStarSheafRestrictScalarsUnitMap R S g))
-    (leftDerivedSheafExtendScalarsProjection_transpose R S Y)
-    (leftDerivedSheafExtendScalarsProjection_transpose R S Z)
-    (mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar R S g) K
+    (htr₁ := leftDerivedSheafExtendScalarsProjection_transpose R S Y)
+    (htr₃ := leftDerivedSheafExtendScalarsProjection_transpose R S Z)
+    (hH := mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar R S g) K
 
 /-- **The transposed derived projection maps commute with the derived pullback**: for `K` in
 `D(Y_proét, R)`, the square

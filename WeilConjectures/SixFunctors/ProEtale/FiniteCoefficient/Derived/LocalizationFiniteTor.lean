@@ -54,29 +54,6 @@ open CategoryTheory Limits MonoidalCategory Pretriangulated
 
 open scoped CategoryTheory.Functor
 
-namespace DerivedCategory
-
-variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
-
-/-- For a distinguished triangle `T₁ ⟶ T₂ ⟶ T₃ ⟶ T₁[1]` in `D(C)` with `T₂` concentrated in
-`[a, b]` and `T₃` concentrated in `[a, e]`, where `b ≤ e + 1`, the first vertex `T₁` is
-concentrated in `[a, e + 1]`: it sits in the distinguished triangle `T₃[-1] ⟶ T₁ ⟶ T₂ ⟶`. -/
-lemma homologyConcentratedIn_obj₁_of_distTriang (T : Triangle (DerivedCategory C))
-    (hT : T ∈ distTriang _) {a b e : ℤ} (hbe : b ≤ e + 1)
-    (h₂ : homologyConcentratedIn a b T.obj₂) (h₃ : homologyConcentratedIn a e T.obj₃) :
-    homologyConcentratedIn a (e + 1) T.obj₁ := by
-  have hT' := inv_rot_of_distTriang T hT
-  obtain ⟨g₂, l₂⟩ := h₂
-  obtain ⟨g₃, l₃⟩ := h₃
-  have : TStructure.t.IsGE T.invRotate.obj₁ (a + 1) := TStructure.t.isGE_shift T.obj₃ a (-1) (a + 1)
-  have : TStructure.t.IsLE T.invRotate.obj₁ (e + 1) := TStructure.t.isLE_shift T.obj₃ e (-1) (e + 1)
-  have : TStructure.t.IsLE T.invRotate.obj₃ b := l₂
-  have : TStructure.t.IsGE T.invRotate.obj₃ a := g₂
-  exact ⟨TStructure.t.isGE₂ _ hT' a (TStructure.t.isGE_of_ge _ a (a + 1)) ‹_›,
-    TStructure.t.isLE₂ _ hT' (e + 1) ‹_› (TStructure.t.isLE_of_le _ b (e + 1))⟩
-
-end DerivedCategory
-
 namespace AlgebraicGeometry
 
 open Scheme

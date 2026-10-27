@@ -120,46 +120,6 @@ lemma homologyConcentratedIn_of_iso {X : Scheme.{u}} {a b : ℤ}
   exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e a,
     _root_.DerivedCategory.TStructure.t.isLE_of_iso e b⟩
 
-omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A] in
-/-- In a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]` with `X₂` concentrated in `[a, b]` and
-`X₃` in `[a, e]`, `b ≤ e`, the first term is concentrated in `[a, e + 1]`. -/
-lemma homologyConcentratedIn_obj₁ {X : Scheme.{u}}
-    (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
-    (hT : T ∈ distTriang _) {a b e : ℤ} (hbe : b ≤ e)
-    (h₂ : _root_.DerivedCategory.homologyConcentratedIn a b T.obj₂)
-    (h₃ : _root_.DerivedCategory.homologyConcentratedIn a e T.obj₃) :
-    _root_.DerivedCategory.homologyConcentratedIn a (e + 1) T.obj₁ := by
-  have hT' := inv_rot_of_distTriang T hT
-  obtain ⟨g₂, l₂⟩ := h₂
-  obtain ⟨g₃, l₃⟩ := h₃
-  have : _root_.DerivedCategory.TStructure.t.IsGE T.invRotate.obj₁ (a + 1) :=
-    _root_.DerivedCategory.TStructure.t.isGE_shift T.obj₃ a (-1) (a + 1)
-  have : _root_.DerivedCategory.TStructure.t.IsLE T.invRotate.obj₁ (e + 1) :=
-    _root_.DerivedCategory.TStructure.t.isLE_shift T.obj₃ e (-1) (e + 1)
-  have : _root_.DerivedCategory.TStructure.t.IsLE T.invRotate.obj₃ b := l₂
-  have : _root_.DerivedCategory.TStructure.t.IsGE T.invRotate.obj₃ a := g₂
-  exact ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ hT' a
-      (_root_.DerivedCategory.TStructure.t.isGE_of_ge _ a (a + 1)) ‹_›,
-    _root_.DerivedCategory.TStructure.t.isLE₂ _ hT' (e + 1) ‹_›
-      (_root_.DerivedCategory.TStructure.t.isLE_of_le _ b (e + 1))⟩
-
-
-omit [HasSmallSiteSheafify A] in
-/-- In a distinguished triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]` with `X₂` of Tor amplitude in `[a, b]`
-and `X₃` of Tor amplitude in `[a, e]`, `b ≤ e`, the first term has Tor amplitude in
-`[a, e + 1]`. -/
-lemma torAmplitudeIn_obj₁ {X : Scheme.{u}}
-    (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
-    (hT : T ∈ distTriang _) {a b e : ℤ} (hbe : b ≤ e)
-    (h₂ : torAmplitudeIn A X a b T.obj₂) (h₃ : torAmplitudeIn A X a e T.obj₃) :
-    torAmplitudeIn A X a (e + 1) T.obj₁ := fun F ↦ by
-  let G := (-⊗ᴸ-(X)[A]).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
-  let := _root_.DerivedCategory.commShiftTensorRight
-    (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
-  have : G.IsTriangulated := _root_.DerivedCategory.isTriangulated_tensorRight
-    (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
-  exact homologyConcentratedIn_obj₁ A _ (G.map_distinguished _ hT) hbe (h₂ F) (h₃ F)
 /-- **The exceptional inverse image along a closed immersion, from the open complement.**
 Let `i : Z ⟶ T` be a closed immersion with open complement `j`. If `K` lies in `D_c^[a, b]` with
 Tor amplitude in `[a, b]`, and `Rj_* j^* K` in `D_c^[a, e]` with Tor amplitude in `[a, e]`,
@@ -192,9 +152,10 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
         (inv_rot_of_distTriang _ hT)
       ((boundedConstructible (ModuleCat.{u + 1} Λ) T).le_shift (-1) _ hMbc) hKbc
   -- `N` lies in `[a, e + 1]` with Tor amplitude in `[a, e + 1]`
-  have hNc := homologyConcentratedIn_obj₁ (ModuleCat.{u + 1} Λ) _ hT hbe hKc hMc
+  have hNc :=
+    _root_.DerivedCategory.homologyConcentratedIn_obj₁_of_distTriang _ hT (by lia) hKc hMc
   have hNt : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a (e + 1) N :=
-    torAmplitudeIn_obj₁ (ModuleCat.{u + 1} Λ) _ hT hbe hKt hMt
+    torAmplitudeIn_obj₁_of_distTriang _ hT (by lia) hKt hMt
   -- `Ri^! K ≅ i^* N`
   let ε := mapDerivedCategoryUpperStarRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) i
   refine ⟨⟨(boundedConstructible (ModuleCat.{u + 1} Λ) Z).prop_of_iso (ε.app _)

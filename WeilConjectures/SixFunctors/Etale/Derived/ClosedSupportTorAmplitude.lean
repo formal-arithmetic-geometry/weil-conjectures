@@ -86,21 +86,6 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage (j : U 
   exact ⟨@isGE_rightDerivedLowerStar_obj Λ _ U T j _ a h₁,
     @isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage Λ _ U T j c hc _ b h₂⟩
 
-omit [Finite Λ] in
-/-- Tor amplitude is two out of three in the first term: if `X₂` has Tor amplitude in `[a, b]` and
-`X₃` in `[a, b']` with `b ≤ b'`, then `X₁` has Tor amplitude in `[a, b' + 1]`, tensoring the
-triangle with a sheaf being a triangulated functor. -/
-lemma torAmplitudeIn_obj₁_of_distTriang
-    (Tr : Triangle (_root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
-    (hTr : Tr ∈ distTriang _) {a b b' : ℤ} (hbb : b ≤ b')
-    (h₂ : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b Tr.obj₂)
-    (h₃ : torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b' Tr.obj₃) :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) T a (b' + 1) Tr.obj₁ := fun F ↦
-  homologyConcentratedIn_obj₁ (ModuleCat.{u + 1} Λ)
-    (((-⊗ᴸ-(T)[ModuleCat.{u + 1} Λ]).flip.obj
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).mapTriangle.obj Tr)
-    (Functor.map_distinguished _ _ hTr) hbb (h₂ F) (h₃ F)
-
 variable (i : Z ⟶ T) (j : U ⟶ T) [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
   [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
@@ -124,8 +109,7 @@ theorem torAmplitudeIn_rightDerivedUpperShriek {c : ℕ}
   have h₃ := torAmplitudeIn_rightDerivedLowerStar_of_isZero_higherDirectImage j hc
     (torAmplitudeIn_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) j a b hta)
   have h₁ := torAmplitudeIn_obj₁_of_distTriang _
-    (supportedLocalizationTriangle_mem_distTriang Λ i j hij K) (le_add_of_nonneg_right
-      (Int.natCast_nonneg c)) hta h₃
+    (supportedLocalizationTriangle_mem_distTriang Λ i j hij K) (by lia) hta h₃
   exact (torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + c + 1)).prop_of_iso
     (((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) i).app _) ≪≫
       mapDerivedUpperStarRightDerivedLowerShriekIso i _)

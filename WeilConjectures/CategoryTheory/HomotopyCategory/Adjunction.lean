@@ -228,6 +228,46 @@ lemma mapHomotopyCategory_counit_app_quotient {L : C ⥤ D} {R : D ⥤ C} (adj :
   simp only [Functor.mapHomotopyCategoryFactors, Functor.comp_obj]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
 
+/-- The counit of `Adjunction.mapHomotopyCategory` at the image of a complex under the left
+adjoint is the image of the counit of `Adjunction.mapHomologicalComplex`. -/
+lemma mapHomotopyCategory_counit_app_mapHomotopyCategory_obj_quotient {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) [L.Additive] [R.Additive]
+    [(HomotopyCategory.quotient D c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences D c)]
+    (X : HomologicalComplex C c) :
+    (adj.mapHomotopyCategory c).counit.app
+        ((L.mapHomotopyCategory c).obj ((HomotopyCategory.quotient C c).obj X)) =
+      (HomotopyCategory.quotient D c).map
+        ((adj.mapHomologicalComplex c).counit.app ((L.mapHomologicalComplex c).obj X)) :=
+  mapHomotopyCategory_counit_app_quotient c adj _
+
+/-- On homotopy categories, the transpose along `f ⊣ g` of the natural transformation induced by
+`π : T ⟶ f ⋙ g` is induced by the transpose `f π ≫ ε : T ⋙ f ⟶ f` of `π`:
+```
+f (T K) ───f (π K)──▶ f (g (f K))
+   │                       │
+   ‖                    ε (f K)
+   ▼                       ▼
+(T ⋙ f) K ──(f π ≫ ε) K──▶ f K
+```
+where the left vertical map is `Functor.mapHomotopyCategoryCompIso`, an identity. -/
+lemma mapHomotopyCategory_map_comp_counit_app {f : C ⥤ D} {g : D ⥤ C} (adj : f ⊣ g)
+    [f.Additive] [g.Additive]
+    [(HomotopyCategory.quotient D c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences D c)]
+    {T : C ⥤ C} [T.Additive] (π : T ⟶ f ⋙ g) (K : HomotopyCategory C c) :
+    (f.mapHomotopyCategory c).map ((NatTrans.mapHomotopyCategory π c).app K) ≫
+        (adj.mapHomotopyCategory c).counit.app ((f.mapHomotopyCategory c).obj K) =
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (T ⋙ f)) c).hom.app K ≫
+        (NatTrans.mapHomotopyCategory
+          (Functor.whiskerRight π f ≫ Functor.whiskerLeft f adj.counit) c).app K := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp,
+    mapHomotopyCategory_counit_app_mapHomotopyCategory_obj_quotient]
+  simp only [NatTrans.mapHomotopyCategory_app, HomotopyCategory.quotient_obj_as,
+    Functor.mapHomotopyCategory_map, ← Functor.map_comp]
+  congr 1
+
 /-- The identity law for `Adjunction.mapHomotopyCategory`. -/
 lemma mapHomotopyCategory_id_unit_app (Y : HomotopyCategory C c) :
     ((Adjunction.id (C := C)).mapHomotopyCategory c).unit.app Y =

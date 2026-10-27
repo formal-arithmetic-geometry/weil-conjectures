@@ -223,7 +223,8 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion_of_ope
       ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj K)) :=
     (boundedConstructible _ T).ext_of_isTriangulatedClosed₂ _ (inv_rot_of_distTriang _ hT)
       ((boundedConstructible _ T).le_shift (-1) _ hMbc) hK
-  have hNc := homologyConcentratedIn_obj₁ _ _ hT (by lia : b ≤ b + e) hab hMc
+  have hNc := _root_.DerivedCategory.homologyConcentratedIn_obj₁_of_distTriang _ hT
+    (by lia : b ≤ b + e + 1) hab hMc
   let ε := mapDerivedCategoryUpperStarRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) i
   exact ⟨(boundedConstructible _ Z).prop_of_iso (ε.app _) (hNbc.mapDerivedCategory_upperStar i),
     homologyConcentratedIn_of_iso _ (ε.app _)
