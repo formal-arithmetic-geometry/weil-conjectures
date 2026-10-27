@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BaseChangePaste
 public import WeilConjectures.TraceFormula.OpenCover
@@ -25,8 +26,6 @@ geometric generic fibres at `Lε^* K`
 
 - `ProEtale.CondensedRing.isIso_baseChangeMap_app_paste_iff`: pointwise pasting of base change
   morphisms along a square with invertible base change morphism.
-- `ProEtale.CondensedRing.exists_etale_affineSpace_of_smooth`: a smooth morphism is, locally on the
-  source, étale over an affine space over the target.
 - `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth`: the reduction to affine spaces, by
   joint conservativity of the pullbacks along a finite affine open cover and weakly étale base
   change along the étale charts.
@@ -40,42 +39,6 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory.Adjunction
-
-variable {A B A' B' A'' B'' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']
-  [Category* A''] [Category* B''] {Lf : B ⥤ A} {Rf : A ⥤ B} {Lf' : B' ⥤ A'} {Rf' : A' ⥤ B'}
-  {Lf'' : B'' ⥤ A''} {Rf'' : A'' ⥤ B''}
-
-/-- **Pointwise two-out-of-three for pasted exchange morphisms**: in the situation of
-`CategoryTheory.Adjunction.exchangeRight_app_paste`, if the exchange morphism of the second square
-is invertible, then the exchange morphism of the outer square is invertible at `K` if and only if
-the image under `G₂` of the exchange morphism of the first square at `K` is invertible. -/
-lemma isIso_exchangeRight_app_paste_iff {G₁ : B ⥤ B'} {G₁' : A ⥤ A'} {G₂ : B' ⥤ B''}
-    {G₂' : A' ⥤ A''} {G : B ⥤ B''} {G' : A ⥤ A''} (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf')
-    (af'' : Lf'' ⊣ Rf'') (θ₁ : G₁ ⋙ Lf' ≅ Lf ⋙ G₁') (θ₂ : G₂ ⋙ Lf'' ≅ Lf' ⋙ G₂')
-    (θ : G ⋙ Lf'' ≅ Lf ⋙ G') (c : G ≅ G₁ ⋙ G₂) (c' : G' ≅ G₁' ⋙ G₂')
-    (h : ∀ N : B, Lf''.map (c.hom.app N) ≫ θ₂.hom.app (G₁.obj N) ≫ G₂'.map (θ₁.hom.app N) =
-      θ.hom.app N ≫ c'.hom.app (Lf.obj N)) (hθ₂ : IsIso (exchangeRight af' af'' θ₂)) (K : A) :
-    IsIso ((exchangeRight af af'' θ).app K) ↔
-      IsIso (G₂.map ((exchangeRight af af' θ₁).app K)) := by
-  have e := exchangeRight_app_paste af af' af'' θ₁ θ₂ θ c c' h K
-  constructor
-  · intro _
-    have : IsIso (c.hom.app (Rf.obj K) ≫ G₂.map ((exchangeRight af af' θ₁).app K) ≫
-        (exchangeRight af' af'' θ₂).app (G₁'.obj K)) := by
-      rw [e]
-      infer_instance
-    have := IsIso.of_isIso_comp_left (c.hom.app (Rf.obj K))
-      (G₂.map ((exchangeRight af af' θ₁).app K) ≫ (exchangeRight af' af'' θ₂).app (G₁'.obj K))
-    exact IsIso.of_isIso_comp_right _ ((exchangeRight af' af'' θ₂).app (G₁'.obj K))
-  · intro _
-    have : IsIso ((exchangeRight af af'' θ).app K ≫ Rf''.map (c'.hom.app K)) := by
-      rw [← e]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (Rf''.map (c'.hom.app K))
-
-end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -134,39 +97,6 @@ lemma isIso_baseChangeMap_app_congr {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {p' :
   rw [Subsingleton.elim sq₁ sq₂]
 
 end Paste
-
-/-! ### Smooth morphisms are locally étale over affine spaces -/
-
-section LocalStructure
-
-/-- **Local structure of smooth morphisms**: around every point of `X`, a smooth morphism
-`t : X ⟶ Y` is, on an affine open `W ⊆ X` (given by an open immersion `ι : W ⟶ X`), the
-composite of an étale morphism `e : W ⟶ 𝔸ⁿ_Y` and the projection `𝔸ⁿ_Y ⟶ Y`. -/
-lemma exists_etale_affineSpace_of_smooth {X Y : Scheme.{u}} (t : X ⟶ Y) [Smooth t] (x : X) :
-    ∃ (W : Scheme.{u}) (ι : W ⟶ X) (_ : IsOpenImmersion ι) (_ : IsAffine W)
-      (_ : x ∈ Set.range ι.base) (n : ℕ) (e : W ⟶ 𝔸(ULift.{u} (Fin n); Y)),
-      Etale e ∧ e ≫ 𝔸(ULift.{u} (Fin n); Y) ↘ Y = ι ≫ t := by
-  obtain ⟨U, hU, V, hV, hxV, eUV, hss⟩ := Smooth.exists_isStandardSmooth t x
-  obtain ⟨n, g, hgC, hg⟩ := hss.exists_etale_mvPolynomial
-  have : Etale (Spec.map (CommRingCat.ofHom g)) := HasRingHomProperty.Spec_iff.mpr hg
-  let r := (MvPolynomial.renameEquiv Γ(Y, U) (Equiv.ulift (α := Fin n))).toRingEquiv
-  refine ⟨Spec Γ(X, V), hV.fromSpec, inferInstance, inferInstance, ?_, n,
-    Spec.map (CommRingCat.ofHom g) ≫ Spec.map (CommRingCat.ofHom r.toRingHom) ≫
-      (AffineSpace.SpecIso (ULift.{u} (Fin n)) Γ(Y, U)).inv ≫
-        AffineSpace.map (ULift.{u} (Fin n)) hU.fromSpec, inferInstance, ?_⟩
-  · rw [hV.range_fromSpec]
-    exact hxV
-  · rw [Category.assoc, Category.assoc, Category.assoc, AffineSpace.map_over,
-      AffineSpace.SpecIso_inv_over_assoc, ← Spec.map_comp_assoc, ← Spec.map_comp_assoc,
-      ← IsAffineOpen.SpecMap_appLE_fromSpec t hU hV eUV]
-    congr 2
-    ext1
-    rw [CommRingCat.hom_comp, CommRingCat.hom_comp, CommRingCat.hom_ofHom, CommRingCat.hom_ofHom,
-      CommRingCat.hom_ofHom, ← hgC]
-    ext a
-    simp [r]
-
-end LocalStructure
 
 /-! ### Reduction of smooth base change to affine spaces -/
 
@@ -234,16 +164,15 @@ square with `t` smooth and `X` quasi-compact and quasi-separated, and let `E` be
 source of `j_Y`. If, for every `n`, the base change morphism of the square of `j_Y` along the
 projection `𝔸ⁿ_Y ⟶ Y` is invertible at `E`, then the base change morphism
 `Lt^* Rj_{Y*} E ⟶ Rj_{X*} Lg^* E` is invertible. Indeed `t` is, locally on `X`, étale over some
-`𝔸ⁿ_Y` (`exists_etale_affineSpace_of_smooth`); the pullbacks along a finite affine open cover
-jointly reflect isomorphisms, and the étale-local step is
+`𝔸ⁿ_Y` (`AlgebraicGeometry.Smooth.exists_etale_affineSpace`); the pullbacks along a finite
+affine open cover jointly reflect isomorphisms, and the étale-local step is
 `isIso_map_baseChangeMap_app_of_etale_affineSpace`. -/
 theorem isIso_baseChangeMap_app_of_smooth [Smooth t] [CompactSpace X] [QuasiSeparatedSpace X]
-    (sq : CommSq g jX jY t) (hj : IsPullback g jX jY t) (E : 𝔻(YΩ))
+    (hj : IsPullback g jX jY t) (E : 𝔻(YΩ))
     (hA : ∀ n : ℕ, IsIso ((baseChangeMap Λ
       (IsPullback.of_hasPullback jY (𝔸(ULift.{u} (Fin n); Y) ↘ Y)).toCommSq).app E)) :
-    IsIso ((baseChangeMap Λ sq).app E) := by
-  rw [Subsingleton.elim sq hj.toCommSq]
-  choose W ι hι hW hx n e he hte using exists_etale_affineSpace_of_smooth t
+    IsIso ((baseChangeMap Λ hj.toCommSq).app E) := by
+  choose W ι hι hW hx n e he hte using Smooth.exists_etale_affineSpace t
   obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover (fun x ↦ Set.range (ι x).base)
     (fun x ↦ (ι x).isOpenEmbedding.isOpen_range) fun x _ ↦ Set.mem_iUnion.2 ⟨x, hx x⟩
   have (a : s) : QuasiCompact (ι a) := by

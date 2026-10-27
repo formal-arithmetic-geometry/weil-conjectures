@@ -31,7 +31,13 @@ and `ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth` (locally on the s
 morphism is étale over an affine space), to smooth base change along the projections
 `𝔸ⁿ_𝒴 ⟶ 𝒴` for the inclusion `j` of the geometric generic fibre,
 `ProEtale.CondensedRing.isIso_baseChangeMap_affineSpace_deformationModel_app`, which is `sorry`ed
-(blueprint `sbc-thm-bounded-derived-smooth-base-change`).
+(blueprint `sbc-thm-bounded-derived-smooth-base-change`). What remains is the transfer to
+`ℚ̄_ℓ`-coefficients: smooth base change for qcqs pushforward is proved for finite coefficients
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth_of_finite`), but the passage
+`𝔽_E → 𝒪_E → ℚ̄_ℓ` needs derived Nakayama and the compatibility of the changes of coefficients
+with `Rj_*` for the non-finite-type `j`, whereas the available derived Nakayama
+(`ProEtale.isIso_of_isIso_derivedReduction_map`) only covers bounded constructible complexes and
+`Rj_*` of a complex on the geometric generic fibre is not constructible.
 
 -/
 
@@ -59,9 +65,16 @@ square of `j` along `π`, the base change morphism `Lπ^* Rj_* ⟶ Rj'_* Lπ'^*`
 
 This is the input that remains: `j` is not of finite type (it is a base change of the geometric
 generic point `Spec Ω ⟶ Spec k'⟦t⟧` of the trait), so the finite-type smooth base change
-`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_smooth` does not apply, and the
-homotopy invariance `Rπ_* Lπ^* ≅ id` needed for the projections of affine spaces is not available
-in the formalism of module objects over `condensedRingObj`. -/
+`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_smooth` does not apply. What is
+missing is the transfer to `ℚ̄_ℓ`-coefficients in the formalism of module objects over
+`condensedRingObj`: smooth base change for the pushforward along a qcqs morphism is proved there
+for finite coefficients (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_smooth_of_finite` in
+`SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems/SmoothFinite.lean`, transported from
+`ProEtale.isIso_derivedBaseChangeMap_app_of_smooth_of_torsion`), and the passage
+`𝔽_E → 𝒪_E → ℚ̄_ℓ` needs derived Nakayama together with the compatibility of the changes of
+coefficients with `Rj_*`. The available derived Nakayama
+(`ProEtale.isIso_of_isIso_derivedReduction_map`) only covers bounded constructible complexes,
+and `Rj_*` of a complex on the geometric generic fibre is not constructible. -/
 theorem isIso_baseChangeMap_affineSpace_deformationModel_app {Y : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (I : Y.left.IdealSheafData) (n : ℕ)
@@ -100,8 +113,9 @@ theorem isIso_pullbackExchange_deformationModel_app_of_smooth {X Y : Over (Spec 
   have hA (n : ℕ) := isIso_baseChangeMap_affineSpace_deformationModel_app k' I n hK
   have h₁ := φ.isIso_pullbackExchange_app_of_isIso_baseChangeMap_app
     (Profinite.padicAlgClRingObj ℓ) K
-  have h₂ := isIso_baseChangeMap_app_of_smooth (Profinite.padicAlgClRingObj ℓ) φ.commSq_j hj
+  have h₂ := isIso_baseChangeMap_app_of_smooth (Profinite.padicAlgClRingObj ℓ) hj
     ((L(((deformationModel Y I k').ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj K)
+  rw [Subsingleton.elim hj.toCommSq φ.commSq_j] at h₂
   revert hA h₁ h₂
   normalize_precoherent
   intro hA h₁ h₂
