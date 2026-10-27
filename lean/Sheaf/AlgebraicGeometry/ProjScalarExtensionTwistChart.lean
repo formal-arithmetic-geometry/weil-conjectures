@@ -6,6 +6,7 @@ Authors: SHEAF group K7
 module
 
 public import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistData
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistChartBasic
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor
 import Sheaf.RingTheory.HomogeneousLocalizationScalarExtension
 import Sheaf.Algebra.Module.GradedLocalizationScalarExtension

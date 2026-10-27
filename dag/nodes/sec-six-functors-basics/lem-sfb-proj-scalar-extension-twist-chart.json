@@ -14,13 +14,16 @@
  ],
  "proof": [
   {
-   "text": "On D_+(f), identify the concrete locally-fraction twist with the quasi-coherent module of homogeneous fractions of degree j. Use the single-twist basic-open fractions theorem for its section module and restrictions. Apply the graded-module sheaf theorem to A(j), and its basis-extension uniqueness, to identify these concrete sections with the associated sheaf; repeat for B(j). Negative j uses the same shifted grading, with zero negative homogeneous pieces.",
+   "text": "First prove the complete-standard-chart subproblem, which identifies the two shifted homogeneous localized modules and shows the prescribed chart map is bijective.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-sc-proj-single-twist-basic-open-fractions",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+    "lem-sfb-proj-scalar-extension-twist-chart-basic"
    ],
    "elementary": false
+  },
+  {
+   "text": "Restrict the resulting chart isomorphism further to any open W inside D_+(psi(f)). An isomorphism of sheaves is an isomorphism on every section module, hence eta.app W is bijective. Empty charts and empty W give the unique map between zero section modules, and negative j uses the same shifted graded-module localization.",
+   "uses": [],
+   "elementary": true
   },
   {
    "text": "Put H=(A_f)_0 and L=(A_f)_j. The homogeneous localization comparison identifies (B_psi(f))_0 with S tensor_R H, after transporting by beta. The explicit tensor-balancing equivalence L tensor_H (S tensor_R H) -> S tensor_R L sends u tensor (s tensor h) to s tensor h*u and has inverse s tensor u -> u tensor (s tensor 1). The graded-module localization scalar-extension equivalence, transported by beta, then identifies it with (B_psi(f))_j. The composite sends (a/f^m) tensor c to c*psi(a)/psi(f)^m. The relation hgraded identifies beta on the homogeneous pieces by spanning; hbeta identifies its values on pure tensors. All maps respect localization equality, including zero divisors.",
@@ -38,14 +41,10 @@
     "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
    "elementary": false
-  },
-  {
-   "text": "Restrict the resulting chart isomorphism further to any open W inside D_+(psi(f)). An isomorphism of sheaves is an isomorphism on every section module, hence eta.app W is bijective. If the chart or W is empty, both section modules are zero and the same argument applies.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sfb-proj-scalar-extension-twist-chart-basic",
   "def-weil-pbc-proj-twisting-sheaf",
   "lem-nagata-homogeneous-localization-scalar-extension",
   "lem-sc-proj-single-twist-basic-open-fractions",
@@ -56,9 +55,9 @@
   "lem-weil-pbc-proj-graded-module-sheaf-exists"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01N2 (lemma-base-change-map-proj), clause (3), standard-open proof; Tag 01MY (lemma-morphism-proj), localized graded-module formula."
+  "place": "Tag 01N2 clause (3), with the complete-chart subproblem split into lem-sfb-proj-scalar-extension-twist-chart-basic"
  },
  "mathlib_searches": [
   {
@@ -181,9 +180,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K7",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261027T210129-L-1661134",
+  "landing": "20261027T234109-L-4190573",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
