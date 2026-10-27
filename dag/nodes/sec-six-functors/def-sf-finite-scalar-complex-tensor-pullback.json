@@ -1,0 +1,121 @@
+{
+ "id": "def-sf-finite-scalar-complex-tensor-pullback",
+ "kind": "definition",
+ "title": "Typed uncurried fixed-scalar complex tensor pullback",
+ "statement": "For an additive monoidal left adjoint L between braided monoidal closed Grothendieck abelian categories, construct the signed-total tensor comparison as an uncurried natural transformation, using mapBifunctorComparisonNatTrans on the ordinary oplax tensor map. Its component on P,Q is exactly the published mapHomologicalComplexδNatTrans component. Specialize this construction to ordinary fixed-scalar pro-etale inverse image [def-weil-proetale-inverse-image]. No flatness or derived category is used. The statement uses the identity-component uncurrying conversion [lem-sf-finite-scalar-tensor-complex].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, signed total of the ordinary tensor comparison"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-weil-proetale-inverse-image",
+  "def-sf-finite-scalar-representative-total-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Compose the identity-component uncurrying/postcomposition isomorphism with the uncurrying of mapBifunctorComparisonNatTrans for the ordinary tensor comparison. Its source and target are explicitly the two signed-total tensor functors, so the construction avoids unfolding the entire native complex monoidal category after concrete specialization.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex",
+    "def-sf-finite-scalar-representative-total-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The published component formulas for mapBifunctorComparisonNatTrans and mapHomologicalComplexδNatTrans identify the two chain maps. Prove this with abstract coefficient categories, then specialize the construction to the fixed-scalar inverse image; use the generic component equation directly when needed.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sf-finite-scalar-representative-total-tensor",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, signed total of the ordinary tensor comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Typed uncurried fixed-scalar complex tensor pullback",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarComplexTensorPullback",
+  "file": "lean/Sheaf/Paper/FiniteScalarComplexTensorPullback.lean",
+  "declaration": "WeilConjectures.finiteScalarComplexTensorPullbackForFunctor",
+  "statement": "def finiteScalarComplexTensorPullbackForFunctor\n    {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]\n    [Abelian C] [Abelian D]\n    [IsGrothendieckAbelian.{u + 1} C] [IsGrothendieckAbelian.{u + 1} D]\n    [MonoidalCategory C] [MonoidalCategory D]\n    [MonoidalPreadditive C] [MonoidalPreadditive D]\n    [MonoidalClosed C] [MonoidalClosed D] [BraidedCategory C] [BraidedCategory D]\n    (L : C ⥤ D) [L.Additive] [L.IsLeftAdjoint] [L.Monoidal] :\n    finiteScalarRepresentativeTotalTensor C ⋙\n        L.mapHomologicalComplex (.up ℤ) ⟶\n      ((L.mapHomologicalComplex (.up ℤ)).prod (L.mapHomologicalComplex (.up ℤ))) ⋙\n        finiteScalarRepresentativeTotalTensor D",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarComplexTensorPullbackForFunctor",
+   "WeilConjectures.finiteScalarComplexTensorPullbackForFunctor_app",
+   "WeilConjectures.finiteScalarFixedComplexTensorPullbackForCoefficients"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -16,44 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Compare the two ordinary direct images through the scalar unit and the coefficient Hom bijection. The constant-section normalization makes the ordinary inverse mate the associated-module realization of inverse image.",
+   "text": "Package the specified realization functors, their tensor representatives and scalar normalization equations in the explicit realization-data records. Package the specified ordinary and derived pullback functors, exact factors, ordinary and derived mates, preservation witnesses, and tensor comparisons in the explicit pullback-data record.",
    "uses": [
-    "def-sf-finite-scalar-pullback-comparison",
-    "lem-sfb-constant-module-derived-projection-identification"
+    "def-sf-finite-scalar-tensor-representative-data",
+    "def-sf-finite-scalar-tensor-pullback-data"
    ],
    "elementary": false
   },
   {
-   "text": "The ordinary tensor comparison in the constructed realization is normalized on pure tensors. Both composites of the ordinary tensor-pullback square send a balanced pure tensor to the tensor of its two inverse-image unit sections. Tensor and sheafification universal properties prove the square. Apply it in each bidegree and use the signed-total coproduct injection equations.",
+   "text": "Use the four checked data laws: the native fixed-coefficient tensor representative normalization, the canonical intrinsic tensor representative normalization, the unary mate-factor equation, and the ordinary chain tensor square. The last two laws apply the two strictly lower stated obligations, without adding any further holes.",
    "uses": [
-    "lem-sf-finite-scalar-tensor-realization"
+    "lem-sf-finite-scalar-tensor-pullback-fixed-data-law",
+    "lem-sf-finite-scalar-tensor-pullback-intrinsic-data-law",
+    "lem-sf-finite-scalar-tensor-pullback-factors-data-law",
+    "lem-sf-finite-scalar-tensor-pullback-chain-data-law"
    ],
    "elementary": false
   },
   {
-   "text": "For the given flat-term K-flat pair, localize this chain square. Substitute the constructed tensor-realization normalization and the canonical intrinsic and fixed tensor-pullback representative equations. The derived adjunction Hom bijections identify the inverse mate with the specified finiteScalarPullbackComparison. Cancel the representative and exact-functor factor isomorphisms. No extension to arbitrary derived inputs is made here.",
+   "text": "Apply ScalarTensorPullbackData.tensorSquare, which is the proved categorical cancellation cube, to those four laws and the given flat K-flat pair. Unfold only the specified data fields and the curried intrinsic comparison to obtain exactly the original target equation.",
    "uses": [
-    "lem-sf-finite-scalar-tensor-realization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-constant-module-derived-projection-identification",
-    "lem-sf-finite-scalar-tensor-pullback-representative-equation"
+    "def-sf-representative-tensor-pullback-data",
+    "lem-sf-representative-tensor-cube",
+    "def-sf-finite-scalar-pullback-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sf-finite-scalar-pullback-comparison",
-  "lem-sfb-constant-module-derived-projection-identification",
-  "lem-sf-finite-scalar-tensor-realization",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sf-finite-scalar-tensor-pullback-representative-equation"
+  "def-sf-finite-scalar-tensor-representative-data",
+  "def-sf-finite-scalar-tensor-pullback-data",
+  "lem-sf-finite-scalar-tensor-pullback-fixed-data-law",
+  "lem-sf-finite-scalar-tensor-pullback-intrinsic-data-law",
+  "lem-sf-finite-scalar-tensor-pullback-factors-data-law",
+  "lem-sf-finite-scalar-tensor-pullback-chain-data-law",
+  "def-sf-representative-tensor-pullback-data",
+  "lem-sf-representative-tensor-cube",
+  "def-sf-finite-scalar-pullback-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "W7",
+  "group": "B3",
   "date": "2026-10-27",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 and 07A6; representative tensor square in step 3 of lem-sf-finite-scalar-tensor-pullback-comparison"
+  "place": "Tags 07A4 and 07A6; actual representative cancellation proof"
  },
  "mathlib_searches": [
   {
@@ -128,9 +134,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H9",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261027T123453-L-2303046",
+  "landing": "20261027T205758-L-1615427",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

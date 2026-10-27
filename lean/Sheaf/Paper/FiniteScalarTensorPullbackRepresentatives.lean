@@ -6,7 +6,10 @@ Authors: SHEAF group W7
 module
 
 public import Sheaf.Paper.FiniteScalarTensorRealization
-import Sheaf.Paper.FiniteScalarTensorPullbackRepresentativeEquation
+import Sheaf.Paper.FiniteScalarTensorPullbackFixedDataLaw
+import Sheaf.Paper.FiniteScalarTensorPullbackIntrinsicDataLaw
+import Sheaf.Paper.FiniteScalarTensorPullbackFactorsDataLaw
+import Sheaf.Paper.FiniteScalarTensorPullbackChainDataLaw
 
 /-! # The normalized scalar tensor square on resolving pairs
 
@@ -42,6 +45,29 @@ attribute [local instance 4000] Preadditive.preadditiveHasZeroMorphisms
 attribute [local instance 30000] SheafOfModules.instPreadditive
   HomologicalComplex.instPreadditive CategoryTheory.functorCategoryPreadditive
   Preadditive.preadditiveHasZeroMorphisms Functor.preservesZeroMorphisms_of_additive
+
+attribute [local irreducible] SheafOfModules.monoidalCategory
+  AlgebraicGeometry.Scheme.proEtaleCanonicalTensorComparison
+  AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotalIso
+  AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotal
+  AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback
+  AlgebraicGeometry.Scheme.proEtaleRingModulePullback
+attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
+  CategoryTheory.Functor.mapHomologicalComplex
+
+attribute [local implicit_reducible] WeilConjectures.finiteScalarTensorRepresentativeData
+
+attribute [local irreducible] DerivedCategory.Q DerivedCategory.Qh
+  CategoryTheory.Functor.mapDerivedCategory
+  AlgebraicGeometry.Scheme.sfIntrinsicModuleEquivalence
+  AlgebraicGeometry.ProEtale.derivedTensor
+attribute [local implicit_reducible] AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence
+  CategoryTheory.Equivalence.mapDerivedCategory
+
+attribute [local implicit_reducible] WeilConjectures.finiteScalarTensorPullbackData
+
+attribute [local implicit_reducible] WeilConjectures.finiteScalarFixedTensorDataForCoefficients
+  WeilConjectures.finiteScalarFixedPullbackDataForCoefficients
 
 namespace WeilConjectures
 
@@ -101,6 +127,15 @@ theorem finiteScalarTensorPullback_onRepresentatives
         ((finiteScalarCurriedTensorPullback R p aX aY).app (EY.obj M)).app (EY.obj N) ≫
         ((curry.obj aX.tensor).map ((finiteScalarPullbackComparison R p).hom.app M)).app _ ≫
         ((curry.obj aX.tensor).obj _).map
-          ((finiteScalarPullbackComparison R p).hom.app N)  := by sorry
+          ((finiteScalarPullbackComparison R p).hom.app N) := by
+  let S := finiteScalarTensorPullbackData R p aX aY
+  have h := ScalarTensorPullbackData.tensorSquare S
+    (finiteScalarTensorPullback_fixedLaw R p aX aY)
+    (finiteScalarTensorPullback_intrinsicLaw R p aX aY)
+    (finiteScalarTensorPullback_factorsLaw R p aX aY)
+    (finiteScalarTensorPullback_chainLaw R p aX aY) P Q _hp _hq
+  simpa only [S, finiteScalarTensorPullbackData, finiteScalarTensorRepresentativeData,
+    finiteScalarFixedTensorDataForCoefficients, finiteScalarFixedPullbackDataForCoefficients,
+    finiteScalarCurriedTensorPullback, ProEtale.leftDerivedUpperStarDerivedTensor] using h
 
 end WeilConjectures

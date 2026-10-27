@@ -1,0 +1,101 @@
+{
+ "id": "def-sf-representative-tensor-ordinary-pullback-law",
+ "kind": "definition",
+ "title": "Ordinary tensor pullback law",
+ "statement": "Name the ordinary chain tensor square for four categories, their tensor functors, two coefficient realizations, two pullbacks, the inverse-mate isomorphism, and their ordinary tensor maps. This is the equality of the two composites on every pair of objects, with no localization or derived tensor models.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Name the ordinary chain tensor square for four categories, their tensor functors, two coefficient realizations, two pullbacks, the inverse-mate isomorphism, and their ordinary tensor maps. This is the equality of the two composites on every pair of objects, with no localization or derived tensor models.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Name the ordinary chain tensor square",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RepresentativeTensorOrdinaryPullbackLaw",
+  "file": "lean/Sheaf/Paper/RepresentativeTensorOrdinaryPullbackLaw.lean",
+  "declaration": "WeilConjectures.tensorOrdinaryPullbackLaw",
+  "statement": "def tensorOrdinaryPullbackLaw\n    {K H K' H' : Type*} [Category K] [Category H] [Category K'] [Category H']\n    (tY : K × K ⥤ K) (tX : H × H ⥤ H)\n    (tY' : K' × K' ⥤ K') (tX' : H' × H' ⥤ H')\n    (U : K ⥤ K') (V : H ⥤ H') (A : K ⥤ H) (B : K' ⥤ H')\n    (c : U ⋙ B ≅ A ⋙ V)\n    (mF : tY ⋙ A ⟶ (A.prod A) ⋙ tX)\n    (bY : tY ⋙ U ⟶ (U.prod U) ⋙ tY')\n    (bX : tX ⋙ V ⟶ (V.prod V) ⋙ tX')\n    (mG : tY' ⋙ B ⟶ (B.prod B) ⋙ tX') : Prop",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.tensorOrdinaryPullbackLaw"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

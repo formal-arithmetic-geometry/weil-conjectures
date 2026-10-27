@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-finite-scalar-pullback-representative-factors",
+ "kind": "statement",
+ "title": "Unary normalization of the derived scalar inverse mate",
+ "statement": "For finite R, p:X→Y, and any fixed-scalar cochain complex P on Y, the specified derived inverse mate [def-sf-finite-scalar-pullback-comparison] agrees with the ordinary inverse mate [def-sf-finite-scalar-ordinary-pullback-comparison] after localization, via the exact-derived factor isomorphisms. Precisely, E_X(f_P);e_X(AP);Q(c_P inverse) equals alpha_P inverse;G(e_Y(P));g_(UP), where f,g are the fixed and intrinsic pullback factor isomorphisms, e_X,e_Y are realization factors, and c is the termwise ordinary mate. No tensor product or choice of tensor model occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 00YV, 07A4 and 07A6; Unary normalization of the derived scalar inverse mate"
+ },
+ "stmt_deps": [
+  "def-sf-finite-scalar-pullback-comparison",
+  "def-sf-finite-scalar-ordinary-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The fixed inverse image is exact, so compose its left-derived-to-exact-derived isomorphism with mapDerivedCategoryFactors to construct f, without choosing any witness.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary comparison is the inverse mate of the section-normalized right comparison. The derived inverse right comparison satisfies its all-complex unit normalization. Apply the exact-derived mate formula and uniqueness of mates to identify the localized ordinary mate with the specified derived mate. Insert the two exact-derived factors to give the displayed unary equation.",
+   "uses": [
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "def-sf-finite-scalar-pullback-comparison",
+    "lem-pur-exact-derived-mate",
+    "lem-finite-realization-direct-image-unit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "def-sf-finite-scalar-pullback-comparison",
+  "lem-pur-exact-derived-mate",
+  "lem-finite-realization-direct-image-unit-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Representative tensor square, ordinary and localization steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Unary normalization of the derived scalar inverse mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarPullbackRepresentativeFactors",
+  "file": "lean/Sheaf/Paper/FiniteScalarPullbackRepresentativeFactors.lean",
+  "declaration": "WeilConjectures.finiteScalarPullback_representative_factors",
+  "statement": "theorem finiteScalarPullback_representative_factors\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (P : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :\n    (sfIntrinsicDerivedEquivalence X R).functor.map\n        ((finiteScalarFixedPullbackFactors R p).hom.app P) ≫\n      (sfIntrinsicModuleEquivalence X R).functor.mapDerivedCategoryFactors.hom.app\n        (((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex\n          (.up ℤ)).obj P) ≫\n      DerivedCategory.Q.map ((finiteScalarComplexPullbackComparison R p).inv.app P) =\n    (finiteScalarPullbackComparison R p).inv.app (DerivedCategory.Q.obj P) ≫\n      (proEtaleConstantRingDerivedPullback R p).map\n        ((sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app P) ≫\n      (proEtaleRingDerivedPullbackFactors p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).hom.app\n          (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarFixedPullbackFactors",
+   "WeilConjectures.finiteScalarPullback_representative_factors"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

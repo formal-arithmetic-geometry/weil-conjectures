@@ -1,0 +1,113 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-representative-data-normalization",
+ "kind": "lemma",
+ "title": "Scalar tensor representative normalization on the shared functors",
+ "statement": "The specified scalar tensor realization obeys its representative equation with the shared fixed tensor representative, shared signed-total object, and shared ordinary total realization transformation. This is the existing scalar representative equation expressed with component-preserving wrappers; no new compatibility hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4, the two descriptions of the signed total tensor"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-shared-representative-equation",
+  "def-sf-finite-scalar-representative-total-realization",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply finiteScalarTensorSharedRepresentative_normalization. Unfold finiteScalarRepresentativeTotalRealization and use finiteScalarRepresentativeTotalRealizationForFunctor_app. Unfold finiteScalarTotalTensorIso; the ordinary total component is the same on both sides.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-shared-representative-equation",
+    "def-sf-finite-scalar-representative-total-realization",
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-shared-representative-equation",
+  "def-sf-finite-scalar-representative-total-realization",
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4, the two descriptions of the signed total tensor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Scalar tensor representative normalization on the shared functors",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorRepresentativeNormalization",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorRepresentativeNormalization.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorRepresentativeData_normalization",
+  "statement": "theorem finiteScalarTensorRepresentativeData_normalization\n    (R : Type u) [CommRing R] [Finite R]\n    {Y : Scheme.{u}}\n    (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R))\n    (P Q : CochainComplex\n      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)\n    (hP : finiteScalarFlatRepresentatives Y R P)\n    (hQ : finiteScalarFlatRepresentatives Y R Q) :\n    (sfIntrinsicDerivedEquivalence Y R).functor.map\n        ((finiteScalarRepresentativeTensorIso\n          (ModuleCat.{u + 1} (ULift.{u + 1} R)) Y\n          (finiteScalarFlatRepresentatives Y R)\n          (finiteScalarFlatRepresentatives_kFlat Y R)).hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫\n      ((finiteScalarTensorRealization Y R aY).hom.app (DerivedCategory.Q.obj P)).app\n        (DerivedCategory.Q.obj Q) ≫\n      aY.tensor.map (Prod.mkHom\n        ((sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app P)\n        ((sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app Q)) =\n    (sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app\n        ((finiteScalarRepresentativeTotalTensor\n          (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R)))).obj (P, Q)) ≫\n      DerivedCategory.Q.map\n        ((finiteScalarRepresentativeTotalRealization R Y).app (P, Q)) ≫\n      aY.representative.hom.app\n        (⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩,\n         ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex\n          (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarTensorRepresentativeData_normalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

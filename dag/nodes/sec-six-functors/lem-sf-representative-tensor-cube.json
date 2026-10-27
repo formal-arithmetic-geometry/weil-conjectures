@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-representative-tensor-cube",
+ "kind": "statement",
+ "title": "Cancellation of normalized tensor representative cubes",
+ "statement": "For two categories of representatives with fixed tensor representatives and two target tensor models, package the exact realization functors, factors, representative isomorphisms and their normalization equations. If a pair of pullback functors has representative equations, its exact factors agree with the ordinary realization mate, and the ordinary chain tensor square commutes, then the specified derived curried tensor square commutes on representatives. This is a general categorical cancellation statement and constructs no new comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6; representative cancellation in the scalar tensor-pullback square"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sf-representative-tensor-fixed-data"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry the realization isomorphisms. Precompose by the source representative isomorphism under the pullback and realization functors. Postcompose by the tensor of the composite localization factors and ordinary mate. Expand both paths using the four representative equations; use naturality of the tensor transformations, realization isomorphisms and localization factors. Substitute the unary factor equation and the chain tensor square, and cancel the two isomorphisms. Convert back to curried components. Treat the ordinary tensor functors as explicit data throughout; all arguments use only naturality, representative equations and cancellation.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex",
+    "def-sf-representative-tensor-fixed-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sf-representative-tensor-fixed-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A6; representative cancellation in the scalar tensor-pullback square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Cancellation of representative tensor compatibility cubes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RepresentativeTensorCube",
+  "file": "lean/Sheaf/Paper/RepresentativeTensorCube.lean",
+  "declaration": "WeilConjectures.finiteScalarRepresentativeTensorCube",
+  "statement": "theorem finiteScalarRepresentativeTensorCube\n    {K H K' H' D E D' E' : Type*}\n    [Category K] [Category H]\n    [Category K'] [Category H'] [Category D] [Category E] [Category D'] [Category E']\n    (Y : ScalarTensorRepresentativeData K K' D D')\n    (X : ScalarTensorRepresentativeData H H' E E')\n    (A : K ⥤ H) (B : K' ⥤ H')\n    (F : D ⥤ E) (G : D' ⥤ E')\n    (f : Y.q ⋙ F ≅ A ⋙ X.q) (g : Y.q' ⋙ G ≅ B ⋙ X.q')\n    (c : Y.U ⋙ B ≅ A ⋙ X.U) (alpha : Y.E ⋙ G ≅ F ⋙ X.E)\n    (hA : ∀ P, Y.P P → X.P (A.obj P))\n    (hB : ∀ P, Y.P' P → X.P' (B.obj P))\n    (mF : Y.t ⋙ A ⟶\n      (A.prod A) ⋙ X.t)\n    (mG : Y.t' ⋙ B ⟶ (B.prod B) ⋙ X.t')\n    (phiF : (postcompose₂.obj F).obj Y.T ⟶\n      (((whiskeringLeft₂ E).obj F).obj F).obj X.T)\n    (phiG : Y.T' ⋙ G ⟶ (G.prod G) ⋙ X.T')\n    (hf : ∀ (P Q : K) (hp : Y.P P) (hq : Y.P Q),\n      F.map (Y.r.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫\n          (phiF.app (Y.q.obj P)).app (Y.q.obj Q) ≫\n          (uncurry.obj X.T).map (Prod.mkHom (f.hom.app P) (f.hom.app Q)) =\n        f.hom.app (Y.t.obj (P, Q)) ≫\n          X.q.map (mF.app (P, Q)) ≫\n          X.r.hom.app (⟨A.obj P, hA P hp⟩, ⟨A.obj Q, hA Q hq⟩))\n    (hg : ∀ (P Q : K') (hp : Y.P' P) (hq : Y.P' Q),\n      G.map (Y.r'.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫\n          phiG.app (Y.q'.obj P, Y.q'.obj Q) ≫\n          X.T'.map (Prod.mkHom (g.hom.app P) (g.hom.app Q)) =\n        g.hom.app (Y.t'.obj (P, Q)) ≫ X.q'.map (mG.app (P, Q)) ≫\n          X.r'.hom.app (⟨B.obj P, hB P hp⟩, ⟨B.obj Q, hB Q hq⟩))\n    (hc : ∀ P : K,\n      X.E.map (f.hom.app P) ≫ X.e.hom.app (A.obj P) ≫ X.q'.map (c.inv.app P) =\n        alpha.inv.app (Y.q.obj P) ≫ G.map (Y.e.hom.app P) ≫ g.hom.app (Y.U.obj P))\n    (ht : ∀ P Q : K,\n      X.U.map (mF.app (P, Q)) ≫ X.b.app (A.obj P, A.obj Q) ≫\n          X.t'.map (Prod.mkHom (c.inv.app P) (c.inv.app Q)) =\n        c.inv.app ((Y.t).obj (P, Q)) ≫\n          B.map (Y.b.app (P, Q)) ≫ mG.app (Y.U.obj P, Y.U.obj Q))\n    (P Q : K) (hp : Y.P P) (hq : Y.P Q) :\n    X.E.map ((phiF.app (Y.q.obj P)).app (Y.q.obj Q)) ≫\n        (X.tau.hom.app (F.obj (Y.q.obj P))).app (F.obj (Y.q.obj Q)) =\n      alpha.inv.app ((Y.T.obj (Y.q.obj P)).obj (Y.q.obj Q)) ≫\n        G.map ((Y.tau.hom.app (Y.q.obj P)).app (Y.q.obj Q)) ≫\n        ((curry.map phiG ≫ (curryObjProdComp G G X.T').hom).app\n          (Y.E.obj (Y.q.obj P))).app (Y.E.obj (Y.q.obj Q)) ≫\n        ((curry.obj X.T').map (alpha.hom.app (Y.q.obj P))).app _ ≫\n        ((curry.obj X.T').obj _).map (alpha.hom.app (Y.q.obj Q))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.ScalarTensorRepresentativeData",
+   "WeilConjectures.finiteScalarRepresentativeTensorCube"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

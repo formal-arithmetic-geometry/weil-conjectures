@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-pullback-chain-data-law",
+ "kind": "lemma",
+ "title": "Ordinary chain normalization in the specified data",
+ "statement": "Unfold the chain law, explicit pullback data, and explicit realization data. Apply finiteScalarTensorPullback_chain_square. The adapter adds no new obligation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "stmt_deps": [
+  "def-sf-finite-scalar-tensor-pullback-data",
+  "lem-sf-finite-scalar-tensor-pullback-chain-square",
+  "lem-sf-finite-scalar-fixed-pullback-data",
+  "def-sf-finite-scalar-fixed-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the chain law, explicit pullback data, and explicit realization data. Apply finiteScalarTensorPullback_chain_square. The adapter adds no new obligation.",
+   "uses": [
+    "def-sf-finite-scalar-tensor-pullback-data",
+    "lem-sf-finite-scalar-tensor-pullback-chain-square",
+    "lem-sf-finite-scalar-fixed-pullback-data",
+    "def-sf-finite-scalar-fixed-tensor-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-tensor-pullback-data",
+  "lem-sf-finite-scalar-tensor-pullback-chain-square",
+  "lem-sf-finite-scalar-fixed-pullback-data",
+  "def-sf-finite-scalar-fixed-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Ordinary chain normalization in the specified data",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackChainDataLaw",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackChainDataLaw.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullback_chainLaw",
+  "statement": "theorem finiteScalarTensorPullback_chainLaw\n    (R : Type u) [CommRing R] [Finite R]\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (aX : ProEtaleTensorModel X (proEtaleConstantRing X R))\n    (aY : ProEtaleTensorModel Y (proEtaleConstantRing Y R)) :\n    (finiteScalarTensorPullbackData R p aX aY).chainLaw",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarTensorPullback_chainLaw"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

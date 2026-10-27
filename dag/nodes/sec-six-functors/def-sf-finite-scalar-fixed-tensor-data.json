@@ -1,0 +1,113 @@
+{
+ "id": "def-sf-finite-scalar-fixed-tensor-data",
+ "kind": "definition",
+ "title": "Native fixed tensor presentation over abstract coefficients",
+ "statement": "Construct TensorFixedRepresentativeData for an abstract coefficient category B and scheme T using DerivedCategory.Q, the supplied K-flat representative class, the shared signed-total functor, the published derived tensor, and finiteScalarRepresentativeTensorIso. The definition is explicit and stores the actual existing maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "stmt_deps": [
+  "def-sf-representative-tensor-fixed-data",
+  "def-sf-finite-scalar-representative-tensor-iso",
+  "lem-sf-finite-scalar-tensor-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Construct TensorFixedRepresentativeData for an abstract coefficient category B and scheme T using DerivedCategory.Q, the supplied K-flat representative class, the shared signed-total functor, the published derived tensor, and finiteScalarRepresentativeTensorIso. The definition is explicit and stores the actual existing maps.",
+   "uses": [
+    "def-sf-representative-tensor-fixed-data",
+    "def-sf-finite-scalar-representative-tensor-iso",
+    "lem-sf-finite-scalar-tensor-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-representative-tensor-fixed-data",
+  "def-sf-finite-scalar-representative-tensor-iso",
+  "lem-sf-finite-scalar-tensor-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Native fixed tensor presentation over abstract coefficients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarFixedTensorData",
+  "file": "lean/Sheaf/Paper/FiniteScalarFixedTensorData.lean",
+  "declaration": "WeilConjectures.finiteScalarFixedTensorDataForCoefficients",
+  "statement": "def finiteScalarFixedTensorDataForCoefficients\n    (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]\n    [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]\n    [Abelian.HasFunctorialFlatResolution B] (T : Scheme.{u})\n    (P : ObjectProperty (CochainComplex (Sheaf (ProEt.topology T) B) ℤ))\n    (hP : ∀ Z, P Z → (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Z) :\n    TensorFixedRepresentativeData (CochainComplex (Sheaf (ProEt.topology T) B) ℤ)\n      (DerivedCategory (Sheaf (ProEt.topology T) B))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarFixedTensorDataForCoefficients"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

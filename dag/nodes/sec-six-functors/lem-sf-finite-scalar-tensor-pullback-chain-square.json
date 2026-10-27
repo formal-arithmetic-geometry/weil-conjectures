@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-finite-scalar-tensor-pullback-chain-square",
+ "kind": "statement",
+ "title": "Scalar pullback tensor square before localization",
+ "statement": "For finite R and p:X→Y, with c the termwise inverse-mate comparison [def-sf-finite-scalar-ordinary-pullback-comparison], the signed-total scalar tensor comparison intertwines the ordinary fixed-scalar and intrinsic pullback tensor maps: V(delta(P,Q));b_X(AP,AQ);t_X(c_P inverse,c_Q inverse) = c_total inverse;B(b_Y(P,Q));m_G(UP,UQ). This is an equality of actual chain maps, for arbitrary P,Q; no derived category or derived tensor model occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 00YV, 07A4 and 07A6; Scalar pullback tensor square before localization"
+ },
+ "stmt_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-sf-finite-scalar-complex-tensor-pullback",
+  "def-sf-finite-scalar-representative-total-realization",
+  "def-sf-representative-tensor-ordinary-pullback-law"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary mate unit equation and the scalar-section direct-image normalization. On a balanced pure tensor both ordinary composites are the tensor of the two inverse-image unit sections. Tensor and sheafification universal properties prove the ordinary square.",
+   "uses": [
+    "def-sf-finite-scalar-ordinary-pullback-comparison",
+    "lem-sf-finite-scalar-tensor-complex",
+    "def-weil-proetale-inverse-image",
+    "def-sf-finite-scalar-representative-total-realization",
+    "def-sf-representative-tensor-ordinary-pullback-law"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the two total chain maps on each bidegree coproduct injection. The summand equations for finiteScalarTotalTensorIso and proEtaleTensorPullbackTotalIso reduce to the ordinary square; the Koszul signs agree.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex",
+    "lem-weil-pbc-proetale-tensor-descent-data",
+    "def-sf-finite-scalar-complex-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The separate preservation theorem is proved from kFlat_map_of_flat_terms: inverse image preserves flat sheaves and colimits. Apply that theorem to the K-flat complex and check the image terms are flat using the flat-preserving functor instance.",
+   "uses": [
+    "lem-sfb-flat-term-kflat-functor",
+    "lem-sfb-proetale-fixed-scalar-pullback-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-ordinary-pullback-comparison",
+  "lem-sf-finite-scalar-tensor-complex",
+  "def-weil-proetale-inverse-image",
+  "def-sf-finite-scalar-representative-total-realization",
+  "lem-weil-pbc-proetale-tensor-descent-data",
+  "def-sf-finite-scalar-complex-tensor-pullback",
+  "lem-sfb-flat-term-kflat-functor",
+  "lem-sfb-proetale-fixed-scalar-pullback-flat",
+  "def-sf-representative-tensor-ordinary-pullback-law"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Representative tensor square, ordinary and localization steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Scalar pullback tensor square before localization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarTensorPullbackChainSquare",
+  "file": "lean/Sheaf/Paper/FiniteScalarTensorPullbackChainSquare.lean",
+  "declaration": "WeilConjectures.finiteScalarTensorPullback_chain_square",
+  "statement": "theorem finiteScalarTensorPullback_chain_square\n    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y) :\n    tensorOrdinaryPullbackLaw\n      (finiteScalarRepresentativeTotalTensor\n        (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))))\n      (finiteScalarRepresentativeTotalTensor\n        (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} R))))\n      (uncurry.obj ((proEtaleOrdinaryTensor Y (proEtaleConstantRing Y R)).map₂HomologicalComplex\n        (.up ℤ) (.up ℤ) (.up ℤ)))\n      (uncurry.obj ((proEtaleOrdinaryTensor X (proEtaleConstantRing X R)).map₂HomologicalComplex\n        (.up ℤ) (.up ℤ) (.up ℤ)))\n      ((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ))\n      ((sfIntrinsicModuleEquivalence X R).functor.mapHomologicalComplex (.up ℤ))\n      ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex\n        (.up ℤ))\n      ((proEtaleRingModulePullback p (proEtaleConstantRing Y R)\n        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).mapHomologicalComplex\n          (.up ℤ))\n      (finiteScalarComplexPullbackComparison R p)\n      (finiteScalarFixedComplexTensorPullbackForCoefficients\n        (ModuleCat.{u + 1} (ULift.{u + 1} R)) p)\n      (finiteScalarRepresentativeTotalRealization R Y)\n      (finiteScalarRepresentativeTotalRealization R X)\n      (finiteScalarIntrinsicComplexTensorPullback R p)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarPullback_preservesRepresentatives",
+   "WeilConjectures.finiteScalarTensorPullback_chain_square"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

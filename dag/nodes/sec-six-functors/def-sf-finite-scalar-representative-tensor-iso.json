@@ -1,0 +1,111 @@
+{
+ "id": "def-sf-finite-scalar-representative-tensor-iso",
+ "kind": "definition",
+ "title": "Fixed-scalar representatives on the shared total functor",
+ "statement": "For a coefficient category B, a scheme T and a specified class P of K-flat cochain sheaves, assemble the published fixed-scalar representative isomorphism component by component with the shared total tensor as its source. Its hom component equals the published representative component, so no localization tensorator or derived tensor data change.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4; signed total tensor and localization tensorators"
+ },
+ "stmt_deps": [
+  "def-sf-finite-scalar-representative-total-tensor",
+  "lem-sf-finite-scalar-tensor-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Apply NatIso.ofComponents to the existing finiteScalarFixedTensorRepresentativeForCoefficients. Its naturality proves the required naturality for the shared total tensor. Unfold the component construction to identify its hom component with the published one. All conversions occur over abstract coefficients.",
+   "uses": [
+    "def-sf-finite-scalar-representative-total-tensor",
+    "lem-sf-finite-scalar-tensor-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-scalar-representative-total-tensor",
+  "lem-sf-finite-scalar-tensor-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4; signed total tensor and localization tensorators"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Fixed-scalar representatives on the shared total functor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarRepresentativeTensorIso",
+  "file": "lean/Sheaf/Paper/FiniteScalarRepresentativeTensorIso.lean",
+  "declaration": "WeilConjectures.finiteScalarRepresentativeTensorIso",
+  "statement": "def finiteScalarRepresentativeTensorIso\n    (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]\n    [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]\n    [Abelian.HasFunctorialFlatResolution B] (T : Scheme.{u})\n    (P : ObjectProperty (CochainComplex (Sheaf (ProEt.topology T) B) ℤ))\n    (hP : ∀ Z, P Z → (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Z) :\n    (P.ι.prod P.ι) ⋙ finiteScalarRepresentativeTotalTensor (Sheaf (ProEt.topology T) B) ⋙\n      DerivedCategory.Q ≅\n      ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q)) ⋙\n        uncurry.obj (ProEtale.derivedTensor B T)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarRepresentativeTensorIso",
+   "WeilConjectures.finiteScalarRepresentativeTensorIso_hom_app"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

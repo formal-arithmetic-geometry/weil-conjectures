@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-finite-scalar-representative-total-tensor",
+ "kind": "definition",
+ "title": "Shared signed-total tensor functor",
+ "statement": "For a preadditive monoidal category C with countable colimits and additive tensor products, construct a shared functor for the existing uncurried raw signed total tensor on cochain complexes. Its data are exactly the existing raw total construction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4; signed total tensor and localization tensorators"
+ },
+ "stmt_deps": [
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof": [
+  {
+   "text": "Define the functor to be uncurry.obj applied to the existing curried tensor map₂HomologicalComplex for the three upward integer complex shapes. All data are explicit existing constructions.",
+   "uses": [
+    "lem-sf-finite-scalar-tensor-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-scalar-tensor-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 07A4; signed total tensor and localization tensorators"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Shared signed-total tensor functor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteScalarRepresentativeTotalTensor",
+  "file": "lean/Sheaf/Paper/FiniteScalarRepresentativeTotalTensor.lean",
+  "declaration": "WeilConjectures.finiteScalarRepresentativeTotalTensor",
+  "statement": "def finiteScalarRepresentativeTotalTensor\n    (C : Type*) [Category.{v} C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]\n    [Limits.HasColimitsOfSize.{0, 0} C] :\n    CochainComplex C ℤ × CochainComplex C ℤ ⥤ CochainComplex C ℤ",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.finiteScalarRepresentativeTotalTensor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

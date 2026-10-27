@@ -19904,3 +19904,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:57 L: merged deliver/B3/Sheaf.Paper.CommonProjectionOpenPullbackTensor (stage 3; reviewer PASS; after a return; landing 20261027T205755-L-1613520 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:57 L: merged deliver/B3/Sheaf.Paper.DiagonalUniformizerLocalChern (stage 3; reviewer PASS; first push; landing 20261027T205756-L-1614119 (proof); batch 20261027T205736; modules 1; new nodes 0)
 - 20:57 L: merged deliver/B3/Sheaf.Paper.EtaleCofinalSupportComposition (stage 3; reviewer PASS; first push; landing 20261027T205757-L-1614849 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 20:57 L: merged deliver/B3/Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives (stage 3; reviewer PASS; first push; landing 20261027T205758-L-1615427 (interface); batch 20261027T205736; modules 24; new nodes 23)

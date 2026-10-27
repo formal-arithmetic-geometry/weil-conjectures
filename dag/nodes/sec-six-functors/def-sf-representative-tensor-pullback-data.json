@@ -1,0 +1,118 @@
+{
+ "id": "def-sf-representative-tensor-pullback-data",
+ "kind": "definition",
+ "title": "Explicit pullback data and their four compatibility laws",
+ "statement": "Construct a record of the actual two pullback functors, their two exact factor isomorphisms, the unary scalar comparison, preservation proofs, and the two tensor comparison transformations. Define its fixed, intrinsic, factors, and chain laws by the four equations of the proved representative cube. The tensorSquare theorem supplies those fields and laws to finiteScalarRepresentativeTensorCube. All data are explicit inputs; no map is selected.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "stmt_deps": [
+  "lem-sf-representative-tensor-cube",
+  "def-sf-representative-tensor-fixed-data",
+  "def-sf-representative-tensor-ordinary-pullback-law"
+ ],
+ "proof": [
+  {
+   "text": "Construct a record of the actual two pullback functors, their two exact factor isomorphisms, the unary scalar comparison, preservation proofs, and the two tensor comparison transformations. Define its fixed, intrinsic, factors, and chain laws by the four equations of the proved representative cube. The tensorSquare theorem supplies those fields and laws to finiteScalarRepresentativeTensorCube. All data are explicit inputs; no map is selected.",
+   "uses": [
+    "lem-sf-representative-tensor-cube",
+    "def-sf-representative-tensor-fixed-data",
+    "def-sf-representative-tensor-ordinary-pullback-law"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-representative-tensor-cube",
+  "def-sf-representative-tensor-fixed-data",
+  "def-sf-representative-tensor-ordinary-pullback-law"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04VK, 07A4 and 07A6; representative tensor cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal equivalence preserves the tensor comparison of left adjoint pullback functors constructed from mates",
+   "results": "Eight mate-equivalence and monoidal-equivalence results, but no specified scalar derived square.",
+   "date": "2026-10-27",
+   "verdict": "Use representative naturality, ordinary mates, and localization tensorators."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "The standard uniqueness-of-left-adjoint API; it does not normalize this derived square.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary comparison with the existing inverse-mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison|ComparisonCompatible",
+   "results": "No matches from Mathlib search. Local searches found the analogous coefficient representative square and canonical pullback normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical representative equations and prove the cancellation argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteScalarTensorPullbackRepresentatives",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-scalar-tensor-pullback-representatives",
+   "place": "Explicit pullback data and their four compatibility laws",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RepresentativeTensorPullbackData",
+  "file": "lean/Sheaf/Paper/RepresentativeTensorPullbackData.lean",
+  "declaration": "WeilConjectures.ScalarTensorPullbackData",
+  "statement": "structure ScalarTensorPullbackData\n    (Y : ScalarTensorRepresentativeData K K' D D')\n    (X : ScalarTensorRepresentativeData H H' E E')\n    extends TensorFixedPullbackData Y.toTensorFixedRepresentativeData\n      X.toTensorFixedRepresentativeData",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.ScalarTensorPullbackData",
+   "WeilConjectures.ScalarTensorPullbackData.fixedLaw",
+   "WeilConjectures.ScalarTensorPullbackData.intrinsicLaw",
+   "WeilConjectures.ScalarTensorPullbackData.factorsLaw",
+   "WeilConjectures.ScalarTensorPullbackData.chainLaw",
+   "WeilConjectures.ScalarTensorPullbackData.tensorSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261027T205758-L-1615427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
