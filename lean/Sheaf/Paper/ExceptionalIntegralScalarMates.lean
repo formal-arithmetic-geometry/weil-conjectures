@@ -43,6 +43,7 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
 set_option synthInstance.maxSize 2048
+set_option linter.unusedVariables false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -648,6 +649,58 @@ structure SystemMates (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
       (Mates.b l Ω d z.change z.allowed).hom.app
         (((tr.reconstruction E false).evaluation z.n).obj N)
 
+/-- Construction of the mate data used by the integral scalar comparison.  This is the
+first strictly smaller part of the construction; the remaining reduction maps are
+recorded separately below because they require the same chosen mate.
+Source: Zheng, Lemma 5.22 and Proposition 5.26.
+(blueprint: lem-sf-exceptional-integral-scalar-mates-data-mates).
+The finite scalar constructions are transported through the specified reconstruction,
+and the completed scalar comparison supplies the integral component.  The resulting
+record contains the fixed scalar functors, their realizations, and all mate equations.
+-/
+theorem exceptionalIntegralScalarMates_data_mates
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (c : Compactification f)
+    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
+    (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
+    (transport : Transported l Ω D hl c operation left) :
+    Nonempty (Mates l Ω c operation left) := by
+  sorry
+
+/-
+The reduction part is a separate strictly smaller assertion: once the scalar mate
+record is fixed, it supplies the reduction comparison at every finite level.
+Source: Zheng, Lemma 5.22 and Proposition 5.26.
+(blueprint: lem-sf-exceptional-integral-scalar-mates-data-reduction).
+The system evaluation and counit maps are obtained by applying the actual finite
+scalar maps to the reconstruction unit and counit; their equations are the transported
+adjunction equations.  The statement is parameterized by the chosen mate record.
+-/
+theorem exceptionalIntegralScalarMates_data_reduction
+    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    {X Y : Scheme.{u}} {f : X ⟶ Y}
+    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (c : Compactification f)
+    (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
+    (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
+    (transport : Transported l Ω D hl c operation left)
+    (d : Mates l Ω c operation left) :
+    Nonempty (∀ (E : FieldStage.{u} l) (n : ℕ),
+      ReductionMates l Ω D hl c operation left transport d E n) := by
+  sorry
+
 /-- Construction of the mate and finite-reduction data used by the integral scalar comparison.
 Source: Zheng, Lemma 5.22 and Proposition 5.26; the finite reduction and completed scalar
 transport steps of the exceptional coefficient construction.
@@ -672,7 +725,10 @@ theorem exceptionalIntegralScalarMates_data
     ∃ d : Mates l Ω c operation left,
       ∃ red : ∀ (E : FieldStage.{u} l) (n : ℕ),
         ReductionMates l Ω D hl c operation left transport d E n, True := by
-  sorry
+  obtain ⟨d⟩ := exceptionalIntegralScalarMates_data_mates l Ω D hl c operation left transport
+  obtain ⟨red⟩ := exceptionalIntegralScalarMates_data_reduction
+    l Ω D hl c operation left transport d
+  exact ⟨d, red, trivial⟩
 
 /-- Construction of the whole-system scalar mate from the integral mate data.
 Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26; the cofinal ramified
