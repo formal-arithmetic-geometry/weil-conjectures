@@ -19850,3 +19850,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:09 L: merged deliver/X2/Sheaf.SixFunctors.RationalVerdierUnit (stage 3; reviewer PASS; first push; landing 20261027T180941-L-3917176 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:10 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ProjectiveBundleRelativelyTrivialLineDescent (stage 3; reviewer PASS; first push; landing 20261027T180943-L-3917545 (proof); batch 20261027T180444; modules 1; new nodes 0)
 - 18:10 L: merged deliver/X5/Sheaf.SixFunctors.IntegralExpressionCanonicalEquations (stage 3; reviewer PASS; first push; landing 20261027T181007-L-3920193 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:10 L: merged deliver/X6/Sheaf.Paper.NativeWeilTensorRingedDerivedSquare (stage 3; reviewer PASS; first push; landing 20261027T181009-L-3920553 (interface); batch 20261027T180444; modules 3; new nodes 2)

@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.NativeWeilTensorRingedModel
 public import Sheaf.Paper.NativeWeilTensorForgetKFlat
 public import Sheaf.Algebra.Homology.RingedForgetTensorDescent
+import Sheaf.Paper.NativeWeilTensorRingedDerivedSquareOrdinary
+import Sheaf.Paper.NativeWeilTensorRingedDerivedSquareNative
 
 /-! # The remaining derived square for the explicit native tensor model
 
@@ -224,6 +226,12 @@ theorem native_weil_tensor_ringed_derived_square
       NativeWeilRingedModelForget k₀ l X T adj chain b A M S SB TB βB cB ordinaryModel t ∧
       Nonempty (RingedForgetTensorTransposition.TensorCoherence
         (nativeWeilRingedMonoidal b SB) S.monoidal
-        (nativeWeilRingedSymmetric b SB βB) β (nativeForget k₀ l X) t) := by sorry
+        (nativeWeilRingedSymmetric b SB βB) β (nativeForget k₀ l X) t) := by
+  obtain ⟨ordinaryModel, hordinary, hnaturality⟩ :=
+    native_weil_tensor_ringed_derived_square_ordinary_data k₀ l X M S β hS
+  obtain ⟨t, hforget, hcoherence⟩ :=
+    native_weil_tensor_ringed_derived_square_native_data k₀ l X T adj e he chain hchain b A M S β
+      hmonoidal hS SB TB βB cB SA TA βA cA d ordinaryModel hordinary hnaturality
+  exact ⟨t, ordinaryModel, hordinary, hnaturality, hforget, hcoherence⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
