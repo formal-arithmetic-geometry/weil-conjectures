@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-tower-composition",
+ "kind": "statement",
+ "title": "Composition of normalized strict scalar pullback towers",
+ "statement": "Let l,E,L,F,iota,j,f:X to Y and P be as in [lem-pur-integral-scalar-pullback-level-composition]. Form the strict reduction towers of [lem-pur-integral-operations-well-defined] and the normalized scalarPullbackTower transformations of [lem-pur-integral-scalar-finite-comparison-models]. The scalar extension by L to F of the E-to-L tower map, followed by the L-to-F tower map and the F-pullback tower map of the ordinary scalar associator on Y, equals the towerwise scalar associator on X followed by the direct E-to-F tower map for j composed with iota. The associator is that of [lem-weil-scalar-extension-composition]. This is an equality of natural transformations between strict towers, before applying Roos.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient coherence for tensor reassociation and adjunction units; normalized finite pullback comparisons and the associated strict reduction towers (Stacks 03EL, 07A4, 08TC)."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-pullback-level-composition",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use extensionality of natural transformations in the tower index n. The chosen strict comparison has at n exactly the chosen normalized scalarPullbackLevel component. Substituting these component equations changes the desired identity to finite-level scalar pullback composition, which holds by the proved finite-level theorem. The tower map induced by the input associator evaluates to the finite pullback of that chain map by the definition of the strict tower functor.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-level-composition",
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-pullback-level-composition",
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "U3 stage 3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient coherence for tensor reassociation and adjunction units; normalized finite pullback comparisons and the associated strict reduction towers (Stacks 03EL, 07A4, 08TC)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of normalized scalar extension comparisons with pullback of sheaf modules",
+   "results": "SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv give generic pullback composition; they do not state the normalized comparison for the completed coefficient reduction tower.",
+   "date": "2026-10-28",
+   "verdict": "Use existing normalized level-map uniqueness in the project."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition compatibility of extension of scalars and pullback comparison via adjunction",
+   "results": "ModuleCat.homEquiv_extendScalarsComp, extendScalarsComp, PresheafOfModules.pullbackComp and generic sheaf pullback lemmas; no theorem for scalarPullbackLevel or scalarPullbackTower.",
+   "date": "2026-10-28",
+   "verdict": "Generic ingredients exist; the specialized identity is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "integralScalarPullback(Level|Tower)Composition|scalarPullbackLevel.*comp; pullbackComp|extendScalarsComp in Mathlib module/sheaf code",
+   "results": "No existing project declaration for either identity. Mathlib has generic scalar and pullback associators. The project already has the normalized finite-level map and strict-tower component equations.",
+   "date": "2026-10-28",
+   "verdict": "Prove finite-level identity by existing uniqueness, then assemble the tower identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarPullbackChainTowerComponent",
+  "group": "U3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The strict-tower assembly of lem-pur-integral-scalar-pullback-chain-tower-component.",
+   "via": [
+    "lem-pur-integral-scalar-pullback-chain-tower-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarPullbackTowerComposition",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackTowerComposition.lean",
+  "declaration": "WeilConjectures.integralScalarPullbackTowerComposition",
+  "statement": "theorem integralScalarPullbackTowerComposition {X Y : AlgebraicGeometry.Scheme.{u}}\n    (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) :\n    Functor.whiskerRight ((scalarPullbackTower l E L ι f).app P)\n        ((integralOrdinaryScalar l L F j X).mapHomologicalComplex (.up ℤ)) ≫\n      (scalarPullbackTower l L F j f).app\n        (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      (integralOperationsPullbackTowerFunctor l F f).map\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι Y F j)\n          (.up ℤ)).hom.app P) =\n    Functor.whiskerLeft ((integralOperationsPullbackTowerFunctor l E f).obj P)\n      ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι X F j)\n        (.up ℤ)).hom) ≫ (scalarPullbackTower l E F (j.comp ι) f).app P",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T210248-L-1681184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T210248-L-1681184",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

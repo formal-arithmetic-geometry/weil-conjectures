@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-level-composition",
+ "kind": "statement",
+ "title": "Composition of normalized finite scalar pullback comparisons",
+ "statement": "Let l be prime, let E,L,F be finite extensions of Q_l with Q_l-algebra maps iota:E to L and j:L to F, let f:X to Y be any scheme morphism, P any cochain complex of completed E-coefficient module sheaves on Y, and n a natural number. Use the normalized finite pullback levels and scalarPullbackLevel of [lem-pur-integral-scalar-finite-comparison-models] and the tensor-normalized ordinary scalar associator of [lem-weil-scalar-extension-composition]. Extending the E-to-L level comparison along L to F, composing with the L-to-F level comparison, and then applying finite F-pullback to the scalar associator on Y equals the scalar associator on X followed by the direct E-to-F level comparison for j composed with iota. This is an equality of chain maps at the fixed finite reduction level n, before Roos completion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient coherence for tensor reassociation and adjunction units; normalized finite pullback comparisons and the associated strict reduction towers (Stacks 03EL, 07A4, 08TC)."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Precompose the iterated comparison with the inverse scalar associator on X and postcompose with the pullback of the associator on Y to form a natural transformation having the same source and target as the direct E-to-F comparison. Evaluate on 1 tensor f-star(1 tensor x). The inverse associator inserts 1 tensor (1 tensor -), functoriality of scalar tensor sections and the two level normalizations give the corresponding double generator on Y, and pullback naturality transports its scalar associator. The associator multiplies the two units, yielding the direct normalized generator. Uniqueness of the normalized finite-level natural transformation identifies the maps. Evaluate at P and cancel the inverse associator. This uses no nonzero object, boundedness or invertibility of the comparison.",
+   "uses": [
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-integral-scalar-pullback-level-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-scalar-pullback-level-construction"
+ ],
+ "proof_origin": {
+  "by": "U3 stage 3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient coherence for tensor reassociation and adjunction units; normalized finite pullback comparisons and the associated strict reduction towers (Stacks 03EL, 07A4, 08TC)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of normalized scalar extension comparisons with pullback of sheaf modules",
+   "results": "SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv give generic pullback composition; they do not state the normalized comparison for the completed coefficient reduction tower.",
+   "date": "2026-10-28",
+   "verdict": "Use existing normalized level-map uniqueness in the project."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition compatibility of extension of scalars and pullback comparison via adjunction",
+   "results": "ModuleCat.homEquiv_extendScalarsComp, extendScalarsComp, PresheafOfModules.pullbackComp and generic sheaf pullback lemmas; no theorem for scalarPullbackLevel or scalarPullbackTower.",
+   "date": "2026-10-28",
+   "verdict": "Generic ingredients exist; the specialized identity is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "integralScalarPullback(Level|Tower)Composition|scalarPullbackLevel.*comp; pullbackComp|extendScalarsComp in Mathlib module/sheaf code",
+   "results": "No existing project declaration for either identity. Mathlib has generic scalar and pullback associators. The project already has the normalized finite-level map and strict-tower component equations.",
+   "date": "2026-10-28",
+   "verdict": "Prove finite-level identity by existing uniqueness, then assemble the tower identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralScalarPullbackChainTowerComponent",
+  "group": "U3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The finite-generator calculation of lem-pur-integral-scalar-pullback-chain-tower-component.",
+   "via": [
+    "lem-pur-integral-scalar-pullback-chain-tower-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarPullbackLevelComposition",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackLevelComposition.lean",
+  "declaration": "WeilConjectures.integralScalarPullbackLevelComposition",
+  "statement": "theorem integralScalarPullbackLevelComposition {X Y : AlgebraicGeometry.Scheme.{u}}\n    (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :\n    (((integralOrdinaryScalar l L F j X).mapHomologicalComplex (.up ℤ)).map\n        ((scalarPullbackLevel l E L ι f n).app P)) ≫\n      (scalarPullbackLevel l L F j f n).app\n        (((integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      (integralOperationsPullbackLevel l F f n).map\n        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι Y F j)\n          (.up ℤ)).hom.app P) =\n    (NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι X F j)\n      (.up ℤ)).hom.app ((integralOperationsPullbackLevel l E f n).obj P) ≫\n        (scalarPullbackLevel l E F (j.comp ι) f n).app P",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T210248-L-1681184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T210248-L-1681184",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
