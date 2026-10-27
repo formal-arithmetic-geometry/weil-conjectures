@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-etale-quotient-tensor-projection-proper-mate",
+ "kind": "statement",
+ "title": "Unbounded proper scalar mate equals the tensor projection",
+ "statement": "For a ring map φ:A→B, a scheme morphism f:Z→W and an arbitrary J in the unbounded derived category on Z, the restricted scalar mate followed by the direct-image restriction comparison equals the canonical scalar/tensor identification, the proper projection map, and the induced tensor/pullback comparison. No bounded-below witness is required.",
+ "stmt_deps": [
+  "def-pur-etale-scalar-mate",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.29(2), Construction 2.26 and Stacks Tag 0GL6; the K-flat normalization of the scalar mate."
+ },
+ "proof": [
+  {
+   "text": "Resolve J by a flat-term K-flat complex, apply the scalar/pullback tensor comparison and the mate counit equation, then descend the equality through the derived localization to arbitrary unbounded J.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.29(2), Construction 2.26 and Stacks Tag 0GL6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived scalar mate restriction equals tensor projection formula",
+   "results": "No exact etale compact-support identity; generic mate and derived tensor declarations only.",
+   "date": "2026-10-28",
+   "verdict": "No whole geometric identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv tensor projection",
+   "results": "Generic mate equivalence only.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarMate_restrict_eq_projection",
+   "results": "Existing bounded theorem found in Sheaf.Paper.PurEtaleScalarMateProjection; it requires Plus witnesses.",
+   "date": "2026-10-28",
+   "verdict": "The new node removes those bounded witnesses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleQuotientTensorProjection",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-quotient-tensor-projection",
+   "place": "First proper-factor calculation in the proof.",
+   "via": [
+    "lem-pur-etale-quotient-tensor-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleQuotientTensorProjectionProperMate",
+  "file": "lean/Sheaf/Paper/EtaleQuotientTensorProjectionProperMate.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarMate_restrict_eq_projection_unbounded",
+  "statement": "theorem scalarMate_restrict_eq_projection_unbounded\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {Z W : Scheme.{u}} (f : Z ⟶ W)\n    (J : DerivedCategoryModule A Z) :\n    (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ).map\n        ((scalarMate φ f).app J) ≫\n        (scalarRestrictionDirectImageMap φ f).app ((scalarExtension φ Z).obj J) =\n      (scalarTensorIso φ W).hom.app (R(lowerStar (ModuleCat.{u + 1} A) f).obj J) ≫\n        ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app J).app\n          (scalarCoefficient φ W) ≫\n        R(lowerStar (ModuleCat.{u + 1} A) f).map\n          (((derivedTensor (ModuleCat.{u + 1} A) Z).obj J).map\n              (scalarCoefficientPullbackIso φ f).hom ≫\n            (scalarTensorIso φ Z).inv.app J)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T205811-L-1617398",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T205811-L-1617398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

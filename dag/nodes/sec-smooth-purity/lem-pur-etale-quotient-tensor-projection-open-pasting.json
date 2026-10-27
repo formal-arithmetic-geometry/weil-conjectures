@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-etale-quotient-tensor-projection-open-pasting",
+ "kind": "statement",
+ "title": "Open-factor pasting for the restricted coefficient projection",
+ "statement": "Assume the unbounded proper scalar mate identity for the open extension of K. Pasting it with the open restriction comparison and the normalized constant coefficient tensor comparison gives the restricted compact-support coefficient projection identity defining exceptionalConstantProjectionMap.",
+ "stmt_deps": [
+  "lem-pur-etale-quotient-tensor-projection-proper-mate",
+  "def-pur-etale-system-projection-data",
+  "lem-pur-etale-exceptional-constant-tensor"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.29(2), Construction 2.26 and Stacks Tag 0GL6; the K-flat normalization of the scalar mate."
+ },
+ "proof": [
+  {
+   "text": "Use naturality of the open coefficient comparison and restriction mate, then expand the signed tensor symmetries; the composite is the generic exceptional projection construction specialized to constants.",
+   "uses": [
+    "lem-pur-etale-quotient-tensor-projection-proper-mate",
+    "def-pur-etale-system-projection-data",
+    "lem-pur-etale-exceptional-constant-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-quotient-tensor-projection-proper-mate",
+  "def-pur-etale-system-projection-data",
+  "lem-pur-etale-exceptional-constant-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.29(2), Construction 2.26 and Stacks Tag 0GL6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived scalar mate restriction equals tensor projection formula",
+   "results": "No exact etale compact-support identity; generic mate and derived tensor declarations only.",
+   "date": "2026-10-28",
+   "verdict": "No whole geometric identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv tensor projection",
+   "results": "Generic mate equivalence only.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarMate_restrict_eq_projection",
+   "results": "Existing bounded theorem found in Sheaf.Paper.PurEtaleScalarMateProjection; it requires Plus witnesses.",
+   "date": "2026-10-28",
+   "verdict": "The new node removes those bounded witnesses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleQuotientTensorProjection",
+  "date": "2026-10-28",
+  "group": "B7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-quotient-tensor-projection",
+   "place": "First proper-factor calculation in the proof.",
+   "via": [
+    "lem-pur-etale-quotient-tensor-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleQuotientTensorProjectionOpenPasting",
+  "file": "lean/Sheaf/Paper/EtaleQuotientTensorProjectionOpenPasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleQuotientTensorProjection_of_proper_mate",
+  "statement": "theorem etaleQuotientTensorProjection_of_proper_mate\n    {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (K : DerivedCategoryModule C X)\n    (hproper :\n      (Sheaf.derivedRestrictScalars Y.smallEtaleTopology a).map\n          ((scalarMate a c.g).app\n            ((openImmersionLowerShriek (ModuleCat.{u + 1} C) c.i).mapDerivedCategory.obj K)) ≫\n        (scalarRestrictionDirectImageMap a c.g).app\n          ((scalarExtension a c.Z).obj\n            ((openImmersionLowerShriek (ModuleCat.{u + 1} C) c.i).mapDerivedCategory.obj K)) =\n      (scalarTensorIso a Y).hom.app\n          ((lowerStar (ModuleCat.{u + 1} C) c.g).rightDerivedFunctor.obj\n            ((openImmersionLowerShriek (ModuleCat.{u + 1} C) c.i).mapDerivedCategory.obj K)) ≫\n        ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} C) c.g).app\n          ((openImmersionLowerShriek (ModuleCat.{u + 1} C) c.i).mapDerivedCategory.obj K)).app\n          (scalarCoefficient a Y) ≫\n        (lowerStar (ModuleCat.{u + 1} C) c.g).rightDerivedFunctor.map\n          (((derivedTensor (ModuleCat.{u + 1} C) c.Z).obj\n              ((openImmersionLowerShriek (ModuleCat.{u + 1} C) c.i).mapDerivedCategory.obj K)).map\n              (scalarCoefficientPullbackIso a c.g).hom ≫\n            (scalarTensorIso a c.Z).inv.app\n              ((openImmersionLowerShriek (ModuleCat.{u + 1} C) c.i).mapDerivedCategory.obj K))) :\n  let V := (DerivedCategory.singleFunctor (ModuleCat.{u + 1} C) 0).obj\n    ((ModuleCat.restrictScalars a).obj (ModuleCat.of D D))\n  let e (W : Scheme.{u}) (L : DerivedCategoryModule C W) :=\n    (scalarTensorIso a W).app L ≪≫\n      ((derivedTensor (ModuleCat.{u + 1} C) W).obj L).mapIso\n        ((DerivedCategory.singleFunctor _ 0).mapIso\n          ((constantCommuteCompose W.smallEtaleTopology\n            (ModuleCat.restrictScalars a)).app (ModuleCat.of D D)) ≪≫\n          (Functor.mapDerivedCategorySingleFunctor\n            (constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).symm.app\n              ((ModuleCat.restrictScalars a).obj (ModuleCat.of D D))) ≪≫\n      ((derivedTensorSymmetry (ModuleCat.{u + 1} C) W).app L).app\n        ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} C)).mapDerivedCategory.obj V)\n  (Sheaf.derivedRestrictScalars Y.smallEtaleTopology a).map\n      ((compactScalarMap a c).app K) ≫\n    (SystemProjection.singleRestriction (CommRingCat.ofHom a) c).app\n      ((scalarExtension a X).obj K) ≫\n    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).map\n      (e X K).hom =\n  (e Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K)).hom ≫\n    exceptionalConstantProjectionMap C c V K"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T205811-L-1617398",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T205811-L-1617398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
