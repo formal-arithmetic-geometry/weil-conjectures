@@ -1,0 +1,87 @@
+{
+ "id": "lem-sp-proetale-proper-boundary-closed-restriction",
+ "kind": "statement",
+ "title": "Closed-boundary restriction of the intrinsic extension by zero",
+ "statement": "For a closed immersion z into the affine base and complementary quasi-compact open e, the intrinsic extension by zero from the clopen open h over the open complement restricts to a zero module on the base change of z.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AH and 09BN, disjoint open-closed restriction and base change."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-extension-by-zero",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Base change z and e to P, identify the resulting closed and open immersions, and use the complement equation to show that the pullback of the extension by zero is zero.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-extension-by-zero"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AH and 09BN."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "blueprint": {
+  "is": null,
+  "from": "lem-sp-proetale-proper-boundary-cohomology"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryClosedRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleProperBoundaryClosedRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_proper_boundary_extension_restricts_zero",
+  "statement": "theorem proEtale_proper_boundary_extension_restricts_zero (R : Type u) [CommRing R] {Z E P U : Scheme.{u}} (z : Z ⟶ Spec (CommRingCat.of R)) [IsClosedImmersion z] (e : E ⟶ Spec (CommRingCat.of R)) [IsOpenImmersion e] [QuasiCompact e] (hcomplement : Set.range e = (Set.range z)ᶜ) (p : P ⟶ Spec (CommRingCat.of R)) [IsProper p] (h : U ⟶ pullback p e) [IsOpenImmersion h] (hclosed : IsClosed (Set.range h)) [QuasiCompact (h ≫ pullback.fst p e)] (A : Type u) [CommRing A] [Finite A] (J : proEtaleRingModules U (proEtaleConstantRing U A)) [Injective J] : IsZero ((proEtaleConstantRingPullback A (pullback.snd z p)).obj ((sfIntrinsicExtensionByZero (h ≫ pullback.fst p e) A).obj J))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T234140-L-14030",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T234140-L-14030",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

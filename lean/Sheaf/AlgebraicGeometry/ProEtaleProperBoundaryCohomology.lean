@@ -41,6 +41,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryClosedRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomologyOfClosedRestriction
 
 /-!
 # Boundary cohomology over a w-contractible affine base
@@ -178,6 +180,9 @@ theorem proEtale_proper_boundary_cohomology
           (CategoryTheory.evaluation P.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj
             (op (ProEt.mk (𝟙 P)))).rightDerived q).obj
               ((sfIntrinsicExtensionByZero (h ≫ pullback.fst p e) A).obj J)) := by
-  sorry
+  refine proEtale_proper_boundary_cohomology_of_closed_restriction_zero R hR z e
+    hcomplement hspecializes p h hclosed A J ?_ hetale q hq
+  exact proEtale_proper_boundary_extension_restricts_zero R z e hcomplement p h hclosed A J
+
 
 end AlgebraicGeometry.Scheme
