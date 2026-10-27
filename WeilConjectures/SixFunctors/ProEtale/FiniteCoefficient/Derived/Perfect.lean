@@ -516,8 +516,8 @@ theorem isFiniteLocallyConstant_of_cover
   exact ⟨M, hM, ⟨(upperStarComp _ (f i j) (g i)).app F ≪≫ e⟩⟩
 
 /-- The cohomology sheaves of a complex of finite projective `Λ_W`-modules on the small pro-étale
-site of `W` are locally constant with finitely generated stalks. The complex is `ν^*` of a complex `P'` of
-finite locally constant étale sheaves
+site of `W` are locally constant with finitely generated stalks. The complex is `ν^*` of a
+complex `P'` of finite locally constant étale sheaves
 (`exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract`); as `ν^*` is exact, its
 cohomology sheaves are `ν^*` of those of `P'`, which are finite locally constant. -/
 theorem isFiniteLocallyConstant_homology_of_retract {W : Scheme.{u}}
