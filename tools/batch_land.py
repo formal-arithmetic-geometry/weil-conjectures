@@ -249,7 +249,25 @@ def candidates(cache: dict) -> list[dict]:
             if p.name not in live:
                 p.unlink(missing_ok=True)               # the branch is gone
     out.sort(key=lambda c: (not bool((read_json(marker(c["group"], c["item"])) or {}).get("repair_priority")), c["group"], c["item"]))
-    return out
+    return freeze_filter(out)
+
+
+FROZEN: dict = {}
+
+
+def freeze_filter(cands: list[dict]) -> list[dict]:
+    """2026-10-28 (the human, 02:50 CST): while more than SHEAF_FREEZE_BLOCKED (100) modules are blocked (tools/freeze.py,
+    local/batch/freeze.json) only rework fixes land with the cluster restores; every other delivery waits on its branch,
+    not checked and not returned. FROZEN describes the last filtering (land_batch logs it)."""
+    import freeze
+    st = freeze.state()
+    if not st.get("frozen"):
+        FROZEN.clear()
+        return cands
+    keep, wait = freeze.split(cands)
+    FROZEN.clear()
+    FROZEN.update(blocked=st.get("blocked"), limit=st.get("limit") or freeze.limit(), wait=len(wait), keep=len(keep))
+    return keep
 
 
 def inflight_files() -> set[str]:
@@ -937,6 +955,12 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
         s2ready = pre2.ready()     # checked by the pump at the start of every step
     except Exception as exc:  # noqa: BLE001
         log("stage 2: check pump failed |", repr(exc)[:300]); s2ready = []
+    if FROZEN:
+        note = (f"frozen: {FROZEN['blocked']} blocked > {FROZEN['limit']} (tools/freeze.py, ~/cc1/FREEZE): {FROZEN['wait']} "
+                f"stage-3 and {len(s2ready)} stage-2 deliveries wait on their branches; {len(cands)} rework fix(es) may land")
+        s2ready = []
+        if cache.get("_freeze_note") != note or time.time() - cache.get("_freeze_note_t", 0) > 600:
+            log(note); cache["_freeze_note"], cache["_freeze_note_t"] = note, time.time()
     if not cands and not s2ready:
         return None
     t0 = time.time()
@@ -2852,6 +2876,11 @@ def restore_when_idle(cache: dict, log) -> None:
 def step(cache: dict, log) -> str:
     """One step of the cycle; returns what it did (idle, landed, waiting, verified, triage, returned)."""
     repairs.reconcile()
+    try:
+        import freeze
+        freeze.update(log)       # 2026-10-28: the blocked freeze (more than 100 blocked: only rework fixes land)
+    except Exception as exc:  # noqa: BLE001
+        log("freeze update failed, the last state holds |", repr(exc)[:300])
     restore_when_idle(cache, log)
     # 2026-10-17 (xrhandoff): no dedicated repair service any more; open repair jobs go to the stage-3 queue at once
     # (coord/repairs.txt, see repair_queue.handoff), before counts() could re-take their XR claims.

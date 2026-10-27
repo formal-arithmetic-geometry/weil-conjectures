@@ -32,6 +32,7 @@ Rules (the human, 2026-10-20):
 
 Usage:
   tools/rework.py status              the rows, which are open, which wait for deeper rework, and what they block
+  tools/rework.py blocked [--commit C] [-v]  the blocked count: quarantined modules missing from lean/ (tools/freeze.py)
   tools/rework.py reconcile           drop the rows verified green (refs/heads/sheaf-verified has the original file)
   tools/rework.py release-held [--dry-run]  release the claims on held items (quarantined non-items, rule-4 blocked),
                                       write coord/rework-hold.txt for the dispatcher
@@ -119,6 +120,26 @@ def rework_imports(rows: dict[str, dict]) -> dict[str, set[str]]:
 def landed(m: str) -> bool:
     """a fix has landed: the module is back at its original path (verified or not)"""
     return (ROOT / opath(m)).is_file()
+
+
+def blocked_files(commit: str | None = None) -> list[str]:
+    """2026-10-28 (the human: freeze above 100 blocked, tools/freeze.py): the modules whose work cannot be dispatched,
+    as quarantine/ paths: every quarantined file whose original path (lean/ + the same path) is missing, i.e. its
+    rework row has not landed (a quarantined copy without a row counts too). `commit`: read that commit's tree (a
+    build snapshot) instead of the working tree."""
+    if commit is None:
+        if not QDIR.is_dir():
+            return []
+        q = sorted("quarantine/" + p.relative_to(QDIR).as_posix() for p in QDIR.rglob("*.lean"))
+        return [p for p in q if not (ROOT / ("lean/" + p[len("quarantine/"):])).is_file()]
+    names = set(git("ls-tree", "-r", "-z", "--name-only", commit, "--", "quarantine", "lean").split("\0"))
+    return sorted(p for p in names if p.startswith("quarantine/") and p.endswith(".lean")
+                  and "lean/" + p[len("quarantine/"):] not in names)
+
+
+def blocked_count(commit: str | None = None) -> int:
+    """the number of blocked modules (blocked_files)"""
+    return len(blocked_files(commit))
 
 
 def open_items(rows=None, imports=None) -> list[str]:
@@ -1156,6 +1177,13 @@ def main() -> int:
                     recheck="--recheck-unlocated" in a, recheck_errors="--recheck-errors" in a, from_loop="--from-loop" in a); return 0
     if cmd == "cluster-restore":
         cluster_restore(dry="--dry-run" in a, wait="--wait" in a); return 0
+    if cmd == "blocked":
+        c = a[a.index("--commit") + 1] if "--commit" in a else None
+        fs = blocked_files(c)
+        print(len(fs))
+        if "-v" in a:
+            print("\n".join(fs))
+        return 0
     if cmd == "release-held":
         release_held(apply="--dry-run" not in a); return 0
     if cmd == "status":
