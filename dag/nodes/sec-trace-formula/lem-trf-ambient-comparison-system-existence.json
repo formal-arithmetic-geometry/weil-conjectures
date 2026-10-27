@@ -16,28 +16,72 @@
  ],
  "proof": [
   {
-   "text": "Proof: for each coefficient field and scheme take the whole-system derived reduction\nadjunction with its quotient evaluation comparisons. The right-derived restriction\nand limit construction supplies its natural Roos comparison, normalized on every\nK-injective tower by the ordinary cone. On a flat-term K-flat representative, whole\nsystem pullback of its reduction is the diagram of the pulled-back finite quotient\ncomplexes. Its Roos realization is the defining completed pullback. Derived change\nof rings similarly identifies scalar change of reduction with the diagram of the\nscalar quotient tensors; the balanced association multiplies the two coefficient\nfactors and retains all quotient transitions. These constructions are available\nwithout inverting ell on the base scheme: they concern module sheaves and the\nactual quotient coefficient maps. Descent along K-flat resolutions gives the two\nnormalized primitive models on the ambient categories. For a constructible complete\ninput, normalized reconstruction makes the actual unit invertible. Its counit on\nthe scalarized reduction is invertible by the same normalized quotient tensor\ncalculation. With ell invertible on both schemes, the pullback calculation and\nconstructibility preservation give invertibility of its pullback counit as well.\nChoose these constructions simultaneously over all the field and scheme parameters.\nThis proves existence of the primitive data only; no mixed, scalar-unit, scalar-tower\nor geometric coherence equation is asserted here.",
+   "text": "Choose the existing evaluation calculus for each field and scheme. Its fixed-calculus ordinary and derived completion models construct the K-injective-normalized Roos model via the existing roosModel construction. No ell-invertibility is needed.",
    "uses": [
-    "def-trf-integral-comparison-realization-models",
-    "def-trf-integral-comparison-sequence-systems",
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY and 0941; normalized quotient-complex construction."
-   }
+   "elementary": false
+  },
+  {
+   "text": "For each scheme map, take fixed-calculus models on the source of the reduction. The ordinary quotient pullback tower comparison, followed by the fixed target Roos comparison, is an isomorphism on good complexes. Descend along the existing pullback universal localization. Whole-system adjunction coherence supplies a strict comparison with every tested presentation; naturality and cancellation give its generator and entire derived normalization equations.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-coherent-quotient-model-comparison",
+    "lem-trf-ordinary-quotient-pullback-tower-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For scalar extension use the single-scheme ambient coherent scalar realization theorem for the same chosen source calculus and target Roos model. This supplies only primitive scalar models.",
+   "uses": [
+    "lem-trf-ambient-quotient-scalar-model-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing transported pullback normalization gives normalized pullback reductions on ell-invertible schemes. For scalar extension, repeat the existing scalar normalization argument without its unused ell-invertibility hypothesis: finite balanced association and the strict representative normalization field transport through the unique universal comparison with the specified sequence scalar functor. Apply unrestricted normalized reconstruction to obtain the actual system counits. The model realization maps are isomorphisms, so their reductions followed by those counits are isomorphisms.",
+   "uses": [
+    "stage3-trf-transported-pullback-normalized",
+    "stage3-trf-transported-scalar-normalized",
+    "stage3-pur-finite-extension-association",
+    "stage3-pur-extension-strict-representatives",
+    "lem-pod-unrestricted-normalized-reconstruction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert intrinsic derived completeness to the existing unrestricted completeness using an auxiliary finite field of characteristic p greater than ell. Unrestricted reconstruction gives the actual unit isomorphism on each constructible input. Assemble coefficient and scalar records with classical simultaneous choice.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pod-unrestricted-normalized-reconstruction",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-trf-integral-comparison-realization-models",
-  "def-trf-integral-comparison-sequence-systems",
-  "lem-coef-derived-system-evaluation-calculus"
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-coherent-quotient-model-comparison",
+  "lem-trf-ordinary-quotient-pullback-tower-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-trf-ambient-quotient-scalar-model-existence",
+  "stage3-trf-transported-pullback-normalized",
+  "stage3-trf-transported-scalar-normalized",
+  "stage3-pur-finite-extension-association",
+  "stage3-pur-extension-strict-representatives",
+  "lem-pod-unrestricted-normalized-reconstruction",
+  "lem-sf-derived-complete-legacy-comparison",
+  "def-trf-integral-comparison-realization-models"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Strict quotient model construction and descent; extension of the primitive-model scope beyond the invertible-base indexing of EffectiveComparisonRealizationModels."
+  "place": "J5 2026-10-27: ambient fixed-calculus Roos and pullback construction, scalar-only remaining step, actual normalized reconstruction counits and unit; same primitive system statement."
  },
  "mathlib_searches": [
   {
@@ -102,13 +146,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
+  "reviewer": "C-9945f",
+  "group": "J5",
   "result": "pass",
-  "landing": "20261025T162139-L-324177",
+  "landing": "20261027T180651-L-3888388",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 9945f2d2 delivered files diffed against live 6db8f8a: af4a content (passed) plus ScalarModelUnit `hp hc` (on D3 7530cec) and ScalarModelIteratedStrictCalculation +hcoh binder (on E9 f3f64ed) with change record; all 5 scalar `.normalization` consumers in the clone adapted; 3b 33/33 importers OK (max 44.6 s)"
  }
 }

@@ -2,7 +2,7 @@
  "id": "lem-trf-scalar-model-iterated-strict-calculation",
  "kind": "statement",
  "title": "Iterated scalar realization on a simultaneous strict quotient presentation",
- "statement": "Fix a prime l, finite extensions E,L,F of Q_l, embeddings iota:E to L and j:L to F, and a scheme X. Let SE,SL be reduction/limit calculi, rhoL,rhoF normalized Roos models and bEL,bLF normalized scalar models [def-trf-integral-comparison-realization-models]. Let P be a flat-term K-flat E-complex, and let C,e,kappa be one strict quotient presentation of SE.reduction(Q(P)) [lem-coef-derived-system-evaluation-calculus]. Let q identify the restricted strict scalar extension of C from E to F with the prescribed strict E-to-F quotient tensor tower, with its pure-tensor normalization. Follow the iterated scalar completion and realization route, inserting the actual SL whole-system counit and the specified system scalar associator [lem-trf-quotient-system-mixed-coherence]. Postcompose by the limit image of scalar(e), the universal system scalar counit at C, the normalized rhoF Roos bridge and Roos(q). This equals the successive ordinary scalar counits on P followed by the localized ordinary SHEAF tensor associator [lem-pur-completed-line-tensor-coherence] and the localized strict E-to-F quotient augmentation [lem-weil-finite-free-completed-scalar-comparison]. The exact order is the attached Lean statement. No direct E-to-F realization model or ordinary DERIVED associator occurs in this calculation.",
+ "statement": "Fix a prime l, finite extensions E,L,F of Q_l, embeddings iota:E to L and j:L to F, and a scheme X. Let SE,SL be reduction/limit calculi, rhoL,rhoF normalized Roos models and bEL,bLF normalized scalar models [def-trf-integral-comparison-realization-models]. Let P be a flat-term K-flat E-complex, and let C,e,kappa be one strict quotient presentation of SE.reduction(Q(P)) coherent with the whole-system adjunction [lem-coef-derived-system-evaluation-calculus]. Let q identify the restricted strict scalar extension of C from E to F with the prescribed strict E-to-F quotient tensor tower, with its pure-tensor normalization. Follow the iterated scalar completion and realization route, inserting the actual SL whole-system counit and the specified system scalar associator [lem-trf-quotient-system-mixed-coherence]. Postcompose by the limit image of scalar(e), the universal system scalar counit at C, the normalized rhoF Roos bridge and Roos(q). This equals the successive ordinary scalar counits on P followed by the localized ordinary SHEAF tensor associator [lem-pur-completed-line-tensor-coherence] and the localized strict E-to-F quotient augmentation [lem-weil-finite-free-completed-scalar-comparison]. The exact order is the attached Lean statement. No direct E-to-F realization model or ordinary DERIVED associator occurs in this calculation.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7; normalization refinement of parent steps 8--10, using Stacks 0941 whole-system cone counit. This square is an agent expansion, not stated verbatim in the source."
@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Obtain qEL and its pure-tensor normalization from bEL.normalization on the given presentation. Combine this equation with completedScalarComparison_existsUnique to replace the first comparison/realization after its presentation map by the first ordinary scalar counit followed by the strict E-to-L augmentation and inverse normalized Roos bridge.",
+   "text": "Obtain qEL and its pure-tensor normalization from bEL.normalization on the given whole-system coherent presentation, supplying its coherence witness. Combine this equation with completedScalarComparison_existsUnique to replace the first comparison/realization after its presentation map by the first ordinary scalar counit followed by the strict E-to-L augmentation and inverse normalized Roos bridge.",
    "uses": [
     "def-trf-integral-comparison-realization-models",
     "lem-weil-finite-free-completed-scalar-comparison"
@@ -44,7 +44,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Categorical assembly of original steps 1--3, with separate single-model Roos lift and strict tensor-coordinate statements; original unit route unchanged."
+  "place": "Categorical assembly of original steps 1--3, with separate single-model Roos lift and strict tensor-coordinate statements; original unit route unchanged. J5 repair after af4aa4783: explicit whole-system-coherence hypothesis for the first model normalization; categorical assembly unchanged."
  },
  "mathlib_searches": [
   {
@@ -100,7 +100,7 @@
   "branch": "sheaf-dag",
   "by": "D2",
   "date": "2026-10-27",
-  "statement": "theorem scalarModelIteratedStrictCalculation\n    (SE : CoefficientDerivedSystemCalculus l E X)\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (bEL : IntegralComparisonScalarModel l E L ι X SE ρL)\n    (bLF : IntegralComparisonScalarModel l L F j X SL ρF)\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (C : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (e : SE.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex l E X n).obj P.obj)\n    (hC : CoefficientReductionPresentation l E X SE.toCoefficientDerivedSystemReduction\n      P.obj P.property.1 C e κ)\n    (q : (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l E F (j.comp ι) X).E.mapHomologicalComplex\n          (.up ℤ)).obj C)).asFunctor ≅ (integralScalarTowerFunctor l E F (j.comp ι) X).obj P.obj)\n    (hq : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n        (s : (coefficientSequenceCommRingSheaf l F X).obj.obj (op (n, U.unop)))\n        (x : (P.obj.X i).val.obj U),\n        ((q.hom.app (op n)).f i).val.app U\n          (integralComparisonRestrictedSection l F X\n            ((integralComparisonSequenceScalarModel l E F (j.comp ι) X).E.obj (C.X i)) n U\n            (integralComparisonSequenceTensorSection l E F (j.comp ι) X (C.X i)\n              (op (n, U.unop)) s\n              (integralComparisonSequenceSection l E X (C.X i) n U\n                (((κ n).inv.f i).val.app U\n                  (unrestrictedIntegralTensorSection l E X n (P.obj.X i) U 1 x))))) =\n          integralScalarTensorSection l E F (j.comp ι) X n (P.obj.X i) U s x) :\n    ((completedDerivedScalarExtension l L F j X).map\n        ((completedScalarComparison l E L ι X).app (DerivedCategory.Q.obj P.obj)) ≫\n      (completedScalarComparison l L F j X).app\n        ((integralScalarExtensionOfUniverses l E L ι X).obj (DerivedCategory.Q.obj P.obj)) ≫\n      (integralScalarExtensionOfUniverses l L F j X).map\n        (bEL.realization.hom.app (DerivedCategory.Q.obj P.obj)) ≫\n      bLF.realization.hom.app\n        ((coefficientSequenceLimit l L X).obj\n          ((integralComparisonDerivedSequenceScalar l E L ι X).obj\n            (SE.reduction.obj (DerivedCategory.Q.obj P.obj)))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonDerivedSequenceScalar l L F j X).map\n          (SL.adjunction.counit.app\n            ((integralComparisonDerivedSequenceScalar l E L ι X).obj\n            (SE.reduction.obj (DerivedCategory.Q.obj P.obj))))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonSystemScalarComposition l E L F ι j X).hom.app\n          (SE.reduction.obj (DerivedCategory.Q.obj P.obj)))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonDerivedSequenceScalar l E F (j.comp ι) X).map e.hom) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonSequenceScalarModel l E F (j.comp ι) X).ε.app C) ≫\n      (integralComparisonRoosBridge l F X ρF _).hom ≫\n      DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom) =\n    (completedDerivedScalarExtension l L F j X).map\n        (completedScalarCounit l E L ι X P.obj) ≫\n      completedScalarCounit l L F j X\n        ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ≫\n      DerivedCategory.Q.map\n        ((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j\n          (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P.obj) ≫\n      DerivedCategory.Q.map\n        ((completedScalarChainComparison l E F (j.comp ι) X).app P.obj)"
+  "statement": "theorem scalarModelIteratedStrictCalculation\n    (SE : CoefficientDerivedSystemCalculus l E X)\n    (SL : CoefficientDerivedSystemCalculus l L X)\n    (ρL : IntegralComparisonRoosModel l L X)\n    (ρF : IntegralComparisonRoosModel l F X)\n    (bEL : IntegralComparisonScalarModel l E L ι X SE ρL)\n    (bLF : IntegralComparisonScalarModel l L F j X SL ρF)\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory)\n    (C : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (e : SE.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex l E X n).obj P.obj)\n    (hC : CoefficientReductionPresentation l E X SE.toCoefficientDerivedSystemReduction\n      P.obj P.property.1 C e κ)\n    (hcoh : IsIntegralComparisonPresentationCoherent l E X SE P.obj C e κ)\n    (q : (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj\n        (((integralComparisonSequenceScalarModel l E F (j.comp ι) X).E.mapHomologicalComplex\n          (.up ℤ)).obj C)).asFunctor ≅ (integralScalarTowerFunctor l E F (j.comp ι) X).obj P.obj)\n    (hq : ∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ)\n        (s : (coefficientSequenceCommRingSheaf l F X).obj.obj (op (n, U.unop)))\n        (x : (P.obj.X i).val.obj U),\n        ((q.hom.app (op n)).f i).val.app U\n          (integralComparisonRestrictedSection l F X\n            ((integralComparisonSequenceScalarModel l E F (j.comp ι) X).E.obj (C.X i)) n U\n            (integralComparisonSequenceTensorSection l E F (j.comp ι) X (C.X i)\n              (op (n, U.unop)) s\n              (integralComparisonSequenceSection l E X (C.X i) n U\n                (((κ n).inv.f i).val.app U\n                  (unrestrictedIntegralTensorSection l E X n (P.obj.X i) U 1 x))))) =\n          integralScalarTensorSection l E F (j.comp ι) X n (P.obj.X i) U s x) :\n    ((completedDerivedScalarExtension l L F j X).map\n        ((completedScalarComparison l E L ι X).app (DerivedCategory.Q.obj P.obj)) ≫\n      (completedScalarComparison l L F j X).app\n        ((integralScalarExtensionOfUniverses l E L ι X).obj (DerivedCategory.Q.obj P.obj)) ≫\n      (integralScalarExtensionOfUniverses l L F j X).map\n        (bEL.realization.hom.app (DerivedCategory.Q.obj P.obj)) ≫\n      bLF.realization.hom.app\n        ((coefficientSequenceLimit l L X).obj\n          ((integralComparisonDerivedSequenceScalar l E L ι X).obj\n            (SE.reduction.obj (DerivedCategory.Q.obj P.obj)))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonDerivedSequenceScalar l L F j X).map\n          (SL.adjunction.counit.app\n            ((integralComparisonDerivedSequenceScalar l E L ι X).obj\n            (SE.reduction.obj (DerivedCategory.Q.obj P.obj))))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonSystemScalarComposition l E L F ι j X).hom.app\n          (SE.reduction.obj (DerivedCategory.Q.obj P.obj)))) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonDerivedSequenceScalar l E F (j.comp ι) X).map e.hom) ≫\n      (coefficientSequenceLimit l F X).map\n        ((integralComparisonSequenceScalarModel l E F (j.comp ι) X).ε.app C) ≫\n      (integralComparisonRoosBridge l F X ρF _).hom ≫\n      DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom) =\n    (completedDerivedScalarExtension l L F j X).map\n        (completedScalarCounit l E L ι X P.obj) ≫\n      completedScalarCounit l L F j X\n        ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ≫\n      DerivedCategory.Q.map\n        ((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j\n          (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P.obj) ≫\n      DerivedCategory.Q.map\n        ((completedScalarChainComparison l E F (j.comp ι) X).app P.obj)"
  },
  "proof_deps": [
   "def-trf-integral-comparison-realization-models",
@@ -123,11 +123,55 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E9",
+  "reviewer": "C-9945f",
+  "group": "J5",
   "result": "pass",
-  "landing": "20261027T131449-L-2939324",
+  "landing": "20261027T180651-L-3888388",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 9945f2d2 delivered files diffed against live 6db8f8a: af4a content (passed) plus ScalarModelUnit `hp hc` (on D3 7530cec) and ScalarModelIteratedStrictCalculation +hcoh binder (on E9 f3f64ed) with change record; all 5 scalar `.normalization` consumers in the clone adapted; 3b 33/33 importers OK (max 44.6 s)"
+ },
+ "statement_change": {
+  "by": "J5 stage 2",
+  "date": "2026-10-27",
+  "old_statement": "Fix a prime l, finite extensions E,L,F of Q_l, embeddings iota:E to L and j:L to F, and a scheme X. Let SE,SL be reduction/limit calculi, rhoL,rhoF normalized Roos models and bEL,bLF normalized scalar models [def-trf-integral-comparison-realization-models]. Let P be a flat-term K-flat E-complex, and let C,e,kappa be one strict quotient presentation of SE.reduction(Q(P)) [lem-coef-derived-system-evaluation-calculus]. Let q identify the restricted strict scalar extension of C from E to F with the prescribed strict E-to-F quotient tensor tower, with its pure-tensor normalization. Follow the iterated scalar completion and realization route, inserting the actual SL whole-system counit and the specified system scalar associator [lem-trf-quotient-system-mixed-coherence]. Postcompose by the limit image of scalar(e), the universal system scalar counit at C, the normalized rhoF Roos bridge and Roos(q). This equals the successive ordinary scalar counits on P followed by the localized ordinary SHEAF tensor associator [lem-pur-completed-line-tensor-coherence] and the localized strict E-to-F quotient augmentation [lem-weil-finite-free-completed-scalar-comparison]. The exact order is the attached Lean statement. No direct E-to-F realization model or ordinary DERIVED associator occurs in this calculation.",
+  "old_proof": [
+   {
+    "text": "Obtain qEL and its pure-tensor normalization from bEL.normalization on the given presentation. Combine this equation with completedScalarComparison_existsUnique to replace the first comparison/realization after its presentation map by the first ordinary scalar counit followed by the strict E-to-L augmentation and inverse normalized Roos bridge.",
+    "uses": [
+     "def-trf-integral-comparison-realization-models",
+     "lem-weil-finite-free-completed-scalar-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The given strict quotient presentation C is K-flat: its finite evaluations are quotient extensions of the good P, and componentwise exactness plus the evaluation tensor comparison detect K-flatness on the sequence site. Expand the normalized derived system associator at C through its universal cochain counits. Move the actual SL counit and both scalar comparisons by naturality.",
+    "uses": [
+     "lem-trf-scalar-presentation-kflat",
+     "lem-trf-quotient-system-mixed-coherence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply the strict tensor-coordinate calculation to the transported first augmentation and transported direct augmentation. Apply the single-model zero-shifted Roos lift calculation. Naturality of the Roos bridge then cancels the strict associator and qEF with their inverses, leaving precisely the two ordinary scalar counits followed by the ordinary sheaf associator and direct augmentation.",
+    "uses": [
+     "lem-trf-scalar-model-roos-zero-lift",
+     "lem-trf-scalar-tensor-roos-coordinates",
+     "def-trf-integral-comparison-realization-models"
+    ],
+    "elementary": false
+   }
+  ],
+  "citers": [
+   {
+    "id": "lem-trf-scalar-model-associativity",
+    "holds": true,
+    "note": "The existing coherentPrimitiveReductionPresentation witness is passed; parent associativity statement unchanged."
+   }
+  ],
+  "what": "The first-model normalization requires whole-system coherence, but the old statement supplied only finite-evaluation presentation equations. Add the missing coherence witness; the only caller already has it from the canonical coherent presentation. Recorded with the stage-2 correction schema during the J5 stage-3 repair.",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7; normalization refinement of parent steps 8--10, using Stacks 0941 whole-system cone counit. This square is an agent expansion, not stated verbatim in the source."
+  }
  }
 }

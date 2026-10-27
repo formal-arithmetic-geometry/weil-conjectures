@@ -186,9 +186,9 @@ theorem primitiveQuotientRealizations_unique
     let d := (integralOperationsGoodLocalization l E Y).objObjPreimageIso K
     have hP : β'.realization.hom.app (DerivedCategory.Q.obj P.obj) =
         β.realization.hom.app (DerivedCategory.Q.obj P.obj) := by
-      obtain ⟨C, e, κ, hC⟩ := SY.reductionModel P.obj P.property.1 P.property.2
-      obtain ⟨q, hq, hβ⟩ := β.normalization P C e κ hC
-      obtain ⟨q', hq', hβ'⟩ := β'.normalization P C e κ hC
+      obtain ⟨C, e, κ, hC, hcoh⟩ := coherentPrimitiveReductionPresentation l E SY P
+      obtain ⟨q, hq, hβ⟩ := β.normalization P C e κ hC hcoh
+      obtain ⟨q', hq', hβ'⟩ := β'.normalization P C e κ hC hcoh
       have hfix : q'.inv ≫ q.hom = 𝟙 _ := by
         apply NatTrans.ext
         funext n

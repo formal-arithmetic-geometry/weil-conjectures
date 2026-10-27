@@ -23,7 +23,7 @@ universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  constantSheaf
+  constantSheaf completedIntegralCommRingSheafUnrestricted coefficientSequenceCommRingSheaf
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 

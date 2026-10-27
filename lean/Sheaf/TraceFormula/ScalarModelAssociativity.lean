@@ -9,6 +9,7 @@ public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.CompletedLineTensorCoherence
 public import Sheaf.Paper.QuotientSystemMixedCoherence
 import Sheaf.TraceFormula.ScalarModelIteratedStrictCalculation
+import Sheaf.Paper.CoherentPrimitiveReductionPresentation
 import all Sheaf.Paper.IntegralOperationsWellDefined
 
 /-! # Scalar model normalization before inverting completion
@@ -120,8 +121,8 @@ theorem scalarModelAssociativity
     let : Λ.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E X
     apply Localization.natTrans_ext Λ W
     intro P
-    obtain ⟨C₀, e, κ, hC⟩ := SE.reductionModel P.obj P.property.1 P.property.2
-    obtain ⟨q, hq, hn⟩ := bEF.normalization P C₀ e κ hC
+    obtain ⟨C₀, e, κ, hC, hcoh⟩ := coherentPrimitiveReductionPresentation l E SE P
+    obtain ⟨q, hq, hn⟩ := bEF.normalization P C₀ e κ hC hcoh
     let t := T.map
         ((integralComparisonDerivedSequenceScalar l E F (j.comp ι) X).map e.hom) ≫
       T.map ((integralComparisonSequenceScalarModel l E F (j.comp ι) X).ε.app C₀) ≫
@@ -136,7 +137,7 @@ theorem scalarModelAssociativity
       (bEF.realization.hom.app (DerivedCategory.Q.obj P.obj)) t
     apply (cancel_mono t).1
     have hs := scalarModelIteratedStrictCalculation l E L F ι j X
-      SE SL ρL ρF bEL bLF P C₀ e κ hC q hq
+      SE SL ρL ρF bEL bLF P C₀ e κ hC hcoh q hq
     have hnorm : CompletedLineTensor.IsAssociatorNormalized l E X L ι F j
         (CompletedLineTensor.associatorData l E X L ι F j) := by
       unfold CompletedLineTensor.associatorData

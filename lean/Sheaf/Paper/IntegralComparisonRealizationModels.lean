@@ -978,7 +978,7 @@ structure IntegralComparisonPullbackModel {Y Z : Scheme.{t}} (f : Z ⟶ Y)
   normalization : IsIntegralComparisonPullbackNormalized l E f S ρ realization
 
 
-/-- The same simultaneous quotient-presentation normalization for completed scalar change.
+/-- The same coherent quotient-presentation normalization for completed scalar change.
 Naming this predicate preserves the equation while keeping model projections small.
 Source: Stacks 06YY, 0941
 (blueprint: def-trf-integral-comparison-realization-models). -/
@@ -996,6 +996,7 @@ def IsIntegralComparisonScalarNormalized
         (unrestrictedIntegralFiniteComplex l E X n).obj P.obj),
     CoefficientReductionPresentation l E X S.toCoefficientDerivedSystemReduction
       P.obj P.property.1 C e κ →
+    IsIntegralComparisonPresentationCoherent l E X S P.obj C e κ →
     ∃ q : (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj
         (((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex
           (.up ℤ)).obj C)).asFunctor ≅ (integralScalarTowerFunctor l E L ι X).obj P.obj,
@@ -1030,7 +1031,7 @@ structure IntegralComparisonScalarModel
   /-- Completed scalar extension as realization of whole-system scalar change. -/
   realization : integralScalarExtensionOfUniverses l E L ι X ≅ S.reduction ⋙
     integralComparisonDerivedSequenceScalar l E L ι X ⋙ coefficientSequenceLimit l L X
-  /-- The fixed quotient-map/zero-shifted-coordinate representative normalization. -/
+  /-- The fixed normalization on whole-system coherent quotient presentations. -/
   normalization : IsIntegralComparisonScalarNormalized l E L ι X S ρ realization
 
 

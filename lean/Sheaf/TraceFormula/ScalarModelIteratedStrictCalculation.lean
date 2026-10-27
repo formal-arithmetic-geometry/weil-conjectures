@@ -62,9 +62,9 @@ private theorem assemble_calculation
 
 
 attribute [local irreducible] integralComparisonSequenceScalarModel
-  coefficientSequenceRestriction
+  coefficientSequenceRestriction coefficientConstantTowerLimit
   integralScalarExtensionOfUniverses completedDerivedScalarExtension
-  completedOrdinaryScalarExtension completedScalarCounit
+  completedOrdinaryScalarExtension completedScalarCounit completedOrdinaryScalarComplex
 
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -83,7 +83,11 @@ Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7;
 Stacks 06YY and 0941; steps 1--3 of lem-trf-scalar-model-associativity.
 (blueprint: lem-trf-scalar-model-iterated-strict-calculation).
 
-Proof in words: normalize bEL on the given presentation C,e,kappa and choose
+The presentation is required to be coherent with the whole-system adjunction.
+This requirement fixes its realization before taking the total limit; equality
+only after separate finite derived evaluations does not fix that realization.
+
+Proof in words: normalize bEL on the given coherent presentation C,e,kappa and choose
 its normalized tower isomorphism qEL. The completed scalar comparison formula
 identifies the first realization, followed by the presentation map, with the
 ordinary E-to-L counit and the strict augmentation transported through qEL.
@@ -118,6 +122,7 @@ theorem scalarModelIteratedStrictCalculation
         (unrestrictedIntegralFiniteComplex l E X n).obj P.obj)
     (hC : CoefficientReductionPresentation l E X SE.toCoefficientDerivedSystemReduction
       P.obj P.property.1 C e κ)
+    (hcoh : IsIntegralComparisonPresentationCoherent l E X SE P.obj C e κ)
     (q : (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj
         (((integralComparisonSequenceScalarModel l E F (j.comp ι) X).E.mapHomologicalComplex
           (.up ℤ)).obj C)).asFunctor ≅ (integralScalarTowerFunctor l E F (j.comp ι) X).obj P.obj)
@@ -184,7 +189,7 @@ theorem scalarModelIteratedStrictCalculation
     (.up ℤ)).mapIso a
   let wa := HomologicalComplex.complexOfFunctorsToFunctorToComplex.mapIso w
   let v := A.map e.hom ≫ M.ε.app C
-  obtain ⟨qEL, hqEL, hnEL⟩ := bEL.normalization P C e κ hC
+  obtain ⟨qEL, hqEL, hnEL⟩ := bEL.normalization P C e κ hC hcoh
   let f := (completedScalarChainComparison l E L ι X).app P.obj ≫
     integralOperationsRoosFunctor.map qEL.inv
   let g := (CompletedLineTensor.scalarAssociatorComplex l E X L ι F j

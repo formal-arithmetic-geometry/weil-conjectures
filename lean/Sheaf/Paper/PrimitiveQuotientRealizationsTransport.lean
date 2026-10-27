@@ -124,10 +124,24 @@ private theorem presentation_transport
     (T.adjunction.leftAdjointUniq S.adjunction)
     (integralComparisonDerivedSequenceScalar l E L ι W ⋙ coefficientSequenceLimit l L W)
   normalization := by
-    intro P C e κ hp
+    intro P C e κ hp hc
     let a := T.adjunction.leftAdjointUniq S.adjunction
     have hpT := presentation_transport l E W S T P C e κ hp
-    obtain ⟨q, hq, he⟩ := M.normalization P C (a.app _ ≪≫ e) κ hpT
+    have hcT : IsIntegralComparisonPresentationCoherent l E W T P.obj C
+        (a.app _ ≪≫ e) κ := by
+      unfold IsIntegralComparisonPresentationCoherent at hc ⊢
+      obtain ⟨b, hb, he⟩ := hc
+      refine ⟨b, hb, ?_⟩
+      have hu : T.adjunction.unit.app (DerivedCategory.Q.obj P.obj) ≫
+          (coefficientSequenceLimit l E W).map ((a.app _ ≪≫ e).hom) =
+          S.adjunction.unit.app (DerivedCategory.Q.obj P.obj) ≫
+            (coefficientSequenceLimit l E W).map e.hom := by
+        dsimp only [a, Iso.trans_hom, Iso.app_hom]
+        rw [Functor.map_comp, ← Category.assoc,
+          Adjunction.unit_leftAdjointUniq_hom_app]
+      rw [hu]
+      exact he
+    obtain ⟨q, hq, he⟩ := M.normalization P C (a.app _ ≪≫ e) κ hpT hcT
     refine ⟨q, hq, ?_⟩
     simpa only [Iso.trans_hom, Iso.app_hom, NatTrans.comp_app,
       Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.comp_map,

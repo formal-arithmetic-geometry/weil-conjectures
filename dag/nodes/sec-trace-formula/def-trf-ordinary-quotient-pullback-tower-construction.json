@@ -1,0 +1,125 @@
+{
+ "id": "def-trf-ordinary-quotient-pullback-tower-construction",
+ "kind": "definition",
+ "title": "Canonical strict quotient pullback tower isomorphism",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "For a prime ell, finite E/Q_ell, any scheme map f:X -> Y and ordinary quotient model M on Y [def-trf-completion-unit-models], define the canonical natural isomorphism from M.quotient followed by degreewise sequence pullback and completed-coefficient restriction to the actual integral finite pullback tower [def-a1-integral-finite-pullback-tower]. Take the mate of the direct-image evaluation comparison [lem-trf-ordinary-quotient-pullback-tower-levels], compose with the finite quotient model evaluation, and form degreewise chain isomorphisms. Their inverse-image-unit generator formula and the successor transition theorem assemble a strict tower isomorphism natural in all complexes. This records the existing private comparison construction, with no new choice or existence assertion.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "def-a1-integral-finite-pullback-tower",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-trf-ordinary-quotient-pullback-tower-levels"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), strict finite quotient pullback; sites-cohomology.tex Tags 06YY and 0941, derived adjunction and whole strict tower limit. This is the normalized quotient-system refinement of the original primitive-realization proof, not a verbatim Stacks statement."
+ },
+ "proof": [
+  {
+   "text": "Take the mate of the whole-sequence direct-image evaluation isomorphism under the actual inverse-image adjunctions. The sequence pullback evaluation theorem inverts this mate. Restrict completed coefficients and compose with M.evaluation, then apply degreewise to complexes. The unit mate formula gives the generator equation.",
+   "uses": [
+    "lem-trf-ordinary-quotient-pullback-tower-levels",
+    "lem-sf-sequence-module-pullback-evaluation",
+    "def-trf-completion-unit-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The successor comparison identifies the adjacent transitions on the generator-normalized level maps. NatTrans.ofOpSequence assembles them into a strict tower map, invertible at every level. NatIso.ofComponents and module comparison naturality make it a natural isomorphism in the complex. All construction fields are explicit and proved.",
+   "uses": [
+    "lem-trf-ordinary-quotient-pullback-successor",
+    "def-a1-integral-finite-pullback-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ordinary-quotient-pullback-tower-levels",
+  "lem-sf-sequence-module-pullback-evaluation",
+  "def-trf-completion-unit-models",
+  "lem-trf-ordinary-quotient-pullback-successor",
+  "def-a1-integral-finite-pullback-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "J5 2026-10-27: existing fully proved private construction extracted solely to keep each file within the compile limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of direct image of module sheaves on a coefficient sequence site equals direct image of finite evaluation, identity on sections",
+   "results": "Eight generic module-sheaf hits, including SheafOfModules.pushforwardSections_coe; no project sequence evaluation comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic pushforward section formulas only; existing private proof retained."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Twelve generic componentwise natural-isomorphism hits; NatIso.ofComponents is used by the existing tower construction.",
+   "date": "2026-10-27",
+   "verdict": "Generic construction ingredient, no exact strict quotient tower theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceDirectImage|ordinaryQuotientPullback|integralOperationsPullbackTower",
+   "results": "Zero Mathlib hits. Repository has the original private construction in OrdinaryQuotientPullbackTowerComparison, now extracted verbatim.",
+   "date": "2026-10-27",
+   "verdict": "Retain the existing proved project construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientComparisonSystemExistence",
+  "date": "2026-10-27",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Existing finite-level/tower construction step of the normalized quotient comparison. Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting. Genuine substep: Strict ordinary quotient pullback tower comparison.",
+   "via": [
+    "lem-trf-ordinary-quotient-pullback-tower-comparison",
+    "lem-trf-primitive-quotient-pullback-model-existence",
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryQuotientPullbackTowerConstruction",
+  "file": "lean/Sheaf/Paper/OrdinaryQuotientPullbackTowerConstruction.lean",
+  "declaration": "WeilConjectures.OrdinaryTowerProof.comparison",
+  "statement": "def comparison {X Y : Scheme.{t}} (f : X ⟶ Y) (M : CompletionUnit.OrdinaryModel l E Y) : M.quotient l E Y ⋙ pullTower l E f ≅ integralOperationsPullbackTowerFunctor l E f",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-9945f",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T180651-L-3888388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-9945f",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T180651-L-3888388",
+  "kind": "interface",
+  "note": "independent cc review: 9945f2d2 delivered files diffed against live 6db8f8a: af4a content (passed) plus ScalarModelUnit `hp hc` (on D3 7530cec) and ScalarModelIteratedStrictCalculation +hcoh binder (on E9 f3f64ed) with change record; all 5 scalar `.normalization` consumers in the clone adapted; 3b 33/33 importers OK (max 44.6 s)"
+ }
+}

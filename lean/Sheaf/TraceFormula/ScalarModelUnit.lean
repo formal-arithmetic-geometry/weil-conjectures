@@ -87,7 +87,7 @@ private theorem scalarModelUnit_onGood
     ℕᵒᵖ ⥤ scalarReductionSource l E X).mapDerivedCategoryFactors
   let A := integralComparisonConstantAdjunction l E X
   obtain ⟨C, e, κ, hp, hc⟩ := coherentPrimitiveReductionPresentation l E SE P
-  obtain ⟨q, hq, hn⟩ := bEE.normalization P C e κ hp
+  obtain ⟨q, hq, hn⟩ := bEE.normalization P C e κ hp hc
   rw [IsIntegralComparisonPresentationCoherent] at hc
   obtain ⟨b, hb, hc⟩ := hc
   let D := (m.E.mapHomologicalComplex (.up ℤ)).obj C

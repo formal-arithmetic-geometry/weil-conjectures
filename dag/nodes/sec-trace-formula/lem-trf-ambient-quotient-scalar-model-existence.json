@@ -1,0 +1,130 @@
+{
+ "id": "lem-trf-ambient-quotient-scalar-model-existence",
+ "kind": "statement",
+ "title": "Normalized coherent scalar quotient realization on an arbitrary scheme",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Fix a prime ell, finite extensions E,L of Q_ell and an embedding i:E -> L. For every scheme X, every whole-system derived reduction calculus S for E on X [lem-coef-derived-system-evaluation-calculus] and every K-injective-normalized Roos model rho for L on X, there exists an IntegralComparisonScalarModel for i,X,S,rho [def-trf-integral-comparison-realization-models]. Its natural realization identifies completed scalar extension with whole-system scalar change of S.reduction followed by total derived limit, and has the specified balanced tensor-generator normalization on every whole-system adjunction-coherent quotient presentation of each flat-term K-flat representative. No invertibility hypothesis on ell on X, constructibility, completeness or Tor-amplitude hypothesis is imposed. Site and coefficient universes are independent. This states a single-scheme primitive scalar comparison only, without pullback data, effectivity, simultaneous choices or coherence laws.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0941, derived extension/restriction and lemma-derived-limit-is-ok; strict scalar quotient construction in the common-stage transport argument."
+ },
+ "proof": [
+  {
+   "text": "Take an ordinary quotient model and compatible derived model for S. Whole-system adjunction coherence identifies each presentation with this canonical quotient model by a strict isomorphism before total limit.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-coherent-quotient-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Balanced finite quotient tensor association gives the strict scalar representative and its actual quotient transitions. On generators the association sends (x tensor a) tensor b to x tensor i(a)b. Its inverse inserts the tensor unit. Applying the normalized Roos comparison identifies the scalar realization with the defining completed scalar tower.",
+   "uses": [
+    "stage3-pur-finite-extension-association",
+    "stage3-pur-extension-strict-representatives",
+    "stage3-pur-extension-representative-roos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend this isomorphism through the localization of flat-term K-flat representatives. For an arbitrary coherent presentation transport the strict tensor map along its canonical comparison, then use naturality of the derived change-of-rings counit and Roos comparison. This gives the displayed normalization in the entire derived system; finite evaluation is never assumed faithful.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-trf-coherent-quotient-model-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "lem-trf-coherent-quotient-model-comparison",
+  "stage3-pur-finite-extension-association",
+  "stage3-pur-extension-strict-representatives",
+  "stage3-pur-extension-representative-roos",
+  "lem-weil-integral-scalar-extension-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "J5: scalar part of the strict quotient construction, corrected to whole-system coherent presentations, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of a whole quotient system realizes completed scalar extension with its coherent tensor presentation",
+   "results": "8 hits, including Algebra.Presentation.tensorModelOfHasCoeffsHom and elementary adic completion scalar tower results.",
+   "date": "2026-10-27",
+   "verdict": "No match for the project whole-system scalar functor or its normalized Roos realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between derived scalar extension of quotient diagrams followed by derived limit and completed scalar extension normalized on coherent K-flat presentations",
+   "results": "8 hits, including localCohomology.diagram, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, and generic Tor/Kan extension definitions.",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized quotient scalar realization."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(Roos|realization|completion)|IsIntegralComparisonScalarNormalized",
+   "results": "25 Mathlib hits about scalar restriction and ordinary adic completion; project search found PrimitiveQuotientScalarModelExistence, whose statement requires ell invertible and whose old normalization is disputed. Blueprint searches scalar quotient realization and coherent scalar found no exact claim.",
+   "date": "2026-10-27",
+   "verdict": "No ambient theorem with the corrected whole-system coherence domain."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientComparisonSystemExistence",
+  "date": "2026-10-27",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final common-stage transport paragraph: derive the finite scalar quotient tensors on a simultaneous K-flat representative and realize them by Roos limit.",
+   "via": [
+    "lem-trf-ambient-comparison-system-existence",
+    "lem-trf-integral-pullback-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AmbientQuotientScalarModelExistence",
+  "file": "lean/Sheaf/Paper/AmbientQuotientScalarModelExistence.lean",
+  "declaration": "WeilConjectures.ambientQuotientScalarModel_exists",
+  "statement": "theorem ambientQuotientScalarModel_exists (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t})\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (ρ : IntegralComparisonRoosModel l L X) :\n    Nonempty (IntegralComparisonScalarModel l E L ι X S ρ)",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-9945f",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T180651-L-3888388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-9945f",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T180651-L-3888388",
+  "kind": "interface",
+  "note": "independent cc review: 9945f2d2 delivered files diffed against live 6db8f8a: af4a content (passed) plus ScalarModelUnit `hp hc` (on D3 7530cec) and ScalarModelIteratedStrictCalculation +hcoh binder (on E9 f3f64ed) with change record; all 5 scalar `.normalization` consumers in the clone adapted; 3b 33/33 importers OK (max 44.6 s)"
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "id": "lem-trf-ordinary-quotient-pullback-tower-levels",
+ "kind": "statement",
+ "title": "Direct image of sequence modules commutes with finite evaluation",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "For a prime ell, finite E/Q_ell, arbitrary scheme map f:X -> Y and nonnegative level n, whole-sequence module direct image followed by evaluation at n is naturally isomorphic to finite coefficient-module direct image after evaluating on X. The hom of the comparison is the identity on every underlying section, expressed by HEq. This is the canonical_exists finite-level substep of [lem-trf-ordinary-quotient-pullback-tower-comparison], using the actual whole-sequence site and coefficient maps [def-trf-integral-comparison-sequence-systems]. No residue-characteristic, invertibility, constructibility or completeness condition is imposed.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), strict finite quotient pullback; sites-cohomology.tex Tags 06YY and 0941, derived adjunction and whole strict tower limit. This is the normalized quotient-system refinement of the original primitive-realization proof, not a verbatim Stacks statement."
+ },
+ "proof": [
+  {
+   "text": "Compare the two composite ordinary sheaf-module pushforwards using their composition isomorphisms and the actual equality of the coefficient-ring maps on every section. Their restriction and scalar actions agree, so both maps and inverses are identity on the underlying section types. Compose the comparisons, retaining their HEq formulas. This is the existing proved private canonical_exists construction, not a new obligation.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "J5 2026-10-27: existing fully proved private construction extracted solely to keep each file within the compile limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of direct image of module sheaves on a coefficient sequence site equals direct image of finite evaluation, identity on sections",
+   "results": "Eight generic module-sheaf hits, including SheafOfModules.pushforwardSections_coe; no project sequence evaluation comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic pushforward section formulas only; existing private proof retained."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "Twelve generic componentwise natural-isomorphism hits; NatIso.ofComponents is used by the existing tower construction.",
+   "date": "2026-10-27",
+   "verdict": "Generic construction ingredient, no exact strict quotient tower theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceDirectImage|ordinaryQuotientPullback|integralOperationsPullbackTower",
+   "results": "Zero Mathlib hits. Repository has the original private construction in OrdinaryQuotientPullbackTowerComparison, now extracted verbatim.",
+   "date": "2026-10-27",
+   "verdict": "Retain the existing proved project construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientComparisonSystemExistence",
+  "date": "2026-10-27",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Existing finite-level/tower construction step of the normalized quotient comparison. Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting. Genuine substep: Strict ordinary quotient pullback tower comparison.",
+   "via": [
+    "lem-trf-ordinary-quotient-pullback-tower-comparison",
+    "lem-trf-primitive-quotient-pullback-model-existence",
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryQuotientPullbackTowerLevels",
+  "file": "lean/Sheaf/Paper/OrdinaryQuotientPullbackTowerLevels.lean",
+  "declaration": "WeilConjectures.OrdinaryTowerProof.canonical_exists",
+  "statement": "theorem canonical_exists {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) : ∃ e : integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n ≅ coefficientSequenceEvaluation l E X n ⋙ coefficientProEtaleModuleDirectImage.{t, u} f (CommRingCat.of (ULift.{t + 1} (finiteCoefficientRing l E (n + 1)))), ∀ (M : coefficientSequenceModules l E X) (U : Y.ProEt) (x : ((coefficientSequenceEvaluation l E Y n).obj ((integralComparisonSequenceDirectImage l E f).obj M)).val.obj (op U)), HEq ((e.hom.app M).val.app (op U) x) x",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-9945f",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T180651-L-3888388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-9945f",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T180651-L-3888388",
+  "kind": "interface",
+  "note": "independent cc review: 9945f2d2 delivered files diffed against live 6db8f8a: af4a content (passed) plus ScalarModelUnit `hp hc` (on D3 7530cec) and ScalarModelIteratedStrictCalculation +hcoh binder (on E9 f3f64ed) with change record; all 5 scalar `.normalization` consumers in the clone adapted; 3b 33/33 importers OK (max 44.6 s)"
+ }
+}
