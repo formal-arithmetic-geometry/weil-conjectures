@@ -15,6 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
 
@@ -183,6 +184,8 @@ theorem nonempty_etaleReductionTensorIso (K M : Dᵇc(Y.left)⟦Profinite.padicI
         ((etaleReduction ℓ E n Y).obj K)).obj ((etaleReduction ℓ E n Y).obj M)) :=
   nonempty_etaleReductionTensorIso_of_components ℓ E n K M
 
+-- the coefficient hypotheses on `k` are part of the setting of the statement, unused by the proof
+set_option linter.unusedSectionVars false in
 /-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
 `det-prop-scalar-six-ctf`, (3), for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale
 site (`sk-def-sf-categories`). **Reduction modulo `ℓⁿ` preserves `Dctf`**: for a bounded
@@ -192,6 +195,6 @@ theorem boundedConstructibleFiniteTor_etaleReduction
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     Etale.DerivedCategory.boundedConstructibleFiniteTor (integersModPowCoeff.{u} ℓ E n) Y.left
       ((etaleReduction ℓ E n Y).obj K) :=
-  sorry
+  boundedConstructibleFiniteTor_etaleReduction_of_components ℓ E n K
 
 end AlgebraicGeometry.ProEtale.CondensedRing

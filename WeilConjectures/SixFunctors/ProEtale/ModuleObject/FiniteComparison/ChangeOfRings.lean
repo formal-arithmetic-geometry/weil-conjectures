@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapRingObjMap
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalarsQuotient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
