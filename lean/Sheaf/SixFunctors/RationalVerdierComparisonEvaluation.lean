@@ -6,6 +6,7 @@ Authors: SHEAF group C6
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
+import Sheaf.SixFunctors.RationalVerdierComparisonEvaluationIntegral
 
 /-! # Completed evaluation for normalized scalar comparisons
 
@@ -77,6 +78,9 @@ theorem normalizedExtension_evaluation
       B.evaluation ((scalar l X E L i).obj K) =
     (@rationalTensorScalarComparison l _ E _ _ _ L _ _ _ i X (units D l hl X)).inv.app
         (K, A.dual.obj (op K)) ≫
-      (scalar l X E L i).map (A.evaluation K) ≫ e.omega.hom) := by sorry
+      (scalar l X E L i).map (A.evaluation K) ≫ e.omega.hom)  := by
+  intro K
+  rcases K with ⟨K⟩
+  exact eq_of_heq (normalizedExtension_evaluation_integral D l hl X E L i wE wL A B e hu hb K)
 
 end WeilConjectures.RationalVerdier

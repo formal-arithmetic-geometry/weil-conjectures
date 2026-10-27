@@ -1,0 +1,99 @@
+{
+ "id": "lem-coef-rational-verdier-comparison-evaluation-integral",
+ "kind": "statement",
+ "title": "Evaluation compatibility on integral representatives",
+ "statement": "Under the hypotheses of lem-coef-rational-verdier-comparison-evaluation, for every integral constructible representative K, the completed scalar evaluation square holds as a heterogeneous equality after applying the two prescribed localization normalizations. This is the representative calculation before transporting to an arbitrary raw rational object.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, comparison and evaluation/biduality compatibility; integral representative calculation"
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-finite-extension-models",
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry the internal-Hom comparison and evaluate it on an integral representative. The inverse tensor-Hom adjunction turns the defining homMap into scalar-extended ordinary evaluation, while postcomposition with the canonical u gives the beta map. The completion representative equations identify this composite with the completed scalar tensorator on K-flat models; localization preserves the equality and the endpoint identifications are exactly the HEq normalizations hu and hb.",
+   "uses": [
+    "def-sf-integral-finite-extension-models",
+    "def-sf-integral-finite-extension-core",
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-rational-verdier-data",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-models",
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-rational-verdier-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Paragraph 3, integral representative substep split from the objectwise evaluation proof."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierComparisonEvaluationIntegral",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierComparisonEvaluationIntegral.lean",
+  "declaration": "WeilConjectures.RationalVerdier.normalizedExtension_evaluation_integral",
+  "statement": "theorem normalizedExtension_evaluation_integral\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (i : E →ₐ[Padic l] L)\n    (wE : IntegralFiniteExtension.DualizingDatum l X D hl E)\n    (wL : IntegralFiniteExtension.DualizingDatum l X D hl L)\n    (A : Datum D l hl X E wE) (B : Datum D l hl X L wL)\n    (e : Extension D l hl X E L i wE wL A B)\n    (hu : (HEq e.omega.hom ((sfRationalConstructibleLocalization l L X).map\n    (ObjectProperty.homMk (X := (integralScalar l X E L i).obj wE.omega) (Y := wL.omega)\n      (IntegralFiniteExtension.u l E L i X D hl wE wL)))))\n    (hb : (∀ K : sfIntegralConstructibleCategory l E X,\n    HEq (e.comparison.hom.app (op ((sfRationalConstructibleLocalization l E X).obj K)))\n      ((sfRationalConstructibleLocalization l L X).map\n        (ObjectProperty.homMk\n          (X := (integralScalar l X E L i).obj\n            ((IntegralVerdier.restrictedDual l E X wE.omega.obj A.preserves).obj (op K)))\n          (Y := (IntegralVerdier.restrictedDual l L X wL.omega.obj B.preserves).obj\n            (op ((integralScalar l X E L i).obj K)))\n          (IntegralFiniteExtension.beta l E L i X D hl wE wL A.ordinary B.ordinary\n            K.obj K.property.1))))) :\n    ∀ K : sfIntegralConstructibleCategory l E X, HEq\n      ((tensor D l hl X L).map\n        (Prod.mkHom (𝟙 ((scalar l X E L i).obj\n          ((sfRationalConstructibleLocalization l E X).obj K)))\n          (e.comparison.hom.app (op ((sfRationalConstructibleLocalization l E X).obj K)))) ≫\n        B.evaluation ((scalar l X E L i).obj\n          ((sfRationalConstructibleLocalization l E X).obj K)))\n      ((@rationalTensorScalarComparison l _ E _ _ _ L _ _ _ i X (units D l hl X)).inv.app\n        ((sfRationalConstructibleLocalization l E X).obj K,\n          A.dual.obj (op ((sfRationalConstructibleLocalization l E X).obj K))) ≫\n        (scalar l X E L i).map (A.evaluation\n          ((sfRationalConstructibleLocalization l E X).obj K)) ≫ e.omega.hom)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdierComparisonEvaluation",
+  "date": "2026-10-28",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-verdier-comparison-evaluation",
+   "place": "Paragraph 3: integral representative calculation used by the evaluation step",
+   "via": [
+    "lem-coef-rational-verdier-comparison-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T234355-L-118361",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261027T234355-L-118361",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
