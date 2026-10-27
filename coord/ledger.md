@@ -20052,3 +20052,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:01 L: merged deliver/N3/Sheaf.Paper.FiniteSectionSpecializationScalarCanonical (stage 3; reviewer PASS; first push; landing 20261027T210150-L-1665604 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 21:01 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ProEtaleClopenFlatDetection (stage 3; reviewer PASS; first push; landing 20261027T210151-L-1665875 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 21:01 L: merged deliver/P1/Sheaf.Paper.FiniteModelConstantScalarExtensionCore (stage 3; reviewer PASS; first push; landing 20261027T210152-L-1666318 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 21:01 L: merged deliver/P1/Sheaf.SecSmoothPurity.FiniteGeneralRingLocalTraceExponent (stage 3; reviewer PASS; first push; landing 20261027T210153-L-1666610 (interface); batch 20261027T205736; modules 2; new nodes 1)

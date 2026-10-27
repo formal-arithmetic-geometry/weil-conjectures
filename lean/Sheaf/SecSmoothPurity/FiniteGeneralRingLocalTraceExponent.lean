@@ -7,6 +7,7 @@ module
 public import Sheaf.SecSmoothPurity.FiniteGeneralRingData
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Data
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import Sheaf.SecSmoothPurity.FiniteGeneralRingLocalTraceCore
 
 /-! # Local frame comparison for finite general-ring integration
 
@@ -57,6 +58,16 @@ theorem finiteGeneralRingLocalTraceExponent
           Etale.vectorBundleIntegration N hNpos A hN S hS' d F) ≫
         (Etale.ordinaryFiniteUnitPullback A V.ι).hom =
       Etale.vectorIntegrationLocalTrace M hMpos A hM t D S hS d F V eV := by
-  sorry
+  obtain ⟨tN, DN, _, _⟩ := Etale.exists_affineSpaceTopTrace N hNpos A hN
+  have hnorm : Etale.VectorIntegrationNormalization N hNpos A hN S hS' d F
+      (Etale.vectorBundleIntegration N hNpos A hN S hS' d F) := by
+    unfold Etale.vectorBundleIntegration Etale.vectorIntegrationGluing
+    exact (Etale.existsUnique_vectorIntegrationGluing N hNpos A hN S hS' d F).2.exists.choose_spec.2
+  have hnormV := hnorm tN DN V eV
+  have hcore := finiteGeneralRingLocalTraceExponent_core A M N hMpos hNpos hdiv
+    hM hN S hS hS' d F q b hb tN DN t D V eV
+  simp only [Functor.map_comp]
+  rw [Category.assoc, hnormV]
+  exact hcore
 
 end AlgebraicGeometry.ProEtale
