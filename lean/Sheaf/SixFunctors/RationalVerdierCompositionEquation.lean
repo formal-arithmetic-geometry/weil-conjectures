@@ -6,6 +6,7 @@ module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
 import Sheaf.Paper.SfScalarExtensionComposition
+import Sheaf.SixFunctors.RationalVerdierIntegralCocycle
 
 /-! # Associator equation for rational Verdier comparisons
 
@@ -35,7 +36,8 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 Source: blueprint thm-coef-rational-verdier, proof step 7, composition clause
 (blueprint: lem-coef-rational-verdier-composition).
 
-Proof: localize the integral beta composition equation for the three normalized
+Proof: first use `integral_comparison_cocycle` for the three ordinary presentations,
+then localize the integral beta composition equation for the three normalized
 presentations. The canonical integral tensor associator is natural on pure tensors,
 and additivity extends the equation to all localized morphisms. The three
 `ExtensionProperties` clauses identify each rational comparison with the localized

@@ -20182,3 +20182,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:37 L: merged deliver/A9/Sheaf.Paper.FiniteDirectCounitFixedRealizationTransport (stage 3; reviewer PASS; first push; landing 20261027T233751-L-4110948 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:37 L: merged deliver/A9/Sheaf.Paper.RationalP1FirstTraceTransportCounit (stage 3; reviewer PASS; first push; landing 20261027T233752-L-4111415 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:37 L: merged deliver/A9/Sheaf.Paper.TowerScalarUnitAbelianTransposeSection (stage 3; reviewer PASS; first push; landing 20261027T233753-L-4111751 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:37 L: merged deliver/A9/Sheaf.SixFunctors.RationalVerdierCompositionEquation (stage 3; reviewer PASS; first push; landing 20261027T233754-L-4112111 (interface); batch 20261027T233735; modules 2; new nodes 1)
