@@ -165,10 +165,10 @@ def blocked_targets() -> list[str]:
     return targets
 
 
-def commit_tree(inflight: list[dict], skip: set = frozenset()):
+def commit_tree(inflight: list[dict], skip: set = frozenset(), prune: set = frozenset()):
     """Commit the repository holding the Lean sources, with the previous version of every file of the landings held
-    back (newest first, so that the oldest previous version of a file is the one that stays). Called by snapshot()
-    with coord/.merge.lock held."""
+    back (newest first, so that the oldest previous version of a file is the one that stays), and without the files of
+    `prune` (quarantine_waiters). Called by snapshot() with coord/.merge.lock held."""
     top = run(["git", "-C", str(li.LEAN), "rev-parse", "--show-toplevel"])
     if top.returncode != 0:
         return None
@@ -188,6 +188,12 @@ def commit_tree(inflight: list[dict], skip: set = frozenset()):
                 run(["git", "update-index", "--add", "--cacheinfo", f"100644,{h},{rel}"], cwd=repo)
             else:
                 run(["git", "update-index", "--force-remove", rel], cwd=repo)
+    for path in sorted(prune):
+        try:
+            rel = str((li.LEAN / path).relative_to(repo))
+        except ValueError:
+            continue
+        run(["git", "update-index", "--force-remove", rel], cwd=repo)
     c = run(["git", "commit", "-q", "-m", f"build {ld.now()}"], cwd=repo)
     if c.returncode != 0 and "nothing to commit" not in c.stdout + c.stderr and "nothing added" not in c.stdout + c.stderr:
         print("warning: git commit failed: " + (c.stderr or c.stdout).strip().split("\n")[0])
@@ -203,6 +209,75 @@ def seed_copy():
         (lake / "packages").symlink_to(li.LEAN / ".lake" / "packages")
     if (li.LEAN / ".lake" / "build").is_dir():
         subprocess.run(["cp", "-a", "--reflink=auto", str(li.LEAN / ".lake" / "build"), str(lake / "build")], check=True)
+
+
+QUARANTINE = li.ROOT / "quarantine"
+
+
+def _module_of_rel(rel: str) -> str:
+    return rel[:-len(".lean")].replace("/", ".")
+
+
+def quarantine_waiters(inflight: list[dict], skip: set) -> set:
+    """Paths (relative to lean/) left out of the candidate because the module imports, directly or through modules so
+    left out, a module that is still quarantined (its file is in quarantine/ and not in the candidate). They wait for
+    their import's fix and the cluster restore; they are not built, so they are neither verified nor failing.
+    2026-10-27 (red build 15:04:17Z, retry 1 of 6db8f8a0f6): a held-back landing's previous version put 2747 modules back
+    into the candidate (the merge queue had recorded their move to quarantine/ by 11828f6cc28 as an unrecorded change
+    U-561877-146, after land_rest had landed the restores that wrote them); their imports (RingedForgetTensorTranspositionData
+    and others) were quarantined, so the build failed with "no such file" / "bad import" in ~3000 modules and the
+    red handling moved 2747 importers to quarantine/ again. The candidate = lean/ with the held-back landings' previous
+    versions (the same order as commit_tree and the copy)."""
+    if not QUARANTINE.is_dir():
+        return set()
+    final = {}                       # path -> backup file of its candidate version, or None (absent)
+    for rec in inflight:
+        for f in rec["files"]:
+            if (rec["id"], f["path"]) in skip:
+                continue
+            final[f["path"]] = (ld.BACKUP / rec["id"] / f["path"]) if f["existed"] else None
+
+    qrels = {q.relative_to(QUARANTINE).as_posix() for q in QUARANTINE.rglob("*.lean")}
+    # a held-back version of a module that is in quarantine/ and not in lean/ does not bring it back: it waits too
+    revived = {rel for rel, b in final.items() if b is not None and rel in qrels and not (li.LEAN / rel).is_file()}
+
+    def present(rel: str) -> bool:
+        if rel in revived:
+            return False
+        return final[rel] is not None if rel in final else (li.LEAN / rel).is_file()
+
+    quarantined = {_module_of_rel(rel): rel for rel in qrels if not present(rel)}
+    if not quarantined:
+        return set()
+
+    def text(rel: str) -> str:
+        p = final.get(rel) if rel in final else li.LEAN / rel
+        try:
+            return p.read_text(errors="ignore") if p is not None else ""
+        except OSError:
+            return ""
+
+    dirs = [str(li.LEAN / d) for d in li.library_dirs() if (li.LEAN / d).is_dir()]
+    waiting, absent = set(), set(quarantined)
+    new = set(quarantined)
+    for _ in range(64):
+        if not new:
+            break
+        pats = sorted(new)
+        r = subprocess.run(["grep", "-rlF", "--include=*.lean", "--exclude-dir=.sandbox", "--exclude-dir=.lake",
+                            "-f", "/dev/stdin", *dirs], input="\n".join(pats) + "\n", capture_output=True, text=True)
+        hits = {pathlib.Path(x).relative_to(li.LEAN).as_posix() for x in r.stdout.split("\n") if x}
+        hits |= {rel for rel, b in final.items() if b is not None}      # the held-back versions are not in lean/
+        new = set()
+        for rel in hits:
+            if rel in waiting or not present(rel):
+                continue
+            if li.imports_of(text(rel)) & absent:
+                waiting.add(rel)
+                m = _module_of_rel(rel)
+                if m not in absent:
+                    absent.add(m); new.add(m)
+    return waiting | revived
 
 
 def snapshot(allowed=None):
@@ -291,7 +366,15 @@ def _snapshot(allowed):
         inflight = sorted(ld.records(ld.INFLIGHT) + held, key=lambda r: r["id"], reverse=True)
         _hid = {r["id"] for r in held}
         skip = superseded(held, [r for r in waiting if r["id"] not in _hid]) if held else set()
-        commit = commit_tree(inflight, skip)
+        try:
+            prune = quarantine_waiters(inflight, skip)
+        except Exception as e:   # noqa: BLE001  (the guard never stops a build)
+            prune = set()
+            print(f"{ld.now()} quarantine-waiter scan failed: {e!r}"[:300], flush=True)
+        if prune:
+            print(f"{ld.now()} build copy: {len(prune)} module(s) left out, they import still-quarantined modules (they "
+                  f"wait for the restore): {' '.join(sorted(_module_of_rel(x) for x in prune)[:6])}", flush=True)
+        commit = commit_tree(inflight, skip, prune)
         CLONE.mkdir(parents=True, exist_ok=True)
         r = run(["rsync", "-a", "-i", "--delete", "--exclude=/.lake", "--exclude=/.sandbox", "--exclude=/.quarantine",
                  "--exclude=/.git", f"{li.LEAN}/", f"{CLONE}/"])
@@ -307,6 +390,8 @@ def _snapshot(allowed):
                     shutil.copy2(bk, dst)
                 elif dst.exists():
                     dst.unlink()
+        for path in prune:
+            (CLONE / path).unlink(missing_ok=True)
         included = [r for r in waiting if allowed is None or r["id"] in allowed]
     return commit, included, changed
 
@@ -329,6 +414,19 @@ def packages_ok() -> bool:
         return False
     stamp.write_text(h.hexdigest())
     return True
+
+
+PROJECT_PREFIXES = ("Sheaf.", "WeilConjectures.", "Comparator.", "Weil.")
+_MISSING_IMPORT = re.compile(r"bad import|no such file or directory|object file .* does not exist|unknown module prefix", re.I)
+
+
+def _own_error(text: str, m: str) -> bool:
+    """True when the build log has an error of `m` other than a missing import (its own failure)."""
+    path = m.replace(".", "/") + ".lean"
+    for line in text.split("\n"):
+        if path in line and "error" in line and not _MISSING_IMPORT.search(line):
+            return True
+    return False
 
 
 def failing_modules(log: str) -> list[str]:
@@ -841,8 +939,36 @@ def finish_result(included, commit, text, elapsed, preempted, source_id, red_tre
         return 1
     failing = sorted(set(failing_modules(text)) | {c["module"] for c in checks})
     graph, clean = clone_imports(), []
+    # 2026-10-27 (retry 1 of the red build 15:04:17Z): a module whose source is not in the build copy ("no such file or
+    # directory" for local/buildtree/...) did not fail: something in the candidate imports a module the copy does not
+    # have. That module, and the modules whose only failure is a project import missing from the copy ("bad import"), are
+    # an infrastructure fault of the candidate, not failures of their own: they are not attributed and nothing is taken
+    # out for them (no importer move to quarantine/); they still block their landings from land_rest.
+    missing = {m for m in failing if m.startswith(PROJECT_PREFIXES) and not _clone_file(m)}
+    infra = set(missing)
+    if missing:
+        for m in failing:
+            if m in infra or not _clone_file(m):
+                continue
+            imps = graph.get(m) or set()
+            if {i for i in imps if i.startswith(PROJECT_PREFIXES) and not _clone_file(i)} and not _own_error(text, m):
+                infra.add(m)
+    if infra:
+        real = [m for m in failing if m not in infra]
+        print(f"INFRASTRUCTURE: {len(missing)} module(s) not in the build copy and {len(infra) - len(missing)} importer(s) "
+              f"failing only on them; not attributed, nothing taken out for them: {' '.join(sorted(infra)[:8])}", flush=True)
+        result["infra_missing"] = sorted(infra)
+        if not real:
+            red_trees.pop(source_id, None)
+            ld.write_json(ld.B / 'red-trees.json', red_trees)
+            print("INFRASTRUCTURE failure (the candidate imports modules it does not contain); nothing recorded, the next "
+                  "snapshot leaves the importers of quarantined modules out (quarantine_waiters).", flush=True)
+            return 1
+        failing = real
     try:
-        clean, checks, failing = clean_landings(included, failing, text, checks, graph)
+        # the infrastructure modules did not compile: their landings do not land from this build (land_rest)
+        clean, checks, failing = clean_landings(included, sorted(set(failing) | infra), text, checks, graph)
+        failing = sorted(set(failing) - infra)
         if checks:
             errors = errors + ["error: " + c["message"] for c in checks if "error: " + c["message"] not in errors]
         save_graph(commit, graph)

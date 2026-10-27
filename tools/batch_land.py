@@ -2083,6 +2083,17 @@ def _land_rest(log) -> int:
             blocked |= li.downstream(blocked, graph)
             ok = [open_recs[i] for i in last["clean"] if i in open_recs
                   and not ({f["module"] for f in open_recs[i]["files"]} & blocked)]
+            # 2026-10-27 (red build 14:46:31Z of 6db8f8a0f6): a landing whose file is no longer in lean/ (moved to
+            # quarantine/ or taken out after it landed; 11828f6cc28 moved 2747 restored modules out before that build) did
+            # not compile in this build: its file was not in the copy. Landed from it, its staged version went into the
+            # verified main and came back into the next candidate without its quarantined imports (retry 1: ~3000 "no
+            # such file" / "bad import"). It does not land; it stays open and waits for its file.
+            gone = [r for r in ok if any(not f.get("deleted") and f.get("module") and not (li.LEAN / f["path"]).is_file()
+                                         for f in r["files"])]
+            if gone:
+                log(f"land_rest: {len(gone)} clean landing(s) not landed, their file is no longer in lean/ (quarantined or "
+                    f"taken out since): {' '.join(r['id'] for r in gone[:6])}")
+                ok = [r for r in ok if r not in gone]
             # 2026-10-25 (the human): a landing that broke an importer (importer_blame) does not land; the red handling
             # takes it out
             try:
