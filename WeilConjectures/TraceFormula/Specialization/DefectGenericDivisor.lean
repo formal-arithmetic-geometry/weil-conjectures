@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorPointwise
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 
 /-!
 
@@ -29,7 +29,10 @@ the node follows from the vanishing of `Le^* Ψ_X(L)` near each generic point of
 
 ## Unfinished
 
-`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_isGeneric` is `sorry`ed: it is the
+`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_isGeneric` is reduced, through the
+open–closed triangle `L ≅ j_! Lj^* L` and the lisse generators of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧`
+(`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_of_lowerShriek`), to the sorried
+`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator`: the
 local computation of nearby cycles along the divisor at a codimension-one point (blueprint
 `det-sp-generic-divisor`, proof), which needs finite-coefficient nearby cycles over the trait
 and their comparison with `ℚ̄_ℓ`-coefficients, not available yet.
@@ -141,16 +144,16 @@ theorem exists_isZero_upperStar_nearbyCycles_of_isGeneric (hX : IsNormalScheme X
     (L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hL : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (centreι X I)).obj L))
-    (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
-    (hsupp : ∀ U : X.left.Opens, I.subschemeι ζ ∈ U →
-      ¬ IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (overRestrictι X U)).obj L)) :
+    (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left) :
     ∃ U : (centre X I).left.Opens, ζ ∈ U ∧
       IsZero ((L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦
         Profinite.padicAlgClRingObj ℓ⟧)).obj
         (L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
           (((deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj L.obj))) :=
-  sorry
+  exists_isZero_upperStar_nearbyCycles_of_lowerShriek k' ζ
+    (fun N hN ↦
+      exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator k' hX hh hI N hN ζ hζ)
+    L hL
 
 /-- **Generic vanishing of the defect along a principal divisor** (blueprint
 `det-sp-generic-divisor`, a node of the subsection `sk-lem-tf-sp-generic-divisor`, for
@@ -175,14 +178,8 @@ theorem exists_dense_isZero_specializationDefect (hX : IsNormalScheme X.left)
     (((boundedConstructible _).ι.map_isZero hL).of_iso
       ((boundedConstructibleUpperStarCompatibility _ ℓ (centreι X I)).symm.app _))
   refine genericallyVanishingDefect_of_forall_defectVanishesNear X I k' _ L.obj fun ζ hζ ↦ ?_
-  by_cases hsupp : ∃ U : X.left.Opens, I.subschemeι ζ ∈ U ∧
-      IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
-        (overRestrictι X U)).obj L)
-  · obtain ⟨U, hU, hLU⟩ := hsupp
-    exact defectVanishesNear_of_isZero_restrict k' L ζ U hU hLU
-  push Not at hsupp
   obtain ⟨U, hζU, hU⟩ :=
-    exists_isZero_upperStar_nearbyCycles_of_isGeneric k' hX hh hI L hL ζ hζ hsupp
+    exists_isZero_upperStar_nearbyCycles_of_isGeneric k' hX hh hI L hL ζ hζ
   exact ⟨U, hζU, isZero_restrict_specializationDefect_of_isZero X I k' _ _ L.obj hΨ hU⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
