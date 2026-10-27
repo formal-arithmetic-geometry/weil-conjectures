@@ -19630,3 +19630,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:29 L: merged deliver/NA/lem-sf-native-ordinary-chain-currying (reviewer PASS; first push; new nodes: 0)
 - 16:04 L: returned deliver/J3/Sheaf.SecSmoothPurity.FiniteGeneralRingIntegrationExponent (reviewer RETURN: (reviewer C-833ed, head 833eddcbb) the reviewer passed it, but the landing failed: T MERGED Sheaf.SecSmoothPurity.Finite)
 - 16:16 L: returned deliver/U1/Sheaf.Paper.CompletedAdicSliceScalarComparison (reviewer RETURN: (reviewer C-2d8a5, head 2d8a5d8b2) D1/brief-stage3 §43: the item proof is `have _ := completedAdic_slice_scalarCompariso)
+- 16:25 L: returned deliver/J4/Sheaf.Paper.CompletedPullbackTowerCore (reviewer RETURN: (reviewer C-c4b79, head c4b79b335) Stage3 §4 / roles/worker.md 3: unforced timing split. The merged CompletedPullbackTow)
