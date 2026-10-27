@@ -135,7 +135,8 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 /-- The triangle of compactifications `X' ⟶[𝟙] X' ⟶[g'] X`, `X ⟶[i] Z ⟶[p] Y`,
 `X' ⟶[i'] Z' ⟶[p' ≫ g] Y` of `g'` and `f`, for a compactification `c = (i, p)` of `f` and a
 compactification `c' = (i', p')` of `f'` lying over it along `h : Z' ⟶ Z`. -/
-noncomputable abbrev baseChangeTriangleLeft (c : Compactification f.left) (c' : Compactification f'.left)
+noncomputable abbrev baseChangeTriangleLeft (c : Compactification f.left)
+    (c' : Compactification f'.left)
     (h : c'.overObj ⟶ c.overObj) (hi : IsPullback g' c'.overI c.overI h)
     (hp : IsPullback h c'.overG c.overG g) [IsProper g.left] [IsProper g'.left]
     (w : g' ≫ f = f' ≫ g) :
@@ -333,7 +334,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv'
   have hi := c.overBaseChange_isPullback_i sq
   have hp := c.overBaseChange_isPullback_g sq
   refine Eq.symm ((Equiv.symm_apply_eq _).2 ?_)
-  refine Eq.trans ?_ (mateEquiv_ofNatIsoRight _ _ _ _ _).symm
+  refine Eq.trans ?_ (congrArg TwoSquare.natTrans (mateEquiv_ofNatIsoRight _ _ _ _ _)).symm
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq c
     (c.ofIsPullback sq.overLeft) (c.overBaseChangeFst sq) hi hp]
   have hm := mateEquiv_mk_whiskerRight_comp_comp_whiskerLeft

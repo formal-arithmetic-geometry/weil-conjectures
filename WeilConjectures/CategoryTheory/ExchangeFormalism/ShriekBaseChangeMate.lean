@@ -5,6 +5,7 @@ Authors: Weil conjectures project
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Coherence
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.CompositionCoherence
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Shriek
@@ -42,27 +43,6 @@ section OfNatIsoRight
 
 variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
   {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ R₁' : D ⥤ C} {L₂ : E ⥤ F} {R₂ R₂' : F ⥤ E}
-
-/-- The mate for adjunctions transported along isomorphisms of the right adjoints is the mate
-for the original adjunctions, conjugated by these isomorphisms. -/
-lemma mateEquiv_ofNatIsoRight (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : R₁ ≅ R₁')
-    (e₂ : R₂ ≅ R₂') (α : TwoSquare G L₁ L₂ H) :
-    (mateEquiv (adj₁.ofNatIsoRight e₁) (adj₂.ofNatIsoRight e₂) α).natTrans =
-      Functor.whiskerRight e₁.inv G ≫ (mateEquiv adj₁ adj₂ α).natTrans ≫
-        Functor.whiskerLeft H e₂.hom := by
-  ext d
-  have h₁ := α.natTrans.naturality (e₁.inv.app d)
-  simp only [Functor.comp_map] at h₁
-  simp only [Functor.comp_obj, mateEquiv_apply, Adjunction.ofNatIsoRight_unit,
-    Adjunction.ofNatIsoRight_counit, Functor.whiskerLeft_comp, Functor.whiskerRight_comp,
-    Category.assoc, NatTrans.comp_app, Functor.id_obj, Functor.rightUnitor_inv_app,
-    Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.associator_hom_app,
-    Functor.whiskerRight_app, Functor.comp_map, Functor.leftUnitor_hom_app, Category.comp_id,
-    Category.id_comp]
-  rw [← R₂'.map_comp_assoc (α.natTrans.app _), ← h₁, R₂'.map_comp_assoc,
-    ← e₂.hom.naturality_assoc, ← adj₂.unit_naturality_assoc, ← R₂'.map_comp, ← e₂.hom.naturality,
-    Functor.map_comp_assoc]
-
 
 /-- Whiskering the sides `G` and `H` of a 2-square `G ⋙ L₂ ⟶ L₁ ⋙ H` corresponds to whiskering
 the sides of its mate `R₁ ⋙ G ⟶ H ⋙ R₂`, as an equation of natural transformations. -/
@@ -239,7 +219,6 @@ lemma compIso_shriekBaseChangeTriangleRight_inv_app (M : F.obj X') :
   dsimp only
   rw [F.exchange_id_vert_app, F.shComp'_id_right_inv_app]
   simp [← Functor.map_comp, shriek]
-
 
 /-- **The mate of the compact-support exchange map is a composite of composition
 isomorphisms**: under `g'^* ⊣ g'_*` and `g^* ⊣ g_*`, the mate of the compact-support exchange
