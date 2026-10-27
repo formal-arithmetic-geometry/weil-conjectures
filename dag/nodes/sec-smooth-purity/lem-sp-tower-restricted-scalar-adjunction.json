@@ -1,0 +1,166 @@
+{
+ "id": "lem-sp-tower-restricted-scalar-adjunction",
+ "kind": "statement",
+ "title": "Normalized restriction/direct-image comparison and the ordinary integral scalar adjunction",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, a scheme morphism f:X to Y, tower geometry b,g [def-sp-tower-shriek-data], Chern data cY,cX [def-sp-tower-class-chern], and integral inverse-image data d [def-sp-tower-chern-pullback-intermediate]. Write resT for restriction along coefficientSystemMap [def-sp-tower-class-coefficients], UT for the recorded integral Forget functor [def-sp-tower-class-systems], and f_*^Ab for componentwise abelian direct image. There is a natural isomorphism chi:(g.push resY) UY -> (resX UX) f_*^Ab whose section maps are heterogeneous identity maps at every level and chart. There is an ordinary adjunction a:(d.pull EX) left adjoint to (g.push resY), with the following normalization for every integral module system M, coefficient module system N, and t:EX(d.pull M)->N: UY(a.adjoint(t)) followed by chi_N equals the componentwise abelian adjunct of d.forgetIso_M followed by UX of the ordinary scalar adjunct of t. No coefficient-unit map, root comparison, Kummer middle normalization, or derived map occurs in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-chern-pullback-intermediate",
+  "def-sp-tower-class-coefficients",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-shriek-data",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary pushforward evaluation and the section, restriction, transition and morphism equations of the recorded Forget functors identify the forgotten restricted direct image with componentwise abelian direct image. Identity transport on every section gives chi, natural in modules and in the whole tower, with its stated section normalization.",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "def-sp-tower-class-systems",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "An additive morphism between integral quotient-module sheaves is linear over the constant residue-ring sheaf: locally lift a scalar to a constant integer, use preservation of integer multiples, and apply separatedness. Apply this at every level; tower naturality is unchanged. Hence each recorded integral Forget functor is fully faithful.",
+   "uses": [
+    "def-sp-tower-class-coefficients",
+    "def-sp-tower-class-systems",
+    "lem-sp-tower-forget-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Compose the target scalar Hom equivalence, the fully faithful target Forget Hom equivalence, precomposition with d.forgetIso, the componentwise abelian Hom equivalence and postcomposition with chi inverse, and finally the inverse of the fully faithful source Forget Hom equivalence. These are natural bijections in both variables and give a. Their defining formula is the asserted normalization.",
+   "uses": [
+    "def-sp-tower-chern-pullback-intermediate",
+    "def-coef-semilinear-system-models",
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-systems",
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-coefficients",
+  "lem-sp-tower-forget-evaluation",
+  "def-sp-tower-chern-pullback-intermediate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T1",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars commutes with direct image of sheaves of modules and gives an adjunction after extension of scalars",
+   "results": "8 hits, including ModuleCat.ExtendRestrictScalarsAdj.homEquiv, its sectionwise HomEquiv maps, and PresheafOfModules.restrictScalars. No ordinary varying-coefficient tower or recorded-Forget normalization.",
+   "date": "2026-10-27",
+   "verdict": "Only general scalar adjunctions; no match for the specialized normalized tower statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including leftAdjointUniq, homEquiv_leftAdjointUniq_hom_app, unit_leftAdjointUniq_hom_app and counit equations.",
+   "date": "2026-10-27",
+   "verdict": "Used to combine the adjunction and endpoint calculations, not a proof of their specialized hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "rg scalarAssociation|ordinaryAdjunction|Forget|normalization in lean/Sheaf/Paper/Tower*, lean/WeilConjectures, and Mathlib/Algebra/Category/ModuleCat/Sheaf; blueprint_refs.py search scalar association, Kummer, coefficient unit",
+   "results": "The existing scalarAssociation_existsUnique requires a concrete RingedPullback coefficient square, unavailable from the integral Forget square without further construction. TowerForgetEvaluation and TowerLineEvaluationUniversal supply finite forgetful/tensor tools. No duplicate of these three ordinary abelian-transpose statements was found. Blueprint searches found zero scalar-association matches and only the general Kummer/coefficient conventions.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; ordinary adjunction construction and the two separate normalizations are the three steps of the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerOrdinaryScalarAssociation",
+  "date": "2026-10-27",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5.; Normalized restriction/direct-image comparison and the ordinary integral scalar adjunction",
+   "via": [
+    "lem-sp-tower-ordinary-scalar-association",
+    "lem-sp-tower-chern-ordinary-scalar-pullback",
+    "lem-sp-tower-chern-scalar-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerRestrictedScalarAdjunction",
+  "file": "lean/Sheaf/Paper/TowerRestrictedScalarAdjunction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.restrictedScalarAdjunction_exists",
+  "statement": "theorem restrictedScalarAdjunction_exists\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)\n    (cY : Chern l E Y) (cX : Chern l E X)\n    (d : IntegralCoefficientPullback l E f cY cX) :\n    ∃ χ : (g.push ⋙ SemilinearSections.res.{u + 1, u, u + 1}\n        (coefficientSystemMap l E Y)) ⋙ cY.reduction.forget.F ≅\n      (SemilinearSections.res.{u + 1, u, u + 1}\n        (coefficientSystemMap l E X) ⋙ cX.reduction.forget.F) ⋙ abPush f,\n      (∀ (N : Systems X (Arings l E X)) (n : ℕ) (U : Y.ProEtᵒᵖ)\n        (x : (((cY.reduction.forget.F.obj\n          ((SemilinearSections.res.{u + 1, u, u + 1}\n            (coefficientSystemMap l E Y)).obj (g.push.obj N))).obj (op n)).obj.obj U)),\n        HEq ((((χ.hom.app N).app (op n)).hom.app U) x) x) ∧\n      ∃ a : (d.pull ⋙ cX.scalar.model.E) ⊣\n          (g.push ⋙ SemilinearSections.res.{u + 1, u, u + 1}\n            (coefficientSystemMap l E Y)),\n        ∀ (M : Systems Y (Rrings l Y)) (N : Systems X (Arings l E X))\n          (t : cX.scalar.model.E.obj (d.pull.obj M) ⟶ N),\n          cY.reduction.forget.F.map ((a.homEquiv M N) t) ≫ χ.hom.app N =\n            ((abAdjunction f).homEquiv _ _)\n              (d.forgetIso.hom.app M ≫ cX.reduction.forget.F.map\n                ((cX.scalar.ordinaryAdjunction.homEquiv _ _) t))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPush",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abAdjunction",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.restrictedScalarAdjunction_exists"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261027T180817-L-3903885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261027T180817-L-3903885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
