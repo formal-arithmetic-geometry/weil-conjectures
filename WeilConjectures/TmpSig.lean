@@ -1,0 +1,4 @@
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+#check @AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible
+#check @AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible
+#check @AlgebraicGeometry.ProEtale.CondensedRing.ContinuousMapRingObj.isMonoidal_boundedConstructible
