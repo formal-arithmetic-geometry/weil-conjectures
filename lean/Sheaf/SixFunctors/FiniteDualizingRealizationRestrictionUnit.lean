@@ -6,6 +6,9 @@ Authors: SHEAF group P7
 module
 
 public import Sheaf.SixFunctors.FiniteDualizingData
+import Sheaf.Paper.NormalizedOriginComparisonCoherence
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
+import Sheaf.SixFunctors.FiniteDualizingIntrinsicRestrictionUnit
 
 /-! # Coherence of finite-coefficient realization restriction -/
 
@@ -19,6 +22,118 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable (X : Scheme.{u})
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem fd_ordinaryRestrictionUnit (T : Scheme.{u}) (R : Type (u + 1)) [CommRing R] :
+    (ProEtale.pbcComparisonRestrict T (RingHom.id R)).inv =
+      Functor.whiskerRight
+        (ProEtale.normalizedOriginRestrictionUnit T.smallEtaleTopology (RingHom.id R) rfl).hom
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T) ≫
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).leftUnitor.hom ≫
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).rightUnitor.inv ≫
+      Functor.whiskerLeft (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T)
+        (ProEtale.normalizedOriginRestrictionUnit (Scheme.ProEt.topology T)
+          (RingHom.id R) rfl).inv := by
+  let a := ProEtale.comparisonAdjunction (ModuleCat.{u + 1} R) T
+  let b := Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology (RingHom.id R)
+  let c := Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology T) (RingHom.id R)
+  change (conjugateEquiv (a.comp c) (b.comp a)).symm (𝟙 _) = _
+  apply (conjugateEquiv (a.comp c) (b.comp a)).injective
+  rw [Equiv.apply_symm_apply]
+  symm
+  rw [← Category.assoc]
+  rw [← conjugateEquiv_comp _ a]
+  rw [← conjugateEquiv_comp _ (a.comp Adjunction.id)]
+  rw [← conjugateEquiv_comp _ (Adjunction.id.comp a)]
+  rw [conjugateEquiv_whiskerLeft c Adjunction.id a,
+    conjugateEquiv_whiskerRight Adjunction.id b a,
+    conjugateEquiv_leftUnitor_hom a]
+  have hr : conjugateEquiv (a.comp Adjunction.id) a
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).rightUnitor.inv =
+      (ProEtale.comparisonLowerStar (ModuleCat.{u + 1} R) T).leftUnitor.hom := by
+    ext X
+    simp
+  rw [hr]
+  ext X
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
+    Category.id_comp, Category.assoc]
+  dsimp only [b, c, ProEtale.normalizedOriginRestrictionUnit,
+    Sheaf.restrictCoextendScalarsAdj]
+  simp only [Functor.comp_obj, sheafCompose_obj_obj, Functor.id_obj,
+    conjugateEquiv_apply_app, Adjunction.id_unit, NatTrans.id_app, Functor.id_map,
+    Category.id_comp, Functor.map_comp, Adjunction.id_counit, CategoryTheory.Functor.map_id,
+    Category.comp_id, Category.assoc, ObjectProperty.FullSubcategory.comp_hom,
+    sheafCompose_map_hom, NatTrans.comp_app, Functor.whiskerRight_app, ModuleCat.hom_comp,
+    LinearMap.coe_comp, Function.comp_apply, ObjectProperty.FullSubcategory.id_hom,
+    ModuleCat.hom_id]
+  rename_i U x
+  apply ModuleCat.CoextendScalars.ext
+  apply LinearMap.ext
+  intro r
+  let M := ((ProEtale.comparisonLowerStar (ModuleCat.{u + 1} R) T).obj X).obj.obj U
+  let z : (ModuleCat.coextendScalars (RingHom.id R)).obj M := x
+  change r • (ModuleCat.CoextendScalars.equiv (RingHom.id R) M z) (1 : R) =
+    (ModuleCat.CoextendScalars.equiv (RingHom.id R) M z) r
+  have h := (ModuleCat.CoextendScalars.equiv (RingHom.id R) M z).map_smul r (1 : R)
+  simpa [ModuleCat.restrictScalars.smul_def, mul_one] using h.symm
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem fd_derivedRestrictionUnit (T : Scheme.{u})
+    (R : Type (u + 1)) [CommRing R] :
+    (ProEtale.pbcDerivedComparisonRestrict T (RingHom.id R)).inv =
+      Functor.whiskerRight
+        (Functor.mapDerivedCategoryNatIso
+          (ProEtale.normalizedOriginRestrictionUnit T.smallEtaleTopology (RingHom.id R) rfl) ≪≫
+          Functor.mapDerivedCategoryIdIso _).hom
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory ≫
+      Functor.whiskerLeft
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory
+        (Functor.mapDerivedCategoryNatIso
+          (ProEtale.normalizedOriginRestrictionUnit (Scheme.ProEt.topology T)
+            (RingHom.id R) rfl) ≪≫ Functor.mapDerivedCategoryIdIso _).inv := by
+  have ho (X : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) :
+      (ProEtale.pbcComparisonRestrict T (RingHom.id R)).hom.app X ≫
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).map
+          ((ProEtale.normalizedOriginRestrictionUnit T.smallEtaleTopology
+            (RingHom.id R) rfl).hom.app X) =
+      (ProEtale.normalizedOriginRestrictionUnit (Scheme.ProEt.topology T)
+        (RingHom.id R) rfl).hom.app
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).obj X) := by
+    apply (cancel_epi ((ProEtale.pbcComparisonRestrict T (RingHom.id R)).inv.app X)).1
+    rw [Iso.inv_hom_id_app_assoc, fd_ordinaryRestrictionUnit]
+    simp
+  ext K
+  have h := Functor.mapDerivedCategorySquareIso_hom_app_id
+    (ProEtale.pbcComparisonRestrict T (RingHom.id R))
+    (ProEtale.normalizedOriginRestrictionUnit T.smallEtaleTopology (RingHom.id R) rfl)
+    (ProEtale.normalizedOriginRestrictionUnit (Scheme.ProEt.topology T)
+      (RingHom.id R) rfl) ho K
+  change (ProEtale.pbcDerivedComparisonRestrict T (RingHom.id R)).hom.app K ≫ _ = _ at h
+  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  apply (cancel_epi ((ProEtale.pbcDerivedComparisonRestrict T (RingHom.id R)).hom.app K)).1
+  rw [Iso.hom_inv_id_app]
+  rw [← Category.assoc, h, Iso.hom_inv_id_app]
+  rfl
+
+private theorem fd_derivedRestrictionUnit' (T : Scheme.{u})
+    (R : Type (u + 1)) [CommRing R] (φ : R →+* R) (hφ : φ = RingHom.id R) :
+    (ProEtale.pbcDerivedComparisonRestrict T φ).inv =
+      Functor.whiskerRight
+        (Functor.mapDerivedCategoryNatIso
+          (ProEtale.normalizedOriginRestrictionUnit T.smallEtaleTopology φ hφ) ≪≫
+          Functor.mapDerivedCategoryIdIso _).hom
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory ≫
+      Functor.whiskerLeft
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory
+        (Functor.mapDerivedCategoryNatIso
+          (ProEtale.normalizedOriginRestrictionUnit (Scheme.ProEt.topology T) φ hφ) ≪≫
+          Functor.mapDerivedCategoryIdIso _).inv := by
+  subst φ
+  exact fd_derivedRestrictionUnit T R
 
 /-- Realization identifies the canonical identity restriction maps.
 Source: current blueprint, lem-coef-finite-dualizing.proof.md, final sentence;
@@ -43,6 +158,7 @@ theorem finiteDualizingRealizationRestriction_unit (n : ℕ)
         ((Functor.mapDerivedCategoryNatIso
           (ProEtale.normalizedOriginRestrictionUnit X.smallEtaleTopology _
             (finiteDualizingQuotient_id l E n)) ≪≫
-          Functor.mapDerivedCategoryIdIso _).hom.app K) := by sorry
+          Functor.mapDerivedCategoryIdIso _).hom.app K) := by
+  sorry
 
 end WeilConjectures
