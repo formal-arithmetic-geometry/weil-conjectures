@@ -12,11 +12,25 @@
  ],
  "proof": [
   {
-   "text": "Use `NatIso.ofComponents` on the level family. The successor transition field gives naturality in the quotient tower, while the component field is exactly `ScalarComponents`; naturality in complexes is inherited from each level isomorphism.",
+   "text": "For each complex Q, use NatTrans.ofOpSequence on the homomorphisms of d.level n Q. Rewrite the two successor maps by Functor.ofOpSequence_map_homOfLE_succ and use HomologicalComplex.hom_ext with d.transition n Q i. This constructs a natural transformation of the actual strict towers.",
    "uses": [
     "lem-sf-open-quotient-scalar-comparison-level-data"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Every component of this tower transformation is the homomorphism of d.level n Q, hence is invertible. NatIso.isIso_of_isIso_app makes the tower transformation invertible. Assemble these tower isomorphisms over Q with NatIso.ofComponents. For naturality in a complex map a, apply tower and complex extensionality and rewrite d.components. Naturality of tc.ordinary n at a.f i, followed by naturality of sc.finite n at scalarReductionExtension.map (a.f i), proves the equation by functoriality and associativity.",
+   "uses": [
+    "lem-sf-open-quotient-scalar-comparison-level-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The assembled natural isomorphism has component (d.level n Q).hom in every degree. Its ScalarComponents field is therefore precisely d.components n Q i. Package this isomorphism and component formula in ScalarComparison and Nonempty.",
+   "uses": [
+    "lem-sf-open-quotient-scalar-comparison-level-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -25,7 +39,9 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 0E8I and 0941; assembly over the quotient index."
+  "place": "Tag 0E8I and the strict-system viewpoint of sites-cohomology.tex Tag 0941; explicit categorical assembly by Mathlib NatTrans.ofOpSequence and NatIso.ofComponents.",
+  "group": "C5",
+  "date": "2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -81,10 +97,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G6",
+  "group": "C5",
   "result": "pass",
-  "landing": "20261027T210016-L-1645066",
-  "kind": "interface",
+  "landing": "20261027T233833-L-4121837",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

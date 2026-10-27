@@ -20214,3 +20214,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:38 L: merged deliver/C4/Sheaf.Paper.StrictTateTensorTowerLiftData (stage 3; reviewer PASS; first push; landing 20261027T233829-L-4121267 (interface); batch 20261027T233735; modules 3; new nodes 2; change records: coord/changes/StrictTateTensorTowerLiftData.md)
 - 23:38 L: merged deliver/C5/Sheaf.Paper.CoefDualizingClosedChart (stage 3; reviewer PASS; first push; landing 20261027T233830-L-4121429 (proof); batch 20261027T233735; modules 1; new nodes 1)
 - 23:38 L: merged deliver/C5/Sheaf.Paper.RationalP1SecondProjectionInterchange (stage 3; reviewer PASS; first push; landing 20261027T233831-L-4121595 (interface); batch 20261027T233735; modules 3; new nodes 2)
+- 23:38 L: merged deliver/C5/Sheaf.SixFunctors.OpenQuotientScalarComparisonAssembly (stage 3; reviewer PASS; first push; landing 20261027T233833-L-4121837 (proof); batch 20261027T233735; modules 1; new nodes 0)
