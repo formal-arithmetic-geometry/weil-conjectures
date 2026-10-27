@@ -1,0 +1,85 @@
+{
+ "id": "lem-sfb-quotient-section-tensor-transport-kflat",
+ "kind": "statement",
+ "title": "Conjugation on flat-term K-flat representatives",
+ "statement": "theorem section_tensor_transport_kflat (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (b : TensorIso a T) (hb : TensorNormalized a T b)\n    (barB : tensor Λ T ⋙ c.model.T ≅\n      (c.model.T.prod c.model.T) ⋙ tensor Λ' T)\n    (hbarB : SectionTensorNormalized a T c barB) :\n    ∀ (P Q : CochainComplex (Modules Λ T) ℤ),\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q →\n      (∀ i : ℤ, ObjectProperty.flat (P.X i)) →\n      (∀ i : ℤ, ObjectProperty.flat (Q.X i)) →\n      (derivedFunctor Λ' T).map (b.hom.app (DerivedCategory.Q.obj P,\n          DerivedCategory.Q.obj Q)) ≫\n          (tensorComparison Λ' T).hom.app ((D a T).obj (DerivedCategory.Q.obj P),\n            (D a T).obj (DerivedCategory.Q.obj Q)) =\n        c.derived.hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q) ≫\n          c.model.T.map ((tensorComparison Λ T).hom.app\n            (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n          barB.hom.app ((derivedFunctor Λ T).obj (DerivedCategory.Q.obj P),\n            (derivedFunctor Λ T).obj (DerivedCategory.Q.obj Q)) ≫\n          (tensor Λ' T).map (Prod.mkHom (c.derived.inv.app (DerivedCategory.Q.obj P))\n            (c.derived.inv.app (DerivedCategory.Q.obj Q)))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4 and 07A6; flat-term representative part of parent proof steps 6--8."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives and perform the normalized scalar and tensor comparison calculation on them.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A4 and 07A6; flat-term representative part of parent proof steps 6--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TensorSectionCondition SectionTensorNormalized",
+   "results": "No existing theorem states this restricted quotient-section transport step.",
+   "date": "2026-10-28",
+   "verdict": "New project lemma required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorTransportCondition",
+  "date": "2026-10-28",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-transport-condition",
+   "place": "Tags 06YY, 07A4 and 07A6; flat-term representative part of parent proof steps 6--8.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionTensorTransportKFlat",
+  "file": "lean/Sheaf/Paper/QuotientSectionTensorTransportKFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_kflat",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_tensor_transport_kflat"
+  ],
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-28",
+  "statement": "theorem section_tensor_transport_kflat (T : Scheme.{u})\n    (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)\n    (b : TensorIso a T) (hb : TensorNormalized a T b)\n    (barB : tensor Λ T ⋙ c.model.T ≅\n      (c.model.T.prod c.model.T) ⋙ tensor Λ' T)\n    (hbarB : SectionTensorNormalized a T c barB) :\n    ∀ (P Q : CochainComplex (Modules Λ T) ℤ),\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q →\n      (∀ i : ℤ, ObjectProperty.flat (P.X i)) →\n      (∀ i : ℤ, ObjectProperty.flat (Q.X i)) →\n      (derivedFunctor Λ' T).map (b.hom.app (DerivedCategory.Q.obj P,\n          DerivedCategory.Q.obj Q)) ≫\n          (tensorComparison Λ' T).hom.app ((D a T).obj (DerivedCategory.Q.obj P),\n            (D a T).obj (DerivedCategory.Q.obj Q)) =\n        c.derived.hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q) ≫\n          c.model.T.map ((tensorComparison Λ T).hom.app\n            (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n          barB.hom.app ((derivedFunctor Λ T).obj (DerivedCategory.Q.obj P),\n            (derivedFunctor Λ T).obj (DerivedCategory.Q.obj Q)) ≫\n          (tensor Λ' T).map (Prod.mkHom (c.derived.inv.app (DerivedCategory.Q.obj P))\n            (c.derived.inv.app (DerivedCategory.Q.obj Q)))"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T180700-L-3890686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T180700-L-3890686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

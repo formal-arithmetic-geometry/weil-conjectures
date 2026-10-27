@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.QuotientSectionTensorData
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientSectionTensorTransportKFlat
+import Sheaf.Paper.QuotientSectionTensorTransportExtension
+import Sheaf.Paper.SectionTensorNormalizationTransport
 
 /-! # Conjugation condition for quotient section tensor transport -/
 
@@ -64,6 +67,7 @@ theorem section_tensor_transport_condition (T : Scheme.{u})
       (c.model.T.prod c.model.T) ⋙ tensor Λ' T)
     (hbarB : SectionTensorNormalized a T c barB) :
     TensorSectionCondition a T c b barB := by
-  sorry
+  apply tensor_section_condition_of_kflat a T c b barB
+  exact section_tensor_transport_kflat a T c hc b hb barB hbarB
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor

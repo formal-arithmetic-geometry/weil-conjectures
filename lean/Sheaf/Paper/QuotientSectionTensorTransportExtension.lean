@@ -1,0 +1,78 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Sheaf.Paper.QuotientSectionTensorData
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
+
+/-! # Resolution extension for quotient section tensor equations -/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 2048
+
+attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.mapDerivedCategory
+  DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
+  AlgebraicGeometry.ProEtale.upperStarFromPoint
+  CategoryTheory.Sheaf.monoidalCategory
+  DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
+
+attribute [local instance] AlgebraicGeometry.ProEtale.CondensedRing.projectionDerivedMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleAbelian
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleHasDerived
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionSheafMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionCoefficientMonObj
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleCategory
+
+universe u
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+open scoped CategoryTheory.Obj ChangeOfRings
+
+namespace AlgebraicGeometry.ProEtale.QuotientSectionTensor
+
+open QuotientChange IntegralQuotient
+open ModuleRingedComparison
+
+variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+  [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+  (a : Λ ⟶ Λ') [IsMonHom a]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
+
+/-- Flat-term representative equations extend uniquely to all derived pairs.
+Source: Stacks 06YS and 06YU; parent proof steps 6--8.
+(blueprint: lem-sfb-quotient-section-tensor-transport-condition).
+
+Proof: the two sides define natural transformations between the same bifunctors on the
+product of derived categories.  The site derived-tensor descent theorem says that
+restriction to flat-term K-flat representatives is bijective on natural transformations.
+Applying this uniqueness statement to the representative equation gives the equality at
+arbitrary derived objects. -/
+theorem tensor_section_condition_of_kflat
+    (T : Scheme.{u}) (c : ScalarSectionData a T) (b : TensorIso a T)
+    (barB : tensor Λ T ⋙ c.model.T ≅
+      (c.model.T.prod c.model.T) ⋙ tensor Λ' T)
+    (hK : ∀ (P Q : CochainComplex (Modules Λ T) ℤ),
+      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →
+      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q →
+      (∀ i : ℤ, ObjectProperty.flat (P.X i)) →
+      (∀ i : ℤ, ObjectProperty.flat (Q.X i)) →
+      (derivedFunctor Λ' T).map (b.hom.app (DerivedCategory.Q.obj P,
+          DerivedCategory.Q.obj Q)) ≫
+          (tensorComparison Λ' T).hom.app ((D a T).obj (DerivedCategory.Q.obj P),
+            (D a T).obj (DerivedCategory.Q.obj Q)) =
+        c.derived.hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q) ≫
+          c.model.T.map ((tensorComparison Λ T).hom.app
+            (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+          barB.hom.app ((derivedFunctor Λ T).obj (DerivedCategory.Q.obj P),
+            (derivedFunctor Λ T).obj (DerivedCategory.Q.obj Q)) ≫
+          (tensor Λ' T).map (Prod.mkHom (c.derived.inv.app (DerivedCategory.Q.obj P))
+            (c.derived.inv.app (DerivedCategory.Q.obj Q)))) :
+    TensorSectionCondition a T c b barB := by
+  sorry
+
+end AlgebraicGeometry.ProEtale.QuotientSectionTensor
