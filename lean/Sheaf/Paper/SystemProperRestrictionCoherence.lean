@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.Paper.SystemCompactSupportRestrictionData
+import Sheaf.Paper.SystemProperRestrictionData
+import Sheaf.Paper.SystemProperRestrictionLaws
 
 /-! # Proper coefficient restriction coherence
 
@@ -73,6 +75,8 @@ theorem systemProperRestrictionCoherence (l : ℕ) [Fact l.Prime]
             (c.derivedUnit Y B).hom.app ((VaryingRing.P (levels B) (steps B) p).obj M) =
           (VaryingRing.P (levels B) (steps B) p).map
             ((c.derivedUnit Z B).hom.app M)) := by
-  sorry
+  obtain ⟨g, ⟨q⟩⟩ := systemProperRestrictionData l p c
+  obtain ⟨hcomp, hunit⟩ := systemProperRestrictionLaws l p c g q
+  exact ⟨g, q, hcomp, hunit⟩
 
 end AlgebraicGeometry.ProEtale.SystemCompactSupportRestriction
