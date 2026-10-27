@@ -6,6 +6,7 @@ Authors: SHEAF group S9
 module
 
 public import Sheaf.Paper.CommonProjectionTensorComparison
+import Sheaf.Paper.CommonProjectionOpenPullbackTensorForward
 
 /-! # Inclusion preserves the open tensor/pullback comparison
 
@@ -26,6 +27,37 @@ universe u v w v' w'
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
+
+private theorem inverseTensorSquare
+    {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]
+    {A' : Type v} [Category.{w} A'] {B' : Type v'} [Category.{w'} B']
+    {F : A ⥤ B} {F' : A' ⥤ B'} {c : A ⥤ A'} {d : B ⥤ B'}
+    (e : F ⋙ d ≅ c ⋙ F')
+    (TA : A × A ⥤ A) (TB : B × B ⥤ B)
+    (TA' : A' × A' ⥤ A') (TB' : B' × B' ⥤ B')
+    (tA : TA ⋙ c ≅ c.prod c ⋙ TA')
+    (tB : TB ⋙ d ≅ d.prod d ⋙ TB')
+    (M N : A) (mu : F.obj (TA.obj (M, N)) ≅ TB.obj (F.obj M, F.obj N))
+    (mu' : F'.obj (TA'.obj (c.obj M, c.obj N)) ≅
+      TB'.obj (F'.obj (c.obj M), F'.obj (c.obj N)))
+    (hs : d.map mu.hom ≫
+        tB.hom.app (F.obj M, F.obj N) ≫
+        TB'.map
+          (Prod.mkHom (e.hom.app M) (e.hom.app N)) =
+      e.hom.app (TA.obj (M, N)) ≫
+        F'.map (tA.hom.app (M, N)) ≫
+        mu'.hom) :
+    d.map mu.inv ≫
+        e.hom.app (TA.obj (M, N)) ≫
+        F'.map (tA.hom.app (M, N)) =
+      tB.hom.app (F.obj M, F.obj N) ≫
+        TB'.map
+          (Prod.mkHom (e.hom.app M) (e.hom.app N)) ≫
+        mu'.inv := by
+  apply (cancel_epi (d.map mu.hom)).mp
+  simp only [← d.map_comp_assoc, Iso.hom_inv_id]
+  rw [reassoc_of% hs]
+  simp
 
 set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
@@ -96,6 +128,37 @@ theorem commonProjectionOpenPullbackTensor
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)
     (Q : SixFunctorCompactifiedSquare D) :
     OpenPullbackTensorSquare (H.commonStageComparison E) (commonProjectionTensorComparison H E)
-      ((H.coefficientStages E).rationalExchange Q) (H.commonStageExchange Q) := by sorry
+      ((H.coefficientStages E).rationalExchange Q) (H.commonStageExchange Q) := by
+  unfold OpenPullbackTensorSquare
+  intro M L
+  apply inverseTensorSquare
+    (e := ((H.commonStageComparison E).directAdjunction Q.i).left)
+    (TA := Functor.uncurry.obj ((H.coefficientStages E).rationalTensor Q.Z))
+    (TB := Functor.uncurry.obj ((H.coefficientStages E).rationalTensor Q.X))
+    (TA' := Functor.uncurry.obj (H.commonStageTensor Q.Z))
+    (TB' := Functor.uncurry.obj (H.commonStageTensor Q.X))
+    (tA := commonProjectionTensorComparison H E Q.Z)
+    (tB := commonProjectionTensorComparison H E Q.X)
+    (M := M) (N := L)
+    (mu := (((H.coefficientStages E).rationalExchange Q).openTensorPullback.app M).app L)
+    (mu' := (((H.commonStageExchange Q).openTensorPullback.app
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj M)).app
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj L)))
+  exact commonProjectionOpenPullbackTensor_forward
+    ((H.commonStageComparison E).directAdjunction Q.i).left
+    (Functor.uncurry.obj ((H.coefficientStages E).rationalTensor Q.Z))
+    (Functor.uncurry.obj ((H.coefficientStages E).rationalTensor Q.X))
+    (Functor.uncurry.obj (H.commonStageTensor Q.Z))
+    (Functor.uncurry.obj (H.commonStageTensor Q.X))
+    (commonProjectionTensorComparison H E Q.Z)
+    (commonProjectionTensorComparison H E Q.X) M L
+    ((((H.coefficientStages E).rationalExchange Q).openTensorPullback.hom.app M).app L)
+    (((H.commonStageExchange Q).openTensorPullback.hom.app
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj M)).app
+      ((GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := C.l) (Ω := C.Qbar) (Y := Q.Z.obj.left) E).obj L))
 
 end WeilConjectures
