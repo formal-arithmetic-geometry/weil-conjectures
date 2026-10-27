@@ -17,8 +17,6 @@ set_option backward.defeqAttrib.useBackward true
 
 @[expose] public section
 
-open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
-
 open CategoryTheory
 
 universe u₇ u₈ v₇ v₈

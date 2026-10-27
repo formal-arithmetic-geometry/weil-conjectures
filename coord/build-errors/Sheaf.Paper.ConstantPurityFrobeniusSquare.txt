@@ -1,85 +1,9 @@
-# global build 2026-10-26T16:20:30Z of d09913d1fb: Sheaf.Paper.ConstantPurityFrobeniusSquare failed
-error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean:324:4: Tactic `rfl` failed: The left-hand side
-  match ConstructibleExceptionalCoefficients.Stage.rational E with
-  | ConstructibleExceptionalCoefficients.Stage.finite E n => inferInstance
-  | ConstructibleExceptionalCoefficients.Stage.integral E => inferInstance
-  | ConstructibleExceptionalCoefficients.Stage.rational E => inferInstance
-  | ConstructibleExceptionalCoefficients.Stage.closed => inferInstance
-is not definitionally equal to the right-hand side
-  { toCategoryStruct := GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5 l Ω (D.geometricFiber Y₀).left L,
-    id_comp := ⋯, comp_id := ⋯, assoc := ⋯ }
-
-D : FiniteFieldDatum
-l : ℕ
-inst✝¹² : Fact (Nat.Prime l)
-hl : l ≠ D.p
-Ω : Type u
-inst✝¹¹ : Field Ω
-inst✝¹⁰ : _root_.Algebra ℚ_[l] Ω
-inst✝⁹ : IsAlgClosure ℚ_[l] Ω
-X₀ Y₀ : Over (Spec (CommRingCat.of D.k₀))
-inst✝⁸ : LocallyOfFiniteType X₀.hom
-inst✝⁷ : QuasiCompact X₀.hom
-inst✝⁶ : LocallyOfFiniteType Y₀.hom
-inst✝⁵ : QuasiCompact Y₀.hom
-f₀ : X₀ ⟶ Y₀
-inst✝⁴ : IsSeparated (Over.Hom.left f₀)
-inst✝³ : LocallyOfFiniteType (Over.Hom.left f₀)
-inst✝² : QuasiCompact (Over.Hom.left f₀)
-inst✝¹ : (x : ↥(D.geometricFiber X₀).left) → Invertible ↑l
-inst✝ : (y : ↥(D.geometricFiber Y₀).left) → Invertible ↑l
-xft : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (CommRingCat.of D.k))
-xqc : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (CommRingCat.of D.k))
-yft : LocallyOfFiniteType ((D.geometricFiber Y₀).left ↘ Spec (CommRingCat.of D.k))
-yqc : QuasiCompact ((D.geometricFiber Y₀).left ↘ Spec (CommRingCat.of D.k))
-fover : Hom.IsOver (FrobeniusExchange.fiberMap D f₀) (Spec (CommRingCat.of D.k))
-fsep : IsSeparated (FrobeniusExchange.fiberMap D f₀)
-fft : LocallyOfFiniteType (FrobeniusExchange.fiberMap D f₀)
-fqc : QuasiCompact (FrobeniusExchange.fiberMap D f₀)
-c₀ : Compactification (Over.Hom.left f₀)
-S : ConstructibleExceptionalCoefficients.System l Ω D hl
-L : AlgebraicallyClosedCoefficients.Index l Ω
-K : sfRationalConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient l Ω L) (D.geometricFiber X₀).left
-E : ConstructibleExceptionalCoefficients.FieldStage l := ConstructibleExceptionalCoefficients.commonField l Ω L
-FX : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left ⥤
-  generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left :=
-  sourceFrobenius D l hl Ω X₀
-FY : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left ⥤
-  generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left :=
-  targetFrobenius D l hl Ω Y₀
-IY : GeneralAlgebraicallyClosedCoefficients.Stage l Ω (D.geometricFiber Y₀).left L ⥤
-  GeneralAlgebraicallyClosedCoefficients.Pair l Ω (D.geometricFiber Y₀).left :=
-  GeneralAlgebraicallyClosedCoefficients.inclusion L
-IX : GeneralAlgebraicallyClosedCoefficients.Stage l Ω (D.geometricFiber X₀).left L ⥤
-  GeneralAlgebraicallyClosedCoefficients.Pair l Ω (D.geometricFiber X₀).left :=
-  GeneralAlgebraicallyClosedCoefficients.inclusion L
-R : ConstructibleExceptionalCoefficients.C l Ω (D.geometricFiber X₀).left
-    (ConstructibleExceptionalCoefficients.Stage.rational E) ⥤
-  ConstructibleExceptionalCoefficients.C l Ω (D.geometricFiber Y₀).left
-    (ConstructibleExceptionalCoefficients.Stage.rational E) :=
-  (operation D l hl Ω X₀ Y₀ f₀ c₀ S (ConstructibleExceptionalCoefficients.Stage.rational E)).F
-F : ConstructibleExceptionalCoefficients.C l Ω (D.geometricFiber X₀).left
-    ConstructibleExceptionalCoefficients.Stage.closed ⥤
-  ConstructibleExceptionalCoefficients.C l Ω (D.geometricFiber Y₀).left
-    ConstructibleExceptionalCoefficients.Stage.closed :=
-  (operation D l hl Ω X₀ Y₀ f₀ c₀ S ConstructibleExceptionalCoefficients.Stage.closed).F
-q : (S.ring.operation (FrobeniusExchange.geometricCompactification D f₀ c₀)
-        (ConstructibleExceptionalCoefficients.Stage.rational
-          (ConstructibleExceptionalCoefficients.commonField l Ω L))).F ⋙
-    ConstructibleExceptionalCoefficients.commonInclusion l Ω (D.geometricFiber Y₀).left L ≅
-  ConstructibleExceptionalCoefficients.commonInclusion l Ω (D.geometricFiber X₀).left L ⋙
-    (S.ring.operation (FrobeniusExchange.geometricCompactification D f₀ c₀)
-        ConstructibleExceptionalCoefficients.Stage.closed).F :=
-  ConstructibleExceptionalCoefficients.FieldComparison.q l Ω
-    (S.common.commonComparison (FrobeniusExchange.geometricCompactification D f₀ c₀) L)
-a : FY.obj (F.obj (IX.obj K)) ⟶ FY.obj (IY.obj (R.obj K)) := FY.map (q.inv.app K)
-b : FY.obj (IY.obj (R.obj K)) ⟶ IY.obj ((sfWeilFrobeniusPullback D l hl Y₀ E.carrier).obj (R.obj K)) :=
-  (sfWeilStagePullbackIdentification D l hl Y₀ Ω L (R.obj K)).hom
-⊢ (match ConstructibleExceptionalCoefficients.Stage.rational E with
-    | ConstructibleExceptionalCoefficients.Stage.finite E n => inferInstance
-    | ConstructibleExceptionalCoefficients.Stage.integral E => inferInstance
-    | ConstructibleExceptionalCoefficients.Stage.rational E => inferInstance
-    | ConstructibleExceptionalCoefficients.Stage.closed => inferInstance) =
-    { toCategoryStruct := GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5 l Ω (D.geometricFiber Y₀).left L,
-      id_comp := ⋯, comp_id := ⋯, assoc := ⋯ }
-error: Lean exited with code 1
+# global build 2026-10-27T15:04:20Z of ef41adbe62: Sheaf.Paper.ConstantPurityFrobeniusSquare failed
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.CommonConstantUnitFrobenius'
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.RationalSmoothPurityCanonical'
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.FrobeniusCoefficientTwistsCanonical'
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.FieldWeilShriekShiftData'
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.FrobeniusGeometricExchange'
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.CommonFrobeniusSquareNormalization'
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.RationalWeilPurityNaturalityMate'
+error: Sheaf/Paper/ConstantPurityFrobeniusSquare.lean: bad import 'Sheaf.Paper.FrobeniusCompactRationalNormalization'

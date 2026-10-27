@@ -20,8 +20,6 @@ set_option Elab.async false
 
 @[expose] public section
 
-open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
-
 universe u
 
 open CategoryTheory Limits MonoidalCategory

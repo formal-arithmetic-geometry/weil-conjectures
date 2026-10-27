@@ -1,14 +1,11 @@
 # Work queue
 
-40 items; claim with `tools/claim.py next <group> [--stage N]`.
+39 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (1 clusters, 3830 modules)
+## Rework: quarantined by the upstream sync (0 clusters, 3830 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
-| item (root) | modules | other roots | cause of the root |
-|---|---|---|---|
-| `Sheaf.Paper.IntegralProperReductionBound` | 1 |  | error: Sheaf/Paper/IntegralProperReductionBound.lean:114:9: failed to synthesize | ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topo |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 0, stage 3 1 items.
 
