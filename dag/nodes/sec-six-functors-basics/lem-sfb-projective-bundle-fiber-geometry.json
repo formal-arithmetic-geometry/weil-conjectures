@@ -19,25 +19,27 @@
  ],
  "proof": [
   {
-   "text": "Choose local frames for E. Open compatibility of canonical symmetric relative Proj and the free comparison in projective_bundle_quotient_geometry identify the projection over every frame open with standard projective (r-1)-space. On homogeneous standard opens the projection is the polynomial projection. The polynomial ring in finitely many variables is flat and finitely presented over the base, and these properties are local on source and target. Thus p is flat and locally of finite presentation.",
+   "text": "Write the positive rank as d+1. The finite-locally-free frame-cover theorem gives opens U_i covering S and isomorphisms E|U_i with the free module on ULift (Fin (d+1)). Transport these frames from restriction to tensor pullback by the existing adjunction comparison. Apply the open and free clauses of projective_bundle_quotient_geometry. Uniqueness of pullbacks identifies p inverse-image U_i, over U_i, with standard projective d-space. The standard homogeneous charts of that space are affine d-spaces. Apply affine-space smoothness on these charts and source locality to prove smoothness of projective space, then target locality on the frame cover to prove Smooth p. Smoothness gives Flat p and LocallyOfFinitePresentation p. The proved GeometricallyReduced.of_smooth gives geometrically reduced p and hence its residue-field fibres.",
    "uses": [
     "def-amb-finite-locally-free-module",
     "lem-trf-projective-bundle-quotient-geometry",
-    "lem-nagata-polynomial-projection-flat"
+    "sbc-lem-affine-space-smooth"
    ],
    "elementary": false
   },
   {
-   "text": "Base change a frame at s to Spec kappa(s). The quotient description identifies the fibre over kappa(s) with projective (r-1)-space, compatibly with all field extensions. Over any field extension its standard charts are polynomial rings, hence reduced and integral, and their pairwise overlaps are nonempty. The chart cover gives reducedness and connectedness. This establishes both geometric properties.",
+   "text": "Choose a frame open U_i containing s. The residue-field map has singleton image {s}, so it lifts to U_i. Paste the restriction pullback square, the local projective-space isomorphism over U_i, and ProjectiveSpace.isPullback_map for this lift. Pullback uniqueness gives an isomorphism from p.fiber s to projective d-space over kappa(s), with the displayed equation on structure maps. For any field K, the standard charts of projective space over K are spectra of polynomial rings, hence connected, and they share the K-point with every homogeneous coordinate equal to 1. Their union is connected. After arbitrary field-valued base change projective space is again projective space by isPullback_map, giving geometric connectedness. Transport this morphism property through the fibre isomorphism.",
    "uses": [
-    "lem-trf-projective-bundle-quotient-geometry"
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lemma-nagata-projective-space-base-change-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "For r>=2 apply the projective-space twist-cohomology computation to O(0). Its positive cohomology vanishes, including H1. For r=1 the fibre is the affine spectrum of its residue field and affine acyclicity gives H1=0. Identify the structure sheaf under the fibre isomorphism; forget the module action to get the displayed abelian-sheaf cohomology vanishing. There is no s on an empty base.",
+   "text": "For the twist O(0) on projective d-space, use the existing twist-cohomology theorem: when d=1 its top cohomology vanishes at twist zero, and when d is not 1 the middle-degree vanishing applies to q=1. This includes d=0, where q=1 is above the dimension. The existing unitIsoTwistZero identifies the underlying abelian structure-sheaf H1 with this vanishing group. Structure-sheaf cohomology functoriality shows that pullback along a scheme isomorphism has inverse the pullback along its inverse. Thus it is injective, so the zero H1 of projective space transports to p.fiber s. Empty bases have no s to consider; the frame-cover smoothness proof remains valid there.",
    "uses": [
-    "lem-pc-projective-space-twist-cohomology"
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-sc-structure-sheaf-cohomology-pullback-functorial"
    ],
    "elementary": false
   }
@@ -45,14 +47,16 @@
  "proof_deps": [
   "def-amb-finite-locally-free-module",
   "lem-trf-projective-bundle-quotient-geometry",
-  "lem-nagata-polynomial-projection-flat",
-  "lem-pc-projective-space-twist-cohomology"
+  "sbc-lem-affine-space-smooth",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sc-structure-sheaf-cohomology-pullback-functorial"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "definition-projective-bundle, lemma-projective-space-bundle and lemma-standard-covering-projective-space; also literature/stacks-project/coherent.tex, lemma-cohomology-projective-space-over-ring (degree zero, q=1).",
-  "note": "K9: extract only the canonical-bundle geometry, independent of M,N and the given fibre isomorphism."
+  "place": "definition-projective-bundle, lemma-projective-space-bundle and lemma-standard-covering-projective-space; coherent.tex, lemma-cohomology-projective-space-over-ring.",
+  "note": "C7: complete Lean proof from the existing quotient-geometry, affine-space smoothness, projective-space base-change and twist-cohomology declarations. The only shortcut is to deduce flatness, finite presentation and geometric reducedness from smoothness of the same local polynomial charts. All helper theorems are private and proved; no new holes."
  },
  "mathlib_searches": [
   {
@@ -139,9 +143,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K9",
+  "group": "C7",
   "result": "pass",
-  "landing": "20261027T151718-L-1196518",
+  "landing": "20261027T180516-L-3868442",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
