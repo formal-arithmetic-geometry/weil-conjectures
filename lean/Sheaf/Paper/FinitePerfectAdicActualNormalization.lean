@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantNormalization
 public import Sheaf.Paper.FinitePerfectAdicStalkModels
+import Sheaf.Paper.FinitePerfectAdicActualLevels
+import Sheaf.Paper.FinitePerfectAdicActualRealization
 
 /-! # The actual-quotient half of a finite perfect normalization diagram
 
@@ -133,6 +135,22 @@ theorem finitePerfectAdic_actual_normalization
     (T : FinitePerfectAdicAlgebraTower d)
     (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n))
     (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) :
-    Nonempty (FinitePerfectAdicActualNormalization X d M V T) := by sorry
+    Nonempty (FinitePerfectAdicActualNormalization X d M V T) := by
+  obtain ⟨L⟩ := finitePerfectAdic_actual_levels X d φ hφ hcompat M V T hperfect hmark
+  obtain ⟨R⟩ := finitePerfectAdic_actual_realization X d φ hφ hcompat M V T L
+    hperfect hmark
+  exact ⟨{
+    K := L.K
+    boundedK := L.boundedK
+    lisseK := L.lisseK
+    stalk := L.stalk
+    dK := L.dK
+    universalK := L.universalK
+    realization := R.realization
+    scalar := R.scalar
+    actual := R.actual
+    model := R.model
+    actual_normalized := R.actual_normalized
+    model_normalized := R.model_normalized }⟩
 
 end AlgebraicGeometry.Scheme
