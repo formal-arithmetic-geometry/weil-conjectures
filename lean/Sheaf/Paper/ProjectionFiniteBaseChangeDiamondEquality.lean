@@ -6,6 +6,7 @@ Authors: SHEAF group F7
 module
 
 public import Sheaf.Paper.ProjectionFiniteBaseChangeCoordinates
+import all Sheaf.Paper.FiniteProjectionExchangeTransposes
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,6 +51,8 @@ theorem sixFunctorProjectionFinite_diamond_equality
         (RX.inverse.obj K.obj) (RY.inverse.obj L.obj) =
       FiniteProjectionExchange.diamondRight A Q.square Q.compactification
         (RX.inverse.obj K.obj) (RY.inverse.obj L.obj) := by
-  sorry
+  have _datum := S
+  let := Padic.finite_coefficientExtensionRing C.l E n hn
+  exact FiniteProjectionExchange.diamond_equality _ Q.square Q.compactification _ _
 
 end WeilConjectures
