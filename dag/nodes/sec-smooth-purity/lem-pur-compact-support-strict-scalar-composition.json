@@ -25,7 +25,8 @@
   "def-weil-abstract-derived-category",
   "def-pc-sheaf-restrict-scalars",
   "lem-pur-compact-support-strict-scalar-mate",
-  "lem-pur-compact-support-scalar-limit-reduction"
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-compact-support-strict-scalar-composition-prelude"
  ],
  "proof": [
   {
@@ -215,6 +216,17 @@
     "lem-pur-constant-completed-scalar-associativity"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the support-realization coherence theorem to the image-tower comparison equation supplied by compactSupportStrictScalarComparison. The coherence theorem is the support-model, reduction-balancing, and retained-level part of Steps 3--6; the resulting equation is exactly the displayed compact-support arrow composition.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-composition-support-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Returned comparison Step 11, proof Steps 3--6: image-tower mate comparison followed by support realization."
+   }
   }
  ],
  "proof_deps": [
@@ -234,12 +246,13 @@
   "lem-pur-constant-completed-scalar-associativity",
   "lem-pur-scalar-limit-tensor-composition",
   "lem-pur-scalar-limit-tensor-restriction",
-  "lem-pur-ordinary-open-scalar-composition"
+  "lem-pur-ordinary-open-scalar-composition",
+  "lem-pur-compact-support-strict-scalar-composition-support-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Existing plans and completed proofs retained. F7, 2026-10-26: ordinary open composition proved from the ordinary coefficient cocycle and conjugate mate pasting; compositionOpen proved by ordinary tower assembly and exact localization. S2, 2026-10-27: compositionProper is proved by the identity-on-sections restriction cocycle, whole-complex unit normalization and scalar-adjunction mate pasting. The strict support composition and strict identity obligations are unchanged."
+  "place": "Existing plans and completed proofs retained. F7, 2026-10-26: ordinary open composition proved from the ordinary coefficient cocycle and conjugate mate pasting; compositionOpen proved by ordinary tower assembly and exact localization. S2, 2026-10-27: compositionProper is proved by the identity-on-sections restriction cocycle, whole-complex unit normalization and scalar-adjunction mate pasting. Q4, 2026-10-28: the strict support composition is proved from compactSupportStrictScalarComparison and supportRealization_coherence (Step 17); the preparatory associators and factor equations moved verbatim to the Prelude module. The strict identity obligation is unchanged."
  },
  "mathlib_searches": [
   {
@@ -375,18 +388,7 @@
   "module": "Sheaf.Paper.CompactSupportStrictScalarComposition",
   "declaration": "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComposition",
   "declarations": [
-   "WeilConjectures.PurStrictScalar.constantMap_composition",
-   "WeilConjectures.PurStrictScalar.compositionOrdinary",
-   "WeilConjectures.PurStrictScalar.compositionBase",
-   "WeilConjectures.PurStrictScalar.compositionTowerOrdinary",
-   "WeilConjectures.PurStrictScalar.compositionTower",
-   "WeilConjectures.PurStrictScalar.compositionCompleted",
-   "WeilConjectures.PurStrictScalar.compositionSelection",
-   "WeilConjectures.PurStrictScalar.compositionSelectionOrdinary",
-   "WeilConjectures.PurStrictScalar.compositionRetained",
-   "WeilConjectures.PurStrictScalar.compositionRamification",
-   "WeilConjectures.PurStrictScalar.compositionProper",
-   "WeilConjectures.PurStrictScalar.compositionOpen",
+   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComparison",
    "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComposition",
    "WeilConjectures.PurStrictScalar.compactSupportScalarLimitComposition",
    "WeilConjectures.PurStrictScalar.completedArrow_existsUnique",
@@ -402,8 +404,8 @@
    "WeilConjectures.PurStrictScalar.compactSupportStrictScalarIdentity",
    "WeilConjectures.PurStrictScalar.compositionFiniteCoefficients",
    "WeilConjectures.PurStrictScalar.identityFiniteCoefficients",
-   "WeilConjectures.PurStrictScalar.compactSupportCompletedScalarIdentity",
-   "WeilConjectures.PurStrictScalar.completedArrow_naturality"
+   "WeilConjectures.PurStrictScalar.completedArrow_naturality",
+   "WeilConjectures.PurStrictScalar.compactSupportCompletedScalarIdentity"
   ],
   "file": "lean/Sheaf/Paper/CompactSupportStrictScalarComposition.lean",
   "statement": "theorem compactSupportStrictScalarComposition (c : Compactification f) (SE : CoefficientDerivedSystemCalculus.{u, u} l E X) (SF : CoefficientDerivedSystemCalculus.{u, u} l F X) (SL : CoefficientDerivedSystemCalculus.{u, u} l L X) (e h : ℕ) (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (hh : PurCompactSupport.Ramification l F L j h) (hhpos : 1 ≤ h) (M : DerivedCategory (scalarReductionSource l E X)) (_hM : finiteTorConstructibleIntegral l E X M) : (compositionTower l E F i L j Y).hom.app ((support l E c SE).obj M) ≫ (arrow l E L (j.comp i) c SE SL (h * e) (compositionRamification l E F i L j e h he hh) (one_le_mul hhpos hepos)).app M = (T l F L j Y).map ((arrow l E F i c SE SF e he hepos).app M) ≫ (compositionSelection l F L j Y e).hom.app ((support l F c SF).obj ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) ≫ (subsequence l L Y e).map ((arrow l F L j c SF SL h hh hhpos).app ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) ≫ (compositionRetained l L Y e h hepos hhpos).hom.app ((support l L c SL).obj ((pbcDerivedExtend (completedCoefficientMap l F L j X)).obj ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M))) ≫ (subsequence l L Y (h * e)).map ((support l L c SL).map ((compositionCompleted l E F i L j X).hom.app M))",
@@ -425,20 +427,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
-  "result": "pass",
-  "landing": "20261027T180631-L-3884617",
+  "reviewer": "C-c5fcb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T234156-L-22538",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComposition",
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarIdentity"
-  ],
-  "sorry_after": [
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComparison",
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarComposition",
-   "WeilConjectures.PurStrictScalar.compactSupportStrictScalarIdentity"
-  ]
+  "note": "independent cc review: item compactSupportStrictScalarComposition proved from the published hole compactSupportStrictScalarComparison (restored, statement unchanged) plus new hole supportRealization_coherence, checked against arrow/supportModel/reductionBalancing/reindexImage definitions in the clone; Prelude = verbatim move of the item prefix; importer CompactSupportCompletedScalarArrow compiled against corrected files"
  }
 }

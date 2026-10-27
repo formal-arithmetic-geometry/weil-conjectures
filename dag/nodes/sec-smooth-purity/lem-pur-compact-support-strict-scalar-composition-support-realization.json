@@ -1,0 +1,101 @@
+{
+ "id": "lem-pur-compact-support-strict-scalar-composition-support-realization",
+ "kind": "statement",
+ "title": "Support realization coherence for strict scalar comparison",
+ "statement": "For a coefficient chain E → F → L, compact-support data SE, SF, SL and ramification indices e, h: the L/F image-tower comparison, followed by the L-image of the tower associator and of the L/E reduction balancing, the inverse L-selection through the image and the inverse L support model, equals the F/E reduction balancing, F-selection and inverse F support model under T_{L/F}, followed by the selection square, the retained L/F arrow, the reassociation of retained levels and the support image of the completed associator.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Returned comparison Step 11, proof Steps 3--6: support realization after strict image-tower mate pasting."
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-strict-scalar-tower-associator",
+  "lem-pur-compact-support-strict-scalar-composition-prelude",
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-pur-strict-scalar-reduction-balancing",
+  "def-pur-native-constant-support-model",
+  "def-pur-constant-scalar-tensor-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand the retained L/F arrow. The selection square is the localized identity square and cancels the F support-model pair. Arithmetic selection acts termwise on the ordinary proper/open mates, so it commutes with the L/F comparison; naturality of that comparison moves the F/E balancing in front. The remaining isomorphisms agree: the reduction balancings compose by uniqueness in reductionBalancing_existsUnique (ordinary balancings compose by ((x⊗b)⊗d)↦x⊗bd), the image selections for e and h compose through compositionRetained, and the L support model is natural in compositionCompleted.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-composition-prelude",
+    "def-pur-strict-scalar-reduction-balancing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Returned comparison Step 11, proof Steps 3--6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-strict-scalar-composition-prelude",
+  "def-pur-strict-scalar-reduction-balancing"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Returned comparison Step 11, support realization portion of Steps 3--6."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-strict-scalar-composition",
+   "place": "Returned comparison Step 11, Steps 3--6 support realization.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-comparison-stage3-h2"
+   ]
+  }
+ },
+ "tool_uses": [
+  "lem-pur-compact-support-strict-scalar-mate"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportStrictScalarCompositionSupportRealization",
+  "file": "lean/Sheaf/Paper/CompactSupportStrictScalarCompositionSupportRealization.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.supportRealization_coherence",
+  "statement": "theorem supportRealization_coherence\n    (c : Compactification f)\n    (SE : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (SF : CoefficientDerivedSystemCalculus.{u, u} l F X)\n    (SL : CoefficientDerivedSystemCalculus.{u, u} l L X)\n    (e h : ℕ) (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e)\n    (hh : PurCompactSupport.Ramification l F L j h) (hhpos : 1 ≤ h)\n    (M : DerivedCategory (scalarReductionSource l E X)) :\n    (comparison l F L j c).app\n        ((T l E F i X).obj ((reduction l E X SE).obj M)) ≫\n      (image l L c).map ((compositionTower l E F i L j X).hom.app\n        ((reduction l E X SE).obj M)) ≫\n      (image l L c).map\n        ((reductionBalancing l E L (j.comp i) X SE SL (h * e)\n          (compositionRamification l E F i L j e h he hh) (one_le_mul hhpos hepos)).hom.app M) ≫\n      (reindexImage l L c (h * e) (one_le_mul hhpos hepos)).inv.app\n        ((reduction l L X SL).obj\n          ((pbcDerivedExtend (completedCoefficientMap l E L (j.comp i) X)).obj M)) ≫\n      (subsequence l L Y (h * e)).map\n        ((supportModel l L c SL).inv.app\n          ((pbcDerivedExtend (completedCoefficientMap l E L (j.comp i) X)).obj M)) =\n    (T l F L j Y).map\n        ((image l F c).map\n          ((reductionBalancing l E F i X SE SF e he hepos).hom.app M)) ≫\n      (T l F L j Y).map\n        ((reindexImage l F c e hepos).inv.app\n          ((reduction l F X SF).obj\n            ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M))) ≫\n      (T l F L j Y).map\n        ((subsequence l F Y e).map\n          ((supportModel l F c SF).inv.app\n            ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M))) ≫\n      (compositionSelection l F L j Y e).hom.app\n        ((support l F c SF).obj\n          ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) ≫\n      (subsequence l L Y e).map\n        ((arrow l F L j c SF SL h hh hhpos).app\n          ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) ≫\n      (compositionRetained l L Y e h hepos hhpos).hom.app\n        ((support l L c SL).obj\n          ((pbcDerivedExtend (completedCoefficientMap l F L j X)).obj\n            ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M))) ≫\n      (subsequence l L Y (h * e)).map\n        ((support l L c SL).map\n          ((compositionCompleted l E F i L j X).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c5fcb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T234156-L-22538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c5fcb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T234156-L-22538",
+  "kind": "interface",
+  "note": "independent cc review: item compactSupportStrictScalarComposition proved from the published hole compactSupportStrictScalarComparison (restored, statement unchanged) plus new hole supportRealization_coherence, checked against arrow/supportModel/reductionBalancing/reindexImage definitions in the clone; Prelude = verbatim move of the item prefix; importer CompactSupportCompletedScalarArrow compiled against corrected files"
+ }
+}

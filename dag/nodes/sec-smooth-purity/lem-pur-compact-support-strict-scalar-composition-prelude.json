@@ -1,0 +1,231 @@
+{
+ "id": "lem-pur-compact-support-strict-scalar-composition-prelude",
+ "kind": "statement",
+ "title": "Strict scalar composition associators and proper/open factor equations",
+ "statement": "For finite coefficient field inclusions E → F → L: the constant coefficient maps compose; the ordinary, derived-base, whole-tower and strict derived-tower tensor associators and the completed tensor associator are the canonical composite-adjunction comparisons; arithmetic selection of levels e then h is selection of level h*e, and the ramification indices multiply. The strict proper scalar mates compose under the strict tower associator (compositionProper), and so do the open balancing maps (compositionOpen).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0E8I and 0941; auxiliary strict scalar composition calculations preceding support realization."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "def-pur-constant-scalar-tensor-data",
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-pur-strict-scalar-reduction-balancing",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Unfold constantMap, rewrite composition of the underlying functor maps, and use extensionality of the composed algebra homomorphisms. The ramification equality follows from Ideal.map_map and Ideal.map_pow; the selection identity from e*(n+1)-1+1=e*(n+1) and subsingleton arrows; the associators are defined as leftAdjointUniq and localized whiskerings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Auxiliary composition Step 1."
+   }
+  },
+  {
+   "text": "compositionProper: the strict tower associator is the composite-adjunction comparison (scalarTowerAssociator_normalization). Invert the proved proper-restriction cocycle (properRestriction_composition) and apply mateEquiv_hcomp with the two conjugate/mate pasting identities.",
+   "uses": [
+    "lem-pur-strict-proper-restriction-composition",
+    "lem-pur-strict-scalar-tower-associator",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Auxiliary composition Steps 1--4 (returned comparison Step 11)."
+   }
+  },
+  {
+   "text": "compositionOpen: apply ordinaryBaseOpenTensor_composition at each index of an ordinary strict tower, conclude by natural-transformation extensionality, and carry the equation through exact localization by the localized open-tensor composition helper of the same module.",
+   "uses": [
+    "lem-pur-ordinary-open-scalar-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Auxiliary composition Steps 1--4 (returned comparison Step 11)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-strict-proper-restriction-composition",
+  "lem-pur-strict-scalar-tower-associator",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-ordinary-open-scalar-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Auxiliary strict scalar composition calculations extracted to keep the item module within the compile limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper open scalar adjunction mates on strict adic quotient diagrams satisfy identity and composition for chains of finite coefficient field extensions",
+   "results": "{\"t\": \"2026-10-22T05:58:52Z\", \"tool\": \"leanfinder\", \"query\": \"Proper open scalar adjunction mates on strict adic quotient diagrams satisfy identity and composition for chains of finite coefficient field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.transitionMapₐ\", \"AdicCompletion.transitionMap_ideal_mk\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AdicCompletion.transitionMap\", \"AdicCompletion.instAlgebra\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"IsAdicComplete.StrictMono.of_comp_lift\"], \"digest\": \"5366b03d4fc6be42\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_vcomp and mateEquiv_hcomp prove abstract pasting, not identification of the coefficient tensor squares, their strict quotient evaluations, ramified subsequences and normalized total-limit associators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor balancing and vertical pasting give transitivity of ramified strict tower compact support coefficient comparisons before total limit",
+   "results": "{\"t\": \"2026-10-22T05:58:55Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor balancing and vertical pasting give transitivity of ramified strict tower compact support coefficient comparisons before total limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"digest\": \"fca80546bf64649e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_vcomp and mateEquiv_hcomp prove abstract pasting, not identification of the coefficient tensor squares, their strict quotient evaluations, ramified subsequences and normalized total-limit associators."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T05:58:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"mate\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.comp_leftAdjointMate\", \"CategoryTheory.comp_rightAdjointMate\", \"CategoryTheory.comp_leftAdjointMate_assoc\", \"CategoryTheory.comp_rightAdjointMate_assoc\"], \"digest\": \"5148e2ae20d81527\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_vcomp and mateEquiv_hcomp prove abstract pasting, not identification of the coefficient tensor squares, their strict quotient evaluations, ramified subsequences and normalized total-limit associators."
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*coefficient|coefficient.*mate|scalar.*[Tt]ower.*comp|[Tt]ower.*scalar.*comp",
+   "results": "{\"t\": \"2026-10-22T05:58:51Z\", \"tool\": \"grep\", \"query\": \"mate.*coefficient|coefficient.*mate|scalar.*[Tt]ower.*comp|[Tt]ower.*scalar.*comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Module/LinearMap/Defs.lean\", \"Mathlib/Algebra/Module/LinearMap/Defs.lean\", \"Mathlib/Algebra/Module/LinearMap/Defs.lean\", \"Mathlib/Algebra/Algebra/Bilinear.lean\", \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean\", \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\"], \"digest\": \"85f9ab91bd74346c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv_vcomp and mateEquiv_hcomp prove abstract pasting, not identification of the coefficient tensor squares, their strict quotient evaluations, ramified subsequences and normalized total-limit associators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity of finite free scalar compact support comparison with tensor associators on strict quotient towers",
+   "results": "{\"t\": \"2026-10-22T05:58:52Z\", \"tool\": \"leansearch\", \"query\": \"Transitivity of finite free scalar compact support comparison with tensor associators on strict quotient towers\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*coefficient|coefficient.*mate|[Rr]oos.*scalar|scalar.*[Tt]ower",
+   "results": "{\"t\": \"2026-10-22T06:53:20Z\", \"tool\": \"grep\", \"query\": \"mate.*coefficient|coefficient.*mate|[Rr]oos.*scalar|scalar.*[Tt]ower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\"], \"digest\": \"9d42ac1282dac0c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting and module scalar associators cover components, not the strict compact-support and normalized completed Roos equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of compact support scalar extension comparison on strict adic coefficient towers",
+   "results": "{\"t\": \"2026-10-22T06:53:21Z\", \"tool\": \"leansearch\", \"query\": \"Composition of compact support scalar extension comparison on strict adic coefficient towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_isClosedEmbedding\", \"CompactlySupportedContinuousMap.instIsScalarTower\", \"HasCompactMulSupport.comp_isClosedEmbedding\", \"CompactlySupportedContinuousMap.coe_comp_to_continuous_fun\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"Algebra.Extension.Hom.comp\", \"ContDiffMapSupportedIn.coe_smul\", \"TestFunction.coe_ofSupportedInCLM\"], \"digest\": \"845208d4b2ccbab1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting and module scalar associators cover components, not the strict compact-support and normalized completed Roos equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T06:53:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"mate\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.comp_leftAdjointMate\", \"CategoryTheory.comp_rightAdjointMate\", \"CategoryTheory.comp_leftAdjointMate_assoc\", \"CategoryTheory.comp_rightAdjointMate_assoc\"], \"digest\": \"5148e2ae20d81527\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting and module scalar associators cover components, not the strict compact-support and normalized completed Roos equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open scalar adjunction mates on strict quotient towers compose under tensor associativity and ramified subsequence restriction",
+   "results": "{\"t\": \"2026-10-22T06:53:29Z\", \"tool\": \"leanfinder\", \"query\": \"Proper open scalar adjunction mates on strict quotient towers compose under tensor associativity and ramified subsequence restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galRestrict'_comp\", \"galLift_comp\", \"galRestrict'_galLift\", \"galLift_galRestrict'\", \"Algebra.TensorProduct.map_restrictScalars_comp_includeRight\", \"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"ModuleCat.homEquiv_extendScalarsComp\", \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\"], \"digest\": \"2760d978ea0a2235\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting and module scalar associators cover components, not the strict compact-support and normalized completed Roos equation"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_hcomp|conjugateEquiv_id CategoryTheory/Adjunction",
+   "results": "{\"t\": \"2026-10-22T06:53:43Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_vcomp|mateEquiv_hcomp|conjugateEquiv_id\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"bc7bfa299826683a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting and module scalar associators cover components, not the strict compact-support and normalized completed Roos equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction Beck Chevalley mate of pasted coefficient change squares equals the composite mates and is compatible with inverse limit tensor comparison",
+   "results": "{\"t\": \"2026-10-22T06:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction Beck Chevalley mate of pasted coefficient change squares equals the composite mates and is compatible with inverse limit tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"3c2840b7f12c0f46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mate pasting and module scalar associators cover components, not the strict compact-support and normalized completed Roos equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "finished",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Composition of scalar proper/open mates before total limit (returned comparison Steps 11)",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-fix-scalar-completion-associator"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportStrictScalarCompositionPrelude",
+  "file": "lean/Sheaf/Paper/CompactSupportStrictScalarCompositionPrelude.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.constantMap_composition",
+  "statement": "theorem constantMap_composition (W : Scheme.{u}) : constantMap l E F i W ≫ constantMap l F L j W = constantMap l E L (j.comp i) W",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.constantMap_composition",
+   "WeilConjectures.PurStrictScalar.compositionOrdinary",
+   "WeilConjectures.PurStrictScalar.compositionBase",
+   "WeilConjectures.PurStrictScalar.compositionTowerOrdinary",
+   "WeilConjectures.PurStrictScalar.compositionTower",
+   "WeilConjectures.PurStrictScalar.compositionCompleted",
+   "WeilConjectures.PurStrictScalar.compositionSelection",
+   "WeilConjectures.PurStrictScalar.compositionSelectionOrdinary",
+   "WeilConjectures.PurStrictScalar.compositionRetained",
+   "WeilConjectures.PurStrictScalar.compositionRamification",
+   "WeilConjectures.PurStrictScalar.compositionProper",
+   "WeilConjectures.PurStrictScalar.compositionOpen"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c5fcb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T234156-L-22538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-c5fcb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T234156-L-22538",
+  "kind": "interface",
+  "note": "independent cc review: item compactSupportStrictScalarComposition proved from the published hole compactSupportStrictScalarComparison (restored, statement unchanged) plus new hole supportRealization_coherence, checked against arrow/supportModel/reductionBalancing/reindexImage definitions in the clone; Prelude = verbatim move of the item prefix; importer CompactSupportCompletedScalarArrow compiled against corrected files"
+ }
+}
