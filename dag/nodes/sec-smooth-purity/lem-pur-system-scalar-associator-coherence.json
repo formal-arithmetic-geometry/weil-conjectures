@@ -13,11 +13,79 @@
   "def-pur-scalar-extension-tower-data",
   "stage3-pur-derived-scalar-tensor-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The fixed coefficient-derived-system calculus of [lem-coef-derived-system-evaluation-calculus] is the ordinary unbounded derived category of module sheaves on the coefficient sequence ringed site, so [lem-sf-ringed-derived-closed-symmetric-monoidal] applies with $\\mathcal O$ the sequence coefficient ring. By the item's hypothesis, $\\alpha^{\\mathrm{sys},F}$ is the associator of that structure, induced on total tensor complexes of K-flat representatives. Explicitly, for flat-term K-flat complexes $P,Q,R$ over $F$, the complexes $T(P,Q)$ and $T(Q,R)$ are again flat-term K-flat representatives of the derived tensors [lem-pur-kflat-total-tensor-model]. Hence, after the system tensor-model isomorphisms at $(P,Q)$, $(T(P,Q),R)$, $(Q,R)$ and $(P,T(Q,R))$, the map $\\alpha^{\\mathrm{sys},F}_{QP,QQ,QR}$ is the localization of the native chain associator $a_{P,Q,R}:T(T(P,Q),R)\\to T(P,T(Q,R))$.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits; agent expansion to the fixed coefficient-system calculus."
+   }
+  },
+  {
+   "text": "Let $P,Q,R$ be flat-term K-flat complexes over $E$ and $s$ the strict scalar extension of [def-pur-scalar-extension-tower-data]. The pairs $(P,Q)$, $(Q,R)$, $(T(P,Q),R)$ and $(P,T(Q,R))$ consist of flat-term K-flat complexes [lem-pur-kflat-total-tensor-model], and $s$ of each is flat-term K-flat over $L$ [lem-pur-kflat-change-of-rings-independent]. Apply the `DerivedSigmaModel` equation of [stage3-pur-derived-scalar-tensor-normalization] to these four pairs. Use naturality of $\\mathrm{derivedSigma}$ along the $E$ tensor-model isomorphisms and functoriality of the $L$ system tensor. After the tensor-model isomorphisms and the scalar counits $\\varepsilon$, $\\sigma^{\\mathrm l}$ at $(QP,QQ,QR)$ becomes the localization of $\\sigma_{T(P,Q),R};(\\sigma_{P,Q}\\otimes1_{sR})$, and $\\sigma^{\\mathrm r}$ that of $\\sigma_{P,T(Q,R)};(1_{sP}\\otimes\\sigma_{Q,R})$. Here $\\sigma$ is the strict comparison. By Step 1 over $E$ and naturality of $\\varepsilon$, $S_{L/E}(\\alpha^{\\mathrm{sys},E})$ becomes the localization of $s(a^E_{P,Q,R})$. By Step 1 over $L$ for $sP,sQ,sR$, $\\alpha^{\\mathrm{sys},L}$ becomes that of $a^L_{sP,sQ,sR}$.",
+   "uses": [
+    "stage3-pur-derived-scalar-tensor-normalization",
+    "def-pur-scalar-extension-tower-data",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Agent expansion of the normalized scalar/tensor comparison and its associativity on K-flat representatives."
+   }
+  },
+  {
+   "text": "It remains to prove the chain identity $s(a^E_{P,Q,R});\\sigma_{P,T(Q,R)};(1\\otimes\\sigma_{Q,R})=\\sigma_{T(P,Q),R};(\\sigma_{P,Q}\\otimes1);a^L_{sP,sQ,sR}$. Take a local homogeneous generator $b\\otimes((x\\otimes y)\\otimes z)$ with $b$ a coefficient section in degree $0$. On the left, the native associator [lem-sf-ringed-tensor-complex-constraints] gives $b\\otimes(x\\otimes(y\\otimes z))$. The generator normalization of $\\sigma$ in [def-pur-scalar-extension-tower-data] then gives $(b\\otimes x)\\otimes(1\\otimes(y\\otimes z))$ and next $(b\\otimes x)\\otimes((1\\otimes y)\\otimes(1\\otimes z))$. On the right, $\\sigma$ gives $(b\\otimes(x\\otimes y))\\otimes(1\\otimes z)$ and then $((b\\otimes x)\\otimes(1\\otimes y))\\otimes(1\\otimes z)$. The native associator then gives the same element. No Koszul sign occurs, since $b$ and $1$ have degree $0$ and the associator is unsigned. Each term of the strict triple tensor is a direct sum of sheafified tensor products [def-pur-sheaf-tensor-product]. A map out of a sheafification is determined on the presheaf tensor, which is generated sectionwise by pure tensors, so the two maps agree in every degree and at every system level. Both sides are already maps of complexes of systems, so no separate check of differentials or quotient transitions is needed.",
+   "uses": [
+    "def-pur-scalar-extension-tower-data",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Tensor reassociation and coefficient-comparison calculation on homogeneous generators; expanded from the imported blueprint sentence."
+   }
+  },
+  {
+   "text": "Localizing Step 3 and inserting the identifications of Step 2 gives the displayed equation at $(QP,QQ,QR)$ for all flat-term K-flat $P,Q,R$. Let $X,Y,Z$ be arbitrary derived system objects represented by complexes $G_X,G_Y,G_Z$. Then [lem-pc-kflat-resolution] on the sequence ringed site gives flat-term K-flat quasi-isomorphisms $P\\to G_X$, $Q\\to G_Y$, $R\\to G_Z$. These become isomorphisms $u,v,w$ in the derived category [def-weil-abstract-derived-category]. Both sides of the equation are composites of natural transformations between functors $D(\\mathscr S_E)^3\\to D(\\mathscr S_L)$: the associators, the natural isomorphism $\\mathrm{derivedSigma}$ and its tensor whiskerings, and the functor $S_{L/E}$. Naturality along $(u,v,w)$ therefore writes each side at $(X,Y,Z)$ as the corresponding side at $(QP,QQ,QR)$, conjugated by the invertible maps $S_{L/E}((u\\otimes v)\\otimes w)$ and $S_{L/E}u\\otimes(S_{L/E}v\\otimes S_{L/E}w)$. Hence $S_{L/E}(\\alpha^{\\mathrm{sys},E});\\sigma^{\\mathrm r}=\\sigma^{\\mathrm l};\\alpha^{\\mathrm{sys},L}$ holds for all $X,Y,Z$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Coherence is inherited from the individual maps on the stated domains; agent expansion via K-flat resolutions and naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-scalar-extension-tower-data",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "stage3-pur-derived-scalar-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Agent expansion of the fixed K-flat-normalized coefficient-system associator calculation; the imported source supplies only the generic tensor-reassociation route."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-rational-tensor-associator-scalar-square",
@@ -54,15 +122,82 @@
    "results": "ModuleCat.extendScalars_assoc ModuleCat.extendScalars_assoc_assoc ModuleCat.extendScalars_assoc' Algebra.TensorProduct.assoc TensorProduct.enorm_assoc Module.Flat.instTensorProduct Coalgebra.TensorProduct.assoc TensorProduct.tensorTensorTensorAssoc",
    "date": "2026-10-27",
    "verdict": "no exact project-specific match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fixed K-flat normalized system scalar associator derivedSigma coherence",
+   "results": "HomologicalComplex.associator (Mathlib/Algebra/Homology/Monoidal); HomologicalComplex.mapBifunctorAssociatorX (Mathlib/Algebra/Homology/BifunctorAssociator); related generic associator declarations; no project-specific declaration",
+   "date": "2026-10-28",
+   "verdict": "no exact project-specific match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Functor, CategoryTheory.NatIso",
+   "results": "unknown identifier 'CategoryTheory.NatIso'; no result returned",
+   "date": "2026-10-28",
+   "verdict": "unavailable/query error; no verdict from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSigma.*associator|systemClosed.*monoidal|systemScalar.*coherence in Mathlib/",
+   "results": "none",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat normalized derived scalar tensor comparison satisfies associator coherence",
+   "results": "CategoryTheory.Mathlib.Tactic.MonTauto.associator_hom_comp_tensorHom_tensorHom_comp_assoc; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc'; generic monoidal/extension associativity only",
+   "date": "2026-10-28",
+   "verdict": "generalizations only; no exact project-specific match"
   }
  ],
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Associator coherence for the fixed K-flat-normalized system scalar calculus and its derivedSigma comparison.",
+   "place": "Imported agent-written interface; this split realizes the fixed K-flat-normalized associator calculation and its derivedSigma associativity.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-28",
+  "item": "lem-pur-system-scalar-associator-coherence",
+  "worker": "stage1",
+  "summary": "Completed the statement-only split with four proof steps. The common coefficient-system calculus pins the systemClosed associator to the ringed K-flat tensor model; derivedSigma normalization and the strict scalar tower give the same homogeneous-generator formula on both nested routes; resolving-representative full faithfulness and unique descent extend the equality to all derived objects. No new nodes were needed.",
+  "blueprint": "The imported fix-prop-coherence proof supplies the tensor-reassociation route; the steps make precise the fixed K-flat coefficient-system and derivedSigma normalization used by this interface.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Fixes the derived system category whose closed tensor structure the item uses; cited in the item's statement."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Supplies the K-flat-induced associator of the fixed system tensor; cited in the item's statement."
+   },
+   {
+    "node": "lem-sf-ringed-tensor-complex-constraints",
+    "why": "Pure-generator formula of the native chain associator used in the strict computation."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Flat-term K-flat resolutions on the sequence ringed site, used to extend the equation from representatives to all derived objects."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NG-4b1b2f52e",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-4b1b2f52e (reviewer sub-agent of L); spot-checked: I read the whole item (no new nodes), the statement of every cited node, fix-prop-coherence.proof.md (a generic sentence only, so the proof is honestly labelled an agent expansion), Stacks 06YS/07A2/0FPT and the Lean read-only (ScalarExtensionTowerRealizationData.lean:182-303 for Good/DerivedSigmaModel/derivedSigma, CoefficientClosedStructure, CoefficientTensorModels). The statement is true under its explicit hypothesis that the systemClosed associator is the K-flat-induced one. Advisory for stage 2: CoefficientClosedStructure.monoidal is a free field that CoefficientTensorModels does not pin, so the Lean statement must carry this normalization. The worker was right to drop lem-sf-coefficient-system-symmetric-calculus: I confirmed it reaches the item, so citing it would make a cycle. I recomputed the generator computation: both routes send b⊗((x⊗y)⊗z) to (b⊗x)⊗((1⊗y)⊗(1⊗z)) with no sign. Small cases E=L, zero objects and ramified ι all hold. Three repairable faults, all fixed in the item JSON with the statement unchanged. (1) C4, step 4: it cited the binary-functor whiskering lemma and the uniqueness of the binary tensor-comparison descent theorem for an equality of two given natural isomorphisms of trifunctors, which neither states; replaced by the elementary argument from naturality and K-flat resolutions (lem-pc-kflat-resolution, def-weil-abstract-derived-category), so the whiskering tool use is withdrawn. (2) C1, step 2: it applied DerivedSigmaModel to the outer pair (T(P,Q),R) and to the scalar images without justifying that they are flat-term K-flat; now cited lem-pur-kflat-total-tensor-model and lem-pur-kflat-change-of-rings-independent, with the inserted tensor-model isomorphisms and counits written out. (3) E5, step 3: the phrase 'preserved by quotient transitions and differentials' is replaced by the explicit generator computation and extensionality from def-pur-sheaf-tensor-product. proof_deps is now the exact union of the step uses, and none of the added citations reaches the item (no cycle). Accepted off-route tools: lem-coef-derived-system-evaluation-calculus, lem-sf-ringed-derived-closed-symmetric-monoidal, lem-sf-ringed-tensor-complex-constraints, lem-pc-kflat-resolution. No duplicate in the DAG: the pullback analogue lem-pur-completed-pullback-tensor-associativity-representatives is a different statement.; 1 file(s) fixed by the reviewer"
  }
 }
