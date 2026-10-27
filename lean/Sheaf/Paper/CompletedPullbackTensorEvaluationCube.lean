@@ -40,7 +40,9 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Transport the two K-flat evaluation normalization squares through the coherent
+/-- STATEMENT-DISPUTED: `ν` is quantified as an arbitrary natural isomorphism, but no
+normalization hypothesis identifies it with the canonical finite pullback tensor comparison.
+Transport the two K-flat evaluation normalization squares through the coherent
 pullback comparison and the supplied derived evaluation comparison.
 Source: Stacks, sites-cohomology.tex, Tags 07A4, 0941 and 03D2
 (blueprint: lem-pur-completed-pullback-tensor-evaluation-representatives).
