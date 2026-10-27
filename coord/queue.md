@@ -1,6 +1,6 @@
 # Work queue
 
-210 items; claim with `tools/claim.py next <group> [--stage N]`.
+214 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (2 clusters, 625 modules)
 
@@ -31,7 +31,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 1135 nodes that below a finished node, not needed, 2 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (199)
+## Stage 3: modules to prove (203)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -76,10 +76,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PrimitiveQuotientScalarModelExistence` | 9 | 1 | proof | route |
 | `Sheaf.Paper.QuotientSectionPullTransport` | 9 | 2 | proof | route |
 | `Sheaf.SecSmoothPurity.FiniteGeneralRingLocalTraceExponent` | 9 | 1 | proof | route |
-| `Sheaf.SixFunctors.IntegralKernelContractions` | 9 | 1 | proof | route |
 | `Sheaf.Paper.OpenScalarCounitSquare` | 10 | 4 | proof | route |
-| `Sheaf.Paper.RationalP1UnitCounit` | 10 | 3 | proof | route |
+| `Sheaf.Paper.RationalP1UnitCounit` | 10 | 1 | proof | route |
 | `Sheaf.SixFunctors.EtaleHomTransposeExact` | 10 | 1 | proof | route |
+| `Sheaf.SixFunctors.IntegralKernelFirstContraction` | 10 | 1 | proof | route |
+| `Sheaf.SixFunctors.IntegralKernelSecondContraction` | 10 | 1 | proof | route |
 | `Sheaf.SixFunctors.IntegralKernelUnitCounit` | 10 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose` | 11 | 1 | proof | route |
 | `Sheaf.Paper.DiagonalTowerLimit` | 11 | 1 | proof | route |
@@ -107,7 +108,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.NormalizedVectorPurityScalarCompatibility` | 13 | 1 | proof | route |
 | `Sheaf.Paper.NormalizedVectorPurityScalarLineWitness` | 13 | 1 | proof | route |
 | `Sheaf.Paper.P1KummerChernScalar` | 13 | 1 | proof | route |
-| `Sheaf.Paper.RationalP1FirstTraceTransport` | 13 | 1 | proof | route |
 | `Sheaf.Paper.RationalP1UnitFactorization` | 13 | 1 | proof | route |
 | `Sheaf.Paper.SmoothClopenComponentInverse` | 13 | 1 | proof | route |
 | `Sheaf.Paper.CompletedSupportedCoefficientTransport` | 14 | 1 | proof | route |
@@ -117,7 +117,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.EtaleCoefficientSystemAdjoint` | 14 | 1 | proof | route |
 | `Sheaf.Paper.ExceptionalCommonStageFromRational` | 14 | 1 | proof | route |
 | `Sheaf.Paper.NormalizedIntegralScalarUnitUnderlying` | 14 | 1 | proof | route |
-| `Sheaf.Paper.ProjectiveSupportedSectionProjection` | 14 | 1 | proof | route |
+| `Sheaf.Paper.RationalP1FirstTraceTransportCore` | 14 | 1 | proof | route |
 | `Sheaf.Paper.RationalP1SecondPullSection` | 14 | 1 | proof | route |
 | `Sheaf.Paper.RationalP1SectionEvaluation` | 14 | 1 | proof | route |
 | `Sheaf.Paper.RingRefinementScalarWord` | 14 | 1 | proof | route |
@@ -126,8 +126,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralSupportAdjointOfPreservation` | 15 | 1 | proof | route |
 | `Sheaf.Paper.IntegralSupportPreservation` | 15 | 1 | proof | route |
 | `Sheaf.Paper.NormalizedScalarAssociatorIntegralTransport` | 15 | 1 | proof | route |
-| `Sheaf.Paper.RationalP1ScalarChernBaseChange` | 15 | 1 | proof | route |
-| `Sheaf.Paper.RationalP1ScalarChernSplittings` | 15 | 1 | proof | route |
+| `Sheaf.Paper.ProjectiveCanonicalSectionProjection` | 15 | 1 | proof | route |
+| `Sheaf.Paper.ProjectiveSupportedSourceNormalization` | 15 | 1 | proof | route |
 | `Sheaf.Paper.RationalP1SecondPretrace` | 15 | 1 | proof | route |
 | `Sheaf.Paper.RingEndpointScalarRestrictions` | 15 | 1 | proof | route |
 | `Sheaf.Paper.StrictKummerUnitNormalization` | 15 | 1 | proof | route |
@@ -142,11 +142,15 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.EtaleQuotientTensorProjection` | 16 | 1 | proof | route |
 | `Sheaf.Paper.ExceptionalScalarMateLocalization` | 16 | 1 | proof | route |
 | `Sheaf.Paper.QcqsCompactSupportNativeTowerComparison` | 16 | 1 | proof | route |
+| `Sheaf.Paper.RationalP1ScalarChernBaseChangeChern` | 16 | 1 | proof | route |
+| `Sheaf.Paper.RationalP1ScalarChernBaseChangeUnit` | 16 | 1 | proof | route |
+| `Sheaf.Paper.RationalP1ScalarChernP2Splitting` | 16 | 1 | proof | route |
+| `Sheaf.Paper.RationalP1ScalarChernQSplitting` | 16 | 1 | proof | route |
 | `Sheaf.Paper.ScalarTowerPullbackLimitSquare` | 16 | 1 | proof | route |
 | `Sheaf.Paper.ScalarTowerTensorLimitSquare` | 16 | 1 | proof | route |
 | `Sheaf.Paper.SfDirectImageRestrictionPasting` | 16 | 1 | proof | route |
 | `Sheaf.Paper.DiagonalUniformizerAdjunctTransport` | 17 | 1 | proof | route |
-| `Sheaf.Paper.DiagonalUniformizerLocalChern` | 17 | 1 | proof | route |
+| `Sheaf.Paper.DiagonalUniformizerLocalChern` | 17 | 2 | proof | route |
 | `Sheaf.Paper.EtaleBrownOpenSingletonEvaluation` | 17 | 1 | proof | route |
 | `Sheaf.Paper.ExceptionalIntegralScalarMates` | 17 | 1 | proof | route |
 | `Sheaf.Paper.ExceptionalRingOperationsExistence` | 17 | 1 | proof | route |
