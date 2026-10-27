@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-evaluation-model-transport",
+ "kind": "lemma",
+ "title": "Transporting evaluation normalization across finite factor isomorphisms",
+ "status": "split",
+ "statement": "Fix a scheme X and quotient level n. Let P,Q be K-flat coefficient-sequence complexes and let R,S be K-flat finite-coefficient complexes. Given isomorphisms from their evaluated P,Q to R,S, the tensor-evaluation normalization of [lem-coef-derived-system-evaluation-calculus] remains valid after composing the two exact evaluation factorization maps with the derived quotient images of these isomorphisms. Its right side is the evaluation factorization at the sequence total tensor, the quotient image of the ordinary evaluation tensor comparison, the quotient image of the tensor of the two isomorphisms, and the finite tensor model at R,S.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison; Tags 0941 and 03D2 for sequence evaluation and the ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Apply the given evaluation-tensor normalization hx to P and Q. Evaluation preserves their K-flatness, so both its finite model and the model at R,S exist.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the finite tensor-model comparison transports the two isomorphisms through that comparison. Functoriality of tensor and associativity paste this with the supplied normalization.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 final ordinary total-complex comparison; Tags 0941 and 03D2 for evaluation and units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of evaluation of coefficient sequences with the canonical pullback tensor comparison of cochain complexes",
+   "results": "Eight hits about shift evaluation and group cohomology; none states this coefficient-sequence ordinary comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso",
+   "results": "No result; this identifier is unknown to the search index.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensor.*[Ee]valuation|[Ee]valuation.*[Cc]ochain.*[Tt]ensor",
+   "results": "No matches from indexed grep. Direct project rg found the generator-normalized sequence comparison, the evaluation comparison, their naturality, and finite K-flat normalization, but no ordinary cochain square.",
+   "date": "2026-10-28",
+   "verdict": "Existing normalizations provide the individual faces, not their section calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorEvaluationCube",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-pullback-tensor-evaluation-cube-model",
+   "place": "Transporting evaluation normalization across finite factor isomorphisms.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorEvaluationModelTransport",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorEvaluationModelTransport.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_evaluation_model_transport",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_evaluation_model_transport"
+  ],
+  "statement": "theorem completedPullbackTensor_evaluation_model_transport (X : Scheme.{u}) (n : ℕ)\n    (hx : CoefficientEvaluationTensorNormalization l E X\n      (pullbackTensorCalculus l E X).toCoefficientDerivedSystemReduction)\n    (P Q : CochainComplex (coefficientSequenceModules l E X) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := coefficientSequenceCommRingSheaf l E X) P)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients\n      (R := coefficientSequenceCommRingSheaf l E X) Q)\n    (R S : CochainComplex (normalizedDVRModules l E X n) ℤ)\n    (hR : CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E X n) R)\n    (hS : CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E X n) S)\n    (a : ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj P ≅ R)\n    (b : ((coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)).obj Q ≅ S) :\n    let t := coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)\n    let t' := coefficientTotalTensor.{u, u + 1, u}\n      (ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)\n    (coefficientSequenceDerivedEvaluation l E X n).map\n        (pullbackTensorSystemModel l E X P Q hP hQ).hom ≫\n      ((pullbackTensorCalculus l E X).evaluationTensor n).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n      (finiteIntrinsicDerivedTensor l E X n).map\n        (Prod.mkHom\n          ((coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app P ≫\n            DerivedCategory.Q.map a.hom)\n          ((coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app Q ≫\n            DerivedCategory.Q.map b.hom)) =\n    (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app\n        (t.obj (P, Q)) ≫\n      DerivedCategory.Q.map (coefficientEvaluationTensorIso l E X n P Q).hom ≫\n      DerivedCategory.Q.map (t'.map (Prod.mkHom a.hom b.hom)) ≫\n      (coefficientFiniteTensorModelIso l E X\n        (pullbackTensorCalculus l E X).toCoefficientDerivedSystemTensors n R S hR hS).hom",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "independent cc review: item cube_model Lean statement (∀ν → finitePullbackTensorConstructionIso) against its node prose (canonical ν) and the change record; Representatives forced one-line adaptation; 12 new proved modules against their node files; #print axioms in a /tmp sandbox (sorryAx upstream only)"
+ }
+}

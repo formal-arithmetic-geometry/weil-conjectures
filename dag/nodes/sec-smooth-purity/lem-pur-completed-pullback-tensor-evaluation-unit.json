@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-evaluation-unit",
+ "kind": "lemma",
+ "title": "Evaluation of the sequence adjunction unit through the ordinary mate",
+ "status": "split",
+ "statement": "For the ordinary inverse-evaluation mate of [def-pur-completed-pullback-tower-realizations], followed by a natural isomorphism c to intrinsic finite inverse image [def-weil-proetale-inverse-image] which preserves adjunction-unit sections, evaluating a sequence adjunction-unit section at quotient level n and applying this composite gives the intrinsic finite adjunction-unit section of its evaluated section. This is an equality of actual sections, for every coefficient-sequence module and every pro-etale object, with no flatness or derived hypothesis.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison; Tags 0941 and 03D2 for sequence evaluation and the ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Use the defining mate uniqueness equation to identify its composite with the evaluated sequence adjunction unit. The canonical section transports for sequence evaluation and direct image give this equation on actual sections.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-coef-evaluation-total-tensor-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the evaluation mate and then apply c. Its prescribed unit equation hc replaces the ordinary finite adjunction unit by the intrinsic one. Apply the same formula degree by degree for the private cochain helper.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-evaluation-total-tensor-naturality",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 final ordinary total-complex comparison; Tags 0941 and 03D2 for evaluation and units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of evaluation of coefficient sequences with the canonical pullback tensor comparison of cochain complexes",
+   "results": "Eight hits about shift evaluation and group cohomology; none states this coefficient-sequence ordinary comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso",
+   "results": "No result; this identifier is unknown to the search index.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensor.*[Ee]valuation|[Ee]valuation.*[Cc]ochain.*[Tt]ensor",
+   "results": "No matches from indexed grep. Direct project rg found the generator-normalized sequence comparison, the evaluation comparison, their naturality, and finite K-flat normalization, but no ordinary cochain square.",
+   "date": "2026-10-28",
+   "verdict": "Existing normalizations provide the individual faces, not their section calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorEvaluationCube",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-pullback-tensor-evaluation-cube-model",
+   "place": "Evaluation of the sequence adjunction unit through the ordinary mate.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorEvaluationUnit",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorEvaluationUnit.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_evaluation_unit",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_evaluation_unit"
+  ],
+  "statement": "theorem completedPullbackTensor_evaluation_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (c : integralOperationsLevelPullback l E f n ≅\n      sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)\n    (hc : ∀ (A : normalizedDVRModules l E Y n) (U : Y.ProEt)\n      (x : A.val.obj (op U)),\n      (c.hom.app A).val.app (op ((proEtaleBaseChange f).obj U))\n        (((coefficientProEtaleModuleAdjunction.{u, u} f\n          (CommRingCat.of (ULift.{u + 1}\n            (finiteCoefficientRing l E (n + 1))))).unit.app A).val.app (op U) x) =\n      ((sfIntrinsicConstantModuleAdjunction f\n        (finiteCoefficientRing l E (n + 1))).unit.app A).val.app (op U) x)\n    (M : coefficientSequenceModules l E Y) (U : Y.ProEt)\n    (x : M.val.obj (op (n, U))) :\n    (((pullbackTensorSequenceInverseEvaluation l E f n).inv.app M ≫\n      c.hom.app ((coefficientSequenceEvaluation l E Y n).obj M)).val.app\n        (op ((proEtaleBaseChange f).obj U)))\n      (coefficientEvaluationSection l E X ((pullbackTensorSequenceInverse l E f).obj M)\n        n (op ((proEtaleBaseChange f).obj U))\n        (((pullbackTensorSequenceAdjunction l E f).unit.app M).val.app (op (n, U)) x)) =\n    ((sfIntrinsicConstantModuleAdjunction f\n      (finiteCoefficientRing l E (n + 1))).unit.app\n        ((coefficientSequenceEvaluation l E Y n).obj M)).val.app (op U)\n      (coefficientEvaluationSection l E Y M n (op U) x)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "independent cc review: item cube_model Lean statement (∀ν → finitePullbackTensorConstructionIso) against its node prose (canonical ν) and the change record; Representatives forced one-line adaptation; 12 new proved modules against their node files; #print axioms in a /tmp sandbox (sorryAx upstream only)"
+ }
+}

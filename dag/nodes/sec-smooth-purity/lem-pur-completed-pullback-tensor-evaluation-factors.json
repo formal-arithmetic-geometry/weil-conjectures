@@ -1,0 +1,105 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-evaluation-factors",
+ "kind": "lemma",
+ "title": "Combining the two quotient maps in the evaluation factorization",
+ "status": "split",
+ "statement": "For the exact derived evaluation comparison e of [def-pur-completed-pullback-tower-realizations] satisfying its prescribed factorization equation he, the same equation holds with the two consecutive derived-quotient images on its right combined into the image of the ordinary inverse evaluation mate followed by the cochain map of c. The equality holds for every sequence complex. This is only functoriality of the quotient, not a new normalization hypothesis.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison; Tags 0941 and 03D2 for sequence evaluation and the ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Specialize the assumed factorization identity he to the chosen complex. Apply functoriality of the derived quotient to its last two arrows and reassociate compositions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 final ordinary total-complex comparison; Tags 0941 and 03D2 for evaluation and units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of evaluation of coefficient sequences with the canonical pullback tensor comparison of cochain complexes",
+   "results": "Eight hits about shift evaluation and group cohomology; none states this coefficient-sequence ordinary comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso",
+   "results": "No result; this identifier is unknown to the search index.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensor.*[Ee]valuation|[Ee]valuation.*[Cc]ochain.*[Tt]ensor",
+   "results": "No matches from indexed grep. Direct project rg found the generator-normalized sequence comparison, the evaluation comparison, their naturality, and finite K-flat normalization, but no ordinary cochain square.",
+   "date": "2026-10-28",
+   "verdict": "Existing normalizations provide the individual faces, not their section calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorEvaluationCube",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-pullback-tensor-evaluation-cube-model",
+   "place": "Combining the two quotient maps in the evaluation factorization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorEvaluationFactors",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorEvaluationFactors.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_evaluation_factors",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_evaluation_factors"
+  ],
+  "statement": "theorem completedPullbackTensor_evaluation_factors {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (n : ℕ)\n    (c : integralOperationsLevelPullback l E f n ≅\n      sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)\n    (e : pullbackTensorSequenceDerived l E f ⋙\n        coefficientSequenceDerivedEvaluation l E X n ≅\n      coefficientSequenceDerivedEvaluation l E Y n ⋙ finiteDerivedPullback l E n f)\n    (he : ∀ A : CochainComplex (coefficientSequenceModules l E Y) ℤ,\n      e.hom.app (DerivedCategory.Q.obj A) ≫\n        (finiteDerivedPullback l E n f).map\n          ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app A) ≫\n        (sfIntrinsicPullback\n          (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app _ =\n      (coefficientSequenceDerivedEvaluation l E X n).map\n        ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A) ≫\n        (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app _ ≫\n        DerivedCategory.Q.map ((pullbackTensorInverseEvaluationComplex l E f n).inv.app A) ≫\n        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app\n          (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj A)))\n    (A : CochainComplex (coefficientSequenceModules l E Y) ℤ) :\n    e.hom.app (DerivedCategory.Q.obj A) ≫\n      (finiteDerivedPullback l E n f).map\n        ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app A) ≫\n      (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n        f).mapDerivedCategoryFactors.hom.app _ =\n    (coefficientSequenceDerivedEvaluation l E X n).map\n      ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A) ≫\n      (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app _ ≫\n      DerivedCategory.Q.map\n        ((pullbackTensorInverseEvaluationComplex l E f n).inv.app A ≫\n          (NatIso.mapHomologicalComplex c (.up ℤ)).hom.app\n            (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj A))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "independent cc review: item cube_model Lean statement (∀ν → finitePullbackTensorConstructionIso) against its node prose (canonical ν) and the change record; Representatives forced one-line adaptation; 12 new proved modules against their node files; #print axioms in a /tmp sandbox (sorryAx upstream only)"
+ }
+}

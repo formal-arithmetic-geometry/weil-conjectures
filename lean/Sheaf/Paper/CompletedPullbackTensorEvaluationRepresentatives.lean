@@ -128,7 +128,7 @@ theorem completedPullbackTensor_evaluation_representatives {X Y : Scheme.{u}}
   have hn := (pullbackTensorCalculus l E Y).evaluationTensor_normalization
   have hx := (pullbackTensorCalculus l E X).evaluationTensor_normalization
   have h := completedPullbackTensor_evaluation_cube_model l E f n c hc e he
-    (finitePullbackTensorConstructionIso l E f n) hn hx P Q hP hQ
+    hn hx P Q hP hQ
   simpa only [finiteEvaluationComparison_app l E f n] using h
 
 

@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-evaluation-pasting",
+ "kind": "lemma",
+ "title": "Pasting prescribed representative faces into the canonical derived evaluation cube",
+ "status": "split",
+ "statement": "Use the system pullback and tensor models of [def-pur-completed-pullback-tower-realizations], finite canonical pullback tensor comparison of [def-pur-finite-pullback-tensor-construction], and evaluation normalizations of [lem-coef-derived-system-evaluation-calculus]. Let c be an ordinary comparison to intrinsic finite inverse image and let e be an exact derived comparison satisfying its prescribed factorization equation. For K-flat sequence complexes P,Q, assume K-flatness of their evaluated and intrinsic-pulled-back complexes. Given an ordinary finite cochain isomorphism k, assume its finite tensor-model normalization square and the explicit total diagonal equality of the exact factorization maps. Then the canonical derived pullback tensor evaluation cube commutes on the pair Q(P),Q(Q). This is a conditional tensor-model pasting statement: it neither constructs k nor proves the total diagonal. Its complete hypotheses and conclusion are the literal Lean attachment.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-finite-pullback-tensor-construction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-proetale-inverse-image",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison; Tags 0941 and 03D2 for sequence evaluation and the ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Use the system and finite tensor models as the four corners. The system comparison normalization and the Y evaluation normalization give two faces. Transport the X evaluation normalization through the two ordinary comparison isomorphisms by finite tensor-model naturality. The assumed finite normalization gives the fourth face.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-completed-pullback-tensor-evaluation-model-transport",
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed factorization equation he, with its quotient maps combined, gives the two factor faces. The assumed diagonal is the total face. Tensor naturality pastes the seven faces; cancel the source model isomorphism and the tensor of the invertible target comparison maps.",
+   "uses": [
+    "lem-pur-completed-pullback-tensor-evaluation-factors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-completed-pullback-tensor-evaluation-model-transport",
+  "def-pur-finite-pullback-tensor-construction",
+  "lem-pur-completed-pullback-tensor-evaluation-factors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 final ordinary total-complex comparison; Tags 0941 and 03D2 for evaluation and units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of evaluation of coefficient sequences with the canonical pullback tensor comparison of cochain complexes",
+   "results": "Eight hits about shift evaluation and group cohomology; none states this coefficient-sequence ordinary comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso",
+   "results": "No result; this identifier is unknown to the search index.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensor.*[Ee]valuation|[Ee]valuation.*[Cc]ochain.*[Tt]ensor",
+   "results": "No matches from indexed grep. Direct project rg found the generator-normalized sequence comparison, the evaluation comparison, their naturality, and finite K-flat normalization, but no ordinary cochain square.",
+   "date": "2026-10-28",
+   "verdict": "Existing normalizations provide the individual faces, not their section calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorEvaluationCube",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-pullback-tensor-evaluation-cube-model",
+   "place": "The derived tensor-model pasting after the finite normalization and the ordinary diagonal have been established.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorEvaluationPasting",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorEvaluationPasting.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_evaluation_pasting",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_evaluation_pasting"
+  ],
+  "statement": "theorem completedPullbackTensor_evaluation_pasting {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (n : ℕ)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    (c : integralOperationsLevelPullback l E f n ≅\n      sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)\n    (e : pullbackTensorSequenceDerived l E f ⋙\n        coefficientSequenceDerivedEvaluation l E X n ≅\n      coefficientSequenceDerivedEvaluation l E Y n ⋙ finiteDerivedPullback l E n f)\n    (he : ∀ A : CochainComplex (coefficientSequenceModules l E Y) ℤ,\n      e.hom.app (DerivedCategory.Q.obj A) ≫\n        (finiteDerivedPullback l E n f).map\n          ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app A) ≫\n        (sfIntrinsicPullback\n          (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app _ =\n      (coefficientSequenceDerivedEvaluation l E X n).map\n        ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A) ≫\n        (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app _ ≫\n        DerivedCategory.Q.map ((pullbackTensorInverseEvaluationComplex l E f n).inv.app A) ≫\n        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app\n          (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj A)))\n    (hn : CoefficientEvaluationTensorNormalization l E Y\n      (pullbackTensorCalculus l E Y).toCoefficientDerivedSystemReduction)\n    (hx : CoefficientEvaluationTensorNormalization l E X\n      (pullbackTensorCalculus l E X).toCoefficientDerivedSystemReduction)\n    (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := coefficientSequenceTopology (ProEt.topology Y))\n      (R := coefficientSequenceCommRingSheaf l E Y) P)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := coefficientSequenceTopology (ProEt.topology Y))\n      (R := coefficientSequenceCommRingSheaf l E Y) Q) :\n    let FC : CochainComplex (coefficientSequenceModules l E Y) ℤ ⥤\n        CochainComplex (coefficientSequenceModules l E X) ℤ :=\n          (pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)\n    let VC : CochainComplex (coefficientSequenceModules l E Y) ℤ ⥤\n        CochainComplex (normalizedDVRModules l E Y n) ℤ :=\n          (coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)\n    let WC : CochainComplex (coefficientSequenceModules l E X) ℤ ⥤\n        CochainComplex (normalizedDVRModules l E X n) ℤ :=\n          (coefficientSequenceEvaluation l E X n).mapHomologicalComplex (.up ℤ)\n    let GC : CochainComplex (normalizedDVRModules l E Y n) ℤ ⥤\n        CochainComplex (normalizedDVRModules l E X n) ℤ := (sfIntrinsicPullback\n      (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex (.up ℤ)\n    let tY : CochainComplex (coefficientSequenceModules l E Y) ℤ ×\n        CochainComplex (coefficientSequenceModules l E Y) ℤ ⥤\n            CochainComplex (coefficientSequenceModules l E Y) ℤ :=\n          coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (ProEt.topology Y)) (coefficientSequenceCommRingSheaf l E Y)\n    let tX : CochainComplex (coefficientSequenceModules l E X) ℤ ×\n        CochainComplex (coefficientSequenceModules l E X) ℤ ⥤\n            CochainComplex (coefficientSequenceModules l E X) ℤ :=\n          coefficientTotalTensor.{u, u + 1, u}\n      (coefficientSequenceTopology (ProEt.topology X)) (coefficientSequenceCommRingSheaf l E X)\n    let tY' : CochainComplex (normalizedDVRModules l E Y n) ℤ ×\n        CochainComplex (normalizedDVRModules l E Y n) ℤ ⥤\n            CochainComplex (normalizedDVRModules l E Y n) ℤ :=\n          coefficientTotalTensor.{u, u + 1, u}\n      (ProEt.topology Y) (integralCoefficientCommRingSheaf l E Y n)\n    let tX' : CochainComplex (normalizedDVRModules l E X n) ℤ ×\n        CochainComplex (normalizedDVRModules l E X n) ℤ ⥤\n            CochainComplex (normalizedDVRModules l E X n) ℤ :=\n          coefficientTotalTensor.{u, u + 1, u}\n      (ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)\n    let d (A : CochainComplex (coefficientSequenceModules l E Y) ℤ) :\n        WC.obj (FC.obj A) ≅ GC.obj (VC.obj A) :=\n      (pullbackTensorInverseEvaluationComplex l E f n).symm.app A ≪≫\n        (NatIso.mapHomologicalComplex c (.up ℤ)).app (VC.obj A)\n    ∀ (hVP : CochainComplex.IsKFlatIndependentCoefficients\n        (R := integralCoefficientCommRingSheaf l E Y n) (VC.obj P))\n      (hVQ : CochainComplex.IsKFlatIndependentCoefficients\n        (R := integralCoefficientCommRingSheaf l E Y n) (VC.obj Q))\n      (hGVP : CochainComplex.IsKFlatIndependentCoefficients\n        (R := integralCoefficientCommRingSheaf l E X n) (GC.obj (VC.obj P)))\n      (hGVQ : CochainComplex.IsKFlatIndependentCoefficients\n        (R := integralCoefficientCommRingSheaf l E X n) (GC.obj (VC.obj Q)))\n      (k : GC.obj (tY'.obj (VC.obj P, VC.obj Q)) ≅\n        tX'.obj (GC.obj (VC.obj P), GC.obj (VC.obj Q)))\n      (_hfinite : (finiteDerivedPullback l E n f).map\n          (coefficientFiniteTensorModelIso l E Y\n            (pullbackTensorCalculus l E Y).toCoefficientDerivedSystemTensors n\n            (VC.obj P) (VC.obj Q) hVP hVQ).hom ≫\n        (finitePullbackTensorConstructionIso l E f n).hom.app\n          (DerivedCategory.Q.obj (VC.obj P), DerivedCategory.Q.obj (VC.obj Q)) ≫\n        (finiteIntrinsicDerivedTensor l E X n).map\n          (Prod.mkHom\n            ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n              f).mapDerivedCategoryFactors.hom.app (VC.obj P))\n            ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n              f).mapDerivedCategoryFactors.hom.app (VC.obj Q))) =\n        (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n          f).mapDerivedCategoryFactors.hom.app _ ≫ DerivedCategory.Q.map k.hom ≫\n        (coefficientFiniteTensorModelIso l E X\n          (pullbackTensorCalculus l E X).toCoefficientDerivedSystemTensors\n          n _ _ hGVP hGVQ).hom)\n      (_hdiag :\n        let b := (pullbackTensorSequenceCochain l E f).app (P, Q)\n        let v := coefficientEvaluationTensorIso l E Y n P Q\n        let w := coefficientEvaluationTensorIso l E X n (FC.obj P) (FC.obj Q)\n        let z := tX'.mapIso (Iso.prod (d P) (d Q))\n        e.hom.app (DerivedCategory.Q.obj (tY.obj (P, Q))) ≫\n          (finiteDerivedPullback l E n f).map\n            (((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.app\n              (tY.obj (P, Q)) ≪≫ DerivedCategory.Q.mapIso v).hom) ≫\n          ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n            f).mapDerivedCategoryFactors.app\n              (tY'.obj (VC.obj P, VC.obj Q)) ≪≫ DerivedCategory.Q.mapIso k).hom =\n        (coefficientSequenceDerivedEvaluation l E X n).map\n          (((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.app\n            (tY.obj (P, Q)) ≪≫ DerivedCategory.Q.mapIso b).hom) ≫\n          ((coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.app\n            (tX.obj (FC.obj P, FC.obj Q)) ≪≫ DerivedCategory.Q.mapIso w ≪≫\n              DerivedCategory.Q.mapIso z).hom),\n    let M := DerivedCategory.Q.obj P\n    let N := DerivedCategory.Q.obj Q\n    (coefficientSequenceDerivedEvaluation l E X n).map\n      ((pullbackTensorSystemComparison l E f).hom.app (M, N)) ≫\n      ((pullbackTensorCalculus l E X).evaluationTensor n).hom.app\n        ((pullbackTensorSequenceDerived l E f).obj M,\n          (pullbackTensorSequenceDerived l E f).obj N) ≫\n      (finiteIntrinsicDerivedTensor l E X n).map\n        (Prod.mkHom (e.hom.app M)\n          (e.hom.app N)) =\n    e.hom.app\n      ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj (M, N)) ≫\n      (finiteDerivedPullback l E n f).map\n        (((pullbackTensorCalculus l E Y).evaluationTensor n).hom.app (M, N)) ≫\n      (finitePullbackTensorConstructionIso l E f n).hom.app\n      ((coefficientSequenceDerivedEvaluation l E Y n).obj M,\n        (coefficientSequenceDerivedEvaluation l E Y n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "independent cc review: item cube_model Lean statement (∀ν → finitePullbackTensorConstructionIso) against its node prose (canonical ν) and the change record; Representatives forced one-line adaptation; 12 new proved modules against their node files; #print axioms in a /tmp sandbox (sorryAx upstream only)"
+ }
+}

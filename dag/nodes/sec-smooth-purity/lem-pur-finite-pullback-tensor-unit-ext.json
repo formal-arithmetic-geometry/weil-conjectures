@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-unit-ext",
+ "kind": "lemma",
+ "title": "Unit pure tensors determine maps from intrinsic pulled-back total complexes",
+ "status": "split",
+ "statement": "For a scheme morphism f:X→Y, a quotient level n and arbitrary unbounded coefficient-sequence complexes P,Q on Y, evaluate P,Q at n. For any finite-coefficient complex H on X, two chain maps from the termwise intrinsic finite inverse image of their evaluated total tensor to H agree if their degree-i maps agree on the intrinsic adjunction unit of every total pure tensor generator whose two finite sections are the evaluations of sequence sections. The hypothesis ranges over every p+q=i, pro-etale Y-object and pair of sequence sections. Canonical evaluation transports are surjective on sections, so these tests suffice. Intrinsic inverse image and its actual adjunction are those of [def-weil-proetale-inverse-image]; evaluation is that of [lem-coef-derived-system-evaluation-calculus]. No flatness is assumed.",
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison; Tags 0941 and 03D2 for sequence evaluation and the ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Apply degreewise extensionality and transpose through the intrinsic inverse-image adjunction. Its unit formula identifies each transpose with the original degree map preceded by the adjunction unit. Total tensor pure-generator extensionality proves equality of these transposes, and injectivity of the adjunction correspondence proves equality of the original maps. Lift the two finite pure-tensor sections through the canonical evaluation section transports, and apply the assumed equality to their sequence preimages.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-coef-evaluation-total-tensor-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-coef-evaluation-total-tensor-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 final ordinary total-complex comparison; Tags 0941 and 03D2 for evaluation and units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of evaluation of coefficient sequences with the canonical pullback tensor comparison of cochain complexes",
+   "results": "Eight hits about shift evaluation and group cohomology; none states this coefficient-sequence ordinary comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso",
+   "results": "No result; this identifier is unknown to the search index.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensor.*[Ee]valuation|[Ee]valuation.*[Cc]ochain.*[Tt]ensor",
+   "results": "No matches from indexed grep. Direct project rg found the generator-normalized sequence comparison, the evaluation comparison, their naturality, and finite K-flat normalization, but no ordinary cochain square.",
+   "date": "2026-10-28",
+   "verdict": "Existing normalizations provide the individual faces, not their section calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorEvaluationCube",
+  "date": "2026-10-28",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-pullback-tensor-evaluation-cube-model",
+   "place": "Extensionality of the finite adjoints in the ordinary cochain evaluation comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorUnitExt",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorUnitExt.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_unit_ext",
+  "declarations": [
+   "WeilConjectures.finitePullbackTensor_unit_ext"
+  ],
+  "statement": "theorem finitePullbackTensor_unit_ext {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n    (H : CochainComplex (normalizedDVRModules l E X n) ℤ)\n    (a b : ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n      f).mapHomologicalComplex (.up ℤ)).obj\n        ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)\n          (integralCoefficientCommRingSheaf l E Y n)).obj\n          ((((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P),\n           (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj Q))) ⟶ H)\n    (h : ∀ (p q i : ℤ) (hpq : p + q = i) (U : Y.ProEt)\n      (x : (P.X p).val.obj (op (n, U)))\n      (y : (Q.X q).val.obj (op (n, U))),\n      (a.f i).val.app (op ((proEtaleBaseChange f).obj U))\n        (((sfIntrinsicConstantModuleAdjunction f\n          (finiteCoefficientRing l E (n + 1))).unit.app _).val.app (op U)\n          (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)\n            (integralCoefficientCommRingSheaf l E Y n)\n            (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)\n            (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj Q)\n            p q i hpq (op U)\n            (coefficientEvaluationSection l E Y (P.X p) n (op U) x)\n            (coefficientEvaluationSection l E Y (Q.X q) n (op U) y))) =\n      (b.f i).val.app (op ((proEtaleBaseChange f).obj U))\n        (((sfIntrinsicConstantModuleAdjunction f\n          (finiteCoefficientRing l E (n + 1))).unit.app _).val.app (op U)\n          (coefficientTensorGenerator.{u, u + 1, u} (ProEt.topology Y)\n            (integralCoefficientCommRingSheaf l E Y n)\n            (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)\n            (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj Q)\n            p q i hpq (op U)\n            (coefficientEvaluationSection l E Y (P.X p) n (op U) x)\n            (coefficientEvaluationSection l E Y (Q.X q) n (op U) y)))) :\n    a = b",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2064f",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261027T234142-L-15064",
+  "kind": "interface",
+  "note": "independent cc review: item cube_model Lean statement (∀ν → finitePullbackTensorConstructionIso) against its node prose (canonical ν) and the change record; Representatives forced one-line adaptation; 12 new proved modules against their node files; #print axioms in a /tmp sandbox (sorryAx upstream only)"
+ }
+}
