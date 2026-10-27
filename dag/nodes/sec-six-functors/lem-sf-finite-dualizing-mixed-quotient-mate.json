@@ -1,0 +1,109 @@
+{
+ "id": "lem-sf-finite-dualizing-mixed-quotient-mate",
+ "kind": "statement",
+ "title": "The mate form of the finite dualizing mixed quotient transition",
+ "statement": "Under the hypotheses of lem-sf-finite-dualizing-mixed-quotient and n≤m, the images under the level-m scalar-extension hom equivalence of the two sides of the finite dualizing mixed quotient square are equal. This is the transposed exceptional and scalar adjunction square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: transpose the coefficient counit square under the exceptional and scalar adjunctions."
+ },
+ "stmt_deps": [
+  "def-sf-scalar-reduction-exchange",
+  "def-sf-integral-finite-extension-models",
+  "def-coef-finite-dualizing-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand finiteU and integralDualizingExceptionalTransition as the specified scalar and exceptional mates. Apply hom-equivalence naturality to move the endpoint transitions across the two adjunctions.",
+   "uses": [
+    "def-sf-integral-finite-extension-models",
+    "def-coef-finite-dualizing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining coefficient counit square commutes by the proper/open mate cocycle and the normalized scalar restriction square; the triangle identities identify the result with the two displayed hom-equivalence images.",
+   "uses": [
+    "lem-coef-finite-dualizing",
+    "lem-coef-finite-free-extension",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "def-sf-scalar-reduction-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-finite-dualizing-data",
+  "def-sf-integral-finite-extension-models",
+  "def-sf-scalar-reduction-exchange",
+  "lem-coef-finite-dualizing",
+  "lem-coef-finite-free-extension",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: transpose the coefficient counit square under the exceptional and scalar adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteU quotient transition mate homEquiv",
+   "results": "No duplicate project declaration; generic adjunction hom-equivalence naturality is available in Mathlib and the project.",
+   "verdict": "no exact match; use as split-off mate step",
+   "date": "2026-10-28"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefFiniteDualizingMixedQuotient",
+  "date": "2026-10-28",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-dualizing-mixed-quotient",
+   "place": "Proof step 2: transpose the equality under the exceptional and scalar adjunctions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefFiniteDualizingMixedQuotient",
+  "file": "lean/Sheaf/SixFunctors/CoefFiniteDualizingMixedQuotient.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.finiteU_quotient_transition_mate",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.finiteU_quotient_transition_mate"
+  ],
+  "statement": "theorem finiteU_quotient_transition_mate {m n : ℕ} (h : n ≤ m) :\n    (pbcDerivedScalarAdjunction (integralScalarQuotientSheafMap l E L ι X m)).homEquiv _ _\n      ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map\n          (integralDualizingExceptionalTransition l E D X hl h) ≫\n        (scalarReductionExchange l E L ι X h).app (integralDualizingFiniteTerm l E D X n) ≫\n        (normalizedDVRRes l L X h).map (finiteU l E L ι X D n)) =\n    (pbcDerivedScalarAdjunction (integralScalarQuotientSheafMap l E L ι X m)).homEquiv _ _\n      (finiteU l E L ι X D m ≫ integralDualizingExceptionalTransition l L D X hl h)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T234102-L-4186933",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T234102-L-4186933",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

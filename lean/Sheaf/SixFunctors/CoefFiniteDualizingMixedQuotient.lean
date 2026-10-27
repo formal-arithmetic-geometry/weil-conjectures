@@ -58,11 +58,36 @@ map is precisely the mate defining scalarReductionExchange, so the resulting
 square is the displayed one. This uses no integral lift, no finite-evaluation
 faithfulness, and no invertibility of scalarReductionExchange. Identity
 extensions, m=n, level zero, and empty X satisfy the same unit formulas. -/
+/- Mate form of the finite quotient transition square.
+
+The equality is obtained by transposing the displayed square under the scalar
+adjunction at level `m`; the exceptional and realization mates reduce it to the
+coefficient counit square. This is the central mate calculation in the proof.
+Source: lem-coef-integral-finite-extension, paragraphs 2--3.
+(blueprint: lem-sf-finite-dualizing-mixed-quotient-mate) -/
+theorem finiteU_quotient_transition_mate {m n : ℕ} (h : n ≤ m) :
+    (pbcDerivedScalarAdjunction
+      (integralScalarQuotientSheafMap l E L ι X m)).homEquiv _ _
+      ((pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map
+          (integralDualizingExceptionalTransition l E D X hl h) ≫
+        (scalarReductionExchange l E L ι X h).app
+          (integralDualizingFiniteTerm l E D X n) ≫
+        (normalizedDVRRes l L X h).map
+          (finiteU l E L ι X D n)) =
+    (pbcDerivedScalarAdjunction
+      (integralScalarQuotientSheafMap l E L ι X m)).homEquiv _ _
+      (finiteU l E L ι X D m ≫
+        integralDualizingExceptionalTransition l L D X hl h) := by
+  sorry
+
 theorem finiteU_quotient_transition {m n : ℕ} (h : n ≤ m) :
     (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map
         (integralDualizingExceptionalTransition l E D X hl h) ≫
       (scalarReductionExchange l E L ι X h).app (integralDualizingFiniteTerm l E D X n) ≫
       (normalizedDVRRes l L X h).map (finiteU l E L ι X D n) =
-    finiteU l E L ι X D m ≫ integralDualizingExceptionalTransition l L D X hl h := by sorry
+    finiteU l E L ι X D m ≫ integralDualizingExceptionalTransition l L D X hl h := by
+  apply Equiv.injective ((pbcDerivedScalarAdjunction
+    (integralScalarQuotientSheafMap l E L ι X m)).homEquiv _ _)
+  exact finiteU_quotient_transition_mate l E L ι X D hl h
 
 end WeilConjectures.IntegralFiniteExtension
