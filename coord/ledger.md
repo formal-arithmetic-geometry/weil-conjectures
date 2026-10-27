@@ -19600,3 +19600,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/J7/Sheaf.AlgebraicGeometry.ProjectiveBundleIntegerTwistSeparation (stage 3; reviewer PASS; first push; landing 20261027T151714-L-1195427 (proof); batch 20261027T151642; modules 1; new nodes 0)
 - 15:17 L: merged deliver/J8/Sheaf.AlgebraicGeometry.ProjectiveBundlePullbackLineReflection (stage 3; reviewer PASS; first push; landing 20261027T151715-L-1195720 (proof); batch 20261027T151642; modules 1; new nodes 0)
 - 15:17 L: merged deliver/J9/Sheaf.AlgebraicGeometry.ProjectiveBundleRelativelyTrivialLineDescent (stage 3; reviewer PASS; first push; landing 20261027T151716-L-1196017 (interface); batch 20261027T151642; modules 2; new nodes 1)
+- 15:17 L: merged deliver/K8/Sheaf.SixFunctors.OpenTensorProjectionDescent (stage 3; reviewer PASS; first push; landing 20261027T151717-L-1196297 (interface); batch 20261027T151642; modules 2; new nodes 1)

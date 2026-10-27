@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-open-tensor-projection-mate-resolving",
+ "kind": "lemma",
+ "title": "Chain formula for the unit projection mate on resolving pairs",
+ "statement": "Fix ringed sites, closed derived tensor structures A,A′ and simultaneous models T,T′, exact additive F,G with an adjunction F left adjoint to G, a site functor and section pull maps, and ordinary/cochain open tensor data D as in [def-sf-open-tensor-cochain-data]. Fix a restriction tensor isomorphism with a TensorComparisonModel as in [def-sf-open-tensor-representative-data], whose ordinary isomorphism is D.pullTensor. Fix one-flat comparisons ambientModel and openModel compatible with T,T′ on simultaneous K-flat inputs. Let alpha be any natural transformation from F(A′(M,GN)) to A(FM,N) whose adjunct is A′(eta_M,1) followed by the inverse restriction comparison. For flat-term K-flat complexes C on the open site and P on the ambient site, compose Q(D.chain(C,P).hom), the inverse exact-F factorization, F of the open one-flat comparison, F of the tensor map induced by the inverse exact-G factorization on P, and alpha at (QC,QP). This equals the ambient one-flat comparison for (FC,P) followed by the tensor map induced by the inverse exact-F factorization on C. This only asserts a chain comparison square on resolving pairs; it does not assert that alpha is invertible or give a formula for arbitrary C.",
+ "stmt_deps": [
+  "def-sf-open-tensor-cochain-data",
+  "def-sf-open-tensor-representative-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, expanding its omitted totalization/descent; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tags 07A4 and 0G7E."
+ },
+ "proof": [
+  {
+   "text": "The ordinary projection identifies tensor with F(M), up to symmetry, with F composed with tensor with M and G. For flat M this is a composite of exact functors. If C is K-flat and P acyclic, exact G makes G(P) acyclic, C tensor G(P) is acyclic, and exact F preserves acyclicity. The given chain projection and tensor symmetry therefore show F(C) is K-flat. Thus F carries the resolving class to itself.",
+   "uses": [
+    "def-sf-open-tensor-cochain-data",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply restrictionModel.derived to F(C) and P. On every total summand, the chain adjunct of the inverse D.chain equals tensor of the termwise unit with identity followed by restrictionModel.chain, by D.ordinaryInverse, hordinary and the two summand identities. Equality on the coproduct summands gives equality of chain maps.",
+   "uses": [
+    "def-sf-open-tensor-cochain-data",
+    "def-sf-open-tensor-representative-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize this equality through the specified exact derived adjunction. Its unit is the localization of the termwise unit with the specified factorization isomorphisms. Replace simultaneous comparisons with ambientModel and openModel using ambientBoth and openBoth. The hypothesis halpha and injectivity of the adjunction bijection identify the resulting map with alpha. Compose with the localized chain projection and cancel its inverse to obtain the displayed resolving-pair square.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "def-sf-open-tensor-representative-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-tensor-cochain-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-sf-open-tensor-representative-data",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, expanding its omitted totalization/descent; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula exact adjunction tensor derived category localization",
+   "results": "Adjunction.derivedε_fac_app, derivedη_fac_app, derivedε, derivedε_fac_app_assoc, derived_counit, derived_unit, derivedη_fac_app_assoc, derived′_unit. No theorem computing the projection mate with the supplied ringed tensor models.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalized resolving-pair calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": "CategoryTheory.Adjunction.homEquiv_counit in Mathlib.CategoryTheory.Adjunction.Basic: the inverse hom equivalence is F.map followed by counit.",
+   "date": "2026-10-27",
+   "verdict": "Used the hom-equivalence API to construct the canonical mate; it does not supply the chain representative calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionComparison|projectionFormulaMap|IsIso.*app.*representative",
+   "results": "msearch grep: 0 hits. Local rg finds the specialized condensed-ring projection formula in WeilConjectures.PoincareDuality.ProjectionFormula, which uses different module categories and fixed monoidal derived structures. No generic normalization for the supplied models.",
+   "date": "2026-10-27",
+   "verdict": "No matching lemma; the resolving-pair calculation is a genuine part of the source argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorProjectionDescent",
+  "date": "2026-10-27",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-projection-descent",
+   "place": "Resolving-pair inverse transpose calculation, original proof step 5 together with preservation in step 1."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorProjectionMateResolving",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorProjectionMateResolving.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.openTensorProjection_mate_resolving",
+  "statement": "theorem openTensorProjection_mate_resolving\n    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)\n    (restriction : A.tensor ⋙ G.mapDerivedCategory ≅\n      (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ A'.tensor)\n    (restrictionModel : TensorComparisonModel.{c, v, r} J J' R R' G A A' T T' restriction)\n    (hordinary : restrictionModel.ordinary = D.pullTensor)\n    (ambientModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J R A)\n    (ambientBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1} J R A T ambientModel)\n    (openModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J' R' A')\n    (openBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1} J' R' A' T' openModel)\n    (alpha : (𝟭 _).prod G.mapDerivedCategory ⋙ A'.tensor ⋙ F.mapDerivedCategory ⟶\n      (F.mapDerivedCategory.prod (𝟭 _)) ⋙ A.tensor)\n    (halpha : ∀ M N,\n      (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj).homEquiv _ _\n          (alpha.app (M, N)) =\n        A'.tensor.map (Prod.mkHom\n            ((SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj).unit.app M)\n            (𝟙 (G.mapDerivedCategory.obj N))) ≫\n          restriction.inv.app (F.mapDerivedCategory.obj M, N))\n    (C : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)\n    (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)\n    (hC : CochainComplex.IsKFlatIndependentCoefficients (J := J') (R := R') C)\n    (flatC : flatTerms.{c, v, r} J' R' C)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (flatP : flatTerms.{c, v, r} J R P) :\n      DerivedCategory.Q.map (D.chain C P).hom ≫\n        F.mapDerivedCategoryFactors.inv.app ((totalTensor.{c, v, r} J' R').obj\n          (C, (G.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n        F.mapDerivedCategory.map ((openModel C ((G.mapHomologicalComplex (.up ℤ)).obj P)\n          (Or.inr (restrictionModel.kflat P hP flatP))).hom) ≫\n        F.mapDerivedCategory.map (A'.tensor.map\n          (Prod.mkHom (𝟙 _) (G.mapDerivedCategoryFactors.inv.app P))) ≫\n        alpha.app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =\n    (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫\n        A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _))",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T151717-L-1196297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261027T151717-L-1196297",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
