@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-compact-support-normalized-reduction-tower-data",
+ "kind": "statement",
+ "title": "Finite compact-support normalized tower data",
+ "statement": "For the fixed input and compactification, a normalized DVR tower and level isomorphisms exist and intertwine each adjacent transition with the compact-support transition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support paragraph: finite coefficient-change comparisons, before taking the derived limit"
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives and identify each finite quotient reduction by the two-term finite-free quotient resolution. Transport the scalar-adjunction comparison through exact extension by zero and the proper projection formula, obtaining the specified level isomorphisms and adjacent transition square.",
+   "uses": [
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-open-tensor-normalization",
+    "lemma-weil-pbc-perfect-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar mates preserve identities and quotient composition on representatives. Apply coherent tower assembly and substitution to obtain the normalized tower and its evaluation compatibility.",
+   "uses": [
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-completed-operation-tower-substitution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-open-tensor-normalization",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-pur-integral-coherence-tower",
+  "lem-pur-completed-operation-tower-substitution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "M9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support paragraph, split into the construction and bound subarguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized DVR tower finite compact support realization transition uniform bound",
+   "results": "No specialized Mathlib declaration; use the recorded paper interfaces.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "NormalizedDVRTower",
+   "results": "No exact Mathlib match.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport_normalizedReductionTower|sfAmbientCompactSupportCandidate",
+   "results": "Only the assigned item and its consumer.",
+   "date": "2026-10-28",
+   "verdict": "No existing theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNormalizedReductionTower",
+  "date": "2026-10-28",
+  "group": "M9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-compact-support-normalized-reduction-tower",
+   "place": "Compact-support paragraph split into construction or boundedness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportNormalizedReductionTowerData",
+  "file": "lean/Sheaf/Paper/CompactSupportNormalizedReductionTowerData.lean",
+  "declaration": "WeilConjectures.compactSupport_normalizedReductionTower_data",
+  "statement": "theorem compactSupport_normalizedReductionTower_data\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (K₀ : Type u) [Field K₀] (hl₀ : IsUnit (l : K₀))\n    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))]\n    [QuasiCompact (X ↘ Spec (.of K₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))]\n    [QuasiCompact (Y ↘ Spec (.of K₀))]\n    [f.IsOver (Spec (.of K₀))] [IsSeparated f]\n    [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f)\n    (K : DerivedCategory (scalarReductionSource l E X))\n    (hK : sfIntegralConstructible l E X K)\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) :\n    ∃ (T : NormalizedDVRTower l E Y D hl)\n      (a : ∀ n : ℕ, T.M n ≅\n        (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).obj\n          ((scalarReductionDerivedExtension l E X n).obj K)),\n      ∀ n : ℕ,\n        (normalizedDVRTowerTransition l E Y D hl n.le_succ).app T.tower ≫\n            (T.evaluationIso n ≪≫\n              (scalarReductionDerivedRestriction l E Y n).mapIso (a n)).hom =\n          (T.evaluationIso (n + 1) ≪≫\n              (scalarReductionDerivedRestriction l E Y (n + 1)).mapIso (a (n + 1))).hom ≫\n            sfCompactSupportTransition l E c K n",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T210143-L-1663827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T210143-L-1663827",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

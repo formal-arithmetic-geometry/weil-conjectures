@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.IntegralRationalQbarCompactSupport
 public import Sheaf.Paper.NormalizedDVRTower
+import Sheaf.Paper.CompactSupportNormalizedReductionTowerData
+import Sheaf.Paper.CompactSupportNormalizedReductionTowerBounds
 
 /-! # Normalization of the finite compact-support tower -/
 
@@ -80,6 +82,10 @@ theorem compactSupport_normalizedReductionTower
         proEtaleCohomologicalSupport
           ((sfAmbientCompactSupportCandidate
             (Padic.coefficientExtensionRing l E (n + 1)) c).obj
-              ((scalarReductionDerivedExtension l E X n).obj K)) ⊆ Set.Icc b₀ b₁ := by sorry
+              ((scalarReductionDerivedExtension l E X n).obj K)) ⊆ Set.Icc b₀ b₁ := by
+  obtain ⟨T, a, ht⟩ := compactSupport_normalizedReductionTower_data l E K₀ hl₀ c K hK D hl
+  obtain ⟨b₀, b₁, hb, hbounds⟩ :=
+    compactSupport_normalizedReductionTower_bounds l E K₀ hl₀ c K hK D hl
+  exact ⟨T, a, ht, b₀, b₁, hb, hbounds⟩
 
 end WeilConjectures
