@@ -20086,3 +20086,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:02 L: merged deliver/T2/Sheaf.Paper.NormalizedVectorPurityScalarLineWitness (stage 3; reviewer PASS; first push; landing 20261027T210236-L-1678749 (proof); batch 20261027T205736; modules 1; new nodes 0)
 - 21:02 L: merged deliver/T2/Sheaf.Paper.PullbackTensorUnitCoherence (stage 3; reviewer PASS; first push; landing 20261027T210237-L-1678968 (interface); batch 20261027T205736; modules 4; new nodes 3)
 - 21:02 L: merged deliver/T3/Sheaf.Paper.FinitePerfectAdicConstantUniversal (stage 3; reviewer PASS; first push; landing 20261027T210239-L-1679207 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 21:02 L: merged deliver/T3/Sheaf.Paper.P1KummerChernScalar (stage 3; reviewer PASS; first push; landing 20261027T210240-L-1679426 (interface); batch 20261027T205736; modules 3; new nodes 2)

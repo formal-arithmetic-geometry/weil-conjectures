@@ -6,6 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.Paper.P1KummerScalarEndpoints
+import Sheaf.Paper.P1KummerChernScalarKummerTransport
 
 /-! # Scalar preservation of the specified ordinary Kummer class
 
@@ -46,6 +47,12 @@ theorem p1KummerChernScalar
       (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
     (hc : ordinaryFiniteP1ChernSpec A N hA S hP c) :
     ordinaryFiniteP1ChernSpec B N hB S hP (e.chernImage c) := by
-  sorry
+  unfold ordinaryFiniteP1ChernSpec at hc ⊢
+  rw [p1KummerChernScalar_class_transport e c, hc,
+    p1KummerChernScalar_kummer_transport hP e]
 
 end AlgebraicGeometry.Etale
+
+
+
+
