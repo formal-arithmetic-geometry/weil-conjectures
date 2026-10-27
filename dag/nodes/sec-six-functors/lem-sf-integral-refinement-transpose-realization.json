@@ -1,0 +1,142 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7C, 0F7D; normalized integral realization comparison in the original node proof, steps 2 and 5. Blueprint motivation: literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md, coefficient compatibility of units and counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived total limit intertwines reverse compactification refinement with open unit normalized proper open mate and proper compositor under whiskering",
+   "results": "Eight hits: limitCompWhiskeringLeftIsoCompLimit, limCompFlipIsoWhiskerLim_hom_app_app, limIsoFlipCompWhiskerLim_hom_app_app, ranCompLimIso, limitCompWhiskeringRightIsoLimitComp_hom_whiskerRight_π, limitCompWhiskeringRightIsoLimitComp_inv_π, limitCompWhiskeringLeftIsoCompLimit_hom_whiskerLeft_π, limit.pre_post. These are generic limit comparisons, not the normalized geometric mate realization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Twelve adjunction API hits, including homEquiv, homEquiv_apply, homEquiv_counit and homEquiv_unit. These provide transpose uniqueness but not the geometric system realization.",
+   "date": "2026-10-27",
+   "verdict": "Use adjunction uniqueness in the stated proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*realization|properOpen.*(transpose|realization)|normalizedRefinementWord",
+   "results": "msearch Mathlib grep: zero hits. Repository rg found the existing normalized word and context constructions in the assigned module, and reverse system laws in CompletedShriekCompositionLaws; no existing theorem compares this actual normalized integral mate under its contexts.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing constructions; isolate only their missing realization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived total limit realization preserves canonical proper open refinement maps normalized by adjunction transpose",
+   "results": "Eight hits: Adjunction.lim_preservesLimits, Functor.totalRightDerived, Functor.totalLeftDerived, Localization.HasProductsOfShapeAux.adj, IsOpenMap.adjunctionNhds, Topology.IsInducing.adjunction, Limits.IsColimit.ofLeftAdjoint, Profinite.forget_preservesLimits. Read the signatures: these are general limit/derived-functor/adjunction results, not this normalized geometric comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use project realization and normalized mate data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralNormalizedRefinementPasting",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-normalized-refinement-pasting",
+   "place": "Original normalized refinement proof, step 2 and the whiskering part of step 5."
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-integral-refinement-transpose-realization",
+ "kind": "lemma",
+ "title": "Total-limit realization of an open-unit-normalized reverse refinement",
+ "statement": "Fix a prime l, a finite extension E/Q_l, a finite-field datum D with l different from its characteristic, simultaneous operations o and prescribed realization data R [def-sf-integral-system-realization-data]. Let f:X→Y be separated finite type between finite-type D.k-schemes, with no absolute separatedness assumed. Let K be a finite-Tor constructible integral input. Assume every one of the eighteen words in every composable binary compactification-refinement diagram is in its stated domain [def-sf-refinement-diagram-words]. For compactifications c,d and v:c→d, let e:J_d K ≅ S_v J_c K be an actual integral isomorphism whose open-adjunction transpose, followed by the prescribed refinementRestriction [def-sf-integral-refinement-normalization-data], is the open unit. Write s_v:B_d R(K)→B_c R(K) for completedShriekRefinement [def-sf-completed-shriek-refinement-maps] and b_v=S_{p_d}(e) followed by the forward proper compositor. For any outside proper/open context q [def-sf-normalized-refinement-context-data] for which both substituted endpoints are geometric and in their domains, their outside-coordinate realization isomorphisms satisfy L(q_system(s_v)) followed by a_{q,c} = a_{q,d} followed by q_integral(b_v). This is a comparison of a single reverse system arrow with its prescribed integral mate, before finite evaluation; it asserts no identity/composition law and involves no auxiliary F_c, rho, or r_c.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-compactifications-refinements",
+  "def-sf-integral-system-realization-data",
+  "def-sf-refinement-diagram-words",
+  "def-sf-integral-refinement-normalization-data",
+  "def-sf-completed-shriek-refinement-maps",
+  "def-sf-normalized-refinement-context-data"
+ ],
+ "proof": [
+  {
+   "text": "Expand the reverse refinement into inverse identity proper unitor, intrinsic proper/open mate for (j_c,1_X,v,j_d), and proper compositor. Use the generator reduction equation and the realization normalization against the actual reconstruction counit to compare the localized integral mate, including its proper compositor. The eighteen-word hypotheses retain every proper/open intermediate required for these squares.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-generator-reduction-coherence",
+    "lem-pur-normalized-actual-reconstruction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under the open adjunction, compose the transpose of the realized mate with the canonical pullback-composition/proper-counit restriction. The clopen normalization gives the open unit, exactly the assumed transpose of e. Cancel the restriction isomorphism on this input and use injectivity of homEquiv to identify the actual arrows. This also applies for identity refinements, empty opens and zero input.",
+   "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-ambient-proper-open-pasting",
+    "def-sf-integral-refinement-normalization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the outside context. The hole is the preceding comparison. A proper factor uses naturality of the proper realization and its recursive push formula. An open factor uses the recursive shriek formula and naturality of the normalized open realization: cancel its invertible reconstruction unit and counit in the normalization equation. The evaluationIso associators give exactly the displayed outside coordinates. No finite-evaluation equality detection is used.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "def-sf-normalized-refinement-context-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7C, 0F7D; normalized integral realization comparison in the original node proof, steps 2 and 5. Blueprint motivation: literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md, coefficient compatibility of units and counits."
+ },
+ "proof_deps": [
+  "def-sf-integral-refinement-normalization-data",
+  "def-sf-normalized-refinement-context-data",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-sf-generator-reduction-coherence",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralRefinementTransposeRealization",
+  "file": "lean/Sheaf/SixFunctors/IntegralRefinementTransposeRealization.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralRefinementTransposeRealization",
+  "statement": "theorem integralRefinementTransposeRealization\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (o : Operations l E) (R : Realizations l E D o)\n    {X Y : Over (Spec (CommRingCat.of D.k))}\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left]\n    (K : finiteTorConstructibleIntegralCategory l E X.left)\n    (hDiagram : ∀ (a : Fin 3 → Compactification f.left)\n      (v : (a 0).Refinement (a 1)) (w : (a 1).Refinement (a 2)) (i : Fin 18),\n      (refinementDiagramWords f a v w (fun _ ↦ inferInstance) i).2.domain l E o\n        (fun _ ↦ K.obj))\n    (c d : Compactification f.left) (v : c.Refinement d)\n    (e : (ringedOpen l E d.i).obj K.obj ≅\n      (ringedPush l E v.hom).obj ((ringedOpen l E c.i).obj K.obj))\n    (he : (ringedOpenAdj l E d.i).homEquiv _ _ e.hom ≫\n      PurCompactSupport.refinementRestriction (PurCompactSupport.completed l E) v\n        (PurCompactSupport.completedPull_comp l E c.i v.hom) K.obj =\n      (ringedOpenAdj l E c.i).unit.app K.obj)\n    {W : Over (Spec (CommRingCat.of D.k))}\n    (q : NormalizedRefinementContext _ Y W)\n    (gc : (q.plug (normalizedRefinementWord f c)).geometric)\n    (gd : (q.plug (normalizedRefinementWord f d)).geometric)\n    (hc : (q.plug (normalizedRefinementWord f c)).domain l E o (fun _ ↦ K.obj))\n    (hd : (q.plug (normalizedRefinementWord f d)).domain l E o (fun _ ↦ K.obj)) :\n    (coefficientSequenceLimit l E W.left).map\n        ((q.evaluate (systemInterpretation l E o)).map\n          ((completedShriekRefinement l E R v).app\n            ((calculus l E X.left).reduction.obj K.obj))) ≫\n      (q.realization l E R (normalizedRefinementWord f c) gc (fun _ ↦ K.obj) hc).hom =\n    (q.realization l E R (normalizedRefinementWord f d) gd (fun _ ↦ K.obj) hd).hom ≫\n      (q.evaluate (integralInterpretation l E)).map\n        ((ringedPush l E d.g).map e.hom ≫\n          (ringedPushComp l E v.hom d.g ≪≫\n            eqToIso (congrArg (ringedPush l E) v.hom_g)).hom.app\n              ((ringedOpen l E c.i).obj K.obj))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-403d2",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180638-L-3885595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-403d2",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180638-L-3885595",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); ten moved data decls vs clone (verbatim); new hole vs original item conjuncts 3-4 + _normalization (implied, not a restatement); node proof_deps vs step uses; unit-route modules vs transitive imports (all still reached)"
+ }
+}

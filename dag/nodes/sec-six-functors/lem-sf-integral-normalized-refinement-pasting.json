@@ -22,80 +22,50 @@
   "def-sf-refinement-diagram-words",
   "def-weil-finite-tor-amplitude",
   "def-sf-integral-refinement-normalization-data",
-  "def-sf-inverse-or-zero"
+  "def-sf-inverse-or-zero",
+  "def-sf-normalized-refinement-context-data"
  ],
  "proof": [
   {
-   "text": "For $u:c\\to d$ use its square $(k,i,r,p)=(j_c,j_d,1_X,u)$ and write $g_u:J_{j_d}\\to S_uJ_{j_c}$ for $\\Gamma_Q$. The compactification definition gives $uj_c=j_d$ and $p_du=p_c$. The intrinsic transpose formula of [lem-sf-semilinear-proper-open-mate-pasting] gives $\\lambda_uP_{j_d}g_u=1$. Its vertical pasting and [lem-sf-ambient-proper-open-pasting] give $g_{vu}=c_{v,u}(S_vg_u)g_v$ and $g_{1_c}=1$, with the prescribed direct-image compositors $c$. These are equations of system transformations before evaluation.",
+   "text": "Extract Good bounds for the input, open prefix and completed support from each constant identity diagram at word 15. Apply the existing completedShriekRefinementLaws to obtain invertibility of the reverse maps and their identity/composition laws on these systems. On the domain inverseOrZero is the actual inverse, so inverse-composition gives the forward laws.",
    "uses": [
-    "def-weil-compactifications-refinements",
-    "lem-sf-semilinear-proper-open-mate-pasting",
-    "lem-sf-ambient-proper-open-pasting"
+    "lem-sf-completed-shriek-composition-laws",
+    "def-sf-normalized-refinement-context-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent assembly on normalized integral systems using the cited realization theorems."
-   }
+   "elementary": true
   },
   {
-   "text": "Realize $g_u$ using [lem-sf-integral-compactification-system-realization]. The generator statement [lem-sf-generator-reduction-coherence] identifies its integral map with the open-adjunction transpose of inverse open restriction through the clopen component. Its transpose is therefore $\\lambda_u^{-1}$ times the open unit. This is precisely the defining transpose of the supplied $e_u$. Injectivity of the open-adjunction Hom bijection gives equality with $e_u$, not merely equality of finite evaluations. The same realization intertwines the proper compositors. All inputs and intermediate systems here meet the normalized, origin and common-bound assumptions by hypothesis.",
+   "text": "Apply the split transpose-realization comparison to the given pointwise e_v, first in any outside context. Invert its square by cancellation of isomorphisms; functors preserve inverse arrows. In the hole context the evaluation associators simplify to identities, giving the base forward realization. The given normalization of rho then gives the displayed conjugation formula for I(rho_v).",
    "uses": [
-    "lem-sf-integral-compactification-system-realization",
-    "lem-sf-generator-reduction-coherence"
+    "lem-sf-integral-refinement-transpose-realization",
+    "def-sf-normalized-refinement-context-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent assembly on normalized integral systems using the cited realization theorems."
-   }
+   "elementary": true
   },
   {
-   "text": "Consequently $\\mathcal L(g_u)$ is invertible on the indicated systems, since it is conjugate to $e_u$. For its normalized source $M$ and target $N$, [lem-pur-normalized-actual-reconstruction-maps] supplies invertible actual counits $e_M,e_N$. Counit naturality reads $g_ue_M=e_N\\mathcal R\\mathcal L(g_u)$, so $g_u=e_N\\mathcal R\\mathcal L(g_u)e_M^{-1}$ is invertible as a system map. Thus put $t_u=(S_{p_d}g_u^{-1})c_{p_d,u}^{-1}:B_c\\to B_d$. Here and below all compositors are evaluated on the displayed open-extension inputs.",
+   "text": "For identity, substitute the forward system identity in the conjugation formula and cancel the endpoint realization isomorphisms and r_c. For composition, substitute the forward system composite and use functoriality of total limit. Cancel the adjacent endpoint realization factors and r_d. Faithfulness of the full inclusion, followed by natural-transformation and iso extensionality, gives the asserted actual integral laws.",
    "uses": [
-    "lem-pur-normalized-actual-reconstruction-maps"
+    "lem-sf-completed-shriek-composition-laws"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent assembly on normalized integral systems using the cited realization theorems."
-   }
+   "elementary": true
   },
   {
-   "text": "Invert the equation of Step 1: $g_{vu}^{-1}=g_v^{-1}(S_vg_u^{-1})c_{v,u}^{-1}$. In $t_vt_u$, naturality moves $c_{p_e,v}^{-1}$ past $S_{p_d}(g_u^{-1})$, where $p_d=p_ev$. Associativity of $c$ then identifies the two inverse compositors with $(S_{p_e}c_{v,u}^{-1})c_{p_e,vu}^{-1}$. Hence $t_vt_u=S_{p_e}(g_v^{-1}(S_vg_u^{-1})c_{v,u}^{-1})c_{p_e,vu}^{-1}=t_{vu}$. The identity equation follows from $g_1=1$ and the unital compositor. These are identities on the assumed diagram domain.",
+   "text": "The invertibility-and-base-comparison conjunct is the previously proved reverse invertibility together with the conjugation formula. For the outside-factor conjunct, multiply the supplied normalization by r_c inverse, cancel r_c inverse r_c, and apply the arbitrary-context forward square already obtained by inversion. All four original conjuncts are proved without finite evaluation.",
    "uses": [
-    "lem-sf-ambient-proper-open-pasting"
+    "lem-sf-integral-refinement-transpose-realization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent assembly on normalized integral systems using the cited realization theorems."
-   }
-  },
-  {
-   "text": "For an integral input $K$ write $\\bar c_{B_c}$ for $c_{B_c}$ followed by the prescribed compact-support realization into $Rp_{c,*}j_{c!}I_X$, and set $a_c=r_c^{-1}\\bar c_{B_c}:\\mathcal L B_c\\mathcal R K\\to I_YF_cK$, with the ambient inclusions understood. By Step 2 and the prescribed ringed-site normalization of $\\rho_u$, the realization theorem gives $I_Y(\\rho_u)=a_d\\mathcal L(t_u)a_c^{-1}$. Its clause on whiskering gives this same equality with every permitted proper/open outer factor and the same compositors; inverses are respected because the generator maps are invertible on this domain. Apply $\\mathcal L$ to Step 4. Substitution cancels $a_d^{-1}a_d$ and yields $I_Y(\\rho_v\\rho_u)=a_e\\mathcal L(t_vt_u)a_c^{-1}=I_Y(\\rho_{vu})$, and $I_Y(\\rho_1)=1$. Faithfulness of the full inclusion gives both asserted integral laws. Zero inputs and empty opens give the unique zero-object arrows; for identity refinements the same formulas use only unitors. No argument detects equality by finite evaluation.",
-   "uses": [
-    "lem-sf-integral-compactification-system-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent assembly on normalized integral systems using the cited realization theorems."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-compactifications-refinements",
-  "lem-pur-normalized-actual-reconstruction-maps",
-  "lem-sf-ambient-proper-open-pasting",
-  "lem-sf-generator-reduction-coherence",
-  "lem-sf-integral-compactification-system-realization",
-  "lem-sf-semilinear-proper-open-mate-pasting"
+  "def-sf-normalized-refinement-context-data",
+  "lem-sf-completed-shriek-composition-laws",
+  "lem-sf-integral-refinement-transpose-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); agent assembly on normalized integral systems using the cited realization theorems. Blueprint motivation: exceptional inverse image definition, derived-limit/refinement-compatible adjunction, and fix-prop-coherence.proof.md, coefficient comparisons of units and counits."
+  "place": "Tags 0F7B, 0F7C, 0F7D; normalized integral realization comparison in the original node proof, steps 2 and 5. Blueprint motivation: literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md, coefficient compatibility of units and counits."
  },
  "mathlib_searches": [
   {
@@ -207,16 +177,6 @@
   "module": "Sheaf.SixFunctors.IntegralNormalizedRefinementPasting",
   "declaration": "WeilConjectures.IntegralSystemRealization.integralNormalizedRefinementPasting",
   "declarations": [
-   "WeilConjectures.IntegralSystemRealization.normalizedRefinementWord",
-   "WeilConjectures.IntegralSystemRealization.normalizedRefinementGeometric",
-   "WeilConjectures.IntegralSystemRealization.normalizedRefinementSystemMap",
-   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext",
-   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.plug",
-   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.evaluate",
-   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.evaluationIso",
-   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.realization",
-   "WeilConjectures.IntegralSystemRealization.normalizedRefinementFiniteType",
-   "WeilConjectures.IntegralSystemRealization.normalizedRefinementQuasiCompact",
    "WeilConjectures.IntegralSystemRealization.integralNormalizedRefinementPasting"
   ],
   "file": "lean/Sheaf/SixFunctors/IntegralNormalizedRefinementPasting.lean",
@@ -225,7 +185,7 @@
   "by": "Q58",
   "date": "2026-10-24",
   "existing": false,
-  "note": "H2 repair: the four new existing:true definition nodes own the seven published helper declarations used by this statement. The four containing theorem nodes are not added as statement dependencies; their conclusions are not assumed. The original proof-dependency plan is unchanged."
+  "note": "H4: the theorem signature is unchanged; data declarations moved verbatim to IntegralNormalizedRefinementData and reexported. Complete proof from the published reverse-system refinement laws and the split transpose-realization comparison."
  },
  "reviewed_lean": {
   "date": "2026-10-24",
@@ -234,5 +194,15 @@
   "group": "Q58",
   "result": "pass",
   "note": "Re-delivery after the e923 H2 RETURN. The item module is byte-identical to e923, whose mathematics was reviewed in full and found correct. The item record changes only stmt_deps (plus the new lean record). The 4 theorem stmt_deps are replaced by 4 new existing:true def owners: def-sf-completed-shriek-refinement-maps (completedShriekF, completedShriekRefinement), def-sf-refinement-diagram-words (refinementDiagramWords), def-sf-integral-refinement-normalization-data (refinementRestriction, finiteTorIntegralInclusion, coefficientPrimeUnit, proved) and def-sf-inverse-or-zero (inverseOrZero). Signatures and prose match the side-live source; none is hollow; no duplicate owner on live; no cycle; brief §5 fields present. Every other identifier in the statement is owned by a def node in the stmt_dep closure. Advisory: sfCompactSupportFiniteIntegralFunctor is reached through def-weil-integral-rational-qbar-compact-support, as in five landed citers; the def-sf-refinement-diagram-words lean.statement overruns into the next declaration, an extractor artefact that is cosmetic. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-403d2",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180638-L-3885595",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); ten moved data decls vs clone (verbatim); new hole vs original item conjuncts 3-4 + _normalization (implied, not a restatement); node proof_deps vs step uses; unit-route modules vs transitive imports (all still reached)"
  }
 }

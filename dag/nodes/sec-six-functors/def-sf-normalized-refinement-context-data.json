@@ -1,0 +1,110 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7C, 0F7D; normalized integral realization comparison in the original node proof, steps 2 and 5. Blueprint motivation: literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md, coefficient compatibility of units and counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived total limit intertwines reverse compactification refinement with open unit normalized proper open mate and proper compositor under whiskering",
+   "results": "Eight hits: limitCompWhiskeringLeftIsoCompLimit, limCompFlipIsoWhiskerLim_hom_app_app, limIsoFlipCompWhiskerLim_hom_app_app, ranCompLimIso, limitCompWhiskeringRightIsoLimitComp_hom_whiskerRight_π, limitCompWhiskeringRightIsoLimitComp_inv_π, limitCompWhiskeringLeftIsoCompLimit_hom_whiskerLeft_π, limit.pre_post. These are generic limit comparisons, not the normalized geometric mate realization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Twelve adjunction API hits, including homEquiv, homEquiv_apply, homEquiv_counit and homEquiv_unit. These provide transpose uniqueness but not the geometric system realization.",
+   "date": "2026-10-27",
+   "verdict": "Use adjunction uniqueness in the stated proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*realization|properOpen.*(transpose|realization)|normalizedRefinementWord",
+   "results": "msearch Mathlib grep: zero hits. Repository rg found the existing normalized word and context constructions in the assigned module, and reverse system laws in CompletedShriekCompositionLaws; no existing theorem compares this actual normalized integral mate under its contexts.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing constructions; isolate only their missing realization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived total limit realization preserves canonical proper open refinement maps normalized by adjunction transpose",
+   "results": "Eight hits: Adjunction.lim_preservesLimits, Functor.totalRightDerived, Functor.totalLeftDerived, Localization.HasProductsOfShapeAux.adj, IsOpenMap.adjunctionNhds, Topology.IsInducing.adjunction, Limits.IsColimit.ofLeftAdjoint, Profinite.forget_preservesLimits. Read the signatures: these are general limit/derived-functor/adjunction results, not this normalized geometric comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use project realization and normalized mate data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralNormalizedRefinementPasting",
+  "date": "2026-10-27",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-normalized-refinement-pasting",
+   "place": "Original normalized refinement proof, step 2 and the whiskering part of step 5."
+  },
+  "same_as": []
+ },
+ "id": "def-sf-normalized-refinement-context-data",
+ "kind": "definition",
+ "title": "Normalized compactification words and proper/open outside contexts",
+ "statement": "Fix a prime l and finite extension E of Q_l. With the typed system/integral interpretations and expression domains [def-sf-integral-system-expression-domain], define the compactification word B_c as compactSupport f c of the one input variable. The geometric witness uses the existing finite-type and quasi-compactness classes. Define its forward system refinement as inverseOrZero [def-sf-inverse-or-zero] of the specified reverse refinement [def-sf-completed-shriek-refinement-maps]. An outside context is inductively the hole, a proper push, or a quasi-compact open shriek. Define substitution, its composite evaluation functor, and the canonical evaluation associator isomorphism by recursion. For realization data [def-sf-integral-system-realization-data], the outside-coordinate realization is the inverse total-limit image of this associator, the comparison of the substituted word, then the integral associator. The bundled finite-type and quasi-compact structure-map instances identify the same Over structure map. These are exactly the existing constructions, relocated without changing any body or signature.",
+ "stmt_deps": [
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-realization-data",
+  "def-sf-completed-shriek-refinement-maps",
+  "def-sf-inverse-or-zero"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralNormalizedRefinementData",
+  "declaration": "WeilConjectures.IntegralSystemRealization.normalizedRefinementWord",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.normalizedRefinementWord",
+   "WeilConjectures.IntegralSystemRealization.normalizedRefinementGeometric",
+   "WeilConjectures.IntegralSystemRealization.normalizedRefinementSystemMap",
+   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext",
+   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.plug",
+   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.evaluate",
+   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.evaluationIso",
+   "WeilConjectures.IntegralSystemRealization.NormalizedRefinementContext.realization",
+   "WeilConjectures.IntegralSystemRealization.normalizedRefinementFiniteType",
+   "WeilConjectures.IntegralSystemRealization.normalizedRefinementQuasiCompact"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralNormalizedRefinementData.lean",
+  "statement": "def normalizedRefinementWord {B : Scheme.{u}} {X Y : Over B} (f : X ⟶ Y)\n    (c : Compactification f.left) : Expression B (ULift.{u} Unit) (fun _ ↦ X) Y",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "The ten existing data declarations moved verbatim from the item and reexported there. No duplicated definition and no new mathematical choice."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-403d2",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180638-L-3885595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-403d2",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261027T180638-L-3885595",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); ten moved data decls vs clone (verbatim); new hole vs original item conjuncts 3-4 + _normalization (implied, not a restatement); node proof_deps vs step uses; unit-route modules vs transitive imports (all still reached)"
+ }
+}

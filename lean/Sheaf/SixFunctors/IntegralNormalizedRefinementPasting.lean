@@ -5,20 +5,10 @@ Authors: SHEAF group Q58
 -/
 module
 
-public import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
+public import Sheaf.SixFunctors.IntegralNormalizedRefinementData
 public import Sheaf.SixFunctors.IntegralRefinementDiagramAdmissibility
-public import Sheaf.SixFunctors.CompletedShriekCompositionLaws
-public import Sheaf.SixFunctors.AmbientProperOpenPasting
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.FiniteTorAmplitudeSites
-public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.Paper.QcqsCompactSupportRealization
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import WeilConjectures.Compactification.RefinementCategory
-import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
-public import Sheaf.SixFunctors.GeneratorReductionStatement
-import Sheaf.SixFunctors.SemilinearProperOpenMatePasting
+import Sheaf.SixFunctors.IntegralRefinementTransposeRealization
 
 /-! # Pasting of the prescribed normalized integral refinement maps
 
@@ -43,125 +33,27 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The one-input compactification word B_c=S_p J_j, with its actual scheme indices.
-Source: blueprint extracted normalized coefficient argument, step 10
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-def normalizedRefinementWord {B : Scheme.{u}} {X Y : Over B} (f : X ⟶ Y)
-    (c : Compactification f.left) : Expression B (ULift.{u} Unit) (fun _ ↦ X) Y :=
-  .compactSupport f c (.var ⟨()⟩)
+private theorem forward_of_reverse_square
+    {C D : Type*} [Category C] [Category D] (L : C ⥤ D)
+    {A B : C} (s : B ⟶ A) [IsIso s]
+    {A' B' : D} (a : L.obj A ≅ A') (b : L.obj B ≅ B') (t : A' ≅ B')
+    (h : L.map s ≫ a.hom = b.hom ≫ t.inv) :
+    t.hom = a.inv ≫ L.map (inv s) ≫ b.hom := by
+  apply (cancel_mono t.inv).mp
+  simp only [Category.assoc, t.hom_inv_id]
+  rw [← h, ← L.map_comp_assoc, IsIso.inv_hom_id, L.map_id]
+  simp
 
-/-- The finite-type geometric proof for the actual one-input compactification word.
-Source: blueprint step 10, finite-type domain
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-abbrev normalizedRefinementGeometric {B : Scheme.{u}} {X Y : Over B}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
-    (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left]
-    (c : Compactification f.left) : (normalizedRefinementWord f c).geometric :=
-  ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
-    inferInstance, inferInstance, True.intro⟩
-
-/-- The inverse of the existing reverse system refinement, wherever it is invertible.
-The total inverse-or-zero convention is the recorded GeneratorReduction convention;
-the theorem below asserts invertibility, so its zero branch is never used there.
-Source: blueprint step 10, inversion of intrinsic system pasting
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-def normalizedRefinementSystemMap {D : FiniteFieldDatum.{u}} {o : Operations l E}
-    (R : Realizations l E D o) {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
-    {c d : Compactification f} (r : c.Refinement d) (M : System l E X) :
-    (completedShriekF l E o c).obj M ⟶ (completedShriekF l E o d).obj M :=
-  GeneratorReduction.inverseOrZero ((completedShriekRefinement l E R r).app M)
-
-/-- Finite outer proper/open factors in a refinement diagram, retaining their order.
-This is notation for the whiskering clause, not additional geometric data.
-Source: blueprint step 10; Stacks 0F7C, 0F7D
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-inductive NormalizedRefinementContext (B : Scheme.{u}) (V : Over B) : Over B →
-    Type (u + 1) where
-  | hole : NormalizedRefinementContext B V V
-  | push {U W : Over B} (f : U ⟶ W) (hf : IsProper f.left)
-      (q : NormalizedRefinementContext B V U) : NormalizedRefinementContext B V W
-  | shriek {U W : Over B} (j : U ⟶ W) (hj : IsOpenImmersion j.left)
-      (hq : QuasiCompact j.left) (q : NormalizedRefinementContext B V U) :
-      NormalizedRefinementContext B V W
-
-/-- Substitute the compactification expression into the same outer proper/open word.
-Source: blueprint step 10, permitted whiskering
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-def NormalizedRefinementContext.plug {B : Scheme.{u}} {V W : Over B}
-    (q : NormalizedRefinementContext B V W) {I : Type u} {X : I → Over B}
-    (e : Expression B I X V) : Expression B I X W :=
-  match q with
-  | .hole => e
-  | .push f hf q => .push f hf (q.plug e)
-  | .shriek j hj hq q => .shriek j hj hq (q.plug e)
-
-/-- Interpret the outside factors as the actual composite functor in either calculus.
-Source: blueprint step 10, whiskering before evaluation
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-def NormalizedRefinementContext.evaluate {B : Scheme.{u}} {V W : Over B}
-    (q : NormalizedRefinementContext B V W)
-    {C : Scheme.{u} → Type v} [∀ T, Category.{w} (C T)]
-    (d : Interpretation C) : C V.left ⥤ C W.left :=
-  match q with
-  | .hole => 𝟭 _
-  | .push f _ q => q.evaluate d ⋙ d.push f.left
-  | .shriek j hj _ q =>
-    letI := hj
-    q.evaluate d ⋙ d.shriek j.left
-
-/-- Canonical associators identify substitution with application of the outer functor.
-Source: blueprint step 10, identical outside factors
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-def NormalizedRefinementContext.evaluationIso {B : Scheme.{u}} {V W : Over B}
-    (q : NormalizedRefinementContext B V W)
-    {C : Scheme.{u} → Type v} [∀ T, Category.{w} (C T)] (d : Interpretation C)
-    {I : Type u} {X : I → Over B} (e : Expression B I X V) :
-    (q.plug e).evaluate d ≅ e.evaluate d ⋙ q.evaluate d :=
-  match q with
-  | .hole => (Functor.rightUnitor (e.evaluate d)).symm
-  | .push f _ q =>
-    Functor.isoWhiskerRight (q.evaluationIso d e) (d.push f.left) ≪≫
-      Functor.associator _ _ _
-  | .shriek j hj _ q =>
-    letI := hj
-    Functor.isoWhiskerRight (q.evaluationIso d e) (d.shriek j.left) ≪≫
-      Functor.associator _ _ _
-
-/-- The prescribed realization in outside-factor coordinates, using only associators.
-Source: blueprint step 10, whiskered realization
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-def NormalizedRefinementContext.realization {D : FiniteFieldDatum.{u}}
-    {o : Operations l E} (R : Realizations l E D o)
-    {I : Type u} [Finite I] {X : I → Over (Spec (CommRingCat.of D.k))}
-    {V W : Over (Spec (CommRingCat.of D.k))}
-    (q : NormalizedRefinementContext _ V W) (e : Expression _ I X V)
-    (g : (q.plug e).geometric) (K : ∀ i, Integral l E (X i).left)
-    (h : (q.plug e).domain l E o K) :
-    (coefficientSequenceLimit l E W.left).obj
-        ((q.evaluate (systemInterpretation l E o)).obj
-          (e.systemObj l E o ((inputReduction l E X).obj K))) ≅
-      (q.evaluate (integralInterpretation l E)).obj
-        ((e.evaluate (integralInterpretation l E)).obj K) :=
-  ((coefficientSequenceLimit l E W.left).mapIso
-    ((q.evaluationIso (systemInterpretation l E o) e).app
-      ((inputReduction l E X).obj K))).symm ≪≫
-    (R.comparison (q.plug e) g).app ⟨K, h⟩ ≪≫
-    (q.evaluationIso (integralInterpretation l E) e).app K
-
-/-- Transport the bundled finite-type structure to the same typeclass structure map.
-Source: blueprint finite-type convention
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-instance normalizedRefinementFiniteType {B : Scheme.{u}} (X : Over B)
-    [LocallyOfFiniteType X.hom] : LocallyOfFiniteType (X.left ↘ B) :=
-  inferInstanceAs (LocallyOfFiniteType X.hom)
-
-/-- Transport quasi-compactness to the same bundled structure morphism.
-Source: blueprint finite-type convention
-(blueprint: lem-sf-integral-normalized-refinement-pasting). -/
-instance normalizedRefinementQuasiCompact {B : Scheme.{u}} (X : Over B)
-    [QuasiCompact X.hom] : QuasiCompact (X.left ↘ B) :=
-  inferInstanceAs (QuasiCompact X.hom)
+private theorem normalizedRefinementSystemMap_eq_inv
+    {D : FiniteFieldDatum.{u}} {o : Operations l E} (R : Realizations l E D o)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
+    {c d : Compactification f} (v : c.Refinement d) (M : System l E X)
+    [IsIso ((completedShriekRefinement l E R v).app M)] :
+    normalizedRefinementSystemMap l E R v M =
+      inv ((completedShriekRefinement l E R v).app M) := by
+  classical
+  simp only [normalizedRefinementSystemMap, GeneratorReduction.inverseOrZero,
+    dif_pos (inferInstance : IsIso ((completedShriekRefinement l E R v).app M))]
 
 section Pasting
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -183,6 +75,8 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
       (finiteTorConstructibleIntegral l E X.left).ι ⋙
         ringedOpen l E _c.i ⋙ ringedPush l E v.hom)
 
+-- The original statement names an index used only by typeclass inference.
+set_option linter.unusedVariables false in
 /-- Actual integral identity, composition, total-limit realization and outer-factor laws.
 Source: blueprint exceptional inverse image, extracted normalized coefficient argument,
 old step 10; Stacks 0F7B, 0F7C, 0F7D
@@ -281,7 +175,129 @@ theorem integralNormalizedRefinementPasting
               (normalizedRefinementSystemMap l E R v
                 ((calculus l E X.left).reduction.obj K.obj))) ≫
           (q.realization l E R (normalizedRefinementWord f d) gd (fun _ ↦ K.obj) hd).hom) := by
-  sorry
+  classical
+  let L := coefficientSequenceLimit l E Y.left
+  let I := (finiteTorConstructibleIntegral l E Y.left).ι
+  let M (K : finiteTorConstructibleIntegralCategory l E X.left) :=
+    (calculus l E X.left).reduction.obj K.obj
+  let a (c : Compactification f.left)
+      (K : finiteTorConstructibleIntegralCategory l E X.left) :=
+    (R.comparison (normalizedRefinementWord f c) (normalizedRefinementGeometric f c)).app
+      ⟨(fun _ ↦ K.obj), hDiagram (fun _ ↦ c) (.id c) (.id c) K 15⟩
+  have hDom (c : Compactification f.left)
+      (K : finiteTorConstructibleIntegralCategory l E X.left) :
+      completedShriekDomain l E o c (M K) := by
+    have h := hDiagram (fun _ ↦ c) (.id c) (.id c) K 15
+    exact ⟨h.2.2.1.1, h.2.2.2, h.2.1⟩
+  have laws := completedShriekRefinementLaws l E D hl o R (f := f.left)
+  have hIso (c d : Compactification f.left) (v : c.Refinement d)
+      (K : finiteTorConstructibleIntegralCategory l E X.left) :
+      IsIso ((completedShriekRefinement l E R v).app (M K)) :=
+    laws.2.2.1 c d v (M K) (hDom c K) (hDom d K)
+  have hId (c : Compactification f.left)
+      (K : finiteTorConstructibleIntegralCategory l E X.left) :
+      normalizedRefinementSystemMap l E R (.id c) (M K) = 𝟙 _ := by
+    have := hIso c c (.id c) K
+    simp only [normalizedRefinementSystemMap_eq_inv, laws.1 c (M K), IsIso.inv_id]
+  have hComp (c d b : Compactification f.left) (v : c.Refinement d)
+      (w : d.Refinement b) (K : finiteTorConstructibleIntegralCategory l E X.left) :
+      normalizedRefinementSystemMap l E R (v.comp w) (M K) =
+        normalizedRefinementSystemMap l E R v (M K) ≫
+          normalizedRefinementSystemMap l E R w (M K) := by
+    have := hIso c d v K
+    have := hIso d b w K
+    have := hIso c b (v.comp w) K
+    simp only [normalizedRefinementSystemMap_eq_inv,
+      laws.2.1 c d b v w, NatTrans.comp_app, IsIso.inv_comp]
+  let t (c d : Compactification f.left) (v : c.Refinement d)
+      (K : finiteTorConstructibleIntegralCategory l E X.left) :=
+    ((ringedPushComp l E v.hom d.g ≪≫
+      eqToIso (congrArg (ringedPush l E) v.hom_g)).app
+        ((ringedOpen l E c.i).obj K.obj)).symm ≪≫
+      (ringedPush l E d.g).mapIso ((e v).app K).symm
+  have hOuter (c d : Compactification f.left) (v : c.Refinement d)
+      (K : finiteTorConstructibleIntegralCategory l E X.left)
+      {W : Over (Spec (CommRingCat.of D.k))}
+      (q : NormalizedRefinementContext _ Y W)
+      (gc : (q.plug (normalizedRefinementWord f c)).geometric)
+      (gd : (q.plug (normalizedRefinementWord f d)).geometric)
+      (hc : (q.plug (normalizedRefinementWord f c)).domain l E o (fun _ ↦ K.obj))
+      (hd : (q.plug (normalizedRefinementWord f d)).domain l E o (fun _ ↦ K.obj)) :
+      (q.evaluate (integralInterpretation l E)).map (t c d v K).hom =
+        (q.realization l E R (normalizedRefinementWord f c) gc (fun _ ↦ K.obj) hc).inv ≫
+          (coefficientSequenceLimit l E W.left).map
+            ((q.evaluate (systemInterpretation l E o)).map
+              (normalizedRefinementSystemMap l E R v (M K))) ≫
+          (q.realization l E R (normalizedRefinementWord f d) gd (fun _ ↦ K.obj) hd).hom := by
+    have := hIso c d v K
+    have h := integralRefinementTransposeRealization l E D hl o R f K
+      (fun cs v w i ↦ hDiagram cs v w K i) c d v ((e v).app K)
+      (_transpose c d v K) q gc gd hc hd
+    have h' := forward_of_reverse_square (coefficientSequenceLimit l E W.left)
+      ((q.evaluate (systemInterpretation l E o)).map
+        ((completedShriekRefinement l E R v).app (M K)))
+      (q.realization l E R (normalizedRefinementWord f c) gc (fun _ ↦ K.obj) hc)
+      (q.realization l E R (normalizedRefinementWord f d) gd (fun _ ↦ K.obj) hd)
+      ((q.evaluate (integralInterpretation l E)).mapIso (t c d v K)) h
+    simpa only [Functor.mapIso_hom, ← Functor.map_inv,
+      normalizedRefinementSystemMap_eq_inv] using h'
+  have hBase (c d : Compactification f.left) (v : c.Refinement d)
+      (K : finiteTorConstructibleIntegralCategory l E X.left) :
+      (t c d v K).hom =
+        (a c K).inv ≫ L.map (normalizedRefinementSystemMap l E R v (M K)) ≫
+          (a d K).hom := by
+    have h := hOuter c d v K .hole (normalizedRefinementGeometric f c)
+      (normalizedRefinementGeometric f d)
+      (hDiagram (fun _ ↦ c) (.id c) (.id c) K 15)
+      (hDiagram (fun _ ↦ d) (.id d) (.id d) K 15)
+    dsimp [NormalizedRefinementContext.realization,
+      NormalizedRefinementContext.evaluationIso, NormalizedRefinementContext.evaluate,
+      NormalizedRefinementContext.plug] at h
+    erw [L.map_id, L.map_id] at h
+    erw [Category.id_comp, Category.comp_id, Category.id_comp, Category.comp_id] at h
+    exact h
+  have hMap (c d : Compactification f.left) (v : c.Refinement d)
+      (K : finiteTorConstructibleIntegralCategory l E X.left) :
+      I.map ((ρ v).hom.app K) ≫ (r d).hom.app K =
+        (r c).hom.app K ≫ (a c K).inv ≫
+          L.map (normalizedRefinementSystemMap l E R v (M K)) ≫ (a d K).hom := by
+    rw [_normalization c d v K]
+    change (r c).hom.app K ≫ (t c d v K).hom = _
+    rw [hBase]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro c
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    apply I.map_injective
+    apply (cancel_mono ((r c).hom.app K)).mp
+    have h := hMap c c (.id c) K
+    rw [hId] at h
+    erw [L.map_id] at h
+    erw [Category.id_comp, (a c K).inv_hom_id, Category.comp_id] at h
+    simpa only [Iso.refl_hom, NatTrans.id_app, I.map_id, Category.id_comp] using h
+  · intro c d b v w
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    apply I.map_injective
+    apply (cancel_mono ((r b).hom.app K)).mp
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+    rw [hMap c b (v.comp w) K, hMap d b w K]
+    simp only [← Category.assoc]
+    rw [hMap c d v K]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, hComp, Functor.map_comp]
+  · intro c d v K
+    exact ⟨hIso c d v K, hMap c d v K⟩
+  · intro c d v K W q gc gd hc hd
+    have h := _normalization c d v K
+    have h' : (r c).inv.app K ≫ I.map ((ρ v).hom.app K) ≫ (r d).hom.app K =
+        (t c d v K).hom := by
+      rw [h]
+      simp only [Iso.inv_hom_id_app_assoc]
+      rfl
+    rw [h']
+    exact hOuter c d v K q gc gd hc hd
 
 end Pasting
 end WeilConjectures.IntegralSystemRealization
