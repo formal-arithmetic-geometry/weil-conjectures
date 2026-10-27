@@ -6,6 +6,8 @@ Authors: SHEAF group M6
 module
 
 public import Sheaf.Paper.EtaleBrownProjectionRealization
+import Sheaf.Paper.EtaleBrownOpenScalarTransportExistence
+import Sheaf.Paper.EtaleBrownOpenScalarTransportSquare
 
 /-! # Open scalar mate in normalized realizations
 
@@ -84,6 +86,9 @@ theorem etaleBrownOpenScalarTransport
       (Etale.scalarExtension (strictEtaleBrownRingMap O t h) c.Z).map
         ((jo n).hom.app P) ≫
       (Etale.ExceptionalCoefficients.openIso (strictEtaleBrownRingMap O t h) c.i).hom.app
-        ((RX.derived n).obj P) := by sorry
+        ((RX.derived n).obj P) := by
+  obtain ⟨op, hop⟩ := etaleBrownOpenScalarTransport_exists O t c S RX RZ ro jo hjo h
+  refine ⟨op, hop, ?_⟩
+  exact etaleBrownOpenScalarTransport_square O t c S RX RZ ro jo hjo h op hop
 
 end AlgebraicGeometry

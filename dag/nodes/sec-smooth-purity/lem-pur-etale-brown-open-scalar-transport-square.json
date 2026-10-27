@@ -1,0 +1,85 @@
+{
+ "id": "lem-pur-etale-brown-open-scalar-transport-square",
+ "kind": "statement",
+ "title": "Transport square for a supplied normalized open scalar mate",
+ "statement": "Transport square for a supplied normalized open scalar mate.\n\nPrecise statement:\n```lean\ntheorem etaleBrownOpenScalarTransport_square\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (S : StrictEtaleCompactSupport O t c)\n    (RX : StrictEtaleBrownRealization O t X S.PX)\n    (RZ : StrictEtaleBrownRealization O t c.Z S.PZ)\n    (ro : ∀ n, StrictEtaleBrownImageRealization O t c.i n\n      S.openImage (S.openDerived.level n) RX RZ)\n    (jo : ∀ n, S.levelDerivedOpen n ⋙ RZ.derived n ≅\n      RX.derived n ⋙ (Etale.openImmersionLowerShriek\n        (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) c.i).mapDerivedCategory)\n    (hjo : ∀ n,\n      (mateEquiv (S.levelDerivedOpenAdjunction n)\n        (((Etale.openImmersionLowerShriekUpperStarAdjunction\n          (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))\n          c.i).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight\n          (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))\n            c.i).rightDerivedFunctorIsoMapDerivedCategory)\n        (.mk _ _ _ _ (jo n).inv)).natTrans = (ro n).inverse.inv)\n    {m n : ℕ} (h : m ≤ n) (op : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅\n      S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived)\n    (hop :\n      (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)\n        (.mk _ _ _ _ op.hom)).natTrans = (S.openDerived.derivedTensor h).inv) :\n    ∀ P : DerivedCategory (strictEtaleLevel X O t n),\n    (RZ.derived m).map (op.inv.app P) ≫\n      (jo m).hom.app ((S.PX.scalar h).derived.obj P) ≫\n      (Etale.openImmersionLowerShriek\n        (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) c.i).mapDerivedCategory.map\n        ((RX.scalar h).hom.app P) =\n    (RZ.scalar h).hom.app ((S.levelDerivedOpen n).obj P) ≫\n      (Etale.scalarExtension (strictEtaleBrownRingMap O t h) c.Z).map\n        ((jo n).hom.app P) ≫\n      (Etale.ExceptionalCoefficients.openIso (strictEtaleBrownRingMap O t h) c.i).hom.app\n        ((RX.derived n).obj P)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Constructions 5.14–5.15 and Lemma 5.16; local open factor of the Brown comparison."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Transpose both paths through the open adjunction. Apply the specified mate normalization for jo, the supplied mate equation for op, and the scalar/open exchange comparison on representatives; descend the equality through the normalized realization factors.",
+   "uses": [
+    "lem-pur-derived-mate-comparison",
+    "lem-pur-etale-open-scalar-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-mate-comparison",
+  "lem-pur-etale-open-scalar-exchange"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Zheng Construction 4.1 and Constructions 5.14–5.15, Lemma 5.16",
+  "place": "Decomposition of lem-pur-etale-brown-open-scalar-transport into the mate-existence and transport-square steps."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownOpenScalarTransport",
+  "date": "2026-10-28",
+  "group": "D7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-brown-open-scalar-transport",
+   "place": "Strictly simpler decomposition of the open scalar transport proof.",
+   "via": [
+    "lem-pur-etale-brown-open-scalar-transport"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownOpenScalarTransportSquare",
+  "file": "lean/Sheaf/Paper/EtaleBrownOpenScalarTransportSquare.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownOpenScalarTransport_square",
+  "statement": "theorem etaleBrownOpenScalarTransport_square\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (S : StrictEtaleCompactSupport O t c)\n    (RX : StrictEtaleBrownRealization O t X S.PX)\n    (RZ : StrictEtaleBrownRealization O t c.Z S.PZ)\n    (ro : ∀ n, StrictEtaleBrownImageRealization O t c.i n\n      S.openImage (S.openDerived.level n) RX RZ)\n    (jo : ∀ n, S.levelDerivedOpen n ⋙ RZ.derived n ≅\n      RX.derived n ⋙ (Etale.openImmersionLowerShriek\n        (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) c.i).mapDerivedCategory)\n    (hjo : ∀ n,\n      (mateEquiv (S.levelDerivedOpenAdjunction n)\n        (((Etale.openImmersionLowerShriekUpperStarAdjunction\n          (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))\n          c.i).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight\n          (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))\n            c.i).rightDerivedFunctorIsoMapDerivedCategory)\n        (.mk _ _ _ _ (jo n).inv)).natTrans = (ro n).inverse.inv)\n    {m n : ℕ} (h : m ≤ n) (op : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅\n      S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived)\n    (hop :\n      (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)\n        (.mk _ _ _ _ op.hom)).natTrans = (S.openDerived.derivedTensor h).inv) :\n    ∀ P : DerivedCategory (strictEtaleLevel X O t n),\n    (RZ.derived m).map (op.inv.app P) ≫\n      (jo m).hom.app ((S.PX.scalar h).derived.obj P) ≫\n      (Etale.openImmersionLowerShriek\n        (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) c.i).mapDerivedCategory.map\n        ((RX.scalar h).hom.app P) =\n    (RZ.scalar h).hom.app ((S.levelDerivedOpen n).obj P) ≫\n      (Etale.scalarExtension (strictEtaleBrownRingMap O t h) c.Z).map\n        ((jo n).hom.app P) ≫\n      (Etale.ExceptionalCoefficients.openIso (strictEtaleBrownRingMap O t h) c.i).hom.app\n        ((RX.derived n).obj P)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T205906-L-1630054",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T205906-L-1630054",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
