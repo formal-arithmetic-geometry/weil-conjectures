@@ -9662,6 +9662,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OfObjectProperty
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
+public import WeilConjectures.Mathlib.CategoryTheory.NatIsoInvApp
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
