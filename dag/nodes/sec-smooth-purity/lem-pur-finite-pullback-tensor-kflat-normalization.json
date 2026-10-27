@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-kflat-normalization",
+ "kind": "statement",
+ "title": "Intrinsic finite pullback tensor normalization on K-flat complexes",
+ "status": "split",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, a scheme morphism f:X -> Y with ell invertible on X and Y, and n >= 0. Let F be the intrinsic finite pullback at the prescribed level n and LF its exact derived functor, with canonical tensor comparison mu from [def-pur-finite-pullback-tensor-construction]. For K-flat cochain complexes P,Q of normalized finite coefficient module sheaves on Y whose termwise pullbacks FP,FQ are K-flat, there is a chain isomorphism k:F Tot(P tensor Q) ~= Tot(FP tensor FQ). Define FinitePullbackTensorGenerators by requiring, for each bidegree (p,q), p+q=i, site object U and sections x,y, that k in degree i sends the inverse-image adjunction unit of the sheafified total tensor generator x tensor y to the total generator of the two inverse-image unit sections over baseChange_f U. This equation holds for k. Moreover LF(s_Y(P,Q));mu(QP,QQ);T_X(factors_P,factors_Q) = factors_Tot;Q_X(k);s_X(FP,FQ), where s_Y and s_X are exactly coefficientFiniteTensorModelIso for the chosen pullbackTensorCalculus. No quotient, coefficient-change comparison, boundedness, or flatness of terms is assumed.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-construction",
+  "def-pur-completed-pullback-tower-core",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof by flat-term K-flat total tensors; Tag 06YY for derived coefficient change, and Modules on Sites Tag 03EL for ordinary tensor pullback. Parent proof steps 1--3."
+ },
+ "proof": [
+  {
+   "text": "Take the direct-sum total of the normalized ordinary tensor pullback isomorphism, conjugated by the unit-normalized finite realization. Its generator formula is precisely FinitePullbackTensorGenerators. The total differential signs agree on every bidegree.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "def-pur-finite-pullback-tensor-construction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On flat-term K-flat pairs the defining representative square of proEtaleCanonicalTensorPullback, transported through the finite realization and finite tensor model comparisons, gives the displayed equality.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pur-finite-pullback-tensor-construction",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary K-flat inputs choose flat-term K-flat resolutions. Exact pullback and tensoring K-flat complexes preserve the resulting quasi-isomorphisms. Naturality of the ordinary total comparison and both prescribed tensor models transports the equality along their invertible localizations.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YY; parent representative square proof steps 1--3."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived pullback tensor comparison is computed on arbitrary K-flat complexes by the ordinary total tensor comparison",
+   "results": "8 hits on generic homological tensor and monoidal adjunction identities; no prescribed intrinsic representative normalization or coefficient/pullback square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Generic naturality only. Used in the parent transport proof; it does not supply this normalized chain calculation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePullbackTensor.*normalization|FinitePullbackTensorGenerators|ordinary.*quotient.*square",
+   "results": "No duplicate finite intrinsic total-tensor statement. Existing IntegralOpenTensorModuleQuotientSquare concerns open extension generators for one module, not the tensor of two arbitrary complexes or this spatial pullback.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; inspected the related open square."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorQuotientRepresentatives",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Finite coefficient reduction compatibility, decomposing the ordinary calculation and K-flat normalization of lem-pur-finite-pullback-tensor-quotient-representatives.",
+   "via": [
+    "lem-pur-finite-pullback-tensor-quotient-representatives"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorKFlatNormalization",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorKFlatNormalization.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_kflat_normalization",
+  "declarations": [
+   "WeilConjectures.FinitePullbackTensorGenerators",
+   "WeilConjectures.finitePullbackTensor_kflat_normalization"
+  ],
+  "statement": "theorem finitePullbackTensor_kflat_normalization {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)] (n : ℕ)\n    (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E Y n) P)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E Y n) Q)\n    (hFP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E X n)\n      (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n        (.up ℤ)).obj P))\n    (hFQ : CochainComplex.IsKFlatIndependentCoefficients\n      (R := integralCoefficientCommRingSheaf l E X n)\n      (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n        (.up ℤ)).obj Q)) :\n    ∃ k : ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n      (.up ℤ)).obj\n          ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)\n            (integralCoefficientCommRingSheaf l E Y n)).obj (P, Q)) ≅\n      (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X)\n        (integralCoefficientCommRingSheaf l E X n)).obj\n          (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n            (.up ℤ)).obj P,\n           ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n             (.up ℤ)).obj Q),\n      FinitePullbackTensorGenerators l E f n P Q k ∧\n      (finiteDerivedPullback l E n f).map\n          (coefficientFiniteTensorModelIso l E Y\n            (pullbackTensorCalculus l E Y).toCoefficientDerivedSystemTensors n P Q hP hQ).hom ≫\n        ((@finitePullbackTensorConstruction l _ E _ _ _ X Y f n hX hY)\n          (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫\n        (finiteIntrinsicDerivedTensor l E X n).map\n          (Prod.mkHom\n            ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n              f).mapDerivedCategoryFactors.hom.app P)\n            ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n              f).mapDerivedCategoryFactors.hom.app Q)) =\n      (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1))\n        f).mapDerivedCategoryFactors.hom.app _ ≫\n        DerivedCategory.Q.map k.hom ≫\n        (coefficientFiniteTensorModelIso l E X\n          (pullbackTensorCalculus l E X).toCoefficientDerivedSystemTensors\n          n _ _ hFP hFQ).hom",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T151655-L-1190247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T151655-L-1190247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

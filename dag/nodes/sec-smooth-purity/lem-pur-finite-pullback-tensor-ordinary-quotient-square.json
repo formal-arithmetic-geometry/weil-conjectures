@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-ordinary-quotient-square",
+ "kind": "statement",
+ "title": "Ordinary total tensor compatibility with finite quotients and pullback",
+ "status": "split",
+ "statement": "Fix a prime l, a finite extension E of Q_l, schemes X,Y with l invertible on both, a morphism f:X -> Y and natural numbers n<=m. Work in the ordinary cochain categories over the prescribed finite coefficient rings at levels m and n. Let Fm,Fn be termwise intrinsic pullbacks, GX,GY termwise actual quotient extensions, and TYm,TXm,TYn,TXn the signed ordinary total tensors. Let c:Fm GX ~= GY Fn be the ordinary pullback/quotient comparison preserving the iterated adjunction-unit sections hc, and let cc be its cochain comparison with degree components given by c (hcc). For arbitrary unbounded P,Q, let km:Fm(TYm(P,Q)) ~= TXm(FmP,FmQ), kn:Fn(TYn(GYP,GYQ)) ~= TXn(FnGYP,FnGYQ) satisfy FinitePullbackTensorGenerators of [lem-pur-finite-pullback-tensor-kflat-normalization]. Let ax:GX(TXm(FmP,FmQ)) ~= TXn(GXFmP,GXFmQ) and ay:GY(TYm(P,Q)) ~= TYn(GYP,GYQ) satisfy the CoefficientScalarTensorGenerators normalization for the actual quotient unit sections of [lem-coef-derived-system-evaluation-calculus]. Then GX(km);ax;TXn(cc_P,cc_Q) = cc_TYm(P,Q);Fn(ay);kn. No derived category, K-flatness, flatness of terms or quotient-flatness hypothesis is imposed.",
+ "stmt_deps": [
+  "lem-pur-finite-pullback-tensor-kflat-normalization",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof by flat-term K-flat total tensors; Tag 06YY for derived coefficient change, and Modules on Sites Tag 03EL for ordinary tensor pullback. Parent proof steps 1--3."
+ },
+ "proof": [
+  {
+   "text": "Check equality in every total degree. Transpose under quotient-extension adjunction and inverse-image adjunction, and then use tensor sheafification and the direct-sum total inclusions to reduce to one pure tensor generator in bidegree (p,q).",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-proetale-inverse-image",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move the ordinary comparison maps through the units by naturality. Apply the generator normalizations of km,kn,ax,ay, then hc to the two input sections and hcc to the components of cc. Both composites give the same tensor of inverse-image units of quotient units. Linearity, sheafification and coproduct uniqueness yield equality of the chain maps; their differential compatibility is already part of the given chain isomorphisms.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-kflat-normalization",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-proetale-inverse-image",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-finite-pullback-tensor-kflat-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YY; parent representative square proof steps 1--3."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a natural transformation preserving adjunction unit sections commutes with the ordinary tensor pullback comparison on total complexes",
+   "results": "8 hits on generic homological tensor and monoidal adjunction identities; no prescribed intrinsic representative normalization or coefficient/pullback square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Generic naturality only. Used in the parent transport proof; it does not supply this normalized chain calculation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePullbackTensor.*normalization|FinitePullbackTensorGenerators|ordinary.*quotient.*square",
+   "results": "No duplicate finite intrinsic total-tensor statement. Existing IntegralOpenTensorModuleQuotientSquare concerns open extension generators for one module, not the tensor of two arbitrary complexes or this spatial pullback.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; inspected the related open square."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorQuotientRepresentatives",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Finite coefficient reduction compatibility, decomposing the ordinary calculation and K-flat normalization of lem-pur-finite-pullback-tensor-quotient-representatives.",
+   "via": [
+    "lem-pur-finite-pullback-tensor-quotient-representatives"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorOrdinaryQuotientSquare",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorOrdinaryQuotientSquare.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_ordinary_quotient_square",
+  "declarations": [
+   "WeilConjectures.finitePullbackTensor_ordinary_quotient_square"
+  ],
+  "statement": "theorem finitePullbackTensor_ordinary_quotient_square {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    {m n : ℕ} (h : n ≤ m)\n    (c : sfIntrinsicPullback (finiteCoefficientRing l E (m + 1)) f ⋙\n        coefficientFiniteQuotientExtension l E X h ≅\n      coefficientFiniteQuotientExtension l E Y h ⋙\n        sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f)\n    (hc : ∀ (M : normalizedDVRModules l E Y m) (U : Y.ProEt)\n        (x : M.val.obj (Opposite.op U)),\n        (c.hom.app M).val.app (Opposite.op ((proEtaleBaseChange f).obj U))\n          (coefficientFiniteQuotientUnitSection l E X h\n            ((sfIntrinsicPullback (finiteCoefficientRing l E (m + 1)) f).obj M)\n            (Opposite.op ((proEtaleBaseChange f).obj U))\n            (((sfIntrinsicConstantModuleAdjunction f\n              (finiteCoefficientRing l E (m + 1))).unit.app M).val.app (Opposite.op U) x)) =\n        ((sfIntrinsicConstantModuleAdjunction f\n          (finiteCoefficientRing l E (n + 1))).unit.app\n            ((coefficientFiniteQuotientExtension l E Y h).obj M)).val.app (Opposite.op U)\n          (coefficientFiniteQuotientUnitSection l E Y h M (Opposite.op U) x))\n    (cc : (sfIntrinsicPullback\n        (finiteCoefficientRing l E (m + 1)) f).mapHomologicalComplex (.up ℤ) ⋙\n        (coefficientFiniteQuotientExtension l E X h).mapHomologicalComplex (.up ℤ) ≅\n      (coefficientFiniteQuotientExtension l E Y h).mapHomologicalComplex (.up ℤ) ⋙\n        (sfIntrinsicPullback\n          (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex (.up ℤ))\n    (hcc : ∀ (P : CochainComplex (normalizedDVRModules l E Y m) ℤ) (i : ℤ),\n      (cc.hom.app P).f i = c.hom.app (P.X i))\n    (P Q : CochainComplex (normalizedDVRModules l E Y m) ℤ) :\n    let Fm := (sfIntrinsicPullback (finiteCoefficientRing l E (m + 1)) f).mapHomologicalComplex\n      (.up ℤ)\n    let Fn := (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex\n      (.up ℤ)\n    let GX := (coefficientFiniteQuotientExtension l E X h).mapHomologicalComplex (.up ℤ)\n    let GY := (coefficientFiniteQuotientExtension l E Y h).mapHomologicalComplex (.up ℤ)\n    let TYm := coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)\n      (integralCoefficientCommRingSheaf l E Y m)\n    let TXm := coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X)\n      (integralCoefficientCommRingSheaf l E X m)\n    let TYn := coefficientTotalTensor.{u, u + 1, u} (ProEt.topology Y)\n      (integralCoefficientCommRingSheaf l E Y n)\n    let TXn := coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X)\n      (integralCoefficientCommRingSheaf l E X n)\n    ∀ (km : Fm.obj (TYm.obj (P, Q)) ≅ TXm.obj (Fm.obj P, Fm.obj Q))\n      (kn : Fn.obj (TYn.obj (GY.obj P, GY.obj Q)) ≅\n        TXn.obj (Fn.obj (GY.obj P), Fn.obj (GY.obj Q)))\n      (ax : GX.obj (TXm.obj (Fm.obj P, Fm.obj Q)) ≅\n        TXn.obj (GX.obj (Fm.obj P), GX.obj (Fm.obj Q)))\n      (ay : GY.obj (TYm.obj (P, Q)) ≅ TYn.obj (GY.obj P, GY.obj Q)),\n      FinitePullbackTensorGenerators l E f m P Q km →\n      FinitePullbackTensorGenerators l E f n (GY.obj P) (GY.obj Q) kn →\n      CoefficientScalarTensorGenerators.{u, u + 1, u} (ProEt.topology X)\n        (integralCoefficientCommRingSheaf l E X m)\n        (integralCoefficientCommRingSheaf l E X n)\n        (coefficientFiniteQuotientExtension l E X h)\n        (hF := coefficientFiniteQuotientExtensionAdditive l E X h)\n        (coefficientFiniteQuotientUnitSection l E X h) (Fm.obj P) (Fm.obj Q) ax →\n      CoefficientScalarTensorGenerators.{u, u + 1, u} (ProEt.topology Y)\n        (integralCoefficientCommRingSheaf l E Y m)\n        (integralCoefficientCommRingSheaf l E Y n)\n        (coefficientFiniteQuotientExtension l E Y h)\n        (hF := coefficientFiniteQuotientExtensionAdditive l E Y h)\n        (coefficientFiniteQuotientUnitSection l E Y h) P Q ay →\n      GX.map km.hom ≫ ax.hom ≫ TXn.map\n          (Prod.mkHom (cc.hom.app P) (cc.hom.app Q)) =\n        cc.hom.app (TYm.obj (P, Q)) ≫ Fn.map ay.hom ≫ kn.hom",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T151655-L-1190247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T151655-L-1190247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

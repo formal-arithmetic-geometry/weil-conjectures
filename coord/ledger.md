@@ -19584,3 +19584,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:16 L: merged deliver/D3/Sheaf.Paper.ScalarExtensionTowerCoherence (stage 3; reviewer PASS; first push; landing 20261027T151652-L-1189535 (interface); batch 20261027T151642; modules 2; new nodes 1)
 - 15:16 L: merged deliver/D4/Sheaf.Paper.ReindexingSystemHomReductionSquare (stage 3; reviewer PASS; first push; landing 20261027T151653-L-1189826 (proof); batch 20261027T151642; modules 1; new nodes 0)
 - 15:16 L: merged deliver/E1/Sheaf.Paper.FiniteScalarTensorPullbackRepresentativeEquation (stage 3; reviewer PASS; first push; landing 20261027T151654-L-1190109 (interface); batch 20261027T151642; modules 3; new nodes 2)
+- 15:16 L: merged deliver/E3/Sheaf.Paper.FinitePullbackTensorQuotientRepresentatives (stage 3; reviewer PASS; first push; landing 20261027T151655-L-1190247 (interface); batch 20261027T151642; modules 3; new nodes 2)
