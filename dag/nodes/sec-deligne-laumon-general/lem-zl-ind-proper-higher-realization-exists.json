@@ -1,0 +1,122 @@
+{
+ "id": "lem-zl-ind-proper-higher-realization-exists",
+ "kind": "statement",
+ "title": "Existence of a represented proper higher realization",
+ "statement": "For the same proper map, coefficient action, degree and input represented Weil sheaf, there exists a represented Weil sheaf H together with an isomorphism from its ind embedding to the higher proper ind-image and an isomorphism from its underlying carrier to the normalized constructible cohomology.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-geometric-fiber-properties",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-constructible-heart"
+ ],
+ "source": {
+  "document": "SGA 4, XVII, proper direct image; Bhatt–Scholze 6.8.14–6.8.15; Barrett, The derived category of the abelian category of constructible sheaves, https://arxiv.org/pdf/2005.10859, Theorem 1.1; Kashiwara–Schapira, Categories and Sheaves, §15.3",
+  "place": "Ordinary-heart realization, exact Yoneda on bounded derived categories, proper-image adjunction and coefficient transport."
+ },
+ "proof": [
+  {
+   "text": "Use the ordinary constructible-heart realization of proper higher direct image, transport it through the normalized compact-support coefficient action, and lift the resulting Frobenius-compatible represented object to the common-stage Weil heart. This yields both the ind-image isomorphism and the normalized cohomology carrier isomorphism.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-constructible-heart",
+    "def-weil-proper-morphism",
+    "def-weil-derived-direct-image",
+    "def-weil-compact-support-coefficient-action",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-constructible-heart",
+  "def-weil-proper-morphism",
+  "def-weil-derived-direct-image",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "SGA 4, XVII, proper direct image; Bhatt–Scholze 6.8.14–6.8.15; Barrett, The derived category of the abelian category of constructible sheaves, https://arxiv.org/pdf/2005.10859, Theorem 1.1; Kashiwara–Schapira, Categories and Sheaves, §15.3",
+  "place": "Ordinary-heart realization, exact Yoneda on bounded derived categories, proper-image adjunction and coefficient transport."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher right derived proper direct image on ind constructible sheaves is cohomology of derived direct image in the constructible derived category",
+   "results": "8 generic hits including CategoryTheory.Functor.rightDerived and generic right-derived universal properties.",
+   "date": "2026-10-25",
+   "verdict": "No comparison with the constructible heart or this ind model."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 hits including rightDerivedZeroIsoSelf, injective vanishing, and NatTrans.rightDerived.",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*(rightDerived|Adjunction)|rightDerived.*Ind",
+   "results": "25 generic hits; CategoryTheory/Abelian/RightDerived.lean and adjunction files. Direct project rg found only the three representability/interchange statement modules.",
+   "date": "2026-10-25",
+   "verdict": "No existing normalized realization comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "agent",
+  "item": "Sheaf.Paper.WeilIndProperHigherRealization",
+  "date": "2026-10-28",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First paragraph, the proper/open construction of higher compact-support images. Realization of represented higher proper ind-image",
+   "via": [
+    "def-zl-weil-compact-support-cohomology",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilIndProperHigherRealizationExists",
+  "file": "lean/Sheaf/Paper/WeilIndProperHigherRealizationExists.lean",
+  "declaration": "WeilConjectures.zlIndWeilProperHigher_realization_exists",
+  "statement": "theorem zlIndWeilProperHigher_realization_exists\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (p₀ : X₀ ⟶ Y₀) [IsProper p₀.left]\n    (S : SfCompactSupportCoefficientAction l D.k (zlRealizationPrimeUnit D l hl) Ω\n      (.ofIsProper (zlFiberMap D p₀)))\n    (n : ℕ) (G : sfCommonStageWeilSheaf D l hl X₀ Ω) :\n    ∃ H : sfCommonStageWeilSheaf D l hl Y₀ Ω,\n      Nonempty ((zlWeilIndEmbedding D l hl Ω Y₀).obj H ≅\n        ((zlIndWeilPush D l hl Ω p₀).rightDerived n).obj\n          ((zlWeilIndEmbedding D l hl Ω X₀).obj G)) ∧\n      Nonempty (H.obj.carrier ≅\n        (constructibleTruncationCohomology\n          (sfCommonStageStandardTStructure l (D.geometricFiber Y₀).left Ω D hl) (n : ℤ)).obj\n            (S.system.functor.obj G.obj.carrier))",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261027T180746-L-3898215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261027T180746-L-3898215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

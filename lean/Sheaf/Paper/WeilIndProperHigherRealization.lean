@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.WeilGeometricFiberProperties
 public import Sheaf.Paper.CompactSupportCoefficientAction
 public import Sheaf.Paper.ConstructibleTruncations
+import Sheaf.Paper.WeilIndProperHigherRealizationExists
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-! # Realization of proper higher image on represented Weil ind-sheaves
@@ -69,6 +70,17 @@ theorem zlIndWeilProperHigher_realization
       (constructibleTruncationCohomology
         (sfCommonStageStandardTStructure l (D.geometricFiber Y₀).left Ω D hl) (n : ℤ)).obj
           (S.system.functor.obj G.obj.carrier)) := by
-  sorry
+  obtain ⟨H₀, ⟨e₀, h₀⟩⟩ := zlIndWeilProperHigher_realization_exists
+    D l hl Ω p₀ S n G
+  obtain ⟨e₀⟩ := e₀
+  obtain ⟨hfull, hfaith⟩ := zlWeilIndEmbedding_full_faithful D l hl Ω Y₀
+  let E := zlWeilIndEmbedding D l hl Ω Y₀
+  let _ : E.Full := hfull
+  let _ : E.Faithful := hfaith
+  obtain ⟨hcarrier⟩ := h₀
+  let i := E.preimageIso (e ≪≫ e₀.symm)
+  let ih : H.obj.carrier ≅ H₀.obj.carrier :=
+    asIso ((Endofunctor.IsoAlgebra.forget _).map i.hom.hom)
+  exact ⟨ih ≪≫ hcarrier⟩
 
 end WeilConjectures
