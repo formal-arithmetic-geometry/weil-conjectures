@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-canonical-supported",
+ "kind": "statement",
+ "title": "Canonical finite direct-image operation on supported arrows",
+ "statement": "theorem diagonalTrace_finiteCanonical_supported\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ)\n    (γ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y) :\n    let E := ULift.{u} (Padic l)\n    let UX := diagonalCompletedUnderlying l (diagonalSurface Y)\n    let US := diagonalCompletedUnderlying l (ProjectiveLine Y)\n    let VX := p.restrictionX.F.mapDerivedCategory\n    let evS := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    p.finitePushUnit l ≫ p.Rf.R.map\n        (UX.map\n            ((DerivedCategory.singleFunctor (DiagonalCompleted l (diagonalSurface Y)) 0).map\n              (completedSupportedUnit l Y) ≫ γ) ≫\n          shiftedComparison UX (VX ⋙ p.LX.R) (p.coefficientsX.lineMap l E p.LX) 2 ≫\n            (p.LX.projection n).app _) ≫ (p.finitePushComparison l n).hom.app _ =\n      US.map (a.hom ≫ p.Rc.R.map γ) ≫ p.sourceMap l E ≫\n        (p.LS.projection n).app _ ≫ evS.map (p.varying.inv.app _)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite direct image; geometric classes proof (3), coefficient-unit normalization"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "def-sfb-diagonal-trace-sources",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-completed-supported-unit",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the single-to-derived-direct-image comparison transports the ordinary supported-source coefficient-unit identity to the completed normalized square. This identifies the supported input seed with the canonical finitePushUnit.",
+   "uses": [
+    "lem-sfb-diagonal-trace-supported-unit-normalization",
+    "def-sfb-diagonal-trace-finite-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand sourceMap, use the finite evaluation/projection identity, and cancel the evaluation isomorphism with its inverse in finitePushComparison.",
+   "uses": [
+    "lem-sfb-diagonal-trace-finite-evaluation-projection",
+    "def-sfb-diagonal-trace-finite-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary supported arrow gamma, naturality of the completed comparison and functoriality of direct image combine the seed and projection identities to give the equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-supported-unit-normalization",
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "lem-sfb-diagonal-trace-finite-evaluation-projection"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "construct the common operation from direct image, then calculate its supported and geometric components",
+  "by": "C8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived_ext|unitToPushforwardObjUnit|tower_evaluation_isKInjective",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-27",
+   "verdict": "Generic unit and derived-functor APIs; no existing normalized finite comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unitToPushforwardObjUnit\"",
+   "results": "3 hits: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "date": "2026-10-27",
+   "verdict": "Generic unit and derived-functor APIs; no existing normalized finite comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized comparison of derived direct image with evaluation of a tower commutes with the inverse limit projections and sends the coefficient unit to the adjunction unit",
+   "results": "8 hits: Profinite.NobelingProof.GoodProducts.square_commutes, AdicCompletion.transitionMap_comp_eval, localCohomology.diagramComp, LightCondensed.ihomPoints_symm_comp, AdicCompletion.eval_lift, AdicCompletion.factorₐ_evalₐ_one, LightCondensed.isoLocallyConstantOfIsColimit_inv, Condensed.isoLocallyConstantOfIsColimit_inv",
+   "date": "2026-10-27",
+   "verdict": "Generic unit and derived-functor APIs; no existing normalized finite comparison statement."
+  },
+  {
+   "tool": "rg",
+   "query": "finiteEvaluation|finitePushUnit|supportedUnit_normalization in lean/Sheaf and lean/WeilConjectures",
+   "results": "No declarations with these names or this normalized finite evaluation/unit interface.",
+   "date": "2026-10-27",
+   "verdict": "Construct evaluation by derived-functor uniqueness; isolate only the two coefficient-unit identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived direct image comparison carries the coefficient unit and commutes with evaluation and inverse limit projections",
+   "results": "8 hits: CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc, SheafOfModules.evaluationPreservesLimit, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, PresheafOfModules.limitCone_π_app_app, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AdicCompletion.eval_lift_apply, smoothSheafCommRing.ι_evalHom_apply",
+   "date": "2026-10-27",
+   "verdict": "Ordinary evaluation/limit lemmas only; the derived common-unit comparison and geometric coefficient unit are not these statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteAdjunctionGeometric",
+  "date": "2026-10-27",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), derived direct image followed by finite evaluation",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-adjunction-geometric",
+    "lem-sfb-diagonal-trace-finite-adjunction-factorization",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteCanonicalSupported",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteCanonicalSupported.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finiteCanonical_supported",
+  "statement": "theorem diagonalTrace_finiteCanonical_supported\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ)\n    (γ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y) :\n    let E := ULift.{u} (Padic l)\n    let UX := diagonalCompletedUnderlying l (diagonalSurface Y)\n    let US := diagonalCompletedUnderlying l (ProjectiveLine Y)\n    let VX := p.restrictionX.F.mapDerivedCategory\n    let evS := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    p.finitePushUnit l ≫ p.Rf.R.map\n        (UX.map\n            ((DerivedCategory.singleFunctor (DiagonalCompleted l (diagonalSurface Y)) 0).map\n              (completedSupportedUnit l Y) ≫ γ) ≫\n          shiftedComparison UX (VX ⋙ p.LX.R) (p.coefficientsX.lineMap l E p.LX) 2 ≫\n            (p.LX.projection n).app _) ≫ (p.finitePushComparison l n).hom.app _ =\n      US.map (a.hom ≫ p.Rc.R.map γ) ≫ p.sourceMap l E ≫\n        (p.LS.projection n).app _ ≫ evS.map (p.varying.inv.app _)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a2c7b",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261027T205852-L-1626047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a2c7b",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261027T205852-L-1626047",
+  "kind": "interface",
+  "note": "independent cc review: item lem-sfb-diagonal-trace-finite-adjunction-geometric (STATEMENT-DISPUTED ∀Φ → canonical finitePushUnit/finitePushComparison Φ) and adapted parent factorization (statement verbatim) against clone, change record, node statement_change, the 5 new nodes/modules and 3b (DivisorAdjoint OK)"
+ }
+}

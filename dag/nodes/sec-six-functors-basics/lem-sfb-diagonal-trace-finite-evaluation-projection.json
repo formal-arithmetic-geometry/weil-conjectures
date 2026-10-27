@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-evaluation-projection",
+ "kind": "statement",
+ "title": "Evaluation comparison commutes with derived inverse-limit projection",
+ "statement": "theorem diagonalTrace_finiteEvaluation_projection\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f)\n    (M : DerivedCategory (DiagonalSystems l X)) (n : ℕ) :\n    p.limits.iso.hom.app M ≫ (p.LS.projection n).app (p.Rt.R.obj M) ≫\n        (finiteEvaluationSquare l f p.Rt p.Rf n).iso.hom.app M =\n      p.Rf.R.map ((p.LX.projection n).app M)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite direct image; geometric classes proof (3), coefficient-unit normalization"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "def-sfb-diagonal-trace-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Compare the two natural transformations from derived limit followed by derived direct image, using the composite universal derived unit. Derived-functor uniqueness reduces equality to the common unit on complexes.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "det-prop-diagonal-tower-limit",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply full normalization of the limit square and evaluation square. Naturality moves the tower direct-image unit across projection. On ordinary complexes, limit.post followed by a projection is direct image of that projection. The generic projection diagram assembles these equalities.",
+   "uses": [
+    "def-sfb-diagonal-trace-finite-evaluation",
+    "det-prop-diagonal-tower-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "det-prop-diagonal-tower-limit",
+  "def-sfb-diagonal-trace-finite-evaluation",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "construct the common operation from direct image, then calculate its supported and geometric components",
+  "by": "C8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived_ext|unitToPushforwardObjUnit|tower_evaluation_isKInjective",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-27",
+   "verdict": "Generic unit and derived-functor APIs; no existing normalized finite comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unitToPushforwardObjUnit\"",
+   "results": "3 hits: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "date": "2026-10-27",
+   "verdict": "Generic unit and derived-functor APIs; no existing normalized finite comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized comparison of derived direct image with evaluation of a tower commutes with the inverse limit projections and sends the coefficient unit to the adjunction unit",
+   "results": "8 hits: Profinite.NobelingProof.GoodProducts.square_commutes, AdicCompletion.transitionMap_comp_eval, localCohomology.diagramComp, LightCondensed.ihomPoints_symm_comp, AdicCompletion.eval_lift, AdicCompletion.factorₐ_evalₐ_one, LightCondensed.isoLocallyConstantOfIsColimit_inv, Condensed.isoLocallyConstantOfIsColimit_inv",
+   "date": "2026-10-27",
+   "verdict": "Generic unit and derived-functor APIs; no existing normalized finite comparison statement."
+  },
+  {
+   "tool": "rg",
+   "query": "finiteEvaluation|finitePushUnit|supportedUnit_normalization in lean/Sheaf and lean/WeilConjectures",
+   "results": "No declarations with these names or this normalized finite evaluation/unit interface.",
+   "date": "2026-10-27",
+   "verdict": "Construct evaluation by derived-functor uniqueness; isolate only the two coefficient-unit identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived direct image comparison carries the coefficient unit and commutes with evaluation and inverse limit projections",
+   "results": "8 hits: CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc, SheafOfModules.evaluationPreservesLimit, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, PresheafOfModules.limitCone_π_app_app, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AdicCompletion.eval_lift_apply, smoothSheafCommRing.ι_evalHom_apply",
+   "date": "2026-10-27",
+   "verdict": "Ordinary evaluation/limit lemmas only; the derived common-unit comparison and geometric coefficient unit are not these statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteAdjunctionGeometric",
+  "date": "2026-10-27",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), derived direct image followed by finite evaluation",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-adjunction-geometric",
+    "lem-sfb-diagonal-trace-finite-adjunction-factorization",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteProjection",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finiteEvaluation_projection",
+  "statement": "theorem diagonalTrace_finiteEvaluation_projection\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f)\n    (M : DerivedCategory (DiagonalSystems l X)) (n : ℕ) :\n    p.limits.iso.hom.app M ≫ (p.LS.projection n).app (p.Rt.R.obj M) ≫\n        (finiteEvaluationSquare l f p.Rt p.Rf n).iso.hom.app M =\n      p.Rf.R.map ((p.LX.projection n).app M)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a2c7b",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261027T205852-L-1626047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a2c7b",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261027T205852-L-1626047",
+  "kind": "interface",
+  "note": "independent cc review: item lem-sfb-diagonal-trace-finite-adjunction-geometric (STATEMENT-DISPUTED ∀Φ → canonical finitePushUnit/finitePushComparison Φ) and adapted parent factorization (statement verbatim) against clone, change record, node statement_change, the 5 new nodes/modules and 3b (DivisorAdjoint OK)"
+ }
+}

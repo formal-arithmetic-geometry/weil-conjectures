@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Paper.DiagonalTraceSources
 public import Sheaf.Paper.DiagonalTraceFiniteCartierChern
-import Sheaf.Paper.DiagonalTraceFiniteAdjunctionSupported
+import Sheaf.Paper.DiagonalTraceFiniteCanonicalSupported
 import Sheaf.Paper.DiagonalTraceFiniteAdjunctionGeometric
 
 /-! # Finite direct-image factorization through the unadjointed surface arrow
@@ -108,8 +108,12 @@ theorem diagonalTrace_finiteAdjunction_factorization
   let evS := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj
     (op n)).mapDerivedCategory
   let line := (SpTowerClasses.line l E p.chernX)⟦(2 : ℤ)⟧
-  obtain ⟨Φ, hγ⟩ := diagonalTrace_finiteAdjunction_supported l Y f p a n
-  have hθ := diagonalTrace_finiteAdjunction_geometric l Y f p a n Φ hγ
-  exact ⟨Φ, hγ, hθ⟩
+  let Φ := fun η : UX.obj (completedUnit l (diagonalSurface Y)) ⟶
+      evX.obj (VX.obj line) ↦
+    p.finitePushUnit l ≫ p.Rf.R.map η ≫ (p.finitePushComparison l n).hom.app line
+  refine ⟨Φ, ?_, ?_⟩
+  · intro γ
+    exact diagonalTrace_finiteCanonical_supported l Y f p a n γ
+  · exact diagonalTrace_finiteAdjunction_geometric l Y f p n
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
