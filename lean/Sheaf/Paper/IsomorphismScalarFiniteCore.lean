@@ -6,6 +6,9 @@ Authors: SHEAF group Q8
 module
 
 public import Sheaf.Paper.IsomorphismScalarCompletedModel
+import Sheaf.Paper.IsomorphismScalarFiniteComparisonFormula
+import Sheaf.Paper.IsomorphismScalarFiniteQuotientFormulas
+import Sheaf.Paper.IsomorphismScalarFiniteTransitionFormulas
 
 /-! # Finite scalar comparison and reduction formulas
 
@@ -69,6 +72,9 @@ theorem scalar_finite_core
     RightQuotientFormula l E L ι g vright ∧
     LeftTransitionFormula l E L ι g tleft ∧
     RightTransitionFormula l E L ι g tright := by
-  sorry
+  obtain ⟨bfin, hF⟩ := finite_formula_exists l E L ι g b hb
+  obtain ⟨vleft, hL, vright, hR⟩ := quotient_formulas_exists l E L ι g b hb
+  obtain ⟨tleft, hTL, tright, hTR⟩ := transition_formulas_exists l E L ι g b hb
+  exact ⟨bfin, vleft, vright, tleft, tright, hF, hL, hR, hTL, hTR⟩
 
 end AlgebraicGeometry.ProEtale.IsomorphismScalarTensor
