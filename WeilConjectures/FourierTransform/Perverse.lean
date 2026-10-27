@@ -26,7 +26,7 @@ one.
 - `AlgebraicGeometry.Etale.isLisse_fourierKernel`: the Fourier kernel is lisse.
 - `AlgebraicGeometry.Etale.isPerverseLE_fourierTransform`,
   `AlgebraicGeometry.Etale.isPerverseGE_fourierTransform`: the perverse amplitude of the
-  transform (blueprint `thm-fd-fourier-perverse`).
+  transform.
 
 ## Implementation notes
 
@@ -86,7 +86,7 @@ noncomputable def fourierTransformIso (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullbac
 omit [IsSeparated π] [QuasiCompact π] [HasCompactification π] [IsSeparated π']
   [HasCompactification π'] in
 /-- **Perverse amplitude of the Fourier transform**, support side: `FT_ψ` carries
-`ᵖD^{≤0}(V) ∩ Dctf(V)` into `ᵖD^{≤1}(V')`. (blueprint: `thm-fd-fourier-perverse`) -/
+`ᵖD^{≤0}(V) ∩ Dctf(V)` into `ᵖD^{≤1}(V')`. -/
 theorem isPerverseLE_fourierTransform
     (hfib : ∀ y, topologicalKrullDim ((pullback.snd π π').fiber y) ≤ ((1 : ℕ) : ℕ∞))
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤))
@@ -105,7 +105,7 @@ theorem isPerverseLE_fourierTransform
   exact (isPerverseLE_shift_iff _ 1 1).2 h₂
 
 /-- **Perverse amplitude of the Fourier transform**, cosupport side: `FT_ψ` carries
-`ᵖD^{≥0}(V) ∩ Dctf(V)` into `ᵖD^{≥-1}(V')`. (blueprint: `thm-fd-fourier-perverse`) -/
+`ᵖD^{≥0}(V) ∩ Dctf(V)` into `ᵖD^{≥-1}(V')`. -/
 theorem isPerverseGE_fourierTransform [PerfectField k]
     [HasCompactification (pullback.fst π π' ≫ π)]
     [HasCompactification (pullback.snd π π' ≫ π')]

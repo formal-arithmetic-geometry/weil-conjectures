@@ -15,8 +15,7 @@ A family of isomorphisms `e_n : M_n ≅ N_n` between the levels of two normalize
 isomorphism of normalized systems. Its restriction of scalars is an isomorphism of the towers
 `n ↦ Res M_n` and `n ↦ Res N_n` in `D(X_ét, Λ)`, and it is realized by an isomorphism of the
 derived limits `R lim_n Res M_n ≅ R lim_n Res N_n` whose reduction at every level `n` is `e_n`.
-This is the step of the uniform-tower reconstruction (blueprint
-`lem-weil-pbc-reconstruction-uniform-tower`) that turns levelwise isomorphisms into an
+This is the step of the uniform-tower reconstruction that turns levelwise isomorphisms into an
 isomorphism over the integral coefficients.
 
 ## Main definitions

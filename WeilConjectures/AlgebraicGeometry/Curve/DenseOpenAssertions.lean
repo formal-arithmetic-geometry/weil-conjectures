@@ -148,11 +148,11 @@ $H^2(Z'',E|_{Z''})=0$ by [lem-weil-pbc-zero-dimensional-cohomology] and $(\mathc
 $(\mathcal C_6)$ and $(\mathcal C_7)$ hold by [lem-weil-pbc-zero-dimensional-field-extension]
 ($\rho^q_{k'/k}(Z,E)$ is an isomorphism for every $q$ and every algebraically closed $k'/k$).
 Since $i:Z\to X$ is a finite morphism of separated finite-type $k$-schemes of dimension $\le1$,
-[lem-weil-pbc-curve-assertions-finite-pushforward] (Stacks 0A5D) gives $\mathcal C(X,G)=\mathcal
-C(X,i_*E)$. In particular $\rho^q_{k'/k}(X,G)$ is an isomorphism for all $q$ when $X$ is proper
-($\mathcal C_7$), or when $G$ is prime to $p$ ($\mathcal C_6$). Dependencies:
-def-weil-pbc-curve-setting, def-weil-pbc-inverse-image, lem-weil-pbc-zero-dimensional-cohomology,
-lem-weil-pbc-zero-dimensional-field-extension, lem-weil-pbc-curve-assertions-finite-pushforward,
+the finite-pushforward case of the curve assertions (Stacks 0A5D) gives
+$\mathcal C(X,G)=\mathcal C(X,i_*E)$. In particular $\rho^q_{k'/k}(X,G)$ is an isomorphism for
+all $q$ when $X$ is proper ($\mathcal C_7$), or when $G$ is prime to $p$ ($\mathcal C_6$).
+Dependencies: def-weil-pbc-curve-setting, def-weil-pbc-inverse-image,
+lem-weil-pbc-zero-dimensional-cohomology, lem-weil-pbc-zero-dimensional-field-extension,
 def-weil-pbc-eight-curve-assertions, def-weil-pbc-C6, def-weil-pbc-C7.
 
 7. Long exact sequences and ladders (Stacks 0GJA, proof: 'The long exact cohomology sequence gives

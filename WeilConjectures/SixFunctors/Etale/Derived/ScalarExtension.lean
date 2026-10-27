@@ -34,12 +34,10 @@ every morphism from `K` to a restriction of scalars factors uniquely.
   `AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedBaseChange_integersShrinkMap`: every
   object of `D(Y_ét, 𝒪_E)` has a derived base change along `𝒪_E ⟶ 𝒪_L`, and derived base change
   preserves derived completeness.
-- `AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange`
-  (`lem-weil-scalar-extension-well-defined`): the rationalization of the derived base change
-  only depends on the rationalization of the integral representative.
-- `AlgebraicGeometry.Etale.isTriangulated_derivedCompleteRationalScalarExtension`
-  (`lem-weil-scalar-extension-exact-triangulated`): the scalar extension
-  `D_comp(Y, E) ⥤ D_comp(Y, L)` is triangulated.
+- `AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange`: the rationalization of
+  the derived base change only depends on the rationalization of the integral representative.
+- `AlgebraicGeometry.Etale.isTriangulated_derivedCompleteRationalScalarExtension`: the scalar
+  extension `D_comp(Y, E) ⥤ D_comp(Y, L)` is triangulated.
 
 ## Construction of the derived base change
 
@@ -270,7 +268,7 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type w) [Field E] [Field L]
 
 variable {Y : Scheme.{u}}
 
-/-- Blueprint `lem-weil-scalar-extension-well-defined`: Well-definedness of scalar extension.
+/-- Well-definedness of scalar extension.
 
 Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. If two integral objects
 `K₁, K₂ ∈ D_comp(Y_ét, 𝒪_E)` become isomorphic in the rationalization `D_comp(Y_ét, E)`, then
@@ -479,8 +477,7 @@ noncomputable abbrev derivedCompleteRationalScalarExtension :
     (integersShrinkMap_nonZeroDivisors_le l E L) (derivedCompleteIntegralScalarExtension l E L)
     (derivedCompleteIntegralScalarExtension_map_smul l E L)
 
-/-- Blueprint `lem-weil-scalar-extension-exact-triangulated`: Scalar extension is an exact
-triangulated functor.
+/-- Scalar extension is an exact triangulated functor.
 
 Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. The scalar extension
 `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` (`def-sfb-rationalization-quotient`), induced on

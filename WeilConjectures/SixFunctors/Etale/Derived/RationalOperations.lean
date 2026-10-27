@@ -16,22 +16,20 @@ of `Λ` (the nonzero elements, or the powers of `ϖ`), so that the rational stag
 `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]` (`CategoryTheory.Rationalization`, blueprint
 `def-sfb-rationalization-quotient`). For a separated finite-type morphism `f : X ⟶ Y` of
 separated finite-type `k`-schemes this file constructs the compact-support direct image and the
-exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`
-(blueprint `lem-coef-rational-operations`):
+exceptional inverse image on `Dᵇc(-, 𝒪_E)` and `Dᵇc(-, E)`, with the adjunction `Rf_! ⊣ Rf^!`:
 
 * at the integral stage, `Rf_!` preserves `Dᵇc(-, 𝒪_E)` (blueprint
   `lem-coef-integral-compact-support`,
   `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerShriek`) and so does
-  `Rf^!` (blueprint `prop-coef-integral-exceptional-adjoint`,
-  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), so that the
-  adjunction `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the constructible categories
+  `Rf^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), so that
+  the adjunction `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the constructible categories
   (`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`);
 * at the rational stage, the functors and the adjunction are the rationalizations of the integral
   ones (`AlgebraicGeometry.Etale.boundedConstructibleRationalLowerShriekUpperShriekAdjunction`),
   so that the rational `Rf_E^!` is right adjoint to the rational `Rf_{!,E}` with the localized
   units and counits;
 * the rational `Rf_E^!` is computed by coefficient passage from the integral formula
-  `Rf^! L ≅ 𝔻_X f^*_comp 𝔻_Y L` of `prop-coef-integral-exceptional-adjoint`
+  `Rf^! L ≅ 𝔻_X f^*_comp 𝔻_Y L`
   (`AlgebraicGeometry.Etale.nonempty_iso_boundedConstructibleRationalUpperShriek`).
 
 ## Implementation notes
@@ -133,9 +131,8 @@ noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerShriek (aX : X
     have ⟨_, hϖ, hI⟩ := hϖI.out
     (boundedConstructibleIntegral_rightDerivedLowerShriek hϖ hI aX aY f hf hK).1
 
-/-- Blueprint `lem-coef-rational-operations`, the integral exceptional adjunction: the adjunction
-`Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to the integral constructible categories
-(blueprint `prop-coef-integral-exceptional-adjoint`). -/
+/-- The integral exceptional adjunction: the adjunction `Rf_! ⊣ Rf^!` of `D(X_ét, Λ)` restricts to
+the integral constructible categories. -/
 noncomputable def boundedConstructibleIntegralLowerShriekUpperShriekAdjunction
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -169,31 +166,28 @@ induced by the integral `Rf_!`
 noncomputable abbrev boundedConstructibleRationalRightDerivedLowerShriek :=
   Rationalization.map M (boundedConstructibleIntegralRightDerivedLowerShriek I aX aY f hf)
 
-/-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
-exceptional inverse image, the adjunction.
+/-- Identification with the rational internal Hom and exceptional inverse image, the adjunction.
 
 On the rationalized constructible categories `Dᵇc(-, E) = Dᵇc(-, 𝒪_E)[M⁻¹]`, the exceptional
 inverse image `Rf_E^!` obtained by coefficient passage from the integral `Rf^!` is right adjoint
 to the compact-support direct image `Rf_{!,E}`, with the localized units and counits: this is the
 localization (`CategoryTheory.Rationalization.mapAdjunction`) of the integral adjunction
-`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`
-(`prop-coef-integral-exceptional-adjoint`). -/
+`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerShriekUpperShriekAdjunction`. -/
 noncomputable def boundedConstructibleRationalLowerShriekUpperShriekAdjunction :
     boundedConstructibleRationalRightDerivedLowerShriek M I aX aY f hf ⊣
       boundedConstructibleRationalUpperShriek (M := M) I aX aY f hf :=
   Rationalization.mapAdjunction M
     (boundedConstructibleIntegralLowerShriekUpperShriekAdjunction (I := I) aX aY f hf)
 
-/-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
-exceptional inverse image, the dual formula `Rf_E^! M ≅ 𝔻_{X,E} f^* 𝔻_{Y,E} M`.
+/-- Identification with the rational internal Hom and exceptional inverse image, the dual formula
+`Rf_E^! M ≅ 𝔻_{X,E} f^* 𝔻_{Y,E} M`.
 
 Let `ω_X`, `ω_Y` be the integral dualizing complexes, the homotopy limits of the towers
 `n ↦ Ra^!(Λ ⧸ Iⁿ)`, with `ω_X ∈ Dᵇc(X, 𝒪_E)`, so that the integral Verdier dual is
 `𝔻_X = RHom(-, ω_X)` and the rational one is its image `𝔻_{X,E}`. For `L ∈ Dᵇc(Y, 𝒪_E)` and a
 completed pullback `N ∈ Dᵇc(X, 𝒪_E)` of `𝔻_Y L` (a morphism `Lf^* 𝔻_Y L ⟶ N` inducing
 isomorphisms on all reductions), the rational exceptional inverse image of the image of `L` in
-`Dᵇc(Y, E)` is the image of `𝔻_X N` in `Dᵇc(X, E)`. It is the image of the integral formula of
-`prop-coef-integral-exceptional-adjoint`
+`Dᵇc(Y, E)` is the image of `𝔻_X N` in `Dᵇc(X, E)`. It is the image of the integral formula
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`) under the
 localization functor; every object of `Dᵇc(Y, E)` is the image of some `L`. -/
 theorem nonempty_iso_boundedConstructibleRationalUpperShriek

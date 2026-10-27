@@ -13,14 +13,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 /-!
 # The `ℚ̄_ℓ` stage of the evaluation at a geometric point
 
-Following blueprint `def-weil-algebraically-closed-coefficients`, the `ℚ̄_ℓ`-coefficient category
-`Dᵇc(Y, ℚ̄_ℓ)` is the filtered 2-colimit over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the
-rational stages `Dᵇc(Y, E)`, along the scalar extensions `- ⊗_E F`, and blueprint
-`def-weil-finite-coefficient-point` defines `Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)`. The evaluation at
-the geometric point of `s = Spec k`, `Fib_s : Dᵇc(s, ℚ̄_ℓ) ⥤ Dᵇ_fd(ℚ̄_ℓ)`, is obtained stagewise
-from the equivalences `Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)`
-(`AlgebraicGeometry.Etale.pointFiberRationalEquivalence`), which are compatible with the scalar
-extensions, and passed to the colimit.
+The `ℚ̄_ℓ`-coefficient category `Dᵇc(Y, ℚ̄_ℓ)` is the filtered 2-colimit over the finite
+subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the rational stages `Dᵇc(Y, E)`, along the scalar extensions
+`- ⊗_E F`, and blueprint `def-weil-finite-coefficient-point` defines
+`Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)`. The evaluation at the geometric point of `s = Spec k`,
+`Fib_s : Dᵇc(s, ℚ̄_ℓ) ⥤ Dᵇ_fd(ℚ̄_ℓ)`, is obtained stagewise from the equivalences
+`Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberRationalEquivalence`), which are
+compatible with the scalar extensions, and passed to the colimit.
 
 We work with the formulation of filtered 2-colimits of
 `WeilConjectures.CategoryTheory.FilteredTwoColimit`: a cocone of categories with vertex `D` *is*
@@ -387,16 +386,14 @@ noncomputable def pointFiberCocone :
 (stage `ℚ̄_ℓ`).
 
 At the algebraically closed coefficient `ℚ̄_ℓ`, `Dᵇc(s, ℚ̄_ℓ)` is the filtered 2-colimit
-`2-colim_E Dᵇc(s, E)` over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` along the scalar
-extensions `- ⊗_E F` (blueprint `def-weil-algebraically-closed-coefficients`), and
-`Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)` is the bounded derived category of finite-dimensional
-`ℚ̄_ℓ`-vector spaces (`PadicAlgCl.fdCocone_isFilteredTwoColimit`). The evaluation at the
-geometric point of `s = Spec k`, obtained stagewise from the equivalences
-`Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberStageEquivalence`), which
-commute with the scalar extensions (`AlgebraicGeometry.Etale.pointFiberStageTransitionIso`), and
-passed to the colimit, identifies `2-colim_E Dᵇc(s, E)` with `Dᵇ_fd(ℚ̄_ℓ)`: the cocone
-`E ↦ Fib_s ⊗_E ℚ̄_ℓ` with vertex `Dᵇ_fd(ℚ̄_ℓ)` is a filtered 2-colimit, i.e.
-`Fib_s : Dᵇc(s, ℚ̄_ℓ) ≌ Dᵇ_fd(ℚ̄_ℓ)`. -/
+`2-colim_E Dᵇc(s, E)` over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` along the scalar extensions
+`- ⊗_E F`, and `Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)` is the bounded derived category of
+finite-dimensional `ℚ̄_ℓ`-vector spaces (`PadicAlgCl.fdCocone_isFilteredTwoColimit`). The evaluation
+at the geometric point of `s = Spec k`, obtained stagewise from the equivalences
+`Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberStageEquivalence`), which commute
+with the scalar extensions (`AlgebraicGeometry.Etale.pointFiberStageTransitionIso`), and passed to
+the colimit, identifies `2-colim_E Dᵇc(s, E)` with `Dᵇ_fd(ℚ̄_ℓ)`: the cocone `E ↦ Fib_s ⊗_E ℚ̄_ℓ`
+with vertex `Dᵇ_fd(ℚ̄_ℓ)` is a filtered 2-colimit, i.e. `Fib_s : Dᵇc(s, ℚ̄_ℓ) ≌ Dᵇ_fd(ℚ̄_ℓ)`. -/
 theorem pointFiberCocone_isFilteredTwoColimit : (pointFiberCocone l k).IsFilteredTwoColimit :=
   (fdCocone_isFilteredTwoColimit l).transport
 

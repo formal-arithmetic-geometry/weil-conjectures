@@ -18,11 +18,9 @@ Three remarks of blueprint `det-def-sf-operations` point to properties of the fi
 stages proved elsewhere in the blueprint:
 
 * the rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` is idempotent complete, so that the
-  canonical functor into its Karoubi envelope is an equivalence
-  (`rem-ptr-weil-rationalization-karoubi-1`, from `lem-weil-rationalization-idempotent-complete`);
+  canonical functor into its Karoubi envelope is an equivalence;
 * the common-stage category `Dᵇc(X, ℚ̄_ℓ)` is idempotent complete, so that the canonical functor
-  into its Karoubi envelope is an equivalence
-  (`rem-ptr-weil-algebraically-closed-coefficients-3`, from `lem-weil-qbar-idempotent-complete`);
+  into its Karoubi envelope is an equivalence;
 * at a field coefficient, every bounded constructible complex has finite Tor amplitude, so that
   `Dᵇctf = Dᵇc` (`rem-ptr-weil-finite-tor-amplitude-4`, from `lem-integral-ctf-equals-bc`).
 
@@ -35,8 +33,8 @@ stages proved elsewhere in the blueprint:
 * The derived tensor product of the field stages is only available, in this repository, for
   étale sheaves of modules over a discrete coefficient field `F`; the Tor amplitude statements
   are made there.
-* The lemmas `lem-weil-qbar-idempotent-complete` and `lem-integral-ctf-equals-bc` belong to
-  other parts of the blueprint. In the Bhatt–Scholze model, idempotent completeness of
+* The idempotent completeness of `Dᵇc(X, ℚ̄_ℓ)` and the lemma `lem-integral-ctf-equals-bc` belong
+  to other parts of the blueprint. In the Bhatt–Scholze model, idempotent completeness of
   `Dᵇc(X, ℚ̄_ℓ)` needs no descent to finite stages: an idempotent of a bounded object of
   `D(X_proét, ℚ̄_ℓ)` splits (`CategoryTheory.Triangulated.TStructure.isSplit_of_isGE_of_isLE`),
   and `Dᵇc(X, ℚ̄_ℓ)` is stable under retracts, retracts of constructible sheaves being
@@ -106,12 +104,11 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
-/-- Blueprint `rem-ptr-weil-rationalization-karoubi-1`: Pointer to the properties of the
-rationalization.
+/-- Pointer to the properties of the rationalization.
 
 The rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ_E]`, in which no idempotent is adjoined, is
 nevertheless idempotent complete, so that the canonical functor into its Karoubi envelope is an
-equivalence (blueprint `lem-weil-rationalization-idempotent-complete`). -/
+equivalence. -/
 theorem Etale.DerivedCategory.isIdempotentComplete_and_isEquivalence_toKaroubi_rational
     (X : Scheme.{u}) :
     IsIdempotentComplete
@@ -141,8 +138,7 @@ instance ProEtale.DerivedCategory.isStableUnderRetracts_boundedConstructibleAdic
       fun n ↦ (ProEtale.adicConstructibleSheaf l X).prop_of_retract
         (e.map (_root_.DerivedCategory.homologyFunctor _ n)) (hc n)⟩
 
-/-- Blueprint `lem-weil-qbar-idempotent-complete`: Idempotent completeness of the common-stage
-category.
+/-- Idempotent completeness of the common-stage category.
 
 The common-stage category `Dᵇc(X, ℚ̄_ℓ)` (in its Bhatt–Scholze model
 `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic`) is idempotent complete. -/
@@ -160,12 +156,10 @@ theorem ProEtale.DerivedCategory.isIdempotentComplete_boundedConstructibleAdic
     ⟨i, r, hir⟩ K.property⟩, ObjectProperty.homMk i, ObjectProperty.homMk r,
     by cat_disch, by cat_disch⟩
 
-/-- Blueprint `rem-ptr-weil-algebraically-closed-coefficients-3`: Pointer to the properties of
-the common-stage category.
+/-- Pointer to the properties of the common-stage category.
 
 The common-stage category `Dᵇc(X, ℚ̄_ℓ)`, in which no idempotent is adjoined, is nevertheless
-idempotent complete, so that the canonical functor into its Karoubi envelope is an equivalence
-(blueprint `lem-weil-qbar-idempotent-complete`). -/
+idempotent complete, so that the canonical functor into its Karoubi envelope is an equivalence. -/
 theorem ProEtale.DerivedCategory.isIdempotentComplete_and_isEquivalence_toKaroubi_adic
     (X : Scheme.{u}) :
     IsIdempotentComplete (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory ∧

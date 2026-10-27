@@ -188,13 +188,13 @@ theorem isClosed_setOf_subsingleton_image {X Y Z : Scheme.{u}}
       (pullback.lift_snd _ _ _) (Y.fromSpecAlgebraicClosureResidueField y)).base).Subsingleton} :=
   isClosed_setOf_subsingleton_range_fiberMap _ _ _ _
 
-/-- Blueprint `sk-prop-av-image-open`: Finiteness of the image is open in the parameter
+/-- Finiteness of the image is open in the parameter
 
 Let `X` be proper over `K`, let `Z` be separated and locally of finite type over `K`, let
 `g : X ×_K Y ⟶ Z` be a morphism of `K`-schemes and let `y₀ ∈ Y`. For `y : Y` let
 `g_y : X_{κ(y)} ⟶ Z_{κ(y)}` be the fibre of `(g, pr₂) : X ×_K Y ⟶ Z ×_K Y` over `y`. If the
 image of `g_{y₀}` is finite, then the image of `g_y` is finite for every `y` in some open
-neighbourhood of `y₀`. This is also blueprint `lem-sc-finite-image-locus-open`.
+neighbourhood of `y₀`.
 
 Following the blueprint, apply Stacks Tag 0AH8
 (`exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage`) to `h = (g, pr₂)` over

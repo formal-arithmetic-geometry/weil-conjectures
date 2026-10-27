@@ -21,7 +21,7 @@ associativity constraints commute with the shifts. Hence the common-stage catego
 `D^b_c(X, ℚ̄_ℓ)` (`AlgebraicGeometry.ProEtale.DerivedCategory.ConstructibleTwoColimit`) is
 triangulated and carries the induced `t`-structure
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitTStructure`), whose heart is
-the constructible heart `Sh_c(X, ℚ̄_ℓ)` of blueprint `def-weil-constructible-heart`
+the constructible heart `Sh_c(X, ℚ̄_ℓ)`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitTStructure_heart`).
 -/
 
@@ -171,10 +171,10 @@ noncomputable instance : Pretriangulated (ConstructibleTwoColimit l X) :=
 instance : IsTriangulated (ConstructibleTwoColimit l X) :=
   StageSystem.PairCategory.isTriangulated (S := boundedFieldConstructibleStageSystem l X)
 
-/-- Blueprint `def-weil-constructible-heart`, `Λ = ℚ̄_ℓ`: the standard `t`-structure on the
-common-stage category `D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`, induced by the standard
-`t`-structures of the finite stages `D^b_c(X, E)`, the transition functors being `t`-exact. Its
-halves are `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitLE` and
+/-- The standard `t`-structure on the common-stage category
+`D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)`, induced by the standard `t`-structures of the finite
+stages `D^b_c(X, E)`, the transition functors being `t`-exact. Its halves are
+`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitLE` and
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitGE`. -/
 noncomputable def constructibleTwoColimitTStructure : TStructure (ConstructibleTwoColimit l X) :=
   (boundedFieldConstructibleStageSystem l X).tStructure
@@ -190,8 +190,7 @@ lemma constructibleTwoColimitTStructure_ge (n : ℤ) :
     (constructibleTwoColimitTStructure X l).ge n = constructibleTwoColimitGE l X n :=
   rfl
 
-/-- Blueprint `def-weil-constructible-heart`, `Λ = ℚ̄_ℓ`: the heart of the standard
-`t`-structure on `D^b_c(X, ℚ̄_ℓ)` is the constructible heart
+/-- The heart of the standard `t`-structure on `D^b_c(X, ℚ̄_ℓ)` is the constructible heart
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitHeart`, which is the
 `2`-colimit of the constructible hearts of the finite stages
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTwoColimitHeartEquiv`). -/
@@ -199,9 +198,8 @@ theorem constructibleTwoColimitTStructure_heart :
     (constructibleTwoColimitTStructure X l).heart = constructibleTwoColimitHeart l X :=
   rfl
 
-/-- Blueprint `def-weil-constructible-heart`, `Λ = ℚ̄_ℓ`: the constructible heart
-`Sh_c(X, ℚ̄_ℓ)` is an abelian category, being the heart of a `t`-structure on a triangulated
-category. -/
+/-- The constructible heart `Sh_c(X, ℚ̄_ℓ)` is an abelian category, being the heart of a
+`t`-structure on a triangulated category. -/
 noncomputable instance abelian_constructibleTwoColimitHeart :
     Abelian (constructibleTwoColimitHeart l X).FullSubcategory :=
   letI := (constructibleTwoColimitTStructure X l).hasHeartFullSubcategory

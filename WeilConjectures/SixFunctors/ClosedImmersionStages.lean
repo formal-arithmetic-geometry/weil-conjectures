@@ -290,7 +290,7 @@ def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
 
 /-- The Karoubi envelope of the rational stage `Dᵇc(X, E)` of blueprint
 `def-sfb-rationalization-quotient` (which takes no Karoubi completion; the canonical functor into
-the envelope is an equivalence by `lem-weil-rationalization-idempotent-complete`): the Karoubi
+the envelope is an equivalence, the rationalization being idempotent complete): the Karoubi
 envelope of the rationalization of `Dᵇc(X, 𝒪_E)`. -/
 abbrev Etale.DerivedCategoryBoundedConstructibleRational (X : Scheme.{u}) :=
   Idempotents.Karoubi (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory
@@ -358,13 +358,12 @@ instance ProEtale.full_adicLowerStar : (ProEtale.adicLowerStar l i).Full :=
 instance ProEtale.faithful_adicLowerStar : (ProEtale.adicLowerStar l i).Faithful :=
   (ProEtale.adicUpperStarLowerStarAdjunction l i).fullyFaithfulROfIsIsoCounit.faithful
 
-/-- Blueprint `def-weil-algebraically-closed-coefficients`: Algebraically closed coefficient
-category
+/-- Algebraically closed coefficient category.
 
 The stage `ℚ̄_ℓ` of `Dᵇc(X, ℚ̄_ℓ)`: bounded complexes of sheaves of modules over the
 constant `ℓ`-adic sheaf `ℚ̄_ℓ,X` with constructible cohomology sheaves
-(`AlgebraicGeometry.ProEtale.adicConstructibleSheaf`), the `2`-colimit over finite `E ⊆ ℚ̄_ℓ` of
-blueprint `def-weil-algebraically-closed-coefficients` realised in the Bhatt–Scholze model. -/
+(`AlgebraicGeometry.ProEtale.adicConstructibleSheaf`), the `2`-colimit over finite `E ⊆ ℚ̄_ℓ`
+realised in the Bhatt–Scholze model. -/
 abbrev ProEtale.DerivedCategory.boundedConstructibleAdic (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory (ProEtale.AdicSheaf l X)) :=
   DerivedCategory.TStructure.t.bounded ⊓

@@ -36,12 +36,11 @@ this file constructs the *completed exchange transformations* of blueprint `sk-d
 * the completed direct-image exchange `Ex_*^comp : Lg^*_comp Rf_* ⟶ Rf'_* Lg'^*_comp`, obtained
   from `Ex_*` by completing, `Rf'_*` preserving derived complete objects;
 * for an open-immersion square, the completed extension-by-zero comparison
-  `j'_! Lg_U^*_comp ⟶ Lg^*_comp j_!`, which is an isomorphism on derived complete objects by
-  blueprint `lem-cbc-completed-extension-zero-comparison`;
+  `j'_! Lg_U^*_comp ⟶ Lg^*_comp j_!`, which is an isomorphism on derived complete objects;
 * for a cartesian square and a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`, the completed
   compact-support exchange `Ex_!^comp : Lg^*_comp Rf_! ⟶ Rf'_! Lg'^*_comp` on derived complete
-  objects (blueprint `def-cbc-completed-exchange-map`): `Ex_*^comp` for `p` at `j_! K`, followed
-  by the inverse of the completed extension-by-zero comparison.
+  objects: `Ex_*^comp` for `p` at `j_! K`, followed by the inverse of the completed
+  extension-by-zero comparison.
 
 ## Main definitions
 
@@ -160,8 +159,8 @@ commutative square `g' ≫ f = f' ≫ g`, as a natural transformation of functor
 `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` (`AlgebraicGeometry.ProEtale.derivedBaseChangeMap`) followed
 by `Rf'_*` of the completion map `Lg'^* ⟶ Lg'^*_comp`, extended to `(Lg^* Rf_* K)^` through the
 universal property of the completion, `Rf'_* Lg'^*_comp K` being derived complete. This is the
-map `Ex^comp_{□,K}` of blueprint `thm-weil-pbc-complete-proetale`, an isomorphism for `f`
-proper and `K` derived complete with étale-origin reductions. -/
+map `Ex^comp_{□,K}`, an isomorphism for `f` proper and `K` derived complete with étale-origin
+reductions (proper base change on the pro-étale site). -/
 noncomputable def completedDerivedBaseChangeMap (sq : CommSq g' f' f g) :
     R((f)_*[ModuleCat.{u + 1} R]) ⋙ completedUpperStar I hI g ⟶
       completedUpperStar I hI g' ⋙ completeRightDerivedLowerStar I hI f' :=
@@ -241,8 +240,7 @@ completion map of `Lg'^* K` (an isomorphism by
 `AlgebraicGeometry.ProEtale.isIso_completion_map_map_completionUnit_app`), and the completion of
 the base change isomorphism `Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*`
 (`AlgebraicGeometry.ProEtale.leftDerivedOpenImmersionLowerShriekBaseChangeIso`). Its inverse,
-on derived complete objects, is the comparison `Lg^*_comp j_! K ⟶ j'_! Lg_U^*_comp K` of blueprint
-`lem-cbc-completed-extension-zero-comparison`. -/
+on derived complete objects, is the comparison `Lg^*_comp j_! K ⟶ j'_! Lg_U^*_comp K`. -/
 noncomputable def completedOpenImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :
     completedUpperStar I hI g' ⋙
         (_root_.DerivedCategory.derivedComplete (Scheme.ProEt.topology U') I).ι ⋙
@@ -263,7 +261,7 @@ section LowerShriek
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `def-cbc-completed-exchange-map`: Completed compact-support exchange map (in its
+/-- Completed compact-support exchange map (in its
 completed form).
 
 For a cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f` with base change
@@ -274,13 +272,13 @@ derived complete: the derived completion of the compact-support exchange
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap`).
 
 The blueprint writes the target as `Rf'_! Lg'^*_comp K`, through the inverse of the completed
-extension-by-zero comparison `Lg^*_comp j_! K ⟶ j'_! Lg'^*_comp K` of
-`lem-cbc-completed-extension-zero-comparison`. That comparison is not an isomorphism for every
-derived complete `K` on pro-étale sites: its proof uses that `j'_!` commutes with countable
-products, which fails (for `Z` the spectrum of a strictly henselian discrete valuation ring with
-generic point `U`, and `M = ∏ₙ (R/ϖⁿ)_U`, the sections of `j_! M` over a w-contractible
-`Spec` of locally constant functions `βℕ → K^sep` form `⊕_ℕ ∏ₙ R/ϖⁿ`, which is not derived
-complete). The map is therefore taken with completed target, which requires no inverse. -/
+extension-by-zero comparison `Lg^*_comp j_! K ⟶ j'_! Lg'^*_comp K`. That comparison is not an
+isomorphism for every derived complete `K` on pro-étale sites: its proof uses that `j'_!`
+commutes with countable products, which fails (for `Z` the spectrum of a strictly henselian
+discrete valuation ring with generic point `U`, and `M = ∏ₙ (R/ϖⁿ)_U`, the sections of `j_! M`
+over a w-contractible `Spec` of locally constant functions `βℕ → K^sep` form `⊕_ℕ ∏ₙ R/ϖⁿ`, which
+is not derived complete). The map is therefore taken with completed target, which requires no
+inverse. -/
 noncomputable def completedRightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     (_root_.DerivedCategory.derivedComplete (Scheme.ProEt.topology X) I).ι ⋙

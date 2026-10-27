@@ -43,10 +43,9 @@ if `X̄` has, locally, a finite stratification by locally closed subschemes on w
 pro-étale locally a finite sum of copies of the constant `ℓ`-adic sheaf `ℚ̄_ℓ,X̄` of continuous
 functions (`AlgebraicGeometry.ProEtale.adicConstantSheaf`), i.e. a constructible
 `ℚ̄_ℓ,X̄`-module in the sense of Bhatt–Scholze. Each such sheaf has a finite field of
-definition `E ⊆ ℚ̄_ℓ`, so this is the `ℚ̄_ℓ`-stage `2-colim_E Sh_c(X̄, E)` of the blueprint
-(`def-weil-algebraically-closed-coefficients`); we work with `ℚ̄_ℓ` directly since the weights,
-the additive characters of the Fourier transform and the embedding `ι : ℚ̄_ℓ →+* ℂ` all live
-there.
+definition `E ⊆ ℚ̄_ℓ`, so this is the `ℚ̄_ℓ`-stage `2-colim_E Sh_c(X̄, E)` of the blueprint; we work
+with `ℚ̄_ℓ` directly since the weights, the additive characters of the Fourier transform and the
+embedding `ι : ℚ̄_ℓ →+* ℂ` all live there.
 
 *Frobenius.* The pullback along the automorphism `Fr_X` of pro-étale sheaves is the
 pushforward along `Fr_X⁻¹` (`AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv`), which is

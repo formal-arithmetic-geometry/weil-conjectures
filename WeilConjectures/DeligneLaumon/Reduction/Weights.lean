@@ -381,7 +381,7 @@ theorem IsMixedOfWeightsAtMost.of_distTriang (T : Triangle (WeilComplex k₀ l X
 
 /-- **Retract stability of complex weights.** A direct summand, more generally a retract, of a
 Weil complex mixed of weights at most `w` is mixed of weights at most `w`: its cohomology sheaves
-are retracts of those of the ambient complex (blueprint: `lem-zl-complex-retract`). -/
+are retracts of those of the ambient complex. -/
 theorem IsMixedOfWeightsAtMost.of_retract (h : Retract K L) (hL : L.IsMixedOfWeightsAtMost ι w) :
     K.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ (hL b).of_retract (h.map (homologySheaf b))

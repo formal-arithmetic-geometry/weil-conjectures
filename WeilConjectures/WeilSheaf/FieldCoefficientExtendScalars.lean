@@ -11,9 +11,9 @@ public import WeilConjectures.WeilSheaf.FieldCoefficient
 /-!
 # From `E`-Weil complexes to `ℚ̄_ℓ`-Weil complexes
 
-Following blueprint `def-weil-weil-sheaf-complex` and `def-weil-algebraically-closed-coefficients`,
-the `ℚ̄_ℓ`-stage `D^b_{c,W}(X, ℚ̄_ℓ)` is the `2`-colimit of the stages `D^b_{c,W}(X, E)` over the
-finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the transition functors being the extensions of scalars.
+Following blueprint `def-weil-weil-sheaf-complex`, the `ℚ̄_ℓ`-stage `D^b_{c,W}(X, ℚ̄_ℓ)` is the
+`2`-colimit of the stages `D^b_{c,W}(X, E)` over the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
+transition functors being the extensions of scalars.
 In this repository the `ℚ̄_ℓ`-stage is realised directly, as `AlgebraicGeometry.WeilComplex`
 (Weil complexes of modules over the constant sheaf `ℚ̄_ℓ,X̄` of locally finite functions), and the
 `E`-stage as `AlgebraicGeometry.FieldWeilComplex` (modules over `E_X̄ : U ↦ C(U, E)`). This file

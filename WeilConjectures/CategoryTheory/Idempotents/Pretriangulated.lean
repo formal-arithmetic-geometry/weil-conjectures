@@ -17,7 +17,7 @@ Let `C` be a pretriangulated category. Following Balmer and Schlichting, we equi
 envelope `Karoubi C` with the shift `(K, e)⟦1⟧ = (K⟦1⟧, e⟦1⟧)` and with the distinguished
 triangles the retracts (in the category of triangles) of images of distinguished triangles of
 `C`. This makes `Karoubi C` a pretriangulated category, and the inclusion `C ⥤ Karoubi C` a
-triangulated functor (blueprint `lem-weil-karoubi-envelope-triangulated`).
+triangulated functor.
 
 The key input is the lifting of idempotents along triangles
 (`CategoryTheory.Pretriangulated.exists_idempotent_of_distTriang`): if `(a, b)` is a pair of
@@ -328,9 +328,8 @@ lemma complete_distinguished_triangle_morphism (T₁ T₂ : Triangle (Karoubi C)
 end Karoubi
 
 variable (C) in
-/-- Blueprint `lem-weil-karoubi-envelope-triangulated`: the Karoubi envelope of a pretriangulated
-category is pretriangulated, the distinguished triangles being the retracts of images of
-distinguished triangles. -/
+/-- The Karoubi envelope of a pretriangulated category is pretriangulated, the distinguished
+triangles being the retracts of images of distinguished triangles. -/
 noncomputable instance Karoubi.pretriangulated : Pretriangulated (Karoubi C) where
   distinguishedTriangles := Karoubi.distinguishedTriangles C
   isomorphic_distinguished := Karoubi.isomorphic_distinguished
@@ -343,8 +342,8 @@ lemma Karoubi.mem_distTriang_iff (T : Triangle (Karoubi C)) :
     T ∈ distTriang (Karoubi C) ↔ ∃ (T' : Triangle C) (_ : T' ∈ distTriang C),
       Nonempty (Retract T ((toKaroubi C).mapTriangle.obj T')) := Iff.rfl
 
-/-- Blueprint `lem-weil-karoubi-envelope-triangulated`: the inclusion of a pretriangulated
-category into its Karoubi envelope is a triangulated functor. -/
+/-- The inclusion of a pretriangulated category into its Karoubi envelope is a triangulated functor.
+-/
 instance toKaroubi.isTriangulated : (toKaroubi C).IsTriangulated where
   map_distinguished T hT := ⟨T, hT, ⟨Retract.refl _⟩⟩
 

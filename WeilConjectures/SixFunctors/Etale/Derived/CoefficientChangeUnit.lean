@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitRef
 Let `ρ : Λ →+* Λ'` be a morphism of coefficient rings. The coefficient comparison
 `Res ⋙ Rf_* ≅ Rf_* ⋙ Res` of the unbounded derived direct image is the mate of the coefficient
 comparison of the derived pullback, both for `Lf^* ⊣ Rf_*` and for `D(f^*) ⊣ Rf_*`
-(`WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar`). Consequently
-(blueprint `prop-trf-adic-coefficient-morphism-systems` (3), `sk-prop-trace-adic`):
+(`WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar`). Consequently:
 
 - the derived base change map `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is compatible with the
   coefficient comparisons (`AlgebraicGeometry.Etale.derivedBaseChangeMap_app_restrictScalars`);

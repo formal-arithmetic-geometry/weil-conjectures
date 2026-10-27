@@ -293,7 +293,7 @@ finite-type morphism of separated finite-type `k`-schemes. Then:
   `lem-coef-integral-hom-reduction`);
 * the derived limit `G_f L` of the finite exceptional inverse images of the reductions of
   `L ∈ Dᵇc(Y, Λ)` lies in `Dᵇc(X, Λ)`, is `Rf^! L` compatibly with the maps to the
-  `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions (`prop-coef-integral-exceptional-adjoint`).
+  `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions.
 
 These are the integral entries `AlgebraicGeometry.Etale.preservationMatrix_integral` of the
 preservation matrix. -/

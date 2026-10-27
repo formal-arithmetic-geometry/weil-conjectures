@@ -62,8 +62,8 @@ theorem nonempty_iso_derivedLowerShriek_comp {X Y Z : Scheme.{u}}
   nonempty_derivedLowerShriek_comp_iso f g
 
 /-- Blueprint `prop-weil-operations`: Six operations on Weil complexes (the base change
-isomorphism; blueprint `thm-cbc-qbar` for the underlying complexes). For a cartesian square of
-`k₀`-schemes
+isomorphism; compactly supported base change for the underlying complexes). For a cartesian
+square of `k₀`-schemes
 
 ```
   X' ──g'──▶ X

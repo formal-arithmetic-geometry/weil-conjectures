@@ -82,15 +82,15 @@ statements and carry no mathematical content beyond the results they cite:
   adjoint are
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal`
   (`lem-coef-finite-exceptional`) and
-  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`
-  (`prop-coef-integral-exceptional-adjoint`).
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`.
 - `rem-ptr-sf-datum-1b`, `rem-weil-biduality-boundary-status` and `open-sf-preservation-gaps`:
   finite-stage biduality is `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`, its
   Weil-equivariant form is `AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`, and
   the `ℚ̄_ℓ` stage is `AlgebraicGeometry.ProEtale.CondensedRing.isIso_verdierBiduality`
   (`det-pd-biduality-coefficients`).
-- `rem-sf-finite-level-comparison-ingredient`: the reconstruction of normalized towers is
-  `AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.
+
+The reconstruction of normalized towers, an ingredient of the finite-level comparison, is
+`AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`.
 
 -/
 
