@@ -14,25 +14,29 @@
  },
  "proof": [
   {
-   "text": "Specialize ringed projection section coherence to the diagonal and second projection, then transport to the fixed internal-module interface.",
+   "text": "Apply the section/projection coherence core before supported-source transport.",
    "uses": [
-    "def-sfb-projective-diagonal-composition",
-    "def-sfb-projective-diagonal-pullback",
-    "def-sfb-section-tensor-comparison"
+    "lem-sfb-projective-canonical-section-projection-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the core identity through the canonical supported-unit isomorphism using projection naturality and the inverse/hom cancellation.",
+   "uses": [
+    "lem-sfb-projective-canonical-section-projection-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-projective-diagonal-composition",
-  "def-sfb-projective-diagonal-pullback",
-  "def-sfb-section-tensor-comparison"
+  "lem-sfb-projective-canonical-section-projection-core",
+  "lem-sfb-projective-canonical-section-projection-transport"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Second identity, cancellation on the diagonal before coefficient normalization.",
-  "note": "Strict lower statement extracted from the assigned supported section projection argument."
+  "place": "Second identity, core section/projection coherence followed by supported-source normalization.",
+  "note": "Decomposed into the core coherence and the strictly separate supported-unit transport step."
  },
  "mathlib_searches": [
   {
@@ -102,9 +106,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261027T194441-L-838767",
+  "landing": "20261027T205900-L-1628678",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

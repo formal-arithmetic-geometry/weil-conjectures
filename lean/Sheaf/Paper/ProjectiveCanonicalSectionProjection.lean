@@ -6,6 +6,7 @@ Authors: SHEAF group B9
 module
 
 public import Sheaf.Paper.RationalP1DiagonalTensor
+import Sheaf.Paper.CanonicalSectionProjectionTransport
 
 /-! # Canonical section/projection identity on the supported diagonal source -/
 
@@ -24,7 +25,6 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
 attribute [local irreducible] firstProjection secondProjection square
-attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 attribute [local irreducible] projectionMap singleUnitIso
 attribute [local irreducible] pullSectionIso supportedUnitIso pushSectionIso
 
@@ -63,6 +63,8 @@ theorem canonical_section_projection
               (by unfold secondProjection; exact pullback.diagonal_snd _))
             (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M) =
       (pushSectionIso Λ Y).hom.app M := by
-  sorry
+  rw [canonical_section_projection_transport Λ Y M]
+  exact canonical_section_projection_core Λ Y M
+
 
 end AlgebraicGeometry.ProEtale.RationalP1

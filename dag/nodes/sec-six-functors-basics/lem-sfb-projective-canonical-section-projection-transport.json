@@ -1,0 +1,98 @@
+{
+ "id": "lem-sfb-projective-canonical-section-projection-transport",
+ "kind": "lemma",
+ "title": "Supported-unit transport for section projection",
+ "statement": "The normalized supported-source section/projection composite equals the corresponding regular-coefficient composite after transport across supportedUnitIso; this is the coefficient-normalization equality used before applying the core section/projection identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, coefficient normalization after the section identity."
+ },
+ "stmt_deps": [
+  "lem-sfb-projective-canonical-section-projection-core"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection naturality isomorphism supported unit",
+   "results": "No exact theorem with the fixed internal-module interface.",
+   "date": "2026-10-28",
+   "verdict": "Split the transport step."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp Iso.hom_inv_id projection",
+   "results": "Only generic categorical identities found.",
+   "date": "2026-10-28",
+   "verdict": "Use the stated transport lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap_naturality_right supportedUnitIso",
+   "results": "No public theorem for this coefficient variable in the current import closure.",
+   "date": "2026-10-28",
+   "verdict": "Use the transport statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectiveCanonicalSectionProjection",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-canonical-section-projection",
+   "place": "Second identity, coefficient normalization.",
+   "via": [
+    "lem-sfb-projective-canonical-section-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalSectionProjectionTransport",
+  "file": "lean/Sheaf/Paper/CanonicalSectionProjectionTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.canonical_section_projection_transport",
+  "statement": "theorem canonical_section_projection_transport (Y : Scheme.{u}) (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) : (ρ_ M).inv ≫ (M ◁ ((singleUnitIso Λ (ProjectiveLine Y)).inv ≫ (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)) ≫ (moduleObjectDerivedPushforward Λ (secondProjection Y)).map (supportedUnitIso Λ Y).hom)) ≫ projectionMap Λ (secondProjection Y) M ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj (source Λ Y)) ≫ (moduleObjectDerivedPushforward Λ (secondProjection Y)).map ((((moduleObjectDerivedPullback Λ (secondProjection Y)).obj M) ◁ (supportedUnitIso Λ Y).inv) ≫ sectionTensorMap Λ (diagonalImmersion Y) (secondProjection Y) (pullSectionIso Λ Y (secondProjection Y) (by unfold secondProjection; exact pullback.diagonal_snd _)) (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M) = (ρ_ M).inv ≫ (M ◁ ((singleUnitIso Λ (ProjectiveLine Y)).inv ≫ (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)))) ≫ projectionMap Λ (secondProjection Y) M ((moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj (unit Λ (ProjectiveLine Y))) ≫ (moduleObjectDerivedPushforward Λ (secondProjection Y)).map (sectionTensorMap Λ (diagonalImmersion Y) (secondProjection Y) (pullSectionIso Λ Y (secondProjection Y) (by unfold secondProjection; exact pullback.diagonal_snd _)) (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T205900-L-1628678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T205900-L-1628678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
