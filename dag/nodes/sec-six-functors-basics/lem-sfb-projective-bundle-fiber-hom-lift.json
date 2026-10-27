@@ -17,63 +17,97 @@
  ],
  "proof": [
   {
-   "text": "Restrict to an affine base neighbourhood trivializing E. Quotient geometry identifies its bundle with projective space. First suppose the base ring is Noetherian. Put F=M dual tensor N; the fibre isomorphism gives F_s isomorphic to O and a generator of it. The projection is proper and flat, by polynomial charts, and F is flat over the base. Its trivial fibre has H^1=0 by projective-space cohomology. Lift the fibre generator by proper flat fibre-section lifting. Tensor-Hom duality converts the lifted section into a morphism from M to N. Under the canonical identifications its pullback to the restricted projection fibre is the given isomorphism, hence invertible. This step does not prove invertibility on the neighbourhood.",
+   "text": "A finite locally free module is finite type, so the identity closed immersion presents the canonical bundle projection as projective in the projective-bundle sense. Apply projectiveBundle_proper.",
    "uses": [
     "def-amb-finite-locally-free-module",
-    "lem-trf-projective-bundle-quotient-geometry",
-    "lemma-nagata-projective-space-base-change-proper",
-    "lem-nagata-polynomial-projection-flat",
-    "lem-pc-projective-space-twist-cohomology",
-    "lem-sfb-proper-flat-fibre-section-lifting",
-    "def-sc-invertible-module",
-    "lem-weil-pbc-module-pullback-tensor"
+    "lem-trf-projective-bundle-proper"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "lemma-perfect-direct-image and remark-explain-perfect-direct-image (Noetherian fibre-section lifting), combined with limits.tex lemma-descend-invertible-modules and finite-presentation map descent; EGA II Remark 4.2.7 announces the related classification."
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-H1-O-multiple-picard-flat-proper (Tag 0BF2), empty comparison family; proper shrinking on the generating locus and tensor cancellation (Modules, Tag 01CY)."
    }
   },
   {
-   "text": "For an arbitrary affine ring A, express Spec A as the limit of its finite-type integer approximations. The corresponding projective spaces are qcqs with affine transitions and the expected limit. Descend M and N to a common Noetherian stage. The original fibre is the limit of the residue-field fibres at the image points. Finite-presentation isomorphism descent places the fibre isomorphism and its inverse at a later stage. Apply the Noetherian lifting step there, and pull its open and morphism back. Compatibility with fibre products and pullback composition identifies the fibre pullback with a pullback of an isomorphism. View the resulting open inside the original S. No removal of the non-isomorphism locus is performed.",
+   "text": "Apply projective_bundle_fiber_geometry: the projection is flat and locally of finite presentation, its fibres are geometrically reduced and connected, and H1(O) of each fibre vanishes. ProperFlatGlobalSections supplies the universal structure-pushforward unit isomorphisms.",
    "uses": [
-    "lemma-nagata-noetherian-inverse-system-affine",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-limit-fibre-products",
-    "lem-trf-invertible-affine-limit-descent",
-    "lem-weil-pbc-limit-residue-field",
-    "lem-trf-fp-module-limit-isomorphism-descent",
-    "lemma-nagata-projective-space-base-change-proper",
-    "def-weil-proper-morphism"
+    "lem-sfb-projective-bundle-fiber-geometry",
+    "lem-sc-proper-flat-global-sections"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "lemma-perfect-direct-image and remark-explain-perfect-direct-image (Noetherian fibre-section lifting), combined with limits.tex lemma-descend-invertible-modules and finite-presentation map descent; EGA II Remark 4.2.7 announces the related classification."
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-H1-O-multiple-picard-flat-proper (Tag 0BF2), empty comparison family; proper shrinking on the generating locus and tensor cancellation (Modules, Tag 01CY)."
+   }
+  },
+  {
+   "text": "Put L=M dual tensor N. It is invertible. Pullback of dual evaluation gives a tensor inverse pairing for the pulled-back M and its dual. Combine that pairing with the assumed fibre isomorphism and the tensor-pullback comparison to trivialize L on the fibre.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-H1-O-multiple-picard-flat-proper (Tag 0BF2), empty comparison family; proper shrinking on the generating locus and tensor cancellation (Modules, Tag 01CY)."
+   }
+  },
+  {
+   "text": "Apply picard_h1_local_section_of_base_descent_generator with n=0, W=S, k=id. All test-family hypotheses are vacuous; H1(O)=0 makes the map to the empty product injective. The fibre line descends from the unit over Spec kappa(s). Obtain a section of L on a base-open pullback generating at every point of the marked fibre.",
+   "uses": [
+    "lem-sc-picard-h1-local-section-base-descent-generator",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-H1-O-multiple-picard-flat-proper (Tag 0BF2), empty comparison family; proper shrinking on the generating locus and tensor cancellation (Modules, Tag 01CY)."
+   }
+  },
+  {
+   "text": "On this proper base change let D be the generating locus. The complement of the closed image of Y minus D is an open W through the marked point. For every test map with image in W its induced map q to Y lands in D. The free generator on D pulls back to a global free generator. homOfGlobalSection is an isomorphism, so tensor-pullback composition trivializes L on the smaller base-open pullback. The helper trivial_near_fiber_generator proves this argument while retaining the actual unit rather than an unspecified finite locally free module.",
+   "uses": [
+    "def-sc-section-generating-locus",
+    "def-weil-proper-morphism",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-H1-O-multiple-picard-flat-proper (Tag 0BF2), empty comparison family; proper shrinking on the generating locus and tensor cancellation (Modules, Tag 01CY)."
+   }
+  },
+  {
+   "text": "Take the image U of W in the original base open. Compare the pullback scheme with the preimage open subscheme. Tensor the trivialization of L with the restricted M and compose the pulled-back dual evaluation M tensor (M dual tensor N) isomorphic to N. This gives an actual isomorphism between the two restricted lines. Use its hom as phi; every functor preserves isomorphisms, so its tensor pullback to the restricted fibre is invertible.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "lemma-H1-O-multiple-picard-flat-proper (Tag 0BF2), empty comparison family; proper shrinking on the generating locus and tensor cancellation (Modules, Tag 01CY)."
    }
   }
  ],
  "proof_deps": [
   "def-amb-finite-locally-free-module",
-  "lem-trf-projective-bundle-quotient-geometry",
-  "lemma-nagata-projective-space-base-change-proper",
-  "lem-nagata-polynomial-projection-flat",
-  "lem-pc-projective-space-twist-cohomology",
-  "lem-sfb-proper-flat-fibre-section-lifting",
-  "def-sc-invertible-module",
+  "lem-trf-projective-bundle-proper",
+  "lem-sfb-projective-bundle-fiber-geometry",
+  "lem-sc-proper-flat-global-sections",
+  "lem-pc-tensor-dual-invertible",
   "lem-weil-pbc-module-pullback-tensor",
-  "lemma-nagata-noetherian-inverse-system-affine",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-limit-fibre-products",
-  "lem-trf-invertible-affine-limit-descent",
-  "lem-weil-pbc-limit-residue-field",
-  "lem-trf-fp-module-limit-isomorphism-descent",
+  "def-pc-module-pullback",
+  "lem-sc-picard-h1-local-section-base-descent-generator",
+  "def-sc-section-generating-locus",
   "def-weil-proper-morphism"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "lemma-perfect-direct-image and remark-explain-perfect-direct-image (Noetherian fibre-section lifting), combined with limits.tex lemma-descend-invertible-modules and finite-presentation map descent; EGA II Remark 4.2.7 announces the related classification."
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "lemma-H1-O-multiple-picard-flat-proper (Tag 0BF2), empty comparison family; proper shrinking on the generating locus and tensor cancellation (Modules, Tag 01CY).",
+  "note": "K9: use existing arbitrary-base Picard H1 generator lifting with the empty family, instead of a second Noetherian approximation argument."
  },
  "mathlib_searches": [
   {
@@ -167,9 +201,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "K9",
   "result": "pass",
-  "landing": "20261027T123523-L-2315649",
+  "landing": "20261027T151718-L-1196518",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

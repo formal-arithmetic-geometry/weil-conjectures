@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-projective-bundle-fiber-geometry",
+ "kind": "statement",
+ "title": "Flatness and structure-sheaf cohomology of canonical projective-bundle fibres",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\mathcal E$ a quasi-coherent finite locally free $\\mathcal O_S$-module of constant positive rank $r$ [def-amb-finite-locally-free-module], and $p:\\mathbf P(\\mathcal E)\\to S$ its canonical symmetric-algebra relative Proj [def-trf-canonical-symmetric-graded-algebra]. Then $p$ is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. For every $s\\in S$, the residue-field fibre $\\mathbf P(\\mathcal E)_s\\to\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre] is geometrically reduced and geometrically connected [def-pc-geometrically-irreducible], and $H^1(\\mathbf P(\\mathcal E)_s,\\mathcal O)=0$, with cohomology of the underlying abelian structure sheaf [def-sc-structure-sheaf-cohomology-pullback].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "definition-projective-bundle, lemma-projective-space-bundle and lemma-standard-covering-projective-space; also literature/stacks-project/coherent.tex, lemma-cohomology-projective-space-over-ring (degree zero, q=1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose local frames for E. Open compatibility of canonical symmetric relative Proj and the free comparison in projective_bundle_quotient_geometry identify the projection over every frame open with standard projective (r-1)-space. On homogeneous standard opens the projection is the polynomial projection. The polynomial ring in finitely many variables is flat and finitely presented over the base, and these properties are local on source and target. Thus p is flat and locally of finite presentation.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-nagata-polynomial-projection-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change a frame at s to Spec kappa(s). The quotient description identifies the fibre over kappa(s) with projective (r-1)-space, compatibly with all field extensions. Over any field extension its standard charts are polynomial rings, hence reduced and integral, and their pairwise overlaps are nonempty. The chart cover gives reducedness and connectedness. This establishes both geometric properties.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r>=2 apply the projective-space twist-cohomology computation to O(0). Its positive cohomology vanishes, including H1. For r=1 the fibre is the affine spectrum of its residue field and affine acyclicity gives H1=0. Identify the structure sheaf under the fibre isomorphism; forget the module action to get the displayed abelian-sheaf cohomology vanishing. There is no s on an empty base.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "definition-projective-bundle, lemma-projective-space-bundle and lemma-standard-covering-projective-space; also literature/stacks-project/coherent.tex, lemma-cohomology-projective-space-over-ring (degree zero, q=1).",
+  "note": "K9: extract only the canonical-bundle geometry, independent of M,N and the given fibre isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Projective.*(Flat|Connected|Reduced)|subsingleton_H",
+   "results": "1 hits.  Top results: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-27",
+   "verdict": "No theorem about canonical locally free projective bundles. The source library has projective-space smoothness and twist cohomology, to use after the frame and fibre identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"Flat\"",
+   "results": "0 hits.  Top results: ",
+   "date": "2026-10-27",
+   "verdict": "No theorem about canonical locally free projective bundles. The source library has projective-space smoothness and twist cohomology, to use after the frame and fibre identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projective bundle of a finite locally free sheaf of positive rank is flat and finitely presented and its fibers are geometrically reduced connected with H1 of the structure sheaf zero",
+   "results": "8 hits.  Top results: AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.valuativeCriterion_existence",
+   "date": "2026-10-27",
+   "verdict": "No theorem about canonical locally free projective bundles. The source library has projective-space smoothness and twist cohomology, to use after the frame and fibre identifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberHomLift",
+  "date": "2026-10-27",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "The fibre-generator lifting step of the local-normal-form argument: polynomial-chart flatness and finite presentation, geometric reducedness and connectedness of projective-space fibres, and the vanishing of their structure-sheaf H1.",
+   "via": [
+    "lem-sfb-projective-bundle-fiber-hom-lift",
+    "lem-sfb-projective-bundle-fiber-iso-spread",
+    "lem-sfb-projective-bundle-local-normal-form",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleFiberGeometry.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_fiber_geometry",
+  "statement": "theorem projective_bundle_fiber_geometry (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r) :\n    let p := (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom\n    Flat p ∧ LocallyOfFinitePresentation p ∧\n      ∀ s : S, GeometricallyReduced (p.fiberToSpecResidueField s) ∧\n        GeometricallyConnected (p.fiberToSpecResidueField s) ∧\n        Subsingleton (Sheaf.H (Scheme.structureSheafAb (p.fiber s)) 1)",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261027T151718-L-1196518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261027T151718-L-1196518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
