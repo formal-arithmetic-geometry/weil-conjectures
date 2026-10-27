@@ -19914,3 +19914,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/B5/Sheaf.Paper.FiniteIntrinsicProjectionCompatibility (stage 3; reviewer PASS; first push; landing 20261027T205808-L-1616988 (proof); batch 20261027T205736; modules 1; new nodes 0)
 - 20:58 L: merged deliver/B6/Sheaf.Paper.EtaleCoefficientSystemAdjoint (stage 3; reviewer FIX; after a return; landing 20261027T205809-L-1617218 (interface); batch 20261027T205736; modules 2; new nodes 0; change records: coord/changes/B6-etale-coefficient-system-adjoint-split.md)
 - 20:58 L: merged deliver/B7/Sheaf.Paper.EtaleQuotientTensorProjection (stage 3; reviewer PASS; first push; landing 20261027T205811-L-1617398 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:58 L: merged deliver/B7/Sheaf.Paper.FiniteIntrinsicTensorRealization (stage 3; reviewer PASS; first push; landing 20261027T205812-L-1617622 (interface); batch 20261027T205736; modules 2; new nodes 1)

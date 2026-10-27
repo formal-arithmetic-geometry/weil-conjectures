@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralProjectionEvaluationFactors
+import Sheaf.Paper.FiniteIntrinsicTensorComponent
 
 /-! # Finite intrinsic tensor realization
 
@@ -14,11 +15,9 @@ finite intrinsic projection comparison.
 Source: fix-prop-projection-formula.proof.md, comparison of the same projection map.
 (blueprint: new-sf-finite-intrinsic-tensor-realization).
 
-Proof: construct the normalized constant coefficient tensor comparison on simultaneous
-flat K-flat representatives, and descend it through the derived localization. The
-comparison is natural in both inputs and is an isomorphism at every ambient finite
-input. This is the tensor realization part of the finite projection argument; no
-support, compactification, or projection map is involved.
+Proof: use the pointwise normalized constant-coefficient tensor comparison on each ambient
+finite input and assemble its chosen isomorphisms into the displayed family. The pointwise
+construction uses simultaneous flat K-flat representatives and descent through localization.
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +36,10 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
 
 (blueprint: new-sf-finite-intrinsic-tensor-realization).
 
-Proof: construct the normalized constant-coefficient tensor comparison on simultaneous flat
-K-flat representatives and descend it through the derived localization. The comparison is
-natural in both inputs and is an isomorphism at every ambient finite input. -/
+Proof: apply the pointwise normalized constant-coefficient tensor comparison at each
+ambient finite input and assemble its chosen isomorphisms into the displayed family. The
+pointwise construction uses simultaneous flat K-flat representatives and descent through
+localization. -/
 theorem finiteIntrinsicTensorRealization
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -47,6 +47,9 @@ theorem finiteIntrinsicTensorRealization
     (S : SixFunctorFiniteOperations D C E (m + 1) (Nat.le_add_left 1 m)) :
     Nonempty (∀ X : SixFunctorSpace D,
         finiteIntrinsicDerivedTensor C.l E X.obj.left m ≅
-          evaluatedTensor (C := C) (E := E) m X) := by sorry
+          evaluatedTensor (C := C) (E := E) m X) := by
+  classical
+  let _ := S
+  exact ⟨fun X ↦ (finiteIntrinsicTensorRealization_component m X).some⟩
 
 end WeilConjectures.IntegralProjectionReduction
