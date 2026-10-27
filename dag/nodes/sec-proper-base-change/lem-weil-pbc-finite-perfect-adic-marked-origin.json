@@ -1,0 +1,165 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09B1 (derived etale/pro-etale comparison), 09C6 (actual finite quotient descent) and 06YY (balancing)."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-perfect-adic-marked-origin",
+ "title": "Retained etale origin and stalk marking of one actual finite quotient",
+ "statement": "Let X be a scheme, d an adic coefficient datum on A, phi_n invertible identifications of the constant A/I^(n+1) rings with the completed finite coefficient sheaves, M a derived completed-module object, V an etale chart, and T a finite perfect adic algebra tower. Assume the level markings of [lem-weil-pbc-finite-perfect-adic-stalk-models]. For each n for which T.level n is perfect, there is a bounded etale complex K with finite locally constant cohomology, a retained comparison isomorphism C_n(K) ≅ J_n, and inhabited geometric stalks of Isom(constant(T.level n),K). Here J_n is constructed by applying the exact fixed-coefficient slice restriction [def-weil-pbc-finite-coefficient-slice-restriction] to the actual nth quotient of M. No consecutive transition is part of this conclusion.",
+ "stmt_deps": [
+  "lem-weil-pbc-finite-perfect-adic-stalk-models",
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "lem-weil-pbc-finite-perfect-adic-constant-cohomology",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Construct J_n by exact restriction of the actual quotient to fixed finite scalars and to V. Choose the marking cover and transport its local derived constant-model isomorphisms to these coordinates. The exact constant and coefficient-lift functors identify local homology with constants on the finite homology modules of the perfect model. Conservativity on the cover gives the same bounded interval globally.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-slice-derived-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each homology degree, descend the local finite constant models to a finite locally constant etale sheaf G_i and retain its comparison isomorphism.",
+   "uses": [
+    "lem-sf-proetale-origin-from-finite-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply bounded truncation induction to these homology origins to obtain K and C_n(K) ≅ J_n. Exact faithful comparison reflects the finite cohomological interval; full faithfulness on sheaves lifts the homology isomorphisms to the G_i and gives finite local constancy.",
+   "uses": [
+    "lem-weil-pbc-bounded-heart-etale-origin",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift each separably closed geometric point to the marking cover. Pull the retained comparison back to that chart and compose with the marking. The invertible units of the bounded-below comparison adjunction lift the resulting proetale isomorphism to an etale isomorphism. Pullback of constants identifies its source; sheafify the Isom-presheaf section and map it into the geometric fiber.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-coefficient-slice-derived-coordinates",
+  "lem-sf-proetale-origin-from-finite-models",
+  "lem-weil-pbc-bounded-heart-etale-origin",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL, 09B1 and 09C6; actual marked finite quotients and their descended transitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ff]ull|essImage|preimageIso",
+   "results": "25 hits: Mathlib/CategoryTheory/Simple.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean.",
+   "date": "2026-10-28",
+   "verdict": "The generic exact-derived-functor and categorical APIs apply, but no theorem states this finite-coefficient etale/proetale descent assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible etale proetale derived descent with compatible coefficient reduction arrows",
+   "results": "8 hits: StandardEtalePresentation, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, StandardEtalePair.HasMap.map, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, StandardEtalePair.instFormallyEtaleRing.",
+   "date": "2026-10-28",
+   "verdict": "The generic exact-derived-functor and categorical APIs apply, but no theorem states this finite-coefficient etale/proetale descent assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of pro-etale sheaves whose cohomology sheaves are finite locally constant descends to the etale site",
+   "results": "8 hits: CategoryTheory.Sheaf.instHasFiniteLimits, Condensed.lanSheafProfinite, LightCondensed, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, LightCondensed.IsDiscrete, LightCondensed.lanLightCondSet.",
+   "date": "2026-10-28",
+   "verdict": "The generic exact-derived-functor and categorical APIs apply, but no theorem states this finite-coefficient etale/proetale descent assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full faithfulness of derived inverse image descends normalized quotient arrows between specified etale origins of a proetale complex, compatibly with restriction of scalars",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.Equivalence.fullyFaithfulFunctor, CategoryTheory.Equivalence.fullyFaithfulInverse, PresheafOfModules.instFaithfulRestrictScalars, AlgebraicGeometry.Scheme.Hom.normalizationDesc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.Equivalence.fullyFaithfulToEssImage.",
+   "date": "2026-10-28",
+   "verdict": "The generic exact-derived-functor and categorical APIs apply, but no theorem states this finite-coefficient etale/proetale descent assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId.",
+   "date": "2026-10-28",
+   "verdict": "The generic exact-derived-functor and categorical APIs apply, but no theorem states this finite-coefficient etale/proetale descent assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicActualLevelDescent",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Finite-extension proof: finite quotient descent and realization in the connected adic-lisse argument (Stacks Tag 09C6).",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-actual-level-descent",
+    "lem-weil-pbc-finite-perfect-adic-actual-realization",
+    "lem-weil-pbc-finite-perfect-adic-actual-normalization",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicMarkedOrigin",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicMarkedOrigin.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_marked_origin",
+  "statement": "theorem finitePerfectAdic_marked_origin\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n))\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)\n    (T : FinitePerfectAdicAlgebraTower d)\n    (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) (n : ℕ)\n    (hp : DerivedCategory.IsPerfect (T.level n)) :\n    ∃ K : DerivedCategory (Sheaf V.left.smallEtaleTopology\n      (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))),\n      (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero\n        ((DerivedCategory.homologyFunctor _ i).obj K)) ∧\n      (∀ i : ℤ, IsFiniteLocallyConstantSheaf\n        ((DerivedCategory.homologyFunctor _ i).obj K)) ∧\n      Nonempty (((ProEtale.comparisonUpperStar\n        (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) V.left)\n        |>.mapDerivedCategory).obj K ≅\n        finitePerfectAdicQuotientCoordinates X d φ M V n) ∧\n      (∀ (Ω : Type t) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ V.left),\n        Nonempty ((pointSmallEtale x).sheafFiber.obj\n          (derivedLocalIsomorphismSheaf (finitePerfectAdicEtaleConstant V.left T n) K)))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdicQuotientCoordinates",
+   "AlgebraicGeometry.Scheme.finitePerfectAdic_marked_origin"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ccadf",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234033-L-4168553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ccadf",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234033-L-4168553",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new MarkedOrigin (sorry-free, axioms checked) + transitions hole vs node statements, Stacks 09AL/09C6/06YY and clone defs (completedAdicQuotientReduction, etaleIsomorphismNormalizationArrow); ActualLevelObjects diff vs clone; 3b importer OK"
+ }
+}

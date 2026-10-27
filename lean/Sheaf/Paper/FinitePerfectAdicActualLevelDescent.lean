@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicActualLevels
 public import Sheaf.Paper.FinitePerfectAdicScalarCoherence
+import Sheaf.Paper.FinitePerfectAdicMarkedOrigin
+import Sheaf.Paper.FinitePerfectAdicCoordinateTransitions
+import Sheaf.Paper.EtaleNormalizationCoherence
 
 /-! # Descent of the actual quotient tower with its comparison retained
 
@@ -84,6 +87,27 @@ theorem finitePerfectAdic_actual_level_descent
     (hperfect : ∀ n : ℕ, DerivedCategory.IsPerfect (T.level n))
     (hmark : FinitePerfectAdicLevelMarkings X d φ M V T) :
     ∃ L : FinitePerfectAdicActualLevelData X d M V T,
-      Nonempty (FinitePerfectAdicActualLevelDescent X d M V T L) := by sorry
+      Nonempty (FinitePerfectAdicActualLevelDescent X d M V T L) := by
+  classical
+  have hlevels := fun n ↦
+    finitePerfectAdic_marked_origin X d φ hφ M V T hmark n (hperfect n)
+  choose K hbounded hlisse e hstalk using hlevels
+  have hplus (n : ℕ) : DerivedCategory.TStructure.t.plus (K n) := by
+    obtain ⟨a, b, hv⟩ := hbounded n
+    exact ⟨a, (DerivedCategory.isGE_iff _ a).mpr fun i hi ↦ hv i (Or.inl hi)⟩
+  obtain ⟨dK, actual, huniversal, hactual⟩ :=
+    finitePerfectAdic_descend_coordinate_transitions X d φ hφ hcompat M V K hplus
+      (fun n ↦ (e n).some)
+  let L : FinitePerfectAdicActualLevelData X d M V T :=
+    { K := K
+      boundedK := hbounded
+      lisseK := hlisse
+      stalk := hstalk
+      dK := dK
+      universalK := fun n ↦
+        { universal := huniversal n
+          coherence := etaleNormalization_coherence V.left
+            (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))) (dK n) } }
+  exact ⟨L, ⟨{ actual := actual, actual_normalized := hactual }⟩⟩
 
 end AlgebraicGeometry.Scheme

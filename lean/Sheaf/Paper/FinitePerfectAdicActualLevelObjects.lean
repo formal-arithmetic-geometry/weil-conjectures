@@ -6,7 +6,7 @@ module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantNormalization
 public import Sheaf.Paper.FinitePerfectAdicStalkModels
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.FinitePerfectAdicMarkedOrigin
 
 /-! # Finite-level descended objects and their cohomology
 
@@ -46,6 +46,10 @@ theorem finitePerfectAdic_actual_level_objects
       (∀ (n : ℕ) (i : ℤ), IsFiniteLocallyConstantSheaf
         ((DerivedCategory.homologyFunctor (Sheaf V.left.smallEtaleTopology
           (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))) i).obj (K n))) := by
-  sorry
+  classical
+  have _hcompat := hcompat
+  choose K hb hl _ _ using fun n ↦
+    finitePerfectAdic_marked_origin X d φ hφ M V T hmark n (hperfect n)
+  exact ⟨K, hb, hl⟩
 
 end AlgebraicGeometry.Scheme
