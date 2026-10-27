@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-lisse-finite-quotient-etale-origin-core",
+ "kind": "statement",
+ "title": "Core descent data for one finite quotient",
+ "statement": "A Noetherian scheme X, an immersion g:Y→X, an adic coefficient datum d on A, a finite level n, a bounded derived object K, and relatively finite lisse inverse-image cohomology determine, for every etale V→Y, a descended level over the completion quotient on V whose cohomology is finite locally constant, whose cohomology vanishing follows that of K, and whose original relative lisse data persists on every proetale refinement.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09B1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply inverse image and constant coefficient comparison, descend the bounded constructible finite-coefficient complex, transfer it across the completion quotient isomorphism, and pull its finite local models back to every refinement.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-coefficient-derived-origin-presentation",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-adic-completion-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "worker Q3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09B1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally constant etale derived origin on a Noetherian scheme",
+   "results": "No exact Mathlib declaration; repository finite-coefficient origin APIs are the intended inputs.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiniteLocallyConstantSheaf DerivedCategory homologyFunctor",
+   "results": "No exact joint match for this custom structure.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse_finite_quotient_etale_origin finiteCoefficient_constructibleDerived_origin",
+   "results": "The assigned module is the first declaration with this interface; no prior theorem closes it.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteQuotientEtaleOrigin",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-finite-quotient-etale-origin",
+   "place": "Tags 09AL, 09B1 and 09C6"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteQuotientEtaleOriginCore",
+  "file": "lean/Sheaf/Paper/LisseFiniteQuotientEtaleOriginCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin_core",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LisseFiniteQuotientEtaleOriginCore",
+   "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin_core"
+  ],
+  "statement": "theorem lisse_finite_quotient_etale_origin_core\n    (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)\n    (K : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))\n    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj K))\n    (hlisse : ∀ q : ℤ,\n      IsRelativelyFiniteLisseModule g (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage g).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj K))))\n    (V : Y.Etale) :\n    Nonempty (LisseFiniteQuotientEtaleOriginCore X Y g d n K V)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T180740-L-3897595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T180740-L-3897595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

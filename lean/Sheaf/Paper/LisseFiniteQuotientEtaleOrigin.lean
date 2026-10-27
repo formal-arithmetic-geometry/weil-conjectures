@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Paper.LisseFiniteQuotientEtaleOriginCore
+import Sheaf.Paper.LisseFiniteQuotientEtaleOriginTransport
 
 /-! # Single finite quotient origins and their conditional constant-model transport
 
@@ -94,6 +96,14 @@ theorem lisse_finite_quotient_etale_origin
             ((DerivedCategory.homologyFunctor _ q).obj
               ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj K))))
     (V : Y.Etale) :
-    Nonempty (LisseFiniteQuotientEtaleOrigin X Y g d n K V) := by sorry
+    Nonempty (LisseFiniteQuotientEtaleOrigin X Y g d n K V) := by
+  obtain ⟨C⟩ := lisse_finite_quotient_etale_origin_core X Y g d n K hbounded hlisse V
+  refine ⟨{ level := C.level
+            lisse := C.lisse
+            vanishing := C.vanishing
+            refinementLisse := C.refinementLisse
+            transport := ?_ }⟩
+  intro Z E hE W w
+  exact lisse_finite_quotient_etale_origin_transport C Z E hE W w
 
 end AlgebraicGeometry.Scheme
