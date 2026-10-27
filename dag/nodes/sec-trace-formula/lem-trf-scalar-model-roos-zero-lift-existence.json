@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-scalar-model-roos-zero-lift-existence",
+ "kind": "statement",
+ "title": "Existence of the normalized scalar Roos lift",
+ "statement": "The realization and constant-tower transpose construction produces a scalar-extended strict Roos map with zero shifted coordinate, normalized quotient coordinates, and the displayed factorization through the scalar counit.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 3.5.1 and Stacks 0941"
+ },
+ "proof": [
+  {
+   "text": "Choose a simultaneous strict quotient presentation and a K-injective tower resolution; apply the constant-tower/limit adjunction and the normalized Roos bridge.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Expansion of scalar-model Roos lift steps 1--2"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ScalarModelRoosZeroLiftExistence",
+  "file": "lean/Sheaf/TraceFormula/ScalarModelRoosZeroLiftExistence.lean",
+  "declaration": "WeilConjectures.scalarModelRoosZeroLift_existence",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-28",
+  "statement": "theorem scalarModelRoosZeroLift_existence (SL : CoefficientDerivedSystemCalculus l L X) (ρL : IntegralComparisonRoosModel l L X) (ρF : IntegralComparisonRoosModel l F X) (b : IntegralComparisonScalarModel l L F j X SL ρF) (P : (integralOperationsGoodComplex l E X).FullSubcategory) (D : CochainComplex (coefficientSequenceModules l L X) ℤ) (f : (completedOrdinaryScalarComplex l E L ι X).obj P.obj ⟶ integralOperationsRoos (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor) (hf : ∀ i : ℤ, f.f i ≫ (CochainComplex.mappingCocone.snd (scalarRoosBoundary (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)).v i (i - 1) (by omega) = 0) : let hType := (completedOrdinaryScalarComplex l L F j X).obj ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ⟶ integralOperationsRoos (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor ∃ h : hType, (∀ i : ℤ, h.f i ≫ (CochainComplex.mappingCocone.snd (scalarRoosBoundary (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor)).v i (i - 1) (by omega) = 0) ∧ (∀ (n : ℕ) (i : ℤ) (U : X.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) (t : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj U) (x : (P.obj.X i).val.obj U) (y : (D.X i).val.obj (op (n, U.unop))), ((f.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor)).f i ≫ (Pi.π (fun m : ℕ ↦ (((coefficientSequenceRestriction l L X).mapHomologicalComplex (.up ℤ)).obj D).asFunctor.obj (op m)) n).f i).val.app U) (completedScalarTensorSection l E L ι X (P.obj.X i) U t x) = integralComparisonRestrictedSection l L X (D.X i) n U y → ((h.f i ≫ (CochainComplex.mappingCocone.fst (scalarRoosBoundary (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor)).f i ≫ (Pi.π (fun m : ℕ ↦ (((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ)).obj (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i).val.app U) (completedScalarTensorSection l L F j X (((completedOrdinaryScalarComplex l E L ι X).obj P.obj).X i) U s (completedScalarTensorSection l E L ι X (P.obj.X i) U t x)) = integralComparisonRestrictedSection l F X ((integralComparisonSequenceScalarModel l L F j X).E.obj (D.X i)) n U (integralComparisonSequenceTensorSection l L F j X (D.X i) (op (n, U.unop)) ((completedIntegralCommRingProjectionUnrestricted l F X n).hom.app U s) y)) ∧ (completedDerivedScalarExtension l L F j X).map (DerivedCategory.Q.map f ≫ (integralComparisonRoosBridge l L X ρL D).inv) ≫ (completedScalarComparison l L F j X).app ((coefficientSequenceLimit l L X).obj (DerivedCategory.Q.obj D)) ≫ b.realization.hom.app ((coefficientSequenceLimit l L X).obj (DerivedCategory.Q.obj D)) ≫ (coefficientSequenceLimit l F X).map ((integralComparisonDerivedSequenceScalar l L F j X).map (SL.adjunction.counit.app (DerivedCategory.Q.obj D))) ≫ (coefficientSequenceLimit l F X).map ((integralComparisonSequenceScalarModel l L F j X).ε.app D) ≫ (integralComparisonRoosBridge l F X ρF _).hom = completedScalarCounit l L F j X ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ≫ DerivedCategory.Q.map h"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarModelRoosZeroLift integralComparisonRoosBridge",
+   "results": "No earlier declaration of this model-specific theorem; the split modules are the only local matches.",
+   "date": "2026-10-28",
+   "verdict": "No direct project match."
+  },
+  {
+   "tool": "loogle",
+   "query": "derived category map equality zero shifted Roos coordinates",
+   "results": "No direct model-specific match.",
+   "date": "2026-10-28",
+   "verdict": "Use split statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized scalar Roos lift realization",
+   "results": "No direct model-specific match.",
+   "date": "2026-10-28",
+   "verdict": "Use split statement."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ScalarModelRoosZeroLift",
+  "date": "2026-10-28",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-scalar-model-roos-zero-lift",
+   "place": "Expansion of the scalar model Roos lift proof steps",
+   "via": [
+    "lem-trf-scalar-model-roos-zero-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T180935-L-3915421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261027T180935-L-3915421",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
