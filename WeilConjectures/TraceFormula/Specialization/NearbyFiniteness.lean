@@ -52,12 +52,12 @@ The theorem for the extension by zero `v_! L` of a lisse sheaf along a locally c
 into the generic fibre `𝔸ⁿ_η` of an affine space `𝔸ⁿ_S`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`) rests on the
 `sorry`ed `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`
-for `n ≥ 1` when `D` meets the special fibre and no closed subscheme of `D` containing `W` is
-quasi-finite over `S`. If `D` misses the special fibre, the nearby cycles vanish by the proper exchange
-(`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`); if `D ⟶ S` is quasi-finite, it
-is open in a scheme finite over `S` (Zariski's main theorem), and the nearby cycles reduce to
-those of the trait by the proper exchange and the reflection of bounded constructibility along
-finite morphisms to `Spec k'`
+for `n ≥ 1` when `D` meets the special fibre and no closed subscheme of `D` containing `W`
+is quasi-finite over `S`. If `D` misses the special fibre, the nearby cycles vanish by the
+proper exchange (`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`); if `D ⟶ S`
+is quasi-finite, it is open in a scheme finite over `S` (Zariski's main theorem), and the
+nearby cycles reduce to those of the trait by the proper exchange and the reflection of bounded
+constructibility along finite morphisms to `Spec k'`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_locallyQuasiFinite_comp`);
 this extends to a quasi-finite closed subscheme of `D` containing `W`, which carries `v_! L`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_of_locallyQuasiFinite`).
