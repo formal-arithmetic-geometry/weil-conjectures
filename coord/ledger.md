@@ -19815,3 +19815,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:08 L: merged deliver/T1/Sheaf.Paper.TowerOrdinaryScalarAssociation (stage 3; reviewer PASS; first push; landing 20261027T180817-L-3903885 (interface); batch 20261027T180444; modules 4; new nodes 3)
 - 18:08 L: merged deliver/T2/Sheaf.Paper.RationalScalarMixedUnitCancellation (stage 3; reviewer PASS; first push; landing 20261027T180818-L-3904100 (interface); batch 20261027T180444; modules 4; new nodes 3)
 - 18:08 L: merged deliver/T3/Sheaf.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux (stage 3; reviewer PASS; first push; landing 20261027T180819-L-3904328 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:08 L: merged deliver/T3/Sheaf.Paper.SmoothFiniteDualizingInverse (stage 3; reviewer PASS; first push; landing 20261027T180821-L-3904455 (interface); batch 20261027T180444; modules 1; new nodes 0)
