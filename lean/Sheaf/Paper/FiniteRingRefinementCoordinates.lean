@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
 public import Sheaf.Paper.FrobeniusWitnessedCompactification
+import Sheaf.Paper.FiniteRingRefinementCoordinatesCore
 
 /-! # Finite ring-sheaf coordinates of one normalized refinement
 
@@ -45,7 +46,8 @@ the open and proper coordinate comparisons. The remaining coordinate change is
 finiteImageIso, and the remaining witnessed word is intrinsicRefinement by its
 definition. This proves the asserted equality of actual arrows, without any
 assumption that the refinement square is cartesian. The same unit equations cover
-identity refinements, zero inputs and empty opens. -/
+identity refinements, zero inputs and empty opens. The unresolved canonical witness is split
+off as `finite_ring_refinement_coordinates_canonical` in the companion module. -/
 theorem finite_ring_refinement_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)
