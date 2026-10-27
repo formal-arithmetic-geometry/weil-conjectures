@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Transport the native parameter adjunction through b.native and compare its right adjoint with the sheaf tensor-Hom adjunction using b.nativeHom.",
+   "text": "For fixed P,Q compose the native tensor-Hom adjunction, full faithfulness of b.native, postcomposition with b.nativeHom, the inverse ringed tensor-Hom adjunction, and precomposition with the braiding. This gives an equivalence h_I from Hom(T(P,Q),I) to Hom(b.native(Q) tensor b.native(P),b.native(I)). Naturality of both adjunctions and of b.nativeHom proves h_J(f followed by g) = h_I(f) followed by b.native(g).",
    "uses": [
     "def-sf-native-weil-tensor-ringed-bridge"
    ],
@@ -23,11 +23,22 @@
    }
   },
   {
-   "text": "Use uniqueness of left adjoints to obtain the underived isomorphism; the counit identity is the uncurrying equation and parameter naturality makes it a bifunctor comparison.",
+   "text": "Reconstruct the representing isomorphism explicitly. For an equivalence E, objects A,B and such a natural Hom equivalence h, put v=h_A(id), let c:E(E.inverse(B)) isomorphic to B be the counit, and put u=h_inverse(B)^(-1)(c.inv). The forward map is E(u) followed by c.hom and the inverse is v. Naturality at u proves v followed by the forward map is id. To prove the other identity, take the full preimage r of c.hom followed by v; injectivity of h_A gives u followed by r=id. Applying E gives the other inverse identity. Naturality at any f also proves v followed by E(f)=h_I(f).",
    "uses": [
     "def-sf-native-weil-tensor-ringed-bridge"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "Apply this reconstruction separately to each P,Q, and use the proved normalized isomorphism to fill underived. Substitute the inverse native adjunction applied to f into v followed by E(f)=h_I(f). The equivalence cancellation law gives precisely the displayed uncurrying equation, including the specified braiding. Thus the uncurry field is proved with no additional hypothesis or derived construction.",
+   "uses": [
+    "def-sf-native-weil-tensor-ringed-bridge"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
     "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
@@ -39,10 +50,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "W8",
+  "group": "E9",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Native tensor model, normalized ringed complex comparison."
+  "place": "Internal-Hom and evaluation comparison; explicit uniqueness of representing objects implementing the existing underived adjunction plan."
  },
  "mathlib_searches": [
   {
@@ -117,10 +128,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W8",
+  "group": "E9",
   "result": "pass",
-  "landing": "20261027T180939-L-3916475",
-  "kind": "interface",
+  "landing": "20261027T205935-L-1636084",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
