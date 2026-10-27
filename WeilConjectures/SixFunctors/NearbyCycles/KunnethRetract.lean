@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Retract
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
 
 /-!
@@ -33,9 +34,6 @@ read off the square instead of being restated.
 
 ## Main statements
 
-* `CategoryTheory.isIso_of_comp_eq_of_retraction`: the abstract retract argument.
-* `CategoryTheory.IsSquareRetract.isIso`, `CategoryTheory.IsTensorRetract.isSquareRetract`: the
-  retract argument for a square `x ≫ a = δ ≫ (u₁ ⊗ u₂) ≫ π`.
 * `NearbyCyclesModel.isIso_map_kunnethMap_of_isSquareRetract`,
   `NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`: the pullback of the Künneth map is
   invertible if the Künneth map of the pullback models is and the retraction data exist.
@@ -49,61 +47,6 @@ universe u
 open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace CategoryTheory
-
-/-- **A retract of an isomorphism along split monomorphisms**: if `x ≫ a = w ≫ π` with `π`
-invertible, `a` and `w` split monomorphisms with retractions `ρ`, `w'`, and the idempotents are
-compatible with `π` (`w' ≫ w ≫ π = π ≫ ρ ≫ a`), then `x` is invertible, with inverse
-`a ≫ π⁻¹ ≫ w'`. -/
-lemma isIso_of_comp_eq_of_retraction {C : Type*} [Category C] {U V U' V' : C} {x : U ⟶ V}
-    {a : V ⟶ V'} {w : U ⟶ U'} {π : U' ⟶ V'} [IsIso π] {ρ : V' ⟶ V} {w' : U' ⟶ U}
-    (ha : a ≫ ρ = 𝟙 V) (hw : w ≫ w' = 𝟙 U) (hsq : x ≫ a = w ≫ π)
-    (hc : w' ≫ w ≫ π = π ≫ ρ ≫ a) : IsIso x := by
-  have hx : x = w ≫ π ≫ ρ := by rw [← reassoc_of% hsq, ha, Category.comp_id]
-  refine ⟨a ≫ inv π ≫ w', ?_, ?_⟩
-  · rw [reassoc_of% hsq, IsIso.hom_inv_id_assoc, hw]
-  · rw [hx, Category.assoc, Category.assoc, reassoc_of% hc, IsIso.inv_hom_id_assoc,
-      reassoc_of% ha, ha]
-
-/-- A *retract structure* on a commutative square `x ≫ a = δ ≫ t ≫ π`: retractions `t'` of `t`
-and `ρ` of `a` such that `π` carries the idempotent `t' ≫ t` to the idempotent `ρ ≫ a`. -/
-def IsSquareRetract {C : Type*} {_ : Category C} {U V V' S T : C} {x : U ⟶ V} {a : V ⟶ V'}
-    {δ : U ⟶ S} {t : S ⟶ T} {π : T ⟶ V'} (_ : x ≫ a = δ ≫ t ≫ π) : Prop :=
-  ∃ (t' : T ⟶ S) (ρ : V' ⟶ V), t ≫ t' = 𝟙 S ∧ a ≫ ρ = 𝟙 V ∧ t' ≫ t ≫ π = π ≫ ρ ≫ a
-
-/-- **A retract of an isomorphism along an isomorphism is an isomorphism**: given a retract
-structure on `x ≫ a = δ ≫ t ≫ π` with `δ` and `π` invertible, `x` is invertible. -/
-lemma IsSquareRetract.isIso {C : Type*} {_ : Category C} {U V V' S T : C} {x : U ⟶ V}
-    {a : V ⟶ V'} {δ : U ⟶ S} [IsIso δ] {t : S ⟶ T} {π : T ⟶ V'} [IsIso π]
-    {hsq : x ≫ a = δ ≫ t ≫ π} (h : IsSquareRetract hsq) : IsIso x := by
-  obtain ⟨t', ρ, ht, ha, hc⟩ := h
-  refine isIso_of_comp_eq_of_retraction (w := δ ≫ t) (w' := t' ≫ inv δ) ha ?_
-    (by rw [hsq, Category.assoc]) ?_
-  · rw [Category.assoc, reassoc_of% ht, IsIso.hom_inv_id]
-  · rw [Category.assoc, Category.assoc, IsIso.inv_hom_id_assoc, hc]
-
-/-- A *tensor retract structure* on a commutative square `x ≫ a = δ ≫ (u₁ ⊗ u₂) ≫ π`: retractions
-`r₁` of `u₁` and `ρ` of `a` such that `π` carries the idempotent `(r₁ ≫ u₁) ⊗ 𝟙` to the idempotent
-`ρ ≫ a`. -/
-def IsTensorRetract {C : Type*} {_ : Category C} {_ : MonoidalCategory C}
-    {U V V' S₁ S₂ T₁ T₂ : C} {x : U ⟶ V} {a : V ⟶ V'} {δ : U ⟶ S₁ ⊗ S₂} {u₁ : S₁ ⟶ T₁}
-    {u₂ : S₂ ⟶ T₂} {π : T₁ ⊗ T₂ ⟶ V'} (_ : x ≫ a = δ ≫ (u₁ ⊗ₘ u₂) ≫ π) : Prop :=
-  ∃ (r₁ : T₁ ⟶ S₁) (ρ : V' ⟶ V), u₁ ≫ r₁ = 𝟙 S₁ ∧ a ≫ ρ = 𝟙 V ∧
-    ((r₁ ≫ u₁) ▷ T₂) ≫ π = π ≫ ρ ≫ a
-
-/-- A tensor retract structure with `u₂` invertible gives a retract structure, with the retraction
-`r₁ ⊗ u₂⁻¹` of `u₁ ⊗ u₂`. -/
-lemma IsTensorRetract.isSquareRetract {C : Type*} {_ : Category C} {_ : MonoidalCategory C}
-    {U V V' S₁ S₂ T₁ T₂ : C} {x : U ⟶ V} {a : V ⟶ V'} {δ : U ⟶ S₁ ⊗ S₂} {u₁ : S₁ ⟶ T₁}
-    {u₂ : S₂ ⟶ T₂} [IsIso u₂] {π : T₁ ⊗ T₂ ⟶ V'} {hsq : x ≫ a = δ ≫ (u₁ ⊗ₘ u₂) ≫ π}
-    (h : IsTensorRetract hsq) : IsSquareRetract hsq := by
-  obtain ⟨r₁, ρ, hr₁, ha, hc⟩ := h
-  refine ⟨r₁ ⊗ₘ inv u₂, ρ, ?_, ha, ?_⟩
-  · rw [tensorHom_comp_tensorHom, hr₁, IsIso.hom_inv_id, tensorHom_id, id_whiskerRight]
-  · rw [← Category.assoc, tensorHom_comp_tensorHom, IsIso.inv_hom_id, tensorHom_id, hc]
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

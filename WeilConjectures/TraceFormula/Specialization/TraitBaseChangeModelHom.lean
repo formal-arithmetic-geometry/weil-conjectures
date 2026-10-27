@@ -50,47 +50,27 @@ lemma Hom.baseChange_total_comp (hgP : gP = φ.generic ≫ gM) :
       (baseChangeHom hP bP hbP vP hvP).total ≫ φ.total :=
   pullback.lift_fst _ _ _
 
-/-- The map of geometric generic fibres of base changes commutes with the projections. -/
-lemma baseChangeGenericMap_comp_aux (hgP : gP = φ.generic ≫ gM) :
-    pullback.map (pullback.snd bP vP) (traitGenericPoint K) (pullback.snd bM vM)
-      (traitGenericPoint K) (φ.baseChangeTotal κ hκb hκv) (𝟙 _) (𝟙 _) (by simp) (by simp) ≫
-        baseChangeGenericMap hM bM hbM vM hvM =
-      baseChangeGenericMap hP bP hbP vP hvP ≫ φ.generic := by
-  refine hM.isPullback_j.hom_ext ?_ ?_
-  · simp only [Category.assoc, baseChangeGenericMap_j, φ.comm_j, baseChangeGenericMap_j_assoc]
-    rw [pullback.lift_fst_assoc, Category.assoc]
-    exact congrArg (_ ≫ ·) (pullback.lift_fst _ _ _)
-  · simp only [Category.assoc, baseChangeGenericMap_g, ← hgP]
-    rw [pullback.lift_snd_assoc]
-    simp
-
 /-- The morphism of base changes commutes with the projections on geometric generic fibres. -/
 lemma Hom.baseChange_generic_comp (hgP : gP = φ.generic ≫ gM) :
     (φ.baseChange hM hP hbM hvM hbP hvP κ hκb hκv hgP).generic ≫
         (baseChangeHom hM bM hbM vM hvM).generic =
-      (baseChangeHom hP bP hbP vP hvP).generic ≫ φ.generic :=
-  baseChangeGenericMap_comp_aux hM hP hbM hvM hbP hvP φ κ hκb hκv hgP
+      (baseChangeHom hP bP hbP vP hvP).generic ≫ φ.generic := by
+  refine hM.isPullback_j.hom_ext ?_ ?_
+  · simp [φ.comm_j]
+  · simp [← hgP]
 
 /-- The morphism of base changes commutes with the projections on special fibres. -/
-lemma Hom.baseChangeSpecial_comp (hgP : gP = φ.generic ≫ gM) :
+lemma Hom.baseChangeSpecial_comp :
     φ.baseChangeSpecial κ hκb hκv ≫ baseChangeSpecialMap hM bM hbM vM hvM =
       baseChangeSpecialMap hP bP hbP vP hvP ≫ f' := by
   have h₁ : (φ.baseChangeSpecial κ hκb hκv ≫ baseChangeSpecialMap hM bM hbM vM hvM) ≫ M.i =
       (baseChangeSpecialMap hP bP hbP vP hvP ≫ f') ≫ M.i := by
-    have hc := (φ.baseChange hM hP hbM hvM hbP hvP κ hκb hκv hgP).comm_i
-    simp only [NearbyCyclesModel.baseChange_i, Hom.baseChange_total] at hc
-    rw [Category.assoc, baseChangeSpecialMap_i]
-    erw [reassoc_of% hc]
-    rw [Category.assoc, φ.comm_i, baseChangeSpecialMap_i_assoc]
-    exact (Category.assoc _ _ _).trans
-      (congrArg (fun t ↦ pullback.fst (pullback.snd bP vP) (traitClosedPoint K) ≫ t)
-        (pullback.lift_fst _ _ _))
+    simp [Hom.baseChangeSpecial, φ.comm_i]
   refine hM.isPullback_i.hom_ext h₁ ?_
   have : IsClosedImmersion (traitClosedPoint k') :=
     IsClosedImmersion.spec_of_surjective _ fun a ↦ ⟨PowerSeries.C a, by simp⟩
   rw [← cancel_mono (traitClosedPoint k')]
   simp only [Category.assoc, ← hM.isPullback_i.w]
   simpa only [Category.assoc] using congrArg (· ≫ qM) h₁
-
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

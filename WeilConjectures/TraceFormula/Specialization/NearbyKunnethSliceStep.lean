@@ -7,12 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.LocallyEmbedsInAffineSpace
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
-public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
-public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -148,7 +148,9 @@ isomorphism for bounded constructible `B`.
 Unfinished: the identification of the stalks of `Rj_*` at the points of the special fibre of
 `N''` with those of `N` requires base change of `Rj_*` along `𝒴 ×_S Spec K⟦t⟧ ⟶ 𝒴`, which is not
 weakly étale, and the comparison of the geometric generic points of the two traits; neither is
-formalised for pro-étale `ℚ̄_ℓ`-sheaves. -/
+formalised for pro-étale `ℚ̄_ℓ`-sheaves. Deligne's proof of this invariance runs the dévissage of
+his finiteness theorem (SGA 4½, [Th. finitude], Thm. 3.2), whose lisse generic case is still
+`sorry` (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`). -/
 theorem isIso_pullbackExchange_baseChangeHom_traitMap
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
@@ -179,7 +181,11 @@ inclusions of the `P`-invariants of the nearby cycles of the slices; the retract
 averaging projections, and their compatibility with `Π'` is the projection formula for
 `P`-invariants (blueprint `det-nearby-kunneth-invariants`), `P` acting trivially on the nearby
 cycles of the change of trait of `N`. Neither the action of inertia on nearby cycles nor base
-change of `Rj_*` along the slice is formalised for pro-étale `ℚ̄_ℓ`-sheaves. -/
+change of `Rj_*` along the slice is formalised for pro-étale `ℚ̄_ℓ`-sheaves. The projection formula
+itself is formalised for discrete representations of a pro-`p` group
+(`Representation.invariantsTensorEquiv`, blueprint `det-nearby-kunneth-invariants`); applying it
+here needs the action of `P` on the nearby cycles, as an action on objects of the derived
+category of pro-étale `ℚ̄_ℓ`-sheaves. -/
 theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -199,8 +205,8 @@ theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
       (Hom.baseChange_generic_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
       (Hom.baseChange_total_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
       (Hom.baseChange_generic_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
-      (by simp : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f₁) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
-      (by simp : f₂ ≫ 𝟙 Y = 𝟙 Z ≫ f₂) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
+      (by simp : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f₁) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
+      (by simp : f₂ ≫ 𝟙 Y = 𝟙 Z ≫ f₂) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _)
       A B) :=
   sorry
 
@@ -214,7 +220,7 @@ monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly he
 the Künneth map of the geometric slice (`NearbyCyclesModel.sliceFst`,
 `NearbyCyclesModel.sliceSnd`) over the trait `Spec K⟦t⟧` is an isomorphism, so is the pullback
 of `Π_{A,B}` to the special fibre of the slice of `P`. The pullback of `Π_{A,B}` is a retract of
-the Künneth map of the slice (`NearbyCyclesModel.isIso_map_kunnethMap_of_isSquareRetract`), by
+the Künneth map of the slice (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`), by
 the generic-slicing identification
 (`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`) and the
 invariance of nearby cycles under change of trait
@@ -252,8 +258,8 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst
     (Hom.baseChange_generic_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
     (Hom.baseChange_total_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
     (Hom.baseChange_generic_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
-    (by simp : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f₁) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _ rfl)
-    (by simp : f₂ ≫ 𝟙 Y = 𝟙 Z ≫ f₂) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _ hgen.symm)
+    (by simp : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f₁) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
+    (by simp : f₂ ≫ 𝟙 Y = 𝟙 Z ≫ f₂) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _)
     A B (by exact_mod_proofs hN') (by exact_mod_proofs hT) (by exact_mod_proofs hK)
 
 include hM hN hpb hP hgen in
