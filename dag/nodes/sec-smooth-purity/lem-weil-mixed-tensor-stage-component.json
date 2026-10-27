@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-mixed-tensor-stage-component",
+ "kind": "statement",
+ "title": "The component conjugate of a mixed tensor square is the image of its original-stage morphism when both endpoint comparisons satisfy pair-functor tower coherence.",
+ "statement": "The component conjugate of a mixed tensor square is the image of its original-stage morphism when both endpoint comparisons satisfy pair-functor tower coherence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Common-stage subargument, steps 3–5; proved component calculation."
+ },
+ "stmt_deps": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Use tensor comparison naturality on the inverse endpoint maps. Pullback tower\ncoherence cancels these inverses. Apply the mixed scalar square, followed by naturality\nof the tensor/pullback isomorphism along the source associators. Finally cancel the\ninvertible target endpoint. The two input coherence equations come from the specified\nstage-system pair functor coherence law.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent D2",
+  "place": "Fully proved helper extracted to keep each module within the compile-time bound.",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictionTensorRepresentativeStageTransport",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-restriction-tensor-representative-stage-transport",
+   "place": "Categorical component calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.MixedTensorStageComponent",
+  "file": "lean/Sheaf/Paper/MixedTensorStageComponent.lean",
+  "declaration": "WeilConjectures.mixedTensorStageComponent",
+  "statement": "theorem mixedTensorStageComponent\n    {I : Type*} [Preorder I]\n    {C : I → Type*} [∀ i, Category* (C i)]\n    {D : I → Type*} [∀ i, Category* (D i)]\n    (SX : StageSystem C) (SY : StageSystem D)\n    (R : ∀ i, C i ⥤ D i) (TX : ∀ i, C i × C i ⥤ C i)\n    (TY : ∀ i, D i × D i ⥤ D i)\n    (p : ∀ {i j : I} (h : i ≤ j), R i ⋙ SY.T h ≅ SX.T h ⋙ R j)\n    (coh : StageSystem.pairFunctorCoherent SX SY R p)\n    (tX : ∀ {i j : I} (h : i ≤ j), TX i ⋙ SX.T h ≅\n      (SX.T h).prod (SX.T h) ⋙ TX j)\n    (tY : ∀ {i j : I} (h : i ≤ j), TY i ⋙ SY.T h ≅\n      (SY.T h).prod (SY.T h) ⋙ TY j)\n    (mu : ∀ i, TX i ⋙ R i ≅ (R i).prod (R i) ⋙ TY i)\n    (square : ∀ {i j : I} (h : i ≤ j) (M N : C i),\n      (SY.T h).map ((mu i).hom.app (M, N)) ≫\n          (tY h).hom.app ((R i).obj M, (R i).obj N) ≫\n          (TY j).map (Prod.mkHom ((p h).hom.app M) ((p h).hom.app N)) =\n        (p h).hom.app ((TX i).obj (M, N)) ≫\n          (R j).map ((tX h).hom.app (M, N)) ≫\n          (mu j).hom.app ((SX.T h).obj M, (SX.T h).obj N))\n    (P Q : SX.PairCategory)\n    (qP : ∀ (H : I) (h : P.stage ≤ H),\n      (SY.T h).obj ((R P.stage).obj P.obj) ≅ (R H).obj (P.toStage h))\n    (qQ : ∀ (H : I) (h : Q.stage ≤ H),\n      (SY.T h).obj ((R Q.stage).obj Q.obj) ≅ (R H).obj (Q.toStage h))\n    (hqP : ∀ H h, qP H h = (p h).app P.obj)\n    (hqQ : ∀ H h, qQ H h = (p h).app Q.obj)\n    (H K : I) (hP : P.stage ≤ H) (hQ : Q.stage ≤ H) (k : H ≤ K) :\n    let PH := P.toStage hP\n    let QH := Q.toStage hQ\n    let a := (p k).app ((TX H).obj (PH, QH)) ≪≫\n      (R K).mapIso ((tX k).app (PH, QH) ≪≫\n        (TX K).mapIso (Iso.prod ((SX.assoc hP k).app P.obj)\n          ((SX.assoc hQ k).app Q.obj)))\n    let z := ((tY k).app ((SY.T hP).obj ((R P.stage).obj P.obj),\n        (SY.T hQ).obj ((R Q.stage).obj Q.obj)) ≪≫\n      (TY K).mapIso (Iso.prod ((SY.assoc hP k).app ((R P.stage).obj P.obj))\n        ((SY.assoc hQ k).app ((R Q.stage).obj Q.obj)))) ≪≫\n      (TY K).mapIso (Iso.prod (qP K (hP.trans k)) (qQ K (hQ.trans k)))\n    a.hom ≫ (mu K).hom.app (P.toStage (hP.trans k), Q.toStage (hQ.trans k)) ≫ z.inv =\n      (SY.T k).map ((mu H).hom.app (PH, QH) ≫\n        (TY H).map (Prod.mkHom (qP H hP).inv (qQ H hQ).inv))",
+  "by": "D2",
+  "date": "2026-10-28",
+  "branch": "sheaf-dag"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a conjugated natural transformation under scalar extension and coherent stage comparisons",
+   "results": "No direct theorem for the prescribed endpoint comparison was found; the proof uses the existing categorical naturality and coherence interfaces.",
+   "date": "2026-10-28",
+   "verdict": "Prove the component calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality is the general categorical tool used in the mixed component calculation.",
+   "date": "2026-10-28",
+   "verdict": "Use naturality and the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|inv_hom_id_assoc",
+   "results": "Functoriality and isomorphism cancellation are available. Existing project endpoint expansion was found in RationalTensorStageCoherence and is reused rather than reproved.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing expansion with the prescribed input associators."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T233841-L-4123214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T233841-L-4123214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

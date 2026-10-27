@@ -20220,3 +20220,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:38 L: merged deliver/C8/Sheaf.SixFunctors.OrdinaryProperOpenInvertibility (stage 3; reviewer PASS; first push; landing 20261027T233837-L-4122484 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:38 L: merged deliver/D2/Sheaf.Paper.FiniteRingRefinementCoordinates (stage 3; reviewer PASS; first push; landing 20261027T233838-L-4122827 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:38 L: merged deliver/D2/Sheaf.Paper.PullbackTensorIntegralCompositionCoherence (stage 3; reviewer PASS; first push; landing 20261027T233839-L-4123035 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:38 L: merged deliver/D2/Sheaf.Paper.RestrictionTensorRepresentativeStageTransport (stage 3; reviewer PASS; first push; landing 20261027T233841-L-4123214 (interface); batch 20261027T233735; modules 5; new nodes 4)

@@ -15,37 +15,56 @@
  ],
  "proof": [
   {
-   "text": "Expand c_H and c_L using the prescribed pullback and tensor endpoint comparisons.",
+   "text": "At the compositum H, define d to be mu_H on A and B transported to H, followed by the tensor image of the inverses of the two pullback endpoint comparisons at H. This is a morphism between the literal objects underlying the two output pairs.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the transition equality in stageSystem_existsUnique to conjugate the assumed scalar mixed square into a square for rationalPullbackStageComparison and rationalTensorStageComparison. Substitution of the transition equalities proves that this retains the prescribed square.",
+   "uses": [
+    "lem-pur-restriction-tensor-normalized-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the two common-stage endpoint comparisons into the normalized stage comparisons and the two input associators. Apply rationalPullbackStageComparison_coherent separately to A.stage <= H <= K and B.stage <= H <= K; these equations identify the two enlarged pullback endpoints.",
+   "uses": [
+    "lem-weil-common-stage-pullback-endpoint",
+    "lem-weil-common-stage-tensor-endpoint"
    ],
    "elementary": false
   },
   {
-   "text": "Use the mixed scalar square and naturality of the tensor comparison to move scalar extension through mu and cancel inverse endpoint comparisons.",
+   "text": "Naturality of the tensor scalar comparison moves the inverse pullback endpoints through scalar extension. The two pullback coherence equations cancel these inverses. Apply the assumed mixed square at H <= K, and then naturality of mu_K along the input associators. Cancel the invertible target endpoint to obtain c_K = T_{K/H}(d). The proved mixedTensorStageComponent theorem supplies this categorical calculation and its input coherence equations.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-weil-mixed-tensor-stage-component",
+    "lem-weil-rational-pullback-stage-coherence"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the pullback/tensor scalar tower equations and associator cocycle to identify the remaining composites with the stage-system transport from H to L.",
+   "text": "Apply the preceding formula at K=L and K=H, including the reflexive transition at H. StageSystem.tr_map says that transport of T_{H/H}(d) is T_{L/H}(d), proving the asserted equality without any identity identification of distinct coefficient fields.",
    "uses": [
-    "lem-pur-integral-operations-scalar-extension",
-    "lem-weil-scalar-extension-composition"
+    "lem-general-algebraically-closed-coefficient-stages"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-derived-pullback-tensor-hom",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-weil-scalar-extension-composition"
+  "lem-general-algebraically-closed-coefficient-stages",
+  "lem-pur-restriction-tensor-normalized-square",
+  "lem-weil-common-stage-pullback-endpoint",
+  "lem-weil-common-stage-tensor-endpoint",
+  "lem-weil-mixed-tensor-stage-component",
+  "lem-weil-rational-pullback-stage-coherence"
  ],
  "proof_origin": {
-  "by": "agent B4",
+  "by": "agent D2",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-  "place": "Fixed-component enlargement calculation of steps 3–5."
+  "place": "Common-stage enlargement calculation: mixed scalar square, pullback endpoint coherence and stage transport of an actual morphism."
  },
  "mathlib_searches": [
   {
@@ -115,9 +134,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261027T205805-L-1616669",
+  "landing": "20261027T233841-L-4123214",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

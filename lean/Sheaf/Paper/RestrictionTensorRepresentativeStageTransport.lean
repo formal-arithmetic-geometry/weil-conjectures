@@ -7,6 +7,15 @@ module
 
 public import Sheaf.Paper.DerivedPullbackTensorHom
 
+import Sheaf.Paper.RationalPullbackStageCoherence
+import Sheaf.Paper.MixedTensorStageComponent
+import Sheaf.Paper.CommonStagePullbackEndpoint
+import Sheaf.Paper.CommonStageTensorEndpoint
+import Sheaf.Paper.RestrictionTensorNormalizedSquare
+import all Sheaf.Paper.GeneralAlgebraicallyClosedCoefficientStages
+import Sheaf.Paper.RationalTensorStageCoherence
+import all Mathlib.Logic.Small.Defs
+
 /-! # Stage transport of restriction tensor representatives
 
 Source: def-pur-section-invariant, common-stage subargument, steps 3--5
@@ -17,6 +26,8 @@ The stage-level transport identity used by the quotient representative theorem.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
+set_option linter.privateModule false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -31,10 +42,28 @@ open WeilConjectures.GeneralAlgebraicallyClosedCoefficients
 open WeilConjectures.AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 
 set_option allowUnsafeReducibility true in
-attribute [local reducible] stageCategory
+attribute [local reducible] stageCategory Stage transition
   WeilConjectures.commonStagePullbackObject WeilConjectures.commonStageTensorObject
 
+set_option allowUnsafeReducibility true in
+attribute [local reducible] stageSystem
+
+set_option linter.auxLemma false in
+set_option allowUnsafeReducibility true in
+attribute [local reducible] stageCategory._aux_1 stageCategory._aux_3 stageCategory._aux_5
+
 namespace WeilConjectures
+
+attribute [local irreducible] HasDerivedCategory.standard integralCoefficientLinear
+  ScalarLocalization.category ScalarLocalization.composition
+  Padic.coefficientExtensionIntegers Padic.coefficientExtensionUniformizer
+  Padic.coefficientExtensionAbsoluteValue sfRationalScalarComp
+  GeneralAlgebraicallyClosedCoefficients.associator
+  GeneralAlgebraicallyClosedCoefficients.normalizedAssociator
+  AlgebraicallyClosedCoefficients.coefficientInclusion
+  ObjectProperty.FullSubcategory.category sfIntegralConstructible ScalarLocalization.linear
+  ScalarLocalization.preadditive Linear.homModule Preadditive.homGroup
+  Preadditive.fullSubcategory Linear.fullSubcategory sfIntegralConstructibleLinear
 
 attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   sfRationalScalarExtension commonStageDerivedPullback commonStageDerivedTensor
@@ -56,6 +85,8 @@ theorem pairRepresentative_eq_of_stage_transport
   rw [hv]
   exact (StageSystem.PairCategory.mkHom_tr h u).symm
 
+set_option maxHeartbeats 400000 in
+-- The categorical component calculation checks several equivalent coefficient-category instances.
 /--
 At the level of the finite coefficient stage, the mixed scalar square and the
 naturality of the tensor comparison identify the representative at an extension
@@ -117,6 +148,55 @@ theorem restrictionTensorRepresentativeStageTransport
                B.toStage (((Padic.finiteCoefficientFields_properties l Ω).1
                 A.stage B.stage).2.trans hK)) ≫ (z A B K hK).inv
         c L h = (stageSystem l Ω Y).tr h (c H le_rfl) := by
-  sorry
+  intro R T b theta S U a z mu mixed A B L h H c
+  let SX := stageSystem l Ω X
+  let SY := stageSystem l Ω Y
+  let p := fun {E K : Index l Ω} (h : E ≤ K) ↦
+    rationalPullbackStageComparison l Ω f h
+  let t := fun (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+    {E K : Index l Ω} (h : E ≤ K) ↦ rationalTensorStageComparison l Ω W h
+  let hA := ((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).1
+  let hB := ((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).2
+  let PA := commonStagePullbackObject l Ω f A
+  let PB := commonStagePullbackObject l Ω f B
+  let d := (mu H).hom.app (A.toStage hA, B.toStage hB) ≫
+    (T Y H).map (Prod.mkHom
+      (commonStagePullbackComparison l Ω f A H hA).inv
+      (commonStagePullbackComparison l Ω f B H hB).inv)
+  have square (E K : Index l Ω) (k : E ≤ K) :=
+    restrictionTensorNormalizedSquare l Ω f mu mixed E K k
+  have hc (K : Index l Ω) (k : H ≤ K) : c K k = (SY.T k).map d := by
+    have hm := mixedTensorStageComponent SX SY R (T X) (T Y) p
+      (rationalPullbackStageComparison_coherent l Ω f) (t X) (t Y) mu
+      (fun {_ _} k ↦ square _ _ k) A B
+      (fun K k ↦ commonStagePullbackComparison l Ω f A K k)
+      (fun K k ↦ commonStagePullbackComparison l Ω f B K k)
+      (fun K k ↦ (commonStagePullback_endpoint l Ω f A K k).symm)
+      (fun K k ↦ (commonStagePullback_endpoint l Ω f B K k).symm)
+      H K hA hB k
+    let aK := (p k).app ((T X H).obj (A.toStage hA, B.toStage hB)) ≪≫
+      (R K).mapIso ((t X k).app (A.toStage hA, B.toStage hB) ≪≫
+        (T X K).mapIso (Iso.prod ((SX.assoc hA k).app A.obj)
+          ((SX.assoc hB k).app B.obj)))
+    let zK := ((t Y k).app (PA.toStage hA, PB.toStage hB) ≪≫
+      (T Y K).mapIso (Iso.prod ((SY.assoc hA k).app PA.obj)
+        ((SY.assoc hB k).app PB.obj))) ≪≫
+      (T Y K).mapIso (Iso.prod
+        (commonStagePullbackComparison l Ω f A K (hA.trans k))
+        (commonStagePullbackComparison l Ω f B K (hB.trans k)))
+    have ha : a A B K k = aK :=
+      congrArg₂ (fun i j ↦ i ≪≫ (R K).mapIso j)
+        (commonStagePullback_endpoint l Ω f (commonStageTensorObject l Ω X A B) K k).symm
+        (commonStageTensor_endpoint l Ω X A B K k).symm
+    have hz : z A B K k = zK :=
+      congrArg (fun i ↦ i ≪≫ (T Y K).mapIso (Iso.prod
+        (commonStagePullbackComparison l Ω f A K (hA.trans k))
+        (commonStagePullbackComparison l Ω f B K (hB.trans k))))
+        (commonStageTensor_endpoint l Ω Y PA PB K k).symm
+    exact (congrArg₂ (fun (i : _ ≅ _) (j : _ ≅ _) ↦ i.hom ≫
+      (mu K).hom.app (A.toStage (hA.trans k), B.toStage (hB.trans k)) ≫ j.inv)
+        ha hz).trans hm
+  exact (hc L h).trans ((SY.tr_map h d).symm.trans
+    (congrArg (SY.tr h) (hc H le_rfl).symm))
 
 end WeilConjectures

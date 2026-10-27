@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-restriction-tensor-normalized-square",
+ "kind": "statement",
+ "title": "The mixed scalar square for rational pullback and tensor is also the mixed square for the normalized comparisons on the recorded stage-system transitions.",
+ "statement": "The mixed scalar square for rational pullback and tensor is also the mixed square for the normalized comparisons on the recorded stage-system transitions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Common-stage subargument, steps 3–5; proved component calculation."
+ },
+ "stmt_deps": [
+  "lem-general-algebraically-closed-coefficient-stages",
+  "lem-weil-rational-pullback-stage-coherence",
+  "lem-weil-rational-tensor-stage-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The stage system transition is equal to the specified scalar extension functor.\nSubstitute these two functor equalities in the mixed square. The conjugating eqToIso\nisomorphisms are then reflexive, so whiskering and composition with them cancel.\nThe resulting square is the square of the normalized stage comparisons.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages",
+    "lem-weil-rational-pullback-stage-coherence",
+    "lem-weil-rational-tensor-stage-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-general-algebraically-closed-coefficient-stages",
+  "lem-weil-rational-pullback-stage-coherence",
+  "lem-weil-rational-tensor-stage-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent D2",
+  "place": "Fully proved helper extracted to keep each module within the compile-time bound.",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictionTensorRepresentativeStageTransport",
+  "date": "2026-10-28",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-restriction-tensor-representative-stage-transport",
+   "place": "Categorical component calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictionTensorNormalizedSquare",
+  "file": "lean/Sheaf/Paper/RestrictionTensorNormalizedSquare.lean",
+  "declaration": "WeilConjectures.restrictionTensorNormalizedSquare",
+  "statement": "theorem restrictionTensorNormalizedSquare\n    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]\n    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] :\n    let R := fun E : Index l Ω ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) f\n    let T := fun (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n      (E : Index l Ω) ↦ rationalDerivedTensor l (Coefficient.{u} l Ω E) W\n    let b := fun (E L : Index l Ω) (h : E ≤ L) ↦\n      rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)\n        (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) f\n    let theta := fun (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n      (E L : Index l Ω) (h : E ≤ L) ↦\n      rationalTensorScalarComparison l (Coefficient.{u} l Ω E)\n        (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) W\n    let SX := stageSystem l Ω X\n    let SY := stageSystem l Ω Y\n    let p := fun {E K : Index l Ω} (h : E ≤ K) ↦\n      rationalPullbackStageComparison l Ω f h\n    let t := fun (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n      {E K : Index l Ω} (h : E ≤ K) ↦ rationalTensorStageComparison l Ω W h\n    ∀ (mu : ∀ E : Index l Ω, T X E ⋙ R E ≅ (R E).prod (R E) ⋙ T Y E),\n      (∀ (E L : Index l Ω) (h : E ≤ L) (M N : Stage l Ω X E),\n        (transition l Ω Y E L h).map ((mu E).hom.app (M, N)) ≫\n          (theta Y E L h).hom.app ((R E).obj M, (R E).obj N) ≫\n          (T Y L).map (Prod.mkHom ((b E L h).hom.app M) ((b E L h).hom.app N)) =\n        (b E L h).hom.app ((T X E).obj (M, N)) ≫\n          (R L).map ((theta X E L h).hom.app (M, N)) ≫\n          (mu L).hom.app ((transition l Ω X E L h).obj M,\n            (transition l Ω X E L h).obj N)) →\n      ∀ (E K : Index l Ω) (k : E ≤ K) (M N : Stage l Ω X E),\n        (SY.T k).map ((mu E).hom.app (M, N)) ≫\n            (t Y k).hom.app ((R E).obj M, (R E).obj N) ≫\n            (T Y K).map (Prod.mkHom ((p k).hom.app M) ((p k).hom.app N)) =\n          (p k).hom.app ((T X E).obj (M, N)) ≫\n            (R K).map ((t X k).hom.app (M, N)) ≫\n            (mu K).hom.app ((SX.T k).obj M, (SX.T k).obj N)",
+  "by": "D2",
+  "date": "2026-10-28",
+  "branch": "sheaf-dag"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a conjugated natural transformation under scalar extension and coherent stage comparisons",
+   "results": "No direct theorem for the prescribed endpoint comparison was found; the proof uses the existing categorical naturality and coherence interfaces.",
+   "date": "2026-10-28",
+   "verdict": "Prove the component calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality is the general categorical tool used in the mixed component calculation.",
+   "date": "2026-10-28",
+   "verdict": "Use naturality and the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "map_comp|inv_hom_id_assoc",
+   "results": "Functoriality and isomorphism cancellation are available. Existing project endpoint expansion was found in RationalTensorStageCoherence and is reused rather than reproved.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing expansion with the prescribed input associators."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T233841-L-4123214",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T233841-L-4123214",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
